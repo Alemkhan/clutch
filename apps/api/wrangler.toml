@@ -1,0 +1,17 @@
+name = "clutch-api"
+main = "src/index.ts"
+compatibility_date = "2024-10-01"
+
+[vars]
+ENVIRONMENT = "development"
+
+# D1 database
+# Run `wrangler d1 create clutch-db` and replace the database_id below
+[[d1_databases]]
+binding = "DB"
+database_name = "clutch-db"
+database_id = "REPLACE_WITH_D1_ID"
+
+# Observability
+[observability]
+enabled = true

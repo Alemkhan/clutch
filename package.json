@@ -1,0 +1,22 @@
+{
+  "name": "clutch",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace @clutch/web",
+    "dev:api": "npm run dev --workspace @clutch/api",
+    "dev": "concurrently \"npm:dev:web\" \"npm:dev:api\"",
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "deploy:web": "npm run deploy --workspace @clutch/web",
+    "deploy:api": "npm run deploy --workspace @clutch/api"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "concurrently": "^9.0.0",
+    "typescript": "^5.6.0"
+  }
+}
