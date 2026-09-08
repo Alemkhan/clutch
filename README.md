@@ -39,3 +39,9 @@ TELEGRAM_BOT_TOKEN=your_token_here
 ```
 
 Never commit `.dev.vars` or `.env`.
+
+## Assets & credits
+
+- Flags: [flagcdn.com](https://flagcdn.com)
+- Country outlines: [djaiss/mapsicon](https://github.com/djaiss/mapsicon) (free to use with credit, served via jsDelivr)
+- Sound effects: [Kenney](https://kenney.nl) UI Audio, Interface Sounds, and Impact Sounds packs (CC0)

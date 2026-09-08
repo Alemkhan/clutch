@@ -10,7 +10,7 @@ ENVIRONMENT = "development"
 [[d1_databases]]
 binding = "DB"
 database_name = "clutch-db"
-database_id = "REPLACE_WITH_D1_ID"
+database_id = "2de23ae8-3ad2-4052-aca6-60477fd7eb4a"
 
 # Observability
 [observability]

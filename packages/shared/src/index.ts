@@ -1,3 +1,7 @@
+export type AnswerType = 'multiple_choice' | 'open_answer';
+
+export * from './fuzzyMatch';
+
 export type SkillResult = 'perfect' | 'great' | 'good' | 'weak' | 'miss';
 
 export type Difficulty = 'Easy' | 'Medium' | 'Hard' | 'Expert';
@@ -10,16 +14,19 @@ export interface QuestionOption {
 export interface Question {
   id: string;
   type: 'multiple_choice';
+  answerType: AnswerType;
   category: string;
   subcategory?: string;
   difficulty: Difficulty;
   prompt: string;
   options: QuestionOption[];
   correctOptionId: string;
+  correctAnswers?: string[];
   explanation: string;
   sourceUrl?: string;
   sourceTitle?: string;
-  media?: string | null;
+  mediaType?: 'flag' | 'outline' | null;
+  mediaUrl?: string | null;
   status: 'draft' | 'approved';
   createdAt: string;
   lastVerifiedAt?: string;
@@ -111,3 +118,6 @@ export function resultFromDistance(d: number): SkillResult {
   if (d <= 1.0) return 'weak';
   return 'miss';
 }
+
+export * from './countries';
+export * from './questionGenerator';
