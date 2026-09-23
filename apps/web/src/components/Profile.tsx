@@ -1,5 +1,6 @@
 import { getStats, winRatePercent } from '../lib/localStats';
 import { playSound } from '../lib/sounds';
+import { getTelegramIdentity } from '../lib/telegram';
 
 interface ProfileProps {
   onBack: () => void;
@@ -7,43 +8,44 @@ interface ProfileProps {
 
 export function Profile({ onBack }: ProfileProps) {
   const stats = getStats();
+  const playerName = getTelegramIdentity()?.displayName || 'Игрок';
 
   const badges = [
-    { id: 'hammer', name: 'First Strike', icon: '/sprites/badge-hammer.png', earned: stats.matchesPlayed > 0 },
-    { id: 'streak', name: 'On Fire', icon: '/sprites/badge-streak.png', earned: stats.bestStreak >= 3 },
-    { id: 'star', name: 'Champion', icon: '/sprites/badge-star.png', earned: stats.wins >= 5 },
+    { id: 'hammer', name: 'Первый удар', icon: '◆', earned: stats.matchesPlayed > 0 },
+    { id: 'streak', name: 'На огне', icon: '↗', earned: stats.bestStreak >= 3 },
+    { id: 'star', name: 'Чемпион', icon: '★', earned: stats.wins >= 5 },
   ];
 
   return (
     <section className="profile-screen">
-      <button className="back-btn" onClick={() => { playSound('click'); onBack(); }}>← Back</button>
+      <button className="back-btn" onClick={() => { playSound('click'); onBack(); }}>← Назад</button>
 
       <div className="profile-head">
-        <img className="profile-avatar" src="/sprites/avatar-player.png" alt="" />
-        <h1 className="profile-name">Player</h1>
-        <p className="profile-tag">Pilot build — stats saved on this device</p>
+        <span className="profile-avatar" aria-hidden="true">{playerName.slice(0, 2).toUpperCase()}</span>
+        <h1 className="profile-name">{playerName}</h1>
+        <p className="profile-tag">Пилотная сборка — статистика хранится на этом устройстве</p>
       </div>
 
       <div className="home-stats-card">
         <div className="mini-stat">
           <span className="mini-stat-value">{stats.wins}</span>
-          <span className="mini-stat-label">Wins</span>
+          <span className="mini-stat-label">Побед</span>
         </div>
         <div className="mini-stat">
           <span className="mini-stat-value">{winRatePercent(stats)}%</span>
-          <span className="mini-stat-label">Win Rate</span>
+          <span className="mini-stat-label">Винрейт</span>
         </div>
         <div className="mini-stat">
           <span className="mini-stat-value">{stats.bestStreak}</span>
-          <span className="mini-stat-label">Best Streak</span>
+          <span className="mini-stat-label">Лучшая серия</span>
         </div>
       </div>
 
-      <h2 className="section-heading">Badges</h2>
+      <h2 className="section-heading">Достижения</h2>
       <div className="badge-grid">
         {badges.map((b) => (
           <div key={b.id} className={`badge-item ${b.earned ? '' : 'locked'}`}>
-            <img src={b.icon} alt="" />
+            <span className="badge-symbol" aria-hidden="true">{b.icon}</span>
             <span>{b.name}</span>
           </div>
         ))}

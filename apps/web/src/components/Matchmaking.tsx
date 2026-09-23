@@ -15,23 +15,26 @@ export function Matchmaking({ opponent, video, onDone }: MatchmakingProps) {
 
   return (
     <section className="matchmaking">
-      <h1 className="screen-title">Finding Your<br />Opponent</h1>
-      <div className="vs-wrap">
-        <div className="vs-side">
-          <img src="/sprites/avatar-player.png" alt="" className="vs-avatar" />
-          <span className="vs-name">You</span>
+      <span className="matchmaking-eyebrow">Асинхронный матч</span>
+      <h1 className="screen-title">Соперник найден</h1>
+      <div className="matchmaking-card">
+        <div className="vs-wrap">
+          <div className="vs-side">
+            <span className="vs-avatar player" aria-hidden="true">ТЫ</span>
+            <span className="vs-name">Ты</span>
+          </div>
+          <span className="vs-label">VS</span>
+          <div className="vs-side">
+            <span className="vs-avatar opponent" aria-hidden="true">{opponent.displayName.slice(0, 2).toUpperCase()}</span>
+            <span className="vs-name">{opponent.displayName}</span>
+          </div>
         </div>
-        <span className="vs-label">VS</span>
-        <div className="vs-side">
-          <img src={opponent.avatar ?? '/sprites/avatar-opponent.png'} alt="" className="vs-avatar" />
-          <span className="vs-name">{opponent.displayName}</span>
-        </div>
+        <p className="matchmaking-status">Ты сыграешь тот же раунд против сохранённого результата соперника.</p>
       </div>
-      <p className="matchmaking-status">Matching players in your league…</p>
-      <div className="matchmaking-spinner" aria-hidden="true" />
+      <div className="matchmaking-loading"><span /> Загружаем раунд</div>
       {video && (
         <a className="matchmaking-video-link" href={video.url} target="_blank" rel="noopener noreferrer">
-          Watch the source clip ↗
+          Смотреть исходный клип ↗
         </a>
       )}
     </section>

@@ -23,7 +23,7 @@ export function OpenAnswerInput({ onSubmit, disabled }: OpenAnswerInputProps) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-        placeholder="Type your answer..."
+        placeholder="Напиши ответ..."
         autoFocus
         disabled={disabled}
         autoComplete="off"
@@ -36,7 +36,7 @@ export function OpenAnswerInput({ onSubmit, disabled }: OpenAnswerInputProps) {
         onClick={handleSubmit}
         disabled={disabled || !value.trim()}
       >
-        Submit
+        Отправить
       </button>
     </div>
   );

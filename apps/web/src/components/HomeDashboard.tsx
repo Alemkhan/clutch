@@ -14,24 +14,31 @@ export function HomeDashboard({ onFindMatch, onProfile, onChallenge }: HomeDashb
   return (
     <section className="home-dashboard">
       <header className="home-header">
-        <button className="home-avatar-btn" onClick={() => { playSound('click'); onProfile(); }}>
-          <img src="/sprites/avatar-player.png" alt="Your profile" />
-        </button>
+        <div className="home-brand" aria-label="Clutch">
+          <span className="home-brand-mark">C</span>
+          <span>CLUTCH</span>
+        </div>
         <div className="home-chips">
           <span className="chip streak-chip">🔥 {stats.currentStreak}</span>
+          <button className="home-avatar-btn" aria-label="Открыть профиль" onClick={() => { playSound('click'); onProfile(); }}>
+            Я
+          </button>
         </div>
       </header>
 
-      <h1 className="home-title">Ready to<br />Clutch?</h1>
-
-      <div className="hero-wrap" aria-hidden="true">
-        <img className="hero-trail" src="/sprites/trail.png" alt="" />
-        <img className="hero-art" src="/sprites/hero.png" alt="" />
-      </div>
-
-      <button className="cta-btn" onClick={() => { playSound('click'); onFindMatch(); }}>
-        Find Match
-      </button>
+      <section className="home-hero-card">
+        <span className="home-kicker">10 вопросов · один соперник</span>
+        <h1 className="home-title">Знание даёт шанс.<br /><em>Точность решает.</em></h1>
+        <p className="home-lede">Ответь правильно, забери попытку и дожми соперника в мини-игре.</p>
+        <div className="home-hero-meter" aria-hidden="true">
+          <span className="home-meter-player" />
+          <span className="home-meter-center">VS</span>
+          <span className="home-meter-opponent" />
+        </div>
+        <button className="cta-btn" onClick={() => { playSound('click'); onFindMatch(); }}>
+          Найти соперника <span aria-hidden="true">→</span>
+        </button>
+      </section>
 
       {challenges.map(({ tournament, badge }) => (
         <div className="challenge-card" key={tournament.id}>
@@ -46,10 +53,10 @@ export function HomeDashboard({ onFindMatch, onProfile, onChallenge }: HomeDashb
               rel="noopener noreferrer"
               onClick={() => playSound('click')}
             >
-              Watch clip ↗
+              Смотреть клип ↗
             </a>
             <button className="challenge-play" onClick={() => { playSound('click'); onChallenge(tournament.id); }}>
-              Play
+              Играть
             </button>
           </div>
         </div>
@@ -58,15 +65,15 @@ export function HomeDashboard({ onFindMatch, onProfile, onChallenge }: HomeDashb
       <div className="home-stats-card">
         <div className="mini-stat">
           <span className="mini-stat-value">{stats.wins}</span>
-          <span className="mini-stat-label">Wins</span>
+          <span className="mini-stat-label">Побед</span>
         </div>
         <div className="mini-stat">
           <span className="mini-stat-value">{winRatePercent(stats)}%</span>
-          <span className="mini-stat-label">Win Rate</span>
+          <span className="mini-stat-label">Винрейт</span>
         </div>
         <div className="mini-stat">
           <span className="mini-stat-value">{stats.bestStreak}</span>
-          <span className="mini-stat-label">Best Streak</span>
+          <span className="mini-stat-label">Лучшая серия</span>
         </div>
       </div>
     </section>

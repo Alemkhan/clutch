@@ -1,8 +1,8 @@
 import { generateMatch } from '@clutch/shared';
-import type { Opponent } from '@clutch/shared';
+import type { CategoryId, Opponent } from '@clutch/shared';
 
-export function createQuestions() {
-  return generateMatch(10);
+export function createQuestions(category: CategoryId = 'geography') {
+  return generateMatch(10, 0.3, category);
 }
 
 export const sampleOpponent: Opponent = {

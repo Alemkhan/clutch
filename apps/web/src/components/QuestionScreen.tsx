@@ -8,12 +8,10 @@ const QUESTION_TIME = 15;
 
 interface QuestionScreenProps {
   question: Question;
-  questionNumber: number;
-  totalQuestions: number;
   onAnswer: (optionId: string, timeMs: number) => void;
 }
 
-export function QuestionScreen({ question, questionNumber, totalQuestions, onAnswer }: QuestionScreenProps) {
+export function QuestionScreen({ question, onAnswer }: QuestionScreenProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const startTimeRef = useRef(Date.now());
 
@@ -49,22 +47,25 @@ export function QuestionScreen({ question, questionNumber, totalQuestions, onAns
       <div className="question-meta">
         <span className="category-chip">{question.subcategory ?? question.category}</span>
         <TimerBar duration={QUESTION_TIME} onExpire={handleExpire} paused={selected !== null} />
-        <span className="question-counter">{questionNumber} / {totalQuestions}</span>
       </div>
 
       {question.mediaUrl && (
         <img
           src={question.mediaUrl}
-          alt={question.mediaType === 'outline' ? 'Country outline' : 'Flag'}
+          alt={question.mediaType === 'outline' ? 'Контур страны' : 'Флаг'}
           className={`question-media ${question.mediaType === 'outline' ? 'outline' : ''}`}
           loading="lazy"
         />
       )}
 
+      {question.mediaText && (
+        <div className="question-media-text">{question.mediaText}</div>
+      )}
+
       <h2 className="question-prompt">{question.prompt}</h2>
 
       {timedOut ? (
-        <div className="timeout-message">Time's up!</div>
+        <div className="timeout-message">Время вышло!</div>
       ) : isOpen ? (
         <OpenAnswerInput onSubmit={handleOpenSubmit} disabled={selected !== null} />
       ) : (

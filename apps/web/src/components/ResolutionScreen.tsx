@@ -17,26 +17,22 @@ export function ResolutionScreen({ question, correct, selectedOptionId, onContin
 
   return (
     <div className="resolution-screen" onClick={onContinue}>
-      <img
-        className={`resolution-impact ${correct ? 'correct' : 'incorrect'}`}
-        src={correct ? '/sprites/burst-correct.png' : '/sprites/smoke-incorrect.png'}
-        alt=""
-        aria-hidden="true"
-      />
-
-      <div className={`resolution-status ${correct ? 'correct' : 'incorrect'}`}>
-        {correct ? 'Correct!' : 'Wrong'}
+      <div className={`resolution-card ${correct ? 'correct' : 'incorrect'}`}>
+        <div className="resolution-symbol" aria-hidden="true">{correct ? '✓' : '×'}</div>
+        <div className={`resolution-status ${correct ? 'correct' : 'incorrect'}`}>
+          {correct ? 'Верно!' : 'Мимо'}
+        </div>
+        {correct ? (
+          <p className="resolution-message">Попытка заработана</p>
+        ) : (
+          <p className="resolution-message">В этом раунде без мини-игры</p>
+        )}
+        <p className="resolution-explanation">{question.explanation}</p>
       </div>
       {correct ? (
-        <p className="resolution-message">Hammer strike earned.</p>
+        <div className="hammer-earned">Перейти к мини-игре <span aria-hidden="true">→</span></div>
       ) : (
-        <p className="resolution-message">No strike this round.</p>
-      )}
-      <p className="resolution-explanation">{question.explanation}</p>
-      {correct ? (
-        <div className="hammer-earned">Tap to strike</div>
-      ) : (
-        <div className="continue-hint">Tap to continue</div>
+        <div className="continue-hint">Тапни, чтобы продолжить</div>
       )}
     </div>
   );

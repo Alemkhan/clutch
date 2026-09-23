@@ -27,6 +27,7 @@ export interface Question {
   sourceTitle?: string;
   mediaType?: 'flag' | 'outline' | null;
   mediaUrl?: string | null;
+  mediaText?: string | null;
   status: 'draft' | 'approved';
   createdAt: string;
   lastVerifiedAt?: string;
@@ -38,6 +39,47 @@ export interface OpponentRound {
   responseTimeMs: number;
   skillScore: number;
   progressAwarded: number;
+}
+
+export interface AsyncMatchRoundInput {
+  questionId: string;
+  selectedAnswer: string;
+  responseTimeMs: number;
+  skillDistance?: number;
+}
+
+export interface AsyncMatchRound {
+  questionId: string;
+  correct: boolean;
+  responseTimeMs: number;
+  skillResult?: SkillResult;
+  progressAwarded: number;
+  playerProgressAfter: number;
+}
+
+export interface StartAsyncMatchRequest {
+  playerId: string;
+  displayName: string;
+  category: 'geography' | 'history' | 'languages';
+  telegramInitData?: string;
+}
+
+export interface StartAsyncMatchResponse {
+  matchId: string;
+  questions: Question[];
+  opponent: Opponent;
+  opponentSource: 'player' | 'bot';
+}
+
+export interface CompleteAsyncMatchRequest {
+  rounds: AsyncMatchRoundInput[];
+}
+
+export interface CompleteAsyncMatchResponse {
+  matchId: string;
+  rounds: AsyncMatchRound[];
+  playerProgress: number;
+  correctCount: number;
 }
 
 export interface Opponent {
@@ -115,9 +157,12 @@ export function resultFromDistance(d: number): SkillResult {
   if (d <= 0.15) return 'perfect';
   if (d <= 0.35) return 'great';
   if (d <= 0.65) return 'good';
-  if (d <= 1.0) return 'weak';
+  if (d <= 0.85) return 'weak';
   return 'miss';
 }
 
 export * from './countries';
+export * from './flagTraits';
+export * from './historicFlags';
+export * from './languages';
 export * from './questionGenerator';

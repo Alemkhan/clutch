@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { SkillResult } from '@clutch/shared';
 import { playSound } from '../lib/sounds';
 import { recordMatch } from '../lib/localStats';
@@ -31,8 +31,11 @@ export function ResultScreen({
   const won = playerProgress > opponentProgress;
   const tie = playerProgress === opponentProgress;
   const [showShare, setShowShare] = useState(false);
+  const recordedRef = useRef(false);
 
   useEffect(() => {
+    if (recordedRef.current) return;
+    recordedRef.current = true;
     playSound(won ? 'matchWin' : 'matchLose');
     recordMatch(won ? 'win' : tie ? 'tie' : 'loss');
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,15 +43,17 @@ export function ResultScreen({
 
   return (
     <div className="result-screen">
-      {won && <img className="result-trophy" src="/sprites/trophy.png" alt="" aria-hidden="true" />}
+      <div className={`result-mark ${won ? 'win' : tie ? 'tie' : 'loss'}`} aria-hidden="true">
+        {won ? '✦' : tie ? '=' : '↗'}
+      </div>
 
       <h1 className={`result-headline ${won ? 'win' : tie ? 'tie' : 'loss'}`}>
-        {won ? 'You Clutched It!' : tie ? 'Draw' : 'So Close'}
+        {won ? 'Клатч!' : tie ? 'Ничья' : 'Почти!'}
       </h1>
 
       <div className="result-comparison">
         <div className="result-side player">
-          <span className="result-name">You</span>
+          <span className="result-name">Ты</span>
           <span className="result-progress">{playerProgress}%</span>
         </div>
         <div className="result-vs">vs</div>
@@ -60,35 +65,37 @@ export function ResultScreen({
 
       <div className="result-stats-grid">
         <div className="stat">
-          <span className="stat-label">Correct Answers</span>
+          <span className="stat-label">Верных ответов</span>
           <span className="stat-value">{correctCount}/{totalQuestions}</span>
         </div>
         <div className="stat">
-          <span className="stat-label">Perfect Hits</span>
+          <span className="stat-label">Идеальных удара</span>
           <span className="stat-value">{perfectHits}</span>
         </div>
         <div className="stat">
-          <span className="stat-label">Avg Reaction</span>
-          <span className="stat-value">{(avgResponseMs / 1000).toFixed(2)}s</span>
+          <span className="stat-label">Ср. реакция</span>
+          <span className="stat-value">{(avgResponseMs / 1000).toFixed(2)}с</span>
         </div>
         {bestSkill && (
           <div className="stat">
-            <span className="stat-label">Best Strike</span>
-            <span className="stat-value">{bestSkill}</span>
+            <span className="stat-label">Лучший удар</span>
+            <span className="stat-value">
+              {{ perfect: 'Идеально', great: 'Отлично', good: 'Хорошо', weak: 'Слабо', miss: 'Мимо' }[bestSkill]}
+            </span>
           </div>
         )}
       </div>
 
       {!won && !tie && (
-        <p className="result-insight">One better strike could have won it.</p>
+        <p className="result-insight">Один точный удар мог всё изменить.</p>
       )}
 
       {showShare && (
         <div className="share-card">
           <p className="share-card-title">CLUTCH</p>
-          <p className="share-card-headline">{won ? 'I clutched the win!' : 'Close match!'}</p>
+          <p className="share-card-headline">{won ? 'Я вытащил клатч!' : 'Почти получилось!'}</p>
           <div className="share-card-scores">
-            <span>You {playerProgress}%</span>
+            <span>Я {playerProgress}%</span>
             <span>vs</span>
             <span>{opponentName} {opponentProgress}%</span>
           </div>
@@ -96,21 +103,21 @@ export function ResultScreen({
       )}
 
       <div className="result-actions">
-        <button className="cta-btn" onClick={() => { playSound('click'); onReplay(); }}>Play Again</button>
+        <button className="cta-btn" onClick={() => { playSound('click'); onReplay(); }}>Ещё раз</button>
         <button
           className="ghost-btn"
           onClick={() => {
             playSound('click');
             if (navigator.share) {
-              navigator.share({ text: `I ${won ? 'won' : 'played'} ${playerProgress}% to ${opponentProgress}% on Clutch!` }).catch(() => {});
+              navigator.share({ text: `Я ${won ? 'выиграл' : 'сыграл'} ${playerProgress}% против ${opponentProgress}% в Clutch!` }).catch(() => {});
             } else {
               setShowShare((v) => !v);
             }
           }}
         >
-          Share
+          Поделиться
         </button>
-        <button className="ghost-btn" onClick={() => { playSound('click'); onHome(); }}>Back to Home</button>
+        <button className="ghost-btn" onClick={() => { playSound('click'); onHome(); }}>В меню</button>
       </div>
     </div>
   );

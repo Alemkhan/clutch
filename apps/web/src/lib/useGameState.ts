@@ -1,13 +1,22 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { analytics } from './analytics';
-import type { SkillResult, Question, Opponent, Tournament } from '@clutch/shared';
+import type {
+  AsyncMatchRoundInput,
+  SkillResult,
+  Question,
+  Opponent,
+  Tournament,
+  CategoryId,
+} from '@clutch/shared';
 import { SKILL_REWARDS, isAnswerCorrect } from '@clutch/shared';
 import { createQuestions, sampleOpponent, miniGameConfig } from './sampleData';
+import { completeAsyncMatch, startAsyncMatch } from './api';
 
 export type Phase = 'home' | 'categories' | 'matchmaking' | 'question' | 'resolution' | 'hammer' | 'result' | 'profile';
 
 interface MatchState {
   phase: Phase;
+  category: CategoryId;
   questions: Question[];
   questionIndex: number;
   playerProgress: number;
@@ -22,10 +31,13 @@ interface MatchState {
   opponent: Opponent;
   activeVideo: Tournament['video'];
   fixedQuestions?: Question[];
+  activeMatchId?: string;
+  roundInputs: AsyncMatchRoundInput[];
 }
 
 const initialState: MatchState = {
   phase: 'home',
+  category: 'geography',
   questions: [],
   questionIndex: 0,
   playerProgress: 0,
@@ -40,6 +52,8 @@ const initialState: MatchState = {
   opponent: sampleOpponent,
   activeVideo: undefined,
   fixedQuestions: undefined,
+  activeMatchId: undefined,
+  roundInputs: [],
 };
 
 function isFinished(player: number, opponent: number, qIndex: number, total: number): boolean {
@@ -48,22 +62,48 @@ function isFinished(player: number, opponent: number, qIndex: number, total: num
 
 export function useGameState() {
   const [state, setState] = useState<MatchState>(initialState);
+  const submittedMatchesRef = useRef(new Set<string>());
 
-  const start = useCallback(() => {
+  const start = useCallback(async () => {
     analytics.startMatch();
-    analytics.track('match_started');
-    setState((prev) => ({
-      ...initialState,
-      opponent: prev.opponent,
-      activeVideo: prev.activeVideo,
-      fixedQuestions: prev.fixedQuestions,
-      questions: prev.fixedQuestions ?? createQuestions(),
-      phase: 'question',
-    }));
-  }, []);
+    if (state.fixedQuestions) {
+      analytics.track('match_started', { source: 'challenge' });
+      setState((prev) => ({
+        ...initialState,
+        category: prev.category,
+        opponent: prev.opponent,
+        activeVideo: prev.activeVideo,
+        fixedQuestions: prev.fixedQuestions,
+        questions: prev.fixedQuestions ?? [],
+        phase: 'question',
+      }));
+      return;
+    }
+
+    try {
+      const match = await startAsyncMatch(state.category);
+      analytics.track('match_started', { source: match.opponentSource });
+      setState((prev) => ({
+        ...initialState,
+        category: prev.category,
+        opponent: match.opponent,
+        questions: match.questions,
+        activeMatchId: match.matchId,
+        phase: 'question',
+      }));
+    } catch {
+      analytics.track('match_started', { source: 'local_fallback' });
+      setState((prev) => ({
+        ...initialState,
+        category: prev.category,
+        opponent: sampleOpponent,
+        questions: createQuestions(prev.category),
+        phase: 'question',
+      }));
+    }
+  }, [state.category, state.fixedQuestions]);
 
   const startChallenge = useCallback((tournament: Tournament, opponent: Opponent, fixedQuestions?: Question[]) => {
-    analytics.track('match_started', { source: tournament.id });
     setState({
       ...initialState,
       opponent,
@@ -81,6 +121,19 @@ export function useGameState() {
       });
     }
   }, [state.phase, state.questions.length]);
+
+  useEffect(() => {
+    if (
+      state.phase !== 'result'
+      || !state.activeMatchId
+      || submittedMatchesRef.current.has(state.activeMatchId)
+    ) return;
+
+    submittedMatchesRef.current.add(state.activeMatchId);
+    void completeAsyncMatch(state.activeMatchId, { rounds: state.roundInputs }).catch(() => {
+      submittedMatchesRef.current.delete(state.activeMatchId!);
+    });
+  }, [state.phase, state.activeMatchId, state.roundInputs]);
 
   const answer = useCallback((optionId: string, _timeMs: number) => {
     setState((prev) => {
@@ -121,21 +174,30 @@ export function useGameState() {
 
       const oppGain = prev.opponent.rounds[prev.questionIndex]?.progressAwarded ?? 0;
       const newOpp = Math.min(100, prev.opponentProgress + oppGain);
+      const roundInputs = [
+        ...prev.roundInputs,
+        {
+          questionId: prev.questions[prev.questionIndex].id,
+          selectedAnswer: prev.selectedOption,
+          responseTimeMs: prev.responseTimes[prev.responseTimes.length - 1] ?? 0,
+        },
+      ];
 
       if (isFinished(prev.playerProgress, newOpp, prev.questionIndex, prev.questions.length)) {
-        return { ...prev, opponentProgress: newOpp, phase: 'result' };
+        return { ...prev, opponentProgress: newOpp, roundInputs, phase: 'result' };
       }
 
       return {
         ...prev,
         opponentProgress: newOpp,
+        roundInputs,
         questionIndex: prev.questionIndex + 1,
         phase: 'question',
       };
     });
   }, []);
 
-  const completeHammer = useCallback((result: SkillResult, progress: number) => {
+  const completeHammer = useCallback((result: SkillResult, progress: number, distance: number) => {
     setState((prev) => {
       const newPlayer = Math.min(100, prev.playerProgress + progress);
       const newBest = !prev.bestSkill || SKILL_REWARDS[result] > SKILL_REWARDS[prev.bestSkill] ? result : prev.bestSkill;
@@ -144,6 +206,15 @@ export function useGameState() {
       const newOpp = Math.min(100, prev.opponentProgress + oppGain);
 
       const skillResults = [...prev.skillResults, result];
+      const roundInputs = [
+        ...prev.roundInputs,
+        {
+          questionId: prev.questions[prev.questionIndex].id,
+          selectedAnswer: prev.selectedOption,
+          responseTimeMs: prev.responseTimes[prev.responseTimes.length - 1] ?? 0,
+          skillDistance: distance,
+        },
+      ];
 
       if (isFinished(newPlayer, newOpp, prev.questionIndex, prev.questions.length)) {
         return {
@@ -153,6 +224,7 @@ export function useGameState() {
           lastSkill: result,
           bestSkill: newBest,
           skillResults,
+          roundInputs,
           phase: 'result',
         };
       }
@@ -164,6 +236,7 @@ export function useGameState() {
         lastSkill: result,
         bestSkill: newBest,
         skillResults,
+        roundInputs,
         questionIndex: prev.questionIndex + 1,
         phase: 'question',
       };
@@ -178,8 +251,12 @@ export function useGameState() {
     setState({ ...initialState, phase: 'categories' });
   }, []);
 
-  const goToMatchmaking = useCallback(() => {
-    setState((prev) => ({ ...prev, phase: 'matchmaking' }));
+  const goToMatchmaking = useCallback((category?: string) => {
+    setState((prev) => ({
+      ...prev,
+      category: (category === 'history' || category === 'languages' ? category : 'geography') as CategoryId,
+      phase: 'matchmaking',
+    }));
   }, []);
 
   const goToProfile = useCallback(() => {

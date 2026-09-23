@@ -1,5 +1,7 @@
+import { useEffect, useRef } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useGameState } from './lib/useGameState';
-import { ProgressBars } from './components/ProgressBars';
+import { MatchHud } from './components/MatchHud';
 import { HomeDashboard } from './components/HomeDashboard';
 import { CategorySelect } from './components/CategorySelect';
 import { Matchmaking } from './components/Matchmaking';
@@ -16,79 +18,122 @@ function handleChallenge(tournamentId: string, startChallenge: ReturnType<typeof
   startChallenge(challenge.tournament, challenge.opponent, challenge.questions);
 }
 
+const screenTransition = {
+  initial: { opacity: 0, y: 8 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
+};
+
+// main is a flex column; each phase wrapper must pass that layout through to its
+// section child (which relies on flex: 1 to fill/center), or content stops centering.
+const screenWrapperStyle = {
+  display: 'flex',
+  flexDirection: 'column' as const,
+  flex: 1,
+  width: '100%',
+  minWidth: 0,
+};
+
 export default function App() {
   const game = useGameState();
-  const showProgress = ['question', 'resolution', 'hammer'].includes(game.phase);
+  const shellRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
+  const screenDuration = reduceMotion ? 0 : 0.18;
+  const showMatchHud = ['question', 'resolution'].includes(game.phase);
+
+  useEffect(() => {
+    shellRef.current?.scrollTo({ top: 0, behavior: 'auto' });
+  }, [game.phase, game.questionIndex]);
 
   return (
-    <main>
-      {showProgress && (
-        <ProgressBars
+    <main ref={shellRef} className={`app-shell phase-${game.phase}`}>
+      {showMatchHud && (
+        <MatchHud
           player={game.playerProgress}
           opponent={game.opponentProgress}
           opponentName={game.opponent.displayName}
+          round={game.questionIndex + 1}
+          totalRounds={game.totalQuestions}
         />
       )}
 
-      {game.phase === 'home' && (
-        <HomeDashboard
-          onFindMatch={game.goToCategories}
-          onProfile={game.goToProfile}
-          onChallenge={(tournamentId) => handleChallenge(tournamentId, game.startChallenge)}
-        />
-      )}
+      <AnimatePresence mode="wait">
+        {game.phase === 'home' && (
+          <motion.div key="home" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <HomeDashboard
+              onFindMatch={game.goToCategories}
+              onProfile={game.goToProfile}
+              onChallenge={(tournamentId) => handleChallenge(tournamentId, game.startChallenge)}
+            />
+          </motion.div>
+        )}
 
-      {game.phase === 'profile' && <Profile onBack={game.goHome} />}
+        {game.phase === 'profile' && (
+          <motion.div key="profile" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <Profile onBack={game.goHome} />
+          </motion.div>
+        )}
 
-      {game.phase === 'categories' && (
-        <CategorySelect onSelect={game.goToMatchmaking} onBack={game.goHome} />
-      )}
+        {game.phase === 'categories' && (
+          <motion.div key="categories" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <CategorySelect onSelect={game.goToMatchmaking} onBack={game.goHome} />
+          </motion.div>
+        )}
 
-      {game.phase === 'matchmaking' && (
-        <Matchmaking opponent={game.opponent} video={game.activeVideo} onDone={game.start} />
-      )}
+        {game.phase === 'matchmaking' && (
+          <motion.div key="matchmaking" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <Matchmaking opponent={game.opponent} video={game.activeVideo} onDone={game.start} />
+          </motion.div>
+        )}
 
-      {game.phase === 'question' && game.currentQuestion && (
-        <QuestionScreen
-          key={game.questionIndex}
-          question={game.currentQuestion}
-          questionNumber={game.questionIndex + 1}
-          totalQuestions={game.totalQuestions}
-          onAnswer={game.answer}
-        />
-      )}
+        {game.phase === 'question' && game.currentQuestion && (
+          <motion.div key="question" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <QuestionScreen
+              key={game.questionIndex}
+              question={game.currentQuestion}
+              onAnswer={game.answer}
+            />
+          </motion.div>
+        )}
 
-      {game.phase === 'resolution' && game.currentQuestion && (
-        <ResolutionScreen
-          question={game.currentQuestion}
-          correct={game.lastCorrect}
-          selectedOptionId={game.selectedOption}
-          onContinue={game.continueAfterResolution}
-        />
-      )}
+        {game.phase === 'resolution' && game.currentQuestion && (
+          <motion.div key="resolution" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <ResolutionScreen
+              question={game.currentQuestion}
+              correct={game.lastCorrect}
+              selectedOptionId={game.selectedOption}
+              onContinue={game.continueAfterResolution}
+            />
+          </motion.div>
+        )}
 
-      {game.phase === 'hammer' && (
-        <HammerGame
-          key={game.questionIndex}
-          config={game.miniGameConfig}
-          onComplete={game.completeHammer}
-        />
-      )}
+        {game.phase === 'hammer' && (
+          <motion.div key="hammer" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <HammerGame
+              key={game.questionIndex}
+              config={game.miniGameConfig}
+              onComplete={game.completeHammer}
+            />
+          </motion.div>
+        )}
 
-      {game.phase === 'result' && (
-        <ResultScreen
-          playerProgress={game.playerProgress}
-          opponentProgress={game.opponentProgress}
-          opponentName={game.opponent.displayName}
-          bestSkill={game.bestSkill}
-          correctCount={game.correctCount}
-          totalQuestions={game.totalQuestions}
-          perfectHits={game.perfectHits}
-          avgResponseMs={game.avgResponseMs}
-          onReplay={game.start}
-          onHome={game.goHome}
-        />
-      )}
+        {game.phase === 'result' && (
+          <motion.div key="result" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <ResultScreen
+              playerProgress={game.playerProgress}
+              opponentProgress={game.opponentProgress}
+              opponentName={game.opponent.displayName}
+              bestSkill={game.bestSkill}
+              correctCount={game.correctCount}
+              totalQuestions={game.totalQuestions}
+              perfectHits={game.perfectHits}
+              avgResponseMs={game.avgResponseMs}
+              onReplay={game.start}
+              onHome={game.goHome}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

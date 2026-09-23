@@ -1,5 +1,17 @@
 import type { Question, Difficulty } from './index';
-import { countries, flagUrl, outlineUrl, type Country } from './countries';
+import { countries, flagUrl, outlineUrl, ISLAND_COUNTRIES, type Country } from './countries';
+import { FLAG_TRAITS } from './flagTraits';
+import { historicFlags, historicFlagUrl } from './historicFlags';
+import { languages } from './languages';
+
+export type CategoryId = 'geography' | 'history' | 'languages';
+
+// Near-identical flag pairs (indistinguishable at quiz size) — never used as
+// each other's distractors: the question would have no fair answer.
+const IDENTICAL_FLAG_PAIRS: [string, string][] = [
+  ['id', 'mc'], // Indonesia / Monaco — literally the same flag
+  ['ro', 'td'], // Romania / Chad — differ by a shade of blue
+];
 
 function shuffle<T>(arr: T[]): T[] {
   const copy = [...arr];
@@ -15,128 +27,212 @@ function pickOne<T>(arr: T[]): T {
 }
 
 function pickDistractors<T>(arr: T[], exclude: T, count: number): T[] {
-  const pool = arr.filter((item) => item !== exclude);
+  const key = (item: T) => (item as Country).code ?? item;
+  const pool = arr.filter((item) => key(item) !== key(exclude));
   return shuffle(pool).slice(0, count);
 }
 
-function buildOptions(correct: Country, distractors: Country[], textFn: (c: Country) => string) {
+// Take the count most plausible distractors from a scored list, with a little
+// variety: shuffle-pick from the top slice instead of always the same three.
+function pickFromShortlist<T>(scored: { item: T; score: number }[], count: number, shortlistSize = 6): T[] {
+  const shortlist = scored.slice(0, shortlistSize).map((s) => s.item);
+  return shuffle(shortlist).slice(0, count);
+}
+
+function buildOptions<T>(
+  correct: T,
+  distractors: T[],
+  idFn: (item: T) => string,
+  textFn: (item: T) => string,
+) {
   const all = shuffle([correct, ...distractors]);
-  const options = all.map((c, i) => ({
+  const options = all.map((item, i) => ({
     id: String.fromCharCode(97 + i),
-    text: textFn(c),
+    text: textFn(item),
   }));
-  const correctOptionId = String.fromCharCode(97 + all.findIndex((c) => c.code === correct.code));
+  const correctOptionId = String.fromCharCode(97 + all.findIndex((item) => idFn(item) === idFn(correct)));
   return { options, correctOptionId };
 }
 
+// ---------- Distractor strategies ----------
+
+function flagDistance(a: string, b: string): number {
+  const A = FLAG_TRAITS[a];
+  const B = FLAG_TRAITS[b];
+  if (!A || !B) return 99;
+  let d = 0;
+  if (A.o !== B.o) d += A.o === 'x' || B.o === 'x' ? 0.1 : 0.3;
+  const keys = new Set([...Object.keys(A.c), ...Object.keys(B.c)]);
+  for (const k of keys) d += Math.abs((A.c[k] ?? 0) - (B.c[k] ?? 0));
+  return d;
+}
+
+// Flag questions: distractors with similar colors + stripe layout.
+// Netherlands → Russia / Thailand / France / Luxembourg, not random flags.
+function pickFlagDistractors(correct: Country, count = 3): Country[] {
+  const banned = new Set(
+    IDENTICAL_FLAG_PAIRS.filter((pair) => pair.includes(correct.code)).flat().filter((c) => c !== correct.code),
+  );
+  const scored = countries
+    .filter((c) => c.code !== correct.code && !banned.has(c.code))
+    .map((c) => ({ item: c, score: flagDistance(correct.code, c.code) }))
+    .sort((x, y) => x.score - y.score);
+  return pickFromShortlist(scored, count);
+}
+
+// Outline questions: island outlines are compared against other islands,
+// mainland against the same region. Kiribati → Fiji / Samoa / Vanuatu.
+function pickOutlineDistractors(correct: Country, count = 3): Country[] {
+  const correctIsland = ISLAND_COUNTRIES.has(correct.code);
+  const scored = outlineCountries
+    .filter((c) => c.code !== correct.code)
+    .map((c) => {
+      let score = 0;
+      if (ISLAND_COUNTRIES.has(c.code) !== correctIsland) score += 1.2;
+      if (c.region !== correct.region) score += 0.5;
+      score += Math.random() * 0.05; // tie-break jitter
+      return { item: c, score };
+    })
+    .sort((x, y) => x.score - y.score);
+  return pickFromShortlist(scored, count);
+}
+
+// Capital-of-country (text) questions: plausible options come from the same region.
+function pickRegionDistractors(correct: Country, count = 3): Country[] {
+  const sameRegion = countries.filter((c) => c.region === correct.region && c.code !== correct.code);
+  const pool = sameRegion.length >= count ? sameRegion : countries.filter((c) => c.code !== correct.code);
+  return shuffle(pool).slice(0, count);
+}
+
+// Language questions: prefer distractors written in the same script —
+// Urdu is compared against Farsi and Arabic, not against Finnish.
+function pickLanguageDistractors(correct: (typeof languages)[number], count = 3): (typeof languages)[number][] {
+  const others = languages.filter((l) => l.id !== correct.id);
+  const sameScript = others.filter((l) => l.script === correct.script);
+  const rest = shuffle(others.filter((l) => l.script !== correct.script));
+  const chosen = shuffle(sameScript).slice(0, count);
+  if (chosen.length < count) chosen.push(...rest.slice(0, count - chosen.length));
+  return shuffle(chosen);
+}
+
+const now = () => new Date().toISOString();
+
+// mapsicon has no outline for these codes (verified 2026-09-09); they never appear
+// as outline media, but stay valid for flag/capital questions and as distractors.
+const OUTLINE_EXCLUDED = new Set(['xk', 'ps', 'mh', 'fm', 'tv']);
+
+const outlineCountries = countries.filter((c) => !OUTLINE_EXCLUDED.has(c.code));
+
+// ---------- Geography (RU) ----------
+
 export function generateFlagToCountry(): Question {
   const correct = pickOne(countries);
-  const distractors = pickDistractors(countries, correct, 3);
-  const { options, correctOptionId } = buildOptions(correct, distractors, (c) => c.name);
+  const distractors = pickFlagDistractors(correct);
+  const { options, correctOptionId } = buildOptions(correct, distractors, (c) => c.code, (c) => c.nameRu);
 
   return {
     id: `flag_country_${correct.code}`,
     type: 'multiple_choice',
     answerType: 'multiple_choice',
     category: 'Geography',
-    subcategory: 'Flags',
+    subcategory: 'Флаги',
     difficulty: 'Easy',
-    prompt: 'Which country does this flag belong to?',
+    prompt: 'Флаг какой это страны?',
     mediaType: 'flag',
     mediaUrl: flagUrl(correct.code),
     options,
     correctOptionId,
-    explanation: `This is the flag of ${correct.name}.`,
+    explanation: `Это флаг ${correct.nameRu} — ${correct.region === 'Asia' ? 'Азия' : correct.region === 'Europe' ? 'Европа' : correct.region === 'Africa' ? 'Африка' : correct.region === 'Americas' ? 'Америка' : 'Океания'}.`,
     status: 'approved',
-    createdAt: new Date().toISOString(),
+    createdAt: now(),
   };
 }
 
 export function generateCountryToCapital(difficulty: Difficulty = 'Medium'): Question {
   const correct = pickOne(countries);
-  const distractors = pickDistractors(countries, correct, 3);
-  const { options, correctOptionId } = buildOptions(correct, distractors, (c) => c.capital);
+  const distractors = pickRegionDistractors(correct);
+  const { options, correctOptionId } = buildOptions(correct, distractors, (c) => c.code, (c) => c.capitalRu);
 
   return {
     id: `capital_${correct.code}`,
     type: 'multiple_choice',
     answerType: 'multiple_choice',
     category: 'Geography',
-    subcategory: 'Capitals',
+    subcategory: 'Столицы',
     difficulty,
-    prompt: `What is the capital of ${correct.name}?`,
+    prompt: `Назовите столицу: ${correct.nameRu}`,
     options,
     correctOptionId,
-    explanation: `The capital of ${correct.name} is ${correct.capital}.`,
+    explanation: `${correct.nameRu}: столица — ${correct.capitalRu}.`,
     status: 'approved',
-    createdAt: new Date().toISOString(),
+    createdAt: now(),
   };
 }
 
 export function generateFlagToCapital(): Question {
   const correct = pickOne(countries);
-  const distractors = pickDistractors(countries, correct, 3);
-  const { options, correctOptionId } = buildOptions(correct, distractors, (c) => c.capital);
+  const distractors = pickFlagDistractors(correct);
+  const { options, correctOptionId } = buildOptions(correct, distractors, (c) => c.code, (c) => c.capitalRu);
 
   return {
     id: `flag_capital_${correct.code}`,
     type: 'multiple_choice',
     answerType: 'multiple_choice',
     category: 'Geography',
-    subcategory: 'Flags & Capitals',
+    subcategory: 'Флаги и столицы',
     difficulty: 'Hard',
-    prompt: 'What is the capital of the country with this flag?',
+    prompt: 'Назовите столицу страны с этим флагом',
     mediaType: 'flag',
     mediaUrl: flagUrl(correct.code),
     options,
     correctOptionId,
-    explanation: `This is the flag of ${correct.name}. Its capital is ${correct.capital}.`,
+    explanation: `Это флаг ${correct.nameRu}. Столица — ${correct.capitalRu}.`,
     status: 'approved',
-    createdAt: new Date().toISOString(),
+    createdAt: now(),
   };
 }
 
 export function generateOutlineToCountry(): Question {
-  const correct = pickOne(countries);
-  const distractors = pickDistractors(countries, correct, 3);
-  const { options, correctOptionId } = buildOptions(correct, distractors, (c) => c.name);
+  const correct = pickOne(outlineCountries);
+  const distractors = pickOutlineDistractors(correct);
+  const { options, correctOptionId } = buildOptions(correct, distractors, (c) => c.code, (c) => c.nameRu);
 
   return {
     id: `outline_country_${correct.code}`,
     type: 'multiple_choice',
     answerType: 'multiple_choice',
     category: 'Geography',
-    subcategory: 'Outlines',
+    subcategory: 'Контуры',
     difficulty: 'Medium',
-    prompt: 'Which country has this shape?',
+    prompt: 'Какая страна имеет такую форму?',
     mediaType: 'outline',
     mediaUrl: outlineUrl(correct.code),
     options,
     correctOptionId,
-    explanation: `This is the outline of ${correct.name}.`,
+    explanation: `Это контур ${correct.nameRu}.`,
     status: 'approved',
-    createdAt: new Date().toISOString(),
+    createdAt: now(),
   };
 }
 
 export function generateOutlineToCountryOpen(): Question {
-  const correct = pickOne(countries);
+  const correct = pickOne(outlineCountries);
   return {
     id: `open_outline_country_${correct.code}`,
     type: 'multiple_choice',
     answerType: 'open_answer',
     category: 'Geography',
-    subcategory: 'Type the Country (Outline)',
+    subcategory: 'Страна по контуру',
     difficulty: 'Expert',
-    prompt: 'Type the name of the country with this shape:',
+    prompt: 'Напишите название страны с таким контуром:',
     mediaType: 'outline',
     mediaUrl: outlineUrl(correct.code),
     options: [],
     correctOptionId: '',
-    correctAnswers: [correct.name],
-    explanation: `This is the outline of ${correct.name}.`,
+    correctAnswers: [correct.nameRu, correct.name],
+    explanation: `Это контур ${correct.nameRu}.`,
     status: 'approved',
-    createdAt: new Date().toISOString(),
+    createdAt: now(),
   };
 }
 
@@ -147,15 +243,36 @@ export function generateCapitalOpenAnswer(): Question {
     type: 'multiple_choice',
     answerType: 'open_answer',
     category: 'Geography',
-    subcategory: 'Type the Capital',
+    subcategory: 'Столица',
     difficulty: 'Hard',
-    prompt: `Type the capital of ${correct.name}`,
+    prompt: `Напишите столицу: ${correct.nameRu}`,
     options: [],
     correctOptionId: '',
-    correctAnswers: [correct.capital],
-    explanation: `The capital of ${correct.name} is ${correct.capital}.`,
+    correctAnswers: [correct.capitalRu, correct.capital],
+    explanation: `${correct.nameRu}: столица — ${correct.capitalRu}.`,
     status: 'approved',
-    createdAt: new Date().toISOString(),
+    createdAt: now(),
+  };
+}
+
+export function generateFlagToCountryOpen(): Question {
+  const correct = pickOne(countries);
+  return {
+    id: `open_flag_country_${correct.code}`,
+    type: 'multiple_choice',
+    answerType: 'open_answer',
+    category: 'Geography',
+    subcategory: 'Страна по флагу',
+    difficulty: 'Expert',
+    prompt: 'Напишите название страны с этим флагом:',
+    mediaType: 'flag',
+    mediaUrl: flagUrl(correct.code),
+    options: [],
+    correctOptionId: '',
+    correctAnswers: [correct.nameRu, correct.name],
+    explanation: `Это флаг ${correct.nameRu}.`,
+    status: 'approved',
+    createdAt: now(),
   };
 }
 
@@ -171,43 +288,92 @@ export function generateFixedCapitalQuiz(countryCodes: string[]): Question[] {
       type: 'multiple_choice' as const,
       answerType: 'open_answer' as const,
       category: 'Geography',
-      subcategory: 'Capitals',
+      subcategory: 'Столицы',
       difficulty: 'Hard' as const,
-      prompt: `What is the capital of ${country.name}?`,
+      prompt: `Назовите столицу: ${country.nameRu}`,
       options: [],
       correctOptionId: '',
-      correctAnswers: [country.capital],
-      explanation: `The capital of ${country.name} is ${country.capital}.`,
+      correctAnswers: [country.capitalRu, country.capital],
+      explanation: `${country.nameRu}: столица — ${country.capitalRu}.`,
       status: 'approved' as const,
-      createdAt: new Date().toISOString(),
+      createdAt: now(),
     }));
 }
 
-export function generateFlagToCountryOpen(): Question {
-  const correct = pickOne(countries);
+// ---------- Historical Flags (RU) ----------
+
+export function generateHistoricFlag(): Question {
+  const correct = pickOne(historicFlags);
+  const distractors = pickDistractors(historicFlags, correct, 3);
+  const { options, correctOptionId } = buildOptions(
+    correct,
+    distractors,
+    (f) => f.id,
+    (f) => `${f.labelRu} (${f.era})`,
+  );
+
   return {
-    id: `open_flag_country_${correct.code}`,
+    id: `hist_flag_${correct.id}`,
     type: 'multiple_choice',
-    answerType: 'open_answer',
-    category: 'Geography',
-    subcategory: 'Type the Country',
-    difficulty: 'Expert',
-    prompt: 'Type the name of the country with this flag:',
+    answerType: 'multiple_choice',
+    category: 'Historical Flags',
+    subcategory: 'Исторические флаги',
+    difficulty: 'Hard',
+    prompt: 'Что это за флаг?',
     mediaType: 'flag',
-    mediaUrl: flagUrl(correct.code),
-    options: [],
-    correctOptionId: '',
-    correctAnswers: [correct.name],
-    explanation: `This is the flag of ${correct.name}.`,
+    mediaUrl: historicFlagUrl(correct.file),
+    options,
+    correctOptionId,
+    explanation: `${correct.labelRu}, ${correct.era}. ${correct.factRu}`,
     status: 'approved',
-    createdAt: new Date().toISOString(),
+    createdAt: now(),
   };
 }
 
-export function generateMatch(numQuestions: number = 10, openRatio: number = 0.3): Question[] {
-  const mcGenerators = [generateFlagToCountry, generateCountryToCapital, generateFlagToCapital, generateOutlineToCountry];
-  const openGenerators = [generateCapitalOpenAnswer, generateFlagToCountryOpen, generateOutlineToCountryOpen];
-  const numOpen = Math.round(numQuestions * openRatio);
+// ---------- Languages (RU) ----------
+
+export function generateLanguage(): Question {
+  const correct = pickOne(languages);
+  const distractors = pickLanguageDistractors(correct);
+  const { options, correctOptionId } = buildOptions(correct, distractors, (l) => l.id, (l) => l.nameRu);
+
+  return {
+    id: `lang_${correct.id}`,
+    type: 'multiple_choice',
+    answerType: 'multiple_choice',
+    category: 'Languages',
+    subcategory: 'Языки',
+    difficulty: 'Medium',
+    prompt: 'Что это за язык?',
+    mediaType: null,
+    mediaUrl: null,
+    mediaText: correct.sample,
+    options,
+    correctOptionId,
+    explanation: `Это ${correct.nameRu}. ${correct.factRu}`,
+    status: 'approved',
+    createdAt: now(),
+  };
+}
+
+// ---------- Match assembly ----------
+
+export function generateMatch(
+  numQuestions: number = 10,
+  openRatio: number = 0.3,
+  category: CategoryId = 'geography',
+): Question[] {
+  const mcGenerators =
+    category === 'history'
+      ? [generateHistoricFlag]
+      : category === 'languages'
+        ? [generateLanguage]
+        : [generateFlagToCountry, generateCountryToCapital, generateFlagToCapital, generateOutlineToCountry];
+  const openGenerators =
+    category === 'geography'
+      ? [generateCapitalOpenAnswer, generateFlagToCountryOpen, generateOutlineToCountryOpen]
+      : [];
+  const numOpen = openGenerators.length ? Math.round(numQuestions * openRatio) : 0;
   const numMC = numQuestions - numOpen;
   const questions: Question[] = [];
   const usedCodes = new Set<string>();
@@ -215,9 +381,9 @@ export function generateMatch(numQuestions: number = 10, openRatio: number = 0.3
 
   const tryAdd = (generator: () => Question): boolean => {
     const question = generator();
-    const countryCode = question.id.split('_').pop()!;
-    if (!usedCodes.has(countryCode)) {
-      usedCodes.add(countryCode);
+    const code = question.id.split('_').pop()!;
+    if (!usedCodes.has(code)) {
+      usedCodes.add(code);
       questions.push(question);
       return true;
     }

@@ -32,8 +32,8 @@ const robbOpponent: Opponent = {
 const robbTournament: Tournament = {
   id: 'test-robb-capitals',
   slug: 'robb-peters-capitals',
-  title: 'Beat Robb Peters',
-  description: 'Real capitals quiz from the video — same 9 questions, same order.',
+  title: 'Обыграй Robb Peters',
+  description: 'Тот же квиз по столицам: 9 вопросов в исходном порядке.',
   status: 'draft',
   questionIds: robbQuizQuestions.map((q) => q.id),
   opponentId: robbOpponent.id,
@@ -55,7 +55,7 @@ export interface Challenge {
 
 // Add new entries here as more real videos get recorded and their outcomes logged.
 export const challenges: Challenge[] = [
-  { tournament: robbTournament, opponent: robbOpponent, questions: robbQuizQuestions, badge: 'Real Video Quiz' },
+  { tournament: robbTournament, opponent: robbOpponent, questions: robbQuizQuestions, badge: 'Видео-челлендж' },
 ];
 
 export function findChallenge(tournamentId: string): Challenge | undefined {
