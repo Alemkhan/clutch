@@ -8,6 +8,9 @@ export type EventType =
   | 'skill_attempt_started'
   | 'skill_attempt_completed'
   | 'match_completed'
+  | 'match_save_pending'
+  | 'match_save_succeeded'
+  | 'match_save_failed'
   | 'match_abandoned'
   | 'replay_clicked'
   | 'result_shared';

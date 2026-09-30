@@ -17,6 +17,24 @@ const SESSION_REFRESH_WINDOW_MS = 5 * 60 * 1000;
 let memoryGuestSession: GuestSessionResponse | null = null;
 let guestSessionRequest: Promise<GuestSessionResponse> | null = null;
 
+export class ApiError extends Error {
+  constructor(
+    public readonly status: number,
+    public readonly retryAfterMs?: number,
+  ) {
+    super(`Clutch API returned ${status}`);
+    this.name = 'ApiError';
+  }
+}
+
+export function isTransientApiError(error: unknown): boolean {
+  return !(error instanceof ApiError)
+    || error.status === 408
+    || error.status === 425
+    || error.status === 429
+    || error.status >= 500;
+}
+
 function getOrCreateDisplayNameSeed(): string {
   try {
     const stored = localStorage.getItem(DISPLAY_NAME_SEED_KEY);
@@ -47,7 +65,15 @@ async function rawApiFetch<T>(path: string, init: RequestInit): Promise<T> {
       headers: { 'Content-Type': 'application/json', ...init.headers },
       signal: controller.signal,
     });
-    if (!response.ok) throw new Error(`Clutch API returned ${response.status}`);
+    if (!response.ok) {
+      const retryAfterSeconds = Number(response.headers.get('Retry-After'));
+      throw new ApiError(
+        response.status,
+        Number.isFinite(retryAfterSeconds) && retryAfterSeconds > 0
+          ? retryAfterSeconds * 1000
+          : undefined,
+      );
+    }
     return await response.json() as T;
   } finally {
     clearTimeout(timeout);
@@ -127,10 +153,9 @@ async function authorizationHeader(): Promise<string> {
 }
 
 async function apiFetch<T>(path: string, init: RequestInit): Promise<T> {
-  const authorization = await authorizationHeader();
-  return rawApiFetch(path, {
+  return rawApiFetch<T>(path, {
     ...init,
-    headers: { ...init.headers, Authorization: authorization },
+    headers: { ...init.headers, Authorization: await authorizationHeader() },
   });
 }
 

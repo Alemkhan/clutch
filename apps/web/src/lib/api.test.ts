@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { guestRenewalAuthorization, isGuestSessionUsable } from './api';
+import { ApiError, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError } from './api';
 
 describe('browser guest session validity', () => {
   const now = 1_800_000_000_000;
@@ -20,5 +20,20 @@ describe('browser guest session validity', () => {
     expect(guestRenewalAuthorization(session, now)).toBe('Bearer prior-token');
     expect(guestRenewalAuthorization({ ...session, expiresAt: now }, now)).toBeNull();
     expect(guestRenewalAuthorization({ token: '', expiresAt: now + 1 }, now)).toBeNull();
+  });
+});
+
+describe('API error retry classification', () => {
+  it('retries network, timeout, rate-limit and server failures', () => {
+    expect(isTransientApiError(new TypeError('offline'))).toBe(true);
+    expect(isTransientApiError(new ApiError(408))).toBe(true);
+    expect(isTransientApiError(new ApiError(425))).toBe(true);
+    expect(isTransientApiError(new ApiError(429))).toBe(true);
+    expect(isTransientApiError(new ApiError(503))).toBe(true);
+  });
+
+  it('does not automatically retry authentication or validation failures', () => {
+    expect(isTransientApiError(new ApiError(401))).toBe(false);
+    expect(isTransientApiError(new ApiError(404))).toBe(false);
   });
 });

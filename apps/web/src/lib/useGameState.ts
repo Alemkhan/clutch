@@ -11,7 +11,8 @@ import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
 } from '@clutch/shared';
 import { createQuestions, createSampleOpponent } from './sampleData';
-import { completeAsyncMatch, startAsyncMatch } from './api';
+import { startAsyncMatch } from './api';
+import { completionQueue, type CompletionQueueEvent } from './completionQueue';
 import {
   normalizeOnlineMatch,
   normalizeScriptedOpponent,
@@ -27,9 +28,22 @@ import {
   recordAnswer,
 } from './gameSession';
 
+export type ResultSaveStatus = 'practice' | 'pending' | 'saved' | 'error';
+
 export function useGameState() {
   const [state, setState] = useState(createInitialGameState);
-  const submittedMatchesRef = useRef(new Set<string>());
+  const [resultSave, setResultSave] = useState<{
+    status: ResultSaveStatus;
+    error?: string;
+    canRetry: boolean;
+  }>({
+    status: 'practice',
+    canRetry: false,
+  });
+  const activeMatchIdRef = useRef<string>();
+  const reportedCompletionRef = useRef<string>();
+  const reportedSavePendingRef = useRef<string>();
+  activeMatchIdRef.current = state.activeMatchId;
 
   const start = useCallback(async () => {
     analytics.startMatch();
@@ -82,26 +96,97 @@ export function useGameState() {
   }, []);
 
   useEffect(() => {
-    if (state.phase === 'result' && state.questions.length > 0) {
-      analytics.track('match_completed', {
-        playerProgress: state.rulesState.playerProgress,
-        opponentProgress: state.rulesState.opponentProgress,
-      });
-    }
-  }, [state.phase, state.questions.length, state.rulesState]);
+    if (state.phase !== 'result' || state.questions.length === 0) return;
+    const completionId = state.activeMatchId ?? analytics.matchId;
+    if (!completionId || reportedCompletionRef.current === completionId) return;
+    reportedCompletionRef.current = completionId;
+    analytics.track('match_completed', {
+      playerProgress: state.rulesState.playerProgress,
+      opponentProgress: state.rulesState.opponentProgress,
+    });
+  }, [
+    state.phase,
+    state.questions.length,
+    state.activeMatchId,
+    state.rulesState.playerProgress,
+    state.rulesState.opponentProgress,
+  ]);
 
   useEffect(() => {
-    if (
-      state.phase !== 'result'
-      || !state.activeMatchId
-      || submittedMatchesRef.current.has(state.activeMatchId)
-    ) return;
+    const handleQueueEvent = (event: CompletionQueueEvent) => {
+      if (event.entry.matchId !== activeMatchIdRef.current) return;
+      if (event.type === 'confirmed') {
+        setResultSave({ status: 'saved', canRetry: false });
+        setState((previous) => previous.activeMatchId === event.entry.matchId
+          ? {
+              ...previous,
+              correctCount: event.response.correctCount,
+              rulesState: {
+                ...previous.rulesState,
+                roundsPlayed: event.response.rounds.length,
+                playerProgress: event.response.playerProgress,
+                outcome: event.response.playerProgress === previous.rulesState.opponentProgress
+                  ? 'tie'
+                  : event.response.playerProgress > previous.rulesState.opponentProgress
+                    ? 'player'
+                    : 'opponent',
+              },
+            }
+          : previous);
+        return;
+      }
+      if (event.entry.status === 'error') {
+        setResultSave({
+          status: 'error',
+          error: 'Не удалось подтвердить результат.',
+          canRetry: event.entry.canRetry,
+        });
+      } else {
+        setResultSave({ status: 'pending', canRetry: false });
+      }
+    };
+    return completionQueue.subscribe(handleQueueEvent);
+  }, []);
 
-    submittedMatchesRef.current.add(state.activeMatchId);
-    void completeAsyncMatch(state.activeMatchId, { rounds: state.roundInputs }).catch(() => {
-      submittedMatchesRef.current.delete(state.activeMatchId!);
-    });
-  }, [state.phase, state.activeMatchId, state.roundInputs]);
+  useEffect(() => {
+    if (state.phase !== 'result' || !state.activeMatchId) {
+      setResultSave({ status: 'practice', canRetry: false });
+      return;
+    }
+    try {
+      const entry = completionQueue.enqueue(
+        state.activeMatchId,
+        { rounds: state.roundInputs },
+        state.rulesState.opponentProgress,
+      );
+      setResultSave(entry.status === 'error'
+        ? {
+            status: 'error',
+            error: 'Не удалось подтвердить результат.',
+            canRetry: entry.canRetry,
+          }
+        : { status: 'pending', canRetry: false });
+      if (reportedSavePendingRef.current !== state.activeMatchId) {
+        reportedSavePendingRef.current = state.activeMatchId;
+        analytics.track('match_save_pending', { matchId: state.activeMatchId });
+      }
+      void completionQueue.flush();
+    } catch {
+      setResultSave({
+        status: 'error',
+        error: 'Очередь сохранения заполнена. Попробуйте позже.',
+        canRetry: false,
+      });
+      if (reportedSavePendingRef.current !== state.activeMatchId) {
+        reportedSavePendingRef.current = state.activeMatchId;
+        analytics.track('match_save_failed', { matchId: state.activeMatchId });
+      }
+    }
+  }, [state.phase, state.activeMatchId, state.roundInputs, state.rulesState.opponentProgress]);
+
+  const retryResultSave = useCallback(() => {
+    if (state.activeMatchId) completionQueue.retry(state.activeMatchId);
+  }, [state.activeMatchId]);
 
   const answer = useCallback((optionId: string, _timeMs: number) => {
     setState((prev) => {
@@ -175,6 +260,10 @@ export function useGameState() {
     opponent: state.opponent,
     activeVideo: state.activeVideo,
     miniGameConfig: state.miniGameConfig,
+    resultSaveStatus: resultSave.status,
+    resultSaveError: resultSave.error,
+    canRetryResultSave: resultSave.canRetry,
+    retryResultSave,
     start,
     startChallenge,
     answer,

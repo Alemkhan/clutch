@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { SkillResult } from '@clutch/shared';
 import { playSound } from '../lib/sounds';
-import { recordMatch } from '../lib/localStats';
+import type { ResultSaveStatus } from '../lib/useGameState';
 
 interface ResultScreenProps {
   playerProgress: number;
@@ -12,6 +12,10 @@ interface ResultScreenProps {
   questionsPlayed: number;
   perfectHits: number;
   avgResponseMs: number;
+  saveStatus: ResultSaveStatus;
+  saveError?: string;
+  canRetrySave: boolean;
+  onRetrySave: () => void;
   onReplay: () => void;
   onHome: () => void;
 }
@@ -25,6 +29,10 @@ export function ResultScreen({
   questionsPlayed,
   perfectHits,
   avgResponseMs,
+  saveStatus,
+  saveError,
+  canRetrySave,
+  onRetrySave,
   onReplay,
   onHome,
 }: ResultScreenProps) {
@@ -37,7 +45,6 @@ export function ResultScreen({
     if (recordedRef.current) return;
     recordedRef.current = true;
     playSound(won ? 'matchWin' : 'matchLose');
-    recordMatch(won ? 'win' : tie ? 'tie' : 'loss');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -89,6 +96,23 @@ export function ResultScreen({
       {!won && !tie && (
         <p className="result-insight">Один точный удар мог всё изменить.</p>
       )}
+
+      <div className={`result-save-status ${saveStatus}`} role="status">
+        {saveStatus === 'practice' && 'Локальная практика — результат не сохраняется.'}
+        {saveStatus === 'pending' && 'Сохраняем результат…'}
+        {saveStatus === 'saved' && 'Результат сохранён.'}
+        {saveStatus === 'error' && (
+          <>
+            <span>{saveError || 'Не удалось сохранить результат.'}</span>
+            {canRetrySave && (
+              <>
+                {' '}
+                <button className="result-save-retry" onClick={onRetrySave}>Повторить</button>
+              </>
+            )}
+          </>
+        )}
+      </div>
 
       {showShare && (
         <div className="share-card">

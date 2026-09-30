@@ -987,6 +987,16 @@ button:active {
   margin-top: auto;
 }
 
+.result-save-retry {
+  min-height: 36px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+}
+
 .share-card {
   width: 100%;
   background: var(--text);

@@ -11,6 +11,8 @@ import { ResolutionScreen } from './components/ResolutionScreen';
 import { HammerGame } from './components/HammerGame';
 import { ResultScreen } from './components/ResultScreen';
 import { findChallenge } from './lib/tournaments';
+import { completionQueue } from './lib/completionQueue';
+import { analytics } from './lib/analytics';
 
 function handleChallenge(tournamentId: string, startChallenge: ReturnType<typeof useGameState>['startChallenge']) {
   const challenge = findChallenge(tournamentId);
@@ -44,6 +46,23 @@ export default function App() {
   useEffect(() => {
     shellRef.current?.scrollTo({ top: 0, behavior: 'auto' });
   }, [game.phase, game.questionIndex]);
+
+  useEffect(() => {
+    const unsubscribe = completionQueue.subscribe((event) => {
+      if (event.type === 'confirmed') {
+        analytics.track('match_save_succeeded', { matchId: event.entry.matchId });
+      } else if (event.entry.status === 'error') {
+        analytics.track('match_save_failed', { matchId: event.entry.matchId });
+      }
+    });
+    void completionQueue.flush();
+    const flushPending = () => { void completionQueue.flush(); };
+    window.addEventListener('online', flushPending);
+    return () => {
+      unsubscribe();
+      window.removeEventListener('online', flushPending);
+    };
+  }, []);
 
   return (
     <main ref={shellRef} className={`app-shell phase-${game.phase}`}>
@@ -128,6 +147,10 @@ export default function App() {
               questionsPlayed={game.questionsPlayed}
               perfectHits={game.perfectHits}
               avgResponseMs={game.avgResponseMs}
+              saveStatus={game.resultSaveStatus}
+              saveError={game.resultSaveError}
+              canRetrySave={game.canRetryResultSave}
+              onRetrySave={game.retryResultSave}
               onReplay={game.start}
               onHome={game.goHome}
             />

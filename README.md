@@ -21,8 +21,9 @@ for the task:
 Status as of 2026-09-30: playable prototype, not production-ready. The API and
 client share match transitions; the API enforces ghost eligibility and versioned
 conditions (R1, migration 0002 required). Authenticated match ownership is in
-place, and R2b bounds match inputs and request frequency. Reliable uploads,
-broader abuse protection, and final art still need work.
+place, R2b bounds match inputs and request frequency, and R3 durably retries
+completed results until a valid acknowledgement. Broader abuse protection,
+safe start/replay states, stable game timing, and final art still need work.
 The remote deployment state has not been verified by this repository audit.
 
 ## Stack
@@ -141,6 +142,14 @@ does not depend on later edits to the source record. The client validates the
 returned `conditions` and opponent transcript before starting, then uses the
 same shared round transition as the API. Local scripts are normalized separately.
 Saved response times are not replayed as a real-time opponent timeline.
+
+Completed online matches are first stored in a versioned browser queue without
+credentials. The client retries transient failures with bounded backoff (and
+honors `Retry-After`), resumes the queue on app bootstrap and browser `online`,
+and removes an entry only after a valid acknowledgement for the same match.
+Terminal 4xx responses remain visible and are not retried. Local/challenge runs
+are labeled as practice and are excluded from confirmed online profile stats.
+The queue covers completed payloads only; it does not restore a match in progress.
 
 API:
 
