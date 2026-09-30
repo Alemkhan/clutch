@@ -14,26 +14,27 @@ export const categories = new Set(['geography', 'history', 'languages']);
 export function isStartRequest(value: unknown): value is StartAsyncMatchRequest {
   if (!value || typeof value !== 'object') return false;
   const body = value as Record<string, unknown>;
-  return typeof body.playerId === 'string'
-    && body.playerId.length > 0
-    && body.playerId.length <= 128
+  return body.playerId === undefined
+    && body.telegramInitData === undefined
     && typeof body.displayName === 'string'
     && body.displayName.trim().length > 0
     && body.displayName.length <= 64
     && typeof body.category === 'string'
-    && categories.has(body.category)
-    && (body.telegramInitData === undefined
-      || (typeof body.telegramInitData === 'string' && body.telegramInitData.length <= 8192));
+    && categories.has(body.category);
 }
 
 export function isRoundInput(value: unknown): value is AsyncMatchRoundInput {
   if (!value || typeof value !== 'object') return false;
   const round = value as Record<string, unknown>;
   return typeof round.questionId === 'string'
+    && round.questionId.length > 0
+    && round.questionId.length <= 128
     && typeof round.selectedAnswer === 'string'
+    && round.selectedAnswer.length <= 512
     && typeof round.responseTimeMs === 'number'
     && Number.isFinite(round.responseTimeMs)
     && round.responseTimeMs >= 0
+    && round.responseTimeMs <= 60_000
     && (round.skillDistance === undefined
       || (typeof round.skillDistance === 'number'
         && Number.isFinite(round.skillDistance)

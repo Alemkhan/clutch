@@ -18,10 +18,11 @@ for the task:
 - [Small implementation tasks](docs/ROADMAP.md)
 - [Art, animation, and audio brief](docs/ART_DIRECTION.md)
 
-Status as of 2026-09-29: playable prototype, not production-ready. The API and
+Status as of 2026-09-30: playable prototype, not production-ready. The API and
 client share match transitions; the API enforces ghost eligibility and versioned
-conditions (R1, migration 0002 required). Match ownership, reliable uploads, and
-final art still need work.
+conditions (R1, migration 0002 required). Authenticated match ownership is in
+place, and R2b bounds match inputs and request frequency. Reliable uploads,
+broader abuse protection, and final art still need work.
 The remote deployment state has not been verified by this repository audit.
 
 ## Stack
@@ -78,9 +79,19 @@ Copy `apps/api/.env.example` to `apps/api/.dev.vars` and fill in:
 
 ```
 TELEGRAM_BOT_TOKEN=your_token_here
+SESSION_SIGNING_SECRET=replace_with_at_least_32_random_characters
 ```
 
+`SESSION_SIGNING_SECRET` signs browser guest sessions and must contain at least
+32 characters. Configure it independently in every environment; do not reuse the
+Telegram bot token.
+
 Never commit `.dev.vars` or `.env`.
+
+`wrangler.toml` also declares the native `API_RATE_LIMITER` binding at 30
+requests per 60 seconds. Its numeric namespace ID must be unique in the target
+Cloudflare account before deployment. Wrangler simulates this binding locally;
+Cloudflare counters are local to each Cloudflare location, not globally exact.
 
 For a deployed web build, set `VITE_API_URL` to the public Worker URL. The web
 app falls back to a local scripted opponent when the API is unavailable.
@@ -107,14 +118,14 @@ URL. Keep both terminals running while testing. Restarting ngrok may change the
 URL.
 
 The tunnel exposes the local app and proxied API. Use it for controlled testing,
-not as a public beta until the authorization issues in the audit are addressed.
+not as a public beta until the remaining release risks in the audit are addressed.
 
 Inside Telegram the client initializes the Mini App SDK, applies viewport safe
-areas, and sends raw `initData` to the Worker. The Worker validates its HMAC
-and expiry before using the Telegram user ID and display name. A normal browser
-continues to use an anonymous local identity.
-This is not yet end-to-end authorization: start accepts client identities when
-initData is absent, and completion does not check match ownership.
+areas, and sends raw `initData` in the `Authorization: tma` header. The Worker
+validates its HMAC and expiry on start and completion before deriving the Telegram
+user ID and display name. A normal browser obtains a signed anonymous guest
+session. Both match routes derive identity from that header, and completion
+returns the same 404 for a missing or foreign match.
 
 ## Async matches
 
@@ -133,9 +144,17 @@ Saved response times are not replayed as a real-time opponent timeline.
 
 API:
 
+- `POST /api/auth/guest` — issue a signed browser guest session.
 - `POST /api/async-matches` — create a run and find a ghost.
 - `POST /api/async-matches/:id/complete` — validate and store its rounds.
 - `GET /api/leaderboard?category=geography` — best completed runs.
+
+The start and completion JSON bodies are capped at 1 KiB and 16 KiB. Completion
+accepts 1–10 rounds with bounded question IDs, answers, and response times.
+Guest session issuance, match start/completion, and leaderboard reads use
+separate 30-per-minute rate-limit buckets keyed by verified player identity or,
+for unauthenticated routes, `CF-Connecting-IP`. A limit returns 429 with
+`Retry-After: 60`; a binding failure returns 503.
 
 ## Assets & credits
 

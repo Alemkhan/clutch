@@ -10,8 +10,10 @@ import {
   type StartAsyncMatchResponse,
 } from '@clutch/shared';
 import type { Hono } from 'hono';
-import { validateTelegramInitData } from '../auth/telegram';
+import { resolveRequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
+import { readJsonBody } from '../http/jsonBody';
+import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import { createBotOpponent } from '../matches/bots';
 import {
   completeRun,
@@ -30,21 +32,23 @@ import {
 
 export function registerAsyncMatchRoutes(app: Hono<{ Bindings: Env }>): void {
   app.post('/api/async-matches', async (c) => {
-    const body = await c.req.json<unknown>().catch(() => null);
+    const identity = await resolveRequestIdentity(c.req.header('Authorization'), c.env);
+    if (!identity) return c.json({ error: 'Authentication required.' }, 401);
+    const rateLimit = await checkRateLimit(c.env.API_RATE_LIMITER, `start:${identity.playerId}`);
+    if (rateLimit === 'limited') {
+      c.header('Retry-After', String(RATE_LIMIT_PERIOD_SECONDS));
+      return c.json({ error: 'Too many requests.' }, 429);
+    }
+    if (rateLimit === 'unavailable') return c.json({ error: 'Rate limiter unavailable.' }, 503);
+    const parsed = await readJsonBody(c.req.raw, 1024);
+    if (!parsed.ok) return c.json({ error: parsed.error }, parsed.status);
+    const body = parsed.value;
     if (!isStartRequest(body)) {
-      return c.json({ error: 'Invalid playerId, displayName, or category.' }, 400);
+      return c.json({ error: 'Invalid displayName or category.' }, 400);
     }
 
-    let playerId = body.playerId;
-    let displayName = body.displayName.trim();
-    if (body.telegramInitData) {
-      const telegramUser = await validateTelegramInitData(body.telegramInitData, c.env.TELEGRAM_BOT_TOKEN);
-      if (!telegramUser) return c.json({ error: 'Invalid or expired Telegram initData.' }, 401);
-      playerId = `telegram:${telegramUser.id}`;
-      displayName = [telegramUser.first_name, telegramUser.last_name].filter(Boolean).join(' ')
-        || telegramUser.username
-        || displayName;
-    }
+    const playerId = identity.playerId;
+    const displayName = identity.displayName || body.displayName.trim();
 
     const ghost = await findGhost(c.env.DB, body.category, playerId);
     const questions = ghost?.questions ?? generateMatch(10, 0.3, body.category);
@@ -72,15 +76,28 @@ export function registerAsyncMatchRoutes(app: Hono<{ Bindings: Env }>): void {
   });
 
   app.post('/api/async-matches/:id/complete', async (c) => {
+    const identity = await resolveRequestIdentity(c.req.header('Authorization'), c.env);
+    if (!identity) return c.json({ error: 'Authentication required.' }, 401);
+    const rateLimit = await checkRateLimit(c.env.API_RATE_LIMITER, `complete:${identity.playerId}`);
+    if (rateLimit === 'limited') {
+      c.header('Retry-After', String(RATE_LIMIT_PERIOD_SECONDS));
+      return c.json({ error: 'Too many requests.' }, 429);
+    }
+    if (rateLimit === 'unavailable') return c.json({ error: 'Rate limiter unavailable.' }, 503);
     const matchId = c.req.param('id');
-    const body = await c.req.json<CompleteAsyncMatchRequest>().catch(() => null);
-    if (!body || !Array.isArray(body.rounds) || body.rounds.length === 0
+    const parsed = await readJsonBody(c.req.raw, 16_384);
+    if (!parsed.ok) return c.json({ error: parsed.error }, parsed.status);
+    const body = parsed.value as CompleteAsyncMatchRequest;
+    if (!body || typeof body !== 'object' || !Array.isArray(body.rounds)
+      || body.rounds.length === 0 || body.rounds.length > 10
       || !body.rounds.every(isRoundInput)) {
       return c.json({ error: 'Invalid rounds.' }, 400);
     }
 
     const run = await findRun(c.env.DB, matchId);
-    if (!run) return c.json({ error: 'Match not found.' }, 404);
+    if (!run || run.player_id !== identity.playerId) {
+      return c.json({ error: 'Match not found.' }, 404);
+    }
 
     if (run.status === 'completed' && run.rounds_json) {
       return c.json(completedResponse(

@@ -59,10 +59,13 @@ export interface AsyncMatchRound {
 }
 
 export interface StartAsyncMatchRequest {
-  playerId: string;
   displayName: string;
   category: 'geography' | 'history' | 'languages';
-  telegramInitData?: string;
+}
+
+export interface GuestSessionResponse {
+  token: string;
+  expiresAt: number;
 }
 
 export interface StartAsyncMatchResponse {

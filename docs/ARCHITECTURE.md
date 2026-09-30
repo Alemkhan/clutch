@@ -1,8 +1,7 @@
 # Архитектура: как устроен текущий код
 
-Основа: `8d87ff6`; дополнено R1 и модульными рефакторингами API/web-state
-в рабочем дереве, 2026-09-29. API и клиент используют shared-правила; схема
-условий добавлена миграцией 0002.
+Основа: checkpoint `a88571a`; дополнено R2a/R2b в рабочем дереве, 2026-09-30.
+API и клиент используют shared-правила; схема условий добавлена миграцией 0002.
 
 ## Карта репозитория
 
@@ -12,7 +11,7 @@ apps/web/                      React 18 + Vite + Framer Motion + Telegram SDK
   src/lib/useGameState.ts       React/API/analytics orchestration
   src/lib/gameSession.ts        чистое состояние и переходы игровой сессии
   src/lib/clientMatchRules.ts   runtime-проверка условий и транскриптов R1c
-  src/lib/api.ts                HTTP, local identity, timeout 5 секунд
+  src/lib/api.ts                HTTP, Telegram/guest auth, timeout 5 секунд
   src/lib/telegram.ts           initData, SDK, viewport
   src/lib/sampleData.ts         локальный соперник, генерация и config молотка
   src/lib/tournaments.ts        фиксированный challenge Robb Peters
@@ -25,16 +24,21 @@ apps/web/                      React 18 + Vite + Framer Motion + Telegram SDK
 apps/api/
   src/index.ts                 composition root: Hono, CORS, регистрация routes
   src/env.ts                   Cloudflare bindings
+  src/auth/guest.ts            HMAC guest token: issue/verify/renewal subject
+  src/auth/identity.ts         Authorization → единый RequestIdentity
   src/auth/telegram.ts         проверка подписи и срока Telegram initData
+  src/http/jsonBody.ts         ограниченное по UTF-8 байтам чтение JSON
+  src/http/rateLimit.ts        общий адаптер Cloudflare RateLimit и IP-ключ
   src/matches/bots.ts          BotProfile и фабрика снимка bot opponent
   src/matches/repository.ts    D1-запросы создания, подбора и завершения
   src/matches/validation.ts    HTTP-входы и проверка сохранённых snapshots
   src/matches/types.ts         внутренний тип строки match_runs
+  src/routes/auth.ts           выдача/продление browser guest session
   src/routes/asyncMatches.ts   сценарии start/complete async-матча
   src/routes/leaderboard.ts    HTTP-маршрут leaderboard
   migrations/0001_async_matches.sql
   migrations/0002_match_conditions.sql  условия, снимок соперника, пригодность ghost
-  wrangler.toml                Worker и binding DB
+  wrangler.toml                Worker, D1 и нативный Rate Limiting binding
 packages/shared/src/
   index.ts                     типы, SKILL_REWARDS, resultFromDistance, exports
   matchRules.ts                чистые правила раунда/матча и пригодности ghost
@@ -47,10 +51,14 @@ packages/shared/src/
   questionBank.ts, showQuiz.ts  заготовки, не подключённые к основному циклу
 tests/telegramAuth.test.ts      3 unit-теста initData
 tests/botOpponent.test.ts       3 unit-теста профилей и фабрики бота
-tests/asyncMatches.test.ts      17 route/SQL-тестов R1b
+tests/guestAuth.test.ts         unit-тесты подписи и срока guest token
+tests/identity.test.ts          разбор Telegram/guest Authorization
+tests/asyncMatches.test.ts      25 route/SQL-тестов R1/R2a
+tests/requestLimits.test.ts      лимиты тела/полей и rate-limit маршрутов R2b
 tests/helpers/testD1.ts         in-memory SQLite adapter для API-тестов
 apps/web/src/lib/clientMatchRules.test.ts  13 клиентских тестов R1c
 apps/web/src/lib/gameSession.test.ts       9 тестов чистых переходов сессии
+apps/web/src/lib/api.test.ts               срок и renewal browser guest session
 packages/shared/src/index.test.ts  15 unit-тестов shared
 ```
 
@@ -67,7 +75,9 @@ App → useGameState (React, сеть, эффекты) → gameSession (чист
 но не содержит реализацию HMAC, SQL или фабрику бота:
 
 ```text
-index → routes/asyncMatches → auth/telegram
+index → routes/auth → auth/guest
+     └→ routes/asyncMatches → auth/identity → auth/{telegram,guest}
+                         ├→ http/{rateLimit,jsonBody}
                           ├→ matches/bots
                           ├→ matches/validation → shared/matchRules
                           └→ matches/repository → D1
@@ -83,7 +93,9 @@ index → routes/asyncMatches → auth/telegram
    без Telegram SDK-инициализация пропускается.
 2. `App` использует `useGameState`. Фазы: `home`, `categories`, `matchmaking`,
    `question`, `resolution`, `hammer`, `result`, `profile`.
-3. Обычный `start()` вызывает API. Worker выбирает завершённую пригодную запись
+3. Обычный `start()` вызывает API с `Authorization`. Telegram передаёт свежий
+   initData; браузер получает/продлевает подписанный guest token. Worker выводит
+   `player_id` только из проверенной identity, затем выбирает пригодную запись
    той же категории и текущих условий, не самого игрока; предпочитает ещё не
    использованную им. Проверяет до 20 кандидатов на каждом из двух путей:
    unused, затем repeat. Повреждённые записи пропускает; если подходящих нет — бот.
@@ -108,18 +120,32 @@ index → routes/asyncMatches → auth/telegram
 | Маршрут | Текущее назначение |
 | --- | --- |
 | `GET /`, `GET /api/health` | Метаданные/health процесса; не проверка доступности D1 |
+| `POST /api/auth/guest` | Выдать новую или продлить существующую guest-сессию |
 | `POST /api/async-matches` | Создать матч; вернуть вопросы, соперника, `opponentSource`, `conditions` |
 | `POST /api/async-matches/:id/complete` | Принять rounds, пересчитать и сохранить результат |
 | `GET /api/leaderboard?category=...` | Агрегат завершённых записей, пока с ошибками выборки |
 | `GET /api/tournaments/:slug` | Заглушка, не хранилище турниров |
+
+До генерации/D1 start и complete проверяют identity, затем отдельный bucket по
+`playerId`; guest и leaderboard используют `CF-Connecting-IP` с безопасным
+локальным fallback. Все четыре bucket имеют предел 30/60 секунд. При превышении
+ответ 429 и `Retry-After: 60`, при недоступном binding — 503. Счётчики нативного
+Cloudflare binding локальны для точки присутствия, а не являются глобальным
+распределённым лимитом. Локальная разработка использует симуляцию Wrangler,
+route-тесты — детерминированный fake binding.
+
+Start принимает не более 1024 UTF-8 байт JSON, complete — 16384. Completion
+ограничен 1..10 раундами: id вопроса 1..128 символов, ответ до 512 (пустой
+допустим), время 0..60000 мс; прежний диапазон distance сохранён.
 
 Единственная таблица — `match_runs`: id, player_id, display_name, category,
 questions_json, rounds_json, progress, correct_count, status, opponent_run_id,
 created_at, completed_at. Миграция 0002 добавляет `rules_version`, `mini_game_id`,
 `mini_game_config_json`, `opponent_json`, `ghost_eligible` и индекс пригодного пула.
 Полноценного серверного профиля нет.
-В браузере хранятся local identity и статистика, но не надёжная очередь
-отправки и не восстановление текущего матча.
+В браузере хранятся подписанный guest token, локальное отображаемое имя и
+статистика, но не надёжная очередь отправки и не восстановление текущего матча.
+Guest token живёт семь дней и продлевает тот же subject за пять минут до срока.
 
 Текущие условия экспортируются как `CURRENT_ASYNC_MATCH_CONDITIONS` из shared:
 `race-to-100-v1`, `hammer_nail`, config 0.8 / 0.28 / 0.06. Версия покрывает
@@ -136,10 +162,11 @@ legacy/неподдерживаемые матчи получают 409 с пр�
 
 ## Границы доверия
 
-- На старте initData проверяется, **если передано**. Без него сервер доверяет
-  `playerId` из тела, включая потенциально чужой `telegram:...`.
-- Завершение не проверяет личность и владение матчем. Знание matchId не должно
-  считаться достаточной авторизацией; ghost id тоже попадает в ответы API.
+- Start и complete требуют Telegram initData либо подписанный guest token.
+  `playerId` из тела не принимается; complete сверяет владельца до выдачи даже
+  уже сохранённого результата. Чужой и отсутствующий matchId одинаково дают 404.
+- Guest token хранится в localStorage и не является полноценным аккаунтом:
+  очистка/кража браузерного хранилища меняет или компрометирует guest identity.
 - API возвращает полный `Question`, включая правильные ответы, и будущие
   результаты соперника. Общие данные/генератор также доступны клиенту.
 - Пересчёт награды не доказывает честность удара: `skillDistance` и время

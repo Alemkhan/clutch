@@ -1,6 +1,7 @@
 /// <reference types="node" />
 /// <reference types="@cloudflare/workers-types" />
 
+import { createHmac, createHash } from 'node:crypto';
 import { afterEach, describe, expect, it } from 'vitest';
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
@@ -12,13 +13,17 @@ import {
   type StartAsyncMatchResponse,
 } from '@clutch/shared';
 import app from '../apps/api/src/index';
+import { issueGuestSession, verifyGuestToken } from '../apps/api/src/auth/guest';
 import { applyR1bMigration, createTestD1, type TestD1 } from './helpers/testD1';
 
 const databases: TestD1[] = [];
 const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
+const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
+const matchAuthorization = new Map<string, string>();
 
 afterEach(() => {
   for (const database of databases.splice(0)) database.sqlite.close();
+  matchAuthorization.clear();
 });
 
 function database(current = true): TestD1 {
@@ -27,24 +32,75 @@ function database(current = true): TestD1 {
   return result;
 }
 
-function env(db: TestD1) {
-  return { DB: db.binding, TELEGRAM_BOT_TOKEN: 'test', ENVIRONMENT: 'test' };
+const allowRateLimiter: RateLimit = {
+  limit: async () => ({ success: true }),
+};
+
+function env(db: TestD1, rateLimiter: RateLimit = allowRateLimiter) {
+  return {
+    DB: db.binding,
+    API_RATE_LIMITER: rateLimiter,
+    TELEGRAM_BOT_TOKEN: 'test',
+    SESSION_SIGNING_SECRET: sessionSecret,
+    ENVIRONMENT: 'test',
+  };
+}
+
+function base64Url(value: Buffer | string): string {
+  return Buffer.from(value).toString('base64url');
+}
+
+function guestIdentity(label: string): { authorization: string; playerId: string } {
+  const hex = createHash('sha256').update(label).digest('hex').slice(0, 32).split('');
+  hex[12] = '4';
+  hex[16] = '8';
+  const subject = `${hex.slice(0, 8).join('')}-${hex.slice(8, 12).join('')}-${hex.slice(12, 16).join('')}-${hex.slice(16, 20).join('')}-${hex.slice(20).join('')}`;
+  const now = Math.floor(Date.now() / 1000);
+  const payload = base64Url(JSON.stringify({ v: 1, sub: subject, iat: now - 1, exp: now + 3600 }));
+  const signedValue = `v1.${payload}`;
+  const signature = createHmac('sha256', sessionSecret).update(signedValue).digest('base64url');
+  return { authorization: `Bearer ${signedValue}.${signature}`, playerId: `guest:${subject}` };
+}
+
+function telegramAuthorization(user: { id: number; first_name: string; last_name?: string }): string {
+  const params = new URLSearchParams({
+    auth_date: String(Math.floor(Date.now() / 1000)),
+    user: JSON.stringify(user),
+  });
+  const dataCheckString = [...params.entries()]
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([key, value]) => `${key}=${value}`)
+    .join('\n');
+  const secret = createHmac('sha256', 'WebAppData').update('test').digest();
+  params.set('hash', createHmac('sha256', secret).update(dataCheckString).digest('hex'));
+  return `tma ${params.toString()}`;
 }
 
 async function start(db: TestD1, playerId = 'player-1'): Promise<StartAsyncMatchResponse> {
+  const identity = guestIdentity(playerId);
   const response = await app.request('/api/async-matches', {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ playerId, displayName: playerId, category: 'geography' }),
+    headers: { 'content-type': 'application/json', authorization: identity.authorization },
+    body: JSON.stringify({ displayName: playerId, category: 'geography' }),
   }, env(db));
   expect(response.status).toBe(201);
-  return response.json() as Promise<StartAsyncMatchResponse>;
+  const result = await response.json() as StartAsyncMatchResponse;
+  matchAuthorization.set(result.matchId, identity.authorization);
+  return result;
 }
 
-async function complete(db: TestD1, matchId: string, rounds: AsyncMatchRoundInput[]) {
+async function complete(
+  db: TestD1,
+  matchId: string,
+  rounds: AsyncMatchRoundInput[],
+  authorization = matchAuthorization.get(matchId),
+) {
   return app.request(`/api/async-matches/${matchId}/complete`, {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    headers: {
+      'content-type': 'application/json',
+      ...(authorization ? { authorization } : {}),
+    },
     body: JSON.stringify({ rounds }),
   }, env(db));
 }
@@ -95,6 +151,8 @@ function insertRun(db: TestD1, options: {
   completedAt?: number | null;
   opponentRunId?: string | null;
 }) {
+  const identity = guestIdentity(options.playerId ?? options.id);
+  matchAuthorization.set(options.id, identity.authorization);
   db.sqlite.prepare(`
     INSERT INTO match_runs (
       id, player_id, display_name, category, questions_json, rounds_json, progress,
@@ -103,7 +161,7 @@ function insertRun(db: TestD1, options: {
     ) VALUES (?, ?, ?, 'geography', ?, ?, 0, 0, ?, ?, 1, ?, ?, ?, ?, ?, ?)
   `).run(
     options.id,
-    options.playerId ?? options.id,
+    identity.playerId,
     options.playerId ?? options.id,
     JSON.stringify(options.questions),
     options.rounds ? JSON.stringify(options.rounds) : null,
@@ -156,6 +214,147 @@ describe('R1b migration', () => {
       opponent_json: null,
       ghost_eligible: 0,
     });
+  });
+});
+
+describe('R2a authenticated match ownership', () => {
+  it('renews a valid guest session without changing its identity', async () => {
+    const db = database();
+    const oldNow = Date.now() - 24 * 60 * 60 * 1000;
+    const old = await issueGuestSession(
+      sessionSecret,
+      oldNow,
+      '123e4567-e89b-42d3-a456-426614174000',
+    );
+    const response = await app.request('/api/auth/guest', {
+      method: 'POST',
+      headers: { authorization: `Bearer ${old!.token}` },
+    }, env(db));
+    expect(response.status).toBe(201);
+    expect(response.headers.get('cache-control')).toBe('no-store');
+    const renewed = await response.json() as { token: string; expiresAt: number };
+    expect(renewed.expiresAt).toBeGreaterThan(old!.expiresAt);
+    await expect(verifyGuestToken(renewed.token, sessionSecret)).resolves.toMatchObject({
+      playerId: old!.playerId,
+    });
+  });
+
+  it('issues different identities for independent fresh guest sessions', async () => {
+    const db = database();
+    const first = await app.request('/api/auth/guest', { method: 'POST' }, env(db));
+    const second = await app.request('/api/auth/guest', { method: 'POST' }, env(db));
+    const firstSession = await first.json() as { token: string };
+    const secondSession = await second.json() as { token: string };
+    const firstIdentity = await verifyGuestToken(firstSession.token, sessionSecret);
+    const secondIdentity = await verifyGuestToken(secondSession.token, sessionSecret);
+    expect(firstIdentity?.playerId).not.toBe(secondIdentity?.playerId);
+  });
+
+  it('rejects invalid bearer and Telegram auth on guest renewal', async () => {
+    const db = database();
+    for (const authorization of ['Bearer invalid', telegramAuthorization({ id: 42, first_name: 'Alem' })]) {
+      const response = await app.request('/api/auth/guest', {
+        method: 'POST', headers: { authorization },
+      }, env(db));
+      expect(response.status).toBe(401);
+      expect(response.headers.get('cache-control')).toBe('no-store');
+    }
+  });
+
+  it('issues a guest session and persists its derived identity', async () => {
+    const db = database();
+    const sessionResponse = await app.request('/api/auth/guest', { method: 'POST' }, env(db));
+    expect(sessionResponse.status).toBe(201);
+    expect(sessionResponse.headers.get('cache-control')).toBe('no-store');
+    const session = await sessionResponse.json() as { token: string; expiresAt: number };
+    expect(session.token).toMatch(/^v1\./u);
+    expect(session.expiresAt).toBeGreaterThan(Date.now());
+
+    const createdResponse = await app.request('/api/async-matches', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${session.token}` },
+      body: JSON.stringify({ displayName: 'Browser player', category: 'geography' }),
+    }, env(db));
+    expect(createdResponse.status).toBe(201);
+    const created = await createdResponse.json() as StartAsyncMatchResponse;
+    const row = db.sqlite.prepare('SELECT player_id, display_name FROM match_runs WHERE id = ?')
+      .get(created.matchId) as { player_id: string; display_name: string };
+    expect(row.player_id).toMatch(/^guest:[0-9a-f-]{36}$/u);
+    expect(row.display_name).toBe('Browser player');
+  });
+
+  it('fails guest issuance closed when the signing secret is missing or short', async () => {
+    const db = database();
+    const base = env(db);
+    for (const secret of ['', 'too-short']) {
+      const response = await app.request('/api/auth/guest', { method: 'POST' }, {
+        ...base,
+        SESSION_SIGNING_SECRET: secret,
+      });
+      expect(response.status).toBe(503);
+    }
+  });
+
+  it('rejects missing and forged auth before starting and rejects body identity', async () => {
+    const db = database();
+    const body = JSON.stringify({ displayName: 'Mallory', category: 'geography' });
+    const missing = await app.request('/api/async-matches', {
+      method: 'POST', headers: { 'content-type': 'application/json' }, body,
+    }, env(db));
+    const forged = await app.request('/api/async-matches', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: 'Bearer forged' },
+      body,
+    }, env(db));
+    expect(missing.status).toBe(401);
+    expect(forged.status).toBe(401);
+
+    const identity = guestIdentity('mallory');
+    const suppliedPlayerId = await app.request('/api/async-matches', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: identity.authorization },
+      body: JSON.stringify({
+        playerId: 'telegram:42', displayName: 'Mallory', category: 'geography',
+      }),
+    }, env(db));
+    expect(suppliedPlayerId.status).toBe(400);
+    expect((db.sqlite.prepare('SELECT COUNT(*) AS count FROM match_runs').get() as { count: number }).count)
+      .toBe(0);
+  });
+
+  it('derives Telegram id and display name from verified initData', async () => {
+    const db = database();
+    const response = await app.request('/api/async-matches', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: telegramAuthorization({ id: 42, first_name: 'Alem', last_name: 'Test' }),
+      },
+      body: JSON.stringify({ displayName: 'Forged name', category: 'geography' }),
+    }, env(db));
+    expect(response.status).toBe(201);
+    const created = await response.json() as StartAsyncMatchResponse;
+    expect(db.sqlite.prepare('SELECT player_id, display_name FROM match_runs WHERE id = ?')
+      .get(created.matchId)).toEqual({ player_id: 'telegram:42', display_name: 'Alem Test' });
+  });
+
+  it('hides existing matches from other identities, including completed matches', async () => {
+    const db = database();
+    const created = await start(db, 'owner');
+    const foreign = guestIdentity('foreign').authorization;
+    const missingIdentity = await complete(db, created.matchId, inputs(created.questions, 4, true, 0), '');
+    expect(missingIdentity.status).toBe(401);
+
+    const absent = await complete(db, 'does-not-exist', inputs(created.questions, 4, true, 0), foreign);
+    const existing = await complete(db, created.matchId, inputs(created.questions, 4, true, 0), foreign);
+    expect(absent.status).toBe(404);
+    expect(existing.status).toBe(404);
+    expect(await existing.json()).toEqual(await absent.json());
+
+    expect((await complete(db, created.matchId, inputs(created.questions, 4, true, 0))).status).toBe(200);
+    expect((await complete(db, created.matchId, inputs(created.questions, 1, false), foreign)).status)
+      .toBe(404);
+    expect((await complete(db, created.matchId, inputs(created.questions, 1, false))).status).toBe(200);
   });
 });
 

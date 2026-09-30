@@ -35,6 +35,7 @@ function equalHex(a: string, b: string): boolean {
 export async function validateTelegramInitData(
   raw: string,
   botToken: string,
+  nowSeconds = Math.floor(Date.now() / 1000),
 ): Promise<TelegramUserPayload | null> {
   const params = new URLSearchParams(raw);
   const receivedHash = params.get('hash');
@@ -52,7 +53,7 @@ export async function validateTelegramInitData(
   const calculatedHash = bytesToHex(await hmacSha256(secretKey, dataCheckString));
   if (!equalHex(calculatedHash, receivedHash.toLowerCase())) return null;
 
-  const now = Math.floor(Date.now() / 1000);
+  const now = nowSeconds;
   if (authDate > now + 300 || now - authDate > 86_400) return null;
 
   try {

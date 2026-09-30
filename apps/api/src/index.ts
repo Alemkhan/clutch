@@ -1,12 +1,13 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import type { Env } from './env';
+import { registerAuthRoutes } from './routes/auth';
 import { registerAsyncMatchRoutes } from './routes/asyncMatches';
 import { registerLeaderboardRoutes } from './routes/leaderboard';
 
 const app = new Hono<{ Bindings: Env }>();
 
-app.use('/api/*', cors());
+app.use('/api/*', cors({ allowHeaders: ['Content-Type', 'Authorization'] }));
 
 app.get('/', (c) => c.json({
   name: 'Clutch API',
@@ -25,6 +26,7 @@ app.get('/api/tournaments/:slug', (c) => c.json({
   message: 'Tournament endpoint ready. Connect D1 to return real data.',
 }));
 
+registerAuthRoutes(app);
 registerAsyncMatchRoutes(app);
 registerLeaderboardRoutes(app);
 
