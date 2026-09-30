@@ -121,17 +121,26 @@ describe('online match conditions and transcript validation', () => {
   it('rejects unsupported rules, ids, and invalid configs', () => {
     expect(() => configForServerConditions({
       ...CURRENT_ASYNC_MATCH_CONDITIONS,
-      rulesVersion: 'race-to-100-v2',
+      rulesVersion: 'race-to-100-v3',
     })).toThrow(/not supported/i);
     expect(() => validateMiniGameConfig({
       markerSpeed: 0.8,
       targetWidth: 0.2,
       perfectWidth: 0.15,
+      pressure: CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config.pressure,
     })).toThrow(/not supported/i);
     expect(() => validateMiniGameConfig({
       markerSpeed: 0.8,
       targetWidth: 0.85,
       perfectWidth: 0.06,
+      pressure: CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config.pressure,
+    })).toThrow(/not supported/i);
+    expect(() => validateMiniGameConfig({
+      ...CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+      pressure: {
+        ...CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config.pressure,
+        stageMultipliers: [1, 0.9, 0.8, 0.6],
+      },
     })).toThrow(/not supported/i);
   });
 

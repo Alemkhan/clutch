@@ -1,7 +1,10 @@
-import { SKILL_DISTANCE_THRESHOLDS, type SkillResult } from '@clutch/shared';
+import type { HammerAttemptRules, SkillResult } from '@clutch/shared';
 
 export const MAX_HAMMER_FRAME_DELTA_MS = 50;
-export const REDUCED_MOTION_MARKER_POSITION = 0.5;
+
+export function reducedMotionMarkerPosition(attempt: HammerAttemptRules): number {
+  return attempt.targetCenter;
+}
 
 /** Triangle wave moving from 0 to 1 and back. Speed is track units per second. */
 export function markerPositionAtElapsed(activeElapsedMs: number, markerSpeed: number): number {
@@ -21,8 +24,14 @@ export interface HammerTierZone {
   widthPercent: number;
 }
 
-/** A normalized distance d maps to a centred track band whose full width is d. */
-export const HAMMER_TIER_ZONES: readonly HammerTierZone[] = (['weak', 'good', 'great', 'perfect'] as const).map((result) => {
-  const width = SKILL_DISTANCE_THRESHOLDS[result];
-  return { result, leftPercent: (1 - width) * 50, widthPercent: width * 100 };
-});
+/** A normalized distance d maps to a track band whose full width is d. */
+export function hammerTierZones(attempt: HammerAttemptRules): readonly HammerTierZone[] {
+  return (['weak', 'good', 'great', 'perfect'] as const).map((result) => {
+    const width = attempt.thresholds[result];
+    return {
+      result,
+      leftPercent: (attempt.targetCenter - width / 2) * 100,
+      widthPercent: width * 100,
+    };
+  });
+}

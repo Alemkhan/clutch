@@ -1,13 +1,14 @@
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
-  SKILL_REWARDS,
   evaluateMatch,
   generateMatch,
-  resultFromDistance,
+  pressureStageFromResults,
+  scoreHammerDistance,
   type AsyncMatchRound,
   type CompleteAsyncMatchRequest,
   type CompleteAsyncMatchResponse,
   type StartAsyncMatchResponse,
+  type SkillResult,
 } from '@clutch/shared';
 import type { Hono } from 'hono';
 import { resolveRequestIdentity } from '../auth/identity';
@@ -121,6 +122,7 @@ export function registerAsyncMatchRoutes(app: Hono<{ Bindings: Env }>): void {
 
     let progress = 0;
     let correctCount = 0;
+    const previousSkillResults: SkillResult[] = [];
     const rounds: AsyncMatchRound[] = [];
     for (let index = 0; index < body.rounds.length; index++) {
       const submitted = body.rounds[index];
@@ -133,8 +135,16 @@ export function registerAsyncMatchRoutes(app: Hono<{ Bindings: Env }>): void {
       const distance = correct && submitted.skillDistance !== undefined
         ? submitted.skillDistance
         : undefined;
-      const skillResult = distance === undefined ? undefined : resultFromDistance(distance);
-      const progressAwarded = skillResult ? SKILL_REWARDS[skillResult] : 0;
+      const scored = distance === undefined
+        ? undefined
+        : scoreHammerDistance(
+            distance,
+            pressureStageFromResults(previousSkillResults),
+            CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+          );
+      const skillResult = scored?.result;
+      const progressAwarded = scored?.progressAwarded ?? 0;
+      if (skillResult) previousSkillResults.push(skillResult);
       progress = Math.min(100, progress + progressAwarded);
       rounds.push({
         questionId: question.id,

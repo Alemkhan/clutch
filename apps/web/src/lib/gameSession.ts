@@ -190,7 +190,7 @@ export function completeSkillDistance(
   state: Readonly<GameState>,
   distance: number,
 ): GameState {
-  const scored = scoreSkillDistance(distance);
+  const scored = scoreSkillDistance(distance, state.skillResults, state.miniGameConfig);
   const bestSkill = !state.bestSkill || scored.progressAwarded > SKILL_REWARDS[state.bestSkill]
     ? scored.result
     : state.bestSkill;

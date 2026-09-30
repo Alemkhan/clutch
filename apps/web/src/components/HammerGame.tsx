@@ -1,18 +1,25 @@
-import { useState, useEffect, useRef, useCallback, type KeyboardEvent } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo, type KeyboardEvent } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import type { MiniGameConfig, SkillResult } from '@clutch/shared';
-import { SKILL_REWARDS, resultFromDistance } from '@clutch/shared';
+import {
+  SKILL_REWARDS,
+  hammerAttemptRules,
+  normalizedHammerDistance,
+  scoreHammerDistance,
+} from '@clutch/shared';
 import { analytics } from '../lib/analytics';
 import {
   cappedFrameDeltaMs,
-  HAMMER_TIER_ZONES,
+  hammerTierZones,
   markerPositionAtElapsed,
-  REDUCED_MOTION_MARKER_POSITION,
+  reducedMotionMarkerPosition,
 } from '../lib/hammerMotion';
 import { playSound, strikeSoundFor } from '../lib/sounds';
 
 interface HammerGameProps {
   config: MiniGameConfig;
+  questionId: string;
+  previousSkillResults: readonly SkillResult[];
   onComplete: (result: SkillResult, progressAwarded: number, distance: number) => void;
 }
 
@@ -57,8 +64,13 @@ export function HammerResultStatus({ result }: { result: SkillResult }) {
   );
 }
 
-export function HammerGame({ config, onComplete }: HammerGameProps) {
+export function HammerGame({ config, questionId, previousSkillResults, onComplete }: HammerGameProps) {
   const reduceMotion = useReducedMotion();
+  const attempt = useMemo(
+    () => hammerAttemptRules(questionId, previousSkillResults, config),
+    [config, previousSkillResults, questionId],
+  );
+  const tierZones = useMemo(() => hammerTierZones(attempt), [attempt]);
   const [markerPos, setMarkerPos] = useState(0);
   const [struck, setStruck] = useState(false);
   const [result, setResult] = useState<SkillResult | null>(null);
@@ -104,8 +116,9 @@ export function HammerGame({ config, onComplete }: HammerGameProps) {
 
     analytics.track('skill_attempt_started');
     if (reduceMotion) {
-      posRef.current = REDUCED_MOTION_MARKER_POSITION;
-      setMarkerPos(REDUCED_MOTION_MARKER_POSITION);
+      const staticPosition = reducedMotionMarkerPosition(attempt);
+      posRef.current = staticPosition;
+      setMarkerPos(staticPosition);
     } else {
       resume();
       document.addEventListener('visibilitychange', onVisibilityChange);
@@ -115,7 +128,7 @@ export function HammerGame({ config, onComplete }: HammerGameProps) {
       document.removeEventListener('visibilitychange', onVisibilityChange);
       if (soundTimeoutRef.current !== null) clearTimeout(soundTimeoutRef.current);
     };
-  }, [config.markerSpeed, reduceMotion]);
+  }, [attempt.targetCenter, config.markerSpeed, reduceMotion]);
 
   const handleTap = useCallback(() => {
     if (stoppedRef.current) return;
@@ -124,10 +137,13 @@ export function HammerGame({ config, onComplete }: HammerGameProps) {
     cancelAnimationFrame(rafRef.current);
     playSound('hammerTap');
 
-    const distance = Math.abs(posRef.current - 0.5) * 2;
+    const distance = normalizedHammerDistance(posRef.current, attempt.targetCenter);
     distanceRef.current = distance;
-    const skillResult = resultFromDistance(distance);
-    const progress = SKILL_REWARDS[skillResult];
+    const { result: skillResult, progressAwarded: progress } = scoreHammerDistance(
+      distance,
+      attempt.stage,
+      config,
+    );
 
     setResult(skillResult);
     soundTimeoutRef.current = setTimeout(() => playSound(strikeSoundFor[skillResult]), 150);
@@ -139,7 +155,7 @@ export function HammerGame({ config, onComplete }: HammerGameProps) {
     // onComplete fires from the nail-sink animation's onAnimationComplete below,
     // once the player has actually seen it settle — not on a fixed timer that has
     // to be kept in sync with the animation's own duration by hand.
-  }, []);
+  }, [attempt.stage, attempt.targetCenter, config]);
 
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -192,7 +208,7 @@ export function HammerGame({ config, onComplete }: HammerGameProps) {
       </div>
 
       <div className="hammer-track" aria-hidden="true">
-        {HAMMER_TIER_ZONES.map((zone) => (
+        {tierZones.map((zone) => (
           <div
             key={zone.result}
             className={`hammer-zone hammer-zone-${zone.result}`}

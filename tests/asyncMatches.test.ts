@@ -434,6 +434,27 @@ describe('async match routes with persisted rules', () => {
     expect(row.ghost_eligible).toBe(1);
   });
 
+  it('re-scores distances sequentially and does not advance pressure on wrong answers or misses', async () => {
+    const db = database();
+    const questions = generateMatch(10, 0.3, 'geography');
+    insertRun(db, { id: 'pressure', questions, snapshot: opponent(questions, Array(10).fill(0)) });
+    const rounds = inputs(questions, 10, false);
+    rounds[0] = { ...rounds[0], selectedAnswer: selectedAnswer(questions[0], true), skillDistance: 0.14 };
+    rounds[1] = { ...rounds[1], selectedAnswer: selectedAnswer(questions[1], true), skillDistance: 0.14 };
+    rounds[2] = { ...rounds[2], skillDistance: 0 };
+    rounds[3] = { ...rounds[3], selectedAnswer: selectedAnswer(questions[3], true), skillDistance: 0.9 };
+    rounds[4] = { ...rounds[4], selectedAnswer: selectedAnswer(questions[4], true), skillDistance: 0.14 };
+
+    const response = await complete(db, 'pressure', rounds);
+    expect(response.status).toBe(200);
+    const body = await response.json() as { rounds: AsyncMatchRound[]; playerProgress: number };
+    expect(body.rounds.slice(0, 5).map((round) => round.skillResult)).toEqual([
+      'perfect', 'great', undefined, 'miss', 'great',
+    ]);
+    expect(body.rounds.slice(0, 5).map((round) => round.progressAwarded)).toEqual([25, 18, 0, 0, 18]);
+    expect(body.playerProgress).toBe(61);
+  });
+
   it('accepts simultaneous 100 and keeps the run eligible', async () => {
     const db = database();
     const questions = generateMatch(10, 0.3, 'geography');
@@ -449,7 +470,8 @@ describe('async match routes with persisted rules', () => {
 
   it.each([
     ['legacy', null, null, null],
-    ['unknown-version', 'race-to-100-v2', CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, configJson],
+    ['v1', 'race-to-100-v1', CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, configJson],
+    ['unknown-version', 'race-to-100-v3', CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, configJson],
     ['unknown-config', CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion,
       CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, '{"markerSpeed":1}'],
   ])('returns 409 for unfinished %s conditions', async (id, rulesVersion, miniGameId, config) => {
@@ -486,7 +508,7 @@ describe('async match routes with persisted rules', () => {
     insertRun(db, { id: 'compatible', playerId: 'ghost', questions, rounds, status: 'completed', eligible: 1, completedAt: 1 });
     insertRun(db, {
       id: 'incompatible', playerId: 'newer-ghost', questions, rounds, status: 'completed',
-      eligible: 1, completedAt: 2, rulesVersion: 'race-to-100-v2',
+      eligible: 1, completedAt: 2, rulesVersion: 'race-to-100-v1',
     });
     insertRun(db, {
       id: 'wrong-game', playerId: 'wrong-game-player', questions, rounds, status: 'completed',

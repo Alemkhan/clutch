@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { MiniGameConfig, Opponent, Question } from '@clutch/shared';
+import { CURRENT_ASYNC_MATCH_CONDITIONS, type MiniGameConfig, type Opponent, type Question } from '@clutch/shared';
 import {
   completeSkillDistance,
   continueAfterAnswerResolution,
@@ -45,6 +45,7 @@ function opponentFor(matchQuestions: Question[], awards: number[] = matchQuestio
 }
 
 const customConfig: MiniGameConfig = {
+  ...CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
   markerSpeed: 1.2,
   targetWidth: 0.3,
   perfectWidth: 0.08,
@@ -211,6 +212,27 @@ describe('game session transitions', () => {
         questionId: 'question-1', selectedAnswer: 'correct', responseTimeMs: 800, skillDistance: 0.2,
       }],
     });
+  });
+
+  it('re-scores the same distance by transcript stage while wrong answers and misses do not advance it', () => {
+    const matchQuestions = questions(6);
+    let state = createPreparedMatchState({
+      category: 'geography', questions: matchQuestions, opponent: opponentFor(matchQuestions),
+    });
+
+    state = completeSkillDistance(recordAnswer(state, 'correct', 500), 0.14);
+    expect(state.lastSkill).toBe('perfect');
+    state = completeSkillDistance(recordAnswer(state, 'correct', 500), 0.14);
+    expect(state.lastSkill).toBe('great');
+
+    state = continueAfterAnswerResolution(recordAnswer(state, 'wrong', 500));
+    state = completeSkillDistance(recordAnswer(state, 'correct', 500), 0.9);
+    expect(state.lastSkill).toBe('miss');
+    state = completeSkillDistance(recordAnswer(state, 'correct', 500), 0.14);
+
+    expect(state.lastSkill).toBe('great');
+    expect(state.skillResults).toEqual(['perfect', 'great', 'miss', 'great']);
+    expect(state.rulesState.playerProgress).toBe(61);
   });
 
   it('uses roundsPlayed when an early fourth-round win becomes terminal', () => {

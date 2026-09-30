@@ -1,9 +1,10 @@
+import type { MiniGameConfig, SkillResult } from './hammerRules';
+
 export type AnswerType = 'multiple_choice' | 'open_answer';
 
 export * from './fuzzyMatch';
+export * from './hammerRules';
 export * from './matchRules';
-
-export type SkillResult = 'perfect' | 'great' | 'good' | 'weak' | 'miss';
 
 export type Difficulty = 'Easy' | 'Medium' | 'Hard' | 'Expert';
 
@@ -94,12 +95,6 @@ export interface Opponent {
   rounds: OpponentRound[];
 }
 
-export interface MiniGameConfig {
-  markerSpeed: number;
-  targetWidth: number;
-  perfectWidth: number;
-}
-
 export interface AsyncMatchConditions {
   rulesVersion: string;
   miniGame: {
@@ -109,13 +104,17 @@ export interface AsyncMatchConditions {
 }
 
 export const CURRENT_ASYNC_MATCH_CONDITIONS: AsyncMatchConditions = {
-  rulesVersion: 'race-to-100-v1',
+  rulesVersion: 'race-to-100-v2',
   miniGame: {
     id: 'hammer_nail',
     config: {
       markerSpeed: 0.8,
       targetWidth: 0.85,
       perfectWidth: 0.15,
+      pressure: {
+        stageMultipliers: [1, 0.9, 0.8, 0.7],
+        maxTargetOffsets: [0.06, 0.09, 0.12, 0.15],
+      },
     },
   },
 };
@@ -168,30 +167,6 @@ export interface Match {
   winner?: 'player' | 'opponent' | 'tie';
   startedAt: string;
   completedAt?: string;
-}
-
-export const SKILL_REWARDS: Record<SkillResult, number> = {
-  perfect: 25,
-  great: 18,
-  good: 12,
-  weak: 5,
-  miss: 0,
-};
-
-/** Maximum normalized distance from the centre for each non-miss tier. */
-export const SKILL_DISTANCE_THRESHOLDS = {
-  perfect: 0.15,
-  great: 0.35,
-  good: 0.65,
-  weak: 0.85,
-} as const;
-
-export function resultFromDistance(d: number): SkillResult {
-  if (d <= SKILL_DISTANCE_THRESHOLDS.perfect) return 'perfect';
-  if (d <= SKILL_DISTANCE_THRESHOLDS.great) return 'great';
-  if (d <= SKILL_DISTANCE_THRESHOLDS.good) return 'good';
-  if (d <= SKILL_DISTANCE_THRESHOLDS.weak) return 'weak';
-  return 'miss';
 }
 
 export * from './countries';

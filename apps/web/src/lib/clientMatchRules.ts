@@ -1,9 +1,9 @@
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
-  SKILL_DISTANCE_THRESHOLDS,
   SKILL_REWARDS,
   applyMatchRound,
-  resultFromDistance,
+  pressureStageFromResults,
+  scoreHammerDistance,
   type AsyncMatchConditions,
   type MatchRulesState,
   type MiniGameConfig,
@@ -51,17 +51,23 @@ function validateQuestions(questions: readonly Question[]): void {
 export function validateMiniGameConfig(value: unknown): MiniGameConfig {
   if (!value || typeof value !== 'object') throw new Error('Mini-game config is missing.');
   const config = value as Record<string, unknown>;
-  if (typeof config.markerSpeed !== 'number' || !Number.isFinite(config.markerSpeed)
-    || config.markerSpeed <= 0 || config.markerSpeed > 10
-    || config.targetWidth !== SKILL_DISTANCE_THRESHOLDS.weak
-    || config.perfectWidth !== SKILL_DISTANCE_THRESHOLDS.perfect) {
+  const current = CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config;
+  const pressure = config.pressure as Record<string, unknown> | undefined;
+  if (Object.keys(config).length !== 4
+    || config.markerSpeed !== current.markerSpeed
+    || config.targetWidth !== current.targetWidth
+    || config.perfectWidth !== current.perfectWidth
+    || !pressure
+    || Object.keys(pressure).length !== 2
+    || !Array.isArray(pressure.stageMultipliers)
+    || !Array.isArray(pressure.maxTargetOffsets)
+    || pressure.stageMultipliers.length !== current.pressure.stageMultipliers.length
+    || pressure.maxTargetOffsets.length !== current.pressure.maxTargetOffsets.length
+    || pressure.stageMultipliers.some((item, index) => item !== current.pressure.stageMultipliers[index])
+    || pressure.maxTargetOffsets.some((item, index) => item !== current.pressure.maxTargetOffsets[index])) {
     throw new Error('Mini-game config is not supported.');
   }
-  return {
-    markerSpeed: config.markerSpeed,
-    targetWidth: config.targetWidth,
-    perfectWidth: config.perfectWidth,
-  };
+  return current;
 }
 
 export function configForServerConditions(conditions: AsyncMatchConditions): MiniGameConfig {
@@ -181,13 +187,20 @@ export function applyClientRound(
   });
 }
 
-export function scoreSkillDistance(distance: number): {
+export function scoreSkillDistance(
+  distance: number,
+  previousResults: readonly SkillResult[] = [],
+  config: MiniGameConfig = CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+): {
   result: SkillResult;
   progressAwarded: number;
 } {
   if (!Number.isFinite(distance) || distance < 0 || distance > 1) {
     throw new Error('Skill distance is invalid.');
   }
-  const result = resultFromDistance(distance);
-  return { result, progressAwarded: SKILL_REWARDS[result] };
+  return scoreHammerDistance(
+    distance,
+    pressureStageFromResults(previousResults),
+    config,
+  );
 }

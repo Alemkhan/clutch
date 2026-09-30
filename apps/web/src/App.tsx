@@ -136,11 +136,13 @@ export default function App() {
           </motion.div>
         )}
 
-        {game.phase === 'hammer' && (
+        {game.phase === 'hammer' && game.currentQuestion && (
           <motion.div key="hammer" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <HammerGame
               key={game.questionIndex}
               config={game.miniGameConfig}
+              questionId={game.currentQuestion.id}
+              previousSkillResults={game.skillResults}
               onComplete={game.completeHammer}
             />
           </motion.div>

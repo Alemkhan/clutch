@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import type { Question } from '@clutch/shared';
+import { CURRENT_ASYNC_MATCH_CONDITIONS, type Question } from '@clutch/shared';
 import { shouldActivateAction } from '../lib/accessibility';
 import { ResolutionScreen } from './ResolutionScreen';
 import { HammerGame, HammerResult, HammerResultStatus, hammerActionSemantics } from './HammerGame';
@@ -36,7 +36,9 @@ describe('accessible gameplay semantics', () => {
   it('names the hammer action and exposes its disabled-after-hit state', () => {
     const html = renderToStaticMarkup(
       <HammerGame
-        config={{ markerSpeed: 0.8, targetWidth: 0.85, perfectWidth: 0.15 }}
+        config={CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config}
+        questionId="question-1"
+        previousSkillResults={[]}
         onComplete={vi.fn()}
       />,
     );

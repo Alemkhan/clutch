@@ -26,7 +26,9 @@ completed results until a valid acknowledgement, and R4 makes matchmaking and
 replay explicit and cancellable. R5a makes the hammer motion frame-rate
 independent and aligns its visual zones with shared scoring. R5b derives the
 15-second question timer from an absolute deadline and settles answer/timeout
-through a one-shot gate. Broader abuse protection and final art still need work.
+through a one-shot gate. R5c adds a deterministic pressure curve: successful
+hits narrow and shift the target under shared client/server rules. Broader abuse
+protection and final art still need work.
 The remote deployment state has not been verified by this repository audit.
 
 ## Stack

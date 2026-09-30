@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
+import { CURRENT_ASYNC_MATCH_CONDITIONS, hammerAttemptRules } from '@clutch/shared';
 import {
   cappedFrameDeltaMs,
-  HAMMER_TIER_ZONES,
+  hammerTierZones,
   markerPositionAtElapsed,
-  REDUCED_MOTION_MARKER_POSITION,
+  reducedMotionMarkerPosition,
 } from './hammerMotion';
 
 describe('hammer motion', () => {
@@ -34,30 +35,36 @@ describe('hammer motion', () => {
     expect(cappedFrameDeltaMs(null, 600)).toBe(0);
   });
 
-  it('centres the marker under reduced motion', () => {
-    expect(REDUCED_MOTION_MARKER_POSITION).toBe(0.5);
+  it('places the reduced-motion marker on the shifted target', () => {
+    const attempt = hammerAttemptRules(
+      'reduced-motion-question',
+      ['great', 'weak'],
+      CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+    );
+    expect(reducedMotionMarkerPosition(attempt)).toBe(attempt.targetCenter);
   });
 
   it('draws nested bands equal to the scoring thresholds', () => {
-    expect(HAMMER_TIER_ZONES.map(({ result }) => result)).toEqual([
+    const attempt = hammerAttemptRules(
+      'geometry-question',
+      ['great', 'weak'],
+      CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+    );
+    const zones = hammerTierZones(attempt);
+    expect(zones.map(({ result }) => result)).toEqual([
       'weak',
       'good',
       'great',
       'perfect',
     ]);
-    expect(HAMMER_TIER_ZONES.map(({ widthPercent }) => widthPercent)).toEqual([
-      85,
-      65,
-      35,
-      15,
-    ]);
-    expect(HAMMER_TIER_ZONES.map(({ leftPercent }) => leftPercent)).toEqual(
-      expect.arrayContaining([
-        expect.closeTo(7.5),
-        expect.closeTo(17.5),
-        expect.closeTo(32.5),
-        expect.closeTo(42.5),
-      ]),
-    );
+    [68, 52, 28, 12].forEach((width, index) => {
+      expect(zones[index].widthPercent).toBeCloseTo(width);
+    });
+    for (const zone of zones) {
+      expect(zone.leftPercent).toBeCloseTo(
+        (attempt.targetCenter - attempt.thresholds[zone.result] / 2) * 100,
+      );
+      expect(zone.widthPercent).toBeCloseTo(attempt.thresholds[zone.result] * 100);
+    }
   });
 });

@@ -1,6 +1,6 @@
 # Архитектура: как устроен текущий код
 
-Основа: checkpoint `e5d8547`; дополнено R7b в рабочем дереве, 2026-10-01.
+Основа: checkpoint `e110d5c`; дополнено R5c в рабочем дереве, 2026-10-01.
 API и клиент используют shared-правила; схема условий добавлена миграцией 0002.
 
 ## Карта репозитория
@@ -41,7 +41,8 @@ apps/api/
   migrations/0002_match_conditions.sql  условия, снимок соперника, пригодность ghost
   wrangler.toml                Worker, D1 и нативный Rate Limiting binding
 packages/shared/src/
-  index.ts                     типы, SKILL_REWARDS, resultFromDistance, exports
+  index.ts                     типы, versioned conditions и exports
+  hammerRules.ts               pressure stage, target, thresholds, distance и scoring
   matchRules.ts                чистые правила раунда/матча и пригодности ghost
   matchRules.test.ts           детерминированные регрессии для этих правил
   questionGenerator.ts         сборка набора по категории
@@ -54,7 +55,7 @@ tests/telegramAuth.test.ts      3 unit-теста initData
 tests/botOpponent.test.ts       3 unit-теста профилей и фабрики бота
 tests/guestAuth.test.ts         unit-тесты подписи и срока guest token
 tests/identity.test.ts          разбор Telegram/guest Authorization
-tests/asyncMatches.test.ts      25 route/SQL-тестов R1/R2a
+tests/asyncMatches.test.ts      route/SQL-тесты async conditions/completion
 tests/requestLimits.test.ts      лимиты тела/полей и rate-limit маршрутов R2b
 tests/helpers/testD1.ts         in-memory SQLite adapter для API-тестов
 apps/web/src/lib/clientMatchRules.test.ts  13 клиентских тестов R1c
@@ -107,7 +108,9 @@ index → routes/auth → auth/guest
 5. Клиент проверяет версию условий, config, вопросы и транскрипт. Только после
    этого ready-lobby показывает имя, источник и кнопку «Начать», затем считает
    ответ/удар и накапливает входы раундов. Обе шкалы и терминальное состояние
-   обновляет `applyMatchRound`; награда удара повторно выводится из distance.
+   обновляет `applyMatchRound`; stage повторно выводится из transcript, а награда
+   удара — из distance через shared pressure-scoring. `HammerGame` строит
+   детерминированный target/вложенные зоны из question id и того же config.
    Вопрос без media сразу получает абсолютный 15-секундный deadline. При
    обязательной картинке deadline создаётся только после успешного `load`; до
    этого формулировка и ответы недоступны, а ошибка загрузки требует retry.
@@ -116,7 +119,8 @@ index → routes/auth → auth/guest
    Один gate в `QuestionScreen` выбирает answer либо timeout (deadline включён
    в timeout) и передаёт единый elapsed; delayed feedback очищается на unmount.
 6. На экране результата клиент отправляет все сыгранные раунды. API повторно
-   проверяет ответы, вычисляет награды и вызывает `evaluateMatch` с сохранённой
+   проверяет ответы, последовательно выводит pressure stage и награды из уже
+   пересчитанных результатов, затем вызывает `evaluateMatch` с сохранённой
    копией соперника. Нетерминальный префикс и лишние раунды получают 400 без
    сохранения. Законное завершение сохраняет результат и `ghost_eligible` вместе.
    До отправки payload попадает в durable-очередь. Только валидный ACK того же
@@ -164,12 +168,14 @@ online-матчей. Токен в очередь не копируется. Т�
 Guest token живёт семь дней и продлевает тот же subject за пять минут до срока.
 
 Текущие условия экспортируются как `CURRENT_ASYNC_MATCH_CONDITIONS` из shared:
-`race-to-100-v1`, `hammer_nail`, config 0.8 / 0.85 / 0.15. Версия покрывает
+`race-to-100-v2`, `hammer_nail`, markerSpeed 0.8, базовые ширины 0.85 / 0.15,
+stage multipliers 1 / 0.9 / 0.8 / 0.7 и offsets 0.06 / 0.09 / 0.12 / 0.15.
+Версия покрывает
 условия завершения, награды и scoring; при их изменении её нужно менять.
 Config сериализуется в постоянном порядке и сравнивается точно. Снимок вопросов
-содержит сам контент; отдельной версии датасета в R1b нет. Новый config намеренно
-несовместим со старыми runs, поэтому они не выбираются как ghost; rulesVersion и
-схема D1 от этого не менялись.
+содержит сам контент; отдельной версии датасета в R1b нет. V2 config намеренно
+несовместим с v1/старыми runs, поэтому они не выбираются как ghost; новая схема
+D1 для этого не понадобилась.
 
 Legacy-строки сохраняются с NULL-условиями и ghost_eligible=0. Незавершённые
 legacy/неподдерживаемые матчи получают 409 с просьбой начать заново. Уже
@@ -188,8 +194,9 @@ legacy/неподдерживаемые матчи получают 409 с пр�
   очистка/кража браузерного хранилища меняет или компрометирует guest identity.
 - API возвращает полный `Question`, включая правильные ответы, и будущие
   результаты соперника. Общие данные/генератор также доступны клиенту.
-- Пересчёт награды не доказывает честность удара: `skillDistance` и время
-  передаёт клиент. Сервер не применяет лимит вопроса в 15 секунд.
+- Последовательный пересчёт pressure stage и награды не доказывает честность
+  удара: `skillDistance` и время передаёт клиент. Сервер не применяет лимит
+  вопроса в 15 секунд.
 - CORS сейчас общий. Ограничение origins полезно для окружений, но само по себе
   не заменяет авторизацию или защиту от поддельного результата.
 
