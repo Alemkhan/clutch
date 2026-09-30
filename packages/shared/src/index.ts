@@ -114,8 +114,8 @@ export const CURRENT_ASYNC_MATCH_CONDITIONS: AsyncMatchConditions = {
     id: 'hammer_nail',
     config: {
       markerSpeed: 0.8,
-      targetWidth: 0.28,
-      perfectWidth: 0.06,
+      targetWidth: 0.85,
+      perfectWidth: 0.15,
     },
   },
 };
@@ -178,11 +178,19 @@ export const SKILL_REWARDS: Record<SkillResult, number> = {
   miss: 0,
 };
 
+/** Maximum normalized distance from the centre for each non-miss tier. */
+export const SKILL_DISTANCE_THRESHOLDS = {
+  perfect: 0.15,
+  great: 0.35,
+  good: 0.65,
+  weak: 0.85,
+} as const;
+
 export function resultFromDistance(d: number): SkillResult {
-  if (d <= 0.15) return 'perfect';
-  if (d <= 0.35) return 'great';
-  if (d <= 0.65) return 'good';
-  if (d <= 0.85) return 'weak';
+  if (d <= SKILL_DISTANCE_THRESHOLDS.perfect) return 'perfect';
+  if (d <= SKILL_DISTANCE_THRESHOLDS.great) return 'great';
+  if (d <= SKILL_DISTANCE_THRESHOLDS.good) return 'good';
+  if (d <= SKILL_DISTANCE_THRESHOLDS.weak) return 'weak';
   return 'miss';
 }
 

@@ -23,8 +23,9 @@ client share match transitions; the API enforces ghost eligibility and versioned
 conditions (R1, migration 0002 required). Authenticated match ownership is in
 place, R2b bounds match inputs and request frequency, R3 durably retries
 completed results until a valid acknowledgement, and R4 makes matchmaking and
-replay explicit and cancellable. Broader abuse protection, stable game timing,
-and final art still need work.
+replay explicit and cancellable. R5a makes the hammer motion frame-rate
+independent and aligns its visual zones with shared scoring. Question timing,
+broader abuse protection, and final art still need work.
 The remote deployment state has not been verified by this repository audit.
 
 ## Stack

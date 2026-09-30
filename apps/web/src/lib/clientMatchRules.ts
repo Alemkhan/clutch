@@ -1,5 +1,6 @@
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
+  SKILL_DISTANCE_THRESHOLDS,
   SKILL_REWARDS,
   applyMatchRound,
   resultFromDistance,
@@ -52,10 +53,8 @@ export function validateMiniGameConfig(value: unknown): MiniGameConfig {
   const config = value as Record<string, unknown>;
   if (typeof config.markerSpeed !== 'number' || !Number.isFinite(config.markerSpeed)
     || config.markerSpeed <= 0 || config.markerSpeed > 10
-    || typeof config.targetWidth !== 'number' || !Number.isFinite(config.targetWidth)
-    || config.targetWidth <= 0 || config.targetWidth > 1
-    || typeof config.perfectWidth !== 'number' || !Number.isFinite(config.perfectWidth)
-    || config.perfectWidth <= 0 || config.perfectWidth > config.targetWidth) {
+    || config.targetWidth !== SKILL_DISTANCE_THRESHOLDS.weak
+    || config.perfectWidth !== SKILL_DISTANCE_THRESHOLDS.perfect) {
     throw new Error('Mini-game config is not supported.');
   }
   return {

@@ -126,7 +126,12 @@ describe('online match conditions and transcript validation', () => {
     expect(() => validateMiniGameConfig({
       markerSpeed: 0.8,
       targetWidth: 0.2,
-      perfectWidth: 0.3,
+      perfectWidth: 0.15,
+    })).toThrow(/not supported/i);
+    expect(() => validateMiniGameConfig({
+      markerSpeed: 0.8,
+      targetWidth: 0.85,
+      perfectWidth: 0.06,
     })).toThrow(/not supported/i);
   });
 

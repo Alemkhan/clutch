@@ -862,19 +862,16 @@ button:active {
   overflow: hidden;
 }
 
-.target-zone {
+.hammer-zone {
   position: absolute;
   top: 0;
   height: 100%;
-  background: rgba(77, 138, 255, 0.15);
 }
 
-.perfect-zone {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  background: rgba(255, 216, 77, 0.3);
-}
+.hammer-zone-weak { background: rgba(77, 138, 255, 0.15); }
+.hammer-zone-good { background: rgba(73, 177, 128, 0.2); }
+.hammer-zone-great { background: rgba(255, 174, 66, 0.24); }
+.hammer-zone-perfect { background: rgba(255, 216, 77, 0.3); }
 
 .marker {
   position: absolute;
@@ -1914,11 +1911,10 @@ input:focus-visible {
   box-shadow: inset 0 2px 8px rgba(23, 23, 22, 0.06);
 }
 
-.target-zone {
-  background: rgba(77, 117, 232, 0.17);
-}
-
-.perfect-zone {
+.hammer-zone-weak { background: rgba(77, 117, 232, 0.17); }
+.hammer-zone-good { background: rgba(73, 177, 128, 0.2); }
+.hammer-zone-great { background: rgba(240, 150, 55, 0.22); }
+.hammer-zone-perfect {
   background: rgba(240, 74, 62, 0.22);
 }
 
