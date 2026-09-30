@@ -1,162 +1,99 @@
-# Clutch — Context for AI Sessions
+# Clutch — контекст для следующей сессии
 
-## What is Clutch
+Обновлено: **2026-09-29**. Проверенная база кода: `8d87ff6`
+(`Milestone D: async matches, Telegram app, and mobile UI`) + R1 и модульные
+рефакторинги API/web-state в рабочем дереве.
+Это снимок состояния, а не обещание готовности к релизу.
 
-Competitive trivia game. Players answer multiple-choice questions, then use timing skill (Hammer the Nail mini-game) to convert correct answers into match progress. Race against opponent to 100%.
+## Что строим
 
-Tagline: "Knowledge earns the attempt. Skill wins the game."
+Русскоязычную mobile-first Telegram Mini App: ответь на вопрос, получи попытку
+в skill-мини-игре, преврати точность в прогресс против соперника.
+«Knowledge earns the attempt. Skill wins the game.»
 
-Owner: Alemkhan (content creator, questions, video, TikTok). Friend joins later for dev.
+Соперник **не играет одновременно**: это запись предыдущего прохождения
+на том же наборе вопросов. Когда записей нет, используется бот.
+Общий интерфейс показывает проценты/полосы, а гвоздь виден только в мини-игре.
+Дартс — возможное развитие, не текущая задача.
 
-## Stack
+## Что уже есть
 
-- TypeScript everywhere
-- Frontend: React + Vite (apps/web)
-- Backend: Hono on Cloudflare Workers (apps/api)
-- Database: Cloudflare D1 (SQLite), database_id in wrangler.toml
-- Shared types: packages/shared
-- Monorepo: npm workspaces
-- Telegram bot: @playclutch (token in apps/api/.dev.vars, NOT in git)
-- Deploy target: Cloudflare (Pages + Workers + D1), not deployed yet
+- npm-monorepo: React/Vite в `apps/web`, Hono/Cloudflare Workers в `apps/api`,
+  типы, контент и scoring в `packages/shared`; хранилище матчей — D1.
+- Полный прототип цикла: главная → категория → соперник → вопрос → разбор →
+  молоток при верном ответе → результат; профиль и локальная статистика.
+- Три игровые категории: география, исторические флаги, языки. До 10 вопросов,
+  таймер 15 секунд, выбор ответа и открытый ввод. Примерно 30% открытых вопросов
+  относится к географии; две другие категории сейчас только с вариантами.
+- Онлайн-матч получает вопросы от API: сохранённый набор соперника либо новый
+  набор из общего генератора. Локальная генерация остаётся для offline fallback.
+- API создаёт прохождение, выбирает запись соперника, сохраняет результаты
+  раундов и отдаёт leaderboard. Проверка Telegram initData реализована на старте,
+  но полного контроля доступа к результатам пока нет.
+- Скриптовый challenge Robb Peters — отдельный локальный сценарий, не живая
+  запись игрока из D1. Есть звуки, SDK Telegram и обработка viewport/safe areas.
+- Общий Match HUD уже отделён от сцены молотка. Убраны старые спрайты с главной,
+  общих экранов и результата; внутри молотка они пока остались.
+- Share частично есть: текст через `navigator.share` либо локальный preview.
+  Экспортируемой картинки и полноценной ссылки-приглашения пока нет.
+- R1a: `packages/shared/src/matchRules.ts` — чистое применение раунда,
+  проверка последовательности, исход и пригодность ghost, с отдельными тестами.
+- R1b: API применяет эти правила, хранит версию/config и полную копию соперника,
+  принимает только законный финиш и фильтрует пул по пригодности/совместимости.
+  Раннее поражение сохраняется, но не становится ghost. В start добавлены
+  `conditions`; старый формат completion сохранён.
+- R1c: клиент проверяет серверные conditions и транскрипт соперника, ведёт
+  прогресс и завершение через те же shared-правила. Локальный Alex и challenge
+  нормализуются под реальные id вопросов и обрезаются на первом достижении 100%;
+  результат показывает число фактически сыгранных вопросов.
+- API после R1 разнесён по `auth`, `matches` и `routes`; `index.ts` — 32-строчная
+  точка сборки. Текущий Alex описан `BotProfile`, а фабрика позволяет добавлять
+  будущие профили сложности без изменения HTTP-маршрутов или D1-кода.
+- Чистое состояние клиентской сессии и переходы вынесены в `gameSession.ts`;
+  `useGameState.ts` оставляет React, сеть, analytics и отправку результата.
+  Online/local/challenge и точные completion-prefix покрыты unit-тестами.
+- Миграция `0002_match_conditions.sql` применена к локальной D1 2026-09-28.
+  Старые строки сохранены, но имеют неизвестные условия и исключены из пула.
+  Незавершённый legacy-матч получает 409: нужно начать новый.
 
-## Project location
+## Что важно не перепутать
 
-`C:\Users\Alemkhan\JSProjects\clutch\`
+- Пользователь **не одобрил текущий визуал**. Новые production-ассеты ещё не
+  утверждены; предыдущий редизайн был выполнен средствами интерфейса, не новой
+  генерацией изображений. Провайдер генерации не выбран.
+- Время ответов соперника хранится, но его прогресс сейчас прибавляется в конце
+  раунда игрока, а не воспроизводится по исходному таймингу.
+- Код пока привязан к `hammer`; универсальный контракт мини-игр — направление,
+  а не уже готовая плагинная система.
+- `questionBank.ts` и `showQuiz.ts` — заготовки, не дополнительные live-категории.
+- Предыдущая работа **уже закоммичена** в `8d87ff6`. Состояние удалённого деплоя,
+  BotFather и production D1 в этой сессии не проверялось.
 
-## Milestones
+## Главные пробелы
 
-- **A — Skeleton**: monorepo (web + api + shared), tooling, landing stub. Done, in the initial commit.
-- **B — Core gameplay loop**: questions, timer, resolution, Hammer the Nail, scripted opponent, result. Done.
-- **C — App shell**: home dashboard, category select, matchmaking, profile, local stats, scripted challenge match. Done (sprites are known debt — see NOT done).
-- **D — Backend & release**: asynchronous ghost matchmaking, D1 persistence, Telegram auth, deploy, mobile QA. In progress.
+1. Закрыть подмену identity и сохранение чужого матча; определить границу доверия
+   к клиентским ответам, времени и точности удара.
+2. Сделать сохранение надёжным: подтверждение, повторная отправка, защита от
+   повторных запросов. Показывать реальный источник соперника и состояние сети.
+3. Исправить зависимость молотка от FPS и согласовать нарисованные зоны со scoring.
+4. Утвердить арт-направление на одной сцене; проверить игру на настоящем телефоне.
 
-## What is done
+Подробности и доказательства — в [аудите](docs/AUDIT.md), порядок работ —
+в [roadmap](docs/ROADMAP.md). Открытые продуктовые решения —
+в [PRODUCT.md](docs/PRODUCT.md). Не считать рекомендации утверждёнными правилами.
 
-- Home dashboard: find match (→ category select → matchmaking), profile, challenge entry (replaced the original landing screen)
-- Game is in Russian (questions, options, UI strings) — data bilingual (name/nameRu, capital/capitalRu); open answers accept both RU and EN spellings
-- 3 categories live: География (197 entries, 7 question types), Исторические флаги (44 flags from Wikimedia Commons, each with a trivia fact on resolution), Языки (37 languages, "what language is this" by script/sample)
-- Historical flag images are served locally from `apps/web/public/flags-historic/` (44 files, downloaded+verified from Commons; taiping is .jpg)
-- 10 questions per match, auto-generated from 197 country entries
-- 4 MC question types: flag→country, country→capital, flag→capital, outline→country
-- 3 open-ended types: type the capital, type the country (flag), type the country (outline) — fuzzy match with Levenshtein
-- Timer: 15 sec countdown per question, "Time's up!" on expire
-- Hammer mini-game: marker moves, tap to stop, scoring (perfect/great/good/weak/miss)
-- Opponent (Alex): scripted, updates progress each round
-- Win condition: first to 100% or highest after 10
-- Match progress is tracked independently for player and opponent and rendered through a compact, game-agnostic Match HUD with identities, percentages, round count, and animated progress bars.
-- Result screen: win/loss + stats + rematch
-- Profile screen with local stats: wins/losses/ties, current + best streak in localStorage — `apps/web/src/lib/localStats.ts`
-- Scripted challenge: "Robb Peters" match reconstructed from a real video's Q&A order and outcomes (right/wrong per question; timings are estimates) — `apps/web/src/lib/tournaments.ts` + `sampleData.ts`
-- Current sprites have real alpha transparency, but their art direction and production quality are not accepted. Treat everything in `apps/web/public/sprites/` as temporary prototype material.
-- Hammer mini-game prototype: hammer swings and strikes a nail sunk into a wood log (depth scales with skill tier: perfect ≈ flush, miss ≈ barely dented), with log shake and impact burst — see `apps/web/src/components/HammerGame.tsx`. Its concept may remain, but its sprites, composition, and animation need a full production pass.
-- Sound effects: clicks, timer ticks, timeout, correct/incorrect, hammer tap + strike-quality tone, match win/lose — see `apps/web/src/lib/sounds.ts`, files in `apps/web/public/sfx/` (Kenney CC0 packs; Higgsfield's audio tools only cover speech/game-pipeline SFX, not standalone sound effects)
-- Country outlines sourced from mapsicon via jsDelivr CDN, rendered as inverted white silhouettes on the dark theme
-- D1 database created, `database_id` wired into `wrangler.toml`, and the async-match flow exercised locally
-- Analytics: match_started, answer_submitted, skill_attempt_started/completed, match_completed (console.log in dev, flush() ready for backend)
-- Async matchmaking foundation: completed runs are stored in D1 and replayed later as ghost opponents on the exact same question set; scripted Alex is the empty-pool/offline fallback
-- D1 migration for match runs plus start/complete/leaderboard API routes
-- Web records answer timing and hammer distance per round and submits completed async runs
-- Unit tests cover skill thresholds, fuzzy answers, and match-generator invariants
-- Telegram Mini App SDK initialization, viewport safe areas, and backend HMAC/expiry validation for initData
-- Local Telegram testing uses one ngrok URL to Vite; Vite proxies /api to the local Worker/D1
-- Shared types in @clutch/shared: Question, Tournament, Opponent, Match, SkillResult, countries, questionGenerator, fuzzyMatch, generateFixedCapitalQuiz
+## Проверки и рабочий процесс
 
-## What is NOT done
+После модульных рефакторингов, 2026-09-29: `npm test` — **84/84**, включая
+17 API/migration-тестов, 13 клиентских тестов правил/нормализации, 9 тестов
+игровой сессии и 3 теста фабрики бота. `npm run build` — **успешно**, включая
+typecheck всех workspaces.
+Отдельно прошёл HTTP smoke на локальном Wrangler + временной D1: bot → победа A →
+точная запись A для B → раннее поражение B исключено из пула; неполный финиш — 400.
+Временный Worker остановлен. R1 целиком находится в незакоммиченном рабочем
+дереве. Production и физические телефоны не проверялись; серверный ACK клиент
+пока не сверяет с локальным итогом.
 
-- Vibration on mobile
-- Share card on result screen
-- Visual production pass: current sprites and animations are placeholder-quality and explicitly rejected for release. Regenerate a coherent sprite set and rebuild the important motion/feedback before visual QA
-- Image generation provider/workflow is intentionally undecided. Alemkhan plans to connect Higgsfield, Midjourney, or DALL-E in the next session and choose based on useful output quality
-- Animation production pass: improve screen transitions, impact anticipation/contact/follow-through, progress feedback, and win/loss moments after the final art direction is selected
-- Deploy to Cloudflare
-- Apply D1 migrations to production and deploy the Worker/Pages app
-- Telegram production configuration in BotFather and deploy-time Worker/Pages URLs
-- Match pool/rating tuning, retries for failed completion uploads, and production observability
-- Deep-link attribution
-- On-device Telegram mobile QA (browser checks at 390x844 and 360x640 are not sufficient)
-- Git: current Milestone C/D worktree still needs an intentional review and commit
-
-## Key files
-
-- `packages/shared/src/index.ts` — types + exports
-- `packages/shared/src/countries.ts` — 197 country/territory entries (bilingual), flagUrl(), outlineUrl()
-- `packages/shared/src/historicFlags.ts` — 44 historical flags (labels, eras, trivia facts), local files
-- `packages/shared/src/languages.ts` — 37 languages with samples + facts
-- `packages/shared/src/questionGenerator.ts` — generates 10 questions per match, per category (geography | history | languages)
-- `packages/shared/src/flagTraits.ts` — auto-generated flag color/orientation traits (from flagcdn images) powering flag distractor similarity
-- `packages/shared/src/fuzzyMatch.ts` — Levenshtein + isAnswerCorrect
-- `apps/web/src/App.tsx` — main component, renders phases
-- `apps/web/src/lib/useGameState.ts` — game state machine (phases: home, profile, categories, matchmaking, question, resolution, hammer, result)
-- `apps/web/src/lib/analytics.ts` — event tracking
-- `apps/web/src/lib/sounds.ts` — sound effect manager (playSound, strikeSoundFor)
-- `apps/web/src/lib/localStats.ts` — localStorage stats (wins/losses/ties/streaks)
-- `apps/web/src/lib/tournaments.ts` + `sampleData.ts` — scripted challenge (Robb Peters) + shared sample data
-- `apps/web/src/components/` — HomeDashboard, CategorySelect, Matchmaking, Profile, QuestionScreen, HammerGame, TimerBar, OpenAnswerInput, MatchHud, ResolutionScreen, ResultScreen
-- `apps/web/src/index.css` — all styles, light parchment theme, red primary, Telegram viewport/safe-area handling, mobile breakpoints
-- `apps/web/public/sfx/` — sound effect files (Kenney CC0)
-- `apps/web/public/sprites/` — visual sprites
-- `apps/api/src/index.ts` — Hono API (health, async match start/complete, leaderboard)
-- `apps/api/migrations/0001_async_matches.sql` — D1 schema for asynchronous match runs
-- `apps/web/src/lib/api.ts` — async-match API client with offline fallback
-- `apps/api/wrangler.toml` — Cloudflare config with D1 binding
-
-## How to run
-
-```bash
-cd C:\Users\Alemkhan\JSProjects\clutch
-npm run dev
-```
-
-Web: http://localhost:5173
-API: http://localhost:8787
-
-## Decisions made
-
-- C# Jekpe Jek CRM abandoned (niche saturated in KZ: Umai CRM, Mobifitness)
-- Clutch is the active project now
-- Questions generated client-side from country dataset (not from D1)
-- Questions/UI in Russian for the TikTok audience; data bilingual, open answers accept RU + EN
-- Historical flags stored locally (public/flags-historic/) — no hotlinking to Wikimedia
-- Countries without mapsicon outlines (xk, ps, mh, fm, tv) never appear as outline media (OUTLINE_EXCLUDED in questionGenerator)
-- Distractors are confusable, not random: flags by color/stripe similarity (FLAG_TRAITS, top-6 shortlist shuffle), outlines island-vs-island + same region, capitals same region, languages same script; near-identical flag pairs (id/mc, ro/td) never distract each other
-- Matchmaking is asynchronous, not live: a player's completed run becomes a ghost opponent for a later player in the same category
-- Ghost opponents replay the exact same questions, timing, correctness, and hammer progress; D1 stores runs/results and no WebSockets are needed
-- Match UI and mini-game UI are separate systems. Question screens must use a compact universal Match HUD (player/opponent identity, percentage, progress bars) with no hammer, nail, dartboard, or other game-specific art.
-- Each skill mini-game owns its own visual metaphor and animation. Hammer the Nail shows the player's nail progress only inside `HammerGame`; a future darts game owns its dartboard visuals without requiring changes to the Match HUD.
-- Skill mini-games should communicate with the match state through a small game-agnostic result contract (skill result/score plus awarded progress), rather than leaking their visuals into shared screens.
-- The current shared stump/nails progress card is not the intended design. Do not polish or preserve it; replace it.
-- Current visual assets and animation timings are disposable prototypes. Do not use them as a style reference for newly generated art. Establish a coherent art direction first, then regenerate the set consistently with the selected provider.
-- Open-ended answers use Levenshtein distance (tolerance = max(1, length/5))
-- Timer: 15 seconds per question
-- Open-ended ratio: ~30% of questions
-- App shell built client-side first (sample data, localStorage stats) — backend only when needed (Milestone D)
-- No deploy yet (waiting)
-
-## Next visual/design session
-
-The next session is a visual reset, not a cleanup pass on the current sprites.
-
-1. Connect and test one or more image-generation providers: Higgsfield, Midjourney, or DALL-E.
-2. Define a small art-direction sheet before generating production assets: palette, outlines, lighting, perspective, texture, character proportions, transparency, and target sprite dimensions.
-3. Generate one complete vertical slice first (home hero + hammer/nail/log + impact effects + result trophy) and validate it in Telegram on a real phone.
-4. Once the style is accepted, generate the remaining assets as a consistent set; keep prompts/seeds/references or other reproducibility metadata where the provider allows it.
-5. Keep the implemented universal `MatchHUD` independent from all mini-game art so future mini-games remain plug-in modules.
-6. Rebuild motion around the accepted assets. Prioritize responsiveness and readable game feedback over decorative animation.
-
-Release bar: the app should not ship with the current sprite set. The rejected shared stump/nails progress card was removed on 2026-09-24.
-
-## Glossary (shared language)
-
-- **Match** — one game: 10 questions, race to 100% progress against an opponent.
-- **Progress** — game-agnostic percent 0–100. Correct answers earn a skill attempt; skill quality converts to progress. Shared screens visualize it with bars/percentages, not mini-game art. First to 100% wins, else highest after 10.
-- **Match HUD** — compact shared match status shown around questions: player/opponent identity, percentages, and thin progress bars. It must work unchanged for Hammer the Nail, darts, and future mini-games.
-- **Hammer the Nail** — one skill mini-game: marker swings, player taps to stop it, and hit quality sets the player's nail depth. Nail/log visuals appear only inside this mini-game.
-- **Skill tier** — hit quality: perfect / great / good / weak / miss. Perfect ≈ nail flush, miss ≈ barely dented.
-- **Resolution screen** — shown right after answering, before the hammer: reveals correct/incorrect + the correct answer.
-- **Challenge** — scripted match against a reconstructed real-world quiz (currently "Robb Peters", from a video's Q&A order and outcomes).
-- **Category** — question domain; Geography, Historical Flags, and Languages are playable.
-- **Local stats** — wins/losses/ties/streaks in localStorage, shown in Profile.
-
-## Separate context: Life diary
-
-`C:\Users\Alemkhan\Documents\Life\` — personal diary with AGENTS.md instructions. Discovery notes for Jekpe Jek in `Цели/проекты/`. Read AGENTS.md first if working in that folder.
+Astra используется для reasoning, ревью и планирования. Кодинг — 5.6-Sol
+с небольшим reasoning по одной ограниченной задаче. Инструкции —
+[AGENTS.md](AGENTS.md); запуск — [README.md](README.md).

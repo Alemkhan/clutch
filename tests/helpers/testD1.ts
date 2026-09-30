@@ -1,0 +1,81 @@
+/// <reference types="node" />
+/// <reference types="@cloudflare/workers-types" />
+
+import { readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import type { DatabaseSync as SQLiteDatabase, SQLInputValue } from 'node:sqlite';
+
+const { DatabaseSync } = createRequire(import.meta.url)('node:sqlite') as {
+  DatabaseSync: typeof import('node:sqlite').DatabaseSync;
+};
+
+function numberedBindings(values: unknown[]): Record<string, SQLInputValue> {
+  return Object.fromEntries(values.map((value, index) => [
+    `?${index + 1}`,
+    value as SQLInputValue,
+  ]));
+}
+
+class SQLiteD1Statement {
+  constructor(
+    private readonly database: SQLiteDatabase,
+    private readonly query: string,
+    private readonly values: unknown[] = [],
+  ) {}
+
+  bind(...values: unknown[]): D1PreparedStatement {
+    return new SQLiteD1Statement(this.database, this.query, values) as unknown as D1PreparedStatement;
+  }
+
+  async first<T = Record<string, unknown>>(column?: string): Promise<T | null> {
+    const statement = this.database.prepare(this.query);
+    const row = (this.values.length === 0
+      ? statement.get()
+      : statement.get(numberedBindings(this.values))) as Record<string, unknown> | undefined;
+    if (!row) return null;
+    return (column ? row[column] : row) as T;
+  }
+
+  async all<T = Record<string, unknown>>(): Promise<D1Result<T>> {
+    const statement = this.database.prepare(this.query);
+    const results = (this.values.length === 0
+      ? statement.all()
+      : statement.all(numberedBindings(this.values))) as T[];
+    return { success: true, results, meta: {} } as D1Result<T>;
+  }
+
+  async run<T = Record<string, unknown>>(): Promise<D1Result<T>> {
+    const statement = this.database.prepare(this.query);
+    const result = this.values.length === 0
+      ? statement.run()
+      : statement.run(numberedBindings(this.values));
+    return {
+      success: true,
+      results: [],
+      meta: { changes: Number(result.changes), last_row_id: Number(result.lastInsertRowid) },
+    } as unknown as D1Result<T>;
+  }
+}
+
+export interface TestD1 {
+  binding: D1Database;
+  sqlite: SQLiteDatabase;
+}
+
+export function applyR1bMigration(sqlite: SQLiteDatabase): void {
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0002_match_conditions.sql', import.meta.url), 'utf8'));
+}
+
+export function createTestD1(applyCurrentMigration = true): TestD1 {
+  const sqlite = new DatabaseSync(':memory:');
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0001_async_matches.sql', import.meta.url), 'utf8'));
+  if (applyCurrentMigration) {
+    applyR1bMigration(sqlite);
+  }
+  const binding = {
+    prepare(query: string) {
+      return new SQLiteD1Statement(sqlite, query) as unknown as D1PreparedStatement;
+    },
+  } as D1Database;
+  return { binding, sqlite };
+}

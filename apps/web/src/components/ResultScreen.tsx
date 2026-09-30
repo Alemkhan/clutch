@@ -9,7 +9,7 @@ interface ResultScreenProps {
   opponentName: string;
   bestSkill: SkillResult | null;
   correctCount: number;
-  totalQuestions: number;
+  questionsPlayed: number;
   perfectHits: number;
   avgResponseMs: number;
   onReplay: () => void;
@@ -22,7 +22,7 @@ export function ResultScreen({
   opponentName,
   bestSkill,
   correctCount,
-  totalQuestions,
+  questionsPlayed,
   perfectHits,
   avgResponseMs,
   onReplay,
@@ -66,7 +66,7 @@ export function ResultScreen({
       <div className="result-stats-grid">
         <div className="stat">
           <span className="stat-label">Верных ответов</span>
-          <span className="stat-value">{correctCount}/{totalQuestions}</span>
+          <span className="stat-value">{correctCount}/{questionsPlayed}</span>
         </div>
         <div className="stat">
           <span className="stat-label">Идеальных удара</span>

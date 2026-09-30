@@ -1,6 +1,7 @@
 export type AnswerType = 'multiple_choice' | 'open_answer';
 
 export * from './fuzzyMatch';
+export * from './matchRules';
 
 export type SkillResult = 'perfect' | 'great' | 'good' | 'weak' | 'miss';
 
@@ -69,6 +70,7 @@ export interface StartAsyncMatchResponse {
   questions: Question[];
   opponent: Opponent;
   opponentSource: 'player' | 'bot';
+  conditions: AsyncMatchConditions;
 }
 
 export interface CompleteAsyncMatchRequest {
@@ -94,6 +96,26 @@ export interface MiniGameConfig {
   targetWidth: number;
   perfectWidth: number;
 }
+
+export interface AsyncMatchConditions {
+  rulesVersion: string;
+  miniGame: {
+    id: 'hammer_nail';
+    config: MiniGameConfig;
+  };
+}
+
+export const CURRENT_ASYNC_MATCH_CONDITIONS: AsyncMatchConditions = {
+  rulesVersion: 'race-to-100-v1',
+  miniGame: {
+    id: 'hammer_nail',
+    config: {
+      markerSpeed: 0.8,
+      targetWidth: 0.28,
+      perfectWidth: 0.06,
+    },
+  },
+};
 
 export interface Tournament {
   id: string;

@@ -2,6 +2,28 @@
 
 Competitive trivia game. Knowledge earns the attempt. Skill wins the game.
 
+Clutch is a Russian-language, mobile-first Telegram Mini App with asynchronous
+opponents: knowledge earns a skill attempt, and its quality earns match progress.
+It also runs in a regular browser.
+
+## Project context
+
+Start with [CONTEXT.md](CONTEXT.md) for the current snapshot. Contributor/model
+workflow lives in [AGENTS.md](AGENTS.md). Read only the detailed document needed
+for the task:
+
+- [Product and open decisions](docs/PRODUCT.md)
+- [Architecture and data flow](docs/ARCHITECTURE.md)
+- [Code audit and known risks](docs/AUDIT.md)
+- [Small implementation tasks](docs/ROADMAP.md)
+- [Art, animation, and audio brief](docs/ART_DIRECTION.md)
+
+Status as of 2026-09-29: playable prototype, not production-ready. The API and
+client share match transitions; the API enforces ghost eligibility and versioned
+conditions (R1, migration 0002 required). Match ownership, reliable uploads, and
+final art still need work.
+The remote deployment state has not been verified by this repository audit.
+
 ## Stack
 
 - **Frontend:** React + Vite (Cloudflare Pages)
@@ -17,7 +39,9 @@ clutch/
 │   ├── web/     # React + Vite (Mini App + Web)
 │   └── api/     # Hono on Workers
 ├── packages/
-│   └── shared/  # shared types, schemas
+│   └── shared/  # types, question data/generation, scoring
+├── docs/        # product, architecture, audit, roadmap, art brief
+└── tests/       # cross-workspace tests (shared also has colocated tests)
 ```
 
 ## Setup
@@ -31,6 +55,23 @@ npm run dev
 Web: http://localhost:5173
 API: http://localhost:8787
 
+After pulling schema changes, run the local migration command again before
+starting the API. Migration `0002_match_conditions.sql` preserves existing runs,
+but does not admit legacy records with unknown conditions to the opponent pool.
+Unfinished legacy matches must be restarted; completed results are not recalculated.
+
+## Checks
+
+```bash
+npm test
+npm run build
+```
+
+The root build includes workspace typechecks. API route tests use the actual SQL
+migrations in isolated in-memory SQLite via Node's built-in `node:sqlite` module
+(verified on Node 22.17.0). Its experimental warning on that version is expected.
+They do not replace Cloudflare runtime smoke tests or on-device Telegram QA.
+
 ## Environment
 
 Copy `apps/api/.env.example` to `apps/api/.dev.vars` and fill in:
@@ -43,6 +84,9 @@ Never commit `.dev.vars` or `.env`.
 
 For a deployed web build, set `VITE_API_URL` to the public Worker URL. The web
 app falls back to a local scripted opponent when the API is unavailable.
+This fallback currently has no clear offline indicator and does not upload the
+result. The root `deploy:web` script currently points to a missing web workspace
+script; complete the release setup before using it.
 
 ## Test inside Telegram locally
 
@@ -62,10 +106,15 @@ Copy the HTTPS URL printed by ngrok, then open `@BotFather`:
 URL. Keep both terminals running while testing. Restarting ngrok may change the
 URL.
 
+The tunnel exposes the local app and proxied API. Use it for controlled testing,
+not as a public beta until the authorization issues in the audit are addressed.
+
 Inside Telegram the client initializes the Mini App SDK, applies viewport safe
 areas, and sends raw `initData` to the Worker. The Worker validates its HMAC
 and expiry before using the Telegram user ID and display name. A normal browser
 continues to use an anonymous local identity.
+This is not yet end-to-end authorization: start accepts client identities when
+initData is absent, and completion does not check match ownership.
 
 ## Async matches
 
@@ -73,6 +122,14 @@ Clutch uses asynchronous opponents rather than live sockets. A completed run
 stores its exact question set and per-round result in D1. A later player in the
 same category receives that run as a ghost opponent and plays the same
 questions. The scripted opponent seeds an empty pool.
+The API accepts only legally finished runs. A full question sequence or the
+player's own 100% makes a run eligible; an early loss is saved but excluded from
+the pool. Matching also requires the current rules version, mini-game, and config.
+Each new run stores its exact opponent snapshot (including bots), so completion
+does not depend on later edits to the source record. The client validates the
+returned `conditions` and opponent transcript before starting, then uses the
+same shared round transition as the API. Local scripts are normalized separately.
+Saved response times are not replayed as a real-time opponent timeline.
 
 API:
 

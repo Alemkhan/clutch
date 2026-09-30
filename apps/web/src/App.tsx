@@ -125,7 +125,7 @@ export default function App() {
               opponentName={game.opponent.displayName}
               bestSkill={game.bestSkill}
               correctCount={game.correctCount}
-              totalQuestions={game.totalQuestions}
+              questionsPlayed={game.questionsPlayed}
               perfectHits={game.perfectHits}
               avgResponseMs={game.avgResponseMs}
               onReplay={game.start}

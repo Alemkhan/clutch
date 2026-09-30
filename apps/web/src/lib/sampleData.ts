@@ -1,11 +1,12 @@
-import { generateMatch } from '@clutch/shared';
-import type { CategoryId, Opponent } from '@clutch/shared';
+import { CURRENT_ASYNC_MATCH_CONDITIONS, generateMatch } from '@clutch/shared';
+import type { CategoryId, Opponent, Question } from '@clutch/shared';
+import { normalizeScriptedOpponent } from './clientMatchRules';
 
 export function createQuestions(category: CategoryId = 'geography') {
   return generateMatch(10, 0.3, category);
 }
 
-export const sampleOpponent: Opponent = {
+const sampleOpponentScript: Opponent = {
   id: 'contestant_001',
   displayName: 'Alex',
   rounds: [
@@ -22,8 +23,8 @@ export const sampleOpponent: Opponent = {
   ],
 };
 
-export const miniGameConfig = {
-  markerSpeed: 0.8,
-  targetWidth: 0.28,
-  perfectWidth: 0.06,
-};
+export function createSampleOpponent(questions: readonly Question[]): Opponent {
+  return normalizeScriptedOpponent(sampleOpponentScript, questions);
+}
+
+export const miniGameConfig = CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config;

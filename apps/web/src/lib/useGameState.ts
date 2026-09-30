@@ -1,126 +1,94 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { analytics } from './analytics';
 import type {
-  AsyncMatchRoundInput,
   SkillResult,
   Question,
   Opponent,
   Tournament,
   CategoryId,
 } from '@clutch/shared';
-import { SKILL_REWARDS, isAnswerCorrect } from '@clutch/shared';
-import { createQuestions, sampleOpponent, miniGameConfig } from './sampleData';
+import {
+  CURRENT_ASYNC_MATCH_CONDITIONS,
+} from '@clutch/shared';
+import { createQuestions, createSampleOpponent } from './sampleData';
 import { completeAsyncMatch, startAsyncMatch } from './api';
-
-export type Phase = 'home' | 'categories' | 'matchmaking' | 'question' | 'resolution' | 'hammer' | 'result' | 'profile';
-
-interface MatchState {
-  phase: Phase;
-  category: CategoryId;
-  questions: Question[];
-  questionIndex: number;
-  playerProgress: number;
-  opponentProgress: number;
-  lastCorrect: boolean;
-  lastSkill: SkillResult | null;
-  bestSkill: SkillResult | null;
-  correctCount: number;
-  selectedOption: string;
-  responseTimes: number[];
-  skillResults: SkillResult[];
-  opponent: Opponent;
-  activeVideo: Tournament['video'];
-  fixedQuestions?: Question[];
-  activeMatchId?: string;
-  roundInputs: AsyncMatchRoundInput[];
-}
-
-const initialState: MatchState = {
-  phase: 'home',
-  category: 'geography',
-  questions: [],
-  questionIndex: 0,
-  playerProgress: 0,
-  opponentProgress: 0,
-  lastCorrect: false,
-  lastSkill: null,
-  bestSkill: null,
-  correctCount: 0,
-  selectedOption: '',
-  responseTimes: [],
-  skillResults: [],
-  opponent: sampleOpponent,
-  activeVideo: undefined,
-  fixedQuestions: undefined,
-  activeMatchId: undefined,
-  roundInputs: [],
-};
-
-function isFinished(player: number, opponent: number, qIndex: number, total: number): boolean {
-  return player >= 100 || opponent >= 100 || qIndex >= total - 1;
-}
+import {
+  normalizeOnlineMatch,
+  normalizeScriptedOpponent,
+  validateMiniGameConfig,
+} from './clientMatchRules';
+import {
+  completeSkillDistance,
+  continueAfterAnswerResolution,
+  createChallengeLobbyState,
+  createChallengeReplayState,
+  createInitialGameState,
+  createPreparedMatchState,
+  recordAnswer,
+} from './gameSession';
 
 export function useGameState() {
-  const [state, setState] = useState<MatchState>(initialState);
+  const [state, setState] = useState(createInitialGameState);
   const submittedMatchesRef = useRef(new Set<string>());
 
   const start = useCallback(async () => {
     analytics.startMatch();
     if (state.fixedQuestions) {
       analytics.track('match_started', { source: 'challenge' });
-      setState((prev) => ({
-        ...initialState,
-        category: prev.category,
-        opponent: prev.opponent,
-        activeVideo: prev.activeVideo,
-        fixedQuestions: prev.fixedQuestions,
-        questions: prev.fixedQuestions ?? [],
-        phase: 'question',
-      }));
+      setState(createChallengeReplayState);
+      return;
+    }
+
+    let rawMatch;
+    try {
+      rawMatch = await startAsyncMatch(state.category);
+    } catch {
+      const questions = createQuestions(state.category);
+      const opponent = createSampleOpponent(questions);
+      analytics.track('match_started', { source: 'local_fallback' });
+      setState((prev) => createPreparedMatchState({ category: prev.category, opponent, questions }));
       return;
     }
 
     try {
-      const match = await startAsyncMatch(state.category);
+      const match = normalizeOnlineMatch(rawMatch);
       analytics.track('match_started', { source: match.opponentSource });
-      setState((prev) => ({
-        ...initialState,
+      setState((prev) => createPreparedMatchState({
         category: prev.category,
         opponent: match.opponent,
         questions: match.questions,
         activeMatchId: match.matchId,
-        phase: 'question',
+        miniGameConfig: match.config,
       }));
-    } catch {
-      analytics.track('match_started', { source: 'local_fallback' });
-      setState((prev) => ({
-        ...initialState,
-        category: prev.category,
-        opponent: sampleOpponent,
-        questions: createQuestions(prev.category),
-        phase: 'question',
-      }));
+    } catch (error) {
+      console.error('Invalid async match response:', error);
+      setState((prev) => ({ ...createInitialGameState(), category: prev.category, phase: 'categories' }));
     }
   }, [state.category, state.fixedQuestions]);
 
   const startChallenge = useCallback((tournament: Tournament, opponent: Opponent, fixedQuestions?: Question[]) => {
-    setState({
-      ...initialState,
-      opponent,
+    if (!fixedQuestions) throw new Error('Challenge questions are required.');
+    if (tournament.miniGame.id !== CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id) {
+      throw new Error('Challenge mini-game is not supported.');
+    }
+    const normalizedOpponent = normalizeScriptedOpponent(opponent, fixedQuestions);
+    const config = validateMiniGameConfig(tournament.miniGame.config);
+    setState(createChallengeLobbyState({
+      questions: fixedQuestions,
+      opponent: normalizedOpponent,
       activeVideo: tournament.video,
-      fixedQuestions,
-      phase: 'matchmaking',
-    });
+      miniGameConfig: config,
+    }));
   }, []);
 
   useEffect(() => {
     if (state.phase === 'result' && state.questions.length > 0) {
       analytics.track('match_completed', {
-        playerProgress: state.playerProgress,
-        opponentProgress: state.opponentProgress,
+        playerProgress: state.rulesState.playerProgress,
+        opponentProgress: state.rulesState.opponentProgress,
       });
     }
-  }, [state.phase, state.questions.length]);
+  }, [state.phase, state.questions.length, state.rulesState]);
 
   useEffect(() => {
     if (
@@ -138,13 +106,7 @@ export function useGameState() {
   const answer = useCallback((optionId: string, _timeMs: number) => {
     setState((prev) => {
       const question = prev.questions[prev.questionIndex];
-      let correct = false;
-      if (question?.answerType === 'open_answer') {
-        const result = isAnswerCorrect(optionId, question.correctAnswers ?? []);
-        correct = result.correct;
-      } else {
-        correct = question && optionId === question.correctOptionId;
-      }
+      const next = recordAnswer(prev, optionId, _timeMs);
       analytics.track('answer_submitted', {
         questionId: question?.id,
         questionIndex: prev.questionIndex,
@@ -152,103 +114,27 @@ export function useGameState() {
         difficulty: question?.difficulty,
         answerType: question?.answerType,
         selectedOption: optionId,
-        correctness: correct,
+        correctness: next.lastCorrect,
         responseTimeMs: _timeMs,
       });
-      return {
-        ...prev,
-        selectedOption: optionId,
-        lastCorrect: correct,
-        correctCount: correct ? prev.correctCount + 1 : prev.correctCount,
-        responseTimes: [...prev.responseTimes, _timeMs],
-        phase: 'resolution',
-      };
+      return next;
     });
   }, []);
 
   const continueAfterResolution = useCallback(() => {
-    setState((prev) => {
-      if (prev.lastCorrect) {
-        return { ...prev, phase: 'hammer' };
-      }
-
-      const oppGain = prev.opponent.rounds[prev.questionIndex]?.progressAwarded ?? 0;
-      const newOpp = Math.min(100, prev.opponentProgress + oppGain);
-      const roundInputs = [
-        ...prev.roundInputs,
-        {
-          questionId: prev.questions[prev.questionIndex].id,
-          selectedAnswer: prev.selectedOption,
-          responseTimeMs: prev.responseTimes[prev.responseTimes.length - 1] ?? 0,
-        },
-      ];
-
-      if (isFinished(prev.playerProgress, newOpp, prev.questionIndex, prev.questions.length)) {
-        return { ...prev, opponentProgress: newOpp, roundInputs, phase: 'result' };
-      }
-
-      return {
-        ...prev,
-        opponentProgress: newOpp,
-        roundInputs,
-        questionIndex: prev.questionIndex + 1,
-        phase: 'question',
-      };
-    });
+    setState(continueAfterAnswerResolution);
   }, []);
 
-  const completeHammer = useCallback((result: SkillResult, progress: number, distance: number) => {
-    setState((prev) => {
-      const newPlayer = Math.min(100, prev.playerProgress + progress);
-      const newBest = !prev.bestSkill || SKILL_REWARDS[result] > SKILL_REWARDS[prev.bestSkill] ? result : prev.bestSkill;
-
-      const oppGain = prev.opponent.rounds[prev.questionIndex]?.progressAwarded ?? 0;
-      const newOpp = Math.min(100, prev.opponentProgress + oppGain);
-
-      const skillResults = [...prev.skillResults, result];
-      const roundInputs = [
-        ...prev.roundInputs,
-        {
-          questionId: prev.questions[prev.questionIndex].id,
-          selectedAnswer: prev.selectedOption,
-          responseTimeMs: prev.responseTimes[prev.responseTimes.length - 1] ?? 0,
-          skillDistance: distance,
-        },
-      ];
-
-      if (isFinished(newPlayer, newOpp, prev.questionIndex, prev.questions.length)) {
-        return {
-          ...prev,
-          playerProgress: newPlayer,
-          opponentProgress: newOpp,
-          lastSkill: result,
-          bestSkill: newBest,
-          skillResults,
-          roundInputs,
-          phase: 'result',
-        };
-      }
-
-      return {
-        ...prev,
-        playerProgress: newPlayer,
-        opponentProgress: newOpp,
-        lastSkill: result,
-        bestSkill: newBest,
-        skillResults,
-        roundInputs,
-        questionIndex: prev.questionIndex + 1,
-        phase: 'question',
-      };
-    });
+  const completeHammer = useCallback((_result: SkillResult, _progress: number, distance: number) => {
+    setState((prev) => completeSkillDistance(prev, distance));
   }, []);
 
   const reset = useCallback(() => {
-    setState(initialState);
+    setState(createInitialGameState());
   }, []);
 
   const goToCategories = useCallback(() => {
-    setState({ ...initialState, phase: 'categories' });
+    setState({ ...createInitialGameState(), phase: 'categories' });
   }, []);
 
   const goToMatchmaking = useCallback((category?: string) => {
@@ -270,8 +156,8 @@ export function useGameState() {
   return {
     phase: state.phase,
     questionIndex: state.questionIndex,
-    playerProgress: state.playerProgress,
-    opponentProgress: state.opponentProgress,
+    playerProgress: state.rulesState.playerProgress,
+    opponentProgress: state.rulesState.opponentProgress,
     lastCorrect: state.lastCorrect,
     lastSkill: state.lastSkill,
     bestSkill: state.bestSkill,
@@ -284,10 +170,11 @@ export function useGameState() {
       ? Math.round(state.responseTimes.reduce((a, b) => a + b, 0) / state.responseTimes.length)
       : 0,
     totalQuestions: state.questions.length,
+    questionsPlayed: state.rulesState.roundsPlayed,
     currentQuestion: state.questions[state.questionIndex],
     opponent: state.opponent,
     activeVideo: state.activeVideo,
-    miniGameConfig,
+    miniGameConfig: state.miniGameConfig,
     start,
     startChallenge,
     answer,
