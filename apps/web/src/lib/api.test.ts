@@ -1,5 +1,10 @@
-import { describe, expect, it } from 'vitest';
-import { ApiError, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError } from './api';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { ApiError, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError, startAsyncMatch } from './api';
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+  vi.restoreAllMocks();
+});
 
 describe('browser guest session validity', () => {
   const now = 1_800_000_000_000;
@@ -35,5 +40,28 @@ describe('API error retry classification', () => {
   it('does not automatically retry authentication or validation failures', () => {
     expect(isTransientApiError(new ApiError(401))).toBe(false);
     expect(isTransientApiError(new ApiError(404))).toBe(false);
+  });
+});
+
+describe('match start cancellation', () => {
+  it('cascades a caller abort to the match fetch', async () => {
+    const fetchMock = vi.fn((input: string | URL | Request, init?: RequestInit) => {
+      const path = String(input);
+      if (path.includes('/api/auth/guest')) {
+        return Promise.resolve(new Response(JSON.stringify({
+          token: 'guest-token',
+          expiresAt: Date.now() + 60 * 60 * 1000,
+        }), { status: 200, headers: { 'Content-Type': 'application/json' } }));
+      }
+      return new Promise<Response>((_resolve, reject) => {
+        init?.signal?.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')), { once: true });
+      });
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    const controller = new AbortController();
+    const request = startAsyncMatch('geography', controller.signal);
+    await vi.waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    controller.abort();
+    await expect(request).rejects.toMatchObject({ name: 'AbortError' });
   });
 });

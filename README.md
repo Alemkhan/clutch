@@ -18,12 +18,13 @@ for the task:
 - [Small implementation tasks](docs/ROADMAP.md)
 - [Art, animation, and audio brief](docs/ART_DIRECTION.md)
 
-Status as of 2026-09-30: playable prototype, not production-ready. The API and
+Status as of 2026-10-01: playable prototype, not production-ready. The API and
 client share match transitions; the API enforces ghost eligibility and versioned
 conditions (R1, migration 0002 required). Authenticated match ownership is in
-place, R2b bounds match inputs and request frequency, and R3 durably retries
-completed results until a valid acknowledgement. Broader abuse protection,
-safe start/replay states, stable game timing, and final art still need work.
+place, R2b bounds match inputs and request frequency, R3 durably retries
+completed results until a valid acknowledgement, and R4 makes matchmaking and
+replay explicit and cancellable. Broader abuse protection, stable game timing,
+and final art still need work.
 The remote deployment state has not been verified by this repository audit.
 
 ## Stack
@@ -94,11 +95,11 @@ requests per 60 seconds. Its numeric namespace ID must be unique in the target
 Cloudflare account before deployment. Wrangler simulates this binding locally;
 Cloudflare counters are local to each Cloudflare location, not globally exact.
 
-For a deployed web build, set `VITE_API_URL` to the public Worker URL. The web
-app falls back to a local scripted opponent when the API is unavailable.
-This fallback currently has no clear offline indicator and does not upload the
-result. The root `deploy:web` script currently points to a missing web workspace
-script; complete the release setup before using it.
+For a deployed web build, set `VITE_API_URL` to the public Worker URL. When the
+API is unavailable, the UI explains the failure and offers retry or explicit
+local practice; practice results are not uploaded. The root `deploy:web` script
+currently points to a missing web workspace script; complete the release setup
+before using it.
 
 ## Test inside Telegram locally
 

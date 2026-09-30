@@ -58,6 +58,10 @@ function getPlayerName(): string {
 
 async function rawApiFetch<T>(path: string, init: RequestInit): Promise<T> {
   const controller = new AbortController();
+  const callerSignal = init.signal;
+  const abortFromCaller = () => controller.abort(callerSignal?.reason);
+  if (callerSignal?.aborted) abortFromCaller();
+  else callerSignal?.addEventListener('abort', abortFromCaller, { once: true });
   const timeout = setTimeout(() => controller.abort(), 5000);
   try {
     const response = await fetch(`${API_BASE}${path}`, {
@@ -77,6 +81,7 @@ async function rawApiFetch<T>(path: string, init: RequestInit): Promise<T> {
     return await response.json() as T;
   } finally {
     clearTimeout(timeout);
+    callerSignal?.removeEventListener('abort', abortFromCaller);
   }
 }
 
@@ -152,14 +157,18 @@ async function authorizationHeader(): Promise<string> {
   return `Bearer ${(await getGuestSession()).token}`;
 }
 
-async function apiFetch<T>(path: string, init: RequestInit): Promise<T> {
+async function apiFetch<T>(path: string, init: RequestInit, signal?: AbortSignal): Promise<T> {
+  signal?.throwIfAborted();
+  const authorization = await authorizationHeader();
+  signal?.throwIfAborted();
   return rawApiFetch<T>(path, {
     ...init,
-    headers: { ...init.headers, Authorization: await authorizationHeader() },
+    headers: { ...init.headers, Authorization: authorization },
+    signal,
   });
 }
 
-export function startAsyncMatch(category: CategoryId): Promise<StartAsyncMatchResponse> {
+export function startAsyncMatch(category: CategoryId, signal?: AbortSignal): Promise<StartAsyncMatchResponse> {
   const telegram = getTelegramIdentity();
   const body: StartAsyncMatchRequest = {
     displayName: telegram?.displayName || getPlayerName(),
@@ -168,7 +177,7 @@ export function startAsyncMatch(category: CategoryId): Promise<StartAsyncMatchRe
   return apiFetch('/api/async-matches', {
     method: 'POST',
     body: JSON.stringify(body),
-  });
+  }, signal);
 }
 
 export function completeAsyncMatch(

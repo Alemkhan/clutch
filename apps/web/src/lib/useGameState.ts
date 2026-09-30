@@ -24,14 +24,21 @@ import {
   createChallengeLobbyState,
   createChallengeReplayState,
   createInitialGameState,
+  createMatchLobbyState,
   createPreparedMatchState,
   recordAnswer,
 } from './gameSession';
+import {
+  MatchRequestCoordinator,
+  matchmakingErrorMessage,
+  type MatchmakingViewState,
+} from './matchmaking';
 
 export type ResultSaveStatus = 'practice' | 'pending' | 'saved' | 'error';
 
 export function useGameState() {
   const [state, setState] = useState(createInitialGameState);
+  const [matchmaking, setMatchmaking] = useState<MatchmakingViewState>({ status: 'loading' });
   const [resultSave, setResultSave] = useState<{
     status: ResultSaveStatus;
     error?: string;
@@ -43,42 +50,57 @@ export function useGameState() {
   const activeMatchIdRef = useRef<string>();
   const reportedCompletionRef = useRef<string>();
   const reportedSavePendingRef = useRef<string>();
+  const requestCoordinatorRef = useRef(new MatchRequestCoordinator());
+  const startingPreparedRef = useRef(false);
   activeMatchIdRef.current = state.activeMatchId;
 
-  const start = useCallback(async () => {
-    analytics.startMatch();
-    if (state.fixedQuestions) {
-      analytics.track('match_started', { source: 'challenge' });
-      setState(createChallengeReplayState);
-      return;
-    }
+  const requestOnlineMatch = useCallback((category: CategoryId) => {
+    const request = requestCoordinatorRef.current.begin(category);
+    if (!request) return;
+    startingPreparedRef.current = false;
+    setMatchmaking({ status: 'loading' });
+    setState({ ...createInitialGameState(), category, phase: 'matchmaking' });
 
-    let rawMatch;
-    try {
-      rawMatch = await startAsyncMatch(state.category);
-    } catch {
-      const questions = createQuestions(state.category);
-      const opponent = createSampleOpponent(questions);
-      analytics.track('match_started', { source: 'local_fallback' });
-      setState((prev) => createPreparedMatchState({ category: prev.category, opponent, questions }));
-      return;
-    }
-
-    try {
-      const match = normalizeOnlineMatch(rawMatch);
-      analytics.track('match_started', { source: match.opponentSource });
-      setState((prev) => createPreparedMatchState({
-        category: prev.category,
+    void startAsyncMatch(category, request.signal).then((rawMatch) => {
+      if (!requestCoordinatorRef.current.isCurrent(request.token)) return;
+      let match;
+      try {
+        match = normalizeOnlineMatch(rawMatch);
+      } catch (error) {
+        console.error('Invalid async match response:', error);
+        if (!requestCoordinatorRef.current.settle(request.token)) return;
+        setMatchmaking({ status: 'error', error: 'Сервер вернул некорректный матч. Попробуй ещё раз.' });
+        return;
+      }
+      if (!requestCoordinatorRef.current.settle(request.token)) return;
+      setState(createMatchLobbyState({
+        category,
         opponent: match.opponent,
         questions: match.questions,
         activeMatchId: match.matchId,
         miniGameConfig: match.config,
+        matchSource: match.opponentSource,
       }));
-    } catch (error) {
-      console.error('Invalid async match response:', error);
-      setState((prev) => ({ ...createInitialGameState(), category: prev.category, phase: 'categories' }));
-    }
-  }, [state.category, state.fixedQuestions]);
+      setMatchmaking({ status: 'ready' });
+    }).catch((error: unknown) => {
+      if (!requestCoordinatorRef.current.settle(request.token)) return;
+      setMatchmaking({ status: 'error', error: matchmakingErrorMessage(error) });
+    });
+  }, []);
+
+  const start = useCallback(() => {
+    if (startingPreparedRef.current || matchmaking.status !== 'ready') return;
+    startingPreparedRef.current = true;
+    setState((previous) => {
+      if (previous.phase !== 'matchmaking' || previous.questions.length === 0) {
+        startingPreparedRef.current = false;
+        return previous;
+      }
+      analytics.startMatch();
+      analytics.track('match_started', { source: previous.matchSource });
+      return { ...previous, phase: 'question' };
+    });
+  }, [matchmaking.status]);
 
   const startChallenge = useCallback((tournament: Tournament, opponent: Opponent, fixedQuestions?: Question[]) => {
     if (!fixedQuestions) throw new Error('Challenge questions are required.');
@@ -87,6 +109,9 @@ export function useGameState() {
     }
     const normalizedOpponent = normalizeScriptedOpponent(opponent, fixedQuestions);
     const config = validateMiniGameConfig(tournament.miniGame.config);
+    requestCoordinatorRef.current.cancel();
+    startingPreparedRef.current = false;
+    setMatchmaking({ status: 'ready' });
     setState(createChallengeLobbyState({
       questions: fixedQuestions,
       opponent: normalizedOpponent,
@@ -94,6 +119,8 @@ export function useGameState() {
       miniGameConfig: config,
     }));
   }, []);
+
+  useEffect(() => () => requestCoordinatorRef.current.cancel(), []);
 
   useEffect(() => {
     if (state.phase !== 'result' || state.questions.length === 0) return;
@@ -215,27 +242,68 @@ export function useGameState() {
   }, []);
 
   const reset = useCallback(() => {
+    requestCoordinatorRef.current.cancel();
     setState(createInitialGameState());
   }, []);
 
   const goToCategories = useCallback(() => {
+    requestCoordinatorRef.current.cancel();
+    startingPreparedRef.current = false;
     setState({ ...createInitialGameState(), phase: 'categories' });
   }, []);
 
   const goToMatchmaking = useCallback((category?: string) => {
-    setState((prev) => ({
-      ...prev,
-      category: (category === 'history' || category === 'languages' ? category : 'geography') as CategoryId,
-      phase: 'matchmaking',
+    requestOnlineMatch((category === 'history' || category === 'languages' ? category : 'geography') as CategoryId);
+  }, [requestOnlineMatch]);
+
+  const retryMatchmaking = useCallback(() => {
+    requestOnlineMatch(state.category);
+  }, [requestOnlineMatch, state.category]);
+
+  const useLocalPractice = useCallback(() => {
+    requestCoordinatorRef.current.cancel();
+    startingPreparedRef.current = false;
+    const questions = createQuestions(state.category);
+    const opponent = createSampleOpponent(questions);
+    setState(createMatchLobbyState({
+      category: state.category,
+      opponent,
+      questions,
+      matchSource: 'local',
     }));
-  }, []);
+    setMatchmaking({ status: 'ready' });
+  }, [state.category]);
+
+  const replay = useCallback(() => {
+    if (state.matchSource === 'player' || state.matchSource === 'bot') {
+      requestOnlineMatch(state.category);
+      return;
+    }
+    requestCoordinatorRef.current.cancel();
+    startingPreparedRef.current = false;
+    if (state.matchSource === 'challenge') {
+      setState(createChallengeReplayState(state));
+      setMatchmaking({ status: 'ready' });
+      return;
+    }
+    const questions = createQuestions(state.category);
+    setState(createMatchLobbyState({
+      category: state.category,
+      questions,
+      opponent: createSampleOpponent(questions),
+      matchSource: 'local',
+    }));
+    setMatchmaking({ status: 'ready' });
+  }, [requestOnlineMatch, state]);
 
   const goToProfile = useCallback(() => {
     setState((prev) => ({ ...prev, phase: 'profile' }));
   }, []);
 
   const goHome = useCallback(() => {
-    setState((prev) => ({ ...prev, phase: 'home' }));
+    requestCoordinatorRef.current.cancel();
+    startingPreparedRef.current = false;
+    setState(createInitialGameState());
   }, []);
 
   return {
@@ -260,11 +328,17 @@ export function useGameState() {
     opponent: state.opponent,
     activeVideo: state.activeVideo,
     miniGameConfig: state.miniGameConfig,
+    matchSource: state.matchSource,
+    matchmakingStatus: matchmaking.status,
+    matchmakingError: matchmaking.error,
     resultSaveStatus: resultSave.status,
     resultSaveError: resultSave.error,
     canRetryResultSave: resultSave.canRetry,
     retryResultSave,
+    retryMatchmaking,
+    useLocalPractice,
     start,
+    replay,
     startChallenge,
     answer,
     continueAfterResolution,

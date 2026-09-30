@@ -101,7 +101,17 @@ export default function App() {
 
         {game.phase === 'matchmaking' && (
           <motion.div key="matchmaking" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
-            <Matchmaking opponent={game.opponent} video={game.activeVideo} onDone={game.start} />
+            <Matchmaking
+              opponent={game.opponent}
+              video={game.activeVideo}
+              status={game.matchmakingStatus}
+              source={game.matchSource}
+              error={game.matchmakingError}
+              onStart={game.start}
+              onRetry={game.retryMatchmaking}
+              onLocalPractice={game.useLocalPractice}
+              onBack={game.matchSource === 'challenge' ? game.goHome : game.goToCategories}
+            />
           </motion.div>
         )}
 
@@ -142,6 +152,7 @@ export default function App() {
               playerProgress={game.playerProgress}
               opponentProgress={game.opponentProgress}
               opponentName={game.opponent.displayName}
+              matchSource={game.matchSource}
               bestSkill={game.bestSkill}
               correctCount={game.correctCount}
               questionsPlayed={game.questionsPlayed}
@@ -151,7 +162,7 @@ export default function App() {
               saveError={game.resultSaveError}
               canRetrySave={game.canRetryResultSave}
               onRetrySave={game.retryResultSave}
-              onReplay={game.start}
+              onReplay={game.replay}
               onHome={game.goHome}
             />
           </motion.div>

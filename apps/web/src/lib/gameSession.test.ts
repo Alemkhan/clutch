@@ -6,6 +6,7 @@ import {
   createChallengeLobbyState,
   createChallengeReplayState,
   createInitialGameState,
+  createMatchLobbyState,
   createPreparedMatchState,
   recordAnswer,
 } from './gameSession';
@@ -99,7 +100,7 @@ describe('game session construction', () => {
     });
 
     expect(replay).toMatchObject({
-      phase: 'question',
+      phase: 'matchmaking',
       category: 'history',
       questions: matchQuestions,
       fixedQuestions: matchQuestions,
@@ -114,6 +115,22 @@ describe('game session construction', () => {
 
   it('does not start an empty challenge replay without fixed questions', () => {
     expect(() => createChallengeReplayState(createInitialGameState())).toThrow(/fixed questions/i);
+  });
+
+  it('keeps explicit local practice in a ready lobby without an online id', () => {
+    const matchQuestions = questions(2);
+    const lobby = createMatchLobbyState({
+      category: 'geography',
+      questions: matchQuestions,
+      opponent: opponentFor(matchQuestions),
+      matchSource: 'local',
+    });
+    expect(lobby).toMatchObject({
+      phase: 'matchmaking',
+      matchSource: 'local',
+      activeMatchId: undefined,
+      questions: matchQuestions,
+    });
   });
 });
 

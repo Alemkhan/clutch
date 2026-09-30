@@ -15,6 +15,7 @@ import {
   isAnswerCorrect,
 } from '@clutch/shared';
 import { applyClientRound, scoreSkillDistance } from './clientMatchRules';
+import type { MatchSource } from './matchmaking';
 
 export type Phase = 'home' | 'categories' | 'matchmaking' | 'question' | 'resolution' | 'hammer' | 'result' | 'profile';
 
@@ -37,6 +38,7 @@ export interface GameState {
   activeMatchId?: string;
   roundInputs: AsyncMatchRoundInput[];
   miniGameConfig: MiniGameConfig;
+  matchSource: MatchSource;
 }
 
 export function createInitialGameState(): GameState {
@@ -59,6 +61,7 @@ export function createInitialGameState(): GameState {
     activeMatchId: undefined,
     roundInputs: [],
     miniGameConfig: CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+    matchSource: 'local',
   };
 }
 
@@ -68,6 +71,7 @@ interface PreparedMatch {
   opponent: Opponent;
   activeMatchId?: string;
   miniGameConfig?: MiniGameConfig;
+  matchSource?: MatchSource;
 }
 
 export function createPreparedMatchState(match: PreparedMatch): GameState {
@@ -78,8 +82,13 @@ export function createPreparedMatchState(match: PreparedMatch): GameState {
     opponent: match.opponent,
     activeMatchId: match.activeMatchId,
     miniGameConfig: match.miniGameConfig ?? CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+    matchSource: match.matchSource ?? 'local',
     phase: 'question',
   };
+}
+
+export function createMatchLobbyState(match: PreparedMatch): GameState {
+  return { ...createPreparedMatchState(match), phase: 'matchmaking' };
 }
 
 interface ChallengeLobby {
@@ -100,6 +109,7 @@ export function createChallengeLobbyState(challenge: ChallengeLobby): GameState 
     activeVideo: challenge.activeVideo,
     fixedQuestions: challenge.questions,
     miniGameConfig: challenge.miniGameConfig,
+    matchSource: 'challenge',
     phase: 'matchmaking',
   };
 }
@@ -116,7 +126,8 @@ export function createChallengeReplayState(state: Readonly<GameState>): GameStat
     fixedQuestions: state.fixedQuestions,
     miniGameConfig: state.miniGameConfig,
     questions: state.fixedQuestions,
-    phase: 'question',
+    matchSource: 'challenge',
+    phase: 'matchmaking',
   };
 }
 

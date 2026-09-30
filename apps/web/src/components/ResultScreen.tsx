@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import type { SkillResult } from '@clutch/shared';
 import { playSound } from '../lib/sounds';
 import type { ResultSaveStatus } from '../lib/useGameState';
+import { MATCH_SOURCE_LABELS, type MatchSource } from '../lib/matchmaking';
 
 interface ResultScreenProps {
   playerProgress: number;
   opponentProgress: number;
   opponentName: string;
+  matchSource: MatchSource;
   bestSkill: SkillResult | null;
   correctCount: number;
   questionsPlayed: number;
@@ -24,6 +26,7 @@ export function ResultScreen({
   playerProgress,
   opponentProgress,
   opponentName,
+  matchSource,
   bestSkill,
   correctCount,
   questionsPlayed,
@@ -57,6 +60,7 @@ export function ResultScreen({
       <h1 className={`result-headline ${won ? 'win' : tie ? 'tie' : 'loss'}`}>
         {won ? 'Клатч!' : tie ? 'Ничья' : 'Почти!'}
       </h1>
+      <span className={`match-source source-${matchSource}`}>{MATCH_SOURCE_LABELS[matchSource]}</span>
 
       <div className="result-comparison">
         <div className="result-side player">
