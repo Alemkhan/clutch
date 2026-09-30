@@ -101,7 +101,10 @@ export function ResultScreen({
         <p className="result-insight">Один точный удар мог всё изменить.</p>
       )}
 
-      <div className={`result-save-status ${saveStatus}`} role="status">
+      <div
+        className={`result-save-status ${saveStatus}`}
+        role={saveStatus === 'error' ? 'alert' : 'status'}
+      >
         {saveStatus === 'practice' && 'Локальная практика — результат не сохраняется.'}
         {saveStatus === 'pending' && 'Сохраняем результат…'}
         {saveStatus === 'saved' && 'Результат сохранён.'}
@@ -111,7 +114,7 @@ export function ResultScreen({
             {canRetrySave && (
               <>
                 {' '}
-                <button className="result-save-retry" onClick={onRetrySave}>Повторить</button>
+                <button type="button" className="result-save-retry" onClick={onRetrySave}>Повторить</button>
               </>
             )}
           </>
@@ -131,8 +134,9 @@ export function ResultScreen({
       )}
 
       <div className="result-actions">
-        <button className="cta-btn" onClick={() => { playSound('click'); onReplay(); }}>Ещё раз</button>
+        <button type="button" className="cta-btn" onClick={() => { playSound('click'); onReplay(); }}>Ещё раз</button>
         <button
+          type="button"
           className="ghost-btn"
           onClick={() => {
             playSound('click');
@@ -145,7 +149,7 @@ export function ResultScreen({
         >
           Поделиться
         </button>
-        <button className="ghost-btn" onClick={() => { playSound('click'); onHome(); }}>В меню</button>
+        <button type="button" className="ghost-btn" onClick={() => { playSound('click'); onHome(); }}>В меню</button>
       </div>
     </div>
   );

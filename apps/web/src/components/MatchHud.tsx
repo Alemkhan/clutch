@@ -21,6 +21,7 @@ interface CompetitorProps {
 
 function Competitor({ name, value, side }: CompetitorProps) {
   const reduceMotion = useReducedMotion();
+  const progress = Math.min(100, Math.max(0, value));
 
   return (
     <div className={`match-hud-competitor ${side}`}>
@@ -31,11 +32,20 @@ function Competitor({ name, value, side }: CompetitorProps) {
         <span className="match-hud-name">{name}</span>
         <strong className="match-hud-value">{value}%</strong>
       </div>
-      <div className="match-hud-track" aria-label={`${name}: ${value}%`}>
+      <div
+        className="match-hud-track"
+        role="progressbar"
+        aria-label={`Прогресс: ${name}`}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={progress}
+        aria-valuetext={`${progress}%`}
+      >
         <motion.span
           className="match-hud-fill"
+          aria-hidden="true"
           initial={false}
-          animate={{ width: `${Math.min(100, Math.max(0, value))}%` }}
+          animate={{ width: `${progress}%` }}
           transition={{ duration: reduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
         />
       </div>

@@ -719,6 +719,12 @@ button:active {
   cursor: pointer;
 }
 
+.resolution-screen:focus-visible,
+.hammer-game:focus-visible {
+  outline: 3px solid rgba(77, 117, 232, 0.45);
+  outline-offset: -3px;
+}
+
 .resolution-status {
   font-size: 40px;
   font-weight: 900;
@@ -821,6 +827,10 @@ button:active {
   align-items: center;
   gap: clamp(14px, 2.8dvh, 24px);
   cursor: pointer;
+}
+
+.hammer-game[aria-disabled='true'] {
+  cursor: default;
 }
 
 .stump-headline {
@@ -1191,6 +1201,18 @@ a:focus-visible,
 input:focus-visible {
   outline: 3px solid rgba(77, 117, 232, 0.35);
   outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .cta-btn {

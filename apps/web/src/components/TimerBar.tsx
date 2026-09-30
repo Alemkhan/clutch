@@ -71,10 +71,16 @@ export function TimerBar({ durationMs, deadlineMs, onExpire, paused }: TimerBarP
   const radius = 42;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference * (1 - remainingMs / durationMs);
+  const remainingSeconds = Math.ceil(remainingMs / 1000);
 
   return (
-    <div className={`timer-ring ${isDanger ? 'danger' : ''}`}>
-      <svg viewBox="0 0 100 100">
+    <div
+      className={`timer-ring ${isDanger ? 'danger' : ''}`}
+      role="timer"
+      aria-label={`Осталось ${remainingSeconds} сек.`}
+      aria-live="off"
+    >
+      <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
         <circle className="timer-ring-bg" cx="50" cy="50" r={radius} />
         <circle
           className="timer-ring-fill"
@@ -84,7 +90,7 @@ export function TimerBar({ durationMs, deadlineMs, onExpire, paused }: TimerBarP
           style={{ strokeDasharray: circumference, strokeDashoffset: offset }}
         />
       </svg>
-      <span className="timer-ring-text">{Math.ceil(remainingMs / 1000)}</span>
+      <span className="timer-ring-text" aria-hidden="true">{remainingSeconds}</span>
     </div>
   );
 }

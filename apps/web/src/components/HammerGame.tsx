@@ -27,6 +27,36 @@ const SINK_PX: Record<SkillResult, number> = {
 const HAMMER_IDLE = { rotate: -22, x: 0, y: 0 };
 const HAMMER_STRUCK = { rotate: 24, x: 14, y: 10 };
 
+export function hammerActionSemantics(struck: boolean, result: SkillResult | null) {
+  return {
+    tabIndex: struck ? -1 : 0,
+    'aria-disabled': struck,
+    'aria-label': result ? 'Удар завершён' : 'Нажмите, чтобы ударить по пню',
+  } as const;
+}
+
+export function HammerResult({ result }: { result: SkillResult }) {
+  return (
+    <div className={`strike-result ${result}`} aria-hidden="true">
+      <span className="strike-label">
+        {{ perfect: 'ИДЕАЛЬНО', great: 'ОТЛИЧНО', good: 'ХОРОШО', weak: 'СЛАБО', miss: 'МИМО' }[result]}
+      </span>
+      <span className="strike-progress">+{SKILL_REWARDS[result]}%</span>
+    </div>
+  );
+}
+
+export function HammerResultStatus({ result }: { result: SkillResult }) {
+  const label = {
+    perfect: 'Идеально', great: 'Отлично', good: 'Хорошо', weak: 'Слабо', miss: 'Мимо',
+  }[result];
+  return (
+    <span className="visually-hidden" role="status">
+      Результат удара: {label}, +{SKILL_REWARDS[result]}% прогресса.
+    </span>
+  );
+}
+
 export function HammerGame({ config, onComplete }: HammerGameProps) {
   const reduceMotion = useReducedMotion();
   const [markerPos, setMarkerPos] = useState(0);
@@ -119,14 +149,14 @@ export function HammerGame({ config, onComplete }: HammerGameProps) {
   };
 
   return (
-    <div
-      className="hammer-game"
-      role="button"
-      tabIndex={0}
-      aria-label={result ? 'Удар завершён' : 'Нажмите, чтобы ударить по пню'}
-      onClick={handleTap}
-      onKeyDown={onKeyDown}
-    >
+    <>
+      <div
+        className="hammer-game"
+        role="button"
+        {...hammerActionSemantics(struck, result)}
+        onClick={handleTap}
+        onKeyDown={onKeyDown}
+      >
       {!result && <h2 className="stump-headline">Бей по пню!</h2>}
 
       <div className={`stump-scene ${struck ? 'shake' : ''}`} aria-hidden="true">
@@ -161,7 +191,7 @@ export function HammerGame({ config, onComplete }: HammerGameProps) {
         )}
       </div>
 
-      <div className="hammer-track">
+      <div className="hammer-track" aria-hidden="true">
         {HAMMER_TIER_ZONES.map((zone) => (
           <div
             key={zone.result}
@@ -176,15 +206,12 @@ export function HammerGame({ config, onComplete }: HammerGameProps) {
       </div>
 
       {result ? (
-        <div className={`strike-result ${result}`}>
-          <span className="strike-label">
-            {{ perfect: 'ИДЕАЛЬНО', great: 'ОТЛИЧНО', good: 'ХОРОШО', weak: 'СЛАБО', miss: 'МИМО' }[result]}
-          </span>
-          <span className="strike-progress">+{SKILL_REWARDS[result]}%</span>
-        </div>
+        <HammerResult result={result} />
       ) : (
         <p className="strike-instruction">Тапни, когда маркер в центре</p>
       )}
-    </div>
+      </div>
+      {result && <HammerResultStatus result={result} />}
+    </>
   );
 }

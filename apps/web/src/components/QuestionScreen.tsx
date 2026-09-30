@@ -134,13 +134,14 @@ export function QuestionScreen({ question, onAnswer }: QuestionScreenProps) {
       {ready && <h2 className="question-prompt">{question.prompt}</h2>}
 
       {ready && (timedOut ? (
-        <div className="timeout-message">Время вышло!</div>
+        <div className="timeout-message" role="alert">Время вышло!</div>
       ) : isOpen ? (
         <OpenAnswerInput onSubmit={handleOpenSubmit} disabled={selected !== null} />
       ) : (
         <div className="options">
           {question.options.map((option) => (
             <button
+              type="button"
               key={option.id}
               className={`option-btn ${selected === option.id ? 'selected' : ''}`}
               onClick={() => handleSelect(option.id)}
