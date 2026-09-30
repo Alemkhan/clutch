@@ -1,10 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import {
+  createQuestionReadiness,
   createQuestionTiming,
   displayedQuestionSecond,
+  markQuestionMediaError,
+  markQuestionMediaReady,
   nextCountdownTick,
   QuestionSubmissionGate,
   remainingQuestionMs,
+  retryQuestionMedia,
 } from './questionTiming';
 
 describe('question timing', () => {
@@ -29,6 +33,48 @@ describe('question timing', () => {
     expect(nextCountdownTick(1_900, played)).toBe(2);
     played.add(2);
     expect(nextCountdownTick(400, played)).toBe(1);
+  });
+});
+
+describe('question media readiness', () => {
+  it('starts a question without media immediately', () => {
+    const readiness = createQuestionReadiness(false, 1_000, 15_000);
+    expect(readiness).toEqual({
+      status: 'ready', requestKey: 0,
+      timing: { startedAtMs: 1_000, deadlineMs: 16_000 },
+    });
+  });
+
+  it('keeps a media question pending without a deadline', () => {
+    expect(createQuestionReadiness(true, 1_000, 15_000)).toEqual({
+      status: 'pending', requestKey: 0, timing: null,
+    });
+  });
+
+  it('creates one timing only after the first successful media load', () => {
+    const pending = createQuestionReadiness(true, 1_000, 15_000);
+    const ready = markQuestionMediaReady(pending, 0, 4_000, 15_000);
+    expect(ready.timing).toEqual({ startedAtMs: 4_000, deadlineMs: 19_000 });
+    expect(markQuestionMediaReady(ready, 0, 8_000, 15_000)).toBe(ready);
+  });
+
+  it('recovers from an error through a new request before starting once', () => {
+    const pending = createQuestionReadiness(true, 1_000, 15_000);
+    const failed = markQuestionMediaError(pending, 0);
+    const retrying = retryQuestionMedia(failed);
+    const ready = markQuestionMediaReady(retrying, 1, 7_000, 15_000);
+
+    expect(failed).toMatchObject({ status: 'error', timing: null });
+    expect(retrying).toMatchObject({ status: 'pending', requestKey: 1, timing: null });
+    expect(markQuestionMediaReady(retrying, 0, 6_000, 15_000)).toBe(retrying);
+    expect(markQuestionMediaError(retrying, 0)).toBe(retrying);
+    expect(ready).toMatchObject({
+      status: 'ready', requestKey: 1,
+      timing: { startedAtMs: 7_000, deadlineMs: 22_000 },
+    });
+    expect(markQuestionMediaError(ready, 1)).toBe(ready);
+    expect(markQuestionMediaReady(ready, 1, 9_000, 15_000)).toBe(ready);
+    expect(retryQuestionMedia(ready)).toBe(ready);
   });
 });
 

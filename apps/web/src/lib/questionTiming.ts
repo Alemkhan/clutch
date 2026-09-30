@@ -3,6 +3,14 @@ export interface QuestionTiming {
   deadlineMs: number;
 }
 
+export type QuestionReadinessStatus = 'pending' | 'error' | 'ready';
+
+export interface QuestionReadiness {
+  status: QuestionReadinessStatus;
+  requestKey: number;
+  timing: QuestionTiming | null;
+}
+
 export type QuestionDecision =
   | { kind: 'answer'; answer: string; elapsedMs: number }
   | { kind: 'timeout'; answer: '__timeout__'; elapsedMs: number };
@@ -11,6 +19,53 @@ export function createQuestionTiming(startedAtMs: number, durationMs: number): Q
   return {
     startedAtMs,
     deadlineMs: startedAtMs + durationMs,
+  };
+}
+
+export function createQuestionReadiness(
+  hasMedia: boolean,
+  nowMs: number,
+  durationMs: number,
+): QuestionReadiness {
+  return {
+    status: hasMedia ? 'pending' : 'ready',
+    requestKey: 0,
+    timing: hasMedia ? null : createQuestionTiming(nowMs, durationMs),
+  };
+}
+
+export function markQuestionMediaReady(
+  readiness: QuestionReadiness,
+  requestKey: number,
+  nowMs: number,
+  durationMs: number,
+): QuestionReadiness {
+  if (readiness.status !== 'pending' || readiness.requestKey !== requestKey || readiness.timing) {
+    return readiness;
+  }
+  return {
+    ...readiness,
+    status: 'ready',
+    timing: createQuestionTiming(nowMs, durationMs),
+  };
+}
+
+export function markQuestionMediaError(
+  readiness: QuestionReadiness,
+  requestKey: number,
+): QuestionReadiness {
+  if (readiness.status !== 'pending' || readiness.requestKey !== requestKey || readiness.timing) {
+    return readiness;
+  }
+  return { ...readiness, status: 'error' };
+}
+
+export function retryQuestionMedia(readiness: QuestionReadiness): QuestionReadiness {
+  if (readiness.status !== 'error' || readiness.timing) return readiness;
+  return {
+    ...readiness,
+    status: 'pending',
+    requestKey: readiness.requestKey + 1,
   };
 }
 
