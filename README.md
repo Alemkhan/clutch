@@ -24,8 +24,9 @@ conditions (R1, migration 0002 required). Authenticated match ownership is in
 place, R2b bounds match inputs and request frequency, R3 durably retries
 completed results until a valid acknowledgement, and R4 makes matchmaking and
 replay explicit and cancellable. R5a makes the hammer motion frame-rate
-independent and aligns its visual zones with shared scoring. Question timing,
-broader abuse protection, and final art still need work.
+independent and aligns its visual zones with shared scoring. R5b derives the
+15-second question timer from an absolute deadline and settles answer/timeout
+through a one-shot gate. Broader abuse protection and final art still need work.
 The remote deployment state has not been verified by this repository audit.
 
 ## Stack

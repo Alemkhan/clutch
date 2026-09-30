@@ -1,18 +1,16 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 interface OpenAnswerInputProps {
-  onSubmit: (answer: string, timeMs: number) => void;
+  onSubmit: (answer: string) => void;
   disabled: boolean;
 }
 
 export function OpenAnswerInput({ onSubmit, disabled }: OpenAnswerInputProps) {
   const [value, setValue] = useState('');
-  const startTimeRef = useRef(Date.now());
 
   const handleSubmit = () => {
     if (!value.trim() || disabled) return;
-    const elapsed = Date.now() - startTimeRef.current;
-    onSubmit(value, elapsed);
+    onSubmit(value);
   };
 
   return (
@@ -22,7 +20,11 @@ export function OpenAnswerInput({ onSubmit, disabled }: OpenAnswerInputProps) {
         className="open-answer-input"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+        onKeyDown={(e) => {
+          if (e.key !== 'Enter') return;
+          e.preventDefault();
+          handleSubmit();
+        }}
         placeholder="Напиши ответ..."
         autoFocus
         disabled={disabled}

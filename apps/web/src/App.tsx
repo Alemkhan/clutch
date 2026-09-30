@@ -118,7 +118,7 @@ export default function App() {
         {game.phase === 'question' && game.currentQuestion && (
           <motion.div key="question" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <QuestionScreen
-              key={game.questionIndex}
+              key={`${game.questionIndex}:${game.currentQuestion.id}`}
               question={game.currentQuestion}
               onAnswer={game.answer}
             />

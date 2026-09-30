@@ -123,12 +123,16 @@ fallback запускается только явно, а replay сохраня�
   корректные границы всех tier, повторный тап и reduced motion. Config теперь
   0.8 / 0.85 / 0.15; это намеренно исключает старые runs из совместимого пула,
   без изменения rulesVersion или миграции D1. Нужна ручная проверка на телефоне.
-- **R5b: вопрос.** `TimerBar.tsx`, `QuestionScreen.tsx`, `OpenAnswerInput.tsx`,
+- **R5b: вопрос — выполнен.** `TimerBar.tsx`, `QuestionScreen.tsx`, `OpenAnswerInput.tsx`,
   guards в state. Deadline вместо подсчёта interval; один ответ/таймаут,
   очистка delayed callbacks. Рекомендация background-политики для проверки:
   вопрос продолжает истекать, незавершённая skill-попытка явно приостанавливается;
   зафиксировать выбранную политику в brief до реализации.
-  Готово: throttling, background/resume и гонка answer/expiry без двойного перехода.
+  Готово: абсолютный 15-секундный deadline, background продолжает отсчёт,
+  visibility resume немедленно синхронизирует UI/expiry; единый one-shot gate
+  отдаёт timeout для события в/после deadline. Throttling, большой скачок,
+  background/resume, exact deadline и гонка answer/expiry покрыты unit-тестами.
+  Нужна ручная проверка на телефоне, включая Telegram и экранную клавиатуру.
 
 Без новых спрайтов, другой шкалы прогресса и полного рефакторинга state machine.
 

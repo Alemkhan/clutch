@@ -1,57 +1,76 @@
 import { useState, useEffect, useRef } from 'react';
 import { playSound } from '../lib/sounds';
+import { nextCountdownTick, remainingQuestionMs } from '../lib/questionTiming';
 
 interface TimerBarProps {
-  duration: number;
+  durationMs: number;
+  deadlineMs: number;
   onExpire: () => void;
   paused: boolean;
 }
 
-export function TimerBar({ duration, onExpire, paused }: TimerBarProps) {
-  const [remaining, setRemaining] = useState(duration);
-  const expiredRef = useRef(false);
-  const lastTickRef = useRef<number | null>(null);
+export function TimerBar({ durationMs, deadlineMs, onExpire, paused }: TimerBarProps) {
+  const [remainingMs, setRemainingMs] = useState(() => remainingQuestionMs(deadlineMs, Date.now()));
+  const timerStateRef = useRef({
+    deadlineMs,
+    expired: false,
+    playedTicks: new Set<number>(),
+  });
+  const onExpireRef = useRef(onExpire);
+
+  if (timerStateRef.current.deadlineMs !== deadlineMs) {
+    timerStateRef.current = {
+      deadlineMs,
+      expired: false,
+      playedTicks: new Set<number>(),
+    };
+  }
 
   useEffect(() => {
-    setRemaining(duration);
-    expiredRef.current = false;
-    lastTickRef.current = null;
-  }, [duration]);
+    onExpireRef.current = onExpire;
+  }, [onExpire]);
 
   useEffect(() => {
-    if (paused) return;
-
-    const interval = setInterval(() => {
-      setRemaining((prev) => {
-        if (prev <= 0.1) {
-          clearInterval(interval);
-          return 0;
-        }
-        const next = Math.round((prev - 0.1) * 10) / 10;
-        const nextSecond = Math.ceil(next);
-        if (nextSecond <= 3 && nextSecond >= 1 && nextSecond !== lastTickRef.current && Number.isInteger(next)) {
-          lastTickRef.current = nextSecond;
-          playSound('tick', 0.6);
-        }
-        return next;
-      });
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, [paused]);
+    setRemainingMs(remainingQuestionMs(deadlineMs, Date.now()));
+  }, [deadlineMs]);
 
   useEffect(() => {
-    if (remaining <= 0 && !expiredRef.current) {
-      expiredRef.current = true;
-      playSound('timeout');
-      onExpire();
+    if (paused) {
+      setRemainingMs(remainingQuestionMs(deadlineMs, Date.now()));
+      return;
     }
-  }, [remaining, onExpire]);
 
-  const isDanger = remaining <= 5;
+    const syncWithClock = () => {
+      const nextRemainingMs = remainingQuestionMs(deadlineMs, Date.now());
+      setRemainingMs(nextRemainingMs);
+
+      const timerState = timerStateRef.current;
+      const tick = nextCountdownTick(nextRemainingMs, timerState.playedTicks);
+      if (tick !== null) {
+        timerState.playedTicks.add(tick);
+        playSound('tick', 0.6);
+      }
+
+      if (nextRemainingMs === 0 && !timerState.expired) {
+        timerState.expired = true;
+        onExpireRef.current();
+      }
+    };
+
+    syncWithClock();
+    const interval = window.setInterval(syncWithClock, 100);
+    document.addEventListener('visibilitychange', syncWithClock);
+
+    return () => {
+      window.clearInterval(interval);
+      document.removeEventListener('visibilitychange', syncWithClock);
+    };
+  }, [deadlineMs, paused]);
+
+  const isDanger = remainingMs <= 5_000;
   const radius = 42;
   const circumference = 2 * Math.PI * radius;
-  const offset = circumference * (1 - remaining / duration);
+  const offset = circumference * (1 - remainingMs / durationMs);
 
   return (
     <div className={`timer-ring ${isDanger ? 'danger' : ''}`}>
@@ -65,7 +84,7 @@ export function TimerBar({ duration, onExpire, paused }: TimerBarProps) {
           style={{ strokeDasharray: circumference, strokeDashoffset: offset }}
         />
       </svg>
-      <span className="timer-ring-text">{Math.ceil(remaining)}</span>
+      <span className="timer-ring-text">{Math.ceil(remainingMs / 1000)}</span>
     </div>
   );
 }
