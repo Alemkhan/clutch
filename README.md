@@ -53,6 +53,10 @@ clutch/
 
 ## Setup
 
+Use Node.js 22.17.0, pinned in [`.nvmrc`](.nvmrc), and npm from that Node
+release. This is also the version used by CI and by the `node:sqlite` route
+tests.
+
 ```bash
 npm install
 npm exec --workspace @clutch/api -- wrangler d1 migrations apply clutch-db --local
@@ -78,6 +82,10 @@ The root build includes workspace typechecks. API route tests use the actual SQL
 migrations in isolated in-memory SQLite via Node's built-in `node:sqlite` module
 (verified on Node 22.17.0). Its experimental warning on that version is expected.
 They do not replace Cloudflare runtime smoke tests or on-device Telegram QA.
+The tracked GitHub Actions workflow runs `npm ci`, `npm test`, and
+`npm run build` on pushes to `master` and pull requests. It has not yet run on
+GitHub in this repository, so local success does not prove the remote CI gate.
+The workflow does not deploy or access secrets.
 
 ## Environment
 

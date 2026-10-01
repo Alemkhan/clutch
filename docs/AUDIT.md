@@ -229,7 +229,11 @@ areas, длинные тексты, закрытие и возврат из фо
 
 ## A11 · P1 перед релизом · Не закончен контур проверки и эксплуатации
 
-Нет tracked CI. В R1b добавлены route-тесты на реальной SQLite с обеими миграциями;
+R9a добавил tracked GitHub Actions CI для push в `master` и pull request:
+Node 22.17.0, `npm ci`, `npm test` и `npm run build`, с read-only permissions,
+timeout и отменой устаревших запусков. Локальные команды проходят, но workflow
+ещё не запускался на GitHub, поэтому удалённый gate пока не подтверждён.
+В R1b добавлены route-тесты на реальной SQLite с обеими миграциями;
 старт → complete → следующий игрок отдельно проверен на локальном Wrangler/D1.
 Автоматического браузерного end-to-end и on-device QA пока нет.
 Корневой `deploy:web` вызывает отсутствующий web script. Wrangler содержит

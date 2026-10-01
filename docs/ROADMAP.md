@@ -228,10 +228,15 @@ questionBank/showQuiz как «готовый контент» без редак
 
 После P0, основных P1 и утверждения визуала:
 
+- **R9a: минимальный CI gate — реализован локально 2026-10-02.** Tracked
+  GitHub Actions workflow для push в `master` и pull request использует единый
+  Node 22.17.0 из `.nvmrc`, `npm ci`, `npm test` и `npm run build`, read-only
+  permissions, timeout и отмену устаревшего запуска. Workflow пока не запускался
+  на GitHub; deploy, environments, remote D1 и release automation сюда не входят.
 - Автоматизировать уже проверенный вручную Wrangler/D1-сценарий: A завершает матч → B получает
   подходящую запись с теми же вопросами/условиями → результат сохраняется.
   Дополнить bot, offline, auth failure, retry и несовместимую версию.
-- Подключить CI с test/build; проверить deployment scripts и разделение окружений.
+- Проверить deployment scripts и разделение окружений.
   Составить точный release checklist для Pages/Worker/D1/Telegram.
 - Минимально подключить диагностику и события с единым matchId: start,
   completed, save_failed, abandoned, replay. Не логировать initData/секреты;
