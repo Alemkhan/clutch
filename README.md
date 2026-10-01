@@ -17,6 +17,7 @@ for the task:
 - [Code audit and known risks](docs/AUDIT.md)
 - [Small implementation tasks](docs/ROADMAP.md)
 - [Art, animation, and audio brief](docs/ART_DIRECTION.md)
+- [Local, browser, and Telegram testing guide](docs/TESTING.md)
 
 Status as of 2026-10-01: playable prototype, not production-ready. The API and
 client share match transitions; the API enforces ghost eligibility and versioned
