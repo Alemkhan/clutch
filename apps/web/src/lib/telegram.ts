@@ -18,11 +18,12 @@ interface TelegramIdentity {
 }
 
 let identity: TelegramIdentity | null = null;
-let initialized = false;
+let initializationPromise: Promise<void> | null = null;
+let coreInitializationPromise: Promise<void> | null = null;
+let viewportInitializationPromise = Promise.resolve();
 
-export async function initializeTelegram(): Promise<void> {
-  if (initialized || !isTMA()) return;
-  initialized = true;
+function runTelegramInitialization(): void {
+  if (!isTMA()) return;
   init();
   restoreInitData();
 
@@ -37,18 +38,31 @@ export async function initializeTelegram(): Promise<void> {
 
   if (mountMiniAppSync.isAvailable()) mountMiniAppSync();
   if (bindMiniAppCssVars.isAvailable()) bindMiniAppCssVars();
+  if (miniAppReady.isAvailable()) miniAppReady();
 
   if (mountViewport.isAvailable()) {
     try {
-      await mountViewport();
-      if (bindViewportCssVars.isAvailable()) bindViewportCssVars();
-      if (expandViewport.isAvailable()) expandViewport();
+      viewportInitializationPromise = mountViewport().then(() => {
+        if (bindViewportCssVars.isAvailable()) bindViewportCssVars();
+        if (expandViewport.isAvailable()) expandViewport();
+      }).catch(() => {
+        // Older Telegram clients may reject viewport requests.
+      });
     } catch {
       // Older Telegram clients may not expose viewport methods.
+      viewportInitializationPromise = Promise.resolve();
     }
   }
+}
 
-  if (miniAppReady.isAvailable()) miniAppReady();
+export function whenTelegramCoreReady(): Promise<void> {
+  coreInitializationPromise ??= Promise.resolve().then(runTelegramInitialization);
+  return coreInitializationPromise;
+}
+
+export function initializeTelegram(): Promise<void> {
+  initializationPromise ??= whenTelegramCoreReady().then(() => viewportInitializationPromise);
+  return initializationPromise;
 }
 
 export function getTelegramIdentity(): TelegramIdentity | null {

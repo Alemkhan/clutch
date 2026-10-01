@@ -1,6 +1,6 @@
 # План следующих изменений
 
-Обновлено 2026-10-01 по checkpoint `e110d5c` и R5c. Это рекомендуемый backlog, не разрешение
+Обновлено 2026-10-02 по checkpoint `69a7832` и R7c в рабочем дереве. Это рекомендуемый backlog, не разрешение
 автоматически выполнить все пункты. Брать **одну подзадачу за раз**.
 
 ## Порядок
@@ -180,7 +180,17 @@ fallback запускается только явно, а replay сохраня�
    получили подходящие роли без агрессивного live-countdown. Ключевая разметка
    покрыта SSR-тестами. Нужна ручная проверка screen reader, pinch zoom и фокуса
    на физическом телефоне.
-3. Telegram bootstrap/loading/timeout, BackButton и сохранность UI при клавиатуре.
+3. **R7c: Telegram/mobile reliability — выполнен 2026-10-02.** Единственный
+   React root сразу показывает доступный loading shell; cached Telegram init
+   ограничен ожиданием 2,5 секунды, а rejection/timeout честно переводят к App с
+   неблокирующим статусом. Viewport догружается в фоне и поздно подключает vars:
+   App ждёт его не более 2,5 секунд, а BackButton от него не зависит. Системный Back скрыт на home и активных
+   question/resolution/hammer; profile/categories/result ведут home, обычный
+   matchmaking — categories, challenge matchmaking — home. Layout использует
+   динамический viewport height, а open-answer удерживается видимым при resize
+   экранной клавиатуры. Timeout/rejection/late completion, cached Promise,
+   зависший/падающий viewport, mapping и listener cleanup покрыты тестами. Физический
+   Telegram, клавиатура и safe areas остаются ручной проверкой.
 
 Готово: walkthrough в Telegram Android и iOS по возможности; минимально один
 реальный целевой телефон с явно записанными непроверенными устройствами.

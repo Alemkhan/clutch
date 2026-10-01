@@ -1,19 +1,21 @@
 # Архитектура: как устроен текущий код
 
-Основа: checkpoint `e110d5c`; дополнено R5c в рабочем дереве, 2026-10-01.
+Основа: checkpoint `69a7832`; дополнено R7c в рабочем дереве, 2026-10-02.
 API и клиент используют shared-правила; схема условий добавлена миграцией 0002.
 
 ## Карта репозитория
 
 ```text
 apps/web/                      React 18 + Vite + Framer Motion + Telegram SDK
-  src/App.tsx                  переключение экранов по phase
+  src/AppBootstrap.tsx         loading/timeout/error вокруг Telegram init
+  src/App.tsx                  переключение экранов по phase, Telegram Back
   src/lib/useGameState.ts       React/API/analytics orchestration
   src/lib/gameSession.ts        чистое состояние и переходы игровой сессии
   src/lib/clientMatchRules.ts   runtime-проверка условий и транскриптов R1c
   src/lib/api.ts                HTTP, Telegram/guest auth, timeout 5 секунд
   src/lib/completionQueue.ts    durable completion, ACK, retry/single-flight
-  src/lib/telegram.ts           initData, SDK, viewport
+  src/lib/telegram.ts           cached SDK/initData и фоновый viewport
+  src/lib/telegramBackButton.ts чистая карта и lifecycle-контроллер BackButton
   src/lib/sampleData.ts         локальный соперник, генерация и config молотка
   src/lib/tournaments.ts        фиксированный challenge Robb Peters
   src/lib/localStats.ts         localStorage: победы/поражения/серии
@@ -91,8 +93,14 @@ index → routes/auth → auth/guest
 
 ## Поток данных
 
-1. `main.tsx` ждёт `initializeTelegram()`, затем монтирует React. В браузере
-   без Telegram SDK-инициализация пропускается.
+1. `main.tsx` синхронно создаёт один React root с `AppBootstrap`: сначала виден
+   доступный loading shell. `initializeTelegram()` возвращает один cached Promise
+   (включая StrictMode); browser/non-TMA завершается сразу. Через 2,5 секунды либо
+   при ошибке App всё равно открывается с неблокирующим статусом. Поздний успех
+   обновляет только bootstrap-состояние, не создаёт второй root и не перемонтирует
+   App. Telegram `ready` и отдельный core-ready signal доступны до фонового
+   `mountViewport`; поздний viewport подключает CSS vars/expand, но не блокирует
+   App после timeout и не задерживает BackButton.
 2. `App` использует `useGameState`. Фазы: `home`, `categories`, `matchmaking`,
    `question`, `resolution`, `hammer`, `result`, `profile`.
 3. Выбор категории сразу запускает один start-запрос с `Authorization`. Telegram передаёт свежий

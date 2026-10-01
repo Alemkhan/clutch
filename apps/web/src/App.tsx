@@ -13,6 +13,7 @@ import { ResultScreen } from './components/ResultScreen';
 import { findChallenge } from './lib/tournaments';
 import { completionQueue } from './lib/completionQueue';
 import { analytics } from './lib/analytics';
+import { useTelegramBackButton } from './lib/useTelegramBackButton';
 
 function handleChallenge(tournamentId: string, startChallenge: ReturnType<typeof useGameState>['startChallenge']) {
   const challenge = findChallenge(tournamentId);
@@ -42,6 +43,11 @@ export default function App() {
   const reduceMotion = useReducedMotion();
   const screenDuration = reduceMotion ? 0 : 0.18;
   const showMatchHud = ['question', 'resolution'].includes(game.phase);
+
+  useTelegramBackButton(game.phase, game.matchSource, {
+    home: game.goHome,
+    categories: game.goToCategories,
+  });
 
   useEffect(() => {
     shellRef.current?.scrollTo({ top: 0, behavior: 'auto' });

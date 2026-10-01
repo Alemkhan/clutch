@@ -1,17 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import AppBootstrap from './AppBootstrap';
 import './index.css';
-import { initializeTelegram } from './lib/telegram';
 
-function renderApp() {
-  ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-  );
-}
-
-void initializeTelegram()
-  .catch(() => {})
-  .finally(renderApp);
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <AppBootstrap />
+  </React.StrictMode>,
+);
