@@ -1,7 +1,7 @@
 # Clutch — контекст для следующей сессии
 
-Обновлено: **2026-10-02**. Проверенная база кода: checkpoint `ca87ae4`
-с R8b(c), выбором цельного лучшего run для leaderboard.
+Обновлено: **2026-10-02**. Проверенная база кода: checkpoint `fd3ab89`
+с R9a, локально проверенным GitHub Actions CI workflow.
 Это снимок состояния, а не обещание готовности к релизу.
 
 ## Что строим
@@ -115,6 +115,10 @@
   имени не создаёт вторую entry. Top-50 использует progress, correct count,
   ранний `completed_at` и стабильный `id`. Сравнимость progress разных наборов
   и условий для публичного рейтинга по-прежнему не утверждена.
+- R9a: tracked GitHub Actions CI проверяет push в `master` и pull request на
+  Node 22.17.0 из `.nvmrc`: `npm ci`, `npm test`, `npm run build`. У workflow
+  read-only permissions, timeout и cancel-in-progress; deploy и секретов нет.
+  На GitHub этот workflow ещё не запускался, поэтому remote gate не подтверждён.
 - Миграция `0002_match_conditions.sql` применена к локальной D1 2026-09-28.
   Старые строки сохранены, но имеют неизвестные условия и исключены из пула.
   Незавершённый legacy-матч получает 409: нужно начать новый.
@@ -145,6 +149,9 @@
 
 ## Проверки и рабочий процесс
 
+После R9a, 2026-10-02: локально `npm test`, `npm run build`, структурная проверка
+workflow и `git diff --check` — успешно. GitHub Actions ещё не выполнялся;
+deployment scripts, environments, remote D1 и опубликованные сервисы не проверялись.
 После R8b(c), 2026-10-02: целевые leaderboard/rate-limit route-тесты — **17/17**,
 `npm test` — **207/207**, `npm run build` и `git diff --check` — успешно.
 Production D1 и опубликованный Worker для этой выборки не проверялись.
