@@ -21,12 +21,28 @@ export function registerLeaderboardRoutes(app: Hono<{ Bindings: Env }>): void {
     const category = c.req.query('category') ?? 'geography';
     if (!categories.has(category)) return c.json({ error: 'Invalid category.' }, 400);
     const result = await c.env.DB.prepare(`
-      SELECT display_name AS displayName, MAX(progress) AS progress,
-             MAX(correct_count) AS correctCount, MAX(completed_at) AS completedAt
-      FROM match_runs
-      WHERE category = ?1 AND status = 'completed'
-      GROUP BY player_id, display_name
-      ORDER BY progress DESC, correctCount DESC, completedAt ASC
+      WITH ranked_runs AS (
+        SELECT id, player_id, display_name, progress, correct_count, completed_at,
+               ROW_NUMBER() OVER (
+                 PARTITION BY player_id
+                 ORDER BY progress DESC,
+                          correct_count DESC,
+                          CASE WHEN completed_at IS NULL THEN 1 ELSE 0 END ASC,
+                          completed_at ASC,
+                          id ASC
+               ) AS player_rank
+        FROM match_runs
+        WHERE category = ?1 AND status = 'completed'
+      )
+      SELECT display_name AS displayName, progress,
+             correct_count AS correctCount, completed_at AS completedAt
+      FROM ranked_runs
+      WHERE player_rank = 1
+      ORDER BY progress DESC,
+               correctCount DESC,
+               CASE WHEN completedAt IS NULL THEN 1 ELSE 0 END ASC,
+               completedAt ASC,
+               id ASC
       LIMIT 50
     `).bind(category).all();
     return c.json({ category, entries: result.results });
