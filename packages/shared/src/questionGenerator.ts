@@ -1,8 +1,8 @@
 import type { Question, Difficulty } from './index';
 import { countries, flagUrl, outlineUrl, ISLAND_COUNTRIES, type Country } from './countries';
 import { FLAG_TRAITS } from './flagTraits';
-import { historicFlags, historicFlagUrl } from './historicFlags';
-import { languages } from './languages';
+import { historicFlags, historicFlagUrl, type HistoricFlag } from './historicFlags';
+import { languages, type LanguageEntry } from './languages';
 
 export type CategoryId = 'geography' | 'history' | 'languages';
 
@@ -123,10 +123,16 @@ const OUTLINE_EXCLUDED = new Set(['xk', 'ps', 'mh', 'fm', 'tv']);
 
 const outlineCountries = countries.filter((c) => !OUTLINE_EXCLUDED.has(c.code));
 
+function requireOutlineCountry(country: Country): Country {
+  if (OUTLINE_EXCLUDED.has(country.code)) {
+    throw new RangeError(`Country ${country.code} does not have an outline asset.`);
+  }
+  return country;
+}
+
 // ---------- Geography (RU) ----------
 
-export function generateFlagToCountry(): Question {
-  const correct = pickOne(countries);
+export function generateFlagToCountry(correct: Country = pickOne(countries)): Question {
   const distractors = pickFlagDistractors(correct);
   const { options, correctOptionId } = buildOptions(correct, distractors, (c) => c.code, (c) => c.nameRu);
 
@@ -148,8 +154,17 @@ export function generateFlagToCountry(): Question {
   };
 }
 
-export function generateCountryToCapital(difficulty: Difficulty = 'Medium'): Question {
-  const correct = pickOne(countries);
+export function generateCountryToCapital(difficulty?: Difficulty): Question;
+export function generateCountryToCapital(correct: Country): Question;
+export function generateCountryToCapital(difficulty: Difficulty, correct: Country): Question;
+export function generateCountryToCapital(
+  difficultyOrCountry: Difficulty | Country = 'Medium',
+  selectedCountry?: Country,
+): Question {
+  const difficulty = typeof difficultyOrCountry === 'string' ? difficultyOrCountry : 'Medium';
+  const correct = typeof difficultyOrCountry === 'string'
+    ? (selectedCountry ?? pickOne(countries))
+    : difficultyOrCountry;
   const distractors = pickRegionDistractors(correct);
   const { options, correctOptionId } = buildOptions(correct, distractors, (c) => c.code, (c) => c.capitalRu);
 
@@ -169,8 +184,7 @@ export function generateCountryToCapital(difficulty: Difficulty = 'Medium'): Que
   };
 }
 
-export function generateFlagToCapital(): Question {
-  const correct = pickOne(countries);
+export function generateFlagToCapital(correct: Country = pickOne(countries)): Question {
   const distractors = pickFlagDistractors(correct);
   const { options, correctOptionId } = buildOptions(correct, distractors, (c) => c.code, (c) => c.capitalRu);
 
@@ -192,8 +206,8 @@ export function generateFlagToCapital(): Question {
   };
 }
 
-export function generateOutlineToCountry(): Question {
-  const correct = pickOne(outlineCountries);
+export function generateOutlineToCountry(correct: Country = pickOne(outlineCountries)): Question {
+  requireOutlineCountry(correct);
   const distractors = pickOutlineDistractors(correct);
   const { options, correctOptionId } = buildOptions(correct, distractors, (c) => c.code, (c) => c.nameRu);
 
@@ -215,8 +229,8 @@ export function generateOutlineToCountry(): Question {
   };
 }
 
-export function generateOutlineToCountryOpen(): Question {
-  const correct = pickOne(outlineCountries);
+export function generateOutlineToCountryOpen(correct: Country = pickOne(outlineCountries)): Question {
+  requireOutlineCountry(correct);
   return {
     id: `open_outline_country_${correct.code}`,
     type: 'multiple_choice',
@@ -236,8 +250,7 @@ export function generateOutlineToCountryOpen(): Question {
   };
 }
 
-export function generateCapitalOpenAnswer(): Question {
-  const correct = pickOne(countries);
+export function generateCapitalOpenAnswer(correct: Country = pickOne(countries)): Question {
   return {
     id: `open_capital_${correct.code}`,
     type: 'multiple_choice',
@@ -255,8 +268,7 @@ export function generateCapitalOpenAnswer(): Question {
   };
 }
 
-export function generateFlagToCountryOpen(): Question {
-  const correct = pickOne(countries);
+export function generateFlagToCountryOpen(correct: Country = pickOne(countries)): Question {
   return {
     id: `open_flag_country_${correct.code}`,
     type: 'multiple_choice',
@@ -302,8 +314,7 @@ export function generateFixedCapitalQuiz(countryCodes: string[]): Question[] {
 
 // ---------- Historical Flags (RU) ----------
 
-export function generateHistoricFlag(): Question {
-  const correct = pickOne(historicFlags);
+export function generateHistoricFlag(correct: HistoricFlag = pickOne(historicFlags)): Question {
   const distractors = pickDistractors(historicFlags, correct, 3);
   const { options, correctOptionId } = buildOptions(
     correct,
@@ -332,8 +343,7 @@ export function generateHistoricFlag(): Question {
 
 // ---------- Languages (RU) ----------
 
-export function generateLanguage(): Question {
-  const correct = pickOne(languages);
+export function generateLanguage(correct: LanguageEntry = pickOne(languages)): Question {
   const distractors = pickLanguageDistractors(correct);
   const { options, correctOptionId } = buildOptions(correct, distractors, (l) => l.id, (l) => l.nameRu);
 
@@ -363,43 +373,64 @@ export function generateMatch(
   openRatio: number = 0.3,
   category: CategoryId = 'geography',
 ): Question[] {
-  const mcGenerators =
-    category === 'history'
-      ? [generateHistoricFlag]
-      : category === 'languages'
-        ? [generateLanguage]
-        : [generateFlagToCountry, generateCountryToCapital, generateFlagToCapital, generateOutlineToCountry];
-  const openGenerators =
-    category === 'geography'
-      ? [generateCapitalOpenAnswer, generateFlagToCountryOpen, generateOutlineToCountryOpen]
-      : [];
-  const numOpen = openGenerators.length ? Math.round(numQuestions * openRatio) : 0;
-  const numMC = numQuestions - numOpen;
-  const questions: Question[] = [];
-  const usedCodes = new Set<string>();
-  let attempts = 0;
+  if (!Number.isInteger(numQuestions) || numQuestions < 0) {
+    throw new RangeError('numQuestions must be a nonnegative integer.');
+  }
+  if (!Number.isFinite(openRatio) || openRatio < 0 || openRatio > 1) {
+    throw new RangeError('openRatio must be a finite number between 0 and 1.');
+  }
 
-  const tryAdd = (generator: () => Question): boolean => {
-    const question = generator();
-    const code = question.id.split('_').pop()!;
-    if (!usedCodes.has(code)) {
-      usedCodes.add(code);
-      questions.push(question);
-      return true;
-    }
-    return false;
+  const capacities: Record<CategoryId, number> = {
+    geography: countries.length,
+    history: historicFlags.length,
+    languages: languages.length,
   };
-
-  while (questions.length < numMC && attempts < 100) {
-    tryAdd(pickOne(mcGenerators));
-    attempts++;
+  if (category !== 'geography' && category !== 'history' && category !== 'languages') {
+    throw new RangeError(`Unknown category: ${String(category)}.`);
+  }
+  const capacity = capacities[category];
+  if (numQuestions > capacity) {
+    throw new RangeError(
+      `Cannot generate ${numQuestions} unique ${category} questions: category capacity is ${capacity}.`,
+    );
+  }
+  if (numQuestions === 0) {
+    return [];
   }
 
-  attempts = 0;
-  while (questions.length < numQuestions && attempts < 100) {
-    tryAdd(pickOne(openGenerators));
-    attempts++;
+  if (category === 'history') {
+    const questions = shuffle(historicFlags)
+      .slice(0, numQuestions)
+      .map((flag) => generateHistoricFlag(flag));
+    return shuffle(questions);
   }
+  if (category === 'languages') {
+    const questions = shuffle(languages)
+      .slice(0, numQuestions)
+      .map((language) => generateLanguage(language));
+    return shuffle(questions);
+  }
+
+  const numOpen = Math.round(numQuestions * openRatio);
+  const selectedCountries = shuffle(countries).slice(0, numQuestions);
+  const questions = selectedCountries.map((country, index) => {
+    if (index < numQuestions - numOpen) {
+      const generators = [
+        generateFlagToCountry,
+        generateCountryToCapital,
+        generateFlagToCapital,
+        ...(OUTLINE_EXCLUDED.has(country.code) ? [] : [generateOutlineToCountry]),
+      ];
+      return pickOne(generators)(country);
+    }
+
+    const generators = [
+      generateCapitalOpenAnswer,
+      generateFlagToCountryOpen,
+      ...(OUTLINE_EXCLUDED.has(country.code) ? [] : [generateOutlineToCountryOpen]),
+    ];
+    return pickOne(generators)(country);
+  });
 
   return shuffle(questions);
 }
