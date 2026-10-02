@@ -237,7 +237,9 @@ timeout и отменой устаревших запусков. Локальн�
 старт → complete → следующий игрок отдельно проверен на локальном Wrangler/D1.
 Автоматического браузерного end-to-end и on-device QA пока нет.
 Корневой `deploy:web` вызывает отсутствующий web script. Wrangler содержит
-ENVIRONMENT=development, нет оформленного разделения dev/prod и release checklist.
+ENVIRONMENT=development, разделение dev/prod ещё не реализовано. R9 подготовил
+[release checklist](RELEASE.md), но он не выполнялся: production IDs, secrets,
+remote migrations, deploy и smoke по-прежнему требуют отдельной проверки.
 Это наблюдения репозитория, а не доказательство отсутствия удалённого деплоя.
 
 [Analytics](../apps/web/src/lib/analytics.ts) хранит события в памяти;

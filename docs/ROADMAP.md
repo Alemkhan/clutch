@@ -237,7 +237,9 @@ questionBank/showQuiz как «готовый контент» без редак
   подходящую запись с теми же вопросами/условиями → результат сохраняется.
   Дополнить bot, offline, auth failure, retry и несовместимую версию.
 - Проверить deployment scripts и разделение окружений.
-  Составить точный release checklist для Pages/Worker/D1/Telegram.
+  Точный [release checklist](RELEASE.md) для Pages/Worker/D1/Telegram уже
+  подготовлен как runbook, но production config, deploy и remote smoke не
+  выполнены.
 - Минимально подключить диагностику и события с единым matchId: start,
   completed, save_failed, abandoned, replay. Не логировать initData/секреты;
   определить срок хранения и действительно нужные поля.
