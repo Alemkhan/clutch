@@ -239,9 +239,15 @@ questionBank/showQuiz как «готовый контент» без редак
   Существующий `/api/health` остаётся liveness без D1. Покрыты текущая схема,
   только 0001, падение binding и отсутствие обращения health к базе. Production
   endpoint ещё не развёрнут и не проверен.
-- Автоматизировать уже проверенный вручную Wrangler/D1-сценарий: A завершает матч → B получает
-  подходящую запись с теми же вопросами/условиями → результат сохраняется.
-  Дополнить bot, offline, auth failure, retry и несовместимую версию.
+- **R9d: локальный Wrangler HTTP smoke — реализован 2026-10-02.** Один
+  cross-platform command создаёт изолированный temp config/D1, применяет текущие
+  migrations, запускает реальный `wrangler dev` и проверяет readiness, 401 без
+  auth, независимых guest A/B, bot → eligible A → точный player ghost для B и
+  canonical повтор completion. Cleanup Worker/temp прошёл; cloud, secrets и
+  deploy не используются. Команда добавлена отдельным CI step до build.
+  Offline/reload/retry остаются клиентскими unit/ручными сценариями, а
+  несовместимые и повреждённые ghost/legacy conditions — route-тестами: HTTP
+  smoke не выдаётся за доказательство этих уровней.
 - Проверить deployment scripts и разделение окружений.
   Точный [release checklist](RELEASE.md) для Pages/Worker/D1/Telegram уже
   подготовлен как runbook, но production config, deploy и remote smoke не

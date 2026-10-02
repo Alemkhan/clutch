@@ -12,6 +12,7 @@
     "tunnel": "ngrok http 5173",
     "build": "npm run typecheck && npm run build --workspace @clutch/web",
     "test": "vitest run",
+    "test:smoke:local": "node scripts/smoke-local.mjs",
     "typecheck": "npm run typecheck --workspaces",
     "deploy:web": "npm run deploy --workspace @clutch/web",
     "deploy:api": "npm run deploy --workspace @clutch/api"

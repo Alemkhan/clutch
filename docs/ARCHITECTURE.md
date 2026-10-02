@@ -65,6 +65,8 @@ apps/web/src/lib/clientMatchRules.test.ts  13 клиентских тестов 
 apps/web/src/lib/gameSession.test.ts       9 тестов чистых переходов сессии
 apps/web/src/lib/api.test.ts               срок и renewal browser guest session
 packages/shared/src/index.test.ts  15 unit-тестов shared
+scripts/smoke-local.mjs            изолированный Wrangler/D1 HTTP smoke
+.github/workflows/ci.yml           unit → local HTTP smoke → build
 ```
 
 ## Как читать основной сценарий
@@ -224,6 +226,12 @@ legacy/неподдерживаемые матчи получают 409 с пр�
 `npm run dev` запускает Vite :5173 и Wrangler :8787. Vite проксирует `/api`
 на Worker; ngrok даёт внешний HTTPS для Vite, поэтому для локального Telegram
 достаточно одного адреса. Команды и секреты описаны в [README](../README.md).
+
+`npm run test:smoke:local` создаёт временный config рядом с временной local D1,
+поэтому Wrangler не ищет project `.dev.vars`/`.env`. Harness применяет текущие
+migrations, проверяет настоящий HTTP-путь guest A → bot → eligible completion →
+player ghost B → canonical repeat и удаляет созданное состояние. CI запускает
+его между unit-тестами и build; remote Cloudflare этим не проверяется.
 
 Целевой deploy: Cloudflare Pages + Workers + D1. Production-конфигурация
 и удалённое состояние сейчас не подтверждены. `deploy:web` в корне ссылается

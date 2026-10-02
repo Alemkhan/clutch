@@ -107,6 +107,7 @@ binding и текущую схему `match_runs`. Если `/api/health` отв
 
 ```powershell
 npm test
+npm run test:smoke:local
 npm run build
 ```
 
@@ -114,8 +115,28 @@ npm run build
 Предупреждение Node о том, что `node:sqlite` experimental, ожидаемо для текущих
 route-тестов.
 
-CI выполняет `npm ci`, `npm test` и `npm run build`, но локальный зелёный прогон
-не доказывает, что GitHub Actions уже выполнялся в remote-репозитории.
+`npm run test:smoke:local` запускает [Node-harness](../scripts/smoke-local.mjs),
+который:
+
+- создаёт временные Wrangler config и persist-каталог вне репозитория;
+- копирует и применяет туда текущие D1 migrations только с `--local`;
+- запускает настоящий `wrangler dev` на свободном localhost-порту и ждёт
+  `/api/ready`;
+- по HTTP проверяет `401` без auth, две независимые guest-сессии, bot для A,
+  eligible completion A, точный player ghost для B и идемпотентный completion B;
+- всегда останавливает Worker и удаляет только созданный временный каталог.
+
+Harness не читает project `.dev.vars`/`.env`: config, test vars и рабочий каталог
+находятся внутри временной директории. Cloudflare-аккаунт, сеть Cloudflare,
+remote D1 и deploy не используются.
+
+Этот smoke не эмулирует браузер и не доказывает offline/reload/retry очереди.
+Такие сценарии, а также несовместимые/повреждённые ghost и legacy conditions,
+остаются отдельным unit/route-уровнем и ручным walkthrough из раздела 8.
+
+CI выполняет `npm ci`, `npm test`, `npm run test:smoke:local` и
+`npm run build`, но локальный зелёный прогон не доказывает, что GitHub Actions
+уже выполнялся в remote-репозитории.
 
 ## 4. Проверка в обычном браузере
 
@@ -415,6 +436,7 @@ npm exec --workspace @clutch/api -- wrangler d1 migrations apply clutch-db --loc
 
 # перед ручным тестом
 npm test
+npm run test:smoke:local
 npm run build
 
 # terminal 1
