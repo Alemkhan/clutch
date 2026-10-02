@@ -2,7 +2,7 @@
 
 Дата исходного аудита: 2026-09-27. Текущий checkpoint: `3015241` с R7c. Метод: чтение web/API/shared, конфигурации,
 миграции, тестов и предыдущего контекста; запуск существующих проверок.
-Статусы A01/A02/A03/A04/A05/A07/A09/A10/A11 дополнены результатами R1–R9c на 2026-10-02.
+Статусы A01/A02/A03/A04/A05/A07/A09/A10/A11 дополнены результатами R1–R9e на 2026-10-02.
 Проблемы ниже выведены из кода, если отдельно не указано иное. Это не результат
 пентеста, полной проверки контента или прогона на физических устройствах.
 
@@ -230,16 +230,20 @@ areas, длинные тексты, закрытие и возврат из фо
 ## A11 · P1 перед релизом · Не закончен контур проверки и эксплуатации
 
 R9a добавил tracked GitHub Actions CI для push в `master` и pull request:
-Node 22.17.0, `npm ci`, `npm test` и `npm run build`, с read-only permissions,
-timeout и отменой устаревших запусков. Локальные команды проходят, но workflow
-ещё не запускался на GitHub, поэтому удалённый gate пока не подтверждён.
+Node 22.17.0, `npm ci`, `npm test`, local Wrangler HTTP smoke и production
+preflight fixture с полным build, с read-only permissions, timeout и отменой
+устаревших запусков. Локальные этапы проходят, но workflow ещё не запускался на
+GitHub, поэтому удалённый gate пока не подтверждён.
 В R1b добавлены route-тесты на реальной SQLite с обеими миграциями;
 старт → complete → следующий игрок отдельно проверен на локальном Wrangler/D1.
 Автоматического браузерного end-to-end и on-device QA пока нет.
-Корневой `deploy:web` вызывает отсутствующий web script. Wrangler содержит
-ENVIRONMENT=development, разделение dev/prod ещё не реализовано. R9 подготовил
-[release checklist](RELEASE.md), но он не выполнялся: production IDs, secrets,
-remote migrations, deploy и smoke по-прежнему требуют отдельной проверки.
+R9e удалил опасные root deploy aliases. Tracked Wrangler остаётся только
+development, а production preflight fail-closed генерирует config в temp из
+шести `CLUTCH_PRODUCTION_*` значений и запрещает повтор dev Worker/D1/rate IDs.
+Он проверяет только dry-run bundle и exact API URL в полном web build: targeted
+validation 22/22 и fixture прошли локально. [Release checklist](RELEASE.md) не
+выполнялся: реальные production resources, secrets, remote migrations, deploy,
+post-deploy smoke и новый GitHub CI gate по-прежнему требуют проверки.
 Это наблюдения репозитория, а не доказательство отсутствия удалённого деплоя.
 
 [Analytics](../apps/web/src/lib/analytics.ts) хранит события в памяти;

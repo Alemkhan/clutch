@@ -11,11 +11,12 @@
     "dev": "concurrently \"npm:dev:web\" \"npm:dev:api\"",
     "tunnel": "ngrok http 5173",
     "build": "npm run typecheck && npm run build --workspace @clutch/web",
+    "preflight:production": "node scripts/preflight-production.mjs",
+    "preflight:production:write-config": "node scripts/preflight-production.mjs --write-config",
     "test": "vitest run",
+    "test:preflight:production": "node scripts/preflight-production.mjs --test-fixture",
     "test:smoke:local": "node scripts/smoke-local.mjs",
-    "typecheck": "npm run typecheck --workspaces",
-    "deploy:web": "npm run deploy --workspace @clutch/web",
-    "deploy:api": "npm run deploy --workspace @clutch/api"
+    "typecheck": "npm run typecheck --workspaces"
   },
   "devDependencies": {
     "@types/node": "^22.20.1",

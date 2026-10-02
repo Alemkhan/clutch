@@ -32,5 +32,5 @@ jobs:
         run: npm test
       - name: Run local Worker HTTP smoke
         run: npm run test:smoke:local
-      - name: Build
-        run: npm run build
+      - name: Run production preflight fixture
+        run: npm run test:preflight:production

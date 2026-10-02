@@ -248,7 +248,20 @@ questionBank/showQuiz как «готовый контент» без редак
   Offline/reload/retry остаются клиентскими unit/ручными сценариями, а
   несовместимые и повреждённые ghost/legacy conditions — route-тестами: HTTP
   smoke не выдаётся за доказательство этих уровней.
-- Проверить deployment scripts и разделение окружений.
+- **R9e: production preflight — реализован локально 2026-10-02.** Команда
+  `npm run preflight:production` fail-closed валидирует шесть явных
+  `CLUTCH_PRODUCTION_*` значений и запрещает совпадение production Worker,
+  D1 ID и rate-limit namespace с development config. Production Wrangler config
+  генерируется только во временном каталоге; выполняются лишь `deploy --dry-run`
+  и полный web/root build с проверкой exact API URL. Опасные root deploy aliases
+  удалены, fixture включён в CI вместо отдельного дублирующего build. Локально
+  validation — 22/22, fixture и cleanup прошли; реальные production resources,
+  secrets, remote operations и GitHub CI не проверялись.
+  Real-mode script `preflight:production:write-config` только после успешных
+  проверок может один раз сохранить ignored validated config без secrets;
+  fixture не пишет его, overwrite запрещён, после изменения ресурсов нужна
+  явная регенерация.
+- Проверить реальные production resources и оставшуюся release-процедуру.
   Точный [release checklist](RELEASE.md) для Pages/Worker/D1/Telegram уже
   подготовлен как runbook, но production config, deploy и remote smoke не
   выполнены.

@@ -66,7 +66,9 @@ apps/web/src/lib/gameSession.test.ts       9 тестов чистых пере�
 apps/web/src/lib/api.test.ts               срок и renewal browser guest session
 packages/shared/src/index.test.ts  15 unit-тестов shared
 scripts/smoke-local.mjs            изолированный Wrangler/D1 HTTP smoke
-.github/workflows/ci.yml           unit → local HTTP smoke → build
+scripts/preflight-production.mjs   production config → dry-run + exact web build
+scripts/lib/production-preflight.mjs  чистая validation/config generation
+.github/workflows/ci.yml           unit → local HTTP smoke → preflight fixture/build
 ```
 
 ## Как читать основной сценарий
@@ -233,9 +235,19 @@ migrations, проверяет настоящий HTTP-путь guest A → bot 
 player ghost B → canonical repeat и удаляет созданное состояние. CI запускает
 его между unit-тестами и build; remote Cloudflare этим не проверяется.
 
-Целевой deploy: Cloudflare Pages + Workers + D1. Production-конфигурация
-и удалённое состояние сейчас не подтверждены. `deploy:web` в корне ссылается
-на отсутствующий script web-пакета; считать релизную процедуру готовой нельзя.
+Tracked `apps/api/wrangler.toml` остаётся только development-конфигурацией.
+`npm run preflight:production` принимает шесть явных `CLUTCH_PRODUCTION_*`
+значений, отвергает повторное использование dev Worker/D1/rate namespace и
+создаёт полный production Wrangler config только во временном каталоге. Затем
+он выполняет `wrangler deploy --dry-run --outdir`, полный root build с отдельным
+пустым Vite env-dir и доказывает наличие exact API URL в клиентском bundle.
+Cloud credentials и app secrets удаляются из child env; upload, remote migration,
+secret mutation и deploy не выполняются. Root deploy aliases отсутствуют,
+реальный выпуск остаётся ручной процедурой из [RELEASE](RELEASE.md).
+Default и fixture mode удаляют config вместе с temp. Только отдельный npm script
+`preflight:production:write-config` после успешных dry-run/build сохраняет JSONC в ignored
+`apps/api/wrangler.production.generated.jsonc` с `wx`: без overwrite и без
+secrets. После смены resource IDs/names файл нужно удалить и сгенерировать снова.
 
 ## Направление изменений, не текущая реализация
 

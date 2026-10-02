@@ -108,7 +108,7 @@ binding и текущую схему `match_runs`. Если `/api/health` отв
 ```powershell
 npm test
 npm run test:smoke:local
-npm run build
+npm run test:preflight:production
 ```
 
 `npm run build` включает typecheck всех workspaces и production-сборку web.
@@ -135,8 +135,16 @@ remote D1 и deploy не используются.
 остаются отдельным unit/route-уровнем и ручным walkthrough из раздела 8.
 
 CI выполняет `npm ci`, `npm test`, `npm run test:smoke:local` и
-`npm run build`, но локальный зелёный прогон не доказывает, что GitHub Actions
-уже выполнялся в remote-репозитории.
+`npm run test:preflight:production`; fixture уже включает полный root build.
+Он использует reserved `.invalid` URL и fake IDs, создаёт production-only config
+в temp, запускает только Wrangler dry-run и проверяет exact URL в web bundle;
+fixture никогда не сохраняет config. В real mode только явный
+`npm run preflight:production:write-config` после успешных проверок создаёт
+ignored `apps/api/wrangler.production.generated.jsonc` через fail-if-exists.
+Файл содержит resource IDs/names, но не secrets; после изменения ресурсов его
+нужно удалить и сгенерировать заново. Это не проверка реальных production
+resources, secrets или deploy. Локальный
+зелёный прогон не доказывает, что GitHub Actions уже выполнялся в remote-репозитории.
 
 ## 4. Проверка в обычном браузере
 
@@ -423,9 +431,9 @@ Vite на `5173` не запущен или завершился. Сначала
 - утверждённый production-визуал, спрайты и лицензии всех ассетов;
 - восстановление незавершённого матча после закрытия приложения.
 
-Не используйте `npm run deploy:web` как готовую релизную команду: web workspace
-пока не содержит deploy-script. Не применяйте remote D1 migrations и не делайте
-deploy без отдельной проверки production-конфигурации и плана отката.
+Root deploy aliases намеренно отсутствуют. Не применяйте remote D1 migrations и
+не делайте deploy без отдельной ручной команды из release runbook, проверенной
+production-конфигурации и плана отката.
 
 ## 11. Короткий ежедневный сценарий
 
@@ -437,7 +445,7 @@ npm exec --workspace @clutch/api -- wrangler d1 migrations apply clutch-db --loc
 # перед ручным тестом
 npm test
 npm run test:smoke:local
-npm run build
+npm run test:preflight:production
 
 # terminal 1
 npm run dev

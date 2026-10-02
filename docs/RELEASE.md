@@ -11,7 +11,8 @@ production D1 из этой рабочей копии не проверены. �
 
 Не направлять публичный трафик, пока не выполнено всё ниже:
 
-- `npm test` и `npm run build` проходят на checkpoint, который будет выпущен.
+- `npm test`, local HTTP smoke и `npm run preflight:production` проходят на
+  checkpoint, который будет выпущен. Preflight включает полный root build.
 - GitHub Actions прошёл на том же commit, а не только локально.
 - Утверждён набор категорий и редакционно проверен публикуемый контент.
 - Утверждён визуальный baseline хотя бы основного flow и hammer mini-game.
@@ -47,12 +48,12 @@ production D1 из этой рабочей копии не проверены. �
 
 ```text
 CLOUDFLARE_ACCOUNT_ID=<...>
-PRODUCTION_WORKER_NAME=<...>
-PRODUCTION_D1_NAME=<...>
-PRODUCTION_D1_ID=<...>
-PRODUCTION_RATE_LIMIT_NAMESPACE_ID=<...>
-PAGES_PROJECT_NAME=<...>
-WORKER_PUBLIC_URL=https://<...>
+CLUTCH_PRODUCTION_WORKER_NAME=<...>
+CLUTCH_PRODUCTION_D1_NAME=<...>
+CLUTCH_PRODUCTION_D1_ID=<UUID>
+CLUTCH_PRODUCTION_RATE_LIMIT_NAMESPACE_ID=<numeric ID>
+CLUTCH_PRODUCTION_API_URL=https://<...>
+CLUTCH_PAGES_PROJECT_NAME=<...>
 WEB_PUBLIC_URL=https://<...>
 TELEGRAM_BOT_USERNAME=<...>
 ```
@@ -61,13 +62,12 @@ TELEGRAM_BOT_USERNAME=<...>
 
 1. Отдельную production D1.
 2. Отдельный production Rate Limiting namespace ID.
-3. Production Worker либо именованное Wrangler environment `production`.
+3. Production Worker с отдельным временным Wrangler config.
 4. Pages project.
 5. Production Telegram bot либо явно подтверждённый существующий бот.
 
-Wrangler environments создают отдельные Workers. Production environment должно
-явно содержать собственные bindings и `ENVIRONMENT = "production"`:
-[Cloudflare environments](https://developers.cloudflare.com/workers/wrangler/environments/).
+Production config должен явно содержать собственные bindings и
+`ENVIRONMENT = "production"`; tracked development config не используется.
 
 Не копируйте production secrets в `.dev.vars`. Не используйте Telegram bot token
 как session signing secret.
@@ -80,22 +80,37 @@ Wrangler environments создают отдельные Workers. Production envi
 node --version
 npm ci
 npm test
-npm run build
+npm run test:smoke:local
+npm run preflight:production
 git status --short
 ```
 
-Ожидается Node `v22.17.0`, зелёные test/build и отсутствие неожиданных файлов.
+Перед preflight задайте шесть `CLUTCH_PRODUCTION_*` переменных из раздела 3 в
+текущей защищённой shell-сессии. Ожидается Node `v22.17.0`, зелёные проверки и
+отсутствие неожиданных файлов.
 Локальная `.claude/` не является частью release artifact.
 
-Перед первым production deploy требуется отдельная задача, которая:
+`apps/api/wrangler.toml` намеренно остаётся development-only. Preflight создаёт
+отдельный полный Wrangler JSONC во временном каталоге только из явных production
+значений и откажется работать, если Worker name, D1 ID или rate-limit namespace
+совпадает с development. Он удаляет cloud/app secrets из child environment,
+запускает только Worker `deploy --dry-run --outdir` и production web build,
+проверяет bundle и exact API URL, затем удаляет temp.
 
-1. Добавит проверенную `[env.production]` конфигурацию Worker.
-2. Вставит реальные production D1/rate-limit IDs без секретов.
-3. Добавит безопасный web deploy либо настроит Pages Git integration.
-4. Проверит Worker dry-run.
+Preflight не применяет migrations, не загружает Worker/Pages и не меняет secrets.
+По умолчанию config остаётся только в temp. После успешного real preflight владелец
+может явно сохранить тот же проверенный config:
 
-Сейчас корневой `deploy:web` ссылается на отсутствующий script web workspace и
-не должен использоваться.
+```powershell
+npm run preflight:production:write-config
+```
+
+Файл `apps/api/wrangler.production.generated.jsonc` ignored, содержит имена/ID
+ресурсов, но не bot/session/cloud secrets. Команда использует fail-if-exists и
+никогда его не перезаписывает; существующий файл нужно осознанно удалить и
+пересоздать после любого изменения production resources. `--write-config`
+запрещён в fixture mode. Root deploy aliases намеренно отсутствуют, а реальный
+deploy выполняется только отдельными ручными командами ниже после review файла.
 
 ## 5. D1
 
@@ -115,13 +130,13 @@ npm exec --workspace @clutch/api -- wrangler d1 migrations list DB --local
 Только после проверки production binding:
 
 ```powershell
-npm exec --workspace @clutch/api -- wrangler d1 migrations list DB --remote --env production
+npx wrangler d1 migrations list DB --remote --config apps/api/wrangler.production.generated.jsonc
 ```
 
 Применение — отдельное подтверждаемое действие владельца:
 
 ```powershell
-npm exec --workspace @clutch/api -- wrangler d1 migrations apply DB --remote --env production
+npx wrangler d1 migrations apply DB --remote --config apps/api/wrangler.production.generated.jsonc
 ```
 
 Cloudflare создаёт backup перед применением migration и откатывает неуспешную
@@ -147,10 +162,10 @@ version. Для staged deployment используйте versions flow:
 
 ### 6.2. Dry-run
 
-После появления production config, но до upload:
+До любых remote-действий:
 
 ```powershell
-npm exec --workspace @clutch/api -- wrangler deploy --dry-run --env production
+npm run preflight:production
 ```
 
 Проверьте в выводе:
@@ -163,10 +178,12 @@ npm exec --workspace @clutch/api -- wrangler deploy --dry-run --env production
 
 ### 6.3. Deploy
 
-Только после D1 migrations и dry-run:
+Default preflight-config удаляется и не может быть случайно задеплоен. Только
+после явного `npm run preflight:production:write-config`, review сохранённого
+файла, D1 migrations и dry-run:
 
 ```powershell
-npm exec --workspace @clutch/api -- wrangler deploy --env production
+npx wrangler deploy --config apps/api/wrangler.production.generated.jsonc
 ```
 
 Сохраните deployment/version ID и commit hash в release notes.
@@ -263,7 +280,7 @@ npx wrangler pages deploy apps/web/dist --project-name <PAGES_PROJECT_NAME>
 Cloudflare позволяет вернуть предыдущую Worker version через Dashboard или:
 
 ```powershell
-npm exec --workspace @clutch/api -- wrangler rollback --env production
+npx wrangler rollback --config apps/api/wrangler.production.generated.jsonc
 ```
 
 Rollback немедленно меняет активную версию. Сохраните ID заведомо рабочей версии:

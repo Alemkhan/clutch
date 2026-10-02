@@ -77,17 +77,19 @@ Unfinished legacy matches must be restarted; completed results are not recalcula
 
 ```bash
 npm test
-npm run build
+npm run test:smoke:local
+npm run test:preflight:production
 ```
 
 The root build includes workspace typechecks. API route tests use the actual SQL
 migrations in isolated in-memory SQLite via Node's built-in `node:sqlite` module
 (verified on Node 22.17.0). Its experimental warning on that version is expected.
 They do not replace Cloudflare runtime smoke tests or on-device Telegram QA.
-The tracked GitHub Actions workflow runs `npm ci`, `npm test`, and
-`npm run build` on pushes to `master` and pull requests. It has not yet run on
-GitHub in this repository, so local success does not prove the remote CI gate.
-The workflow does not deploy or access secrets.
+The tracked GitHub Actions workflow runs `npm ci`, unit/route tests, the local
+Wrangler HTTP smoke, and the production preflight fixture on pushes to `master`
+and pull requests. The fixture includes the full root build. It has not yet run
+on GitHub in this repository, so local success does not prove the remote CI
+gate. The workflow does not deploy, use remote resources, or access secrets.
 
 ## Environment
 
@@ -102,18 +104,28 @@ SESSION_SIGNING_SECRET=replace_with_at_least_32_random_characters
 32 characters. Configure it independently in every environment; do not reuse the
 Telegram bot token.
 
-Never commit `.dev.vars` or `.env`.
+Never commit `.dev.vars*` or `.env*`; tracked `.env.example` templates remain
+available for local setup.
 
 `wrangler.toml` also declares the native `API_RATE_LIMITER` binding at 30
 requests per 60 seconds. Its numeric namespace ID must be unique in the target
 Cloudflare account before deployment. Wrangler simulates this binding locally;
 Cloudflare counters are local to each Cloudflare location, not globally exact.
 
-For a deployed web build, set `VITE_API_URL` to the public Worker URL. When the
-API is unavailable, the UI explains the failure and offers retry or explicit
-local practice; practice results are not uploaded. The root `deploy:web` script
-currently points to a missing web workspace script; complete the release setup
-before using it.
+For release preparation, `npm run preflight:production` requires six explicit
+`CLUTCH_PRODUCTION_*` values documented in [RELEASE](docs/RELEASE.md). It creates
+a temporary production-only Wrangler config, refuses reuse of the tracked
+development Worker/D1/rate-limit resources, performs only Worker dry-run and a
+web build with the exact API URL, then removes the config. Root deploy aliases
+were removed: deployment and remote migrations remain deliberate manual runbook
+actions. When the API is unavailable, the UI offers retry or explicit local
+practice; practice results are not uploaded.
+
+After a successful real preflight, the owner can explicitly persist the same
+validated config with `npm run preflight:production:write-config`. It is
+written once to ignored `apps/api/wrangler.production.generated.jsonc`, contains
+resource names/IDs but no secrets, and is never overwritten. Review it before
+manual release commands and regenerate it after any production resource change.
 
 ## Test inside Telegram locally
 
