@@ -4,28 +4,13 @@ import type { Env } from './env';
 import { registerAuthRoutes } from './routes/auth';
 import { registerAsyncMatchRoutes } from './routes/asyncMatches';
 import { registerLeaderboardRoutes } from './routes/leaderboard';
+import { registerSystemRoutes } from './routes/system';
 
 const app = new Hono<{ Bindings: Env }>();
 
 app.use('/api/*', cors({ allowHeaders: ['Content-Type', 'Authorization'] }));
 
-app.get('/', (c) => c.json({
-  name: 'Clutch API',
-  status: 'ok',
-  tagline: 'Knowledge earns the attempt. Skill wins the game.',
-}));
-
-app.get('/api/health', (c) => c.json({
-  status: 'ok',
-  timestamp: Date.now(),
-  environment: c.env.ENVIRONMENT,
-}));
-
-app.get('/api/tournaments/:slug', (c) => c.json({
-  slug: c.req.param('slug'),
-  message: 'Tournament endpoint ready. Connect D1 to return real data.',
-}));
-
+registerSystemRoutes(app);
 registerAuthRoutes(app);
 registerAsyncMatchRoutes(app);
 registerLeaderboardRoutes(app);

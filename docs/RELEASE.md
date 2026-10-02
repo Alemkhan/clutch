@@ -215,21 +215,27 @@ npx wrangler pages deploy apps/web/dist --project-name <PAGES_PROJECT_NAME>
 Выполнять в таком порядке:
 
 1. `GET <WORKER_PUBLIC_URL>/api/health` возвращает `status: ok` и
-   `environment: production`.
-2. `GET <WORKER_PUBLIC_URL>/api/leaderboard?category=geography` не даёт `5xx`.
-3. Pages открывается и обращается именно к production Worker.
-4. Browser guest получает online-матч, завершает его и видит
+   `environment: production`; это только liveness Worker без проверки D1.
+2. `GET <WORKER_PUBLIC_URL>/api/ready` возвращает `status: ok`,
+   `environment: production` и `checks.d1: ok`. Ответ 503 означает, что трафик
+   направлять рано: проверить binding и применение текущих D1 migrations.
+3. `GET <WORKER_PUBLIC_URL>/api/leaderboard?category=geography` не даёт `5xx`.
+4. Pages открывается и обращается именно к production Worker.
+5. Browser guest получает online-матч, завершает его и видит
    `Результат сохранён.`.
-5. Telegram-пользователь получает матч без `401` и сохраняет completion.
-6. Игрок A создаёт eligible-run; другой игрок B видит `Запись игрока` с тем же
+6. Telegram-пользователь получает матч без `401` и сохраняет completion.
+7. Игрок A создаёт eligible-run; другой игрок B видит `Запись игрока` с тем же
    набором вопросов.
-7. Неподходящая/повреждённая ghost-запись не ломает matchmaking.
-8. Offline completion остаётся видимой и сохраняется после восстановления сети.
-9. Проверены экранная клавиатура, BackButton, safe areas, background/return и
+8. Неподходящая/повреждённая ghost-запись не ломает matchmaking.
+9. Offline completion остаётся видимой и сохраняется после восстановления сети.
+10. Проверены экранная клавиатура, BackButton, safe areas, background/return и
    звук на реальном телефоне.
-10. В D1 появилась ожидаемая completed-запись без дубликата completion.
-11. В Workers Logs нет token, raw `initData`, session secret или полного
+11. В D1 появилась ожидаемая completed-запись без дубликата completion.
+12. В Workers Logs нет token, raw `initData`, session secret или полного
     Authorization header.
+
+Маршрут `/api/ready` реализован и проверен локально в R9c, но его production URL
+не считается опубликованным или проверенным до фактического deploy и этого smoke.
 
 После smoke не удаляйте тестовые строки вручную, если это единственное
 доказательство end-to-end. Пометьте тестовые identity либо удалите их отдельной

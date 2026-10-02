@@ -84,15 +84,22 @@ npm run dev
 
 - приложение: `http://127.0.0.1:5173`;
 - API: `http://127.0.0.1:8787`;
-- health check: `http://127.0.0.1:8787/api/health`.
+- liveness: `http://127.0.0.1:8787/api/health`;
+- readiness D1: `http://127.0.0.1:8787/api/ready`.
 
 Быстрая проверка API из второго PowerShell:
 
 ```powershell
 Invoke-RestMethod http://127.0.0.1:8787/api/health
+Invoke-RestMethod http://127.0.0.1:8787/api/ready
 ```
 
-Ожидается JSON со `status: ok` и `environment: development`.
+Оба ответа должны содержать `status: ok` и `environment: development`.
+Readiness дополнительно возвращает `checks.d1: ok`: он проверяет локальный D1
+binding и текущую схему `match_runs`. Если `/api/health` отвечает 200, а
+`/api/ready` — 503, Worker жив, но миграции не применены либо D1 недоступна;
+повторите шаг 2.3 и проверьте binding. Ответ намеренно не раскрывает SQL или
+текст внутренней ошибки.
 
 ## 3. Автоматические проверки
 
@@ -133,6 +140,7 @@ CI выполняет `npm ci`, `npm test` и `npm run build`, но локаль
 Полезные URL:
 
 - `http://127.0.0.1:5173/api/health` — health через Vite proxy;
+- `http://127.0.0.1:5173/api/ready` — D1 readiness через Vite proxy;
 - `http://127.0.0.1:5173/api/leaderboard?category=geography` — локальный
   leaderboard.
 

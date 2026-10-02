@@ -39,6 +39,7 @@ apps/api/
   src/routes/auth.ts           выдача/продление browser guest session
   src/routes/asyncMatches.ts   сценарии start/complete async-матча
   src/routes/leaderboard.ts    HTTP-маршрут leaderboard
+  src/routes/system.ts         metadata, liveness/readiness, tournament stub
   migrations/0001_async_matches.sql
   migrations/0002_match_conditions.sql  условия, снимок соперника, пригодность ghost
   wrangler.toml                Worker, D1 и нативный Rate Limiting binding
@@ -75,13 +76,16 @@ App → useGameState (React, сеть, эффекты) → gameSession (чист
                                       ↘ clientMatchRules → shared/matchRules
 ```
 
-Серверный путь начинается с маленькой точки сборки; маршрут координирует,
-но не содержит реализацию HMAC, SQL или фабрику бота:
+Серверный путь начинается с маленькой точки сборки. Доменные SQL-запросы матчей
+остаются в repository; системный route содержит только фиксированный read-only
+schema probe для readiness:
 
 ```text
-index → routes/auth → auth/guest
+index → routes/system → D1 readiness
+     ├→ routes/auth → auth/guest
+     ├→ routes/leaderboard → D1
      └→ routes/asyncMatches → auth/identity → auth/{telegram,guest}
-                         ├→ http/{rateLimit,jsonBody}
+                          ├→ http/{rateLimit,jsonBody}
                           ├→ matches/bots
                           ├→ matches/validation → shared/matchRules
                           └→ matches/repository → D1
@@ -145,7 +149,8 @@ token и не запускает дубль той же категории. Ош
 
 | Маршрут | Текущее назначение |
 | --- | --- |
-| `GET /`, `GET /api/health` | Метаданные/health процесса; не проверка доступности D1 |
+| `GET /`, `GET /api/health` | Метаданные и дешёвый liveness процесса; D1 не вызывается |
+| `GET /api/ready` | Readiness для трафика: binding D1 и текущая схема `match_runs`, включая колонки миграции 0002 |
 | `POST /api/auth/guest` | Выдать новую или продлить существующую guest-сессию |
 | `POST /api/async-matches` | Создать матч; вернуть вопросы, соперника, `opponentSource`, `conditions` |
 | `POST /api/async-matches/:id/complete` | Принять rounds, пересчитать и сохранить результат |

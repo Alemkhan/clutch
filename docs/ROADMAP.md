@@ -233,6 +233,12 @@ questionBank/showQuiz как «готовый контент» без редак
   Node 22.17.0 из `.nvmrc`, `npm ci`, `npm test` и `npm run build`, read-only
   permissions, timeout и отмену устаревшего запуска. Workflow пока не запускался
   на GitHub; deploy, environments, remote D1 и release automation сюда не входят.
+- **R9c: API readiness — реализован локально 2026-10-02.** Новый
+  `GET /api/ready` дешёвым read-only запросом `LIMIT 0` проверяет D1 binding и
+  текущую схему `match_runs`, включая 0002; ошибка возвращает обезличенный 503.
+  Существующий `/api/health` остаётся liveness без D1. Покрыты текущая схема,
+  только 0001, падение binding и отсутствие обращения health к базе. Production
+  endpoint ещё не развёрнут и не проверен.
 - Автоматизировать уже проверенный вручную Wrangler/D1-сценарий: A завершает матч → B получает
   подходящую запись с теми же вопросами/условиями → результат сохраняется.
   Дополнить bot, offline, auth failure, retry и несовместимую версию.
