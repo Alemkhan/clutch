@@ -1,7 +1,7 @@
 # Clutch — контекст для следующей сессии
 
-Обновлено: **2026-10-02**. Проверенная база: checkpoint `9caa82a`
-с R9d Wrangler HTTP smoke в локально проверенном CI workflow.
+Обновлено: **2026-10-02**. Проверенная база: checkpoint `290b696`
+с R9e production preflight в локально проверенном CI workflow.
 Это снимок состояния, а не обещание готовности к релизу.
 
 ## Что строим
@@ -118,9 +118,9 @@
   и условий для публичного рейтинга по-прежнему не утверждена.
 - R9a: tracked GitHub Actions CI проверяет push в `master` и pull request на
   Node 22.17.0 из `.nvmrc`: `npm ci`, unit/route tests, локальный Wrangler HTTP
-  smoke и build. У workflow read-only permissions, timeout и cancel-in-progress;
-  deploy и секретов нет. На GitHub этот workflow ещё не запускался, поэтому
-  remote gate пока не подтверждён.
+  smoke и production preflight fixture с полным build. У workflow read-only
+  permissions, timeout и cancel-in-progress; deploy и секретов нет. На GitHub
+  этот workflow ещё не запускался, поэтому remote gate пока не подтверждён.
 - R9: добавлены ручные runbooks [TESTING](docs/TESTING.md) и
   [RELEASE](docs/RELEASE.md). Они описывают локальный/Telegram walkthrough,
   production gates, D1/Worker/Pages порядок и rollback, но ни один remote шаг
@@ -134,8 +134,19 @@
   и local D1, применяет текущие migrations, запускает настоящий Wrangler и по
   HTTP доказывает readiness, auth failure, bot → eligible A → точный ghost B и
   canonical повтор completion. Исправленный прогон завершился exit 0 и удалил
-  temp; command включён в CI перед build. Он не проверяет browser offline/retry,
-  legacy incompatibility, remote Cloudflare или deploy.
+  temp; command включён в CI перед production preflight fixture/build. Он не
+  проверяет browser offline/retry, legacy incompatibility, remote Cloudflare
+  или deploy.
+- R9e: production preflight валидирует шесть явных `CLUTCH_PRODUCTION_*`
+  значений, запрещает reuse development Worker/D1/rate namespace и создаёт
+  production Wrangler config только в temp. Fixture доказал Worker dry-run,
+  production bindings, полный root build и exact API URL; temp удалён. Root
+  deploy aliases удалены, а реальные deploy/remote/secrets остаются только
+  ручными шагами release runbook. CI использует fixture вместо отдельного build.
+  Default/fixture не оставляют config; только real-mode npm script
+  `preflight:production:write-config` после успешных проверок создаёт ignored
+  `apps/api/wrangler.production.generated.jsonc` без secrets и без overwrite
+  для последующего review и ручных команд.
 - Миграция `0002_match_conditions.sql` применена к локальной D1 2026-09-28.
   Старые строки сохранены, но имеют неизвестные условия и исключены из пула.
   Незавершённый legacy-матч получает 409: нужно начать новый.
@@ -150,7 +161,7 @@
 - Код пока привязан к `hammer`; универсальный контракт мини-игр — направление,
   а не уже готовая плагинная система.
 - `questionBank.ts` и `showQuiz.ts` — заготовки, не дополнительные live-категории.
-- Проверенный checkpoint этой задачи — `9caa82a`. Состояние удалённого деплоя,
+- Проверенный checkpoint этой задачи — `290b696`. Состояние удалённого деплоя,
   BotFather и production D1 в этой сессии не проверялось.
 
 ## Главные пробелы
@@ -166,6 +177,12 @@
 
 ## Проверки и рабочий процесс
 
+После R9e, 2026-10-02: validation/config tests — **22/22**;
+`npm run test:preflight:production` завершился exit 0, проверил production
+DB/rate/environment bindings, полный root build и exact API URL; temp очищен.
+Отдельный write-config прогон создал, подтвердил и удалил ignored JSONC;
+`npm test` — **233/233**. Реальные production resources/secrets, remote
+Cloudflare и новый GitHub CI gate не проверялись.
 После R9d, 2026-10-02: `npm run test:smoke:local` прошёл через реальный локальный
 Wrangler/D1 с exit 0; Worker остановлен, изолированный temp удалён. GitHub Actions
 с новым step ещё не выполнялся, remote Cloudflare и browser offline не проверялись.
@@ -205,7 +222,8 @@ retry и Telegram на физическом телефоне вручную не
 проверен автоматически, но ещё не повторён в настоящем локальном Wrangler.
 R2a/R2b закоммичены в `0484ca1`, R3b/R3c — в `97f5550`, R4 — в `6ea7cbf`,
 R5a — в `5307940`; R5b/R7a/R7b входят в `e110d5c`, R5c — в `69a7832`, R7c —
-в `3015241`, R9c readiness — в `5dc6806`, R9d smoke — в `9caa82a`. Production,
+в `3015241`, R9c readiness — в `5dc6806`, R9d smoke — в `9caa82a`, R9e
+preflight — в `290b696`. Production,
 реальный browser reload/offline walkthrough и физические телефоны не проверялись.
 
 Astra используется для reasoning, ревью и планирования. Кодинг — 5.6-Sol
