@@ -1,7 +1,7 @@
 # Clutch — контекст для следующей сессии
 
-Обновлено: **2026-10-02**. Проверенная база: checkpoint `5dc6806`
-с R9c D1 readiness поверх release runbook и локально проверенного CI workflow.
+Обновлено: **2026-10-02**. Проверенная база: checkpoint `9caa82a`
+с R9d Wrangler HTTP smoke в локально проверенном CI workflow.
 Это снимок состояния, а не обещание готовности к релизу.
 
 ## Что строим
@@ -117,9 +117,10 @@
   ранний `completed_at` и стабильный `id`. Сравнимость progress разных наборов
   и условий для публичного рейтинга по-прежнему не утверждена.
 - R9a: tracked GitHub Actions CI проверяет push в `master` и pull request на
-  Node 22.17.0 из `.nvmrc`: `npm ci`, `npm test`, `npm run build`. У workflow
-  read-only permissions, timeout и cancel-in-progress; deploy и секретов нет.
-  На GitHub этот workflow ещё не запускался, поэтому remote gate не подтверждён.
+  Node 22.17.0 из `.nvmrc`: `npm ci`, unit/route tests, локальный Wrangler HTTP
+  smoke и build. У workflow read-only permissions, timeout и cancel-in-progress;
+  deploy и секретов нет. На GitHub этот workflow ещё не запускался, поэтому
+  remote gate пока не подтверждён.
 - R9: добавлены ручные runbooks [TESTING](docs/TESTING.md) и
   [RELEASE](docs/RELEASE.md). Они описывают локальный/Telegram walkthrough,
   production gates, D1/Worker/Pages порядок и rollback, но ни один remote шаг
@@ -129,6 +130,12 @@
   обезличенный 503; `/api/health` остаётся liveness без обращения к D1.
   Route-сценарии с текущей/старой схемой и упавшим binding проверены локально;
   production endpoint не развёрнут и не проверен.
+- R9d: `scripts/smoke-local.mjs` из одного npm command создаёт временные config
+  и local D1, применяет текущие migrations, запускает настоящий Wrangler и по
+  HTTP доказывает readiness, auth failure, bot → eligible A → точный ghost B и
+  canonical повтор completion. Исправленный прогон завершился exit 0 и удалил
+  temp; command включён в CI перед build. Он не проверяет browser offline/retry,
+  legacy incompatibility, remote Cloudflare или deploy.
 - Миграция `0002_match_conditions.sql` применена к локальной D1 2026-09-28.
   Старые строки сохранены, но имеют неизвестные условия и исключены из пула.
   Незавершённый legacy-матч получает 409: нужно начать новый.
@@ -143,7 +150,7 @@
 - Код пока привязан к `hammer`; универсальный контракт мини-игр — направление,
   а не уже готовая плагинная система.
 - `questionBank.ts` и `showQuiz.ts` — заготовки, не дополнительные live-категории.
-- Проверенный checkpoint этой задачи — `5dc6806`. Состояние удалённого деплоя,
+- Проверенный checkpoint этой задачи — `9caa82a`. Состояние удалённого деплоя,
   BotFather и production D1 в этой сессии не проверялось.
 
 ## Главные пробелы
@@ -159,6 +166,9 @@
 
 ## Проверки и рабочий процесс
 
+После R9d, 2026-10-02: `npm run test:smoke:local` прошёл через реальный локальный
+Wrangler/D1 с exit 0; Worker остановлен, изолированный temp удалён. GitHub Actions
+с новым step ещё не выполнялся, remote Cloudflare и browser offline не проверялись.
 После R9c, 2026-10-02: целевые readiness/liveness route-тесты — **4/4**,
 `npm test` — **211/211**, `npm run build` и `git diff --check` — успешно.
 Production Worker/D1 и опубликованный `/api/ready` не проверялись.
@@ -195,7 +205,7 @@ retry и Telegram на физическом телефоне вручную не
 проверен автоматически, но ещё не повторён в настоящем локальном Wrangler.
 R2a/R2b закоммичены в `0484ca1`, R3b/R3c — в `97f5550`, R4 — в `6ea7cbf`,
 R5a — в `5307940`; R5b/R7a/R7b входят в `e110d5c`, R5c — в `69a7832`, R7c —
-в `3015241`, R9c readiness — в `5dc6806`. Production,
+в `3015241`, R9c readiness — в `5dc6806`, R9d smoke — в `9caa82a`. Production,
 реальный browser reload/offline walkthrough и физические телефоны не проверялись.
 
 Astra используется для reasoning, ревью и планирования. Кодинг — 5.6-Sol
