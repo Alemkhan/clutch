@@ -1,7 +1,7 @@
 # Clutch — контекст для следующей сессии
 
-Обновлено: **2026-10-02**. Проверенная база кода: checkpoint `fd3ab89`
-с R9a, локально проверенным GitHub Actions CI workflow.
+Обновлено: **2026-10-02**. Проверенная база: checkpoint `aa9e758`
+с R9 release runbook поверх локально проверенного CI workflow.
 Это снимок состояния, а не обещание готовности к релизу.
 
 ## Что строим
@@ -119,6 +119,10 @@
   Node 22.17.0 из `.nvmrc`: `npm ci`, `npm test`, `npm run build`. У workflow
   read-only permissions, timeout и cancel-in-progress; deploy и секретов нет.
   На GitHub этот workflow ещё не запускался, поэтому remote gate не подтверждён.
+- R9: добавлены ручные runbooks [TESTING](docs/TESTING.md) и
+  [RELEASE](docs/RELEASE.md). Они описывают локальный/Telegram walkthrough,
+  production gates, D1/Worker/Pages порядок и rollback, но ни один remote шаг
+  ими не считается выполненным.
 - Миграция `0002_match_conditions.sql` применена к локальной D1 2026-09-28.
   Старые строки сохранены, но имеют неизвестные условия и исключены из пула.
   Незавершённый legacy-матч получает 409: нужно начать новый.
