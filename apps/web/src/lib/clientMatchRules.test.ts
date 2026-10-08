@@ -215,3 +215,33 @@ describe('client round integration', () => {
     });
   });
 });
+
+describe('short recorded opponent', () => {
+  it('accepts a short online player transcript below 100 and keeps its progress frozen', () => {
+    const matchQuestions = questions(10);
+    const short = opponentFor(matchQuestions, [25, 0, 5, 0, 0, 5]); // stopped at question 6
+    const normalized = normalizeOnlineMatch(onlineMatch(matchQuestions, short));
+    expect(normalized.opponent.rounds).toHaveLength(6);
+
+    const state = play(matchQuestions, normalized.opponent, Array(10).fill(0));
+    expect(state).toMatchObject({
+      status: 'completed', roundsPlayed: 10, opponentProgress: 35, playerProgress: 0, outcome: 'opponent',
+    });
+  });
+
+  it('lets the player pass a frozen opponent and win by reaching 100', () => {
+    const matchQuestions = questions(10);
+    const short = opponentFor(matchQuestions, [25, 0, 5]);
+    const state = play(matchQuestions, short, [25, 25, 25, 25]);
+    expect(state).toMatchObject({ status: 'completed', roundsPlayed: 4, opponentProgress: 30, outcome: 'player' });
+  });
+
+  it('still rejects a short transcript below the pool threshold or from a bot', () => {
+    const matchQuestions = questions(10);
+    expect(() => normalizeOnlineMatch(onlineMatch(matchQuestions, opponentFor(matchQuestions, [25, 25]))))
+      .toThrow(/too short/i);
+    const bot = onlineMatch(matchQuestions, opponentFor(matchQuestions, [25, 0, 5, 0]));
+    bot.opponentSource = 'bot';
+    expect(() => normalizeOnlineMatch(bot)).toThrow(/too short/i);
+  });
+});

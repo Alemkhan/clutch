@@ -1,11 +1,14 @@
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
   evaluateMatch,
-  generateMatch,
+  DAILY_BANK_SIZE,
+  dailyQuestionSet,
+  dailyQuestionSetIds,
   pressureStageFromResults,
   scoreHammerDistance,
   type AsyncMatchRound,
   type CompleteAsyncMatchRequest,
+  type Question,
   type CompleteAsyncMatchResponse,
   type StartAsyncMatchResponse,
   type SkillResult,
@@ -15,12 +18,13 @@ import { resolveRequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
 import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
-import { createBotOpponent } from '../matches/bots';
+import { createBotOpponent, pickBotProfile } from '../matches/bots';
 import {
   completeRun,
   createMatchRun,
   currentMiniGameConfigJson,
-  findGhost,
+  findGhostInSets,
+  lastPlayedBySet,
   findRun,
 } from '../matches/repository';
 import {
@@ -51,9 +55,27 @@ export function registerAsyncMatchRoutes(app: Hono<{ Bindings: Env }>): void {
     const playerId = identity.playerId;
     const displayName = identity.displayName || body.displayName.trim();
 
-    const ghost = await findGhost(c.env.DB, body.category, playerId);
-    const questions = ghost?.questions ?? generateMatch(10, 0.3, body.category);
-    const opponent = ghost?.opponent ?? createBotOpponent(questions);
+    const now = Date.now();
+    const bankIds = dailyQuestionSetIds(body.category, now);
+    // 1) a set with a waiting unfaced record; 2) a set not yet played today; 3) the least recent one.
+    const ghost = await findGhostInSets(c.env.DB, bankIds, playerId);
+    let questionSetId: string;
+    let questions: Question[];
+    if (ghost) {
+      questionSetId = ghost.questionSetId;
+      questions = ghost.questions;
+    } else {
+      const played = await lastPlayedBySet(c.env.DB, bankIds, playerId);
+      let index = bankIds.findIndex((id) => !played.has(id));
+      if (index === -1) {
+        index = 0;
+        for (let candidate = 1; candidate < DAILY_BANK_SIZE; candidate++) {
+          if (played.get(bankIds[candidate])! < played.get(bankIds[index])!) index = candidate;
+        }
+      }
+      ({ questionSetId, questions } = dailyQuestionSet(body.category, now, index));
+    }
+    const opponent = ghost?.opponent ?? createBotOpponent(questions, pickBotProfile(questionSetId, playerId));
     const matchId = crypto.randomUUID();
 
     await createMatchRun(c.env.DB, {
@@ -61,6 +83,7 @@ export function registerAsyncMatchRoutes(app: Hono<{ Bindings: Env }>): void {
       playerId,
       displayName,
       category: body.category,
+      questionSetId,
       questions,
       opponentRunId: ghost?.row.id ?? null,
       opponent,
@@ -168,7 +191,12 @@ export function registerAsyncMatchRoutes(app: Hono<{ Bindings: Env }>): void {
 
     let matchState;
     try {
-      matchState = evaluateMatch(questions.map((question) => question.id), rounds, opponent.rounds);
+      matchState = evaluateMatch(
+        questions.map((question) => question.id),
+        rounds,
+        opponent.rounds,
+        { frozenOpponent: true },
+      );
     } catch (error) {
       return c.json({ error: error instanceof Error ? error.message : 'Invalid match sequence.' }, 400);
     }

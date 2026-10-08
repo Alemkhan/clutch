@@ -174,3 +174,4 @@ export * from './flagTraits';
 export * from './historicFlags';
 export * from './languages';
 export * from './questionGenerator';
+export * from './dailyQuestionSet';

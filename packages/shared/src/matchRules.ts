@@ -23,6 +23,26 @@ export interface ApplyMatchRoundInput {
 
 const MAX_PROGRESS = 100;
 
+/** A finished run needs at least this many played rounds to be offered as an opponent. */
+export const MIN_POOL_ROUNDS = 3;
+
+/**
+ * A recorded opponent that stopped before the end of the set without reaching 100.
+ * Returns the number of the last recorded round, or null when the run was not cut short
+ * (it played the whole set, or finished early by reaching 100).
+ */
+export function abandonedAtRound(
+  rounds: readonly { progressAwarded: number }[],
+  questionCount: number,
+): number | null {
+  if (rounds.length === 0 || rounds.length >= questionCount) return null;
+  const progress = Math.min(
+    MAX_PROGRESS,
+    rounds.reduce((sum, round) => sum + round.progressAwarded, 0),
+  );
+  return progress < MAX_PROGRESS ? rounds.length : null;
+}
+
 export function createMatchRulesState(): MatchRulesState {
   return {
     roundsPlayed: 0,
@@ -148,13 +168,15 @@ function assertOrderedRun(
 
 /**
  * Validates and evaluates the player's played prefix against a normalized
- * opponent transcript. This does not validate an HTTP schema or decide whether
+ * opponent transcript. With `frozenOpponent`, a transcript shorter than the set
+ * is legal: the opponent's progress freezes after its last recorded round. This does not validate an HTTP schema or decide whether
  * an incomplete opponent transcript is eligible for a persisted opponent pool.
  */
 export function evaluateMatch(
   questionIds: readonly string[],
   playerRounds: readonly NormalizedMatchRound[],
   opponentRounds: readonly NormalizedMatchRound[],
+  options: { frozenOpponent?: boolean } = {},
 ): MatchRulesState {
   assertQuestionIds(questionIds);
   assertOrderedRun('player', questionIds, playerRounds);
@@ -162,9 +184,13 @@ export function evaluateMatch(
 
   let state = createMatchRulesState();
   for (let index = 0; index < playerRounds.length; index += 1) {
-    const opponentRound = opponentRounds[index];
+    let opponentRound = opponentRounds[index];
     if (opponentRound === undefined) {
-      throw new Error(`opponent round is missing for question ${questionIds[index]}`);
+      // A recorded opponent that stopped early stays where it was: no invented rounds, no progress.
+      if (!options.frozenOpponent) {
+        throw new Error(`opponent round is missing for question ${questionIds[index]}`);
+      }
+      opponentRound = { questionId: questionIds[index], progressAwarded: 0 };
     }
 
     state = applyMatchRound(state, {

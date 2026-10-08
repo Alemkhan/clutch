@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
+  abandonedAtRound,
   applyMatchRound,
   createMatchRulesState,
   evaluateMatch,
+  MIN_POOL_ROUNDS,
   type NormalizedMatchRound,
 } from './matchRules';
 
@@ -172,6 +174,21 @@ describe('evaluateMatch', () => {
     );
   });
 
+  it('freezes a short opponent instead of inventing zero rounds when allowed', () => {
+    const state = evaluateMatch(questionIds, rounds([5, 5, 5]), rounds([25]), { frozenOpponent: true });
+    expect(state.opponentProgress).toBe(25);
+    expect(state.playerProgress).toBe(15);
+    expect(state.status).toBe('in_progress');
+  });
+
+  it('lets the player finish a set against a frozen opponent', () => {
+    const ids = ['q1', 'q2', 'q3'];
+    const state = evaluateMatch(ids, rounds([5, 5, 5]), rounds([25, 25]), { frozenOpponent: true });
+    expect(state.status).toBe('completed');
+    expect(state.outcome).toBe('opponent');
+    expect(state.opponentProgress).toBe(50);
+  });
+
   it('rejects extra player or opponent rounds after terminal progress', () => {
     expect(() => evaluateMatch(questionIds, rounds([100, 5]), rounds([5, 5]))).toThrow(
       /player has an extra round/,
@@ -240,5 +257,20 @@ describe('applyMatchRound', () => {
         opponentRound: { questionId: 'q2', progressAwarded: 5 },
       }),
     ).toThrow(/after the match has completed/);
+  });
+});
+
+describe('abandonedAtRound', () => {
+  const awards = (values: number[]) => values.map((progressAwarded) => ({ progressAwarded }));
+  it('reports the last recorded round of a short run below 100', () => {
+    expect(abandonedAtRound(awards([25, 0, 5, 0, 0, 5]), 10)).toBe(6);
+  });
+  it('does not call an early 100 or a full run abandoned', () => {
+    expect(abandonedAtRound(awards([25, 25, 25, 25]), 10)).toBeNull();
+    expect(abandonedAtRound(awards(Array(10).fill(5)), 10)).toBeNull();
+    expect(abandonedAtRound([], 10)).toBeNull();
+  });
+  it('exposes the pool threshold', () => {
+    expect(MIN_POOL_ROUNDS).toBe(3);
   });
 });

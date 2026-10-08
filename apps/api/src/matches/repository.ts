@@ -1,4 +1,4 @@
-import { CURRENT_ASYNC_MATCH_CONDITIONS, type AsyncMatchRound, type Opponent, type Question } from '@clutch/shared';
+import { CURRENT_ASYNC_MATCH_CONDITIONS, MIN_POOL_ROUNDS, type AsyncMatchRound, type Opponent, type Question } from '@clutch/shared';
 import type { RunRow } from './types';
 import { candidateSnapshot } from './validation';
 
@@ -12,49 +12,70 @@ const runColumns = `
 
 export interface GhostMatch {
   row: RunRow;
+  questionSetId: string;
   questions: Question[];
   opponent: Opponent;
 }
 
-export async function findGhost(
+/**
+ * One query over the whole day's bank: the freshest finished run of another player, with at
+ * least MIN_POOL_ROUNDS played rounds, that this player has not faced yet. Its set is the set
+ * to play. Whether the run reached 100 is irrelevant: ghost_eligible is not a pool filter.
+ * There is deliberately no fallback that drops the "already faced" condition.
+ */
+export async function findGhostInSets(
   db: D1Database,
-  category: string,
+  questionSetIds: readonly string[],
   playerId: string,
 ): Promise<GhostMatch | null> {
-  const select = `
-    SELECT ${runColumns}
+  if (questionSetIds.length === 0) return null;
+  const setPlaceholders = questionSetIds.map((_, index) => `?${index + 6}`).join(', ');
+  const result = await db.prepare(`
+    SELECT ${runColumns}, question_set_id
     FROM match_runs
-    WHERE category = ?1
+    WHERE question_set_id IN (${setPlaceholders})
       AND status = 'completed'
-      AND ghost_eligible = 1
+      AND CASE WHEN json_valid(rounds_json) THEN json_array_length(rounds_json) ELSE 0 END >= ?1
       AND rules_version = ?3
       AND mini_game_id = ?4
       AND mini_game_config_json = ?5
-      AND player_id <> ?2`;
-  const queries = [
-    `${select}
+      AND player_id <> ?2
       AND id NOT IN (
         SELECT opponent_run_id FROM match_runs
         WHERE player_id = ?2 AND opponent_run_id IS NOT NULL
       )
-      ORDER BY completed_at DESC LIMIT 20`,
-    `${select} ORDER BY completed_at DESC LIMIT 20`,
-  ];
-
-  for (const query of queries) {
-    const result = await db.prepare(query).bind(
-      category,
-      playerId,
-      CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion,
-      CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
-      currentMiniGameConfigJson,
-    ).all<RunRow>();
-    for (const row of result.results) {
-      const snapshot = candidateSnapshot(row);
-      if (snapshot) return { row, ...snapshot };
+    ORDER BY completed_at DESC LIMIT 20
+  `).bind(
+    MIN_POOL_ROUNDS,
+    playerId,
+    CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion,
+    CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
+    currentMiniGameConfigJson,
+    ...questionSetIds,
+  ).all<RunRow>();
+  for (const row of result.results) {
+    const snapshot = candidateSnapshot(row);
+    if (snapshot && row.question_set_id) {
+      return { row, questionSetId: row.question_set_id, ...snapshot };
     }
   }
   return null;
+}
+
+/** When this player last started each of the given sets (any status), by set id. */
+export async function lastPlayedBySet(
+  db: D1Database,
+  questionSetIds: readonly string[],
+  playerId: string,
+): Promise<Map<string, number>> {
+  const placeholders = questionSetIds.map((_, index) => `?${index + 2}`).join(', ');
+  const result = await db.prepare(`
+    SELECT question_set_id, MAX(created_at) AS last_played
+    FROM match_runs
+    WHERE player_id = ?1 AND question_set_id IN (${placeholders})
+    GROUP BY question_set_id
+  `).bind(playerId, ...questionSetIds).all<{ question_set_id: string; last_played: number }>();
+  return new Map(result.results.map((row) => [row.question_set_id, row.last_played]));
 }
 
 export async function createMatchRun(db: D1Database, input: {
@@ -62,6 +83,7 @@ export async function createMatchRun(db: D1Database, input: {
   playerId: string;
   displayName: string;
   category: string;
+  questionSetId: string;
   questions: Question[];
   opponentRunId: string | null;
   opponent: Opponent;
@@ -69,8 +91,8 @@ export async function createMatchRun(db: D1Database, input: {
   await db.prepare(`
     INSERT INTO match_runs (
       id, player_id, display_name, category, questions_json, opponent_run_id, created_at,
-      rules_version, mini_game_id, mini_game_config_json, opponent_json
-    ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)
+      rules_version, mini_game_id, mini_game_config_json, opponent_json, question_set_id
+    ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12)
   `).bind(
     input.id,
     input.playerId,
@@ -83,6 +105,7 @@ export async function createMatchRun(db: D1Database, input: {
     CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
     currentMiniGameConfigJson,
     JSON.stringify(input.opponent),
+    input.questionSetId,
   ).run();
 }
 

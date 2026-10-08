@@ -1,4 +1,5 @@
 import {
+  MIN_POOL_ROUNDS,
   SKILL_REWARDS,
   isAnswerCorrect,
   type AsyncMatchRound,
@@ -106,7 +107,9 @@ export function validOpponentForQuestions(value: unknown, questions: Question[])
       || progress === 100) return false;
     progress = Math.min(100, progress + round.progressAwarded);
   }
-  return opponent.rounds.length === questions.length || progress === 100;
+  // A recorded opponent may stop early: its progress freezes after the last recorded round.
+  return opponent.rounds.length === questions.length || progress === 100
+    || opponent.rounds.length >= MIN_POOL_ROUNDS;
 }
 
 function ghostOpponent(row: RunRow, rounds: AsyncMatchRound[]): Opponent {

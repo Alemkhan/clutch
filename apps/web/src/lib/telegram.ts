@@ -10,6 +10,7 @@ import {
   mountViewport,
   restoreInitData,
   retrieveRawInitData,
+  shareURL,
 } from '@telegram-apps/sdk-react';
 
 interface TelegramIdentity {
@@ -67,4 +68,14 @@ export function initializeTelegram(): Promise<void> {
 
 export function getTelegramIdentity(): TelegramIdentity | null {
   return identity;
+}
+
+export function canShareViaTelegram(): boolean {
+  return isTMA() && shareURL.isAvailable();
+}
+
+export function shareViaTelegram(url: string, text: string): boolean {
+  if (!shareURL.isAvailable()) return false;
+  shareURL(url, text);
+  return true;
 }

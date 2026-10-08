@@ -13,17 +13,21 @@ const IDENTICAL_FLAG_PAIRS: [string, string][] = [
   ['ro', 'td'], // Romania / Chad — differ by a shade of blue
 ];
 
+// Source of randomness for the current generation. Swapped only for the duration
+// of a synchronous generateMatch call (see its optional rng parameter).
+let random: () => number = Math.random;
+
 function shuffle<T>(arr: T[]): T[] {
   const copy = [...arr];
   for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(random() * (i + 1));
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
 }
 
 function pickOne<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
+  return arr[Math.floor(random() * arr.length)];
 }
 
 function pickDistractors<T>(arr: T[], exclude: T, count: number): T[] {
@@ -90,7 +94,7 @@ function pickOutlineDistractors(correct: Country, count = 3): Country[] {
       let score = 0;
       if (ISLAND_COUNTRIES.has(c.code) !== correctIsland) score += 1.2;
       if (c.region !== correct.region) score += 0.5;
-      score += Math.random() * 0.05; // tie-break jitter
+      score += random() * 0.05; // tie-break jitter
       return { item: c, score };
     })
     .sort((x, y) => x.score - y.score);
@@ -368,10 +372,56 @@ export function generateLanguage(correct: LanguageEntry = pickOne(languages)): Q
 
 // ---------- Match assembly ----------
 
+/**
+ * Which question templates each entity was already asked with, across the sets of one
+ * bank: entity key -> template name -> times used. Mutated by generateMatch.
+ */
+export type TemplateUsage = Map<string, Map<string, number>>;
+
+// Among the templates available for this entity, keep the ones used least so far
+// (unused ones first: count 0), then pick one with the current rng.
+function pickLeastUsed<T extends { name: string }>(
+  templates: T[],
+  entityKey: string,
+  usage: TemplateUsage | undefined,
+): T {
+  const used = usage?.get(entityKey);
+  let candidates = templates;
+  if (used) {
+    const counts = templates.map((template) => used.get(template.name) ?? 0);
+    const min = Math.min(...counts);
+    candidates = templates.filter((_, index) => counts[index] === min);
+  }
+  const chosen = pickOne(candidates);
+  if (usage) {
+    const entry = usage.get(entityKey) ?? new Map<string, number>();
+    entry.set(chosen.name, (entry.get(chosen.name) ?? 0) + 1);
+    usage.set(entityKey, entry);
+  }
+  return chosen;
+}
+
 export function generateMatch(
   numQuestions: number = 10,
   openRatio: number = 0.3,
   category: CategoryId = 'geography',
+  rng: () => number = Math.random,
+  templateUsage?: TemplateUsage,
+): Question[] {
+  const previousRandom = random;
+  random = rng;
+  try {
+    return generateMatchWithRandom(numQuestions, openRatio, category, templateUsage);
+  } finally {
+    random = previousRandom;
+  }
+}
+
+function generateMatchWithRandom(
+  numQuestions: number,
+  openRatio: number,
+  category: CategoryId,
+  usage?: TemplateUsage,
 ): Question[] {
   if (!Number.isInteger(numQuestions) || numQuestions < 0) {
     throw new RangeError('numQuestions must be a nonnegative integer.');
@@ -401,13 +451,20 @@ export function generateMatch(
   if (category === 'history') {
     const questions = shuffle(historicFlags)
       .slice(0, numQuestions)
-      .map((flag) => generateHistoricFlag(flag));
+      .map((flag) => {
+        // Single template per entity: nothing to choose, only record the use.
+        pickLeastUsed([{ name: 'hist_flag' }], flag.id, usage);
+        return generateHistoricFlag(flag);
+      });
     return shuffle(questions);
   }
   if (category === 'languages') {
     const questions = shuffle(languages)
       .slice(0, numQuestions)
-      .map((language) => generateLanguage(language));
+      .map((language) => {
+        pickLeastUsed([{ name: 'lang' }], language.id, usage);
+        return generateLanguage(language);
+      });
     return shuffle(questions);
   }
 
@@ -416,21 +473,108 @@ export function generateMatch(
   const questions = selectedCountries.map((country, index) => {
     if (index < numQuestions - numOpen) {
       const generators = [
-        generateFlagToCountry,
-        generateCountryToCapital,
-        generateFlagToCapital,
-        ...(OUTLINE_EXCLUDED.has(country.code) ? [] : [generateOutlineToCountry]),
+        { name: 'flag_country', make: generateFlagToCountry },
+        { name: 'capital', make: generateCountryToCapital },
+        { name: 'flag_capital', make: generateFlagToCapital },
+        ...(OUTLINE_EXCLUDED.has(country.code) ? [] : [{ name: 'outline_country', make: generateOutlineToCountry }]),
       ];
-      return pickOne(generators)(country);
+      return pickLeastUsed(generators, country.code, usage).make(country);
     }
 
     const generators = [
-      generateCapitalOpenAnswer,
-      generateFlagToCountryOpen,
-      ...(OUTLINE_EXCLUDED.has(country.code) ? [] : [generateOutlineToCountryOpen]),
+      { name: 'open_capital', make: generateCapitalOpenAnswer },
+      { name: 'open_flag_country', make: generateFlagToCountryOpen },
+      ...(OUTLINE_EXCLUDED.has(country.code) ? [] : [{ name: 'open_outline_country', make: generateOutlineToCountryOpen }]),
     ];
-    return pickOne(generators)(country);
+    return pickLeastUsed(generators, country.code, usage).make(country);
   });
 
   return shuffle(questions);
+}
+
+// ---------- Rebuild by id ----------
+
+type CountryTemplate =
+  | 'flag_country'
+  | 'capital'
+  | 'flag_capital'
+  | 'outline_country'
+  | 'open_outline_country'
+  | 'open_capital'
+  | 'open_flag_country'
+  | 'capital_fixed';
+
+// Longest prefixes first: `open_outline_country_` must not be read as something shorter.
+const COUNTRY_TEMPLATE_PREFIXES: [string, CountryTemplate][] = [
+  ['open_outline_country_', 'open_outline_country'],
+  ['open_flag_country_', 'open_flag_country'],
+  ['open_capital_', 'open_capital'],
+  ['outline_country_', 'outline_country'],
+  ['flag_capital_', 'flag_capital'],
+  ['flag_country_', 'flag_country'],
+  ['capital_fixed_', 'capital_fixed'],
+  ['capital_', 'capital'],
+];
+
+type ResolvedQuestionId =
+  | { kind: 'country'; template: CountryTemplate; country: Country }
+  | { kind: 'history'; flag: HistoricFlag }
+  | { kind: 'language'; language: LanguageEntry };
+
+function resolveQuestionId(id: unknown): ResolvedQuestionId | null {
+  if (typeof id !== 'string') return null;
+  if (id.startsWith('hist_flag_')) {
+    const flag = historicFlags.find((f) => f.id === id.slice('hist_flag_'.length));
+    return flag ? { kind: 'history', flag } : null;
+  }
+  if (id.startsWith('lang_')) {
+    const language = languages.find((l) => l.id === id.slice('lang_'.length));
+    return language ? { kind: 'language', language } : null;
+  }
+  for (const [prefix, template] of COUNTRY_TEMPLATE_PREFIXES) {
+    if (!id.startsWith(prefix)) continue;
+    const code = id.slice(prefix.length);
+    const country = countries.find((c) => c.code === code);
+    if (!country) return null;
+    if ((template === 'outline_country' || template === 'open_outline_country') && OUTLINE_EXCLUDED.has(code)) {
+      return null;
+    }
+    return { kind: 'country', template, country };
+  }
+  return null;
+}
+
+/** True when a stored question id still maps to an existing question template and entity. */
+export function isKnownQuestionId(id: unknown): boolean {
+  return resolveQuestionId(id) !== null;
+}
+
+/** Category a question id belongs to, or null for an unknown id. */
+export function questionIdCategory(id: unknown): CategoryId | null {
+  const resolved = resolveQuestionId(id);
+  if (!resolved) return null;
+  return resolved.kind === 'history' ? 'history' : resolved.kind === 'language' ? 'languages' : 'geography';
+}
+
+/**
+ * Rebuilds a question from its id (`{template}_{entity code}`). Answer options of
+ * multiple-choice questions are drawn anew. Unknown or malformed ids give null:
+ * ids stored by older versions may refer to templates or entities that no longer exist.
+ */
+export function generateQuestionById(id: unknown): Question | null {
+  const resolved = resolveQuestionId(id);
+  if (!resolved) return null;
+  if (resolved.kind === 'history') return generateHistoricFlag(resolved.flag);
+  if (resolved.kind === 'language') return generateLanguage(resolved.language);
+  const { country } = resolved;
+  switch (resolved.template) {
+    case 'flag_country': return generateFlagToCountry(country);
+    case 'capital': return generateCountryToCapital(country);
+    case 'flag_capital': return generateFlagToCapital(country);
+    case 'outline_country': return generateOutlineToCountry(country);
+    case 'open_outline_country': return generateOutlineToCountryOpen(country);
+    case 'open_capital': return generateCapitalOpenAnswer(country);
+    case 'open_flag_country': return generateFlagToCountryOpen(country);
+    case 'capital_fixed': return generateFixedCapitalQuiz([country.code])[0] ?? null;
+  }
 }

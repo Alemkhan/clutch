@@ -66,11 +66,16 @@ export function applyR1bMigration(sqlite: SQLiteDatabase): void {
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0002_match_conditions.sql', import.meta.url), 'utf8'));
 }
 
+export function applyQuestionSetMigration(sqlite: SQLiteDatabase): void {
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0003_question_set_id.sql', import.meta.url), 'utf8'));
+}
+
 export function createTestD1(applyCurrentMigration = true): TestD1 {
   const sqlite = new DatabaseSync(':memory:');
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0001_async_matches.sql', import.meta.url), 'utf8'));
   if (applyCurrentMigration) {
     applyR1bMigration(sqlite);
+    applyQuestionSetMigration(sqlite);
   }
   const binding = {
     prepare(query: string) {

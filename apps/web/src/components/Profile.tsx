@@ -1,6 +1,7 @@
 import { getStats, winRatePercent } from '../lib/localStats';
 import { playSound } from '../lib/sounds';
 import { getTelegramIdentity } from '../lib/telegram';
+import { SoundToggle } from './SoundToggle';
 
 interface ProfileProps {
   onBack: () => void;
@@ -40,6 +41,9 @@ export function Profile({ onBack }: ProfileProps) {
           <span className="mini-stat-label">Лучшая серия</span>
         </div>
       </div>
+
+      <h2 className="section-heading">Настройки</h2>
+      <SoundToggle variant="profile" />
 
       <h2 className="section-heading">Достижения</h2>
       <div className="badge-grid">

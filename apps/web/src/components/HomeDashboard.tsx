@@ -1,15 +1,18 @@
 import { getStats, winRatePercent } from '../lib/localStats';
+import { mistakeCount } from '../lib/mistakeLog';
 import { playSound } from '../lib/sounds';
 import { challenges } from '../lib/tournaments';
 
 interface HomeDashboardProps {
   onFindMatch: () => void;
   onProfile: () => void;
+  onTraining: () => void;
   onChallenge: (tournamentId: string) => void;
 }
 
-export function HomeDashboard({ onFindMatch, onProfile, onChallenge }: HomeDashboardProps) {
+export function HomeDashboard({ onFindMatch, onProfile, onTraining, onChallenge }: HomeDashboardProps) {
   const stats = getStats();
+  const mistakes = mistakeCount();
 
   return (
     <section className="home-dashboard">
@@ -39,6 +42,13 @@ export function HomeDashboard({ onFindMatch, onProfile, onChallenge }: HomeDashb
           Найти соперника <span aria-hidden="true">→</span>
         </button>
       </section>
+
+      <button type="button" className="training-entry" onClick={() => { playSound('click'); onTraining(); }}>
+        <span className="training-entry-title">Тренировка по ошибкам</span>
+        <span className="training-entry-meta">
+          {mistakes > 0 ? `Ошибок накоплено: ${mistakes}` : 'Пока нет ошибок'}
+        </span>
+      </button>
 
       {challenges.map(({ tournament, badge }) => (
         <div className="challenge-card" key={tournament.id}>

@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
+import { SoundToggle } from './SoundToggle';
 
 interface MatchHudProps {
   player: number;
@@ -58,9 +59,12 @@ export function MatchHud({ player, opponent, opponentName, round, totalRounds }:
     <section className="match-hud" aria-label="Прогресс матча">
       <div className="match-hud-grid">
         <Competitor name="Ты" value={player} side="player" />
-        <div className="match-hud-round" aria-label={`Раунд ${round} из ${totalRounds}`}>
-          <span>Раунд</span>
-          <strong>{round}<i>/</i>{totalRounds}</strong>
+        <div className="match-hud-center">
+          <div className="match-hud-round" aria-label={`Раунд ${round} из ${totalRounds}`}>
+            <span>Раунд</span>
+            <strong>{round}<i>/</i>{totalRounds}</strong>
+          </div>
+          <SoundToggle variant="hud" />
         </div>
         <Competitor name={opponentName} value={opponent} side="opponent" />
       </div>

@@ -1,3 +1,4 @@
+import { abandonedAtRound, type Opponent } from '@clutch/shared';
 import { ApiError } from './api';
 
 export type MatchSource = 'player' | 'bot' | 'local' | 'challenge';
@@ -14,6 +15,20 @@ export const MATCH_SOURCE_LABELS: Record<MatchSource, string> = {
   local: 'Локальная практика',
   challenge: 'Челлендж',
 };
+
+/**
+ * Honest note for a recorded player who stopped before the end of the set without reaching 100.
+ * Derived from the transcript; a player who won early by reaching 100 is not "abandoned".
+ */
+export function abandonedNote(
+  source: MatchSource,
+  opponent: Opponent,
+  questionCount: number,
+): string | null {
+  if (source !== 'player') return null;
+  const round = abandonedAtRound(opponent.rounds, questionCount);
+  return round === null ? null : `Запись оборвалась на ${round}-м вопросе`;
+}
 
 export function matchmakingErrorMessage(error: unknown): string {
   if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {

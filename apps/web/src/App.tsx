@@ -10,9 +10,12 @@ import { QuestionScreen } from './components/QuestionScreen';
 import { ResolutionScreen } from './components/ResolutionScreen';
 import { HammerGame } from './components/HammerGame';
 import { ResultScreen } from './components/ResultScreen';
+import { Training } from './components/Training';
 import { findChallenge } from './lib/tournaments';
 import { completionQueue } from './lib/completionQueue';
 import { analytics } from './lib/analytics';
+import { abandonedNote } from './lib/matchmaking';
+import { shouldShowMatchHud } from './lib/matchHud';
 import { useTelegramBackButton } from './lib/useTelegramBackButton';
 
 function handleChallenge(tournamentId: string, startChallenge: ReturnType<typeof useGameState>['startChallenge']) {
@@ -42,7 +45,7 @@ export default function App() {
   const shellRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
   const screenDuration = reduceMotion ? 0 : 0.18;
-  const showMatchHud = ['question', 'resolution'].includes(game.phase);
+  const showMatchHud = shouldShowMatchHud(game.phase);
 
   useTelegramBackButton(game.phase, game.matchSource, {
     home: game.goHome,
@@ -88,6 +91,7 @@ export default function App() {
             <HomeDashboard
               onFindMatch={game.goToCategories}
               onProfile={game.goToProfile}
+              onTraining={game.goToTraining}
               onChallenge={(tournamentId) => handleChallenge(tournamentId, game.startChallenge)}
             />
           </motion.div>
@@ -96,6 +100,16 @@ export default function App() {
         {game.phase === 'profile' && (
           <motion.div key="profile" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <Profile onBack={game.goHome} />
+          </motion.div>
+        )}
+
+        {game.phase === 'training' && (
+          <motion.div key="training" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <Training
+              questions={game.trainingQuestions}
+              onAnswered={game.recordTrainingAnswer}
+              onBack={game.goHome}
+            />
           </motion.div>
         )}
 
@@ -112,6 +126,7 @@ export default function App() {
               video={game.activeVideo}
               status={game.matchmakingStatus}
               source={game.matchSource}
+              abandonedNote={abandonedNote(game.matchSource, game.opponent, game.totalQuestions)}
               error={game.matchmakingError}
               onStart={game.start}
               onRetry={game.retryMatchmaking}
@@ -161,6 +176,7 @@ export default function App() {
               opponentProgress={game.opponentProgress}
               opponentName={game.opponent.displayName}
               matchSource={game.matchSource}
+              abandonedNote={abandonedNote(game.matchSource, game.opponent, game.totalQuestions)}
               bestSkill={game.bestSkill}
               correctCount={game.correctCount}
               questionsPlayed={game.questionsPlayed}

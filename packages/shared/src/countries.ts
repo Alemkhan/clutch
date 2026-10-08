@@ -5,6 +5,10 @@ export interface Country {
   capital: string;
   capitalRu: string;
   region: string;
+  /** Editorial provenance; filled only for entries verified against a primary source. */
+  sourceUrl?: string;
+  sourceTitle?: string;
+  lastVerifiedAt?: string;
 }
 
 export const countries: Country[] = [
@@ -62,7 +66,10 @@ export const countries: Country[] = [
   { code: 'bs', name: 'Bahamas', nameRu: 'Багамы', capital: 'Nassau', capitalRu: 'Нассау', region: 'Americas' },
   { code: 'bb', name: 'Barbados', nameRu: 'Барбадос', capital: 'Bridgetown', capitalRu: 'Бриджтаун', region: 'Americas' },
   { code: 'bz', name: 'Belize', nameRu: 'Белиз', capital: 'Belmopan', capitalRu: 'Бельмопан', region: 'Americas' },
-  { code: 'bo', name: 'Bolivia', nameRu: 'Боливия', capital: 'La Paz', capitalRu: 'Ла-Пас', region: 'Americas' },
+  { code: 'bo', name: 'Bolivia', nameRu: 'Боливия', capital: 'Sucre', capitalRu: 'Сукре', region: 'Americas',
+    sourceUrl: 'https://www.senapi.gob.bo/normativas/constitucion-politica-del-estado/constitucion-politica-del-estado-plurinacional-de-bolivia',
+    sourceTitle: 'Конституция Боливии, статья 6: столица — Сукре',
+    lastVerifiedAt: '2026-10-08' },
   { code: 'br', name: 'Brazil', nameRu: 'Бразилия', capital: 'Brasília', capitalRu: 'Бразилиа', region: 'Americas' },
   { code: 'ca', name: 'Canada', nameRu: 'Канада', capital: 'Ottawa', capitalRu: 'Оттава', region: 'Americas' },
   { code: 'cl', name: 'Chile', nameRu: 'Чили', capital: 'Santiago', capitalRu: 'Сантьяго', region: 'Americas' },
@@ -159,7 +166,10 @@ export const countries: Country[] = [
   { code: 'cd', name: 'DR Congo', nameRu: 'ДР Конго', capital: 'Kinshasa', capitalRu: 'Киншаса', region: 'Africa' },
   { code: 'dj', name: 'Djibouti', nameRu: 'Джибути', capital: 'Djibouti', capitalRu: 'Джибути', region: 'Africa' },
   { code: 'eg', name: 'Egypt', nameRu: 'Египет', capital: 'Cairo', capitalRu: 'Каир', region: 'Africa' },
-  { code: 'gq', name: 'Equatorial Guinea', nameRu: 'Экваториальная Гвинея', capital: 'Malabo', capitalRu: 'Малабо', region: 'Africa' },
+  { code: 'gq', name: 'Equatorial Guinea', nameRu: 'Экваториальная Гвинея', capital: 'Ciudad de la Paz', capitalRu: 'Сьюдад-де-ла-Пас', region: 'Africa',
+    sourceUrl: 'https://www.guineaecuatorialpress.com/index.php/noticias/el_presidente_de_la_republica_proclama_la_ciudad_de_la_paz_como_capital_de_la_republica_de_guinea_ecuatorial_con_la_firma_de_un_decreto_ley',
+    sourceTitle: 'Правительство Экваториальной Гвинеи: Сьюдад-де-ла-Пас объявлена столицей (январь 2026; декрет подтверждён парламентом)',
+    lastVerifiedAt: '2026-10-08' },
   { code: 'er', name: 'Eritrea', nameRu: 'Эритрея', capital: 'Asmara', capitalRu: 'Асмэра', region: 'Africa' },
   { code: 'sz', name: 'Eswatini', nameRu: 'Эсватини', capital: 'Mbabane', capitalRu: 'Мбабане', region: 'Africa' },
   { code: 'et', name: 'Ethiopia', nameRu: 'Эфиопия', capital: 'Addis Ababa', capitalRu: 'Аддис-Абеба', region: 'Africa' },

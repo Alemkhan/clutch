@@ -17,7 +17,7 @@ import {
 import { applyClientRound, scoreSkillDistance } from './clientMatchRules';
 import type { MatchSource } from './matchmaking';
 
-export type Phase = 'home' | 'categories' | 'matchmaking' | 'question' | 'resolution' | 'hammer' | 'result' | 'profile';
+export type Phase = 'home' | 'categories' | 'matchmaking' | 'question' | 'resolution' | 'hammer' | 'result' | 'profile' | 'training';
 
 export interface GameState {
   phase: Phase;

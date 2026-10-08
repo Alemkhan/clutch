@@ -1,5 +1,6 @@
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
+  MIN_POOL_ROUNDS,
   SKILL_REWARDS,
   applyMatchRound,
   pressureStageFromResults,
@@ -94,6 +95,7 @@ function normalizeOpponent(
   opponent: Opponent,
   questions: readonly Question[],
   remapIds: boolean,
+  allowFrozen = false,
 ): Opponent {
   validateQuestions(questions);
   if (!opponent || typeof opponent.id !== 'string' || opponent.id.length === 0
@@ -124,7 +126,10 @@ function normalizeOpponent(
     }
   }
 
-  if (progress < 100
+  // A recorded player may have stopped early: progress freezes after the last recorded round.
+  const frozenOk = allowFrozen && opponent.rounds.length >= MIN_POOL_ROUNDS
+    && rounds.length === opponent.rounds.length;
+  if (progress < 100 && !frozenOk
     && (rounds.length !== questions.length || opponent.rounds.length !== questions.length)) {
     throw new Error('Opponent transcript is too short for this match.');
   }
@@ -153,7 +158,7 @@ export function normalizeOnlineMatch(match: StartAsyncMatchResponse): Normalized
     throw new Error('Async match response is invalid.');
   }
   const config = configForServerConditions(match.conditions);
-  const opponent = normalizeOpponent(match.opponent, match.questions, false);
+  const opponent = normalizeOpponent(match.opponent, match.questions, false, match.opponentSource === 'player');
   return {
     matchId: match.matchId,
     questions: match.questions,
@@ -174,8 +179,13 @@ export function applyClientRound(
     throw new Error('Player progress award is not supported.');
   }
   const question = questions[questionIndex];
-  const opponentRound = opponent.rounds[questionIndex];
-  if (!question || !opponentRound) throw new Error('Match transcript ended unexpectedly.');
+  if (!question) throw new Error('Match transcript ended unexpectedly.');
+  // Past the end of a short recorded opponent its progress stays frozen (award 0).
+  const opponentRound = opponent.rounds[questionIndex]
+    ?? (opponent.rounds.length >= MIN_POOL_ROUNDS
+      ? { questionId: question.id, progressAwarded: 0 }
+      : undefined);
+  if (!opponentRound) throw new Error('Match transcript ended unexpectedly.');
   return applyMatchRound(state, {
     expectedQuestionId: question.id,
     isLastQuestion: questionIndex === questions.length - 1,

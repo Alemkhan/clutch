@@ -2,6 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import type { SkillResult } from '@clutch/shared';
 import { playSound } from '../lib/sounds';
 import type { ResultSaveStatus } from '../lib/useGameState';
+import { canShareViaTelegram, shareViaTelegram } from '../lib/telegram';
+import {
+  buildSharePayload,
+  chooseShareStrategy,
+  executeShare,
+  buildShareUrl,
+  shareHeadline,
+  type ShareResult,
+} from '../lib/share';
 import { MATCH_SOURCE_LABELS, type MatchSource } from '../lib/matchmaking';
 
 interface ResultScreenProps {
@@ -9,6 +18,7 @@ interface ResultScreenProps {
   opponentProgress: number;
   opponentName: string;
   matchSource: MatchSource;
+  abandonedNote?: string | null;
   bestSkill: SkillResult | null;
   correctCount: number;
   questionsPlayed: number;
@@ -27,6 +37,7 @@ export function ResultScreen({
   opponentProgress,
   opponentName,
   matchSource,
+  abandonedNote,
   bestSkill,
   correctCount,
   questionsPlayed,
@@ -41,7 +52,24 @@ export function ResultScreen({
 }: ResultScreenProps) {
   const won = playerProgress > opponentProgress;
   const tie = playerProgress === opponentProgress;
-  const [showShare, setShowShare] = useState(false);
+  const [shareResult, setShareResult] = useState<ShareResult | null>(null);
+  const shareInput = { playerProgress, opponentProgress, opponentName, matchSource };
+  const shareUrl = buildShareUrl(
+    shareInput,
+    import.meta.env.VITE_API_URL ?? '',
+    typeof window === 'undefined' ? '' : window.location.origin,
+  );
+
+  async function handleShare() {
+    const hasNative = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
+    const strategy = chooseShareStrategy({ telegramShare: canShareViaTelegram(), nativeShare: hasNative });
+    const result = await executeShare(strategy, buildSharePayload(shareInput, shareUrl), {
+      telegramShare: shareViaTelegram,
+      nativeShare: hasNative ? (data) => navigator.share(data) : undefined,
+      copy: (text) => navigator.clipboard.writeText(text),
+    });
+    setShareResult(result);
+  }
   const recordedRef = useRef(false);
 
   useEffect(() => {
@@ -61,6 +89,7 @@ export function ResultScreen({
         {won ? 'Клатч!' : tie ? 'Ничья' : 'Почти!'}
       </h1>
       <span className={`match-source source-${matchSource}`}>{MATCH_SOURCE_LABELS[matchSource]}</span>
+      {abandonedNote && <span className="match-source source-player abandoned-note">{abandonedNote}</span>}
 
       <div className="result-comparison">
         <div className="result-side player">
@@ -121,16 +150,19 @@ export function ResultScreen({
         )}
       </div>
 
-      {showShare && (
-        <div className="share-card">
-          <p className="share-card-title">CLUTCH</p>
-          <p className="share-card-headline">{won ? 'Я вытащил клатч!' : 'Почти получилось!'}</p>
-          <div className="share-card-scores">
-            <span>Я {playerProgress}%</span>
-            <span>vs</span>
-            <span>{opponentName} {opponentProgress}%</span>
-          </div>
+      <div className="share-card">
+        <p className="share-card-title">CLUTCH</p>
+        <p className="share-card-headline">{shareHeadline(shareInput)}</p>
+        <div className="share-card-scores">
+          <span>Я {playerProgress}%</span>
+          <span>vs</span>
+          <span>{opponentName} {opponentProgress}%</span>
         </div>
+        {matchSource === 'local' && <p className="share-card-note">Тренировка, результат не сохранён</p>}
+      </div>
+      {shareResult === 'copied' && <p className="result-insight" role="status">Ссылка скопирована.</p>}
+      {shareResult === 'failed' && (
+        <p className="result-insight" role="status">Не удалось поделиться. Ссылка: {shareUrl}</p>
       )}
 
       <div className="result-actions">
@@ -138,14 +170,7 @@ export function ResultScreen({
         <button
           type="button"
           className="ghost-btn"
-          onClick={() => {
-            playSound('click');
-            if (navigator.share) {
-              navigator.share({ text: `Я ${won ? 'выиграл' : 'сыграл'} ${playerProgress}% против ${opponentProgress}% в Clutch!` }).catch(() => {});
-            } else {
-              setShowShare((v) => !v);
-            }
-          }}
+          onClick={() => { playSound('click'); void handleShare(); }}
         >
           Поделиться
         </button>

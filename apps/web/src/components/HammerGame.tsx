@@ -15,6 +15,8 @@ import {
   reducedMotionMarkerPosition,
 } from '../lib/hammerMotion';
 import { playSound, strikeSoundFor } from '../lib/sounds';
+import { preloadImages } from '../lib/preloadImages';
+import { hasSeenHammerIntro, markHammerIntroSeen } from '../lib/hammerIntro';
 
 interface HammerGameProps {
   config: MiniGameConfig;
@@ -64,6 +66,28 @@ export function HammerResultStatus({ result }: { result: SkillResult }) {
   );
 }
 
+export function HammerIntro({ onConfirm }: { onConfirm: () => void }) {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    buttonRef.current?.focus();
+  }, []);
+  return (
+    <section className="hammer-intro" role="region" aria-labelledby="hammer-intro-title">
+      <h2 id="hammer-intro-title" className="hammer-intro-title">Как забить гвоздь</h2>
+      <ul className="hammer-intro-list">
+        <li>Маркер бежит по полосе туда и обратно.</li>
+        <li>Тапни, чтобы остановить его в целевой зоне.</li>
+        <li>Чем ближе к центру, тем больше прогресса за удар.</li>
+        <li>Промах не даёт прогресса, но попытку не отнимает.</li>
+      </ul>
+      <p className="hammer-intro-note">С каждым удачным ударом зоны становятся уже.</p>
+      <button type="button" className="hammer-intro-btn" ref={buttonRef} onClick={onConfirm}>
+        Понятно, бью
+      </button>
+    </section>
+  );
+}
+
 export function HammerGame({ config, questionId, previousSkillResults, onComplete }: HammerGameProps) {
   const reduceMotion = useReducedMotion();
   const attempt = useMemo(
@@ -74,6 +98,9 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
   const [markerPos, setMarkerPos] = useState(0);
   const [struck, setStruck] = useState(false);
   const [result, setResult] = useState<SkillResult | null>(null);
+  // The explanation is a step BEFORE the attempt: while open, the attempt effect
+  // below does not start the marker, the frame clock or analytics.
+  const [introOpen, setIntroOpen] = useState(() => !hasSeenHammerIntro());
   const posRef = useRef(0);
   const activeElapsedRef = useRef(0);
   const lastFrameRef = useRef<number | null>(null);
@@ -83,7 +110,14 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
   const completedRef = useRef(false);
   const soundTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // The burst sprites are multi-megabyte and otherwise first requested at the
+  // moment of the strike. Warm the cache on mount; failures are ignored.
   useEffect(() => {
+    preloadImages(['/sprites/burst-hit.png', '/sprites/burst-perfect.png']);
+  }, []);
+
+  useEffect(() => {
+    if (introOpen) return undefined;
     posRef.current = 0;
     activeElapsedRef.current = 0;
     lastFrameRef.current = null;
@@ -128,10 +162,10 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
       document.removeEventListener('visibilitychange', onVisibilityChange);
       if (soundTimeoutRef.current !== null) clearTimeout(soundTimeoutRef.current);
     };
-  }, [attempt.targetCenter, config.markerSpeed, reduceMotion]);
+  }, [attempt.targetCenter, config.markerSpeed, reduceMotion, introOpen]);
 
   const handleTap = useCallback(() => {
-    if (stoppedRef.current) return;
+    if (introOpen || stoppedRef.current) return;
     stoppedRef.current = true;
     setStruck(true);
     cancelAnimationFrame(rafRef.current);
@@ -155,7 +189,12 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
     // onComplete fires from the nail-sink animation's onAnimationComplete below,
     // once the player has actually seen it settle — not on a fixed timer that has
     // to be kept in sync with the animation's own duration by hand.
-  }, [attempt.stage, attempt.targetCenter, config]);
+  }, [attempt.stage, attempt.targetCenter, config, introOpen]);
+
+  const confirmIntro = () => {
+    markHammerIntroSeen();
+    setIntroOpen(false);
+  };
 
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -166,10 +205,12 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
 
   return (
     <>
+      {introOpen && <HammerIntro onConfirm={confirmIntro} />}
       <div
         className="hammer-game"
         role="button"
-        {...hammerActionSemantics(struck, result)}
+        {...hammerActionSemantics(struck || introOpen, result)}
+        aria-hidden={introOpen || undefined}
         onClick={handleTap}
         onKeyDown={onKeyDown}
       >
@@ -226,6 +267,7 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
       ) : (
         <p className="strike-instruction">Тапни, когда маркер в центре</p>
       )}
+
       </div>
       {result && <HammerResultStatus result={result} />}
     </>

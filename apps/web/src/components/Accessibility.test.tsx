@@ -15,7 +15,10 @@ const question: Question = {
   createdAt: '2026-10-01',
 };
 
-afterEach(() => vi.restoreAllMocks());
+afterEach(() => {
+  vi.restoreAllMocks();
+  vi.unstubAllGlobals();
+});
 
 describe('accessible gameplay semantics', () => {
   it('renders resolution as one named keyboard action', () => {
@@ -34,6 +37,8 @@ describe('accessible gameplay semantics', () => {
   });
 
   it('names the hammer action and exposes its disabled-after-hit state', () => {
+    // The explanation was already seen on this device, so the attempt is live.
+    vi.stubGlobal('localStorage', { getItem: () => '1', setItem: () => undefined });
     const html = renderToStaticMarkup(
       <HammerGame
         config={CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config}

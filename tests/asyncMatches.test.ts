@@ -5,6 +5,9 @@ import { createHmac, createHash } from 'node:crypto';
 import { afterEach, describe, expect, it } from 'vitest';
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
+  DAILY_BANK_SIZE,
+  dailyQuestionSet,
+  dailyQuestionSetIds,
   generateMatch,
   type AsyncMatchRound,
   type AsyncMatchRoundInput,
@@ -150,6 +153,7 @@ function insertRun(db: TestD1, options: {
   config?: string | null;
   completedAt?: number | null;
   opponentRunId?: string | null;
+  questionSetId?: string | null;
 }) {
   const identity = guestIdentity(options.playerId ?? options.id);
   matchAuthorization.set(options.id, identity.authorization);
@@ -157,8 +161,8 @@ function insertRun(db: TestD1, options: {
     INSERT INTO match_runs (
       id, player_id, display_name, category, questions_json, rounds_json, progress,
       correct_count, status, opponent_run_id, created_at, completed_at, rules_version,
-      mini_game_id, mini_game_config_json, opponent_json, ghost_eligible
-    ) VALUES (?, ?, ?, 'geography', ?, ?, 0, 0, ?, ?, 1, ?, ?, ?, ?, ?, ?)
+      mini_game_id, mini_game_config_json, opponent_json, ghost_eligible, question_set_id
+    ) VALUES (?, ?, ?, 'geography', ?, ?, 0, 0, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?)
   `).run(
     options.id,
     identity.playerId,
@@ -177,6 +181,7 @@ function insertRun(db: TestD1, options: {
     options.config === undefined ? configJson : options.config,
     options.snapshot === undefined ? null : JSON.stringify(options.snapshot),
     options.eligible ?? 0,
+    options.questionSetId ?? null,
   );
 }
 
@@ -364,8 +369,11 @@ describe('async match routes with persisted rules', () => {
     const created = await start(db);
     expect(created.conditions).toEqual(CURRENT_ASYNC_MATCH_CONDITIONS);
     expect(created.opponentSource).toBe('bot');
-    expect(created.opponent.rounds).toHaveLength(8);
-    expect(created.opponent.rounds.at(-1)?.questionId).toBe(created.questions[7].id);
+    // Bot strength depends on the question set and player, so the length is 8..10.
+    const botRounds = created.opponent.rounds.length;
+    expect(botRounds).toBeGreaterThanOrEqual(8);
+    expect(botRounds).toBeLessThanOrEqual(10);
+    expect(created.opponent.rounds.at(-1)?.questionId).toBe(created.questions[botRounds - 1].id);
 
     const row = db.sqlite.prepare(`
       SELECT rules_version, mini_game_id, mini_game_config_json, opponent_json
@@ -386,20 +394,24 @@ describe('async match routes with persisted rules', () => {
 
     const second = await start(db, 'challenger');
     expect(second.opponentSource).toBe('player');
-    expect(second.questions).toEqual(first.questions);
+    expect(second.questions).toEqual(first.questions); // same shared daily set, not inherited
     expect(second.conditions).toEqual(first.conditions);
     expect(second.opponent.id).toBe(first.matchId);
   });
 
-  it('saves an early loss but excludes it from the opponent pool', async () => {
+  it('saves an early loss with ghost_eligible 0 and still offers it as an opponent', async () => {
     const db = database();
     const first = await start(db, 'loser');
-    const response = await complete(db, first.matchId, inputs(first.questions, 8, false));
+    const response = await complete(db, first.matchId, inputs(first.questions, first.opponent.rounds.length, false));
     expect(response.status).toBe(200);
     const row = db.sqlite.prepare('SELECT status, ghost_eligible FROM match_runs WHERE id = ?')
       .get(first.matchId) as { status: string; ghost_eligible: number };
     expect(row).toEqual({ status: 'completed', ghost_eligible: 0 });
-    expect((await start(db, 'next')).opponentSource).toBe('bot');
+    const next = await start(db, 'next');
+    expect(next.opponentSource).toBe('player');
+    expect(next.opponent.id).toBe(first.matchId);
+    expect(next.opponent.rounds).toHaveLength(first.opponent.rounds.length);
+    expect(next.questions).toEqual(first.questions);
   });
 
   it('rejects a nonterminal prefix without writing completion fields', async () => {
@@ -503,32 +515,32 @@ describe('async match routes with persisted rules', () => {
 
   it('filters incompatible ghosts on unused and repeat selection paths', async () => {
     const db = database();
-    const questions = generateMatch(10, 0.3, 'geography');
+    const { questionSetId, questions } = dailyQuestionSet('geography');
     const rounds = storedRounds(questions, Array(10).fill(5));
-    insertRun(db, { id: 'compatible', playerId: 'ghost', questions, rounds, status: 'completed', eligible: 1, completedAt: 1 });
+    insertRun(db, { id: 'compatible', playerId: 'ghost', questions, questionSetId, rounds, status: 'completed', eligible: 1, completedAt: 1 });
     insertRun(db, {
-      id: 'incompatible', playerId: 'newer-ghost', questions, rounds, status: 'completed',
+      id: 'incompatible', questionSetId, playerId: 'newer-ghost', questions, rounds, status: 'completed',
       eligible: 1, completedAt: 2, rulesVersion: 'race-to-100-v1',
     });
     insertRun(db, {
-      id: 'wrong-game', playerId: 'wrong-game-player', questions, rounds, status: 'completed',
+      id: 'wrong-game', questionSetId, playerId: 'wrong-game-player', questions, rounds, status: 'completed',
       eligible: 1, completedAt: 3, miniGameId: 'future_game',
     });
     insertRun(db, {
-      id: 'wrong-config', playerId: 'wrong-config-player', questions, rounds, status: 'completed',
+      id: 'wrong-config', questionSetId, playerId: 'wrong-config-player', questions, rounds, status: 'completed',
       eligible: 1, completedAt: 4, config: '{"markerSpeed":1}',
     });
     const unused = await start(db, 'chooser');
     expect(unused.opponent.id).toBe('compatible');
     const repeat = await start(db, 'chooser');
-    expect(repeat.opponent.id).toBe('compatible');
+    expect(repeat.opponentSource).toBe('bot'); // 'compatible' was already faced; no fallback
   });
 
   it('uses the stored snapshot even after the source ghost is edited', async () => {
     const db = database();
-    const questions = generateMatch(10, 0.3, 'geography');
+    const { questionSetId, questions } = dailyQuestionSet('geography');
     const rounds = storedRounds(questions, [25, 25, 25, 25]);
-    insertRun(db, { id: 'source', playerId: 'source-player', questions, rounds, status: 'completed', eligible: 1, completedAt: 1 });
+    insertRun(db, { id: 'source', playerId: 'source-player', questions, questionSetId, rounds, status: 'completed', eligible: 1, completedAt: 1 });
     const created = await start(db, 'challenger');
     db.sqlite.prepare("UPDATE match_runs SET rounds_json = 'not json' WHERE id = 'source'").run();
     expect((await complete(db, created.matchId, inputs(created.questions, 4, false))).status).toBe(200);
@@ -536,21 +548,21 @@ describe('async match routes with persisted rules', () => {
 
   it('skips malformed and short flagged ghosts', async () => {
     const db = database();
-    const questions = generateMatch(10, 0.3, 'geography');
+    const { questionSetId, questions } = dailyQuestionSet('geography');
     insertRun(db, {
-      id: 'short', playerId: 'short-player', questions,
+      id: 'short', playerId: 'short-player', questions, questionSetId,
       rounds: storedRounds(questions, [25]), status: 'completed', eligible: 1, completedAt: 2,
     });
     const malformedQuestions = questions.map((question, index) => (
       index === 0 ? { ...question, options: [null] } : question
     )) as unknown as Question[];
     insertRun(db, {
-      id: 'malformed', playerId: 'malformed-player', questions: malformedQuestions,
+      id: 'malformed', playerId: 'malformed-player', questions: malformedQuestions, questionSetId,
       rounds: storedRounds(malformedQuestions, [25, 25, 25, 25]),
       status: 'completed', eligible: 1, completedAt: 3,
     });
     insertRun(db, {
-      id: 'bad-round', playerId: 'bad-round-player', questions,
+      id: 'bad-round', playerId: 'bad-round-player', questions, questionSetId,
       rounds: [{
         questionId: questions[0].id,
         correct: true,
@@ -561,6 +573,140 @@ describe('async match routes with persisted rules', () => {
       status: 'completed', eligible: 1, completedAt: 4,
     });
     expect((await start(db, 'chooser')).opponentSource).toBe('bot');
+  });
+
+  it('gives different players the same daily set and records its id', async () => {
+    const db = database();
+    const first = await start(db, 'daily-a');
+    const second = await start(db, 'daily-b');
+    expect(second.questions).toEqual(first.questions);
+    expect(first.questions).toEqual(dailyQuestionSet('geography').questions);
+    const stored = db.sqlite.prepare('SELECT question_set_id FROM match_runs WHERE id = ?')
+      .get(first.matchId) as { question_set_id: string };
+    expect(stored.question_set_id).toBe(dailyQuestionSet('geography').questionSetId);
+  });
+
+  it('does not inherit a ghost quiz from another set and ignores NULL-set rows', async () => {
+    const db = database();
+    const questions = generateMatch(10, 0.3, 'geography');
+    const rounds = storedRounds(questions, Array(10).fill(5));
+    insertRun(db, { id: 'old-null', playerId: 'old-1', questions, rounds, status: 'completed', eligible: 1, completedAt: 1 });
+    insertRun(db, {
+      id: 'yesterday', playerId: 'old-2', questions, rounds, status: 'completed', eligible: 1,
+      completedAt: 2, questionSetId: 'geography:2000-01-01',
+    });
+    const created = await start(db, 'newcomer');
+    expect(created.opponentSource).toBe('bot');
+    expect(created.questions).toEqual(dailyQuestionSet('geography').questions);
+  });
+
+  it('never serves the same opponent to a player twice', async () => {
+    const db = database();
+    const { questionSetId, questions } = dailyQuestionSet('geography');
+    const rounds = storedRounds(questions, Array(10).fill(5));
+    insertRun(db, { id: 'only-ghost', playerId: 'ghost', questions, questionSetId, rounds, status: 'completed', eligible: 1, completedAt: 1 });
+    expect((await start(db, 'repeat')).opponent.id).toBe('only-ghost');
+    for (let attempt = 0; attempt < 3; attempt++) {
+      expect((await start(db, 'repeat')).opponentSource).toBe('bot');
+    }
+    expect((await start(db, 'other')).opponent.id).toBe('only-ghost');
+  });
+
+  describe('daily bank selection', () => {
+    const bankSet = (index: number) => dailyQuestionSet('geography', Date.now(), index);
+    const pending = (db: TestD1, id: string, index: number, completedAt: number, awards: number[]) => {
+      const { questionSetId, questions } = bankSet(index);
+      insertRun(db, {
+        id, playerId: `p-${id}`, questions, questionSetId, rounds: storedRounds(questions, awards),
+        status: 'completed', eligible: 0, completedAt,
+      });
+    };
+
+    it('gives a repeat match in the same category a different set until the bank is used up', async () => {
+      const db = database();
+      const seen: string[] = [];
+      for (let attempt = 0; attempt < DAILY_BANK_SIZE; attempt++) {
+        const created = await start(db, 'grinder');
+        expect(created.opponentSource).toBe('bot');
+        const stored = db.sqlite.prepare('SELECT question_set_id FROM match_runs WHERE id = ?')
+          .get(created.matchId) as { question_set_id: string };
+        seen.push(stored.question_set_id);
+      }
+      expect(seen).toEqual(dailyQuestionSetIds('geography'));
+      // Bank exhausted: the least recently played set comes back, still against a bot.
+      const again = await start(db, 'grinder');
+      const stored = db.sqlite.prepare('SELECT question_set_id FROM match_runs WHERE id = ?')
+        .get(again.matchId) as { question_set_id: string };
+      expect(stored.question_set_id).toBe(seen[0]);
+      expect(again.questions).toEqual(bankSet(0).questions);
+      expect(again.opponentSource).toBe('bot');
+    });
+
+    it('prefers a set with a waiting record over an unplayed empty one', async () => {
+      const db = database();
+      pending(db, 'waiting', 5, 10, [5, 5, 5, 5]);
+      const created = await start(db, 'chooser');
+      expect(created.opponentSource).toBe('player');
+      expect(created.opponent.id).toBe('waiting');
+      expect(created.questions).toEqual(bankSet(5).questions);
+      const stored = db.sqlite.prepare('SELECT question_set_id FROM match_runs WHERE id = ?')
+        .get(created.matchId) as { question_set_id: string };
+      expect(stored.question_set_id).toBe(bankSet(5).questionSetId);
+    });
+
+    it('takes the freshest record across the bank and gives two players the same quiz', async () => {
+      const db = database();
+      pending(db, 'old', 3, 10, [5, 5, 5, 5]);
+      pending(db, 'fresh', 7, 20, [5, 5, 5, 5]);
+      pending(db, 'middle', 1, 15, [5, 5, 5, 5]);
+      const first = await start(db, 'a');
+      const second = await start(db, 'b');
+      expect(first.opponent.id).toBe('fresh');
+      expect(second.opponent.id).toBe('fresh');
+      expect(second.questions).toEqual(first.questions);
+      // The same player moves on to the next freshest record, never repeating one.
+      expect((await start(db, 'a')).opponent.id).toBe('middle');
+      expect((await start(db, 'a')).opponent.id).toBe('old');
+      expect((await start(db, 'a')).opponentSource).toBe('bot');
+    });
+
+    it('uses the lowest set not played today when no record is waiting', async () => {
+      const db = database();
+      const first = await start(db, 'solo');
+      const second = await start(db, 'solo');
+      expect(first.questions).toEqual(bankSet(0).questions);
+      expect(second.questions).toEqual(bankSet(1).questions);
+      expect(second.questions).not.toEqual(first.questions);
+    });
+
+    it('pools records that stopped on a loss but not ones shorter than 3 rounds', async () => {
+      const db = database();
+      pending(db, 'two-rounds', 0, 30, [5, 5]);
+      expect((await start(db, 'seeker')).opponentSource).toBe('bot');
+      pending(db, 'three-rounds', 2, 10, [0, 0, 0]);
+      const created = await start(db, 'seeker-2');
+      expect(created.opponent.id).toBe('three-rounds');
+    });
+
+    it('lets a player finish the set against a record that stopped early, with its progress frozen', async () => {
+      const db = database();
+      pending(db, 'stopped', 4, 10, [25, 0, 5, 0, 0, 5]); // 35% after round 6
+      const created = await start(db, 'finisher');
+      expect(created.opponent.id).toBe('stopped');
+      expect(created.opponent.rounds).toHaveLength(6);
+      // Ten wrong answers: the set is played to the end after the record stops at question 6.
+      const response = await complete(db, created.matchId, inputs(created.questions, 10, false));
+      expect(response.status).toBe(200);
+      const row = db.sqlite.prepare('SELECT status, progress FROM match_runs WHERE id = ?')
+        .get(created.matchId) as { status: string; progress: number };
+      expect(row).toEqual({ status: 'completed', progress: 0 });
+      // A shorter prefix is still not a finished match.
+      const other = await start(db, 'finisher-2');
+      expect((await complete(db, other.matchId, inputs(other.questions, 8, false))).status).toBe(400);
+      // Reaching 100 passes the frozen opponent and ends the match early.
+      const winner = await start(db, 'finisher-3');
+      expect((await complete(db, winner.matchId, inputs(winner.questions, 4, true, 0))).status).toBe(200);
+    });
   });
 
   it('returns the first stored response on repeated completion', async () => {

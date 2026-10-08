@@ -6,6 +6,7 @@ interface MatchmakingProps {
   video?: Tournament['video'];
   status: MatchmakingStatus;
   source: MatchSource;
+  abandonedNote?: string | null;
   error?: string;
   onStart: () => void;
   onRetry: () => void;
@@ -18,6 +19,7 @@ export function Matchmaking({
   video,
   status,
   source,
+  abandonedNote,
   error,
   onStart,
   onRetry,
@@ -48,6 +50,7 @@ export function Matchmaking({
         <>
           <h1 className="screen-title">Матч готов</h1>
           <span className={`match-source source-${source}`}>{MATCH_SOURCE_LABELS[source]}</span>
+          {abandonedNote && <span className="match-source source-player abandoned-note">{abandonedNote}</span>}
           <div className="matchmaking-card">
             <div className="vs-wrap">
               <div className="vs-side">

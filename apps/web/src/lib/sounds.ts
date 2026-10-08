@@ -1,4 +1,5 @@
 import type { SkillResult } from '@clutch/shared';
+import { readSoundEnabled, writeSoundEnabled } from './soundPreference';
 
 const soundFiles = {
   click: '/sfx/click.ogg',
@@ -30,7 +31,31 @@ function getAudio(name: SoundName): HTMLAudioElement {
   return audio;
 }
 
+const listeners = new Set<() => void>();
+
+export function isSoundEnabled(): boolean {
+  return readSoundEnabled();
+}
+
+export function setSoundEnabled(enabled: boolean): void {
+  writeSoundEnabled(enabled);
+  listeners.forEach((listener) => listener());
+}
+
+export function toggleSound(): boolean {
+  const next = !isSoundEnabled();
+  setSoundEnabled(next);
+  return next;
+}
+
+export function subscribeSound(listener: () => void): () => void {
+  listeners.add(listener);
+  return () => { listeners.delete(listener); };
+}
+
 export function playSound(name: SoundName, volume = 1) {
+  // Muted: return before any Audio is created, cloned or played.
+  if (!isSoundEnabled()) return;
   const base = getAudio(name);
   const instance = base.cloneNode(true) as HTMLAudioElement;
   instance.volume = volume;

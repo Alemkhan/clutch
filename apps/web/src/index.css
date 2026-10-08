@@ -1586,6 +1586,71 @@ input:focus-visible {
   background: var(--opponent);
 }
 
+.match-hud-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.sound-toggle-hud {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* Expands the tap area to 44px without growing the HUD. */
+.sound-toggle-hud::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+}
+
+.sound-toggle-hud[aria-pressed='false'] {
+  color: var(--text-dim);
+  background: var(--surface-2);
+}
+
+.sound-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.sound-toggle-row[aria-pressed='false'] .sound-toggle-state {
+  color: var(--text-dim);
+}
+
+.sound-toggle-hud:focus-visible,
+.sound-toggle-row:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 2px;
+}
+
 .match-hud-round {
   display: flex;
   flex-direction: column;
@@ -2194,4 +2259,108 @@ input:focus-visible {
   .result-mark {
     animation: none;
   }
+}
+
+/* Hammer mini-game: explanation step before the first attempt */
+.hammer-intro {
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+  margin: 0 auto 16px;
+  padding: 18px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.hammer-intro-title { margin: 0 0 10px; font-size: 20px; }
+.hammer-intro-list { margin: 0 0 12px; padding-left: 20px; font-size: 16px; line-height: 1.45; }
+.hammer-intro-list li + li { margin-top: 6px; }
+.hammer-intro-note { margin: 0 0 14px; font-size: 14px; font-weight: 600; color: var(--text-dim); }
+.hammer-intro-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Mistake training */
+
+.training-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 254, 250, 0.88);
+  box-shadow: var(--shadow-sm);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.training-entry-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.training-entry-meta {
+  color: var(--text-dim);
+  font-size: 0.875rem;
+}
+
+.training-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.training-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.training-exit {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.training-title {
+  font-family: var(--font-display);
+}
+
+.training-text {
+  line-height: 1.5;
+}
+
+.training-note {
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: var(--surface-2);
+  color: var(--text-dim);
+  font-size: 0.8125rem;
+  line-height: 1.4;
 }

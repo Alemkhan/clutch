@@ -4,6 +4,10 @@ compatibility_date = "2024-10-01"
 
 [vars]
 ENVIRONMENT = "development"
+# Куда ведёт страница шаринга /api/share (только из конфигурации, не из запроса).
+TELEGRAM_MINI_APP_LINK = "https://t.me/playclutchbot?startapp"
+# Origin веб-приложения для абсолютного URL картинки; пусто = origin запроса.
+PUBLIC_WEB_ORIGIN = ""
 
 # Clutch API namespace; this ID must be unique in the target Cloudflare account.
 [[ratelimits]]
