@@ -326,6 +326,12 @@ export function useGameState() {
     if (correct) recordCorrectAnswer(questionId);
   }, []);
 
+  const goToLastStand = useCallback(() => {
+    requestCoordinatorRef.current.cancel();
+    startingPreparedRef.current = false;
+    setState({ ...createInitialGameState(), phase: 'lastStand' });
+  }, []);
+
   const goToProfile = useCallback(() => {
     setState((prev) => ({ ...prev, phase: 'profile' }));
   }, []);
@@ -378,6 +384,7 @@ export function useGameState() {
     goToMatchmaking,
     goToProfile,
     goToTraining,
+    goToLastStand,
     recordTrainingAnswer,
     trainingQuestions,
     goHome,

@@ -670,6 +670,71 @@ describe('async match routes with persisted rules', () => {
       expect((await start(db, 'a')).opponentSource).toBe('bot');
     });
 
+    const setOf = (db: TestD1, matchId: string) => (db.sqlite
+      .prepare('SELECT question_set_id FROM match_runs WHERE id = ?')
+      .get(matchId) as { question_set_id: string }).question_set_id;
+
+    it('does not send a player back to a set they played because a friend answered it', async () => {
+      const db = database();
+      const mine = await start(db, 'owner');
+      expect(mine.opponentSource).toBe('bot');
+      expect((await complete(db, mine.matchId, inputs(mine.questions, 4, true, 0))).status).toBe(200);
+      const friend = await start(db, 'friend');
+      expect(friend.opponent.id).toBe(mine.matchId);
+      expect(friend.questions).toEqual(mine.questions);
+      expect((await complete(db, friend.matchId, inputs(friend.questions, 4, false))).status).toBe(200);
+      const again = await start(db, 'owner');
+      expect(setOf(db, again.matchId)).not.toBe(setOf(db, mine.matchId));
+      expect(again.questions).not.toEqual(mine.questions);
+      expect(again.opponentSource).toBe('bot');
+    });
+
+    it('prefers a waiting record on an unplayed set over a bot, skipping records on played sets', async () => {
+      const db = database();
+      pending(db, 'on-played', 0, 30, [5, 5, 5, 5]);
+      pending(db, 'on-fresh', 4, 10, [5, 5, 5, 5]);
+      insertRun(db, { id: 'earlier', playerId: 'chooser', questions: bankSet(0).questions, questionSetId: bankSet(0).questionSetId });
+      const created = await start(db, 'chooser');
+      expect(created.opponent.id).toBe('on-fresh');
+      expect(created.questions).toEqual(bankSet(4).questions);
+    });
+
+    it('counts an unfinished run as having played the set', async () => {
+      const db = database();
+      pending(db, 'on-abandoned', 2, 10, [5, 5, 5, 5]);
+      insertRun(db, { id: 'abandoned', playerId: 'quitter', questions: bankSet(2).questions, questionSetId: bankSet(2).questionSetId, status: 'in_progress' });
+      const created = await start(db, 'quitter');
+      expect(created.opponentSource).toBe('bot');
+      expect(setOf(db, created.matchId)).toBe(bankSet(0).questionSetId);
+    });
+
+    it('takes an unplayed set against a bot when only played sets have waiting records', async () => {
+      const db = database();
+      pending(db, 'waiting', 0, 10, [5, 5, 5, 5]);
+      insertRun(db, { id: 'mine', playerId: 'veteran', questions: bankSet(0).questions, questionSetId: bankSet(0).questionSetId });
+      const created = await start(db, 'veteran');
+      expect(created.opponentSource).toBe('bot');
+      expect(setOf(db, created.matchId)).toBe(bankSet(1).questionSetId);
+    });
+
+    it('with every bank set played, pairs with a waiting record on any set, then falls back to a bot', async () => {
+      const db = database();
+      for (let index = 0; index < DAILY_BANK_SIZE; index++) {
+        insertRun(db, { id: `played-${index}`, playerId: 'finisher', questions: bankSet(index).questions, questionSetId: bankSet(index).questionSetId, status: 'completed', completedAt: 1 });
+      }
+      pending(db, 'late-a', 6, 10, [5, 5, 5, 5]);
+      pending(db, 'late-b', 9, 20, [5, 5, 5, 5]);
+      const first = await start(db, 'finisher');
+      expect(first.opponentSource).toBe('player');
+      expect(first.opponent.id).toBe('late-b');
+      expect(first.questions).toEqual(bankSet(9).questions);
+      const second = await start(db, 'finisher');
+      expect(second.opponent.id).toBe('late-a');
+      expect(second.questions).toEqual(bankSet(6).questions);
+      const third = await start(db, 'finisher');
+      expect(third.opponentSource).toBe('bot');
+    });
+
     it('uses the lowest set not played today when no record is waiting', async () => {
       const db = database();
       const first = await start(db, 'solo');

@@ -16,7 +16,7 @@ const CATEGORIES = [
 export function CategorySelect({ onSelect, onBack }: CategorySelectProps) {
   return (
     <section className="category-select">
-      <button className="back-btn" onClick={() => { playSound('click'); onBack(); }}>← Назад</button>
+      <button className="back-btn" onClick={() => { onBack(); }}>← Назад</button>
       <h1 className="screen-title">Выбери<br />категорию</h1>
       <p className="screen-subtitle">Покажи, что знаешь. Докажи умением.</p>
       <div className="category-list">
@@ -25,7 +25,7 @@ export function CategorySelect({ onSelect, onBack }: CategorySelectProps) {
             key={cat.id}
             className={`category-card ${cat.available ? '' : 'locked'}`}
             disabled={!cat.available}
-            onClick={() => { if (cat.available) { playSound('click'); onSelect(cat.id); } }}
+            onClick={() => { if (cat.available) { onSelect(cat.id); } }}
           >
             <span className="category-icon">
               {cat.icon.startsWith('/') ? <img src={cat.icon} alt="" /> : cat.icon}

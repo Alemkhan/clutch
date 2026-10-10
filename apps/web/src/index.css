@@ -413,10 +413,18 @@ button:active {
   flex: 1;
   display: flex;
   flex-direction: column;
+  text-align: center;
+}
+
+/* Back stays at the top like on every other screen; only the body is centred. */
+.matchmaking-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 24px;
-  text-align: center;
+  min-height: 0;
 }
 
 .vs-wrap {
@@ -1731,7 +1739,8 @@ input:focus-visible {
 
 /* Matchmaking */
 
-.matchmaking {
+/* The top offset belongs to the body: on the section it pushed Back off the top edge. */
+.matchmaking-body {
   justify-content: flex-start;
   gap: 18px;
   padding-top: clamp(28px, 8dvh, 74px);
@@ -2337,19 +2346,8 @@ input:focus-visible {
   gap: 12px;
 }
 
-.training-exit {
-  min-height: 44px;
-  padding: 0 14px;
-  border: 1px solid var(--line-strong);
-  border-radius: 14px;
-  background: transparent;
-  color: var(--text);
-  font: inherit;
-  cursor: pointer;
-}
-
-.training-title {
-  font-family: var(--font-display);
+.training-header .back-btn {
+  align-self: center;
 }
 
 .training-text {
@@ -2363,4 +2361,282 @@ input:focus-visible {
   color: var(--text-dim);
   font-size: 0.8125rem;
   line-height: 1.4;
+}
+
+/* Last Stand */
+
+.ls-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+.ls-center {
+  justify-content: center;
+  text-align: center;
+  align-items: stretch;
+}
+
+.ls-header {
+  display: flex;
+  align-items: center;
+}
+
+.ls-hint {
+  margin: 0;
+  color: var(--text-dim);
+  line-height: 1.45;
+  font-size: 0.9rem;
+}
+
+.ls-rules {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.ls-round-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ls-category {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 8vw, 2.4rem);
+  line-height: 1.12;
+  hyphens: auto;
+}
+
+.ls-answer {
+  scroll-margin-bottom: 24px;
+}
+
+.ls-notice {
+  padding: 12px 14px;
+  border-radius: 14px;
+  line-height: 1.4;
+}
+
+.ls-notice-occupied {
+  background: rgba(238, 58, 48, 0.12);
+  border: 2px solid var(--error);
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.ls-notice-invalid {
+  background: rgba(245, 180, 0, 0.14);
+  border: 1px solid var(--perfect);
+}
+
+.ls-notice-error {
+  background: rgba(238, 58, 48, 0.08);
+  border: 1px solid var(--error);
+}
+
+.ls-opponents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-dim);
+  font-size: 0.875rem;
+}
+
+.ls-source {
+  padding: 1px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.ls-reveal,
+.ls-board {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ls-reveal-row,
+.ls-board-row {
+  display: grid;
+  gap: 4px 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 254, 250, 0.92);
+}
+
+.ls-reveal-row {
+  grid-template-columns: 1fr auto;
+}
+
+.ls-reveal-answer {
+  font-weight: 800;
+}
+
+.ls-reveal-time {
+  grid-column: 1 / -1;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.ls-reveal-row.me {
+  border-color: var(--opponent);
+}
+
+.ls-reveal-row.fastest .ls-reveal-flag {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.ls-board-row {
+  grid-template-columns: 2.2em 1fr auto;
+  align-items: center;
+}
+
+.ls-board-place {
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.ls-board-score {
+  font-weight: 700;
+}
+
+.ls-score {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 10vw, 3rem);
+  font-weight: 800;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-screen * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Home: Last Stand hero card (light, blue accent: a different game from the dark match card) */
+.ls-home-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  padding: 22px 20px 20px;
+  border: 2px solid var(--opponent);
+  border-radius: 28px;
+  background: #fffefa;
+  box-shadow: 0 18px 40px rgba(47, 111, 237, 0.16);
+  color: var(--text);
+}
+
+.ls-home-card::before {
+  position: absolute;
+  top: -70px;
+  right: -60px;
+  width: 190px;
+  height: 190px;
+  border: 40px solid rgba(47, 111, 237, 0.14);
+  border-radius: 50%;
+  content: '';
+  pointer-events: none;
+}
+
+.ls-home-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ls-home-kicker {
+  align-self: flex-start;
+  max-width: 100%;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--opponent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ls-home-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 10vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.ls-home-lede {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.ls-home-hook {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 12px 14px;
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.ls-home-hook-head {
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.ls-home-hook-detail {
+  color: var(--text-dim);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.ls-home-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 58px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 18px;
+  background: var(--opponent);
+  box-shadow: 0 12px 26px rgba(47, 111, 237, 0.3);
+  color: #fff;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.ls-home-cta:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 3px;
 }

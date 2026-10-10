@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import { fetchLastStandLeaderboard } from '../lib/api';
+import { buildLastStandHook, type LastStandHook } from '../lib/lastStandHook';
 import { getStats, winRatePercent } from '../lib/localStats';
 import { mistakeCount } from '../lib/mistakeLog';
 import { playSound } from '../lib/sounds';
@@ -7,10 +10,22 @@ interface HomeDashboardProps {
   onFindMatch: () => void;
   onProfile: () => void;
   onTraining: () => void;
+  onLastStand: () => void;
   onChallenge: (tournamentId: string) => void;
 }
 
-export function HomeDashboard({ onFindMatch, onProfile, onTraining, onChallenge }: HomeDashboardProps) {
+export function HomeDashboard({ onFindMatch, onProfile, onTraining, onLastStand, onChallenge }: HomeDashboardProps) {
+  const [lastStandHook, setLastStandHook] = useState<LastStandHook | null>(null);
+
+  // Fire-and-forget: the home screen never waits for this. Any failure just means no hook.
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchLastStandLeaderboard(undefined, controller.signal)
+      .then((raw) => { if (!controller.signal.aborted) setLastStandHook(buildLastStandHook(raw)); })
+      .catch(() => {});
+    return () => controller.abort();
+  }, []);
+
   const stats = getStats();
   const mistakes = mistakeCount();
 
@@ -23,7 +38,7 @@ export function HomeDashboard({ onFindMatch, onProfile, onTraining, onChallenge 
         </div>
         <div className="home-chips">
           <span className="chip streak-chip">🔥 {stats.currentStreak}</span>
-          <button className="home-avatar-btn" aria-label="Открыть профиль" onClick={() => { playSound('click'); onProfile(); }}>
+          <button className="home-avatar-btn" aria-label="Открыть профиль" onClick={() => { onProfile(); }}>
             Я
           </button>
         </div>
@@ -38,12 +53,32 @@ export function HomeDashboard({ onFindMatch, onProfile, onTraining, onChallenge 
           <span className="home-meter-center">VS</span>
           <span className="home-meter-opponent" />
         </div>
-        <button className="cta-btn" onClick={() => { playSound('click'); onFindMatch(); }}>
+        <button className="cta-btn" onClick={() => { onFindMatch(); }}>
           Найти соперника <span aria-hidden="true">→</span>
         </button>
       </section>
 
-      <button type="button" className="training-entry" onClick={() => { playSound('click'); onTraining(); }}>
+      <section className="ls-home-card" aria-labelledby="ls-home-title">
+        <span className="ls-home-kicker">Новый режим · до 12 кругов</span>
+        <h2 className="ls-home-title" id="ls-home-title">Last Stand</h2>
+        <p className="ls-home-lede">Называй страны из объявленной категории и не совпадай с соперником.</p>
+        {lastStandHook && (
+          <div className={`ls-home-hook ls-home-hook-${lastStandHook.kind}`}>
+            <span className="ls-home-hook-head">{lastStandHook.headline}</span>
+            <span className="ls-home-hook-detail">{lastStandHook.detail}</span>
+          </div>
+        )}
+        <button
+          type="button"
+          className="ls-home-cta"
+          aria-label="Last Stand: начать забег по категориям стран"
+          onClick={() => { onLastStand(); }}
+        >
+          Начать забег <span aria-hidden="true">→</span>
+        </button>
+      </section>
+
+      <button type="button" className="training-entry" onClick={() => { onTraining(); }}>
         <span className="training-entry-title">Тренировка по ошибкам</span>
         <span className="training-entry-meta">
           {mistakes > 0 ? `Ошибок накоплено: ${mistakes}` : 'Пока нет ошибок'}
@@ -61,11 +96,10 @@ export function HomeDashboard({ onFindMatch, onProfile, onTraining, onChallenge 
               href={tournament.video?.url}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => playSound('click')}
             >
               Смотреть клип ↗
             </a>
-            <button className="challenge-play" onClick={() => { playSound('click'); onChallenge(tournament.id); }}>
+            <button className="challenge-play" onClick={() => { onChallenge(tournament.id); }}>
               Играть
             </button>
           </div>

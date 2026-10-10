@@ -70,12 +70,17 @@ export function applyQuestionSetMigration(sqlite: SQLiteDatabase): void {
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0003_question_set_id.sql', import.meta.url), 'utf8'));
 }
 
+export function applyLastStandMigration(sqlite: SQLiteDatabase): void {
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0004_last_stand.sql', import.meta.url), 'utf8'));
+}
+
 export function createTestD1(applyCurrentMigration = true): TestD1 {
   const sqlite = new DatabaseSync(':memory:');
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0001_async_matches.sql', import.meta.url), 'utf8'));
   if (applyCurrentMigration) {
     applyR1bMigration(sqlite);
     applyQuestionSetMigration(sqlite);
+    applyLastStandMigration(sqlite);
   }
   const binding = {
     prepare(query: string) {

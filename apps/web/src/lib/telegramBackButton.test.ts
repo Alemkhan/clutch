@@ -26,6 +26,7 @@ describe('Telegram BackButton mapping', () => {
     expect(telegramBackAction('home', 'local')).toBe('hidden');
     expect(telegramBackAction('profile', 'local')).toBe('home');
     expect(telegramBackAction('categories', 'local')).toBe('home');
+    expect(telegramBackAction('lastStand', 'local')).toBe('home');
     expect(telegramBackAction('matchmaking', 'player')).toBe('categories');
     expect(telegramBackAction('matchmaking', 'challenge')).toBe('home');
     expect(telegramBackAction('result', 'bot')).toBe('home');

@@ -13,6 +13,7 @@ describe('shouldShowMatchHud', () => {
     result: false,
     profile: false,
     training: false,
+    lastStand: false,
   };
 
   for (const [phase, visible] of Object.entries(expected) as [Phase, boolean][]) {

@@ -37,10 +37,23 @@ describe('Training screens', () => {
 
   it('home dashboard offers the training entry even when storage is broken', () => {
     const html = renderToStaticMarkup(
-      <HomeDashboard onFindMatch={vi.fn()} onProfile={vi.fn()} onTraining={vi.fn()} onChallenge={vi.fn()} />,
+      <HomeDashboard onFindMatch={vi.fn()} onProfile={vi.fn()} onTraining={vi.fn()} onLastStand={vi.fn()} onChallenge={vi.fn()} />,
     );
     expect(html).toContain('Тренировка по ошибкам');
     expect(html).toContain('Пока нет ошибок');
+  });
+
+  it('home dashboard renders the Last Stand card without a hook before any data arrives', () => {
+    const html = renderToStaticMarkup(
+      <HomeDashboard onFindMatch={vi.fn()} onProfile={vi.fn()} onTraining={vi.fn()} onLastStand={vi.fn()} onChallenge={vi.fn()} />,
+    );
+    expect(html).toContain('ls-home-card');
+    expect(html).toContain('не совпадай с соперником');
+    expect(html).toContain('aria-label="Last Stand: начать забег по категориям стран"');
+    expect(html).not.toContain('ls-home-hook');
+    expect(html).not.toContain('Сегодня');
+    expect(html.indexOf('home-hero-card')).toBeLessThan(html.indexOf('ls-home-card'));
+    expect(html.indexOf('ls-home-card')).toBeLessThan(html.indexOf('Тренировка по ошибкам'));
   });
 });
 

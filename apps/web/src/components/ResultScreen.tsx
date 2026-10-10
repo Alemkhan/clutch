@@ -166,15 +166,15 @@ export function ResultScreen({
       )}
 
       <div className="result-actions">
-        <button type="button" className="cta-btn" onClick={() => { playSound('click'); onReplay(); }}>Ещё раз</button>
+        <button type="button" className="cta-btn" onClick={() => { onReplay(); }}>Ещё раз</button>
         <button
           type="button"
           className="ghost-btn"
-          onClick={() => { playSound('click'); void handleShare(); }}
+          onClick={() => { void handleShare(); }}
         >
           Поделиться
         </button>
-        <button type="button" className="ghost-btn" onClick={() => { playSound('click'); onHome(); }}>В меню</button>
+        <button type="button" className="ghost-btn" onClick={() => { onHome(); }}>В меню</button>
       </div>
     </div>
   );

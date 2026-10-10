@@ -14,7 +14,7 @@ export function telegramBackAction(
   phase: Phase,
   matchSource: MatchSource,
 ): TelegramBackAction {
-  if (phase === 'profile' || phase === 'training' || phase === 'categories' || phase === 'result') return 'home';
+  if (phase === 'profile' || phase === 'training' || phase === 'lastStand' || phase === 'categories' || phase === 'result') return 'home';
   if (phase === 'matchmaking') return matchSource === 'challenge' ? 'home' : 'categories';
   return 'hidden';
 }

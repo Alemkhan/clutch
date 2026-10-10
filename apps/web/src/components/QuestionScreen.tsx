@@ -34,7 +34,8 @@ export function QuestionScreen({ question, onAnswer }: QuestionScreenProps) {
 
   const applyDecision = (decision: QuestionDecision, delay: boolean) => {
     setSelected(decision.answer);
-    playSound(decision.kind === 'timeout' ? 'timeout' : 'click');
+    // Picking an answer is silent now; only running out of time still speaks.
+    if (decision.kind === 'timeout') playSound('timeout');
 
     if (!delay) {
       onAnswer(decision.answer, decision.elapsedMs);

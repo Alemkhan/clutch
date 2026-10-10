@@ -11,6 +11,7 @@ import { ResolutionScreen } from './components/ResolutionScreen';
 import { HammerGame } from './components/HammerGame';
 import { ResultScreen } from './components/ResultScreen';
 import { Training } from './components/Training';
+import { LastStand } from './components/LastStand';
 import { findChallenge } from './lib/tournaments';
 import { completionQueue } from './lib/completionQueue';
 import { analytics } from './lib/analytics';
@@ -92,6 +93,7 @@ export default function App() {
               onFindMatch={game.goToCategories}
               onProfile={game.goToProfile}
               onTraining={game.goToTraining}
+              onLastStand={game.goToLastStand}
               onChallenge={(tournamentId) => handleChallenge(tournamentId, game.startChallenge)}
             />
           </motion.div>
@@ -110,6 +112,12 @@ export default function App() {
               onAnswered={game.recordTrainingAnswer}
               onBack={game.goHome}
             />
+          </motion.div>
+        )}
+
+        {game.phase === 'lastStand' && (
+          <motion.div key="lastStand" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <LastStand onHome={game.goHome} />
           </motion.div>
         )}
 

@@ -3,6 +3,7 @@ import { cors } from 'hono/cors';
 import type { Env } from './env';
 import { registerAuthRoutes } from './routes/auth';
 import { registerAsyncMatchRoutes } from './routes/asyncMatches';
+import { registerLastStandRoutes } from './routes/lastStand';
 import { registerLeaderboardRoutes } from './routes/leaderboard';
 import { registerShareRoutes } from './routes/share';
 import { registerSystemRoutes } from './routes/system';
@@ -16,6 +17,7 @@ registerShareRoutes(app);
 registerAuthRoutes(app);
 registerAsyncMatchRoutes(app);
 registerLeaderboardRoutes(app);
+registerLastStandRoutes(app);
 
 export { validateTelegramInitData } from './auth/telegram';
 export default app;

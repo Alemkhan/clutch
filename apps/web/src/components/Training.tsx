@@ -33,12 +33,12 @@ export function Training({ questions, onAnswered, onBack }: TrainingProps) {
   if (questions.length === 0) {
     return (
       <section className="training-screen">
-        <h2 className="training-title">Тренировка по ошибкам</h2>
+        <h2 className="screen-title">Тренировка по ошибкам</h2>
         <p className="training-text">
           Пока здесь пусто: тренировка наполняется вопросами, в которых ты ошибся или не успел ответить в матчах.
         </p>
         <p className="training-note">{TRAINING_NOT_SAVED_NOTE}</p>
-        <button type="button" className="cta-btn" onClick={() => { playSound('click'); onBack(); }}>
+        <button type="button" className="cta-btn" onClick={() => { onBack(); }}>
           На главный
         </button>
       </section>
@@ -48,12 +48,12 @@ export function Training({ questions, onAnswered, onBack }: TrainingProps) {
   if (state.step === 'done') {
     return (
       <section className="training-screen">
-        <h2 className="training-title">Тренировка завершена</h2>
+        <h2 className="screen-title">Тренировка завершена</h2>
         <p className="training-text">
           Верно: {state.correctCount} из {state.questions.length}. Верный ответ уменьшает счётчик ошибок по вопросу.
         </p>
         <p className="training-note">{TRAINING_NOT_SAVED_NOTE}</p>
-        <button type="button" className="cta-btn" onClick={() => { playSound('click'); onBack(); }}>
+        <button type="button" className="cta-btn" onClick={() => { onBack(); }}>
           На главный
         </button>
       </section>
@@ -64,7 +64,7 @@ export function Training({ questions, onAnswered, onBack }: TrainingProps) {
     <section className="training-screen">
       <div className="training-header">
         <span className="chip">Тренировка · {state.index + 1} из {state.questions.length}</span>
-        <button type="button" className="training-exit" onClick={() => { playSound('click'); onBack(); }}>
+        <button type="button" className="back-btn" onClick={() => { onBack(); }}>
           Выйти
         </button>
       </div>

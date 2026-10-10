@@ -57,8 +57,9 @@ export function registerAsyncMatchRoutes(app: Hono<{ Bindings: Env }>): void {
 
     const now = Date.now();
     const bankIds = dailyQuestionSetIds(body.category, now);
-    // 1) a set with a waiting unfaced record; 2) a set not yet played today; 3) the least recent one.
-    const ghost = await findGhostInSets(c.env.DB, bankIds, playerId);
+    // 1) a waiting unfaced record on a set this player has not played; 2) an unplayed set (bot);
+    // 3) bank exhausted: a waiting unfaced record on any set; 4) the least recently played set (bot).
+    let ghost = await findGhostInSets(c.env.DB, bankIds, playerId, { unplayedSetsOnly: true });
     let questionSetId: string;
     let questions: Question[];
     if (ghost) {
@@ -68,12 +69,22 @@ export function registerAsyncMatchRoutes(app: Hono<{ Bindings: Env }>): void {
       const played = await lastPlayedBySet(c.env.DB, bankIds, playerId);
       let index = bankIds.findIndex((id) => !played.has(id));
       if (index === -1) {
-        index = 0;
-        for (let candidate = 1; candidate < DAILY_BANK_SIZE; candidate++) {
-          if (played.get(bankIds[candidate])! < played.get(bankIds[index])!) index = candidate;
+        ghost = await findGhostInSets(c.env.DB, bankIds, playerId);
+        if (ghost) {
+          index = bankIds.indexOf(ghost.questionSetId);
+        } else {
+          index = 0;
+          for (let candidate = 1; candidate < DAILY_BANK_SIZE; candidate++) {
+            if (played.get(bankIds[candidate])! < played.get(bankIds[index])!) index = candidate;
+          }
         }
       }
-      ({ questionSetId, questions } = dailyQuestionSet(body.category, now, index));
+      if (ghost) {
+        questionSetId = ghost.questionSetId;
+        questions = ghost.questions;
+      } else {
+        ({ questionSetId, questions } = dailyQuestionSet(body.category, now, index));
+      }
     }
     const opponent = ghost?.opponent ?? createBotOpponent(questions, pickBotProfile(questionSetId, playerId));
     const matchId = crypto.randomUUID();

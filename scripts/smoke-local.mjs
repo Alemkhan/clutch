@@ -280,7 +280,8 @@ async function verifyHttpFlow(baseUrl, readinessResponse) {
   const tokenA = await guestSession(baseUrl);
   const matchA = await startMatch(baseUrl, tokenA, 'Smoke A');
   assert.equal(matchA.opponentSource, 'bot');
-  assert.equal(matchA.opponent.id, 'clutch_bot');
+  // One of four bot profiles, chosen deterministically from the set id and the player id.
+  assert.match(matchA.opponent.id, /^clutch_bot(_weak|_medium|_strong)?$/);
   const completionA = await completeMatch(
     baseUrl,
     tokenA,

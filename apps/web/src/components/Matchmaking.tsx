@@ -28,7 +28,9 @@ export function Matchmaking({
 }: MatchmakingProps) {
   return (
     <section className="matchmaking">
-      <button className="back-btn" onClick={onBack} aria-label="Назад">←</button>
+      <button className="back-btn" onClick={onBack}>← Назад</button>
+      {/* The body is centred on its own; keeping Back inside that flow pushed it off the top. */}
+      <div className="matchmaking-body">
       <span className="matchmaking-eyebrow">Асинхронный матч</span>
       {status === 'loading' && (
         <>
@@ -78,6 +80,7 @@ export function Matchmaking({
           )}
         </>
       )}
+      </div>
     </section>
   );
 }

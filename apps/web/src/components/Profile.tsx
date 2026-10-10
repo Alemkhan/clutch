@@ -19,7 +19,7 @@ export function Profile({ onBack }: ProfileProps) {
 
   return (
     <section className="profile-screen">
-      <button className="back-btn" onClick={() => { playSound('click'); onBack(); }}>← Назад</button>
+      <button className="back-btn" onClick={() => { onBack(); }}>← Назад</button>
 
       <div className="profile-head">
         <span className="profile-avatar" aria-hidden="true">{playerName.slice(0, 2).toUpperCase()}</span>

@@ -20,15 +20,23 @@ export interface GhostMatch {
 /**
  * One query over the whole day's bank: the freshest finished run of another player, with at
  * least MIN_POOL_ROUNDS played rounds, that this player has not faced yet. Its set is the set
- * to play. Whether the run reached 100 is irrelevant: ghost_eligible is not a pool filter.
+ * to play. With unplayedSetsOnly the run must also sit on a set this player never started,
+ * so a live opponent is never bought with repeated questions. Whether the run reached 100 is irrelevant: ghost_eligible is not a pool filter.
  * There is deliberately no fallback that drops the "already faced" condition.
  */
 export async function findGhostInSets(
   db: D1Database,
   questionSetIds: readonly string[],
   playerId: string,
+  options: { unplayedSetsOnly?: boolean } = {},
 ): Promise<GhostMatch | null> {
   if (questionSetIds.length === 0) return null;
+  // "Played" means any run of the set by this player, whatever its status.
+  const unplayedClause = options.unplayedSetsOnly ? `
+      AND question_set_id NOT IN (
+        SELECT question_set_id FROM match_runs
+        WHERE player_id = ?2 AND question_set_id IS NOT NULL
+      )` : '';
   const setPlaceholders = questionSetIds.map((_, index) => `?${index + 6}`).join(', ');
   const result = await db.prepare(`
     SELECT ${runColumns}, question_set_id
@@ -43,7 +51,7 @@ export async function findGhostInSets(
       AND id NOT IN (
         SELECT opponent_run_id FROM match_runs
         WHERE player_id = ?2 AND opponent_run_id IS NOT NULL
-      )
+      )${unplayedClause}
     ORDER BY completed_at DESC LIMIT 20
   `).bind(
     MIN_POOL_ROUNDS,

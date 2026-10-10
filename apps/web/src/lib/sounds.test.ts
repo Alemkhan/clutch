@@ -3,7 +3,7 @@ import { resetSoundPreferenceMemory } from './soundPreference';
 import { playSound, setSoundEnabled, strikeSoundFor, toggleSound, type SoundName } from './sounds';
 
 const names: SoundName[] = [
-  'click', 'tick', 'timeout', 'correct', 'incorrect', 'hammerTap',
+  'tick', 'timeout', 'correct', 'incorrect', 'hammerTap',
   ...Object.values(strikeSoundFor), 'matchWin', 'matchLose',
 ];
 
@@ -27,7 +27,7 @@ describe('playSound with the sound preference', () => {
   afterEach(() => vi.unstubAllGlobals());
 
   it('plays when enabled', () => {
-    playSound('click');
+    playSound('correct');
     expect(created).toBe(1);
     expect(played).toBe(1);
   });
@@ -43,7 +43,7 @@ describe('playSound with the sound preference', () => {
     setSoundEnabled(false);
     expect(toggleSound()).toBe(true);
     expect(played).toBe(0);
-    playSound('click');
+    playSound('correct');
     expect(played).toBe(1);
   });
 });

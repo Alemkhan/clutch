@@ -2,7 +2,6 @@ import type { SkillResult } from '@clutch/shared';
 import { readSoundEnabled, writeSoundEnabled } from './soundPreference';
 
 const soundFiles = {
-  click: '/sfx/click.ogg',
   tick: '/sfx/tick.ogg',
   timeout: '/sfx/timeout.ogg',
   correct: '/sfx/correct.ogg',

@@ -173,5 +173,7 @@ export * from './countries';
 export * from './flagTraits';
 export * from './historicFlags';
 export * from './languages';
+export * from './narrowCategories';
 export * from './questionGenerator';
 export * from './dailyQuestionSet';
+export * from './lastStand';
