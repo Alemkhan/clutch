@@ -23,16 +23,16 @@ function createAdapter() {
 
 describe('Telegram BackButton mapping', () => {
   it('maps only safe non-gameplay phases to navigation', () => {
-    expect(telegramBackAction('home', 'local')).toBe('hidden');
-    expect(telegramBackAction('profile', 'local')).toBe('home');
-    expect(telegramBackAction('categories', 'local')).toBe('home');
-    expect(telegramBackAction('lastStand', 'local')).toBe('home');
-    expect(telegramBackAction('matchmaking', 'player')).toBe('categories');
-    expect(telegramBackAction('matchmaking', 'challenge')).toBe('home');
-    expect(telegramBackAction('result', 'bot')).toBe('home');
+    expect(telegramBackAction('home')).toBe('hidden');
+    expect(telegramBackAction('profile')).toBe('home');
+    expect(telegramBackAction('categories')).toBe('home');
+    expect(telegramBackAction('lastStand')).toBe('home');
+    expect(telegramBackAction('matchmaking')).toBe('categories');
+    expect(telegramBackAction('myRuns')).toBe('home');
+    expect(telegramBackAction('result')).toBe('home');
 
     for (const phase of ['question', 'resolution', 'hammer'] as const) {
-      expect(telegramBackAction(phase, 'player')).toBe('hidden');
+      expect(telegramBackAction(phase)).toBe('hidden');
     }
   });
 
@@ -84,8 +84,8 @@ describe('Telegram BackButton mapping', () => {
 
 describe('Telegram BackButton in the solo run', () => {
   it('is visible on safe solo screens and hidden while playing', () => {
-    expect(telegramBackAction('solo', 'local')).toBe('home');
-    expect(telegramBackAction('solo', 'local', false)).toBe('home');
-    expect(telegramBackAction('solo', 'local', true)).toBe('hidden');
+    expect(telegramBackAction('solo')).toBe('home');
+    expect(telegramBackAction('solo', false)).toBe('home');
+    expect(telegramBackAction('solo', true)).toBe('hidden');
   });
 });

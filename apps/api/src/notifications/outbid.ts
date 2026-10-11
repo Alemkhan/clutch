@@ -44,7 +44,7 @@ export function outbidText(challengerName: string, challengerProgress: number, r
     + 'Можно сыграть реванш: вопросы будут новые.';
 }
 
-function newInviteId(): string {
+export function newInviteId(): string {
   const bytes = crypto.getRandomValues(new Uint8Array(16));
   let binary = '';
   for (const byte of bytes) binary += String.fromCharCode(byte);
@@ -128,4 +128,37 @@ export async function notifySoloResult(
   event: OutbidEvent & { outcome: SoloRecipientOutcome },
 ): Promise<void> {
   await deliverInvite(env, event, (name) => soloResultText(name, event.outcome));
+}
+
+export function duelResultText(friendName: string, outcome: SoloRecipientOutcome): string {
+  const name = cleanName(friendName);
+  if (outcome === 'record_won') return `${name} сыграл вашу запись по ссылке и не смог её обойти. Дружеская игра, не в зачёт.`;
+  if (outcome === 'record_lost') return `${name} обошёл вашу запись по ссылке. Дружеская игра, не в зачёт.`;
+  return `Ничья с ${name} на вашей записи. Дружеская игра, не в зачёт.`;
+}
+
+/**
+ * Итог дружеской дуэли для автора записи. Это только известие: приглашения на реванш (строка в
+ * rematch_invites и кнопка) не создаётся, потому что забег друга вне соревнования. Не бросает:
+ * вызывается из waitUntil после ответа игроку. Повтор невозможен, completion срабатывает один раз.
+ */
+export async function notifyDuelResult(
+  env: Env,
+  event: OutbidEvent & { outcome: SoloRecipientOutcome },
+): Promise<void> {
+  try {
+    const chatId = telegramChatId(event.recipientRun.playerId);
+    if (!chatId || !env.TELEGRAM_BOT_TOKEN) return;
+    if (!(await isOutbidEnabled(env.DB, event.recipientRun.playerId))) return;
+    const stopUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, STOP_PAYLOAD);
+    const result = await sendTelegramMessage(
+      env.TELEGRAM_BOT_TOKEN,
+      chatId,
+      duelResultText(event.challengerName, event.outcome),
+      stopUrl ? [[{ text: 'Не присылать такие сообщения', url: stopUrl }]] : [],
+    ).catch(() => 'failed' as const);
+    if (result === 'blocked') await setOutbidEnabled(env.DB, event.recipientRun.playerId, false);
+  } catch (error) {
+    console.error('Duel notification failed:', error instanceof Error ? error.message : 'unknown error');
+  }
 }

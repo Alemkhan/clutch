@@ -6,7 +6,6 @@ import type {
   Opponent,
   Question,
   SkillResult,
-  Tournament,
 } from '@clutch/shared';
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
@@ -17,7 +16,7 @@ import {
 import { applyClientRound, scoreSkillDistance } from './clientMatchRules';
 import type { MatchSource } from './matchmaking';
 
-export type Phase = 'home' | 'categories' | 'matchmaking' | 'question' | 'resolution' | 'hammer' | 'result' | 'profile' | 'training' | 'lastStand' | 'solo';
+export type Phase = 'home' | 'categories' | 'matchmaking' | 'question' | 'resolution' | 'hammer' | 'result' | 'profile' | 'training' | 'lastStand' | 'solo' | 'myRuns';
 
 export interface GameState {
   phase: Phase;
@@ -33,8 +32,6 @@ export interface GameState {
   responseTimes: number[];
   skillResults: SkillResult[];
   opponent: Opponent;
-  activeVideo: Tournament['video'];
-  fixedQuestions?: Question[];
   activeMatchId?: string;
   roundInputs: AsyncMatchRoundInput[];
   miniGameConfig: MiniGameConfig;
@@ -56,8 +53,6 @@ export function createInitialGameState(): GameState {
     responseTimes: [],
     skillResults: [],
     opponent: { id: 'contestant_001', displayName: 'Alex', rounds: [] },
-    activeVideo: undefined,
-    fixedQuestions: undefined,
     activeMatchId: undefined,
     roundInputs: [],
     miniGameConfig: CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
@@ -89,46 +84,6 @@ export function createPreparedMatchState(match: PreparedMatch): GameState {
 
 export function createMatchLobbyState(match: PreparedMatch): GameState {
   return { ...createPreparedMatchState(match), phase: 'matchmaking' };
-}
-
-interface ChallengeLobby {
-  questions: Question[];
-  opponent: Opponent;
-  activeVideo: Tournament['video'];
-  miniGameConfig: MiniGameConfig;
-}
-
-export function createChallengeLobbyState(challenge: ChallengeLobby): GameState {
-  const questionCategory = challenge.questions[0]?.category;
-  return {
-    ...createInitialGameState(),
-    category: questionCategory === 'history' || questionCategory === 'languages'
-      ? questionCategory
-      : 'geography',
-    opponent: challenge.opponent,
-    activeVideo: challenge.activeVideo,
-    fixedQuestions: challenge.questions,
-    miniGameConfig: challenge.miniGameConfig,
-    matchSource: 'challenge',
-    phase: 'matchmaking',
-  };
-}
-
-export function createChallengeReplayState(state: Readonly<GameState>): GameState {
-  if (!state.fixedQuestions || state.fixedQuestions.length === 0) {
-    throw new Error('Challenge replay requires fixed questions.');
-  }
-  return {
-    ...createInitialGameState(),
-    category: state.category,
-    opponent: state.opponent,
-    activeVideo: state.activeVideo,
-    fixedQuestions: state.fixedQuestions,
-    miniGameConfig: state.miniGameConfig,
-    questions: state.fixedQuestions,
-    matchSource: 'challenge',
-    phase: 'matchmaking',
-  };
 }
 
 export function recordAnswer(

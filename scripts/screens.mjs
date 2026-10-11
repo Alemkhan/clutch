@@ -2,6 +2,7 @@
 // Нужен запущенный `npm run dev`. Запуск из корня репозитория:
 //   node scripts/screens.mjs            — все экраны в 390x844
 //   node scripts/screens.mjs 360        — другая ширина
+//   CLUTCH_REDUCED_MOTION=1 node scripts/screens.mjs — с prefers-reduced-motion
 // Файлы кладутся в screenshots/ (каталог в .gitignore).
 import { mkdirSync } from 'node:fs';
 import { chromium, devices } from '@playwright/test';
@@ -13,10 +14,14 @@ const OUT = 'screenshots';
 /** Экран: имя файла и клики, которые до него доводят. */
 const SCREENS = [
   { name: 'home', steps: [] },
-  { name: 'categories', steps: ['Найти соперника'] },
-  { name: 'matchmaking', steps: ['Найти соперника', 'География'] },
+  { name: 'categories', steps: ['Играть'] },
+  { name: 'solo-ready', steps: ['Играть', 'География'] },
+  { name: 'my-runs', steps: ['Мои партии'] },
   { name: 'profile', steps: ['Открыть профиль'] },
-  { name: 'training', steps: ['Тренировка по ошибкам'] },
+  { name: 'training', steps: ['Тренировка'] },
+  { name: 'training-bots', steps: ['Тренировка', 'Игра против ботов'] },
+  { name: 'training-bot-ready', steps: ['Тренировка', 'Игра против ботов', 'Опытный', 'География'] },
+  { name: 'training-mistakes', steps: ['Тренировка', 'Отработка ошибок'] },
   { name: 'laststand', steps: ['Last Stand'] },
 ];
 
@@ -27,6 +32,7 @@ const context = await browser.newContext({
   ...devices['Pixel 7'],
   viewport: { width: WIDTH, height: 844 },
   locale: 'ru-RU',
+  reducedMotion: process.env.CLUTCH_REDUCED_MOTION ? 'reduce' : 'no-preference',
 });
 
 for (const screen of SCREENS) {

@@ -3,8 +3,6 @@ import { CURRENT_ASYNC_MATCH_CONDITIONS, type MiniGameConfig, type Opponent, typ
 import {
   completeSkillDistance,
   continueAfterAnswerResolution,
-  createChallengeLobbyState,
-  createChallengeReplayState,
   createInitialGameState,
   createMatchLobbyState,
   createPreparedMatchState,
@@ -52,15 +50,13 @@ const customConfig: MiniGameConfig = {
 };
 
 describe('game session construction', () => {
-  it('creates and resets state without stale online or challenge fields', () => {
+  it('creates and resets state without stale online fields', () => {
     const initial = createInitialGameState();
     expect(initial).toMatchObject({
       phase: 'home',
       questions: [],
       roundInputs: [],
       activeMatchId: undefined,
-      fixedQuestions: undefined,
-      activeVideo: undefined,
     });
     expect(initial.rulesState).toMatchObject({ roundsPlayed: 0, status: 'in_progress' });
   });
@@ -81,41 +77,6 @@ describe('game session construction', () => {
     expect(online).toMatchObject({
       phase: 'question', category: 'languages', activeMatchId: 'online-1', miniGameConfig: customConfig,
     });
-  });
-
-  it('keeps only fixed challenge context when replaying', () => {
-    const matchQuestions = questions(2);
-    matchQuestions[0].category = 'history';
-    const lobby = createChallengeLobbyState({
-      questions: matchQuestions,
-      opponent: opponentFor(matchQuestions),
-      activeVideo: { platform: 'youtube', url: 'https://example.test', contentId: 'video-1' },
-      miniGameConfig: customConfig,
-    });
-    const replay = createChallengeReplayState({
-      ...lobby,
-      phase: 'result',
-      activeMatchId: 'stale-online-id',
-      correctCount: 2,
-      roundInputs: [{ questionId: 'stale', selectedAnswer: 'stale', responseTimeMs: 5 }],
-    });
-
-    expect(replay).toMatchObject({
-      phase: 'matchmaking',
-      category: 'history',
-      questions: matchQuestions,
-      fixedQuestions: matchQuestions,
-      opponent: lobby.opponent,
-      activeVideo: lobby.activeVideo,
-      miniGameConfig: customConfig,
-      activeMatchId: undefined,
-      correctCount: 0,
-      roundInputs: [],
-    });
-  });
-
-  it('does not start an empty challenge replay without fixed questions', () => {
-    expect(() => createChallengeReplayState(createInitialGameState())).toThrow(/fixed questions/i);
   });
 
   it('keeps explicit local practice in a ready lobby without an online id', () => {

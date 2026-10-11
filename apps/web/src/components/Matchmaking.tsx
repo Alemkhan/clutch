@@ -1,10 +1,9 @@
-import type { Opponent, Tournament } from '@clutch/shared';
+import type { Opponent } from '@clutch/shared';
 import { ScreenHeader } from './ScreenHeader';
 import { MATCH_SOURCE_LABELS, type MatchSource, type MatchmakingStatus } from '../lib/matchmaking';
 
 interface MatchmakingProps {
   opponent: Opponent;
-  video?: Tournament['video'];
   status: MatchmakingStatus;
   source: MatchSource;
   abandonedNote?: string | null;
@@ -17,7 +16,6 @@ interface MatchmakingProps {
 
 export function Matchmaking({
   opponent,
-  video,
   status,
   source,
   abandonedNote,
@@ -70,15 +68,9 @@ export function Matchmaking({
               {source === 'player' && 'Ты сыграешь тот же раунд против сохранённого результата игрока.'}
               {source === 'bot' && 'В пуле нет подходящей записи — этот раунд сыграет бот.'}
               {source === 'local' && 'Практика работает без сервера. Результат не будет сохранён.'}
-              {source === 'challenge' && 'Фиксированный челлендж из исходного клипа.'}
             </p>
           </div>
           <button className="cta-btn" onClick={onStart}>Начать</button>
-          {video && (
-            <a className="matchmaking-video-link" href={video.url} target="_blank" rel="noopener noreferrer">
-              Смотреть исходный клип ↗
-            </a>
-          )}
         </>
       )}
       </div>

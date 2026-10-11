@@ -90,6 +90,10 @@ export function applySoloOutcomeMigration(sqlite: SQLiteDatabase): void {
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0008_solo_outcome.sql', import.meta.url), 'utf8'));
 }
 
+export function applyFriendInvitesMigration(sqlite: SQLiteDatabase): void {
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0009_friend_invites.sql', import.meta.url), 'utf8'));
+}
+
 export function createTestD1(applyCurrentMigration = true): TestD1 {
   const sqlite = new DatabaseSync(':memory:');
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0001_async_matches.sql', import.meta.url), 'utf8'));
@@ -101,6 +105,7 @@ export function createTestD1(applyCurrentMigration = true): TestD1 {
     applyRematchReleaseMigration(sqlite);
     applySoloRunsMigration(sqlite);
     applySoloOutcomeMigration(sqlite);
+    applyFriendInvitesMigration(sqlite);
   }
   const binding = {
     prepare(query: string) {

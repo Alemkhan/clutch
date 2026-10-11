@@ -1,6 +1,8 @@
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
   CURRENT_SOLO_RUN_CONDITIONS,
+  FRIEND_RULES_VERSION,
+  PRACTICE_RULES_VERSION,
   SOLO_ROUND_CAP,
   SOLO_TARGET_PROGRESS,
   MIN_POOL_ROUNDS,
@@ -179,6 +181,8 @@ export interface NormalizedSoloRun {
   pace: Opponent | null;
   config: MiniGameConfig;
   bankExhausted: boolean;
+  /** Забег по дружеской ссылке: вне соревнования, исход против записи автора считается. */
+  friendDuel?: boolean;
 }
 
 /** Темп — только картинка: битую запись не рисуем, но и забег из-за неё не отменяем. */
@@ -197,21 +201,27 @@ function normalizeSoloPace(pace: Opponent | null, questions: readonly Question[]
   return pace;
 }
 
-export function normalizeSoloRun(run: StartSoloRunResponse): NormalizedSoloRun {
+/** practice: ответ тренировки против бота идёт со своей версией правил. */
+export function normalizeSoloRun(run: StartSoloRunResponse, practice = false): NormalizedSoloRun {
   if (!run || typeof run.runId !== 'string' || run.runId.length === 0 || !Array.isArray(run.questions)) {
     throw new Error('Solo run response is invalid.');
   }
-  if (run.rulesVersion !== CURRENT_SOLO_RUN_CONDITIONS.rulesVersion
+  const friendDuel = !practice && run.rulesVersion === FRIEND_RULES_VERSION;
+  const expectedRules = practice ? PRACTICE_RULES_VERSION : CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
+  if ((run.rulesVersion !== expectedRules && !friendDuel)
     || run.target !== SOLO_TARGET_PROGRESS || run.roundCap !== SOLO_ROUND_CAP) {
     throw new Error('Solo run conditions are not supported by this client.');
   }
   validateQuestions(run.questions);
+  const pace = normalizeSoloPace(run.pace ?? null, run.questions);
+  if (practice && !pace) throw new Error('Practice run has no usable bot.');
   return {
     runId: run.runId,
     questions: run.questions,
-    pace: normalizeSoloPace(run.pace ?? null, run.questions),
+    pace,
     config: validateMiniGameConfig(CURRENT_SOLO_RUN_CONDITIONS.miniGame.config),
     bankExhausted: run.bankExhausted === true,
+    friendDuel,
   };
 }
 

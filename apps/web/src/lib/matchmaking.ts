@@ -1,7 +1,7 @@
 import { abandonedAtRound, type Opponent } from '@clutch/shared';
 import { ApiError } from './api';
 
-export type MatchSource = 'player' | 'bot' | 'local' | 'challenge';
+export type MatchSource = 'player' | 'bot' | 'local';
 export type MatchmakingStatus = 'loading' | 'ready' | 'error';
 
 export interface MatchmakingViewState {
@@ -13,7 +13,6 @@ export const MATCH_SOURCE_LABELS: Record<MatchSource, string> = {
   player: 'Запись игрока',
   bot: 'Бот',
   local: 'Локальная практика',
-  challenge: 'Челлендж',
 };
 
 /**

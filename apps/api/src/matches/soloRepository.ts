@@ -1,6 +1,8 @@
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
   CURRENT_SOLO_RUN_CONDITIONS,
+  FRIEND_RULES_VERSION,
+  PRACTICE_RULES_VERSION,
   type AsyncMatchRound,
   type MyRunOutcome,
   type Opponent,
@@ -16,10 +18,15 @@ export async function createSoloRun(db: D1Database, input: {
   playerId: string;
   displayName: string;
   category: string;
-  questionSetId: string;
+  /** Набор запоминается и для тренировки: увиденные вопросы не должны вернуться в зачёте. */
+  questionSetId: string | null;
   questions: Question[];
   paceRunId: string | null;
   pace: Opponent | null;
+  /** Тренировка против бота: своя версия правил, вне пула, таблицы, приглашений и истории. */
+  practice?: boolean;
+  /** Забег по дружеской ссылке: своя версия правил, вне пула, таблицы и приглашений; исход считается. */
+  friend?: boolean;
   now: number;
 }): Promise<void> {
   await db.prepare(`
@@ -35,7 +42,9 @@ export async function createSoloRun(db: D1Database, input: {
     JSON.stringify(input.questions),
     input.paceRunId,
     input.now,
-    CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
+    input.practice
+      ? PRACTICE_RULES_VERSION
+      : input.friend ? FRIEND_RULES_VERSION : CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
     CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
     currentMiniGameConfigJson,
     input.pace ? JSON.stringify(input.pace) : null,
@@ -53,12 +62,16 @@ export async function completeSoloRun(db: D1Database, input: {
   soloScore: number;
   /** Исход против темпа; null — темпа не было, забег ждёт соперника. */
   outcome: MyRunOutcome | null;
+  /** Тренировка закрывается без цели, оценки и права стать записью соперника. */
+  practice?: boolean;
+  /** Дружеская дуэль: результат и исход сохраняются, но забег не может стать записью соперника. */
+  friend?: boolean;
   now: number;
 }): Promise<boolean> {
   const update = await db.prepare(`
     UPDATE match_runs
     SET rounds_json = ?2, progress = ?3, correct_count = ?4, status = 'completed',
-        completed_at = ?5, ghost_eligible = ?6, reached_target = ?6, set_par = ?7, solo_score = ?8,
+        completed_at = ?5, ghost_eligible = ?6, reached_target = ?10, set_par = ?7, solo_score = ?8,
         solo_outcome = ?9
     WHERE id = ?1 AND status = 'in_progress'
   `).bind(
@@ -67,10 +80,11 @@ export async function completeSoloRun(db: D1Database, input: {
     input.progress,
     input.correctCount,
     input.now,
-    input.reachedTarget ? 1 : 0,
-    input.setPar,
-    input.soloScore,
-    input.outcome,
+    input.practice || input.friend ? 0 : input.reachedTarget ? 1 : 0,
+    input.practice ? null : input.setPar,
+    input.practice ? null : input.soloScore,
+    input.practice ? null : input.outcome,
+    input.practice ? null : input.reachedTarget ? 1 : 0,
   ).run();
   return update.meta.changes > 0;
 }

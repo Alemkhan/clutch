@@ -4,7 +4,9 @@ import type {
   CompleteAsyncMatchResponse,
   CompleteSoloRunRequest,
   CompleteSoloRunResponse,
+  CreateFriendInviteResponse,
   GuestSessionResponse,
+  PracticeLevelId,
   MyRunsResponse,
   StartSoloRunRequest,
   StartSoloRunResponse,
@@ -26,6 +28,8 @@ export class ApiError extends Error {
   constructor(
     public readonly status: number,
     public readonly retryAfterMs?: number,
+    /** Машинный код причины из тела ответа (например, taken/expired/own у приглашений). */
+    public readonly reason?: string,
   ) {
     super(`Clutch API returned ${status}`);
     this.name = 'ApiError';
@@ -61,6 +65,15 @@ function getPlayerName(): string {
   }
 }
 
+async function errorReason(response: Response): Promise<string | undefined> {
+  try {
+    const body = await response.json() as { reason?: unknown } | null;
+    return typeof body?.reason === 'string' ? body.reason : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 async function rawApiFetch<T>(path: string, init: RequestInit): Promise<T> {
   const controller = new AbortController();
   const callerSignal = init.signal;
@@ -81,6 +94,7 @@ async function rawApiFetch<T>(path: string, init: RequestInit): Promise<T> {
         Number.isFinite(retryAfterSeconds) && retryAfterSeconds > 0
           ? retryAfterSeconds * 1000
           : undefined,
+        await errorReason(response),
       );
     }
     return await response.json() as T;
@@ -202,11 +216,18 @@ export function completeAsyncMatch(
 
 // ---- Соло-забег и «Мои партии» ----
 
-export function startSoloRun(category: CategoryId, signal?: AbortSignal): Promise<StartSoloRunResponse> {
+export function startSoloRun(
+  category: CategoryId,
+  signal?: AbortSignal,
+  rematchInviteId?: string,
+  botLevel?: PracticeLevelId,
+): Promise<StartSoloRunResponse> {
   const telegram = getTelegramIdentity();
   const body: StartSoloRunRequest = {
     displayName: telegram?.displayName || getPlayerName(),
     category,
+    ...(rematchInviteId ? { rematchInviteId } : {}),
+    ...(botLevel ? { botLevel } : {}),
   };
   return apiFetch('/api/solo-runs', { method: 'POST', body: JSON.stringify(body) }, signal);
 }
@@ -239,6 +260,11 @@ export function fetchMyRuns(
 export interface RematchPreview {
   inviteId: string;
   category: CategoryId;
+  /** В какой режим вести реванш: гоночный старт либо соло-забег. */
+  mode: 'race' | 'solo';
+  /** true: открытая ссылка «Позвать друга», а не реванш по обойдённой записи. */
+  friend?: boolean;
+  expiresAt: number;
   challengerName: string;
   challengerProgress: number;
   yourProgress: number;
@@ -246,6 +272,11 @@ export interface RematchPreview {
 
 export function fetchRematchPreview(inviteId: string, signal?: AbortSignal): Promise<RematchPreview> {
   return apiFetch(`/api/rematch/${encodeURIComponent(inviteId)}`, { method: 'GET' }, signal);
+}
+
+/** «Позвать друга»: ссылка на открытое приглашение по своему завершённому забегу; повтор даёт ту же ссылку. */
+export function createFriendInvite(runId: string, signal?: AbortSignal): Promise<CreateFriendInviteResponse> {
+  return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}/invite`, { method: 'POST', body: '{}' }, signal);
 }
 
 export function setOutbidNotifications(enabled: boolean): Promise<{ enabled: boolean }> {

@@ -47,7 +47,6 @@ describe('matchmaking copy', () => {
       player: 'Запись игрока',
       bot: 'Бот',
       local: 'Локальная практика',
-      challenge: 'Челлендж',
     });
   });
 });

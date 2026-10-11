@@ -2,6 +2,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it, vi } from 'vitest';
 import {
   CURRENT_SOLO_RUN_CONDITIONS,
+  PRACTICE_LEVELS,
   SOLO_ROUND_CAP,
   generateMatch,
   type CompleteSoloRunResponse,
@@ -32,6 +33,7 @@ const handlers = {
   onHammerComplete: vi.fn(),
   onRetrySave: vi.fn(),
   onHome: vi.fn(),
+  onMyRuns: vi.fn(),
 };
 
 const saving: SoloSaveState = { status: 'saving', response: null, canRetry: false };
@@ -92,40 +94,82 @@ describe('solo run screens', () => {
     expect(error).toContain('back-btn');
   });
 
-  it('says plainly when there is no pace and never invents a rival', () => {
-    const html = render({ ...playing(null, 'ready') });
-    expect(html).toContain('Темпа соперника пока нет');
-    expect(html).not.toMatch(/Бот|Alex/);
+  it('explains nothing about a rival or pace before the start', () => {
+    for (const rival of [null, pace([25])]) {
+      const html = render(playing(rival, 'ready'));
+      expect(html).not.toMatch(/[Тт]емп|на полосе|не завершает|Alex|Бот/);
+      expect(html).toContain('Начать');
+    }
+  });
+});
+
+describe('solo run as practice against a bot', () => {
+  const level = PRACTICE_LEVELS[1];
+  const renderPractice = (state: SoloFlowState) => renderToStaticMarkup(
+    <SoloRunScreen state={state} save={saving} {...handlers} practice={level} />,
+  );
+
+  it('says it is a practice, names the bot as a bot and does not count', () => {
+    const html = renderPractice(playing(pace([12], 'Max'), 'ready'));
+    expect(html).toContain('Тренировка · Любитель');
+    expect(html).toContain('Бот Max');
+    expect(html).toContain('Не засчитывается');
+    expect(html).not.toMatch(/[Тт]емп|Соло-забег/);
   });
 
-  it('tells that a pace does not finish the run', () => {
-    const html = render({ ...playing(pace([25]), 'ready') });
-    expect(html).toContain('Темп: Alex');
-    expect(html).toContain('Он не завершает забег');
+  it('draws the bot on the strip by its short name (the long label does not fit 360 px)', () => {
+    const html = renderPractice(playing(pace([12, 12], 'Max'), 'question', [12]));
+    expect(html).toContain('>Max<');
+    expect(html).toContain('aria-valuenow="12"');
+  });
+
+  it('shows a short verdict instead of a saved achievement, whatever the save status', () => {
+    const state = finished([25, 25, 25, 25], pace([25, 25, 25, 12, 25], 'Max'));
+    for (const save of [saving, { status: 'error' as const, response: null, canRetry: true }]) {
+      const html = renderToStaticMarkup(<SoloRunScreen state={state} save={save} {...handlers} practice={level} />);
+      expect(html).toContain('Ты обошёл бота');
+      expect(html).toContain('Тренировка · не засчитывается');
+      expect(html).toContain('Ещё раз');
+      expect(html).toContain('Другой уровень');
+      expect(html).not.toMatch(/Сохраняем|зафиксирован|Мои партии|[Тт]емп/);
+      expect(html).not.toContain('role="alert"');
+    }
+  });
+
+  it('shows the loading and error states under the practice name', () => {
+    expect(renderPractice(beginSoloLoading('geography'))).toContain('Тренировка');
+    const error = renderPractice(failSoloLoading(beginSoloLoading('geography'), 'Нет сети'));
+    expect(error).toContain('Тренировка');
+    expect(error).toContain('Повторить');
   });
 });
 
 describe('solo run HUD while playing', () => {
-  it('draws the own progress, rounds left and no pace when there is none', () => {
+  it('draws only the own progress and rounds left when there is no rival', () => {
     const html = render(playing(null, 'question', [10, 0]));
     expect(html).toContain('role="progressbar"');
     expect(html).toContain('aria-valuenow="10"');
     expect(html).toContain('Круг 3');
     expect(html).toContain(`осталось ${SOLO_ROUND_CAP - 2}`);
-    expect(html).not.toContain('solo-hud-pace');
-    expect(html).not.toContain('Темп:');
+    expect(html).toContain('solo-hud-alone');
+    expect(html).not.toContain('match-hud-competitor opponent');
+    expect(html).not.toMatch(/[Тт]емп/);
   });
 
-  it('draws the pace as a mark on the same bar', () => {
+  it('draws the rival like the race HUD: avatar, name and bar, without any explanation', () => {
     const html = render(playing(pace([25, 25]), 'question', [5, 5]));
-    expect(html).toContain('solo-hud-pace-mark');
-    expect(html).toContain('Темп: <strong>Alex</strong> · 50%');
+    expect(html).toContain('match-hud-competitor opponent');
+    expect(html).toContain('>A<');
+    expect(html).toContain('>Alex<');
+    expect(html).toContain('50%');
     expect(html).toContain('aria-valuenow="10"');
+    expect(html).not.toContain('solo-hud-alone');
+    expect(html).not.toMatch(/[Тт]емп|не завершает/);
   });
 
   it('keeps asking questions after the pace reached 100', () => {
     const html = render(playing(pace([25, 25, 25, 25]), 'question', [0, 0, 0, 0]));
-    expect(html).toContain('Темп: <strong>Alex</strong> · 100%');
+    expect(html).toContain('aria-valuenow="100"');
     expect(html).toContain('question-screen');
     expect(html).toContain('Круг 5');
     expect(html).not.toContain('result-screen');
@@ -133,48 +177,56 @@ describe('solo run HUD while playing', () => {
 });
 
 describe('solo run result', () => {
-  it('reached the target: rounds, par and score in plain words', () => {
+  it('reached the target: the result is recorded, with two ways forward and no par or score', () => {
     const html = render(finished([25, 25, 25, 25]), saved({}));
     expect(html).toContain('Дошёл до 100%');
-    expect(html).toContain('4 круга');
-    expect(html).toContain('Эталон для этого набора — 5 кругов');
-    expect(html).toContain('0,80');
-    expect(html).toContain('быстрее эталонного игрока');
+    expect(html).toContain('Результат зафиксирован');
+    expect(html).toContain('Сыграть ещё');
+    expect(html).toContain('Мои партии');
+    expect(html).not.toMatch(/[Ээ]талон|0,80|par|score|Ничья|Ждём результата|solo-result-outcome/);
     expect(html).toContain('reached');
   });
 
-  it('did not reach the target: says so, shows the progress, no victory wording', () => {
+  it('offers to call a friend only for a saved run that reached the target, never in practice', () => {
+    expect(render(finished([25, 25, 25, 25]), saved({}))).toContain('Позвать друга');
+    expect(render(finished([25, 25, 25, 25]))).not.toContain('Позвать друга');
+    expect(render(finished([25, 25, 25, 25]), saved({ reachedTarget: false }))).not.toContain('Позвать друга');
+    const practice = renderToStaticMarkup(
+      <SoloRunScreen state={finished([25, 25, 25, 25], pace([25, 25, 25, 25]))} save={saved({})} practice={PRACTICE_LEVELS[0]} {...handlers} />,
+    );
+    expect(practice).toContain('Тренировка');
+    expect(practice).not.toContain('Позвать друга');
+  });
+
+  it('does not reveal the rival outcome on this screen', () => {
+    for (const outcome of [null, 'player', 'opponent', 'tie'] as const) {
+      const html = render(finished([25, 25, 25, 25], pace([25, 25, 25, 25])), saved({ outcome }));
+      expect(html).not.toMatch(/Ничья|Ждём|прошёл набор|лучше тебя|Alex/);
+    }
+  });
+
+  it('did not reach the target: says so, shows the progress, no victory wording, same buttons', () => {
     const awards = new Array<number>(SOLO_ROUND_CAP).fill(2);
     const html = render(finished(awards), { ...saving });
     expect(html).toContain('До 100% не дошёл');
     expect(html).toContain('40% из 100%');
     expect(html).toContain('not-reached');
-    expect(html).toContain('До цели');
-    expect(html).not.toMatch(/Дошёл до 100|Клатч|Эталон/);
+    expect(html).toContain('Сыграть ещё');
+    expect(html).toContain('Мои партии');
+    expect(html).not.toMatch(/Дошёл до 100|Клатч|Эталон|зафиксирован/);
   });
 
-  it('waiting for the rival is shown as waiting, not as a tie', () => {
-    const html = render(finished([25, 25, 25, 25]), saved({ outcome: null }));
-    expect(html).toContain('Ждём результата соперника');
-    expect(html).toContain('solo-result-outcome waiting');
-    expect(html).not.toContain('Ничья');
-  });
-
-  it('a real tie is shown as a tie, not as waiting', () => {
-    const html = render(finished([25, 25, 25, 25], pace([25, 25, 25, 25])), saved({ outcome: 'tie' }));
-    expect(html).toContain('Ничья с Alex');
-    expect(html).toContain('solo-result-outcome tie');
-    expect(html).not.toContain('Ждём результата');
-  });
-
-  it('shows the pending save and the failed save with retry', () => {
-    expect(render(finished([25, 25, 25, 25]))).toContain('Сохраняем результат');
+  it('keeps the buttons off while saving and shows a failed save with retry', () => {
+    const pending = render(finished([25, 25, 25, 25]));
+    expect(pending).toContain('Сохраняем результат');
+    expect(pending.match(/disabled=""/g)?.length).toBe(2);
     const html = render(finished([25, 25, 25, 25]), {
       status: 'error', response: null, error: 'Не удалось сохранить результат.', canRetry: true,
     });
     expect(html).toContain('role="alert"');
     expect(html).toContain('Повторить');
-    expect(html).not.toContain('Эталон');
+    expect(html).not.toContain('disabled=""');
+    expect(html).not.toContain('зафиксирован');
   });
 
   it('does not render a question after the run is closed', () => {

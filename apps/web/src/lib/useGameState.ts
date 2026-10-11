@@ -4,7 +4,6 @@ import type {
   SkillResult,
   Question,
   Opponent,
-  Tournament,
   CategoryId,
 } from '@clutch/shared';
 import {
@@ -23,8 +22,6 @@ import {
 import {
   completeSkillDistance,
   continueAfterAnswerResolution,
-  createChallengeLobbyState,
-  createChallengeReplayState,
   createInitialGameState,
   createMatchLobbyState,
   createPreparedMatchState,
@@ -109,24 +106,6 @@ export function useGameState() {
       return { ...previous, phase: 'question' };
     });
   }, [matchmaking.status]);
-
-  const startChallenge = useCallback((tournament: Tournament, opponent: Opponent, fixedQuestions?: Question[]) => {
-    if (!fixedQuestions) throw new Error('Challenge questions are required.');
-    if (tournament.miniGame.id !== CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id) {
-      throw new Error('Challenge mini-game is not supported.');
-    }
-    const normalizedOpponent = normalizeScriptedOpponent(opponent, fixedQuestions);
-    const config = validateMiniGameConfig(tournament.miniGame.config);
-    requestCoordinatorRef.current.cancel();
-    startingPreparedRef.current = false;
-    setMatchmaking({ status: 'ready' });
-    setState(createChallengeLobbyState({
-      questions: fixedQuestions,
-      opponent: normalizedOpponent,
-      activeVideo: tournament.video,
-      miniGameConfig: config,
-    }));
-  }, []);
 
   useEffect(() => () => requestCoordinatorRef.current.cancel(), []);
 
@@ -306,11 +285,6 @@ export function useGameState() {
     }
     requestCoordinatorRef.current.cancel();
     startingPreparedRef.current = false;
-    if (state.matchSource === 'challenge') {
-      setState(createChallengeReplayState(state));
-      setMatchmaking({ status: 'ready' });
-      return;
-    }
     const questions = createQuestions(state.category);
     setState(createMatchLobbyState({
       category: state.category,
@@ -346,6 +320,12 @@ export function useGameState() {
     setState({ ...createInitialGameState(), phase: 'solo' });
   }, []);
 
+  const goToMyRuns = useCallback(() => {
+    requestCoordinatorRef.current.cancel();
+    startingPreparedRef.current = false;
+    setState({ ...createInitialGameState(), phase: 'myRuns' });
+  }, []);
+
   const goToProfile = useCallback(() => {
     setState((prev) => ({ ...prev, phase: 'profile' }));
   }, []);
@@ -376,7 +356,6 @@ export function useGameState() {
     questionsPlayed: state.rulesState.roundsPlayed,
     currentQuestion: state.questions[state.questionIndex],
     opponent: state.opponent,
-    activeVideo: state.activeVideo,
     miniGameConfig: state.miniGameConfig,
     matchSource: state.matchSource,
     matchmakingStatus: matchmaking.status,
@@ -390,7 +369,6 @@ export function useGameState() {
     useLocalPractice,
     start,
     replay,
-    startChallenge,
     answer,
     continueAfterResolution,
     completeHammer,
@@ -401,6 +379,7 @@ export function useGameState() {
     goToTraining,
     goToLastStand,
     goToSolo,
+    goToMyRuns,
     recordTrainingAnswer,
     trainingQuestions,
     goHome,

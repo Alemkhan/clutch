@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { CategoryId, CompleteSoloRunResponse } from '@clutch/shared';
+import type { CategoryId, CompleteSoloRunResponse, PracticeLevelId } from '@clutch/shared';
 import { completeSoloRun, isTransientApiError, startSoloRun } from './api';
 import { normalizeSoloRun } from './clientMatchRules';
 import { MatchRequestCoordinator } from './matchmaking';
@@ -27,23 +27,27 @@ export interface SoloSaveState {
 const SAVING: SoloSaveState = { status: 'saving', response: null, canRetry: false };
 
 /** Сетевая обвязка соло-забега: старт и сохранение результата. Правила остаются в soloRunFlow. */
-export function useSoloRun() {
+/** botLevel: тренировка против бота. Остальное — как в обычном забеге. */
+export function useSoloRun(botLevel?: PracticeLevelId) {
   const [state, setState] = useState<SoloFlowState>(createSoloFlowState);
   const [save, setSave] = useState<SoloSaveState>(SAVING);
   const coordinatorRef = useRef(new MatchRequestCoordinator());
   const saveControllerRef = useRef<AbortController | null>(null);
+  // Реванш: тот же invite повторяется при «Повторить» и сбрасывается при выходе к категориям.
+  const inviteRef = useRef<string>();
   const stateRef = useRef(state);
   stateRef.current = state;
 
-  const begin = useCallback((category: CategoryId) => {
-    const request = coordinatorRef.current.begin(category);
+  const begin = useCallback((category: CategoryId, rematchInviteId?: string) => {
+    inviteRef.current = rematchInviteId;
+    const request = coordinatorRef.current.begin(rematchInviteId ?? category);
     if (!request) return;
     setState(beginSoloLoading(category));
-    void startSoloRun(category, request.signal).then((raw) => {
+    void startSoloRun(category, request.signal, rematchInviteId, botLevel).then((raw) => {
       if (!coordinatorRef.current.isCurrent(request.token)) return;
       let run;
       try {
-        run = normalizeSoloRun(raw);
+        run = normalizeSoloRun(raw, botLevel !== undefined);
       } catch (error) {
         console.error('Invalid solo run response:', error);
         if (!coordinatorRef.current.settle(request.token)) return;
@@ -56,12 +60,13 @@ export function useSoloRun() {
       if (!coordinatorRef.current.settle(request.token)) return;
       setState((previous) => failSoloLoading(previous, soloStartErrorMessage(error)));
     });
-  }, []);
+  }, [botLevel]);
 
-  const retryStart = useCallback(() => begin(stateRef.current.category), [begin]);
+  const retryStart = useCallback(() => begin(stateRef.current.category, inviteRef.current), [begin]);
 
   /** Назад с загрузки или ошибки: отменяем запрос и возвращаемся к выбору категории. */
   const backToCategories = useCallback(() => {
+    inviteRef.current = undefined;
     coordinatorRef.current.cancel();
     saveControllerRef.current?.abort();
     saveControllerRef.current = null;

@@ -48,7 +48,7 @@ export function registerMyRunsRoutes(app: Hono<{ Bindings: Env }>): void {
       MAX_INVITES,
     );
     const response: MyRunsResponse = {
-      runs: page.map(toRunSummary),
+      runs: page.map((row) => toRunSummary(row, identity.playerId)),
       nextCursor: rows.length > limit && last
         ? encodeHistoryCursor({ completedAt: last.completed_at, id: last.id })
         : null,

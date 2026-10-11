@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import type { Phase } from './gameSession';
-import type { MatchSource } from './matchmaking';
 import { whenTelegramCoreReady } from './telegram';
 import {
   telegramBackAction,
@@ -16,11 +15,10 @@ interface BackCallbacks {
 
 export function useTelegramBackButton(
   phase: Phase,
-  matchSource: MatchSource,
   callbacks: BackCallbacks,
   soloPlaying = false,
 ): void {
-  const action = telegramBackAction(phase, matchSource, soloPlaying);
+  const action = telegramBackAction(phase, soloPlaying);
   const actionRef = useRef(action);
   const callbacksRef = useRef(callbacks);
   const controllerRef = useRef<TelegramBackButtonController | null>(null);

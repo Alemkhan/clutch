@@ -292,9 +292,8 @@ export function generateFlagToCountryOpen(correct: Country = pickOne(countries))
   };
 }
 
-// Builds an ordered, fixed capital quiz for a specific list of country codes —
-// used for tournaments that replay a specific real recorded quiz, rather than
-// the random pool used by generateMatch.
+// Builds an ordered, fixed capital quiz for a specific list of country codes.
+// Resolves `capital_fixed_*` ids in generateQuestionById.
 export function generateFixedCapitalQuiz(countryCodes: string[]): Question[] {
   return countryCodes
     .map((code) => countries.find((c) => c.code === code))

@@ -174,7 +174,7 @@ Completed online matches are first stored in a versioned browser queue without
 credentials. The client retries transient failures with bounded backoff (and
 honors `Retry-After`), resumes the queue on app bootstrap and browser `online`,
 and removes an entry only after a valid acknowledgement for the same match.
-Terminal 4xx responses remain visible and are not retried. Local/challenge runs
+Terminal 4xx responses remain visible and are not retried. Local runs
 are labeled as practice and are excluded from confirmed online profile stats.
 The queue covers completed payloads only; it does not restore a match in progress.
 

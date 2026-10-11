@@ -45,9 +45,4 @@ export function registerSystemRoutes(app: Hono<{ Bindings: Env }>): void {
       }, 503);
     }
   });
-
-  app.get('/api/tournaments/:slug', (c) => c.json({
-    slug: c.req.param('slug'),
-    message: 'Tournament endpoint ready. Connect D1 to return real data.',
-  }));
 }

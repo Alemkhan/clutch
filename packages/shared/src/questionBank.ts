@@ -1,6 +1,6 @@
 // General-knowledge question bank in the show style (easy → expert ladder).
 // Universal (no US-centric items), RU + EN. Not wired into the game yet —
-// content pool for future categories / scripted challenges.
+// content pool for future categories.
 
 export type BankCategory = 'science' | 'history' | 'popculture' | 'food' | 'sport' | 'math';
 

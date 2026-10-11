@@ -4,8 +4,9 @@ export const INVITE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 export interface InviteRow {
   id: string;
-  recipient_player_id: string;
-  recipient_run_id: string;
+  /** Пусто у открытого приглашения («Позвать друга») до погашения: адресатом станет первый, кто начнёт забег. */
+  recipient_player_id: string | null;
+  recipient_run_id: string | null;
   challenger_run_id: string;
   category: string;
   recipient_progress: number;
@@ -22,6 +23,22 @@ export type InviteMode = 'race' | 'solo';
 /** Приглашение ведёт в тот режим, в котором сыгран забег-вызов; всё, что не соло, — гонка. */
 export function inviteMode(invite: Pick<InviteRow, 'challenger_rules_version'>): InviteMode {
   return invite.challenger_rules_version === CURRENT_SOLO_RUN_CONDITIONS.rulesVersion ? 'solo' : 'race';
+}
+
+/** Открытое приглашение: адресата и его записи нет, пока ссылку не погасят. */
+export function isOpenInvite(invite: Pick<InviteRow, 'recipient_run_id'>): boolean {
+  return invite.recipient_run_id === null;
+}
+
+export type InviteUnavailableReason = 'taken' | 'expired';
+
+/** Почему приглашение уже нельзя принять; null — можно. Погашенное важнее просроченного. */
+export function inviteUnavailableReason(
+  invite: Pick<InviteRow, 'consumed_at' | 'expires_at'>,
+  now: number,
+): InviteUnavailableReason | null {
+  if (invite.consumed_at !== null) return 'taken';
+  return invite.expires_at <= now ? 'expired' : null;
 }
 
 /** No row means enabled: the opt-out default is applied here and nowhere else. */
@@ -70,6 +87,44 @@ export async function insertInviteOnce(db: D1Database, invite: {
   return result.meta.changes > 0;
 }
 
+/**
+ * Открытое приглашение на запись автора: без адресата, со сроком и одноразовостью как у реванша.
+ * false, если для этого забега открытое приглашение уже есть (уникальный индекс).
+ */
+export async function insertOpenInviteOnce(db: D1Database, invite: {
+  id: string;
+  challengerRunId: string;
+  category: string;
+  challengerProgress: number;
+  now: number;
+}): Promise<boolean> {
+  const result = await db.prepare(`
+    INSERT OR IGNORE INTO rematch_invites (
+      id, recipient_player_id, recipient_run_id, challenger_run_id, category,
+      recipient_progress, challenger_progress, created_at, expires_at, notify_status
+    ) VALUES (?1, NULL, NULL, ?2, ?3, 0, ?4, ?5, ?6, 'sent')
+  `).bind(
+    invite.id,
+    invite.challengerRunId,
+    invite.category,
+    invite.challengerProgress,
+    invite.now,
+    invite.now + INVITE_TTL_MS,
+  ).run();
+  return result.meta.changes > 0;
+}
+
+export async function findOpenInviteForRun(db: D1Database, challengerRunId: string): Promise<InviteRow | null> {
+  return db.prepare(`
+    SELECT i.id, i.recipient_player_id, i.recipient_run_id, i.challenger_run_id, i.category,
+           i.recipient_progress, i.challenger_progress, i.created_at, i.expires_at, i.consumed_at,
+           c.rules_version AS challenger_rules_version
+    FROM rematch_invites i
+    LEFT JOIN match_runs c ON c.id = i.challenger_run_id
+    WHERE i.challenger_run_id = ?1 AND i.recipient_run_id IS NULL
+  `).bind(challengerRunId).first<InviteRow>();
+}
+
 export async function markInviteNotified(db: D1Database, id: string, sent: boolean): Promise<void> {
   await db.prepare('UPDATE rematch_invites SET notify_status = ?2 WHERE id = ?1')
     .bind(id, sent ? 'sent' : 'failed')
@@ -87,7 +142,11 @@ export async function findInvite(db: D1Database, id: string): Promise<InviteRow 
   `).bind(id).first<InviteRow>();
 }
 
-/** Atomically spends the invite for its addressee; false if spent, expired or addressed to someone else. */
+/**
+ * Atomically spends the invite for its addressee; false if spent, expired or addressed to someone else.
+ * Открытое приглашение достаётся тому, чей UPDATE выполнился первым (меняется ровно одна строка), и
+ * никогда автору записи. Адресатом становится погасивший.
+ */
 export async function consumeInvite(
   db: D1Database,
   id: string,
@@ -96,15 +155,27 @@ export async function consumeInvite(
 ): Promise<boolean> {
   const now = Date.now();
   const result = await db.prepare(`
-    UPDATE rematch_invites SET consumed_at = ?3, rematch_run_id = ?4
-    WHERE id = ?1 AND recipient_player_id = ?2 AND consumed_at IS NULL AND expires_at > ?3
+    UPDATE rematch_invites SET consumed_at = ?3, rematch_run_id = ?4, recipient_player_id = ?2
+    WHERE id = ?1 AND consumed_at IS NULL AND expires_at > ?3
+      AND (
+        recipient_player_id = ?2
+        OR (
+          recipient_player_id IS NULL
+          AND NOT EXISTS (SELECT 1 FROM match_runs c WHERE c.id = challenger_run_id AND c.player_id = ?2)
+        )
+      )
   `).bind(id, playerId, now, rematchRunId).run();
   return result.meta.changes > 0;
 }
 
 export async function releaseInvite(db: D1Database, id: string): Promise<void> {
-  await db.prepare('UPDATE rematch_invites SET consumed_at = NULL, rematch_run_id = NULL WHERE id = ?1')
-    .bind(id).run();
+  // У открытого приглашения возврат снимает и адресата: ссылка снова свободна для первого.
+  await db.prepare(`
+    UPDATE rematch_invites
+    SET consumed_at = NULL, rematch_run_id = NULL,
+        recipient_player_id = CASE WHEN recipient_run_id IS NULL THEN NULL ELSE recipient_player_id END
+    WHERE id = ?1
+  `).bind(id).run();
 }
 
 /**

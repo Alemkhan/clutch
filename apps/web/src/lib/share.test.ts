@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import {
+  buildFriendInvitePayload,
   buildShareText,
   buildSharePayload,
   chooseShareStrategy,
@@ -29,7 +30,7 @@ describe('buildShareUrl', () => {
   });
   it('passes the opponent name only for a human opponent', () => {
     expect(parse(buildShareUrl(base, '', 'http://x')).searchParams.get('n')).toBe('Алекс');
-    for (const matchSource of ['bot', 'local', 'challenge'] as const) {
+    for (const matchSource of ['bot', 'local'] as const) {
       expect(parse(buildShareUrl({ ...base, matchSource }, '', 'http://x')).searchParams.has('n')).toBe(false);
     }
   });
@@ -101,5 +102,13 @@ describe('executeShare', () => {
     const eff = (e: Error) => ({ telegramShare: () => false, nativeShare: async () => { throw e; } });
     expect(await executeShare('native', payload, eff(abort))).toBe('cancelled');
     expect(await executeShare('native', payload, eff(new Error('boom')))).toBe('failed');
+  });
+});
+
+describe('friend invite payload', () => {
+  it('carries the invite link as is, with a short text and no score', () => {
+    const payload = buildFriendInvitePayload('https://t.me/bot?startapp=rm_x');
+    expect(payload.url).toBe('https://t.me/bot?startapp=rm_x');
+    expect(payload.text).not.toMatch(/\d|темп/i);
   });
 });

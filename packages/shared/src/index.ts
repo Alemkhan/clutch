@@ -1,4 +1,5 @@
 import type { MiniGameConfig, SkillResult } from './hammerRules';
+import type { PracticeLevelId } from './practice';
 
 export type AnswerType = 'multiple_choice' | 'open_answer';
 
@@ -8,6 +9,8 @@ export * from './matchRules';
 export * from './soloRun';
 export * from './questionPricing';
 export * from './soloCompare';
+export * from './practice';
+export * from './friendDuel';
 
 export type Difficulty = 'Easy' | 'Medium' | 'Hard' | 'Expert';
 
@@ -99,6 +102,10 @@ export interface CompleteAsyncMatchResponse {
 export interface StartSoloRunRequest {
   displayName: string;
   category: 'geography' | 'history' | 'languages';
+  /** Одноразовое приглашение на соло-реванш; сервер сверяет его с игроком. */
+  rematchInviteId?: string;
+  /** Тренировка: уровень бота. Забег не идёт в соревнование; с реваншем не сочетается. */
+  botLevel?: PracticeLevelId;
 }
 
 export interface StartSoloRunResponse {
@@ -114,6 +121,13 @@ export interface StartSoloRunResponse {
 }
 
 export type CompleteSoloRunRequest = CompleteAsyncMatchRequest;
+
+/** «Позвать друга»: готовая ссылка на открытое приглашение по записи своего завершённого забега. */
+export interface CreateFriendInviteResponse {
+  inviteId: string;
+  url: string;
+  expiresAt: number;
+}
 
 export interface CompleteSoloRunResponse {
   runId: string;
@@ -150,6 +164,11 @@ export interface MyRunSummary {
   opponent: { kind: 'player' | 'bot'; displayName: string } | null;
   /** null: соло без соперника (ждёт его, opponent === null) либо исход не удалось определить. Ничья — 'tie'. */
   outcome: MyRunOutcome | null;
+  /**
+   * Дружеская дуэль, не в зачёт: 'played' — игрок играл по ссылке; 'hosted' — друг сыграл его запись
+   * (цифры тогда друга, а исход дан глазами владельца записи). Обычная партия — null.
+   */
+  friendDuel?: 'played' | 'hosted' | null;
 }
 
 /** Активное приглашение на реванш, адресованное игроку. */
@@ -205,56 +224,6 @@ export const CURRENT_SOLO_RUN_CONDITIONS: AsyncMatchConditions = {
   rulesVersion: 'solo-to-100-v1',
   miniGame: CURRENT_ASYNC_MATCH_CONDITIONS.miniGame,
 };
-
-export interface Tournament {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  status: 'draft' | 'published';
-  publishAt?: string;
-  questionIds: string[];
-  opponentId: string;
-  miniGame: {
-    id: 'hammer_nail';
-    config: MiniGameConfig;
-  };
-  rankingEnabled: boolean;
-  video?: {
-    platform: string;
-    url: string;
-    contentId: string;
-  };
-}
-
-export interface SkillAttempt {
-  questionId: string;
-  result: SkillResult;
-  progressAwarded: number;
-  distance: number;
-}
-
-export interface MatchRound {
-  questionId: string;
-  selectedOptionId?: string;
-  correct: boolean;
-  responseTimeMs: number;
-  skillAttempt?: SkillAttempt;
-  playerProgressAfter: number;
-  opponentProgressAfter: number;
-}
-
-export interface Match {
-  id: string;
-  tournamentId: string;
-  playerProgress: number;
-  opponentProgress: number;
-  rounds: MatchRound[];
-  status: 'in_progress' | 'completed';
-  winner?: 'player' | 'opponent' | 'tie';
-  startedAt: string;
-  completedAt?: string;
-}
 
 export * from './countries';
 export * from './flagTraits';

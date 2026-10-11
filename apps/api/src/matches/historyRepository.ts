@@ -1,8 +1,11 @@
-import { evaluateMatch, type AsyncMatchRound, type MyRunOutcome, type MyRunSummary } from '@clutch/shared';
+import { FRIEND_RULES_VERSION, PRACTICE_RULES_VERSION, evaluateMatch, invertOutcome, type AsyncMatchRound, type MyRunOutcome, type MyRunSummary } from '@clutch/shared';
 import { parseQuestions } from './validation';
 
 export interface HistoryRow {
   id: string;
+  /** Владелец забега; у чужой дружеской дуэли отличается от смотрящего. */
+  player_id?: string;
+  display_name?: string;
   category: MyRunSummary['category'];
   questions_json: string;
   rounds_json: string | null;
@@ -36,18 +39,30 @@ export async function listCompletedRuns(
   limit: number,
   cursor: { completedAt: number; id: string } | null,
 ): Promise<HistoryRow[]> {
-  const columns = `id, category, questions_json, rounds_json, progress, correct_count, rules_version,
+  const columns = `id, player_id, display_name, category, questions_json, rounds_json, progress, correct_count, rules_version,
     opponent_json, opponent_run_id, reached_target, set_par, solo_score, solo_outcome, created_at, completed_at`;
   const statement = cursor
     ? db.prepare(`
         SELECT ${columns} FROM match_runs
-        WHERE player_id = ?1 AND status = 'completed' AND completed_at IS NOT NULL
+        WHERE status = 'completed' AND completed_at IS NOT NULL
+          AND (
+            (player_id = ?1 AND rules_version IS NOT '${PRACTICE_RULES_VERSION}')
+            OR (rules_version = '${FRIEND_RULES_VERSION}' AND opponent_run_id IN (
+              SELECT id FROM match_runs WHERE player_id = ?1
+            ))
+          )
           AND (completed_at < ?2 OR (completed_at = ?2 AND id < ?3))
         ORDER BY completed_at DESC, id DESC LIMIT ?4
       `).bind(playerId, cursor.completedAt, cursor.id, limit + 1)
     : db.prepare(`
         SELECT ${columns} FROM match_runs
-        WHERE player_id = ?1 AND status = 'completed' AND completed_at IS NOT NULL
+        WHERE status = 'completed' AND completed_at IS NOT NULL
+          AND (
+            (player_id = ?1 AND rules_version IS NOT '${PRACTICE_RULES_VERSION}')
+            OR (rules_version = '${FRIEND_RULES_VERSION}' AND opponent_run_id IN (
+              SELECT id FROM match_runs WHERE player_id = ?1
+            ))
+          )
         ORDER BY completed_at DESC, id DESC LIMIT ?2
       `).bind(playerId, limit + 1);
   return (await statement.all<HistoryRow>()).results;
@@ -83,7 +98,11 @@ function raceOutcome(
   }
 }
 
-export function toRunSummary(row: HistoryRow): MyRunSummary {
+/** viewerId нужен, чтобы отличить дуэль друга по моей записи от моей собственной игры. */
+export function toRunSummary(row: HistoryRow, viewerId?: string): MyRunSummary {
+  const friendDuel = row.rules_version === FRIEND_RULES_VERSION
+    ? (viewerId !== undefined && row.player_id !== undefined && row.player_id !== viewerId ? 'hosted' : 'played')
+    : null;
   const solo = row.rules_version?.startsWith('solo-') ?? false;
   const rounds = (parseJson(row.rounds_json) as AsyncMatchRound[] | null) ?? [];
   const opponent = parseJson(row.opponent_json) as { displayName?: unknown; rounds?: unknown } | null;
@@ -100,10 +119,15 @@ export function toRunSummary(row: HistoryRow): MyRunSummary {
     soloScore: solo ? row.solo_score : null,
     startedAt: row.created_at,
     completedAt: row.completed_at,
-    opponent: named
-      ? { kind: row.opponent_run_id ? 'player' : 'bot', displayName: opponent.displayName as string }
-      : null,
+    opponent: friendDuel === 'hosted'
+      ? { kind: 'player', displayName: row.display_name ?? 'Друг' }
+      : named
+        ? { kind: row.opponent_run_id ? 'player' : 'bot', displayName: opponent.displayName as string }
+        : null,
     // Соло: сохранённый исход; null — соперника не было (opponent === null) или забег старше миграции.
-    outcome: solo ? row.solo_outcome ?? null : raceOutcome(row, rounds, opponent),
+    outcome: solo
+      ? (friendDuel === 'hosted' && row.solo_outcome ? invertOutcome(row.solo_outcome) : row.solo_outcome ?? null)
+      : raceOutcome(row, rounds, opponent),
+    friendDuel,
   };
 }

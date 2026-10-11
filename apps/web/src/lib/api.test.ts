@@ -96,4 +96,15 @@ describe('solo run and my-runs calls', () => {
     expect(paths).toContain('/api/solo-runs');
     expect(paths).toContain('/api/solo-runs/run%2F1/complete');
   });
+
+  it('sends the rematch invite to the solo route and to the race route respectively', async () => {
+    const fetchMock = stubApi();
+    await startSoloRun('geography', undefined, 'rm_soloinvite');
+    await startAsyncMatch('geography', undefined, 'rm_raceinvite');
+    const calls = fetchMock.mock.calls as unknown as [string, RequestInit][];
+    const solo = calls.find(([path]) => path === '/api/solo-runs');
+    const race = calls.find(([path]) => path === '/api/async-matches');
+    expect(JSON.parse(String(solo?.[1].body)).rematchInviteId).toBe('rm_soloinvite');
+    expect(JSON.parse(String(race?.[1].body)).rematchInviteId).toBe('rm_raceinvite');
+  });
 });

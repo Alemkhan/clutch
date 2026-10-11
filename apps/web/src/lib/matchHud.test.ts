@@ -14,8 +14,9 @@ describe('shouldShowMatchHud', () => {
     profile: false,
     training: false,
     lastStand: false,
-    // У соло-забега свой HUD с одной полосой и темпом.
+    // У соло-забега свой HUD, у «Моих партий» HUD нет.
     solo: false,
+    myRuns: false,
   };
 
   for (const [phase, visible] of Object.entries(expected) as [Phase, boolean][]) {

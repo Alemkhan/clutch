@@ -1,6 +1,8 @@
 import {
   CURRENT_SOLO_RUN_CONDITIONS,
+  FRIEND_RULES_VERSION,
   MAX_DAILY_SET_SIZE,
+  PRACTICE_RULES_VERSION,
   SOLO_ROUND_CAP,
   SOLO_TARGET_PROGRESS,
   applySoloRound,
@@ -8,6 +10,7 @@ import {
   invertOutcome,
   dailyKey,
   createSoloRunState,
+  isPracticeLevelId,
   evaluateSoloRun,
   setPar,
   soloScore,
@@ -24,8 +27,9 @@ import { resolveRequestIdentity, type RequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
 import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
-import { matchmake } from '../matches/matchmaking';
-import { currentMiniGameConfigJson, findRun, findRunOwner } from '../matches/repository';
+import { PRACTICE_BOT_PROFILES, createBotOpponent } from '../matches/bots';
+import { matchmake, pickSet } from '../matches/matchmaking';
+import { currentMiniGameConfigJson, findRecordRun, findRun, findRunOwner, type GhostMatch } from '../matches/repository';
 import { scoreSubmittedRound } from '../matches/scoring';
 import {
   completeSoloRun,
@@ -35,8 +39,16 @@ import {
   soloLeaderboard,
 } from '../matches/soloRepository';
 import { categories, isRoundInput, isStartRequest, parseQuestions } from '../matches/validation';
-import { notifySoloResult } from '../notifications/outbid';
-import { consumeInvite, findInvite, inviteMode, releaseInvite, type InviteRow } from '../notifications/repository';
+import { notifyDuelResult, notifySoloResult } from '../notifications/outbid';
+import {
+  consumeInvite,
+  findInvite,
+  inviteMode,
+  inviteUnavailableReason,
+  isOpenInvite,
+  releaseInvite,
+  type InviteRow,
+} from '../notifications/repository';
 
 type AppContext = Context<{ Bindings: Env }>;
 
@@ -78,16 +90,69 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
     const now = Date.now();
     const runId = crypto.randomUUID();
 
+    // Тренировка: бот вместо записи игрока, вне соревнования (см. PRACTICE_RULES_VERSION).
+    const requestedLevel = (parsed.value as { botLevel?: unknown }).botLevel;
+    if (requestedLevel !== undefined) {
+      if (!isPracticeLevelId(requestedLevel) || parsed.value.rematchInviteId) {
+        return c.json({ error: 'Invalid botLevel.' }, 400);
+      }
+      // Тот же выбор набора, что в соревновании: увиденное в тренировке не должно
+      // вернуться потом в зачётном забеге, поэтому набор запоминается за игроком.
+      const { questionSetId, questions, bankExhausted } = await pickSet(
+        c.env.DB,
+        category,
+        identity.playerId,
+        now,
+      );
+      const bot = createBotOpponent(questions, PRACTICE_BOT_PROFILES[requestedLevel]);
+      await createSoloRun(c.env.DB, {
+        id: runId,
+        playerId: identity.playerId,
+        displayName: identity.displayName || displayName.trim(),
+        category,
+        questionSetId,
+        questions,
+        paceRunId: null,
+        pace: bot,
+        practice: true,
+        now,
+      });
+      const practiceResponse: StartSoloRunResponse = {
+        runId,
+        questions,
+        pace: bot,
+        target: SOLO_TARGET_PROGRESS,
+        roundCap: SOLO_ROUND_CAP,
+        rulesVersion: PRACTICE_RULES_VERSION,
+        bankExhausted,
+      };
+      return c.json(practiceResponse, 201);
+    }
+
     // Реванш: приглашение должно быть адресовано игроку, не потрачено, не просрочено и из соло.
     // Категория берётся из приглашения, набор — обычным подбором (новый, не сыгранный получателем).
+    // «Позвать друга» — открытое приглашение без адресата: его гасит первый, кто начал забег, и играет
+    // против самой записи автора на её наборе. Эта запись зарезервирована и в общем подборе не участвует.
     let invite: InviteRow | null = null;
+    let friendDuel = false;
+    let record: GhostMatch | null = null;
     if (parsed.value.rematchInviteId) {
       invite = await findInvite(c.env.DB, parsed.value.rematchInviteId);
-      if (!invite || invite.recipient_player_id !== identity.playerId) {
+      if (!invite) return c.json({ error: 'Rematch invite not found.' }, 404);
+      const friend = isOpenInvite(invite);
+      friendDuel = friend;
+      if (!friend && invite.recipient_player_id !== identity.playerId) {
         return c.json({ error: 'Rematch invite not found.' }, 404);
       }
-      if (invite.consumed_at !== null || invite.expires_at <= now) {
-        return c.json({ error: 'Rematch invite is no longer available.' }, 410);
+      if (friend) {
+        record = await findRecordRun(c.env.DB, invite.challenger_run_id, CURRENT_SOLO_RUN_CONDITIONS.rulesVersion);
+        if (record?.row.player_id === identity.playerId) {
+          return c.json({ error: 'This is your own invite.', reason: 'own' }, 403);
+        }
+      }
+      const reason = inviteUnavailableReason(invite, now);
+      if (reason || (friend && !record)) {
+        return c.json({ error: 'Rematch invite is no longer available.', reason: reason ?? 'expired' }, 410);
       }
       if (inviteMode(invite) !== 'solo') {
         return c.json({ error: 'This rematch invite is for race mode.' }, 409);
@@ -95,15 +160,17 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
       category = invite.category as typeof category;
     }
     // Тот же подбор набора, что в гонке, но по соло-пулу: только забеги, дошедшие до цели.
-    const { ghost, questionSetId, questions, bankExhausted } = await matchmake(
-      c.env.DB,
-      category,
-      identity.playerId,
-      now,
-      { rulesVersion: CURRENT_SOLO_RUN_CONDITIONS.rulesVersion, reachedTargetOnly: true },
-    );
+    const { ghost, questionSetId, questions, bankExhausted } = record
+      ? { ghost: record, questionSetId: record.questionSetId, questions: record.questions, bankExhausted: false }
+      : await matchmake(
+        c.env.DB,
+        category,
+        identity.playerId,
+        now,
+        { rulesVersion: CURRENT_SOLO_RUN_CONDITIONS.rulesVersion, reachedTargetOnly: true },
+      );
     if (invite && !await consumeInvite(c.env.DB, invite.id, identity.playerId, runId)) {
-      return c.json({ error: 'Rematch invite is no longer available.' }, 410);
+      return c.json({ error: 'Rematch invite is no longer available.', reason: 'taken' }, 410);
     }
     try {
       await createSoloRun(c.env.DB, {
@@ -115,6 +182,7 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
         questions,
         paceRunId: ghost?.row.id ?? null,
         pace: ghost?.opponent ?? null,
+        friend: friendDuel,
         now,
       });
     } catch (error) {
@@ -127,7 +195,7 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
       pace: ghost?.opponent ?? null,
       target: SOLO_TARGET_PROGRESS,
       roundCap: SOLO_ROUND_CAP,
-      rulesVersion: CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
+      rulesVersion: friendDuel ? FRIEND_RULES_VERSION : CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
       bankExhausted,
     };
     return c.json(response, 201);
@@ -149,7 +217,9 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
 
     const run = await findRun(c.env.DB, runId);
     if (!run || run.player_id !== identity.playerId) return c.json({ error: 'Run not found.' }, 404);
-    if (run.rules_version !== CURRENT_SOLO_RUN_CONDITIONS.rulesVersion
+    const practice = run.rules_version === PRACTICE_RULES_VERSION;
+    const friend = run.rules_version === FRIEND_RULES_VERSION;
+    if ((!practice && !friend && run.rules_version !== CURRENT_SOLO_RUN_CONDITIONS.rulesVersion)
       || run.mini_game_config_json !== currentMiniGameConfigJson) {
       return c.json({ error: 'This is not a solo run.' }, 409);
     }
@@ -210,8 +280,9 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
     }
 
     // Сравнение с записью-темпом. Нет записи — исход null, забег ждёт соперника.
+    // Тренировка не сравнивается: бот — не запись игрока, а исход тренировки не хранится.
     const completedAt = Date.now();
-    const pace = run.opponent_run_id ? await findPaceResult(c.env.DB, run.opponent_run_id) : null;
+    const pace = run.opponent_run_id && !practice ? await findPaceResult(c.env.DB, run.opponent_run_id) : null;
     const outcome = pace
       ? compareSoloRuns({
         reachedTarget: result.reachedTarget,
@@ -232,6 +303,8 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
       setPar: result.par,
       soloScore: result.score,
       outcome,
+      practice,
+      friend,
       now: completedAt,
     });
     if (!didComplete) {
@@ -248,13 +321,15 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
       return c.json({ error: 'Run completion conflicted with another request.' }, 409);
     }
     // Владелец записи узнаёт исход в любом случае; повтор completion сюда не доходит.
-    if (outcome && run.opponent_run_id) {
+    if (!practice && outcome && run.opponent_run_id) {
       const paceRunId = run.opponent_run_id;
       deferred(c, (async () => {
         const recipientRun = await findRunOwner(c.env.DB, paceRunId);
         if (!recipientRun) return;
         const recipientView = invertOutcome(outcome);
-        await notifySoloResult(c.env, {
+        // Дружеская дуэль: автор записи узнаёт итог, но реванш-приглашение ему не создаётся.
+        const notify = friend ? notifyDuelResult : notifySoloResult;
+        await notify(c.env, {
           recipientRun,
           challengerRunId: runId,
           challengerName: run.display_name,

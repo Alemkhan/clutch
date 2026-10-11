@@ -1,10 +1,10 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { SOLO_TARGET_PROGRESS } from '@clutch/shared';
+import { Competitor } from './MatchHud';
 import { SoundToggle } from './SoundToggle';
 
 interface SoloHudProps {
   progress: number;
-  target: number;
-  /** Прогресс темпа соперника на той же полосе. null — темпа нет, ничего не рисуем. */
+  /** Прогресс записи соперника на её полосе. null — соперника нет, ничего не рисуем. */
   paceProgress: number | null;
   paceName: string | null;
   round: number;
@@ -12,68 +12,27 @@ interface SoloHudProps {
   roundsLeft: number;
 }
 
-function clamp(value: number, max: number): number {
-  return Math.min(max, Math.max(0, value));
-}
-
 /**
- * HUD соло-забега: личность, процент и одна полоса. Темп соперника — метка на этой же полосе;
- * он только подсказывает, забег завершает один игрок: дойдя до цели или упёршись в потолок.
+ * HUD соло-забега в том же виде, что и в гонке: аватар, имя, процент и полоса.
+ * Соперник только рисуется: забег завершает один игрок, дойдя до цели или упёршись в потолок.
  */
-export function SoloHud({ progress, target, paceProgress, paceName, round, roundsLeft }: SoloHudProps) {
-  const reduceMotion = useReducedMotion();
-  const own = clamp(progress, target);
-  const pace = paceProgress === null ? null : clamp(paceProgress, target);
-  const transition = { duration: reduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] as const };
+export function SoloHud({ progress, paceProgress, paceName, round, roundsLeft }: SoloHudProps) {
+  const own = Math.min(SOLO_TARGET_PROGRESS, Math.max(0, progress));
+  const hasOpponent = paceProgress !== null && Boolean(paceName);
 
   return (
-    <section className="match-hud solo-hud" aria-label="Прогресс забега">
-      <div className="solo-hud-top">
-        <div className="match-hud-identity">
-          <span className="match-hud-avatar" aria-hidden="true">ТЫ</span>
-          <span className="match-hud-name">Ты</span>
-          <strong className="match-hud-value">{own}%</strong>
+    <section className={hasOpponent ? 'match-hud solo-hud' : 'match-hud solo-hud solo-hud-alone'} aria-label="Прогресс забега">
+      <div className="match-hud-grid">
+        <Competitor name="Ты" value={own} side="player" />
+        <div className="match-hud-center">
+          <div className="solo-hud-rounds" aria-label={`Круг ${round}, осталось кругов: ${roundsLeft}`}>
+            <strong>Круг {round}</strong>
+            <span>осталось {roundsLeft}</span>
+          </div>
+          <SoundToggle variant="hud" />
         </div>
-        <div className="solo-hud-rounds" aria-label={`Круг ${round}, осталось кругов: ${roundsLeft}`}>
-          <strong>Круг {round}</strong>
-          <span>осталось {roundsLeft}</span>
-        </div>
-        <SoundToggle variant="hud" />
+        {hasOpponent && <Competitor name={paceName ?? ''} value={paceProgress ?? 0} side="opponent" />}
       </div>
-      <div className="solo-hud-bar">
-        <div
-          className="match-hud-track"
-          role="progressbar"
-          aria-label="Твой прогресс"
-          aria-valuemin={0}
-          aria-valuemax={target}
-          aria-valuenow={own}
-          aria-valuetext={`${own}% из ${target}%`}
-        >
-          <motion.span
-            className="match-hud-fill"
-            aria-hidden="true"
-            initial={false}
-            animate={{ width: `${(own / target) * 100}%` }}
-            transition={transition}
-          />
-        </div>
-        {pace !== null && (
-          <motion.span
-            className="solo-hud-pace-mark"
-            aria-hidden="true"
-            initial={false}
-            animate={{ left: `${(pace / target) * 100}%` }}
-            transition={transition}
-          />
-        )}
-      </div>
-      {pace !== null && paceName && (
-        <p className="solo-hud-pace">
-          Темп: <strong>{paceName}</strong> · {pace}%
-          <span> · забег не завершает</span>
-        </p>
-      )}
     </section>
   );
 }

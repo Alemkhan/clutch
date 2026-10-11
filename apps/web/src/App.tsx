@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import type { CategoryId } from '@clutch/shared';
+import type { CategoryId, PracticeLevel } from '@clutch/shared';
 import { useGameState } from './lib/useGameState';
 import { MatchHud } from './components/MatchHud';
 import { HomeDashboard } from './components/HomeDashboard';
@@ -11,24 +11,18 @@ import { QuestionScreen } from './components/QuestionScreen';
 import { ResolutionScreen } from './components/ResolutionScreen';
 import { HammerGame } from './components/HammerGame';
 import { ResultScreen } from './components/ResultScreen';
-import { Training } from './components/Training';
+import { TrainingHub } from './components/TrainingHub';
 import { RematchEntry } from './components/RematchEntry';
 import { readLaunchIntent, type LaunchIntent } from './lib/launchIntent';
 import { LastStand } from './components/LastStand';
-import { SoloRun } from './components/SoloRun';
+import { SoloRun, type SoloRematch } from './components/SoloRun';
+import { MyRuns } from './components/MyRuns';
 import { isSoloPlaying, type SoloStage } from './lib/soloRunFlow';
-import { findChallenge } from './lib/tournaments';
 import { completionQueue } from './lib/completionQueue';
 import { analytics } from './lib/analytics';
 import { abandonedNote } from './lib/matchmaking';
 import { shouldShowMatchHud } from './lib/matchHud';
 import { useTelegramBackButton } from './lib/useTelegramBackButton';
-
-function handleChallenge(tournamentId: string, startChallenge: ReturnType<typeof useGameState>['startChallenge']) {
-  const challenge = findChallenge(tournamentId);
-  if (!challenge) return;
-  startChallenge(challenge.tournament, challenge.opponent, challenge.questions);
-}
 
 const screenTransition = {
   initial: { opacity: 0, y: 8 },
@@ -50,10 +44,35 @@ export default function App() {
   const game = useGameState();
   const [launchIntent, setLaunchIntent] = useState<LaunchIntent | null>(readLaunchIntent);
   const closeLaunchIntent = useCallback(() => setLaunchIntent(null), []);
-  const startRematch = useCallback((inviteId: string, category: CategoryId) => {
+  const [soloRematch, setSoloRematch] = useState<SoloRematch | null>(null);
+  // Тренировка против бота: уровень, с которым открыт экран solo. null — обычный забег.
+  const [practiceLevel, setPracticeLevel] = useState<PracticeLevel | null>(null);
+  // Режим берётся из приглашения: соло-приглашение нельзя запускать гоночным стартом и наоборот.
+  const startRematch = useCallback((inviteId: string, category: CategoryId, mode: 'race' | 'solo') => {
     setLaunchIntent(null);
+    setPracticeLevel(null);
+    if (mode === 'solo') {
+      setSoloRematch({ inviteId, category });
+      game.goToSolo();
+      return;
+    }
     game.startRematch(inviteId, category);
-  }, [game.startRematch]);
+  }, [game.startRematch, game.goToSolo]);
+  // Приглашение из «Моих партий» открывается тем же экраном, что и ссылка из бота.
+  const openInvite = useCallback((inviteId: string) => {
+    game.goHome();
+    setLaunchIntent({ type: 'rematch', inviteId });
+  }, [game.goHome]);
+  const startSolo = useCallback(() => {
+    setSoloRematch(null);
+    setPracticeLevel(null);
+    game.goToSolo();
+  }, [game.goToSolo]);
+  const startPractice = useCallback((level: PracticeLevel) => {
+    setSoloRematch(null);
+    setPracticeLevel(level);
+    game.goToSolo();
+  }, [game.goToSolo]);
   const shellRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
   const screenDuration = reduceMotion ? 0 : 0.18;
@@ -63,8 +82,9 @@ export default function App() {
   // Молоток в соло получает тот же фон, что и в гонке.
   const shellPhase = game.phase === 'solo' && soloStage === 'hammer' ? 'hammer' : game.phase;
 
-  useTelegramBackButton(game.phase, game.matchSource, {
-    home: game.goHome,
+  useTelegramBackButton(game.phase, {
+    // В тренировке системная «Назад» ведёт к её разделу, а не на главную.
+    home: game.phase === 'solo' && practiceLevel ? game.goToTraining : game.goHome,
     categories: game.goToCategories,
   }, soloPlaying);
 
@@ -111,12 +131,11 @@ export default function App() {
         {game.phase === 'home' && !launchIntent && (
           <motion.div key="home" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <HomeDashboard
-              onFindMatch={game.goToCategories}
               onProfile={game.goToProfile}
               onTraining={game.goToTraining}
               onLastStand={game.goToLastStand}
-              onSolo={game.goToSolo}
-              onChallenge={(tournamentId) => handleChallenge(tournamentId, game.startChallenge)}
+              onSolo={startSolo}
+              onMyRuns={game.goToMyRuns}
             />
           </motion.div>
         )}
@@ -129,9 +148,10 @@ export default function App() {
 
         {game.phase === 'training' && (
           <motion.div key="training" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
-            <Training
+            <TrainingHub
               questions={game.trainingQuestions}
               onAnswered={game.recordTrainingAnswer}
+              onStartBot={startPractice}
               onBack={game.goHome}
             />
           </motion.div>
@@ -145,7 +165,19 @@ export default function App() {
 
         {game.phase === 'solo' && (
           <motion.div key="solo" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
-            <SoloRun onHome={game.goHome} onStageChange={setSoloStage} />
+            <SoloRun
+              onHome={practiceLevel ? game.goToTraining : game.goHome}
+              practice={practiceLevel ?? undefined}
+              onMyRuns={game.goToMyRuns}
+              rematch={soloRematch}
+              onStageChange={setSoloStage}
+            />
+          </motion.div>
+        )}
+
+        {game.phase === 'myRuns' && (
+          <motion.div key="myRuns" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <MyRuns onBack={game.goHome} onOpenInvite={openInvite} onPlay={startSolo} />
           </motion.div>
         )}
 
@@ -159,7 +191,6 @@ export default function App() {
           <motion.div key="matchmaking" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <Matchmaking
               opponent={game.opponent}
-              video={game.activeVideo}
               status={game.matchmakingStatus}
               source={game.matchSource}
               abandonedNote={abandonedNote(game.matchSource, game.opponent, game.totalQuestions)}
@@ -167,7 +198,7 @@ export default function App() {
               onStart={game.start}
               onRetry={game.retryMatchmaking}
               onLocalPractice={game.useLocalPractice}
-              onBack={game.matchSource === 'challenge' ? game.goHome : game.goToCategories}
+              onBack={game.goToCategories}
             />
           </motion.div>
         )}

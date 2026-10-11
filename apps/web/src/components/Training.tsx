@@ -16,6 +16,8 @@ interface TrainingProps {
   /** Called once per answered question, with the verdict. */
   onAnswered: (questionId: string, correct: boolean) => void;
   onBack: () => void;
+  /** Подпись кнопки выхода на итоговых экранах. */
+  exitLabel?: string;
 }
 
 export const TRAINING_NOT_SAVED_NOTE =
@@ -27,7 +29,7 @@ function reducer(state: TrainingState, action: Action): TrainingState {
   return action.type === 'answer' ? answerTraining(state, action.answer) : continueTraining(state);
 }
 
-export function Training({ questions, onAnswered, onBack }: TrainingProps) {
+export function Training({ questions, onAnswered, onBack, exitLabel = 'На главный' }: TrainingProps) {
   const [state, dispatch] = useReducer(reducer, questions, createTrainingState);
   const question = state.questions[state.index];
 
@@ -40,7 +42,7 @@ export function Training({ questions, onAnswered, onBack }: TrainingProps) {
         </p>
         <p className="training-note">{TRAINING_NOT_SAVED_NOTE}</p>
         <button type="button" className="cta-btn" onClick={() => { onBack(); }}>
-          На главный
+          {exitLabel}
         </button>
       </section>
     );
@@ -55,7 +57,7 @@ export function Training({ questions, onAnswered, onBack }: TrainingProps) {
         </p>
         <p className="training-note">{TRAINING_NOT_SAVED_NOTE}</p>
         <button type="button" className="cta-btn" onClick={() => { onBack(); }}>
-          На главный
+          {exitLabel}
         </button>
       </section>
     );

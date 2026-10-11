@@ -14,13 +14,13 @@ function initials(name: string): string {
   return (letters.slice(0, 2).join('') || '?').toUpperCase();
 }
 
-interface CompetitorProps {
+export interface CompetitorProps {
   name: string;
   value: number;
   side: 'player' | 'opponent';
 }
 
-function Competitor({ name, value, side }: CompetitorProps) {
+export function Competitor({ name, value, side }: CompetitorProps) {
   const reduceMotion = useReducedMotion();
   const progress = Math.min(100, Math.max(0, value));
 

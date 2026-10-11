@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import type { CategoryId } from '@clutch/shared';
+import type { CategoryId, PracticeLevel } from '@clutch/shared';
 import { SOLO_ROUND_CAP } from '@clutch/shared';
 import { CategorySelect } from './CategorySelect';
 import { HammerGame } from './HammerGame';
@@ -16,6 +16,8 @@ import {
   type SoloFlowState,
   type SoloStage,
 } from '../lib/soloRunFlow';
+import { buildPracticeSummary, practiceBotLabel } from '../lib/practiceResult';
+import { FRIEND_DUEL_CHIP, buildFriendDuelSummary } from '../lib/friendDuelResult';
 import { useSoloRun, type SoloSaveState } from '../lib/useSoloRun';
 
 interface SoloRunScreenProps {
@@ -29,19 +31,24 @@ interface SoloRunScreenProps {
   onContinue: () => void;
   onHammerComplete: (result: unknown, progress: number, distance: number) => void;
   onRetrySave: () => void;
+  /** В тренировке «домой» ведёт к выбору уровня. */
   onHome: () => void;
+  onMyRuns: () => void;
+  /** Тренировка против бота: другой текст и итог, результат не засчитывается. */
+  practice?: PracticeLevel;
 }
 
 export function toSoloCategory(id: string): CategoryId {
   return id === 'history' || id === 'languages' ? id : 'geography';
 }
 
-/** Экран соло-забега по шагам. Темп соперника только рисуется: завершает забег сам игрок. */
+/** Экран соло-забега по шагам. Соперник только рисуется на полосе: завершает забег сам игрок. */
 export function SoloRunScreen(props: SoloRunScreenProps) {
   const { state, save } = props;
   const view = soloFlowView(state);
   const pace = soloPaceOf(state);
   const question = currentSoloQuestion(state);
+  const eyebrow = props.practice ? 'Тренировка' : 'Соло-забег';
 
   if (state.stage === 'categories') {
     return <CategorySelect onSelect={(id) => props.onSelectCategory(toSoloCategory(id))} onBack={props.onHome} />;
@@ -52,7 +59,7 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
       <section className="matchmaking">
         <ScreenHeader onBack={props.onBackToCategories} />
         <div className="matchmaking-body">
-          <span className="matchmaking-eyebrow">Соло-забег</span>
+          <span className="matchmaking-eyebrow">{eyebrow}</span>
           <h1 className="screen-title">Готовим забег</h1>
           <div className="matchmaking-loading" role="status"><span /> Загружаем вопросы</div>
         </div>
@@ -65,7 +72,7 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
       <section className="matchmaking">
         <ScreenHeader onBack={props.onBackToCategories} />
         <div className="matchmaking-body">
-          <span className="matchmaking-eyebrow">Соло-забег</span>
+          <span className="matchmaking-eyebrow">{eyebrow}</span>
           <h1 className="screen-title">Забег не начался</h1>
           <p className="matchmaking-error" role="alert">{state.error}</p>
           <div className="matchmaking-actions">
@@ -78,16 +85,32 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
 
   if (!view) return null;
 
+  if (state.stage === 'ready' && props.practice) {
+    return (
+      <section className="matchmaking">
+        <ScreenHeader onBack={props.onBackToCategories} />
+        <div className="matchmaking-body">
+          <span className="matchmaking-eyebrow">Тренировка · {props.practice.name}</span>
+          <h1 className="screen-title">Всё готово</h1>
+          <div className="matchmaking-card">
+            <p className="matchmaking-status">
+              Против: {pace ? practiceBotLabel(pace.displayName) : 'бот'}. Не засчитывается.
+            </p>
+          </div>
+          <button type="button" className="cta-btn" onClick={props.onStart}>Начать</button>
+        </div>
+      </section>
+    );
+  }
+
   if (state.stage === 'ready') {
     return (
       <section className="matchmaking">
         <ScreenHeader onBack={props.onBackToCategories} />
         <div className="matchmaking-body">
-          <span className="matchmaking-eyebrow">Соло-забег</span>
+          <span className="matchmaking-eyebrow">{state.friendDuel ? 'Вызов друга' : 'Соло-забег'}</span>
           <h1 className="screen-title">Забег готов</h1>
-          <span className={`match-source ${pace ? 'source-player' : 'source-local'}`}>
-            {pace ? `Темп: ${pace.displayName}` : 'Темпа соперника пока нет'}
-          </span>
+          {state.friendDuel && <span className="chip">{FRIEND_DUEL_CHIP}</span>}
           {state.bankExhausted && (
             <span className="match-source source-player abandoned-note">
               Все наборы дня в этой категории пройдены — выдан тот, что ты играл давнее всех
@@ -95,13 +118,8 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
           )}
           <div className="matchmaking-card">
             <p className="matchmaking-status">
-              Играй до {view.target}% в своём темпе, не больше {SOLO_ROUND_CAP} кругов.
-              Верный ответ даёт попытку в мини-игре, точность удара даёт прогресс.
-            </p>
-            <p className="matchmaking-status">
-              {pace
-                ? 'Темп соперника виден на полосе прогресса. Он не завершает забег: даже если соперник уже на 100%, ты играешь, пока не дойдёшь сам.'
-                : 'Ты идёшь первым: сравнить результат пока не с кем. Забег сохранится и будет ждать соперника.'}
+              Дойди до {view.target}%, но не больше чем за {SOLO_ROUND_CAP} кругов.
+              Верный ответ даёт попытку в мини-игре, удар двигает прогресс.
             </p>
           </div>
           <button type="button" className="cta-btn" onClick={props.onStart}>Начать</button>
@@ -114,15 +132,16 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
     return (
       <SoloResult
         view={view}
-        correctCount={state.correctCount}
-        paceName={pace?.displayName ?? null}
         saveStatus={save.status}
         response={save.response}
         saveError={save.error}
         canRetrySave={save.canRetry}
         onRetrySave={props.onRetrySave}
         onReplay={props.onBackToCategories}
-        onHome={props.onHome}
+        onMyRuns={props.onMyRuns}
+        practice={props.practice && state.session ? buildPracticeSummary(state.session) : null}
+        friendDuel={state.friendDuel && state.session ? buildFriendDuelSummary(state.session, save.response) : null}
+        onExitPractice={props.onHome}
       />
     );
   }
@@ -131,7 +150,6 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
   const hud = (
     <SoloHud
       progress={view.progress}
-      target={view.target}
       paceProgress={view.paceProgress}
       paceName={pace?.displayName ?? null}
       round={view.round}
@@ -166,15 +184,30 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
   );
 }
 
+export interface SoloRematch {
+  inviteId: string;
+  category: CategoryId;
+}
+
 interface SoloRunProps {
   onHome: () => void;
+  onMyRuns: () => void;
+  /** Реванш из приглашения: забег стартует сразу, без выбора категории. */
+  rematch?: SoloRematch | null;
+  /** Тренировка против бота выбранного уровня; без неё — обычный забег. */
+  practice?: PracticeLevel;
   /** Нужен приложению: системная «Назад» скрыта во время игры, а молоток получает свой фон. */
   onStageChange: (stage: SoloStage) => void;
 }
 
-export function SoloRun({ onHome, onStageChange }: SoloRunProps) {
-  const run = useSoloRun();
+export function SoloRun({ onHome, onMyRuns, rematch, practice, onStageChange }: SoloRunProps) {
+  const run = useSoloRun(practice?.id);
   const { stage } = run.state;
+  const { begin } = run;
+
+  useEffect(() => {
+    if (rematch) begin(rematch.category, rematch.inviteId);
+  }, [rematch, begin]);
 
   useEffect(() => {
     onStageChange(stage);
@@ -194,6 +227,8 @@ export function SoloRun({ onHome, onStageChange }: SoloRunProps) {
       onHammerComplete={run.completeHammer}
       onRetrySave={run.retrySave}
       onHome={onHome}
+      onMyRuns={onMyRuns}
+      practice={practice}
     />
   );
 }

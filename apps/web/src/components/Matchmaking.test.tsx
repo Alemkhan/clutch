@@ -46,7 +46,6 @@ describe('Matchmaking states', () => {
     ['player', 'Запись игрока'],
     ['bot', 'Бот'],
     ['local', 'Локальная практика'],
-    ['challenge', 'Челлендж'],
   ] as const)('labels a ready %s match honestly', (source, label) => {
     const html = renderToStaticMarkup(
       <Matchmaking {...actions} opponent={opponent} status="ready" source={source} />,

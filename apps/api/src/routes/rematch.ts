@@ -4,7 +4,14 @@ import type { Env } from '../env';
 import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import { REMATCH_INVITE_ID } from '../matches/validation';
-import { findInvite, inviteMode, isOutbidEnabled, setOutbidEnabled } from '../notifications/repository';
+import {
+  findInvite,
+  inviteMode,
+  inviteUnavailableReason,
+  isOpenInvite,
+  isOutbidEnabled,
+  setOutbidEnabled,
+} from '../notifications/repository';
 
 type AppContext = Context<{ Bindings: Env }>;
 
@@ -22,28 +29,35 @@ async function authenticate(c: AppContext, scope: string): Promise<RequestIdenti
 
 export function registerRematchRoutes(app: Hono<{ Bindings: Env }>): void {
   // Preview for the "rematch with ..." screen. An invite that is not addressed to the caller is
-  // indistinguishable from a missing one.
+  // indistinguishable from a missing one. An open friend invite has no addressee: anyone but the
+  // author sees it until someone starts a run from it.
   app.get('/api/rematch/:id', async (c) => {
     const identity = await authenticate(c, 'rematch');
     if (identity instanceof Response) return identity;
     const id = c.req.param('id');
     if (!REMATCH_INVITE_ID.test(id)) return c.json({ error: 'Rematch invite not found.' }, 404);
     const invite = await findInvite(c.env.DB, id);
-    if (!invite || invite.recipient_player_id !== identity.playerId) {
+    if (!invite) return c.json({ error: 'Rematch invite not found.' }, 404);
+    const friend = isOpenInvite(invite);
+    if (!friend && invite.recipient_player_id !== identity.playerId) {
       return c.json({ error: 'Rematch invite not found.' }, 404);
     }
-    if (invite.consumed_at !== null || invite.expires_at <= Date.now()) {
-      return c.json({ error: 'Rematch invite is no longer available.' }, 410);
-    }
-    const challenger = await c.env.DB.prepare('SELECT display_name FROM match_runs WHERE id = ?1')
+    const challenger = await c.env.DB.prepare('SELECT display_name, player_id FROM match_runs WHERE id = ?1')
       .bind(invite.challenger_run_id)
-      .first<{ display_name: string }>();
+      .first<{ display_name: string; player_id: string }>();
     if (!challenger) return c.json({ error: 'Rematch invite is no longer available.' }, 410);
+    if (friend && challenger.player_id === identity.playerId) {
+      return c.json({ error: 'This is your own invite.', reason: 'own' }, 403);
+    }
+    const reason = inviteUnavailableReason(invite, Date.now());
+    if (reason) return c.json({ error: 'Rematch invite is no longer available.', reason }, 410);
     return c.json({
       inviteId: invite.id,
       category: invite.category,
       /** Куда вести игрока: гоночный или соло-старт. */
       mode: inviteMode(invite),
+      /** Открытая ссылка «Позвать друга», а не реванш по обойдённой записи. */
+      friend,
       challengerName: challenger.display_name,
       challengerProgress: invite.challenger_progress,
       yourProgress: invite.recipient_progress,

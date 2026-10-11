@@ -2,20 +2,17 @@ import { useEffect, useState } from 'react';
 import { fetchLastStandLeaderboard } from '../lib/api';
 import { buildLastStandHook, type LastStandHook } from '../lib/lastStandHook';
 import { getStats, winRatePercent } from '../lib/localStats';
-import { mistakeCount } from '../lib/mistakeLog';
 import { playSound } from '../lib/sounds';
-import { challenges } from '../lib/tournaments';
 
 interface HomeDashboardProps {
-  onFindMatch: () => void;
   onProfile: () => void;
   onTraining: () => void;
   onLastStand: () => void;
   onSolo: () => void;
-  onChallenge: (tournamentId: string) => void;
+  onMyRuns: () => void;
 }
 
-export function HomeDashboard({ onFindMatch, onProfile, onTraining, onLastStand, onSolo, onChallenge }: HomeDashboardProps) {
+export function HomeDashboard({ onProfile, onTraining, onLastStand, onSolo, onMyRuns }: HomeDashboardProps) {
   const [lastStandHook, setLastStandHook] = useState<LastStandHook | null>(null);
 
   // Fire-and-forget: the home screen never waits for this. Any failure just means no hook.
@@ -28,7 +25,6 @@ export function HomeDashboard({ onFindMatch, onProfile, onTraining, onLastStand,
   }, []);
 
   const stats = getStats();
-  const mistakes = mistakeCount();
 
   return (
     <section className="home-dashboard">
@@ -46,25 +42,18 @@ export function HomeDashboard({ onFindMatch, onProfile, onTraining, onLastStand,
       </header>
 
       <section className="home-hero-card">
-        <span className="home-kicker">10 вопросов · один соперник</span>
-        <h1 className="home-title">Знание даёт шанс.<br /><em>Точность решает.</em></h1>
-        <p className="home-lede">Ответь правильно, забери попытку и дожми соперника в мини-игре.</p>
+        <span className="home-kicker">География · флаги · языки</span>
+        <h1 className="home-title">Ответь верно.<br /><em>Дойди до 100%.</em></h1>
+        <p className="home-lede">Верный ответ даёт попытку в мини-игре, а удар двигает тебя вперёд.</p>
         <div className="home-hero-meter" aria-hidden="true">
           <span className="home-meter-player" />
           <span className="home-meter-center">VS</span>
           <span className="home-meter-opponent" />
         </div>
-        <button className="cta-btn" onClick={() => { onFindMatch(); }}>
-          Найти соперника <span aria-hidden="true">→</span>
+        <button className="cta-btn" onClick={() => { onSolo(); }}>
+          Играть <span aria-hidden="true">→</span>
         </button>
       </section>
-
-      <button type="button" className="training-entry solo-entry" onClick={() => { onSolo(); }}>
-        <span className="training-entry-title">Забег до 100%</span>
-        <span className="training-entry-meta">
-          Соло в своём темпе. Темп другого игрока виден на полосе, но забег он не завершает.
-        </span>
-      </button>
 
       <section className="ls-home-card" aria-labelledby="ls-home-title">
         <span className="ls-home-kicker">Новый режим · до 12 кругов</span>
@@ -86,33 +75,15 @@ export function HomeDashboard({ onFindMatch, onProfile, onTraining, onLastStand,
         </button>
       </section>
 
-      <button type="button" className="training-entry" onClick={() => { onTraining(); }}>
-        <span className="training-entry-title">Тренировка по ошибкам</span>
-        <span className="training-entry-meta">
-          {mistakes > 0 ? `Ошибок накоплено: ${mistakes}` : 'Пока нет ошибок'}
-        </span>
+      <button type="button" className="training-entry" onClick={() => { onMyRuns(); }}>
+        <span className="training-entry-title">Мои партии</span>
+        <span className="training-entry-meta">Результаты и вызовы на реванш</span>
       </button>
 
-      {challenges.map(({ tournament, badge }) => (
-        <div className="challenge-card" key={tournament.id}>
-          <span className="challenge-badge">{badge}</span>
-          <h3 className="challenge-title">{tournament.title}</h3>
-          <p className="challenge-desc">{tournament.description}</p>
-          <div className="challenge-actions">
-            <a
-              className="challenge-watch"
-              href={tournament.video?.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Смотреть клип ↗
-            </a>
-            <button className="challenge-play" onClick={() => { onChallenge(tournament.id); }}>
-              Играть
-            </button>
-          </div>
-        </div>
-      ))}
+      <button type="button" className="training-entry" onClick={() => { onTraining(); }}>
+        <span className="training-entry-title">Тренировка</span>
+        <span className="training-entry-meta">Боты и отработка ошибок</span>
+      </button>
 
       <div className="home-stats-card">
         <div className="mini-stat">

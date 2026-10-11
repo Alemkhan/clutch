@@ -31,6 +31,8 @@ export interface SoloFlowState {
   session: SoloRunSession | null;
   config: MiniGameConfig;
   bankExhausted: boolean;
+  /** Забег по дружеской ссылке: вне соревнования. */
+  friendDuel: boolean;
   selectedOption: string;
   lastCorrect: boolean;
   correctCount: number;
@@ -54,6 +56,7 @@ export function createSoloFlowState(): SoloFlowState {
     session: null,
     config: CURRENT_SOLO_RUN_CONDITIONS.miniGame.config,
     bankExhausted: false,
+    friendDuel: false,
     selectedOption: '',
     lastCorrect: false,
     correctCount: 0,
@@ -79,6 +82,7 @@ export function applyLoadedSoloRun(state: SoloFlowState, run: NormalizedSoloRun)
     session: createSoloRunSession(run.questions, run.pace),
     config: run.config,
     bankExhausted: run.bankExhausted,
+    friendDuel: run.friendDuel === true,
   };
 }
 
@@ -168,6 +172,9 @@ export function soloPaceOf(state: Readonly<SoloFlowState>): Opponent | null {
 }
 
 export function soloStartErrorMessage(error: unknown): string {
+  if (error instanceof ApiError && error.reason === 'taken') return 'Ссылку уже занял другой игрок.';
+  if (error instanceof ApiError && error.reason === 'expired') return 'Срок ссылки вышел.';
+  if (error instanceof ApiError && error.reason === 'own') return 'Это твоя ссылка. Отправь её другу.';
   if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
     return 'Не удалось подтвердить сессию или доступ. Вернись в Telegram или обнови страницу.';
   }

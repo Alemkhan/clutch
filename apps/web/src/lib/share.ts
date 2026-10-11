@@ -81,6 +81,11 @@ export function buildSharePayload(input: ShareInput, url: string): SharePayload 
   return { text: buildShareText(input), url };
 }
 
+/** «Позвать друга»: ссылка ведёт прямо в приглашение, поэтому свой счёт в текст не входит. */
+export function buildFriendInvitePayload(url: string): SharePayload {
+  return { text: 'Обгони мой результат в Clutch', url };
+}
+
 export function chooseShareStrategy({ telegramShare, nativeShare }: ShareCapabilities): ShareStrategy {
   if (telegramShare) return 'telegram';
   if (nativeShare) return 'native';

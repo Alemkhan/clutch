@@ -20,6 +20,21 @@ const paceRound = (index: number, progressAwarded = 12) => (
   { questionId: questions[index].id, correct: true, responseTimeMs: 2000, skillScore: 0.5, progressAwarded }
 );
 
+describe('normalizeSoloRun in practice', () => {
+  const bot = { id: 'clutch_bot_medium', displayName: 'Max', rounds: [paceRound(0, 25)] };
+
+  it('accepts only the practice rules, and only for a practice run', () => {
+    const practice = response({ rulesVersion: 'solo-practice-v1', pace: bot });
+    expect(normalizeSoloRun(practice, true).pace).toEqual(bot);
+    expect(() => normalizeSoloRun(practice)).toThrow();
+    expect(() => normalizeSoloRun(response({ pace: bot }), true)).toThrow();
+  });
+
+  it('does not run a practice without a usable bot', () => {
+    expect(() => normalizeSoloRun(response({ rulesVersion: 'solo-practice-v1', pace: null }), true)).toThrow();
+  });
+});
+
 describe('normalizeSoloRun', () => {
   it('accepts a run without a pace and does not invent one', () => {
     expect(normalizeSoloRun(response())).toMatchObject({ runId: 'run-1', pace: null, bankExhausted: false });

@@ -15,7 +15,6 @@ import {
   validateMiniGameConfig,
 } from './clientMatchRules';
 import { createSampleOpponent } from './sampleData';
-import { challenges } from './tournaments';
 
 function questions(count: number): Question[] {
   return Array.from({ length: count }, (_, index) => ({
@@ -80,13 +79,6 @@ describe('scripted opponent normalization', () => {
     expect(opponent.rounds.map((round) => round.questionId)).toEqual(
       matchQuestions.slice(0, 8).map((question) => question.id),
     );
-  });
-
-  it('maps the 9-round challenge and truncates its first 100 at round 8', () => {
-    const challenge = challenges[0];
-    const opponent = normalizeScriptedOpponent(challenge.opponent, challenge.questions);
-    expect(opponent.rounds).toHaveLength(8);
-    expect(opponent.rounds.at(-1)?.questionId).toBe(challenge.questions[7].id);
   });
 
   it('rejects a short nonterminal transcript', () => {

@@ -15,6 +15,8 @@ const runColumns = `
 export interface PoolOptions {
   rulesVersion?: string;
   reachedTargetOnly?: boolean;
+  /** Момент подбора (мс): по нему решается, жив ли резерв под приглашение. По умолчанию — сейчас. */
+  now?: number;
 }
 
 export interface GhostMatch {
@@ -30,6 +32,8 @@ export interface GhostMatch {
  * to play. With unplayedSetsOnly the run must also sit on a set this player never started,
  * so a live opponent is never bought with repeated questions. Whether the run reached 100 is irrelevant for the race pool: ghost_eligible is not a filter; the solo pool filters reached_target.
  * There is deliberately no fallback that drops the "already faced" condition.
+ * A run held by a live open friend invite (not consumed, not released, not expired) is not offered:
+ * it is reserved for the link. The check uses expires_at, so it does not wait for the cron pass.
  */
 export async function findGhostInSets(
   db: D1Database,
@@ -45,7 +49,7 @@ export async function findGhostInSets(
         WHERE player_id = ?2 AND question_set_id IS NOT NULL
       )` : '';
   const reachedClause = options.reachedTargetOnly ? ' AND reached_target = 1' : '';
-  const setPlaceholders = questionSetIds.map((_, index) => `?${index + 6}`).join(', ');
+  const setPlaceholders = questionSetIds.map((_, index) => `?${index + 7}`).join(', ');
   const result = await db.prepare(`
     SELECT ${runColumns}, question_set_id
     FROM match_runs
@@ -60,6 +64,11 @@ export async function findGhostInSets(
         SELECT opponent_run_id FROM match_runs
         WHERE player_id = ?2 AND opponent_run_id IS NOT NULL
       )${unplayedClause}${reachedClause}
+      AND NOT EXISTS (
+        SELECT 1 FROM rematch_invites reserved
+        WHERE reserved.challenger_run_id = match_runs.id AND reserved.recipient_run_id IS NULL
+          AND reserved.consumed_at IS NULL AND reserved.released_at IS NULL AND reserved.expires_at > ?6
+      )
     ORDER BY completed_at DESC LIMIT 20
   `).bind(
     MIN_POOL_ROUNDS,
@@ -67,6 +76,7 @@ export async function findGhostInSets(
     options.rulesVersion ?? CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion,
     CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
     currentMiniGameConfigJson,
+    options.now ?? Date.now(),
     ...questionSetIds,
   ).all<RunRow>();
   for (const row of result.results) {
@@ -163,4 +173,30 @@ export async function completeRun(db: D1Database, input: {
     input.ghostEligible ? 1 : 0,
   ).run();
   return update.meta.changes > 0;
+}
+
+/**
+ * Запись, ради которой созвано открытое приглашение: завершённый соло-забег, дошедший до цели, с
+ * текущим конфигом молотка и пригодным для темпа снимком. Резерв здесь не проверяется: запись
+ * забирает сам владелец ссылки, а не общий подбор. null — запись больше не годится.
+ */
+export async function findRecordRun(
+  db: D1Database,
+  runId: string,
+  rulesVersion: string,
+): Promise<GhostMatch | null> {
+  const row = await db.prepare(`
+    SELECT ${runColumns}, question_set_id
+    FROM match_runs
+    WHERE id = ?1 AND status = 'completed' AND reached_target = 1
+      AND rules_version = ?2 AND mini_game_id = ?3 AND mini_game_config_json = ?4
+  `).bind(
+    runId,
+    rulesVersion,
+    CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
+    currentMiniGameConfigJson,
+  ).first<RunRow>();
+  if (!row?.question_set_id) return null;
+  const snapshot = candidateSnapshot(row);
+  return snapshot ? { row, questionSetId: row.question_set_id, ...snapshot } : null;
 }
