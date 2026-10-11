@@ -11,10 +11,11 @@ interface HomeDashboardProps {
   onProfile: () => void;
   onTraining: () => void;
   onLastStand: () => void;
+  onSolo: () => void;
   onChallenge: (tournamentId: string) => void;
 }
 
-export function HomeDashboard({ onFindMatch, onProfile, onTraining, onLastStand, onChallenge }: HomeDashboardProps) {
+export function HomeDashboard({ onFindMatch, onProfile, onTraining, onLastStand, onSolo, onChallenge }: HomeDashboardProps) {
   const [lastStandHook, setLastStandHook] = useState<LastStandHook | null>(null);
 
   // Fire-and-forget: the home screen never waits for this. Any failure just means no hook.
@@ -57,6 +58,13 @@ export function HomeDashboard({ onFindMatch, onProfile, onTraining, onLastStand,
           Найти соперника <span aria-hidden="true">→</span>
         </button>
       </section>
+
+      <button type="button" className="training-entry solo-entry" onClick={() => { onSolo(); }}>
+        <span className="training-entry-title">Забег до 100%</span>
+        <span className="training-entry-meta">
+          Соло в своём темпе. Темп другого игрока виден на полосе, но забег он не завершает.
+        </span>
+      </button>
 
       <section className="ls-home-card" aria-labelledby="ls-home-title">
         <span className="ls-home-kicker">Новый режим · до 12 кругов</span>

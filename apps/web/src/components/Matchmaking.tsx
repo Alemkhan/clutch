@@ -1,4 +1,5 @@
 import type { Opponent, Tournament } from '@clutch/shared';
+import { ScreenHeader } from './ScreenHeader';
 import { MATCH_SOURCE_LABELS, type MatchSource, type MatchmakingStatus } from '../lib/matchmaking';
 
 interface MatchmakingProps {
@@ -28,7 +29,7 @@ export function Matchmaking({
 }: MatchmakingProps) {
   return (
     <section className="matchmaking">
-      <button className="back-btn" onClick={onBack}>← Назад</button>
+      <ScreenHeader onBack={onBack} />
       {/* The body is centred on its own; keeping Back inside that flow pushed it off the top. */}
       <div className="matchmaking-body">
       <span className="matchmaking-eyebrow">Асинхронный матч</span>

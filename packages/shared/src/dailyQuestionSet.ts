@@ -1,10 +1,32 @@
 import { generateMatch, type CategoryId, type TemplateUsage } from './questionGenerator';
 import type { Question } from './index';
 
-export const DAILY_SET_SIZE = 10;
+/**
+ * Размер набора и число наборов в банке по категориям. Различимых вопросов: 197 стран с семью
+ * шаблонами в географии, но только 44 флага и 37 языков по одному шаблону. Слотов в сутки =
+ * набор × банк: 18 × 6 = 108 у тонких категорий (повтор 2.45 и 2.9 раза против 2.7 и 3.2 при 10 × 12),
+ * а набор в 18 вопросов даёт дойти до 100% почти всем (при 10 не доходили 26% и 11%).
+ */
+export const DAILY_SET_SIZES: Readonly<Record<CategoryId, number>> = {
+  geography: 20,
+  history: 18,
+  languages: 18,
+};
+export const DAILY_BANK_SIZES: Readonly<Record<CategoryId, number>> = {
+  geography: 12,
+  history: 6,
+  languages: 6,
+};
+
+export function dailySetSize(category: CategoryId): number {
+  return DAILY_SET_SIZES[category];
+}
+export function dailyBankSize(category: CategoryId): number {
+  return DAILY_BANK_SIZES[category];
+}
+/** Самый большой набор среди категорий: грубый потолок числа кругов в запросе. */
+export const MAX_DAILY_SET_SIZE: number = Math.max(...Object.values(DAILY_SET_SIZES));
 export const DAILY_SET_OPEN_RATIO = 0.3;
-/** How many different question sets exist per category per UTC day. */
-export const DAILY_BANK_SIZE = 12;
 
 /** Small deterministic PRNG (mulberry32): same seed, same sequence. Returns floats in [0, 1). */
 export function createSeededRandom(seed: number): () => number {
@@ -41,7 +63,7 @@ export function questionSetId(category: CategoryId, dateKey: string, index: numb
 /** All set ids of the category's bank for the UTC day containing the timestamp, in index order. */
 export function dailyQuestionSetIds(category: CategoryId, timestampMs: number = Date.now()): string[] {
   const dateKey = dailyKey(timestampMs);
-  return Array.from({ length: DAILY_BANK_SIZE }, (_, index) => questionSetId(category, dateKey, index));
+  return Array.from({ length: dailyBankSize(category) }, (_, index) => questionSetId(category, dateKey, index));
 }
 
 type DailySet = { questionSetId: string; questions: Question[] };
@@ -56,10 +78,10 @@ function buildDailyBank(category: CategoryId, dateKey: string): DailySet[] {
   const usage: TemplateUsage = new Map();
   // createdAt is wall-clock in the generator; pin it so the set is byte-identical for everyone.
   const createdAt = `${dateKey}T00:00:00.000Z`;
-  return Array.from({ length: DAILY_BANK_SIZE }, (_, index) => {
+  return Array.from({ length: dailyBankSize(category) }, (_, index) => {
     const id = questionSetId(category, dateKey, index);
     const questions = generateMatch(
-      DAILY_SET_SIZE,
+      dailySetSize(category),
       DAILY_SET_OPEN_RATIO,
       category,
       createSeededRandom(hashSeed(id)),
@@ -101,8 +123,9 @@ export function dailyQuestionSet(
   timestampMs: number = Date.now(),
   index = 0,
 ): DailySet {
-  if (!Number.isInteger(index) || index < 0 || index >= DAILY_BANK_SIZE) {
-    throw new RangeError(`bank index must be an integer in [0, ${DAILY_BANK_SIZE})`);
+  const bankSize = dailyBankSize(category);
+  if (!Number.isInteger(index) || index < 0 || index >= bankSize) {
+    throw new RangeError(`bank index must be an integer in [0, ${bankSize})`);
   }
   return structuredClone(dailyQuestionBank(category, timestampMs)[index]) as DailySet;
 }

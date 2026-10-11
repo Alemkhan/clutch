@@ -58,14 +58,18 @@ export function useGameState() {
   const startingPreparedRef = useRef(false);
   activeMatchIdRef.current = state.activeMatchId;
 
-  const requestOnlineMatch = useCallback((category: CategoryId) => {
-    const request = requestCoordinatorRef.current.begin(category);
+  // Remembered so that Retry repeats the same rematch; any ordinary request clears it.
+  const rematchInviteRef = useRef<string>();
+
+  const requestOnlineMatch = useCallback((category: CategoryId, rematchInviteId?: string) => {
+    rematchInviteRef.current = rematchInviteId;
+    const request = requestCoordinatorRef.current.begin(rematchInviteId ?? category);
     if (!request) return;
     startingPreparedRef.current = false;
     setMatchmaking({ status: 'loading' });
     setState({ ...createInitialGameState(), category, phase: 'matchmaking' });
 
-    void startAsyncMatch(category, request.signal).then((rawMatch) => {
+    void startAsyncMatch(category, request.signal, rematchInviteId).then((rawMatch) => {
       if (!requestCoordinatorRef.current.isCurrent(request.token)) return;
       let match;
       try {
@@ -274,8 +278,12 @@ export function useGameState() {
   }, [requestOnlineMatch]);
 
   const retryMatchmaking = useCallback(() => {
-    requestOnlineMatch(state.category);
+    requestOnlineMatch(state.category, rematchInviteRef.current);
   }, [requestOnlineMatch, state.category]);
+
+  const startRematch = useCallback((inviteId: string, category: CategoryId) => {
+    requestOnlineMatch(category, inviteId);
+  }, [requestOnlineMatch]);
 
   const useLocalPractice = useCallback(() => {
     requestCoordinatorRef.current.cancel();
@@ -332,6 +340,12 @@ export function useGameState() {
     setState({ ...createInitialGameState(), phase: 'lastStand' });
   }, []);
 
+  const goToSolo = useCallback(() => {
+    requestCoordinatorRef.current.cancel();
+    startingPreparedRef.current = false;
+    setState({ ...createInitialGameState(), phase: 'solo' });
+  }, []);
+
   const goToProfile = useCallback(() => {
     setState((prev) => ({ ...prev, phase: 'profile' }));
   }, []);
@@ -372,6 +386,7 @@ export function useGameState() {
     canRetryResultSave: resultSave.canRetry,
     retryResultSave,
     retryMatchmaking,
+    startRematch,
     useLocalPractice,
     start,
     replay,
@@ -385,6 +400,7 @@ export function useGameState() {
     goToProfile,
     goToTraining,
     goToLastStand,
+    goToSolo,
     recordTrainingAnswer,
     trainingQuestions,
     goHome,

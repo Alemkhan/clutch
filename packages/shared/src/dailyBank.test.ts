@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import {
-  DAILY_BANK_SIZE,
+  dailyBankSize,
   clearDailyBankCache,
   countries,
   dailyBankCacheSize,
   dailyQuestionBank,
   dailyQuestionSet,
+  dailySetSize,
   generateCapitalOpenAnswer,
   generateCountryToCapital,
   isAnswerCorrect,
@@ -19,9 +20,9 @@ const entityOf = (id: string) => id.slice(-2);
 describe('daily bank as a whole', () => {
   it('is deterministic and index-addressable', () => {
     clearDailyBankCache();
-    const first = Array.from({ length: DAILY_BANK_SIZE }, (_, i) => dailyQuestionSet('geography', day, i));
+    const first = Array.from({ length: dailyBankSize('geography') }, (_, i) => dailyQuestionSet('geography', day, i));
     clearDailyBankCache();
-    const second = Array.from({ length: DAILY_BANK_SIZE }, (_, i) => dailyQuestionSet('geography', day + 5_000, 11 - i));
+    const second = Array.from({ length: dailyBankSize('geography') }, (_, i) => dailyQuestionSet('geography', day + 5_000, dailyBankSize('geography') - 1 - i));
     expect(second.reverse()).toEqual(first);
   });
 
@@ -70,8 +71,8 @@ describe('daily bank as a whole', () => {
   it.each(['history', 'languages'] as CategoryId[])('builds %s without looping or throwing', (category) => {
     clearDailyBankCache();
     const bank = dailyQuestionBank(category, day);
-    expect(bank).toHaveLength(DAILY_BANK_SIZE);
-    expect(bank.every((set) => set.questions.length === 10)).toBe(true);
+    expect(bank).toHaveLength(dailyBankSize(category));
+    expect(bank.every((set) => set.questions.length === dailySetSize(category))).toBe(true);
   });
 
   it('memoizes and bounds the cache', () => {

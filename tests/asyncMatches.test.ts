@@ -2,10 +2,10 @@
 /// <reference types="@cloudflare/workers-types" />
 
 import { createHmac, createHash } from 'node:crypto';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
-  DAILY_BANK_SIZE,
+  dailyBankSize,
   dailyQuestionSet,
   dailyQuestionSetIds,
   generateMatch,
@@ -16,6 +16,7 @@ import {
   type StartAsyncMatchResponse,
 } from '@clutch/shared';
 import app from '../apps/api/src/index';
+import { matchmake } from '../apps/api/src/matches/matchmaking';
 import { issueGuestSession, verifyGuestToken } from '../apps/api/src/auth/guest';
 import { applyR1bMigration, createTestD1, type TestD1 } from './helpers/testD1';
 
@@ -23,6 +24,15 @@ const databases: TestD1[] = [];
 const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
 const matchAuthorization = new Map<string, string>();
+
+// The daily bank and the bot profile both derive from today's date, so a live clock makes these
+// route tests pass or fail depending on the calendar. Pin a day where the bot finishes early.
+beforeAll(() => {
+  vi.useFakeTimers({ shouldAdvanceTime: true });
+  vi.setSystemTime(new Date('2026-10-08T12:00:00.000Z'));
+});
+
+afterAll(() => vi.useRealTimers());
 
 afterEach(() => {
   for (const database of databases.splice(0)) database.sqlite.close();
@@ -369,10 +379,10 @@ describe('async match routes with persisted rules', () => {
     const created = await start(db);
     expect(created.conditions).toEqual(CURRENT_ASYNC_MATCH_CONDITIONS);
     expect(created.opponentSource).toBe('bot');
-    // Bot strength depends on the question set and player, so the length is 8..10.
+    // Bot strength depends on the question set and player, so the length is 8..set size.
     const botRounds = created.opponent.rounds.length;
     expect(botRounds).toBeGreaterThanOrEqual(8);
-    expect(botRounds).toBeLessThanOrEqual(10);
+    expect(botRounds).toBeLessThanOrEqual(created.questions.length);
     expect(created.opponent.rounds.at(-1)?.questionId).toBe(created.questions[botRounds - 1].id);
 
     const row = db.sqlite.prepare(`
@@ -625,9 +635,10 @@ describe('async match routes with persisted rules', () => {
     it('gives a repeat match in the same category a different set until the bank is used up', async () => {
       const db = database();
       const seen: string[] = [];
-      for (let attempt = 0; attempt < DAILY_BANK_SIZE; attempt++) {
+      for (let attempt = 0; attempt < dailyBankSize('geography'); attempt++) {
         const created = await start(db, 'grinder');
         expect(created.opponentSource).toBe('bot');
+        expect(created.bankExhausted).toBe(false);
         const stored = db.sqlite.prepare('SELECT question_set_id FROM match_runs WHERE id = ?')
           .get(created.matchId) as { question_set_id: string };
         seen.push(stored.question_set_id);
@@ -640,6 +651,7 @@ describe('async match routes with persisted rules', () => {
       expect(stored.question_set_id).toBe(seen[0]);
       expect(again.questions).toEqual(bankSet(0).questions);
       expect(again.opponentSource).toBe('bot');
+      expect(again.bankExhausted).toBe(true);
     });
 
     it('prefers a set with a waiting record over an unplayed empty one', async () => {
@@ -719,7 +731,7 @@ describe('async match routes with persisted rules', () => {
 
     it('with every bank set played, pairs with a waiting record on any set, then falls back to a bot', async () => {
       const db = database();
-      for (let index = 0; index < DAILY_BANK_SIZE; index++) {
+      for (let index = 0; index < dailyBankSize('geography'); index++) {
         insertRun(db, { id: `played-${index}`, playerId: 'finisher', questions: bankSet(index).questions, questionSetId: bankSet(index).questionSetId, status: 'completed', completedAt: 1 });
       }
       pending(db, 'late-a', 6, 10, [5, 5, 5, 5]);
@@ -760,7 +772,7 @@ describe('async match routes with persisted rules', () => {
       expect(created.opponent.id).toBe('stopped');
       expect(created.opponent.rounds).toHaveLength(6);
       // Ten wrong answers: the set is played to the end after the record stops at question 6.
-      const response = await complete(db, created.matchId, inputs(created.questions, 10, false));
+      const response = await complete(db, created.matchId, inputs(created.questions, created.questions.length, false));
       expect(response.status).toBe(200);
       const row = db.sqlite.prepare('SELECT status, progress FROM match_runs WHERE id = ?')
         .get(created.matchId) as { status: string; progress: number };
@@ -795,5 +807,29 @@ describe('async match routes with persisted rules', () => {
     expect(winningResponse.status).toBe(200);
     expect(losingResponse.status).toBe(200);
     expect(await losingResponse.json()).toEqual(await winningResponse.json());
+  });
+});
+
+describe('matchmaking stays inside each category bank', () => {
+  it.each(['geography', 'history', 'languages'] as const)('%s: walks its own bank, then repeats the oldest set and says so', async (category) => {
+    const db = database();
+    const size = dailyBankSize(category);
+    const ids = dailyQuestionSetIds(category, Date.now());
+    expect(ids).toHaveLength(size);
+    const seen: string[] = [];
+    // Двойной обход: после size наборов банк исчерпан и подбор обязан остаться в его границах.
+    for (let step = 0; step < size * 2; step++) {
+      const picked = await matchmake(db.binding, category, 'walker', Date.now());
+      seen.push(picked.questionSetId);
+      expect(ids).toContain(picked.questionSetId);
+      expect(picked.bankExhausted).toBe(step >= size);
+      db.sqlite.prepare(`
+        INSERT INTO match_runs (id, player_id, display_name, category, questions_json, created_at, question_set_id)
+        VALUES (?, 'walker', 'walker', ?, '[]', ?, ?)
+      `).run(`walk-${category}-${step}`, category, step + 1, picked.questionSetId);
+    }
+    expect(seen.slice(0, size)).toEqual(ids);
+    // Наименее давно сыгранный набор — тот, что играли первым; цикл идёт по кругу.
+    expect(seen.slice(size)).toEqual(ids);
   });
 });

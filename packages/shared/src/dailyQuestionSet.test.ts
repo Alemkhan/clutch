@@ -2,8 +2,11 @@ import { describe, expect, it } from 'vitest';
 import {
   createSeededRandom,
   dailyKey,
-  DAILY_BANK_SIZE,
+  DAILY_BANK_SIZES,
+  MAX_DAILY_SET_SIZE,
+  dailyBankSize,
   dailyQuestionSet,
+  dailySetSize,
   dailyQuestionSetIds,
   generateMatch,
   hashSeed,
@@ -42,7 +45,7 @@ describe('dailyQuestionSet', () => {
     const first = dailyQuestionSet(category, day1);
     const second = dailyQuestionSet(category, day1 + 3_600_000);
     expect(second).toEqual(first);
-    expect(first.questions).toHaveLength(10);
+    expect(first.questions).toHaveLength(dailySetSize(category));
     expect(first.questionSetId).toBe(`${category}:2026-10-07:0`);
   });
 
@@ -67,8 +70,8 @@ describe('dailyQuestionSet', () => {
 describe('daily bank', () => {
   it('has the configured number of ids, in index order, for the UTC day', () => {
     const ids = dailyQuestionSetIds('geography', day1);
-    expect(ids).toHaveLength(DAILY_BANK_SIZE);
-    expect(DAILY_BANK_SIZE).toBe(12);
+    expect(ids).toHaveLength(dailyBankSize('geography'));
+    expect(dailyBankSize('geography')).toBe(12);
     expect(ids[0]).toBe('geography:2026-10-07:0');
     expect(ids[11]).toBe('geography:2026-10-07:11');
     expect(dailyQuestionSetIds('geography', day1 + 3_600_000)).toEqual(ids);
@@ -76,14 +79,14 @@ describe('daily bank', () => {
 
   it('is deterministic per index and different between indexes', () => {
     const questionIds = (index: number) => dailyQuestionSet('history', day1, index).questions.map((q) => q.id);
-    const all = Array.from({ length: DAILY_BANK_SIZE }, (_, index) => questionIds(index));
+    const all = Array.from({ length: dailyBankSize('history') }, (_, index) => questionIds(index));
     expect(all.map((_, index) => questionIds(index))).toEqual(all);
-    expect(new Set(all.map((ids) => ids.join('|'))).size).toBe(DAILY_BANK_SIZE);
-    expect(dailyQuestionSet('history', day1, 7).questionSetId).toBe('history:2026-10-07:7');
+    expect(new Set(all.map((ids) => ids.join('|'))).size).toBe(dailyBankSize('history'));
+    expect(dailyQuestionSet('history', day1, 5).questionSetId).toBe('history:2026-10-07:5');
   });
 
   it('rejects an index outside the bank', () => {
-    expect(() => dailyQuestionSet('history', day1, DAILY_BANK_SIZE)).toThrow(RangeError);
+    expect(() => dailyQuestionSet('history', day1, dailyBankSize('history'))).toThrow(RangeError);
     expect(() => dailyQuestionSet('history', day1, -1)).toThrow(RangeError);
   });
 });
@@ -96,5 +99,19 @@ describe('generateMatch rng parameter', () => {
     const a = generateMatch(10, 0.3, 'geography').map((q) => q.id);
     const b = generateMatch(10, 0.3, 'geography').map((q) => q.id);
     expect(a).not.toEqual(b);
+  });
+});
+
+describe('dailySetSize', () => {
+  it('is per category, bounded by the entity supply', () => {
+    expect([dailySetSize('geography'), dailySetSize('history'), dailySetSize('languages')]).toEqual([20, 18, 18]);
+    expect(MAX_DAILY_SET_SIZE).toBe(20);
+  });
+});
+
+describe('dailyBankSize', () => {
+  it('is per category: thin categories get fewer, longer sets', () => {
+    expect(DAILY_BANK_SIZES).toEqual({ geography: 12, history: 6, languages: 6 });
+    expect(dailyQuestionSetIds('languages', day1)).toHaveLength(6);
   });
 });

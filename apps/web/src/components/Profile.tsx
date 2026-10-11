@@ -1,5 +1,5 @@
 import { getStats, winRatePercent } from '../lib/localStats';
-import { playSound } from '../lib/sounds';
+import { ScreenHeader } from './ScreenHeader';
 import { getTelegramIdentity } from '../lib/telegram';
 import { SoundToggle } from './SoundToggle';
 
@@ -19,7 +19,7 @@ export function Profile({ onBack }: ProfileProps) {
 
   return (
     <section className="profile-screen">
-      <button className="back-btn" onClick={() => { onBack(); }}>← Назад</button>
+      <ScreenHeader onBack={onBack} />
 
       <div className="profile-head">
         <span className="profile-avatar" aria-hidden="true">{playerName.slice(0, 2).toUpperCase()}</span>

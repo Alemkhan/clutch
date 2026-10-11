@@ -12,5 +12,7 @@ export interface RunRow {
   mini_game_config_json: string | null;
   opponent_json: string | null;
   ghost_eligible: number;
+  opponent_run_id?: string | null;
+  created_at: number;
   question_set_id?: string | null;
 }

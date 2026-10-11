@@ -1,5 +1,8 @@
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_SOLO_RUN_CONDITIONS,
+  SOLO_ROUND_CAP,
+  SOLO_TARGET_PROGRESS,
   MIN_POOL_ROUNDS,
   SKILL_REWARDS,
   applyMatchRound,
@@ -12,6 +15,7 @@ import {
   type OpponentRound,
   type Question,
   type StartAsyncMatchResponse,
+  type StartSoloRunResponse,
   type SkillResult,
 } from '@clutch/shared';
 
@@ -165,6 +169,49 @@ export function normalizeOnlineMatch(match: StartAsyncMatchResponse): Normalized
     opponent,
     config,
     opponentSource: match.opponentSource,
+  };
+}
+
+export interface NormalizedSoloRun {
+  runId: string;
+  questions: Question[];
+  /** Темп для полосы; null — записи нет или она не подходит к набору. Забег темп не завершает. */
+  pace: Opponent | null;
+  config: MiniGameConfig;
+  bankExhausted: boolean;
+}
+
+/** Темп — только картинка: битую запись не рисуем, но и забег из-за неё не отменяем. */
+function normalizeSoloPace(pace: Opponent | null, questions: readonly Question[]): Opponent | null {
+  if (!pace || typeof pace.id !== 'string' || pace.id.length === 0
+    || typeof pace.displayName !== 'string' || pace.displayName.trim().length === 0
+    || !Array.isArray(pace.rounds) || pace.rounds.length > questions.length) return null;
+  try {
+    pace.rounds.forEach((round, index) => {
+      validateRound(round);
+      if (round.questionId !== questions[index].id) throw new Error('Pace round is out of order.');
+    });
+  } catch {
+    return null;
+  }
+  return pace;
+}
+
+export function normalizeSoloRun(run: StartSoloRunResponse): NormalizedSoloRun {
+  if (!run || typeof run.runId !== 'string' || run.runId.length === 0 || !Array.isArray(run.questions)) {
+    throw new Error('Solo run response is invalid.');
+  }
+  if (run.rulesVersion !== CURRENT_SOLO_RUN_CONDITIONS.rulesVersion
+    || run.target !== SOLO_TARGET_PROGRESS || run.roundCap !== SOLO_ROUND_CAP) {
+    throw new Error('Solo run conditions are not supported by this client.');
+  }
+  validateQuestions(run.questions);
+  return {
+    runId: run.runId,
+    questions: run.questions,
+    pace: normalizeSoloPace(run.pace ?? null, run.questions),
+    config: validateMiniGameConfig(CURRENT_SOLO_RUN_CONDITIONS.miniGame.config),
+    bankExhausted: run.bankExhausted === true,
   };
 }
 

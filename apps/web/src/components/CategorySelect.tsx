@@ -1,4 +1,4 @@
-import { playSound } from '../lib/sounds';
+import { ScreenHeader } from './ScreenHeader';
 
 interface CategorySelectProps {
   onSelect: (categoryId: string) => void;
@@ -7,7 +7,7 @@ interface CategorySelectProps {
 
 const CATEGORIES = [
   { id: 'geography', name: 'География', icon: '🌍', available: true, blurb: '195 стран · флаги, столицы, контуры' },
-  { id: 'history', name: 'Исторические флаги', icon: '🏴', available: true, blurb: '44 флага · империи, султанаты, города' },
+  { id: 'history', name: 'Другие флаги', icon: '🏴', available: true, blurb: '44 флага · империи, города, забытые государства' },
   { id: 'languages', name: 'Языки', icon: '🗣️', available: true, blurb: '37 языков · угадаешь по письму?' },
   { id: 'sports', name: 'Спорт', icon: '⚽', available: false },
   { id: 'science', name: 'Наука', icon: '🧪', available: false },
@@ -16,8 +16,7 @@ const CATEGORIES = [
 export function CategorySelect({ onSelect, onBack }: CategorySelectProps) {
   return (
     <section className="category-select">
-      <button className="back-btn" onClick={() => { onBack(); }}>← Назад</button>
-      <h1 className="screen-title">Выбери<br />категорию</h1>
+      <ScreenHeader onBack={onBack} title={<>Выбери<br />категорию</>} />
       <p className="screen-subtitle">Покажи, что знаешь. Докажи умением.</p>
       <div className="category-list">
         {CATEGORIES.map((cat) => (

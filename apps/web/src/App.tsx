@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import type { CategoryId } from '@clutch/shared';
 import { useGameState } from './lib/useGameState';
 import { MatchHud } from './components/MatchHud';
 import { HomeDashboard } from './components/HomeDashboard';
@@ -11,7 +12,11 @@ import { ResolutionScreen } from './components/ResolutionScreen';
 import { HammerGame } from './components/HammerGame';
 import { ResultScreen } from './components/ResultScreen';
 import { Training } from './components/Training';
+import { RematchEntry } from './components/RematchEntry';
+import { readLaunchIntent, type LaunchIntent } from './lib/launchIntent';
 import { LastStand } from './components/LastStand';
+import { SoloRun } from './components/SoloRun';
+import { isSoloPlaying, type SoloStage } from './lib/soloRunFlow';
 import { findChallenge } from './lib/tournaments';
 import { completionQueue } from './lib/completionQueue';
 import { analytics } from './lib/analytics';
@@ -43,19 +48,29 @@ const screenWrapperStyle = {
 
 export default function App() {
   const game = useGameState();
+  const [launchIntent, setLaunchIntent] = useState<LaunchIntent | null>(readLaunchIntent);
+  const closeLaunchIntent = useCallback(() => setLaunchIntent(null), []);
+  const startRematch = useCallback((inviteId: string, category: CategoryId) => {
+    setLaunchIntent(null);
+    game.startRematch(inviteId, category);
+  }, [game.startRematch]);
   const shellRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
   const screenDuration = reduceMotion ? 0 : 0.18;
   const showMatchHud = shouldShowMatchHud(game.phase);
+  const [soloStage, setSoloStage] = useState<SoloStage>('categories');
+  const soloPlaying = game.phase === 'solo' && isSoloPlaying(soloStage);
+  // Молоток в соло получает тот же фон, что и в гонке.
+  const shellPhase = game.phase === 'solo' && soloStage === 'hammer' ? 'hammer' : game.phase;
 
   useTelegramBackButton(game.phase, game.matchSource, {
     home: game.goHome,
     categories: game.goToCategories,
-  });
+  }, soloPlaying);
 
   useEffect(() => {
     shellRef.current?.scrollTo({ top: 0, behavior: 'auto' });
-  }, [game.phase, game.questionIndex]);
+  }, [game.phase, game.questionIndex, soloStage]);
 
   useEffect(() => {
     const unsubscribe = completionQueue.subscribe((event) => {
@@ -75,7 +90,7 @@ export default function App() {
   }, []);
 
   return (
-    <main ref={shellRef} className={`app-shell phase-${game.phase}`}>
+    <main ref={shellRef} className={`app-shell phase-${shellPhase}`}>
       {showMatchHud && (
         <MatchHud
           player={game.playerProgress}
@@ -87,13 +102,20 @@ export default function App() {
       )}
 
       <AnimatePresence mode="wait">
-        {game.phase === 'home' && (
+        {game.phase === 'home' && launchIntent && (
+          <motion.div key="launch" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <RematchEntry intent={launchIntent} onStartRematch={startRematch} onClose={closeLaunchIntent} />
+          </motion.div>
+        )}
+
+        {game.phase === 'home' && !launchIntent && (
           <motion.div key="home" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <HomeDashboard
               onFindMatch={game.goToCategories}
               onProfile={game.goToProfile}
               onTraining={game.goToTraining}
               onLastStand={game.goToLastStand}
+              onSolo={game.goToSolo}
               onChallenge={(tournamentId) => handleChallenge(tournamentId, game.startChallenge)}
             />
           </motion.div>
@@ -118,6 +140,12 @@ export default function App() {
         {game.phase === 'lastStand' && (
           <motion.div key="lastStand" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <LastStand onHome={game.goHome} />
+          </motion.div>
+        )}
+
+        {game.phase === 'solo' && (
+          <motion.div key="solo" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <SoloRun onHome={game.goHome} onStageChange={setSoloStage} />
           </motion.div>
         )}
 

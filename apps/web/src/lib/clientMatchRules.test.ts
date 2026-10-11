@@ -57,6 +57,7 @@ function onlineMatch(matchQuestions: Question[], opponent: Opponent): StartAsync
     opponent,
     opponentSource: 'player',
     conditions: CURRENT_ASYNC_MATCH_CONDITIONS,
+    bankExhausted: false,
   };
 }
 

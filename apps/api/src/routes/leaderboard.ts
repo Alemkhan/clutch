@@ -33,6 +33,7 @@ export function registerLeaderboardRoutes(app: Hono<{ Bindings: Env }>): void {
                ) AS player_rank
         FROM match_runs
         WHERE category = ?1 AND status = 'completed'
+          AND (rules_version IS NULL OR rules_version NOT LIKE 'solo-%')
       )
       SELECT display_name AS displayName, progress,
              correct_count AS correctCount, completed_at AS completedAt

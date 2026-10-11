@@ -12,6 +12,8 @@ import type { RunRow } from './types';
 
 export const categories = new Set(['geography', 'history', 'languages']);
 
+export const REMATCH_INVITE_ID = /^rm_[A-Za-z0-9_-]{22}$/;
+
 export function isStartRequest(value: unknown): value is StartAsyncMatchRequest {
   if (!value || typeof value !== 'object') return false;
   const body = value as Record<string, unknown>;
@@ -21,7 +23,9 @@ export function isStartRequest(value: unknown): value is StartAsyncMatchRequest 
     && body.displayName.trim().length > 0
     && body.displayName.length <= 64
     && typeof body.category === 'string'
-    && categories.has(body.category);
+    && categories.has(body.category)
+    && (body.rematchInviteId === undefined
+      || (typeof body.rematchInviteId === 'string' && REMATCH_INVITE_ID.test(body.rematchInviteId)));
 }
 
 export function isRoundInput(value: unknown): value is AsyncMatchRoundInput {

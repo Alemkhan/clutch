@@ -2,7 +2,12 @@ import type {
   CategoryId,
   CompleteAsyncMatchRequest,
   CompleteAsyncMatchResponse,
+  CompleteSoloRunRequest,
+  CompleteSoloRunResponse,
   GuestSessionResponse,
+  MyRunsResponse,
+  StartSoloRunRequest,
+  StartSoloRunResponse,
   StartAsyncMatchRequest,
   StartAsyncMatchResponse,
 } from '@clutch/shared';
@@ -168,11 +173,16 @@ async function apiFetch<T>(path: string, init: RequestInit, signal?: AbortSignal
   });
 }
 
-export function startAsyncMatch(category: CategoryId, signal?: AbortSignal): Promise<StartAsyncMatchResponse> {
+export function startAsyncMatch(
+  category: CategoryId,
+  signal?: AbortSignal,
+  rematchInviteId?: string,
+): Promise<StartAsyncMatchResponse> {
   const telegram = getTelegramIdentity();
   const body: StartAsyncMatchRequest = {
     displayName: telegram?.displayName || getPlayerName(),
     category,
+    ...(rematchInviteId ? { rematchInviteId } : {}),
   };
   return apiFetch('/api/async-matches', {
     method: 'POST',
@@ -188,6 +198,58 @@ export function completeAsyncMatch(
     method: 'POST',
     body: JSON.stringify(body),
   });
+}
+
+// ---- Соло-забег и «Мои партии» ----
+
+export function startSoloRun(category: CategoryId, signal?: AbortSignal): Promise<StartSoloRunResponse> {
+  const telegram = getTelegramIdentity();
+  const body: StartSoloRunRequest = {
+    displayName: telegram?.displayName || getPlayerName(),
+    category,
+  };
+  return apiFetch('/api/solo-runs', { method: 'POST', body: JSON.stringify(body) }, signal);
+}
+
+export function completeSoloRun(
+  runId: string,
+  body: CompleteSoloRunRequest,
+  signal?: AbortSignal,
+): Promise<CompleteSoloRunResponse> {
+  return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}/complete`, {
+    method: 'POST',
+    body: JSON.stringify(body),
+  }, signal);
+}
+
+/** before — nextCursor предыдущей страницы; приглашения приходят только с первой. */
+export function fetchMyRuns(
+  options: { limit?: number; before?: string } = {},
+  signal?: AbortSignal,
+): Promise<MyRunsResponse> {
+  const query = new URLSearchParams();
+  if (options.limit !== undefined) query.set('limit', String(options.limit));
+  if (options.before) query.set('before', options.before);
+  const suffix = query.size > 0 ? `?${query}` : '';
+  return apiFetch(`/api/my-runs${suffix}`, { method: 'GET' }, signal);
+}
+
+// ---- Rematch and notifications ----
+
+export interface RematchPreview {
+  inviteId: string;
+  category: CategoryId;
+  challengerName: string;
+  challengerProgress: number;
+  yourProgress: number;
+}
+
+export function fetchRematchPreview(inviteId: string, signal?: AbortSignal): Promise<RematchPreview> {
+  return apiFetch(`/api/rematch/${encodeURIComponent(inviteId)}`, { method: 'GET' }, signal);
+}
+
+export function setOutbidNotifications(enabled: boolean): Promise<{ enabled: boolean }> {
+  return apiFetch('/api/notifications/outbid', { method: 'PUT', body: JSON.stringify({ enabled }) });
 }
 
 // ---- Last Stand ----

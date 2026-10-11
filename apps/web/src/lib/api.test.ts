@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ApiError, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError, startAsyncMatch } from './api';
+import { ApiError, completeSoloRun, fetchMyRuns, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError, startAsyncMatch, startSoloRun } from './api';
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -63,5 +63,37 @@ describe('match start cancellation', () => {
     await vi.waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
     controller.abort();
     await expect(request).rejects.toMatchObject({ name: 'AbortError' });
+  });
+});
+
+describe('solo run and my-runs calls', () => {
+  function stubApi() {
+    const fetchMock = vi.fn((input: string | URL | Request) => {
+      const path = String(input);
+      const body = path.includes('/api/auth/guest')
+        ? { token: 'guest-token', expiresAt: Date.now() + 60 * 60 * 1000 }
+        : { runs: [], nextCursor: null, invites: [] };
+      return Promise.resolve(new Response(JSON.stringify(body), { status: 200 }));
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    return fetchMock;
+  }
+
+  it('requests the my-runs page with the cursor and the guest bearer', async () => {
+    const fetchMock = stubApi();
+    await fetchMyRuns({ limit: 10, before: '123_abc' });
+    const [path, init] = fetchMock.mock.calls[fetchMock.mock.calls.length - 1] as unknown as [string, RequestInit];
+    expect(path).toBe('/api/my-runs?limit=10&before=123_abc');
+    expect(init.method).toBe('GET');
+    expect((init.headers as Record<string, string>).Authorization).toBe('Bearer guest-token');
+  });
+
+  it('posts solo start and complete to their own routes', async () => {
+    const fetchMock = stubApi();
+    await startSoloRun('geography');
+    await completeSoloRun('run/1', { rounds: [] });
+    const paths = fetchMock.mock.calls.map(([input]) => String(input));
+    expect(paths).toContain('/api/solo-runs');
+    expect(paths).toContain('/api/solo-runs/run%2F1/complete');
   });
 });

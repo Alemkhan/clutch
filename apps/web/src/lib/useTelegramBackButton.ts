@@ -18,8 +18,9 @@ export function useTelegramBackButton(
   phase: Phase,
   matchSource: MatchSource,
   callbacks: BackCallbacks,
+  soloPlaying = false,
 ): void {
-  const action = telegramBackAction(phase, matchSource);
+  const action = telegramBackAction(phase, matchSource, soloPlaying);
   const actionRef = useRef(action);
   const callbacksRef = useRef(callbacks);
   const controllerRef = useRef<TelegramBackButtonController | null>(null);

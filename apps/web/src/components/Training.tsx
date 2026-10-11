@@ -1,6 +1,7 @@
 import { useReducer } from 'react';
 import type { Question } from '@clutch/shared';
 import { QuestionScreen } from './QuestionScreen';
+import { ScreenHeader } from './ScreenHeader';
 import { ResolutionScreen } from './ResolutionScreen';
 import {
   answerTraining,
@@ -62,12 +63,12 @@ export function Training({ questions, onAnswered, onBack }: TrainingProps) {
 
   return (
     <section className="training-screen">
-      <div className="training-header">
-        <span className="chip">Тренировка · {state.index + 1} из {state.questions.length}</span>
-        <button type="button" className="back-btn" onClick={() => { onBack(); }}>
-          Выйти
-        </button>
-      </div>
+      <ScreenHeader
+        className="training-header"
+        leading={<span className="chip">Тренировка · {state.index + 1} из {state.questions.length}</span>}
+        backLabel="Выйти"
+        onBack={onBack}
+      />
       <p className="training-note">{TRAINING_NOT_SAVED_NOTE}</p>
       {state.step === 'question' && question && (
         <QuestionScreen

@@ -5,6 +5,7 @@ import { createHmac, createHash } from 'node:crypto';
 import { afterEach, describe, expect, it } from 'vitest';
 import app from '../apps/api/src/index';
 import { readJsonBody } from '../apps/api/src/http/jsonBody';
+import { MAX_DAILY_SET_SIZE } from '@clutch/shared';
 import { isRoundInput } from '../apps/api/src/matches/validation';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
@@ -127,19 +128,46 @@ describe('R2b request shape limits', () => {
     expect(isRoundInput({ ...validRound, responseTimeMs: 60_001 })).toBe(false);
   });
 
-  it('rejects more than ten rounds before looking up the match', async () => {
+  it.each(['/api/async-matches', '/api/solo-runs'])(
+    'rejects more than the largest set of rounds before looking up the match (%s)',
+    async (path) => {
+      const db = database();
+      const limiter = new FakeRateLimiter('allow');
+      const rounds = Array.from({ length: MAX_DAILY_SET_SIZE + 1 }, () => validRound);
+      // Матча с таким id нет: без раннего отсева ответ был бы 404 после чтения из базы.
+      const response = await app.request(`${path}/no-such-match/complete`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', authorization: guestAuthorization('huge-rounds') },
+        body: JSON.stringify({ rounds }),
+      }, env(db, limiter));
+      expect(response.status).toBe(400);
+      expect(await response.json()).toEqual({ error: 'Invalid rounds.' });
+    },
+  );
+
+  it('rejects more rounds than the match set holds', async () => {
     const db = database();
     const limiter = new FakeRateLimiter('allow');
-    const response = await app.request('/api/async-matches/not-present/complete', {
+    const authorization = guestAuthorization('too-many-rounds');
+    // Набор истории короче максимума: лишний круг проходит ранний отсев и ловится точной проверкой.
+    const started = await app.request('/api/async-matches', {
       method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        authorization: guestAuthorization('too-many-rounds'),
-      },
-      body: JSON.stringify({ rounds: Array.from({ length: 11 }, () => validRound) }),
+      headers: { 'content-type': 'application/json', authorization },
+      body: JSON.stringify({ displayName: 'Игрок', category: 'history' }),
+    }, env(db, limiter));
+    const match = await started.json() as { matchId: string; questions: Array<{ id: string }> };
+    expect(match.questions.length).toBeLessThan(MAX_DAILY_SET_SIZE);
+    const rounds = Array.from({ length: match.questions.length + 1 }, (_, index) => ({
+      ...validRound,
+      questionId: match.questions[Math.min(index, match.questions.length - 1)].id,
+    }));
+    const response = await app.request(`/api/async-matches/${match.matchId}/complete`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization },
+      body: JSON.stringify({ rounds }),
     }, env(db, limiter));
     expect(response.status).toBe(400);
-    expect(limiter.keys).toHaveLength(1);
+    expect(await response.json()).toEqual({ error: 'Too many rounds.' });
   });
 });
 

@@ -13,7 +13,10 @@ export type TelegramBackAction = 'hidden' | 'home' | 'categories';
 export function telegramBackAction(
   phase: Phase,
   matchSource: MatchSource,
+  soloPlaying = false,
 ): TelegramBackAction {
+  // В активном забеге системная «Назад» скрыта: случайный выход потерял бы несохранённый забег.
+  if (phase === 'solo') return soloPlaying ? 'hidden' : 'home';
   if (phase === 'profile' || phase === 'training' || phase === 'lastStand' || phase === 'categories' || phase === 'result') return 'home';
   if (phase === 'matchmaking') return matchSource === 'challenge' ? 'home' : 'categories';
   return 'hidden';

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { ScreenHeader } from './ScreenHeader';
 import { TimerBar } from './TimerBar';
 import { playSound } from '../lib/sounds';
 import { useLastStand, type LeaderboardView } from '../lib/useLastStand';
@@ -87,12 +88,7 @@ interface IntroProps {
 export function LastStandIntro({ onStart, onLeaderboard, onBack }: IntroProps) {
   return (
     <section className="ls-screen">
-      <header className="ls-header">
-        <button type="button" className="back-btn" aria-label="Назад на главный экран" onClick={() => { onBack(); }}>
-          ← Назад
-        </button>
-      </header>
-      <h1 className="screen-title">Last Stand</h1>
+      <ScreenHeader onBack={onBack} backAriaLabel="Назад на главный экран" title="Last Stand" />
       <p className="screen-subtitle">
         Объявляется категория стран. Назови любую страну из неё, но не ту, которую раньше тебя назвал соперник.
       </p>
@@ -349,12 +345,7 @@ interface LeaderboardProps {
 export function LastStandLeaderboard({ view, onRetry, onClose }: LeaderboardProps) {
   return (
     <section className="ls-screen">
-      <header className="ls-header">
-        <button type="button" className="back-btn" aria-label="Закрыть таблицу дня" onClick={() => { onClose(); }}>
-          ← Назад
-        </button>
-      </header>
-      <h2 className="screen-title">Таблица дня</h2>
+      <ScreenHeader onBack={onClose} backAriaLabel="Закрыть таблицу дня" title="Таблица дня" titleAs="h2" />
       {view.status === 'ready' && <p className="ls-hint">{view.data.dateKey}</p>}
       {view.status === 'loading' && <p className="screen-subtitle" role="status">Загружаем таблицу…</p>}
       {view.status === 'error' && (

@@ -332,7 +332,7 @@ export function generateHistoricFlag(correct: HistoricFlag = pickOne(historicFla
     type: 'multiple_choice',
     answerType: 'multiple_choice',
     category: 'Historical Flags',
-    subcategory: 'Исторические флаги',
+    subcategory: 'Другие флаги',
     difficulty: 'Hard',
     prompt: 'Что это за флаг?',
     mediaType: 'flag',

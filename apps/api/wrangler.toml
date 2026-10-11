@@ -25,6 +25,10 @@ binding = "DB"
 database_name = "clutch-db"
 database_id = "2de23ae8-3ad2-4052-aca6-60477fd7eb4a"
 
+# Плановый проход: раз в 15 минут отпускает просроченные приглашения на реванш.
+[triggers]
+crons = ["*/15 * * * *"]
+
 # Observability
 [observability]
 enabled = true

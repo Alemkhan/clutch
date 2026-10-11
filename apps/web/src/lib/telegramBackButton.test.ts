@@ -81,3 +81,11 @@ describe('Telegram BackButton mapping', () => {
     expect(adapter.unmount).toHaveBeenCalledTimes(1);
   });
 });
+
+describe('Telegram BackButton in the solo run', () => {
+  it('is visible on safe solo screens and hidden while playing', () => {
+    expect(telegramBackAction('solo', 'local')).toBe('home');
+    expect(telegramBackAction('solo', 'local', false)).toBe('home');
+    expect(telegramBackAction('solo', 'local', true)).toBe('hidden');
+  });
+});

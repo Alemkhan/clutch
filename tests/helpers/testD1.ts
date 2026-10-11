@@ -74,6 +74,22 @@ export function applyLastStandMigration(sqlite: SQLiteDatabase): void {
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0004_last_stand.sql', import.meta.url), 'utf8'));
 }
 
+export function applyRematchMigration(sqlite: SQLiteDatabase): void {
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0005_rematch_notifications.sql', import.meta.url), 'utf8'));
+}
+
+export function applyRematchReleaseMigration(sqlite: SQLiteDatabase): void {
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0006_rematch_invite_release.sql', import.meta.url), 'utf8'));
+}
+
+export function applySoloRunsMigration(sqlite: SQLiteDatabase): void {
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0007_solo_runs.sql', import.meta.url), 'utf8'));
+}
+
+export function applySoloOutcomeMigration(sqlite: SQLiteDatabase): void {
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0008_solo_outcome.sql', import.meta.url), 'utf8'));
+}
+
 export function createTestD1(applyCurrentMigration = true): TestD1 {
   const sqlite = new DatabaseSync(':memory:');
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0001_async_matches.sql', import.meta.url), 'utf8'));
@@ -81,6 +97,10 @@ export function createTestD1(applyCurrentMigration = true): TestD1 {
     applyR1bMigration(sqlite);
     applyQuestionSetMigration(sqlite);
     applyLastStandMigration(sqlite);
+    applyRematchMigration(sqlite);
+    applyRematchReleaseMigration(sqlite);
+    applySoloRunsMigration(sqlite);
+    applySoloOutcomeMigration(sqlite);
   }
   const binding = {
     prepare(query: string) {

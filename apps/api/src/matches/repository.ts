@@ -8,7 +8,14 @@ export const currentMiniGameConfigJson = JSON.stringify(
 
 const runColumns = `
   id, player_id, display_name, questions_json, rounds_json, progress, correct_count, status,
-  rules_version, mini_game_id, mini_game_config_json, opponent_json, ghost_eligible`;
+  rules_version, mini_game_id, mini_game_config_json, opponent_json, ghost_eligible, opponent_run_id,
+  created_at`;
+
+/** Какой пул соперников: версия правил и (для соло) только забеги, дошедшие до цели. */
+export interface PoolOptions {
+  rulesVersion?: string;
+  reachedTargetOnly?: boolean;
+}
 
 export interface GhostMatch {
   row: RunRow;
@@ -21,14 +28,14 @@ export interface GhostMatch {
  * One query over the whole day's bank: the freshest finished run of another player, with at
  * least MIN_POOL_ROUNDS played rounds, that this player has not faced yet. Its set is the set
  * to play. With unplayedSetsOnly the run must also sit on a set this player never started,
- * so a live opponent is never bought with repeated questions. Whether the run reached 100 is irrelevant: ghost_eligible is not a pool filter.
+ * so a live opponent is never bought with repeated questions. Whether the run reached 100 is irrelevant for the race pool: ghost_eligible is not a filter; the solo pool filters reached_target.
  * There is deliberately no fallback that drops the "already faced" condition.
  */
 export async function findGhostInSets(
   db: D1Database,
   questionSetIds: readonly string[],
   playerId: string,
-  options: { unplayedSetsOnly?: boolean } = {},
+  options: PoolOptions & { unplayedSetsOnly?: boolean } = {},
 ): Promise<GhostMatch | null> {
   if (questionSetIds.length === 0) return null;
   // "Played" means any run of the set by this player, whatever its status.
@@ -37,6 +44,7 @@ export async function findGhostInSets(
         SELECT question_set_id FROM match_runs
         WHERE player_id = ?2 AND question_set_id IS NOT NULL
       )` : '';
+  const reachedClause = options.reachedTargetOnly ? ' AND reached_target = 1' : '';
   const setPlaceholders = questionSetIds.map((_, index) => `?${index + 6}`).join(', ');
   const result = await db.prepare(`
     SELECT ${runColumns}, question_set_id
@@ -51,12 +59,12 @@ export async function findGhostInSets(
       AND id NOT IN (
         SELECT opponent_run_id FROM match_runs
         WHERE player_id = ?2 AND opponent_run_id IS NOT NULL
-      )${unplayedClause}
+      )${unplayedClause}${reachedClause}
     ORDER BY completed_at DESC LIMIT 20
   `).bind(
     MIN_POOL_ROUNDS,
     playerId,
-    CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion,
+    options.rulesVersion ?? CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion,
     CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
     currentMiniGameConfigJson,
     ...questionSetIds,
@@ -68,6 +76,17 @@ export async function findGhostInSets(
     }
   }
   return null;
+}
+
+/** Owner and category of a stored run, for the outbid notification. */
+export async function findRunOwner(
+  db: D1Database,
+  runId: string,
+): Promise<{ id: string; playerId: string; category: string } | null> {
+  const row = await db.prepare('SELECT id, player_id, category FROM match_runs WHERE id = ?1')
+    .bind(runId)
+    .first<{ id: string; player_id: string; category: string }>();
+  return row ? { id: row.id, playerId: row.player_id, category: row.category } : null;
 }
 
 /** When this player last started each of the given sets (any status), by set id. */

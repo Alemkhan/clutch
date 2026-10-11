@@ -5,6 +5,9 @@ export type AnswerType = 'multiple_choice' | 'open_answer';
 export * from './fuzzyMatch';
 export * from './hammerRules';
 export * from './matchRules';
+export * from './soloRun';
+export * from './questionPricing';
+export * from './soloCompare';
 
 export type Difficulty = 'Easy' | 'Medium' | 'Hard' | 'Expert';
 
@@ -62,6 +65,8 @@ export interface AsyncMatchRound {
 export interface StartAsyncMatchRequest {
   displayName: string;
   category: 'geography' | 'history' | 'languages';
+  /** One-time rematch invite id (the part after "rm_" is random); checked against the caller on the server. */
+  rematchInviteId?: string;
 }
 
 export interface GuestSessionResponse {
@@ -75,6 +80,8 @@ export interface StartAsyncMatchResponse {
   opponent: Opponent;
   opponentSource: 'player' | 'bot';
   conditions: AsyncMatchConditions;
+  /** true: игрок прошёл все наборы дня в категории, выдан наименее давно сыгранный. */
+  bankExhausted: boolean;
 }
 
 export interface CompleteAsyncMatchRequest {
@@ -86,6 +93,80 @@ export interface CompleteAsyncMatchResponse {
   rounds: AsyncMatchRound[];
   playerProgress: number;
   correctCount: number;
+}
+
+/** Соло-забег: тело старта без реванш-приглашения (сервер его отклоняет). */
+export interface StartSoloRunRequest {
+  displayName: string;
+  category: 'geography' | 'history' | 'languages';
+}
+
+export interface StartSoloRunResponse {
+  runId: string;
+  questions: Question[];
+  /** Только темп для отрисовки; забег он не завершает. null — записи нет. */
+  pace: Opponent | null;
+  target: number;
+  roundCap: number;
+  rulesVersion: string;
+  /** true: все наборы дня в категории уже пройдены, выдан наименее давно сыгранный. */
+  bankExhausted: boolean;
+}
+
+export type CompleteSoloRunRequest = CompleteAsyncMatchRequest;
+
+export interface CompleteSoloRunResponse {
+  runId: string;
+  rounds: AsyncMatchRound[];
+  progress: number;
+  correctCount: number;
+  roundsPlayed: number;
+  reachedTarget: boolean;
+  par: number;
+  score: number;
+  /** Исход против темпа глазами игрока. null — темпа не было, забег ждёт соперника (это не ничья). */
+  outcome: MyRunOutcome | null;
+}
+
+/** Исход партии глазами игрока: победа, поражение или ничья. */
+export type MyRunOutcome = 'player' | 'opponent' | 'tie';
+
+/** Одна завершённая партия игрока в «Моих партиях». */
+export interface MyRunSummary {
+  runId: string;
+  category: 'geography' | 'history' | 'languages';
+  mode: 'race' | 'solo';
+  roundsPlayed: number;
+  progress: number;
+  correctCount: number;
+  /** null у гонки: цель достигается там же, где и победа, отдельного признака нет. */
+  reachedTarget: boolean | null;
+  /** Только у соло-забега. */
+  setPar: number | null;
+  soloScore: number | null;
+  startedAt: number;
+  completedAt: number;
+  /** С кем сравнивался: запись игрока, бот либо никого (соло без темпа). */
+  opponent: { kind: 'player' | 'bot'; displayName: string } | null;
+  /** null: соло без соперника (ждёт его, opponent === null) либо исход не удалось определить. Ничья — 'tie'. */
+  outcome: MyRunOutcome | null;
+}
+
+/** Активное приглашение на реванш, адресованное игроку. */
+export interface MyRematchInvite {
+  inviteId: string;
+  category: 'geography' | 'history' | 'languages';
+  challengerName: string;
+  challengerProgress: number;
+  yourProgress: number;
+  expiresAt: number;
+}
+
+export interface MyRunsResponse {
+  runs: MyRunSummary[];
+  /** Значение для `before` следующей страницы; null — партий больше нет. */
+  nextCursor: string | null;
+  invites: MyRematchInvite[];
 }
 
 export interface Opponent {
@@ -117,6 +198,12 @@ export const CURRENT_ASYNC_MATCH_CONDITIONS: AsyncMatchConditions = {
       },
     },
   },
+};
+
+/** Соло-забег до цели: та же схема и тот же молоток, своя версия правил (гоночные записи в соло-пул не попадают). */
+export const CURRENT_SOLO_RUN_CONDITIONS: AsyncMatchConditions = {
+  rulesVersion: 'solo-to-100-v1',
+  miniGame: CURRENT_ASYNC_MATCH_CONDITIONS.miniGame,
 };
 
 export interface Tournament {
