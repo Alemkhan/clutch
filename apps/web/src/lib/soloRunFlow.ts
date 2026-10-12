@@ -74,7 +74,7 @@ export function isSoloPlaying(stage: SoloStage): boolean {
 export function createSoloFlowState(): SoloFlowState {
   return {
     stage: 'categories',
-    category: 'geography',
+    category: 'general',
     session: null,
     config: CURRENT_SOLO_RUN_CONDITIONS.miniGame.config,
     bankExhausted: false,

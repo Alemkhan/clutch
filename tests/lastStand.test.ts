@@ -5,9 +5,11 @@ import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { baseTimeMs, collisionBonusMs, countries, LAST_STAND_MAX_ROUNDS } from '@clutch/shared';
 import app from '../apps/api/src/index';
-import { createLastStandBot, FAST_BOT, SLOW_BOT, type LastStandOpponent } from '../apps/api/src/lastStand/bots';
+import {
+  createLastStandBot, FAST_BOT, mineForRound, MINE_POOL_SIZE, orderedMembers, SLOW_BOT, type LastStandOpponent,
+} from '../apps/api/src/lastStand/bots';
 import { recogniseCountry } from '../apps/api/src/lastStand/normalize';
-import { countryNameRu, planForDate } from '../apps/api/src/lastStand/plan';
+import { memberNameRu, planForDate } from '../apps/api/src/lastStand/plan';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
@@ -76,6 +78,12 @@ function members(index: number): string[] {
   return [...planForDate(today)[index].members];
 }
 
+/** Members of a round without the system's mine: answers that never eliminate. */
+function safeMembers(index: number): string[] {
+  const mine = mineForRound(planForDate(today)[index], today);
+  return members(index).filter((member) => member !== mine);
+}
+
 function setOpponents(db: TestD1, runId: string, opponents: LastStandOpponent[]) {
   db.sqlite.prepare('UPDATE last_stand_runs SET opponents_json = ? WHERE id = ?').run(JSON.stringify(opponents), runId);
 }
@@ -133,12 +141,12 @@ describe('last stand: answers', () => {
   it('accepted: next round, reveal of this round only', async () => {
     const db = database();
     const run = await startRun(db, 'p1');
-    const [first, second] = members(0);
+    const [first, second] = safeMembers(0);
     setOpponents(db, run.runId, [
       opponentAnswering('Dana', { 0: { answer: second, atMs: 3000 }, 1: { answer: first, atMs: 100 } }),
       emptyOpponent('Max'),
     ]);
-    const response = await answer(db, run, countryNameRu(first), 2400);
+    const response = await answer(db, run, memberNameRu(planForDate(today)[0], first), 2400);
     expect(response.status).toBe(200);
     const body = await response.json() as Json;
     const next = planForDate(today)[1];
@@ -146,7 +154,7 @@ describe('last stand: answers', () => {
       status: 'accepted',
       reason: null,
       deadlineMs: baseTimeMs(planForDate(today)[0].scale),
-      reveal: [{ displayName: 'Dana', answerRu: countryNameRu(second), atMs: 3000 }],
+      reveal: [{ displayName: 'Dana', answerRu: memberNameRu(planForDate(today)[0], second), atMs: 3000 }],
       survived: 1,
       round: { index: 1, scale: next.scale, titleRu: expect.any(String), timeMs: baseTimeMs(next.scale) },
     });
@@ -157,16 +165,16 @@ describe('last stand: answers', () => {
     const db = database();
     const run = await startRun(db, 'p2');
     const round = planForDate(today)[0];
-    const [taken, free] = members(0);
+    const [taken, free] = safeMembers(0);
     setOpponents(db, run.runId, [opponentAnswering('Dana', { 0: { answer: taken, atMs: 1000 } }), emptyOpponent('Max')]);
-    const occupied = await (await answer(db, run, countryNameRu(taken), 2000)).json() as Json;
+    const occupied = await (await answer(db, run, memberNameRu(planForDate(today)[0], taken), 2000)).json() as Json;
     expect(occupied.status).toBe('occupied');
     expect(occupied.reason).toBeNull();
     expect(occupied.deadlineMs).toBe(baseTimeMs(round.scale) + collisionBonusMs(round.scale));
     expect(occupied.round.index).toBe(0);
     expect(occupied.reveal).toEqual([]);
     expect(occupied.survived).toBe(0);
-    const accepted = await (await answer(db, run, countryNameRu(free), 3000)).json() as Json;
+    const accepted = await (await answer(db, run, memberNameRu(planForDate(today)[0], free), 3000)).json() as Json;
     expect(accepted.status).toBe('accepted');
     expect(accepted.round.index).toBe(1);
   });
@@ -177,9 +185,9 @@ describe('last stand: answers', () => {
     const round = planForDate(today)[0];
     const [taken, free] = members(0);
     setOpponents(db, run.runId, [opponentAnswering('Dana', { 0: { answer: taken, atMs: 1000 } }), emptyOpponent('Max')]);
-    await answer(db, run, countryNameRu(taken), 2000);
+    await answer(db, run, memberNameRu(planForDate(today)[0], taken), 2000);
     const late = baseTimeMs(round.scale) + 1000;
-    expect(((await (await answer(db, run, countryNameRu(free), late)).json()) as Json).status).toBe('accepted');
+    expect(((await (await answer(db, run, memberNameRu(planForDate(today)[0], free), late)).json()) as Json).status).toBe('accepted');
   });
 
   it('invalid: unknown text and a country outside the category are not elimination', async () => {
@@ -193,7 +201,7 @@ describe('last stand: answers', () => {
       expect(body).toMatchObject({ status: 'invalid', reason: null, deadlineMs: base, survived: 0, reveal: [] });
       expect(body.round.index).toBe(0);
     }
-    expect(((await (await answer(db, run, countryNameRu(members(0)[0]), 1600)).json()) as Json).status).toBe('accepted');
+    expect(((await (await answer(db, run, memberNameRu(planForDate(today)[0], members(0)[0]), 1600)).json()) as Json).status).toBe('accepted');
   });
 
   it('eliminated by timeout, with reveal and a null round', async () => {
@@ -201,10 +209,10 @@ describe('last stand: answers', () => {
     const run = await startRun(db, 'p4');
     const [first] = members(0);
     setOpponents(db, run.runId, [opponentAnswering('Dana', { 0: { answer: first, atMs: 5000 } }), emptyOpponent('Max')]);
-    const body = await (await answer(db, run, countryNameRu(first), 10_000_000)).json() as Json;
+    const body = await (await answer(db, run, memberNameRu(planForDate(today)[0], first), 10_000_000)).json() as Json;
     expect(body).toMatchObject({ status: 'eliminated', reason: 'timeout', survived: 0, round: null });
     expect(body.deadlineMs).toBe(baseTimeMs(planForDate(today)[0].scale));
-    expect(body.reveal).toEqual([{ displayName: 'Dana', answerRu: countryNameRu(first), atMs: 5000 }]);
+    expect(body.reveal).toEqual([{ displayName: 'Dana', answerRu: memberNameRu(planForDate(today)[0], first), atMs: 5000 }]);
   });
 
   it('eliminated by exhaustion when records already named every member', async () => {
@@ -213,7 +221,7 @@ describe('last stand: answers', () => {
     const all = members(0);
     const opponents = all.map((code, index) => opponentAnswering(`R${index}`, { 0: { answer: code, atMs: 100 + index } }));
     setOpponents(db, run.runId, opponents);
-    const body = await (await answer(db, run, countryNameRu(all[0]), 9000)).json() as Json;
+    const body = await (await answer(db, run, memberNameRu(planForDate(today)[0], all[0]), 9000)).json() as Json;
     expect(body).toMatchObject({ status: 'eliminated', reason: 'exhausted', round: null, survived: 0 });
   });
 
@@ -222,7 +230,7 @@ describe('last stand: answers', () => {
     const run = await startRun(db, 'p6');
     setOpponents(db, run.runId, [emptyOpponent('Dana'), emptyOpponent('Max')]);
     for (let index = 0; index < LAST_STAND_MAX_ROUNDS; index++) {
-      const body = await (await answer(db, run, countryNameRu(members(index)[0]), 2000)).json() as Json;
+      const body = await (await answer(db, run, memberNameRu(planForDate(today)[index], safeMembers(index)[0]), 2000)).json() as Json;
       if (index < LAST_STAND_MAX_ROUNDS - 1) {
         expect(body.status).toBe('accepted');
         expect(body.round.index).toBe(index + 1);
@@ -237,7 +245,7 @@ describe('last stand: answers', () => {
     const db = database();
     const run = await startRun(db, 'p7');
     await answer(db, run, 'x', 10_000_000);
-    expect((await answer(db, run, countryNameRu(members(0)[0]), 1000)).status).toBe(409);
+    expect((await answer(db, run, memberNameRu(planForDate(today)[0], members(0)[0]), 1000)).status).toBe(409);
   });
 
   it('404 for a foreign or unknown run, 400 for garbage, 401 without identity', async () => {
@@ -259,7 +267,7 @@ describe('last stand: answers', () => {
   it('clamps absurd atMs instead of failing', async () => {
     const db = database();
     const run = await startRun(db, 'p8');
-    const body = await (await answer(db, run, countryNameRu(members(0)[0]), -50)).json() as Json;
+    const body = await (await answer(db, run, memberNameRu(planForDate(today)[0], members(0)[0]), -50)).json() as Json;
     expect(body.status).toBe('accepted');
     const huge = await startRun(db, 'p9');
     const timeout = await (await answer(db, huge, 'x', 1e308)).json() as Json;
@@ -267,10 +275,81 @@ describe('last stand: answers', () => {
   });
 });
 
+describe('last stand: the mine', () => {
+  const mineOf = (index: number) => mineForRound(planForDate(today)[index], today)!;
+
+  it('naming the mine eliminates at once, names it, and stores the reason', async () => {
+    const db = database();
+    const run = await startRun(db, 'm1');
+    setOpponents(db, run.runId, [emptyOpponent('Dana'), emptyOpponent('Max')]);
+    const round = planForDate(today)[0];
+    const body = await (await answer(db, run, memberNameRu(round, mineOf(0)), 2000)).json() as Json;
+    expect(body).toMatchObject({
+      status: 'eliminated', reason: 'mined', mineRu: memberNameRu(round, mineOf(0)), round: null, survived: 0,
+    });
+    const row = db.sqlite.prepare('SELECT status, eliminated_by FROM last_stand_runs WHERE id = ?').get(run.runId) as Json;
+    expect(row).toMatchObject({ status: 'eliminated', eliminated_by: 'mined' });
+  });
+
+  it('the mine kills even when an opponent record already holds it', async () => {
+    const db = database();
+    const run = await startRun(db, 'm2');
+    const round = planForDate(today)[0];
+    setOpponents(db, run.runId, [opponentAnswering('Dana', { 0: { answer: mineOf(0), atMs: 900 } }), emptyOpponent('Max')]);
+    const body = await (await answer(db, run, memberNameRu(round, mineOf(0)), 2000)).json() as Json;
+    expect(body).toMatchObject({ status: 'eliminated', reason: 'mined' });
+  });
+
+  it('a record match without the mine is still occupied, and passing rounds never name the mine', async () => {
+    const db = database();
+    const run = await startRun(db, 'm3');
+    const round = planForDate(today)[0];
+    const [taken, free] = safeMembers(0);
+    setOpponents(db, run.runId, [opponentAnswering('Dana', { 0: { answer: taken, atMs: 900 } }), emptyOpponent('Max')]);
+    const occupied = await (await answer(db, run, memberNameRu(round, taken), 2000)).json() as Json;
+    expect(occupied.status).toBe('occupied');
+    const accepted = await (await answer(db, run, memberNameRu(round, free), 2500)).json() as Json;
+    expect(accepted.status).toBe('accepted');
+    expect(occupied.mineRu).toBeUndefined();
+    expect(accepted.mineRu).toBeUndefined();
+  });
+
+  it('a round where only the mine is free is exhausted', async () => {
+    const db = database();
+    const run = await startRun(db, 'm4');
+    const round = planForDate(today)[0];
+    const others = safeMembers(0);
+    setOpponents(db, run.runId, others.map((code, index) => opponentAnswering(`R${index}`, { 0: { answer: code, atMs: 100 + index } })));
+    const body = await (await answer(db, run, memberNameRu(round, mineOf(0)), 2000)).json() as Json;
+    expect(body).toMatchObject({ status: 'eliminated', reason: 'exhausted' });
+    expect(body.mineRu).toBeUndefined();
+  });
+
+  it('is fixed by day and round, always among the most obvious, and bots never name it', () => {
+    for (const dateKey of ['2026-10-08', '2026-10-09', '2027-01-15', '2027-06-30']) {
+      const rounds = planForDate(dateKey);
+      const bots = [FAST_BOT, SLOW_BOT].map((profile) => createLastStandBot(profile, dateKey, 'guest:x', rounds));
+      rounds.forEach((round, index) => {
+        const mine = mineForRound(round, dateKey);
+        expect(mine).toBe(mineForRound(round, dateKey));
+        const top = orderedMembers(round, dateKey).slice(0, MINE_POOL_SIZE);
+        expect(top).toContain(mine);
+        if (round.members.length > 1) for (const bot of bots) expect(bot.answers[index]!.answer).not.toBe(mine);
+      });
+    }
+  });
+
+  it('does not reach the client in start or in the round view', async () => {
+    const db = database();
+    const run = await startRun(db, 'm5');
+    expect(JSON.stringify(run)).not.toContain('mine');
+  });
+});
+
 describe('last stand: pool, leaderboard, ranking', () => {
   async function finish(db: TestD1, run: Json, rounds: number): Promise<void> {
     setOpponents(db, run.runId, [emptyOpponent('Dana'), emptyOpponent('Max')]);
-    for (let index = 0; index < rounds; index++) await answer(db, run, countryNameRu(members(index)[0]), 2000);
+    for (let index = 0; index < rounds; index++) await answer(db, run, memberNameRu(planForDate(today)[index], safeMembers(index)[0]), 2000);
     if (rounds < LAST_STAND_MAX_ROUNDS) await answer(db, run, 'x', 10_000_000);
   }
 
@@ -317,7 +396,7 @@ describe('last stand: pool, leaderboard, ranking', () => {
     const db = database();
     const a = await startRun(db, 'a');
     setOpponents(db, a.runId, [emptyOpponent('Dana'), emptyOpponent('Max')]);
-    await answer(db, a, countryNameRu(members(0)[0]), 2000);
+    await answer(db, a, memberNameRu(planForDate(today)[0], members(0)[0]), 2000);
     expect(((await (await board(db, 'a')).json()) as Json).entries).toEqual([]);
     const b = await startRun(db, 'b');
     expect(b.opponents.every((o: Json) => o.source === 'bot')).toBe(true);
@@ -350,11 +429,11 @@ describe('last stand: pool, leaderboard, ranking', () => {
     const [first] = members(0);
     const c = await startRun(db, 'c', 'Вера');
     setOpponents(db, c.runId, [opponentAnswering('Алем', { 0: { answer: first, atMs: 2000 } }), emptyOpponent('Max')]);
-    expect(((await (await answer(db, c, countryNameRu(first), 2000)).json()) as Json).status).toBe('occupied');
-    expect(((await (await answer(db, c, countryNameRu(first), 600)).json()) as Json).status).toBe('occupied');
+    expect(((await (await answer(db, c, memberNameRu(planForDate(today)[0], first), 2000)).json()) as Json).status).toBe('occupied');
+    expect(((await (await answer(db, c, memberNameRu(planForDate(today)[0], first), 600)).json()) as Json).status).toBe('occupied');
     const d = await startRun(db, 'd', 'Дима');
     setOpponents(db, d.runId, [opponentAnswering('Алем', { 0: { answer: first, atMs: 2000 } }), emptyOpponent('Max')]);
-    expect(((await (await answer(db, d, countryNameRu(first), 2001)).json()) as Json).status).toBe('occupied');
+    expect(((await (await answer(db, d, memberNameRu(planForDate(today)[0], first), 2001)).json()) as Json).status).toBe('occupied');
   });
 });
 

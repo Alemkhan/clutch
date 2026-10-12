@@ -10,7 +10,7 @@ import {
 } from '@clutch/shared';
 import type { RunRow } from './types';
 
-export const categories = new Set(['geography', 'history', 'languages']);
+export const categories = new Set(['general', 'geography', 'history', 'languages']);
 
 export const REMATCH_INVITE_ID = /^rm_[A-Za-z0-9_-]{22}$/;
 

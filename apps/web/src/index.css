@@ -1,7 +1,9 @@
 :root {
   --error: #ee3a30;
-  --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display:
+    "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --bg: #f3f0e8;
   --surface: #fffefa;
   --surface-2: #e9e5dc;
@@ -20,7 +22,10 @@
   --btn-h: 56px;
   --btn-h-sm: 48px;
   --nav-h: 64px;
-  --safe-bottom: var(--tg-viewport-content-safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
+  --safe-bottom: var(
+    --tg-viewport-content-safe-area-inset-bottom,
+    env(safe-area-inset-bottom, 0px)
+  );
   --shadow: 0 18px 45px rgba(36, 31, 22, 0.09);
   --shadow-sm: 0 6px 18px rgba(36, 31, 22, 0.06);
 }
@@ -51,7 +56,10 @@ body {
   background: #dedbd4;
 }
 
-h1, h2, h3, .display {
+h1,
+h2,
+h3,
+.display {
   font-family: var(--font-display);
 }
 
@@ -59,11 +67,34 @@ main {
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
-  padding:
-    calc(14px + var(--tg-viewport-content-safe-area-inset-top, env(safe-area-inset-top, 0px)))
-    calc(14px + var(--tg-viewport-content-safe-area-inset-right, env(safe-area-inset-right, 0px)))
-    calc(14px + var(--tg-viewport-content-safe-area-inset-bottom, env(safe-area-inset-bottom, 0px)))
-    calc(14px + var(--tg-viewport-content-safe-area-inset-left, env(safe-area-inset-left, 0px)));
+  padding: calc(
+      14px +
+        var(
+          --tg-viewport-content-safe-area-inset-top,
+          env(safe-area-inset-top, 0px)
+        )
+    )
+    calc(
+      14px +
+        var(
+          --tg-viewport-content-safe-area-inset-right,
+          env(safe-area-inset-right, 0px)
+        )
+    )
+    calc(
+      14px +
+        var(
+          --tg-viewport-content-safe-area-inset-bottom,
+          env(safe-area-inset-bottom, 0px)
+        )
+    )
+    calc(
+      14px +
+        var(
+          --tg-viewport-content-safe-area-inset-left,
+          env(safe-area-inset-left, 0px)
+        )
+    );
   height: var(--tg-viewport-height, 100dvh);
   min-height: 0;
   overflow-x: hidden;
@@ -108,9 +139,27 @@ main::-webkit-scrollbar {
 .bootstrap-status {
   position: fixed;
   z-index: 20;
-  right: max(12px, var(--tg-viewport-content-safe-area-inset-right, env(safe-area-inset-right, 0px)));
-  bottom: max(12px, var(--tg-viewport-content-safe-area-inset-bottom, env(safe-area-inset-bottom, 0px)));
-  left: max(12px, var(--tg-viewport-content-safe-area-inset-left, env(safe-area-inset-left, 0px)));
+  right: max(
+    12px,
+    var(
+      --tg-viewport-content-safe-area-inset-right,
+      env(safe-area-inset-right, 0px)
+    )
+  );
+  bottom: max(
+    12px,
+    var(
+      --tg-viewport-content-safe-area-inset-bottom,
+      env(safe-area-inset-bottom, 0px)
+    )
+  );
+  left: max(
+    12px,
+    var(
+      --tg-viewport-content-safe-area-inset-left,
+      env(safe-area-inset-left, 0px)
+    )
+  );
   max-width: 456px;
   margin: 0 auto;
   padding: 9px 12px;
@@ -126,14 +175,18 @@ main::-webkit-scrollbar {
 }
 
 @keyframes bootstrap-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 button {
   font-family: inherit;
   cursor: pointer;
   border: none;
-  transition: transform 0.1s, background 0.2s;
+  transition:
+    transform 0.1s,
+    background 0.2s;
   touch-action: manipulation;
 }
 
@@ -215,7 +268,9 @@ button:active {
   padding: 0 20px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: var(--radius-btn);
-  transition: transform 0.12s ease, background 0.2s ease;
+  transition:
+    transform 0.12s ease,
+    background 0.2s ease;
   box-shadow: 0 12px 28px rgba(240, 74, 62, 0.24);
   font-size: 17px;
   letter-spacing: -0.01em;
@@ -445,7 +500,9 @@ button:active {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* === PROFILE === */
@@ -553,7 +610,9 @@ button:active {
 .timer-ring-fill {
   stroke: var(--primary);
   stroke-linecap: round;
-  transition: stroke-dashoffset 0.1s linear, stroke 0.3s;
+  transition:
+    stroke-dashoffset 0.1s linear,
+    stroke 0.3s;
 }
 
 .timer-ring.danger .timer-ring-fill {
@@ -877,7 +936,7 @@ button:active {
   gap: clamp(12px, 2.2dvh, 20px);
 }
 
-.hammer-game[aria-disabled='true'] {
+.hammer-game[aria-disabled="true"] {
   cursor: default;
 }
 
@@ -966,11 +1025,18 @@ button:active {
   height: 100%;
 }
 
-.hammer-zone-weak { background: rgba(77, 117, 232, 0.17); }
-.hammer-zone-good { background: rgba(73, 177, 128, 0.2); }
-.hammer-zone-great { background: rgba(240, 150, 55, 0.22); }
+.hammer-zone-weak {
+  background: rgba(77, 117, 232, 0.17);
+}
+.hammer-zone-good {
+  background: rgba(73, 177, 128, 0.2);
+}
+.hammer-zone-great {
+  background: rgba(240, 150, 55, 0.22);
+}
 .hammer-zone-perfect {
-  background: rgba(240, 74, 62, 0.22); }
+  background: rgba(240, 74, 62, 0.22);
+}
 
 .marker {
   position: absolute;
@@ -1041,31 +1107,96 @@ button:active {
   align-items: center;
   justify-content: flex-start;
   text-align: center;
-  gap: clamp(12px, 2dvh, 18px);
+  gap: clamp(14px, 2.4dvh, 22px);
   padding-top: clamp(8px, 2dvh, 18px);
-  padding-bottom: calc(8px + var(--tg-viewport-content-safe-area-inset-bottom, env(safe-area-inset-bottom, 0px)));
+  /* Запас снизу сдвигает центр композиции чуть выше геометрического. */
+  padding-bottom: calc(
+    clamp(8px, 5dvh, 48px) +
+      var(
+        --tg-viewport-content-safe-area-inset-bottom,
+        env(safe-area-inset-bottom, 0px)
+      )
+  );
 }
 
-.result-headline { font-size: clamp(26px, 10vw, 48px); max-width: 100%; overflow-wrap: anywhere; font-weight: 900; letter-spacing: -0.03em; }
-.result-headline.win { color: var(--success); }
-.result-headline.loss { color: var(--text-dim); }
-.result-headline.tie { color: var(--perfect); }
-.result-comparison { display: flex; align-items: center; gap: 24px;
+/* Автополя крайних элементов центрируют сцену в свободном месте, а при
+   переполнении схлопываются в 0: верх не обрезается, main прокручивается. */
+.result-screen > :first-child {
+  margin-top: auto;
+}
+.result-screen > :last-child {
+  margin-bottom: auto;
+}
+
+.result-headline {
+  font-size: clamp(26px, 10vw, 48px);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+.result-headline.win {
+  color: var(--success);
+}
+.result-headline.loss {
+  color: var(--text-dim);
+}
+.result-headline.tie {
+  color: var(--perfect);
+}
+.result-comparison {
+  display: flex;
+  align-items: center;
+  gap: 24px;
   width: 100%;
   justify-content: center;
   padding: 15px 18px;
   border: 1px solid var(--line);
   border-radius: 19px;
-  background: rgba(255, 254, 250, 0.78); }
-.result-side { display: flex; flex-direction: column; gap: 6px; }
-.result-name { font-size: 14px; color: var(--text-dim); font-weight: 600; }
-.result-progress { font-size: 32px; font-weight: 900; }
-.result-vs { font-size: 16px; color: var(--text-dim); opacity: 0.5; }
-.result-stats { display: flex; gap: 32px; }
-.stat { display: flex; flex-direction: column; gap: 4px; }
-.stat-label { font-size: 13px; color: var(--text-dim); }
-.stat-value { font-size: 20px; font-weight: 800; text-transform: capitalize; }
-.result-insight { color: var(--text-dim); font-size: 15px; font-style: italic; }
+  background: rgba(255, 254, 250, 0.78);
+}
+.result-side {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.result-name {
+  font-size: 14px;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+.result-progress {
+  font-size: 32px;
+  font-weight: 900;
+}
+.result-vs {
+  font-size: 16px;
+  color: var(--text-dim);
+  opacity: 0.5;
+}
+.result-stats {
+  display: flex;
+  gap: 32px;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.stat-label {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.stat-value {
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+.result-insight {
+  color: var(--text-dim);
+  font-size: 15px;
+  font-style: italic;
+}
 
 .result-stats-grid {
   display: grid;
@@ -1092,7 +1223,7 @@ button:active {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 8px;
+  margin-top: clamp(4px, 1dvh, 10px);
 }
 
 .solo-result-summary {
@@ -1145,13 +1276,55 @@ button:active {
   opacity: 0.85;
 }
 
-@keyframes impact-pop { from { transform: scale(0.2) rotate(-14deg); opacity: 0; } 70% { transform: scale(1.12) rotate(4deg); opacity: 1; } to { transform: scale(1) rotate(0); opacity: 1; } }
-@keyframes log-shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-5px) rotate(-0.8deg); } 40% { transform: translateX(4px) rotate(0.6deg); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+@keyframes impact-pop {
+  from {
+    transform: scale(0.2) rotate(-14deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.12) rotate(4deg);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+@keyframes log-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px) rotate(-0.8deg);
+  }
+  40% {
+    transform: translateX(4px) rotate(0.6deg);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
 
 @media (max-width: 380px) {
   main {
-    padding-right: calc(10px + var(--tg-viewport-content-safe-area-inset-right, env(safe-area-inset-right, 0px)));
-    padding-left: calc(10px + var(--tg-viewport-content-safe-area-inset-left, env(safe-area-inset-left, 0px)));
+    padding-right: calc(
+      10px +
+        var(
+          --tg-viewport-content-safe-area-inset-right,
+          env(safe-area-inset-right, 0px)
+        )
+    );
+    padding-left: calc(
+      10px +
+        var(
+          --tg-viewport-content-safe-area-inset-left,
+          env(safe-area-inset-left, 0px)
+        )
+    );
   }
 
   .category-icon {
@@ -1165,8 +1338,20 @@ button:active {
 
 @media (max-height: 720px) {
   main {
-    padding-top: calc(8px + var(--tg-viewport-content-safe-area-inset-top, env(safe-area-inset-top, 0px)));
-    padding-bottom: calc(8px + var(--tg-viewport-content-safe-area-inset-bottom, env(safe-area-inset-bottom, 0px)));
+    padding-top: calc(
+      8px +
+        var(
+          --tg-viewport-content-safe-area-inset-top,
+          env(safe-area-inset-top, 0px)
+        )
+    );
+    padding-bottom: calc(
+      8px +
+        var(
+          --tg-viewport-content-safe-area-inset-bottom,
+          env(safe-area-inset-bottom, 0px)
+        )
+    );
   }
 
   .question-screen {
@@ -1179,7 +1364,6 @@ button:active {
   .stump-scene {
     height: 220px;
   }
-
 }
 
 @media (orientation: landscape) and (max-height: 520px) {
@@ -1193,8 +1377,13 @@ button:active {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .strike-burst { animation: none; }
-  .stump-scene.shake { transition: none; animation: none; }
+  .strike-burst {
+    animation: none;
+  }
+  .stump-scene.shake {
+    transition: none;
+    animation: none;
+  }
   /* .hammer-tool and .nail-slot img are animated by Framer Motion, which respects
      reduced motion via useReducedMotion() in HammerGame.tsx, not CSS. */
 }
@@ -1208,8 +1397,16 @@ main.app-shell {
   isolation: isolate;
   gap: 10px;
   background:
-    radial-gradient(circle at 105% 8%, rgba(240, 74, 62, 0.12), transparent 27%),
-    radial-gradient(circle at -10% 92%, rgba(77, 117, 232, 0.08), transparent 25%),
+    radial-gradient(
+      circle at 105% 8%,
+      rgba(240, 74, 62, 0.12),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at -10% 92%,
+      rgba(77, 117, 232, 0.08),
+      transparent 25%
+    ),
     var(--bg);
 }
 
@@ -1220,8 +1417,11 @@ main.app-shell::before {
   max-width: 480px;
   margin: 0 auto;
   pointer-events: none;
-  content: '';
-  background-image: radial-gradient(rgba(23, 23, 22, 0.06) 0.65px, transparent 0.65px);
+  content: "";
+  background-image: radial-gradient(
+    rgba(23, 23, 22, 0.06) 0.65px,
+    transparent 0.65px
+  );
   background-size: 7px 7px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22), transparent 42%);
 }
@@ -1303,7 +1503,7 @@ input:focus-visible {
 .home-hero-card::before,
 .home-hero-card::after {
   position: absolute;
-  content: '';
+  content: "";
   border-radius: 50%;
   pointer-events: none;
 }
@@ -1377,7 +1577,7 @@ input:focus-visible {
 
 /* Стрелка в зазоре сетки: три значка должны читаться как последовательность, а не как список. */
 .home-loop-step:not(:last-child)::after {
-  content: '→';
+  content: "→";
   position: absolute;
   top: 11px;
   right: -7px;
@@ -1533,12 +1733,12 @@ input:focus-visible {
 
 /* Expands the tap area to 44px without growing the HUD. */
 .sound-toggle-hud::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: -8px;
 }
 
-.sound-toggle-hud[aria-pressed='false'] {
+.sound-toggle-hud[aria-pressed="false"] {
   color: var(--text-dim);
   background: var(--surface-2);
 }
@@ -1561,7 +1761,7 @@ input:focus-visible {
   touch-action: manipulation;
 }
 
-.sound-toggle-row[aria-pressed='false'] .sound-toggle-state {
+.sound-toggle-row[aria-pressed="false"] .sound-toggle-state {
   color: var(--text-dim);
 }
 
@@ -1675,7 +1875,7 @@ input:focus-visible {
 
 .matchmaking-status {
   max-width: 310px;
-  margin: 20px auto 0;
+  margin: auto auto 0;
   color: var(--text-dim);
   font-size: 13px;
   line-height: 1.45;
@@ -1724,7 +1924,10 @@ input:focus-visible {
 }
 
 @keyframes loading-pulse {
-  to { opacity: 0.25; transform: scale(0.7); }
+  to {
+    opacity: 0.25;
+    transform: scale(0.7);
+  }
 }
 
 /* Question */
@@ -1799,7 +2002,11 @@ input:focus-visible {
 
 .phase-hammer {
   background:
-    radial-gradient(circle at 50% 38%, rgba(240, 74, 62, 0.12), transparent 28%),
+    radial-gradient(
+      circle at 50% 38%,
+      rgba(240, 74, 62, 0.12),
+      transparent 28%
+    ),
     var(--bg);
 }
 
@@ -1807,7 +2014,7 @@ input:focus-visible {
   display: block;
   margin-bottom: 5px;
   color: var(--primary);
-  content: 'ТОЧНОСТЬ';
+  content: "ТОЧНОСТЬ";
   font-family: var(--font-body);
   font-size: 10px;
   font-weight: 900;
@@ -1943,10 +2150,25 @@ input:focus-visible {
   text-align: left;
   overflow-wrap: anywhere;
 }
-.hammer-intro-title { margin: 0 0 10px; font-size: 20px; }
-.hammer-intro-list { margin: 0 0 12px; padding-left: 20px; font-size: 16px; line-height: 1.45; }
-.hammer-intro-list li + li { margin-top: 6px; }
-.hammer-intro-note { margin: 0 0 14px; font-size: 14px; font-weight: 600; color: var(--text-dim); }
+.hammer-intro-title {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+.hammer-intro-list {
+  margin: 0 0 12px;
+  padding-left: 20px;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.hammer-intro-list li + li {
+  margin-top: 6px;
+}
+.hammer-intro-note {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
 .hammer-intro-btn {
   width: 100%;
   min-height: 48px;
@@ -1976,7 +2198,9 @@ input:focus-visible {
   font: inherit;
   text-align: left;
   cursor: pointer;
-  transition: transform 0.12s ease, background 0.2s ease;
+  transition:
+    transform 0.12s ease,
+    background 0.2s ease;
 }
 
 .training-entry-title {
@@ -2304,7 +2528,7 @@ input:focus-visible {
   height: 128px;
   border: 28px solid rgba(77, 117, 232, 0.1);
   border-radius: 50%;
-  content: '';
+  content: "";
   pointer-events: none;
 }
 
@@ -2371,7 +2595,9 @@ input:focus-visible {
   color: #fff;
   font: inherit;
   font-size: 16px;
-  transition: transform 0.12s ease, background 0.2s ease;
+  transition:
+    transform 0.12s ease,
+    background 0.2s ease;
   font-weight: 800;
   cursor: pointer;
 }
@@ -2392,7 +2618,22 @@ input:focus-visible {
   width: 100%;
   max-width: 480px;
   height: calc(var(--nav-h) + var(--safe-bottom));
-  padding: 0 max(6px, var(--tg-viewport-content-safe-area-inset-right, env(safe-area-inset-right, 0px))) var(--safe-bottom) max(6px, var(--tg-viewport-content-safe-area-inset-left, env(safe-area-inset-left, 0px)));
+  padding: 0
+    max(
+      6px,
+      var(
+        --tg-viewport-content-safe-area-inset-right,
+        env(safe-area-inset-right, 0px)
+      )
+    )
+    var(--safe-bottom)
+    max(
+      6px,
+      var(
+        --tg-viewport-content-safe-area-inset-left,
+        env(safe-area-inset-left, 0px)
+      )
+    );
   border-top: 1px solid var(--line);
   background: rgba(255, 254, 250, 0.96);
   box-shadow: 0 -6px 20px rgba(36, 31, 22, 0.05);
@@ -2414,7 +2655,9 @@ input:focus-visible {
   font-size: 11px;
   font-weight: 700;
   line-height: 1.1;
-  transition: color 0.2s ease, transform 0.12s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.12s ease;
 }
 
 .bottom-nav-item > span {
@@ -2449,3 +2692,4 @@ input:focus-visible {
     transform: none;
   }
 }
+

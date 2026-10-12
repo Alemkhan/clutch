@@ -1,0 +1,419 @@
+[
+  {
+    "id": "au-food-1tq921o",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Easy",
+    "promptRu": "Из какого зерна делают попкорн?",
+    "answerRu": "кукуруза",
+    "acceptedRu": [
+      "кукуруза",
+      "из кукурузы",
+      "кукурузы"
+    ],
+    "distractorsRu": [
+      "рис",
+      "пшеница",
+      "овёс"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Попкорн",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-f6qks7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Easy",
+    "promptRu": "Какой овощ даёт борщу красный цвет?",
+    "answerRu": "свёкла",
+    "acceptedRu": [
+      "свёкла",
+      "свекла"
+    ],
+    "distractorsRu": [
+      "морковь",
+      "капуста",
+      "томат"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Борщ",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-2reoep",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Easy",
+    "promptRu": "Из какой страны пришли суши?",
+    "answerRu": "Япония",
+    "acceptedRu": [
+      "Япония"
+    ],
+    "distractorsRu": [
+      "Китай",
+      "Корея",
+      "Таиланд"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Суси",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-cj502v",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Easy",
+    "promptRu": "Какой фрукт сушат, чтобы получился изюм?",
+    "answerRu": "виноград",
+    "acceptedRu": [
+      "виноград"
+    ],
+    "distractorsRu": [
+      "слива",
+      "абрикос",
+      "инжир"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Изюм",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-kkykdg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Medium",
+    "promptRu": "Какой орех используют в пасте «Нутелла»?",
+    "answerRu": "фундук",
+    "acceptedRu": [
+      "фундук",
+      "лесной орех",
+      "лещина"
+    ],
+    "distractorsRu": [
+      "миндаль",
+      "арахис",
+      "грецкий орех"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Nutella",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-j2re51",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Medium",
+    "promptRu": "Из каких бобов делают шоколад?",
+    "answerRu": "какао-бобы",
+    "acceptedRu": [
+      "какао-бобы",
+      "какао",
+      "какао бобы"
+    ],
+    "distractorsRu": [
+      "кофейные зёрна",
+      "соевые бобы",
+      "стручки ванили"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Какао-бобы",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-79gxrz",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Medium",
+    "promptRu": "Как называется национальное казахское блюдо из варёного мяса и тонкого теста?",
+    "answerRu": "бешбармак",
+    "acceptedRu": [
+      "бешбармак",
+      "бесбармак",
+      "ет"
+    ],
+    "distractorsRu": [
+      "плов",
+      "манты",
+      "лагман"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Бешбармак",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-txx89z",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Medium",
+    "promptRu": "Из какой страны родом паэлья?",
+    "answerRu": "Испания",
+    "acceptedRu": [
+      "Испания"
+    ],
+    "distractorsRu": [
+      "Италия",
+      "Мексика",
+      "Португалия"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Паэлья",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-19h4ita",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Medium",
+    "promptRu": "Какой сыр кладут в классический греческий салат?",
+    "answerRu": "фета",
+    "acceptedRu": [
+      "фета"
+    ],
+    "distractorsRu": [
+      "моцарелла",
+      "пармезан",
+      "рикотта"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Греческий салат",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-7mjo60",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Medium",
+    "promptRu": "Чем в природе является трюфель?",
+    "answerRu": "гриб",
+    "acceptedRu": [
+      "гриб"
+    ],
+    "distractorsRu": [
+      "орех",
+      "корень",
+      "ягода"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Трюфель",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-1pzae2n",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Hard",
+    "promptRu": "Как называется японский алкогольный напиток из риса?",
+    "answerRu": "сакэ",
+    "acceptedRu": [
+      "сакэ",
+      "саке"
+    ],
+    "distractorsRu": [
+      "соджу",
+      "мескаль",
+      "байцзю"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Сакэ",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-18am6ao",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Hard",
+    "promptRu": "Как называется острая корейская квашеная капуста с перцем?",
+    "answerRu": "кимчи",
+    "acceptedRu": [
+      "кимчи",
+      "чимчи"
+    ],
+    "distractorsRu": [
+      "тофу",
+      "мисо",
+      "пибимпап"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Кимчхи",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-ason2w",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Hard",
+    "promptRu": "Какая специя придаёт карри жёлтый цвет?",
+    "answerRu": "куркума",
+    "acceptedRu": [
+      "куркума"
+    ],
+    "distractorsRu": [
+      "шафран",
+      "паприка",
+      "имбирь"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Куркума",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-2w6h9o",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Hard",
+    "promptRu": "Какой напиток делают из листьев камелии китайской?",
+    "answerRu": "чай",
+    "acceptedRu": [
+      "чай"
+    ],
+    "distractorsRu": [
+      "кофе",
+      "мате",
+      "каркаде"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Чай",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-ajvtbo",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Hard",
+    "promptRu": "Как называется испанский холодный томатный суп?",
+    "answerRu": "гаспачо",
+    "acceptedRu": [
+      "гаспачо"
+    ],
+    "distractorsRu": [
+      "минестроне",
+      "том ям",
+      "борщ"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Гаспачо",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-t1wadx",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Expert",
+    "promptRu": "Сколько примерно килокалорий в одном грамме жира?",
+    "answerRu": "9",
+    "acceptedRu": [
+      "9",
+      "девять"
+    ],
+    "distractorsRu": [
+      "4",
+      "7",
+      "2"
+    ],
+    "openAnswer": true,
+    "explanationRu": "В грамме белка и углеводов — около 4 ккал.",
+    "sourceHint": "Википедия: Пищевая ценность",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-8hs1qj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Expert",
+    "promptRu": "Из какой муки делают японскую лапшу соба?",
+    "answerRu": "гречневая",
+    "acceptedRu": [
+      "гречневая",
+      "из гречневой муки",
+      "гречка"
+    ],
+    "distractorsRu": [
+      "рисовая",
+      "кукурузная",
+      "ржаная"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Соба",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-food-ohi316",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Expert",
+    "promptRu": "Какая страна производит больше всех кофе?",
+    "answerRu": "Бразилия",
+    "acceptedRu": [
+      "Бразилия"
+    ],
+    "distractorsRu": [
+      "Колумбия",
+      "Эфиопия",
+      "Вьетнам"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Кофе",
+    "reviewNote": "Рейтинг по годам: проверить по свежей статистике FAO или ICO.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "q-food-r0luh0",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Easy",
+    "promptRu": "Как называется японское блюдо из жареного угря, часто подаваемое с рисом в суши-ресторанах?",
+    "answerRu": "унаги",
+    "acceptedRu": [
+      "унаги",
+      "Унаги"
+    ],
+    "distractorsRu": [
+      "сашими",
+      "темпура",
+      "васаби"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Унаги — японское слово для обозначения пресноводного угря.",
+    "sourceTitle": "Hammer Challenge",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

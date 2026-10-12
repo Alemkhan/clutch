@@ -11,6 +11,7 @@ export interface RunStatus {
 }
 
 const CATEGORY_NAMES: Record<MyRunSummary['category'], string> = {
+  general: 'Общие знания',
   geography: 'География',
   history: 'Другие флаги',
   languages: 'Языки',

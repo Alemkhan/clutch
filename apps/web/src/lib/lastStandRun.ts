@@ -7,7 +7,7 @@ import { LAST_STAND_MAX_ROUNDS } from '@clutch/shared';
 
 export type LastStandScaleName = 'wide' | 'regional' | 'narrow';
 export type LastStandAnswerStatus = 'accepted' | 'occupied' | 'invalid' | 'eliminated' | 'cleared';
-export type LastStandEliminationReason = 'timeout' | 'exhausted';
+export type LastStandEliminationReason = 'timeout' | 'exhausted' | 'mined';
 
 export interface LastStandRoundInfo {
   index: number;
@@ -44,6 +44,8 @@ export interface LastStandRevealEntry {
 export interface LastStandAnswerResponse {
   status: LastStandAnswerStatus;
   reason: LastStandEliminationReason | null;
+  /** Name of the system's pre-set answer; sent only with reason 'mined'. */
+  mineRu?: string | null;
   deadlineMs: number;
   reveal: LastStandRevealEntry[] | null;
   survived: number;
@@ -99,12 +101,14 @@ export function parseStartResponse(value: unknown): LastStandStartResponse {
 
 export function parseAnswerResponse(value: unknown): LastStandAnswerResponse {
   if (!isRecord(value)) return fail('answer');
-  const { status, reason, deadlineMs, reveal, survived, round } = value;
+  const { status, reason, deadlineMs, reveal, survived, round, mineRu } = value;
   if (
     status !== 'accepted' && status !== 'occupied' && status !== 'invalid'
     && status !== 'eliminated' && status !== 'cleared'
   ) return fail('status');
-  if (reason !== null && reason !== undefined && reason !== 'timeout' && reason !== 'exhausted') return fail('reason');
+  if (reason !== null && reason !== undefined && reason !== 'timeout' && reason !== 'exhausted'
+    && reason !== 'mined') return fail('reason');
+  if (mineRu !== null && mineRu !== undefined && typeof mineRu !== 'string') return fail('mineRu');
   if (typeof deadlineMs !== 'number' || !Number.isFinite(deadlineMs)) return fail('deadlineMs');
   if (typeof survived !== 'number' || !Number.isInteger(survived) || survived < 0) return fail('survived');
 
@@ -132,6 +136,7 @@ export function parseAnswerResponse(value: unknown): LastStandAnswerResponse {
   return {
     status,
     reason: (reason ?? null) as LastStandEliminationReason | null,
+    mineRu: typeof mineRu === 'string' && mineRu.trim() !== '' ? mineRu : null,
     deadlineMs,
     reveal: parsedReveal,
     survived,
@@ -187,6 +192,8 @@ export interface LastStandState {
   pendingRound: LastStandRoundInfo | null;
   outcome: 'eliminated' | 'cleared' | null;
   reason: LastStandEliminationReason | null;
+  /** The system's pre-set answer, named by the server when the player stepped on it. */
+  mineRu: string | null;
   error: string | null;
   /** Last answer sent in the current round; used to show the player's own row in the reveal. */
   lastSent: { answer: string; atMs: number } | null;
@@ -209,6 +216,7 @@ export function createLastStandState(): LastStandState {
     pendingRound: null,
     outcome: null,
     reason: null,
+    mineRu: null,
     error: null,
     lastSent: null,
   };
@@ -277,6 +285,7 @@ export function applyLastStandAnswer(
         pendingRound: response.round,
         outcome: response.status === 'accepted' ? null : response.status,
         reason: response.reason,
+        mineRu: response.reason === 'mined' ? (response.mineRu ?? null) : null,
         lastSent: null,
       };
       if (base.reveal) return { ...base, stage: 'reveal' };
@@ -368,7 +377,8 @@ export function roundLabel(index: number): string {
   return `Круг ${Math.min(index + 1, LAST_STAND_TOTAL_ROUNDS)} из ${LAST_STAND_TOTAL_ROUNDS}`;
 }
 
-export function eliminationText(reason: LastStandEliminationReason | null): string {
+export function eliminationText(reason: LastStandEliminationReason | null, mineRu: string | null = null): string {
+  if (reason === 'mined') return mineRu ? `Ты назвал загаданное: ${mineRu}.` : 'Ты назвал загаданное системой.';
   if (reason === 'timeout') return 'Время вышло, ответа не было.';
   if (reason === 'exhausted') return 'Свободных стран не осталось: все варианты заняли соперники.';
   return 'Ты выбыл.';

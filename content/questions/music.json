@@ -1,0 +1,1216 @@
+[
+  {
+    "id": "au-music-1c4odpj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Easy",
+    "promptRu": "Сколько струн у классической гитары?",
+    "answerRu": "6",
+    "acceptedRu": [
+      "6",
+      "шесть"
+    ],
+    "distractorsRu": [
+      "4",
+      "7",
+      "12"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Классическая гитара",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-11i1ual",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Easy",
+    "promptRu": "Сколько нот в гамме «до-ре-ми-фа-соль-ля-си»?",
+    "answerRu": "7",
+    "acceptedRu": [
+      "7",
+      "семь"
+    ],
+    "distractorsRu": [
+      "5",
+      "8",
+      "12"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Гамма",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-5qsji9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Easy",
+    "promptRu": "Из какой страны группа ABBA?",
+    "answerRu": "Швеция",
+    "acceptedRu": [
+      "Швеция"
+    ],
+    "distractorsRu": [
+      "Норвегия",
+      "Дания",
+      "Финляндия"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: ABBA",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-gwy8y4",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Как звали солиста группы Queen?",
+    "answerRu": "Фредди Меркьюри",
+    "acceptedRu": [
+      "Фредди Меркьюри",
+      "Меркьюри",
+      "Фредди"
+    ],
+    "distractorsRu": [
+      "Брайан Мэй",
+      "Мик Джаггер",
+      "Элтон Джон"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Меркьюри, Фредди",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-10wjm18",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Сколько линий в нотном стане?",
+    "answerRu": "5",
+    "acceptedRu": [
+      "5",
+      "пять"
+    ],
+    "distractorsRu": [
+      "4",
+      "6",
+      "7"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Нотный стан",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-1scw7zr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Какой композитор продолжал писать музыку, полностью потеряв слух?",
+    "answerRu": "Людвиг ван Бетховен",
+    "acceptedRu": [
+      "Людвиг ван Бетховен",
+      "Бетховен"
+    ],
+    "distractorsRu": [
+      "Вольфганг Амадей Моцарт",
+      "Иоганн Себастьян Бах",
+      "Фредерик Шопен"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Бетховен, Людвиг ван",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-nahhl7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Какого певца называют королём рок-н-ролла?",
+    "answerRu": "Элвис Пресли",
+    "acceptedRu": [
+      "Элвис Пресли",
+      "Пресли",
+      "Элвис"
+    ],
+    "distractorsRu": [
+      "Чак Берри",
+      "Литл Ричард",
+      "Джонни Кэш"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Пресли, Элвис",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-16sqjp9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Какой инструмент называют королём музыкальных инструментов?",
+    "answerRu": "орган",
+    "acceptedRu": [
+      "орган"
+    ],
+    "distractorsRu": [
+      "рояль",
+      "скрипка",
+      "арфа"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Орган (музыкальный инструмент)",
+    "reviewNote": "Устойчивое выражение, но некоторые называют так рояль — решить, оставлять ли.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-yxj32r",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Сколько клавиш у стандартного фортепиано?",
+    "answerRu": "88",
+    "acceptedRu": [
+      "88",
+      "восемьдесят восемь"
+    ],
+    "distractorsRu": [
+      "76",
+      "64",
+      "92"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Фортепиано",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-o21a5s",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал оперу «Евгений Онегин»?",
+    "answerRu": "Пётр Чайковский",
+    "acceptedRu": [
+      "Пётр Чайковский",
+      "Петр Чайковский",
+      "Чайковский"
+    ],
+    "distractorsRu": [
+      "Модест Мусоргский",
+      "Михаил Глинка",
+      "Николай Римский-Корсаков"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Евгений Онегин (опера)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-1mt2kcj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал оперу «Руслан и Людмила»?",
+    "answerRu": "Михаил Глинка",
+    "acceptedRu": [
+      "Михаил Глинка",
+      "Глинка"
+    ],
+    "distractorsRu": [
+      "Модест Мусоргский",
+      "Александр Бородин",
+      "Пётр Чайковский"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Руслан и Людмила (опера)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-fsccbu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Как называется самый низкий мужской певческий голос?",
+    "answerRu": "бас",
+    "acceptedRu": [
+      "бас"
+    ],
+    "distractorsRu": [
+      "баритон",
+      "тенор",
+      "альт"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Бас (голос)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-1bf703m",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "На каком инструменте играл Шерлок Холмс?",
+    "answerRu": "скрипка",
+    "acceptedRu": [
+      "скрипка"
+    ],
+    "distractorsRu": [
+      "флейта",
+      "виолончель",
+      "фортепиано"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Шерлок Холмс",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-10derae",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Expert",
+    "promptRu": "Кто написал «Полёт шмеля»?",
+    "answerRu": "Николай Римский-Корсаков",
+    "acceptedRu": [
+      "Николай Римский-Корсаков",
+      "Римский-Корсаков"
+    ],
+    "distractorsRu": [
+      "Сергей Рахманинов",
+      "Модест Мусоргский",
+      "Пётр Чайковский"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Полёт шмеля",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-1jwzpdg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Expert",
+    "promptRu": "Сколько симфоний написал Бетховен?",
+    "answerRu": "9",
+    "acceptedRu": [
+      "9",
+      "девять"
+    ],
+    "distractorsRu": [
+      "5",
+      "7",
+      "12"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Бетховен, Людвиг ван",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-19upfr1",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Expert",
+    "promptRu": "Из какой страны был композитор Фредерик Шопен?",
+    "answerRu": "Польша",
+    "acceptedRu": [
+      "Польша"
+    ],
+    "distractorsRu": [
+      "Франция",
+      "Австрия",
+      "Венгрия"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Шопен родился в Польше и последние годы жил во Франции.",
+    "sourceHint": "Википедия: Шопен, Фредерик",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-music-j2b68b",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Expert",
+    "promptRu": "Какая группа выпустила альбом «The Dark Side of the Moon»?",
+    "answerRu": "Pink Floyd",
+    "acceptedRu": [
+      "Pink Floyd",
+      "Пинк Флойд"
+    ],
+    "distractorsRu": [
+      "Led Zeppelin",
+      "The Rolling Stones",
+      "The Doors"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: The Dark Side of the Moon",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "wd-music-Q185968",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Easy",
+    "promptRu": "Кто композитор произведения «Кармен»?",
+    "answerRu": "Жорж Бизе",
+    "acceptedRu": [
+      "Жорж Бизе",
+      "Бизе"
+    ],
+    "distractorsRu": [
+      "Джоаккино Россини",
+      "Вольфганг Амадей Моцарт",
+      "Морис Равель"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Кармен» написал Жорж Бизе.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q185968",
+    "sourceTitle": "Wikidata: Кармен",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q5064",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Easy",
+    "promptRu": "Кто композитор произведения «Волшебная флейта»?",
+    "answerRu": "Вольфганг Амадей Моцарт",
+    "acceptedRu": [
+      "Вольфганг Амадей Моцарт",
+      "Моцарт"
+    ],
+    "distractorsRu": [
+      "Пётр Ильич Чайковский",
+      "Джузеппе Верди",
+      "Иоганн Себастьян Бах"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Волшебная флейта» написал Вольфганг Амадей Моцарт.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q5064",
+    "sourceTitle": "Wikidata: Волшебная флейта",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q199786",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Easy",
+    "promptRu": "Кто композитор произведения «Лебединое озеро»?",
+    "answerRu": "Пётр Ильич Чайковский",
+    "acceptedRu": [
+      "Пётр Ильич Чайковский",
+      "Чайковский"
+    ],
+    "distractorsRu": [
+      "Карл Орф",
+      "Джоаккино Россини",
+      "Иоганн Себастьян Бах"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Лебединое озеро» написал Пётр Ильич Чайковский.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q199786",
+    "sourceTitle": "Wikidata: Лебединое озеро",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q186162",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Easy",
+    "promptRu": "Кто композитор произведения «Травиата»?",
+    "answerRu": "Джузеппе Верди",
+    "acceptedRu": [
+      "Джузеппе Верди",
+      "Верди"
+    ],
+    "distractorsRu": [
+      "Рихард Вагнер",
+      "Иоганн Себастьян Бах",
+      "Игорь Стравинский"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Травиата» написал Джузеппе Верди.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q186162",
+    "sourceTitle": "Wikidata: Травиата",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q19005",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Easy",
+    "promptRu": "Кто композитор произведения «Мадам Баттерфляй»?",
+    "answerRu": "Джакомо Пуччини",
+    "acceptedRu": [
+      "Джакомо Пуччини",
+      "Пуччини"
+    ],
+    "distractorsRu": [
+      "Джоаккино Россини",
+      "Георг Фридрих Гендель",
+      "Жорж Бизе"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Мадам Баттерфляй» написал Джакомо Пуччини.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q19005",
+    "sourceTitle": "Wikidata: Мадам Баттерфляй",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q171277",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Easy",
+    "promptRu": "Кто композитор произведения «Аида»?",
+    "answerRu": "Джузеппе Верди",
+    "acceptedRu": [
+      "Джузеппе Верди",
+      "Верди"
+    ],
+    "distractorsRu": [
+      "Рихард Вагнер",
+      "Рихард Штраус",
+      "Игорь Стравинский"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Аида» написал Джузеппе Верди.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q171277",
+    "sourceTitle": "Wikidata: Аида",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q201873",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Easy",
+    "promptRu": "Кто композитор произведения «Свадьба Фигаро»?",
+    "answerRu": "Вольфганг Амадей Моцарт",
+    "acceptedRu": [
+      "Вольфганг Амадей Моцарт",
+      "Моцарт"
+    ],
+    "distractorsRu": [
+      "Джузеппе Верди",
+      "Руджеро Леонкавалло",
+      "Иоганн Штраус"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Свадьба Фигаро» написал Вольфганг Амадей Моцарт.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q201873",
+    "sourceTitle": "Wikidata: Свадьба Фигаро",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q192039",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Easy",
+    "promptRu": "Кто композитор произведения «Дон Жуан»?",
+    "answerRu": "Вольфганг Амадей Моцарт",
+    "acceptedRu": [
+      "Вольфганг Амадей Моцарт",
+      "Моцарт"
+    ],
+    "distractorsRu": [
+      "Морис Равель",
+      "Пётр Ильич Чайковский",
+      "Джакомо Пуччини"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Дон Жуан» написал Вольфганг Амадей Моцарт.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q192039",
+    "sourceTitle": "Wikidata: Дон Жуан",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q192941",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Easy",
+    "promptRu": "Кто композитор произведения «Тоска»?",
+    "answerRu": "Джакомо Пуччини",
+    "acceptedRu": [
+      "Джакомо Пуччини",
+      "Пуччини"
+    ],
+    "distractorsRu": [
+      "Иоганн Себастьян Бах",
+      "Морис Равель",
+      "Людвиг ван Бетховен"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Тоска» написал Джакомо Пуччини.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q192941",
+    "sourceTitle": "Wikidata: Тоска",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q189234",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Кто композитор произведения «Риголетто»?",
+    "answerRu": "Джузеппе Верди",
+    "acceptedRu": [
+      "Джузеппе Верди",
+      "Верди"
+    ],
+    "distractorsRu": [
+      "Рихард Штраус",
+      "Рихард Вагнер",
+      "Джакомо Пуччини"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Риголетто» написал Джузеппе Верди.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q189234",
+    "sourceTitle": "Wikidata: Риголетто",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q190237",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Кто композитор произведения «Кольцо нибелунга»?",
+    "answerRu": "Рихард Вагнер",
+    "acceptedRu": [
+      "Рихард Вагнер",
+      "Вагнер"
+    ],
+    "distractorsRu": [
+      "Рихард Штраус",
+      "Пётр Ильич Чайковский",
+      "Георг Фридрих Гендель"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Кольцо нибелунга» написал Рихард Вагнер.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q190237",
+    "sourceTitle": "Wikidata: Кольцо нибелунга",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q11980",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Кто композитор произведения «К Элизе»?",
+    "answerRu": "Людвиг ван Бетховен",
+    "acceptedRu": [
+      "Людвиг ван Бетховен",
+      "ван Бетховен"
+    ],
+    "distractorsRu": [
+      "Вольфганг Амадей Моцарт",
+      "Руджеро Леонкавалло",
+      "Жорж Бизе"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«К Элизе» написал Людвиг ван Бетховен.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q11980",
+    "sourceTitle": "Wikidata: К Элизе",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q193705",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Кто композитор произведения «Щелкунчик»?",
+    "answerRu": "Пётр Ильич Чайковский",
+    "acceptedRu": [
+      "Пётр Ильич Чайковский",
+      "Чайковский"
+    ],
+    "distractorsRu": [
+      "Иоганн Себастьян Бах",
+      "Морис Равель",
+      "Жорж Бизе"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Щелкунчик» написал Пётр Ильич Чайковский.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q193705",
+    "sourceTitle": "Wikidata: Щелкунчик",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q207990",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Кто композитор произведения «Турандот»?",
+    "answerRu": "Джакомо Пуччини",
+    "acceptedRu": [
+      "Джакомо Пуччини",
+      "Пуччини"
+    ],
+    "distractorsRu": [
+      "Джузеппе Верди",
+      "Морис Равель",
+      "Пётр Ильич Чайковский"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Турандот» написал Джакомо Пуччини.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q207990",
+    "sourceTitle": "Wikidata: Турандот",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q1324254",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Кто композитор произведения «Тристан и Изольда»?",
+    "answerRu": "Рихард Вагнер",
+    "acceptedRu": [
+      "Рихард Вагнер",
+      "Вагнер"
+    ],
+    "distractorsRu": [
+      "Морис Равель",
+      "Руджеро Леонкавалло",
+      "Эдвард Григ"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Тристан и Изольда» написал Рихард Вагнер.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1324254",
+    "sourceTitle": "Wikidata: Тристан и Изольда",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q208659",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Кто композитор произведения «Севильский цирюльник»?",
+    "answerRu": "Джоаккино Россини",
+    "acceptedRu": [
+      "Джоаккино Россини",
+      "Россини"
+    ],
+    "distractorsRu": [
+      "Морис Равель",
+      "Иоганн Штраус",
+      "Джузеппе Верди"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Севильский цирюльник» написал Джоаккино Россини.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q208659",
+    "sourceTitle": "Wikidata: Севильский цирюльник",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q221806",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Кто композитор произведения «Сельская честь»?",
+    "answerRu": "Пьетро Масканьи",
+    "acceptedRu": [
+      "Пьетро Масканьи",
+      "Масканьи"
+    ],
+    "distractorsRu": [
+      "Руджеро Леонкавалло",
+      "Иоганн Себастьян Бах",
+      "Георг Фридрих Гендель"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Сельская честь» написал Пьетро Масканьи.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q221806",
+    "sourceTitle": "Wikidata: Сельская честь",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q193778",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Кто композитор произведения «Фиделио»?",
+    "answerRu": "Людвиг ван Бетховен",
+    "acceptedRu": [
+      "Людвиг ван Бетховен",
+      "ван Бетховен"
+    ],
+    "distractorsRu": [
+      "Джоаккино Россини",
+      "Жорж Бизе",
+      "Игорь Стравинский"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Фиделио» написал Людвиг ван Бетховен.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q193778",
+    "sourceTitle": "Wikidata: Фиделио",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q253716",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Кто композитор произведения «Carmina Burana»?",
+    "answerRu": "Карл Орф",
+    "acceptedRu": [
+      "Карл Орф",
+      "Орф"
+    ],
+    "distractorsRu": [
+      "Джакомо Пуччини",
+      "Людвиг ван Бетховен",
+      "Иоганн Себастьян Бах"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Carmina Burana» написал Карл Орф.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q253716",
+    "sourceTitle": "Wikidata: Carmina Burana",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q208094",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Кто композитор произведения «Пер Гюнт»?",
+    "answerRu": "Эдвард Григ",
+    "acceptedRu": [
+      "Эдвард Григ",
+      "Григ"
+    ],
+    "distractorsRu": [
+      "Вольфганг Амадей Моцарт",
+      "Морис Равель",
+      "Иоганн Штраус"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Пер Гюнт» написал Эдвард Григ.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q208094",
+    "sourceTitle": "Wikidata: Пер Гюнт",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q248644",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Кто композитор произведения «Паяцы»?",
+    "answerRu": "Руджеро Леонкавалло",
+    "acceptedRu": [
+      "Руджеро Леонкавалло",
+      "Леонкавалло"
+    ],
+    "distractorsRu": [
+      "Людвиг ван Бетховен",
+      "Игорь Стравинский",
+      "Георг Фридрих Гендель"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Паяцы» написал Руджеро Леонкавалло.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q248644",
+    "sourceTitle": "Wikidata: Паяцы",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q206015",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Кто композитор произведения «Весна священная»?",
+    "answerRu": "Игорь Стравинский",
+    "acceptedRu": [
+      "Игорь Стравинский",
+      "Стравинский"
+    ],
+    "distractorsRu": [
+      "Жорж Бизе",
+      "Джузеппе Верди",
+      "Людвиг ван Бетховен"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Весна священная» написал Игорь Стравинский.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q206015",
+    "sourceTitle": "Wikidata: Весна священная",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q207732",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Кто композитор произведения «Мессия»?",
+    "answerRu": "Георг Фридрих Гендель",
+    "acceptedRu": [
+      "Георг Фридрих Гендель",
+      "Гендель"
+    ],
+    "distractorsRu": [
+      "Джузеппе Верди",
+      "Игорь Стравинский",
+      "Иоганн Штраус"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Мессия» написал Георг Фридрих Гендель.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q207732",
+    "sourceTitle": "Wikidata: Мессия",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q211971",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Кто композитор произведения «Хорошо темперированный клавир»?",
+    "answerRu": "Иоганн Себастьян Бах",
+    "acceptedRu": [
+      "Иоганн Себастьян Бах",
+      "Бах"
+    ],
+    "distractorsRu": [
+      "Пьетро Масканьи",
+      "Джоаккино Россини",
+      "Игорь Стравинский"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Хорошо темперированный клавир» написал Иоганн Себастьян Бах.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q211971",
+    "sourceTitle": "Wikidata: Хорошо темперированный клавир",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q220340",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Кто композитор произведения «Парсифаль»?",
+    "answerRu": "Рихард Вагнер",
+    "acceptedRu": [
+      "Рихард Вагнер",
+      "Вагнер"
+    ],
+    "distractorsRu": [
+      "Джузеппе Верди",
+      "Вольфганг Амадей Моцарт",
+      "Руджеро Леонкавалло"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Парсифаль» написал Рихард Вагнер.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q220340",
+    "sourceTitle": "Wikidata: Парсифаль",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q212776",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Кто композитор произведения «1812 год»?",
+    "answerRu": "Пётр Ильич Чайковский",
+    "acceptedRu": [
+      "Пётр Ильич Чайковский",
+      "Чайковский"
+    ],
+    "distractorsRu": [
+      "Морис Равель",
+      "Иоганн Себастьян Бах",
+      "Игорь Стравинский"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«1812 год» написал Пётр Ильич Чайковский.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q212776",
+    "sourceTitle": "Wikidata: 1812 год",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q482621",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Hard",
+    "promptRu": "Кто композитор произведения «На прекрасном голубом Дунае»?",
+    "answerRu": "Иоганн Штраус",
+    "acceptedRu": [
+      "Иоганн Штраус",
+      "Штраус"
+    ],
+    "distractorsRu": [
+      "Иоганн Себастьян Бах",
+      "Джоаккино Россини",
+      "Рихард Штраус"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«На прекрасном голубом Дунае» написал Иоганн Штраус.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q482621",
+    "sourceTitle": "Wikidata: На прекрасном голубом Дунае",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q327331",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Expert",
+    "promptRu": "Кто композитор произведения «Болеро»?",
+    "answerRu": "Морис Равель",
+    "acceptedRu": [
+      "Морис Равель",
+      "Равель"
+    ],
+    "distractorsRu": [
+      "Вольфганг Амадей Моцарт",
+      "Георг Фридрих Гендель",
+      "Джакомо Пуччини"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Болеро» написал Морис Равель.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q327331",
+    "sourceTitle": "Wikidata: Болеро",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q12008",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Expert",
+    "promptRu": "Кто композитор произведения «Соната для фортепиано № 14»?",
+    "answerRu": "Людвиг ван Бетховен",
+    "acceptedRu": [
+      "Людвиг ван Бетховен",
+      "ван Бетховен"
+    ],
+    "distractorsRu": [
+      "Морис Равель",
+      "Джакомо Пуччини",
+      "Рихард Штраус"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Соната для фортепиано № 14» написал Людвиг ван Бетховен.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q12008",
+    "sourceTitle": "Wikidata: Соната для фортепиано № 14",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q213728",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Expert",
+    "promptRu": "Кто композитор произведения «Вариации Гольдберга»?",
+    "answerRu": "Иоганн Себастьян Бах",
+    "acceptedRu": [
+      "Иоганн Себастьян Бах",
+      "Бах"
+    ],
+    "distractorsRu": [
+      "Игорь Стравинский",
+      "Карл Орф",
+      "Морис Равель"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Вариации Гольдберга» написал Иоганн Себастьян Бах.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q213728",
+    "sourceTitle": "Wikidata: Вариации Гольдберга",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q208224",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Expert",
+    "promptRu": "Кто композитор произведения «Бранденбургские концерты»?",
+    "answerRu": "Иоганн Себастьян Бах",
+    "acceptedRu": [
+      "Иоганн Себастьян Бах",
+      "Бах"
+    ],
+    "distractorsRu": [
+      "Рихард Штраус",
+      "Пётр Ильич Чайковский",
+      "Эдвард Григ"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Бранденбургские концерты» написал Иоганн Себастьян Бах.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q208224",
+    "sourceTitle": "Wikidata: Бранденбургские концерты",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q723407",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Expert",
+    "promptRu": "Кто композитор произведения «Саломея»?",
+    "answerRu": "Рихард Штраус",
+    "acceptedRu": [
+      "Рихард Штраус",
+      "Штраус"
+    ],
+    "distractorsRu": [
+      "Джузеппе Верди",
+      "Жорж Бизе",
+      "Людвиг ван Бетховен"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Саломея» написал Рихард Штраус.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q723407",
+    "sourceTitle": "Wikidata: Саломея",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q464930",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Expert",
+    "promptRu": "Кто композитор произведения «Летучая мышь»?",
+    "answerRu": "Иоганн Штраус",
+    "acceptedRu": [
+      "Иоганн Штраус",
+      "Штраус"
+    ],
+    "distractorsRu": [
+      "Джакомо Пуччини",
+      "Жорж Бизе",
+      "Морис Равель"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Летучая мышь» написал Иоганн Штраус.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q464930",
+    "sourceTitle": "Wikidata: Летучая мышь",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q12001",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Expert",
+    "promptRu": "Кто композитор произведения «Марш Радецкого»?",
+    "answerRu": "Иоганн Штраус",
+    "acceptedRu": [
+      "Иоганн Штраус",
+      "Штраус"
+    ],
+    "distractorsRu": [
+      "Рихард Вагнер",
+      "Морис Равель",
+      "Пьетро Масканьи"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Марш Радецкого» написал Иоганн Штраус.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q12001",
+    "sourceTitle": "Wikidata: Марш Радецкого",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-music-Q471240",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Expert",
+    "promptRu": "Кто композитор произведения «Кавалер розы»?",
+    "answerRu": "Рихард Штраус",
+    "acceptedRu": [
+      "Рихард Штраус",
+      "Штраус"
+    ],
+    "distractorsRu": [
+      "Джакомо Пуччини",
+      "Георг Фридрих Гендель",
+      "Иоганн Себастьян Бах"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Кавалер розы» написал Рихард Штраус.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q471240",
+    "sourceTitle": "Wikidata: Кавалер розы",
+    "origin": "wikidata",
+    "license": "CC0"
+  }
+]

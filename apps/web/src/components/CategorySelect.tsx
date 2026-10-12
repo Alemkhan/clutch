@@ -6,11 +6,10 @@ interface CategorySelectProps {
 }
 
 const CATEGORIES = [
+  { id: 'general', name: 'Общие знания', icon: '💡', available: true, blurb: 'наука, кино, музыка, спорт, история — 16 тем' },
   { id: 'geography', name: 'География', icon: '🌍', available: true, blurb: '195 стран · флаги, столицы, контуры' },
   { id: 'history', name: 'Другие флаги', icon: '🏴', available: true, blurb: '44 флага · империи, города, забытые государства' },
   { id: 'languages', name: 'Языки', icon: '🗣️', available: true, blurb: '37 языков · угадаешь по письму?' },
-  { id: 'sports', name: 'Спорт', icon: '⚽', available: false },
-  { id: 'science', name: 'Наука', icon: '🧪', available: false },
 ];
 
 export function CategorySelect({ onSelect, onBack }: CategorySelectProps) {

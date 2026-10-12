@@ -1,0 +1,442 @@
+[
+  {
+    "id": "au-space-16bjiuv",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Easy",
+    "promptRu": "Какая планета ближе всего к Солнцу?",
+    "answerRu": "Меркурий",
+    "acceptedRu": [
+      "Меркурий"
+    ],
+    "distractorsRu": [
+      "Венера",
+      "Марс",
+      "Земля"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Меркурий",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-1c8m3t9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Easy",
+    "promptRu": "Какая планета самая большая в Солнечной системе?",
+    "answerRu": "Юпитер",
+    "acceptedRu": [
+      "Юпитер"
+    ],
+    "distractorsRu": [
+      "Сатурн",
+      "Нептун",
+      "Уран"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Юпитер",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-rxp3p8",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Easy",
+    "promptRu": "Как называется естественный спутник Земли?",
+    "answerRu": "Луна",
+    "acceptedRu": [
+      "Луна"
+    ],
+    "distractorsRu": [
+      "Фобос",
+      "Европа",
+      "Титан"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Луна",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-zgi3n5",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Easy",
+    "promptRu": "Какая планета знаменита яркими широкими кольцами?",
+    "answerRu": "Сатурн",
+    "acceptedRu": [
+      "Сатурн"
+    ],
+    "distractorsRu": [
+      "Юпитер",
+      "Марс",
+      "Нептун"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Кольца Сатурна",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-rwn0cl",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Medium",
+    "promptRu": "Кто первым вышел в открытый космос?",
+    "answerRu": "Алексей Леонов",
+    "acceptedRu": [
+      "Алексей Леонов",
+      "Леонов"
+    ],
+    "distractorsRu": [
+      "Юрий Гагарин",
+      "Нил Армстронг",
+      "Герман Титов"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Леонов, Алексей Архипович",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-1o2v68c",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Medium",
+    "promptRu": "Кто первым ступил на Луну?",
+    "answerRu": "Нил Армстронг",
+    "acceptedRu": [
+      "Нил Армстронг",
+      "Армстронг"
+    ],
+    "distractorsRu": [
+      "Базз Олдрин",
+      "Юрий Гагарин",
+      "Майкл Коллинз"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Аполлон-11",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-idjvyn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Medium",
+    "promptRu": "Как звали первую женщину-космонавта?",
+    "answerRu": "Валентина Терешкова",
+    "acceptedRu": [
+      "Валентина Терешкова",
+      "Терешкова"
+    ],
+    "distractorsRu": [
+      "Светлана Савицкая",
+      "Салли Райд",
+      "Елена Кондакова"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Терешкова, Валентина Владимировна",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-193e4tx",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Medium",
+    "promptRu": "Сколько планет в Солнечной системе?",
+    "answerRu": "8",
+    "acceptedRu": [
+      "8",
+      "восемь"
+    ],
+    "distractorsRu": [
+      "9",
+      "7",
+      "10"
+    ],
+    "openAnswer": true,
+    "explanationRu": "С 2006 года Плутон считается карликовой планетой.",
+    "sourceHint": "Википедия: Солнечная система",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-1msd8ui",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Medium",
+    "promptRu": "В каком году человек впервые высадился на Луну?",
+    "answerRu": "1969",
+    "acceptedRu": [
+      "1969"
+    ],
+    "distractorsRu": [
+      "1961",
+      "1972",
+      "1965"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Аполлон-11",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-zbmoxv",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Medium",
+    "promptRu": "Как называется наша галактика?",
+    "answerRu": "Млечный Путь",
+    "acceptedRu": [
+      "Млечный Путь",
+      "Млечный путь"
+    ],
+    "distractorsRu": [
+      "Андромеда",
+      "Треугольник",
+      "Сомбреро"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Млечный Путь",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-4nb6tj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Hard",
+    "promptRu": "Какая звезда ближе всех к Солнечной системе?",
+    "answerRu": "Проксима Центавра",
+    "acceptedRu": [
+      "Проксима Центавра",
+      "Проксима"
+    ],
+    "distractorsRu": [
+      "Сириус",
+      "Бетельгейзе",
+      "Полярная звезда"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Проксима Центавра",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-ybwxvi",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Hard",
+    "promptRu": "Какая планета вращается, как будто лёжа на боку?",
+    "answerRu": "Уран",
+    "acceptedRu": [
+      "Уран"
+    ],
+    "distractorsRu": [
+      "Нептун",
+      "Сатурн",
+      "Венера"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Уран (планета)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-mveqsa",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Hard",
+    "promptRu": "Как называется граница чёрной дыры, из-за которой не возвращается даже свет?",
+    "answerRu": "горизонт событий",
+    "acceptedRu": [
+      "горизонт событий"
+    ],
+    "distractorsRu": [
+      "сингулярность",
+      "аккреционный диск",
+      "фотосфера"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Горизонт событий",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-11a0f04",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Hard",
+    "promptRu": "Как назывался первый искусственный спутник Земли?",
+    "answerRu": "Спутник-1",
+    "acceptedRu": [
+      "Спутник-1",
+      "Спутник 1",
+      "ПС-1",
+      "Спутник"
+    ],
+    "distractorsRu": [
+      "Восток-1",
+      "Эксплорер-1",
+      "Луна-1"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Спутник-1",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-1ncds3i",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Expert",
+    "promptRu": "Какой спутник Сатурна самый большой?",
+    "answerRu": "Титан",
+    "acceptedRu": [
+      "Титан"
+    ],
+    "distractorsRu": [
+      "Ганимед",
+      "Энцелад",
+      "Европа"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Титан (спутник)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-1vm387o",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Expert",
+    "promptRu": "Сколько примерно минут идёт свет от Солнца до Земли?",
+    "answerRu": "8",
+    "acceptedRu": [
+      "8",
+      "восемь",
+      "8 минут"
+    ],
+    "distractorsRu": [
+      "1",
+      "30",
+      "60"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Около 8 минут 20 секунд.",
+    "sourceHint": "Википедия: Солнце",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-1cbdp36",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Expert",
+    "promptRu": "Как называется самый высокий вулкан Солнечной системы?",
+    "answerRu": "Олимп",
+    "acceptedRu": [
+      "Олимп",
+      "гора Олимп"
+    ],
+    "distractorsRu": [
+      "Мауна-Кеа",
+      "Эверест",
+      "Килиманджаро"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Олимп находится на Марсе.",
+    "sourceHint": "Википедия: Олимп (Марс)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-space-1fci0uy",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Expert",
+    "promptRu": "Какая планета Солнечной системы самая горячая?",
+    "answerRu": "Венера",
+    "acceptedRu": [
+      "Венера"
+    ],
+    "distractorsRu": [
+      "Меркурий",
+      "Марс",
+      "Юпитер"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Меркурий ближе к Солнцу, но плотная атмосфера Венеры держит тепло.",
+    "sourceHint": "Википедия: Венера",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "q-space-1jx4mfh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Easy",
+    "promptRu": "Кто стал первым в истории человеком, совершившим полет в космическое пространство в 1961 году?",
+    "answerRu": "Юрий Гагарин",
+    "acceptedRu": [
+      "Юрий Гагарин",
+      "Гагарин"
+    ],
+    "distractorsRu": [
+      "Герман Титов",
+      "Нил Армстронг",
+      "Алексей Леонов"
+    ],
+    "openAnswer": true,
+    "explanationRu": "12 апреля 1961 года Юрий Гагарин совершил полёт на корабле «Восток-1».",
+    "sourceTitle": "Last Person Standing Wins $500 (Ages 8-45 Quiz)",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-space-tsql90",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Easy",
+    "promptRu": "Какой астронавт первым ступил на поверхность Луны во время миссии «Аполлон-11» в 1969 году?",
+    "answerRu": "Нил Армстронг",
+    "acceptedRu": [
+      "Нил Армстронг",
+      "Армстронг"
+    ],
+    "distractorsRu": [
+      "Базз Олдрин",
+      "Майкл Коллинз",
+      "Юрий Гагарин"
+    ],
+    "openAnswer": true,
+    "explanationRu": "20 июля 1969 года Нил Армстронг произнёс знаменитые слова ступив на Луну.",
+    "sourceTitle": "Last Person Standing Wins $500 (Ages 8-45 Quiz)",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

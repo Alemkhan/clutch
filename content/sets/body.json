@@ -1,0 +1,225 @@
+[
+  {
+    "id": "set-blood-groups",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "body",
+    "titleRu": "Назови группу крови по системе AB0",
+    "mcPromptRu": "Что из этого — группа крови по системе AB0?",
+    "members": [
+      {
+        "id": "o",
+        "answerRu": "первая",
+        "acceptedRu": [
+          "первая",
+          "I",
+          "0",
+          "O"
+        ]
+      },
+      {
+        "id": "a",
+        "answerRu": "вторая",
+        "acceptedRu": [
+          "вторая",
+          "II",
+          "A",
+          "А"
+        ]
+      },
+      {
+        "id": "b",
+        "answerRu": "третья",
+        "acceptedRu": [
+          "третья",
+          "III",
+          "B",
+          "В"
+        ]
+      },
+      {
+        "id": "ab",
+        "answerRu": "четвёртая",
+        "acceptedRu": [
+          "четвёртая",
+          "четвертая",
+          "IV",
+          "AB",
+          "АВ"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "пятая",
+      "C",
+      "D"
+    ],
+    "sourceHint": "Википедия: Система AB0",
+    "reviewNote": "Короткие обозначения (I, A, 0) требуют точного совпадения, без нечёткого сравнения.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-fingers",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "body",
+    "titleRu": "Назови палец руки",
+    "mcPromptRu": "Что из этого — название пальца руки?",
+    "members": [
+      {
+        "id": "thumb",
+        "answerRu": "большой",
+        "acceptedRu": [
+          "большой"
+        ]
+      },
+      {
+        "id": "index",
+        "answerRu": "указательный",
+        "acceptedRu": [
+          "указательный"
+        ]
+      },
+      {
+        "id": "middle",
+        "answerRu": "средний",
+        "acceptedRu": [
+          "средний"
+        ]
+      },
+      {
+        "id": "ring",
+        "answerRu": "безымянный",
+        "acceptedRu": [
+          "безымянный"
+        ]
+      },
+      {
+        "id": "pinky",
+        "answerRu": "мизинец",
+        "acceptedRu": [
+          "мизинец"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "локоть",
+      "запястье",
+      "ноготь"
+    ],
+    "sourceHint": "Словарь",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-basic-tastes",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "body",
+    "titleRu": "Назови основной вкус",
+    "mcPromptRu": "Что из этого — один из пяти основных вкусов?",
+    "members": [
+      {
+        "id": "sweet",
+        "answerRu": "сладкий",
+        "acceptedRu": [
+          "сладкий"
+        ]
+      },
+      {
+        "id": "salty",
+        "answerRu": "солёный",
+        "acceptedRu": [
+          "солёный",
+          "соленый"
+        ]
+      },
+      {
+        "id": "sour",
+        "answerRu": "кислый",
+        "acceptedRu": [
+          "кислый"
+        ]
+      },
+      {
+        "id": "bitter",
+        "answerRu": "горький",
+        "acceptedRu": [
+          "горький"
+        ]
+      },
+      {
+        "id": "umami",
+        "answerRu": "умами",
+        "acceptedRu": [
+          "умами"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "острый",
+      "мятный",
+      "пряный"
+    ],
+    "sourceHint": "Википедия: Вкус",
+    "reviewNote": "Острота — болевое ощущение, не вкус: проверить, примут ли игроки.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-body-1lvkl04",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "body",
+    "titleRu": "Назови раздел систематической анатомии человека",
+    "mcPromptRu": "Какая из этих дисциплин является официальным разделом описательной анатомии человека?",
+    "members": [
+      {
+        "id": "osteology",
+        "answerRu": "остеология",
+        "acceptedRu": [
+          "остеология"
+        ]
+      },
+      {
+        "id": "myology",
+        "answerRu": "миология",
+        "acceptedRu": [
+          "миология"
+        ]
+      },
+      {
+        "id": "arthrology",
+        "answerRu": "артрология",
+        "acceptedRu": [
+          "артрология",
+          "синдесмология"
+        ]
+      },
+      {
+        "id": "splanchnology",
+        "answerRu": "спланхнология",
+        "acceptedRu": [
+          "спланхнология"
+        ]
+      },
+      {
+        "id": "angiology",
+        "answerRu": "ангиология",
+        "acceptedRu": [
+          "ангиология"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "астрономия",
+      "геология",
+      "орнитология"
+    ],
+    "sourceTitle": "Анатомия человека — Википедия",
+    "reviewNote": "Основные учения анатомии человека по органам.",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

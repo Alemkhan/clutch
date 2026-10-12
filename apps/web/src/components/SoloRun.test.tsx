@@ -8,7 +8,7 @@ import {
   type CompleteSoloRunResponse,
   type Opponent,
 } from '@clutch/shared';
-import { SoloRunScreen } from './SoloRun';
+import { SoloRunScreen, toSoloCategory } from './SoloRun';
 import {
   applyLoadedSoloRun,
   beginSoloLoading,
@@ -231,5 +231,16 @@ describe('solo run result', () => {
 
   it('does not render a question after the run is closed', () => {
     expect(render(finished([25, 25, 25, 25]))).not.toContain('question-screen');
+  });
+});
+
+describe('toSoloCategory', () => {
+  it('keeps the four categories and falls back to general for anything else', () => {
+    for (const id of ['general', 'geography', 'history', 'languages']) expect(toSoloCategory(id)).toBe(id);
+    for (const junk of ['', 'sports', 'science', 'GENERAL', '__proto__']) expect(toSoloCategory(junk)).toBe('general');
+  });
+
+  it('starts a fresh flow in general', () => {
+    expect(createSoloFlowState().category).toBe('general');
   });
 });

@@ -18,7 +18,7 @@ export function registerLeaderboardRoutes(app: Hono<{ Bindings: Env }>): void {
       return c.json({ error: 'Too many requests.' }, 429);
     }
     if (rateLimit === 'unavailable') return c.json({ error: 'Rate limiter unavailable.' }, 503);
-    const category = c.req.query('category') ?? 'geography';
+    const category = c.req.query('category') ?? 'general';
     if (!categories.has(category)) return c.json({ error: 'Invalid category.' }, 400);
     const result = await c.env.DB.prepare(`
       WITH ranked_runs AS (

@@ -1,0 +1,113 @@
+[
+  {
+    "id": "set-nature-d0njp2",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "nature",
+    "titleRu": "Назови вид рода Пантеры семейства кошачьих",
+    "mcPromptRu": "Какое из этих животных относится к роду Пантеры (Panthera)?",
+    "members": [
+      {
+        "id": "lion",
+        "answerRu": "лев",
+        "acceptedRu": [
+          "лев"
+        ]
+      },
+      {
+        "id": "tiger",
+        "answerRu": "тигр",
+        "acceptedRu": [
+          "тигр"
+        ]
+      },
+      {
+        "id": "jaguar",
+        "answerRu": "ягуар",
+        "acceptedRu": [
+          "ягуар"
+        ]
+      },
+      {
+        "id": "leopard",
+        "answerRu": "леопард",
+        "acceptedRu": [
+          "леопард"
+        ]
+      },
+      {
+        "id": "snow_leopard",
+        "answerRu": "снежный барс",
+        "acceptedRu": [
+          "снежный барс",
+          "ирбис"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "гепард",
+      "пума",
+      "рысь"
+    ],
+    "sourceTitle": "Кошачьи — Википедия",
+    "reviewNote": "Современный биологический состав рода Panthera.",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "set-nature-yj3j44",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "nature",
+    "titleRu": "Назови одну из 5 длиннейших рек мира",
+    "mcPromptRu": "Какая из этих рек входит в топ-5 самых длинных рек на Земле?",
+    "members": [
+      {
+        "id": "amazon",
+        "answerRu": "Амазонка",
+        "acceptedRu": [
+          "Амазонка"
+        ]
+      },
+      {
+        "id": "nile",
+        "answerRu": "Нил",
+        "acceptedRu": [
+          "Нил"
+        ]
+      },
+      {
+        "id": "yangtze",
+        "answerRu": "Янцзы",
+        "acceptedRu": [
+          "Янцзы"
+        ]
+      },
+      {
+        "id": "mississippi",
+        "answerRu": "Миссисипи",
+        "acceptedRu": [
+          "Миссисипи",
+          "Миссисипи-Миссури"
+        ]
+      },
+      {
+        "id": "yenisei",
+        "answerRu": "Енисей",
+        "acceptedRu": [
+          "Енисей",
+          "Енисей-Ангара"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Дунай",
+      "Рейн",
+      "Темза"
+    ],
+    "sourceTitle": "Список рек по длине — Википедия",
+    "reviewNote": "Первая пятёрка мировых рек по протяжённости.",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

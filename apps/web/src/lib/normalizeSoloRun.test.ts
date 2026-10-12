@@ -5,7 +5,7 @@ import {
   generateMatch,
   type StartSoloRunResponse,
 } from '@clutch/shared';
-import { normalizeSoloRun } from './clientMatchRules';
+import { normalizeSoloRun, normalizeSoloSnapshot } from './clientMatchRules';
 
 const questions = generateMatch(12, 0, 'geography');
 
@@ -58,5 +58,19 @@ describe('normalizeSoloRun', () => {
     expect(() => normalizeSoloRun(response({ roundCap: 30 }))).toThrow();
     expect(() => normalizeSoloRun(response({ runId: '' }))).toThrow();
     expect(() => normalizeSoloRun(response({ questions: [] }))).toThrow();
+  });
+});
+
+describe('normalizeSoloSnapshot category', () => {
+  const snapshot = (category: string) => ({
+    ...response(), category, rounds: [], status: 'in_progress', result: null,
+  }) as unknown as Parameters<typeof normalizeSoloSnapshot>[0];
+
+  it('accepts general next to the other categories and rejects an unknown one', () => {
+    for (const category of ['general', 'geography', 'history', 'languages']) {
+      expect(normalizeSoloSnapshot(snapshot(category)).category).toBe(category);
+    }
+    expect(() => normalizeSoloSnapshot(snapshot('sports'))).toThrow();
+    expect(() => normalizeSoloSnapshot(snapshot('toString'))).toThrow();
   });
 });

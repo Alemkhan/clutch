@@ -1,0 +1,428 @@
+[
+  {
+    "id": "au-tech-1r98xxy",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Easy",
+    "promptRu": "Какая компания выпускает iPhone?",
+    "answerRu": "Apple",
+    "acceptedRu": [
+      "Apple",
+      "Эппл"
+    ],
+    "distractorsRu": [
+      "Samsung",
+      "Google",
+      "Nokia"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: iPhone",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-1yr4ap8",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Easy",
+    "promptRu": "Как называют в интернете знак @?",
+    "answerRu": "собака",
+    "acceptedRu": [
+      "собака",
+      "собачка"
+    ],
+    "distractorsRu": [
+      "решётка",
+      "кошка",
+      "червяк"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: @",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-9jhq5b",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Сколько бит в одном байте?",
+    "answerRu": "8",
+    "acceptedRu": [
+      "8",
+      "восемь"
+    ],
+    "distractorsRu": [
+      "4",
+      "16",
+      "10"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Байт",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-dqkq8d",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Кто основал Microsoft вместе с Полом Алленом?",
+    "answerRu": "Билл Гейтс",
+    "acceptedRu": [
+      "Билл Гейтс",
+      "Гейтс"
+    ],
+    "distractorsRu": [
+      "Стив Джобс",
+      "Марк Цукерберг",
+      "Илон Маск"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Microsoft",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-6clxgb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Кто создал Facebook?",
+    "answerRu": "Марк Цукерберг",
+    "acceptedRu": [
+      "Марк Цукерберг",
+      "Цукерберг"
+    ],
+    "distractorsRu": [
+      "Джек Дорси",
+      "Ларри Пейдж",
+      "Илон Маск"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Facebook",
+    "reviewNote": "Сооснователей несколько — уточнить «главный создатель» или оставить только выбор.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-ks8kpi",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Какой компании принадлежит YouTube?",
+    "answerRu": "Google",
+    "acceptedRu": [
+      "Google",
+      "Гугл",
+      "Alphabet"
+    ],
+    "distractorsRu": [
+      "Meta",
+      "Microsoft",
+      "Amazon"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: YouTube",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-1l3jc5c",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Как расшифровывается WWW?",
+    "answerRu": "World Wide Web",
+    "acceptedRu": [
+      "World Wide Web",
+      "всемирная паутина"
+    ],
+    "distractorsRu": [
+      "World Web Window",
+      "Wide World Web",
+      "Web World Wide"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Всемирная паутина",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-dh9uot",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Как называется главная микросхема компьютера, которая выполняет вычисления?",
+    "answerRu": "процессор",
+    "acceptedRu": [
+      "процессор",
+      "ЦП",
+      "CPU"
+    ],
+    "distractorsRu": [
+      "видеокарта",
+      "оперативная память",
+      "жёсткий диск"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Центральный процессор",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-ju6343",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Hard",
+    "promptRu": "Как фамилия братьев — создателей Telegram?",
+    "answerRu": "Дуровы",
+    "acceptedRu": [
+      "Дуровы",
+      "Дуров"
+    ],
+    "distractorsRu": [
+      "Касперские",
+      "Воложи",
+      "Брины"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Telegram",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-x92qpw",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Hard",
+    "promptRu": "В каком году вышел первый iPhone?",
+    "answerRu": "2007",
+    "acceptedRu": [
+      "2007"
+    ],
+    "distractorsRu": [
+      "2005",
+      "2008",
+      "2010"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: iPhone (первое поколение)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-14py7qz",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Hard",
+    "promptRu": "Как называют вирус, который шифрует файлы и требует выкуп?",
+    "answerRu": "программа-вымогатель",
+    "acceptedRu": [
+      "программа-вымогатель",
+      "вымогатель",
+      "шифровальщик"
+    ],
+    "distractorsRu": [
+      "троян",
+      "червь",
+      "шпион"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Программа-вымогатель",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-db7ob9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Hard",
+    "promptRu": "Сколько килобайт в мегабайте в двоичной системе?",
+    "answerRu": "1024",
+    "acceptedRu": [
+      "1024"
+    ],
+    "distractorsRu": [
+      "1000",
+      "512",
+      "2048"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Мегабайт",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-1scsj42",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Expert",
+    "promptRu": "Кого считают первым программистом в истории?",
+    "answerRu": "Ада Лавлейс",
+    "acceptedRu": [
+      "Ада Лавлейс",
+      "Лавлейс"
+    ],
+    "distractorsRu": [
+      "Алан Тьюринг",
+      "Чарльз Бэббидж",
+      "Грейс Хоппер"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Лавлейс, Ада",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-lwok58",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Expert",
+    "promptRu": "Какой язык программирования назван в честь британской комик-группы?",
+    "answerRu": "Python",
+    "acceptedRu": [
+      "Python",
+      "Питон",
+      "Пайтон"
+    ],
+    "distractorsRu": [
+      "Java",
+      "Ruby",
+      "Perl"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Python",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-tech-q4i3xh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Expert",
+    "promptRu": "Что означает буква «S» в HTTPS?",
+    "answerRu": "secure",
+    "acceptedRu": [
+      "secure",
+      "безопасный",
+      "защищённый",
+      "защищенный"
+    ],
+    "distractorsRu": [
+      "server",
+      "system",
+      "speed"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: HTTPS",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "q-tech-13flmii",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Кто разработал проект Аналитической машины — первого механического цифрового компьютера?",
+    "answerRu": "Чарльз Бэббидж",
+    "acceptedRu": [
+      "Чарльз Бэббидж",
+      "Бэббидж"
+    ],
+    "distractorsRu": [
+      "Алан Тьюринг",
+      "Джон фон Нейман",
+      "Конрад Цузе"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Чарльз Бэббидж описал устройство Аналитической машины в 1835 году.",
+    "sourceTitle": "История вычислительной техники — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-tech-1u9i0gc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Кто считается первым в истории программистом за составление программы для аналитической машины Бэббиджа?",
+    "answerRu": "Ада Лавлейс",
+    "acceptedRu": [
+      "Ада Лавлейс",
+      "Лавлейс"
+    ],
+    "distractorsRu": [
+      "Грейс Хоппер",
+      "Маргарет Гамильтон",
+      "Джоан Кларк"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Графиня Ада Лавлейс написала первую алгоритмическую программу для вычисления чисел Бернулли.",
+    "sourceTitle": "История вычислительной техники — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-tech-42b6gj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Как называлась первая советская ЭВМ, созданная в Киеве под руководством С. А. Лебедева?",
+    "answerRu": "МЭСМ",
+    "acceptedRu": [
+      "МЭСМ"
+    ],
+    "distractorsRu": [
+      "БЭСМ",
+      "Урал",
+      "Стрела"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Малая электронно-счётная машина (МЭСМ) заработала в 1950 году.",
+    "sourceTitle": "История вычислительной техники — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-tech-e9w22r",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Как называлась немецкая роторная шифровальная машина, взломанная в Блетчли-парке во время войны?",
+    "answerRu": "Энигма",
+    "acceptedRu": [
+      "Энигма",
+      "Enigma"
+    ],
+    "distractorsRu": [
+      "Лоренц",
+      "Колосс",
+      "Логика"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Взлом шифров «Энигмы» сыграл ключевую роль в разведке союзников.",
+    "sourceTitle": "История вычислительной техники — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

@@ -1,0 +1,1528 @@
+[
+  {
+    "id": "au-science-10aackr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой газ растения поглощают из воздуха для фотосинтеза?",
+    "answerRu": "углекислый газ",
+    "acceptedRu": [
+      "углекислый газ",
+      "CO2",
+      "диоксид углерода"
+    ],
+    "distractorsRu": [
+      "кислород",
+      "азот",
+      "водород"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Фотосинтез",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-1i6qjj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "При какой температуре кипит вода на уровне моря, в градусах Цельсия?",
+    "answerRu": "100",
+    "acceptedRu": [
+      "100",
+      "сто"
+    ],
+    "distractorsRu": [
+      "90",
+      "120",
+      "80"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Вода",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-1ucndre",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Как называется прибор для измерения температуры?",
+    "answerRu": "термометр",
+    "acceptedRu": [
+      "термометр",
+      "градусник"
+    ],
+    "distractorsRu": [
+      "барометр",
+      "манометр",
+      "гигрометр"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Термометр",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-1llnkk2",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой химической формулой записывают воду?",
+    "answerRu": "H2O",
+    "acceptedRu": [
+      "H2O",
+      "аш два о"
+    ],
+    "distractorsRu": [
+      "CO2",
+      "O2",
+      "H2O2"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Вода",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-elli83",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Как называется частица атома с отрицательным зарядом?",
+    "answerRu": "электрон",
+    "acceptedRu": [
+      "электрон"
+    ],
+    "distractorsRu": [
+      "протон",
+      "нейтрон",
+      "фотон"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Электрон",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-imaol5",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "В каких единицах измеряют силу электрического тока?",
+    "answerRu": "ампер",
+    "acceptedRu": [
+      "ампер",
+      "амперы",
+      "А"
+    ],
+    "distractorsRu": [
+      "вольт",
+      "ватт",
+      "ом"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Ампер",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-wd9zzc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Как называется наука о живых организмах?",
+    "answerRu": "биология",
+    "acceptedRu": [
+      "биология"
+    ],
+    "distractorsRu": [
+      "геология",
+      "химия",
+      "астрономия"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Биология",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-wnaoqu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой учёный открыл закон всемирного тяготения?",
+    "answerRu": "Исаак Ньютон",
+    "acceptedRu": [
+      "Исаак Ньютон",
+      "Ньютон"
+    ],
+    "distractorsRu": [
+      "Галилео Галилей",
+      "Альберт Эйнштейн",
+      "Никола Тесла"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Закон всемирного тяготения",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-14z31xs",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Кто создал периодическую таблицу химических элементов?",
+    "answerRu": "Дмитрий Менделеев",
+    "acceptedRu": [
+      "Дмитрий Менделеев",
+      "Менделеев"
+    ],
+    "distractorsRu": [
+      "Михаил Ломоносов",
+      "Нильс Бор",
+      "Антуан Лавуазье"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Периодическая система химических элементов",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-2d6ixn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Как называется сила, которая удерживает планеты на орбитах вокруг Солнца?",
+    "answerRu": "гравитация",
+    "acceptedRu": [
+      "гравитация",
+      "тяготение",
+      "сила тяжести",
+      "притяжение"
+    ],
+    "distractorsRu": [
+      "магнетизм",
+      "трение",
+      "инерция"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Гравитация",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-1fpuwsv",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой газ составляет большую часть атмосферы Земли?",
+    "answerRu": "азот",
+    "acceptedRu": [
+      "азот"
+    ],
+    "distractorsRu": [
+      "кислород",
+      "углекислый газ",
+      "аргон"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Азота в воздухе около 78 %, кислорода около 21 %.",
+    "sourceHint": "Википедия: Атмосфера Земли",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-19dpw4m",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "В каких единицах измеряют частоту?",
+    "answerRu": "герц",
+    "acceptedRu": [
+      "герц",
+      "герцы",
+      "Гц"
+    ],
+    "distractorsRu": [
+      "децибел",
+      "джоуль",
+      "паскаль"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Герц",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-12ceqxi",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Что обозначает буква «c» в формуле E = mc²?",
+    "answerRu": "скорость света",
+    "acceptedRu": [
+      "скорость света"
+    ],
+    "distractorsRu": [
+      "ускорение свободного падения",
+      "теплоёмкость",
+      "электрический заряд"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Эквивалентность массы и энергии",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-1ji2q4",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой металл лучше всех проводит электричество?",
+    "answerRu": "серебро",
+    "acceptedRu": [
+      "серебро"
+    ],
+    "distractorsRu": [
+      "медь",
+      "золото",
+      "алюминий"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Серебро",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-1cclbo3",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Как называется переход вещества из твёрдого состояния сразу в газ?",
+    "answerRu": "сублимация",
+    "acceptedRu": [
+      "сублимация",
+      "возгонка"
+    ],
+    "distractorsRu": [
+      "конденсация",
+      "испарение",
+      "кристаллизация"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Сублимация (физика)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-dnb0z8",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Кто открыл пенициллин?",
+    "answerRu": "Александр Флеминг",
+    "acceptedRu": [
+      "Александр Флеминг",
+      "Флеминг"
+    ],
+    "distractorsRu": [
+      "Луи Пастер",
+      "Роберт Кох",
+      "Эдвард Дженнер"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Пенициллин",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-fmivjb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой элемент самый распространённый во Вселенной?",
+    "answerRu": "водород",
+    "acceptedRu": [
+      "водород"
+    ],
+    "distractorsRu": [
+      "гелий",
+      "кислород",
+      "углерод"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Распространённость химических элементов",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-931ach",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Как называется единица радиоактивности в системе СИ?",
+    "answerRu": "беккерель",
+    "acceptedRu": [
+      "беккерель",
+      "Бк"
+    ],
+    "distractorsRu": [
+      "зиверт",
+      "грей",
+      "кюри"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Беккерель",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-wa50jg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Чему равен абсолютный ноль по шкале Цельсия, если округлить до целых?",
+    "answerRu": "−273",
+    "acceptedRu": [
+      "−273",
+      "-273",
+      "минус 273",
+      "−273,15",
+      "-273,15"
+    ],
+    "distractorsRu": [
+      "−100",
+      "−459",
+      "−373"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Точно −273,15 °C. −459 — это абсолютный ноль по Фаренгейту.",
+    "sourceHint": "Википедия: Абсолютный ноль температуры",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-science-6c8jcc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой учёный предложил теорию эволюции путём естественного отбора?",
+    "answerRu": "Чарльз Дарвин",
+    "acceptedRu": [
+      "Чарльз Дарвин",
+      "Дарвин"
+    ],
+    "distractorsRu": [
+      "Жан-Батист Ламарк",
+      "Грегор Мендель",
+      "Альфред Нобель"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Естественный отбор",
+    "reviewNote": "Уоллес пришёл к идее одновременно — проверить, не нужен ли он в допустимых ответах.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "wd-element-H",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой химический элемент обозначается символом H?",
+    "answerRu": "водород",
+    "acceptedRu": [
+      "водород"
+    ],
+    "distractorsRu": [
+      "азот",
+      "лантан",
+      "висмут"
+    ],
+    "openAnswer": true,
+    "explanationRu": "H — водород, элемент номер 1 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q556",
+    "sourceTitle": "Wikidata: водород",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-O",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой химический элемент обозначается символом O?",
+    "answerRu": "кислород",
+    "acceptedRu": [
+      "кислород"
+    ],
+    "distractorsRu": [
+      "калий",
+      "галлий",
+      "мышьяк"
+    ],
+    "openAnswer": true,
+    "explanationRu": "O — кислород, элемент номер 8 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q629",
+    "sourceTitle": "Wikidata: кислород",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-C",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой химический элемент обозначается символом C?",
+    "answerRu": "углерод",
+    "acceptedRu": [
+      "углерод"
+    ],
+    "distractorsRu": [
+      "бор",
+      "празеодим",
+      "хром"
+    ],
+    "openAnswer": true,
+    "explanationRu": "C — углерод, элемент номер 6 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q623",
+    "sourceTitle": "Wikidata: углерод",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Fe",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой химический элемент обозначается символом Fe?",
+    "answerRu": "железо",
+    "acceptedRu": [
+      "железо"
+    ],
+    "distractorsRu": [
+      "углерод",
+      "мышьяк",
+      "медь"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Fe — железо, элемент номер 26 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q677",
+    "sourceTitle": "Wikidata: железо",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Au",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой химический элемент обозначается символом Au?",
+    "answerRu": "золото",
+    "acceptedRu": [
+      "золото"
+    ],
+    "distractorsRu": [
+      "натрий",
+      "углерод",
+      "самарий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Au — золото, элемент номер 79 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q897",
+    "sourceTitle": "Wikidata: золото",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Ag",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой химический элемент обозначается символом Ag?",
+    "answerRu": "серебро",
+    "acceptedRu": [
+      "серебро"
+    ],
+    "distractorsRu": [
+      "ксенон",
+      "иридий",
+      "эрбий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ag — серебро, элемент номер 47 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1090",
+    "sourceTitle": "Wikidata: серебро",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-N",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом N?",
+    "answerRu": "азот",
+    "acceptedRu": [
+      "азот"
+    ],
+    "distractorsRu": [
+      "уран",
+      "тулий",
+      "иридий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "N — азот, элемент номер 7 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q627",
+    "sourceTitle": "Wikidata: азот",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-He",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом He?",
+    "answerRu": "гелий",
+    "acceptedRu": [
+      "гелий"
+    ],
+    "distractorsRu": [
+      "фтор",
+      "кальций",
+      "германий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "He — гелий, элемент номер 2 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q560",
+    "sourceTitle": "Wikidata: гелий",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Na",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом Na?",
+    "answerRu": "натрий",
+    "acceptedRu": [
+      "натрий"
+    ],
+    "distractorsRu": [
+      "ниобий",
+      "таллий",
+      "кадмий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Na — натрий, элемент номер 11 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q658",
+    "sourceTitle": "Wikidata: натрий",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Cu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом Cu?",
+    "answerRu": "медь",
+    "acceptedRu": [
+      "медь"
+    ],
+    "distractorsRu": [
+      "самарий",
+      "полоний",
+      "скандий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Cu — медь, элемент номер 29 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q753",
+    "sourceTitle": "Wikidata: медь",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Ca",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом Ca?",
+    "answerRu": "кальций",
+    "acceptedRu": [
+      "кальций"
+    ],
+    "distractorsRu": [
+      "франций",
+      "олово",
+      "медь"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ca — кальций, элемент номер 20 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q706",
+    "sourceTitle": "Wikidata: кальций",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-K",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом K?",
+    "answerRu": "калий",
+    "acceptedRu": [
+      "калий"
+    ],
+    "distractorsRu": [
+      "платина",
+      "никель",
+      "сера"
+    ],
+    "openAnswer": true,
+    "explanationRu": "K — калий, элемент номер 19 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q703",
+    "sourceTitle": "Wikidata: калий",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Cl",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом Cl?",
+    "answerRu": "хлор",
+    "acceptedRu": [
+      "хлор"
+    ],
+    "distractorsRu": [
+      "полоний",
+      "иод",
+      "скандий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Cl — хлор, элемент номер 17 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q688",
+    "sourceTitle": "Wikidata: хлор",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Al",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом Al?",
+    "answerRu": "алюминий",
+    "acceptedRu": [
+      "алюминий"
+    ],
+    "distractorsRu": [
+      "мышьяк",
+      "марганец",
+      "вольфрам"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Al — алюминий, элемент номер 13 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q663",
+    "sourceTitle": "Wikidata: алюминий",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Zn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом Zn?",
+    "answerRu": "цинк",
+    "acceptedRu": [
+      "цинк"
+    ],
+    "distractorsRu": [
+      "прометий",
+      "скандий",
+      "ниобий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Zn — цинк, элемент номер 30 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q758",
+    "sourceTitle": "Wikidata: цинк",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Hg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом Hg?",
+    "answerRu": "ртуть",
+    "acceptedRu": [
+      "ртуть"
+    ],
+    "distractorsRu": [
+      "аргон",
+      "бор",
+      "ванадий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Hg — ртуть, элемент номер 80 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q925",
+    "sourceTitle": "Wikidata: ртуть",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Pb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом Pb?",
+    "answerRu": "свинец",
+    "acceptedRu": [
+      "свинец"
+    ],
+    "distractorsRu": [
+      "ниобий",
+      "диспрозий",
+      "ксенон"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Pb — свинец, элемент номер 82 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q708",
+    "sourceTitle": "Wikidata: свинец",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Sn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом Sn?",
+    "answerRu": "олово",
+    "acceptedRu": [
+      "олово"
+    ],
+    "distractorsRu": [
+      "сурьма",
+      "натрий",
+      "алюминий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Sn — олово, элемент номер 50 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1096",
+    "sourceTitle": "Wikidata: олово",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-U",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент обозначается символом U?",
+    "answerRu": "уран",
+    "acceptedRu": [
+      "уран"
+    ],
+    "distractorsRu": [
+      "серебро",
+      "тербий",
+      "лантан"
+    ],
+    "openAnswer": true,
+    "explanationRu": "U — уран, элемент номер 92 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1098",
+    "sourceTitle": "Wikidata: уран",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Mg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой химический элемент обозначается символом Mg?",
+    "answerRu": "магний",
+    "acceptedRu": [
+      "магний"
+    ],
+    "distractorsRu": [
+      "фосфор",
+      "литий",
+      "рений"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Mg — магний, элемент номер 12 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q660",
+    "sourceTitle": "Wikidata: магний",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Si",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой химический элемент обозначается символом Si?",
+    "answerRu": "кремний",
+    "acceptedRu": [
+      "кремний"
+    ],
+    "distractorsRu": [
+      "молибден",
+      "рутений",
+      "сурьма"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Si — кремний, элемент номер 14 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q670",
+    "sourceTitle": "Wikidata: кремний",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-P",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой химический элемент обозначается символом P?",
+    "answerRu": "фосфор",
+    "acceptedRu": [
+      "фосфор"
+    ],
+    "distractorsRu": [
+      "осмий",
+      "медь",
+      "платина"
+    ],
+    "openAnswer": true,
+    "explanationRu": "P — фосфор, элемент номер 15 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q674",
+    "sourceTitle": "Wikidata: фосфор",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-S",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой химический элемент обозначается символом S?",
+    "answerRu": "сера",
+    "acceptedRu": [
+      "сера"
+    ],
+    "distractorsRu": [
+      "висмут",
+      "уран",
+      "хлор"
+    ],
+    "openAnswer": true,
+    "explanationRu": "S — сера, элемент номер 16 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q682",
+    "sourceTitle": "Wikidata: сера",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-I",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой химический элемент обозначается символом I?",
+    "answerRu": "иод",
+    "acceptedRu": [
+      "иод"
+    ],
+    "distractorsRu": [
+      "медь",
+      "литий",
+      "висмут"
+    ],
+    "openAnswer": true,
+    "explanationRu": "I — иод, элемент номер 53 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1103",
+    "sourceTitle": "Wikidata: иод",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Ni",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой химический элемент обозначается символом Ni?",
+    "answerRu": "никель",
+    "acceptedRu": [
+      "никель"
+    ],
+    "distractorsRu": [
+      "азот",
+      "углерод",
+      "ниобий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ni — никель, элемент номер 28 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q744",
+    "sourceTitle": "Wikidata: никель",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Ti",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой химический элемент обозначается символом Ti?",
+    "answerRu": "титан",
+    "acceptedRu": [
+      "титан"
+    ],
+    "distractorsRu": [
+      "празеодим",
+      "франций",
+      "иттербий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ti — титан, элемент номер 22 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q716",
+    "sourceTitle": "Wikidata: титан",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Ne",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой химический элемент обозначается символом Ne?",
+    "answerRu": "неон",
+    "acceptedRu": [
+      "неон"
+    ],
+    "distractorsRu": [
+      "стронций",
+      "эрбий",
+      "тербий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ne — неон, элемент номер 10 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q654",
+    "sourceTitle": "Wikidata: неон",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Ar",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой химический элемент обозначается символом Ar?",
+    "answerRu": "аргон",
+    "acceptedRu": [
+      "аргон"
+    ],
+    "distractorsRu": [
+      "астат",
+      "ртуть",
+      "алюминий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ar — аргон, элемент номер 18 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q696",
+    "sourceTitle": "Wikidata: аргон",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Pt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой химический элемент обозначается символом Pt?",
+    "answerRu": "платина",
+    "acceptedRu": [
+      "платина"
+    ],
+    "distractorsRu": [
+      "рутений",
+      "неон",
+      "стронций"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Pt — платина, элемент номер 78 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q880",
+    "sourceTitle": "Wikidata: платина",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Li",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой химический элемент обозначается символом Li?",
+    "answerRu": "литий",
+    "acceptedRu": [
+      "литий"
+    ],
+    "distractorsRu": [
+      "гафний",
+      "селен",
+      "сурьма"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Li — литий, элемент номер 3 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q568",
+    "sourceTitle": "Wikidata: литий",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-F",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой химический элемент обозначается символом F?",
+    "answerRu": "фтор",
+    "acceptedRu": [
+      "фтор"
+    ],
+    "distractorsRu": [
+      "лантан",
+      "мышьяк",
+      "германий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "F — фтор, элемент номер 9 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q650",
+    "sourceTitle": "Wikidata: фтор",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Cr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой химический элемент обозначается символом Cr?",
+    "answerRu": "хром",
+    "acceptedRu": [
+      "хром"
+    ],
+    "distractorsRu": [
+      "неодим",
+      "кальций",
+      "бром"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Cr — хром, элемент номер 24 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q725",
+    "sourceTitle": "Wikidata: хром",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Co",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой химический элемент обозначается символом Co?",
+    "answerRu": "кобальт",
+    "acceptedRu": [
+      "кобальт"
+    ],
+    "distractorsRu": [
+      "иод",
+      "селен",
+      "самарий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Co — кобальт, элемент номер 27 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q740",
+    "sourceTitle": "Wikidata: кобальт",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Mn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой химический элемент обозначается символом Mn?",
+    "answerRu": "марганец",
+    "acceptedRu": [
+      "марганец"
+    ],
+    "distractorsRu": [
+      "торий",
+      "кремний",
+      "фосфор"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Mn — марганец, элемент номер 25 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q731",
+    "sourceTitle": "Wikidata: марганец",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-W",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой химический элемент обозначается символом W?",
+    "answerRu": "вольфрам",
+    "acceptedRu": [
+      "вольфрам"
+    ],
+    "distractorsRu": [
+      "углерод",
+      "таллий",
+      "цинк"
+    ],
+    "openAnswer": true,
+    "explanationRu": "W — вольфрам, элемент номер 74 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q743",
+    "sourceTitle": "Wikidata: вольфрам",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Ra",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой химический элемент обозначается символом Ra?",
+    "answerRu": "радий",
+    "acceptedRu": [
+      "радий"
+    ],
+    "distractorsRu": [
+      "селен",
+      "лютеций",
+      "титан"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ra — радий, элемент номер 88 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1128",
+    "sourceTitle": "Wikidata: радий",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Rn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой химический элемент обозначается символом Rn?",
+    "answerRu": "радон",
+    "acceptedRu": [
+      "радон"
+    ],
+    "distractorsRu": [
+      "лантан",
+      "самарий",
+      "палладий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Rn — радон, элемент номер 86 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1133",
+    "sourceTitle": "Wikidata: радон",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Ba",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой химический элемент обозначается символом Ba?",
+    "answerRu": "барий",
+    "acceptedRu": [
+      "барий"
+    ],
+    "distractorsRu": [
+      "таллий",
+      "тербий",
+      "висмут"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ba — барий, элемент номер 56 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1112",
+    "sourceTitle": "Wikidata: барий",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Sr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой химический элемент обозначается символом Sr?",
+    "answerRu": "стронций",
+    "acceptedRu": [
+      "стронций"
+    ],
+    "distractorsRu": [
+      "неодим",
+      "гафний",
+      "осмий"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Sr — стронций, элемент номер 38 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q938",
+    "sourceTitle": "Wikidata: стронций",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Br",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой химический элемент обозначается символом Br?",
+    "answerRu": "бром",
+    "acceptedRu": [
+      "бром"
+    ],
+    "distractorsRu": [
+      "гольмий",
+      "углерод",
+      "мышьяк"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Br — бром, элемент номер 35 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q879",
+    "sourceTitle": "Wikidata: бром",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Kr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой химический элемент обозначается символом Kr?",
+    "answerRu": "криптон",
+    "acceptedRu": [
+      "криптон"
+    ],
+    "distractorsRu": [
+      "калий",
+      "алюминий",
+      "вольфрам"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Kr — криптон, элемент номер 36 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q888",
+    "sourceTitle": "Wikidata: криптон",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Xe",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой химический элемент обозначается символом Xe?",
+    "answerRu": "ксенон",
+    "acceptedRu": [
+      "ксенон"
+    ],
+    "distractorsRu": [
+      "цирконий",
+      "скандий",
+      "радон"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Xe — ксенон, элемент номер 54 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1106",
+    "sourceTitle": "Wikidata: ксенон",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-element-Pu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой химический элемент обозначается символом Pu?",
+    "answerRu": "плутоний",
+    "acceptedRu": [
+      "плутоний"
+    ],
+    "distractorsRu": [
+      "литий",
+      "сера",
+      "кислород"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Pu — плутоний, элемент номер 94 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1102",
+    "sourceTitle": "Wikidata: плутоний",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "q-science-q33dx2",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Из каких двух основных химических элементов состоит вещество Солнца?",
+    "answerRu": "водород и гелий",
+    "acceptedRu": [
+      "водород и гелий",
+      "гелий и водород"
+    ],
+    "distractorsRu": [
+      "кислород и азот",
+      "углерод и кремний",
+      "железо и никель"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Солнце состоит примерно на 73% из водорода и на 25% из гелия.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-science-1ys8w78",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какое четвертое агрегатное состояние вещества следует за газом при высокотемпературной ионизации?",
+    "answerRu": "плазма",
+    "acceptedRu": [
+      "плазма"
+    ],
+    "distractorsRu": [
+      "конденсат Бозе-Эйнштейна",
+      "жидкость",
+      "твёрдое тело"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Плазма — частично или полностью ионизованный газ.",
+    "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-science-elkaof",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какая элементарная частица (бозон) отвечает за наличие массы у других фундаментальных частиц?",
+    "answerRu": "бозон Хиггса",
+    "acceptedRu": [
+      "бозон Хиггса",
+      "Хиггс"
+    ],
+    "distractorsRu": [
+      "фотон",
+      "глюон",
+      "нейтрино"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Бозон Хиггса был открыт на Большом адронном коллайдере в 2012 году.",
+    "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-science-xco3gf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Как называется единица измерения частоты периодических процессов в системе СИ?",
+    "answerRu": "герц",
+    "acceptedRu": [
+      "герц",
+      "Гц",
+      "Hz"
+    ],
+    "distractorsRu": [
+      "паскаль",
+      "джоуль",
+      "ватт"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Один герц равен одному исполнению цикла в секунду.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

@@ -20,6 +20,7 @@ import {
 import app from '../apps/api/src/index';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
+import { recordMistake } from '../apps/api/src/matches/mistakesRepository';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
 const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
@@ -278,5 +279,43 @@ describe('solo run', () => {
     });
     expect(done.status).toBe(200);
     expect(await done.json()).toMatchObject({ playerProgress: 100 });
+  });
+});
+
+describe('general category', () => {
+  const startGeneral = (db: TestD1, label: string) => request(db, '/api/solo-runs', guest(label).authorization, {
+    displayName: label,
+    category: 'general',
+  });
+
+  it('starts a solo run in general with the general set, and keeps the category', async () => {
+    const db = database();
+    const response = await startGeneral(db, 'ann');
+    expect(response.status).toBe(201);
+    const run = await response.json() as StartSoloRunResponse;
+    expect(run.questions.length).toBeGreaterThan(0);
+    const row = db.sqlite.prepare('SELECT category FROM match_runs WHERE id = ?').get(run.runId) as { category: string };
+    expect(row.category).toBe('general');
+    expect(fullQuestions(db, run.runId).some((question) => question.id.startsWith('gp:'))).toBe(true);
+  });
+
+  it('serves a pack question (gp:) in mistake training', async () => {
+    const db = database();
+    const run = await (await startGeneral(db, 'bob')).json() as StartSoloRunResponse;
+    const packId = fullQuestions(db, run.runId).find((question) => question.id.startsWith('gp:'))!.id;
+    // Ошибка записана игроку без активного забега, так что вопрос не заблокирован.
+    await recordMistake(db.binding, guest('ann').playerId, packId, NOW);
+    const listed = await app.request('/api/training/mistakes', { headers: { authorization: guest('ann').authorization } }, {
+      DB: db.binding,
+      API_RATE_LIMITER: allowRateLimiter,
+      TELEGRAM_BOT_TOKEN: 'test',
+      SESSION_SIGNING_SECRET: sessionSecret,
+      ENVIRONMENT: 'test',
+      TELEGRAM_MINI_APP_LINK: 'https://t.me/testbot?startapp',
+    });
+    expect(((await listed.json()) as { ids: string[] }).ids).toEqual([packId]);
+    const questions = await request(db, '/api/training/questions', guest('ann').authorization, { ids: [packId] });
+    expect(questions.status).toBe(200);
+    expect(JSON.stringify(await questions.json())).toContain(packId);
   });
 });

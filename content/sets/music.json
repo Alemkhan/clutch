@@ -1,0 +1,172 @@
+[
+  {
+    "id": "set-beatles",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "music",
+    "titleRu": "Назови участника «Битлз» классического состава",
+    "mcPromptRu": "Кто из них был в классическом составе «Битлз»?",
+    "members": [
+      {
+        "id": "lennon",
+        "answerRu": "Джон Леннон",
+        "acceptedRu": [
+          "Джон Леннон",
+          "Леннон"
+        ]
+      },
+      {
+        "id": "mccartney",
+        "answerRu": "Пол Маккартни",
+        "acceptedRu": [
+          "Пол Маккартни",
+          "Маккартни"
+        ]
+      },
+      {
+        "id": "harrison",
+        "answerRu": "Джордж Харрисон",
+        "acceptedRu": [
+          "Джордж Харрисон",
+          "Харрисон"
+        ]
+      },
+      {
+        "id": "starr",
+        "answerRu": "Ринго Старр",
+        "acceptedRu": [
+          "Ринго Старр",
+          "Старр",
+          "Ринго"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Мик Джаггер",
+      "Фредди Меркьюри",
+      "Элтон Джон"
+    ],
+    "sourceHint": "Википедия: The Beatles",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-abba",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "music",
+    "titleRu": "Назови участника группы ABBA",
+    "mcPromptRu": "Кто из них — участник ABBA?",
+    "members": [
+      {
+        "id": "agnetha",
+        "answerRu": "Агнета Фельтског",
+        "acceptedRu": [
+          "Агнета Фельтског",
+          "Агнета"
+        ]
+      },
+      {
+        "id": "bjorn",
+        "answerRu": "Бьорн Ульвеус",
+        "acceptedRu": [
+          "Бьорн Ульвеус",
+          "Бьорн"
+        ]
+      },
+      {
+        "id": "benny",
+        "answerRu": "Бенни Андерссон",
+        "acceptedRu": [
+          "Бенни Андерссон",
+          "Бенни"
+        ]
+      },
+      {
+        "id": "frida",
+        "answerRu": "Анни-Фрид Лингстад",
+        "acceptedRu": [
+          "Анни-Фрид Лингстад",
+          "Фрида",
+          "Анни-Фрид"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Мадонна",
+      "Элвис Пресли",
+      "Шер"
+    ],
+    "sourceHint": "Википедия: ABBA",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-notes",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "music",
+    "titleRu": "Назови ноту",
+    "mcPromptRu": "Что из этого — нота?",
+    "members": [
+      {
+        "id": "do",
+        "answerRu": "до",
+        "acceptedRu": [
+          "до"
+        ]
+      },
+      {
+        "id": "re",
+        "answerRu": "ре",
+        "acceptedRu": [
+          "ре"
+        ]
+      },
+      {
+        "id": "mi",
+        "answerRu": "ми",
+        "acceptedRu": [
+          "ми"
+        ]
+      },
+      {
+        "id": "fa",
+        "answerRu": "фа",
+        "acceptedRu": [
+          "фа"
+        ]
+      },
+      {
+        "id": "sol",
+        "answerRu": "соль",
+        "acceptedRu": [
+          "соль"
+        ]
+      },
+      {
+        "id": "la",
+        "answerRu": "ля",
+        "acceptedRu": [
+          "ля"
+        ]
+      },
+      {
+        "id": "si",
+        "answerRu": "си",
+        "acceptedRu": [
+          "си"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "па",
+      "ба",
+      "ко"
+    ],
+    "sourceHint": "Википедия: Сольмизация",
+    "reviewNote": "Короткие ответы: только точное совпадение.",
+    "origin": "authored",
+    "license": "original"
+  }
+]

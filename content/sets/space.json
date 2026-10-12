@@ -1,0 +1,328 @@
+[
+  {
+    "id": "set-terrestrial-planets",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "space",
+    "titleRu": "Назови планету земной группы",
+    "mcPromptRu": "Что из этого — планета земной группы?",
+    "members": [
+      {
+        "id": "mercury",
+        "answerRu": "Меркурий",
+        "acceptedRu": [
+          "Меркурий"
+        ]
+      },
+      {
+        "id": "venus",
+        "answerRu": "Венера",
+        "acceptedRu": [
+          "Венера"
+        ]
+      },
+      {
+        "id": "earth",
+        "answerRu": "Земля",
+        "acceptedRu": [
+          "Земля"
+        ]
+      },
+      {
+        "id": "mars",
+        "answerRu": "Марс",
+        "acceptedRu": [
+          "Марс"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Юпитер",
+      "Луна",
+      "Плутон",
+      "Сатурн"
+    ],
+    "sourceHint": "Википедия: Планета земной группы",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-giant-planets",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "space",
+    "titleRu": "Назови планету-гигант",
+    "mcPromptRu": "Что из этого — планета-гигант?",
+    "members": [
+      {
+        "id": "jupiter",
+        "answerRu": "Юпитер",
+        "acceptedRu": [
+          "Юпитер"
+        ]
+      },
+      {
+        "id": "saturn",
+        "answerRu": "Сатурн",
+        "acceptedRu": [
+          "Сатурн"
+        ]
+      },
+      {
+        "id": "uranus",
+        "answerRu": "Уран",
+        "acceptedRu": [
+          "Уран"
+        ]
+      },
+      {
+        "id": "neptune",
+        "answerRu": "Нептун",
+        "acceptedRu": [
+          "Нептун"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Марс",
+      "Венера",
+      "Плутон",
+      "Земля"
+    ],
+    "sourceHint": "Википедия: Планета-гигант",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-dwarf-planets",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "space",
+    "titleRu": "Назови карликовую планету",
+    "mcPromptRu": "Что из этого — карликовая планета?",
+    "members": [
+      {
+        "id": "pluto",
+        "answerRu": "Плутон",
+        "acceptedRu": [
+          "Плутон"
+        ]
+      },
+      {
+        "id": "ceres",
+        "answerRu": "Церера",
+        "acceptedRu": [
+          "Церера"
+        ]
+      },
+      {
+        "id": "eris",
+        "answerRu": "Эрида",
+        "acceptedRu": [
+          "Эрида"
+        ]
+      },
+      {
+        "id": "makemake",
+        "answerRu": "Макемаке",
+        "acceptedRu": [
+          "Макемаке"
+        ]
+      },
+      {
+        "id": "haumea",
+        "answerRu": "Хаумеа",
+        "acceptedRu": [
+          "Хаумеа"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Луна",
+      "Марс",
+      "Титан",
+      "Ганимед"
+    ],
+    "sourceHint": "Международный астрономический союз: список карликовых планет",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-solar-planets",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "space",
+    "titleRu": "Назови планету Солнечной системы",
+    "mcPromptRu": "Что из этого — планета Солнечной системы?",
+    "members": [
+      {
+        "id": "mercury",
+        "answerRu": "Меркурий",
+        "acceptedRu": [
+          "Меркурий"
+        ]
+      },
+      {
+        "id": "venus",
+        "answerRu": "Венера",
+        "acceptedRu": [
+          "Венера"
+        ]
+      },
+      {
+        "id": "earth",
+        "answerRu": "Земля",
+        "acceptedRu": [
+          "Земля"
+        ]
+      },
+      {
+        "id": "mars",
+        "answerRu": "Марс",
+        "acceptedRu": [
+          "Марс"
+        ]
+      },
+      {
+        "id": "jupiter",
+        "answerRu": "Юпитер",
+        "acceptedRu": [
+          "Юпитер"
+        ]
+      },
+      {
+        "id": "saturn",
+        "answerRu": "Сатурн",
+        "acceptedRu": [
+          "Сатурн"
+        ]
+      },
+      {
+        "id": "uranus",
+        "answerRu": "Уран",
+        "acceptedRu": [
+          "Уран"
+        ]
+      },
+      {
+        "id": "neptune",
+        "answerRu": "Нептун",
+        "acceptedRu": [
+          "Нептун"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Плутон",
+      "Луна",
+      "Солнце",
+      "Церера"
+    ],
+    "sourceHint": "Международный астрономический союз, резолюция 2006 года",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-zodiac",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "space",
+    "titleRu": "Назови знак зодиака",
+    "mcPromptRu": "Что из этого — знак зодиака?",
+    "members": [
+      {
+        "id": "aries",
+        "answerRu": "Овен",
+        "acceptedRu": [
+          "Овен"
+        ]
+      },
+      {
+        "id": "taurus",
+        "answerRu": "Телец",
+        "acceptedRu": [
+          "Телец"
+        ]
+      },
+      {
+        "id": "gemini",
+        "answerRu": "Близнецы",
+        "acceptedRu": [
+          "Близнецы"
+        ]
+      },
+      {
+        "id": "cancer",
+        "answerRu": "Рак",
+        "acceptedRu": [
+          "Рак"
+        ]
+      },
+      {
+        "id": "leo",
+        "answerRu": "Лев",
+        "acceptedRu": [
+          "Лев"
+        ]
+      },
+      {
+        "id": "virgo",
+        "answerRu": "Дева",
+        "acceptedRu": [
+          "Дева"
+        ]
+      },
+      {
+        "id": "libra",
+        "answerRu": "Весы",
+        "acceptedRu": [
+          "Весы"
+        ]
+      },
+      {
+        "id": "scorpio",
+        "answerRu": "Скорпион",
+        "acceptedRu": [
+          "Скорпион"
+        ]
+      },
+      {
+        "id": "sagittarius",
+        "answerRu": "Стрелец",
+        "acceptedRu": [
+          "Стрелец"
+        ]
+      },
+      {
+        "id": "capricorn",
+        "answerRu": "Козерог",
+        "acceptedRu": [
+          "Козерог"
+        ]
+      },
+      {
+        "id": "aquarius",
+        "answerRu": "Водолей",
+        "acceptedRu": [
+          "Водолей"
+        ]
+      },
+      {
+        "id": "pisces",
+        "answerRu": "Рыбы",
+        "acceptedRu": [
+          "Рыбы"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Змееносец",
+      "Дракон",
+      "Кит"
+    ],
+    "sourceHint": "Википедия: Знаки зодиака",
+    "reviewNote": "Змееносец — созвездие на эклиптике, но не знак: возможна путаница.",
+    "origin": "authored",
+    "license": "original"
+  }
+]

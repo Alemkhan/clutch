@@ -1,0 +1,1031 @@
+[
+  {
+    "id": "set-elements-classical",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "science",
+    "titleRu": "Назови одну из четырёх стихий",
+    "mcPromptRu": "Что из этого — одна из четырёх стихий?",
+    "members": [
+      {
+        "id": "fire",
+        "answerRu": "огонь",
+        "acceptedRu": [
+          "огонь"
+        ]
+      },
+      {
+        "id": "water",
+        "answerRu": "вода",
+        "acceptedRu": [
+          "вода"
+        ]
+      },
+      {
+        "id": "earth",
+        "answerRu": "земля",
+        "acceptedRu": [
+          "земля"
+        ]
+      },
+      {
+        "id": "air",
+        "answerRu": "воздух",
+        "acceptedRu": [
+          "воздух"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "металл",
+      "дерево",
+      "лёд"
+    ],
+    "sourceHint": "Википедия: Четыре стихии",
+    "reviewNote": "Металл и дерево — стихии китайской традиции: проверить, не путают ли.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-noble-gases",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "science",
+    "titleRu": "Назови благородный газ",
+    "mcPromptRu": "Что из этого — благородный газ?",
+    "members": [
+      {
+        "id": "he",
+        "answerRu": "гелий",
+        "acceptedRu": [
+          "гелий"
+        ]
+      },
+      {
+        "id": "ne",
+        "answerRu": "неон",
+        "acceptedRu": [
+          "неон"
+        ]
+      },
+      {
+        "id": "ar",
+        "answerRu": "аргон",
+        "acceptedRu": [
+          "аргон"
+        ]
+      },
+      {
+        "id": "kr",
+        "answerRu": "криптон",
+        "acceptedRu": [
+          "криптон"
+        ]
+      },
+      {
+        "id": "xe",
+        "answerRu": "ксенон",
+        "acceptedRu": [
+          "ксенон"
+        ]
+      },
+      {
+        "id": "rn",
+        "answerRu": "радон",
+        "acceptedRu": [
+          "радон"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "водород",
+      "азот",
+      "кислород",
+      "хлор"
+    ],
+    "sourceHint": "Википедия: Благородные газы",
+    "reviewNote": "Оганесон формально тоже в 18-й группе — решить, принимать ли его как ответ.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-rainbow",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "science",
+    "titleRu": "Назови цвет радуги",
+    "mcPromptRu": "Какой из этих цветов есть в радуге?",
+    "members": [
+      {
+        "id": "red",
+        "answerRu": "красный",
+        "acceptedRu": [
+          "красный"
+        ]
+      },
+      {
+        "id": "orange",
+        "answerRu": "оранжевый",
+        "acceptedRu": [
+          "оранжевый"
+        ]
+      },
+      {
+        "id": "yellow",
+        "answerRu": "жёлтый",
+        "acceptedRu": [
+          "жёлтый",
+          "желтый"
+        ]
+      },
+      {
+        "id": "green",
+        "answerRu": "зелёный",
+        "acceptedRu": [
+          "зелёный",
+          "зеленый"
+        ]
+      },
+      {
+        "id": "cyan",
+        "answerRu": "голубой",
+        "acceptedRu": [
+          "голубой"
+        ]
+      },
+      {
+        "id": "blue",
+        "answerRu": "синий",
+        "acceptedRu": [
+          "синий"
+        ]
+      },
+      {
+        "id": "violet",
+        "answerRu": "фиолетовый",
+        "acceptedRu": [
+          "фиолетовый"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "розовый",
+      "коричневый",
+      "белый",
+      "чёрный"
+    ],
+    "sourceHint": "Википедия: Радуга",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-chemical-elements",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "science",
+    "titleRu": "Назови химический элемент",
+    "mcPromptRu": "Что из этого — химический элемент?",
+    "members": [
+      {
+        "id": "H",
+        "answerRu": "водород",
+        "acceptedRu": [
+          "водород"
+        ]
+      },
+      {
+        "id": "He",
+        "answerRu": "гелий",
+        "acceptedRu": [
+          "гелий"
+        ]
+      },
+      {
+        "id": "Li",
+        "answerRu": "литий",
+        "acceptedRu": [
+          "литий"
+        ]
+      },
+      {
+        "id": "Be",
+        "answerRu": "бериллий",
+        "acceptedRu": [
+          "бериллий"
+        ]
+      },
+      {
+        "id": "B",
+        "answerRu": "бор",
+        "acceptedRu": [
+          "бор"
+        ]
+      },
+      {
+        "id": "C",
+        "answerRu": "углерод",
+        "acceptedRu": [
+          "углерод"
+        ]
+      },
+      {
+        "id": "N",
+        "answerRu": "азот",
+        "acceptedRu": [
+          "азот"
+        ]
+      },
+      {
+        "id": "O",
+        "answerRu": "кислород",
+        "acceptedRu": [
+          "кислород"
+        ]
+      },
+      {
+        "id": "F",
+        "answerRu": "фтор",
+        "acceptedRu": [
+          "фтор"
+        ]
+      },
+      {
+        "id": "Ne",
+        "answerRu": "неон",
+        "acceptedRu": [
+          "неон"
+        ]
+      },
+      {
+        "id": "Na",
+        "answerRu": "натрий",
+        "acceptedRu": [
+          "натрий"
+        ]
+      },
+      {
+        "id": "Mg",
+        "answerRu": "магний",
+        "acceptedRu": [
+          "магний"
+        ]
+      },
+      {
+        "id": "Al",
+        "answerRu": "алюминий",
+        "acceptedRu": [
+          "алюминий"
+        ]
+      },
+      {
+        "id": "Si",
+        "answerRu": "кремний",
+        "acceptedRu": [
+          "кремний"
+        ]
+      },
+      {
+        "id": "P",
+        "answerRu": "фосфор",
+        "acceptedRu": [
+          "фосфор"
+        ]
+      },
+      {
+        "id": "S",
+        "answerRu": "сера",
+        "acceptedRu": [
+          "сера"
+        ]
+      },
+      {
+        "id": "Cl",
+        "answerRu": "хлор",
+        "acceptedRu": [
+          "хлор"
+        ]
+      },
+      {
+        "id": "Ar",
+        "answerRu": "аргон",
+        "acceptedRu": [
+          "аргон"
+        ]
+      },
+      {
+        "id": "K",
+        "answerRu": "калий",
+        "acceptedRu": [
+          "калий"
+        ]
+      },
+      {
+        "id": "Ca",
+        "answerRu": "кальций",
+        "acceptedRu": [
+          "кальций"
+        ]
+      },
+      {
+        "id": "Sc",
+        "answerRu": "скандий",
+        "acceptedRu": [
+          "скандий"
+        ]
+      },
+      {
+        "id": "Ti",
+        "answerRu": "титан",
+        "acceptedRu": [
+          "титан"
+        ]
+      },
+      {
+        "id": "V",
+        "answerRu": "ванадий",
+        "acceptedRu": [
+          "ванадий"
+        ]
+      },
+      {
+        "id": "Cr",
+        "answerRu": "хром",
+        "acceptedRu": [
+          "хром"
+        ]
+      },
+      {
+        "id": "Mn",
+        "answerRu": "марганец",
+        "acceptedRu": [
+          "марганец"
+        ]
+      },
+      {
+        "id": "Fe",
+        "answerRu": "железо",
+        "acceptedRu": [
+          "железо"
+        ]
+      },
+      {
+        "id": "Co",
+        "answerRu": "кобальт",
+        "acceptedRu": [
+          "кобальт"
+        ]
+      },
+      {
+        "id": "Ni",
+        "answerRu": "никель",
+        "acceptedRu": [
+          "никель"
+        ]
+      },
+      {
+        "id": "Cu",
+        "answerRu": "медь",
+        "acceptedRu": [
+          "медь"
+        ]
+      },
+      {
+        "id": "Zn",
+        "answerRu": "цинк",
+        "acceptedRu": [
+          "цинк"
+        ]
+      },
+      {
+        "id": "Ga",
+        "answerRu": "галлий",
+        "acceptedRu": [
+          "галлий"
+        ]
+      },
+      {
+        "id": "Ge",
+        "answerRu": "германий",
+        "acceptedRu": [
+          "германий"
+        ]
+      },
+      {
+        "id": "As",
+        "answerRu": "мышьяк",
+        "acceptedRu": [
+          "мышьяк"
+        ]
+      },
+      {
+        "id": "Se",
+        "answerRu": "селен",
+        "acceptedRu": [
+          "селен"
+        ]
+      },
+      {
+        "id": "Br",
+        "answerRu": "бром",
+        "acceptedRu": [
+          "бром"
+        ]
+      },
+      {
+        "id": "Kr",
+        "answerRu": "криптон",
+        "acceptedRu": [
+          "криптон"
+        ]
+      },
+      {
+        "id": "Rb",
+        "answerRu": "рубидий",
+        "acceptedRu": [
+          "рубидий"
+        ]
+      },
+      {
+        "id": "Sr",
+        "answerRu": "стронций",
+        "acceptedRu": [
+          "стронций"
+        ]
+      },
+      {
+        "id": "Y",
+        "answerRu": "иттрий",
+        "acceptedRu": [
+          "иттрий"
+        ]
+      },
+      {
+        "id": "Zr",
+        "answerRu": "цирконий",
+        "acceptedRu": [
+          "цирконий"
+        ]
+      },
+      {
+        "id": "Nb",
+        "answerRu": "ниобий",
+        "acceptedRu": [
+          "ниобий"
+        ]
+      },
+      {
+        "id": "Mo",
+        "answerRu": "молибден",
+        "acceptedRu": [
+          "молибден"
+        ]
+      },
+      {
+        "id": "Tc",
+        "answerRu": "технеций",
+        "acceptedRu": [
+          "технеций"
+        ]
+      },
+      {
+        "id": "Ru",
+        "answerRu": "рутений",
+        "acceptedRu": [
+          "рутений"
+        ]
+      },
+      {
+        "id": "Rh",
+        "answerRu": "родий",
+        "acceptedRu": [
+          "родий"
+        ]
+      },
+      {
+        "id": "Pd",
+        "answerRu": "палладий",
+        "acceptedRu": [
+          "палладий"
+        ]
+      },
+      {
+        "id": "Ag",
+        "answerRu": "серебро",
+        "acceptedRu": [
+          "серебро"
+        ]
+      },
+      {
+        "id": "Cd",
+        "answerRu": "кадмий",
+        "acceptedRu": [
+          "кадмий"
+        ]
+      },
+      {
+        "id": "In",
+        "answerRu": "индий",
+        "acceptedRu": [
+          "индий"
+        ]
+      },
+      {
+        "id": "Sn",
+        "answerRu": "олово",
+        "acceptedRu": [
+          "олово"
+        ]
+      },
+      {
+        "id": "Sb",
+        "answerRu": "сурьма",
+        "acceptedRu": [
+          "сурьма"
+        ]
+      },
+      {
+        "id": "Te",
+        "answerRu": "теллур",
+        "acceptedRu": [
+          "теллур"
+        ]
+      },
+      {
+        "id": "I",
+        "answerRu": "иод",
+        "acceptedRu": [
+          "иод"
+        ]
+      },
+      {
+        "id": "Xe",
+        "answerRu": "ксенон",
+        "acceptedRu": [
+          "ксенон"
+        ]
+      },
+      {
+        "id": "Cs",
+        "answerRu": "цезий",
+        "acceptedRu": [
+          "цезий"
+        ]
+      },
+      {
+        "id": "Ba",
+        "answerRu": "барий",
+        "acceptedRu": [
+          "барий"
+        ]
+      },
+      {
+        "id": "La",
+        "answerRu": "лантан",
+        "acceptedRu": [
+          "лантан"
+        ]
+      },
+      {
+        "id": "Ce",
+        "answerRu": "церий",
+        "acceptedRu": [
+          "церий"
+        ]
+      },
+      {
+        "id": "Pr",
+        "answerRu": "празеодим",
+        "acceptedRu": [
+          "празеодим"
+        ]
+      },
+      {
+        "id": "Nd",
+        "answerRu": "неодим",
+        "acceptedRu": [
+          "неодим"
+        ]
+      },
+      {
+        "id": "Pm",
+        "answerRu": "прометий",
+        "acceptedRu": [
+          "прометий"
+        ]
+      },
+      {
+        "id": "Sm",
+        "answerRu": "самарий",
+        "acceptedRu": [
+          "самарий"
+        ]
+      },
+      {
+        "id": "Eu",
+        "answerRu": "европий",
+        "acceptedRu": [
+          "европий"
+        ]
+      },
+      {
+        "id": "Gd",
+        "answerRu": "гадолиний",
+        "acceptedRu": [
+          "гадолиний"
+        ]
+      },
+      {
+        "id": "Tb",
+        "answerRu": "тербий",
+        "acceptedRu": [
+          "тербий"
+        ]
+      },
+      {
+        "id": "Dy",
+        "answerRu": "диспрозий",
+        "acceptedRu": [
+          "диспрозий"
+        ]
+      },
+      {
+        "id": "Ho",
+        "answerRu": "гольмий",
+        "acceptedRu": [
+          "гольмий"
+        ]
+      },
+      {
+        "id": "Er",
+        "answerRu": "эрбий",
+        "acceptedRu": [
+          "эрбий"
+        ]
+      },
+      {
+        "id": "Tm",
+        "answerRu": "тулий",
+        "acceptedRu": [
+          "тулий"
+        ]
+      },
+      {
+        "id": "Yb",
+        "answerRu": "иттербий",
+        "acceptedRu": [
+          "иттербий"
+        ]
+      },
+      {
+        "id": "Lu",
+        "answerRu": "лютеций",
+        "acceptedRu": [
+          "лютеций"
+        ]
+      },
+      {
+        "id": "Hf",
+        "answerRu": "гафний",
+        "acceptedRu": [
+          "гафний"
+        ]
+      },
+      {
+        "id": "Ta",
+        "answerRu": "тантал",
+        "acceptedRu": [
+          "тантал"
+        ]
+      },
+      {
+        "id": "W",
+        "answerRu": "вольфрам",
+        "acceptedRu": [
+          "вольфрам"
+        ]
+      },
+      {
+        "id": "Re",
+        "answerRu": "рений",
+        "acceptedRu": [
+          "рений"
+        ]
+      },
+      {
+        "id": "Os",
+        "answerRu": "осмий",
+        "acceptedRu": [
+          "осмий"
+        ]
+      },
+      {
+        "id": "Ir",
+        "answerRu": "иридий",
+        "acceptedRu": [
+          "иридий"
+        ]
+      },
+      {
+        "id": "Pt",
+        "answerRu": "платина",
+        "acceptedRu": [
+          "платина"
+        ]
+      },
+      {
+        "id": "Au",
+        "answerRu": "золото",
+        "acceptedRu": [
+          "золото"
+        ]
+      },
+      {
+        "id": "Hg",
+        "answerRu": "ртуть",
+        "acceptedRu": [
+          "ртуть"
+        ]
+      },
+      {
+        "id": "Tl",
+        "answerRu": "таллий",
+        "acceptedRu": [
+          "таллий"
+        ]
+      },
+      {
+        "id": "Pb",
+        "answerRu": "свинец",
+        "acceptedRu": [
+          "свинец"
+        ]
+      },
+      {
+        "id": "Bi",
+        "answerRu": "висмут",
+        "acceptedRu": [
+          "висмут"
+        ]
+      },
+      {
+        "id": "Po",
+        "answerRu": "полоний",
+        "acceptedRu": [
+          "полоний"
+        ]
+      },
+      {
+        "id": "At",
+        "answerRu": "астат",
+        "acceptedRu": [
+          "астат"
+        ]
+      },
+      {
+        "id": "Rn",
+        "answerRu": "радон",
+        "acceptedRu": [
+          "радон"
+        ]
+      },
+      {
+        "id": "Fr",
+        "answerRu": "франций",
+        "acceptedRu": [
+          "франций"
+        ]
+      },
+      {
+        "id": "Ra",
+        "answerRu": "радий",
+        "acceptedRu": [
+          "радий"
+        ]
+      },
+      {
+        "id": "Ac",
+        "answerRu": "актиний",
+        "acceptedRu": [
+          "актиний"
+        ]
+      },
+      {
+        "id": "Th",
+        "answerRu": "торий",
+        "acceptedRu": [
+          "торий"
+        ]
+      },
+      {
+        "id": "Pa",
+        "answerRu": "протактиний",
+        "acceptedRu": [
+          "протактиний"
+        ]
+      },
+      {
+        "id": "U",
+        "answerRu": "уран",
+        "acceptedRu": [
+          "уран"
+        ]
+      },
+      {
+        "id": "Np",
+        "answerRu": "нептуний",
+        "acceptedRu": [
+          "нептуний"
+        ]
+      },
+      {
+        "id": "Pu",
+        "answerRu": "плутоний",
+        "acceptedRu": [
+          "плутоний"
+        ]
+      },
+      {
+        "id": "Am",
+        "answerRu": "америций",
+        "acceptedRu": [
+          "америций"
+        ]
+      },
+      {
+        "id": "Cm",
+        "answerRu": "кюрий",
+        "acceptedRu": [
+          "кюрий"
+        ]
+      },
+      {
+        "id": "Bk",
+        "answerRu": "берклий",
+        "acceptedRu": [
+          "берклий"
+        ]
+      },
+      {
+        "id": "Cf",
+        "answerRu": "калифорний",
+        "acceptedRu": [
+          "калифорний"
+        ]
+      },
+      {
+        "id": "Es",
+        "answerRu": "эйнштейний",
+        "acceptedRu": [
+          "эйнштейний"
+        ]
+      },
+      {
+        "id": "Fm",
+        "answerRu": "фермий",
+        "acceptedRu": [
+          "фермий"
+        ]
+      },
+      {
+        "id": "Md",
+        "answerRu": "менделевий",
+        "acceptedRu": [
+          "менделевий"
+        ]
+      },
+      {
+        "id": "No",
+        "answerRu": "нобелий",
+        "acceptedRu": [
+          "нобелий"
+        ]
+      },
+      {
+        "id": "Lr",
+        "answerRu": "лоуренсий",
+        "acceptedRu": [
+          "лоуренсий"
+        ]
+      },
+      {
+        "id": "Rf",
+        "answerRu": "резерфордий",
+        "acceptedRu": [
+          "резерфордий"
+        ]
+      },
+      {
+        "id": "Db",
+        "answerRu": "дубний",
+        "acceptedRu": [
+          "дубний"
+        ]
+      },
+      {
+        "id": "Sg",
+        "answerRu": "сиборгий",
+        "acceptedRu": [
+          "сиборгий"
+        ]
+      },
+      {
+        "id": "Bh",
+        "answerRu": "борий",
+        "acceptedRu": [
+          "борий"
+        ]
+      },
+      {
+        "id": "Hs",
+        "answerRu": "хассий",
+        "acceptedRu": [
+          "хассий"
+        ]
+      },
+      {
+        "id": "Mt",
+        "answerRu": "мейтнерий",
+        "acceptedRu": [
+          "мейтнерий"
+        ]
+      },
+      {
+        "id": "Ds",
+        "answerRu": "дармштадтий",
+        "acceptedRu": [
+          "дармштадтий"
+        ]
+      },
+      {
+        "id": "Rg",
+        "answerRu": "рентгений",
+        "acceptedRu": [
+          "рентгений"
+        ]
+      },
+      {
+        "id": "Cn",
+        "answerRu": "коперниций",
+        "acceptedRu": [
+          "коперниций"
+        ]
+      },
+      {
+        "id": "Nh",
+        "answerRu": "нихоний",
+        "acceptedRu": [
+          "нихоний"
+        ]
+      },
+      {
+        "id": "Fl",
+        "answerRu": "флеровий",
+        "acceptedRu": [
+          "флеровий"
+        ]
+      },
+      {
+        "id": "Mc",
+        "answerRu": "московий",
+        "acceptedRu": [
+          "московий"
+        ]
+      },
+      {
+        "id": "Lv",
+        "answerRu": "ливерморий",
+        "acceptedRu": [
+          "ливерморий"
+        ]
+      },
+      {
+        "id": "Ts",
+        "answerRu": "теннессин",
+        "acceptedRu": [
+          "теннессин"
+        ]
+      },
+      {
+        "id": "Og",
+        "answerRu": "оганесон",
+        "acceptedRu": [
+          "оганесон"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "стекло",
+      "бронза",
+      "сталь",
+      "вода",
+      "гранит",
+      "латунь",
+      "кварц",
+      "алмаз"
+    ],
+    "sourceUrl": "https://www.wikidata.org/wiki/Q11344",
+    "sourceTitle": "Wikidata: химический элемент",
+    "origin": "wikidata",
+    "license": "CC0"
+  }
+]

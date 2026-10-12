@@ -179,6 +179,7 @@ export default function App() {
               practice={practiceLevel ?? undefined}
               onMyRuns={game.goToMyRuns}
               rematch={soloRematch}
+              defaultCategory={practiceLevel ? undefined : 'general'}
               onStageChange={setSoloStage}
             />
           </motion.div>

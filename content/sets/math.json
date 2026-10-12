@@ -1,0 +1,56 @@
+[
+  {
+    "id": "set-platonic-solids",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "math",
+    "titleRu": "Назови правильный многогранник",
+    "mcPromptRu": "Что из этого — правильный многогранник?",
+    "members": [
+      {
+        "id": "tetrahedron",
+        "answerRu": "тетраэдр",
+        "acceptedRu": [
+          "тетраэдр"
+        ]
+      },
+      {
+        "id": "cube",
+        "answerRu": "куб",
+        "acceptedRu": [
+          "куб",
+          "гексаэдр"
+        ]
+      },
+      {
+        "id": "octahedron",
+        "answerRu": "октаэдр",
+        "acceptedRu": [
+          "октаэдр"
+        ]
+      },
+      {
+        "id": "dodecahedron",
+        "answerRu": "додекаэдр",
+        "acceptedRu": [
+          "додекаэдр"
+        ]
+      },
+      {
+        "id": "icosahedron",
+        "answerRu": "икосаэдр",
+        "acceptedRu": [
+          "икосаэдр"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "пирамида",
+      "призма",
+      "конус"
+    ],
+    "sourceHint": "Википедия: Правильный многогранник",
+    "origin": "authored",
+    "license": "original"
+  }
+]

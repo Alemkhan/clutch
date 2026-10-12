@@ -1,0 +1,396 @@
+[
+  {
+    "id": "au-sport-m9n934",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Easy",
+    "promptRu": "Сколько колец на олимпийском флаге?",
+    "answerRu": "5",
+    "acceptedRu": [
+      "5",
+      "пять"
+    ],
+    "distractorsRu": [
+      "4",
+      "6",
+      "7"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Олимпийские кольца",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-8ve7ki",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Easy",
+    "promptRu": "Сколько игроков одной команды на площадке в баскетболе?",
+    "answerRu": "5",
+    "acceptedRu": [
+      "5",
+      "пять"
+    ],
+    "distractorsRu": [
+      "6",
+      "7",
+      "11"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Баскетбол",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-6e612i",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Easy",
+    "promptRu": "В какой игре бывают шах и мат?",
+    "answerRu": "шахматы",
+    "acceptedRu": [
+      "шахматы"
+    ],
+    "distractorsRu": [
+      "шашки",
+      "го",
+      "нарды"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Шахматы",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-gelogu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Easy",
+    "promptRu": "В какой игре используют ракетку и волан?",
+    "answerRu": "бадминтон",
+    "acceptedRu": [
+      "бадминтон"
+    ],
+    "distractorsRu": [
+      "теннис",
+      "сквош",
+      "настольный теннис"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Бадминтон",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-1a5i25f",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Раз во сколько лет проходят летние Олимпийские игры?",
+    "answerRu": "4",
+    "acceptedRu": [
+      "4",
+      "четыре"
+    ],
+    "distractorsRu": [
+      "2",
+      "3",
+      "5"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Летние Олимпийские игры",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-1djvqe1",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Сколько минут длится основное время футбольного матча?",
+    "answerRu": "90",
+    "acceptedRu": [
+      "90",
+      "девяносто"
+    ],
+    "distractorsRu": [
+      "60",
+      "80",
+      "120"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Футбол",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-1yb67t7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Какая сборная выиграла больше всех чемпионатов мира по футболу?",
+    "answerRu": "Бразилия",
+    "acceptedRu": [
+      "Бразилия"
+    ],
+    "distractorsRu": [
+      "Германия",
+      "Италия",
+      "Аргентина"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Чемпионат мира по футболу",
+    "reviewNote": "Проверить итог ЧМ-2026: при новом чемпионе счёт может сравняться.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-1pmvzk5",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Какой вид спорта называют королевой спорта?",
+    "answerRu": "лёгкая атлетика",
+    "acceptedRu": [
+      "лёгкая атлетика",
+      "легкая атлетика",
+      "атлетика"
+    ],
+    "distractorsRu": [
+      "плавание",
+      "гимнастика",
+      "футбол"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Лёгкая атлетика",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-1o4qm3q",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "В каком городе прошли летние Олимпийские игры 1980 года?",
+    "answerRu": "Москва",
+    "acceptedRu": [
+      "Москва"
+    ],
+    "distractorsRu": [
+      "Лос-Анджелес",
+      "Монреаль",
+      "Мюнхен"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Летние Олимпийские игры 1980",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-ss1zeq",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Кто установил мировой рекорд на 100 метров — 9,58 секунды?",
+    "answerRu": "Усэйн Болт",
+    "acceptedRu": [
+      "Усэйн Болт",
+      "Усейн Болт",
+      "Болт"
+    ],
+    "distractorsRu": [
+      "Карл Льюис",
+      "Тайсон Гэй",
+      "Йохан Блейк"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Болт, Усэйн",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-1e9lafc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Hard",
+    "promptRu": "За какой трофей борются в Национальной хоккейной лиге?",
+    "answerRu": "Кубок Стэнли",
+    "acceptedRu": [
+      "Кубок Стэнли",
+      "Стэнли"
+    ],
+    "distractorsRu": [
+      "Кубок Гагарина",
+      "Кубок Дэвиса",
+      "Кубок Райдера"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Кубок Стэнли",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-3sfvu6",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Hard",
+    "promptRu": "Сколько игроков одной команды на площадке в волейболе?",
+    "answerRu": "6",
+    "acceptedRu": [
+      "6",
+      "шесть"
+    ],
+    "distractorsRu": [
+      "5",
+      "7",
+      "9"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Волейбол",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-1y6nhe6",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Hard",
+    "promptRu": "Кто в 1985 году в 22 года стал чемпионом мира по шахматам?",
+    "answerRu": "Гарри Каспаров",
+    "acceptedRu": [
+      "Гарри Каспаров",
+      "Каспаров"
+    ],
+    "distractorsRu": [
+      "Анатолий Карпов",
+      "Магнус Карлсен",
+      "Бобби Фишер"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Каспаров, Гарри Кимович",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-1s64hfr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Hard",
+    "promptRu": "Какова длина олимпийского бассейна в метрах?",
+    "answerRu": "50",
+    "acceptedRu": [
+      "50",
+      "пятьдесят"
+    ],
+    "distractorsRu": [
+      "25",
+      "100",
+      "75"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Плавательный бассейн",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-afoq59",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Expert",
+    "promptRu": "В каком году прошли первые Олимпийские игры современности?",
+    "answerRu": "1896",
+    "acceptedRu": [
+      "1896"
+    ],
+    "distractorsRu": [
+      "1900",
+      "1888",
+      "1912"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Летние Олимпийские игры 1896",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-1upvhy5",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Expert",
+    "promptRu": "В каком городе прошли первые Олимпийские игры современности?",
+    "answerRu": "Афины",
+    "acceptedRu": [
+      "Афины"
+    ],
+    "distractorsRu": [
+      "Париж",
+      "Лондон",
+      "Олимпия"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Летние Олимпийские игры 1896",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-14zjih7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Expert",
+    "promptRu": "Как называется круглый помост, на котором борются сумоисты?",
+    "answerRu": "дохё",
+    "acceptedRu": [
+      "дохё",
+      "дохе"
+    ],
+    "distractorsRu": [
+      "татами",
+      "ринг",
+      "октагон"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Сумо",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-sport-10nzs1n",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Expert",
+    "promptRu": "Сколько раундов длится чемпионский бой в профессиональном боксе?",
+    "answerRu": "12",
+    "acceptedRu": [
+      "12",
+      "двенадцать"
+    ],
+    "distractorsRu": [
+      "10",
+      "15",
+      "8"
+    ],
+    "openAnswer": true,
+    "explanationRu": "До 1980-х чемпионские бои шли 15 раундов.",
+    "sourceHint": "Википедия: Бокс",
+    "origin": "authored",
+    "license": "original"
+  }
+]

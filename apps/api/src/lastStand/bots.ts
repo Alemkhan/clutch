@@ -55,7 +55,11 @@ export const SLOW_BOT: LastStandBotProfile = {
 
 export const LAST_STAND_BOT_PROFILES: readonly LastStandBotProfile[] = [FAST_BOT, SLOW_BOT];
 
-function orderedMembers(members: readonly string[], dateKey: string): string[] {
+/** Members from the most obvious to the least; bots and the mine draw from the same order. */
+export function orderedMembers(round: Pick<LastStandRound, 'categoryId' | 'members'>, dateKey: string): string[] {
+  // A pack category lists its members from the most obvious to the least: keep that order.
+  if (round.categoryId.startsWith('gp:')) return [...round.members];
+  const members = round.members;
   const tieBreak = (code: string) => hashSeed(`ls-order:${dateKey}:${code}`);
   return [...members].sort((a, b) => {
     const ra = obviousRank.get(a) ?? Infinity;
@@ -63,6 +67,23 @@ function orderedMembers(members: readonly string[], dateKey: string): string[] {
     if (ra !== rb) return ra < rb ? -1 : 1;
     return tieBreak(a) - tieBreak(b);
   });
+}
+
+/** The mine is one of this many most obvious members. */
+export const MINE_POOL_SIZE = 3;
+
+/**
+ * The system's pre-set answer for a round: one of the most obvious members, fixed by (dateKey, round).
+ * Server only — never put it into a LastStandRound or a client payload.
+ */
+export function mineForRound(
+  round: Pick<LastStandRound, 'index' | 'categoryId' | 'members'>,
+  dateKey: string,
+): string | null {
+  const top = orderedMembers(round, dateKey).slice(0, MINE_POOL_SIZE);
+  if (top.length === 0) return null;
+  const random = createSeededRandom(hashSeed(`ls-mine:${dateKey}:${round.index}`));
+  return top[Math.min(top.length - 1, Math.floor(random() * top.length))];
 }
 
 /**
@@ -77,12 +98,14 @@ export function createLastStandBot(
 ): LastStandOpponent {
   const random = createSeededRandom(hashSeed(`ls-bot:${profile.id}:${dateKey}:${playerId}`));
   const answers = rounds.slice(0, LAST_STAND_MAX_ROUNDS).map((round) => {
-    const ordered = orderedMembers(round.members, dateKey);
+    // Records belong to players who survived, so a bot never names the mine.
+    const mine = mineForRound(round, dateKey);
+    const ordered = orderedMembers(round, dateKey).filter((member) => member !== mine);
     // Exactly two draws per round keep later rounds independent of earlier branching.
     const pickDraw = random();
     const timeDraw = random();
     const pickRandom = createSeededRandom(Math.floor(pickDraw * 4294967296));
-    const index = Math.min(ordered.length - 1, profile.pickIndex(pickRandom, ordered.length));
+    const index = Math.max(0, Math.min(ordered.length - 1, profile.pickIndex(pickRandom, ordered.length)));
     const atMs = profile.answerMs(() => timeDraw, round);
     return { answer: ordered[index], atMs: Math.min(atMs, round.baseTimeMs - 1) };
   });

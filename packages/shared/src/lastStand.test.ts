@@ -5,6 +5,7 @@ import {
   applyLastStandResolution,
   countFreeOptions,
   createLastStandGame,
+  freeOptions,
   currentLastStandRound,
   isExhausted,
   narrowShareAt,
@@ -380,5 +381,41 @@ describe('state', () => {
     }
     expect(state).toMatchObject({ status: 'cleared', survived: 12, eliminatedBy: null });
     expect(currentLastStandRound(state)).toBeNull();
+  });
+});
+
+describe('mine (system pre-set answer)', () => {
+  const round = { members: ['a', 'b', 'c'], baseTimeMs: 10_000, collisionBonusMs: 5_000 };
+  const record = (answer: string) => ({ answer, atMs: 1000 });
+
+  it('eliminates with reason mined, even when a record holds the same answer', () => {
+    const base = { round, atMs: 2000, collisions: 0 };
+    expect(resolveLastStandAnswer({ ...base, answer: 'a', records: [null, null], mine: 'a' }))
+      .toEqual({ kind: 'eliminated', reason: 'mined' });
+    expect(resolveLastStandAnswer({ ...base, answer: 'a', records: [record('a'), null], mine: 'a' }))
+      .toEqual({ kind: 'eliminated', reason: 'mined' });
+  });
+
+  it('still reports occupied for a record match that is not the mine', () => {
+    const resolution = resolveLastStandAnswer({
+      round, answer: 'b', atMs: 2000, collisions: 0, records: [record('b'), null], mine: 'a',
+    });
+    expect(resolution).toMatchObject({ kind: 'occupied', freeLeft: 1 });
+  });
+
+  it('checks exhausted and timeout before the mine, and invalid input is not a mine hit', () => {
+    expect(resolveLastStandAnswer({ round, answer: 'a', atMs: 99_000, collisions: 0, records: [], mine: 'a' }))
+      .toEqual({ kind: 'eliminated', reason: 'timeout' });
+    expect(resolveLastStandAnswer({ round, answer: null, atMs: 100, collisions: 0, records: [], mine: 'a' }))
+      .toEqual({ kind: 'invalid' });
+  });
+
+  it('does not count the mine as a free option; only the mine left is exhausted', () => {
+    expect(freeOptions(['a', 'b', 'c'], [record('b')], 'a')).toEqual(['c']);
+    expect(isExhausted(['a', 'b', 'c'], [record('b'), record('c')], 'a')).toBe(true);
+    expect(isExhausted(['a', 'b', 'c'], [record('b'), record('c')])).toBe(false);
+    expect(resolveLastStandAnswer({
+      round, answer: 'a', atMs: 100, collisions: 0, records: [record('b'), record('c')], mine: 'a',
+    })).toEqual({ kind: 'eliminated', reason: 'exhausted' });
   });
 });

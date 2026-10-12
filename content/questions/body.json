@@ -1,0 +1,471 @@
+[
+  {
+    "id": "au-body-eh8onz",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Easy",
+    "promptRu": "Какой орган качает кровь по телу?",
+    "answerRu": "сердце",
+    "acceptedRu": [
+      "сердце"
+    ],
+    "distractorsRu": [
+      "печень",
+      "лёгкие",
+      "почки"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Сердце",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-1sc4k0r",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Easy",
+    "promptRu": "Какой орган защищает череп?",
+    "answerRu": "мозг",
+    "acceptedRu": [
+      "мозг",
+      "головной мозг"
+    ],
+    "distractorsRu": [
+      "сердце",
+      "печень",
+      "лёгкие"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Череп",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-1mcmw9r",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Какой орган человека самый большой?",
+    "answerRu": "кожа",
+    "acceptedRu": [
+      "кожа"
+    ],
+    "distractorsRu": [
+      "печень",
+      "мозг",
+      "лёгкие"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Кожа",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-1mipivi",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Сколько камер в сердце человека?",
+    "answerRu": "4",
+    "acceptedRu": [
+      "4",
+      "четыре"
+    ],
+    "distractorsRu": [
+      "2",
+      "3",
+      "5"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Сердце",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-1kholgk",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Какой витамин вырабатывается в коже на солнце?",
+    "answerRu": "D",
+    "acceptedRu": [
+      "D",
+      "витамин D",
+      "Д",
+      "витамин Д"
+    ],
+    "distractorsRu": [
+      "C",
+      "A",
+      "B12"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Витамин D",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-1heidvr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Какая кость в теле человека самая длинная?",
+    "answerRu": "бедренная кость",
+    "acceptedRu": [
+      "бедренная кость",
+      "бедренная",
+      "бедро"
+    ],
+    "distractorsRu": [
+      "большеберцовая кость",
+      "плечевая кость",
+      "позвоночник"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Бедренная кость",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-16bm77o",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Сколько обычно зубов мудрости у человека?",
+    "answerRu": "4",
+    "acceptedRu": [
+      "4",
+      "четыре"
+    ],
+    "distractorsRu": [
+      "2",
+      "6",
+      "8"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Зуб мудрости",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-18mclpq",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Hard",
+    "promptRu": "Где в теле человека находится самая маленькая кость?",
+    "answerRu": "в ухе",
+    "acceptedRu": [
+      "в ухе",
+      "ухо",
+      "среднее ухо",
+      "стремечко"
+    ],
+    "distractorsRu": [
+      "в пальце ноги",
+      "в носу",
+      "в запястье"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Стремечко",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-1dox92s",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Hard",
+    "promptRu": "Какой орган вырабатывает желчь?",
+    "answerRu": "печень",
+    "acceptedRu": [
+      "печень"
+    ],
+    "distractorsRu": [
+      "желчный пузырь",
+      "поджелудочная железа",
+      "селезёнка"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Желчный пузырь только хранит желчь.",
+    "sourceHint": "Википедия: Желчь",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-y94ih1",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Hard",
+    "promptRu": "Сколько примерно литров крови у взрослого человека?",
+    "answerRu": "5",
+    "acceptedRu": [
+      "5",
+      "пять",
+      "5 литров"
+    ],
+    "distractorsRu": [
+      "2",
+      "10",
+      "15"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Обычно 4,5–5,5 литра.",
+    "sourceHint": "Википедия: Кровь",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-1be42pj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Hard",
+    "promptRu": "Какой гормон снижает уровень сахара в крови?",
+    "answerRu": "инсулин",
+    "acceptedRu": [
+      "инсулин"
+    ],
+    "distractorsRu": [
+      "адреналин",
+      "тестостерон",
+      "мелатонин"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Инсулин",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-1ehmylt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Hard",
+    "promptRu": "Сколько молочных зубов у ребёнка?",
+    "answerRu": "20",
+    "acceptedRu": [
+      "20",
+      "двадцать"
+    ],
+    "distractorsRu": [
+      "32",
+      "24",
+      "16"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Молочные зубы",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-6gshvc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Expert",
+    "promptRu": "Как называется пигмент, который придаёт коже цвет?",
+    "answerRu": "меланин",
+    "acceptedRu": [
+      "меланин"
+    ],
+    "distractorsRu": [
+      "гемоглобин",
+      "каротин",
+      "хлорофилл"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Меланин",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-1g12c8z",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Expert",
+    "promptRu": "Какая группа крови подходит для переливания почти всем?",
+    "answerRu": "первая отрицательная",
+    "acceptedRu": [
+      "первая отрицательная",
+      "I отрицательная",
+      "0 отрицательная"
+    ],
+    "distractorsRu": [
+      "четвёртая положительная",
+      "вторая положительная",
+      "третья отрицательная"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Группа крови",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-body-1tjvxyw",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Expert",
+    "promptRu": "Какая мышца в теле человека самая большая?",
+    "answerRu": "большая ягодичная",
+    "acceptedRu": [
+      "большая ягодичная",
+      "ягодичная",
+      "большая ягодичная мышца"
+    ],
+    "distractorsRu": [
+      "бицепс",
+      "икроножная",
+      "широчайшая мышца спины"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Большая ягодичная мышца",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "q-body-55xn39",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Easy",
+    "promptRu": "Какое латинское название (пателла) носит кость, защищающая коленный сустав человека?",
+    "answerRu": "коленная чашечка",
+    "acceptedRu": [
+      "коленная чашечка",
+      "надколенник"
+    ],
+    "distractorsRu": [
+      "бедренная кость",
+      "большеберцовая кость",
+      "ключица"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Надколенник (patella) — крупнейшая сесамовидная кость скелета человека.",
+    "sourceTitle": "Анатомия человека — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-body-yp4k8t",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Easy",
+    "promptRu": "Какой орган человеческого тела отвечает за фильтрацию крови и образование мочи?",
+    "answerRu": "почка",
+    "acceptedRu": [
+      "почка",
+      "почки"
+    ],
+    "distractorsRu": [
+      "печень",
+      "селезёнка",
+      "лёгкие"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Почки выполняют функции мочеобразования и поддержания гомеостаза.",
+    "sourceTitle": "Анатомия человека — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-body-oojy64",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Как называется раздел анатомии человека, изучающий мышечную систему?",
+    "answerRu": "миология",
+    "acceptedRu": [
+      "миология"
+    ],
+    "distractorsRu": [
+      "остеология",
+      "ангиология",
+      "неврология"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Миология — учение о строении и функциях мышц.",
+    "sourceTitle": "Анатомия человека — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-body-4qi5kf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Как называется наука о сосудистой системе человека (артериях, венах и лимфатических сосудах)?",
+    "answerRu": "ангиология",
+    "acceptedRu": [
+      "ангиология"
+    ],
+    "distractorsRu": [
+      "кардиология",
+      "миология",
+      "неврология"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ангиология изучает кровеносные и лимфатические сосуды.",
+    "sourceTitle": "Анатомия человека — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-body-ylyz5l",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Hard",
+    "promptRu": "Как называется самый крупный непарный орган пищеварительной системы человека, выполняющий функцию нейтрализации токсинов?",
+    "answerRu": "печень",
+    "acceptedRu": [
+      "печень"
+    ],
+    "distractorsRu": [
+      "поджелудочная железа",
+      "селезёнка",
+      "желудок"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Печень — крупнейшая железа внешней секреции человека.",
+    "sourceTitle": "Анатомия человека — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-body-vhsyru",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Expert",
+    "promptRu": "Как называется ветвь анатомии, изучающая внутренние органы человеческого тела?",
+    "answerRu": "спланхнология",
+    "acceptedRu": [
+      "спланхнология"
+    ],
+    "distractorsRu": [
+      "гистология",
+      "цитология",
+      "эндокринология"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Спланхнология — учение о внутренних органах (внутренностях).",
+    "sourceTitle": "Анатомия человека — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

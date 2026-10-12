@@ -1,4 +1,4 @@
-import { countries, levenshtein, normalizeAnswer, type Country } from '@clutch/shared';
+import { countries, levenshtein, matchPackSetMember, normalizeAnswer, type Country, type PackSet } from '@clutch/shared';
 
 const byCode = new Map<string, Country>(countries.map((country) => [country.code, country]));
 
@@ -46,4 +46,21 @@ export function recogniseCountry(input: unknown, members: readonly string[]): st
     }
   }
   return tied ? null : bestCode;
+}
+
+/**
+ * Free text -> member of the round's category: country code, or pack member id for `gp:` categories.
+ * One entry point so the route does not branch on the category kind.
+ */
+export function recogniseAnswer(
+  input: unknown,
+  round: { categoryId: string; members: readonly string[] },
+  packSet?: PackSet,
+): string | null {
+  if (!packSet) return recogniseCountry(input, round.members);
+  if (typeof input !== 'string' || input.length > MAX_ANSWER_LENGTH * 2) return null;
+  const text = input.trim();
+  if (!text || text.length > MAX_ANSWER_LENGTH) return null;
+  const id = matchPackSetMember(packSet, text);
+  return id !== null && round.members.includes(id) ? id : null;
 }

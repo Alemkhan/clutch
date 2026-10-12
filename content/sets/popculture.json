@@ -1,0 +1,143 @@
+[
+  {
+    "id": "set-hogwarts",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "popculture",
+    "titleRu": "Назови факультет Хогвартса",
+    "mcPromptRu": "Что из этого — факультет Хогвартса?",
+    "members": [
+      {
+        "id": "gryffindor",
+        "answerRu": "Гриффиндор",
+        "acceptedRu": [
+          "Гриффиндор"
+        ]
+      },
+      {
+        "id": "slytherin",
+        "answerRu": "Слизерин",
+        "acceptedRu": [
+          "Слизерин"
+        ]
+      },
+      {
+        "id": "ravenclaw",
+        "answerRu": "Когтевран",
+        "acceptedRu": [
+          "Когтевран",
+          "Равенкло"
+        ]
+      },
+      {
+        "id": "hufflepuff",
+        "answerRu": "Пуффендуй",
+        "acceptedRu": [
+          "Пуффендуй",
+          "Хаффлпафф"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Шармбатон",
+      "Дурмстранг",
+      "Азкабан"
+    ],
+    "sourceHint": "Википедия: Хогвартс",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-tmnt",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "popculture",
+    "titleRu": "Назови черепашку-ниндзя",
+    "mcPromptRu": "Кто из них — черепашка-ниндзя?",
+    "members": [
+      {
+        "id": "leonardo",
+        "answerRu": "Леонардо",
+        "acceptedRu": [
+          "Леонардо",
+          "Лео"
+        ]
+      },
+      {
+        "id": "raphael",
+        "answerRu": "Рафаэль",
+        "acceptedRu": [
+          "Рафаэль",
+          "Раф"
+        ]
+      },
+      {
+        "id": "donatello",
+        "answerRu": "Донателло",
+        "acceptedRu": [
+          "Донателло",
+          "Донни"
+        ]
+      },
+      {
+        "id": "michelangelo",
+        "answerRu": "Микеланджело",
+        "acceptedRu": [
+          "Микеланджело",
+          "Майки"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Сплинтер",
+      "Шреддер",
+      "Тициан"
+    ],
+    "sourceHint": "Википедия: Черепашки-ниндзя",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-popculture-h8fbmh",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "popculture",
+    "titleRu": "Назови знак зодиака стихии Огня",
+    "mcPromptRu": "Какой из этих знаков зодиака относится к тригону Огня?",
+    "members": [
+      {
+        "id": "aries",
+        "answerRu": "Овен",
+        "acceptedRu": [
+          "Овен",
+          "овен"
+        ]
+      },
+      {
+        "id": "leo",
+        "answerRu": "Лев",
+        "acceptedRu": [
+          "Лев",
+          "лев"
+        ]
+      },
+      {
+        "id": "sagittarius",
+        "answerRu": "Стрелец",
+        "acceptedRu": [
+          "Стрелец",
+          "стрелец"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Телец",
+      "Рак",
+      "Скорпион"
+    ],
+    "sourceTitle": "Знаки зодиака — Википедия",
+    "reviewNote": "Три знака зодиака огненной стихии.",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

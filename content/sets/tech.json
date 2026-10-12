@@ -1,0 +1,72 @@
+[
+  {
+    "id": "set-wright",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "tech",
+    "titleRu": "Назови одного из братьев Райт",
+    "mcPromptRu": "Кто из них — один из братьев Райт?",
+    "members": [
+      {
+        "id": "wilbur",
+        "answerRu": "Уилбур",
+        "acceptedRu": [
+          "Уилбур",
+          "Уилбур Райт"
+        ]
+      },
+      {
+        "id": "orville",
+        "answerRu": "Орвилл",
+        "acceptedRu": [
+          "Орвилл",
+          "Орвилл Райт",
+          "Орвил"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Генри Форд",
+      "Игорь Сикорский",
+      "Луи Блерио"
+    ],
+    "sourceHint": "Википедия: Братья Райт",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-tech-uharl3",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "tech",
+    "titleRu": "Назови пионера вычислительной техники XIX века",
+    "mcPromptRu": "Кто из этих учёных заложил фундаментальные основы вычислительной техники в XIX веке?",
+    "members": [
+      {
+        "id": "babbage",
+        "answerRu": "Чарльз Бэббидж",
+        "acceptedRu": [
+          "Чарльз Бэббидж",
+          "Бэббидж"
+        ]
+      },
+      {
+        "id": "lovelace",
+        "answerRu": "Ада Лавлейс",
+        "acceptedRu": [
+          "Ада Лавлейс",
+          "Лавлейс"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Алан Тьюринг",
+      "Блез Паскаль",
+      "Готфрид Лейбниц"
+    ],
+    "sourceTitle": "История вычислительной техники — Википедия",
+    "reviewNote": "Именно основоположники XIX века.",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

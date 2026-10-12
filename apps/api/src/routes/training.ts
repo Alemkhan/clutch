@@ -1,5 +1,5 @@
 import {
-  generateQuestionById,
+  resolveQuestionById,
   isAnswerCorrect,
   toPublicQuestion,
   type PublicQuestion,
@@ -74,7 +74,7 @@ export function registerTrainingRoutes(app: Hono<{ Bindings: Env }>): void {
     const allowed = new Set(await listTrainableMistakes(c.env.DB, identity.playerId));
     const questions: PublicQuestion[] = [];
     for (const id of new Set(ids as string[])) {
-      const question = allowed.has(id) ? generateQuestionById(id) : null;
+      const question = allowed.has(id) ? resolveQuestionById(id) : null;
       // Любой недоступный id отклоняет весь запрос одинаково: клиент берёт id из /api/training/mistakes.
       if (!question) return notAvailable(c);
       questions.push(toPublicQuestion(question));
@@ -95,7 +95,7 @@ export function registerTrainingRoutes(app: Hono<{ Bindings: Env }>): void {
       return c.json({ error: 'Invalid answer.' }, 400);
     }
     const allowed = await listTrainableMistakes(c.env.DB, identity.playerId);
-    const question = allowed.includes(body.questionId) ? generateQuestionById(body.questionId) : null;
+    const question = allowed.includes(body.questionId) ? resolveQuestionById(body.questionId) : null;
     if (!question) return notAvailable(c);
     const response: TrainingCheckResponse = question.answerType === 'open_answer'
       ? {

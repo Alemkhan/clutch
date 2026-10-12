@@ -111,7 +111,7 @@ describe('dailySetSize', () => {
 
 describe('dailyBankSize', () => {
   it('is per category: thin categories get fewer, longer sets', () => {
-    expect(DAILY_BANK_SIZES).toEqual({ geography: 12, history: 6, languages: 6 });
+    expect(DAILY_BANK_SIZES).toEqual({ general: 12, geography: 12, history: 6, languages: 6 });
     expect(dailyQuestionSetIds('languages', day1)).toHaveLength(6);
   });
 });

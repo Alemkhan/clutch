@@ -1,6 +1,9 @@
 import { SKILL_DISTANCE_THRESHOLDS, type MiniGameConfig, type SkillResult } from './hammerRules';
 import type { PracticeLevelId } from './practice';
 
+/** Категория вопросов. Единственное объявление; questionGenerator его ре-экспортирует. */
+export type CategoryId = 'general' | 'geography' | 'history' | 'languages';
+
 export type AnswerType = 'multiple_choice' | 'open_answer';
 
 export * from './fuzzyMatch';
@@ -94,7 +97,7 @@ export interface AsyncMatchRound {
 
 export interface StartAsyncMatchRequest {
   displayName: string;
-  category: 'geography' | 'history' | 'languages';
+  category: CategoryId;
   /** One-time rematch invite id (the part after "rm_" is random); checked against the caller on the server. */
   rematchInviteId?: string;
 }
@@ -128,7 +131,7 @@ export interface CompleteAsyncMatchResponse {
 /** Соло-забег: тело старта без реванш-приглашения (сервер его отклоняет). */
 export interface StartSoloRunRequest {
   displayName: string;
-  category: 'geography' | 'history' | 'languages';
+  category: CategoryId;
   /** Одноразовое приглашение на соло-реванш; сервер сверяет его с игроком. */
   rematchInviteId?: string;
   /** Тренировка: уровень бота. Забег не идёт в соревнование; с реваншем не сочетается. */
@@ -220,7 +223,7 @@ export interface SoloPlayedRound {
 
 /** Состояние забега для продолжения после закрытой вкладки. Незакрытый удар сервер засчитывает промахом. */
 export interface SoloRunSnapshot extends StartSoloRunResponse {
-  category: 'geography' | 'history' | 'languages';
+  category: CategoryId;
   rounds: SoloPlayedRound[];
   status: 'in_progress' | 'completed';
   result: CompleteSoloRunResponse | null;
@@ -261,7 +264,7 @@ export type MyRunOutcome = 'player' | 'opponent' | 'tie';
 /** Одна завершённая партия игрока в «Моих партиях». */
 export interface MyRunSummary {
   runId: string;
-  category: 'geography' | 'history' | 'languages';
+  category: CategoryId;
   mode: 'race' | 'solo';
   roundsPlayed: number;
   progress: number;
@@ -287,7 +290,7 @@ export interface MyRunSummary {
 /** Активное приглашение на реванш, адресованное игроку. */
 export interface MyRematchInvite {
   inviteId: string;
-  category: 'geography' | 'history' | 'languages';
+  category: CategoryId;
   challengerName: string;
   challengerProgress: number;
   yourProgress: number;
@@ -347,3 +350,8 @@ export * from './narrowCategories';
 export * from './questionGenerator';
 export * from './dailyQuestionSet';
 export * from './lastStand';
+export * from './seededRandom';
+export * from './generalPack';
+export * from './generalSet';
+// Explicit: the facade shadows the generator-only versions that `export *` above also brings in.
+export { isKnownQuestionId, questionIdCategory, resolveQuestionById } from './questionResolve';

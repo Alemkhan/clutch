@@ -1,0 +1,471 @@
+[
+  {
+    "id": "au-language-1et867p",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Easy",
+    "promptRu": "Сколько букв в русском алфавите?",
+    "answerRu": "33",
+    "acceptedRu": [
+      "33",
+      "тридцать три"
+    ],
+    "distractorsRu": [
+      "32",
+      "26",
+      "34"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Русский алфавит",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-ml3o2d",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Easy",
+    "promptRu": "Сколько букв в английском алфавите?",
+    "answerRu": "26",
+    "acceptedRu": [
+      "26",
+      "двадцать шесть"
+    ],
+    "distractorsRu": [
+      "24",
+      "28",
+      "33"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Английский алфавит",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-1c3g5ml",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Easy",
+    "promptRu": "Как по-английски «спасибо»?",
+    "answerRu": "thank you",
+    "acceptedRu": [
+      "thank you",
+      "thanks"
+    ],
+    "distractorsRu": [
+      "please",
+      "sorry",
+      "hello"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Словарь",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-1yasiky",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Medium",
+    "promptRu": "На каком языке говорят в Бразилии?",
+    "answerRu": "португальский",
+    "acceptedRu": [
+      "португальский"
+    ],
+    "distractorsRu": [
+      "испанский",
+      "бразильский",
+      "французский"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Бразилия",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-g0u77r",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Medium",
+    "promptRu": "Как называется слово, противоположное по смыслу другому слову?",
+    "answerRu": "антоним",
+    "acceptedRu": [
+      "антоним"
+    ],
+    "distractorsRu": [
+      "синоним",
+      "омоним",
+      "пароним"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Антонимы",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-1bltfuu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Medium",
+    "promptRu": "Сколько падежей в русском языке по школьной программе?",
+    "answerRu": "6",
+    "acceptedRu": [
+      "6",
+      "шесть"
+    ],
+    "distractorsRu": [
+      "5",
+      "7",
+      "8"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Падеж",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-1f3jcqm",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Medium",
+    "promptRu": "Какой язык родной для наибольшего числа людей в мире?",
+    "answerRu": "китайский",
+    "acceptedRu": [
+      "китайский",
+      "мандаринский",
+      "путунхуа"
+    ],
+    "distractorsRu": [
+      "английский",
+      "испанский",
+      "хинди"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Список языков по числу носителей",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-w3sg2s",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Hard",
+    "promptRu": "Как называют слова, которые одинаково звучат и пишутся, но значат разное?",
+    "answerRu": "омонимы",
+    "acceptedRu": [
+      "омонимы",
+      "омоним"
+    ],
+    "distractorsRu": [
+      "синонимы",
+      "антонимы",
+      "паронимы"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Омонимы",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-1t1tjjx",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Hard",
+    "promptRu": "Какая буква встречается в русском тексте чаще всех?",
+    "answerRu": "о",
+    "acceptedRu": [
+      "о",
+      "буква о"
+    ],
+    "distractorsRu": [
+      "а",
+      "е",
+      "и"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Частотность",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-1uxvh29",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Hard",
+    "promptRu": "Сколько гласных букв в русском алфавите?",
+    "answerRu": "10",
+    "acceptedRu": [
+      "10",
+      "десять"
+    ],
+    "distractorsRu": [
+      "6",
+      "9",
+      "12"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Русский алфавит",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-1eaul7j",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Hard",
+    "promptRu": "Какой язык государственный в Иране?",
+    "answerRu": "персидский",
+    "acceptedRu": [
+      "персидский",
+      "фарси"
+    ],
+    "distractorsRu": [
+      "арабский",
+      "турецкий",
+      "курдский"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Иран",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-k0euik",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Hard",
+    "promptRu": "Как по-японски «спасибо»?",
+    "answerRu": "аригато",
+    "acceptedRu": [
+      "аригато",
+      "аригато годзаимас"
+    ],
+    "distractorsRu": [
+      "конничива",
+      "сайонара",
+      "кавай"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Словарь",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-iatk0z",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Expert",
+    "promptRu": "Как называется наука о происхождении слов?",
+    "answerRu": "этимология",
+    "acceptedRu": [
+      "этимология"
+    ],
+    "distractorsRu": [
+      "энтомология",
+      "морфология",
+      "фонетика"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Этимология",
+    "reviewNote": "При вводе нечёткое сравнение путает с «энтомологией» — только выбор.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-v18nsi",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Expert",
+    "promptRu": "Какой язык официальный в Андорре?",
+    "answerRu": "каталанский",
+    "acceptedRu": [
+      "каталанский"
+    ],
+    "distractorsRu": [
+      "испанский",
+      "французский",
+      "португальский"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Андорра",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-1hxxw0p",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Expert",
+    "promptRu": "Какое русское слово пишется с тремя буквами «е» подряд?",
+    "answerRu": "длинношеее",
+    "acceptedRu": [
+      "длинношеее"
+    ],
+    "distractorsRu": [
+      "змееед",
+      "длинношеий",
+      "зееед"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Словарь",
+    "reviewNote": "Вопрос о написании: нечёткое сравнение засчитало бы опечатку, поэтому только выбор. Проверить «короткошеее».",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-language-wjml6i",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Expert",
+    "promptRu": "Из какого языка в русский пришло слово «шоколад»?",
+    "answerRu": "из науатль",
+    "acceptedRu": [
+      "из науатль",
+      "науатль",
+      "ацтекский"
+    ],
+    "distractorsRu": [
+      "испанский",
+      "французский",
+      "голландский"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Этимологический словарь",
+    "reviewNote": "Путь заимствования шёл через испанский и европейские языки — нужен источник, сформулировать точно.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "q-language-d7oq2m",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Easy",
+    "promptRu": "К какой древней письменной традиции относится греческий алфавит, давший начало кириллице и латинице?",
+    "answerRu": "греческая",
+    "acceptedRu": [
+      "греческая",
+      "греческий"
+    ],
+    "distractorsRu": [
+      "финикийская",
+      "арамейская",
+      "клинопись"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Греческий алфавит возник на основе финикийского письма в VIII веке до н. э.",
+    "sourceTitle": "Греческий алфавит — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-language-ut9uq3",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Medium",
+    "promptRu": "Какая буква греческого алфавита традиционно используется для обозначения математической константы 3,14159...?",
+    "answerRu": "пи",
+    "acceptedRu": [
+      "пи",
+      "Пи",
+      "π"
+    ],
+    "distractorsRu": [
+      "сигма",
+      "дельта",
+      "фи"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Буква пи (П, π) обозначает отношение длины окружности к её диаметру.",
+    "sourceTitle": "Греческий алфавит — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-language-16xmw8a",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Hard",
+    "promptRu": "Какой язык является официальным и государственным в эфиопской слоговей письменности?",
+    "answerRu": "амхарский",
+    "acceptedRu": [
+      "амхарский",
+      "амхарский язык"
+    ],
+    "distractorsRu": [
+      "арабский",
+      "суахили",
+      "сомалийский"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Амхарский язык использует эфиопское письмо (геэз).",
+    "sourceTitle": "Languages Quiz @isaacm.1063 @Peskovii",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-language-1uekw9u",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Hard",
+    "promptRu": "К какой языковой семье относится арабский язык?",
+    "answerRu": "афроазиатская",
+    "acceptedRu": [
+      "афроазиатская",
+      "семито-хамитская",
+      "семитская"
+    ],
+    "distractorsRu": [
+      "индоевропейская",
+      "алтайская",
+      "картвельская"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Арабский язык относится к семитской ветви афроазиатской семьи.",
+    "sourceTitle": "Languages Quiz @isaacm.1063 @Peskovii",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-language-21zxki",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Expert",
+    "promptRu": "Как называется язык-изолят, на котором говорят баски на севере Испании и юго-западе Франции?",
+    "answerRu": "баскский",
+    "acceptedRu": [
+      "баскский",
+      "эускара"
+    ],
+    "distractorsRu": [
+      "каталанский",
+      "галисийский",
+      "бретонский"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Баскский язык не входит ни в одну известную языковую семью.",
+    "sourceTitle": "Languages Quiz @isaacm.1063 @Peskovii",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

@@ -1,0 +1,409 @@
+[
+  {
+    "id": "au-math-1mmux3q",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Easy",
+    "promptRu": "Сколько будет 12 × 12?",
+    "answerRu": "144",
+    "acceptedRu": [
+      "144"
+    ],
+    "distractorsRu": [
+      "124",
+      "132",
+      "154"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Арифметика",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-1m3ebp9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Easy",
+    "promptRu": "Сколько сторон у шестиугольника?",
+    "answerRu": "6",
+    "acceptedRu": [
+      "6",
+      "шесть"
+    ],
+    "distractorsRu": [
+      "5",
+      "7",
+      "8"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Шестиугольник",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-1i2bj02",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Easy",
+    "promptRu": "Сколько дней в високосном году?",
+    "answerRu": "366",
+    "acceptedRu": [
+      "366"
+    ],
+    "distractorsRu": [
+      "365",
+      "364",
+      "367"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Високосный год",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-t2gk8v",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Easy",
+    "promptRu": "Какое число записывают римской цифрой X?",
+    "answerRu": "10",
+    "acceptedRu": [
+      "10",
+      "десять"
+    ],
+    "distractorsRu": [
+      "5",
+      "50",
+      "100"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Римские цифры",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-1vop39f",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Medium",
+    "promptRu": "Сколько минут в сутках?",
+    "answerRu": "1440",
+    "acceptedRu": [
+      "1440"
+    ],
+    "distractorsRu": [
+      "1240",
+      "3600",
+      "2400"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Арифметика: 24 × 60",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-pjxpr0",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Medium",
+    "promptRu": "Сколько будет 15 % от 60?",
+    "answerRu": "9",
+    "acceptedRu": [
+      "9"
+    ],
+    "distractorsRu": [
+      "6",
+      "12",
+      "15"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Арифметика",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-1g361i5",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Medium",
+    "promptRu": "Сколько граней у куба?",
+    "answerRu": "6",
+    "acceptedRu": [
+      "6",
+      "шесть"
+    ],
+    "distractorsRu": [
+      "8",
+      "12",
+      "4"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Куб",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-1wlqk9a",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Medium",
+    "promptRu": "Как называется треугольник, у которого все стороны равны?",
+    "answerRu": "равносторонний",
+    "acceptedRu": [
+      "равносторонний",
+      "правильный"
+    ],
+    "distractorsRu": [
+      "равнобедренный",
+      "прямоугольный",
+      "тупоугольный"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Правильный треугольник",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-1tlbvi2",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Medium",
+    "promptRu": "Чему равна сумма углов треугольника, в градусах?",
+    "answerRu": "180",
+    "acceptedRu": [
+      "180",
+      "180 градусов"
+    ],
+    "distractorsRu": [
+      "360",
+      "90",
+      "270"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Треугольник",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-36ep3u",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Medium",
+    "promptRu": "Как называется число, которое делится только на 1 и на себя?",
+    "answerRu": "простое",
+    "acceptedRu": [
+      "простое",
+      "простое число"
+    ],
+    "distractorsRu": [
+      "чётное",
+      "целое",
+      "составное"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Простое число",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-qt0zwu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Hard",
+    "promptRu": "Сколько будет 2 в восьмой степени?",
+    "answerRu": "256",
+    "acceptedRu": [
+      "256"
+    ],
+    "distractorsRu": [
+      "128",
+      "512",
+      "64"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Арифметика",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-7efp77",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Hard",
+    "promptRu": "Какое самое маленькое простое число?",
+    "answerRu": "2",
+    "acceptedRu": [
+      "2",
+      "два"
+    ],
+    "distractorsRu": [
+      "1",
+      "3",
+      "0"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Простое число",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-1emnedg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Hard",
+    "promptRu": "Сколько будет 1000 разделить на 8?",
+    "answerRu": "125",
+    "acceptedRu": [
+      "125"
+    ],
+    "distractorsRu": [
+      "120",
+      "150",
+      "112"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Арифметика",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-1iepwkg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Hard",
+    "promptRu": "Какое число записано римскими цифрами MMXXVI?",
+    "answerRu": "2026",
+    "acceptedRu": [
+      "2026"
+    ],
+    "distractorsRu": [
+      "2016",
+      "2024",
+      "2046"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Римские цифры",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-1hgmapd",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Hard",
+    "promptRu": "Чему равен квадратный корень из 169?",
+    "answerRu": "13",
+    "acceptedRu": [
+      "13"
+    ],
+    "distractorsRu": [
+      "12",
+      "14",
+      "17"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Арифметика",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-1tnd7xr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Expert",
+    "promptRu": "Сколько секунд в сутках?",
+    "answerRu": "86400",
+    "acceptedRu": [
+      "86400"
+    ],
+    "distractorsRu": [
+      "36000",
+      "43200",
+      "84600"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Арифметика: 24 × 3600",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-1hudq2r",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Expert",
+    "promptRu": "Сколько градусов в каждом угле правильного шестиугольника?",
+    "answerRu": "120",
+    "acceptedRu": [
+      "120"
+    ],
+    "distractorsRu": [
+      "108",
+      "135",
+      "90"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Правильный шестиугольник",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-c3iik9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Expert",
+    "promptRu": "Сколько нулей в числе квинтиллион?",
+    "answerRu": "18",
+    "acceptedRu": [
+      "18",
+      "восемнадцать"
+    ],
+    "distractorsRu": [
+      "15",
+      "21",
+      "12"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Квинтиллион",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-math-br58ns",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Expert",
+    "promptRu": "Какое следующее число: 2, 3, 5, 7, 11, …?",
+    "answerRu": "13",
+    "acceptedRu": [
+      "13"
+    ],
+    "distractorsRu": [
+      "12",
+      "15",
+      "17"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Последовательность простых чисел",
+    "origin": "authored",
+    "license": "original"
+  }
+]

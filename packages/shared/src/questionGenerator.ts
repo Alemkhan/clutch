@@ -1,10 +1,10 @@
-import type { Question, Difficulty } from './index';
+import type { CategoryId, Question, Difficulty } from './index';
 import { countries, flagUrl, outlineUrl, ISLAND_COUNTRIES, type Country } from './countries';
 import { FLAG_TRAITS } from './flagTraits';
 import { historicFlags, historicFlagUrl, type HistoricFlag } from './historicFlags';
 import { languages, type LanguageEntry } from './languages';
 
-export type CategoryId = 'geography' | 'history' | 'languages';
+export type { CategoryId };
 
 // Near-identical flag pairs (indistinguishable at quiz size) — never used as
 // each other's distractors: the question would have no fair answer.
@@ -429,11 +429,12 @@ function generateMatchWithRandom(
     throw new RangeError('openRatio must be a finite number between 0 and 1.');
   }
 
-  const capacities: Record<CategoryId, number> = {
+  const capacities: Record<Exclude<CategoryId, 'general'>, number> = {
     geography: countries.length,
     history: historicFlags.length,
     languages: languages.length,
   };
+  // 'general' нарочно не обслуживается: набор общего режима собирает generalSet.ts.
   if (category !== 'geography' && category !== 'history' && category !== 'languages') {
     throw new RangeError(`Unknown category: ${String(category)}.`);
   }

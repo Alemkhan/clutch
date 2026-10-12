@@ -9,7 +9,7 @@ export interface LastStandRunRow {
   status: 'in_progress' | 'eliminated' | 'cleared';
   survived: number;
   collisions: number;
-  eliminated_by: 'timeout' | 'exhausted' | null;
+  eliminated_by: 'timeout' | 'exhausted' | 'mined' | null;
   opponents_json: string;
   answers_json: string;
   counts_for_board: number;
@@ -160,7 +160,7 @@ export async function saveAccepted(
 export async function saveEliminated(
   db: D1Database,
   run: LastStandRunRow,
-  reason: 'timeout' | 'exhausted',
+  reason: 'timeout' | 'exhausted' | 'mined',
   now: number,
 ): Promise<boolean> {
   const result = await db.prepare(`

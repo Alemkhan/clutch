@@ -116,12 +116,17 @@ export function useSoloRun(botLevel?: PracticeLevelId) {
   }, [practice]);
 
   /** Продолжение забега, начатого раньше на этом устройстве (если он ещё не закрыт). */
-  const resume = useCallback(() => {
+  const resume = useCallback((fallbackCategory?: CategoryId) => {
+    if (stateRef.current.stage !== 'categories') return;
     const stored = loadActiveSoloRun();
-    if (!stored || stored.practice !== practice || stateRef.current.stage !== 'categories') return;
+    if (!stored || stored.practice !== practice) {
+      // Нечего продолжать: «Играть» с главной начинает забег в категории по умолчанию.
+      if (fallbackCategory) begin(fallbackCategory);
+      return;
+    }
     setState(beginSoloLoading(stateRef.current.category));
     restoreFromServer(stored.runId, () => setState(createSoloFlowState()));
-  }, [practice, restoreFromServer]);
+  }, [practice, begin, restoreFromServer]);
 
   /** Назад с загрузки, ошибки или готового забега: отменяем запрос и возвращаемся к выбору категории. */
   const backToCategories = useCallback(() => {

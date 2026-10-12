@@ -37,7 +37,7 @@ function insertRun(db: TestD1, run: {
   id: string;
   playerId: string;
   displayName: string;
-  category?: 'geography' | 'history' | 'languages';
+  category?: 'general' | 'geography' | 'history' | 'languages';
   progress: number;
   correctCount: number;
   status?: 'in_progress' | 'completed';
@@ -75,19 +75,19 @@ async function leaderboard(db: TestD1, category = 'geography') {
 }
 
 describe('leaderboard best-run selection', () => {
-  it('defaults to geography and rejects an unknown category', async () => {
+  it('defaults to general and rejects an unknown category', async () => {
     const db = database();
     insertRun(db, {
-      id: 'default-geo', playerId: 'default-player', displayName: 'Default Geo',
-      progress: 10, correctCount: 1, completedAt: 100,
+      id: 'default-geo', playerId: 'default-player', displayName: 'Default General',
+      progress: 10, correctCount: 1, completedAt: 100, category: 'general',
     });
 
     const defaultResponse = await app.request('/api/leaderboard', {}, env(db));
     expect(defaultResponse.status).toBe(200);
     expect(await defaultResponse.json()).toEqual({
-      category: 'geography',
+      category: 'general',
       entries: [{
-        displayName: 'Default Geo', progress: 10, correctCount: 1, completedAt: 100,
+        displayName: 'Default General', progress: 10, correctCount: 1, completedAt: 100,
       }],
     });
 

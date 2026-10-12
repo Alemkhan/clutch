@@ -1,0 +1,134 @@
+[
+  {
+    "id": "set-musketeers",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "literature",
+    "titleRu": "Назови мушкетёра из романа Дюма",
+    "mcPromptRu": "Кто из них — мушкетёр из «Трёх мушкетёров»?",
+    "members": [
+      {
+        "id": "athos",
+        "answerRu": "Атос",
+        "acceptedRu": [
+          "Атос"
+        ]
+      },
+      {
+        "id": "porthos",
+        "answerRu": "Портос",
+        "acceptedRu": [
+          "Портос"
+        ]
+      },
+      {
+        "id": "aramis",
+        "answerRu": "Арамис",
+        "acceptedRu": [
+          "Арамис"
+        ]
+      },
+      {
+        "id": "dartagnan",
+        "answerRu": "д’Артаньян",
+        "acceptedRu": [
+          "д’Артаньян",
+          "Д'Артаньян",
+          "Дартаньян"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Ришелье",
+      "Рошфор",
+      "Бекингем"
+    ],
+    "sourceHint": "Википедия: Три мушкетёра",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-winnie",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "literature",
+    "titleRu": "Назови персонажа книг о Винни-Пухе",
+    "mcPromptRu": "Кто из них — персонаж книг Милна о Винни-Пухе?",
+    "members": [
+      {
+        "id": "pooh",
+        "answerRu": "Винни-Пух",
+        "acceptedRu": [
+          "Винни-Пух",
+          "Пух"
+        ]
+      },
+      {
+        "id": "piglet",
+        "answerRu": "Пятачок",
+        "acceptedRu": [
+          "Пятачок"
+        ]
+      },
+      {
+        "id": "eeyore",
+        "answerRu": "Иа-Иа",
+        "acceptedRu": [
+          "Иа-Иа",
+          "Иа"
+        ]
+      },
+      {
+        "id": "rabbit",
+        "answerRu": "Кролик",
+        "acceptedRu": [
+          "Кролик"
+        ]
+      },
+      {
+        "id": "owl",
+        "answerRu": "Сова",
+        "acceptedRu": [
+          "Сова"
+        ]
+      },
+      {
+        "id": "tigger",
+        "answerRu": "Тигра",
+        "acceptedRu": [
+          "Тигра"
+        ]
+      },
+      {
+        "id": "kanga",
+        "answerRu": "Кенга",
+        "acceptedRu": [
+          "Кенга"
+        ]
+      },
+      {
+        "id": "roo",
+        "answerRu": "Крошка Ру",
+        "acceptedRu": [
+          "Крошка Ру",
+          "Ру"
+        ]
+      },
+      {
+        "id": "robin",
+        "answerRu": "Кристофер Робин",
+        "acceptedRu": [
+          "Кристофер Робин"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Чебурашка",
+      "Карлсон",
+      "Буратино"
+    ],
+    "sourceHint": "Википедия: Винни-Пух",
+    "origin": "authored",
+    "license": "original"
+  }
+]

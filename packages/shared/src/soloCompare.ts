@@ -1,4 +1,4 @@
-import type { MyRunOutcome } from './index';
+import type { CategoryId, MyRunOutcome } from './index';
 
 /** То, что нужно знать о завершённом соло-забеге, чтобы сравнить его с другим. */
 export interface SoloRunResult {
@@ -64,7 +64,7 @@ export interface SoloLeaderboardEntry {
 }
 
 export interface SoloLeaderboardResponse {
-  category: 'geography' | 'history' | 'languages';
+  category: CategoryId;
   /** Сутки по UTC, YYYY-MM-DD. */
   dateKey: string;
   entries: SoloLeaderboardEntry[];

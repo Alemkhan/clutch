@@ -1,0 +1,1560 @@
+[
+  {
+    "id": "au-film-1y1nn9o",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Как зовут мышонка — символ Disney?",
+    "answerRu": "Микки Маус",
+    "acceptedRu": [
+      "Микки Маус",
+      "Микки"
+    ],
+    "distractorsRu": [
+      "Джерри",
+      "Спиди Гонсалес",
+      "Стюарт Литтл"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Микки Маус",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-1p7gt5g",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Как зовут зелёного огра из мультфильма DreamWorks?",
+    "answerRu": "Шрек",
+    "acceptedRu": [
+      "Шрек"
+    ],
+    "distractorsRu": [
+      "Халк",
+      "Гринч",
+      "Йода"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Шрек (персонаж)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-1miniqr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Как зовут снеговика из «Холодного сердца»?",
+    "answerRu": "Олаф",
+    "acceptedRu": [
+      "Олаф"
+    ],
+    "distractorsRu": [
+      "Свен",
+      "Кристофф",
+      "Ханс"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Холодное сердце (мультфильм)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-tdg5b6",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "За кем всё время гоняется Волк в «Ну, погоди!»?",
+    "answerRu": "за Зайцем",
+    "acceptedRu": [
+      "за Зайцем",
+      "Заяц",
+      "заяц",
+      "Зайца"
+    ],
+    "distractorsRu": [
+      "за Колобком",
+      "за Ёжиком",
+      "за Белкой"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Ну, погоди!",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-1q1568o",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Как зовут кота из «Простоквашино»?",
+    "answerRu": "Матроскин",
+    "acceptedRu": [
+      "Матроскин"
+    ],
+    "distractorsRu": [
+      "Леопольд",
+      "Шарик",
+      "Котофей"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Кот Матроскин",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-m1wvsw",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "В каком мультфильме живёт львёнок Симба?",
+    "answerRu": "Король Лев",
+    "acceptedRu": [
+      "Король Лев",
+      "«Король Лев»"
+    ],
+    "distractorsRu": [
+      "Мадагаскар",
+      "Книга джунглей",
+      "Тарзан"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Король Лев",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-kiwyjc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Как зовут мальчика из «Простоквашино»?",
+    "answerRu": "дядя Фёдор",
+    "acceptedRu": [
+      "дядя Фёдор",
+      "дядя Федор",
+      "Фёдор",
+      "Федор"
+    ],
+    "distractorsRu": [
+      "Печкин",
+      "Малыш",
+      "Денис"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Дядя Фёдор",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-dzzm2p",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Как зовут злодея в чёрном шлеме из «Звёздных войн»?",
+    "answerRu": "Дарт Вейдер",
+    "acceptedRu": [
+      "Дарт Вейдер",
+      "Вейдер",
+      "Энакин Скайуокер"
+    ],
+    "distractorsRu": [
+      "Дарт Мол",
+      "Палпатин",
+      "Боба Фетт"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Дарт Вейдер",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-1rpg1h4",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто сыграл Джека в фильме «Титаник»?",
+    "answerRu": "Леонардо Ди Каприо",
+    "acceptedRu": [
+      "Леонардо Ди Каприо",
+      "Леонардо ДиКаприо",
+      "Ди Каприо",
+      "ДиКаприо"
+    ],
+    "distractorsRu": [
+      "Брэд Питт",
+      "Мэтт Деймон",
+      "Джонни Депп"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Титаник (фильм, 1997)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-1nbagf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Какая студия выпустила «Историю игрушек»?",
+    "answerRu": "Pixar",
+    "acceptedRu": [
+      "Pixar",
+      "Пиксар"
+    ],
+    "distractorsRu": [
+      "DreamWorks",
+      "Blue Sky",
+      "Illumination"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: История игрушек",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-1pw4usb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Как зовут пирата, которого играет Джонни Депп в «Пиратах Карибского моря»?",
+    "answerRu": "Джек Воробей",
+    "acceptedRu": [
+      "Джек Воробей",
+      "Воробей",
+      "Джек Спарроу",
+      "Спарроу"
+    ],
+    "distractorsRu": [
+      "Гектор Барбосса",
+      "Уилл Тёрнер",
+      "Дейви Джонс"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Джек Воробей",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-1k6fif6",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто снял «Иронию судьбы, или С лёгким паром!»?",
+    "answerRu": "Эльдар Рязанов",
+    "acceptedRu": [
+      "Эльдар Рязанов",
+      "Рязанов"
+    ],
+    "distractorsRu": [
+      "Леонид Гайдай",
+      "Георгий Данелия",
+      "Никита Михалков"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Ирония судьбы, или С лёгким паром!",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-95lm7o",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Как зовут робота-уборщика из мультфильма Pixar 2008 года?",
+    "answerRu": "ВАЛЛ-И",
+    "acceptedRu": [
+      "ВАЛЛ-И",
+      "Валли",
+      "WALL-E"
+    ],
+    "distractorsRu": [
+      "ЕВА",
+      "R2-D2",
+      "Бэймакс"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: ВАЛЛ-И",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-10s2r15",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто снял комедию «Операция „Ы“ и другие приключения Шурика»?",
+    "answerRu": "Леонид Гайдай",
+    "acceptedRu": [
+      "Леонид Гайдай",
+      "Гайдай"
+    ],
+    "distractorsRu": [
+      "Эльдар Рязанов",
+      "Георгий Данелия",
+      "Владимир Меньшов"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Операция «Ы» и другие приключения Шурика",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-1halp2p",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Какой фильм 1959 года получил 11 «Оскаров»?",
+    "answerRu": "Бен-Гур",
+    "acceptedRu": [
+      "Бен-Гур",
+      "«Бен-Гур»"
+    ],
+    "distractorsRu": [
+      "Унесённые ветром",
+      "Касабланка",
+      "Лоуренс Аравийский"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Бен-Гур (фильм, 1959)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-14wkikl",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Какой фильм Хаяо Миядзаки получил «Оскар» в 2003 году?",
+    "answerRu": "Унесённые призраками",
+    "acceptedRu": [
+      "Унесённые призраками",
+      "Унесенные призраками",
+      "«Унесённые призраками»",
+      "«Унесенные призраками»"
+    ],
+    "distractorsRu": [
+      "Мой сосед Тоторо",
+      "Принцесса Мононоке",
+      "Ходячий замок"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Унесённые призраками",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-film-h9xgj1",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Какой фильм получил «Оскар» за лучший фильм первым из снятых не на английском языке?",
+    "answerRu": "Паразиты",
+    "acceptedRu": [
+      "Паразиты",
+      "«Паразиты»"
+    ],
+    "distractorsRu": [
+      "Амели",
+      "Рома",
+      "Жизнь прекрасна"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Паразиты (фильм)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "wd-film-Q44578",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Кто режиссёр фильма «Титаник»?",
+    "answerRu": "Джеймс Кэмерон",
+    "acceptedRu": [
+      "Джеймс Кэмерон",
+      "Кэмерон"
+    ],
+    "distractorsRu": [
+      "Билли Уайлдер",
+      "Гор Вербински",
+      "Джонатан Демми"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Титаник» — Джеймс Кэмерон.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q44578",
+    "sourceTitle": "Wikidata: Титаник",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q134773",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Кто режиссёр фильма «Форрест Гамп»?",
+    "answerRu": "Роберт Земекис",
+    "acceptedRu": [
+      "Роберт Земекис",
+      "Земекис"
+    ],
+    "distractorsRu": [
+      "Джосс Уидон",
+      "Серджо Леоне",
+      "Зак Снайдер"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Форрест Гамп» — Роберт Земекис.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q134773",
+    "sourceTitle": "Wikidata: Форрест Гамп",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q47703",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Кто режиссёр фильма «Крёстный отец»?",
+    "answerRu": "Фрэнсис Форд Коппола",
+    "acceptedRu": [
+      "Фрэнсис Форд Коппола",
+      "Коппола"
+    ],
+    "distractorsRu": [
+      "Джеймс Мактиг",
+      "Рон Ховард",
+      "Энг Ли"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Крёстный отец» — Фрэнсис Форд Коппола.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q47703",
+    "sourceTitle": "Wikidata: Крёстный отец",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q24871",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Кто режиссёр фильма «Аватар»?",
+    "answerRu": "Джеймс Кэмерон",
+    "acceptedRu": [
+      "Джеймс Кэмерон",
+      "Кэмерон"
+    ],
+    "distractorsRu": [
+      "Стивен Спилберг",
+      "Мел Гибсон",
+      "Дэвид Финчер"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Аватар» — Джеймс Кэмерон.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q24871",
+    "sourceTitle": "Wikidata: Аватар",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q128518",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Кто режиссёр фильма «Гладиатор»?",
+    "answerRu": "Ридли Скотт",
+    "acceptedRu": [
+      "Ридли Скотт",
+      "Скотт"
+    ],
+    "distractorsRu": [
+      "Джосс Уидон",
+      "Энг Ли",
+      "Ирвин Кершнер"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Гладиатор» — Ридли Скотт.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q128518",
+    "sourceTitle": "Wikidata: Гладиатор",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q132689",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Кто режиссёр фильма «Касабланка»?",
+    "answerRu": "Майкл Кёртис",
+    "acceptedRu": [
+      "Майкл Кёртис",
+      "Кёртис"
+    ],
+    "distractorsRu": [
+      "Чарли Чаплин",
+      "Кристофер Нолан",
+      "Серджо Леоне"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Касабланка» — Майкл Кёртис.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q132689",
+    "sourceTitle": "Wikidata: Касабланка",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q104123",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Кто режиссёр фильма «Криминальное чтиво»?",
+    "answerRu": "Квентин Тарантино",
+    "acceptedRu": [
+      "Квентин Тарантино",
+      "Тарантино"
+    ],
+    "distractorsRu": [
+      "Джеймс Мактиг",
+      "Стэнли Кубрик",
+      "Питер Джексон"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Криминальное чтиво» — Квентин Тарантино.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q104123",
+    "sourceTitle": "Wikidata: Криминальное чтиво",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q172241",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Кто режиссёр фильма «Побег из Шоушенка»?",
+    "answerRu": "Фрэнк Дарабонт",
+    "acceptedRu": [
+      "Фрэнк Дарабонт",
+      "Дарабонт"
+    ],
+    "distractorsRu": [
+      "Чарли Чаплин",
+      "Стивен Спилберг",
+      "Ричард Маркуанд"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Побег из Шоушенка» — Фрэнк Дарабонт.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q172241",
+    "sourceTitle": "Wikidata: Побег из Шоушенка",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q163872",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Кто режиссёр фильма «Тёмный рыцарь»?",
+    "answerRu": "Кристофер Нолан",
+    "acceptedRu": [
+      "Кристофер Нолан",
+      "Нолан"
+    ],
+    "distractorsRu": [
+      "Питер Уир",
+      "Альфонсо Куарон",
+      "Энг Ли"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Тёмный рыцарь» — Кристофер Нолан.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q163872",
+    "sourceTitle": "Wikidata: Тёмный рыцарь",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q91540",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Кто режиссёр фильма «Назад в будущее»?",
+    "answerRu": "Роберт Земекис",
+    "acceptedRu": [
+      "Роберт Земекис",
+      "Земекис"
+    ],
+    "distractorsRu": [
+      "Фрэнк Дарабонт",
+      "Ридли Скотт",
+      "Джеймс Мактиг"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Назад в будущее» — Роберт Земекис.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q91540",
+    "sourceTitle": "Wikidata: Назад в будущее",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q190050",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Кто режиссёр фильма «Бойцовский клуб»?",
+    "answerRu": "Дэвид Финчер",
+    "acceptedRu": [
+      "Дэвид Финчер",
+      "Финчер"
+    ],
+    "distractorsRu": [
+      "Майкл Кёртис",
+      "Фрэнк Дарабонт",
+      "Майк Ньюэлл"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Бойцовский клуб» — Дэвид Финчер.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q190050",
+    "sourceTitle": "Wikidata: Бойцовский клуб",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q483941",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Easy",
+    "promptRu": "Кто режиссёр фильма «Список Шиндлера»?",
+    "answerRu": "Стивен Спилберг",
+    "acceptedRu": [
+      "Стивен Спилберг",
+      "Спилберг"
+    ],
+    "distractorsRu": [
+      "Питер Джексон",
+      "Зак Снайдер",
+      "Билли Уайлдер"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Список Шиндлера» — Стивен Спилберг.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q483941",
+    "sourceTitle": "Wikidata: Список Шиндлера",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q133654",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто режиссёр фильма «Молчание ягнят»?",
+    "answerRu": "Джонатан Демми",
+    "acceptedRu": [
+      "Джонатан Демми",
+      "Демми"
+    ],
+    "distractorsRu": [
+      "Питер Джексон",
+      "Дэвид Йейтс",
+      "Роберт Земекис"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Молчание ягнят» — Джонатан Демми.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q133654",
+    "sourceTitle": "Wikidata: Молчание ягнят",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q102438",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто режиссёр фильма «Гарри Поттер и философский камень»?",
+    "answerRu": "Крис Коламбус",
+    "acceptedRu": [
+      "Крис Коламбус",
+      "Коламбус"
+    ],
+    "distractorsRu": [
+      "Майк Ньюэлл",
+      "Серджо Леоне",
+      "Джеймс Мактиг"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Гарри Поттер и философский камень» — Крис Коламбус.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q102438",
+    "sourceTitle": "Wikidata: Гарри Поттер и философский камень",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q167726",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто режиссёр фильма «Парк юрского периода»?",
+    "answerRu": "Стивен Спилберг",
+    "acceptedRu": [
+      "Стивен Спилберг",
+      "Спилберг"
+    ],
+    "distractorsRu": [
+      "Гор Вербински",
+      "Джонатан Демми",
+      "Серджо Леоне"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Парк юрского периода» — Стивен Спилберг.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q167726",
+    "sourceTitle": "Wikidata: Парк юрского периода",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q5890",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто режиссёр фильма «V — значит вендетта»?",
+    "answerRu": "Джеймс Мактиг",
+    "acceptedRu": [
+      "Джеймс Мактиг",
+      "Мактиг"
+    ],
+    "distractorsRu": [
+      "Билли Уайлдер",
+      "Энг Ли",
+      "Мел Гибсон"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «V — значит вендетта» — Джеймс Мактиг.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q5890",
+    "sourceTitle": "Wikidata: V — значит вендетта",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q13417189",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто режиссёр фильма «Интерстеллар»?",
+    "answerRu": "Кристофер Нолан",
+    "acceptedRu": [
+      "Кристофер Нолан",
+      "Нолан"
+    ],
+    "distractorsRu": [
+      "Джеймс Кэмерон",
+      "Майкл Кёртис",
+      "Питер Джексон"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Интерстеллар» — Кристофер Нолан.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q13417189",
+    "sourceTitle": "Wikidata: Интерстеллар",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q127367",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто режиссёр фильма «Властелин колец: Братство Кольца»?",
+    "answerRu": "Питер Джексон",
+    "acceptedRu": [
+      "Питер Джексон",
+      "Джексон"
+    ],
+    "distractorsRu": [
+      "Энг Ли",
+      "Джонатан Демми",
+      "Питер Уир"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Властелин колец: Братство Кольца» — Питер Джексон.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q127367",
+    "sourceTitle": "Wikidata: Властелин колец: Братство Кольца",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q182218",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто режиссёр фильма «Мстители»?",
+    "answerRu": "Джосс Уидон",
+    "acceptedRu": [
+      "Джосс Уидон",
+      "Уидон"
+    ],
+    "distractorsRu": [
+      "Мел Гибсон",
+      "Ричард Маркуанд",
+      "Фрэнк Дарабонт"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Мстители» — Джосс Уидон.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q182218",
+    "sourceTitle": "Wikidata: Мстители",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q17738",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто режиссёр фильма «Звёздные войны. Эпизод IV: Новая надежда»?",
+    "answerRu": "Джордж Лукас",
+    "acceptedRu": [
+      "Джордж Лукас",
+      "Лукас"
+    ],
+    "distractorsRu": [
+      "Билли Уайлдер",
+      "Рон Ховард",
+      "Квентин Тарантино"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Звёздные войны. Эпизод IV: Новая надежда» — Джордж Лукас.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q17738",
+    "sourceTitle": "Wikidata: Звёздные войны. Эпизод IV: Новая надежда",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q41483",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто режиссёр фильма «Хороший, плохой, злой»?",
+    "answerRu": "Серджо Леоне",
+    "acceptedRu": [
+      "Серджо Леоне",
+      "Леоне"
+    ],
+    "distractorsRu": [
+      "Сэм Рэйми",
+      "Джордж Лукас",
+      "Мел Гибсон"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Хороший, плохой, злой» — Серджо Леоне.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q41483",
+    "sourceTitle": "Wikidata: Хороший, плохой, злой",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q102244",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто режиссёр фильма «Гарри Поттер и тайная комната»?",
+    "answerRu": "Крис Коламбус",
+    "acceptedRu": [
+      "Крис Коламбус",
+      "Коламбус"
+    ],
+    "distractorsRu": [
+      "Серджо Леоне",
+      "Пон Джун Хо",
+      "Чарли Чаплин"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Гарри Поттер и тайная комната» — Крис Коламбус.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q102244",
+    "sourceTitle": "Wikidata: Гарри Поттер и тайная комната",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q131074",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто режиссёр фильма «Властелин колец: Возвращение короля»?",
+    "answerRu": "Питер Джексон",
+    "acceptedRu": [
+      "Питер Джексон",
+      "Джексон"
+    ],
+    "distractorsRu": [
+      "Майкл Кёртис",
+      "Джеймс Кэмерон",
+      "Стэнли Кубрик"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Властелин колец: Возвращение короля» — Питер Джексон.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q131074",
+    "sourceTitle": "Wikidata: Властелин колец: Возвращение короля",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q162729",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Кто режиссёр фильма «Храброе сердце»?",
+    "answerRu": "Мел Гибсон",
+    "acceptedRu": [
+      "Мел Гибсон",
+      "Гибсон"
+    ],
+    "distractorsRu": [
+      "Чарли Чаплин",
+      "Орсон Уэллс",
+      "Джеймс Мактиг"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Храброе сердце» — Мел Гибсон.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q162729",
+    "sourceTitle": "Wikidata: Храброе сердце",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q165713",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто режиссёр фильма «Звёздные войны. Эпизод I: Скрытая угроза»?",
+    "answerRu": "Джордж Лукас",
+    "acceptedRu": [
+      "Джордж Лукас",
+      "Лукас"
+    ],
+    "distractorsRu": [
+      "Джонатан Демми",
+      "Майкл Кёртис",
+      "Крис Коламбус"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Звёздные войны. Эпизод I: Скрытая угроза» — Джордж Лукас.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q165713",
+    "sourceTitle": "Wikidata: Звёздные войны. Эпизод I: Скрытая угроза",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q102225",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто режиссёр фильма «Гарри Поттер и Кубок огня»?",
+    "answerRu": "Майк Ньюэлл",
+    "acceptedRu": [
+      "Майк Ньюэлл",
+      "Ньюэлл"
+    ],
+    "distractorsRu": [
+      "Энг Ли",
+      "Ричард Маркуанд",
+      "Ридли Скотт"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Гарри Поттер и Кубок огня» — Майк Ньюэлл.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q102225",
+    "sourceTitle": "Wikidata: Гарри Поттер и Кубок огня",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q46717",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто режиссёр фильма «Пираты Карибского моря: Проклятие Чёрной жемчужины»?",
+    "answerRu": "Гор Вербински",
+    "acceptedRu": [
+      "Гор Вербински",
+      "Вербински"
+    ],
+    "distractorsRu": [
+      "Квентин Тарантино",
+      "Питер Джексон",
+      "Джон Фавро"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Пираты Карибского моря: Проклятие Чёрной жемчужины» — Гор Вербински.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q46717",
+    "sourceTitle": "Wikidata: Пираты Карибского моря: Проклятие Чёрной жемчужины",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q103474",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто режиссёр фильма «Космическая одиссея 2001 года»?",
+    "answerRu": "Стэнли Кубрик",
+    "acceptedRu": [
+      "Стэнли Кубрик",
+      "Кубрик"
+    ],
+    "distractorsRu": [
+      "Рон Ховард",
+      "Ирвин Кершнер",
+      "Питер Уир"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Космическая одиссея 2001 года» — Стэнли Кубрик.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q103474",
+    "sourceTitle": "Wikidata: Космическая одиссея 2001 года",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q102448",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто режиссёр фильма «Гарри Поттер и узник Азкабана»?",
+    "answerRu": "Альфонсо Куарон",
+    "acceptedRu": [
+      "Альфонсо Куарон",
+      "Куарон"
+    ],
+    "distractorsRu": [
+      "Дэвид Йейтс",
+      "Майкл Кёртис",
+      "Сэм Рэйми"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Гарри Поттер и узник Азкабана» — Альфонсо Куарон.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q102448",
+    "sourceTitle": "Wikidata: Гарри Поттер и узник Азкабана",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q161687",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто режиссёр фильма «Гарри Поттер и Принц-полукровка»?",
+    "answerRu": "Дэвид Йейтс",
+    "acceptedRu": [
+      "Дэвид Йейтс",
+      "Йейтс"
+    ],
+    "distractorsRu": [
+      "Зак Снайдер",
+      "Ридли Скотт",
+      "Крис Коламбус"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Гарри Поттер и Принц-полукровка» — Дэвид Йейтс.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q161687",
+    "sourceTitle": "Wikidata: Гарри Поттер и Принц-полукровка",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q102235",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто режиссёр фильма «Гарри Поттер и Орден Феникса»?",
+    "answerRu": "Дэвид Йейтс",
+    "acceptedRu": [
+      "Дэвид Йейтс",
+      "Йейтс"
+    ],
+    "distractorsRu": [
+      "Стэнли Кубрик",
+      "Гор Вербински",
+      "Ирвин Кершнер"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Гарри Поттер и Орден Феникса» — Дэвид Йейтс.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q102235",
+    "sourceTitle": "Wikidata: Гарри Поттер и Орден Феникса",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q184768",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто режиссёр фильма «Крёстный отец 2»?",
+    "answerRu": "Фрэнсис Форд Коппола",
+    "acceptedRu": [
+      "Фрэнсис Форд Коппола",
+      "Коппола"
+    ],
+    "distractorsRu": [
+      "Дэвид Йейтс",
+      "Питер Джексон",
+      "Зак Снайдер"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Крёстный отец 2» — Фрэнсис Форд Коппола.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q184768",
+    "sourceTitle": "Wikidata: Крёстный отец 2",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q106316",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто режиссёр фильма «Общество мёртвых поэтов»?",
+    "answerRu": "Питер Уир",
+    "acceptedRu": [
+      "Питер Уир",
+      "Уир"
+    ],
+    "distractorsRu": [
+      "Мел Гибсон",
+      "Альфонсо Куарон",
+      "Гор Вербински"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Общество мёртвых поэтов» — Питер Уир.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q106316",
+    "sourceTitle": "Wikidata: Общество мёртвых поэтов",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q164103",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто режиссёр фильма «Игры разума»?",
+    "answerRu": "Рон Ховард",
+    "acceptedRu": [
+      "Рон Ховард",
+      "Ховард"
+    ],
+    "distractorsRu": [
+      "Крис Коламбус",
+      "Стэнли Кубрик",
+      "Ричард Маркуанд"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Игры разума» — Рон Ховард.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q164103",
+    "sourceTitle": "Wikidata: Игры разума",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q54274",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто режиссёр фильма «Пираты Карибского моря: На краю света»?",
+    "answerRu": "Гор Вербински",
+    "acceptedRu": [
+      "Гор Вербински",
+      "Вербински"
+    ],
+    "distractorsRu": [
+      "Ричард Маркуанд",
+      "Джордж Лукас",
+      "Майк Ньюэлл"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Пираты Карибского моря: На краю света» — Гор Вербински.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q54274",
+    "sourceTitle": "Wikidata: Пираты Карибского моря: На краю света",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q160618",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Кто режиссёр фильма «Горбатая гора»?",
+    "answerRu": "Энг Ли",
+    "acceptedRu": [
+      "Энг Ли",
+      "Ли"
+    ],
+    "distractorsRu": [
+      "Билли Уайлдер",
+      "Стэнли Кубрик",
+      "Сэм Рэйми"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Горбатая гора» — Энг Ли.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q160618",
+    "sourceTitle": "Wikidata: Горбатая гора",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q24815",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Кто режиссёр фильма «Гражданин Кейн»?",
+    "answerRu": "Орсон Уэллс",
+    "acceptedRu": [
+      "Орсон Уэллс",
+      "Уэллс"
+    ],
+    "distractorsRu": [
+      "Майкл Кёртис",
+      "Фрэнк Дарабонт",
+      "Рон Ховард"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Гражданин Кейн» — Орсон Уэллс.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q24815",
+    "sourceTitle": "Wikidata: Гражданин Кейн",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q192724",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Кто режиссёр фильма «Железный человек»?",
+    "answerRu": "Джон Фавро",
+    "acceptedRu": [
+      "Джон Фавро",
+      "Фавро"
+    ],
+    "distractorsRu": [
+      "Альфонсо Куарон",
+      "Сэм Рэйми",
+      "Серджо Леоне"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Железный человек» — Джон Фавро.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q192724",
+    "sourceTitle": "Wikidata: Железный человек",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q181795",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Кто режиссёр фильма «Звёздные войны. Эпизод V: Империя наносит ответный удар»?",
+    "answerRu": "Ирвин Кершнер",
+    "acceptedRu": [
+      "Ирвин Кершнер",
+      "Кершнер"
+    ],
+    "distractorsRu": [
+      "Орсон Уэллс",
+      "Фрэнсис Форд Коппола",
+      "Питер Джексон"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Звёздные войны. Эпизод V: Империя наносит ответный удар» — Ирвин Кершнер.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q181795",
+    "sourceTitle": "Wikidata: Звёздные войны. Эпизод V: Империя наносит ответный удар",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q484442",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Кто режиссёр фильма «Человек-паук»?",
+    "answerRu": "Сэм Рэйми",
+    "acceptedRu": [
+      "Сэм Рэйми",
+      "Рэйми"
+    ],
+    "distractorsRu": [
+      "Энг Ли",
+      "Крис Коламбус",
+      "Билли Уайлдер"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Человек-паук» — Сэм Рэйми.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q484442",
+    "sourceTitle": "Wikidata: Человек-паук",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q184843",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Кто режиссёр фильма «Бегущий по лезвию»?",
+    "answerRu": "Ридли Скотт",
+    "acceptedRu": [
+      "Ридли Скотт",
+      "Скотт"
+    ],
+    "distractorsRu": [
+      "Стивен Спилберг",
+      "Мел Гибсон",
+      "Энг Ли"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Бегущий по лезвию» — Ридли Скотт.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q184843",
+    "sourceTitle": "Wikidata: Бегущий по лезвию",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q181803",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Кто режиссёр фильма «Звёздные войны. Эпизод VI: Возвращение джедая»?",
+    "answerRu": "Ричард Маркуанд",
+    "acceptedRu": [
+      "Ричард Маркуанд",
+      "Маркуанд"
+    ],
+    "distractorsRu": [
+      "Серджо Леоне",
+      "Майкл Кёртис",
+      "Билли Уайлдер"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Звёздные войны. Эпизод VI: Возвращение джедая» — Ричард Маркуанд.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q181803",
+    "sourceTitle": "Wikidata: Звёздные войны. Эпизод VI: Возвращение джедая",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q131390",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Кто режиссёр фильма «300 спартанцев»?",
+    "answerRu": "Зак Снайдер",
+    "acceptedRu": [
+      "Зак Снайдер",
+      "Снайдер"
+    ],
+    "distractorsRu": [
+      "Джонатан Демми",
+      "Энг Ли",
+      "Стивен Спилберг"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «300 спартанцев» — Зак Снайдер.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q131390",
+    "sourceTitle": "Wikidata: 300 спартанцев",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q14171368",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Кто режиссёр фильма «Мстители: Эра Альтрона»?",
+    "answerRu": "Джосс Уидон",
+    "acceptedRu": [
+      "Джосс Уидон",
+      "Уидон"
+    ],
+    "distractorsRu": [
+      "Орсон Уэллс",
+      "Сэм Рэйми",
+      "Джеймс Кэмерон"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Мстители: Эра Альтрона» — Джосс Уидон.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q14171368",
+    "sourceTitle": "Wikidata: Мстители: Эра Альтрона",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q190086",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Кто режиссёр фильма «В джазе только девушки»?",
+    "answerRu": "Билли Уайлдер",
+    "acceptedRu": [
+      "Билли Уайлдер",
+      "Уайлдер"
+    ],
+    "distractorsRu": [
+      "Энг Ли",
+      "Серджо Леоне",
+      "Рон Ховард"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «В джазе только девушки» — Билли Уайлдер.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q190086",
+    "sourceTitle": "Wikidata: В джазе только девушки",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q109116",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Кто режиссёр фильма «Великий диктатор»?",
+    "answerRu": "Чарли Чаплин",
+    "acceptedRu": [
+      "Чарли Чаплин",
+      "Чаплин"
+    ],
+    "distractorsRu": [
+      "Джеймс Кэмерон",
+      "Стэнли Кубрик",
+      "Крис Коламбус"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Великий диктатор» — Чарли Чаплин.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q109116",
+    "sourceTitle": "Wikidata: Великий диктатор",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-film-Q61448040",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Expert",
+    "promptRu": "Кто режиссёр фильма «Паразиты»?",
+    "answerRu": "Пон Джун Хо",
+    "acceptedRu": [
+      "Пон Джун Хо",
+      "Хо"
+    ],
+    "distractorsRu": [
+      "Дэвид Финчер",
+      "Серджо Леоне",
+      "Квентин Тарантино"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Режиссёр фильма «Паразиты» — Пон Джун Хо.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q61448040",
+    "sourceTitle": "Wikidata: Паразиты",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "q-film-mm200o",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Какой фильм Джеймса Кэмерона 1997 года стал первым в истории, преодолевшим рубеж в 1 млрд долларов сборов?",
+    "answerRu": "Титаник",
+    "acceptedRu": [
+      "Титаник",
+      "Titanic"
+    ],
+    "distractorsRu": [
+      "Аватар",
+      "Парк Юрского периода",
+      "Терминатор 2"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Титаник» удерживал рекорд самых кассовых сборов более 10 лет.",
+    "sourceTitle": "Список самых кассовых фильмов — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-film-15lc29g",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Hard",
+    "promptRu": "Какой фильм кинокомикс студии Marvel 2019 года занимает второе место по мировым кассовым сборам в истории?",
+    "answerRu": "Мстители: Финал",
+    "acceptedRu": [
+      "Мстители: Финал",
+      "Мстители Финал",
+      "Avengers: Endgame"
+    ],
+    "distractorsRu": [
+      "Мстители: Война бесконечности",
+      "Человек-паук: Нет пути домой",
+      "Чёрная пантера"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Фильм «Мстители: Финал» собрал свыше 2,79 млрд долларов.",
+    "sourceTitle": "Список самых кассовых фильмов — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

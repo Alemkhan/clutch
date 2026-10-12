@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { MyRunSummary } from '@clutch/shared';
-import { formatRunTime, inviteDeadline, roundsText, runStatus, runSummary } from './myRunsView';
+import { categoryName, formatRunTime, inviteDeadline, roundsText, runStatus, runSummary } from './myRunsView';
 
 function run(overrides: Partial<MyRunSummary> = {}): MyRunSummary {
   return {
@@ -61,5 +61,11 @@ describe('time text', () => {
     expect(inviteDeadline(now + 5 * 3600_000, now)).toBe('Ещё 5 ч');
     expect(inviteDeadline(now + 90_000, now)).toBe('Ещё 1 мин');
     expect(inviteDeadline(now - 1, now)).toBeNull();
+  });
+});
+
+describe('category names', () => {
+  it('names the general category', () => {
+    expect(categoryName('general')).toBe('Общие знания');
   });
 });

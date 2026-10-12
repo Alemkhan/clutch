@@ -1,6 +1,7 @@
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
   CURRENT_SOLO_RUN_CONDITIONS,
+  DAILY_SET_SIZES,
   FRIEND_RULES_VERSION,
   PRACTICE_RULES_VERSION,
   SOLO_ROUND_CAP,
@@ -252,7 +253,7 @@ export function normalizeSoloSnapshot(snapshot: SoloRunSnapshot, practice = fals
   const run = normalizeSoloRun(snapshot, practice);
   if (!Array.isArray(snapshot.rounds) || snapshot.rounds.length > run.questions.length
     || (snapshot.status !== 'in_progress' && snapshot.status !== 'completed')
-    || (snapshot.category !== 'geography' && snapshot.category !== 'history' && snapshot.category !== 'languages')) {
+    || !Object.hasOwn(DAILY_SET_SIZES, snapshot.category)) {
     throw new Error('Solo run snapshot is invalid.');
   }
   snapshot.rounds.forEach((round, index) => {

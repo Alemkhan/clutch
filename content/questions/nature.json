@@ -1,0 +1,739 @@
+[
+  {
+    "id": "au-nature-snmr1t",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Easy",
+    "promptRu": "Какое животное самое большое на Земле?",
+    "answerRu": "синий кит",
+    "acceptedRu": [
+      "синий кит",
+      "голубой кит"
+    ],
+    "distractorsRu": [
+      "африканский слон",
+      "кашалот",
+      "китовая акула"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Синий кит",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-inrxh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Easy",
+    "promptRu": "Сколько ног у паука?",
+    "answerRu": "8",
+    "acceptedRu": [
+      "8",
+      "восемь"
+    ],
+    "distractorsRu": [
+      "6",
+      "10",
+      "12"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Пауки",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-pspxo5",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Easy",
+    "promptRu": "Какое животное называют царём зверей?",
+    "answerRu": "лев",
+    "acceptedRu": [
+      "лев"
+    ],
+    "distractorsRu": [
+      "тигр",
+      "медведь",
+      "слон"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Лев",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-1xx4qij",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Easy",
+    "promptRu": "Как называется детёныш лошади?",
+    "answerRu": "жеребёнок",
+    "acceptedRu": [
+      "жеребёнок",
+      "жеребенок"
+    ],
+    "distractorsRu": [
+      "телёнок",
+      "ягнёнок",
+      "козлёнок"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Лошадь",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-1gu4bf5",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Easy",
+    "promptRu": "Какая нелетающая птица живёт в Антарктиде?",
+    "answerRu": "пингвин",
+    "acceptedRu": [
+      "пингвин"
+    ],
+    "distractorsRu": [
+      "страус",
+      "альбатрос",
+      "чайка"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Пингвиновые",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-tjc9yv",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Easy",
+    "promptRu": "Какое животное носит детёныша в сумке и прыгает на задних лапах?",
+    "answerRu": "кенгуру",
+    "acceptedRu": [
+      "кенгуру"
+    ],
+    "distractorsRu": [
+      "коала",
+      "енот",
+      "заяц"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Кенгуру",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-at5bj7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Какое животное самое высокое в мире?",
+    "answerRu": "жираф",
+    "acceptedRu": [
+      "жираф"
+    ],
+    "distractorsRu": [
+      "слон",
+      "страус",
+      "верблюд"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Жираф",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-xiat8i",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Какое млекопитающее умеет по-настоящему летать?",
+    "answerRu": "летучая мышь",
+    "acceptedRu": [
+      "летучая мышь",
+      "летучие мыши",
+      "рукокрылые"
+    ],
+    "distractorsRu": [
+      "белка-летяга",
+      "колибри",
+      "шиншилла"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Рукокрылые",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-105tcwh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Какое дерево даёт жёлуди?",
+    "answerRu": "дуб",
+    "acceptedRu": [
+      "дуб"
+    ],
+    "distractorsRu": [
+      "клён",
+      "бук",
+      "каштан"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Дуб",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-1hix3wf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Как называют животных, которые едят только растения?",
+    "answerRu": "травоядные",
+    "acceptedRu": [
+      "травоядные",
+      "травоядное",
+      "фитофаги"
+    ],
+    "distractorsRu": [
+      "хищники",
+      "всеядные",
+      "падальщики"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Травоядные",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-sec4l0",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Чем дышат рыбы?",
+    "answerRu": "жабрами",
+    "acceptedRu": [
+      "жабрами",
+      "жабры"
+    ],
+    "distractorsRu": [
+      "лёгкими",
+      "кожей",
+      "плавниками"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Жабры",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-1m3klo0",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Hard",
+    "promptRu": "Какая птица умеет летать задом наперёд?",
+    "answerRu": "колибри",
+    "acceptedRu": [
+      "колибри"
+    ],
+    "distractorsRu": [
+      "стриж",
+      "ласточка",
+      "сокол"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Колибри",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-2l6jd",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Hard",
+    "promptRu": "Какое животное самое быстрое в пикирующем полёте?",
+    "answerRu": "сапсан",
+    "acceptedRu": [
+      "сапсан"
+    ],
+    "distractorsRu": [
+      "беркут",
+      "гепард",
+      "стриж"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Сапсан",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-181k0f",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Hard",
+    "promptRu": "Какая рыба самая большая в мире?",
+    "answerRu": "китовая акула",
+    "acceptedRu": [
+      "китовая акула"
+    ],
+    "distractorsRu": [
+      "синий кит",
+      "белая акула",
+      "рыба-луна"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Синий кит — млекопитающее, а не рыба.",
+    "sourceHint": "Википедия: Китовая акула",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-8wkn91",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Hard",
+    "promptRu": "У какого наземного животного самая долгая беременность?",
+    "answerRu": "слон",
+    "acceptedRu": [
+      "слон",
+      "африканский слон"
+    ],
+    "distractorsRu": [
+      "жираф",
+      "носорог",
+      "бегемот"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Около 22 месяцев.",
+    "sourceHint": "Википедия: Африканский слон",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-j6zxkg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Expert",
+    "promptRu": "Сколько глаз у медоносной пчелы?",
+    "answerRu": "5",
+    "acceptedRu": [
+      "5",
+      "пять"
+    ],
+    "distractorsRu": [
+      "2",
+      "4",
+      "8"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Два сложных глаза и три простых.",
+    "sourceHint": "Википедия: Медоносная пчела",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-1djwk9x",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Expert",
+    "promptRu": "Какое дерево самое высокое в мире?",
+    "answerRu": "секвойя",
+    "acceptedRu": [
+      "секвойя",
+      "вечнозелёная секвойя",
+      "вечнозеленая секвойя",
+      "секвойя вечнозелёная",
+      "секвойя вечнозеленая"
+    ],
+    "distractorsRu": [
+      "эвкалипт",
+      "баобаб",
+      "кедр"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Секвойя",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-1xx1hxt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Expert",
+    "promptRu": "Какое млекопитающее откладывает яйца и имеет утиный клюв?",
+    "answerRu": "утконос",
+    "acceptedRu": [
+      "утконос"
+    ],
+    "distractorsRu": [
+      "ленивец",
+      "броненосец",
+      "муравьед"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Утконос",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-nature-qkuwih",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Expert",
+    "promptRu": "Как называется наука о насекомых?",
+    "answerRu": "энтомология",
+    "acceptedRu": [
+      "энтомология"
+    ],
+    "distractorsRu": [
+      "этимология",
+      "орнитология",
+      "ихтиология"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Энтомология",
+    "reviewNote": "При вводе нечёткое сравнение путает с «этимологией» — только выбор.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-1pv92du",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Easy",
+    "promptRu": "Какое крупнейшее в мире млекопитающее обитает в океане?",
+    "answerRu": "синий кит",
+    "acceptedRu": [
+      "синий кит",
+      "голубой кит"
+    ],
+    "distractorsRu": [
+      "кашалот",
+      "косатка",
+      "китовая акула"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Синий кит является самым крупным животным на Земле.",
+    "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-wgp417",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Easy",
+    "promptRu": "Какое единственное млекопитающее способно к настоящему активному машущему полёту?",
+    "answerRu": "летучая мышь",
+    "acceptedRu": [
+      "летучая мышь",
+      "рукокрылые"
+    ],
+    "distractorsRu": [
+      "белка-летяга",
+      "летяга",
+      "страус"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Летучие мыши — единственные млекопитающие, способные к машущему полёту.",
+    "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-1ydqa37",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Easy",
+    "promptRu": "Какое водоплавающее австралийское млекопитающее имеет уткообразный клюв и откладывает яйца?",
+    "answerRu": "утконос",
+    "acceptedRu": [
+      "утконос"
+    ],
+    "distractorsRu": [
+      "ехидна",
+      "воббат",
+      "коала"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Утконос относится к отряду однопроходных млекопитающих.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-5z7drd",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Easy",
+    "promptRu": "Как официально называется детёныш кенгуру?",
+    "answerRu": "джои",
+    "acceptedRu": [
+      "джои",
+      "joey"
+    ],
+    "distractorsRu": [
+      "теля",
+      "щенок",
+      "панда"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Детёнышей всех сумчатых в английском языке и международно называют «джои».",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-578ait",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Easy",
+    "promptRu": "Какая самая длинная река в мире протекает по территории Южной Америки?",
+    "answerRu": "Амазонка",
+    "acceptedRu": [
+      "Амазонка",
+      "река Амазонка"
+    ],
+    "distractorsRu": [
+      "Нил",
+      "Миссисипи",
+      "Янцзы"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Амазонка — самая полноводная и длинная река на Земле.",
+    "sourceTitle": "Список рек по длине — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-a5d8jm",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Какое дикое животное семейства кошачьих является самым быстрым сухопутным млекопитающим?",
+    "answerRu": "гепард",
+    "acceptedRu": [
+      "гепард"
+    ],
+    "distractorsRu": [
+      "лев",
+      "тигр",
+      "леопард"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Гепард способно развивать скорость до 100-120 км/ч.",
+    "sourceTitle": "Кошачьи — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-19gazwc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "К какому семейству хищных млекопитающих относятся львы, тигры, ягуары и домашние кошки?",
+    "answerRu": "кошачьи",
+    "acceptedRu": [
+      "кошачьи",
+      "кошачьих",
+      "семейство кошачьих"
+    ],
+    "distractorsRu": [
+      "псовые",
+      "куньи",
+      "медвежьи"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Кошачьи — семейство отряда хищных млекопитающих.",
+    "sourceTitle": "Кошачьи — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-1ku6ulh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Какое дикое кошачье является крупнейшим по массе и размеру среди всех представителей семейства?",
+    "answerRu": "тигр",
+    "acceptedRu": [
+      "тигр"
+    ],
+    "distractorsRu": [
+      "лев",
+      "ягуар",
+      "пума"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Тигр — самый крупный вид семейства кошачьих.",
+    "sourceTitle": "Кошачьи — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-n9iqug",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Какая река считается самой длинной в Африке?",
+    "answerRu": "Нил",
+    "acceptedRu": [
+      "Нил",
+      "река Нил"
+    ],
+    "distractorsRu": [
+      "Конго",
+      "Нигер",
+      "Замбези"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Нил — главная речная артерия Северной и Восточной Африки.",
+    "sourceTitle": "Список рек по длине — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-1ybfyd7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Какая река является самой длинной в Евразии и Китае?",
+    "answerRu": "Янцзы",
+    "acceptedRu": [
+      "Янцзы"
+    ],
+    "distractorsRu": [
+      "Хуанхэ",
+      "Меконг",
+      "Амур"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Янцзы — длиннейшая река Евразийского континента.",
+    "sourceTitle": "Список рек по длине — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-qva8so",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Hard",
+    "promptRu": "Какую форму имеют зрачки у парнокопытных животных, таких как овцы и козы?",
+    "answerRu": "прямоугольную",
+    "acceptedRu": [
+      "прямоугольную",
+      "прямоугольник",
+      "горизонтальную"
+    ],
+    "distractorsRu": [
+      "круглую",
+      "вертикальную",
+      "треугольную"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Прямоугольные горизонтальные зрачки дают овцам широкий обзор для защиты от хищников.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-7wmpmh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Hard",
+    "promptRu": "Какое крупное кошачье Нового Света является единственным представителем рода пантер в Америке?",
+    "answerRu": "ягуар",
+    "acceptedRu": [
+      "ягуар"
+    ],
+    "distractorsRu": [
+      "пума",
+      "оцелот",
+      "ягуарунди"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ягуар — единственный представитель рода Panthera на американских континентах.",
+    "sourceTitle": "Кошачьи — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-1i7c9hr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Hard",
+    "promptRu": "Как называется крупная горная кошка Центральной Азии, также известная как ирбис?",
+    "answerRu": "снежный барс",
+    "acceptedRu": [
+      "снежный барс",
+      "ирбис",
+      "барс"
+    ],
+    "distractorsRu": [
+      "дымчатый леопард",
+      "пума",
+      "гепард"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Снежный барс (ирбис) обитает в горных массивах Центральной Азии.",
+    "sourceTitle": "Кошачьи — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-nature-1j56ls0",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Expert",
+    "promptRu": "Какая речная система в США занимает четвёртое место в мире по протяжённости вместе с притоком Миссури?",
+    "answerRu": "Миссисипи",
+    "acceptedRu": [
+      "Миссисипи",
+      "Миссисипи-Миссури"
+    ],
+    "distractorsRu": [
+      "Колорадо",
+      "Колумбия",
+      "Юкон"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Миссисипи с Миссури образует крупнейшую речную систему Северной Америки.",
+    "sourceTitle": "Список рек по длине — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

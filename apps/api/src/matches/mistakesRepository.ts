@@ -1,4 +1,4 @@
-import { generateQuestionById } from '@clutch/shared';
+import { resolveQuestionById } from '@clutch/shared';
 
 /** Сколько вопросов в одной сессии отработки ошибок. */
 export const TRAINING_SESSION_SIZE = 10;
@@ -86,5 +86,5 @@ export async function listTrainableMistakes(db: D1Database, playerId: string): P
   const blocked = await activeRunQuestionIds(db, playerId);
   return result.results
     .map((row) => row.question_id)
-    .filter((id) => !blocked.has(id) && generateQuestionById(id) !== null);
+    .filter((id) => !blocked.has(id) && resolveQuestionById(id) !== null);
 }

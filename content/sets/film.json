@@ -1,0 +1,170 @@
+[
+  {
+    "id": "set-lumiere",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "film",
+    "titleRu": "Назови одного из братьев Люмьер",
+    "mcPromptRu": "Кто из них — один из братьев Люмьер?",
+    "members": [
+      {
+        "id": "auguste",
+        "answerRu": "Огюст",
+        "acceptedRu": [
+          "Огюст",
+          "Огюст Люмьер"
+        ]
+      },
+      {
+        "id": "louis",
+        "answerRu": "Луи",
+        "acceptedRu": [
+          "Луи",
+          "Луи Люмьер"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Жорж Мельес",
+      "Томас Эдисон",
+      "Чарли Чаплин"
+    ],
+    "sourceHint": "Википедия: Братья Люмьер",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-avengers-2012",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "film",
+    "titleRu": "Назови героя из первых «Мстителей» 2012 года",
+    "mcPromptRu": "Кто из них был в команде «Мстителей» 2012 года?",
+    "members": [
+      {
+        "id": "ironman",
+        "answerRu": "Железный человек",
+        "acceptedRu": [
+          "Железный человек",
+          "Тони Старк"
+        ]
+      },
+      {
+        "id": "cap",
+        "answerRu": "Капитан Америка",
+        "acceptedRu": [
+          "Капитан Америка",
+          "Стив Роджерс"
+        ]
+      },
+      {
+        "id": "thor",
+        "answerRu": "Тор",
+        "acceptedRu": [
+          "Тор"
+        ]
+      },
+      {
+        "id": "hulk",
+        "answerRu": "Халк",
+        "acceptedRu": [
+          "Халк",
+          "Брюс Бэннер"
+        ]
+      },
+      {
+        "id": "widow",
+        "answerRu": "Чёрная вдова",
+        "acceptedRu": [
+          "Чёрная вдова",
+          "Черная вдова",
+          "Наташа Романофф"
+        ]
+      },
+      {
+        "id": "hawkeye",
+        "answerRu": "Соколиный глаз",
+        "acceptedRu": [
+          "Соколиный глаз",
+          "Клинт Бартон"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Человек-паук",
+      "Бэтмен",
+      "Дэдпул"
+    ],
+    "sourceHint": "Википедия: Мстители (фильм, 2012)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-film-5tpdup",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "film",
+    "titleRu": "Назови фильм с мировыми сборами более 2 млрд долларов",
+    "mcPromptRu": "Какой из этих фильмов преодолел рубеж в 2 миллиарда долларов в мировом прокате?",
+    "members": [
+      {
+        "id": "avatar",
+        "answerRu": "Аватар",
+        "acceptedRu": [
+          "Аватар",
+          "Avatar"
+        ]
+      },
+      {
+        "id": "endgame",
+        "answerRu": "Мстители: Финал",
+        "acceptedRu": [
+          "Мстители: Финал",
+          "Мстители Финал"
+        ]
+      },
+      {
+        "id": "avatar2",
+        "answerRu": "Аватар: Путь воды",
+        "acceptedRu": [
+          "Аватар: Путь воды",
+          "Аватар Путь воды"
+        ]
+      },
+      {
+        "id": "titanic",
+        "answerRu": "Титаник",
+        "acceptedRu": [
+          "Титаник",
+          "Titanic"
+        ]
+      },
+      {
+        "id": "starwars7",
+        "answerRu": "Звёздные войны: Пробуждение силы",
+        "acceptedRu": [
+          "Звёздные войны: Пробуждение силы",
+          "Звездные войны: Пробуждение силы",
+          "Пробуждение силы"
+        ]
+      },
+      {
+        "id": "infinity_war",
+        "answerRu": "Мстители: Война бесконечности",
+        "acceptedRu": [
+          "Мстители: Война бесконечности",
+          "Война бесконечности"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Шрек 2",
+      "Гарри Поттер и философский камень",
+      "Темный рыцарь"
+    ],
+    "sourceTitle": "Список самых кассовых фильмов — Википедия",
+    "reviewNote": "Фильмы-двухмиллиардники по кассовым сборам.",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

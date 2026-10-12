@@ -1,0 +1,1036 @@
+[
+  {
+    "id": "au-world-1wn35e0",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "Какая гора самая высокая в мире?",
+    "answerRu": "Эверест",
+    "acceptedRu": [
+      "Эверест",
+      "Джомолунгма"
+    ],
+    "distractorsRu": [
+      "К2",
+      "Килиманджаро",
+      "Эльбрус"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Джомолунгма",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-world-1qmizat",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "Какой океан самый большой?",
+    "answerRu": "Тихий",
+    "acceptedRu": [
+      "Тихий",
+      "Тихий океан"
+    ],
+    "distractorsRu": [
+      "Атлантический",
+      "Индийский",
+      "Северный Ледовитый"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Тихий океан",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-world-1q4ryk6",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "Какая страна самая большая по площади?",
+    "answerRu": "Россия",
+    "acceptedRu": [
+      "Россия"
+    ],
+    "distractorsRu": [
+      "Канада",
+      "Китай",
+      "США"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Список государств по площади",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-world-1yl8ufh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какое озеро самое глубокое в мире?",
+    "answerRu": "Байкал",
+    "acceptedRu": [
+      "Байкал",
+      "озеро Байкал"
+    ],
+    "distractorsRu": [
+      "Танганьика",
+      "Каспийское море",
+      "Виктория"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Байкал",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-world-1c7gzfh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какой остров самый большой в мире?",
+    "answerRu": "Гренландия",
+    "acceptedRu": [
+      "Гренландия"
+    ],
+    "distractorsRu": [
+      "Мадагаскар",
+      "Новая Гвинея",
+      "Борнео"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Австралию считают материком.",
+    "sourceHint": "Википедия: Гренландия",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-world-ohmxox",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какая самая большая жаркая пустыня мира?",
+    "answerRu": "Сахара",
+    "acceptedRu": [
+      "Сахара"
+    ],
+    "distractorsRu": [
+      "Гоби",
+      "Аравийская",
+      "Калахари"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Если считать холодные пустыни, самая большая — Антарктида.",
+    "sourceHint": "Википедия: Сахара",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-world-g1xbqc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Как называется самый высокий водопад в мире?",
+    "answerRu": "Анхель",
+    "acceptedRu": [
+      "Анхель",
+      "водопад Анхель"
+    ],
+    "distractorsRu": [
+      "Виктория",
+      "Ниагарский",
+      "Игуасу"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Анхель",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-world-b8oy8z",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Как называется самое высокое здание в мире?",
+    "answerRu": "Бурдж-Халифа",
+    "acceptedRu": [
+      "Бурдж-Халифа",
+      "Бурдж Халифа"
+    ],
+    "distractorsRu": [
+      "Шанхайская башня",
+      "Абрадж аль-Бейт",
+      "Лахта-центр"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Бурдж-Халифа",
+    "reviewNote": "Проверять перед релизом: строится Джидда-Тауэр.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-world-1b97dlg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Какое море на самом деле является крупнейшим озером мира?",
+    "answerRu": "Каспийское",
+    "acceptedRu": [
+      "Каспийское",
+      "Каспийское море",
+      "Каспий"
+    ],
+    "distractorsRu": [
+      "Аральское",
+      "Мёртвое",
+      "Чёрное"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Каспийское море",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-world-141swwl",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Expert",
+    "promptRu": "Какой посёлок в Якутии считают полюсом холода Северного полушария?",
+    "answerRu": "Оймякон",
+    "acceptedRu": [
+      "Оймякон"
+    ],
+    "distractorsRu": [
+      "Верхоянск",
+      "Норильск",
+      "Якутск"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Оймякон",
+    "reviewNote": "Верхоянск тоже претендует на звание — проверить формулировку.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-world-1gihzoc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Expert",
+    "promptRu": "Какая самая длинная горная цепь на суше?",
+    "answerRu": "Анды",
+    "acceptedRu": [
+      "Анды",
+      "Андийские горы"
+    ],
+    "distractorsRu": [
+      "Гималаи",
+      "Скалистые горы",
+      "Уральские горы"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Анды",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "q-world-1mcd8ua",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "Какая страна является непосредственным северным соседом США?",
+    "answerRu": "Канада",
+    "acceptedRu": [
+      "Канада"
+    ],
+    "distractorsRu": [
+      "Мексика",
+      "Гренландия",
+      "Багамы"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Канада граничит с США на севере.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-gwfmzm",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "В какой европейской столице находится Эйфелева башня?",
+    "answerRu": "Париж",
+    "acceptedRu": [
+      "Париж"
+    ],
+    "distractorsRu": [
+      "Лондон",
+      "Берлин",
+      "Рим"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Эйфелева башня находится в Париже, Франция.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-rosr88",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "Какая столица является главным городом Великобритании?",
+    "answerRu": "Лондон",
+    "acceptedRu": [
+      "Лондон"
+    ],
+    "distractorsRu": [
+      "Дублин",
+      "Эдинбург",
+      "Кардифф"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Лондон — столица Соединённого Королевства.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-17j62g",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "Столицей какого американского штата является Денвер?",
+    "answerRu": "Колорадо",
+    "acceptedRu": [
+      "Колорадо"
+    ],
+    "distractorsRu": [
+      "Техас",
+      "Юта",
+      "Аризона"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Денвер — административный центр штата Колорадо.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-ye06rt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "Какое государство признано самым маленьким в мире по площади?",
+    "answerRu": "Ватикан",
+    "acceptedRu": [
+      "Ватикан"
+    ],
+    "distractorsRu": [
+      "Монако",
+      "Сан-Марино",
+      "Лихтенштейн"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ватикан — карликовое государство-анклав внутри Рима.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-12cmchx",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "Какой океан омывает восточное побережье США?",
+    "answerRu": "Атлантический",
+    "acceptedRu": [
+      "Атлантический",
+      "Атлантический океан",
+      "Атлантика"
+    ],
+    "distractorsRu": [
+      "Тихий",
+      "Индийский",
+      "Северный Ледовитый"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Восточные штаты США выходят к Атлантическому океану.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-19beql4",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "В какой части света расположена Германия?",
+    "answerRu": "Европа",
+    "acceptedRu": [
+      "Европа"
+    ],
+    "distractorsRu": [
+      "Азия",
+      "Америка",
+      "Африка"
+    ],
+    "openAnswer": true,
+    "explanationRu": "ФРГ находится в Центральной Европе.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-3if8je",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какая горная система считается самой длинной сухопутной цепью в мире?",
+    "answerRu": "Анды",
+    "acceptedRu": [
+      "Анды",
+      "Андские Кордильеры"
+    ],
+    "distractorsRu": [
+      "Гималаи",
+      "Кордильеры",
+      "Альпы"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Анды протянулись вдоль западного побережья Южной Америки.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-1ix2mhh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Официальными языками какого европейского государства являются нидерландский, французский и немецкий?",
+    "answerRu": "Бельгия",
+    "acceptedRu": [
+      "Бельгия"
+    ],
+    "distractorsRu": [
+      "Швейцария",
+      "Люксембург",
+      "Нидерланды"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Бельгия делится на три языковых сообщества.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-15uug46",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какая азиатская страна удерживает первенство по дикой популяции тигров?",
+    "answerRu": "Индия",
+    "acceptedRu": [
+      "Индия"
+    ],
+    "distractorsRu": [
+      "Китай",
+      "Таиланд",
+      "Индонезия"
+    ],
+    "openAnswer": true,
+    "explanationRu": "В Индии проживает наибольшее количество тигров в мире.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-16qvck",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какой крупный густонаселённый город является самым большим на западе США в штате Калифорния?",
+    "answerRu": "Лос-Анджелес",
+    "acceptedRu": [
+      "Лос-Анджелес",
+      "Лос Анджелес"
+    ],
+    "distractorsRu": [
+      "Сан-Франциско",
+      "Сан-Диего",
+      "Сакраменто"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Лос-Анджелес — крупнейший город Калифорнии.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-1ot7eab",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "В какой стране находится густонаселённый остров Зеландия с её столицей?",
+    "answerRu": "Дания",
+    "acceptedRu": [
+      "Дания"
+    ],
+    "distractorsRu": [
+      "Швеция",
+      "Норвегия",
+      "Нидерланды"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Копенгаген расположен на датском острове Зеландия.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-1sznspn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какая азиатская столица является родным домом для наибольшего числа носителей языка гуджарати?",
+    "answerRu": "Ахмадабад",
+    "acceptedRu": [
+      "Ахмадабад",
+      "Ахмедабад"
+    ],
+    "distractorsRu": [
+      "Мумбаи",
+      "Дели",
+      "Карачи"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ахмадабад — крупнейший город штата Гуджарат.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-4f6ghr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какое африканское островное государство является главным мировым производителем ванили?",
+    "answerRu": "Мадагаскар",
+    "acceptedRu": [
+      "Мадагаскар"
+    ],
+    "distractorsRu": [
+      "Маврикий",
+      "Сейшелы",
+      "Коморы"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Мадагаскар производит большую часть мировой бурбонной ванили.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-1etyn1k",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "В какому древнему китайскому городу принадлежит знаменитая Терракотовая армия?",
+    "answerRu": "Сиань",
+    "acceptedRu": [
+      "Сиань",
+      "Си ань"
+    ],
+    "distractorsRu": [
+      "Пекин",
+      "Нанкин",
+      "Лоян"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Терракотовая армия гробницы Цинь Шихуанди находится в Сиане.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-1xlu7le",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Какое африканское государство до 1997 года официально именовалось Заиром?",
+    "answerRu": "ДР Конго",
+    "acceptedRu": [
+      "ДР Конго",
+      "Демократическая Республика Конго",
+      "Конго"
+    ],
+    "distractorsRu": [
+      "Республика Конго",
+      "Ангола",
+      "Замбия"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Демократическая Республика Конго с 1971 по 1997 год называлась Заиром.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-dukbhu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Какой американский штат единственный имеет непрямоугольный флаг сложных форм?",
+    "answerRu": "Огайо",
+    "acceptedRu": [
+      "Огайо"
+    ],
+    "distractorsRu": [
+      "Небраска",
+      "Алабама",
+      "Техас"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Флаг штата Огайо выполнен в форме ласточкина хвоста (непропорциональный фалклип).",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-1i2i5qo",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Название какого итальянского города восходит к греческому слову Неаполис, что означает «новый город»?",
+    "answerRu": "Неаполь",
+    "acceptedRu": [
+      "Неаполь"
+    ],
+    "distractorsRu": [
+      "Милан",
+      "Турин",
+      "Палермо"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Неаполь был основан греческими поселенцами как Неаполис.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-126dd7b",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "На каком острове расположен канадский город Монреаль?",
+    "answerRu": "Монреаль",
+    "acceptedRu": [
+      "Монреаль",
+      "остров Монреаль"
+    ],
+    "distractorsRu": [
+      "Ванкувер",
+      "Ньюфаундленд",
+      "Виктория"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Монреаль расположен на одноимённом острове у слияния рек Святого Лаврентия и Оттава.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-adabw3",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Какой остров является самым населённым в Бангладеш?",
+    "answerRu": "Бхола",
+    "acceptedRu": [
+      "Бхола",
+      "Бола"
+    ],
+    "distractorsRu": [
+      "Сент-Мартин",
+      "Хаттия",
+      "Сандвип"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Остров Бхола расположен в дельте Ганга и является крупнейшим по населению островным регионом страны.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-1mt71ok",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Какая страна до получения независимости в 1971 году официально именовалась Восточным Пакистаном?",
+    "answerRu": "Бангладеш",
+    "acceptedRu": [
+      "Бангладеш"
+    ],
+    "distractorsRu": [
+      "Мьянма",
+      "Шри-Ланка",
+      "Непал"
+    ],
+    "openAnswer": true,
+    "explanationRu": "После войны за независимость 1971 года Восточный Пакистан стал государством Бангладеш.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-z8ncdh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "На каком острове со столицей Нассау находится большая часть населения Багамских Островов?",
+    "answerRu": "Нью-Провиденс",
+    "acceptedRu": [
+      "Нью-Провиденс",
+      "Нью Провиденс"
+    ],
+    "distractorsRu": [
+      "Большой Багама",
+      "Андрос",
+      "Элеутера"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Нью-Провиденс — главный остров Багам со столицей Нассау.",
+    "sourceTitle": "Isaac & Anderson vs. 11 Smart Players: Geography Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-g98a4t",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Expert",
+    "promptRu": "Какая природная зона представляет собой северный хвойный бореальный лес?",
+    "answerRu": "тайга",
+    "acceptedRu": [
+      "тайга",
+      "Тайга"
+    ],
+    "distractorsRu": [
+      "тундра",
+      "степь",
+      "саванна"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Тайга — биом хвойных лесов умеренного и субполярного пояса.",
+    "sourceTitle": "Isaac & Anderson vs. 11 Smart Players: Geography Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-4a8xvp",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Expert",
+    "promptRu": "Какой южноитальянский остров расположен непосредственно к югу от французского острова Корсика?",
+    "answerRu": "Сардиния",
+    "acceptedRu": [
+      "Сардиния"
+    ],
+    "distractorsRu": [
+      "Сицилия",
+      "Мальта",
+      "Эльба"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Пролив Бонифачо отделяет Корсику от Сардинии.",
+    "sourceTitle": "Isaac & Anderson vs. 11 Smart Players: Geography Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-knljgn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Expert",
+    "promptRu": "Какое название носит обширный полупустынный регион на юге Южной Америки в Парагвае, Боливии и Аргентине?",
+    "answerRu": "Гран-Чако",
+    "acceptedRu": [
+      "Гран-Чако",
+      "Гран Чако",
+      "Чако"
+    ],
+    "distractorsRu": [
+      "Пантанал",
+      "Патагония",
+      "Пампа"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Гран-Чако — тропический малонаселённый регион Южной Америки.",
+    "sourceTitle": "Isaac & Jake vs. 10 Smart Players",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-1osdpf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Expert",
+    "promptRu": "Какой единственный американский штат имеет однопалатный легислатуру (парламент)?",
+    "answerRu": "Небраска",
+    "acceptedRu": [
+      "Небраска"
+    ],
+    "distractorsRu": [
+      "Вайоминг",
+      "Айдахо",
+      "Вермонт"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Сенат Небраски является единственным однопалатным законодательным органом штатов США.",
+    "sourceTitle": "Isaac & Jake vs. 10 Smart Players",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-p3h56b",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Expert",
+    "promptRu": "Без учёта внешних заморских территорий, какая страна является самой южной на Земле?",
+    "answerRu": "Чили",
+    "acceptedRu": [
+      "Чили"
+    ],
+    "distractorsRu": [
+      "Аргентина",
+      "Новая Зеландия",
+      "ЮАР"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Мыс Горн и крайние южные острова Чили делают её самой южной континентальной страной.",
+    "sourceTitle": "Last Person Standing Wins $500 (Ages 8-45 Quiz)",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-px8q19",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "На каком итальянском острове расположен действующий вулкан Этна?",
+    "answerRu": "Сицилия",
+    "acceptedRu": [
+      "Сицилия"
+    ],
+    "distractorsRu": [
+      "Сардиния",
+      "Корсика",
+      "Капри"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Этна — один из самых активных вулканов в мире, находящийся на востоке Сицилии.",
+    "sourceTitle": "Last Person Standing Wins $500 (Ages 8-45 Quiz)",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-utbur8",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "Родиной какого популярного плода с маслянистой мякотью является Мексика?",
+    "answerRu": "авокадо",
+    "acceptedRu": [
+      "авокадо",
+      "Авокадо"
+    ],
+    "distractorsRu": [
+      "ананас",
+      "банан",
+      "манго"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Авокадо происходят из Центральной Америки и Мексики.",
+    "sourceTitle": "Last Person Standing Wins $500 (Ages 8-45 Quiz)",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-y9s9f4",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "В какой залив впадает пограничная река Рио-Гранде между США и Мексикой?",
+    "answerRu": "Мексиканский",
+    "acceptedRu": [
+      "Мексиканский",
+      "Мексиканский залив"
+    ],
+    "distractorsRu": [
+      "Персидский",
+      "Калифорнийский",
+      "Гудзонов"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Река Рио-Гранде впадает в Мексиканский залив.",
+    "sourceTitle": "Last Person Standing Wins $500 (Ages 8-45 Quiz)",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-wjimq0",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какая южноамериканская страна не имеет выхода к морю и граничит с Аргентиной, Бразилией и Боливией?",
+    "answerRu": "Парагвай",
+    "acceptedRu": [
+      "Парагвай"
+    ],
+    "distractorsRu": [
+      "Уругвай",
+      "Колумбия",
+      "Эквадор"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Парагвай — одна из двух внутриконтинентальных стран Южной Америки.",
+    "sourceTitle": "My Smartest Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-1mc0lal",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какое островное государство Тихого океана признано самым многоязычным в мире?",
+    "answerRu": "Папуа — Новая Гвинея",
+    "acceptedRu": [
+      "Папуа — Новая Гвинея",
+      "Папуа Новая Гвинея",
+      "Папуа-Новая Гвинея"
+    ],
+    "distractorsRu": [
+      "Вануату",
+      "Соломоновы Острова",
+      "Фиджи"
+    ],
+    "openAnswer": true,
+    "explanationRu": "В Папуа — Новой Гвинее насчитывается свыше 800 живых языков.",
+    "sourceTitle": "My Smartest Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-17m42z7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Какой южноамериканский язык является официальным в Парагвае наряду с испанским?",
+    "answerRu": "гуарани",
+    "acceptedRu": [
+      "гуарани",
+      "Гуарани"
+    ],
+    "distractorsRu": [
+      "кечуа",
+      "аймара",
+      "науатль"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Гуарани — язык коренного населения, государственный язык Парагвая.",
+    "sourceTitle": "My Smartest Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-qzzdm6",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Лидером какой африканской страны во время Португальской революции гвоздик 1974 года был Нельсон Мандела?",
+    "answerRu": "ЮАР",
+    "acceptedRu": [
+      "ЮАР",
+      "Южно-Африканская Республика",
+      "Южная Африка"
+    ],
+    "distractorsRu": [
+      "Намибия",
+      "Зимбабве",
+      "Ангола"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Нельсон Мандела — борец против апартеида и первый чёрный президент ЮАР.",
+    "sourceTitle": "Name the 10 Countries @jakelyonsgeo @soluna16",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-world-1yb31mc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Expert",
+    "promptRu": "Какая европейская столица на реке Дунай была образована объединением городов Буда и Пешт?",
+    "answerRu": "Будапешт",
+    "acceptedRu": [
+      "Будапешт"
+    ],
+    "distractorsRu": [
+      "Вена",
+      "Братислава",
+      "Белград"
+    ],
+    "openAnswer": true,
+    "explanationRu": "В 1873 году Буда, Обуда и Пешт объединились в Будапешт.",
+    "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

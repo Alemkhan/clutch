@@ -1,0 +1,277 @@
+[
+  {
+    "id": "set-ancient-wonders",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "history",
+    "titleRu": "Назови одно из семи чудес света древнего мира",
+    "mcPromptRu": "Что из этого — одно из семи чудес древнего мира?",
+    "members": [
+      {
+        "id": "giza",
+        "answerRu": "пирамида Хеопса",
+        "acceptedRu": [
+          "пирамида Хеопса",
+          "пирамида Хуфу",
+          "пирамида Гизы",
+          "пирамиды Гизы"
+        ]
+      },
+      {
+        "id": "babylon",
+        "answerRu": "висячие сады Семирамиды",
+        "acceptedRu": [
+          "висячие сады Семирамиды",
+          "висячие сады Вавилона",
+          "висячие сады"
+        ]
+      },
+      {
+        "id": "artemis",
+        "answerRu": "храм Артемиды",
+        "acceptedRu": [
+          "храм Артемиды",
+          "храм Артемиды Эфесской"
+        ]
+      },
+      {
+        "id": "zeus",
+        "answerRu": "статуя Зевса",
+        "acceptedRu": [
+          "статуя Зевса",
+          "статуя Зевса в Олимпии"
+        ]
+      },
+      {
+        "id": "mausoleum",
+        "answerRu": "Галикарнасский мавзолей",
+        "acceptedRu": [
+          "Галикарнасский мавзолей",
+          "мавзолей в Галикарнасе"
+        ]
+      },
+      {
+        "id": "colossus",
+        "answerRu": "Колосс Родосский",
+        "acceptedRu": [
+          "Колосс Родосский"
+        ]
+      },
+      {
+        "id": "pharos",
+        "answerRu": "Александрийский маяк",
+        "acceptedRu": [
+          "Александрийский маяк",
+          "Фаросский маяк"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Колизей",
+      "Стоунхендж",
+      "Великая Китайская стена",
+      "Тадж-Махал"
+    ],
+    "sourceHint": "Википедия: Семь чудес света",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-history-1i8t9kx",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "history",
+    "titleRu": "Назови корабль первой экспедиции Колумба",
+    "mcPromptRu": "Какое из этих судов входило в состав первой экспедиции Христофора Колумба 1492 года?",
+    "members": [
+      {
+        "id": "santa_maria",
+        "answerRu": "Санта-Мария",
+        "acceptedRu": [
+          "Санта-Мария",
+          "Санта Мария"
+        ]
+      },
+      {
+        "id": "pinta",
+        "answerRu": "Пинта",
+        "acceptedRu": [
+          "Пинта"
+        ]
+      },
+      {
+        "id": "nina",
+        "answerRu": "Нинья",
+        "acceptedRu": [
+          "Нинья"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Виктория",
+      "Мэйфлауэр",
+      "Титаник"
+    ],
+    "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
+    "reviewNote": "Три судна первой трансатлантической экспедиции Колумба.",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "set-history-12ex34l",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "history",
+    "titleRu": "Назови лидера «Большой тройки» на Ялтинской конференции",
+    "mcPromptRu": "Кто из этих государственных лидеров представлял союзников на Ялтинской конференции 1945 года?",
+    "members": [
+      {
+        "id": "roosevelt",
+        "answerRu": "Франклин Рузвельт",
+        "acceptedRu": [
+          "Франклин Рузвельт",
+          "Рузвельт"
+        ]
+      },
+      {
+        "id": "churchill",
+        "answerRu": "Уинстон Черчилль",
+        "acceptedRu": [
+          "Уинстон Черчилль",
+          "Черчилль"
+        ]
+      },
+      {
+        "id": "stalin",
+        "answerRu": "Иосиф Сталин",
+        "acceptedRu": [
+          "Иосиф Сталин",
+          "Сталин"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Шарль де Голль",
+      "Гарри Трумэн",
+      "Клемент Эттли"
+    ],
+    "sourceTitle": "Хронология Второй мировой войны — Википедия",
+    "reviewNote": "Участники Ялтинской конференции 1945 года.",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "set-history-lg9gd9",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "history",
+    "titleRu": "Назови один из узловых городов Великого шёлкового пути",
+    "mcPromptRu": "Какой из этих известных древних городов являлся ключевым узлом на Великом шёлковом пути?",
+    "members": [
+      {
+        "id": "changan",
+        "answerRu": "Чанъань",
+        "acceptedRu": [
+          "Чанъань",
+          "Сиань"
+        ]
+      },
+      {
+        "id": "samarkand",
+        "answerRu": "Самарканд",
+        "acceptedRu": [
+          "Самарканд"
+        ]
+      },
+      {
+        "id": "bukhara",
+        "answerRu": "Бухара",
+        "acceptedRu": [
+          "Бухара"
+        ]
+      },
+      {
+        "id": "kashgar",
+        "answerRu": "Кашгар",
+        "acceptedRu": [
+          "Кашгар"
+        ]
+      },
+      {
+        "id": "merv",
+        "answerRu": "Мерв",
+        "acceptedRu": [
+          "Мерв"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Мачу-Пикчу",
+      "Теночтитлан",
+      "Карфаген"
+    ],
+    "sourceTitle": "Великий шёлковый путь — Википедия",
+    "reviewNote": "Ключевые торговые центры на Шёлковом пути.",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "set-history-1ggpxua",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "history",
+    "titleRu": "Назови главную союзную державу Антигитлеровской коалиции",
+    "mcPromptRu": "Какое из этих государств входило в число главных союзных держав во Второй мировой войне?",
+    "members": [
+      {
+        "id": "ussr",
+        "answerRu": "СССР",
+        "acceptedRu": [
+          "СССР",
+          "Советский Союз"
+        ]
+      },
+      {
+        "id": "usa",
+        "answerRu": "США",
+        "acceptedRu": [
+          "США",
+          "Соединённые Штаты",
+          "Соединенные Штаты"
+        ]
+      },
+      {
+        "id": "uk",
+        "answerRu": "Великобритания",
+        "acceptedRu": [
+          "Великобритания",
+          "Соединённое Королевство",
+          "Соединенное Королевство"
+        ]
+      },
+      {
+        "id": "china",
+        "answerRu": "Китай",
+        "acceptedRu": [
+          "Китай"
+        ]
+      },
+      {
+        "id": "france",
+        "answerRu": "Франция",
+        "acceptedRu": [
+          "Франция"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Германия",
+      "Италия",
+      "Япония"
+    ],
+    "sourceTitle": "Хронология Второй мировой войны — Википедия",
+    "reviewNote": "Основные страны Антигитлеровской коалиции.",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

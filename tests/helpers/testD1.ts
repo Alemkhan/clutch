@@ -102,6 +102,14 @@ export function applyPlayerMistakesMigration(sqlite: SQLiteDatabase): void {
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0011_player_mistakes.sql', import.meta.url), 'utf8'));
 }
 
+export function applyGeneralCategoryMigration(sqlite: SQLiteDatabase): void {
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0012_general_category.sql', import.meta.url), 'utf8'));
+}
+
+export function applyLastStandMinedMigration(sqlite: SQLiteDatabase): void {
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0013_last_stand_mined.sql', import.meta.url), 'utf8'));
+}
+
 export function createTestD1(applyCurrentMigration = true): TestD1 {
   const sqlite = new DatabaseSync(':memory:');
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0001_async_matches.sql', import.meta.url), 'utf8'));
@@ -116,6 +124,8 @@ export function createTestD1(applyCurrentMigration = true): TestD1 {
     applyFriendInvitesMigration(sqlite);
     applySoloRoundsMigration(sqlite);
     applyPlayerMistakesMigration(sqlite);
+    applyGeneralCategoryMigration(sqlite);
+    applyLastStandMinedMigration(sqlite);
   }
   const binding = {
     prepare(query: string) {

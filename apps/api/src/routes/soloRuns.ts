@@ -324,7 +324,7 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
     const owner = await findRunOwner(c.env.DB, run.id);
     const snapshot: SoloRunSnapshot = {
       runId: run.id,
-      category: (owner?.category ?? 'geography') as SoloRunSnapshot['category'],
+      category: (owner?.category ?? 'general') as SoloRunSnapshot['category'],
       questions: questions.map(toPublicQuestion),
       pace: parsePace(run.opponent_json),
       target: SOLO_TARGET_PROGRESS,
@@ -348,7 +348,7 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
   app.get('/api/solo-leaderboard', async (c) => {
     const identity = await authenticate(c, 'solo-board');
     if (identity instanceof Response) return identity;
-    const category = c.req.query('category') ?? 'geography';
+    const category = c.req.query('category') ?? 'general';
     if (!categories.has(category)) return c.json({ error: 'Invalid category.' }, 400);
     const dateKey = c.req.query('date') ?? dailyKey(Date.now());
     const dayStart = DATE_KEY.test(dateKey) ? Date.parse(`${dateKey}T00:00:00Z`) : Number.NaN;

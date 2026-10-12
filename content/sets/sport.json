@@ -1,0 +1,124 @@
+[
+  {
+    "id": "set-olympic-rings",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "sport",
+    "titleRu": "Назови цвет олимпийского кольца",
+    "mcPromptRu": "Какой из этих цветов есть среди олимпийских колец?",
+    "members": [
+      {
+        "id": "blue",
+        "answerRu": "синий",
+        "acceptedRu": [
+          "синий",
+          "голубой"
+        ]
+      },
+      {
+        "id": "yellow",
+        "answerRu": "жёлтый",
+        "acceptedRu": [
+          "жёлтый",
+          "желтый"
+        ]
+      },
+      {
+        "id": "black",
+        "answerRu": "чёрный",
+        "acceptedRu": [
+          "чёрный",
+          "черный"
+        ]
+      },
+      {
+        "id": "green",
+        "answerRu": "зелёный",
+        "acceptedRu": [
+          "зелёный",
+          "зеленый"
+        ]
+      },
+      {
+        "id": "red",
+        "answerRu": "красный",
+        "acceptedRu": [
+          "красный"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "белый",
+      "фиолетовый",
+      "оранжевый"
+    ],
+    "sourceHint": "Олимпийская хартия, олимпийский символ",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-chess-pieces",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "sport",
+    "titleRu": "Назови шахматную фигуру",
+    "mcPromptRu": "Что из этого — шахматная фигура?",
+    "members": [
+      {
+        "id": "king",
+        "answerRu": "король",
+        "acceptedRu": [
+          "король"
+        ]
+      },
+      {
+        "id": "queen",
+        "answerRu": "ферзь",
+        "acceptedRu": [
+          "ферзь",
+          "королева"
+        ]
+      },
+      {
+        "id": "rook",
+        "answerRu": "ладья",
+        "acceptedRu": [
+          "ладья",
+          "тура"
+        ]
+      },
+      {
+        "id": "bishop",
+        "answerRu": "слон",
+        "acceptedRu": [
+          "слон",
+          "офицер"
+        ]
+      },
+      {
+        "id": "knight",
+        "answerRu": "конь",
+        "acceptedRu": [
+          "конь",
+          "лошадь"
+        ]
+      },
+      {
+        "id": "pawn",
+        "answerRu": "пешка",
+        "acceptedRu": [
+          "пешка"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "шашка",
+      "дамка",
+      "туз",
+      "джокер"
+    ],
+    "sourceHint": "Правила шахмат ФИДЕ",
+    "origin": "authored",
+    "license": "original"
+  }
+]

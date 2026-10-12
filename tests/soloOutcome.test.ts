@@ -320,7 +320,7 @@ describe('solo leaderboard', () => {
     // Второй, худший забег игрока a таблицу не дублирует.
     insertSolo(db, { id: 'a2', playerId: 'p:a', soloScore: 2, name: 'a-worse' });
 
-    const response = await board(db);
+    const response = await board(db, '?category=geography');
     expect(response.status).toBe(200);
     const body = await response.json() as SoloLeaderboardResponse;
     expect(body).toMatchObject({ category: 'geography', dateKey: '2026-10-11' });
@@ -329,12 +329,21 @@ describe('solo leaderboard', () => {
     expect(body.entries[1]).toMatchObject({ roundsPlayed: 5, setPar: setPar(SET.questions) });
   });
 
+  it('defaults to the general category', async () => {
+    const db = database();
+    insertSolo(db, { id: 'g', playerId: 'p:g', soloScore: 1, category: 'general' });
+    insertSolo(db, { id: 'geo', playerId: 'p:geo', soloScore: 1 });
+    const body = await (await board(db)).json() as SoloLeaderboardResponse;
+    expect(body.category).toBe('general');
+    expect(body.entries.map((entry) => entry.displayName)).toEqual(['g']);
+  });
+
   it('breaks equal scores by fewer rounds, then shorter run duration', async () => {
     const db = database();
     insertSolo(db, { id: 'slow', playerId: 'p:1', soloScore: 1, completedAt: NOW - 500, durationMs: 9000 });
     insertSolo(db, { id: 'fast', playerId: 'p:2', soloScore: 1, completedAt: NOW - 10, durationMs: 2000 });
     insertSolo(db, { id: 'long', playerId: 'p:4', soloScore: 1, completedAt: NOW - 900, durationMs: 100, rounds: 6 });
-    const body = await (await board(db)).json() as SoloLeaderboardResponse;
+    const body = await (await board(db, '?category=geography')).json() as SoloLeaderboardResponse;
     expect(body.entries.map((entry) => entry.displayName)).toEqual(['fast', 'slow', 'long']);
   });
 
@@ -342,7 +351,7 @@ describe('solo leaderboard', () => {
     const db = database();
     insertSolo(db, { id: 'old', playerId: 'p:o', soloScore: 1, completedAt: NOW - 36 * 60 * 60 * 1000 });
     insertSolo(db, { id: 'hist', playerId: 'p:h', soloScore: 1, category: 'history' });
-    const previous = await (await board(db, '?date=2026-10-10')).json() as SoloLeaderboardResponse;
+    const previous = await (await board(db, '?category=geography&date=2026-10-10')).json() as SoloLeaderboardResponse;
     expect(previous.entries.map((entry) => entry.displayName)).toEqual(['old']);
     const history = await (await board(db, '?category=history')).json() as SoloLeaderboardResponse;
     expect(history.entries.map((entry) => entry.displayName)).toEqual(['hist']);

@@ -16,7 +16,10 @@
     "test": "vitest run",
     "test:preflight:production": "node scripts/preflight-production.mjs --test-fixture",
     "test:smoke:local": "node scripts/smoke-local.mjs",
-    "typecheck": "npm run typecheck --workspaces"
+    "typecheck": "npm run typecheck --workspaces",
+    "content:check": "vitest run packages/shared/src/generalPack",
+    "content:import": "node scripts/content/import.mjs",
+    "content:wikidata": "node scripts/content/build-wikidata-pack.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",

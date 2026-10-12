@@ -95,6 +95,7 @@ export function LastStandIntro({ onStart, onLeaderboard, onBack }: IntroProps) {
       <ul className="ls-rules">
         <li>Переживи как можно больше кругов, максимум {LAST_STAND_TOTAL_ROUNDS}.</li>
         <li>Если страну уже заняли, назови другую, пока идёт время.</li>
+        <li>У системы на каждый круг есть загаданный ответ: назовёшь его, и забег кончится.</li>
         <li>Ответы соперников раскрываются после круга.</li>
       </ul>
       <button type="button" className="cta-btn" onClick={() => { onStart(); }}>
@@ -303,7 +304,7 @@ export function LastStandReveal({ snapshot, survived, finalRound, onContinue }: 
 // ---------- final ----------
 
 interface FinalProps {
-  state: Pick<LastStandState, 'survived' | 'outcome' | 'reason'>;
+  state: Pick<LastStandState, 'survived' | 'outcome' | 'reason'> & { mineRu?: string | null };
   onAgain: () => void;
   onLeaderboard: () => void;
   onHome: () => void;
@@ -319,7 +320,7 @@ export function LastStandFinal({ state, onAgain, onLeaderboard, onHome }: FinalP
         {survivedText(state.survived)}
       </p>
       <p className="screen-subtitle" role="status">
-        {cleared ? 'Все круги пережиты, ты остался последним.' : eliminationText(state.reason)}
+        {cleared ? 'Все круги пережиты, ты остался последним.' : eliminationText(state.reason, state.mineRu ?? null)}
       </p>
       <button type="button" className="cta-btn" onClick={() => { onAgain(); }}>
         Ещё раз

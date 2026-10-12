@@ -1,0 +1,1125 @@
+[
+  {
+    "id": "au-history-1n7abyq",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Easy",
+    "promptRu": "В какой стране находятся пирамиды Гизы?",
+    "answerRu": "Египет",
+    "acceptedRu": [
+      "Египет"
+    ],
+    "distractorsRu": [
+      "Мексика",
+      "Перу",
+      "Судан"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Пирамиды Гизы",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-169lml3",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Easy",
+    "promptRu": "В каком году закончилась Вторая мировая война?",
+    "answerRu": "1945",
+    "acceptedRu": [
+      "1945"
+    ],
+    "distractorsRu": [
+      "1944",
+      "1939",
+      "1941"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Вторая мировая война",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-16fuh3w",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Easy",
+    "promptRu": "В каком городе находится Колизей?",
+    "answerRu": "Рим",
+    "acceptedRu": [
+      "Рим"
+    ],
+    "distractorsRu": [
+      "Афины",
+      "Флоренция",
+      "Неаполь"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Колизей",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-17lssla",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Кто был первым президентом США?",
+    "answerRu": "Джордж Вашингтон",
+    "acceptedRu": [
+      "Джордж Вашингтон",
+      "Вашингтон"
+    ],
+    "distractorsRu": [
+      "Авраам Линкольн",
+      "Томас Джефферсон",
+      "Бенджамин Франклин"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Вашингтон, Джордж",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-1fnvjvt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "В каком году пала Берлинская стена?",
+    "answerRu": "1989",
+    "acceptedRu": [
+      "1989"
+    ],
+    "distractorsRu": [
+      "1991",
+      "1985",
+      "1990"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Берлинская стена",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-1tbcslq",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Как звали македонского царя, создавшего огромную империю?",
+    "answerRu": "Александр Македонский",
+    "acceptedRu": [
+      "Александр Македонский",
+      "Александр Великий",
+      "Александр"
+    ],
+    "distractorsRu": [
+      "Юлий Цезарь",
+      "Дарий",
+      "Ганнибал"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Александр Македонский",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-17cu51r",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "В каком году экспедиция Колумба доплыла до Америки?",
+    "answerRu": "1492",
+    "acceptedRu": [
+      "1492"
+    ],
+    "distractorsRu": [
+      "1498",
+      "1453",
+      "1517"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Христофор Колумб",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-50rvij",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Какая цивилизация построила Чичен-Ицу?",
+    "answerRu": "майя",
+    "acceptedRu": [
+      "майя"
+    ],
+    "distractorsRu": [
+      "ацтеки",
+      "инки",
+      "ольмеки"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Чичен-Ица",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-16zjtpm",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "В каком году распался СССР?",
+    "answerRu": "1991",
+    "acceptedRu": [
+      "1991"
+    ],
+    "distractorsRu": [
+      "1989",
+      "1993",
+      "1985"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Распад СССР",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-qatax4",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Кто основал Монгольскую империю?",
+    "answerRu": "Чингисхан",
+    "acceptedRu": [
+      "Чингисхан",
+      "Темучин",
+      "Тэмуджин"
+    ],
+    "distractorsRu": [
+      "Хубилай",
+      "Батый",
+      "Тамерлан"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Чингисхан",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-6cntke",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Как называли древний торговый путь из Китая в Средиземноморье?",
+    "answerRu": "Великий шёлковый путь",
+    "acceptedRu": [
+      "Великий шёлковый путь",
+      "Великий шелковый путь",
+      "Шёлковый путь",
+      "Шелковый путь"
+    ],
+    "distractorsRu": [
+      "Янтарный путь",
+      "Путь из варяг в греки",
+      "Соляной путь"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Великий шёлковый путь",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-voi72j",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Как звали первого императора, объединившего Китай?",
+    "answerRu": "Цинь Шихуанди",
+    "acceptedRu": [
+      "Цинь Шихуанди",
+      "Цинь Шихуан",
+      "Шихуанди"
+    ],
+    "distractorsRu": [
+      "Чингисхан",
+      "Хубилай",
+      "Конфуций"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Цинь Шихуанди",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-1d17d7w",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Как называлась столица Византийской империи?",
+    "answerRu": "Константинополь",
+    "acceptedRu": [
+      "Константинополь",
+      "Царьград"
+    ],
+    "distractorsRu": [
+      "Рим",
+      "Афины",
+      "Антиохия"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Византийская империя",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-11mjnyl",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Кто был первым императором Российской империи?",
+    "answerRu": "Пётр I",
+    "acceptedRu": [
+      "Пётр I",
+      "Петр I",
+      "Пётр Первый",
+      "Петр Первый",
+      "Пётр Великий",
+      "Петр Великий",
+      "Пётр 1",
+      "Петр 1"
+    ],
+    "distractorsRu": [
+      "Иван Грозный",
+      "Екатерина II",
+      "Александр I"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Пётр I",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-1iihvzq",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "В каком году началась Первая мировая война?",
+    "answerRu": "1914",
+    "acceptedRu": [
+      "1914"
+    ],
+    "distractorsRu": [
+      "1918",
+      "1905",
+      "1912"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Первая мировая война",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-1d518ln",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Какой полководец перешёл Альпы с боевыми слонами?",
+    "answerRu": "Ганнибал",
+    "acceptedRu": [
+      "Ганнибал"
+    ],
+    "distractorsRu": [
+      "Александр Македонский",
+      "Юлий Цезарь",
+      "Наполеон"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Ганнибал",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-1kusu7k",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Как звали последнюю царицу эллинистического Египта?",
+    "answerRu": "Клеопатра",
+    "acceptedRu": [
+      "Клеопатра",
+      "Клеопатра VII"
+    ],
+    "distractorsRu": [
+      "Нефертити",
+      "Хатшепсут",
+      "Береника"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Клеопатра",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-1qbgnsx",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Expert",
+    "promptRu": "Как назывался корабль экспедиции Магеллана, который первым обошёл вокруг света?",
+    "answerRu": "Виктория",
+    "acceptedRu": [
+      "Виктория",
+      "«Виктория»"
+    ],
+    "distractorsRu": [
+      "Санта-Мария",
+      "Тринидад",
+      "Мейфлауэр"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Кругосветное плавание Магеллана",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-jc3oub",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Expert",
+    "promptRu": "В каком году была подписана Великая хартия вольностей?",
+    "answerRu": "1215",
+    "acceptedRu": [
+      "1215"
+    ],
+    "distractorsRu": [
+      "1066",
+      "1492",
+      "1314"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Великая хартия вольностей",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-19m55d4",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Expert",
+    "promptRu": "Какой правитель построил Тадж-Махал?",
+    "answerRu": "Шах-Джахан",
+    "acceptedRu": [
+      "Шах-Джахан",
+      "Шах Джахан"
+    ],
+    "distractorsRu": [
+      "Акбар",
+      "Бабур",
+      "Аурангзеб"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Тадж-Махал",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-history-1llm2vo",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Expert",
+    "promptRu": "Как звали правителя, при котором Москва стала столицей единого Русского государства и было свергнуто ордынское иго?",
+    "answerRu": "Иван III",
+    "acceptedRu": [
+      "Иван III",
+      "Иван Третий",
+      "Иван 3"
+    ],
+    "distractorsRu": [
+      "Иван Грозный",
+      "Дмитрий Донской",
+      "Василий III"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Иван III",
+    "reviewNote": "Формулировка длинная — сократить или оставить только выбор из вариантов.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "q-history-1iw6l1b",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Easy",
+    "promptRu": "В каденцию какого президента США британские войска сожгли Белый дом в 1814 году?",
+    "answerRu": "Джеймс Мэдисон",
+    "acceptedRu": [
+      "Джеймс Мэдисон",
+      "Мэдисон"
+    ],
+    "distractorsRu": [
+      "Томас Джефферсон",
+      "Джон Адамс",
+      "Эндрю Джексон"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Во время англо-американской войны 1812–1815 годов при Джеймсе Мэдисоне был сожжён Вашингтон.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-1de4xev",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Easy",
+    "promptRu": "Кто из американских политиков стал вице-президентом, а затем президентом США, не будучи избранным ни на один из этих постов?",
+    "answerRu": "Джеральд Форд",
+    "acceptedRu": [
+      "Джеральд Форд",
+      "Форд"
+    ],
+    "distractorsRu": [
+      "Ричард Никсон",
+      "Линдон Джонсон",
+      "Гарри Трумэн"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Джеральд Форд сменил Спиро Агню, а затем Ричарда Никсона после Уотергейта.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-unk65i",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Easy",
+    "promptRu": "Кто написал знаменитую антиутопию «1984»?",
+    "answerRu": "Джордж Оруэлл",
+    "acceptedRu": [
+      "Джордж Оруэлл",
+      "Оруэлл"
+    ],
+    "distractorsRu": [
+      "Олдос Хаксли",
+      "Рэй Брэдбери",
+      "Герберт Уэллс"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Роман «1984» был опубликован Джорджем Оруэллом в 1949 году.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-146g4ms",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Easy",
+    "promptRu": "Как назывался флагманский корабль Христофора Колумба в его первой трансатлантической экспедиции 1492 года?",
+    "answerRu": "Санта-Мария",
+    "acceptedRu": [
+      "Санта-Мария",
+      "Санта Мария"
+    ],
+    "distractorsRu": [
+      "Пинта",
+      "Нинья",
+      "Виктория"
+    ],
+    "openAnswer": true,
+    "explanationRu": "«Санта-Мария» была крупнейшим судом из трёх кораблей экспедиции Колумба.",
+    "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-1g5fmiy",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Easy",
+    "promptRu": "В каком году произошёл официальный запуск первого искусственного спутника Земли?",
+    "answerRu": "1957",
+    "acceptedRu": [
+      "1957",
+      "1957 год"
+    ],
+    "distractorsRu": [
+      "1961",
+      "1945",
+      "1969"
+    ],
+    "openAnswer": true,
+    "explanationRu": "СССР запустил «Спутник-1» 4 октября 1957 года.",
+    "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-1e815i8",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Easy",
+    "promptRu": "В каденцию какого президента США было принято решение об использовании атомного оружия в 1945 году?",
+    "answerRu": "Гарри Трумэн",
+    "acceptedRu": [
+      "Гарри Трумэн",
+      "Трумэн"
+    ],
+    "distractorsRu": [
+      "Франклин Рузвельт",
+      "Дуайт Эйзенхауэр",
+      "Джон Кеннеди"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Гарри Трумэн отдавал приказ об атомных бомбардировках Хиросимы и Нагасаки.",
+    "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-d1vko9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Easy",
+    "promptRu": "Как зовут отца Анны Франк, сохранившего её знаменитый дневник после войны?",
+    "answerRu": "Отто Франк",
+    "acceptedRu": [
+      "Отто Франк",
+      "Отто"
+    ],
+    "distractorsRu": [
+      "Петер Франк",
+      "Марго Франк",
+      "Вальтер Франк"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Отто Франк единственный из семьи выжил в узлах концлагерей и опубликовал дневник дочери.",
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-18vxe8p",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "В каком веке до н. э. был официально открыт Великий шёлковый путь?",
+    "answerRu": "2",
+    "acceptedRu": [
+      "2",
+      "II",
+      "втором",
+      "2-м"
+    ],
+    "distractorsRu": [
+      "5",
+      "1",
+      "10"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Великий шёлковый путь был проложен во II веке до н. э. во время династии Хань.",
+    "sourceTitle": "Великий шёлковый путь — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-18idhj5",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Какая китайская императорская династия впервые наладила регулярные караванные связи по Шёлковому пути?",
+    "answerRu": "Хань",
+    "acceptedRu": [
+      "Хань",
+      "династия Хань"
+    ],
+    "distractorsRu": [
+      "Тан",
+      "Мин",
+      "Цинь"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Посланник Чжан Цянь отправился на Запад при императоре У-ди династии Хань.",
+    "sourceTitle": "Великий шёлковый путь — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-1fl22i9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "В каком году началась Вторая мировая война в Европе?",
+    "answerRu": "1939",
+    "acceptedRu": [
+      "1939",
+      "1939 год"
+    ],
+    "distractorsRu": [
+      "1941",
+      "1938",
+      "1940"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Вторая мировая война началась 1 сентября 1939 года с вторжения Германии в Польшу.",
+    "sourceTitle": "Хронология Второй мировой войны — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-1rzytmm",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Нападением на какую европейскую страну началась Вторая мировая война 1 сентября 1939 года?",
+    "answerRu": "Польша",
+    "acceptedRu": [
+      "Польша"
+    ],
+    "distractorsRu": [
+      "Франция",
+      "Чехословакия",
+      "Бельгия"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Германия атаковала Польшу, что заставило Великобританию и Францию объявить войну Германии.",
+    "sourceTitle": "Хронология Второй мировой войны — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-1pyf7kl",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "В каком городе Крыма состоялась известная конференция лидеров СССР, США и Великобритании в феврале 1945 года?",
+    "answerRu": "Ялта",
+    "acceptedRu": [
+      "Ялта"
+    ],
+    "distractorsRu": [
+      "Севастополь",
+      "Симферополь",
+      "Керчь"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Ялтинская (Крымская) конференция проходила в Ливадийском дворце.",
+    "sourceTitle": "Хронология Второй мировой войны — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-1u1w71s",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Какое из Семи чудес света представляло собой бронзовую статую высотой более 30 метров?",
+    "answerRu": "Колосс Родосский",
+    "acceptedRu": [
+      "Колосс Родосский"
+    ],
+    "distractorsRu": [
+      "Статуя Зевса в Олимпии",
+      "Александрийский маяк",
+      "Мавзолей в Галикарнасе"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Колосс Родосский простоял всего около 50 лет и был разрушен землетрясением.",
+    "sourceTitle": "Семь чудес света — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-tmpy27",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "В каком месопотамском городе располагались легендарные Висячие сады Семирамиды?",
+    "answerRu": "Вавилон",
+    "acceptedRu": [
+      "Вавилон"
+    ],
+    "distractorsRu": [
+      "Ур",
+      "Ниневия",
+      "Урук"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Висячие сады Семирамиды связывают с вавилонским царём Навуходоносором II.",
+    "sourceTitle": "Семь чудес света — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-p24l7z",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Какой древнегреческий скульптор создал хризоэлефантинную статую Зевса в Олимпии?",
+    "answerRu": "Фидий",
+    "acceptedRu": [
+      "Фидий"
+    ],
+    "distractorsRu": [
+      "Пракситель",
+      "Мирон",
+      "Поликлет"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Фидий создал статую Зевса из золота и слоновой кости во II половине V века до н. э.",
+    "sourceTitle": "Семь чудес света — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-1s9qup9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "На каком острове у побережья Египта был возведён Александрийский маяк?",
+    "answerRu": "Фарос",
+    "acceptedRu": [
+      "Фарос",
+      "остров Фарос"
+    ],
+    "distractorsRu": [
+      "Крит",
+      "Родос",
+      "Кипр"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Благодаря острову Фарос маяки во многих европейских языках называют фарами.",
+    "sourceTitle": "Семь чудес света — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-kq9d3q",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "В каком современном государстве расположены руины древнего Галикарнаса, где стоял Галикарнасский мавзолей?",
+    "answerRu": "Турция",
+    "acceptedRu": [
+      "Турция"
+    ],
+    "distractorsRu": [
+      "Греция",
+      "Египет",
+      "Италия"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Руины Галикарнаса находятся в современном турецком городе Бодрум.",
+    "sourceTitle": "Семь чудес света — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-5bqaoo",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Кто возглавил успешную Гаитянскую революцию против французских колонизаторов в конце XVIII века?",
+    "answerRu": "Туссен-Лувертюр",
+    "acceptedRu": [
+      "Туссен-Лувертюр",
+      "Туссен Лувертюр"
+    ],
+    "distractorsRu": [
+      "Симон Боливар",
+      "Хосе де Сан-Мартин",
+      "Мигель Идальго"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Франсуа Доминик Туссен-Лувертюр стал лидером восстания рабов на Сан-Доминго.",
+    "sourceTitle": "Name the 10 Countries @jakelyonsgeo @soluna16",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-uwehqi",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Как называлась бескровная революция 1974 года в Португалии, свергнувшая режим Нового государства?",
+    "answerRu": "Революция гвоздик",
+    "acceptedRu": [
+      "Революция гвоздик",
+      "революция гвоздик"
+    ],
+    "distractorsRu": [
+      "Бархатная революция",
+      "Революция роз",
+      "Жёлтая революция"
+    ],
+    "openAnswer": true,
+    "explanationRu": "25 апреля 1974 года гражданские лица вставляли гвоздики в стволы винтовок солдат.",
+    "sourceTitle": "Name the 10 Countries @jakelyonsgeo @soluna16",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-10f3ouv",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Expert",
+    "promptRu": "Какой лидер возглавлял диктаторский режим Красных кхмеров в Камбодже в 1975–1979 годах?",
+    "answerRu": "Пол Пот",
+    "acceptedRu": [
+      "Пол Пот"
+    ],
+    "distractorsRu": [
+      "Хо Ши Мин",
+      "Сукарно",
+      "Нородом Сианук"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Пол Пот провел масштабные репрессии и насильственную аграризацию страны.",
+    "sourceTitle": "Name the 10 Countries @jakelyonsgeo @soluna16",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-67lw0s",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Expert",
+    "promptRu": "Какое колониальное название носил остров Цейлон до переименования в Республику Шри-Ланка в 1972 году?",
+    "answerRu": "Цейлон",
+    "acceptedRu": [
+      "Цейлон"
+    ],
+    "distractorsRu": [
+      "Бирма",
+      "Формоза",
+      "Сиам"
+    ],
+    "openAnswer": true,
+    "explanationRu": "До 1972 года государство официально именовалось Доминион Цейлон.",
+    "sourceTitle": "My Smartest Players vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-1k78qxw",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Expert",
+    "promptRu": "В каком году состоялась капитуляция нацистской Германии, ознаменовавшая конец войны в Европе?",
+    "answerRu": "1945",
+    "acceptedRu": [
+      "1945",
+      "1945 год"
+    ],
+    "distractorsRu": [
+      "1944",
+      "1946",
+      "1943"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Акт о безоговорочной капитуляции Германии вступил в силу в мае 1945 года.",
+    "sourceTitle": "Хронология Второй мировой войны — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-1oegbmi",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Expert",
+    "promptRu": "На борту какого американского линкора 2 сентября 1945 года был подписан Акт о капитуляции Японии?",
+    "answerRu": "Миссури",
+    "acceptedRu": [
+      "Миссури",
+      "линкор Миссури"
+    ],
+    "distractorsRu": [
+      "Аризона",
+      "Айова",
+      "Ямато"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Церемония подписания проходила в Токийском заливе на линкоре «Миссури».",
+    "sourceTitle": "Хронология Второй мировой войны — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-4z2uex",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Expert",
+    "promptRu": "Британская королева Елизавета II правила Соединённым Королевством рекордные 70 лет. В каком году она скончалась?",
+    "answerRu": "2022",
+    "acceptedRu": [
+      "2022",
+      "2022 год"
+    ],
+    "distractorsRu": [
+      "2020",
+      "2021",
+      "2023"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Елизавета II скончалась 8 сентября 2022 года в замке Балморал.",
+    "sourceTitle": "Last Person Standing Wins $500 (Ages 8-45 Quiz)",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-eo6xz1",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Easy",
+    "promptRu": "Как называется знаменитое мегалитическое каменное сооружение в графстве Уилтшир в Англии?",
+    "answerRu": "Стоунхендж",
+    "acceptedRu": [
+      "Стоунхендж"
+    ],
+    "distractorsRu": [
+      "Карнак",
+      "Ньюгрейндж",
+      "Парфенон"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Стоунхендж — внесённый в список ЮНЕСКО археологический памятник.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-mhfb9j",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Easy",
+    "promptRu": "Какой грандиозный древнеримский амфитеатр для гладиаторских боёв был построен в центре Рима?",
+    "answerRu": "Колизей",
+    "acceptedRu": [
+      "Колизей",
+      "Амфитеатр Флавиев"
+    ],
+    "distractorsRu": [
+      "Пантеон",
+      "Форум",
+      "Арена ди Верона"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Колизей вмещал более 50 тысяч зрителей.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-14cenmj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "В каком тосканском городе находится известная колокольная падающая башня на Пьяцца dei Miracoli?",
+    "answerRu": "Пиза",
+    "acceptedRu": [
+      "Пиза"
+    ],
+    "distractorsRu": [
+      "Флоренция",
+      "Сиена",
+      "Лукка"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Пизанская башня получила всемирную известность благодаря непреднамеренному наклону.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-1mla4ow",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Какая европейская революционная организация и война освобождения привели к созданию современного государства Бангладеш в 1971 году?",
+    "answerRu": "Война за независимость Бангладеш",
+    "acceptedRu": [
+      "Война за независимость Бангладеш",
+      "Война за независимость"
+    ],
+    "distractorsRu": [
+      "Революция гвоздик",
+      "Индокитайская война",
+      "Гражданская война"
+    ],
+    "openAnswer": false,
+    "explanationRu": "В 1971 году Восточный Пакистан добился независимости и стал Бангладеш.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-history-vdfgtj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Какое название носил островный штат Индийского океана до того, как в 1971 году получил независимость?",
+    "answerRu": "Бахрейн",
+    "acceptedRu": [
+      "Бахрейн"
+    ],
+    "distractorsRu": [
+      "Катар",
+      "Кувейт",
+      "Оман"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Бахрейн являлся британским протекторатом до 1971 года.",
+    "sourceTitle": "Geniuses vs. Impossible Quiz",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

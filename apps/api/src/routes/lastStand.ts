@@ -12,9 +12,9 @@ import { resolveRequestIdentity, type RequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
 import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
-import { pickFillerBots } from '../lastStand/bots';
-import { recogniseCountry } from '../lastStand/normalize';
-import { countryNameRu, planForDate, roundTitleRu } from '../lastStand/plan';
+import { mineForRound, pickFillerBots } from '../lastStand/bots';
+import { recogniseAnswer } from '../lastStand/normalize';
+import { memberNameRu, packSetForRound, planForDate, roundTitleRu } from '../lastStand/plan';
 import {
   createRun,
   findPoolOpponents,
@@ -157,14 +157,16 @@ export function registerLastStandRoutes(app: Hono<{ Bindings: Env }>): void {
     const records: (RecordedAnswer | null)[] = opponents.map(
       (opponent) => opponent.answers[run.survived] ?? null,
     );
-    const code = recogniseCountry(body.answer, round.members);
-    const { state: next, resolution } = submitLastStandAnswer(state, { answer: code, atMs, records });
+    const code = recogniseAnswer(body.answer, round, packSetForRound(round));
+    // The mine stays on the server; it is named in the response only when it eliminates.
+    const mine = mineForRound(round, run.date_key);
+    const { state: next, resolution } = submitLastStandAnswer(state, { answer: code, atMs, records, mine });
     if (!resolution) return c.json({ error: 'Run is already finished.' }, 409);
 
     const reveal = () => opponents.flatMap((opponent) => {
       const record = opponent.answers[run.survived];
       return record
-        ? [{ displayName: opponent.displayName, answerRu: countryNameRu(record.answer), atMs: record.atMs }]
+        ? [{ displayName: opponent.displayName, answerRu: memberNameRu(round, record.answer), atMs: record.atMs }]
         : [];
     });
     const conflict = () => c.json({ error: 'Answer conflicted with another request.' }, 409);
@@ -200,6 +202,7 @@ export function registerLastStandRoutes(app: Hono<{ Bindings: Env }>): void {
           reveal: reveal(),
           survived: run.survived,
           round: null,
+          ...(resolution.reason === 'mined' && mine !== null ? { mineRu: memberNameRu(round, mine) } : {}),
         });
       }
       case 'accepted': {

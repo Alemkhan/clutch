@@ -1,0 +1,885 @@
+[
+  {
+    "id": "set-traffic-light",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови цвет светофора",
+    "mcPromptRu": "Какой из этих цветов есть у обычного светофора?",
+    "members": [
+      {
+        "id": "red",
+        "answerRu": "красный",
+        "acceptedRu": [
+          "красный"
+        ]
+      },
+      {
+        "id": "yellow",
+        "answerRu": "жёлтый",
+        "acceptedRu": [
+          "жёлтый",
+          "желтый"
+        ]
+      },
+      {
+        "id": "green",
+        "answerRu": "зелёный",
+        "acceptedRu": [
+          "зелёный",
+          "зеленый"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "синий",
+      "белый",
+      "фиолетовый"
+    ],
+    "sourceHint": "Венская конвенция о дорожных знаках и сигналах",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-seasons",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови время года",
+    "mcPromptRu": "Что из этого — время года?",
+    "members": [
+      {
+        "id": "winter",
+        "answerRu": "зима",
+        "acceptedRu": [
+          "зима"
+        ]
+      },
+      {
+        "id": "spring",
+        "answerRu": "весна",
+        "acceptedRu": [
+          "весна"
+        ]
+      },
+      {
+        "id": "summer",
+        "answerRu": "лето",
+        "acceptedRu": [
+          "лето"
+        ]
+      },
+      {
+        "id": "autumn",
+        "answerRu": "осень",
+        "acceptedRu": [
+          "осень"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "полдень",
+      "вечер",
+      "сезон дождей"
+    ],
+    "sourceHint": "Словарь",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-cardinal",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови сторону света",
+    "mcPromptRu": "Что из этого — сторона света?",
+    "members": [
+      {
+        "id": "north",
+        "answerRu": "север",
+        "acceptedRu": [
+          "север"
+        ]
+      },
+      {
+        "id": "south",
+        "answerRu": "юг",
+        "acceptedRu": [
+          "юг"
+        ]
+      },
+      {
+        "id": "east",
+        "answerRu": "восток",
+        "acceptedRu": [
+          "восток"
+        ]
+      },
+      {
+        "id": "west",
+        "answerRu": "запад",
+        "acceptedRu": [
+          "запад"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "верх",
+      "центр",
+      "экватор"
+    ],
+    "sourceHint": "Словарь",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-card-suits",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови масть игральных карт",
+    "mcPromptRu": "Что из этого — масть игральных карт?",
+    "members": [
+      {
+        "id": "hearts",
+        "answerRu": "черви",
+        "acceptedRu": [
+          "черви",
+          "червы"
+        ]
+      },
+      {
+        "id": "spades",
+        "answerRu": "пики",
+        "acceptedRu": [
+          "пики",
+          "пика"
+        ]
+      },
+      {
+        "id": "clubs",
+        "answerRu": "трефы",
+        "acceptedRu": [
+          "трефы",
+          "крести",
+          "трефа"
+        ]
+      },
+      {
+        "id": "diamonds",
+        "answerRu": "бубны",
+        "acceptedRu": [
+          "бубны",
+          "буби",
+          "бубна"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "звёзды",
+      "луны",
+      "листья"
+    ],
+    "sourceHint": "Википедия: Масть (карты)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-great-lakes",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови одно из Великих озёр Северной Америки",
+    "mcPromptRu": "Что из этого — одно из Великих озёр?",
+    "members": [
+      {
+        "id": "superior",
+        "answerRu": "Верхнее",
+        "acceptedRu": [
+          "Верхнее"
+        ]
+      },
+      {
+        "id": "michigan",
+        "answerRu": "Мичиган",
+        "acceptedRu": [
+          "Мичиган"
+        ]
+      },
+      {
+        "id": "huron",
+        "answerRu": "Гурон",
+        "acceptedRu": [
+          "Гурон"
+        ]
+      },
+      {
+        "id": "erie",
+        "answerRu": "Эри",
+        "acceptedRu": [
+          "Эри"
+        ]
+      },
+      {
+        "id": "ontario",
+        "answerRu": "Онтарио",
+        "acceptedRu": [
+          "Онтарио"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Байкал",
+      "Виктория",
+      "Титикака"
+    ],
+    "sourceHint": "Википедия: Великие озёра",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-weekdays",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови день недели",
+    "mcPromptRu": "Что из этого — день недели?",
+    "members": [
+      {
+        "id": "mon",
+        "answerRu": "понедельник",
+        "acceptedRu": [
+          "понедельник"
+        ]
+      },
+      {
+        "id": "tue",
+        "answerRu": "вторник",
+        "acceptedRu": [
+          "вторник"
+        ]
+      },
+      {
+        "id": "wed",
+        "answerRu": "среда",
+        "acceptedRu": [
+          "среда"
+        ]
+      },
+      {
+        "id": "thu",
+        "answerRu": "четверг",
+        "acceptedRu": [
+          "четверг"
+        ]
+      },
+      {
+        "id": "fri",
+        "answerRu": "пятница",
+        "acceptedRu": [
+          "пятница"
+        ]
+      },
+      {
+        "id": "sat",
+        "answerRu": "суббота",
+        "acceptedRu": [
+          "суббота"
+        ]
+      },
+      {
+        "id": "sun",
+        "answerRu": "воскресенье",
+        "acceptedRu": [
+          "воскресенье"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "январь",
+      "полдень",
+      "выходной"
+    ],
+    "sourceHint": "Словарь",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-oceans",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови океан",
+    "mcPromptRu": "Что из этого — океан?",
+    "members": [
+      {
+        "id": "pacific",
+        "answerRu": "Тихий",
+        "acceptedRu": [
+          "Тихий",
+          "Тихий океан"
+        ]
+      },
+      {
+        "id": "atlantic",
+        "answerRu": "Атлантический",
+        "acceptedRu": [
+          "Атлантический",
+          "Атлантический океан"
+        ]
+      },
+      {
+        "id": "indian",
+        "answerRu": "Индийский",
+        "acceptedRu": [
+          "Индийский",
+          "Индийский океан"
+        ]
+      },
+      {
+        "id": "arctic",
+        "answerRu": "Северный Ледовитый",
+        "acceptedRu": [
+          "Северный Ледовитый",
+          "Северный Ледовитый океан"
+        ]
+      },
+      {
+        "id": "southern",
+        "answerRu": "Южный",
+        "acceptedRu": [
+          "Южный",
+          "Южный океан"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Средиземное",
+      "Карибское",
+      "Саргассово",
+      "Балтийское"
+    ],
+    "sourceHint": "Международная гидрографическая организация",
+    "reviewNote": "Южный океан признают не все источники: решить, оставлять ли набор в узких раундах.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-months",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови месяц",
+    "mcPromptRu": "Что из этого — месяц?",
+    "members": [
+      {
+        "id": "jan",
+        "answerRu": "январь",
+        "acceptedRu": [
+          "январь"
+        ]
+      },
+      {
+        "id": "feb",
+        "answerRu": "февраль",
+        "acceptedRu": [
+          "февраль"
+        ]
+      },
+      {
+        "id": "mar",
+        "answerRu": "март",
+        "acceptedRu": [
+          "март"
+        ]
+      },
+      {
+        "id": "apr",
+        "answerRu": "апрель",
+        "acceptedRu": [
+          "апрель"
+        ]
+      },
+      {
+        "id": "may",
+        "answerRu": "май",
+        "acceptedRu": [
+          "май"
+        ]
+      },
+      {
+        "id": "jun",
+        "answerRu": "июнь",
+        "acceptedRu": [
+          "июнь"
+        ]
+      },
+      {
+        "id": "jul",
+        "answerRu": "июль",
+        "acceptedRu": [
+          "июль"
+        ]
+      },
+      {
+        "id": "aug",
+        "answerRu": "август",
+        "acceptedRu": [
+          "август"
+        ]
+      },
+      {
+        "id": "sep",
+        "answerRu": "сентябрь",
+        "acceptedRu": [
+          "сентябрь"
+        ]
+      },
+      {
+        "id": "oct",
+        "answerRu": "октябрь",
+        "acceptedRu": [
+          "октябрь"
+        ]
+      },
+      {
+        "id": "nov",
+        "answerRu": "ноябрь",
+        "acceptedRu": [
+          "ноябрь"
+        ]
+      },
+      {
+        "id": "dec",
+        "answerRu": "декабрь",
+        "acceptedRu": [
+          "декабрь"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "понедельник",
+      "весна",
+      "полдень"
+    ],
+    "sourceHint": "Словарь",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-chinese-zodiac",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови животное китайского календаря",
+    "mcPromptRu": "Что из этого — животное китайского календаря?",
+    "members": [
+      {
+        "id": "rat",
+        "answerRu": "Крыса",
+        "acceptedRu": [
+          "Крыса",
+          "мышь"
+        ]
+      },
+      {
+        "id": "ox",
+        "answerRu": "Бык",
+        "acceptedRu": [
+          "Бык",
+          "Корова"
+        ]
+      },
+      {
+        "id": "tiger",
+        "answerRu": "Тигр",
+        "acceptedRu": [
+          "Тигр"
+        ]
+      },
+      {
+        "id": "rabbit",
+        "answerRu": "Кролик",
+        "acceptedRu": [
+          "Кролик",
+          "Заяц",
+          "Кот"
+        ]
+      },
+      {
+        "id": "dragon",
+        "answerRu": "Дракон",
+        "acceptedRu": [
+          "Дракон"
+        ]
+      },
+      {
+        "id": "snake",
+        "answerRu": "Змея",
+        "acceptedRu": [
+          "Змея"
+        ]
+      },
+      {
+        "id": "horse",
+        "answerRu": "Лошадь",
+        "acceptedRu": [
+          "Лошадь",
+          "Конь"
+        ]
+      },
+      {
+        "id": "goat",
+        "answerRu": "Коза",
+        "acceptedRu": [
+          "Коза",
+          "Овца",
+          "Баран"
+        ]
+      },
+      {
+        "id": "monkey",
+        "answerRu": "Обезьяна",
+        "acceptedRu": [
+          "Обезьяна"
+        ]
+      },
+      {
+        "id": "rooster",
+        "answerRu": "Петух",
+        "acceptedRu": [
+          "Петух",
+          "Курица"
+        ]
+      },
+      {
+        "id": "dog",
+        "answerRu": "Собака",
+        "acceptedRu": [
+          "Собака"
+        ]
+      },
+      {
+        "id": "pig",
+        "answerRu": "Свинья",
+        "acceptedRu": [
+          "Свинья",
+          "Кабан"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Волк",
+      "Лиса",
+      "Медведь"
+    ],
+    "sourceHint": "Википедия: Китайский календарь",
+    "reviewNote": "Кот — вьетнамский вариант Кролика: решить, принимать ли.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-g7",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови страну «Большой семёрки»",
+    "mcPromptRu": "Какая из этих стран входит в «Большую семёрку»?",
+    "members": [
+      {
+        "id": "us",
+        "answerRu": "США",
+        "acceptedRu": [
+          "США",
+          "Соединённые Штаты",
+          "Соединенные Штаты"
+        ]
+      },
+      {
+        "id": "gb",
+        "answerRu": "Великобритания",
+        "acceptedRu": [
+          "Великобритания",
+          "Британия",
+          "Англия"
+        ]
+      },
+      {
+        "id": "fr",
+        "answerRu": "Франция",
+        "acceptedRu": [
+          "Франция"
+        ]
+      },
+      {
+        "id": "de",
+        "answerRu": "Германия",
+        "acceptedRu": [
+          "Германия"
+        ]
+      },
+      {
+        "id": "it",
+        "answerRu": "Италия",
+        "acceptedRu": [
+          "Италия"
+        ]
+      },
+      {
+        "id": "ca",
+        "answerRu": "Канада",
+        "acceptedRu": [
+          "Канада"
+        ]
+      },
+      {
+        "id": "jp",
+        "answerRu": "Япония",
+        "acceptedRu": [
+          "Япония"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Китай",
+      "Индия",
+      "Австралия",
+      "Испания"
+    ],
+    "sourceHint": "Официальный сайт G7",
+    "reviewNote": "«Англия» как алиас Великобритании — решить редактору.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "set-world-r60rgy",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови страну-соседа Канады или США",
+    "mcPromptRu": "Какая из этих стран имеет прямую сухопутную границу в Северной Америке?",
+    "members": [
+      {
+        "id": "usa",
+        "answerRu": "США",
+        "acceptedRu": [
+          "США",
+          "Соединённые Штаты Америки",
+          "Соединенные Штаты Америки",
+          "Соединенные Штаты"
+        ]
+      },
+      {
+        "id": "canada",
+        "answerRu": "Канада",
+        "acceptedRu": [
+          "Канада"
+        ]
+      },
+      {
+        "id": "mexico",
+        "answerRu": "Мексика",
+        "acceptedRu": [
+          "Мексика"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Бразилия",
+      "Куба",
+      "Ямайка"
+    ],
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "reviewNote": "Североамериканские страны с самой протяжённой общей границей.",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "set-world-k7rmcm",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови один из трёх официальных языков Бельгии",
+    "mcPromptRu": "Какой из этих языков имеет официальный статус в Бельгии?",
+    "members": [
+      {
+        "id": "dutch",
+        "answerRu": "нидерландский",
+        "acceptedRu": [
+          "нидерландский",
+          "голландский"
+        ]
+      },
+      {
+        "id": "french",
+        "answerRu": "французский",
+        "acceptedRu": [
+          "французский"
+        ]
+      },
+      {
+        "id": "german",
+        "answerRu": "немецкий",
+        "acceptedRu": [
+          "немецкий"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "итальянский",
+      "испанский",
+      "датский"
+    ],
+    "sourceTitle": "12 Smart Players vs. Impossible Quiz",
+    "reviewNote": "Три государственных языка Бельгии.",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "set-world-edfjqd",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови страну Южной Америки без выхода к океану",
+    "mcPromptRu": "Какая из этих южноамериканских стран является внутриконтинентальной?",
+    "members": [
+      {
+        "id": "paraguay",
+        "answerRu": "Парагвай",
+        "acceptedRu": [
+          "Парагвай"
+        ]
+      },
+      {
+        "id": "bolivia",
+        "answerRu": "Боливия",
+        "acceptedRu": [
+          "Боливия"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Чили",
+      "Аргентина",
+      "Перу"
+    ],
+    "sourceTitle": "My Smartest Players vs. Impossible Quiz",
+    "reviewNote": "Единственные две страны Южной Америки без выхода к морю.",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "set-world-34bnh4",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови одно из древних чудес света",
+    "mcPromptRu": "Что из этого входит в число семи чудес света Древнего мира?",
+    "members": [
+      {
+        "id": "khufu",
+        "answerRu": "Пирамида Хеопса",
+        "acceptedRu": [
+          "Пирамида Хеопса",
+          "Пирамида Хуфу"
+        ]
+      },
+      {
+        "id": "babylon",
+        "answerRu": "Висячие сады Семирамиды",
+        "acceptedRu": [
+          "Висячие сады Семирамиды"
+        ]
+      },
+      {
+        "id": "artemis",
+        "answerRu": "Храм Артемиды Эфесской",
+        "acceptedRu": [
+          "Храм Артемиды Эфесской",
+          "Храм Артемиды в Эфесе"
+        ]
+      },
+      {
+        "id": "zeus",
+        "answerRu": "Статуя Зевса в Олимпии",
+        "acceptedRu": [
+          "Статуя Зевса в Олимпии"
+        ]
+      },
+      {
+        "id": "mausoleum",
+        "answerRu": "Мавзолей в Галикарнасе",
+        "acceptedRu": [
+          "Мавзолей в Галикарнасе",
+          "Галикарнасский мавзолей"
+        ]
+      },
+      {
+        "id": "rhodes",
+        "answerRu": "Колосс Родосский",
+        "acceptedRu": [
+          "Колосс Родосский"
+        ]
+      },
+      {
+        "id": "lighthouse",
+        "answerRu": "Александрийский маяк",
+        "acceptedRu": [
+          "Александрийский маяк",
+          "Фаросский маяк"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Тадж-Махал",
+      "Колизей",
+      "Петра"
+    ],
+    "sourceTitle": "Семь чудес света — Википедия",
+    "reviewNote": "Полный классический список семи чудес света.",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "set-world-q49tts",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "world",
+    "titleRu": "Назови высочайший небоскрёб из топ-3 мира",
+    "mcPromptRu": "Какое из этих зданий входит в тройку самых высоких построек мира?",
+    "members": [
+      {
+        "id": "burj",
+        "answerRu": "Бурдж-Халифа",
+        "acceptedRu": [
+          "Бурдж-Халифа",
+          "Бурдж Халифа"
+        ]
+      },
+      {
+        "id": "shanghai",
+        "answerRu": "Шанхайская башня",
+        "acceptedRu": [
+          "Шанхайская башня"
+        ]
+      },
+      {
+        "id": "abraj",
+        "answerRu": "Абрадж аль-Бейт",
+        "acceptedRu": [
+          "Абрадж аль-Бейт",
+          "Королевская часовая башня"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "Эмпайр-стейт-билдинг",
+      "Тайбэй 101",
+      "Лахта Центр"
+    ],
+    "sourceTitle": "Список самых высоких зданий мира — Википедия",
+    "reviewNote": "Топ-3 высочайших зданий согласно Википедии.",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

@@ -121,19 +121,22 @@ function toRound(index: number, category: LastStandCategory): LastStandRound {
 }
 
 /**
- * Plan of the day. Deterministic: same dateKey and narrow pool give the same rounds.
+ * Plan of the day. Deterministic: same dateKey and pools give the same rounds.
+ * `extraRegional` joins the regional pool next to the country regions (other category sources).
  * No category repeats while an unused one is left anywhere, and neighbours never share one.
  */
 export function planLastStandRounds(
   dateKey: string,
   narrowCategories: readonly LastStandCategory[],
   total: number = LAST_STAND_MAX_ROUNDS,
+  extraRegional: readonly LastStandCategory[] = [],
 ): LastStandRound[] {
   validateNarrowCategories(narrowCategories);
   const random = createSeededRandom(hashSeed(`last-stand:${dateKey}`));
   const pools: Record<LastStandScale, LastStandCategory[]> = {
     wide: [wideCategory()],
-    regional: regionalCategories(),
+    regional: [...regionalCategories(), ...extraRegional.filter((category) => category.scale === 'regional')]
+      .sort((a, b) => (a.id < b.id ? -1 : 1)),
     narrow: [...narrowCategories]
       .filter((category) => category.members.length >= LAST_STAND_TABLE_SIZE)
       .sort((a, b) => (a.id < b.id ? -1 : 1)),
@@ -193,21 +196,24 @@ export interface RecordedAnswer {
 /** Answers of the table's records for one round; null if a record had no answer in it. */
 export type RecordAnswers = readonly (RecordedAnswer | null)[];
 
-/** Members not named by any opponent record of the round (time plays no role). */
-export function freeOptions(members: readonly string[], records: RecordAnswers): string[] {
+/**
+ * Members not named by any opponent record of the round (time plays no role).
+ * `mine` is the system's pre-set answer: naming it eliminates, so it is never a free option.
+ */
+export function freeOptions(members: readonly string[], records: RecordAnswers, mine: string | null = null): string[] {
   const taken = new Set<string>();
   for (const record of records) if (record) taken.add(record.answer);
-  return members.filter((member) => !taken.has(member));
+  return members.filter((member) => !taken.has(member) && member !== mine);
 }
 
-/** Number of members no opponent named. */
-export function countFreeOptions(members: readonly string[], records: RecordAnswers): number {
-  return freeOptions(members, records).length;
+/** Number of members no opponent named (and that are not the mine). */
+export function countFreeOptions(members: readonly string[], records: RecordAnswers, mine: string | null = null): number {
+  return freeOptions(members, records, mine).length;
 }
 
-/** True when opponents' answers cover every member: nothing is left to name. */
-export function isExhausted(members: readonly string[], records: RecordAnswers): boolean {
-  return members.length > 0 && countFreeOptions(members, records) === 0;
+/** True when opponents' answers and the mine cover every member: nothing safe is left to name. */
+export function isExhausted(members: readonly string[], records: RecordAnswers, mine: string | null = null): boolean {
+  return members.length > 0 && countFreeOptions(members, records, mine) === 0;
 }
 
 export type LastStandResolution =
@@ -216,7 +222,7 @@ export type LastStandResolution =
   | { kind: 'occupied'; answer: string; collisions: number; deadlineMs: number; freeLeft: number }
   /** Not recognised or not in the category: not an elimination, keep typing while the timer runs. */
   | { kind: 'invalid' }
-  | { kind: 'eliminated'; reason: 'timeout' | 'exhausted' };
+  | { kind: 'eliminated'; reason: 'timeout' | 'exhausted' | 'mined' };
 
 export interface ResolveInput {
   round: Pick<LastStandRound, 'members' | 'baseTimeMs' | 'collisionBonusMs'>;
@@ -227,18 +233,23 @@ export interface ResolveInput {
   records: RecordAnswers;
   /** Collisions already suffered in this round. */
   collisions: number;
+  /** The system's pre-set answer for the round (member id), or null when the round has none. */
+  mine?: string | null;
 }
 
 /**
- * Resolves one submission, in order: elimination (exhausted, then timeout), invalid, occupied.
+ * Resolves one submission, in order: exhausted, timeout, invalid, mined, occupied.
+ * The mine kills even when an opponent record already holds the same answer.
  * Occupied ignores who was faster, so `atMs` only ever decides the timeout. Records never change.
  */
 export function resolveLastStandAnswer(input: ResolveInput): LastStandResolution {
   const { round, answer, atMs, records, collisions } = input;
+  const mine = input.mine ?? null;
   const deadline = roundDeadlineMs(round, collisions);
-  if (isExhausted(round.members, records)) return { kind: 'eliminated', reason: 'exhausted' };
+  if (isExhausted(round.members, records, mine)) return { kind: 'eliminated', reason: 'exhausted' };
   if (atMs > deadline) return { kind: 'eliminated', reason: 'timeout' };
   if (answer === null || !round.members.includes(answer)) return { kind: 'invalid' };
+  if (mine !== null && answer === mine) return { kind: 'eliminated', reason: 'mined' };
   const blocked = records.some((record) => record && record.answer === answer);
   if (!blocked) return { kind: 'accepted', answer };
   const next = collisions + 1;
@@ -247,7 +258,7 @@ export function resolveLastStandAnswer(input: ResolveInput): LastStandResolution
     answer,
     collisions: next,
     deadlineMs: roundDeadlineMs(round, next),
-    freeLeft: countFreeOptions(round.members, records),
+    freeLeft: countFreeOptions(round.members, records, mine),
   };
 }
 
@@ -263,7 +274,7 @@ export interface LastStandState {
   /** Collisions in the current round. */
   collisions: number;
   status: LastStandStatus;
-  eliminatedBy: 'timeout' | 'exhausted' | null;
+  eliminatedBy: 'timeout' | 'exhausted' | 'mined' | null;
 }
 
 export function createLastStandGame(
@@ -318,7 +329,7 @@ export function applyLastStandResolution(state: LastStandState, resolution: Last
 /** Resolves a submission against the current round and advances the state. */
 export function submitLastStandAnswer(
   state: LastStandState,
-  submission: { answer: string | null; atMs: number; records: RecordAnswers },
+  submission: { answer: string | null; atMs: number; records: RecordAnswers; mine?: string | null },
 ): { state: LastStandState; resolution: LastStandResolution | null } {
   const round = currentLastStandRound(state);
   if (!round) return { state, resolution: null };

@@ -82,6 +82,14 @@ describe('Last Stand screens', () => {
     expect(cleared).toContain('Забег пройден');
   });
 
+  it('final names the mine the player stepped on, and the intro explains it', () => {
+    const html = renderToStaticMarkup(
+      <LastStandFinal state={{ survived: 2, outcome: 'eliminated', reason: 'mined', mineRu: 'США' }} onAgain={noop} onLeaderboard={noop} onHome={noop} />,
+    );
+    expect(html).toContain('Ты назвал загаданное: США.');
+    expect(renderToStaticMarkup(<LastStandIntro onStart={noop} onLeaderboard={noop} onBack={noop} />)).toContain('загаданный ответ');
+  });
+
   it('leaderboard handles loading, error, empty and ranked rows', () => {
     const props = { onRetry: noop, onClose: noop };
     expect(renderToStaticMarkup(<LastStandLeaderboard view={{ status: 'loading' }} {...props} />)).toContain('Загружаем');

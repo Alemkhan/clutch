@@ -1,5 +1,9 @@
-import { generateMatch, type CategoryId, type TemplateUsage } from './questionGenerator';
-import type { Question } from './index';
+import { generateMatch, type TemplateUsage } from './questionGenerator';
+import type { CategoryId, Question } from './index';
+import { buildGeneralSet } from './generalSet';
+import { createSeededRandom, hashSeed } from './seededRandom';
+
+export { createSeededRandom, hashSeed };
 
 /**
  * Размер набора и число наборов в банке по категориям. Различимых вопросов: 197 стран с семью
@@ -8,11 +12,13 @@ import type { Question } from './index';
  * а набор в 18 вопросов даёт дойти до 100% почти всем (при 10 не доходили 26% и 11%).
  */
 export const DAILY_SET_SIZES: Readonly<Record<CategoryId, number>> = {
+  general: 20,
   geography: 20,
   history: 18,
   languages: 18,
 };
 export const DAILY_BANK_SIZES: Readonly<Record<CategoryId, number>> = {
+  general: 12,
   geography: 12,
   history: 6,
   languages: 6,
@@ -27,28 +33,6 @@ export function dailyBankSize(category: CategoryId): number {
 /** Самый большой набор среди категорий: грубый потолок числа кругов в запросе. */
 export const MAX_DAILY_SET_SIZE: number = Math.max(...Object.values(DAILY_SET_SIZES));
 export const DAILY_SET_OPEN_RATIO = 0.3;
-
-/** Small deterministic PRNG (mulberry32): same seed, same sequence. Returns floats in [0, 1). */
-export function createSeededRandom(seed: number): () => number {
-  let state = seed >>> 0;
-  return () => {
-    state = (state + 0x6d2b79f5) >>> 0;
-    let t = state;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-/** Stable 32-bit FNV-1a hash of a string, used to turn a set id into a PRNG seed. */
-export function hashSeed(value: string): number {
-  let hash = 0x811c9dc5;
-  for (let index = 0; index < value.length; index++) {
-    hash ^= value.charCodeAt(index);
-    hash = Math.imul(hash, 0x01000193);
-  }
-  return hash >>> 0;
-}
 
 /** UTC calendar day as YYYY-MM-DD. The daily set rolls over at 00:00 UTC. */
 export function dailyKey(timestampMs: number): string {
@@ -80,6 +64,10 @@ function buildDailyBank(category: CategoryId, dateKey: string): DailySet[] {
   const createdAt = `${dateKey}T00:00:00.000Z`;
   return Array.from({ length: dailyBankSize(category) }, (_, index) => {
     const id = questionSetId(category, dateKey, index);
+    if (category === 'general') {
+      const general = buildGeneralSet(id, dateKey, usage);
+      return { questionSetId: id, questions: general.map((question) => ({ ...question, createdAt })) };
+    }
     const questions = generateMatch(
       dailySetSize(category),
       DAILY_SET_OPEN_RATIO,

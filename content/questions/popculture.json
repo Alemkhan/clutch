@@ -1,0 +1,355 @@
+[
+  {
+    "id": "au-popculture-1bi4kns",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Easy",
+    "promptRu": "Какой супергерой носит щит со звездой?",
+    "answerRu": "Капитан Америка",
+    "acceptedRu": [
+      "Капитан Америка"
+    ],
+    "distractorsRu": [
+      "Железный человек",
+      "Тор",
+      "Бэтмен"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Капитан Америка",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-popculture-1jmq2q9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Easy",
+    "promptRu": "Как зовут жёлтую губку из мультсериала?",
+    "answerRu": "Губка Боб",
+    "acceptedRu": [
+      "Губка Боб",
+      "Спанч Боб",
+      "Губка Боб Квадратные Штаны"
+    ],
+    "distractorsRu": [
+      "Патрик",
+      "Сквидвард",
+      "Мистер Крабс"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Губка Боб Квадратные Штаны",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-popculture-1hd6vuz",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Medium",
+    "promptRu": "Как зовут волшебника — наставника Фродо?",
+    "answerRu": "Гэндальф",
+    "acceptedRu": [
+      "Гэндальф"
+    ],
+    "distractorsRu": [
+      "Саруман",
+      "Дамблдор",
+      "Мерлин"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Гэндальф",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-popculture-1jmbdf7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Medium",
+    "promptRu": "Как зовут директора Хогвартса в первых книгах о Гарри Поттере?",
+    "answerRu": "Альбус Дамблдор",
+    "acceptedRu": [
+      "Альбус Дамблдор",
+      "Дамблдор"
+    ],
+    "distractorsRu": [
+      "Северус Снегг",
+      "Минерва Макгонагалл",
+      "Рубеус Хагрид"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Альбус Дамблдор",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-popculture-y4n5dt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Medium",
+    "promptRu": "Как называется город, который защищает Бэтмен?",
+    "answerRu": "Готэм",
+    "acceptedRu": [
+      "Готэм",
+      "Готэм-сити"
+    ],
+    "distractorsRu": [
+      "Метрополис",
+      "Стар-Сити",
+      "Централ-Сити"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Готэм-сити",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-popculture-13dp2in",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Medium",
+    "promptRu": "Какое настоящее имя Человека-паука?",
+    "answerRu": "Питер Паркер",
+    "acceptedRu": [
+      "Питер Паркер",
+      "Паркер"
+    ],
+    "distractorsRu": [
+      "Брюс Уэйн",
+      "Кларк Кент",
+      "Тони Старк"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Человек-паук",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-popculture-1i780hh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Medium",
+    "promptRu": "Какая игра стала самой продаваемой видеоигрой в истории?",
+    "answerRu": "Minecraft",
+    "acceptedRu": [
+      "Minecraft",
+      "Майнкрафт"
+    ],
+    "distractorsRu": [
+      "Tetris",
+      "GTA V",
+      "Fortnite"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Minecraft",
+    "reviewNote": "Позиция в рейтинге продаж меняется — проверить перед релизом.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-popculture-11u2qgw",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Hard",
+    "promptRu": "С какой планеты прилетел Супермен?",
+    "answerRu": "Криптон",
+    "acceptedRu": [
+      "Криптон"
+    ],
+    "distractorsRu": [
+      "Татуин",
+      "Вулкан",
+      "Асгард"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Криптон (DC Comics)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-popculture-1t0xr14",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Hard",
+    "promptRu": "Как зовут итальянского водопроводчика — героя игр Nintendo?",
+    "answerRu": "Марио",
+    "acceptedRu": [
+      "Марио",
+      "Супер Марио"
+    ],
+    "distractorsRu": [
+      "Луиджи",
+      "Йоши",
+      "Соник"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Марио",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-popculture-tum3ix",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Hard",
+    "promptRu": "Как зовут ёжика — героя игр Sega?",
+    "answerRu": "Соник",
+    "acceptedRu": [
+      "Соник",
+      "Sonic"
+    ],
+    "distractorsRu": [
+      "Наклз",
+      "Тейлз",
+      "Марио"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Ёж Соник",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-popculture-29tc83",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Expert",
+    "promptRu": "Как зовут злодея, который щелчком пальцев уничтожил половину всего живого во Вселенной в фильмах Marvel?",
+    "answerRu": "Танос",
+    "acceptedRu": [
+      "Танос"
+    ],
+    "distractorsRu": [
+      "Альтрон",
+      "Локи",
+      "Красный Череп"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Танос",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-popculture-1r6e20q",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Expert",
+    "promptRu": "Какая страна придумала тетрис?",
+    "answerRu": "СССР",
+    "acceptedRu": [
+      "СССР",
+      "Советский Союз"
+    ],
+    "distractorsRu": [
+      "Япония",
+      "США",
+      "Венгрия"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Тетрис создал Алексей Пажитнов в Москве в 1984 году.",
+    "sourceHint": "Википедия: Тетрис",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-popculture-1ivc52z",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Expert",
+    "promptRu": "Как называется вымышленный континент в «Игре престолов», где стоит Королевская Гавань?",
+    "answerRu": "Вестерос",
+    "acceptedRu": [
+      "Вестерос"
+    ],
+    "distractorsRu": [
+      "Эссос",
+      "Средиземье",
+      "Нарния"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Вестерос",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "q-popculture-n24bbp",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Easy",
+    "promptRu": "Сколько знаков включает в себя классический европейский зодиак?",
+    "answerRu": "12",
+    "acceptedRu": [
+      "12",
+      "двенадцать"
+    ],
+    "distractorsRu": [
+      "10",
+      "13",
+      "8"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Зодиакальный пояс делится на 12 равных 30-градусных секторов.",
+    "sourceTitle": "Знаки зодиака — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-popculture-jhcxwf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Easy",
+    "promptRu": "Какой знак зодиака открывает зодиакальный цикл с весеннего равноденствия?",
+    "answerRu": "Овен",
+    "acceptedRu": [
+      "Овен",
+      "овен"
+    ],
+    "distractorsRu": [
+      "Телец",
+      "Близнецы",
+      "Рыбы"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Первым знаком зодиака традиционно является Овен.",
+    "sourceTitle": "Знаки зодиака — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  },
+  {
+    "id": "q-popculture-1v4pudt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Medium",
+    "promptRu": "Какой знак зодиака является заключительным, 12-м знаком в зодиакальном круге?",
+    "answerRu": "Рыбы",
+    "acceptedRu": [
+      "Рыбы",
+      "рыбы"
+    ],
+    "distractorsRu": [
+      "Водолей",
+      "Козерог",
+      "Скорпион"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Рыбы замыкают 12-секторный зодиакальный круг.",
+    "sourceTitle": "Знаки зодиака — Википедия",
+    "origin": "notebooklm",
+    "license": "original"
+  }
+]

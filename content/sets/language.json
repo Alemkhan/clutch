@@ -1,0 +1,192 @@
+[
+  {
+    "id": "set-greek-letters",
+    "editorialStatus": "approved",
+    "kind": "set",
+    "topic": "language",
+    "titleRu": "Назови букву греческого алфавита",
+    "mcPromptRu": "Что из этого — буква греческого алфавита?",
+    "members": [
+      {
+        "id": "alpha",
+        "answerRu": "альфа",
+        "acceptedRu": [
+          "альфа"
+        ]
+      },
+      {
+        "id": "beta",
+        "answerRu": "бета",
+        "acceptedRu": [
+          "бета"
+        ]
+      },
+      {
+        "id": "gamma",
+        "answerRu": "гамма",
+        "acceptedRu": [
+          "гамма"
+        ]
+      },
+      {
+        "id": "delta",
+        "answerRu": "дельта",
+        "acceptedRu": [
+          "дельта"
+        ]
+      },
+      {
+        "id": "epsilon",
+        "answerRu": "эпсилон",
+        "acceptedRu": [
+          "эпсилон"
+        ]
+      },
+      {
+        "id": "zeta",
+        "answerRu": "дзета",
+        "acceptedRu": [
+          "дзета",
+          "зета"
+        ]
+      },
+      {
+        "id": "eta",
+        "answerRu": "эта",
+        "acceptedRu": [
+          "эта"
+        ]
+      },
+      {
+        "id": "theta",
+        "answerRu": "тета",
+        "acceptedRu": [
+          "тета"
+        ]
+      },
+      {
+        "id": "iota",
+        "answerRu": "йота",
+        "acceptedRu": [
+          "йота"
+        ]
+      },
+      {
+        "id": "kappa",
+        "answerRu": "каппа",
+        "acceptedRu": [
+          "каппа"
+        ]
+      },
+      {
+        "id": "lambda",
+        "answerRu": "лямбда",
+        "acceptedRu": [
+          "лямбда"
+        ]
+      },
+      {
+        "id": "mu",
+        "answerRu": "мю",
+        "acceptedRu": [
+          "мю",
+          "ми"
+        ]
+      },
+      {
+        "id": "nu",
+        "answerRu": "ню",
+        "acceptedRu": [
+          "ню",
+          "ни"
+        ]
+      },
+      {
+        "id": "xi",
+        "answerRu": "кси",
+        "acceptedRu": [
+          "кси"
+        ]
+      },
+      {
+        "id": "omicron",
+        "answerRu": "омикрон",
+        "acceptedRu": [
+          "омикрон"
+        ]
+      },
+      {
+        "id": "pi",
+        "answerRu": "пи",
+        "acceptedRu": [
+          "пи"
+        ]
+      },
+      {
+        "id": "rho",
+        "answerRu": "ро",
+        "acceptedRu": [
+          "ро"
+        ]
+      },
+      {
+        "id": "sigma",
+        "answerRu": "сигма",
+        "acceptedRu": [
+          "сигма"
+        ]
+      },
+      {
+        "id": "tau",
+        "answerRu": "тау",
+        "acceptedRu": [
+          "тау"
+        ]
+      },
+      {
+        "id": "upsilon",
+        "answerRu": "ипсилон",
+        "acceptedRu": [
+          "ипсилон"
+        ]
+      },
+      {
+        "id": "phi",
+        "answerRu": "фи",
+        "acceptedRu": [
+          "фи"
+        ]
+      },
+      {
+        "id": "chi",
+        "answerRu": "хи",
+        "acceptedRu": [
+          "хи"
+        ]
+      },
+      {
+        "id": "psi",
+        "answerRu": "пси",
+        "acceptedRu": [
+          "пси"
+        ]
+      },
+      {
+        "id": "omega",
+        "answerRu": "омега",
+        "acceptedRu": [
+          "омега"
+        ]
+      }
+    ],
+    "nonMembersRu": [
+      "алеф",
+      "руна",
+      "шва"
+    ],
+    "sourceHint": "Википедия: Греческий алфавит",
+    "reviewNote": "Много коротких названий (ро, пи, фи): нужен точный матч.",
+    "origin": "authored",
+    "license": "original"
+  }
+]

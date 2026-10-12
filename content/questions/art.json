@@ -1,0 +1,1073 @@
+[
+  {
+    "id": "au-art-15tqnn6",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Какой цвет получится, если смешать синюю и жёлтую краску?",
+    "answerRu": "зелёный",
+    "acceptedRu": [
+      "зелёный",
+      "зеленый"
+    ],
+    "distractorsRu": [
+      "фиолетовый",
+      "оранжевый",
+      "коричневый"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Цветовой круг",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-zhda7s",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "В каком городе находится Лувр?",
+    "answerRu": "Париж",
+    "acceptedRu": [
+      "Париж"
+    ],
+    "distractorsRu": [
+      "Лондон",
+      "Рим",
+      "Мадрид"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Лувр",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-capnqf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Как называется картина, на которой изображены цветы, фрукты и посуда?",
+    "answerRu": "натюрморт",
+    "acceptedRu": [
+      "натюрморт"
+    ],
+    "distractorsRu": [
+      "пейзаж",
+      "портрет",
+      "марина"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Натюрморт",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-djfxz",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Какой художник отрезал себе часть уха?",
+    "answerRu": "Винсент Ван Гог",
+    "acceptedRu": [
+      "Винсент Ван Гог",
+      "Ван Гог"
+    ],
+    "distractorsRu": [
+      "Поль Гоген",
+      "Клод Моне",
+      "Сальвадор Дали"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Ван Гог, Винсент",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-z5gx3z",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Какой художник известен картиной с «растекающимися» часами?",
+    "answerRu": "Сальвадор Дали",
+    "acceptedRu": [
+      "Сальвадор Дали",
+      "Дали"
+    ],
+    "distractorsRu": [
+      "Рене Магритт",
+      "Пабло Пикассо",
+      "Жоан Миро"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Постоянство памяти",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-1t1uouj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "В каком городе находится Эрмитаж?",
+    "answerRu": "Санкт-Петербург",
+    "acceptedRu": [
+      "Санкт-Петербург",
+      "Петербург",
+      "СПб",
+      "Питер"
+    ],
+    "distractorsRu": [
+      "Москва",
+      "Казань",
+      "Великий Новгород"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Эрмитаж",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-n19o9i",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Кто создал мраморную статую Давида во Флоренции в 1504 году?",
+    "answerRu": "Микеланджело",
+    "acceptedRu": [
+      "Микеланджело",
+      "Микеланджело Буонарроти"
+    ],
+    "distractorsRu": [
+      "Бернини",
+      "Роден",
+      "Канова"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Давид (Микеланджело)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-1vqlft3",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Какое направление в живописи начали Моне и Ренуар?",
+    "answerRu": "импрессионизм",
+    "acceptedRu": [
+      "импрессионизм"
+    ],
+    "distractorsRu": [
+      "кубизм",
+      "сюрреализм",
+      "барокко"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Импрессионизм",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-l7f1v3",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал «Чёрный квадрат»?",
+    "answerRu": "Казимир Малевич",
+    "acceptedRu": [
+      "Казимир Малевич",
+      "Малевич"
+    ],
+    "distractorsRu": [
+      "Василий Кандинский",
+      "Марк Шагал",
+      "Илья Репин"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Чёрный квадрат",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-1q05i8",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Как называется роспись по сырой штукатурке?",
+    "answerRu": "фреска",
+    "acceptedRu": [
+      "фреска"
+    ],
+    "distractorsRu": [
+      "мозаика",
+      "витраж",
+      "гравюра"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Фреска",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-br4do7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал картину «Девятый вал»?",
+    "answerRu": "Иван Айвазовский",
+    "acceptedRu": [
+      "Иван Айвазовский",
+      "Айвазовский"
+    ],
+    "distractorsRu": [
+      "Иван Шишкин",
+      "Исаак Левитан",
+      "Виктор Васнецов"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Девятый вал",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-xjj4im",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Кто расписал потолок Сикстинской капеллы?",
+    "answerRu": "Микеланджело",
+    "acceptedRu": [
+      "Микеланджело",
+      "Микеланджело Буонарроти"
+    ],
+    "distractorsRu": [
+      "Рафаэль",
+      "Леонардо да Винчи",
+      "Сандро Боттичелли"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Сикстинская капелла",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-1ozffqt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Какая художница известна автопортретами со сросшимися бровями?",
+    "answerRu": "Фрида Кало",
+    "acceptedRu": [
+      "Фрида Кало",
+      "Кало",
+      "Фрида"
+    ],
+    "distractorsRu": [
+      "Тамара де Лемпицка",
+      "Джорджия О’Кифф",
+      "Яёи Кусама"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Кало, Фрида",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-1o48liu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Кто написал картину «Боярыня Морозова»?",
+    "answerRu": "Василий Суриков",
+    "acceptedRu": [
+      "Василий Суриков",
+      "Суриков"
+    ],
+    "distractorsRu": [
+      "Илья Репин",
+      "Василий Перов",
+      "Василий Верещагин"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Боярыня Морозова (картина)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "au-art-ozk375",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "В каком городе стоит статуя Христа-Искупителя с раскинутыми руками?",
+    "answerRu": "Рио-де-Жанейро",
+    "acceptedRu": [
+      "Рио-де-Жанейро",
+      "Рио"
+    ],
+    "distractorsRu": [
+      "Сан-Паулу",
+      "Лиссабон",
+      "Буэнос-Айрес"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Статуя Христа-Искупителя",
+    "reviewNote": "В Лиссабоне есть похожая статуя Кришту-Рей — проверить, не путает ли это.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "wd-painting-Q12418",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Кто написал картину «Мона Лиза»?",
+    "answerRu": "Леонардо да Винчи",
+    "acceptedRu": [
+      "Леонардо да Винчи",
+      "да Винчи"
+    ],
+    "distractorsRu": [
+      "Ян ван Эйк",
+      "Сальвадор Дали",
+      "Пьер Огюст Ренуар"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Мона Лиза» — Леонардо да Винчи.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q12418",
+    "sourceTitle": "Wikidata: Мона Лиза",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q45585",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Кто написал картину «Звёздная ночь»?",
+    "answerRu": "Винсент Ван Гог",
+    "acceptedRu": [
+      "Винсент Ван Гог",
+      "Ван Гог"
+    ],
+    "distractorsRu": [
+      "Ян Вермеер",
+      "Грант Вуд",
+      "Франсиско Гойя"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Звёздная ночь» — Винсент Ван Гог.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q45585",
+    "sourceTitle": "Wikidata: Звёздная ночь",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q185372",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Кто написал картину «Девушка с жемчужной серёжкой»?",
+    "answerRu": "Ян Вермеер",
+    "acceptedRu": [
+      "Ян Вермеер",
+      "Вермеер"
+    ],
+    "distractorsRu": [
+      "Рембрандт",
+      "Сальвадор Дали",
+      "Теодор Жерико"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Девушка с жемчужной серёжкой» — Ян Вермеер.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q185372",
+    "sourceTitle": "Wikidata: Девушка с жемчужной серёжкой",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q175036",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Кто написал картину «Герника»?",
+    "answerRu": "Пабло Пикассо",
+    "acceptedRu": [
+      "Пабло Пикассо",
+      "Пикассо"
+    ],
+    "distractorsRu": [
+      "Ян ван Эйк",
+      "Пьер Огюст Ренуар",
+      "Сандро Боттичелли"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Герника» — Пабло Пикассо.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q175036",
+    "sourceTitle": "Wikidata: Герника",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q29530",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Кто написал картину «Свобода, ведущая народ»?",
+    "answerRu": "Эжен Делакруа",
+    "acceptedRu": [
+      "Эжен Делакруа",
+      "Делакруа"
+    ],
+    "distractorsRu": [
+      "Пьер Огюст Ренуар",
+      "Грант Вуд",
+      "Диего Веласкес"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Свобода, ведущая народ» — Эжен Делакруа.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q29530",
+    "sourceTitle": "Wikidata: Свобода, ведущая народ",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q219831",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Кто написал картину «Ночной дозор»?",
+    "answerRu": "Рембрандт",
+    "acceptedRu": [
+      "Рембрандт"
+    ],
+    "distractorsRu": [
+      "Франсиско Гойя",
+      "Клод Моне",
+      "Диего Веласкес"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Ночной дозор» — Рембрандт.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q219831",
+    "sourceTitle": "Wikidata: Ночной дозор",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q208758",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Кто написал картину «Менины (Фрейлины)»?",
+    "answerRu": "Диего Веласкес",
+    "acceptedRu": [
+      "Диего Веласкес",
+      "Веласкес"
+    ],
+    "distractorsRu": [
+      "Клод Моне",
+      "Питер Брейгель Старший",
+      "Иероним Босх"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Менины (Фрейлины)» — Диего Веласкес.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q208758",
+    "sourceTitle": "Wikidata: Менины (Фрейлины)",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q151047",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Кто написал картину «Рождение Венеры»?",
+    "answerRu": "Сандро Боттичелли",
+    "acceptedRu": [
+      "Сандро Боттичелли",
+      "Боттичелли"
+    ],
+    "distractorsRu": [
+      "Диего Веласкес",
+      "Леонардо да Винчи",
+      "Эдуард Мане"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Рождение Венеры» — Сандро Боттичелли.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q151047",
+    "sourceTitle": "Wikidata: Рождение Венеры",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q154469",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Кто написал картину «Едоки картофеля»?",
+    "answerRu": "Винсент Ван Гог",
+    "acceptedRu": [
+      "Винсент Ван Гог",
+      "Ван Гог"
+    ],
+    "distractorsRu": [
+      "Рембрандт",
+      "Тициан",
+      "Леонардо да Винчи"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Едоки картофеля» — Винсент Ван Гог.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q154469",
+    "sourceTitle": "Wikidata: Едоки картофеля",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q328523",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Кто написал картину «Впечатление. Восходящее солнце»?",
+    "answerRu": "Клод Моне",
+    "acceptedRu": [
+      "Клод Моне",
+      "Моне"
+    ],
+    "distractorsRu": [
+      "Илья Ефимович Репин",
+      "Каспар Давид Фридрих",
+      "Густав Климт"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Впечатление. Восходящее солнце» — Клод Моне.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q328523",
+    "sourceTitle": "Wikidata: Впечатление. Восходящее солнце",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q1752990",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Кто написал картину «Смерть Сократа»?",
+    "answerRu": "Жак Луи Давид",
+    "acceptedRu": [
+      "Жак Луи Давид",
+      "Давид"
+    ],
+    "distractorsRu": [
+      "Эдуард Мане",
+      "Густав Климт",
+      "Иероним Босх"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Смерть Сократа» — Жак Луи Давид.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1752990",
+    "sourceTitle": "Wikidata: Смерть Сократа",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q698487",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Кто написал картину «Поцелуй»?",
+    "answerRu": "Густав Климт",
+    "acceptedRu": [
+      "Густав Климт",
+      "Климт"
+    ],
+    "distractorsRu": [
+      "Эжен Делакруа",
+      "Клод Моне",
+      "Каспар Давид Фридрих"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Поцелуй» — Густав Климт.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q698487",
+    "sourceTitle": "Wikidata: Поцелуй",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q474338",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Кто написал картину «Дама с горностаем»?",
+    "answerRu": "Леонардо да Винчи",
+    "acceptedRu": [
+      "Леонардо да Винчи",
+      "да Винчи"
+    ],
+    "distractorsRu": [
+      "Эдуард Мане",
+      "Франсиско Гойя",
+      "Теодор Жерико"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Дама с горностаем» — Леонардо да Винчи.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q474338",
+    "sourceTitle": "Wikidata: Дама с горностаем",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q321303",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Кто написал картину «Сад земных наслаждений»?",
+    "answerRu": "Иероним Босх",
+    "acceptedRu": [
+      "Иероним Босх",
+      "Босх"
+    ],
+    "distractorsRu": [
+      "Теодор Жерико",
+      "Жак Луи Давид",
+      "Эжен Делакруа"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Сад земных наслаждений» — Иероним Босх.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q321303",
+    "sourceTitle": "Wikidata: Сад земных наслаждений",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q25729",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Кто написал картину «Постоянство памяти»?",
+    "answerRu": "Сальвадор Дали",
+    "acceptedRu": [
+      "Сальвадор Дали",
+      "Дали"
+    ],
+    "distractorsRu": [
+      "Сандро Боттичелли",
+      "Теодор Жерико",
+      "Грант Вуд"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Постоянство памяти» — Сальвадор Дали.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q25729",
+    "sourceTitle": "Wikidata: Постоянство памяти",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q311243",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Кто написал картину «Странник над морем тумана»?",
+    "answerRu": "Каспар Давид Фридрих",
+    "acceptedRu": [
+      "Каспар Давид Фридрих",
+      "Фридрих"
+    ],
+    "distractorsRu": [
+      "Теодор Жерико",
+      "Сальвадор Дали",
+      "Илья Ефимович Репин"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Странник над морем тумана» — Каспар Давид Фридрих.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q311243",
+    "sourceTitle": "Wikidata: Странник над морем тумана",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q212616",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал картину «Плот «Медузы»»?",
+    "answerRu": "Теодор Жерико",
+    "acceptedRu": [
+      "Теодор Жерико",
+      "Жерико"
+    ],
+    "distractorsRu": [
+      "Ян ван Эйк",
+      "Пабло Пикассо",
+      "Диего Веласкес"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Плот «Медузы»» — Теодор Жерико.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q212616",
+    "sourceTitle": "Wikidata: Плот «Медузы»",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q478271",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал картину «Запорожцы»?",
+    "answerRu": "Илья Ефимович Репин",
+    "acceptedRu": [
+      "Илья Ефимович Репин",
+      "Репин"
+    ],
+    "distractorsRu": [
+      "Эдуард Мане",
+      "Густав Климт",
+      "Эжен Делакруа"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Запорожцы» — Илья Ефимович Репин.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q478271",
+    "sourceTitle": "Wikidata: Запорожцы",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q464782",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал картину «Американская готика»?",
+    "answerRu": "Грант Вуд",
+    "acceptedRu": [
+      "Грант Вуд",
+      "Вуд"
+    ],
+    "distractorsRu": [
+      "Сандро Боттичелли",
+      "Рембрандт",
+      "Винсент Ван Гог"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Американская готика» — Грант Вуд.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q464782",
+    "sourceTitle": "Wikidata: Американская готика",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q152509",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал картину «Завтрак на траве»?",
+    "answerRu": "Эдуард Мане",
+    "acceptedRu": [
+      "Эдуард Мане",
+      "Мане"
+    ],
+    "distractorsRu": [
+      "Диего Веласкес",
+      "Тициан",
+      "Ян Вермеер"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Завтрак на траве» — Эдуард Мане.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q152509",
+    "sourceTitle": "Wikidata: Завтрак на траве",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q152867",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал картину «Маха обнажённая»?",
+    "answerRu": "Франсиско Гойя",
+    "acceptedRu": [
+      "Франсиско Гойя",
+      "Гойя"
+    ],
+    "distractorsRu": [
+      "Теодор Жерико",
+      "Тициан",
+      "Леонардо да Винчи"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Маха обнажённая» — Франсиско Гойя.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q152867",
+    "sourceTitle": "Wikidata: Маха обнажённая",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q1091086",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал картину «Третье мая 1808 года в Мадриде»?",
+    "answerRu": "Франсиско Гойя",
+    "acceptedRu": [
+      "Франсиско Гойя",
+      "Гойя"
+    ],
+    "distractorsRu": [
+      "Ян Вермеер",
+      "Пьер Огюст Ренуар",
+      "Леонардо да Винчи"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Третье мая 1808 года в Мадриде» — Франсиско Гойя.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1091086",
+    "sourceTitle": "Wikidata: Третье мая 1808 года в Мадриде",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q661378",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал картину «Урок анатомии доктора Тульпа»?",
+    "answerRu": "Рембрандт",
+    "acceptedRu": [
+      "Рембрандт"
+    ],
+    "distractorsRu": [
+      "Густав Климт",
+      "Илья Ефимович Репин",
+      "Каспар Давид Фридрих"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Урок анатомии доктора Тульпа» — Рембрандт.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q661378",
+    "sourceTitle": "Wikidata: Урок анатомии доктора Тульпа",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q167605",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал картину «Молочница»?",
+    "answerRu": "Ян Вермеер",
+    "acceptedRu": [
+      "Ян Вермеер",
+      "Вермеер"
+    ],
+    "distractorsRu": [
+      "Густав Климт",
+      "Питер Брейгель Старший",
+      "Теодор Жерико"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Молочница» — Ян Вермеер.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q167605",
+    "sourceTitle": "Wikidata: Молочница",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q683274",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Кто написал картину «Бал в Мулен де ла Галетт»?",
+    "answerRu": "Пьер Огюст Ренуар",
+    "acceptedRu": [
+      "Пьер Огюст Ренуар",
+      "Ренуар"
+    ],
+    "distractorsRu": [
+      "Леонардо да Винчи",
+      "Каспар Давид Фридрих",
+      "Эжен Делакруа"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Бал в Мулен де ла Галетт» — Пьер Огюст Ренуар.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q683274",
+    "sourceTitle": "Wikidata: Бал в Мулен де ла Галетт",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q220859",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Кто написал картину «Портрет четы Арнольфини»?",
+    "answerRu": "Ян ван Эйк",
+    "acceptedRu": [
+      "Ян ван Эйк",
+      "ван Эйк"
+    ],
+    "distractorsRu": [
+      "Сандро Боттичелли",
+      "Жак Луи Давид",
+      "Грант Вуд"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Портрет четы Арнольфини» — Ян ван Эйк.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q220859",
+    "sourceTitle": "Wikidata: Портрет четы Арнольфини",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q737062",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Кто написал картину «Олимпия»?",
+    "answerRu": "Эдуард Мане",
+    "acceptedRu": [
+      "Эдуард Мане",
+      "Мане"
+    ],
+    "distractorsRu": [
+      "Клод Моне",
+      "Каспар Давид Фридрих",
+      "Сандро Боттичелли"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Олимпия» — Эдуард Мане.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q737062",
+    "sourceTitle": "Wikidata: Олимпия",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q476458",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Кто написал картину «Клятва Горациев»?",
+    "answerRu": "Жак Луи Давид",
+    "acceptedRu": [
+      "Жак Луи Давид",
+      "Давид"
+    ],
+    "distractorsRu": [
+      "Франсиско Гойя",
+      "Диего Веласкес",
+      "Тициан"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Клятва Горациев» — Жак Луи Давид.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q476458",
+    "sourceTitle": "Wikidata: Клятва Горациев",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q549847",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Кто написал картину «Весна»?",
+    "answerRu": "Сандро Боттичелли",
+    "acceptedRu": [
+      "Сандро Боттичелли",
+      "Боттичелли"
+    ],
+    "distractorsRu": [
+      "Винсент Ван Гог",
+      "Ян ван Эйк",
+      "Эдуард Мане"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Весна» — Сандро Боттичелли.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q549847",
+    "sourceTitle": "Wikidata: Весна",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q727875",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Кто написал картину «Венера Урбинская»?",
+    "answerRu": "Тициан",
+    "acceptedRu": [
+      "Тициан"
+    ],
+    "distractorsRu": [
+      "Ян ван Эйк",
+      "Грант Вуд",
+      "Винсент Ван Гог"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Венера Урбинская» — Тициан.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q727875",
+    "sourceTitle": "Wikidata: Венера Урбинская",
+    "origin": "wikidata",
+    "license": "CC0"
+  },
+  {
+    "id": "wd-painting-Q500985",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Кто написал картину «Охотники на снегу»?",
+    "answerRu": "Питер Брейгель Старший",
+    "acceptedRu": [
+      "Питер Брейгель Старший",
+      "Старший"
+    ],
+    "distractorsRu": [
+      "Жак Луи Давид",
+      "Ян ван Эйк",
+      "Густав Климт"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Автор картины «Охотники на снегу» — Питер Брейгель Старший.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q500985",
+    "sourceTitle": "Wikidata: Охотники на снегу",
+    "origin": "wikidata",
+    "license": "CC0"
+  }
+]
