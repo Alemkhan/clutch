@@ -18,7 +18,7 @@ import {
 } from '@clutch/shared';
 import app from '../apps/api/src/index';
 import { releaseExpiredRematchInvites } from '../apps/api/src/notifications/expiry';
-import { INVITE_TTL_MS } from '../apps/api/src/notifications/repository';
+import { OPEN_INVITE_TTL_MS } from '../apps/api/src/notifications/repository';
 import {
   applyFriendInvitesMigration,
   applyLastStandMigration,
@@ -144,7 +144,8 @@ describe('friend invite: creation', () => {
     const first = await createInvite(db, 'ann', runId);
     expect(first.url).toBe(`https://t.me/testbot?startapp=${first.inviteId}`);
     expect(first.inviteId).toMatch(/^rm_[A-Za-z0-9_-]{22}$/u);
-    expect(first.expiresAt).toBe(NOW + INVITE_TTL_MS);
+    // Открытая ссылка держит запись вне подбора, поэтому живёт сутки, а не неделю.
+    expect(first.expiresAt).toBe(NOW + OPEN_INVITE_TTL_MS);
     expect(await createInvite(db, 'ann', runId)).toEqual(first);
     expect(inviteCount(db)).toEqual({ n: 1 });
   });
@@ -191,7 +192,7 @@ describe('friend invite: claiming and reservation', () => {
     const response = await call(db, 'bob', 'GET', `/api/rematch/${link.inviteId}`);
     expect(response.status).toBe(200);
     expect(await response.json()).toMatchObject({
-      inviteId: link.inviteId, mode: 'solo', friend: true, challengerName: 'ann', challengerProgress: 100,
+      inviteId: link.inviteId, friend: true, challengerName: 'ann', challengerProgress: 100,
     });
     expect(db.sqlite.prepare('SELECT consumed_at, recipient_player_id FROM rematch_invites').get())
       .toEqual({ consumed_at: null, recipient_player_id: null });
@@ -256,9 +257,10 @@ describe('friend invite: claiming and reservation', () => {
     // Резерв снят по сроку ещё до планового прохода; проход лишь фиксирует отпускание.
     const returned = await (await startRun(db, 'erin')).json() as StartSoloRunResponse;
     expect(returned.pace?.id).toBe(authorRun);
-    expect(await releaseExpiredRematchInvites(db.binding, NOW)).toEqual({ released: 1, more: false });
+    expect(await releaseExpiredRematchInvites(db.binding, NOW)).toEqual({ released: 1, claimsReleased: 0, more: false });
+    // Запись забрал первый: матч — это пара, второму она уже не достаётся.
     const after = await (await startRun(db, 'frank')).json() as StartSoloRunResponse;
-    expect(after.pace?.id).toBe(authorRun);
+    expect(after.pace).toBeNull();
   });
 
   it('keeps the record out of the shared pool while the link is live and frees it once taken', async () => {

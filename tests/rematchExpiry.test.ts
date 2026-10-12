@@ -50,7 +50,7 @@ describe('releaseExpiredRematchInvites', () => {
 
     const summary = await releaseExpiredRematchInvites(db.binding, NOW);
 
-    expect(summary).toEqual({ released: 2, more: false });
+    expect(summary).toEqual({ released: 2, claimsReleased: 0, more: false });
     expect(releasedAt(db, 'expired')).toBe(NOW);
     expect(releasedAt(db, 'exactly-now')).toBe(NOW);
   });
@@ -82,7 +82,7 @@ describe('releaseExpiredRematchInvites', () => {
     await releaseExpiredRematchInvites(db.binding, NOW);
     const again = await releaseExpiredRematchInvites(db.binding, NOW + 60_000);
 
-    expect(again).toEqual({ released: 0, more: false });
+    expect(again).toEqual({ released: 0, claimsReleased: 0, more: false });
     expect(releasedAt(db, 'expired')).toBe(NOW);
   });
 
@@ -93,8 +93,8 @@ describe('releaseExpiredRematchInvites', () => {
     const first = await releaseExpiredRematchInvites(db.binding, NOW, 2);
     const second = await releaseExpiredRematchInvites(db.binding, NOW, 2);
 
-    expect(first).toEqual({ released: 2, more: true });
-    expect(second).toEqual({ released: 1, more: false });
+    expect(first).toEqual({ released: 2, claimsReleased: 0, more: true });
+    expect(second).toEqual({ released: 1, claimsReleased: 0, more: false });
   });
 
   it('does not alter the challenger run', async () => {

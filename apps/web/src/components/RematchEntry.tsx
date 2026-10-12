@@ -10,7 +10,7 @@ import type { LaunchIntent } from '../lib/launchIntent';
 
 interface RematchEntryProps {
   intent: LaunchIntent;
-  onStartRematch: (inviteId: string, category: CategoryId, mode: RematchPreview['mode']) => void;
+  onStartRematch: (inviteId: string, category: CategoryId) => void;
   onClose: () => void;
 }
 
@@ -78,15 +78,13 @@ function RematchInvite({ inviteId, onStartRematch, onClose }: {
                 <h1 className="screen-title">Реванш с {state.preview.challengerName}</h1>
                 <p className="matchmaking-status">
                   {state.preview.challengerName} обошёл вашу запись: {state.preview.challengerProgress}% против {state.preview.yourProgress}%.
-                  {state.preview.mode === 'solo'
-                    ? 'Это будет новый забег по другому набору: твой результат сравнят с его.'
-                    : 'Вопросы будут те же, соперник — его сохранённая запись.'}
+                  Это будет новый забег по другому набору: твой результат сравнят с его.
                 </p>
               </>
             )}
             <button
               className="cta-btn"
-              onClick={() => onStartRematch(state.preview.inviteId, state.preview.category, state.preview.mode)}
+              onClick={() => onStartRematch(state.preview.inviteId, state.preview.category)}
             >
               {state.preview.friend ? 'Играть' : 'Начать реванш'}
             </button>

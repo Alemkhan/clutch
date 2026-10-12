@@ -107,27 +107,6 @@ export interface GuestSessionResponse {
   expiresAt: number;
 }
 
-export interface StartAsyncMatchResponse {
-  matchId: string;
-  questions: Question[];
-  opponent: Opponent;
-  opponentSource: 'player' | 'bot';
-  conditions: AsyncMatchConditions;
-  /** true: игрок прошёл все наборы дня в категории, выдан наименее давно сыгранный. */
-  bankExhausted: boolean;
-}
-
-export interface CompleteAsyncMatchRequest {
-  rounds: AsyncMatchRoundInput[];
-}
-
-export interface CompleteAsyncMatchResponse {
-  matchId: string;
-  rounds: AsyncMatchRound[];
-  playerProgress: number;
-  correctCount: number;
-}
-
 /** Соло-забег: тело старта без реванш-приглашения (сервер его отклоняет). */
 export interface StartSoloRunRequest {
   displayName: string;
@@ -224,6 +203,8 @@ export interface SoloPlayedRound {
 /** Состояние забега для продолжения после закрытой вкладки. Незакрытый удар сервер засчитывает промахом. */
 export interface SoloRunSnapshot extends StartSoloRunResponse {
   category: CategoryId;
+  /** Соперник отпущен, пока игрока не было: забег продолжается как одиночный. */
+  paceReleased?: boolean;
   rounds: SoloPlayedRound[];
   status: 'in_progress' | 'completed';
   result: CompleteSoloRunResponse | null;
@@ -319,6 +300,8 @@ export interface AsyncMatchConditions {
   };
 }
 
+// Режима гонки больше нет, но константа осталась: её конфиг мини-игры считает круг соло
+// (matches/repository, scoring, soloRepository), а rulesVersion опознаёт старые гоночные записи.
 export const CURRENT_ASYNC_MATCH_CONDITIONS: AsyncMatchConditions = {
   rulesVersion: 'race-to-100-v3',
   miniGame: {

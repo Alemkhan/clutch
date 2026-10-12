@@ -1,43 +1,4 @@
-import { abandonedAtRound, type Opponent } from '@clutch/shared';
-import { ApiError } from './api';
-
 export type MatchSource = 'player' | 'bot' | 'local';
-export type MatchmakingStatus = 'loading' | 'ready' | 'error';
-
-export interface MatchmakingViewState {
-  status: MatchmakingStatus;
-  error?: string;
-}
-
-export const MATCH_SOURCE_LABELS: Record<MatchSource, string> = {
-  player: 'Запись игрока',
-  bot: 'Бот',
-  local: 'Локальная практика',
-};
-
-/**
- * Honest note for a recorded player who stopped before the end of the set without reaching 100.
- * Derived from the transcript; a player who won early by reaching 100 is not "abandoned".
- */
-export function abandonedNote(
-  source: MatchSource,
-  opponent: Opponent,
-  questionCount: number,
-): string | null {
-  if (source !== 'player') return null;
-  const round = abandonedAtRound(opponent.rounds, questionCount);
-  return round === null ? null : `Запись оборвалась на ${round}-м вопросе`;
-}
-
-export function matchmakingErrorMessage(error: unknown): string {
-  if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
-    return 'Не удалось подтвердить сессию или доступ. Вернись в Telegram или обнови страницу.';
-  }
-  if (error instanceof ApiError && error.status >= 400 && error.status < 500 && error.status !== 408 && error.status !== 425 && error.status !== 429) {
-    return 'Сервер не смог создать матч. Попробуй ещё раз.';
-  }
-  return 'Матчмейкинг временно недоступен. Проверь соединение и попробуй ещё раз.';
-}
 
 interface ActiveRequest {
   key: string;

@@ -377,11 +377,26 @@ export function roundLabel(index: number): string {
   return `Круг ${Math.min(index + 1, LAST_STAND_TOTAL_ROUNDS)} из ${LAST_STAND_TOTAL_ROUNDS}`;
 }
 
+/**
+ * Почему забег кончился. У загаданного ответа это объяснение правила, а не повтор ответа:
+ * сам ответ экран показывает отдельно и крупно. Игрок, выбывший на мине, иначе не понимает,
+ * за что его выбило — так и случилось на живой игре.
+ */
 export function eliminationText(reason: LastStandEliminationReason | null, mineRu: string | null = null): string {
-  if (reason === 'mined') return mineRu ? `Ты назвал загаданное: ${mineRu}.` : 'Ты назвал загаданное системой.';
+  if (reason === 'mined') {
+    return mineRu
+      ? 'Этот ответ система загадала заранее, до начала дня, и он один на весь круг. Любой другой верный ответ прошёл бы.'
+      : 'Ты назвал ответ, загаданный системой. Он один на круг, любой другой верный прошёл бы.';
+  }
   if (reason === 'timeout') return 'Время вышло, ответа не было.';
-  if (reason === 'exhausted') return 'Свободных стран не осталось: все варианты заняли соперники.';
+  if (reason === 'exhausted') return 'Свободных ответов не осталось: все варианты заняли соперники.';
   return 'Ты выбыл.';
+}
+
+/** Заголовок итога: на мине он называет причину, а не просто «Ты выбыл». */
+export function outcomeTitle(outcome: 'cleared' | 'eliminated' | null, reason: LastStandEliminationReason | null): string {
+  if (outcome === 'cleared') return 'Забег пройден!';
+  return reason === 'mined' ? 'Ты назвал загаданное' : 'Ты выбыл';
 }
 
 export function survivedText(survived: number): string {

@@ -89,6 +89,49 @@ export async function completeSoloRun(db: D1Database, input: {
   return update.meta.changes > 0;
 }
 
+/**
+ * Исход записи, против которой только что сыграли, глазами её владельца.
+ *
+ * Без этого исход писался только финиширующему забегу, а строка владельца оставалась с
+ * `solo_outcome IS NULL` навсегда — и в «Моих партиях» у него вечно висело «Ждём соперника»,
+ * хотя уведомление уже сообщило итог. Пишем только в пустое: запись сравнивают один раз,
+ * и повтор не должен переписать уже решённый исход.
+ */
+export async function settleRecordOutcome(
+  db: D1Database,
+  runId: string,
+  outcome: MyRunOutcome,
+): Promise<boolean> {
+  const update = await db.prepare(`
+    UPDATE match_runs
+    SET solo_outcome = ?2
+    WHERE id = ?1 AND status = 'completed' AND solo_outcome IS NULL
+  `).bind(runId, outcome).run();
+  return update.meta.changes > 0;
+}
+
+/**
+ * Незаконченный зачётный забег игрока, если он есть.
+ *
+ * Без этого повторный старт создавал НОВЫЙ забег: брошенный занимал набор навсегда
+ * (`lastPlayedBySet` считает сыгранной любую строку), игрок уезжал на следующий набор дня,
+ * а запись соперника оставалась на прежнем — и встретиться с ней он уже не мог.
+ * Тренировка и дружеская дуэль сюда не попадают: у них свои правила и свои строки.
+ */
+export async function findActiveSoloRun(
+  db: D1Database,
+  playerId: string,
+  category: string,
+): Promise<{ id: string } | null> {
+  return db.prepare(`
+    SELECT id FROM match_runs
+    WHERE player_id = ?1 AND category = ?2 AND status = 'in_progress'
+      AND rules_version = ?3
+    ORDER BY created_at DESC
+    LIMIT 1
+  `).bind(playerId, category, CURRENT_SOLO_RUN_CONDITIONS.rulesVersion).first<{ id: string }>();
+}
+
 /** Сохранённый исход завершённого забега; null — ждёт соперника или забег старше миграции. */
 export async function findSoloOutcome(db: D1Database, runId: string): Promise<MyRunOutcome | null> {
   const row = await db.prepare('SELECT solo_outcome FROM match_runs WHERE id = ?1')

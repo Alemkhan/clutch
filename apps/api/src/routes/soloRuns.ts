@@ -9,6 +9,7 @@ import {
   compareSoloRuns,
   invertOutcome,
   dailyKey,
+  practiceQuestionSet,
   isPracticeLevelId,
   evaluateSoloRun,
   setPar,
@@ -34,7 +35,7 @@ import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import { PRACTICE_BOT_PROFILES, createBotOpponent } from '../matches/bots';
 import { matchmake, pickSet } from '../matches/matchmaking';
-import { currentMiniGameConfigJson, findRecordRun, findRun, findRunOwner, type GhostMatch } from '../matches/repository';
+import { claimRecord, currentMiniGameConfigJson, findRecordRun, findRun, findRunOwner, type GhostMatch } from '../matches/repository';
 import { recordMistake } from '../matches/mistakesRepository';
 import { scoreSubmittedRound } from '../matches/scoring';
 import { insertSoloAnswer, listSoloRounds, settleSoloHammer, type SoloRoundRow } from '../matches/soloRoundsRepository';
@@ -42,8 +43,10 @@ import type { RunRow } from '../matches/types';
 import {
   completeSoloRun,
   createSoloRun,
+  findActiveSoloRun,
   findPaceResult,
   findSoloOutcome,
+  settleRecordOutcome,
   soloLeaderboard,
 } from '../matches/soloRepository';
 import { categories, correctFor, isRoundInput, isStartRequest, parseQuestions } from '../matches/validation';
@@ -104,14 +107,11 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
       if (!isPracticeLevelId(requestedLevel) || parsed.value.rematchInviteId) {
         return c.json({ error: 'Invalid botLevel.' }, 400);
       }
-      // Тот же выбор набора, что в соревновании: увиденное в тренировке не должно
-      // вернуться потом в зачётном забеге, поэтому набор запоминается за игроком.
-      const { questionSetId, questions, bankExhausted } = await pickSet(
-        c.env.DB,
-        category,
-        identity.playerId,
-        now,
-      );
+      // Свой набор, НЕ из дневного банка: иначе тренировка показывала бы зачётные наборы
+      // и помечала их сыгранными, то есть позволяла пройти день с ботами и сыграть зачёт
+      // уже зная вопросы. См. practiceQuestionSet.
+      const { questionSetId, questions } = practiceQuestionSet(category, runId, now);
+      const bankExhausted = false;
       const bot = createBotOpponent(questions, PRACTICE_BOT_PROFILES[requestedLevel]);
       await createSoloRun(c.env.DB, {
         id: runId,
@@ -167,8 +167,31 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
       }
       category = invite.category as typeof category;
     }
+    // Незаконченный забег продолжается, а не заменяется новым. Иначе повторный старт создавал
+    // новую строку, брошенный забег навсегда занимал набор, игрок уезжал на следующий набор дня
+    // и терял запись соперника, которая осталась на прежнем. Реванш и дружеская ссылка идут
+    // своей дорогой: у них свой набор и своё приглашение.
+    if (!invite) {
+      const active = await findActiveSoloRun(c.env.DB, identity.playerId, category);
+      if (active) {
+        const existing = await findRun(c.env.DB, active.id);
+        const storedQuestions = existing && parseQuestions(existing.questions_json);
+        if (existing && storedQuestions) {
+          const resumed: StartSoloRunResponse = {
+            runId: existing.id,
+            questions: storedQuestions.map(toPublicQuestion),
+            pace: parsePace(existing.opponent_json),
+            target: SOLO_TARGET_PROGRESS,
+            roundCap: SOLO_ROUND_CAP,
+            rulesVersion: existing.rules_version ?? CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
+            bankExhausted: false,
+          };
+          return c.json(resumed, 201);
+        }
+      }
+    }
     // Тот же подбор набора, что в гонке, но по соло-пулу: только забеги, дошедшие до цели.
-    const { ghost, questionSetId, questions, bankExhausted } = record
+    const picked = record
       ? { ghost: record, questionSetId: record.questionSetId, questions: record.questions, bankExhausted: false }
       : await matchmake(
         c.env.DB,
@@ -177,6 +200,14 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
         now,
         { rulesVersion: CURRENT_SOLO_RUN_CONDITIONS.rulesVersion, reachedTargetOnly: true },
       );
+    // Матч — это пара. Запись забирается атомарно: при одновременных стартах ровно один игрок
+    // получает её, остальные играют без соперника, а их забеги сами становятся ждущими записями.
+    // Запись по ссылке «Позвать друга» уже закреплена приглашением, её захватывать не нужно.
+    let { ghost } = picked;
+    const { questionSetId, questions, bankExhausted } = picked;
+    if (ghost && !record && !await claimRecord(c.env.DB, ghost.row.id, runId, now)) {
+      ghost = null;
+    }
     if (invite && !await consumeInvite(c.env.DB, invite.id, identity.playerId, runId)) {
       return c.json({ error: 'Rematch invite is no longer available.', reason: 'taken' }, 410);
     }
@@ -327,6 +358,8 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
       category: (owner?.category ?? 'general') as SoloRunSnapshot['category'],
       questions: questions.map(toPublicQuestion),
       pace: parsePace(run.opponent_json),
+      // Соперника отпустили, пока игрока не было: экран должен сказать об этом прямо.
+      ...(run.pace_released === 1 ? { paceReleased: true } : {}),
       target: SOLO_TARGET_PROGRESS,
       roundCap: SOLO_ROUND_CAP,
       rulesVersion: run.rules_version ?? CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
@@ -598,6 +631,9 @@ async function finalizeSoloRun(
       const recipientRun = await findRunOwner(c.env.DB, paceRunId);
       if (!recipientRun) return;
       const recipientView = invertOutcome(outcome);
+      // Исход записывается и владельцу записи, иначе его забег навсегда остаётся «Ждём соперника».
+      // Дружеская дуэль вне зачёта: там исход владельцу не пишется, у неё своя пометка.
+      if (!friend) await settleRecordOutcome(c.env.DB, paceRunId, recipientView);
       // Дружеская дуэль: автор записи узнаёт итог, но реванш-приглашение ему не создаётся.
       const notify = friend ? notifyDuelResult : notifySoloResult;
       await notify(c.env, {

@@ -92,7 +92,7 @@ describe('R2b request shape limits', () => {
     const db = database();
     const limiter = new FakeRateLimiter('allow');
     const authorization = guestAuthorization('body-limits');
-    const declared = await app.request('/api/async-matches', {
+    const declared = await app.request('/api/solo-runs', {
       method: 'POST',
       headers: {
         authorization,
@@ -103,14 +103,14 @@ describe('R2b request shape limits', () => {
     }, env(db, limiter));
     expect(declared.status).toBe(413);
 
-    const actual = await app.request('/api/async-matches/not-present/complete', {
+    const actual = await app.request('/api/solo-runs/not-present/answer', {
       method: 'POST',
       headers: { authorization, 'content-type': 'application/json' },
-      body: JSON.stringify({ rounds: [{ ...validRound, selectedAnswer: 'я'.repeat(9_000) }] }),
+      body: JSON.stringify({ ...validRound, roundIndex: 0, selectedAnswer: 'я'.repeat(9_000) }),
     }, env(db, limiter));
     expect(actual.status).toBe(413);
 
-    const malformed = await app.request('/api/async-matches', {
+    const malformed = await app.request('/api/solo-runs', {
       method: 'POST',
       headers: { authorization, 'content-type': 'application/json' },
       body: '{broken',
@@ -128,23 +128,6 @@ describe('R2b request shape limits', () => {
     expect(isRoundInput({ ...validRound, responseTimeMs: 60_001 })).toBe(false);
   });
 
-  it.each(['/api/async-matches'])(
-    'rejects more than the largest set of rounds before looking up the match (%s)',
-    async (path) => {
-      const db = database();
-      const limiter = new FakeRateLimiter('allow');
-      const rounds = Array.from({ length: MAX_DAILY_SET_SIZE + 1 }, () => validRound);
-      // Матча с таким id нет: без раннего отсева ответ был бы 404 после чтения из базы.
-      const response = await app.request(`${path}/no-such-match/complete`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json', authorization: guestAuthorization('huge-rounds') },
-        body: JSON.stringify({ rounds }),
-      }, env(db, limiter));
-      expect(response.status).toBe(400);
-      expect(await response.json()).toEqual({ error: 'Invalid rounds.' });
-    },
-  );
-
   it('rejects a solo round index beyond the largest set before looking up the run', async () => {
     const db = database();
     const limiter = new FakeRateLimiter('allow');
@@ -156,45 +139,15 @@ describe('R2b request shape limits', () => {
     expect(response.status).toBe(400);
     expect(await response.json()).toEqual({ error: 'Invalid answer.' });
   });
-
-  it('rejects more rounds than the match set holds', async () => {
-    const db = database();
-    const limiter = new FakeRateLimiter('allow');
-    const authorization = guestAuthorization('too-many-rounds');
-    // Набор истории короче максимума: лишний круг проходит ранний отсев и ловится точной проверкой.
-    const started = await app.request('/api/async-matches', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', authorization },
-      body: JSON.stringify({ displayName: 'Игрок', category: 'history' }),
-    }, env(db, limiter));
-    const match = await started.json() as { matchId: string; questions: Array<{ id: string }> };
-    expect(match.questions.length).toBeLessThan(MAX_DAILY_SET_SIZE);
-    const rounds = Array.from({ length: match.questions.length + 1 }, (_, index) => ({
-      ...validRound,
-      questionId: match.questions[Math.min(index, match.questions.length - 1)].id,
-    }));
-    const response = await app.request(`/api/async-matches/${match.matchId}/complete`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', authorization },
-      body: JSON.stringify({ rounds }),
-    }, env(db, limiter));
-    expect(response.status).toBe(400);
-    expect(await response.json()).toEqual({ error: 'Too many rounds.' });
-  });
 });
 
 describe('R2b route rate limits', () => {
   it.each([
     ['guest:203.0.113.9', '/api/auth/guest', { method: 'POST', headers: { 'CF-Connecting-IP': '203.0.113.9' } }],
-    ['start:guest:', '/api/async-matches', {
+    ['solo-start:guest:', '/api/solo-runs', {
       method: 'POST',
       headers: { authorization: guestAuthorization('start'), 'content-type': 'application/json' },
       body: JSON.stringify({ displayName: 'Player', category: 'geography' }),
-    }],
-    ['complete:guest:', '/api/async-matches/not-present/complete', {
-      method: 'POST',
-      headers: { authorization: guestAuthorization('complete'), 'content-type': 'application/json' },
-      body: JSON.stringify({ rounds: [validRound] }),
     }],
     ['solo-round:guest:', '/api/solo-runs/not-present/answer', {
       method: 'POST',

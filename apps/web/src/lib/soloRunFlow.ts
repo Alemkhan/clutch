@@ -47,6 +47,8 @@ export interface SoloFlowState {
   friendDuel: boolean;
   /** Забег продолжен после закрытой вкладки. */
   resumed: boolean;
+  /** Соперник отпущен за время отсутствия: полоса соперника исчезла не просто так. */
+  paceReleased: boolean;
   selectedOption: string;
   lastCorrect: boolean;
   /** Пояснение к текущему вопросу: приходит с вердиктом сервера, раньше его нет. */
@@ -80,6 +82,7 @@ export function createSoloFlowState(): SoloFlowState {
     bankExhausted: false,
     friendDuel: false,
     resumed: false,
+    paceReleased: false,
     selectedOption: '',
     lastCorrect: false,
     explanation: '',
@@ -133,6 +136,7 @@ export function restoreSoloRun(snapshot: NormalizedSoloSnapshot): SoloFlowState 
     config: snapshot.config,
     friendDuel: snapshot.friendDuel === true,
     resumed: true,
+    paceReleased: snapshot.paceReleased === true,
     correctCount: snapshot.rounds.filter((round) => round.correct).length,
     responseTimes: snapshot.rounds.map((round) => round.responseTimeMs),
     skillResults,

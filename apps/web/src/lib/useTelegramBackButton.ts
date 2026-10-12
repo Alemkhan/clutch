@@ -10,7 +10,6 @@ import {
 
 interface BackCallbacks {
   home: () => void;
-  categories: () => void;
 }
 
 export function useTelegramBackButton(

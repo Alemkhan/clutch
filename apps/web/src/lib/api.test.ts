@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ApiError, answerSoloRound, checkTrainingAnswer, fetchMyRuns, fetchSoloRunSnapshot, fetchTrainingMistakes, fetchTrainingQuestions, hammerSoloRound, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError, startAsyncMatch, startSoloRun } from './api';
+import { ApiError, answerSoloRound, checkTrainingAnswer, fetchMyRuns, fetchSoloRunSnapshot, fetchTrainingMistakes, fetchTrainingQuestions, hammerSoloRound, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError, startSoloRun } from './api';
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -59,7 +59,7 @@ describe('match start cancellation', () => {
     });
     vi.stubGlobal('fetch', fetchMock);
     const controller = new AbortController();
-    const request = startAsyncMatch('geography', controller.signal);
+    const request = startSoloRun('geography', controller.signal);
     await vi.waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
     controller.abort();
     await expect(request).rejects.toMatchObject({ name: 'AbortError' });
@@ -120,14 +120,11 @@ describe('solo run and my-runs calls', () => {
     expect(JSON.parse(String(check?.[1].body))).toEqual({ questionId: 'capital_li', answer: 'Вадуц' });
   });
 
-  it('sends the rematch invite to the solo route and to the race route respectively', async () => {
+  it('sends the rematch invite to the solo route', async () => {
     const fetchMock = stubApi();
     await startSoloRun('geography', undefined, 'rm_soloinvite');
-    await startAsyncMatch('geography', undefined, 'rm_raceinvite');
     const calls = fetchMock.mock.calls as unknown as [string, RequestInit][];
     const solo = calls.find(([path]) => path === '/api/solo-runs');
-    const race = calls.find(([path]) => path === '/api/async-matches');
     expect(JSON.parse(String(solo?.[1].body)).rematchInviteId).toBe('rm_soloinvite');
-    expect(JSON.parse(String(race?.[1].body)).rematchInviteId).toBe('rm_raceinvite');
   });
 });

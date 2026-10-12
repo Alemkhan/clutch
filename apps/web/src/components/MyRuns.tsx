@@ -37,7 +37,9 @@ function Invite({ invite, now, onOpen }: { invite: MyRematchInvite; now: number;
     <li>
       <button type="button" className="my-run my-run-invite" onClick={() => { onOpen(invite.inviteId); }}>
         <span className="my-run-top">
-          <span className="my-run-title">{invite.challengerName} зовёт на реванш</span>
+          {/* Приглашение создаёт система, когда запись обошли. Писать «зовёт на реванш» нельзя:
+              соперник ничего не нажимал, и у игрока это выглядит как вызов, которого не было. */}
+          <span className="my-run-title">Реванш с {invite.challengerName}: новые вопросы</span>
           <span className="my-run-status">{deadline}</span>
         </span>
         <span className="my-run-meta">

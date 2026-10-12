@@ -7,7 +7,7 @@ import {
 } from '@telegram-apps/sdk-react';
 import type { Phase } from './gameSession';
 
-export type TelegramBackAction = 'hidden' | 'home' | 'categories';
+export type TelegramBackAction = 'hidden' | 'home';
 
 export function telegramBackAction(
   phase: Phase,
@@ -15,8 +15,7 @@ export function telegramBackAction(
 ): TelegramBackAction {
   // В активном забеге системная «Назад» скрыта: случайный выход потерял бы несохранённый забег.
   if (phase === 'solo') return soloPlaying ? 'hidden' : 'home';
-  if (phase === 'profile' || phase === 'training' || phase === 'lastStand' || phase === 'myRuns' || phase === 'categories' || phase === 'result') return 'home';
-  if (phase === 'matchmaking') return 'categories';
+  if (phase === 'profile' || phase === 'training' || phase === 'lastStand' || phase === 'myRuns') return 'home';
   return 'hidden';
 }
 

@@ -8,6 +8,7 @@ import {
   LAST_STAND_TOTAL_ROUNDS,
   buildRevealRows,
   eliminationText,
+  outcomeTitle,
   formatAnswerTime,
   lastStandAbsoluteDeadline,
   rankLeaderboard,
@@ -312,15 +313,24 @@ interface FinalProps {
 
 export function LastStandFinal({ state, onAgain, onLeaderboard, onHome }: FinalProps) {
   const cleared = state.outcome === 'cleared';
+  const mineRu = state.reason === 'mined' ? state.mineRu ?? null : null;
   return (
     <section className="ls-screen ls-center">
       <span className="home-kicker">Last Stand</span>
-      <h2 className="screen-title">{cleared ? 'Забег пройден!' : 'Ты выбыл'}</h2>
-      <p className="ls-score" aria-label={`Пережито кругов: ${survivedText(state.survived)}`}>
-        {survivedText(state.survived)}
-      </p>
+      <h2 className="screen-title">{outcomeTitle(cleared ? 'cleared' : 'eliminated', state.reason)}</h2>
+      {/* Загаданное показывается крупно и подписано: без этого выбывание выглядит беспричинным. */}
+      {mineRu && (
+        <p className="ls-mine-reveal">
+          <span className="ls-mine-label">Система загадала</span>
+          <span className="ls-mine-answer">{mineRu}</span>
+        </p>
+      )}
+      {/* Объяснение идёт сразу за загаданным ответом: счёт между ними разрывает разбор. */}
       <p className="screen-subtitle" role="status">
         {cleared ? 'Все круги пережиты, ты остался последним.' : eliminationText(state.reason, state.mineRu ?? null)}
+      </p>
+      <p className="ls-score" aria-label={`Пережито кругов: ${survivedText(state.survived)}`}>
+        {survivedText(state.survived)}
       </p>
       <button type="button" className="cta-btn" onClick={() => { onAgain(); }}>
         Ещё раз

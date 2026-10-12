@@ -86,7 +86,16 @@ describe('Last Stand screens', () => {
     const html = renderToStaticMarkup(
       <LastStandFinal state={{ survived: 2, outcome: 'eliminated', reason: 'mined', mineRu: 'США' }} onAgain={noop} onLeaderboard={noop} onHome={noop} />,
     );
-    expect(html).toContain('Ты назвал загаданное: США.');
+    // Заголовок называет причину, ответ показан крупно и подписан, строка объясняет правило.
+    expect(html).toContain('Ты назвал загаданное');
+    expect(html).toContain('Система загадала');
+    expect(html).toContain('США');
+    expect(html).toContain('Любой другой верный ответ прошёл бы');
+    // Выбывание по времени этого разбора не показывает.
+    const timedOut = renderToStaticMarkup(
+      <LastStandFinal state={{ survived: 2, outcome: 'eliminated', reason: 'timeout', mineRu: null }} onAgain={noop} onLeaderboard={noop} onHome={noop} />,
+    );
+    expect(timedOut).not.toContain('Система загадала');
     expect(renderToStaticMarkup(<LastStandIntro onStart={noop} onLeaderboard={noop} onBack={noop} />)).toContain('загаданный ответ');
   });
 

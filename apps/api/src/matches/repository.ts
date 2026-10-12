@@ -1,4 +1,4 @@
-import { CURRENT_ASYNC_MATCH_CONDITIONS, MIN_POOL_ROUNDS, type AsyncMatchRound, type Opponent, type Question } from '@clutch/shared';
+import { CURRENT_ASYNC_MATCH_CONDITIONS, MIN_POOL_ROUNDS, type Opponent, type Question } from '@clutch/shared';
 import type { RunRow } from './types';
 import { candidateSnapshot } from './validation';
 
@@ -9,7 +9,7 @@ export const currentMiniGameConfigJson = JSON.stringify(
 const runColumns = `
   id, player_id, display_name, questions_json, rounds_json, progress, correct_count, status,
   rules_version, mini_game_id, mini_game_config_json, opponent_json, ghost_eligible, opponent_run_id,
-  created_at`;
+  created_at, pace_released`;
 
 /** Какой пул соперников: версия правил и (для соло) только забеги, дошедшие до цели. */
 export interface PoolOptions {
@@ -35,6 +35,93 @@ export interface GhostMatch {
  * A run held by a live open friend invite (not consumed, not released, not expired) is not offered:
  * it is reserved for the link. The check uses expires_at, so it does not wait for the cron pass.
  */
+/**
+ * Сколько запись ждёт молчащего претендента.
+ *
+ * Считается не от захвата, а от последнего круга: пока человек отвечает, запись за ним, сколько бы
+ * он ни играл (двадцать вопросов по пятнадцать секунд — это минуты). Замолчал — отпускаем, иначе
+ * у владельца записи «Ждём соперника» висит из-за того, что кто-то закрыл приложение.
+ */
+export const CLAIM_IDLE_MS = 3 * 60 * 1000;
+
+/**
+ * Последняя активность претендента: время его последнего круга, а если кругов нет — время захвата.
+ * Завершённый забег сюда не попадает: матч состоялся, и запись занята навсегда.
+ */
+const claimIdleSince = `
+  COALESCE(
+    (SELECT MAX(COALESCE(round.settled_at, round.created_at))
+       FROM solo_run_rounds round WHERE round.run_id = match_runs.claimed_by),
+    match_runs.claimed_at
+  )`;
+
+/** Запись свободна: её никто не держит либо держащий замолчал и ещё не доиграл. */
+export const unclaimedCondition = (idleParam: number): string => `(
+    match_runs.claimed_by IS NULL
+    OR (
+      ${claimIdleSince} <= ?${idleParam}
+      AND EXISTS (
+        SELECT 1 FROM match_runs challenger
+        WHERE challenger.id = match_runs.claimed_by AND challenger.status = 'in_progress'
+      )
+    )
+  )`;
+
+/**
+ * Забрать запись себе. Атомарно: в D1 нет ни блокировок строк, ни SKIP LOCKED, поэтому ровно
+ * один одновременный запрос меняет строку, а остальные получают ноль изменений и идут дальше.
+ *
+ * Перехват у замолчавшего рвёт его пару: иначе он вернулся бы и доиграл против записи, которую
+ * уже играет другой, и исход снова достался бы тому, кто случайно финишировал первым.
+ */
+export async function claimRecord(
+  db: D1Database,
+  recordRunId: string,
+  challengerRunId: string,
+  now: number,
+): Promise<boolean> {
+  const previous = await db.prepare('SELECT claimed_by FROM match_runs WHERE id = ?1')
+    .bind(recordRunId)
+    .first<{ claimed_by: string | null }>();
+  const update = await db.prepare(`
+    UPDATE match_runs
+    SET claimed_by = ?2, claimed_at = ?3
+    WHERE id = ?1 AND ${unclaimedCondition(4)}
+  `).bind(recordRunId, challengerRunId, now, now - CLAIM_IDLE_MS).run();
+  if (update.meta.changes === 0) return false;
+  if (previous?.claimed_by && previous.claimed_by !== challengerRunId) {
+    await dropPace(db, previous.claimed_by);
+  }
+  return true;
+}
+
+/**
+ * Снять с забега соперника: пара разорвана, забег продолжается как одиночный и может сам стать
+ * ждущей записью. `pace_released` нужен, чтобы вернувшемуся можно было об этом сказать.
+ */
+export async function dropPace(db: D1Database, runId: string): Promise<void> {
+  await db.prepare(`
+    UPDATE match_runs
+    SET opponent_run_id = NULL, opponent_json = NULL, pace_released = 1
+    WHERE id = ?1 AND status = 'in_progress'
+  `).bind(runId).run();
+}
+
+/** Отпустить записи, чьи претенденты замолчали. Возвращает число освобождённых. */
+export async function releaseExpiredClaims(db: D1Database, now: number, limit: number): Promise<number> {
+  const stale = await db.prepare(`
+    SELECT id, claimed_by FROM match_runs
+    WHERE claimed_by IS NOT NULL AND ${unclaimedCondition(1)}
+    LIMIT ?2
+  `).bind(now - CLAIM_IDLE_MS, limit).all<{ id: string; claimed_by: string }>();
+  for (const row of stale.results) {
+    await db.prepare('UPDATE match_runs SET claimed_by = NULL, claimed_at = NULL WHERE id = ?1')
+      .bind(row.id).run();
+    await dropPace(db, row.claimed_by);
+  }
+  return stale.results.length;
+}
+
 export async function findGhostInSets(
   db: D1Database,
   questionSetIds: readonly string[],
@@ -50,6 +137,7 @@ export async function findGhostInSets(
       )` : '';
   const reachedClause = options.reachedTargetOnly ? ' AND reached_target = 1' : '';
   const setPlaceholders = questionSetIds.map((_, index) => `?${index + 7}`).join(', ');
+  const claimPlaceholder = questionSetIds.length + 7;
   const result = await db.prepare(`
     SELECT ${runColumns}, question_set_id
     FROM match_runs
@@ -69,6 +157,10 @@ export async function findGhostInSets(
         WHERE reserved.challenger_run_id = match_runs.id AND reserved.recipient_run_id IS NULL
           AND reserved.consumed_at IS NULL AND reserved.released_at IS NULL AND reserved.expires_at > ?6
       )
+      -- Матч — это пара: запись достаётся одному сопернику, а забег, который сам играл против
+      -- чьей-то записи, второй раз в пул не возвращается.
+      AND opponent_run_id IS NULL
+      AND ${unclaimedCondition(claimPlaceholder)}
     ORDER BY completed_at DESC LIMIT 20
   `).bind(
     MIN_POOL_ROUNDS,
@@ -78,6 +170,7 @@ export async function findGhostInSets(
     currentMiniGameConfigJson,
     options.now ?? Date.now(),
     ...questionSetIds,
+    (options.now ?? Date.now()) - CLAIM_IDLE_MS,
   ).all<RunRow>();
   for (const row of result.results) {
     const snapshot = candidateSnapshot(row);
@@ -115,64 +208,10 @@ export async function lastPlayedBySet(
   return new Map(result.results.map((row) => [row.question_set_id, row.last_played]));
 }
 
-export async function createMatchRun(db: D1Database, input: {
-  id: string;
-  playerId: string;
-  displayName: string;
-  category: string;
-  questionSetId: string;
-  questions: Question[];
-  opponentRunId: string | null;
-  opponent: Opponent;
-}): Promise<void> {
-  await db.prepare(`
-    INSERT INTO match_runs (
-      id, player_id, display_name, category, questions_json, opponent_run_id, created_at,
-      rules_version, mini_game_id, mini_game_config_json, opponent_json, question_set_id
-    ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12)
-  `).bind(
-    input.id,
-    input.playerId,
-    input.displayName,
-    input.category,
-    JSON.stringify(input.questions),
-    input.opponentRunId,
-    Date.now(),
-    CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion,
-    CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
-    currentMiniGameConfigJson,
-    JSON.stringify(input.opponent),
-    input.questionSetId,
-  ).run();
-}
-
 export async function findRun(db: D1Database, matchId: string): Promise<RunRow | null> {
   return db.prepare(`SELECT ${runColumns} FROM match_runs WHERE id = ?1`)
     .bind(matchId)
     .first<RunRow>();
-}
-
-export async function completeRun(db: D1Database, input: {
-  matchId: string;
-  rounds: AsyncMatchRound[];
-  progress: number;
-  correctCount: number;
-  ghostEligible: boolean;
-}): Promise<boolean> {
-  const update = await db.prepare(`
-    UPDATE match_runs
-    SET rounds_json = ?2, progress = ?3, correct_count = ?4,
-        status = 'completed', completed_at = ?5, ghost_eligible = ?6
-    WHERE id = ?1 AND status = 'in_progress'
-  `).bind(
-    input.matchId,
-    JSON.stringify(input.rounds),
-    input.progress,
-    input.correctCount,
-    Date.now(),
-    input.ghostEligible ? 1 : 0,
-  ).run();
-  return update.meta.changes > 0;
 }
 
 /**

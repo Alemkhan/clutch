@@ -1,10 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ApiError } from './api';
-import {
-  MATCH_SOURCE_LABELS,
-  MatchRequestCoordinator,
-  matchmakingErrorMessage,
-} from './matchmaking';
+import { MatchRequestCoordinator } from './matchmaking';
 
 describe('match request coordinator', () => {
   it('keeps a delayed response current until it settles', () => {
@@ -31,22 +26,5 @@ describe('match request coordinator', () => {
     expect(coordinator.isCurrent(first.token)).toBe(false);
     expect(coordinator.settle(first.token)).toBe(false);
     expect(coordinator.isCurrent(second.token)).toBe(true);
-  });
-});
-
-describe('matchmaking copy', () => {
-  it('distinguishes session failures from temporary backend failures', () => {
-    expect(matchmakingErrorMessage(new ApiError(401))).toMatch(/сесси/i);
-    expect(matchmakingErrorMessage(new ApiError(403))).toMatch(/доступ/i);
-    expect(matchmakingErrorMessage(new ApiError(503))).toMatch(/временно/i);
-    expect(matchmakingErrorMessage(new TypeError('offline'))).toMatch(/соединение/i);
-  });
-
-  it('has honest labels for every source', () => {
-    expect(MATCH_SOURCE_LABELS).toEqual({
-      player: 'Запись игрока',
-      bot: 'Бот',
-      local: 'Локальная практика',
-    });
   });
 });

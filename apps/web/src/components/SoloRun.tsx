@@ -145,6 +145,13 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
             {state.resumed && (
               <p className="matchmaking-status">{resumeNote(view)}</p>
             )}
+            {/* Полоса соперника исчезла не сама: пока игрока не было, запись ушла к другому. */}
+            {state.paceReleased && (
+              <p className="matchmaking-status" role="status">
+                Соперник отпущен: тебя долго не было, и его запись забрал другой игрок.
+                Забег продолжается один и сам станет записью для следующего.
+              </p>
+            )}
           </div>
           <button type="button" className="cta-btn" onClick={props.onStart}>
             {state.resumed ? "Продолжить" : "Начать"}

@@ -4,7 +4,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { generateQuestionById } from '@clutch/shared';
 import { CategorySelect } from './CategorySelect';
 import { LastStandIntro, LastStandLeaderboard } from './LastStand';
-import { Matchmaking } from './Matchmaking';
 import { Profile } from './Profile';
 import { ScreenHeader } from './ScreenHeader';
 import { Training } from './Training';
@@ -41,14 +40,10 @@ describe('ScreenHeader', () => {
     expect(html).toContain('<h2 class="screen-title">Т</h2>');
   });
 
-  it('draws the back button of all six screens with the same component', () => {
+  it('draws the back button of all five screens with the same component', () => {
     const question = generateQuestionById('capital_li')!;
-    const opponent = { id: 'o', displayName: 'Alex', rounds: [] };
     const screens = [
       renderToStaticMarkup(<CategorySelect onSelect={noop} onBack={noop} />),
-      renderToStaticMarkup(
-        <Matchmaking opponent={opponent} status="ready" source="player" onStart={noop} onRetry={noop} onBack={noop} />,
-      ),
       renderToStaticMarkup(<Profile onBack={noop} />),
       renderToStaticMarkup(<Training questions={[question]} check={vi.fn()} onBack={noop} />),
       renderToStaticMarkup(<LastStandIntro onStart={noop} onLeaderboard={noop} onBack={noop} />),

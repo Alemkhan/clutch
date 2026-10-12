@@ -12,6 +12,7 @@ import {
   rankLeaderboard,
   recordSentAnswer,
   survivedText,
+  outcomeTitle,
   type LastStandAnswerResponse,
   type LastStandRoundInfo,
 } from './lastStandRun';
@@ -148,7 +149,13 @@ describe('presentation', () => {
     expect(survivedText(12)).toBe('12 кругов из 12');
     expect(eliminationText('timeout')).toContain('Время');
     expect(eliminationText('exhausted')).toContain('соперники');
-    expect(eliminationText('mined', 'США')).toBe('Ты назвал загаданное: США.');
+    // На мине строка объясняет правило: сам ответ экран показывает отдельно и крупно.
+    expect(eliminationText('mined', 'США')).toContain('загадала заранее');
+    expect(eliminationText('mined', 'США')).toContain('Любой другой верный ответ прошёл бы');
+    expect(eliminationText('mined', null)).toContain('загаданный системой');
+    expect(outcomeTitle('eliminated', 'mined')).toBe('Ты назвал загаданное');
+    expect(outcomeTitle('eliminated', 'timeout')).toBe('Ты выбыл');
+    expect(outcomeTitle('cleared', null)).toBe('Забег пройден!');
     expect(parseAnswerResponse({ ...answer({ status: 'eliminated', round: null }), reason: 'mined', mineRu: 'США' }))
       .toMatchObject({ reason: 'mined', mineRu: 'США' });
   });

@@ -161,10 +161,12 @@ describe('solo run', () => {
     const db = database();
     const size = dailyBankSize('geography');
     let first: StartSoloRunResponse | undefined;
+    // Забеги надо доигрывать: незаконченный теперь продолжается, а не уступает место новому.
     for (let step = 0; step < size; step++) {
       const run = await start(db, 'grinder');
       expect(run.bankExhausted).toBe(false);
       first ??= run;
+      expect((await finish(db, 'grinder', run.runId, inputs(fullQuestions(db, run.runId), 4, true))).status).toBe(200);
     }
     const repeat = await start(db, 'grinder');
     expect(repeat.bankExhausted).toBe(true);
@@ -236,7 +238,7 @@ describe('solo run', () => {
     expect(await full.json()).toMatchObject({ roundsPlayed: SOLO_ROUND_CAP, reachedTarget: false });
   });
 
-  it('does not mix race records into the solo pool, or solo records into the race pool', async () => {
+  it('does not mix legacy race records into the solo pool', async () => {
     const db = database();
     insertRun(db, {
       id: 'race-run',
@@ -245,14 +247,6 @@ describe('solo run', () => {
       reachedTarget: null,
     });
     expect((await start(db, 'fay')).pace).toBeNull();
-
-    const db2 = database();
-    insertRun(db2, { id: 'solo-run', playerId: 'guest:other', rulesVersion: SOLO, reachedTarget: 1 });
-    const race = await request(db2, '/api/async-matches', guest('gus').authorization, {
-      displayName: 'gus', category: 'geography',
-    });
-    expect(race.status).toBe(201);
-    expect((await race.json() as { opponentSource: string }).opponentSource).toBe('bot');
   });
 
   it('refuses another player, a race match id and unauthenticated calls', async () => {
@@ -261,24 +255,9 @@ describe('solo run', () => {
     expect((await finish(db, 'mallory', run.runId, roundInputs(fullQuestions(db, run.runId), 4, true))).status).toBe(404);
     expect((await request(db, `/api/solo-runs/${run.runId}/answer`, '', {})).status).toBe(401);
 
-    const race = await request(db, '/api/async-matches', guest('ivy').authorization, {
-      displayName: 'ivy', category: 'geography',
-    });
-    const raceMatch = await race.json() as { matchId: string; questions: Question[] };
-    expect((await finish(db, 'ivy', raceMatch.matchId, roundInputs(raceMatch.questions, 4, true))).status).toBe(409);
-  });
-
-  it('keeps the race mode working end to end', async () => {
-    const db = database();
-    const auth = guest('jon').authorization;
-    const started = await request(db, '/api/async-matches', auth, { displayName: 'jon', category: 'geography' });
-    expect(started.status).toBe(201);
-    const match = await started.json() as { matchId: string; questions: Question[] };
-    const done = await request(db, `/api/async-matches/${match.matchId}/complete`, auth, {
-      rounds: roundInputs(match.questions, 4, true),
-    });
-    expect(done.status).toBe(200);
-    expect(await done.json()).toMatchObject({ playerProgress: 100 });
+    // Старая запись режима гонки соло-маршрутами не принимается.
+    insertRun(db, { id: 'race-run', playerId: guest('ivy').playerId, rulesVersion: CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion, reachedTarget: null });
+    expect((await finish(db, 'ivy', 'race-run', roundInputs(fullQuestions(db, run.runId), 4, true))).status).toBe(409);
   });
 });
 

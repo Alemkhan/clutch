@@ -7,9 +7,7 @@ import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
   dailyQuestionSet,
   type AsyncMatchRound,
-  type AsyncMatchRoundInput,
   type Question,
-  type StartAsyncMatchResponse,
 } from '@clutch/shared';
 import app from '../apps/api/src/index';
 import { notifyOutbid } from '../apps/api/src/notifications/outbid';
@@ -132,70 +130,34 @@ function insertCompleted(db: TestD1, id: string, playerId: string, name: string,
   );
 }
 
-async function startMatch(db: TestD1, authorization: string, extra: Record<string, unknown> = {}) {
-  const response = await request(db, '/api/async-matches', authorization, {
-    method: 'POST',
-    body: JSON.stringify({ displayName: 'Игрок', category: 'geography', ...extra }),
-  });
-  return response;
-}
-
-function inputs(questions: Question[], count: number, correct: boolean): AsyncMatchRoundInput[] {
-  return questions.slice(0, count).map((question) => ({
-    questionId: question.id,
-    selectedAnswer: question.answerType === 'open_answer'
-      ? (correct ? question.correctAnswers![0] : '__wrong__')
-      : (correct
-        ? question.correctOptionId
-        : question.options.find((option) => option.id !== question.correctOptionId)!.id),
-    responseTimeMs: 1000,
-    ...(correct ? { skillDistance: 0 } : {}),
-  }));
-}
-
-async function finish(db: TestD1, authorization: string, match: StartAsyncMatchResponse, win: boolean) {
-  const response = await request(db, `/api/async-matches/${match.matchId}/complete`, authorization, {
-    method: 'POST',
-    body: JSON.stringify({ rounds: inputs(match.questions, win ? 4 : match.questions.length, win) }),
-  });
-  await settle();
-  return response;
-}
-
-/** Alem (telegram:42) has a recorded run; Bob (guest) faces it. Returns Bob's started match. */
-async function bobFacesAlem(db: TestD1, bob = guestAuthorization('bob')) {
-  insertCompleted(db, 'alem-run', 'telegram:42', 'Алем');
-  const response = await startMatch(db, bob);
-  expect(response.status).toBe(201);
-  const match = await response.json() as StartAsyncMatchResponse;
-  expect(match.opponentSource).toBe('player');
-  expect(match.opponent.id).toBe('alem-run');
-  return match;
-}
-
 function inviteRows(db: TestD1) {
   return db.sqlite.prepare('SELECT * FROM rematch_invites').all() as Array<Record<string, unknown>>;
 }
 
-describe('outbid notification', () => {
-  it('messages a Telegram owner when their record is beaten, without blocking the response', async () => {
-    const db = database();
-    const match = await bobFacesAlem(db);
-    const bob = guestAuthorization('bob');
-    const response = await request(db, `/api/async-matches/${match.matchId}/complete`, bob, {
-      method: 'POST',
-      body: JSON.stringify({ rounds: inputs(match.questions, 4, true) }),
-    });
-    expect(response.status).toBe(200);
-    // Work was handed to waitUntil, so it has not necessarily run when the response is ready.
-    await settle();
+/** Рекорд-получатель (Алем) и забег-вызов (Боб); гонки больше нет, поэтому сообщение шлётся напрямую. */
+function bobBeatsAlem(db: TestD1, seed = true) {
+  if (seed) {
+    insertCompleted(db, 'alem-run', 'telegram:42', 'Алем');
+    insertCompleted(db, 'bob-run', 'guest:11111111-1111-4111-8111-111111111111', 'Боб', [25, 25, 25, 25]);
+  }
+  return notifyOutbid(env(db) as never, {
+    recipientRun: { id: 'alem-run', playerId: 'telegram:42', category: 'geography' },
+    challengerRunId: 'bob-run',
+    challengerName: 'Игрок',
+    recipientProgress: 50,
+    challengerProgress: 100,
+  });
+}
 
+describe('outbid notification', () => {
+  it('messages a Telegram owner once per bypass', async () => {
+    const db = database();
+    await bobBeatsAlem(db);
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     expect(url).toBe('https://api.telegram.org/bottest/sendMessage');
     const payload = JSON.parse(init.body as string);
     expect(payload.chat_id).toBe('42');
-    expect(payload.parse_mode).toBeUndefined();
     expect(payload.text).toBe('Игрок обошёл вашу запись: 100% против 50%. Можно сыграть реванш: вопросы будут новые.');
     const [[rematch], [stop]] = payload.reply_markup.inline_keyboard;
     const rows = inviteRows(db);
@@ -205,45 +167,15 @@ describe('outbid notification', () => {
     expect(rows[0]).toMatchObject({
       recipient_player_id: 'telegram:42',
       recipient_run_id: 'alem-run',
-      challenger_run_id: match.matchId,
+      challenger_run_id: 'bob-run',
       notify_status: 'sent',
     });
     expect(String(rows[0].id)).toMatch(/^rm_[A-Za-z0-9_-]{22}$/u);
-  });
 
-  it('race mode: stays silent on a loss, and does not repeat for the same bypass (solo notifies both outcomes: tests/soloOutcome.test.ts)', async () => {
-    const db = database();
-    const lost = await bobFacesAlem(db);
-    expect((await finish(db, guestAuthorization('bob'), lost, false)).status).toBe(200);
-    expect(fetchMock).not.toHaveBeenCalled();
-    expect(inviteRows(db)).toHaveLength(0);
-
-    const db2 = database();
-    const won = await bobFacesAlem(db2);
-    await finish(db2, guestAuthorization('bob'), won, true);
-    // A retried completion is canonical and must not notify again.
-    await finish(db2, guestAuthorization('bob'), won, true);
-    // Even a direct second attempt for the same pair is stopped by the UNIQUE constraint.
-    await notifyOutbid(env(db2) as never, {
-      recipientRun: { id: 'alem-run', playerId: 'telegram:42', category: 'geography' },
-      challengerRunId: won.matchId,
-      challengerName: 'Игрок',
-      recipientProgress: 50,
-      challengerProgress: 100,
-    });
+    // Повтор для той же пары остановлен ограничением UNIQUE.
+    await bobBeatsAlem(db, false);
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(inviteRows(db2)).toHaveLength(1);
-  });
-
-  it('skips guests silently', async () => {
-    const db = database();
-    insertCompleted(db, 'guest-run', 'guest:11111111-1111-4111-8111-111111111111', 'Гость');
-    const started = await startMatch(db, guestAuthorization('bob'));
-    const match = await started.json() as StartAsyncMatchResponse;
-    expect(match.opponent.id).toBe('guest-run');
-    expect((await finish(db, guestAuthorization('bob'), match, true)).status).toBe(200);
-    expect(fetchMock).not.toHaveBeenCalled();
-    expect(inviteRows(db)).toHaveLength(0);
+    expect(inviteRows(db)).toHaveLength(1);
   });
 
   it('respects unsubscribe and can be re-enabled', async () => {
@@ -252,8 +184,7 @@ describe('outbid notification', () => {
       method: 'PUT', body: JSON.stringify({ enabled: false }),
     });
     expect(await off.json()).toEqual({ enabled: false });
-    const match = await bobFacesAlem(db);
-    await finish(db, guestAuthorization('bob'), match, true);
+    await bobBeatsAlem(db);
     expect(fetchMock).not.toHaveBeenCalled();
     expect(inviteRows(db)).toHaveLength(0);
 
@@ -263,111 +194,21 @@ describe('outbid notification', () => {
       method: 'PUT', body: JSON.stringify({ enabled: 'yes' }),
     })).status).toBe(400);
     expect((await request(db, '/api/notifications/outbid', 'Bearer bad')).status).toBe(401);
-
-    await request(db, '/api/notifications/outbid', alem, {
-      method: 'PUT', body: JSON.stringify({ enabled: true }),
-    });
-    // A fresh record of Alem is beaten by Carol: a new bypass, a new message.
-    insertCompleted(db, 'alem-run-2', 'telegram:42', 'Алем');
-    db.sqlite.prepare("UPDATE match_runs SET completed_at = ? WHERE id = 'alem-run-2'").run(Date.now());
-    const carol = guestAuthorization('carol');
-    const carolMatch = await (await startMatch(db, carol)).json() as StartAsyncMatchResponse;
-    expect(carolMatch.opponent.id).toBe('alem-run-2');
-    await finish(db, carol, carolMatch, true);
-    expect(fetchMock).toHaveBeenCalledTimes(1);
-  });
-
-  it('keeps the challenger response intact when Telegram fails or throws', async () => {
-    for (const failure of [
-      async () => new Response('{"ok":false}', { status: 500 }),
-      async () => { throw new Error('network down'); },
-    ]) {
-      fetchMock.mockReset();
-      fetchMock.mockImplementation(failure);
-      const db = database();
-      const match = await bobFacesAlem(db);
-      const response = await finish(db, guestAuthorization('bob'), match, true);
-      expect(response.status).toBe(200);
-      expect((await response.json() as { playerProgress: number }).playerProgress).toBe(100);
-      expect(inviteRows(db)[0].notify_status).toBe('failed');
-    }
   });
 
   it('stops messaging a user who blocked the bot', async () => {
     fetchMock.mockImplementation(async () => new Response('{"ok":false}', { status: 403 }));
     const db = database();
-    const match = await bobFacesAlem(db);
-    await finish(db, guestAuthorization('bob'), match, true);
+    await bobBeatsAlem(db);
     const status = await request(db, '/api/notifications/outbid', alem);
     expect(await status.json()).toEqual({ enabled: false });
   });
 });
 
-describe('rematch invite', () => {
-  async function invited() {
+describe('rematch invite preview', () => {
+  it('does not show an unknown or malformed invite', async () => {
     const db = database();
-    const match = await bobFacesAlem(db);
-    await finish(db, guestAuthorization('bob'), match, true);
-    const inviteId = String(inviteRows(db)[0].id);
-    return { db, match, inviteId };
-  }
-
-  it('shows the invite only to its addressee', async () => {
-    const { db, inviteId } = await invited();
-    const preview = await request(db, `/api/rematch/${inviteId}`, alem);
-    expect(preview.status).toBe(200);
-    expect(await preview.json()).toMatchObject({
-      inviteId, category: 'geography', challengerName: 'Игрок', challengerProgress: 100, yourProgress: 50,
-    });
-    expect((await request(db, `/api/rematch/${inviteId}`, guestAuthorization('mallory'))).status).toBe(404);
-    expect((await request(db, `/api/rematch/${inviteId}`, telegramAuthorization({ id: 43, first_name: 'Eve' }))).status)
-      .toBe(404);
     expect((await request(db, '/api/rematch/not-an-invite', alem)).status).toBe(404);
-  });
-
-  it('puts the addressee on a new set, once, and only for them', async () => {
-    const { db, inviteId } = await invited();
-    const playedBefore = (db.sqlite.prepare(
-      "SELECT question_set_id FROM match_runs WHERE player_id = 'telegram:42'",
-    ).all() as Array<{ question_set_id: string }>).map((row) => row.question_set_id);
-    expect(playedBefore).toEqual([SET.questionSetId]);
-
-    // Someone else cannot use or burn the invite.
-    const stolen = await startMatch(db, guestAuthorization('mallory'), { rematchInviteId: inviteId });
-    expect(stolen.status).toBe(404);
-    expect(inviteRows(db)[0].consumed_at).toBeNull();
-
-    const rematch = await startMatch(db, alem, { rematchInviteId: inviteId });
-    expect(rematch.status).toBe(201);
-    const started = await rematch.json() as StartAsyncMatchResponse;
-    const row = db.sqlite.prepare('SELECT question_set_id, category FROM match_runs WHERE id = ?')
-      .get(started.matchId) as { question_set_id: string; category: string };
-    // Единое правило: набор, который получатель уже играл, не выдаётся и по приглашению.
-    expect(playedBefore).not.toContain(row.question_set_id);
-    expect(started.questions.map((question) => question.id))
-      .not.toEqual(SET.questions.map((question) => question.id));
-    expect(row.category).toBe('geography');
-    expect(inviteRows(db)[0].rematch_run_id).toBe(started.matchId);
-
-    // One use per invite.
-    expect((await startMatch(db, alem, { rematchInviteId: inviteId })).status).toBe(410);
-    expect((await request(db, `/api/rematch/${inviteId}`, alem)).status).toBe(410);
-  });
-
-  it('rejects malformed and expired invites', async () => {
-    const { db, inviteId } = await invited();
-    expect((await startMatch(db, alem, { rematchInviteId: 'rm_short' })).status).toBe(400);
-    expect((await startMatch(db, alem, { rematchInviteId: 'rm_AAAAAAAAAAAAAAAAAAAAAA' })).status).toBe(404);
-    db.sqlite.prepare('UPDATE rematch_invites SET expires_at = 1 WHERE id = ?').run(inviteId);
-    expect((await startMatch(db, alem, { rematchInviteId: inviteId })).status).toBe(410);
-  });
-
-  it('releases the invite when the match cannot be created', async () => {
-    const { db, inviteId } = await invited();
-    // Вставка матча падает уже после гашения приглашения: оно должно вернуться.
-    db.sqlite.exec("CREATE TRIGGER fail_insert BEFORE INSERT ON match_runs BEGIN SELECT RAISE(ABORT, 'boom'); END");
-    vi.spyOn(console, 'error').mockImplementation(() => undefined);
-    expect((await startMatch(db, alem, { rematchInviteId: inviteId })).status).toBe(500);
-    expect(inviteRows(db)[0].consumed_at).toBeNull();
+    expect((await request(db, '/api/rematch/rm_AAAAAAAAAAAAAAAAAAAAAA', alem)).status).toBe(404);
   });
 });

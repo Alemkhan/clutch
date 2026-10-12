@@ -2489,6 +2489,34 @@ input:focus-visible {
   font-weight: 700;
 }
 
+/* Разбор выбывания на загаданном: подпись и сам ответ, чтобы причина читалась сразу. */
+.ls-mine-reveal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 14px 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.ls-mine-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.ls-mine-answer {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 7vw, 2.1rem);
+  font-weight: 900;
+  color: var(--error);
+  overflow-wrap: anywhere;
+}
+
 .ls-score {
   margin: 0;
   font-family: var(--font-display);

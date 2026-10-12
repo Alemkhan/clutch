@@ -106,6 +106,11 @@ export function applyGeneralCategoryMigration(sqlite: SQLiteDatabase): void {
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0012_general_category.sql', import.meta.url), 'utf8'));
 }
 
+export function applyRecordClaimMigration(sqlite: SQLiteDatabase): void {
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0014_record_claim.sql', import.meta.url), 'utf8'));
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0015_pace_released.sql', import.meta.url), 'utf8'));
+}
+
 export function applyLastStandMinedMigration(sqlite: SQLiteDatabase): void {
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0013_last_stand_mined.sql', import.meta.url), 'utf8'));
 }
@@ -126,6 +131,7 @@ export function createTestD1(applyCurrentMigration = true): TestD1 {
     applyPlayerMistakesMigration(sqlite);
     applyGeneralCategoryMigration(sqlite);
     applyLastStandMinedMigration(sqlite);
+    applyRecordClaimMigration(sqlite);
   }
   const binding = {
     prepare(query: string) {

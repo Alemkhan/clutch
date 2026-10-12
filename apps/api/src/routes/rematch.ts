@@ -49,13 +49,12 @@ export function registerRematchRoutes(app: Hono<{ Bindings: Env }>): void {
     if (friend && challenger.player_id === identity.playerId) {
       return c.json({ error: 'This is your own invite.', reason: 'own' }, 403);
     }
-    const reason = inviteUnavailableReason(invite, Date.now());
+    // Режима гонки больше нет: приглашение на неё принять нечем, для игрока оно как истёкшее.
+    const reason = inviteUnavailableReason(invite, Date.now()) ?? (inviteMode(invite) === 'solo' ? null : 'expired');
     if (reason) return c.json({ error: 'Rematch invite is no longer available.', reason }, 410);
     return c.json({
       inviteId: invite.id,
       category: invite.category,
-      /** Куда вести игрока: гоночный или соло-старт. */
-      mode: inviteMode(invite),
       /** Открытая ссылка «Позвать друга», а не реванш по обойдённой записи. */
       friend,
       challengerName: challenger.display_name,

@@ -51,7 +51,7 @@ describe('Training screens', () => {
     expect(html.match(/aria-current="page"/g)).toHaveLength(1);
     expect(html).not.toMatch(/Рейтинг|Ranked|Лига/);
     for (const phase of ['home', 'myRuns', 'training', 'profile'] as const) expect(navTabForPhase(phase)).toBe(phase);
-    for (const phase of ['categories', 'matchmaking', 'question', 'resolution', 'hammer', 'result', 'lastStand', 'solo'] as const) {
+    for (const phase of ['lastStand', 'solo'] as const) {
       expect(navTabForPhase(phase)).toBeNull();
     }
   });

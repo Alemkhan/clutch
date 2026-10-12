@@ -82,7 +82,7 @@ describe('my runs screen', () => {
 
   it('shows active invites with the time left and opens them by id', () => {
     const html = render(ready([run()], [invite()]));
-    expect(html).toContain('Ann зовёт на реванш');
+    expect(html).toContain('Реванш с Ann: новые вопросы');
     expect(html).toContain('Ещё 5 ч');
     expect(html).toContain('Языки · 100% против 60%');
     expect(html).toContain('my-run-invite');
@@ -90,13 +90,13 @@ describe('my runs screen', () => {
 
   it('hides an invite whose time has run out', () => {
     const html = render(ready([run()], [invite({ expiresAt: NOW - 1 })]));
-    expect(html).not.toContain('зовёт на реванш');
+    expect(html).not.toContain('Реванш с');
     expect(html).not.toContain('Вызовы');
   });
 
   it('shows invites even when there are no runs yet', () => {
     const html = render(ready([], [invite()]));
-    expect(html).toContain('зовёт на реванш');
+    expect(html).toContain('Реванш с');
     expect(html).toContain('Пока нет сыгранных партий');
   });
 

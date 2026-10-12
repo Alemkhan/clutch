@@ -312,13 +312,10 @@ describe('a run interrupted after several rounds continues from the same place',
     expect(late).toMatchObject({ skillResult: 'miss', progressAwarded: 0, progress: 0 });
   });
 
-  it('refuses another player and a race match', async () => {
+  it('refuses another player', async () => {
     const db = database();
     const run = await start(db, 'ann');
     expect((await call(db, 'mallory', `/api/solo-runs/${run.runId}`)).status).toBe(404);
-    const race = await call(db, 'ann', '/api/async-matches', { displayName: 'ann', category: 'geography' });
-    const match = await race.json() as { matchId: string };
-    expect((await call(db, 'ann', `/api/solo-runs/${match.matchId}`)).status).toBe(409);
   });
 });
 

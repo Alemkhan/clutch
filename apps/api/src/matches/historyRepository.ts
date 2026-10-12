@@ -20,6 +20,8 @@ export interface HistoryRow {
   solo_outcome: MyRunOutcome | null;
   created_at: number;
   completed_at: number;
+  /** Кто сыграл мою запись: у ждавшего забега соперника в своей строке нет. */
+  played_by?: string | null;
 }
 
 /** Курсор — completedAt_id последней отданной партии; в id нет символа "_". */
@@ -39,8 +41,13 @@ export async function listCompletedRuns(
   limit: number,
   cursor: { completedAt: number; id: string } | null,
 ): Promise<HistoryRow[]> {
+  // played_by: имя того, кто сыграл эту запись. Своя строка этого не знает — связь живёт
+  // на строке претендента (opponent_run_id), поэтому владелец записи иначе видит «Победа» без имени.
   const columns = `id, player_id, display_name, category, questions_json, rounds_json, progress, correct_count, rules_version,
-    opponent_json, opponent_run_id, reached_target, set_par, solo_score, solo_outcome, created_at, completed_at`;
+    opponent_json, opponent_run_id, reached_target, set_par, solo_score, solo_outcome, created_at, completed_at,
+    (SELECT challenger.display_name FROM match_runs challenger
+      WHERE challenger.opponent_run_id = match_runs.id AND challenger.status = 'completed'
+      ORDER BY challenger.completed_at LIMIT 1) AS played_by`;
   const statement = cursor
     ? db.prepare(`
         SELECT ${columns} FROM match_runs
@@ -123,7 +130,10 @@ export function toRunSummary(row: HistoryRow, viewerId?: string): MyRunSummary {
       ? { kind: 'player', displayName: row.display_name ?? 'Друг' }
       : named
         ? { kind: row.opponent_run_id ? 'player' : 'bot', displayName: opponent.displayName as string }
-        : null,
+        // Моя запись дождалась соперника: он виден только со своей стороны связи.
+        : row.played_by
+          ? { kind: 'player', displayName: row.played_by }
+          : null,
     // Соло: сохранённый исход; null — соперника не было (opponent === null) или забег старше миграции.
     outcome: solo
       ? (friendDuel === 'hosted' && row.solo_outcome ? invertOutcome(row.solo_outcome) : row.solo_outcome ?? null)

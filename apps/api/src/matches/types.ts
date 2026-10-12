@@ -15,4 +15,6 @@ export interface RunRow {
   opponent_run_id?: string | null;
   created_at: number;
   question_set_id?: string | null;
+  /** 1 — соперник отпущен: претендент замолчал и запись ушла обратно в подбор. */
+  pace_released?: number | null;
 }

@@ -25,15 +25,12 @@ describe('Telegram BackButton mapping', () => {
   it('maps only safe non-gameplay phases to navigation', () => {
     expect(telegramBackAction('home')).toBe('hidden');
     expect(telegramBackAction('profile')).toBe('home');
-    expect(telegramBackAction('categories')).toBe('home');
     expect(telegramBackAction('lastStand')).toBe('home');
-    expect(telegramBackAction('matchmaking')).toBe('categories');
     expect(telegramBackAction('myRuns')).toBe('home');
-    expect(telegramBackAction('result')).toBe('home');
-
-    for (const phase of ['question', 'resolution', 'hammer'] as const) {
-      expect(telegramBackAction(phase)).toBe('hidden');
-    }
+    expect(telegramBackAction('training')).toBe('home');
+    expect(telegramBackAction('solo')).toBe('home');
+    // В активном забеге соло кнопка скрыта.
+    expect(telegramBackAction('solo', true)).toBe('hidden');
   });
 
   it('updates visibility and routes clicks through the latest action', () => {
@@ -43,10 +40,10 @@ describe('Telegram BackButton mapping', () => {
 
     controller.mount();
     expect(adapter.hide).toHaveBeenCalledTimes(1);
-    controller.setAction('categories');
+    controller.setAction('home');
     expect(adapter.show).toHaveBeenCalledTimes(1);
     press();
-    expect(navigate).toHaveBeenCalledWith('categories');
+    expect(navigate).toHaveBeenCalledWith('home');
 
     controller.setAction('hidden');
     press();

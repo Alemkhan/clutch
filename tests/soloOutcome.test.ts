@@ -203,9 +203,10 @@ describe('solo outcome against a pace', () => {
     expect(result.outcome).toBe('opponent');
     expect(storedOutcome(db, run.runId)).toBe('opponent');
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(sentPayload().text)
-      .toBe('Ваша запись устояла: Игрок не смог её обойти. Можно сыграть реванш: вопросы будут новые.');
-    expect(inviteRows(db)).toHaveLength(1);
+    expect(sentPayload().text).toBe('Ваша запись устояла: Игрок не смог её обойти.');
+    // Победившей записи реванш не создаётся: раньше владелец видел у себя вызов, которого
+    // соперник не отправлял.
+    expect(inviteRows(db)).toHaveLength(0);
   });
 
   it('equal score and rounds go to the shorter run, not to whoever played first', async () => {
@@ -301,7 +302,7 @@ describe('solo outcome against a pace', () => {
 
   it('has a separate text for a tie', () => {
     expect(soloResultText('Игрок', 'tie'))
-      .toBe('Ничья с Игрок: результаты сравнялись. Можно сыграть реванш: вопросы будут новые.');
+      .toBe('Ничья с Игрок: результаты сравнялись.');
   });
 });
 
@@ -373,8 +374,8 @@ describe('solo leaderboard', () => {
 describe('solo rematch invite', () => {
   const bob = guest('bob');
   const alemAuth = () => telegram({ id: 42, first_name: 'Алем' });
-  const startWith = (db: TestD1, authorization: string, rematchInviteId: string, path = '/api/solo-runs') =>
-    call(db, path, authorization, { displayName: 'Алем', category: 'geography', rematchInviteId });
+  const startWith = (db: TestD1, authorization: string, rematchInviteId: string) =>
+    call(db, '/api/solo-runs', authorization, { displayName: 'Алем', category: 'geography', rematchInviteId });
 
   /** Боб обыгрывает запись Алема в соло; Алем получает приглашение. */
   async function invited() {
@@ -431,7 +432,7 @@ describe('solo rematch invite', () => {
     expect(inviteRows(db)[0].consumed_at).toBeNull();
   });
 
-  it('rejects an invite of the other mode with a clear error and does not spend it', async () => {
+  it('rejects an invite of the retired race mode with a clear error and does not spend it', async () => {
     const { db, inviteId } = await invited();
     // Тот же игрок, но приглашение из гонки: вызов брошен гоночным забегом.
     insertSolo(db, { id: 'race-challenger', playerId: 'p:race', soloScore: 1 });
@@ -449,16 +450,13 @@ describe('solo rematch invite', () => {
     expect(soloWithRace.status).toBe(409);
     expect(await soloWithRace.json()).toEqual({ error: 'This rematch invite is for race mode.' });
 
-    const raceWithSolo = await startWith(db, alemAuth(), inviteId, '/api/async-matches');
-    expect(raceWithSolo.status).toBe(409);
-    expect(await raceWithSolo.json()).toEqual({ error: 'This rematch invite is for solo mode.' });
-
     const consumed = db.sqlite.prepare('SELECT COUNT(*) AS count FROM rematch_invites WHERE consumed_at IS NOT NULL')
       .get() as { count: number };
     expect(consumed.count).toBe(0);
 
-    const preview = await call(db, `/api/rematch/${inviteId}`, alemAuth());
-    expect(await preview.json()).toMatchObject({ mode: 'solo' });
-    expect(await (await call(db, `/api/rematch/${raceInviteId}`, alemAuth())).json()).toMatchObject({ mode: 'race' });
+    expect((await call(db, `/api/rematch/${inviteId}`, alemAuth())).status).toBe(200);
+    // Режима гонки нет: приглашение на неё в превью выглядит как истёкшее.
+    const racePreview = await call(db, `/api/rematch/${raceInviteId}`, alemAuth());
+    expect(racePreview.status).toBe(410);
   });
 });

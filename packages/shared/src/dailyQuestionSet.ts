@@ -117,3 +117,36 @@ export function dailyQuestionSet(
   }
   return structuredClone(dailyQuestionBank(category, timestampMs)[index]) as DailySet;
 }
+
+/**
+ * Набор для тренировки: **не из дневного банка**.
+ *
+ * Раньше тренировка брала тот же набор, что и зачётный забег, и помечала его сыгранным. Это
+ * открывало простой обман: пройти с ботами все наборы дня, а потом сыграть зачётный забег уже
+ * зная вопросы — и заодно выжигало банк. Поэтому у тренировки свой сид и свой `questionSetId`
+ * с префиксом `practice:`, которого нет в `dailyQuestionSetIds`, так что подбор зачётного забега
+ * о нём не знает.
+ *
+ * Плата за это: вопрос из тренировки может случайно встретиться потом в зачётном наборе —
+ * пул сущностей и пакет общие. Это слабее прежней гарантии, но прежняя гарантия стоила дыры.
+ */
+export function practiceQuestionSet(
+  category: CategoryId,
+  seed: string,
+  timestampMs: number = Date.now(),
+): DailySet {
+  const dateKey = dailyKey(timestampMs);
+  // Индекс числовой: сборщик общего режима берёт из id номер окна в пакете.
+  const index = hashSeed(`practice:${seed}`) % 1000;
+  const questionSetId = `practice:${category}:${dateKey}:${index}`;
+  const createdAt = `${dateKey}T00:00:00.000Z`;
+  const questions = category === 'general'
+    ? buildGeneralSet(questionSetId, dateKey)
+    : generateMatch(
+      dailySetSize(category),
+      DAILY_SET_OPEN_RATIO,
+      category,
+      createSeededRandom(hashSeed(questionSetId)),
+    );
+  return { questionSetId, questions: questions.map((question) => ({ ...question, createdAt })) };
+}

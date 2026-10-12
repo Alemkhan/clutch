@@ -64,11 +64,30 @@ export interface OutbidEvent {
  * unsubscribe buttons, and marks the delivery. Never throws: it runs inside waitUntil, after the
  * challenger already has their answer. The UNIQUE pair makes a repeat a silent no-op.
  */
-async function deliverInvite(env: Env, event: OutbidEvent, text: (name: string) => string): Promise<void> {
+async function deliverInvite(
+  env: Env,
+  event: OutbidEvent,
+  text: (name: string) => string,
+  withInvite = true,
+): Promise<void> {
   try {
     const chatId = telegramChatId(event.recipientRun.playerId);
     if (!chatId || !env.TELEGRAM_BOT_TOKEN) return;
     if (!(await isOutbidEnabled(env.DB, event.recipientRun.playerId))) return;
+
+    // Известие без приглашения: звать на реванш того, чья запись устояла, не за чем, а строка
+    // в rematch_invites выглядела бы у него как вызов, которого соперник не посылал.
+    if (!withInvite) {
+      const onlyStopUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, STOP_PAYLOAD);
+      const plain = await sendTelegramMessage(
+        env.TELEGRAM_BOT_TOKEN,
+        chatId,
+        text(cleanName(event.challengerName)),
+        onlyStopUrl ? [[{ text: 'Не присылать такие сообщения', url: onlyStopUrl }]] : [],
+      ).catch(() => 'failed' as const);
+      if (plain === 'blocked') await setOutbidEnabled(env.DB, event.recipientRun.playerId, false);
+      return;
+    }
 
     const inviteId = newInviteId();
     const isNew = await insertInviteOnce(env.DB, {
@@ -114,12 +133,12 @@ export async function notifyOutbid(env: Env, event: OutbidEvent): Promise<void> 
 /** Исход соло-забега глазами владельца записи: его запись победила, проиграла или сравнялась. */
 export type SoloRecipientOutcome = 'record_won' | 'record_lost' | 'tie';
 
+/** Реванш обещается только проигравшей записи: приглашение создаётся лишь в этом случае. */
 export function soloResultText(challengerName: string, outcome: SoloRecipientOutcome): string {
   const name = cleanName(challengerName);
-  const rematch = 'Можно сыграть реванш: вопросы будут новые.';
-  if (outcome === 'record_won') return `Ваша запись устояла: ${name} не смог её обойти. ${rematch}`;
-  if (outcome === 'record_lost') return `${name} обошёл вашу запись. ${rematch}`;
-  return `Ничья с ${name}: результаты сравнялись. ${rematch}`;
+  if (outcome === 'record_won') return `Ваша запись устояла: ${name} не смог её обойти.`;
+  if (outcome === 'record_lost') return `${name} обошёл вашу запись. Можно сыграть реванш: вопросы будут новые.`;
+  return `Ничья с ${name}: результаты сравнялись.`;
 }
 
 /** Соло: владелец записи узнаёт исход в любом случае, не только когда его обыграли. */
@@ -127,7 +146,14 @@ export async function notifySoloResult(
   env: Env,
   event: OutbidEvent & { outcome: SoloRecipientOutcome },
 ): Promise<void> {
-  await deliverInvite(env, event, (name) => soloResultText(name, event.outcome));
+  // Приглашение на реванш создаётся ТОЛЬКО когда запись обошли. Раньше оно создавалось при любом
+  // исходе, и выигравший видел у себя вызов, которого соперник не отправлял.
+  await deliverInvite(
+    env,
+    event,
+    (name) => soloResultText(name, event.outcome),
+    event.outcome === 'record_lost',
+  );
 }
 
 export function duelResultText(friendName: string, outcome: SoloRecipientOutcome): string {

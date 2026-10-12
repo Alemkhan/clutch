@@ -1,7 +1,5 @@
 import type {
   CategoryId,
-  CompleteAsyncMatchRequest,
-  CompleteAsyncMatchResponse,
   CreateFriendInviteResponse,
   GuestSessionResponse,
   PracticeLevelId,
@@ -12,8 +10,6 @@ import type {
   SoloRunSnapshot,
   StartSoloRunRequest,
   StartSoloRunResponse,
-  StartAsyncMatchRequest,
-  StartAsyncMatchResponse,
   TrainingCheckRequest,
   TrainingCheckResponse,
   TrainingMistakesResponse,
@@ -194,33 +190,6 @@ async function apiFetch<T>(path: string, init: RequestInit, signal?: AbortSignal
   });
 }
 
-export function startAsyncMatch(
-  category: CategoryId,
-  signal?: AbortSignal,
-  rematchInviteId?: string,
-): Promise<StartAsyncMatchResponse> {
-  const telegram = getTelegramIdentity();
-  const body: StartAsyncMatchRequest = {
-    displayName: telegram?.displayName || getPlayerName(),
-    category,
-    ...(rematchInviteId ? { rematchInviteId } : {}),
-  };
-  return apiFetch('/api/async-matches', {
-    method: 'POST',
-    body: JSON.stringify(body),
-  }, signal);
-}
-
-export function completeAsyncMatch(
-  matchId: string,
-  body: CompleteAsyncMatchRequest,
-): Promise<CompleteAsyncMatchResponse> {
-  return apiFetch(`/api/async-matches/${encodeURIComponent(matchId)}/complete`, {
-    method: 'POST',
-    body: JSON.stringify(body),
-  });
-}
-
 // ---- Соло-забег и «Мои партии» ----
 
 export function startSoloRun(
@@ -306,8 +275,6 @@ export function fetchMyRuns(
 export interface RematchPreview {
   inviteId: string;
   category: CategoryId;
-  /** В какой режим вести реванш: гоночный старт либо соло-забег. */
-  mode: 'race' | 'solo';
   /** true: открытая ссылка «Позвать друга», а не реванш по обойдённой записи. */
   friend?: boolean;
   expiresAt: number;

@@ -226,43 +226,41 @@ async function guestSession(baseUrl) {
   return body.token;
 }
 
-async function startMatch(baseUrl, token, displayName) {
-  return jsonRequest(baseUrl, '/api/async-matches', {
+async function startSoloRun(baseUrl, token, displayName) {
+  return jsonRequest(baseUrl, '/api/solo-runs', {
     method: 'POST',
     headers: {
       authorization: `Bearer ${token}`,
       'content-type': 'application/json',
     },
-    body: JSON.stringify({ displayName, category: 'geography' }),
+    body: JSON.stringify({ displayName, category: 'general' }),
   }, 201);
 }
 
-function correctAnswer(question) {
-  if (question.answerType === 'open_answer') {
-    assert.ok(Array.isArray(question.correctAnswers) && question.correctAnswers.length > 0);
-    return question.correctAnswers[0];
+const ANSWER_KEYS = ['correctOptionId', 'correctAnswers', 'explanation'];
+
+/** Вопрос, на который игрок ещё не ответил, не должен нести ответа ни в одном поле. */
+function assertNoAnswers(payload, where) {
+  const text = JSON.stringify(payload);
+  for (const key of ANSWER_KEYS) {
+    assert.ok(!text.includes(`"${key}"`), `${where} carries ${key}`);
   }
-  return question.correctOptionId;
 }
 
-function winningRounds(questions) {
-  return questions.slice(0, 4).map((question) => ({
-    questionId: question.id,
-    selectedAnswer: correctAnswer(question),
-    responseTimeMs: 1_000,
-    skillDistance: 0,
-  }));
+/** Заведомое действие игрока: первый вариант либо строка, которой нет среди ответов. */
+function someAnswer(question) {
+  return question.answerType === 'open_answer' ? 'заведомо неверный ответ' : question.options[0].id;
 }
 
-async function completeMatch(baseUrl, token, matchId, rounds) {
-  return jsonRequest(baseUrl, `/api/async-matches/${matchId}/complete`, {
+function roundRequest(baseUrl, token, runId, path, body, expectedStatus = 200) {
+  return jsonRequest(baseUrl, `/api/solo-runs/${runId}/${path}`, {
     method: 'POST',
     headers: {
       authorization: `Bearer ${token}`,
       'content-type': 'application/json',
     },
-    body: JSON.stringify({ rounds }),
-  }, 200);
+    body: JSON.stringify(body),
+  }, expectedStatus);
 }
 
 async function verifyHttpFlow(baseUrl, readinessResponse) {
@@ -271,44 +269,74 @@ async function verifyHttpFlow(baseUrl, readinessResponse) {
   assert.equal(readiness.status, 'ok');
   assert.equal(readiness.environment, 'smoke');
 
-  await jsonRequest(baseUrl, '/api/async-matches', {
+  await jsonRequest(baseUrl, '/api/solo-runs', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ displayName: 'No auth', category: 'geography' }),
+    body: JSON.stringify({ displayName: 'No auth', category: 'general' }),
   }, 401);
 
-  const tokenA = await guestSession(baseUrl);
-  const matchA = await startMatch(baseUrl, tokenA, 'Smoke A');
-  assert.equal(matchA.opponentSource, 'bot');
-  // One of four bot profiles, chosen deterministically from the set id and the player id.
-  assert.match(matchA.opponent.id, /^clutch_bot(_weak|_medium|_strong)?$/);
-  const completionA = await completeMatch(
-    baseUrl,
-    tokenA,
-    matchA.matchId,
-    winningRounds(matchA.questions),
-  );
-  assert.equal(completionA.playerProgress, 100);
-  assert.equal(completionA.rounds.length, 4);
+  // Режим гонки удалён (R12): маршрута нет, а не «есть, но требует авторизации».
+  // Ответ не JSON, поэтому проверяется сырым запросом.
+  const removedRace = await fetch(`${baseUrl}/api/async-matches`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ displayName: 'Race', category: 'geography' }),
+    signal: AbortSignal.timeout(5_000),
+  });
+  assert.equal(removedRace.status, 404, 'the race route must be gone, not merely guarded');
 
+  const tokenA = await guestSession(baseUrl);
+  const runA = await startSoloRun(baseUrl, tokenA, 'Smoke A');
+  assert.ok(Array.isArray(runA.questions) && runA.questions.length > 0);
+  assertNoAnswers(runA.questions, 'solo start');
+
+  // Круг идёт в два запроса: ответ, затем удар. Правильный ответ приходит только после ответа.
+  const question = runA.questions[0];
+  const answerBody = {
+    roundIndex: 0,
+    questionId: question.id,
+    selectedAnswer: someAnswer(question),
+    responseTimeMs: 1_000,
+  };
+  const verdict = await roundRequest(baseUrl, tokenA, runA.runId, 'answer', answerBody);
+  assert.equal(verdict.roundIndex, 0);
+  assert.equal(verdict.questionId, question.id);
+  assert.equal(typeof verdict.correct, 'boolean');
+  assert.ok(typeof verdict.explanation === 'string' && verdict.explanation.length > 0);
+
+  // Повтор того же круга не считается дважды: сервер отдаёт уже записанное.
+  const repeated = await roundRequest(baseUrl, tokenA, runA.runId, 'answer', answerBody);
+  assert.deepEqual(repeated, verdict);
+
+  if (verdict.awaitingHammer) {
+    const struck = await roundRequest(baseUrl, tokenA, runA.runId, 'hammer', {
+      roundIndex: 0,
+      questionId: question.id,
+      skillDistance: 0,
+    });
+    assert.equal(struck.roundIndex, 0);
+    assert.equal(struck.awaitingHammer, false);
+    assert.ok(struck.progress > 0, 'a perfect strike after a correct answer must move progress');
+  } else {
+    assert.equal(verdict.correct, false);
+    assert.equal(verdict.progress, 0);
+  }
+
+  // Закрытая вкладка не теряет забег: он продолжается с уже сыгранными кругами.
+  const snapshot = await jsonRequest(baseUrl, `/api/solo-runs/${runA.runId}`, {
+    headers: { authorization: `Bearer ${tokenA}` },
+  }, 200);
+  assert.equal(snapshot.runId, runA.runId);
+  assert.equal(snapshot.status, 'in_progress');
+  assert.equal(snapshot.rounds.length, 1);
+  assertNoAnswers(snapshot.questions, 'solo snapshot');
+
+  // Второй игрок получает свой забег, а не чужой.
   const tokenB = await guestSession(baseUrl);
   assert.notEqual(tokenB, tokenA);
-  const matchB = await startMatch(baseUrl, tokenB, 'Smoke B');
-  assert.equal(matchB.opponentSource, 'player');
-  assert.equal(matchB.opponent.id, matchA.matchId);
-  assert.deepEqual(matchB.questions, matchA.questions);
-  assert.deepEqual(matchB.conditions, matchA.conditions);
-
-  const roundsB = winningRounds(matchB.questions);
-  const completionB = await completeMatch(baseUrl, tokenB, matchB.matchId, roundsB);
-  assert.equal(completionB.playerProgress, 100);
-  const repeatedB = await completeMatch(
-    baseUrl,
-    tokenB,
-    matchB.matchId,
-    roundsB.slice(0, 1),
-  );
-  assert.deepEqual(repeatedB, completionB);
+  const runB = await startSoloRun(baseUrl, tokenB, 'Smoke B');
+  assert.notEqual(runB.runId, runA.runId);
+  assertNoAnswers(runB.questions, 'second solo start');
 }
 
 async function main() {

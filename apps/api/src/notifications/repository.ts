@@ -1,6 +1,14 @@
 import { CURRENT_SOLO_RUN_CONDITIONS } from '@clutch/shared';
 
+/** Реванш играется на новом наборе и ничью запись не держит, поэтому живёт долго. */
 export const INVITE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
+/**
+ * Открытая ссылка «Позвать друга» держит запись автора вне общего подбора всё время жизни,
+ * поэтому срок короткий: наборы меняются каждые сутки, и запись недельной давности никому
+ * уже не интересна, а пул она всё это время занимает.
+ */
+export const OPEN_INVITE_TTL_MS = 24 * 60 * 60 * 1000;
 
 export interface InviteRow {
   id: string;
@@ -109,7 +117,7 @@ export async function insertOpenInviteOnce(db: D1Database, invite: {
     invite.category,
     invite.challengerProgress,
     invite.now,
-    invite.now + INVITE_TTL_MS,
+    invite.now + OPEN_INVITE_TTL_MS,
   ).run();
   return result.meta.changes > 0;
 }

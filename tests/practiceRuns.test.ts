@@ -148,9 +148,8 @@ async function finish(db: TestD1, authorization: string, run: StartSoloRunRespon
  */
 function disguiseAsCompetitive(db: TestD1, run: StartSoloRunResponse) {
   const ids = dailyQuestionSetIds('geography', NOW);
-  const index = ids.findIndex((_, i) =>
-    dailyQuestionSet('geography', NOW, i).questions[0].id === run.questions[0].id);
-  expect(index).toBeGreaterThanOrEqual(0);
+  // Набор тренировки свой (practice:...), поэтому подделываем строку под первый набор банка.
+  const index = 0;
   db.sqlite.prepare(`
     UPDATE match_runs
     SET question_set_id = ?, reached_target = 1, ghost_eligible = 1, set_par = 20, solo_score = 0.2,
@@ -303,28 +302,29 @@ describe('practice run against a bot', () => {
     });
   });
   describe('does not repeat a set the player already saw', () => {
-    it('skips sets already played in competition and records its own', async () => {
+    // Прежде тренировка брала набор из банка дня и помечала его сыгранным. Это позволяло
+    // пройти день с ботами и сыграть зачёт уже зная вопросы, поэтому у неё теперь свой набор.
+    it('takes a set of its own and leaves the day bank untouched', async () => {
       const db = database();
       const bank = dailyQuestionSetIds('geography', NOW);
 
       // Зачётный забег занимает первый набор банка.
       const first = await (await call(db, '/api/solo-runs', ann, { displayName: 'Игрок', category: 'geography' })).json() as StartSoloRunResponse;
-      const firstIds = first.questions.map((question) => question.id);
+      const firstRow = db.sqlite.prepare('SELECT question_set_id AS id FROM match_runs WHERE id = ?').get(first.runId) as { id: string };
+      expect(firstRow.id).toBe(bank[0]);
 
-      // Тренировка обязана взять другой набор, а не случайный из всех.
+      // Тренировка берёт набор вне банка.
       const practice = await startPractice(db, ann);
-      const practiceIds = practice.questions.map((question) => question.id);
-      expect(practiceIds.some((id) => firstIds.includes(id))).toBe(false);
+      const row = db.sqlite.prepare('SELECT question_set_id AS id FROM match_runs WHERE id = ?').get(practice.runId) as { id: string };
+      expect(row.id.startsWith('practice:')).toBe(true);
+      expect(bank).not.toContain(row.id);
 
-      // И запомнить свой, чтобы он не вернулся потом в зачёте.
-      const row = db.sqlite.prepare('SELECT question_set_id AS id FROM match_runs WHERE id = ?').get(practice.runId) as { id: string | null };
-      expect(row.id).not.toBeNull();
-      expect(bank).toContain(row.id);
-
-      const third = await (await call(db, '/api/solo-runs', ann, { displayName: 'Игрок', category: 'geography' })).json() as StartSoloRunResponse;
-      const thirdIds = third.questions.map((question) => question.id);
-      expect(thirdIds.some((id) => practiceIds.includes(id))).toBe(false);
-      expect(thirdIds.some((id) => firstIds.includes(id))).toBe(false);
+      // И не расходует банк: у игрока остаётся ровно один зачётный забег, на первом наборе.
+      const competitive = db.sqlite
+        .prepare("SELECT question_set_id AS id FROM match_runs WHERE question_set_id NOT LIKE 'practice:%'")
+        .all() as Array<{ id: string }>;
+      expect(competitive).toHaveLength(1);
+      expect(competitive[0].id).toBe(bank[0]);
     });
   });
 });
