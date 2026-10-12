@@ -19,6 +19,7 @@ import {
 import app from '../apps/api/src/index';
 import { soloResultText } from '../apps/api/src/notifications/outbid';
 import { createTestD1, type TestD1 } from './helpers/testD1';
+import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
 const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
@@ -92,19 +93,6 @@ function guest(label: string): string {
   return `Bearer ${signed}.${createHmac('sha256', sessionSecret).update(signed).digest('base64url')}`;
 }
 
-function inputs(questions: Question[], count: number, correct: boolean): AsyncMatchRoundInput[] {
-  return questions.slice(0, count).map((question) => ({
-    questionId: question.id,
-    selectedAnswer: question.answerType === 'open_answer'
-      ? (correct ? question.correctAnswers![0] : '__wrong__')
-      : (correct
-        ? question.correctOptionId
-        : question.options.find((option) => option.id !== question.correctOptionId)!.id),
-    responseTimeMs: 1000,
-    ...(correct ? { skillDistance: 0 } : {}),
-  }));
-}
-
 /** Завершённый соло-забег другого игрока на наборе дня 0: круги по 25. */
 function insertSolo(db: TestD1, options: {
   id: string;
@@ -164,9 +152,11 @@ async function start(db: TestD1, authorization: string): Promise<StartSoloRunRes
 }
 
 async function finish(db: TestD1, authorization: string, run: StartSoloRunResponse, count: number, correct: boolean) {
-  const response = await call(db, `/api/solo-runs/${run.runId}/complete`, authorization, {
-    rounds: inputs(run.questions, count, correct),
-  });
+  const response = await playRounds(
+    (path, body) => call(db, path, authorization, body),
+    run.runId,
+    roundInputs(fullQuestions(db, run.runId), count, correct),
+  );
   await Promise.all(pending);
   return response;
 }
@@ -267,7 +257,7 @@ describe('solo outcome against a pace', () => {
     insertSolo(db, { id: 'alem-run', playerId: 'telegram:42', name: 'Алем', soloScore: 99 });
     const run = await start(db, bob);
     const first = await (await finish(db, bob, run, 4, true)).json() as CompleteSoloRunResponse;
-    const again = await (await finish(db, bob, run, 1, false)).json() as CompleteSoloRunResponse;
+    const again = await (await finish(db, bob, run, 4, true)).json() as CompleteSoloRunResponse;
     expect(again).toEqual(first);
     expect(again.outcome).toBe('player');
     expect(fetchMock).toHaveBeenCalledTimes(1);

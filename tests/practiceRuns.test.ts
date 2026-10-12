@@ -22,6 +22,7 @@ import {
 import app from '../apps/api/src/index';
 import { PRACTICE_BOT_PROFILES, createBotOpponent } from '../apps/api/src/matches/bots';
 import { createTestD1, type TestD1 } from './helpers/testD1';
+import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
 const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
@@ -132,9 +133,11 @@ async function startPractice(db: TestD1, authorization: string, botLevel = 'amat
 }
 
 async function finish(db: TestD1, authorization: string, run: StartSoloRunResponse, count: number, correct = true) {
-  const response = await call(db, `/api/solo-runs/${run.runId}/complete`, authorization, {
-    rounds: inputs(run.questions, count, correct),
-  });
+  const response = await playRounds(
+    (path, body) => call(db, path, authorization, body),
+    run.runId,
+    roundInputs(fullQuestions(db, run.runId), count, correct),
+  );
   await Promise.all(pending);
   return response;
 }
@@ -166,7 +169,7 @@ describe('practice run against a bot', () => {
     for (const level of PRACTICE_LEVELS) {
       const run = await startPractice(db, ann, level.id);
       expect(run.rulesVersion).toBe(PRACTICE_RULES_VERSION);
-      expect(run.pace).toEqual(createBotOpponent(run.questions, PRACTICE_BOT_PROFILES[level.id]));
+      expect(run.pace).toEqual(createBotOpponent(fullQuestions(db, run.runId), PRACTICE_BOT_PROFILES[level.id]));
       // Набор запоминается и у тренировки: вне соревнования её держит версия правил,
       // а не пустой question_set_id. Иначе увиденные вопросы вернулись бы в зачёте.
       expect(rowOf(db, run.runId)).toMatchObject({
@@ -178,16 +181,26 @@ describe('practice run against a bot', () => {
     expect(new Set(Object.values(PRACTICE_BOT_PROFILES)).size).toBe(PRACTICE_LEVELS.length);
   });
 
-  it('describes the strength of each level truthfully', () => {
-    const questions = dailyQuestionSet('geography', NOW, 0).questions;
-    const ids = questions.map((question) => question.id);
+  it('describes the strength of each level truthfully on sets of 18 and 20', () => {
+    const sets = [
+      dailyQuestionSet('geography', NOW, 0).questions,
+      dailyQuestionSet('history', NOW, 0).questions,
+    ];
+    expect(sets.map((questions) => questions.length).sort()).toEqual([18, 20]);
+    const rounds: number[] = [];
     for (const level of PRACTICE_LEVELS) {
-      const bot = createBotOpponent(questions, PRACTICE_BOT_PROFILES[level.id]);
-      const final = evaluateSoloRun(ids, bot.rounds);
-      // Набор длиннее десяти кругов: награды профиля повторяются по кругу, и слабый бот тоже доходит.
-      expect(final.reachedTarget).toBe(true);
-      expect(level.caption).toBe(`100% за ${final.roundsPlayed} кругов`);
+      const played = sets.map((questions) => {
+        const bot = createBotOpponent(questions, PRACTICE_BOT_PROFILES[level.id]);
+        const final = evaluateSoloRun(questions.map((question) => question.id), bot.rounds);
+        expect(final.reachedTarget).toBe(true);
+        expect(level.caption).toBe(`100% за ${final.roundsPlayed} кругов`);
+        return final.roundsPlayed;
+      });
+      expect(played[0]).toBe(played[1]);
+      rounds.push(played[0]);
     }
+    // от слабого к сильному: 17, 13, 9, 6 - ступени не меньше трёх кругов
+    for (let i = 1; i < rounds.length; i += 1) expect(rounds[i - 1] - rounds[i]).toBeGreaterThanOrEqual(3);
   });
 
   it('rejects an unknown level and a level together with a rematch invite', async () => {
@@ -219,14 +232,14 @@ describe('practice run against a bot', () => {
     expect(rowOf(db, run.runId)).toMatchObject({
       status: 'completed', ghost_eligible: 0, reached_target: null, solo_score: null, set_par: null, solo_outcome: null,
     });
-    const again = await finish(db, ann, run, 1, false);
+    const again = await finish(db, ann, run, 4);
     expect(await again.json()).toEqual(result);
   });
 
   it('is refused by the race completion route', async () => {
     const db = database();
     const run = await startPractice(db, ann);
-    const response = await call(db, `/api/matches/${run.runId}/complete`, ann, { rounds: inputs(run.questions, 4, true) });
+    const response = await call(db, `/api/matches/${run.runId}/complete`, ann, { rounds: roundInputs(fullQuestions(db, run.runId), 4, true) });
     expect(response.status).toBeGreaterThanOrEqual(400);
     expect(rowOf(db, run.runId).status).toBe('in_progress');
   });

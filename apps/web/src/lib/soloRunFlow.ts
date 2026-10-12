@@ -1,13 +1,16 @@
 import type {
-  AsyncMatchRoundInput,
   CategoryId,
+  CompleteSoloRunResponse,
   MiniGameConfig,
   Opponent,
   SkillResult,
+  SoloAnswerRequest,
+  SoloHammerRequest,
+  SoloRoundResponse,
 } from '@clutch/shared';
-import { CURRENT_SOLO_RUN_CONDITIONS, SKILL_REWARDS, isAnswerCorrect } from '@clutch/shared';
+import { CURRENT_SOLO_RUN_CONDITIONS, SKILL_REWARDS } from '@clutch/shared';
 import { ApiError } from './api';
-import { scoreSkillDistance, type NormalizedSoloRun } from './clientMatchRules';
+import type { NormalizedSoloRun, NormalizedSoloSnapshot } from './clientMatchRules';
 import {
   applySoloSessionRound,
   createSoloRunSession,
@@ -18,11 +21,20 @@ import {
 
 /**
  * Экранные шаги соло-забега. Чистые переходы без React и сети, как gameSession для гонки.
- * Забег закрывают только правила в soloRunSession: темп соперника сюда не заходит.
+ *
+ * Клиент не знает правильных ответов и не считает награду: каждый шаг круга уходит на сервер, а следующий
+ * экран строится из его ответа. Пока запрос не подтверждён (`pending`), круг не засчитан, и его можно
+ * безопасно отправить ещё раз: сервер повтор не считает дважды.
+ * Забег закрывает сервер (shared/soloRun.ts); клиентская копия правил нужна только для полос и счётчиков.
  */
 export type SoloStage =
   | 'categories' | 'loading' | 'error' | 'ready'
-  | 'question' | 'resolution' | 'hammer' | 'result';
+  | 'question' | 'checking' | 'resolution' | 'hammer' | 'submitting' | 'result';
+
+/** Запрос, который ждёт подтверждения сервера. */
+export type SoloPending =
+  | { kind: 'answer'; request: SoloAnswerRequest }
+  | { kind: 'hammer'; request: SoloHammerRequest };
 
 export interface SoloFlowState {
   stage: SoloStage;
@@ -33,17 +45,27 @@ export interface SoloFlowState {
   bankExhausted: boolean;
   /** Забег по дружеской ссылке: вне соревнования. */
   friendDuel: boolean;
+  /** Забег продолжен после закрытой вкладки. */
+  resumed: boolean;
   selectedOption: string;
   lastCorrect: boolean;
+  /** Пояснение к текущему вопросу: приходит с вердиктом сервера, раньше его нет. */
+  explanation: string;
   correctCount: number;
   responseTimes: number[];
   skillResults: SkillResult[];
-  roundInputs: AsyncMatchRoundInput[];
+  pending: SoloPending | null;
+  /** Повторы исчерпаны, запрос не дошёл: показываем «Повторить», прогресс не потерян. */
+  syncFailed: boolean;
+  /** Итог забега от сервера; появляется вместе с последним кругом. */
+  result: CompleteSoloRunResponse | null;
   error?: string;
 }
 
 /** Шаги, на которых нельзя случайно уйти системной кнопкой «Назад». */
-const ACTIVE_STAGES: ReadonlySet<SoloStage> = new Set<SoloStage>(['question', 'resolution', 'hammer']);
+const ACTIVE_STAGES: ReadonlySet<SoloStage> = new Set<SoloStage>([
+  'question', 'checking', 'resolution', 'hammer', 'submitting',
+]);
 
 export function isSoloPlaying(stage: SoloStage): boolean {
   return ACTIVE_STAGES.has(stage);
@@ -57,12 +79,16 @@ export function createSoloFlowState(): SoloFlowState {
     config: CURRENT_SOLO_RUN_CONDITIONS.miniGame.config,
     bankExhausted: false,
     friendDuel: false,
+    resumed: false,
     selectedOption: '',
     lastCorrect: false,
+    explanation: '',
     correctCount: 0,
     responseTimes: [],
     skillResults: [],
-    roundInputs: [],
+    pending: null,
+    syncFailed: false,
+    result: null,
   };
 }
 
@@ -86,6 +112,34 @@ export function applyLoadedSoloRun(state: SoloFlowState, run: NormalizedSoloRun)
   };
 }
 
+/**
+ * Забег, продолженный с сервера: сыгранные круги берём из его записи и прогоняем через те же правила shared.
+ * Закрытый забег сразу показывает итог; открытый ждёт кнопку «Продолжить» на следующем вопросе.
+ */
+export function restoreSoloRun(snapshot: NormalizedSoloSnapshot): SoloFlowState {
+  let session = createSoloRunSession(snapshot.questions, snapshot.pace);
+  const skillResults: SkillResult[] = [];
+  for (const round of snapshot.rounds) {
+    session = applySoloSessionRound(session, round.progressAwarded);
+    if (round.skillResult) skillResults.push(round.skillResult);
+  }
+  const completed = snapshot.status === 'completed';
+  return {
+    ...createSoloFlowState(),
+    stage: completed ? 'result' : 'ready',
+    category: snapshot.category,
+    runId: snapshot.runId,
+    session,
+    config: snapshot.config,
+    friendDuel: snapshot.friendDuel === true,
+    resumed: true,
+    correctCount: snapshot.rounds.filter((round) => round.correct).length,
+    responseTimes: snapshot.rounds.map((round) => round.responseTimeMs),
+    skillResults,
+    result: completed ? snapshot.result : null,
+  };
+}
+
 export function startSoloPlay(state: SoloFlowState): SoloFlowState {
   if (state.stage !== 'ready' || !state.session) return state;
   return { ...state, stage: 'question' };
@@ -101,31 +155,51 @@ export function currentSoloQuestion(state: Readonly<SoloFlowState>) {
   return session ? session.questions[session.run.roundsPlayed] : undefined;
 }
 
+/** Ответ игрока уходит на проверку серверу; верность мы узнаем только из его ответа. */
 export function recordSoloAnswer(
   state: Readonly<SoloFlowState>,
   selectedOption: string,
   responseTimeMs: number,
 ): SoloFlowState {
   const question = currentSoloQuestion(state);
-  const correct = question?.answerType === 'open_answer'
-    ? isAnswerCorrect(selectedOption, question.correctAnswers ?? []).correct
-    : Boolean(question && selectedOption === question.correctOptionId);
+  if (state.stage !== 'question' || !question || !state.runId) return state as SoloFlowState;
   return {
     ...state,
-    stage: 'resolution',
+    stage: 'checking',
     selectedOption,
-    lastCorrect: correct,
-    correctCount: correct ? state.correctCount + 1 : state.correctCount,
+    syncFailed: false,
     responseTimes: [...state.responseTimes, responseTimeMs],
+    pending: {
+      kind: 'answer',
+      request: {
+        roundIndex: requireSession(state).run.roundsPlayed,
+        questionId: question.id,
+        selectedAnswer: selectedOption,
+        responseTimeMs,
+      },
+    },
   };
 }
 
-function currentRoundInput(state: Readonly<SoloFlowState>, skillDistance?: number): AsyncMatchRoundInput {
+function matchesPending(state: Readonly<SoloFlowState>, kind: SoloPending['kind'], response: SoloRoundResponse): boolean {
+  return state.pending?.kind === kind
+    && state.pending.request.roundIndex === response.roundIndex
+    && state.pending.request.questionId === response.questionId
+    && response.runId === state.runId;
+}
+
+/** Вердикт сервера по ответу: верно или нет, пояснение; неверный круг уже закрыт им с нулевой наградой. */
+export function applySoloAnswerVerdict(state: Readonly<SoloFlowState>, response: SoloRoundResponse): SoloFlowState {
+  if (!matchesPending(state, 'answer', response)) return state as SoloFlowState;
   return {
-    questionId: currentSoloQuestion(state)!.id,
-    selectedAnswer: state.selectedOption,
-    responseTimeMs: state.responseTimes[state.responseTimes.length - 1] ?? 0,
-    ...(skillDistance === undefined ? {} : { skillDistance }),
+    ...state,
+    stage: 'resolution',
+    pending: null,
+    syncFailed: false,
+    lastCorrect: response.correct,
+    explanation: response.explanation,
+    correctCount: response.correct ? state.correctCount + 1 : state.correctCount,
+    result: response.result ?? state.result,
   };
 }
 
@@ -133,21 +207,53 @@ function afterRound(state: SoloFlowState, session: SoloRunSession): SoloFlowStat
   return { ...state, session, stage: soloRunView(session).completed ? 'result' : 'question' };
 }
 
-/** Верный ответ даёт попытку; неверный закрывает круг с нулём и идёт дальше без мини-игры. */
+/** Верный ответ даёт попытку; неверный круг сервер уже закрыл, остаётся перейти дальше. */
 export function continueSoloAfterResolution(state: Readonly<SoloFlowState>): SoloFlowState {
+  if (state.stage !== 'resolution') return state as SoloFlowState;
   if (state.lastCorrect) return { ...state, stage: 'hammer' };
-  const session = applySoloSessionRound(requireSession(state), 0);
-  return afterRound({ ...state, roundInputs: [...state.roundInputs, currentRoundInput(state)] }, session);
+  return afterRound({ ...state }, applySoloSessionRound(requireSession(state), 0));
 }
 
+/** Удар измерен на устройстве; сервер получает расстояние, награду считает сам. */
 export function completeSoloHammer(state: Readonly<SoloFlowState>, distance: number): SoloFlowState {
-  const scored = scoreSkillDistance(distance, state.skillResults, state.config);
-  const session = applySoloSessionRound(requireSession(state), scored.progressAwarded);
+  const question = currentSoloQuestion(state);
+  if (state.stage !== 'hammer' || !question) return state as SoloFlowState;
+  return {
+    ...state,
+    stage: 'submitting',
+    syncFailed: false,
+    pending: {
+      kind: 'hammer',
+      request: {
+        roundIndex: requireSession(state).run.roundsPlayed,
+        questionId: question.id,
+        skillDistance: distance,
+      },
+    },
+  };
+}
+
+/** Итог удара от сервера: награда и прогресс его, клиент только отражает их в своих полосах. */
+export function applySoloHammerVerdict(state: Readonly<SoloFlowState>, response: SoloRoundResponse): SoloFlowState {
+  if (!matchesPending(state, 'hammer', response) || response.awaitingHammer) return state as SoloFlowState;
+  const session = applySoloSessionRound(requireSession(state), response.progressAwarded);
   return afterRound({
     ...state,
-    skillResults: [...state.skillResults, scored.result],
-    roundInputs: [...state.roundInputs, currentRoundInput(state, distance)],
+    pending: null,
+    syncFailed: false,
+    skillResults: [...state.skillResults, response.skillResult ?? 'miss'],
+    result: response.result ?? state.result,
   }, session);
+}
+
+/** Запрос не дошёл после всех повторов: круг не потерян, его можно отправить снова. */
+export function failSoloSync(state: Readonly<SoloFlowState>, error: string): SoloFlowState {
+  if (!state.pending) return state as SoloFlowState;
+  return { ...state, syncFailed: true, error };
+}
+
+export function retrySoloSync(state: Readonly<SoloFlowState>): SoloFlowState {
+  return state.pending ? { ...state, syncFailed: false, error: undefined } : state as SoloFlowState;
 }
 
 export function soloFlowView(state: Readonly<SoloFlowState>): SoloRunView | null {

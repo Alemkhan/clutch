@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ApiError, completeSoloRun, fetchMyRuns, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError, startAsyncMatch, startSoloRun } from './api';
+import { ApiError, answerSoloRound, checkTrainingAnswer, fetchMyRuns, fetchSoloRunSnapshot, fetchTrainingQuestions, hammerSoloRound, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError, startAsyncMatch, startSoloRun } from './api';
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -88,13 +88,33 @@ describe('solo run and my-runs calls', () => {
     expect((init.headers as Record<string, string>).Authorization).toBe('Bearer guest-token');
   });
 
-  it('posts solo start and complete to their own routes', async () => {
+  it('posts solo start, answer and hammer to their own routes, and reads the snapshot with GET', async () => {
     const fetchMock = stubApi();
     await startSoloRun('geography');
-    await completeSoloRun('run/1', { rounds: [] });
-    const paths = fetchMock.mock.calls.map(([input]) => String(input));
+    await answerSoloRound('run/1', { roundIndex: 0, questionId: 'q', selectedAnswer: 'a', responseTimeMs: 5 });
+    await hammerSoloRound('run/1', { roundIndex: 0, questionId: 'q', skillDistance: 0.1 });
+    await fetchSoloRunSnapshot('run/1');
+    const calls = fetchMock.mock.calls as unknown as [string, RequestInit][];
+    const paths = calls.map(([input]) => String(input));
     expect(paths).toContain('/api/solo-runs');
-    expect(paths).toContain('/api/solo-runs/run%2F1/complete');
+    expect(paths).toContain('/api/solo-runs/run%2F1/answer');
+    expect(paths).toContain('/api/solo-runs/run%2F1/hammer');
+    const snapshot = calls.find(([path, init]) => path === '/api/solo-runs/run%2F1' && init.method === 'GET');
+    expect(snapshot).toBeDefined();
+    // Расстояние удара уходит как есть, награду клиент не присылает.
+    const hammer = calls.find(([path]) => path.endsWith('/hammer'));
+    expect(JSON.parse(String(hammer?.[1].body))).toEqual({ roundIndex: 0, questionId: 'q', skillDistance: 0.1 });
+  });
+
+  it('asks the server for mistake-training questions and verdicts', async () => {
+    const fetchMock = stubApi();
+    await fetchTrainingQuestions(['capital_li']);
+    await checkTrainingAnswer('capital_li', 'Вадуц');
+    const calls = fetchMock.mock.calls as unknown as [string, RequestInit][];
+    const questions = calls.find(([path]) => path === '/api/training/questions');
+    const check = calls.find(([path]) => path === '/api/training/check');
+    expect(JSON.parse(String(questions?.[1].body))).toEqual({ ids: ['capital_li'] });
+    expect(JSON.parse(String(check?.[1].body))).toEqual({ questionId: 'capital_li', answer: 'Вадуц' });
   });
 
   it('sends the rematch invite to the solo route and to the race route respectively', async () => {

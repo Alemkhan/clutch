@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import type { Question } from '@clutch/shared';
+import type { PublicQuestion } from '@clutch/shared';
 import { OpenAnswerInput } from './OpenAnswerInput';
 import { TimerBar } from './TimerBar';
 import { playSound } from '../lib/sounds';
@@ -16,7 +16,7 @@ const QUESTION_TIME_MS = 15_000;
 const FEEDBACK_DELAY_MS = 200;
 
 interface QuestionScreenProps {
-  question: Question;
+  question: PublicQuestion;
   onAnswer: (optionId: string, timeMs: number) => void;
 }
 

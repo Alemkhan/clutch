@@ -19,6 +19,7 @@ import {
 } from '@clutch/shared';
 import app from '../apps/api/src/index';
 import { createTestD1, type TestD1 } from './helpers/testD1';
+import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
 const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
@@ -102,7 +103,7 @@ async function start(db: TestD1, label: string): Promise<StartSoloRunResponse> {
 }
 
 function finish(db: TestD1, label: string, runId: string, rounds: AsyncMatchRoundInput[]) {
-  return request(db, `/api/solo-runs/${runId}/complete`, guest(label).authorization, { rounds });
+  return playRounds((path, body) => request(db, path, guest(label).authorization, body), runId, rounds);
 }
 
 function rowOf(db: TestD1, id: string) {
@@ -177,11 +178,11 @@ describe('solo run', () => {
     expect(run.roundCap).toBe(SOLO_ROUND_CAP);
 
     // Четыре точных удара по 25: цель достигнута на четвёртом круге.
-    const response = await finish(db, 'ann', run.runId, inputs(run.questions, 4, true));
+    const response = await finish(db, 'ann', run.runId, roundInputs(fullQuestions(db, run.runId), 4, true));
     expect(response.status).toBe(200);
     const result = await response.json() as CompleteSoloRunResponse;
     expect(result).toMatchObject({ progress: 100, roundsPlayed: 4, reachedTarget: true, correctCount: 4 });
-    expect(result.par).toBe(setPar(run.questions));
+    expect(result.par).toBe(setPar(fullQuestions(db, run.runId)));
     expect(result.score).toBe(soloScore(4, result.par));
     expect(rowOf(db, run.runId)).toMatchObject({
       status: 'completed',
@@ -192,7 +193,7 @@ describe('solo run', () => {
       rules_version: SOLO,
     });
 
-    const again = await finish(db, 'ann', run.runId, inputs(run.questions, 1, false));
+    const again = await finish(db, 'ann', run.runId, roundInputs(fullQuestions(db, run.runId), 4, true));
     expect(await again.json()).toEqual(result);
   });
 
@@ -200,7 +201,7 @@ describe('solo run', () => {
     const db = database();
     const run = await start(db, 'bob');
     expect(run.questions.length).toBeGreaterThanOrEqual(SOLO_ROUND_CAP);
-    const response = await finish(db, 'bob', run.runId, inputs(run.questions, SOLO_ROUND_CAP, false));
+    const response = await finish(db, 'bob', run.runId, roundInputs(fullQuestions(db, run.runId), SOLO_ROUND_CAP, false));
     expect(response.status).toBe(200);
     expect(await response.json()).toMatchObject({
       progress: 0, roundsPlayed: SOLO_ROUND_CAP, reachedTarget: false,
@@ -215,7 +216,7 @@ describe('solo run', () => {
   it('keeps the run open when the prefix does not finish it', async () => {
     const db = database();
     const run = await start(db, 'dan');
-    expect((await finish(db, 'dan', run.runId, inputs(run.questions, 4, false))).status).toBe(400);
+    expect((await finish(db, 'dan', run.runId, roundInputs(fullQuestions(db, run.runId), 4, false))).status).toBe(400);
     expect(rowOf(db, run.runId)).toMatchObject({ status: 'in_progress' });
   });
 
@@ -227,9 +228,9 @@ describe('solo run', () => {
     expect(run.pace?.rounds).toHaveLength(4);
 
     // Темп добирает 100 на четвёртом круге, но забег игрока от этого не кончается.
-    expect((await finish(db, 'eve', run.runId, inputs(run.questions, 4, false))).status).toBe(400);
+    expect((await finish(db, 'eve', run.runId, roundInputs(fullQuestions(db, run.runId), 4, false))).status).toBe(400);
     expect(rowOf(db, run.runId)).toMatchObject({ status: 'in_progress' });
-    const full = await finish(db, 'eve', run.runId, inputs(run.questions, SOLO_ROUND_CAP, false));
+    const full = await finish(db, 'eve', run.runId, roundInputs(fullQuestions(db, run.runId), SOLO_ROUND_CAP, false));
     expect(full.status).toBe(200);
     expect(await full.json()).toMatchObject({ roundsPlayed: SOLO_ROUND_CAP, reachedTarget: false });
   });
@@ -256,14 +257,14 @@ describe('solo run', () => {
   it('refuses another player, a race match id and unauthenticated calls', async () => {
     const db = database();
     const run = await start(db, 'hal');
-    expect((await finish(db, 'mallory', run.runId, inputs(run.questions, 4, true))).status).toBe(404);
-    expect((await request(db, `/api/solo-runs/${run.runId}/complete`, '', { rounds: [] })).status).toBe(401);
+    expect((await finish(db, 'mallory', run.runId, roundInputs(fullQuestions(db, run.runId), 4, true))).status).toBe(404);
+    expect((await request(db, `/api/solo-runs/${run.runId}/answer`, '', {})).status).toBe(401);
 
     const race = await request(db, '/api/async-matches', guest('ivy').authorization, {
       displayName: 'ivy', category: 'geography',
     });
     const raceMatch = await race.json() as { matchId: string; questions: Question[] };
-    expect((await finish(db, 'ivy', raceMatch.matchId, inputs(raceMatch.questions, 4, true))).status).toBe(409);
+    expect((await finish(db, 'ivy', raceMatch.matchId, roundInputs(raceMatch.questions, 4, true))).status).toBe(409);
   });
 
   it('keeps the race mode working end to end', async () => {
@@ -273,7 +274,7 @@ describe('solo run', () => {
     expect(started.status).toBe(201);
     const match = await started.json() as { matchId: string; questions: Question[] };
     const done = await request(db, `/api/async-matches/${match.matchId}/complete`, auth, {
-      rounds: inputs(match.questions, 4, true),
+      rounds: roundInputs(match.questions, 4, true),
     });
     expect(done.status).toBe(200);
     expect(await done.json()).toMatchObject({ playerProgress: 100 });

@@ -128,7 +128,7 @@ describe('R2b request shape limits', () => {
     expect(isRoundInput({ ...validRound, responseTimeMs: 60_001 })).toBe(false);
   });
 
-  it.each(['/api/async-matches', '/api/solo-runs'])(
+  it.each(['/api/async-matches'])(
     'rejects more than the largest set of rounds before looking up the match (%s)',
     async (path) => {
       const db = database();
@@ -144,6 +144,18 @@ describe('R2b request shape limits', () => {
       expect(await response.json()).toEqual({ error: 'Invalid rounds.' });
     },
   );
+
+  it('rejects a solo round index beyond the largest set before looking up the run', async () => {
+    const db = database();
+    const limiter = new FakeRateLimiter('allow');
+    const response = await app.request('/api/solo-runs/no-such-run/answer', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: guestAuthorization('huge-index') },
+      body: JSON.stringify({ roundIndex: MAX_DAILY_SET_SIZE, questionId: 'q', selectedAnswer: 'a', responseTimeMs: 1 }),
+    }, env(db, limiter));
+    expect(response.status).toBe(400);
+    expect(await response.json()).toEqual({ error: 'Invalid answer.' });
+  });
 
   it('rejects more rounds than the match set holds', async () => {
     const db = database();
@@ -183,6 +195,16 @@ describe('R2b route rate limits', () => {
       method: 'POST',
       headers: { authorization: guestAuthorization('complete'), 'content-type': 'application/json' },
       body: JSON.stringify({ rounds: [validRound] }),
+    }],
+    ['solo-round:guest:', '/api/solo-runs/not-present/answer', {
+      method: 'POST',
+      headers: { authorization: guestAuthorization('solo-round'), 'content-type': 'application/json' },
+      body: JSON.stringify({ roundIndex: 0, questionId: 'q', selectedAnswer: 'a', responseTimeMs: 1 }),
+    }],
+    ['training:guest:', '/api/training/check', {
+      method: 'POST',
+      headers: { authorization: guestAuthorization('training'), 'content-type': 'application/json' },
+      body: JSON.stringify({ questionId: 'capital_bf', answer: 'x' }),
     }],
     ['leaderboard:203.0.113.9', '/api/leaderboard', {
       headers: { 'CF-Connecting-IP': '203.0.113.9' },

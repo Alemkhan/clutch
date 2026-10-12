@@ -22,6 +22,7 @@ import app from '../apps/api/src/index';
 import { listCompletedRuns, toRunSummary } from '../apps/api/src/matches/historyRepository';
 import { insertInviteOnce, insertOpenInviteOnce } from '../apps/api/src/notifications/repository';
 import { createTestD1, type TestD1 } from './helpers/testD1';
+import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
 const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
@@ -88,15 +89,6 @@ function call(db: TestD1, label: string, path: string, body?: unknown) {
   }, executionCtx);
 }
 
-function inputs(questions: Question[], count: number): AsyncMatchRoundInput[] {
-  return questions.slice(0, count).map((question) => ({
-    questionId: question.id,
-    selectedAnswer: question.answerType === 'open_answer' ? question.correctAnswers![0] : question.correctOptionId,
-    responseTimeMs: 1000,
-    skillDistance: 0,
-  }));
-}
-
 /** Завершённая соло-запись на наборе 0: четыре точных удара, дошла до цели. */
 function insertRecord(db: TestD1, id: string, playerId: string) {
   let progress = 0;
@@ -143,7 +135,7 @@ async function playFriend(db: TestD1, label = 'bob') {
   });
   expect(started.status).toBe(201);
   const run = await started.json() as StartSoloRunResponse;
-  const done = await call(db, label, `/api/solo-runs/${run.runId}/complete`, { rounds: inputs(run.questions, 4) });
+  const done = await playRounds((path, body) => call(db, label, path, body), run.runId, roundInputs(fullQuestions(db, run.runId), 4, true));
   await Promise.all(pending);
   expect(done.status).toBe(200);
   return { run, result: await done.json() as CompleteSoloRunResponse };
@@ -200,7 +192,7 @@ describe('friend duel: out of the competition', () => {
       displayName: 'bob', category: 'geography', rematchInviteId: OPEN_INVITE,
     });
     const run = await started.json() as StartSoloRunResponse;
-    await call(db, 'bob', `/api/solo-runs/${run.runId}/complete`, { rounds: inputs(run.questions, 4) });
+    await playRounds((path, body) => call(db, 'bob', path, body), run.runId, roundInputs(fullQuestions(db, run.runId), 4, true));
     await Promise.all(pending);
     expect(inviteCount(db)).toBe(before);
     for (const [, init] of fetchMock.mock.calls as Array<[string, { body: string }]>) {
@@ -284,7 +276,7 @@ describe('friend duel: what stays competitive', () => {
     expect(started.status).toBe(201);
     const run = await started.json() as StartSoloRunResponse;
     expect(run.rulesVersion).toBe(SOLO);
-    const done = await call(db, 'bob', `/api/solo-runs/${run.runId}/complete`, { rounds: inputs(run.questions, 4) });
+    const done = await playRounds((path, body) => call(db, 'bob', path, body), run.runId, roundInputs(fullQuestions(db, run.runId), 4, true));
     expect(done.status).toBe(200);
     expect(rowOf(db, run.runId)).toMatchObject({ rules_version: SOLO, reached_target: 1 });
     const board = await call(db, 'carol', '/api/solo-leaderboard?category=geography');
@@ -297,7 +289,7 @@ describe('friend duel: what stays competitive', () => {
     const started = await call(db, 'bob', '/api/solo-runs', { displayName: 'bob', category: 'geography', botLevel: 'amateur' });
     const run = await started.json() as StartSoloRunResponse;
     expect(run.rulesVersion).toBe(PRACTICE_RULES_VERSION);
-    await call(db, 'bob', `/api/solo-runs/${run.runId}/complete`, { rounds: inputs(run.questions, 4) });
+    await playRounds((path, body) => call(db, 'bob', path, body), run.runId, roundInputs(fullQuestions(db, run.runId), 4, true));
     const board = await call(db, 'carol', '/api/solo-leaderboard?category=geography');
     expect((await board.json() as SoloLeaderboardResponse).entries).toEqual([]);
     const mine = await call(db, 'bob', '/api/my-runs');

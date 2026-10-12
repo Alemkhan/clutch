@@ -3,7 +3,7 @@ import {
   SOLO_TARGET_PROGRESS,
   evaluateSoloRun,
   type Opponent,
-  type Question,
+  type PublicQuestion,
   type SoloRunRound,
   type SoloRunState,
 } from '@clutch/shared';
@@ -13,7 +13,7 @@ import {
  * в shared/soloRun.ts; здесь только хранение и выдача данных экрану. Без DOM и таймеров.
  */
 export interface SoloRunSession {
-  questions: readonly Question[];
+  questions: readonly PublicQuestion[];
   /** Темп соперника: данные для отрисовки. В правила забега не попадает. null — записи нет. */
   pace: Opponent | null;
   rounds: readonly SoloRunRound[];
@@ -37,7 +37,7 @@ export interface SoloRunView {
 }
 
 export function createSoloRunSession(
-  questions: readonly Question[],
+  questions: readonly PublicQuestion[],
   pace: Opponent | null = null,
 ): SoloRunSession {
   return { questions, pace, rounds: [], run: evaluate(questions, []) };
@@ -56,7 +56,7 @@ export function applySoloSessionRound(
 }
 
 /** Единственная точка правил: shared сам бросит на круге после конца и закроет забег по набору. */
-function evaluate(questions: readonly Question[], rounds: readonly SoloRunRound[]): SoloRunState {
+function evaluate(questions: readonly PublicQuestion[], rounds: readonly SoloRunRound[]): SoloRunState {
   return evaluateSoloRun(questions.map((question) => question.id), rounds);
 }
 

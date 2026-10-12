@@ -2,16 +2,22 @@ import type {
   CategoryId,
   CompleteAsyncMatchRequest,
   CompleteAsyncMatchResponse,
-  CompleteSoloRunRequest,
-  CompleteSoloRunResponse,
   CreateFriendInviteResponse,
   GuestSessionResponse,
   PracticeLevelId,
   MyRunsResponse,
+  SoloAnswerRequest,
+  SoloHammerRequest,
+  SoloRoundResponse,
+  SoloRunSnapshot,
   StartSoloRunRequest,
   StartSoloRunResponse,
   StartAsyncMatchRequest,
   StartAsyncMatchResponse,
+  TrainingCheckRequest,
+  TrainingCheckResponse,
+  TrainingQuestionsRequest,
+  TrainingQuestionsResponse,
 } from '@clutch/shared';
 import { getTelegramIdentity } from './telegram';
 
@@ -232,15 +238,49 @@ export function startSoloRun(
   return apiFetch('/api/solo-runs', { method: 'POST', body: JSON.stringify(body) }, signal);
 }
 
-export function completeSoloRun(
+/** Круг соло-забега, шаг 1: ответ. Повтор безопасен: сервер вернёт уже записанный итог круга. */
+export function answerSoloRound(
   runId: string,
-  body: CompleteSoloRunRequest,
+  body: SoloAnswerRequest,
   signal?: AbortSignal,
-): Promise<CompleteSoloRunResponse> {
-  return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}/complete`, {
+): Promise<SoloRoundResponse> {
+  return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}/answer`, {
     method: 'POST',
     body: JSON.stringify(body),
   }, signal);
+}
+
+/** Круг соло-забега, шаг 2: удар молотка. Повтор безопасен так же. */
+export function hammerSoloRound(
+  runId: string,
+  body: SoloHammerRequest,
+  signal?: AbortSignal,
+): Promise<SoloRoundResponse> {
+  return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}/hammer`, {
+    method: 'POST',
+    body: JSON.stringify(body),
+  }, signal);
+}
+
+/** Состояние забега для продолжения после закрытой вкладки. */
+export function fetchSoloRunSnapshot(runId: string, signal?: AbortSignal): Promise<SoloRunSnapshot> {
+  return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}`, { method: 'GET' }, signal);
+}
+
+/** Отработка ошибок: вопросы по сохранённым id (без ответов) собирает сервер. */
+export function fetchTrainingQuestions(ids: string[], signal?: AbortSignal): Promise<TrainingQuestionsResponse> {
+  const body: TrainingQuestionsRequest = { ids };
+  return apiFetch('/api/training/questions', { method: 'POST', body: JSON.stringify(body) }, signal);
+}
+
+/** Проверка ответа в отработке. Для вопроса с вариантами answer — текст выбранного варианта. */
+export function checkTrainingAnswer(
+  questionId: string,
+  answer: string,
+  signal?: AbortSignal,
+): Promise<TrainingCheckResponse> {
+  const body: TrainingCheckRequest = { questionId, answer };
+  return apiFetch('/api/training/check', { method: 'POST', body: JSON.stringify(body) }, signal);
 }
 
 /** before — nextCursor предыдущей страницы; приглашения приходят только с первой. */

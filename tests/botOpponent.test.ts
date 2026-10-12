@@ -16,15 +16,15 @@ describe('createBotOpponent', () => {
     const questions = generateMatch(10, 0.3, 'geography');
     const opponent = createBotOpponent(questions);
 
-    expect(DEFAULT_BOT_PROFILE.rewards).toEqual([18, 12, 0, 25, 18, 0, 18, 12, 25, 18]);
+    expect(DEFAULT_BOT_PROFILE.rewards.slice(0, 6)).toEqual([18, 25, 12, 18, 25, 12]);
     expect(opponent.id).toBe('clutch_bot');
     expect(opponent.displayName).toBe('Alex');
     expect(opponent.rounds.map((round) => round.progressAwarded))
-      .toEqual([18, 12, 0, 25, 18, 0, 18, 12]);
+      .toEqual([18, 25, 12, 18, 25, 12]);
     expect(opponent.rounds.map((round) => round.responseTimeMs))
-      .toEqual([2400, 2900, 3400, 3900, 2400, 2900, 3400, 3900]);
+      .toEqual([2400, 2900, 3400, 3900, 2400, 2900]);
     expect(opponent.rounds.map((round) => round.questionId))
-      .toEqual(questions.slice(0, 8).map((question) => question.id));
+      .toEqual(questions.slice(0, 6).map((question) => question.id));
   });
 
   it('maps a custom profile onto question ids without changing the API shape', () => {
@@ -66,11 +66,13 @@ describe('bot profile selection', () => {
   const supported = new Set<number>(Object.values(SKILL_REWARDS));
 
   it('defines four curves with the agreed 100% round', () => {
-    expect(cumulative(WEAK_BOT_PROFILE.rewards)).toEqual([12, 17, 17, 29, 29, 47, 47, 59, 59, 64]);
-    expect(reachedAt(WEAK_BOT_PROFILE)).toBe(0);
-    expect(reachedAt(MEDIUM_BOT_PROFILE)).toBe(10);
+    expect(reachedAt(WEAK_BOT_PROFILE)).toBe(17);
+    expect(reachedAt(MEDIUM_BOT_PROFILE)).toBe(13);
     expect(reachedAt(STRONG_BOT_PROFILE)).toBe(9);
-    expect(reachedAt(DEFAULT_BOT_PROFILE)).toBe(8);
+    expect(reachedAt(DEFAULT_BOT_PROFILE)).toBe(6);
+    // ступени между соседними уровнями - не меньше трёх кругов
+    const steps = [DEFAULT_BOT_PROFILE, STRONG_BOT_PROFILE, MEDIUM_BOT_PROFILE, WEAK_BOT_PROFILE].map(reachedAt);
+    for (let i = 1; i < steps.length; i += 1) expect(steps[i] - steps[i - 1]).toBeGreaterThanOrEqual(3);
     expect(new Set(BOT_PROFILES.map((p) => p.displayName)).size).toBe(4);
     expect(new Set(BOT_PROFILES.map((p) => p.id)).size).toBe(4);
   });
@@ -78,15 +80,15 @@ describe('bot profile selection', () => {
   it('uses only supported rewards and builds through createBotOpponent', () => {
     const questions = generateMatch(10, 0, 'history');
     for (const profile of BOT_PROFILES) {
-      expect(profile.rewards).toHaveLength(10);
+      expect(profile.rewards).toHaveLength(20);
       for (const reward of profile.rewards) expect(supported.has(reward)).toBe(true);
       expect(() => createBotOpponent(questions, profile)).not.toThrow();
     }
     const weak = createBotOpponent(questions, WEAK_BOT_PROFILE);
+    // на наборе из 10 вопросов слабый бот не доходит до 100%
     expect(weak.rounds).toHaveLength(10);
     const total = weak.rounds.reduce((sum, round) => sum + round.progressAwarded, 0);
-    expect(total).toBeGreaterThanOrEqual(60);
-    expect(total).toBeLessThanOrEqual(70);
+    expect(total).toBeLessThan(100);
   });
 
   it('is deterministic per set and player, and varies between sets', () => {

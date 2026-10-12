@@ -9,6 +9,7 @@ import { registerLeaderboardRoutes } from './routes/leaderboard';
 import { registerRematchRoutes } from './routes/rematch';
 import { registerMyRunsRoutes } from './routes/myRuns';
 import { registerSoloRunRoutes } from './routes/soloRuns';
+import { registerTrainingRoutes } from './routes/training';
 import { registerFriendInviteRoutes } from './routes/friendInvites';
 import { registerShareRoutes } from './routes/share';
 import { registerSystemRoutes } from './routes/system';
@@ -25,6 +26,7 @@ registerLeaderboardRoutes(app);
 registerRematchRoutes(app);
 registerMyRunsRoutes(app);
 registerSoloRunRoutes(app);
+registerTrainingRoutes(app);
 registerFriendInviteRoutes(app);
 registerLastStandRoutes(app);
 

@@ -14,7 +14,21 @@ import {
   scoreSkillDistance,
   validateMiniGameConfig,
 } from './clientMatchRules';
-import { createSampleOpponent } from './sampleData';
+
+/** Сценарий старой локальной практики: 10 кругов соперника, партия кончается на 8-м (достигнуто 100). */
+const scriptedOpponent: Opponent = {
+  id: 'contestant_001',
+  displayName: 'Alex',
+  rounds: [
+    [18, true], [12, true], [0, false], [25, true], [18, true], [0, false], [18, true], [12, true], [25, true], [18, true],
+  ].map(([progressAwarded, correct], index) => ({
+    questionId: `q${index + 1}`,
+    correct: correct as boolean,
+    responseTimeMs: 3000,
+    skillScore: (progressAwarded as number) / 25,
+    progressAwarded: progressAwarded as number,
+  })),
+};
 
 function questions(count: number): Question[] {
   return Array.from({ length: count }, (_, index) => ({
@@ -74,7 +88,7 @@ function play(
 describe('scripted opponent normalization', () => {
   it('maps the local 10-round script to real ids and truncates at round 8', () => {
     const matchQuestions = questions(10);
-    const opponent = createSampleOpponent(matchQuestions);
+    const opponent = normalizeScriptedOpponent(scriptedOpponent, matchQuestions);
     expect(opponent.rounds).toHaveLength(8);
     expect(opponent.rounds.map((round) => round.questionId)).toEqual(
       matchQuestions.slice(0, 8).map((question) => question.id),

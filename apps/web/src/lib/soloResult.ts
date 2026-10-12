@@ -1,4 +1,4 @@
-import type { CompleteSoloRunResponse } from '@clutch/shared';
+import type { CompleteSoloRunResponse, SoloRoundResponse } from '@clutch/shared';
 import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS } from '@clutch/shared';
 import type { SoloRunView } from './soloRunSession';
 
@@ -90,4 +90,29 @@ export function parseSoloCompletion(value: unknown, expectedRunId: string): Comp
     || !finite(response.score) || response.score < 0
     || !outcomeOk) return null;
   return response as CompleteSoloRunResponse;
+}
+
+const SKILL_RESULTS = new Set(['perfect', 'great', 'good', 'weak', 'miss']);
+
+/** Проверка ответа сервера по кругу: чужой или битый ответ в состояние забега не попадает. */
+export function parseSoloRound(value: unknown, expectedRunId: string): SoloRoundResponse | null {
+  if (!value || typeof value !== 'object') return null;
+  const response = value as Partial<SoloRoundResponse>;
+  const finite = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n);
+  if (response.runId !== expectedRunId
+    || !Number.isInteger(response.roundIndex) || (response.roundIndex as number) < 0
+    || typeof response.questionId !== 'string' || response.questionId.length === 0
+    || typeof response.correct !== 'boolean'
+    || typeof response.awaitingHammer !== 'boolean'
+    || typeof response.explanation !== 'string'
+    || !finite(response.progressAwarded) || response.progressAwarded < 0
+    || !finite(response.progress) || response.progress < 0 || response.progress > SOLO_TARGET_PROGRESS
+    || !finite(response.roundsPlayed) || response.roundsPlayed < 0
+    || (response.status !== 'in_progress' && response.status !== 'completed')
+    || typeof response.reachedTarget !== 'boolean'
+    || (response.skillResult !== null && !SKILL_RESULTS.has(response.skillResult as string))
+    || (response.awaitingHammer && !response.correct)) return null;
+  if (response.result !== null && response.result !== undefined
+    && !parseSoloCompletion(response.result, expectedRunId)) return null;
+  return { ...(response as SoloRoundResponse), result: response.result ?? null };
 }

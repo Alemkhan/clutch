@@ -33,7 +33,7 @@ describe('abandonedNote', () => {
   it('renders the note in the lobby only when given', () => {
     const props = {
       opponent: opponent([5, 5, 5]), status: 'ready' as const, source: 'player' as const,
-      onStart: vi.fn(), onRetry: vi.fn(), onLocalPractice: vi.fn(), onBack: vi.fn(),
+      onStart: vi.fn(), onRetry: vi.fn(), onBack: vi.fn(),
     };
     const withNote = renderToStaticMarkup(<Matchmaking {...props} abandonedNote="Запись оборвалась на 3-м вопросе" />);
     expect(withNote).toContain('Запись оборвалась на 3-м вопросе');

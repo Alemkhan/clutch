@@ -12,7 +12,6 @@ const opponent: Opponent = {
 const actions = {
   onStart: vi.fn(),
   onRetry: vi.fn(),
-  onLocalPractice: vi.fn(),
   onBack: vi.fn(),
 };
 
@@ -23,7 +22,6 @@ describe('Matchmaking states', () => {
     );
     expect(html).toContain('Ищем соперника');
     expect(html).not.toContain(opponent.displayName);
-    expect(html).not.toContain('Локальная практика');
   });
 
   it('shows recovery actions without pretending a match exists', () => {
@@ -38,7 +36,8 @@ describe('Matchmaking states', () => {
     );
     expect(html).toContain('Матчмейкинг временно недоступен.');
     expect(html).toContain('Повторить');
-    expect(html).toContain('Локальная практика');
+    // Вопросы есть только на сервере: офлайн-«практики» без него нет.
+    expect(html).not.toContain('Локальная практика');
     expect(html).not.toContain(opponent.displayName);
   });
 

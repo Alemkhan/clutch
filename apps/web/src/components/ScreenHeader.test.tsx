@@ -47,10 +47,10 @@ describe('ScreenHeader', () => {
     const screens = [
       renderToStaticMarkup(<CategorySelect onSelect={noop} onBack={noop} />),
       renderToStaticMarkup(
-        <Matchmaking opponent={opponent} status="ready" source="player" onStart={noop} onRetry={noop} onLocalPractice={noop} onBack={noop} />,
+        <Matchmaking opponent={opponent} status="ready" source="player" onStart={noop} onRetry={noop} onBack={noop} />,
       ),
       renderToStaticMarkup(<Profile onBack={noop} />),
-      renderToStaticMarkup(<Training questions={[question]} onAnswered={noop} onBack={noop} />),
+      renderToStaticMarkup(<Training questions={[question]} check={vi.fn()} onAnswered={noop} onBack={noop} />),
       renderToStaticMarkup(<LastStandIntro onStart={noop} onLeaderboard={noop} onBack={noop} />),
       renderToStaticMarkup(
         <LastStandLeaderboard view={{ status: 'loading' }} onRetry={noop} onClose={noop} />,

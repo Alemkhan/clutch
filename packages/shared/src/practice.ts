@@ -16,10 +16,10 @@ export interface PracticeLevel {
 
 /** От слабого к сильному. Профили ботов с наградами по кругам живут в api/matches/bots.ts. */
 export const PRACTICE_LEVELS: readonly PracticeLevel[] = [
-  { id: 'novice', name: 'Новичок', caption: '100% за 16 кругов' },
-  { id: 'amateur', name: 'Любитель', caption: '100% за 10 кругов' },
+  { id: 'novice', name: 'Новичок', caption: '100% за 17 кругов' },
+  { id: 'amateur', name: 'Любитель', caption: '100% за 13 кругов' },
   { id: 'skilled', name: 'Опытный', caption: '100% за 9 кругов' },
-  { id: 'master', name: 'Мастер', caption: '100% за 8 кругов' },
+  { id: 'master', name: 'Мастер', caption: '100% за 6 кругов' },
 ];
 
 export function isPracticeLevelId(value: unknown): value is PracticeLevelId {

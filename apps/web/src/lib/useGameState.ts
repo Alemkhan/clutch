@@ -9,9 +9,13 @@ import type {
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
 } from '@clutch/shared';
-import { loadPlayableMistakes, pruneUnknownMistakes, recordCorrectAnswer, recordMistake } from './mistakeLog';
-import { buildTrainingQuestions } from './trainingSession';
-import { createQuestions, createSampleOpponent } from './sampleData';
+import {
+  loadPlayableMistakes,
+  pruneUnknownMistakes,
+  recordCorrectAnswer,
+  recordMistake,
+  selectTrainingIds,
+} from './mistakeLog';
 import { startAsyncMatch } from './api';
 import { completionQueue, type CompletionQueueEvent } from './completionQueue';
 import {
@@ -46,7 +50,8 @@ export function useGameState() {
     status: 'practice',
     canRetry: false,
   });
-  const [trainingQuestions, setTrainingQuestions] = useState<Question[]>([]);
+  // Отработка хранит только id ошибок; вопросы и проверку ответа даёт сервер (см. MistakePractice).
+  const [trainingIds, setTrainingIds] = useState<string[]>([]);
   const recordedAnswerRef = useRef<{ questions: Question[]; index: number } | null>(null);
   const activeMatchIdRef = useRef<string>();
   const reportedCompletionRef = useRef<string>();
@@ -264,42 +269,22 @@ export function useGameState() {
     requestOnlineMatch(category, inviteId);
   }, [requestOnlineMatch]);
 
-  const useLocalPractice = useCallback(() => {
-    requestCoordinatorRef.current.cancel();
-    startingPreparedRef.current = false;
-    const questions = createQuestions(state.category);
-    const opponent = createSampleOpponent(questions);
-    setState(createMatchLobbyState({
-      category: state.category,
-      opponent,
-      questions,
-      matchSource: 'local',
-    }));
-    setMatchmaking({ status: 'ready' });
-  }, [state.category]);
-
   const replay = useCallback(() => {
     if (state.matchSource === 'player' || state.matchSource === 'bot') {
       requestOnlineMatch(state.category);
       return;
     }
+    // Вопросов без сервера больше нет: оффлайн-партию не из чего собрать, возвращаемся к выбору категории.
     requestCoordinatorRef.current.cancel();
     startingPreparedRef.current = false;
-    const questions = createQuestions(state.category);
-    setState(createMatchLobbyState({
-      category: state.category,
-      questions,
-      opponent: createSampleOpponent(questions),
-      matchSource: 'local',
-    }));
-    setMatchmaking({ status: 'ready' });
-  }, [requestOnlineMatch, state]);
+    setState({ ...createInitialGameState(), phase: 'categories' });
+  }, [requestOnlineMatch, state.category, state.matchSource]);
 
   const goToTraining = useCallback(() => {
     requestCoordinatorRef.current.cancel();
     startingPreparedRef.current = false;
     pruneUnknownMistakes();
-    setTrainingQuestions(buildTrainingQuestions(loadPlayableMistakes()));
+    setTrainingIds(selectTrainingIds(loadPlayableMistakes()));
     setState({ ...createInitialGameState(), phase: 'training' });
   }, []);
 
@@ -366,7 +351,6 @@ export function useGameState() {
     retryResultSave,
     retryMatchmaking,
     startRematch,
-    useLocalPractice,
     start,
     replay,
     answer,
@@ -381,7 +365,7 @@ export function useGameState() {
     goToSolo,
     goToMyRuns,
     recordTrainingAnswer,
-    trainingQuestions,
+    trainingIds,
     goHome,
   };
 }

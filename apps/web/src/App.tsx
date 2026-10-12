@@ -159,7 +159,7 @@ export default function App() {
         {game.phase === 'training' && (
           <motion.div key="training" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <TrainingHub
-              questions={game.trainingQuestions}
+              mistakeIds={game.trainingIds}
               onAnswered={game.recordTrainingAnswer}
               onStartBot={startPractice}
               onPlayingChange={setTrainingPlaying}
@@ -208,7 +208,6 @@ export default function App() {
               error={game.matchmakingError}
               onStart={game.start}
               onRetry={game.retryMatchmaking}
-              onLocalPractice={game.useLocalPractice}
               onBack={game.goToCategories}
             />
           </motion.div>
@@ -227,7 +226,7 @@ export default function App() {
         {game.phase === 'resolution' && game.currentQuestion && (
           <motion.div key="resolution" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <ResolutionScreen
-              question={game.currentQuestion}
+              explanation={game.currentQuestion.explanation}
               correct={game.lastCorrect}
               selectedOptionId={game.selectedOption}
               onContinue={game.continueAfterResolution}

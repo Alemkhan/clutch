@@ -1,4 +1,19 @@
-import { isKnownQuestionId, questionIdCategory, type CategoryId } from '@clutch/shared';
+import type { CategoryId } from '@clutch/shared';
+
+// Таблицы стран, флагов и языков в браузер не отдаются (в них ответы), поэтому «знает ли игра этот id» клиент
+// решает только по форме id: `{шаблон}_{код}`. Существует ли сущность, проверяет сервер и возвращает unknownIds.
+const QUESTION_ID = /^(hist_flag|lang|open_outline_country|open_flag_country|open_capital|outline_country|flag_capital|flag_country|capital_fixed|capital)_[a-z0-9_-]{1,40}$/;
+
+function isKnownQuestionId(id: unknown): id is string {
+  return typeof id === 'string' && QUESTION_ID.test(id);
+}
+
+function questionIdCategory(id: unknown): CategoryId | null {
+  if (!isKnownQuestionId(id)) return null;
+  if (id.startsWith('hist_flag_')) return 'history';
+  if (id.startsWith('lang_')) return 'languages';
+  return 'geography';
+}
 
 export interface MistakeEntry {
   /** Question id, `{template}_{entity code}`: enough to rebuild the question. */
@@ -104,6 +119,15 @@ export function loadPlayableMistakes(): MistakeEntry[] {
 
 export function mistakeCount(): number {
   return loadPlayableMistakes().length;
+}
+
+/** Убирает записи, о которых сервер сказал, что вопрос из них больше не собрать (unknownIds). */
+export function removeMistakes(ids: readonly string[]): void {
+  if (ids.length === 0) return;
+  const gone = new Set(ids);
+  const all = loadMistakes();
+  const kept = all.filter((e) => !gone.has(e.id));
+  if (kept.length !== all.length) save(kept);
 }
 
 /** Drops entries whose question no longer exists, so they stop occupying the 200 slots. */

@@ -15,7 +15,9 @@ import {
   type MiniGameConfig,
   type Opponent,
   type OpponentRound,
+  type PublicQuestion,
   type Question,
+  type SoloRunSnapshot,
   type StartAsyncMatchResponse,
   type StartSoloRunResponse,
   type SkillResult,
@@ -23,7 +25,8 @@ import {
 
 const supportedRewards = new Set<number>(Object.values(SKILL_REWARDS));
 
-function validateQuestions(questions: readonly Question[]): void {
+/** Форма вопроса без ответов: то, что нужно для показа. Ответов здесь быть не должно и не требуется. */
+function validatePublicQuestions(questions: readonly PublicQuestion[]): void {
   if (questions.length === 0) throw new Error('Match questions must not be empty.');
   const ids = new Set<string>();
   for (const question of questions) {
@@ -43,7 +46,18 @@ function validateQuestions(questions: readonly Question[]): void {
       }
       optionIds.add(option.id);
     }
-    if (question.answerType === 'multiple_choice' && !optionIds.has(question.correctOptionId)) {
+    if (question.answerType === 'multiple_choice' && optionIds.size === 0) {
+      throw new Error('Match question has no options.');
+    }
+    ids.add(question.id);
+  }
+}
+
+/** Гоночный матч приходит с ответами (клиент сам считает круги): проверяем и их. */
+function validateQuestions(questions: readonly Question[]): void {
+  for (const question of questions) {
+    if (question.answerType === 'multiple_choice'
+      && !(Array.isArray(question.options) && question.options.some((option) => option?.id === question.correctOptionId))) {
       throw new Error('Match question has no valid correct option.');
     }
     if (question.answerType === 'open_answer'
@@ -51,8 +65,8 @@ function validateQuestions(questions: readonly Question[]): void {
         || question.correctAnswers.some((answer) => typeof answer !== 'string' || answer.length === 0))) {
       throw new Error('Match open question has no valid answer.');
     }
-    ids.add(question.id);
   }
+  validatePublicQuestions(questions);
 }
 
 export function validateMiniGameConfig(value: unknown): MiniGameConfig {
@@ -177,7 +191,7 @@ export function normalizeOnlineMatch(match: StartAsyncMatchResponse): Normalized
 
 export interface NormalizedSoloRun {
   runId: string;
-  questions: Question[];
+  questions: PublicQuestion[];
   /** Темп для полосы; null — записи нет или она не подходит к набору. Забег темп не завершает. */
   pace: Opponent | null;
   config: MiniGameConfig;
@@ -187,7 +201,7 @@ export interface NormalizedSoloRun {
 }
 
 /** Темп — только картинка: битую запись не рисуем, но и забег из-за неё не отменяем. */
-function normalizeSoloPace(pace: Opponent | null, questions: readonly Question[]): Opponent | null {
+function normalizeSoloPace(pace: Opponent | null, questions: readonly PublicQuestion[]): Opponent | null {
   if (!pace || typeof pace.id !== 'string' || pace.id.length === 0
     || typeof pace.displayName !== 'string' || pace.displayName.trim().length === 0
     || !Array.isArray(pace.rounds) || pace.rounds.length > questions.length) return null;
@@ -213,7 +227,7 @@ export function normalizeSoloRun(run: StartSoloRunResponse, practice = false): N
     || run.target !== SOLO_TARGET_PROGRESS || run.roundCap !== SOLO_ROUND_CAP) {
     throw new Error('Solo run conditions are not supported by this client.');
   }
-  validateQuestions(run.questions);
+  validatePublicQuestions(run.questions);
   const pace = normalizeSoloPace(run.pace ?? null, run.questions);
   if (practice && !pace) throw new Error('Practice run has no usable bot.');
   return {
@@ -223,6 +237,36 @@ export function normalizeSoloRun(run: StartSoloRunResponse, practice = false): N
     config: validateMiniGameConfig(CURRENT_SOLO_RUN_CONDITIONS.miniGame.config),
     bankExhausted: run.bankExhausted === true,
     friendDuel,
+  };
+}
+
+/** Забег, продолженный после закрытой вкладки: те же проверки, что у старта, плюс сыгранные круги. */
+export interface NormalizedSoloSnapshot extends NormalizedSoloRun {
+  category: SoloRunSnapshot['category'];
+  rounds: SoloRunSnapshot['rounds'];
+  status: SoloRunSnapshot['status'];
+  result: SoloRunSnapshot['result'];
+}
+
+export function normalizeSoloSnapshot(snapshot: SoloRunSnapshot, practice = false): NormalizedSoloSnapshot {
+  const run = normalizeSoloRun(snapshot, practice);
+  if (!Array.isArray(snapshot.rounds) || snapshot.rounds.length > run.questions.length
+    || (snapshot.status !== 'in_progress' && snapshot.status !== 'completed')
+    || (snapshot.category !== 'geography' && snapshot.category !== 'history' && snapshot.category !== 'languages')) {
+    throw new Error('Solo run snapshot is invalid.');
+  }
+  snapshot.rounds.forEach((round, index) => {
+    if (!round || round.questionId !== run.questions[index].id || typeof round.correct !== 'boolean'
+      || !supportedRewards.has(round.progressAwarded) || !Number.isFinite(round.responseTimeMs)) {
+      throw new Error('Solo run snapshot has an invalid round.');
+    }
+  });
+  return {
+    ...run,
+    category: snapshot.category,
+    rounds: snapshot.rounds,
+    status: snapshot.status,
+    result: snapshot.result ?? null,
   };
 }
 

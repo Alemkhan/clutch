@@ -1,10 +1,15 @@
 # Clutch
 
-Competitive trivia game. Knowledge earns the attempt. Skill wins the game.
+Competitive trivia game with a skill mini-game.
 
 Clutch is a Russian-language, mobile-first Telegram Mini App with asynchronous
-opponents: knowledge earns a skill attempt, and its quality earns match progress.
-It also runs in a regular browser.
+opponents: a correct answer earns a skill attempt, and the quality of the attempt
+earns progress. The main mode is a **solo run to 100% at your own pace**: a saved
+run of another player (or a bot) is shown on the progress bar but cannot end your
+run, and runs are compared by laps normalized to the difficulty of the question
+set. It also runs in a regular browser. (The earlier slogan "Skill wins the game"
+was retired: a playtest showed knowledge, not accuracy, decided the outcome. See
+[Product](docs/PRODUCT.md), DEC-01.)
 
 ## Project context
 
@@ -19,8 +24,20 @@ for the task:
 - [Art, animation, and audio brief](docs/ART_DIRECTION.md)
 - [Local, browser, and Telegram testing guide](docs/TESTING.md)
 - [Production release checklist](docs/RELEASE.md)
+- [First playtest report](docs/PLAYTEST_01.md) (historical: measured under the old race rules)
+- [Last Stand mode notes](docs/COLLISION_MODE.md)
+- [Content review gate](docs/CONTENT_REVIEW.md)
 
-Status as of 2026-10-01: playable prototype, not production-ready. The API and
+Status as of 2026-10-12: playable prototype, not production-ready. The main mode
+is now the solo run (`solo-to-100-v2`); training (`solo-practice-v1`), friend duels
+by link (`solo-friend-v1`, outside the ranking), rematch invites, "My runs" and a
+four-section bottom navigation exist. The old race (`race-to-100-v3`) remains in
+code only for previously issued invites. **Known open issue:** correct answers are
+sent to the client and country data ships in the browser bundle; a fix is in
+progress and not done. The paragraph below describes the earlier race-era
+hardening (as of 2026-10-01); it still applies to the shared infrastructure.
+
+The API and
 client share match transitions; the API enforces ghost eligibility and versioned
 conditions (R1, migration 0002 required). Authenticated match ownership is in
 place, R2b bounds match inputs and request frequency, R3 durably retries
@@ -29,7 +46,8 @@ replay explicit and cancellable. R5a makes the hammer motion frame-rate
 independent and aligns its visual zones with shared scoring. R5b derives the
 15-second question timer from an absolute deadline and settles answer/timeout
 through a one-shot gate. R5c adds a deterministic pressure curve: successful
-hits narrow and shift the target under shared client/server rules. Broader abuse
+hits narrow and shift the target under shared client/server rules. The hammer was
+later made harder (narrower perfect zone, variable marker speed). Broader abuse
 protection and final art still need work.
 The remote deployment state has not been verified by this repository audit.
 
@@ -69,9 +87,11 @@ Web: http://localhost:5173
 API: http://localhost:8787
 
 After pulling schema changes, run the local migration command again before
-starting the API. Migration `0002_match_conditions.sql` preserves existing runs,
-but does not admit legacy records with unknown conditions to the opponent pool.
-Unfinished legacy matches must be restarted; completed results are not recalculated.
+starting the API (migrations 0001–0009 are applied locally; 0009 rebuilds the
+invites table so an invite may have no recipient). Migration
+`0002_match_conditions.sql` preserves existing runs, but does not admit legacy
+records with unknown conditions to the opponent pool. Unfinished legacy matches
+must be restarted; completed results are not recalculated.
 
 ## Checks
 
@@ -178,12 +198,20 @@ Terminal 4xx responses remain visible and are not retried. Local runs
 are labeled as practice and are excluded from confirmed online profile stats.
 The queue covers completed payloads only; it does not restore a match in progress.
 
+The text above describes the race path (`POST /api/async-matches`), kept for
+previously issued invites. The current solo flow uses `POST /api/solo-runs`,
+`POST /api/solo-runs/:id/complete` and `GET /api/solo-leaderboard`; see
+[Architecture](docs/ARCHITECTURE.md).
+
 API:
 
 - `POST /api/auth/guest` — issue a signed browser guest session.
-- `POST /api/async-matches` — create a run and find a ghost.
-- `POST /api/async-matches/:id/complete` — validate and store its rounds.
-- `GET /api/leaderboard?category=geography` — best completed runs.
+- `POST /api/solo-runs`, `POST /api/solo-runs/:id/complete` — start and store a solo run.
+- `GET /api/solo-leaderboard` — daily solo board by `solo_score`.
+- `POST /api/solo-runs/:id/invite` — open "invite a friend" link.
+- `GET /api/rematch/:id`, `GET /api/my-runs` — rematch invite, run history.
+- `POST /api/async-matches`, `POST /api/async-matches/:id/complete` — legacy race path.
+- `GET /api/leaderboard?category=geography` — legacy race leaderboard.
 
 The start and completion JSON bodies are capped at 1 KiB and 16 KiB. Completion
 accepts 1–10 rounds with bounded question IDs, answers, and response times.

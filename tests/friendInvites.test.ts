@@ -9,6 +9,7 @@ import {
   PRACTICE_RULES_VERSION,
   SOLO_ROUND_CAP,
   dailyQuestionSet,
+  toPublicQuestion,
   type AsyncMatchRound,
   type AsyncMatchRoundInput,
   type CreateFriendInviteResponse,
@@ -30,6 +31,7 @@ import {
   createTestD1,
   type TestD1,
 } from './helpers/testD1';
+import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
 const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
@@ -83,19 +85,6 @@ function call(db: TestD1, label: string, method: 'GET' | 'POST', path: string, b
   });
 }
 
-function inputs(questions: Question[], count: number, correct: boolean): AsyncMatchRoundInput[] {
-  return questions.slice(0, count).map((question) => ({
-    questionId: question.id,
-    selectedAnswer: question.answerType === 'open_answer'
-      ? (correct ? question.correctAnswers![0] : '__wrong__')
-      : (correct
-        ? question.correctOptionId
-        : question.options.find((option) => option.id !== question.correctOptionId)!.id),
-    responseTimeMs: 1000,
-    ...(correct ? { skillDistance: 0 } : {}),
-  }));
-}
-
 const startRun = (db: TestD1, label: string, extra: Record<string, unknown> = {}) =>
   call(db, label, 'POST', '/api/solo-runs', { displayName: label, category: 'geography', ...extra });
 
@@ -104,9 +93,7 @@ async function finishedRun(db: TestD1, label: string): Promise<string> {
   const response = await startRun(db, label);
   expect(response.status).toBe(201);
   const run = await response.json() as StartSoloRunResponse;
-  const done = await call(db, label, 'POST', `/api/solo-runs/${run.runId}/complete`, {
-    rounds: inputs(run.questions, 4, true),
-  });
+  const done = await playRounds((path, body) => call(db, label, 'POST', path, body), run.runId, roundInputs(fullQuestions(db, run.runId), 4, true));
   expect(done.status).toBe(200);
   return run.runId;
 }
@@ -188,9 +175,7 @@ describe('friend invite: creation', () => {
     expect((await invite(db, 'ann', started.runId)).status).toBe(409);
 
     const capped = await (await startRun(db, 'eve')).json() as StartSoloRunResponse;
-    const done = await call(db, 'eve', 'POST', `/api/solo-runs/${capped.runId}/complete`, {
-      rounds: inputs(capped.questions, SOLO_ROUND_CAP, false),
-    });
+    const done = await playRounds((path, body) => call(db, 'eve', 'POST', path, body), capped.runId, roundInputs(fullQuestions(db, capped.runId), SOLO_ROUND_CAP, false));
     expect(done.status).toBe(200);
     const response = await invite(db, 'eve', capped.runId);
     expect(response.status).toBe(409);
@@ -231,7 +216,8 @@ describe('friend invite: claiming and reservation', () => {
     const run = await winner.json() as StartSoloRunResponse;
     expect(run.pace?.id).toBe(authorRun);
     const stored = db.sqlite.prepare('SELECT questions_json FROM match_runs WHERE id = ?').get(authorRun) as { questions_json: string };
-    expect(JSON.stringify(run.questions)).toBe(stored.questions_json);
+    // Тот же набор, что у автора, но без ответов: клиент получает публичный вид вопросов.
+    expect(run.questions).toEqual((JSON.parse(stored.questions_json) as Question[]).map(toPublicQuestion));
     const row = db.sqlite.prepare('SELECT recipient_player_id, rematch_run_id FROM rematch_invites').get() as Record<string, unknown>;
     expect(row).toEqual({ recipient_player_id: guest(winnerLabel).playerId, rematch_run_id: run.runId });
 

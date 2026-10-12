@@ -4,18 +4,26 @@ import {
   SOLO_ROUND_CAP,
   SOLO_TARGET_PROGRESS,
   generateMatch,
+  toPublicQuestion,
   type Opponent,
-  type Question,
+  type PublicQuestion,
+  type SoloRoundResponse,
 } from '@clutch/shared';
+import type { NormalizedSoloSnapshot } from './clientMatchRules';
 import {
   applyLoadedSoloRun,
+  applySoloAnswerVerdict,
+  applySoloHammerVerdict,
   beginSoloLoading,
   completeSoloHammer,
   continueSoloAfterResolution,
   currentSoloQuestion,
   failSoloLoading,
+  failSoloSync,
   isSoloPlaying,
   recordSoloAnswer,
+  restoreSoloRun,
+  retrySoloSync,
   soloFlowView,
   soloRoundsLeft,
   startSoloPlay,
@@ -24,7 +32,7 @@ import {
 
 const config = CURRENT_SOLO_RUN_CONDITIONS.miniGame.config;
 
-function paceOf(questions: Question[], awards: number[]): Opponent {
+function paceOf(questions: PublicQuestion[], awards: number[]): Opponent {
   return {
     id: 'pace',
     displayName: 'Alex',
@@ -38,28 +46,58 @@ function paceOf(questions: Question[], awards: number[]): Opponent {
   };
 }
 
-function started(questions: Question[], pace: Opponent | null): SoloFlowState {
+function started(questions: PublicQuestion[], pace: Opponent | null): SoloFlowState {
   const loaded = applyLoadedSoloRun(beginSoloLoading('geography'), {
     runId: 'run-1', questions, pace, config, bankExhausted: false,
   });
   return startSoloPlay(loaded);
 }
 
-/** Круг с неверным ответом: без мини-игры, прогресс 0. */
-function missRound(state: SoloFlowState): SoloFlowState {
-  return continueSoloAfterResolution(recordSoloAnswer(state, '__timeout__', 1000));
+/** Ответ сервера по кругу: так выглядит то, что клиент получает вместо собственной проверки. */
+function serverRound(state: SoloFlowState, overrides: Partial<SoloRoundResponse>): SoloRoundResponse {
+  const pending = state.pending!;
+  return {
+    runId: 'run-1',
+    roundIndex: pending.request.roundIndex,
+    questionId: pending.request.questionId,
+    correct: false,
+    explanation: 'Пояснение сервера.',
+    awaitingHammer: false,
+    skillResult: null,
+    progressAwarded: 0,
+    progress: 0,
+    roundsPlayed: pending.request.roundIndex + 1,
+    status: 'in_progress',
+    reachedTarget: false,
+    result: null,
+    ...overrides,
+  };
 }
 
-/** Верный ответ и идеальный удар: +25. */
+/** Круг с неверным ответом: сервер закрыл его с нулём, мини-игры нет. */
+function missRound(state: SoloFlowState): SoloFlowState {
+  const checking = recordSoloAnswer(state, '__timeout__', 1000);
+  expect(checking.stage).toBe('checking');
+  const resolved = applySoloAnswerVerdict(checking, serverRound(checking, { correct: false }));
+  expect(resolved.stage).toBe('resolution');
+  return continueSoloAfterResolution(resolved);
+}
+
+/** Верный ответ и идеальный удар: сервер присуждает +25. */
 function perfectRound(state: SoloFlowState): SoloFlowState {
-  const question = currentSoloQuestion(state)!;
-  const answered = continueSoloAfterResolution(recordSoloAnswer(state, question.correctOptionId, 1000));
+  const checking = recordSoloAnswer(state, 'a', 1000);
+  const verdict = applySoloAnswerVerdict(checking, serverRound(checking, { correct: true, awaitingHammer: true }));
+  const answered = continueSoloAfterResolution(verdict);
   expect(answered.stage).toBe('hammer');
-  return completeSoloHammer(answered, 0);
+  const submitting = completeSoloHammer(answered, 0);
+  expect(submitting.stage).toBe('submitting');
+  return applySoloHammerVerdict(submitting, serverRound(submitting, {
+    correct: true, skillResult: 'perfect', progressAwarded: 25,
+  }));
 }
 
 describe('solo run flow', () => {
-  const questions = generateMatch(24, 0, 'geography');
+  const questions = generateMatch(24, 0, 'geography').map(toPublicQuestion);
 
   it('moves loading, error and ready without starting the run by itself', () => {
     const loading = beginSoloLoading('history');
@@ -70,7 +108,9 @@ describe('solo run flow', () => {
     expect(soloFlowView(ready)).toMatchObject({ progress: 0, round: 1 });
     expect(startSoloPlay(ready).stage).toBe('question');
     expect(isSoloPlaying('ready')).toBe(false);
-    expect(isSoloPlaying('hammer')).toBe(true);
+    for (const stage of ['question', 'checking', 'resolution', 'hammer', 'submitting'] as const) {
+      expect(isSoloPlaying(stage)).toBe(true);
+    }
   });
 
   it('a pace that reached 100 does NOT finish the run: the player keeps playing', () => {
@@ -119,16 +159,120 @@ describe('solo run flow', () => {
     expect(soloRoundsLeft(view)).toBe(5);
     expect(soloRoundsLeft({ roundsToCap: 3, questionsLeft: 9 })).toBe(3);
   });
+});
 
-  it('records one round input per round, with the hammer distance only after a hit', () => {
+describe('solo run flow with a server that scores the rounds', () => {
+  const questions = generateMatch(24, 0, 'geography').map(toPublicQuestion);
+
+  it('does not decide whether the answer is right: it waits for the server verdict', () => {
+    const checking = recordSoloAnswer(started(questions, null), 'a', 1234);
+    expect(checking).toMatchObject({ stage: 'checking', selectedOption: 'a', lastCorrect: false, correctCount: 0 });
+    expect(checking.pending).toEqual({
+      kind: 'answer',
+      request: { roundIndex: 0, questionId: questions[0].id, selectedAnswer: 'a', responseTimeMs: 1234 },
+    });
+    // До ответа сервера ни пояснения, ни прогресса нет.
+    expect(checking.explanation).toBe('');
+    expect(soloFlowView(checking)).toMatchObject({ progress: 0, roundsPlayed: 0 });
+
+    const answered = applySoloAnswerVerdict(checking, serverRound(checking, { correct: true, awaitingHammer: true }));
+    expect(answered).toMatchObject({ stage: 'resolution', lastCorrect: true, correctCount: 1, pending: null });
+    expect(answered.explanation).toBe('Пояснение сервера.');
+  });
+
+  it('takes the reward from the server, not from the distance', () => {
+    let state = recordSoloAnswer(started(questions, null), 'a', 1);
+    state = continueSoloAfterResolution(applySoloAnswerVerdict(state, serverRound(state, { correct: true, awaitingHammer: true })));
+    const submitting = completeSoloHammer(state, 0);
+    expect(submitting.pending).toEqual({
+      kind: 'hammer',
+      request: { roundIndex: 0, questionId: questions[0].id, skillDistance: 0 },
+    });
+    // Сервер присудил 12: именно это попадает в прогресс, расстояние ни на что не влияет.
+    const done = applySoloHammerVerdict(submitting, serverRound(submitting, {
+      correct: true, skillResult: 'good', progressAwarded: 12,
+    }));
+    expect(soloFlowView(done)).toMatchObject({ progress: 12, roundsPlayed: 1 });
+    expect(done.skillResults).toEqual(['good']);
+  });
+
+  it('ignores a verdict for another round or question', () => {
+    const checking = recordSoloAnswer(started(questions, null), 'a', 1);
+    expect(applySoloAnswerVerdict(checking, serverRound(checking, { roundIndex: 3 }))).toBe(checking);
+    expect(applySoloAnswerVerdict(checking, serverRound(checking, { questionId: 'other' }))).toBe(checking);
+    expect(applySoloAnswerVerdict(checking, serverRound(checking, { runId: 'other' }))).toBe(checking);
+  });
+
+  it('keeps the unsent round when the connection fails and allows sending it again', () => {
+    const checking = recordSoloAnswer(started(questions, null), 'a', 1);
+    const failed = failSoloSync(checking, 'offline');
+    expect(failed).toMatchObject({ stage: 'checking', syncFailed: true });
+    expect(failed.pending).toEqual(checking.pending);
+    const retried = retrySoloSync(failed);
+    expect(retried.syncFailed).toBe(false);
+    expect(retried.pending).toEqual(checking.pending);
+  });
+
+  it('a wrong answer that the server closed with the run ends the run at the cap', () => {
     let state = started(questions, null);
-    state = missRound(state);
-    state = perfectRound(state);
-    expect(state.roundInputs).toEqual([
-      expect.objectContaining({ questionId: questions[0].id, selectedAnswer: '__timeout__' }),
-      expect.objectContaining({ questionId: questions[1].id, skillDistance: 0 }),
-    ]);
-    expect(state.roundInputs[0]).not.toHaveProperty('skillDistance');
-    expect(state.correctCount).toBe(1);
+    for (let round = 0; round < SOLO_ROUND_CAP - 1; round += 1) state = missRound(state);
+    const checking = recordSoloAnswer(state, '__timeout__', 1);
+    const closing = applySoloAnswerVerdict(checking, serverRound(checking, {
+      correct: false,
+      status: 'completed',
+      result: {
+        runId: 'run-1', rounds: [], progress: 0, correctCount: 0, roundsPlayed: SOLO_ROUND_CAP,
+        reachedTarget: false, par: 5, score: 4, outcome: null,
+      },
+    }));
+    expect(closing.result).toMatchObject({ roundsPlayed: SOLO_ROUND_CAP });
+    expect(continueSoloAfterResolution(closing).stage).toBe('result');
+  });
+});
+
+describe('a run interrupted after several rounds continues from the same place', () => {
+  const questions = generateMatch(24, 0, 'geography').map(toPublicQuestion);
+  const snapshot = (overrides: Partial<NormalizedSoloSnapshot> = {}): NormalizedSoloSnapshot => ({
+    runId: 'run-1',
+    questions,
+    pace: null,
+    config,
+    bankExhausted: false,
+    category: 'geography',
+    status: 'in_progress',
+    result: null,
+    rounds: [
+      { questionId: questions[0].id, correct: true, skillResult: 'perfect', progressAwarded: 25, responseTimeMs: 1500 },
+      { questionId: questions[1].id, correct: false, skillResult: null, progressAwarded: 0, responseTimeMs: 4000 },
+      { questionId: questions[2].id, correct: true, skillResult: 'good', progressAwarded: 12, responseTimeMs: 2500 },
+    ],
+    ...overrides,
+  });
+
+  it('rebuilds progress, skill history and counters from the server record', () => {
+    const state = restoreSoloRun(snapshot());
+    expect(state).toMatchObject({
+      stage: 'ready', resumed: true, runId: 'run-1', correctCount: 2, skillResults: ['perfect', 'good'], pending: null,
+    });
+    expect(soloFlowView(state)).toMatchObject({ progress: 37, roundsPlayed: 3, round: 4 });
+    // Дальше играется следующий вопрос набора, а не первый.
+    const playing = startSoloPlay(state);
+    expect(currentSoloQuestion(playing)?.id).toBe(questions[3].id);
+    expect(recordSoloAnswer(playing, 'a', 1).pending).toMatchObject({ request: { roundIndex: 3, questionId: questions[3].id } });
+  });
+
+  it('shows the result at once when the server has already closed the run', () => {
+    const result = {
+      runId: 'run-1', rounds: [], progress: 100, correctCount: 4, roundsPlayed: 4, reachedTarget: true,
+      par: 5, score: 0.8, outcome: null,
+    };
+    const state = restoreSoloRun(snapshot({
+      status: 'completed',
+      result,
+      rounds: [0, 1, 2, 3].map((index) => ({
+        questionId: questions[index].id, correct: true, skillResult: 'perfect' as const, progressAwarded: 25, responseTimeMs: 1000,
+      })),
+    }));
+    expect(state).toMatchObject({ stage: 'result', result });
   });
 });

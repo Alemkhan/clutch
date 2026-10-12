@@ -1,7 +1,13 @@
 # Архитектура: как устроен текущий код
 
-Основа: checkpoint `3015241` с R7c, 2026-10-02.
-API и клиент используют shared-правила; схема условий добавлена миграцией 0002.
+Основа: checkpoint `3015241` с R7c, 2026-10-02; обновлено 2026-10-12 под соло-режим.
+API и клиент используют shared-правила; схема условий добавлена миграцией 0002,
+соло-забеги, реванш и дружеские приглашения — миграциями 0003–0009 (применены локально).
+
+Основной режим — **соло-забег до 100%** (`solo-to-100-v2`), а не гонка. Путь гонки
+(`race-to-100-v3`, `POST /api/async-matches`) остаётся в коде ради ранее выданных
+приглашений, входа с главной у него нет. Разделы «Карта репозитория» и «Поток
+данных» ниже описывают оба пути; раздел «Соло-забег» — действующий.
 
 ## Карта репозитория
 
@@ -17,11 +23,19 @@ apps/web/                      React 18 + Vite + Framer Motion + Telegram SDK
   src/lib/telegram.ts           cached SDK/initData и фоновый viewport
   src/lib/telegramBackButton.ts чистая карта и lifecycle-контроллер BackButton
   src/lib/sampleData.ts         локальный соперник, генерация и config молотка
-  src/lib/tournaments.ts        фиксированный challenge Robb Peters
+  src/lib/useSoloRun.ts, soloRunSession.ts, soloRunFlow.ts, soloResult.ts
+                                основной цикл: забег, чистые переходы, итог
+  src/lib/useFriendInvite.ts, friendDuelResult.ts  «Позвать друга», итог дуэли
+  src/lib/trainingSession.ts, mistakeLog.ts, myRunsView.ts, launchIntent.ts
+                                тренировка и отработка ошибок, «Мои партии»,
+                                разбор startapp-ссылки (реванш/отписка)
+  src/lib/useLastStand.ts, lastStandRun.ts, lastStandHook.ts  режим Last Stand
   src/lib/localStats.ts         localStorage: победы/поражения/серии
   src/lib/analytics.ts          очередь в памяти + dev console, без подключения
   src/lib/sounds.ts             воспроизведение текущих эффектов
-  src/components/              вопросы, MatchHud, HammerGame, итог, профиль
+  src/components/              вопросы, MatchHud/SoloHud, HammerGame, итоги, профиль,
+                               BottomNav (четыре раздела), SoloRun/SoloResult,
+                               TrainingHub/Training, MyRuns, RematchEntry, LastStand
   src/index.css                общие стили и более поздние V2-переопределения
   public/{sprites,sfx,flags-historic}/
 apps/api/
@@ -38,11 +52,28 @@ apps/api/
   src/matches/types.ts         внутренний тип строки match_runs
   src/routes/auth.ts           выдача/продление browser guest session
   src/routes/asyncMatches.ts   сценарии start/complete async-матча
-  src/routes/leaderboard.ts    HTTP-маршрут leaderboard
-  src/routes/system.ts         metadata, liveness/readiness, tournament stub
+  src/routes/leaderboard.ts    HTTP-маршрут leaderboard гонки
+  src/routes/soloRuns.ts       старт/завершение соло-забега, таблица соло
+  src/routes/friendInvites.ts  «Позвать друга»: создание открытого приглашения
+  src/routes/rematch.ts        приглашение на реванш, согласие на уведомления
+  src/routes/myRuns.ts         история прохождений игрока
+  src/routes/share.ts          OG-страница и карточка результата
+  src/routes/lastStand.ts      Last Stand: старт, ответ, таблица
+  src/routes/system.ts         metadata, liveness/readiness
+  src/matches/{matchmaking,scoring,soloRepository,historyRepository}.ts
+                               подбор из банка наборов дня, оценка круга, D1 соло и истории
+  src/notifications/           приглашения на реванш, Telegram-сообщения, плановый возврат просроченных
+  src/lastStand/, src/share/   Last Stand и рендер карточки результата
   migrations/0001_async_matches.sql
   migrations/0002_match_conditions.sql  условия, снимок соперника, пригодность ghost
-  wrangler.toml                Worker, D1 и нативный Rate Limiting binding
+  migrations/0003_question_set_id.sql   идентификатор набора вопросов
+  migrations/0004_last_stand.sql        таблица Last Stand
+  migrations/0005_rematch_notifications.sql  согласие на уведомления, приглашения на реванш
+  migrations/0006_rematch_invite_release.sql возврат просроченных приглашений
+  migrations/0007_solo_runs.sql         reached_target, set_par, solo_score
+  migrations/0008_solo_outcome.sql      исход забега, индекс таблицы соло
+  migrations/0009_friend_invites.sql    приглашение без адресата (пересборка таблицы)
+  wrangler.toml                Worker, D1, Rate Limiting binding и cron возврата приглашений
 packages/shared/src/
   index.ts                     типы, versioned conditions и exports
   hammerRules.ts               pressure stage, target, thresholds, distance и scoring
@@ -50,9 +81,14 @@ packages/shared/src/
   matchRules.test.ts           детерминированные регрессии для этих правил
   questionGenerator.ts         сборка набора по категории
   countries.ts                 197 записей стран/территорий
-  historicFlags.ts             44 записи; изображения локально в web
+  historicFlags.ts             44 записи («Другие флаги», id `history`); изображения локально в web
   languages.ts                 37 языков и примеры письма
   flagTraits.ts, fuzzyMatch.ts  похожие дистракторы и проверка открытого ответа
+  soloRun.ts, soloCompare.ts   правила соло-забега и сравнение по solo_score
+  practice.ts, friendDuel.ts   версии `solo-practice-v1` / `solo-friend-v1`, уровни ботов
+  dailyQuestionSet.ts          покатегорийные размеры наборов и банк наборов дня
+  narrowCategories.ts, lastStand.ts  Last Stand
+  questionPricing.ts           оценка «цены» вопроса по формату
   questionBank.ts, showQuiz.ts  заготовки, не подключённые к основному циклу
 tests/telegramAuth.test.ts      3 unit-теста initData
 tests/botOpponent.test.ts       3 unit-теста профилей и фабрики бота
@@ -95,11 +131,73 @@ index → routes/system → D1 readiness
                           └→ matches/repository → D1
 ```
 
+Соло-путь (`routes/soloRuns`, `friendInvites`, `rematch`, `myRuns`) устроен так же:
+SQL в `matches/*Repository` и `notifications/repository`, правила в shared.
+
 Новый профиль бота добавляется в `matches/bots.ts`. Новый HTTP-сценарий — в
 `routes`; SQL остаётся в `repository`. Переход вопрос → разбор → skill → итог
 меняется и тестируется в `gameSession`, а общие условия победы — в shared.
 
-## Поток данных
+## Соло-забег: действующий основной цикл
+
+Игрок проходит набор вопросов в своём темпе до 100% прогресса. Запись соперника
+(или бот) показывается на полосе, но завершить забег не может, поэтому забег не
+обрывается, когда «соперник добрал». Результат — `solo_score = круги / пар набора`
+(`set_par` хранится в `match_runs`): нормирует наборы разной сложности. Исход
+против записи (`player` / `opponent` / `tie`, колонка `solo_outcome`) считает
+`compareSoloRuns` в shared; тайминг — параметр функции, функция чистая.
+
+| Версия правил | Назначение |
+| --- | --- |
+| `solo-to-100-v2` | Соревновательный забег: пул, таблица, приглашения, рейтинг |
+| `solo-practice-v1` | Тренировка с ботом на уровне сложности; вне соревнования |
+| `solo-friend-v1` | Дуэль по ссылке «Позвать друга»; вне соревнования |
+| `race-to-100-v3` | Старая гонка; только для ранее выданных приглашений |
+
+- **Старт и завершение:** `POST /api/solo-runs`, `POST /api/solo-runs/:id/answer`, `/hammer` (покруговая отправка), `GET /api/solo-runs/:id` (продолжение); `POST /api/training/questions`, `/check` (отработка ошибок);
+  таблица за сутки — `GET /api/solo-leaderboard` (только дошедшие до цели, по
+  категории и `solo_score`; индекс из миграции 0008).
+- **Подбор:** `matches/matchmaking.ts` берёт свободную запись на несыгранном
+  игроком наборе из банка дня, иначе несыгранный набор с ботом, иначе любую
+  свободную запись, иначе давнее всего сыгранный набор. Если игрок прошёл все
+  наборы дня, клиент может прямо сказать, что набор повторяется.
+- **Размеры наборов:** `DAILY_SET_SIZES` — география 20 вопросов и 12 наборов в
+  банке дня, `history` («Другие флаги») и `languages` по 18 и 6 наборов. Причина:
+  у флагов 44 сущности, у языков 37 и по одному шаблону вопроса, тогда как в
+  географии 197 стран на семь шаблонов. Набор в `match_runs` определяет
+  `question_set_id` (миграция 0003), поэтому id `history` менять нельзя.
+- **Реванш:** когда один забег обошёл чужой, создаётся одноразовое приглашение со
+  сроком (`rematch_invites`); реванш идёт на новом наборе. Получатель открывает его
+  по startapp-ссылке (`rm_…`), `GET /api/rematch/:id`. Согласие на уведомления —
+  `/api/notifications/outbid` (по умолчанию включено, отписка в сообщении).
+- **Возврат просроченных:** cron раз в 15 минут (`wrangler.toml`) вызывает
+  `releaseExpiredRematchInvites`; просроченные неиспользованные приглашения
+  получают `released_at`, а запись возвращается в общий подбор (миграция 0006).
+- **«Позвать друга»:** `POST /api/solo-runs/:id/invite` создаёт открытое
+  приглашение без адресата; его забирает первый открывший. Запись пригласившего
+  резервируется на срок приглашения и возвращается в подбор по `expires_at`.
+  Миграция 0009 пересобрала `rematch_invites`, чтобы `recipient_player_id` и
+  `recipient_run_id` могли быть пустыми. Дуэль идёт с версией `solo-friend-v1` и
+  **вне зачёта**: не в пул, не в таблицу, без приглашений и рейтинга, потому что
+  пригласивший уже видел набор; исход против его записи при этом считается и
+  виден обоим.
+- **Тренировка:** клиентский раздел с ботами на уровнях (`practice.ts`) и
+  отработкой ошибок по локальному `mistakeLog`; результат не уходит в
+  соревнование (`solo-practice-v1`).
+- **«Мои партии»:** `GET /api/my-runs` (курсорная выдача, `historyRepository`) и
+  экран `MyRuns`.
+- **Навигация:** `BottomNav` — четыре раздела; фазы и системный Back описаны
+  в `App`/`telegramBackButton`.
+
+Цель забега и потолок кругов заданы константами `SOLO_TARGET_PROGRESS` и
+`SOLO_ROUND_CAP` в `packages/shared/src/soloRun.ts`; здесь не дублируются, чтобы не
+расходиться с кодом.
+
+## Поток данных гонки (`race-to-100`, устаревший путь)
+
+Этот путь и `POST /api/async-matches` остаются в API для ранее выданных
+приглашений; с главной в них войти нельзя. Подробности сохранены, потому что
+код ещё содержит эти правила.
 
 1. `main.tsx` синхронно создаёт один React root с `AppBootstrap`: сначала виден
    доступный loading shell. `initializeTelegram()` возвращает один cached Promise
@@ -146,8 +244,7 @@ index → routes/system → D1 readiness
 Start имеет собственный пятисекундный timeout и принимает caller AbortSignal.
 Координатор отменяет запрос при back, игнорирует поздний ответ по монотонному
 token и не запускает дубль той же категории. Ошибка остаётся видимой; локальная
-практика начинается только по явному выбору. Challenge с фиксированными вопросами
-не вызывает API и помечается отдельно от локальной практики.
+практика начинается только по явному выбору.
 
 ## API и хранение
 
@@ -156,10 +253,17 @@ token и не запускает дубль той же категории. Ош
 | `GET /`, `GET /api/health` | Метаданные и дешёвый liveness процесса; D1 не вызывается |
 | `GET /api/ready` | Readiness для трафика: binding D1 и текущая схема `match_runs`, включая колонки миграции 0002 |
 | `POST /api/auth/guest` | Выдать новую или продлить существующую guest-сессию |
-| `POST /api/async-matches` | Создать матч; вернуть вопросы, соперника, `opponentSource`, `conditions` |
-| `POST /api/async-matches/:id/complete` | Принять rounds, пересчитать и сохранить результат |
-| `GET /api/leaderboard?category=...` | Лучшая цельная completed-запись на игрока, top-50 внутри категории |
-| `GET /api/tournaments/:slug` | Заглушка, не хранилище турниров |
+| `POST /api/solo-runs`, `POST /api/solo-runs/:id/answer`, `/hammer`, `GET /api/solo-runs/:id` | Старт, покруговой счёт на сервере (миграция 0010) и продолжение соло-забега |
+| `GET /api/solo-leaderboard` | Таблица соло за сутки по `solo_score` |
+| `POST /api/solo-runs/:id/invite` | Открытое приглашение «Позвать друга» |
+| `GET /api/rematch/:id` | Данные приглашения на реванш |
+| `GET`/`PUT /api/notifications/outbid` | Согласие на уведомления об обгоне |
+| `GET /api/my-runs` | История прохождений игрока |
+| `GET /api/share`, `GET /api/share/card.png` | OG-страница и картинка результата |
+| `POST /api/last-stand/start`, `/:runId/answer`, `GET /api/last-stand/leaderboard` | Last Stand |
+| `POST /api/async-matches` | Создать матч гонки (устаревший путь); вернуть вопросы, соперника, `opponentSource`, `conditions` |
+| `POST /api/async-matches/:id/complete` | Принять rounds гонки, пересчитать и сохранить результат |
+| `GET /api/leaderboard?category=...` | Лучшая цельная completed-запись гонки на игрока, top-50 внутри категории |
 
 До генерации/D1 start и complete проверяют identity, затем отдельный bucket по
 `playerId`; guest и leaderboard используют `CF-Connecting-IP` с безопасным
@@ -179,10 +283,14 @@ Start принимает не более 1024 UTF-8 байт JSON, complete — 
 ограничен 1..10 раундами: id вопроса 1..128 символов, ответ до 512 (пустой
 допустим), время 0..60000 мс; прежний диапазон distance сохранён.
 
-Единственная таблица — `match_runs`: id, player_id, display_name, category,
+Основная таблица — `match_runs`: id, player_id, display_name, category,
 questions_json, rounds_json, progress, correct_count, status, opponent_run_id,
 created_at, completed_at. Миграция 0002 добавляет `rules_version`, `mini_game_id`,
-`mini_game_config_json`, `opponent_json`, `ghost_eligible` и индекс пригодного пула.
+`mini_game_config_json`, `opponent_json`, `ghost_eligible` и индекс пригодного пула;
+0003 — `question_set_id`; 0007 — `reached_target`, `set_par`, `solo_score`;
+0008 — `solo_outcome` и индекс таблицы соло. Остальные таблицы: `last_stand_runs`
+(0004), `player_notification_prefs` и `rematch_invites` (0005; 0006 добавляет
+`released_at`, 0009 пересобирает таблицу без обязательного адресата).
 Полноценного серверного профиля нет.
 В браузере хранятся подписанный guest token, локальное отображаемое имя,
 versioned completion-очередь до 20 записей и отдельная статистика подтверждённых
@@ -190,10 +298,14 @@ online-матчей. Токен в очередь не копируется. Т�
 восстанавливается.
 Guest token живёт семь дней и продлевает тот же subject за пять минут до срока.
 
-Текущие условия экспортируются как `CURRENT_ASYNC_MATCH_CONDITIONS` из shared:
-`race-to-100-v2`, `hammer_nail`, markerSpeed 0.8, базовые ширины 0.85 / 0.15,
-stage multipliers 1 / 0.9 / 0.8 / 0.7 и offsets 0.06 / 0.09 / 0.12 / 0.15.
-Версия покрывает
+Условия гонки экспортируются как `CURRENT_ASYNC_MATCH_CONDITIONS` из shared
+(`race-to-100-v3`, мини-игра `hammer_nail`), условия соло — как
+`CURRENT_SOLO_RUN_CONDITIONS`. Числа config молотка (зоны, скорость маркера,
+stage multipliers, offsets) живут в shared и менялись: зона идеального попадания
+сужена с 0.15 до 0.06, полоса «хорошо» с 0.35 до 0.28, а скорость маркера больше
+не константа 0.8, а меняется в диапазоне 0.6–1.6 и выводится из хеша вопроса и
+стадии давления. Здесь они намеренно не перечислены повторно: источник истины —
+`hammerRules.ts`. Версия покрывает
 условия завершения, награды и scoring; при их изменении её нужно менять.
 Config сериализуется в постоянном порядке и сравнивается точно. Снимок вопросов
 содержит сам контент; отдельной версии датасета в R1b нет. V2 config намеренно
@@ -215,8 +327,10 @@ legacy/неподдерживаемые матчи получают 409 с пр�
   уже сохранённого результата. Чужой и отсутствующий matchId одинаково дают 404.
 - Guest token хранится в localStorage и не является полноценным аккаунтом:
   очистка/кража браузерного хранилища меняет или компрометирует guest identity.
-- API возвращает полный `Question`, включая правильные ответы, и будущие
-  результаты соперника. Общие данные/генератор также доступны клиенту.
+- **Известная незакрытая проблема.** API возвращает полный `Question`, включая
+  правильные ответы, и будущие результаты соперника; данные стран и генератор
+  лежат в браузерном бандле. Исправляется отдельной задачей, на 2026-10-12 не
+  завершено: до её закрытия таблицы и пул не защищены от подделки.
 - Последовательный пересчёт pressure stage и награды не доказывает честность
   удара: `skillDistance` и время передаёт клиент. Сервер не применяет лимит
   вопроса в 15 секунд.

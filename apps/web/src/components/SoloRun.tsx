@@ -30,7 +30,12 @@ interface SoloRunScreenProps {
   onAnswer: (optionId: string, timeMs: number) => void;
   onContinue: () => void;
   onHammerComplete: (result: unknown, progress: number, distance: number) => void;
-  onRetrySave: () => void;
+  /** Итог приходит вместе с последним кругом, повторять нечего; свойство осталось для экрана результата. */
+  onRetrySave?: () => void;
+  /** Запрос круга не дошёл после повторов: прогресс на сервере цел, круг можно отправить снова. */
+  syncError?: string | null;
+  canRetrySync?: boolean;
+  onRetrySync?: () => void;
   /** В тренировке «домой» ведёт к выбору уровня. */
   onHome: () => void;
   onMyRuns: () => void;
@@ -38,8 +43,14 @@ interface SoloRunScreenProps {
   practice?: PracticeLevel;
 }
 
+const noop = () => undefined;
+
 export function toSoloCategory(id: string): CategoryId {
   return id === 'history' || id === 'languages' ? id : 'geography';
+}
+
+function resumeNote(view: { roundsPlayed: number; progress: number; target: number }): string {
+  return `Уже сыграно кругов: ${view.roundsPlayed}, прогресс ${view.progress}% из ${view.target}%.`;
 }
 
 /** Экран соло-забега по шагам. Соперник только рисуется на полосе: завершает забег сам игрок. */
@@ -91,13 +102,15 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
         <ScreenHeader onBack={props.onBackToCategories} />
         <div className="matchmaking-body">
           <span className="matchmaking-eyebrow">Тренировка · {props.practice.name}</span>
-          <h1 className="screen-title">Всё готово</h1>
+          <h1 className="screen-title">{state.resumed ? 'Продолжаем тренировку' : 'Всё готово'}</h1>
           <div className="matchmaking-card">
             <p className="matchmaking-status">
               Против: {pace ? practiceBotLabel(pace.displayName) : 'бот'}. Не засчитывается.
             </p>
+            {state.resumed && <p className="matchmaking-status">{resumeNote(view)}</p>}
           </div>
-          <button type="button" className="cta-btn" onClick={props.onStart}>Начать</button>
+          <button type="button" className="cta-btn" onClick={props.onStart}>{state.resumed ? 'Продолжить' : 'Начать'}</button>
+          {state.resumed && <button type="button" className="ghost-btn" onClick={props.onBackToCategories}>Начать заново</button>}
         </div>
       </section>
     );
@@ -109,7 +122,7 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
         <ScreenHeader onBack={props.onBackToCategories} />
         <div className="matchmaking-body">
           <span className="matchmaking-eyebrow">{state.friendDuel ? 'Вызов друга' : 'Соло-забег'}</span>
-          <h1 className="screen-title">Забег готов</h1>
+          <h1 className="screen-title">{state.resumed ? 'Продолжаем забег' : 'Забег готов'}</h1>
           {state.friendDuel && <span className="chip">{FRIEND_DUEL_CHIP}</span>}
           {state.bankExhausted && (
             <span className="match-source source-player abandoned-note">
@@ -121,8 +134,10 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
               Дойди до {view.target}%, но не больше чем за {SOLO_ROUND_CAP} кругов.
               Верный ответ даёт попытку в мини-игре, удар двигает прогресс.
             </p>
+            {state.resumed && <p className="matchmaking-status">{resumeNote(view)}</p>}
           </div>
-          <button type="button" className="cta-btn" onClick={props.onStart}>Начать</button>
+          <button type="button" className="cta-btn" onClick={props.onStart}>{state.resumed ? 'Продолжить' : 'Начать'}</button>
+          {state.resumed && <button type="button" className="ghost-btn" onClick={props.onBackToCategories}>Начать заново</button>}
         </div>
       </section>
     );
@@ -136,7 +151,7 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
         response={save.response}
         saveError={save.error}
         canRetrySave={save.canRetry}
-        onRetrySave={props.onRetrySave}
+        onRetrySave={props.onRetrySave ?? noop}
         onReplay={props.onBackToCategories}
         onMyRuns={props.onMyRuns}
         practice={props.practice && state.session ? buildPracticeSummary(state.session) : null}
@@ -163,9 +178,23 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
       {state.stage === 'question' && (
         <QuestionScreen key={`${view.roundsPlayed}:${question.id}`} question={question} onAnswer={props.onAnswer} />
       )}
+      {(state.stage === 'checking' || state.stage === 'submitting') && (
+        props.syncError ? (
+          <div className="solo-sync">
+            <p className="matchmaking-error" role="alert">{props.syncError}</p>
+            {props.canRetrySync
+              ? <button type="button" className="cta-btn" onClick={props.onRetrySync}>Повторить</button>
+              : <button type="button" className="cta-btn" onClick={props.onHome}>Выйти</button>}
+          </div>
+        ) : (
+          <div className="matchmaking-loading solo-sync" role="status">
+            <span /> {state.stage === 'checking' ? 'Проверяем ответ' : 'Засчитываем удар'}
+          </div>
+        )
+      )}
       {state.stage === 'resolution' && (
         <ResolutionScreen
-          question={question}
+          explanation={state.explanation}
           correct={state.lastCorrect}
           selectedOptionId={state.selectedOption}
           onContinue={props.onContinue}
@@ -203,11 +232,12 @@ interface SoloRunProps {
 export function SoloRun({ onHome, onMyRuns, rematch, practice, onStageChange }: SoloRunProps) {
   const run = useSoloRun(practice?.id);
   const { stage } = run.state;
-  const { begin } = run;
+  const { begin, resume } = run;
 
   useEffect(() => {
     if (rematch) begin(rematch.category, rematch.inviteId);
-  }, [rematch, begin]);
+    else resume();
+  }, [rematch, begin, resume]);
 
   useEffect(() => {
     onStageChange(stage);
@@ -225,7 +255,9 @@ export function SoloRun({ onHome, onMyRuns, rematch, practice, onStageChange }: 
       onAnswer={run.answer}
       onContinue={run.continueAfterResolution}
       onHammerComplete={run.completeHammer}
-      onRetrySave={run.retrySave}
+      syncError={run.syncError}
+      canRetrySync={run.canRetrySync}
+      onRetrySync={run.retrySync}
       onHome={onHome}
       onMyRuns={onMyRuns}
       practice={practice}

@@ -9,35 +9,39 @@ export interface BotProfile {
 
 const botResponseTimeMs = (roundIndex: number) => 2400 + (roundIndex % 4) * 500;
 
-// Сильный: 100% на 8-м раунде. Это прежняя кривая Alex, она не менялась.
+// Награды заданы на 20 кругов (потолок забега) и НЕ повторяются: набор из 18 вопросов
+// берёт первые 18, и подписи уровней от длины набора (18 или 20) не зависят.
+// Круг, на котором бот набирает 100%: Alex 6, Ira 9, Max 13, Dana 17. Ступени 3-4 круга.
+
+// Мастер: 100% на 6-м круге (после 5-го 98%).
 export const DEFAULT_BOT_PROFILE: BotProfile = {
   id: 'clutch_bot',
   displayName: 'Alex',
-  rewards: [18, 12, 0, 25, 18, 0, 18, 12, 25, 18],
+  rewards: [18, 25, 12, 18, 25, 12, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18],
   responseTimeMs: botResponseTimeMs,
 };
 
-// Слабый: итог 64% за 10 раундов, 100% не достигает.
+// Новичок: 100% на 17-м круге (после 16-го 95%).
 export const WEAK_BOT_PROFILE: BotProfile = {
   id: 'clutch_bot_weak',
   displayName: 'Dana',
-  rewards: [12, 5, 0, 12, 0, 18, 0, 12, 0, 5],
+  rewards: [5, 12, 0, 5, 0, 12, 5, 0, 12, 5, 0, 12, 5, 5, 12, 5, 12, 0, 5, 5],
   responseTimeMs: botResponseTimeMs,
 };
 
-// Средний: 100% ровно на 10-м раунде (после 9-го 95%).
+// Любитель: 100% на 13-м круге (после 12-го 93%).
 export const MEDIUM_BOT_PROFILE: BotProfile = {
   id: 'clutch_bot_medium',
   displayName: 'Max',
-  rewards: [18, 12, 0, 18, 12, 18, 0, 12, 5, 25],
+  rewards: [12, 18, 0, 12, 5, 12, 0, 12, 12, 5, 0, 5, 12, 12, 12, 12, 12, 12, 12, 12],
   responseTimeMs: botResponseTimeMs,
 };
 
-// Крепкий: 100% на 9-м раунде (после 8-го 97%).
+// Опытный: 100% на 9-м круге (после 8-го 97%).
 export const STRONG_BOT_PROFILE: BotProfile = {
   id: 'clutch_bot_strong',
   displayName: 'Ira',
-  rewards: [18, 12, 0, 25, 12, 0, 18, 12, 18, 18],
+  rewards: [18, 12, 0, 25, 12, 18, 0, 12, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18],
   responseTimeMs: botResponseTimeMs,
 };
 

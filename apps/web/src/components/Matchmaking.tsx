@@ -10,7 +10,6 @@ interface MatchmakingProps {
   error?: string;
   onStart: () => void;
   onRetry: () => void;
-  onLocalPractice: () => void;
   onBack: () => void;
 }
 
@@ -22,7 +21,6 @@ export function Matchmaking({
   error,
   onStart,
   onRetry,
-  onLocalPractice,
   onBack,
 }: MatchmakingProps) {
   return (
@@ -43,7 +41,6 @@ export function Matchmaking({
           <p className="matchmaking-error" role="alert">{error}</p>
           <div className="matchmaking-actions">
             <button className="cta-btn" onClick={onRetry}>Повторить</button>
-            <button className="ghost-btn" onClick={onLocalPractice}>Локальная практика</button>
           </div>
         </>
       )}

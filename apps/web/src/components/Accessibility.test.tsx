@@ -23,7 +23,7 @@ afterEach(() => {
 describe('accessible gameplay semantics', () => {
   it('renders resolution as one named keyboard action', () => {
     const html = renderToStaticMarkup(
-      <ResolutionScreen question={question} correct selectedOptionId="a" onContinue={vi.fn()} />,
+      <ResolutionScreen explanation={question.explanation} correct selectedOptionId="a" onContinue={vi.fn()} />,
     );
 
     expect(html).toContain(

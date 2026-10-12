@@ -1,18 +1,18 @@
 import { useEffect, useRef, type KeyboardEvent } from 'react';
-import type { Question } from '@clutch/shared';
 import { playSound } from '../lib/sounds';
 import { shouldActivateAction } from '../lib/accessibility';
 
 interface ResolutionScreenProps {
-  question: Question;
+  /** Пояснение приходит от сервера вместе с вердиктом: до ответа его нет, оно называет верный ответ. */
+  explanation: string;
   correct: boolean;
-  selectedOptionId: string;
+  selectedOptionId?: string;
   onContinue: () => void;
   /** Training has no attempt or mini-game: it is plain question practice. */
   variant?: 'match' | 'training';
 }
 
-export function ResolutionScreen({ question, correct, selectedOptionId, onContinue, variant = 'match' }: ResolutionScreenProps) {
+export function ResolutionScreen({ explanation, correct, onContinue, variant = 'match' }: ResolutionScreenProps) {
   const continuedRef = useRef(false);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ export function ResolutionScreen({ question, correct, selectedOptionId, onContin
         ) : (
           <p className="resolution-message">В этом раунде без мини-игры</p>
         )}
-        <p className="resolution-explanation">{question.explanation}</p>
+        <p className="resolution-explanation">{explanation}</p>
       </div>
       {training ? (
         <div className="continue-hint">Тапни, чтобы продолжить</div>

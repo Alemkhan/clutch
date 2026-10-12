@@ -41,6 +41,33 @@ export interface Question {
   lastVerifiedAt?: string;
 }
 
+/**
+ * Вопрос в том виде, в каком он уходит в браузер: только то, что нужно показать.
+ * Нет correctOptionId, correctAnswers и пояснения (оно называет ответ), нет источников.
+ */
+export type PublicQuestion = Pick<
+  Question,
+  'id' | 'type' | 'answerType' | 'category' | 'subcategory' | 'difficulty' | 'prompt'
+  | 'options' | 'mediaType' | 'mediaUrl' | 'mediaText'
+>;
+
+/** Белый список полей: новое поле вопроса не попадёт клиенту, пока его не добавят сюда осознанно. */
+export function toPublicQuestion(question: Question): PublicQuestion {
+  return {
+    id: question.id,
+    type: question.type,
+    answerType: question.answerType,
+    category: question.category,
+    ...(question.subcategory === undefined ? {} : { subcategory: question.subcategory }),
+    difficulty: question.difficulty,
+    prompt: question.prompt,
+    options: question.options.map((option) => ({ id: option.id, text: option.text })),
+    ...(question.mediaType === undefined ? {} : { mediaType: question.mediaType }),
+    ...(question.mediaUrl === undefined ? {} : { mediaUrl: question.mediaUrl }),
+    ...(question.mediaText === undefined ? {} : { mediaText: question.mediaText }),
+  };
+}
+
 export interface OpponentRound {
   questionId: string;
   correct: boolean;
@@ -110,7 +137,8 @@ export interface StartSoloRunRequest {
 
 export interface StartSoloRunResponse {
   runId: string;
-  questions: Question[];
+  /** Без ответов и пояснений: правильный ответ приходит только после сыгранного круга. */
+  questions: PublicQuestion[];
   /** Только темп для отрисовки; забег он не завершает. null — записи нет. */
   pace: Opponent | null;
   target: number;
@@ -120,7 +148,6 @@ export interface StartSoloRunResponse {
   bankExhausted: boolean;
 }
 
-export type CompleteSoloRunRequest = CompleteAsyncMatchRequest;
 
 /** «Позвать друга»: готовая ссылка на открытое приглашение по записи своего завершённого забега. */
 export interface CreateFriendInviteResponse {
@@ -140,6 +167,87 @@ export interface CompleteSoloRunResponse {
   score: number;
   /** Исход против темпа глазами игрока. null — темпа не было, забег ждёт соперника (это не ничья). */
   outcome: MyRunOutcome | null;
+}
+
+/** Ответ игрока на вопрос круга. roundIndex с нуля; повтор того же круга сервер не считает дважды. */
+export interface SoloAnswerRequest {
+  roundIndex: number;
+  questionId: string;
+  selectedAnswer: string;
+  responseTimeMs: number;
+}
+
+/** Удар молотка по верному ответу. skillDistance измеряет устройство: сервер ему верит в пределах 0..1. */
+export interface SoloHammerRequest {
+  roundIndex: number;
+  questionId: string;
+  skillDistance: number;
+}
+
+/**
+ * Итог круга от сервера: верность, награда, прогресс и правильный ответ — уже после проверки.
+ * awaitingHammer: ответ верен, ждём удар; круг ещё не закрыт и прогресс не изменился.
+ */
+export interface SoloRoundResponse {
+  runId: string;
+  roundIndex: number;
+  questionId: string;
+  correct: boolean;
+  /** Только у вопроса с вариантами. */
+  correctOptionId?: string;
+  /** Только у открытого вопроса. */
+  correctAnswers?: string[];
+  explanation: string;
+  awaitingHammer: boolean;
+  skillResult: SkillResult | null;
+  progressAwarded: number;
+  /** Прогресс забега после этого круга (пока ждём удар — до него). */
+  progress: number;
+  roundsPlayed: number;
+  status: 'in_progress' | 'completed';
+  reachedTarget: boolean;
+  /** Итог забега; есть, только когда этот круг его закрыл. */
+  result: CompleteSoloRunResponse | null;
+}
+
+export interface SoloPlayedRound {
+  questionId: string;
+  correct: boolean;
+  skillResult: SkillResult | null;
+  progressAwarded: number;
+  responseTimeMs: number;
+}
+
+/** Состояние забега для продолжения после закрытой вкладки. Незакрытый удар сервер засчитывает промахом. */
+export interface SoloRunSnapshot extends StartSoloRunResponse {
+  category: 'geography' | 'history' | 'languages';
+  rounds: SoloPlayedRound[];
+  status: 'in_progress' | 'completed';
+  result: CompleteSoloRunResponse | null;
+}
+
+/** Отработка ошибок: клиент хранит id, вопросы и проверку получает от сервера. */
+export interface TrainingQuestionsRequest {
+  ids: string[];
+}
+
+export interface TrainingQuestionsResponse {
+  questions: PublicQuestion[];
+  /** Id, из которых вопрос больше не собрать: клиент убирает их из своего списка. */
+  unknownIds: string[];
+}
+
+/** Для вопроса с вариантами answer — ТЕКСТ выбранного варианта: варианты каждый раз собираются заново. */
+export interface TrainingCheckRequest {
+  questionId: string;
+  answer: string;
+}
+
+export interface TrainingCheckResponse {
+  correct: boolean;
+  correctText?: string;
+  correctAnswers?: string[];
+  explanation: string;
 }
 
 /** Исход партии глазами игрока: победа, поражение или ничья. */
