@@ -2,9 +2,6 @@ import type { HammerAttemptRules, SkillResult } from '@clutch/shared';
 
 export const MAX_HAMMER_FRAME_DELTA_MS = 50;
 
-export function reducedMotionMarkerPosition(attempt: HammerAttemptRules): number {
-  return attempt.targetCenter;
-}
 
 /** Triangle wave moving from 0 to 1 and back. Speed is track units per second. */
 export function markerPositionAtElapsed(activeElapsedMs: number, markerSpeed: number): number {

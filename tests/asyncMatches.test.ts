@@ -799,12 +799,16 @@ describe('async match routes with persisted rules', () => {
 
   it('returns one canonical result for concurrent completion requests', async () => {
     const db = database();
-    const created = await start(db);
-    // Проигрывающая сторона шлёт весь набор: восемь кругов завершали матч, только если
-    // соперник сам успевал добрать до 100%, а это зависит от того, кто достался из пула.
+    // Соперник задан явно и до 100% не доходит. Иначе матч завершался бы на ЕГО круге,
+    // и следующий круг игрока падал бы с «кругом после завершения»: до этого соперник
+    // приходил из пула, поэтому тест падал через раз в зависимости от того, кто достался.
+    const questions = generateMatch(10, 0.3, 'geography');
+    insertRun(db, { id: 'concurrent', questions, snapshot: opponent(questions, Array(10).fill(0)) });
+    // Обе посылки по отдельности корректно завершают матч: одна добирает до 100%,
+    // другая доигрывает набор до конца. Гонка остаётся только за запись результата.
     const [winningResponse, losingResponse] = await Promise.all([
-      complete(db, created.matchId, inputs(created.questions, 4, true, 0)),
-      complete(db, created.matchId, inputs(created.questions, created.questions.length, false)),
+      complete(db, 'concurrent', inputs(questions, 4, true, 0)),
+      complete(db, 'concurrent', inputs(questions, questions.length, false)),
     ]);
 
     expect(winningResponse.status).toBe(200);

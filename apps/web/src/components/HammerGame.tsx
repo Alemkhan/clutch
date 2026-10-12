@@ -12,7 +12,6 @@ import {
   cappedFrameDeltaMs,
   hammerTierZones,
   markerPositionAtElapsed,
-  reducedMotionMarkerPosition,
 } from '../lib/hammerMotion';
 import { playSound, strikeSoundFor } from '../lib/sounds';
 import { preloadImages } from '../lib/preloadImages';
@@ -149,20 +148,18 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
     };
 
     analytics.track('skill_attempt_started');
-    if (reduceMotion) {
-      const staticPosition = reducedMotionMarkerPosition(attempt);
-      posRef.current = staticPosition;
-      setMarkerPos(staticPosition);
-    } else {
-      resume();
-      document.addEventListener('visibilitychange', onVisibilityChange);
-    }
+    // Маркер движется всегда, в том числе при prefers-reduced-motion: это сама механика,
+    // а не украшение. Раньше он там замирал на цели, и каждый удар выходил идеальным —
+    // то есть включённое «уменьшение движения» давало гарантированные 25 очков.
+    // Под reduce motion гасится декор: замах, тряска пня, вспышки.
+    resume();
+    document.addEventListener('visibilitychange', onVisibilityChange);
     return () => {
       cancelAnimationFrame(rafRef.current);
       document.removeEventListener('visibilitychange', onVisibilityChange);
       if (soundTimeoutRef.current !== null) clearTimeout(soundTimeoutRef.current);
     };
-  }, [attempt.targetCenter, attempt.markerSpeed, reduceMotion, introOpen]);
+  }, [attempt.targetCenter, attempt.markerSpeed, introOpen]);
 
   const handleTap = useCallback(() => {
     if (introOpen || stoppedRef.current) return;

@@ -9,7 +9,6 @@ import {
   cappedFrameDeltaMs,
   hammerTierZones,
   markerPositionAtElapsed,
-  reducedMotionMarkerPosition,
 } from './hammerMotion';
 
 describe('hammer motion', () => {
@@ -40,13 +39,29 @@ describe('hammer motion', () => {
     expect(cappedFrameDeltaMs(null, 600)).toBe(0);
   });
 
-  it('places the reduced-motion marker on the shifted target', () => {
+  // Регресс: маркер когда-то замирал на цели при prefers-reduced-motion, и каждый удар
+  // выходил идеальным. Положение маркера обязано зависеть только от времени и скорости,
+  // и никогда — от того, где стоит цель.
+  it('sweeps the whole track and never parks on the target', () => {
     const attempt = hammerAttemptRules(
       'reduced-motion-question',
       ['great', 'weak'],
       CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
     );
-    expect(reducedMotionMarkerPosition(attempt)).toBe(attempt.targetCenter);
+    const positions = Array.from({ length: 400 }, (_, step) =>
+      markerPositionAtElapsed(step * 10, attempt.markerSpeed));
+
+    expect(Math.min(...positions)).toBeLessThan(0.02);
+    expect(Math.max(...positions)).toBeGreaterThan(0.98);
+
+    // Идеальных попаданий среди произвольных моментов — меньшинство, а не все подряд.
+    const perfect = positions.filter((position) =>
+      scoreHammerDistance(
+        normalizedHammerDistance(position, attempt.targetCenter),
+        attempt.stage,
+        CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+      ).result === 'perfect').length;
+    expect(perfect / positions.length).toBeLessThan(0.15);
   });
 
   it('draws nested bands equal to the scoring thresholds', () => {
