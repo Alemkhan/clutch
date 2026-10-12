@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PRACTICE_LEVELS, type PracticeLevel, type Question } from '@clutch/shared';
 import { mistakeCount } from '../lib/mistakeLog';
 import { ScreenHeader } from './ScreenHeader';
@@ -10,6 +10,8 @@ interface TrainingHubProps {
   onAnswered: (questionId: string, correct: boolean) => void;
   onStartBot: (level: PracticeLevel) => void;
   onBack: () => void;
+  /** true, пока идёт практика ошибок: App прячет нижнюю навигацию. */
+  onPlayingChange?: (playing: boolean) => void;
 }
 
 type View = 'menu' | 'bots' | 'mistakes';
@@ -29,8 +31,13 @@ export function PracticeLevelList({ onStartBot }: { onStartBot: (level: Practice
 }
 
 /** «Тренировка»: практика без зачёта. Два входа: игра против бота и отработка ошибок. */
-export function TrainingHub({ questions, onAnswered, onStartBot, onBack }: TrainingHubProps) {
+export function TrainingHub({ questions, onAnswered, onStartBot, onBack, onPlayingChange }: TrainingHubProps) {
   const [view, setView] = useState<View>('menu');
+
+  useEffect(() => {
+    onPlayingChange?.(view === 'mistakes');
+    return () => onPlayingChange?.(false);
+  }, [view, onPlayingChange]);
 
   if (view === 'mistakes') {
     return (

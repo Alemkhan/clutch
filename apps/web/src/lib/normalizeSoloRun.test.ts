@@ -12,7 +12,7 @@ const questions = generateMatch(12, 0, 'geography');
 function response(overrides: Partial<StartSoloRunResponse> = {}): StartSoloRunResponse {
   return {
     runId: 'run-1', questions, pace: null, target: SOLO_TARGET_PROGRESS, roundCap: SOLO_ROUND_CAP,
-    rulesVersion: 'solo-to-100-v1', bankExhausted: false, ...overrides,
+    rulesVersion: 'solo-to-100-v2', bankExhausted: false, ...overrides,
   };
 }
 
@@ -53,7 +53,7 @@ describe('normalizeSoloRun', () => {
   });
 
   it('rejects rules this client does not know', () => {
-    expect(() => normalizeSoloRun(response({ rulesVersion: 'solo-to-100-v2' }))).toThrow();
+    expect(() => normalizeSoloRun(response({ rulesVersion: 'solo-to-100-v3' }))).toThrow();
     expect(() => normalizeSoloRun(response({ target: 150 }))).toThrow();
     expect(() => normalizeSoloRun(response({ roundCap: 30 }))).toThrow();
     expect(() => normalizeSoloRun(response({ runId: '' }))).toThrow();

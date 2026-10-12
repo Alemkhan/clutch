@@ -17,6 +17,7 @@ import { readLaunchIntent, type LaunchIntent } from './lib/launchIntent';
 import { LastStand } from './components/LastStand';
 import { SoloRun, type SoloRematch } from './components/SoloRun';
 import { MyRuns } from './components/MyRuns';
+import { BottomNav, navTabForPhase, type NavTab } from './components/BottomNav';
 import { isSoloPlaying, type SoloStage } from './lib/soloRunFlow';
 import { completionQueue } from './lib/completionQueue';
 import { analytics } from './lib/analytics';
@@ -82,6 +83,17 @@ export default function App() {
   // Молоток в соло получает тот же фон, что и в гонке.
   const shellPhase = game.phase === 'solo' && soloStage === 'hammer' ? 'hammer' : game.phase;
 
+  // Практика ошибок внутри «Тренировки» — это игра: панель на ней скрыта.
+  const [trainingPlaying, setTrainingPlaying] = useState(false);
+  const navTab = navTabForPhase(game.phase);
+  const showNav = navTab !== null && !(game.phase === 'home' && launchIntent) && !(game.phase === 'training' && trainingPlaying);
+  const selectNavTab = useCallback((tab: NavTab) => {
+    if (tab === 'home') game.goHome();
+    else if (tab === 'myRuns') game.goToMyRuns();
+    else if (tab === 'training') game.goToTraining();
+    else game.goToProfile();
+  }, [game.goHome, game.goToMyRuns, game.goToTraining, game.goToProfile]);
+
   useTelegramBackButton(game.phase, {
     // В тренировке системная «Назад» ведёт к её разделу, а не на главную.
     home: game.phase === 'solo' && practiceLevel ? game.goToTraining : game.goHome,
@@ -110,7 +122,8 @@ export default function App() {
   }, []);
 
   return (
-    <main ref={shellRef} className={`app-shell phase-${shellPhase}`}>
+    <>
+    <main ref={shellRef} className={`app-shell phase-${shellPhase}${showNav ? ' has-nav' : ''}`}>
       {showMatchHud && (
         <MatchHud
           player={game.playerProgress}
@@ -131,11 +144,8 @@ export default function App() {
         {game.phase === 'home' && !launchIntent && (
           <motion.div key="home" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <HomeDashboard
-              onProfile={game.goToProfile}
-              onTraining={game.goToTraining}
               onLastStand={game.goToLastStand}
               onSolo={startSolo}
-              onMyRuns={game.goToMyRuns}
             />
           </motion.div>
         )}
@@ -152,6 +162,7 @@ export default function App() {
               questions={game.trainingQuestions}
               onAnswered={game.recordTrainingAnswer}
               onStartBot={startPractice}
+              onPlayingChange={setTrainingPlaying}
               onBack={game.goHome}
             />
           </motion.div>
@@ -260,5 +271,7 @@ export default function App() {
         )}
       </AnimatePresence>
     </main>
+    {showNav && navTab && <BottomNav active={navTab} onSelect={selectNavTab} />}
+    </>
   );
 }

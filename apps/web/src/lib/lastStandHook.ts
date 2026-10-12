@@ -1,12 +1,8 @@
 import { parseLeaderboardResponse } from './lastStandRun';
 
-/** The server returns at most this many leaderboard rows. */
-export const LAST_STAND_BOARD_LIMIT = 50;
-
 export interface LastStandHook {
-  kind: 'empty' | 'played';
+  kind: 'best';
   headline: string;
-  detail: string;
 }
 
 function plural(n: number, one: string, few: string, many: string): string {
@@ -19,9 +15,10 @@ function plural(n: number, one: string, few: string, many: string): string {
 }
 
 /**
- * Turns the raw leaderboard response into the daily hook of the home card.
- * Returns null when there is no trustworthy data (not loaded, network error,
- * malformed body): the card then shows no hook at all instead of zeros.
+ * Turns the raw leaderboard response into the one-line hook of the home card:
+ * the best result of the day. Returns null when there is nothing trustworthy to
+ * show (not loaded, network error, malformed body, nobody has a result yet):
+ * the card then shows no hook at all instead of "nobody played" or zeros.
  */
 export function buildLastStandHook(raw: unknown): LastStandHook | null {
   if (raw === null || raw === undefined) return null;
@@ -31,22 +28,10 @@ export function buildLastStandHook(raw: unknown): LastStandHook | null {
   } catch {
     return null;
   }
-  if (entries.length === 0) {
-    return {
-      kind: 'empty',
-      headline: 'Сегодня ещё никто не играл',
-      detail: 'Будь первым и задай планку дня',
-    };
-  }
-  const best = Math.max(...entries.map((entry) => Math.max(0, Math.floor(entry.survived))));
-  const count = entries.length;
-  const capped = count >= LAST_STAND_BOARD_LIMIT;
-  const countText = capped ? `${LAST_STAND_BOARD_LIMIT}+` : String(count);
-  const verb = count === 1 ? 'играл' : 'играли';
-  const noun = capped ? 'человек' : plural(count, 'человек', 'человека', 'человек');
+  const best = Math.max(0, ...entries.map((entry) => Math.floor(entry.survived)));
+  if (best < 1) return null;
   return {
-    kind: 'played',
-    headline: `Сегодня ${verb} ${countText} ${noun}`,
-    detail: `Лучший результат: ${best} ${plural(best, 'круг', 'круга', 'кругов')}`,
+    kind: 'best',
+    headline: `Лучший результат дня: ${best} ${plural(best, 'круг', 'круга', 'кругов')}`,
   };
 }

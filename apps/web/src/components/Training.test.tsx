@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { generateQuestionById } from '@clutch/shared';
 import { Training, TRAINING_NOT_SAVED_NOTE } from './Training';
 import { HomeDashboard } from './HomeDashboard';
+import { BottomNav, navTabForPhase } from './BottomNav';
 import { TrainingHub } from './TrainingHub';
 import {
   answerTraining,
@@ -14,7 +15,7 @@ import {
 const handlers = { onAnswered: vi.fn(), onBack: vi.fn() };
 
 function homeHandlers() {
-  return { onProfile: vi.fn(), onTraining: vi.fn(), onLastStand: vi.fn(), onSolo: vi.fn(), onMyRuns: vi.fn() };
+  return { onLastStand: vi.fn(), onSolo: vi.fn() };
 }
 
 describe('Training screens', () => {
@@ -40,13 +41,15 @@ describe('Training screens', () => {
     expect(html).not.toMatch(/молот|hammer|match-hud|VS|Найти соперника/i);
   });
 
-  it('home dashboard offers the training entry even when storage is broken', () => {
-    const html = renderToStaticMarkup(
-      <HomeDashboard {...homeHandlers()} />,
-    );
-    expect(html).toContain('Тренировка');
-    expect(html).toContain('Боты и отработка ошибок');
-    expect(html).not.toContain('Тренировка по ошибкам');
+  it('the bottom nav offers all four sections, marks the active one and hides during the game', () => {
+    const html = renderToStaticMarkup(<BottomNav active="training" onSelect={vi.fn()} />);
+    for (const label of ['Главная', 'Партии', 'Тренировка', 'Профиль']) expect(html).toContain(label);
+    expect(html.match(/aria-current="page"/g)).toHaveLength(1);
+    expect(html).not.toMatch(/Рейтинг|Ranked|Лига/);
+    for (const phase of ['home', 'myRuns', 'training', 'profile'] as const) expect(navTabForPhase(phase)).toBe(phase);
+    for (const phase of ['categories', 'matchmaking', 'question', 'resolution', 'hammer', 'result', 'lastStand', 'solo'] as const) {
+      expect(navTabForPhase(phase)).toBeNull();
+    }
   });
 
   it('the training hub offers bots and the mistake log, and shows an empty mistake list', () => {
@@ -62,8 +65,7 @@ describe('Training screens', () => {
   it('home dashboard has one main action, and it starts the solo run', () => {
     const html = renderToStaticMarkup(<HomeDashboard {...homeHandlers()} />);
     expect(html).toContain('Играть');
-    expect(html).toContain('Мои партии');
-    expect(html).not.toMatch(/Найти соперника|Забег до 100|[Тт]емп|Видео|Челлендж|челлендж|Robb|Смотреть клип|10 вопросов|Точность решает/);
+    expect(html).not.toMatch(/гонк|обгони|первым|race|Мои партии|Найти соперника|Забег до 100|[Тт]емп|Видео|Челлендж|челлендж|Robb|Смотреть клип|10 вопросов|Точность решает/);
     // Единственная большая кнопка экрана; её обработчик в App — запуск соло-забега.
     expect(html.match(/class="cta-btn"/g)).toHaveLength(1);
   });
@@ -75,10 +77,11 @@ describe('Training screens', () => {
     expect(html).toContain('ls-home-card');
     expect(html).toContain('не совпадай с соперником');
     expect(html).toContain('aria-label="Last Stand: начать забег по категориям стран"');
+    expect(html).toContain('До 12 кругов');
     expect(html).not.toContain('ls-home-hook');
     expect(html).not.toContain('Сегодня');
+    expect(html).not.toContain('VS');
     expect(html.indexOf('home-hero-card')).toBeLessThan(html.indexOf('ls-home-card'));
-    expect(html.indexOf('ls-home-card')).toBeLessThan(html.indexOf('Боты и отработка ошибок'));
   });
 });
 

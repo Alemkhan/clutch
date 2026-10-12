@@ -1,18 +1,32 @@
 import { useEffect, useState } from 'react';
 import { fetchLastStandLeaderboard } from '../lib/api';
 import { buildLastStandHook, type LastStandHook } from '../lib/lastStandHook';
-import { getStats, winRatePercent } from '../lib/localStats';
-import { playSound } from '../lib/sounds';
+import { getStats } from '../lib/localStats';
 
 interface HomeDashboardProps {
-  onProfile: () => void;
-  onTraining: () => void;
   onLastStand: () => void;
   onSolo: () => void;
-  onMyRuns: () => void;
 }
 
-export function HomeDashboard({ onProfile, onTraining, onLastStand, onSolo, onMyRuns }: HomeDashboardProps) {
+/** Петля игры тремя значками: верный ответ, удар в мини-игре, прогресс. Без текста-инструкции. */
+function LoopIcon({ kind }: { kind: 'answer' | 'strike' | 'progress' }) {
+  const common = { width: 22, height: 22, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
+  if (kind === 'answer') {
+    return <svg {...common} aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M7.8 12.4l2.9 2.9 5.6-6" /></svg>;
+  }
+  if (kind === 'strike') {
+    return <svg {...common} aria-hidden="true"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4.5" /><circle cx="12" cy="12" r="0.8" fill="currentColor" /></svg>;
+  }
+  return <svg {...common} aria-hidden="true"><path d="M4 16h16" strokeOpacity="0.4" /><path d="M4 16h10" /><path d="M5 7l5 4 3-3 6 5" /></svg>;
+}
+
+const LOOP_STEPS = [
+  { kind: 'answer', label: 'Верный ответ' },
+  { kind: 'strike', label: 'Удар' },
+  { kind: 'progress', label: 'Прогресс' },
+] as const;
+
+export function HomeDashboard({ onLastStand, onSolo }: HomeDashboardProps) {
   const [lastStandHook, setLastStandHook] = useState<LastStandHook | null>(null);
 
   // Fire-and-forget: the home screen never waits for this. Any failure just means no hook.
@@ -33,38 +47,34 @@ export function HomeDashboard({ onProfile, onTraining, onLastStand, onSolo, onMy
           <span className="home-brand-mark">C</span>
           <span>CLUTCH</span>
         </div>
-        <div className="home-chips">
-          <span className="chip streak-chip">🔥 {stats.currentStreak}</span>
-          <button className="home-avatar-btn" aria-label="Открыть профиль" onClick={() => { onProfile(); }}>
-            Я
-          </button>
-        </div>
+        {/* Ноль в чипе читается как «тут пусто», поэтому серия показывается только когда она есть. */}
+        {stats.currentStreak > 0 && <span className="chip streak-chip">🔥 {stats.currentStreak}</span>}
       </header>
 
       <section className="home-hero-card">
         <span className="home-kicker">География · флаги · языки</span>
         <h1 className="home-title">Ответь верно.<br /><em>Дойди до 100%.</em></h1>
-        <p className="home-lede">Верный ответ даёт попытку в мини-игре, а удар двигает тебя вперёд.</p>
-        <div className="home-hero-meter" aria-hidden="true">
-          <span className="home-meter-player" />
-          <span className="home-meter-center">VS</span>
-          <span className="home-meter-opponent" />
-        </div>
+        <p className="home-lede">Верный ответ даёт попытку в мини‑игре.</p>
+        <ol className="home-loop" aria-label="Как идёт забег">
+          {LOOP_STEPS.map((step) => (
+            <li key={step.kind} className="home-loop-step">
+              <span className="home-loop-icon"><LoopIcon kind={step.kind} /></span>
+              <span className="home-loop-label">{step.label}</span>
+            </li>
+          ))}
+        </ol>
         <button className="cta-btn" onClick={() => { onSolo(); }}>
           Играть <span aria-hidden="true">→</span>
         </button>
       </section>
 
       <section className="ls-home-card" aria-labelledby="ls-home-title">
-        <span className="ls-home-kicker">Новый режим · до 12 кругов</span>
-        <h2 className="ls-home-title" id="ls-home-title">Last Stand</h2>
+        <div className="ls-home-top">
+          <h2 className="ls-home-title" id="ls-home-title">Last Stand</h2>
+          <span className="ls-home-kicker">До 12 кругов</span>
+        </div>
         <p className="ls-home-lede">Называй страны из объявленной категории и не совпадай с соперником.</p>
-        {lastStandHook && (
-          <div className={`ls-home-hook ls-home-hook-${lastStandHook.kind}`}>
-            <span className="ls-home-hook-head">{lastStandHook.headline}</span>
-            <span className="ls-home-hook-detail">{lastStandHook.detail}</span>
-          </div>
-        )}
+        {lastStandHook && <p className="ls-home-hook">{lastStandHook.headline}</p>}
         <button
           type="button"
           className="ls-home-cta"
@@ -74,31 +84,6 @@ export function HomeDashboard({ onProfile, onTraining, onLastStand, onSolo, onMy
           Начать забег <span aria-hidden="true">→</span>
         </button>
       </section>
-
-      <button type="button" className="training-entry" onClick={() => { onMyRuns(); }}>
-        <span className="training-entry-title">Мои партии</span>
-        <span className="training-entry-meta">Результаты и вызовы на реванш</span>
-      </button>
-
-      <button type="button" className="training-entry" onClick={() => { onTraining(); }}>
-        <span className="training-entry-title">Тренировка</span>
-        <span className="training-entry-meta">Боты и отработка ошибок</span>
-      </button>
-
-      <div className="home-stats-card">
-        <div className="mini-stat">
-          <span className="mini-stat-value">{stats.wins}</span>
-          <span className="mini-stat-label">Побед</span>
-        </div>
-        <div className="mini-stat">
-          <span className="mini-stat-value">{winRatePercent(stats)}%</span>
-          <span className="mini-stat-label">Винрейт</span>
-        </div>
-        <div className="mini-stat">
-          <span className="mini-stat-value">{stats.bestStreak}</span>
-          <span className="mini-stat-label">Лучшая серия</span>
-        </div>
-      </div>
     </section>
   );
 }

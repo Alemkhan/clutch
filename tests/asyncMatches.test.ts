@@ -461,11 +461,11 @@ describe('async match routes with persisted rules', () => {
     const questions = generateMatch(10, 0.3, 'geography');
     insertRun(db, { id: 'pressure', questions, snapshot: opponent(questions, Array(10).fill(0)) });
     const rounds = inputs(questions, 10, false);
-    rounds[0] = { ...rounds[0], selectedAnswer: selectedAnswer(questions[0], true), skillDistance: 0.14 };
-    rounds[1] = { ...rounds[1], selectedAnswer: selectedAnswer(questions[1], true), skillDistance: 0.14 };
+    rounds[0] = { ...rounds[0], selectedAnswer: selectedAnswer(questions[0], true), skillDistance: 0.058 };
+    rounds[1] = { ...rounds[1], selectedAnswer: selectedAnswer(questions[1], true), skillDistance: 0.058 };
     rounds[2] = { ...rounds[2], skillDistance: 0 };
     rounds[3] = { ...rounds[3], selectedAnswer: selectedAnswer(questions[3], true), skillDistance: 0.9 };
-    rounds[4] = { ...rounds[4], selectedAnswer: selectedAnswer(questions[4], true), skillDistance: 0.14 };
+    rounds[4] = { ...rounds[4], selectedAnswer: selectedAnswer(questions[4], true), skillDistance: 0.058 };
 
     const response = await complete(db, 'pressure', rounds);
     expect(response.status).toBe(200);
@@ -493,9 +493,10 @@ describe('async match routes with persisted rules', () => {
   it.each([
     ['legacy', null, null, null],
     ['v1', 'race-to-100-v1', CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, configJson],
-    ['unknown-version', 'race-to-100-v3', CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, configJson],
+    ['v2', 'race-to-100-v2', CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, configJson],
+    ['unknown-version', 'race-to-100-v4', CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, configJson],
     ['unknown-config', CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion,
-      CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, '{"markerSpeed":1}'],
+      CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, '{"markerSpeedMin":1}'],
   ])('returns 409 for unfinished %s conditions', async (id, rulesVersion, miniGameId, config) => {
     const db = database();
     const questions = generateMatch(10, 0.3, 'geography');
@@ -538,7 +539,7 @@ describe('async match routes with persisted rules', () => {
     });
     insertRun(db, {
       id: 'wrong-config', questionSetId, playerId: 'wrong-config-player', questions, rounds, status: 'completed',
-      eligible: 1, completedAt: 4, config: '{"markerSpeed":1}',
+      eligible: 1, completedAt: 4, config: '{"markerSpeedMin":1}',
     });
     const unused = await start(db, 'chooser');
     expect(unused.opponent.id).toBe('compatible');
@@ -799,9 +800,11 @@ describe('async match routes with persisted rules', () => {
   it('returns one canonical result for concurrent completion requests', async () => {
     const db = database();
     const created = await start(db);
+    // Проигрывающая сторона шлёт весь набор: восемь кругов завершали матч, только если
+    // соперник сам успевал добрать до 100%, а это зависит от того, кто достался из пула.
     const [winningResponse, losingResponse] = await Promise.all([
       complete(db, created.matchId, inputs(created.questions, 4, true, 0)),
-      complete(db, created.matchId, inputs(created.questions, 8, false)),
+      complete(db, created.matchId, inputs(created.questions, created.questions.length, false)),
     ]);
 
     expect(winningResponse.status).toBe(200);

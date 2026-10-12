@@ -129,7 +129,7 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
 
       activeElapsedRef.current += cappedFrameDeltaMs(lastFrameRef.current, timestamp);
       lastFrameRef.current = timestamp;
-      const next = markerPositionAtElapsed(activeElapsedRef.current, config.markerSpeed);
+      const next = markerPositionAtElapsed(activeElapsedRef.current, attempt.markerSpeed);
       posRef.current = next;
       setMarkerPos(next);
 
@@ -162,7 +162,7 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
       document.removeEventListener('visibilitychange', onVisibilityChange);
       if (soundTimeoutRef.current !== null) clearTimeout(soundTimeoutRef.current);
     };
-  }, [attempt.targetCenter, config.markerSpeed, reduceMotion, introOpen]);
+  }, [attempt.targetCenter, attempt.markerSpeed, reduceMotion, introOpen]);
 
   const handleTap = useCallback(() => {
     if (introOpen || stoppedRef.current) return;

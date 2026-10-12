@@ -44,7 +44,8 @@ function opponentFor(matchQuestions: Question[], awards: number[] = matchQuestio
 
 const customConfig: MiniGameConfig = {
   ...CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
-  markerSpeed: 1.2,
+  markerSpeedMin: 1.0,
+  markerSpeedMax: 1.4,
   targetWidth: 0.3,
   perfectWidth: 0.08,
 };
@@ -181,15 +182,15 @@ describe('game session transitions', () => {
       category: 'geography', questions: matchQuestions, opponent: opponentFor(matchQuestions),
     });
 
-    state = completeSkillDistance(recordAnswer(state, 'correct', 500), 0.14);
+    state = completeSkillDistance(recordAnswer(state, 'correct', 500), 0.058);
     expect(state.lastSkill).toBe('perfect');
-    state = completeSkillDistance(recordAnswer(state, 'correct', 500), 0.14);
+    state = completeSkillDistance(recordAnswer(state, 'correct', 500), 0.058);
     expect(state.lastSkill).toBe('great');
 
     state = continueAfterAnswerResolution(recordAnswer(state, 'wrong', 500));
     state = completeSkillDistance(recordAnswer(state, 'correct', 500), 0.9);
     expect(state.lastSkill).toBe('miss');
-    state = completeSkillDistance(recordAnswer(state, 'correct', 500), 0.14);
+    state = completeSkillDistance(recordAnswer(state, 'correct', 500), 0.058);
 
     expect(state.lastSkill).toBe('great');
     expect(state.skillResults).toEqual(['perfect', 'great', 'miss', 'great']);
@@ -202,7 +203,7 @@ describe('game session transitions', () => {
       category: 'geography', questions: matchQuestions, opponent: opponentFor(matchQuestions),
     });
     for (let index = 0; index < 4; index += 1) {
-      state = completeSkillDistance(recordAnswer(state, 'correct', 500 + index), 0.1);
+      state = completeSkillDistance(recordAnswer(state, 'correct', 500 + index), 0.03);
     }
 
     expect(state).toMatchObject({

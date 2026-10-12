@@ -11,26 +11,18 @@ describe('buildLastStandHook', () => {
     expect(buildLastStandHook({ dateKey: 'd', entries: [{ displayName: 1 }] })).toBeNull();
   });
 
-  it('invites to be first when nobody played', () => {
-    expect(buildLastStandHook({ dateKey: 'd', entries: [] })).toEqual({
-      kind: 'empty',
-      headline: 'Сегодня ещё никто не играл',
-      detail: 'Будь первым и задай планку дня',
-    });
+  it('shows nothing when nobody has a result yet (no "nobody played" copy)', () => {
+    expect(buildLastStandHook({ dateKey: 'd', entries: [] })).toBeNull();
+    expect(buildLastStandHook({ dateKey: 'd', entries: [entry(0)] })).toBeNull();
   });
 
-  it('reports players and best result', () => {
-    expect(buildLastStandHook({ dateKey: 'd', entries: [entry(1)] })).toMatchObject({
-      kind: 'played', headline: 'Сегодня играл 1 человек', detail: 'Лучший результат: 1 круг',
+  it('reports only the best result of the day, never a player count', () => {
+    expect(buildLastStandHook({ dateKey: 'd', entries: [entry(1)] })).toEqual({
+      kind: 'best', headline: 'Лучший результат дня: 1 круг',
     });
-    expect(buildLastStandHook({ dateKey: 'd', entries: [entry(3), entry(9), entry(2)] })).toMatchObject({
-      headline: 'Сегодня играли 3 человека', detail: 'Лучший результат: 9 кругов',
-    });
-    expect(buildLastStandHook({ dateKey: 'd', entries: [entry(2), entry(0)] })!.detail).toBe('Лучший результат: 2 круга');
-  });
-
-  it('does not claim an exact count at the server row limit', () => {
-    const entries = Array.from({ length: 50 }, () => entry(4));
-    expect(buildLastStandHook({ dateKey: 'd', entries })!.headline).toBe('Сегодня играли 50+ человек');
+    expect(buildLastStandHook({ dateKey: 'd', entries: [entry(3), entry(9), entry(2)] })!.headline)
+      .toBe('Лучший результат дня: 9 кругов');
+    expect(buildLastStandHook({ dateKey: 'd', entries: [entry(2), entry(0)] })!.headline)
+      .toBe('Лучший результат дня: 2 круга');
   });
 });

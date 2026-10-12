@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { CURRENT_ASYNC_MATCH_CONDITIONS, hammerAttemptRules } from '@clutch/shared';
+import {
+  CURRENT_ASYNC_MATCH_CONDITIONS,
+  hammerAttemptRules,
+  normalizedHammerDistance,
+  scoreHammerDistance,
+} from '@clutch/shared';
 import {
   cappedFrameDeltaMs,
   hammerTierZones,
@@ -17,7 +22,7 @@ describe('hammer motion', () => {
         elapsed += cappedFrameDeltaMs(previous, now);
         previous = now;
       }
-      return markerPositionAtElapsed(elapsed, 0.8);
+      return markerPositionAtElapsed(elapsed, 1.3);
     });
     expect(positions[0]).toBeCloseTo(positions[1], 10);
     expect(positions[1]).toBeCloseTo(positions[2], 10);
@@ -57,7 +62,7 @@ describe('hammer motion', () => {
       'great',
       'perfect',
     ]);
-    [68, 52, 28, 12].forEach((width, index) => {
+    [68, 52, 22.4, 4.8].forEach((width, index) => {
       expect(zones[index].widthPercent).toBeCloseTo(width);
     });
     for (const zone of zones) {
@@ -65,6 +70,23 @@ describe('hammer motion', () => {
         (attempt.targetCenter - attempt.thresholds[zone.result] / 2) * 100,
       );
       expect(zone.widthPercent).toBeCloseTo(attempt.thresholds[zone.result] * 100);
+    }
+  });
+
+  it('draws the perfect zone exactly where a strike scores perfect', () => {
+    const config = CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config;
+    for (const previous of [[], ['great'], ['great', 'weak'], ['good', 'good', 'good']] as const) {
+      const attempt = hammerAttemptRules('draw-score-question', previous, config);
+      const perfect = hammerTierZones(attempt).find((zone) => zone.result === 'perfect')!;
+      const left = perfect.leftPercent / 100;
+      const right = (perfect.leftPercent + perfect.widthPercent) / 100;
+      const score = (position: number) => scoreHammerDistance(
+        normalizedHammerDistance(position, attempt.targetCenter), attempt.stage, config,
+      ).result;
+      expect(score(left + 1e-6)).toBe('perfect');
+      expect(score(right - 1e-6)).toBe('perfect');
+      expect(score(left - 1e-3)).toBe('great');
+      expect(score(right + 1e-3)).toBe('great');
     }
   });
 });

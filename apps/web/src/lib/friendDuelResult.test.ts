@@ -30,7 +30,7 @@ describe('friend duel on the client', () => {
       rulesVersion: FRIEND_RULES_VERSION, bankExhausted: false,
     };
     expect(normalizeSoloRun(response).friendDuel).toBe(true);
-    expect(normalizeSoloRun({ ...response, rulesVersion: 'solo-to-100-v1' }).friendDuel).toBe(false);
+    expect(normalizeSoloRun({ ...response, rulesVersion: 'solo-to-100-v2' }).friendDuel).toBe(false);
     expect(() => normalizeSoloRun(response, true)).toThrow();
     expect(() => normalizeSoloRun({ ...response, rulesVersion: 'solo-other-v1' })).toThrow();
   });

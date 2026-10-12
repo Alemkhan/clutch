@@ -114,7 +114,7 @@ describe('online match conditions and transcript validation', () => {
   it('rejects unsupported rules, ids, and invalid configs', () => {
     expect(() => configForServerConditions({
       ...CURRENT_ASYNC_MATCH_CONDITIONS,
-      rulesVersion: 'race-to-100-v3',
+      rulesVersion: 'race-to-100-v2',
     })).toThrow(/not supported/i);
     expect(() => validateMiniGameConfig({
       markerSpeed: 0.8,
@@ -162,7 +162,7 @@ describe('online match conditions and transcript validation', () => {
   });
 
   it('derives the reward from distance using server scoring', () => {
-    expect(scoreSkillDistance(0.1)).toEqual({ result: 'perfect', progressAwarded: 25 });
+    expect(scoreSkillDistance(0.05)).toEqual({ result: 'perfect', progressAwarded: 25 });
     expect(scoreSkillDistance(0.9)).toEqual({ result: 'miss', progressAwarded: 0 });
     expect(() => scoreSkillDistance(Number.NaN)).toThrow(/invalid/i);
   });

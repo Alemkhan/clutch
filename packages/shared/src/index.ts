@@ -1,4 +1,4 @@
-import type { MiniGameConfig, SkillResult } from './hammerRules';
+import { SKILL_DISTANCE_THRESHOLDS, type MiniGameConfig, type SkillResult } from './hammerRules';
 import type { PracticeLevelId } from './practice';
 
 export type AnswerType = 'multiple_choice' | 'open_answer';
@@ -204,13 +204,14 @@ export interface AsyncMatchConditions {
 }
 
 export const CURRENT_ASYNC_MATCH_CONDITIONS: AsyncMatchConditions = {
-  rulesVersion: 'race-to-100-v2',
+  rulesVersion: 'race-to-100-v3',
   miniGame: {
     id: 'hammer_nail',
     config: {
-      markerSpeed: 0.8,
+      markerSpeedMin: 0.6,
+      markerSpeedMax: 1.6,
       targetWidth: 0.85,
-      perfectWidth: 0.15,
+      perfectWidth: SKILL_DISTANCE_THRESHOLDS.perfect,
       pressure: {
         stageMultipliers: [1, 0.9, 0.8, 0.7],
         maxTargetOffsets: [0.06, 0.09, 0.12, 0.15],
@@ -221,7 +222,7 @@ export const CURRENT_ASYNC_MATCH_CONDITIONS: AsyncMatchConditions = {
 
 /** Соло-забег до цели: та же схема и тот же молоток, своя версия правил (гоночные записи в соло-пул не попадают). */
 export const CURRENT_SOLO_RUN_CONDITIONS: AsyncMatchConditions = {
-  rulesVersion: 'solo-to-100-v1',
+  rulesVersion: 'solo-to-100-v2',
   miniGame: CURRENT_ASYNC_MATCH_CONDITIONS.miniGame,
 };
 

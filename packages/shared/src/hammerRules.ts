@@ -1,7 +1,9 @@
 export type SkillResult = 'perfect' | 'great' | 'good' | 'weak' | 'miss';
 
 export interface MiniGameConfig {
-  markerSpeed: number;
+  /** Marker speed bounds (track units per second); each attempt gets a deterministic value inside. */
+  markerSpeedMin: number;
+  markerSpeedMax: number;
   targetWidth: number;
   perfectWidth: number;
   pressure: {
@@ -20,8 +22,8 @@ export const SKILL_REWARDS: Record<SkillResult, number> = {
 
 /** Maximum normalized distance from the target centre for each non-miss tier. */
 export const SKILL_DISTANCE_THRESHOLDS = {
-  perfect: 0.15,
-  great: 0.35,
+  perfect: 0.06,
+  great: 0.28,
   good: 0.65,
   weak: 0.85,
 } as const;
@@ -38,6 +40,7 @@ export interface HammerThresholds {
 export interface HammerAttemptRules {
   stage: PressureStage;
   targetCenter: number;
+  markerSpeed: number;
   thresholds: HammerThresholds;
 }
 
@@ -79,6 +82,26 @@ export function hammerTargetCenter(
   return Math.min(1 - halfWeakZone, Math.max(halfWeakZone, 0.5 + offset));
 }
 
+/**
+ * Marker speed for one attempt. Derived from the question id and pressure stage
+ * (never Math.random), so everyone playing the same set faces the same speeds,
+ * while a player cannot get used to a single pace.
+ */
+export function hammerMarkerSpeed(
+  questionId: string,
+  stage: PressureStage,
+  config: MiniGameConfig,
+): number {
+  let h = stableQuestionHash(`speed:${stage}:${questionId}`);
+  h ^= h >>> 16;
+  h = Math.imul(h, 0x85ebca6b);
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35);
+  h ^= h >>> 16;
+  const unit = (h >>> 0) / 0xffffffff;
+  return config.markerSpeedMin + unit * (config.markerSpeedMax - config.markerSpeedMin);
+}
+
 export function hammerAttemptRules(
   questionId: string,
   previousResults: readonly SkillResult[],
@@ -88,6 +111,7 @@ export function hammerAttemptRules(
   return {
     stage,
     targetCenter: hammerTargetCenter(questionId, stage, config),
+    markerSpeed: hammerMarkerSpeed(questionId, stage, config),
     thresholds: hammerThresholdsForStage(stage, config),
   };
 }

@@ -60,8 +60,9 @@ export function validateMiniGameConfig(value: unknown): MiniGameConfig {
   const config = value as Record<string, unknown>;
   const current = CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config;
   const pressure = config.pressure as Record<string, unknown> | undefined;
-  if (Object.keys(config).length !== 4
-    || config.markerSpeed !== current.markerSpeed
+  if (Object.keys(config).length !== 5
+    || config.markerSpeedMin !== current.markerSpeedMin
+    || config.markerSpeedMax !== current.markerSpeedMax
     || config.targetWidth !== current.targetWidth
     || config.perfectWidth !== current.perfectWidth
     || !pressure
