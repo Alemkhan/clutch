@@ -9,13 +9,6 @@ import type {
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
 } from '@clutch/shared';
-import {
-  loadPlayableMistakes,
-  pruneUnknownMistakes,
-  recordCorrectAnswer,
-  recordMistake,
-  selectTrainingIds,
-} from './mistakeLog';
 import { startAsyncMatch } from './api';
 import { completionQueue, type CompletionQueueEvent } from './completionQueue';
 import {
@@ -50,9 +43,6 @@ export function useGameState() {
     status: 'practice',
     canRetry: false,
   });
-  // Отработка хранит только id ошибок; вопросы и проверку ответа даёт сервер (см. MistakePractice).
-  const [trainingIds, setTrainingIds] = useState<string[]>([]);
-  const recordedAnswerRef = useRef<{ questions: Question[]; index: number } | null>(null);
   const activeMatchIdRef = useRef<string>();
   const reportedCompletionRef = useRef<string>();
   const reportedSavePendingRef = useRef<string>();
@@ -203,19 +193,6 @@ export function useGameState() {
     }
   }, [state.phase, state.activeMatchId, state.roundInputs, state.rulesState.opponentProgress]);
 
-  // Device-local mistake log: a wrong answer or a timeout is a mistake, a correct answer pays one back.
-  // Once per answered question; the effect runs after the render that entered the resolution phase.
-  useEffect(() => {
-    if (state.phase !== 'resolution') return;
-    const question = state.questions[state.questionIndex];
-    if (!question) return;
-    const last = recordedAnswerRef.current;
-    if (last && last.questions === state.questions && last.index === state.questionIndex) return;
-    recordedAnswerRef.current = { questions: state.questions, index: state.questionIndex };
-    if (state.lastCorrect) recordCorrectAnswer(question.id);
-    else recordMistake(question.id);
-  }, [state.phase, state.questions, state.questionIndex, state.lastCorrect]);
-
   const retryResultSave = useCallback(() => {
     if (state.activeMatchId) completionQueue.retry(state.activeMatchId);
   }, [state.activeMatchId]);
@@ -283,14 +260,7 @@ export function useGameState() {
   const goToTraining = useCallback(() => {
     requestCoordinatorRef.current.cancel();
     startingPreparedRef.current = false;
-    pruneUnknownMistakes();
-    setTrainingIds(selectTrainingIds(loadPlayableMistakes()));
     setState({ ...createInitialGameState(), phase: 'training' });
-  }, []);
-
-  // Training answers only touch the device-local mistake log: no match, no queue, no stats.
-  const recordTrainingAnswer = useCallback((questionId: string, correct: boolean) => {
-    if (correct) recordCorrectAnswer(questionId);
   }, []);
 
   const goToLastStand = useCallback(() => {
@@ -364,8 +334,6 @@ export function useGameState() {
     goToLastStand,
     goToSolo,
     goToMyRuns,
-    recordTrainingAnswer,
-    trainingIds,
     goHome,
   };
 }

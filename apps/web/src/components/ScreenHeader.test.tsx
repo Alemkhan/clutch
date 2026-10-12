@@ -50,7 +50,7 @@ describe('ScreenHeader', () => {
         <Matchmaking opponent={opponent} status="ready" source="player" onStart={noop} onRetry={noop} onBack={noop} />,
       ),
       renderToStaticMarkup(<Profile onBack={noop} />),
-      renderToStaticMarkup(<Training questions={[question]} check={vi.fn()} onAnswered={noop} onBack={noop} />),
+      renderToStaticMarkup(<Training questions={[question]} check={vi.fn()} onBack={noop} />),
       renderToStaticMarkup(<LastStandIntro onStart={noop} onLeaderboard={noop} onBack={noop} />),
       renderToStaticMarkup(
         <LastStandLeaderboard view={{ status: 'loading' }} onRetry={noop} onClose={noop} />,

@@ -6,6 +6,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   SOLO_ROUND_CAP,
   type AsyncMatchRoundInput,
+  type Question,
   type SoloRoundResponse,
   type SoloRunSnapshot,
   type StartSoloRunResponse,
@@ -13,6 +14,7 @@ import {
   type TrainingQuestionsResponse,
 } from '@clutch/shared';
 import app from '../apps/api/src/index';
+import { listTrainableMistakes, payBackMistake, recordMistake } from '../apps/api/src/matches/mistakesRepository';
 import { fullQuestions, roundInputs } from './helpers/soloPlay';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
@@ -321,40 +323,145 @@ describe('a run interrupted after several rounds continues from the same place',
 });
 
 describe('mistake training on the server', () => {
-  it('returns questions without answers and lists unknown ids', async () => {
+  const openMistakes = (db: TestD1, label: string) => call(db, label, '/api/training/mistakes');
+  const trainingCheck = (db: TestD1, label: string, questionId: string, answerText: string) =>
+    call(db, label, '/api/training/check', { questionId, answer: answerText });
+  const trainingQuestions = (db: TestD1, label: string, ids: string[]) =>
+    call(db, label, '/api/training/questions', { ids });
+
+  /** Текст верного ответа: так проверяется вопрос с вариантами; для открытого вопроса это сам ответ. */
+  const rightText = (question: Question): string => question.answerType === 'open_answer'
+    ? question.correctAnswers![0]
+    : question.options.find((option) => option.id === question.correctOptionId)!.text;
+
+  async function playWrong(db: TestD1, label: string, runId: string, count: number) {
+    const inputs = roundInputs(fullQuestions(db, runId), count, false);
+    for (let index = 0; index < inputs.length; index += 1) {
+      expect((await answer(db, label, runId, index, inputs[index])).status).toBe(200);
+    }
+    return inputs;
+  }
+
+  it('does not hand out the answer to a question taken from a fresh run, on either route', async () => {
     const db = database();
-    const response = await call(db, 'ann', '/api/training/questions', {
-      ids: ['capital_bf', 'hist_flag_nope', 'lang_nope', 'flag_country_ru'],
-    });
-    expect(response.status).toBe(200);
-    const body = await response.json() as TrainingQuestionsResponse;
-    expect(body.questions.map((question) => question.id)).toEqual(['capital_bf', 'flag_country_ru']);
-    expect(body.unknownIds).toEqual(['hist_flag_nope', 'lang_nope']);
-    const text = JSON.stringify(body);
+    const run = await start(db, 'ann');
+    for (const { id } of run.questions) {
+      const check = await trainingCheck(db, 'ann', id, 'zzz');
+      expect(check.status).toBe(404);
+      expect(JSON.stringify(await check.json())).not.toMatch(/correct|explanation/);
+      const listed = await trainingQuestions(db, 'ann', [id]);
+      expect(listed.status).toBe(404);
+      expect(JSON.stringify(await listed.json())).not.toMatch(/correct|explanation|options/);
+    }
+  });
+
+  it('does not serve a question that is only in the active run, even if it is in the journal', async () => {
+    const db = database();
+    const run = await start(db, 'ann');
+    const questions = fullQuestions(db, run.runId);
+    await playWrong(db, 'ann', run.runId, 1);
+    // Игрок ошибся в этих вопросах раньше (журнал заполнен напрямую), но в этом забеге они ещё не сыграны.
+    const insert = db.sqlite.prepare(
+      'INSERT OR IGNORE INTO player_mistakes (player_id, question_id, owed_count, first_mistake_at, last_mistake_at) '
+      + 'SELECT player_id, ?, 1, 1, 1 FROM match_runs WHERE id = ?',
+    );
+    for (const question of questions) insert.run(question.id, run.runId);
+
+    const listed = await (await openMistakes(db, 'ann')).json() as { count: number; ids: string[] };
+    expect(listed.ids).toEqual([questions[0].id]);
+    expect((await trainingCheck(db, 'ann', questions[1].id, rightText(questions[1]))).status).toBe(404);
+    expect((await trainingQuestions(db, 'ann', [questions[1].id])).status).toBe(404);
+    // Сыгранный круг сервер уже показал, он доступен.
+    expect((await trainingCheck(db, 'ann', questions[0].id, rightText(questions[0]))).status).toBe(200);
+  });
+
+  it('refuses unknown ids, ids never failed, and ids failed by someone else in exactly the same way', async () => {
+    const db = database();
+    const bobRun = await start(db, 'bob');
+    await playWrong(db, 'bob', bobRun.runId, 1);
+    const bobsId = fullQuestions(db, bobRun.runId)[0].id;
+    expect(((await (await openMistakes(db, 'bob')).json()) as { ids: string[] }).ids).toEqual([bobsId]);
+
+    const refusals: Array<[number, string]> = [];
+    for (const id of ['nope_xx', 'capital_bf', bobsId]) {
+      const check = await trainingCheck(db, 'ann', id, 'a');
+      const listed = await trainingQuestions(db, 'ann', [id]);
+      refusals.push([check.status, await check.text()], [listed.status, await listed.text()]);
+    }
+    expect(refusals.every(([status]) => status === 404)).toBe(true);
+    expect(new Set(refusals.map(([, body]) => body)).size).toBe(1);
+  });
+
+  it('writes a wrong answer in a solo run to the player journal, once, and not a correct one', async () => {
+    const db = database();
+    const run = await start(db, 'ann');
+    const questions = fullQuestions(db, run.runId);
+    const [wrong] = roundInputs(questions, 1, false);
+    await answer(db, 'ann', run.runId, 0, wrong);
+    await answer(db, 'ann', run.runId, 0, wrong);
+    const [right] = roundInputs(questions.slice(1), 1, true);
+    await perfectRound(db, 'ann', run.runId, 1, right);
+
+    const rows = db.sqlite.prepare('SELECT question_id, owed_count, resolved_at FROM player_mistakes').all();
+    expect(rows).toEqual([{ question_id: questions[0].id, owed_count: 1, resolved_at: null }]);
+    expect(await (await openMistakes(db, 'ann')).json()).toEqual({ count: 1, ids: [questions[0].id] });
+    expect(await (await openMistakes(db, 'bob')).json()).toEqual({ count: 0, ids: [] });
+  });
+
+  it('records mistakes from practice runs against a bot too', async () => {
+    const db = database();
+    const response = await call(db, 'ann', '/api/solo-runs', { displayName: 'Ann', category: 'geography', botLevel: 'novice' });
+    const run = await response.json() as StartSoloRunResponse;
+    await playWrong(db, 'ann', run.runId, 1);
+    expect(((await (await openMistakes(db, 'ann')).json()) as { count: number }).count).toBe(1);
+  });
+
+  it('trains accumulated mistakes from start to finish and resolves them', async () => {
+    const db = database();
+    const run = await start(db, 'ann');
+    const questions = fullQuestions(db, run.runId);
+    await playWrong(db, 'ann', run.runId, 2);
+    const { count, ids } = await (await openMistakes(db, 'ann')).json() as { count: number; ids: string[] };
+    expect(count).toBe(2);
+    expect(new Set(ids)).toEqual(new Set([questions[0].id, questions[1].id]));
+
+    const served = await (await trainingQuestions(db, 'ann', ids)).json() as TrainingQuestionsResponse;
+    expect(served.questions.map((question) => question.id)).toEqual(ids);
+    const text = JSON.stringify(served);
     expect(text).not.toContain('correctOptionId');
     expect(text).not.toContain('correctAnswers');
     expect(text).not.toContain('explanation');
+
+    for (const [position, id] of ids.entries()) {
+      const question = questions.find((candidate) => candidate.id === id)!;
+      const wrongAnswer = question.answerType === 'open_answer'
+        ? '__wrong__'
+        : question.options.find((option) => option.id !== question.correctOptionId)!.text;
+      const miss = await (await trainingCheck(db, 'ann', id, wrongAnswer)).json() as TrainingCheckResponse;
+      expect(miss.correct).toBe(false);
+      expect(miss.correctText ?? miss.correctAnswers).toBeDefined();
+      // Неверный ответ долг не гасит: осталось столько же, сколько было до этого вопроса.
+      expect(((await (await openMistakes(db, 'ann')).json()) as { count: number }).count).toBe(ids.length - position);
+      const hit = await (await trainingCheck(db, 'ann', id, rightText(question))).json() as TrainingCheckResponse;
+      expect(hit.correct).toBe(true);
+      expect(hit.explanation.length).toBeGreaterThan(0);
+    }
+    expect(await (await openMistakes(db, 'ann')).json()).toEqual({ count: 0, ids: [] });
+    // Решённые ошибки помечены, а не удалены, и снова недоступны.
+    const resolved = db.sqlite.prepare('SELECT COUNT(*) AS n FROM player_mistakes WHERE resolved_at IS NOT NULL').get() as { n: number };
+    expect(resolved.n).toBe(2);
+    expect((await trainingCheck(db, 'ann', ids[0], 'x')).status).toBe(404);
   });
 
-  it('checks a multiple-choice answer by option text, and shows the right one afterwards', async () => {
+  it('reopens a resolved mistake when the same question is failed again', async () => {
     const db = database();
-    const listed = await (await call(db, 'ann', '/api/training/questions', { ids: ['capital_bf'] })).json() as TrainingQuestionsResponse;
-    const wrongText = listed.questions[0].options.map((option) => option.text).find((text) => text !== 'Уагадугу');
-    const wrong = await call(db, 'ann', '/api/training/check', { questionId: 'capital_bf', answer: wrongText });
-    expect(await wrong.json()).toMatchObject({ correct: false, correctText: 'Уагадугу' });
-    const right = await call(db, 'ann', '/api/training/check', { questionId: 'capital_bf', answer: 'Уагадугу' });
-    const verdict = await right.json() as TrainingCheckResponse;
-    expect(verdict.correct).toBe(true);
-    expect(verdict.explanation).toContain('Уагадугу');
-  });
-
-  it('checks an open answer with the shared fuzzy matcher', async () => {
-    const db = database();
-    const ok = await (await call(db, 'ann', '/api/training/check', { questionId: 'open_capital_bf', answer: 'уагадугу' })).json() as TrainingCheckResponse;
-    expect(ok.correct).toBe(true);
-    const bad = await (await call(db, 'ann', '/api/training/check', { questionId: 'open_capital_bf', answer: 'Москва' })).json() as TrainingCheckResponse;
-    expect(bad.correct).toBe(false);
-    expect(bad.correctAnswers).toContain('Уагадугу');
+    await recordMistake(db.binding, 'p1', 'capital_bf', 1);
+    await payBackMistake(db.binding, 'p1', 'capital_bf', 2);
+    expect(await listTrainableMistakes(db.binding, 'p1')).toEqual([]);
+    await recordMistake(db.binding, 'p1', 'capital_bf', 3);
+    expect(db.sqlite.prepare('SELECT owed_count, resolved_at FROM player_mistakes').get())
+      .toEqual({ owed_count: 1, resolved_at: null });
+    expect(await listTrainableMistakes(db.binding, 'p1')).toEqual(['capital_bf']);
   });
 
   it('validates input and authentication', async () => {
@@ -363,13 +470,15 @@ describe('mistake training on the server', () => {
     const tooMany = Array.from({ length: 21 }, (_, index) => `capital_${index}`);
     expect((await call(db, 'ann', '/api/training/questions', { ids: tooMany })).status).toBe(400);
     expect((await call(db, 'ann', '/api/training/questions', { ids: [1] })).status).toBe(400);
-    expect((await call(db, 'ann', '/api/training/check', { questionId: 'nope_xx', answer: 'a' })).status).toBe(404);
     expect((await call(db, 'ann', '/api/training/check', { questionId: 'capital_bf' })).status).toBe(400);
-    const anonymous = await app.request('/api/training/questions', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ ids: ['capital_bf'] }),
-    }, environment(db));
-    expect(anonymous.status).toBe(401);
+    for (const path of ['/api/training/questions', '/api/training/check']) {
+      const anonymous = await app.request(path, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ ids: ['capital_bf'], questionId: 'capital_bf', answer: 'x' }),
+      }, environment(db));
+      expect(anonymous.status).toBe(401);
+    }
+    expect((await app.request('/api/training/mistakes', {}, environment(db))).status).toBe(401);
   });
 });

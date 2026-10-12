@@ -18,8 +18,6 @@ interface TrainingProps {
   questions: PublicQuestion[];
   /** Проверка ответа на сервере: клиент не знает правильного ответа заранее. */
   check: (questionId: string, answer: string, signal?: AbortSignal) => Promise<TrainingCheckResponse>;
-  /** Called once per answered question, with the verdict. */
-  onAnswered: (questionId: string, correct: boolean) => void;
   onBack: () => void;
   /** Подпись кнопки выхода на итоговых экранах. */
   exitLabel?: string;
@@ -45,13 +43,11 @@ function reducer(state: TrainingState, action: Action): TrainingState {
   }
 }
 
-export function Training({ questions, check, onAnswered, onBack, exitLabel = 'На главный' }: TrainingProps) {
+export function Training({ questions, check, onBack, exitLabel = 'На главный' }: TrainingProps) {
   const [state, dispatch] = useReducer(reducer, questions, createTrainingState);
   const question = state.questions[state.index];
   const checkRef = useRef(check);
-  const answeredRef = useRef(onAnswered);
   checkRef.current = check;
-  answeredRef.current = onAnswered;
 
   // Ответ уходит на проверку; при обрыве он сохраняется, а «Повторить» отправляет его снова.
   const checking = state.step === 'checking' && !state.checkFailed;
@@ -61,7 +57,6 @@ export function Training({ questions, check, onAnswered, onBack, exitLabel = 'Н
     void checkRef.current(question.id, trainingAnswerText(question, state.selectedOption), controller.signal)
       .then((verdict) => {
         if (controller.signal.aborted) return;
-        answeredRef.current(question.id, verdict.correct);
         dispatch({ type: 'verdict', verdict });
       })
       .catch(() => {
@@ -75,7 +70,7 @@ export function Training({ questions, check, onAnswered, onBack, exitLabel = 'Н
       <section className="training-screen">
         <h2 className="screen-title">Тренировка по ошибкам</h2>
         <p className="training-text">
-          Пока здесь пусто: тренировка наполняется вопросами, в которых ты ошибся или не успел ответить в матчах.
+          Пока здесь пусто: тренировка наполняется вопросами, в которых ты ошибся или не успел ответить в забегах.
         </p>
         <p className="training-note">{TRAINING_NOT_SAVED_NOTE}</p>
         <button type="button" className="cta-btn" onClick={() => { onBack(); }}>

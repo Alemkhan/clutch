@@ -16,6 +16,7 @@ import type {
   StartAsyncMatchResponse,
   TrainingCheckRequest,
   TrainingCheckResponse,
+  TrainingMistakesResponse,
   TrainingQuestionsRequest,
   TrainingQuestionsResponse,
 } from '@clutch/shared';
@@ -267,7 +268,12 @@ export function fetchSoloRunSnapshot(runId: string, signal?: AbortSignal): Promi
   return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}`, { method: 'GET' }, signal);
 }
 
-/** Отработка ошибок: вопросы по сохранённым id (без ответов) собирает сервер. */
+/** Журнал ошибок ведёт сервер: сколько ошибок можно отработать и id ближайшей сессии. */
+export function fetchTrainingMistakes(signal?: AbortSignal): Promise<TrainingMistakesResponse> {
+  return apiFetch('/api/training/mistakes', { method: 'GET' }, signal);
+}
+
+/** Отработка ошибок: вопросы (без ответов) по id из журнала; чужие и недоступные id сервер отклоняет. */
 export function fetchTrainingQuestions(ids: string[], signal?: AbortSignal): Promise<TrainingQuestionsResponse> {
   const body: TrainingQuestionsRequest = { ids };
   return apiFetch('/api/training/questions', { method: 'POST', body: JSON.stringify(body) }, signal);

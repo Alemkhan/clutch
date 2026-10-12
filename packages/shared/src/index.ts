@@ -226,15 +226,20 @@ export interface SoloRunSnapshot extends StartSoloRunResponse {
   result: CompleteSoloRunResponse | null;
 }
 
-/** Отработка ошибок: клиент хранит id, вопросы и проверку получает от сервера. */
+/** Отработка ошибок: журнал ведёт сервер; клиент получает id сессии, затем вопросы и проверку. */
+export interface TrainingMistakesResponse {
+  /** Сколько ошибок сейчас можно отработать. */
+  count: number;
+  /** Id следующей сессии по приоритету. */
+  ids: string[];
+}
+
 export interface TrainingQuestionsRequest {
   ids: string[];
 }
 
 export interface TrainingQuestionsResponse {
   questions: PublicQuestion[];
-  /** Id, из которых вопрос больше не собрать: клиент убирает их из своего списка. */
-  unknownIds: string[];
 }
 
 /** Для вопроса с вариантами answer — ТЕКСТ выбранного варианта: варианты каждый раз собираются заново. */

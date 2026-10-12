@@ -35,6 +35,7 @@ import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import { PRACTICE_BOT_PROFILES, createBotOpponent } from '../matches/bots';
 import { matchmake, pickSet } from '../matches/matchmaking';
 import { currentMiniGameConfigJson, findRecordRun, findRun, findRunOwner, type GhostMatch } from '../matches/repository';
+import { recordMistake } from '../matches/mistakesRepository';
 import { scoreSubmittedRound } from '../matches/scoring';
 import { insertSoloAnswer, listSoloRounds, settleSoloHammer, type SoloRoundRow } from '../matches/soloRoundsRepository';
 import type { RunRow } from '../matches/types';
@@ -252,7 +253,7 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
         round: { questionId: question.id, progressAwarded: 0 },
       }).progress;
     // Если параллельный запрос успел раньше, вставка ничего не изменит и ниже вернётся записанное им.
-    await insertSoloAnswer(c.env.DB, {
+    const inserted = await insertSoloAnswer(c.env.DB, {
       runId: run.id,
       roundIndex: body.roundIndex,
       questionId: question.id,
@@ -262,6 +263,9 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
       settledProgressAfter,
       now: Date.now(),
     });
+    // Ошибка пишется в журнал игрока ровно один раз: повтор запроса вставку не проходит (inserted = false).
+    // Пишем и тренировочные, и дружеские забеги: сервер всё равно показал игроку верный ответ.
+    if (inserted && !correct) await recordMistake(c.env.DB, identity.playerId, question.id, Date.now());
     rows = await listSoloRounds(c.env.DB, run.id);
     return respondWithRound(c, loaded, rows, body.roundIndex);
   });

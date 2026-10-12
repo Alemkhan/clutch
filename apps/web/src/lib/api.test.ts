@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ApiError, answerSoloRound, checkTrainingAnswer, fetchMyRuns, fetchSoloRunSnapshot, fetchTrainingQuestions, hammerSoloRound, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError, startAsyncMatch, startSoloRun } from './api';
+import { ApiError, answerSoloRound, checkTrainingAnswer, fetchMyRuns, fetchSoloRunSnapshot, fetchTrainingMistakes, fetchTrainingQuestions, hammerSoloRound, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError, startAsyncMatch, startSoloRun } from './api';
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -108,9 +108,12 @@ describe('solo run and my-runs calls', () => {
 
   it('asks the server for mistake-training questions and verdicts', async () => {
     const fetchMock = stubApi();
+    await fetchTrainingMistakes();
     await fetchTrainingQuestions(['capital_li']);
     await checkTrainingAnswer('capital_li', 'Вадуц');
     const calls = fetchMock.mock.calls as unknown as [string, RequestInit][];
+    const mistakes = calls.find(([path]) => path === '/api/training/mistakes');
+    expect(mistakes?.[1].method).toBe('GET');
     const questions = calls.find(([path]) => path === '/api/training/questions');
     const check = calls.find(([path]) => path === '/api/training/check');
     expect(JSON.parse(String(questions?.[1].body))).toEqual({ ids: ['capital_li'] });

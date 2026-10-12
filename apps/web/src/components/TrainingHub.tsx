@@ -1,14 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { PRACTICE_LEVELS, type PracticeLevel, type PublicQuestion } from '@clutch/shared';
-import { checkTrainingAnswer, fetchTrainingQuestions } from '../lib/api';
-import { mistakeCount, removeMistakes } from '../lib/mistakeLog';
+import { checkTrainingAnswer, fetchTrainingMistakes, fetchTrainingQuestions } from '../lib/api';
 import { ScreenHeader } from './ScreenHeader';
 import { Training } from './Training';
 
 interface TrainingHubProps {
-  /** Id ошибок для отработки: вопросы по ним сервер собирает при входе в раздел. */
-  mistakeIds: string[];
-  onAnswered: (questionId: string, correct: boolean) => void;
   onStartBot: (level: PracticeLevel) => void;
   onBack: () => void;
   /** true, пока идёт практика ошибок: App прячет нижнюю навигацию. */
@@ -38,13 +34,12 @@ type MistakeLoad =
 
 interface MistakePracticeProps {
   ids: string[];
-  onAnswered: (questionId: string, correct: boolean) => void;
   onBack: () => void;
   exitLabel?: string;
 }
 
-/** Загрузка вопросов отработки с сервера (без ответов) и сама отработка. Id, которых сервер не знает, чистятся из журнала. */
-export function MistakePractice({ ids, onAnswered, onBack, exitLabel }: MistakePracticeProps) {
+/** Загрузка вопросов отработки с сервера (без ответов) и сама отработка. Журнал ошибок ведёт сервер: id приходят оттуда же, чужие сервер отклоняет. */
+export function MistakePractice({ ids, onBack, exitLabel }: MistakePracticeProps) {
   const [load, setLoad] = useState<MistakeLoad>(ids.length === 0 ? { status: 'ready', questions: [] } : { status: 'loading' });
   const [attempt, setAttempt] = useState(0);
 
@@ -57,8 +52,7 @@ export function MistakePractice({ ids, onAnswered, onBack, exitLabel }: MistakeP
     setLoad({ status: 'loading' });
     fetchTrainingQuestions(ids, controller.signal).then((response) => {
       if (controller.signal.aborted) return;
-      removeMistakes(response.unknownIds);
-      // Порядок сессии задал журнал ошибок: сервер отдаёт вопросы в том же порядке.
+      // Порядок сессии задал сервер; вопросы приходят в том же порядке.
       setLoad({ status: 'ready', questions: response.questions });
     }).catch(() => {
       if (!controller.signal.aborted) setLoad({ status: 'error' });
@@ -89,7 +83,6 @@ export function MistakePractice({ ids, onAnswered, onBack, exitLabel }: MistakeP
     <Training
       questions={load.questions}
       check={checkTrainingAnswer}
-      onAnswered={onAnswered}
       onBack={onBack}
       exitLabel={exitLabel}
     />
@@ -97,8 +90,57 @@ export function MistakePractice({ ids, onAnswered, onBack, exitLabel }: MistakeP
 }
 
 /** «Тренировка»: практика без зачёта. Два входа: игра против бота и отработка ошибок. */
-export function TrainingHub({ mistakeIds, onAnswered, onStartBot, onBack, onPlayingChange }: TrainingHubProps) {
+/** Журнал ошибок живёт на сервере: экран показывает только то, что сервер ответил. */
+export type MistakeSummary =
+  | { status: 'loading' }
+  | { status: 'error' }
+  | { status: 'ready'; count: number; ids: string[] };
+
+export function mistakeMeta(summary: MistakeSummary): string {
+  if (summary.status === 'loading') return 'Загружаем…';
+  if (summary.status === 'error') return 'Не удалось загрузить ошибки';
+  return summary.count > 0 ? `Ошибок накоплено: ${summary.count}` : 'Пока нет ошибок';
+}
+
+/** Меню «Тренировки»: два входа. Выделено, чтобы состояния журнала проверялись без сети. */
+export function TrainingMenu({ summary, onBots, onMistakes, onBack }: {
+  summary: MistakeSummary;
+  onBots: () => void;
+  onMistakes: () => void;
+  onBack: () => void;
+}) {
+  return (
+    <section className="training-screen">
+      <ScreenHeader onBack={onBack} title="Тренировка" />
+      <p className="training-note">Не идёт в зачёт</p>
+      <button type="button" className="training-entry" onClick={onBots}>
+        <span className="training-entry-title">Игра против ботов</span>
+        <span className="training-entry-meta">Четыре уровня сложности</span>
+      </button>
+      <button type="button" className="training-entry" onClick={onMistakes} disabled={summary.status === 'loading'}>
+        <span className="training-entry-title">Отработка ошибок</span>
+        <span className="training-entry-meta">{mistakeMeta(summary)}</span>
+      </button>
+    </section>
+  );
+}
+
+export function TrainingHub({ onStartBot, onBack, onPlayingChange }: TrainingHubProps) {
   const [view, setView] = useState<View>('menu');
+  const [summary, setSummary] = useState<MistakeSummary>({ status: 'loading' });
+
+  // Список ошибок берётся с сервера при каждом возврате в меню: после отработки он изменился.
+  useEffect(() => {
+    if (view !== 'menu') return undefined;
+    const controller = new AbortController();
+    setSummary({ status: 'loading' });
+    fetchTrainingMistakes(controller.signal).then((response) => {
+      if (!controller.signal.aborted) setSummary({ status: 'ready', count: response.count, ids: response.ids });
+    }).catch(() => {
+      if (!controller.signal.aborted) setSummary({ status: 'error' });
+    });
+    return () => controller.abort();
+  }, [view]);
 
   useEffect(() => {
     onPlayingChange?.(view === 'mistakes');
@@ -108,8 +150,7 @@ export function TrainingHub({ mistakeIds, onAnswered, onStartBot, onBack, onPlay
   if (view === 'mistakes') {
     return (
       <MistakePractice
-        ids={mistakeIds}
-        onAnswered={onAnswered}
+        ids={summary.status === 'ready' ? summary.ids : []}
         onBack={() => setView('menu')}
         exitLabel="К тренировке"
       />
@@ -125,21 +166,12 @@ export function TrainingHub({ mistakeIds, onAnswered, onStartBot, onBack, onPlay
     );
   }
 
-  const mistakes = mistakeCount();
   return (
-    <section className="training-screen">
-      <ScreenHeader onBack={onBack} title="Тренировка" />
-      <p className="training-note">Не идёт в зачёт</p>
-      <button type="button" className="training-entry" onClick={() => setView('bots')}>
-        <span className="training-entry-title">Игра против ботов</span>
-        <span className="training-entry-meta">Четыре уровня сложности</span>
-      </button>
-      <button type="button" className="training-entry" onClick={() => setView('mistakes')}>
-        <span className="training-entry-title">Отработка ошибок</span>
-        <span className="training-entry-meta">
-          {mistakes > 0 ? `Ошибок накоплено: ${mistakes}` : 'Пока нет ошибок'}
-        </span>
-      </button>
-    </section>
+    <TrainingMenu
+      summary={summary}
+      onBots={() => setView('bots')}
+      onMistakes={() => setView('mistakes')}
+      onBack={onBack}
+    />
   );
 }

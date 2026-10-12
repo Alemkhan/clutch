@@ -6,6 +6,7 @@ import {
   type Question,
   type TrainingCheckRequest,
   type TrainingCheckResponse,
+  type TrainingMistakesResponse,
   type TrainingQuestionsResponse,
 } from '@clutch/shared';
 import type { Context, Hono } from 'hono';
@@ -13,6 +14,7 @@ import { resolveRequestIdentity, type RequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
 import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
+import { listTrainableMistakes, payBackMistake, TRAINING_SESSION_SIZE } from '../matches/mistakesRepository';
 
 type AppContext = Context<{ Bindings: Env }>;
 
@@ -36,11 +38,29 @@ function correctText(question: Question): string | undefined {
   return question.options.find((option) => option.id === question.correctOptionId)?.text;
 }
 
+/** Один и тот же отказ для «такого вопроса нет» и «ты в нём не ошибался»: по различию ответов id не перебрать. */
+function notAvailable(c: AppContext): Response {
+  return c.json({ error: 'Question not available.' }, 404);
+}
+
 /**
- * Отработка ошибок без состояния: id вопроса восстанавливает вопрос, варианты каждый раз собираются заново,
- * поэтому для вариантов клиент присылает ТЕКСТ выбранного, а не букву. Без забега и без записи в базу.
+ * Отработка ошибок. Вопросы и проверка ответа доступны ТОЛЬКО по ошибкам из серверного журнала игрока
+ * (player_mistakes, пишется при неверном круге соло) и только вне непройденной части его активного забега.
+ * Варианты каждый раз собираются заново, поэтому для вариантов клиент присылает ТЕКСТ выбранного, а не букву.
  */
 export function registerTrainingRoutes(app: Hono<{ Bindings: Env }>): void {
+  // Сессия отработки: id по приоритету и общее число доступных ошибок.
+  app.get('/api/training/mistakes', async (c) => {
+    const identity = await authenticate(c, 'training');
+    if (identity instanceof Response) return identity;
+    const trainable = await listTrainableMistakes(c.env.DB, identity.playerId);
+    const response: TrainingMistakesResponse = {
+      count: trainable.length,
+      ids: trainable.slice(0, TRAINING_SESSION_SIZE),
+    };
+    return c.json(response);
+  });
+
   app.post('/api/training/questions', async (c) => {
     const identity = await authenticate(c, 'training');
     if (identity instanceof Response) return identity;
@@ -51,14 +71,15 @@ export function registerTrainingRoutes(app: Hono<{ Bindings: Env }>): void {
       || !ids.every((id) => typeof id === 'string' && id.length > 0 && id.length <= MAX_ID_LENGTH)) {
       return c.json({ error: 'Invalid ids.' }, 400);
     }
+    const allowed = new Set(await listTrainableMistakes(c.env.DB, identity.playerId));
     const questions: PublicQuestion[] = [];
-    const unknownIds: string[] = [];
     for (const id of new Set(ids as string[])) {
-      const question = generateQuestionById(id);
-      if (question) questions.push(toPublicQuestion(question));
-      else unknownIds.push(id);
+      const question = allowed.has(id) ? generateQuestionById(id) : null;
+      // Любой недоступный id отклоняет весь запрос одинаково: клиент берёт id из /api/training/mistakes.
+      if (!question) return notAvailable(c);
+      questions.push(toPublicQuestion(question));
     }
-    const response: TrainingQuestionsResponse = { questions, unknownIds };
+    const response: TrainingQuestionsResponse = { questions };
     return c.json(response);
   });
 
@@ -73,8 +94,9 @@ export function registerTrainingRoutes(app: Hono<{ Bindings: Env }>): void {
       || typeof body.answer !== 'string' || body.answer.length > 512) {
       return c.json({ error: 'Invalid answer.' }, 400);
     }
-    const question = generateQuestionById(body.questionId);
-    if (!question) return c.json({ error: 'Unknown question.' }, 404);
+    const allowed = await listTrainableMistakes(c.env.DB, identity.playerId);
+    const question = allowed.includes(body.questionId) ? generateQuestionById(body.questionId) : null;
+    if (!question) return notAvailable(c);
     const response: TrainingCheckResponse = question.answerType === 'open_answer'
       ? {
         correct: isAnswerCorrect(body.answer, question.correctAnswers ?? []).correct,
@@ -86,6 +108,8 @@ export function registerTrainingRoutes(app: Hono<{ Bindings: Env }>): void {
         correctText: correctText(question),
         explanation: question.explanation,
       };
+    // Верный ответ гасит один долг в журнале; решённая ошибка уходит из доступных.
+    if (response.correct) await payBackMistake(c.env.DB, identity.playerId, question.id, Date.now());
     return c.json(response);
   });
 }

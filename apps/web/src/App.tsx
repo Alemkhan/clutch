@@ -159,8 +159,6 @@ export default function App() {
         {game.phase === 'training' && (
           <motion.div key="training" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <TrainingHub
-              mistakeIds={game.trainingIds}
-              onAnswered={game.recordTrainingAnswer}
               onStartBot={startPractice}
               onPlayingChange={setTrainingPlaying}
               onBack={game.goHome}

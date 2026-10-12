@@ -4,7 +4,7 @@ import { generateQuestionById, toPublicQuestion } from '@clutch/shared';
 import { Training, TRAINING_NOT_SAVED_NOTE } from './Training';
 import { HomeDashboard } from './HomeDashboard';
 import { BottomNav, navTabForPhase } from './BottomNav';
-import { TrainingHub } from './TrainingHub';
+import { TrainingMenu } from './TrainingHub';
 import {
   applyTrainingVerdict,
   beginTrainingAnswer,
@@ -15,7 +15,7 @@ import {
   trainingAnswerText,
 } from '../lib/trainingSession';
 
-const handlers = { onAnswered: vi.fn(), onBack: vi.fn(), check: vi.fn() };
+const handlers = { onBack: vi.fn(), check: vi.fn() };
 const publicQuestion = (id: string) => toPublicQuestion(generateQuestionById(id)!);
 
 function homeHandlers() {
@@ -56,9 +56,9 @@ describe('Training screens', () => {
     }
   });
 
-  it('the training hub offers bots and the mistake log, and shows an empty mistake list', () => {
+  it('the training menu offers bots and the mistake log, and shows an empty mistake list', () => {
     const html = renderToStaticMarkup(
-      <TrainingHub mistakeIds={[]} onAnswered={vi.fn()} onStartBot={vi.fn()} onBack={vi.fn()} />,
+      <TrainingMenu summary={{ status: 'ready', count: 0, ids: [] }} onBots={vi.fn()} onMistakes={vi.fn()} onBack={vi.fn()} />,
     );
     expect(html).toContain('Игра против ботов');
     expect(html).toContain('Отработка ошибок');
