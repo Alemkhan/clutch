@@ -116,6 +116,49 @@ export function hammerAttemptRules(
   };
 }
 
+/**
+ * Положение маркера: треугольная волна от 0 к 1 и обратно. Скорость — единицы дорожки в секунду.
+ * Живёт в shared, потому что по этой же формуле сервер восстанавливает удар из времени тапа:
+ * двух реализаций быть не должно, иначе клиент и сервер разойдутся в оценке.
+ */
+export function markerPositionAtElapsed(activeElapsedMs: number, markerSpeed: number): number {
+  const phase = ((Math.max(0, activeElapsedMs) / 1000) * markerSpeed) % 2;
+  return phase <= 1 ? phase : 2 - phase;
+}
+
+/** Активное время удара дальше этой границы сервер не рассматривает: столько маркер не живёт. */
+export const MAX_HAMMER_ELAPSED_MS = 600_000;
+
+export interface HammerTapScore {
+  attempt: HammerAttemptRules;
+  markerPosition: number;
+  distance: number;
+  result: SkillResult;
+  progressAwarded: number;
+}
+
+/**
+ * Оценка удара по моменту тапа. Единственный путь к награде: клиент сообщает, **когда** он ударил
+ * (активное время от старта маркера), а расстояние до цели и tier выводит эта функция.
+ * Цель и скорость детерминированы по id вопроса и стадии давления, так что сервер считает
+ * ровно то же, что игрок видел на экране, не веря ни одному присланному им расстоянию.
+ */
+export function scoreHammerTap(
+  questionId: string,
+  previousResults: readonly SkillResult[],
+  config: MiniGameConfig,
+  activeElapsedMs: number,
+): HammerTapScore {
+  if (!Number.isFinite(activeElapsedMs) || activeElapsedMs < 0) {
+    throw new RangeError('Hammer elapsed time must be a finite non-negative number');
+  }
+  const attempt = hammerAttemptRules(questionId, previousResults, config);
+  const markerPosition = markerPositionAtElapsed(activeElapsedMs, attempt.markerSpeed);
+  const distance = normalizedHammerDistance(markerPosition, attempt.targetCenter);
+  const { result, progressAwarded } = scoreHammerDistance(distance, attempt.stage, config);
+  return { attempt, markerPosition, distance, result, progressAwarded };
+}
+
 export function normalizedHammerDistance(markerPosition: number, targetCenter: number): number {
   if (!Number.isFinite(markerPosition) || !Number.isFinite(targetCenter)) {
     throw new RangeError('Hammer positions must be finite numbers');

@@ -8,6 +8,8 @@ export interface SoloRoundRow {
   selected_answer: string;
   response_time_ms: number;
   correct: number;
+  /** Присланный момент удара. null — круг закрыт без удара. Сырой ввод, из него выведено расстояние. */
+  active_elapsed_ms: number | null;
   skill_distance: number | null;
   skill_result: SkillResult | null;
   progress_awarded: number | null;
@@ -19,7 +21,8 @@ export interface SoloRoundRow {
 export async function listSoloRounds(db: D1Database, runId: string): Promise<SoloRoundRow[]> {
   const result = await db.prepare(`
     SELECT run_id, round_index, question_id, selected_answer, response_time_ms, correct,
-           skill_distance, skill_result, progress_awarded, progress_after, created_at, settled_at
+           active_elapsed_ms, skill_distance, skill_result, progress_awarded, progress_after,
+           created_at, settled_at
     FROM solo_run_rounds WHERE run_id = ?1 ORDER BY round_index ASC
   `).bind(runId).all<SoloRoundRow>();
   return result.results;
@@ -66,6 +69,9 @@ export async function insertSoloAnswer(db: D1Database, input: {
 export async function settleSoloHammer(db: D1Database, input: {
   runId: string;
   roundIndex: number;
+  /** Момент удара, как его сообщил клиент. null — круг закрыт без удара. */
+  activeElapsedMs: number | null;
+  /** Выведено сервером из момента удара, не присылается клиентом. */
   skillDistance: number;
   skillResult: SkillResult;
   progressAwarded: number;
@@ -74,11 +80,13 @@ export async function settleSoloHammer(db: D1Database, input: {
 }): Promise<boolean> {
   const result = await db.prepare(`
     UPDATE solo_run_rounds
-    SET skill_distance = ?3, skill_result = ?4, progress_awarded = ?5, progress_after = ?6, settled_at = ?7
+    SET active_elapsed_ms = ?3, skill_distance = ?4, skill_result = ?5,
+        progress_awarded = ?6, progress_after = ?7, settled_at = ?8
     WHERE run_id = ?1 AND round_index = ?2 AND correct = 1 AND settled_at IS NULL
   `).bind(
     input.runId,
     input.roundIndex,
+    input.activeElapsedMs,
     input.skillDistance,
     input.skillResult,
     input.progressAwarded,

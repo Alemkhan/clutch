@@ -1,7 +1,9 @@
 import {
+  CURRENT_ASYNC_MATCH_CONDITIONS,
   CURRENT_SOLO_RUN_CONDITIONS,
   FRIEND_RULES_VERSION,
   MAX_DAILY_SET_SIZE,
+  MAX_HAMMER_ELAPSED_MS,
   PRACTICE_RULES_VERSION,
   SOLO_ROUND_CAP,
   SOLO_TARGET_PROGRESS,
@@ -12,6 +14,7 @@ import {
   practiceQuestionSet,
   isPracticeLevelId,
   evaluateSoloRun,
+  scoreHammerTap,
   setPar,
   soloScore,
   toPublicQuestion,
@@ -37,7 +40,6 @@ import { PRACTICE_BOT_PROFILES, createBotOpponent } from '../matches/bots';
 import { matchmake, pickSet } from '../matches/matchmaking';
 import { claimRecord, currentMiniGameConfigJson, findRecordRun, findRun, findRunOwner, type GhostMatch } from '../matches/repository';
 import { recordMistake } from '../matches/mistakesRepository';
-import { scoreSubmittedRound } from '../matches/scoring';
 import { insertSoloAnswer, listSoloRounds, settleSoloHammer, type SoloRoundRow } from '../matches/soloRoundsRepository';
 import type { RunRow } from '../matches/types';
 import {
@@ -301,7 +303,8 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
     return respondWithRound(c, loaded, rows, body.roundIndex);
   });
 
-  // Круг соло-забега, шаг 2: удар по верному ответу. skillDistance присылает клиент (граница доверия).
+  // Круг соло-забега, шаг 2: удар по верному ответу. Клиент сообщает момент удара, расстояние до
+  // цели и награду считает сервер: цель и скорость маркера он выводит из id вопроса и стадии сам.
   app.post('/api/solo-runs/:id/hammer', async (c) => {
     const identity = await authenticate(c, 'solo-round');
     if (identity instanceof Response) return identity;
@@ -322,7 +325,10 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
     if (row.correct !== 1) return c.json({ error: 'Only a correct answer earns a hammer.', reason: 'not_correct' }, 409);
 
     if (row.settled_at === null) {
-      const settled = await settleHammerRow(c, run, questions, rows, body.roundIndex, body.skillDistance);
+      const settled = await settleHammerRow(c, run, questions, rows, body.roundIndex, {
+        kind: 'tap',
+        activeElapsedMs: body.activeElapsedMs,
+      });
       if (settled instanceof Response) return settled;
       rows = settled;
     }
@@ -341,7 +347,7 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
 
     const pendingIndex = rows.findIndex((row) => row.settled_at === null);
     if (pendingIndex >= 0 && run.status === 'in_progress') {
-      const settled = await settleHammerRow(c, run, questions, rows, pendingIndex, 1);
+      const settled = await settleHammerRow(c, run, questions, rows, pendingIndex, { kind: 'forfeit' });
       if (settled instanceof Response) return settled;
       rows = settled;
     }
@@ -453,8 +459,8 @@ function isHammerRequest(value: unknown): value is SoloHammerRequest {
   const body = value as Record<string, unknown>;
   return isRoundIndex(body.roundIndex)
     && typeof body.questionId === 'string' && body.questionId.length > 0 && body.questionId.length <= 128
-    && typeof body.skillDistance === 'number' && Number.isFinite(body.skillDistance)
-    && body.skillDistance >= 0 && body.skillDistance <= 1;
+    && typeof body.activeElapsedMs === 'number' && Number.isFinite(body.activeElapsedMs)
+    && body.activeElapsedMs >= 0 && body.activeElapsedMs <= MAX_HAMMER_ELAPSED_MS;
 }
 
 interface LoadedSoloRun {
@@ -480,8 +486,24 @@ async function openSoloRun(c: AppContext, identity: RequestIdentity, runId: stri
 }
 
 /**
- * Закрывает ожидающий удара круг. Награду считает shared (scoreSubmittedRound → scoreHammerDistance),
- * закрытие защищено условным UPDATE: проигравший гонку запрос просто перечитывает записанное.
+ * Чем закрывается круг: настоящим ударом игрока или отказом от него.
+ * `forfeit` — верный ответ без удара (игрок ушёл с забега): промах без присланного времени.
+ */
+type HammerSettlement = { kind: 'tap'; activeElapsedMs: number } | { kind: 'forfeit' };
+
+/**
+ * Запас к измеренному сервером окну. Активное время клиента всегда меньше настоящего: он
+ * обрезает длинные кадры и встаёт на скрытой вкладке. Запас закрывает разницу часов и задержку
+ * запроса, то есть это проверка на невозможное время, а не защита от подобранного момента удара:
+ * маркер периодичен, и удачная фаза повторяется каждые 1,2–3,3 секунды.
+ */
+const HAMMER_TIMING_SLACK_MS = 5_000;
+
+/**
+ * Закрывает ожидающий удара круг. Расстояние до цели считает сервер из присланного момента удара
+ * (`scoreHammerTap`): цель и скорость маркера он выводит из id вопроса и стадии давления сам, так
+ * что оценку удара клиент сообщить не может — только время. Закрытие защищено условным UPDATE:
+ * проигравший гонку запрос просто перечитывает записанное.
  */
 async function settleHammerRow(
   c: AppContext,
@@ -489,7 +511,7 @@ async function settleHammerRow(
   questions: Question[],
   rows: SoloRoundRow[],
   index: number,
-  skillDistance: number,
+  settlement: HammerSettlement,
 ): Promise<SoloRoundRow[] | Response> {
   const question = questions[index];
   const row = rows[index];
@@ -497,17 +519,19 @@ async function settleHammerRow(
   if (!question || question.id !== row.question_id || before.some((earlier) => earlier.settled_at === null)) {
     return c.json({ error: 'Stored run is inconsistent.' }, 409);
   }
+  const now = Date.now();
+  if (settlement.kind === 'tap' && settlement.activeElapsedMs > now - row.created_at + HAMMER_TIMING_SLACK_MS) {
+    return c.json({ error: 'Hammer timing is impossible for this round.', reason: 'impossible_timing' }, 400);
+  }
   const previousResults = before.flatMap((earlier) => (earlier.skill_result ? [earlier.skill_result] : []));
-  const scored = scoreSubmittedRound(
-    question,
-    {
-      questionId: question.id,
-      selectedAnswer: row.selected_answer,
-      responseTimeMs: row.response_time_ms,
-      skillDistance,
-    },
-    previousResults,
-  );
+  const scored = settlement.kind === 'tap'
+    ? scoreHammerTap(
+      question.id,
+      previousResults,
+      CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+      settlement.activeElapsedMs,
+    )
+    : { distance: 1, result: 'miss' as const, progressAwarded: 0 };
   const next = applySoloRound(evaluateSoloRun(questionIds(questions), settledRounds(before)), {
     expectedQuestionId: question.id,
     round: { questionId: question.id, progressAwarded: scored.progressAwarded },
@@ -515,11 +539,12 @@ async function settleHammerRow(
   await settleSoloHammer(c.env.DB, {
     runId: run.id,
     roundIndex: index,
-    skillDistance,
-    skillResult: scored.skillResult ?? 'miss',
+    activeElapsedMs: settlement.kind === 'tap' ? settlement.activeElapsedMs : null,
+    skillDistance: scored.distance,
+    skillResult: scored.result,
     progressAwarded: scored.progressAwarded,
     progressAfter: next.progress,
-    now: Date.now(),
+    now,
   });
   return listSoloRounds(c.env.DB, run.id);
 }

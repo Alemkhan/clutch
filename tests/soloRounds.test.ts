@@ -4,9 +4,11 @@
 import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  MAX_HAMMER_ELAPSED_MS,
   SOLO_ROUND_CAP,
   type AsyncMatchRoundInput,
   type Question,
+  type SkillResult,
   type SoloRoundResponse,
   type SoloRunSnapshot,
   type StartSoloRunResponse,
@@ -15,7 +17,7 @@ import {
 } from '@clutch/shared';
 import app from '../apps/api/src/index';
 import { listTrainableMistakes, payBackMistake, recordMistake } from '../apps/api/src/matches/mistakesRepository';
-import { fullQuestions, roundInputs } from './helpers/soloPlay';
+import { fullQuestions, missTapElapsedMs, perfectTapElapsedMs, roundInputs } from './helpers/soloPlay';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
@@ -81,8 +83,28 @@ const answer = (db: TestD1, label: string, runId: string, roundIndex: number, in
     responseTimeMs: input.responseTimeMs,
   });
 
-const hammer = (db: TestD1, label: string, runId: string, roundIndex: number, questionId: string, skillDistance: number) =>
-  call(db, label, `/api/solo-runs/${runId}/hammer`, { roundIndex, questionId, skillDistance });
+const hammer = (db: TestD1, label: string, runId: string, roundIndex: number, questionId: string, activeElapsedMs: number) =>
+  call(db, label, `/api/solo-runs/${runId}/hammer`, { roundIndex, questionId, activeElapsedMs });
+
+/**
+ * Результаты уже закрытых кругов, как их видит сервер: по ним он выводит стадию давления,
+ * а значит цель и скорость маркера. Тесту они нужны, чтобы посчитать момент точного удара.
+ */
+const playedResults = (db: TestD1, runId: string, beforeIndex: number): SkillResult[] =>
+  (db.sqlite.prepare(
+    'SELECT skill_result FROM solo_run_rounds WHERE run_id = ? AND round_index < ? ORDER BY round_index',
+  ).all(runId, beforeIndex) as { skill_result: SkillResult | null }[])
+    .flatMap((row) => (row.skill_result ? [row.skill_result] : []));
+
+const roundRow = (db: TestD1, runId: string, roundIndex: number) =>
+  db.sqlite.prepare(
+    'SELECT active_elapsed_ms, skill_distance, skill_result, settled_at FROM solo_run_rounds WHERE run_id = ? AND round_index = ?',
+  ).get(runId, roundIndex) as {
+    active_elapsed_ms: number | null;
+    skill_distance: number | null;
+    skill_result: SkillResult | null;
+    settled_at: number | null;
+  };
 
 const roundCount = (db: TestD1, runId: string) =>
   (db.sqlite.prepare('SELECT COUNT(*) AS n FROM solo_run_rounds WHERE run_id = ?').get(runId) as { n: number }).n;
@@ -91,10 +113,11 @@ const runRow = (db: TestD1, runId: string) =>
   db.sqlite.prepare('SELECT status, progress, correct_count FROM match_runs WHERE id = ?').get(runId) as
     { status: string; progress: number; correct_count: number };
 
-/** Полный круг: верный ответ и удар в центр. */
+/** Полный круг: верный ответ и удар ровно в центр цели текущей стадии. */
 async function perfectRound(db: TestD1, label: string, runId: string, index: number, input: AsyncMatchRoundInput) {
   await answer(db, label, runId, index, input);
-  return await (await hammer(db, label, runId, index, input.questionId, 0)).json() as SoloRoundResponse;
+  const elapsed = perfectTapElapsedMs(input.questionId, playedResults(db, runId, index));
+  return await (await hammer(db, label, runId, index, input.questionId, elapsed)).json() as SoloRoundResponse;
 }
 
 describe('answers never reach the browser before the round is played', () => {
@@ -171,10 +194,10 @@ describe('a round is counted once', () => {
     const run = await start(db, 'ann');
     const [right] = roundInputs(fullQuestions(db, run.runId), 1, true);
     await answer(db, 'ann', run.runId, 0, right);
-    const first = await (await hammer(db, 'ann', run.runId, 0, right.questionId, 0)).json() as SoloRoundResponse;
+    const first = await (await hammer(db, 'ann', run.runId, 0, right.questionId, perfectTapElapsedMs(right.questionId))).json() as SoloRoundResponse;
     expect(first).toMatchObject({ awaitingHammer: false, skillResult: 'perfect', progressAwarded: 25, progress: 25 });
-    const again = await (await hammer(db, 'ann', run.runId, 0, right.questionId, 0)).json() as SoloRoundResponse;
-    const worse = await (await hammer(db, 'ann', run.runId, 0, right.questionId, 0.9)).json() as SoloRoundResponse;
+    const again = await (await hammer(db, 'ann', run.runId, 0, right.questionId, perfectTapElapsedMs(right.questionId))).json() as SoloRoundResponse;
+    const worse = await (await hammer(db, 'ann', run.runId, 0, right.questionId, missTapElapsedMs(right.questionId))).json() as SoloRoundResponse;
     expect(again).toEqual(first);
     expect(worse).toEqual(first);
     expect(runRow(db, run.runId).status).toBe('in_progress');
@@ -197,7 +220,7 @@ describe('a round is counted once', () => {
     const [right] = roundInputs(fullQuestions(db, run.runId), 1, true);
     const answers = await Promise.all([0, 1, 2].map(() => answer(db, 'ann', run.runId, 0, right)));
     expect(answers.map((response) => response.status)).toEqual([200, 200, 200]);
-    const hammers = await Promise.all([0, 1, 2].map(() => hammer(db, 'ann', run.runId, 0, right.questionId, 0)));
+    const hammers = await Promise.all([0, 1, 2].map(() => hammer(db, 'ann', run.runId, 0, right.questionId, perfectTapElapsedMs(right.questionId))));
     const bodies = await Promise.all(hammers.map((response) => response.json() as Promise<SoloRoundResponse>));
     expect(new Set(bodies.map((body) => body.progress))).toEqual(new Set([25]));
     expect(roundCount(db, run.runId)).toBe(1);
@@ -208,25 +231,91 @@ describe('a round is counted once', () => {
     const run = await start(db, 'ann');
     const inputs = roundInputs(fullQuestions(db, run.runId), 3, true);
     expect((await answer(db, 'ann', run.runId, 1, inputs[1])).status).toBe(409);
-    expect((await hammer(db, 'ann', run.runId, 0, inputs[0].questionId, 0)).status).toBe(409);
+    expect((await hammer(db, 'ann', run.runId, 0, inputs[0].questionId, perfectTapElapsedMs(inputs[0].questionId))).status).toBe(409);
     // Неверный ответ не даёт удара.
     const [wrong] = roundInputs(fullQuestions(db, run.runId), 1, false);
     await answer(db, 'ann', run.runId, 0, wrong);
-    expect((await hammer(db, 'ann', run.runId, 0, wrong.questionId, 0)).status).toBe(409);
+    expect((await hammer(db, 'ann', run.runId, 0, wrong.questionId, perfectTapElapsedMs(wrong.questionId))).status).toBe(409);
     // Следующий вопрос нельзя пропустить: подменённый id отклоняется.
     expect((await answer(db, 'ann', run.runId, 1, inputs[2])).status).toBe(400);
     expect(roundCount(db, run.runId)).toBe(1);
   });
 
-  it('rejects a skill distance outside 0..1 and foreign players', async () => {
+  it('rejects an impossible hammer time and foreign players', async () => {
     const db = database();
     const run = await start(db, 'ann');
     const [right] = roundInputs(fullQuestions(db, run.runId), 1, true);
     expect((await answer(db, 'mallory', run.runId, 0, right)).status).toBe(404);
     await answer(db, 'ann', run.runId, 0, right);
-    expect((await hammer(db, 'ann', run.runId, 0, right.questionId, 1.5)).status).toBe(400);
-    expect((await hammer(db, 'mallory', run.runId, 0, right.questionId, 0)).status).toBe(404);
+    expect((await hammer(db, 'ann', run.runId, 0, right.questionId, MAX_HAMMER_ELAPSED_MS + 1)).status).toBe(400);
+    expect((await hammer(db, 'mallory', run.runId, 0, right.questionId, perfectTapElapsedMs(right.questionId))).status).toBe(404);
   });
+});
+
+describe('the hammer award is derived by the server from the tap moment', () => {
+  /** Верный ответ на первом круге: удар ждёт, можно бить. */
+  async function awaitingHammer(db: TestD1, label: string) {
+    const run = await start(db, label);
+    const [right] = roundInputs(fullQuestions(db, run.runId), 1, true);
+    await answer(db, label, run.runId, 0, right);
+    return { run, right };
+  }
+
+  it('refuses a payload that carries the award instead of the moment', async () => {
+    const db = database();
+    const { run, right } = await awaitingHammer(db, 'ann');
+    // Так выглядел чит: одно число skillDistance: 0 давало 25 очков за круг.
+    const response = await call(db, 'ann', `/api/solo-runs/${run.runId}/hammer`, {
+      roundIndex: 0,
+      questionId: right.questionId,
+      skillDistance: 0,
+    });
+    expect(response.status).toBe(400);
+    expect(roundRow(db, run.runId, 0).settled_at).toBeNull();
+  });
+
+  it('pays 25 for a tap on the target and nothing for a tap half a track away', async () => {
+    const hit = database();
+    const onTarget = await awaitingHammer(hit, 'ann');
+    const struck = await (await hammer(
+      hit, 'ann', onTarget.run.runId, 0, onTarget.right.questionId,
+      perfectTapElapsedMs(onTarget.right.questionId),
+    )).json() as SoloRoundResponse;
+    expect(struck).toMatchObject({ skillResult: 'perfect', progressAwarded: 25 });
+
+    // Тот же вопрос, но удар в половине дорожки от цели: сервер сам видит промах.
+    const missed = database();
+    const offTarget = await awaitingHammer(missed, 'ann');
+    const wide = await (await hammer(
+      missed, 'ann', offTarget.run.runId, 0, offTarget.right.questionId,
+      missTapElapsedMs(offTarget.right.questionId),
+    )).json() as SoloRoundResponse;
+    expect(wide).toMatchObject({ skillResult: 'miss', progressAwarded: 0 });
+  });
+
+  it('refuses a tap claimed later than the round could possibly have run', async () => {
+    const db = database();
+    const { run, right } = await awaitingHammer(db, 'ann');
+    // Часы в тесте стоят, то есть круг «только что» создан: шесть секунд активной игры в нём
+    // поместиться не могли. Это проверка на невозможное время, а не на подобранный момент.
+    const response = await hammer(db, 'ann', run.runId, 0, right.questionId, 6_000);
+    expect(response.status).toBe(400);
+    expect(await response.json()).toMatchObject({ reason: 'impossible_timing' });
+    expect(roundRow(db, run.runId, 0).settled_at).toBeNull();
+  });
+
+  it('keeps the raw moment next to the distance it derived from it', async () => {
+    const db = database();
+    const { run, right } = await awaitingHammer(db, 'ann');
+    const elapsed = perfectTapElapsedMs(right.questionId);
+    await hammer(db, 'ann', run.runId, 0, right.questionId, elapsed);
+    const row = roundRow(db, run.runId, 0);
+    // Сырой ввод остаётся для поиска выбросов, расстояние рядом с ним — уже вывод сервера.
+    expect(row.active_elapsed_ms).toBeCloseTo(elapsed, 6);
+    expect(row.skill_distance).toBeCloseTo(0, 6);
+    expect(row.skill_result).toBe('perfect');
+  });
+
 });
 
 describe('the server closes the run', () => {
@@ -265,7 +354,7 @@ describe('the server closes the run', () => {
     const inputs = roundInputs(fullQuestions(db, run.runId), 4, true);
     let last: SoloRoundResponse | undefined;
     for (let index = 0; index < 4; index += 1) last = await perfectRound(db, 'ann', run.runId, index, inputs[index]);
-    const retry = await (await hammer(db, 'ann', run.runId, 3, inputs[3].questionId, 0)).json() as SoloRoundResponse;
+    const retry = await (await hammer(db, 'ann', run.runId, 3, inputs[3].questionId, perfectTapElapsedMs(inputs[3].questionId, playedResults(db, run.runId, 3)))).json() as SoloRoundResponse;
     expect(retry).toEqual(last);
     expect(roundCount(db, run.runId)).toBe(4);
   });
@@ -307,8 +396,10 @@ describe('a run interrupted after several rounds continues from the same place',
     expect(snapshot.rounds).toEqual([
       { questionId: right.questionId, correct: true, skillResult: 'miss', progressAwarded: 0, responseTimeMs: 1000 },
     ]);
+    // Удара не было, поэтому и момента удара в строке нет.
+    expect(roundRow(db, run.runId, 0).active_elapsed_ms).toBeNull();
     // Поздний удар уже ничего не меняет.
-    const late = await (await hammer(db, 'ann', run.runId, 0, right.questionId, 0)).json() as SoloRoundResponse;
+    const late = await (await hammer(db, 'ann', run.runId, 0, right.questionId, perfectTapElapsedMs(right.questionId))).json() as SoloRoundResponse;
     expect(late).toMatchObject({ skillResult: 'miss', progressAwarded: 0, progress: 0 });
   });
 

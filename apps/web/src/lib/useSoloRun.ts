@@ -145,8 +145,8 @@ export function useSoloRun(botLevel?: PracticeLevelId) {
     setState((previous) => recordSoloAnswer(previous, optionId, timeMs));
   }, []);
   const continueAfterResolution = useCallback(() => setState(continueSoloAfterResolution), []);
-  const completeHammer = useCallback((_result: unknown, _progress: number, distance: number) => {
-    setState((previous) => completeSoloHammer(previous, distance));
+  const completeHammer = useCallback((_result: unknown, _progress: number, activeElapsedMs: number) => {
+    setState((previous) => completeSoloHammer(previous, activeElapsedMs));
   }, []);
 
   // Отправка круга. Пока сервер не подтвердил, запрос висит в state.pending; повторы автоматические,

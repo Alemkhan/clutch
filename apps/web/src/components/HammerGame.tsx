@@ -4,8 +4,7 @@ import type { MiniGameConfig, SkillResult } from '@clutch/shared';
 import {
   SKILL_REWARDS,
   hammerAttemptRules,
-  normalizedHammerDistance,
-  scoreHammerDistance,
+  scoreHammerTap,
 } from '@clutch/shared';
 import { analytics } from '../lib/analytics';
 import {
@@ -21,7 +20,12 @@ interface HammerGameProps {
   config: MiniGameConfig;
   questionId: string;
   previousSkillResults: readonly SkillResult[];
-  onComplete: (result: SkillResult, progressAwarded: number, distance: number) => void;
+  /**
+   * Третий аргумент — активное время удара, а не его качество: именно он уходит на сервер,
+   * который сам выводит из него расстояние до цели и награду. Результат и награда здесь —
+   * только для немедленной анимации и звука; зачётными их делает ответ сервера.
+   */
+  onComplete: (result: SkillResult, progressAwarded: number, activeElapsedMs: number) => void;
 }
 
 const SINK_PX: Record<SkillResult, number> = {
@@ -105,7 +109,7 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
   const lastFrameRef = useRef<number | null>(null);
   const stoppedRef = useRef(false);
   const rafRef = useRef<number>(0);
-  const distanceRef = useRef(1);
+  const tapElapsedRef = useRef(0);
   const completedRef = useRef(false);
   const soundTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -168,12 +172,15 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
     cancelAnimationFrame(rafRef.current);
     playSound('hammerTap');
 
-    const distance = normalizedHammerDistance(posRef.current, attempt.targetCenter);
-    distanceRef.current = distance;
-    const { result: skillResult, progressAwarded: progress } = scoreHammerDistance(
-      distance,
-      attempt.stage,
+    // Момент удара — это то, что уйдёт на сервер; он же даёт предпросмотр через ту самую
+    // функцию, которой сервер посчитает награду, поэтому разойтись в оценке они не могут.
+    const activeElapsedMs = activeElapsedRef.current;
+    tapElapsedRef.current = activeElapsedMs;
+    const { result: skillResult, progressAwarded: progress } = scoreHammerTap(
+      questionId,
+      previousSkillResults,
       config,
+      activeElapsedMs,
     );
 
     setResult(skillResult);
@@ -224,7 +231,7 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
             onAnimationComplete={() => {
               if (result && !completedRef.current) {
                 completedRef.current = true;
-                onComplete(result, SKILL_REWARDS[result], distanceRef.current);
+                onComplete(result, SKILL_REWARDS[result], tapElapsedRef.current);
               }
             }}
           />

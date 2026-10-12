@@ -1,4 +1,5 @@
 import {
+  MAX_HAMMER_ELAPSED_MS,
   MIN_POOL_ROUNDS,
   SKILL_REWARDS,
   isAnswerCorrect,
@@ -40,11 +41,11 @@ export function isRoundInput(value: unknown): value is AsyncMatchRoundInput {
     && Number.isFinite(round.responseTimeMs)
     && round.responseTimeMs >= 0
     && round.responseTimeMs <= 60_000
-    && (round.skillDistance === undefined
-      || (typeof round.skillDistance === 'number'
-        && Number.isFinite(round.skillDistance)
-        && round.skillDistance >= 0
-        && round.skillDistance <= 1));
+    && (round.activeElapsedMs === undefined
+      || (typeof round.activeElapsedMs === 'number'
+        && Number.isFinite(round.activeElapsedMs)
+        && round.activeElapsedMs >= 0
+        && round.activeElapsedMs <= MAX_HAMMER_ELAPSED_MS));
 }
 
 export function correctFor(question: Question, selectedAnswer: string): boolean {

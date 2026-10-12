@@ -89,7 +89,7 @@ function perfectRound(state: SoloFlowState): SoloFlowState {
   const verdict = applySoloAnswerVerdict(checking, serverRound(checking, { correct: true, awaitingHammer: true }));
   const answered = continueSoloAfterResolution(verdict);
   expect(answered.stage).toBe('hammer');
-  const submitting = completeSoloHammer(answered, 0);
+  const submitting = completeSoloHammer(answered, 420);
   expect(submitting.stage).toBe('submitting');
   return applySoloHammerVerdict(submitting, serverRound(submitting, {
     correct: true, skillResult: 'perfect', progressAwarded: 25,
@@ -180,15 +180,15 @@ describe('solo run flow with a server that scores the rounds', () => {
     expect(answered.explanation).toBe('Пояснение сервера.');
   });
 
-  it('takes the reward from the server, not from the distance', () => {
+  it('takes the reward from the server, not from the tap moment', () => {
     let state = recordSoloAnswer(started(questions, null), 'a', 1);
     state = continueSoloAfterResolution(applySoloAnswerVerdict(state, serverRound(state, { correct: true, awaitingHammer: true })));
-    const submitting = completeSoloHammer(state, 0);
+    const submitting = completeSoloHammer(state, 420);
     expect(submitting.pending).toEqual({
       kind: 'hammer',
-      request: { roundIndex: 0, questionId: questions[0].id, skillDistance: 0 },
+      request: { roundIndex: 0, questionId: questions[0].id, activeElapsedMs: 420 },
     });
-    // Сервер присудил 12: именно это попадает в прогресс, расстояние ни на что не влияет.
+    // Сервер присудил 12: именно это попадает в прогресс, присланное время само собой не награда.
     const done = applySoloHammerVerdict(submitting, serverRound(submitting, {
       correct: true, skillResult: 'good', progressAwarded: 12,
     }));

@@ -83,7 +83,8 @@ export interface AsyncMatchRoundInput {
   questionId: string;
   selectedAnswer: string;
   responseTimeMs: number;
-  skillDistance?: number;
+  /** Момент удара, а не его качество: расстояние до цели выводит сервер. */
+  activeElapsedMs?: number;
 }
 
 export interface AsyncMatchRound {
@@ -159,11 +160,14 @@ export interface SoloAnswerRequest {
   responseTimeMs: number;
 }
 
-/** Удар молотка по верному ответу. skillDistance измеряет устройство: сервер ему верит в пределах 0..1. */
+/**
+ * Удар молотка по верному ответу. Устройство сообщает только **момент** удара — активное время
+ * от старта маркера; расстояние до цели и награду считает сервер (`scoreHammerTap`).
+ */
 export interface SoloHammerRequest {
   roundIndex: number;
   questionId: string;
-  skillDistance: number;
+  activeElapsedMs: number;
 }
 
 /**

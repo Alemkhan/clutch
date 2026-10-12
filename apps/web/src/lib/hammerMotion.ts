@@ -2,12 +2,9 @@ import type { HammerAttemptRules, SkillResult } from '@clutch/shared';
 
 export const MAX_HAMMER_FRAME_DELTA_MS = 50;
 
-
-/** Triangle wave moving from 0 to 1 and back. Speed is track units per second. */
-export function markerPositionAtElapsed(activeElapsedMs: number, markerSpeed: number): number {
-  const phase = ((Math.max(0, activeElapsedMs) / 1000) * markerSpeed) % 2;
-  return phase <= 1 ? phase : 2 - phase;
-}
+// Положение маркера живёт в shared: по той же формуле сервер восстанавливает удар из времени
+// тапа, и второй реализации здесь быть не должно. Реэкспорт — чтобы импорт остался одним.
+export { markerPositionAtElapsed } from '@clutch/shared';
 
 /** A hidden tab and an unexpectedly long frame may advance at most one short frame. */
 export function cappedFrameDeltaMs(previousTimestamp: number | null, timestamp: number): number {

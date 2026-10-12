@@ -92,7 +92,7 @@ describe('solo run and my-runs calls', () => {
     const fetchMock = stubApi();
     await startSoloRun('geography');
     await answerSoloRound('run/1', { roundIndex: 0, questionId: 'q', selectedAnswer: 'a', responseTimeMs: 5 });
-    await hammerSoloRound('run/1', { roundIndex: 0, questionId: 'q', skillDistance: 0.1 });
+    await hammerSoloRound('run/1', { roundIndex: 0, questionId: 'q', activeElapsedMs: 420 });
     await fetchSoloRunSnapshot('run/1');
     const calls = fetchMock.mock.calls as unknown as [string, RequestInit][];
     const paths = calls.map(([input]) => String(input));
@@ -101,9 +101,9 @@ describe('solo run and my-runs calls', () => {
     expect(paths).toContain('/api/solo-runs/run%2F1/hammer');
     const snapshot = calls.find(([path, init]) => path === '/api/solo-runs/run%2F1' && init.method === 'GET');
     expect(snapshot).toBeDefined();
-    // Расстояние удара уходит как есть, награду клиент не присылает.
+    // Уходит только момент удара: ни расстояния, ни награды клиент не присылает.
     const hammer = calls.find(([path]) => path.endsWith('/hammer'));
-    expect(JSON.parse(String(hammer?.[1].body))).toEqual({ roundIndex: 0, questionId: 'q', skillDistance: 0.1 });
+    expect(JSON.parse(String(hammer?.[1].body))).toEqual({ roundIndex: 0, questionId: 'q', activeElapsedMs: 420 });
   });
 
   it('asks the server for mistake-training questions and verdicts', async () => {

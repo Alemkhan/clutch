@@ -218,8 +218,8 @@ export function continueSoloAfterResolution(state: Readonly<SoloFlowState>): Sol
   return afterRound({ ...state }, applySoloSessionRound(requireSession(state), 0));
 }
 
-/** Удар измерен на устройстве; сервер получает расстояние, награду считает сам. */
-export function completeSoloHammer(state: Readonly<SoloFlowState>, distance: number): SoloFlowState {
+/** Устройство сообщает только момент удара; расстояние до цели и награду выводит сервер. */
+export function completeSoloHammer(state: Readonly<SoloFlowState>, activeElapsedMs: number): SoloFlowState {
   const question = currentSoloQuestion(state);
   if (state.stage !== 'hammer' || !question) return state as SoloFlowState;
   return {
@@ -231,7 +231,7 @@ export function completeSoloHammer(state: Readonly<SoloFlowState>, distance: num
       request: {
         roundIndex: requireSession(state).run.roundsPlayed,
         questionId: question.id,
-        skillDistance: distance,
+        activeElapsedMs,
       },
     },
   };

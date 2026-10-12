@@ -309,14 +309,34 @@ async function verifyHttpFlow(baseUrl, readinessResponse) {
   assert.deepEqual(repeated, verdict);
 
   if (verdict.awaitingHammer) {
+    // Оценку удара прислать нельзя: принимается только момент удара, награду считает сервер.
+    // Насколько именно момент хорош, проверяют route-тесты — здесь важно, что по HTTP
+    // старый путь закрыт, невозможное время отклонено, а вердикт приходит от сервера.
+    const legacy = await fetch(`${baseUrl}/api/solo-runs/${runA.runId}/hammer`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${tokenA}` },
+      body: JSON.stringify({ roundIndex: 0, questionId: question.id, skillDistance: 0 }),
+      signal: AbortSignal.timeout(5_000),
+    });
+    assert.equal(legacy.status, 400, 'a hammer payload with a ready-made distance must be refused');
+
+    const impossible = await fetch(`${baseUrl}/api/solo-runs/${runA.runId}/hammer`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${tokenA}` },
+      body: JSON.stringify({ roundIndex: 0, questionId: question.id, activeElapsedMs: 599_000 }),
+      signal: AbortSignal.timeout(5_000),
+    });
+    assert.equal(impossible.status, 400, 'a tap claimed long after the round started must be refused');
+
     const struck = await roundRequest(baseUrl, tokenA, runA.runId, 'hammer', {
       roundIndex: 0,
       questionId: question.id,
-      skillDistance: 0,
+      activeElapsedMs: 500,
     });
     assert.equal(struck.roundIndex, 0);
     assert.equal(struck.awaitingHammer, false);
-    assert.ok(struck.progress > 0, 'a perfect strike after a correct answer must move progress');
+    assert.equal(typeof struck.skillResult, 'string', 'the server must report the tier it derived itself');
+    assert.equal(typeof struck.progressAwarded, 'number', 'the award must come from the server');
   } else {
     assert.equal(verdict.correct, false);
     assert.equal(verdict.progress, 0);

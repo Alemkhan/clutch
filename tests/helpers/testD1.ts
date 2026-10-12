@@ -115,6 +115,10 @@ export function applyLastStandMinedMigration(sqlite: SQLiteDatabase): void {
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0013_last_stand_mined.sql', import.meta.url), 'utf8'));
 }
 
+export function applyHammerTapElapsedMigration(sqlite: SQLiteDatabase): void {
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0016_hammer_tap_elapsed.sql', import.meta.url), 'utf8'));
+}
+
 export function createTestD1(applyCurrentMigration = true): TestD1 {
   const sqlite = new DatabaseSync(':memory:');
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0001_async_matches.sql', import.meta.url), 'utf8'));
@@ -132,6 +136,7 @@ export function createTestD1(applyCurrentMigration = true): TestD1 {
     applyGeneralCategoryMigration(sqlite);
     applyLastStandMinedMigration(sqlite);
     applyRecordClaimMigration(sqlite);
+    applyHammerTapElapsedMigration(sqlite);
   }
   const binding = {
     prepare(query: string) {

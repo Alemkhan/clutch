@@ -85,7 +85,6 @@ function inputs(questions: Question[], count: number, correct: boolean): AsyncMa
         ? question.correctOptionId
         : question.options.find((option) => option.id !== question.correctOptionId)!.id),
     responseTimeMs: 1000,
-    ...(correct ? { skillDistance: 0 } : {}),
   }));
 }
 

@@ -7,9 +7,11 @@ import {
   hammerMarkerSpeed,
   hammerTargetCenter,
   hammerThresholdsForStage,
+  markerPositionAtElapsed,
   normalizedHammerDistance,
   pressureStageFromResults,
   scoreHammerDistance,
+  scoreHammerTap,
   stableQuestionHash,
   type PressureStage,
 } from './index';
@@ -108,5 +110,62 @@ describe('hammer marker speed', () => {
       buckets[Math.min(4, Math.floor(((speed - 0.6) / 1.0) * 5))] += 1;
     }
     for (const count of buckets) expect(count / speeds.length).toBeGreaterThan(0.12);
+  });
+});
+
+describe('scoring a hammer tap from its moment', () => {
+  const questionId = 'geography:2026-10-13:0:q4';
+
+  it('derives the marker position from the time, not from the client', () => {
+    expect(markerPositionAtElapsed(0, 1)).toBe(0);
+    expect(markerPositionAtElapsed(1000, 1)).toBe(1);
+    expect(markerPositionAtElapsed(1500, 1)).toBeCloseTo(0.5);
+    expect(markerPositionAtElapsed(2000, 1)).toBe(0);
+    // Отрицательное время не отводит маркер назад за ноль.
+    expect(markerPositionAtElapsed(-500, 1)).toBe(0);
+  });
+
+  it('pays the full reward only for the moment the marker is on the target', () => {
+    const attempt = hammerAttemptRules(questionId, [], config);
+    const onTarget = (attempt.targetCenter / attempt.markerSpeed) * 1000;
+    const scored = scoreHammerTap(questionId, [], config, onTarget);
+    expect(scored.distance).toBeCloseTo(0, 10);
+    expect(scored.result).toBe('perfect');
+    expect(scored.progressAwarded).toBe(25);
+    expect(scored.markerPosition).toBeCloseTo(attempt.targetCenter, 10);
+  });
+
+  it('turns a moment half a track away into a miss worth nothing', () => {
+    const attempt = hammerAttemptRules(questionId, [], config);
+    const away = attempt.targetCenter > 0.5 ? attempt.targetCenter - 0.5 : attempt.targetCenter + 0.5;
+    const scored = scoreHammerTap(questionId, [], config, (away / attempt.markerSpeed) * 1000);
+    expect(scored.distance).toBeCloseTo(1, 10);
+    expect(scored.result).toBe('miss');
+    expect(scored.progressAwarded).toBe(0);
+  });
+
+  it('scores the very same moment differently once pressure moves the target', () => {
+    // Один и тот же момент удара не даёт одну и ту же награду: цель и скорость зависят от стадии,
+    // поэтому заученное «хорошее время» на следующем круге уже не работает.
+    const moment = 500;
+    const scores = ([[], ['perfect'], ['perfect', 'perfect']] as const)
+      .map((previous) => scoreHammerTap(questionId, previous, config, moment).distance);
+    expect(new Set(scores).size).toBeGreaterThan(1);
+  });
+
+  it('agrees with the plain distance scoring it is built on', () => {
+    for (let elapsed = 0; elapsed <= 3000; elapsed += 37) {
+      const scored = scoreHammerTap(questionId, [], config, elapsed);
+      const position = markerPositionAtElapsed(elapsed, scored.attempt.markerSpeed);
+      const distance = normalizedHammerDistance(position, scored.attempt.targetCenter);
+      expect(scored.distance).toBe(distance);
+      expect(scored.result).toBe(scoreHammerDistance(distance, scored.attempt.stage, config).result);
+    }
+  });
+
+  it('refuses a moment that is not a finite non-negative number', () => {
+    expect(() => scoreHammerTap(questionId, [], config, Number.NaN)).toThrow(RangeError);
+    expect(() => scoreHammerTap(questionId, [], config, Number.POSITIVE_INFINITY)).toThrow(RangeError);
+    expect(() => scoreHammerTap(questionId, [], config, -1)).toThrow(RangeError);
   });
 });
