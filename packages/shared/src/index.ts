@@ -139,6 +139,15 @@ export interface CreateFriendInviteResponse {
   expiresAt: number;
 }
 
+/**
+ * Итог нажатия «Позвать на реванш». Ссылки здесь нет: приглашение адресное, и его уносит
+ * сообщение бота владельцу обойдённой записи, а не share с экрана звавшего.
+ */
+export interface CreateRematchInviteResponse {
+  inviteId: string;
+  expiresAt: number;
+}
+
 export interface CompleteSoloRunResponse {
   runId: string;
   rounds: AsyncMatchRound[];
@@ -270,6 +279,11 @@ export interface MyRunSummary {
    * (цифры тогда друга, а исход дан глазами владельца записи). Обычная партия — null.
    */
   friendDuel?: 'played' | 'hosted' | null;
+  /**
+   * Реванш зовёт игрок, а не система. 'available' — этот забег обошёл чью-то запись, и её владельца
+   * можно позвать; 'sent' — уже позвал; null — звать некого.
+   */
+  rematchOffer?: 'available' | 'sent' | null;
 }
 
 /** Активное приглашение на реванш, адресованное игроку. */

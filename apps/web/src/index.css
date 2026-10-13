@@ -2268,6 +2268,14 @@ input:focus-visible {
   cursor: pointer;
 }
 
+/* Кнопка внутри карточки партии: уже строк, чтобы не выглядела основным действием экрана. */
+.my-run-rematch {
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+}
+
 .my-run-top {
   display: flex;
   align-items: baseline;

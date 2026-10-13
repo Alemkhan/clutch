@@ -1,6 +1,7 @@
 import type {
   CategoryId,
   CreateFriendInviteResponse,
+  CreateRematchInviteResponse,
   GuestSessionResponse,
   PracticeLevelId,
   MyRunsResponse,
@@ -290,6 +291,11 @@ export function fetchRematchPreview(inviteId: string, signal?: AbortSignal): Pro
 /** «Позвать друга»: ссылка на открытое приглашение по своему завершённому забегу; повтор даёт ту же ссылку. */
 export function createFriendInvite(runId: string, signal?: AbortSignal): Promise<CreateFriendInviteResponse> {
   return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}/invite`, { method: 'POST', body: '{}' }, signal);
+}
+
+/** «Позвать на реванш» с обошедшего запись забега: приглашение создаёт это нажатие и только оно. */
+export function createRematchInvite(runId: string, signal?: AbortSignal): Promise<CreateRematchInviteResponse> {
+  return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}/rematch`, { method: 'POST', body: '{}' }, signal);
 }
 
 export function setOutbidNotifications(enabled: boolean): Promise<{ enabled: boolean }> {

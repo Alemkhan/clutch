@@ -5,12 +5,13 @@ import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_SOLO_RUN_CONDITIONS,
   dailyQuestionSet,
   type AsyncMatchRound,
   type Question,
 } from '@clutch/shared';
 import app from '../apps/api/src/index';
-import { notifyOutbid } from '../apps/api/src/notifications/outbid';
+import { notifySoloResult } from '../apps/api/src/notifications/outbid';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
@@ -65,11 +66,15 @@ function request(db: TestD1, path: string, authorization: string, init: RequestI
   }, env(db), executionCtx);
 }
 
-function guestAuthorization(label: string): string {
+function guestSubject(label: string): string {
   const hex = createHash('sha256').update(label).digest('hex').slice(0, 32).split('');
   hex[12] = '4';
   hex[16] = '8';
-  const subject = `${hex.slice(0, 8).join('')}-${hex.slice(8, 12).join('')}-${hex.slice(12, 16).join('')}-${hex.slice(16, 20).join('')}-${hex.slice(20).join('')}`;
+  return `${hex.slice(0, 8).join('')}-${hex.slice(8, 12).join('')}-${hex.slice(12, 16).join('')}-${hex.slice(16, 20).join('')}-${hex.slice(20).join('')}`;
+}
+
+function guestAuthorization(label: string): string {
+  const subject = guestSubject(label);
   const now = Math.floor(Date.now() / 1000);
   const payload = Buffer.from(JSON.stringify({ v: 1, sub: subject, iat: now - 1, exp: now + 3600 })).toString('base64url');
   const signed = `v1.${payload}`;
@@ -134,36 +139,38 @@ function inviteRows(db: TestD1) {
   return db.sqlite.prepare('SELECT * FROM rematch_invites').all() as Array<Record<string, unknown>>;
 }
 
-/** Рекорд-получатель (Алем) и забег-вызов (Боб); гонки больше нет, поэтому сообщение шлётся напрямую. */
-function bobBeatsAlem(db: TestD1, seed = true) {
-  if (seed) {
-    insertCompleted(db, 'alem-run', 'telegram:42', 'Алем');
-    insertCompleted(db, 'bob-run', 'guest:11111111-1111-4111-8111-111111111111', 'Боб', [25, 25, 25, 25]);
-  }
-  return notifyOutbid(env(db) as never, {
-    recipientRun: { id: 'alem-run', playerId: 'telegram:42', category: 'geography' },
-    challengerRunId: 'bob-run',
-    challengerName: 'Игрок',
-    recipientProgress: 50,
-    challengerProgress: 100,
-  });
+const bobAuthorization = guestAuthorization('bob');
+const bobPlayerId = `guest:${guestSubject('bob')}`;
+
+/**
+ * Запись Алема и обошедший её забег Боба. Приглашения тут ещё нет: по DEC-09 его создаёт только
+ * нажатие Боба, то есть `POST /api/solo-runs/bob-run/rematch`.
+ */
+function seedBeatenRecord(db: TestD1, outcome: 'player' | 'opponent' | 'tie' = 'player') {
+  insertCompleted(db, 'alem-run', 'telegram:42', 'Алем');
+  insertCompleted(db, 'bob-run', bobPlayerId, 'Боб', [25, 25, 25, 25]);
+  db.sqlite.prepare(`
+    UPDATE match_runs
+    SET rules_version = ?, opponent_run_id = 'alem-run', solo_outcome = ?, reached_target = 1
+    WHERE id = 'bob-run'
+  `).run(CURRENT_SOLO_RUN_CONDITIONS.rulesVersion, outcome);
 }
 
-describe('outbid notification', () => {
-  it('messages a Telegram owner once per bypass', async () => {
+const callRematch = (db: TestD1, runId = 'bob-run', authorization = bobAuthorization) =>
+  request(db, `/api/solo-runs/${runId}/rematch`, authorization, { method: 'POST', body: '{}' });
+
+describe('a rematch is called by the player who beat the record', () => {
+  it('creates the invite on the press and messages the record owner once', async () => {
     const db = database();
-    await bobBeatsAlem(db);
-    expect(fetchMock).toHaveBeenCalledTimes(1);
-    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
-    expect(url).toBe('https://api.telegram.org/bottest/sendMessage');
-    const payload = JSON.parse(init.body as string);
-    expect(payload.chat_id).toBe('42');
-    expect(payload.text).toBe('Игрок обошёл вашу запись: 100% против 50%. Можно сыграть реванш: вопросы будут новые.');
-    const [[rematch], [stop]] = payload.reply_markup.inline_keyboard;
+    seedBeatenRecord(db);
+    // До нажатия приглашения нет вовсе: исход уже известен, но никто никого не звал.
+    expect(inviteRows(db)).toHaveLength(0);
+
+    const response = await callRematch(db);
+    expect(response.status).toBe(201);
     const rows = inviteRows(db);
     expect(rows).toHaveLength(1);
-    expect(rematch.url).toBe(`https://t.me/testbot?startapp=${rows[0].id}`);
-    expect(stop.url).toBe('https://t.me/testbot?startapp=unsub');
+    expect(await response.json()).toEqual({ inviteId: rows[0].id, expiresAt: rows[0].expires_at });
     expect(rows[0]).toMatchObject({
       recipient_player_id: 'telegram:42',
       recipient_run_id: 'alem-run',
@@ -172,24 +179,55 @@ describe('outbid notification', () => {
     });
     expect(String(rows[0].id)).toMatch(/^rm_[A-Za-z0-9_-]{22}$/u);
 
-    // Повтор для той же пары остановлен ограничением UNIQUE.
-    await bobBeatsAlem(db, false);
     expect(fetchMock).toHaveBeenCalledTimes(1);
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toBe('https://api.telegram.org/bottest/sendMessage');
+    const payload = JSON.parse(init.body as string);
+    expect(payload.chat_id).toBe('42');
+    // Текст зовёт, и теперь это правда: за ним стоит нажатие Боба.
+    expect(payload.text).toBe('Боб зовёт на реванш: вопросы будут новые.');
+    const [[rematch], [stop]] = payload.reply_markup.inline_keyboard;
+    expect(rematch.url).toBe(`https://t.me/testbot?startapp=${rows[0].id}`);
+    expect(stop.url).toBe('https://t.me/testbot?startapp=unsub');
+
+    // Повторное нажатие возвращает то же приглашение и не звонит получателю снова.
+    const again = await callRematch(db);
+    expect(again.status).toBe(201);
+    expect(await again.json()).toEqual({ inviteId: rows[0].id, expiresAt: rows[0].expires_at });
     expect(inviteRows(db)).toHaveLength(1);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
-  it('respects unsubscribe and can be re-enabled', async () => {
+  it('refuses a run that beat nobody, a foreign run and a race run', async () => {
     const db = database();
+    seedBeatenRecord(db, 'opponent');
+    // Проигравший реванш не зовёт: он просто играет снова.
+    expect((await callRematch(db)).status).toBe(409);
+    expect(inviteRows(db)).toHaveLength(0);
+
+    db.sqlite.prepare("UPDATE match_runs SET solo_outcome = 'player' WHERE id = 'bob-run'").run();
+    // Чужой забег неотличим от несуществующего.
+    expect((await callRematch(db, 'bob-run', alem)).status).toBe(404);
+    expect((await callRematch(db, 'no-such-run')).status).toBe(404);
+    // Своя запись: звать себя нельзя.
+    db.sqlite.prepare("UPDATE match_runs SET player_id = ? WHERE id = 'alem-run'").run(bobPlayerId);
+    expect((await callRematch(db)).status).toBe(403);
+    expect(inviteRows(db)).toHaveLength(0);
+  });
+
+  it('creates the invite even when the owner unsubscribed from bot messages', async () => {
+    const db = database();
+    seedBeatenRecord(db);
     const off = await request(db, '/api/notifications/outbid', alem, {
       method: 'PUT', body: JSON.stringify({ enabled: false }),
     });
     expect(await off.json()).toEqual({ enabled: false });
-    await bobBeatsAlem(db);
-    expect(fetchMock).not.toHaveBeenCalled();
-    expect(inviteRows(db)).toHaveLength(0);
 
-    const status = await request(db, '/api/notifications/outbid', alem);
-    expect(await status.json()).toEqual({ enabled: false });
+    expect((await callRematch(db)).status).toBe(201);
+    // Приглашение есть: отписка глушит сообщение бота, а не сам вызов — он виден в «Моих партиях».
+    expect(inviteRows(db)).toHaveLength(1);
+    expect(fetchMock).not.toHaveBeenCalled();
+
     expect((await request(db, '/api/notifications/outbid', alem, {
       method: 'PUT', body: JSON.stringify({ enabled: 'yes' }),
     })).status).toBe(400);
@@ -199,9 +237,32 @@ describe('outbid notification', () => {
   it('stops messaging a user who blocked the bot', async () => {
     fetchMock.mockImplementation(async () => new Response('{"ok":false}', { status: 403 }));
     const db = database();
-    await bobBeatsAlem(db);
+    seedBeatenRecord(db);
+    expect((await callRematch(db)).status).toBe(201);
     const status = await request(db, '/api/notifications/outbid', alem);
     expect(await status.json()).toEqual({ enabled: false });
+  });
+});
+
+describe('the outcome notice does not invite anyone', () => {
+  it('tells the owner their record lost without creating an invite', async () => {
+    const db = database();
+    seedBeatenRecord(db);
+    await notifySoloResult(env(db) as never, {
+      recipientRun: { id: 'alem-run', playerId: 'telegram:42', category: 'geography' },
+      challengerRunId: 'bob-run',
+      challengerName: 'Боб',
+      recipientProgress: 50,
+      challengerProgress: 100,
+      outcome: 'record_lost',
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    const payload = JSON.parse((fetchMock.mock.calls[0] as [string, RequestInit])[1].body as string);
+    // Ни обещания реванша в тексте, ни кнопки, ни строки в базе: звать может только соперник.
+    expect(payload.text).toBe('Боб обошёл вашу запись.');
+    expect(payload.reply_markup.inline_keyboard).toHaveLength(1);
+    expect(payload.reply_markup.inline_keyboard[0][0].url).toBe('https://t.me/testbot?startapp=unsub');
+    expect(inviteRows(db)).toHaveLength(0);
   });
 });
 

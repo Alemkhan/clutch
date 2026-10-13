@@ -1,4 +1,4 @@
-import { FRIEND_RULES_VERSION, PRACTICE_RULES_VERSION, evaluateMatch, invertOutcome, type AsyncMatchRound, type MyRunOutcome, type MyRunSummary } from '@clutch/shared';
+import { CURRENT_SOLO_RUN_CONDITIONS, FRIEND_RULES_VERSION, PRACTICE_RULES_VERSION, evaluateMatch, invertOutcome, type AsyncMatchRound, type MyRunOutcome, type MyRunSummary } from '@clutch/shared';
 import { parseQuestions } from './validation';
 
 export interface HistoryRow {
@@ -22,6 +22,8 @@ export interface HistoryRow {
   completed_at: number;
   /** Кто сыграл мою запись: у ждавшего забега соперника в своей строке нет. */
   played_by?: string | null;
+  /** 1 — с этого забега уже звали на реванш: кнопку показывать больше не нужно. */
+  rematch_offered?: number | null;
 }
 
 /** Курсор — completedAt_id последней отданной партии; в id нет символа "_". */
@@ -47,7 +49,9 @@ export async function listCompletedRuns(
     opponent_json, opponent_run_id, reached_target, set_par, solo_score, solo_outcome, created_at, completed_at,
     (SELECT challenger.display_name FROM match_runs challenger
       WHERE challenger.opponent_run_id = match_runs.id AND challenger.status = 'completed'
-      ORDER BY challenger.completed_at LIMIT 1) AS played_by`;
+      ORDER BY challenger.completed_at LIMIT 1) AS played_by,
+    EXISTS (SELECT 1 FROM rematch_invites offered
+      WHERE offered.challenger_run_id = match_runs.id AND offered.recipient_run_id IS NOT NULL) AS rematch_offered`;
   const statement = cursor
     ? db.prepare(`
         SELECT ${columns} FROM match_runs
@@ -139,5 +143,20 @@ export function toRunSummary(row: HistoryRow, viewerId?: string): MyRunSummary {
       ? (friendDuel === 'hosted' && row.solo_outcome ? invertOutcome(row.solo_outcome) : row.solo_outcome ?? null)
       : raceOutcome(row, rounds, opponent),
     friendDuel,
+    rematchOffer: rematchOffer(row, friendDuel),
   };
+}
+
+/**
+ * Можно ли с этого забега позвать на реванш. Звать вправе только обошедший чью-то запись и только
+ * со своего зачётного соло-забега: дружеская дуэль вне соревнования, а устоявшую запись звать
+ * не за чем. Условия те же, что проверяет `POST /api/solo-runs/:id/rematch`.
+ */
+function rematchOffer(
+  row: HistoryRow,
+  friendDuel: MyRunSummary['friendDuel'],
+): MyRunSummary['rematchOffer'] {
+  if (friendDuel || row.rules_version !== CURRENT_SOLO_RUN_CONDITIONS.rulesVersion) return null;
+  if (!row.opponent_run_id || row.solo_outcome !== 'player') return null;
+  return row.rematch_offered ? 'sent' : 'available';
 }

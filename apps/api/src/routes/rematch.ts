@@ -1,11 +1,15 @@
+import { CURRENT_SOLO_RUN_CONDITIONS, type CreateRematchInviteResponse } from '@clutch/shared';
 import type { Context, Hono } from 'hono';
 import { resolveRequestIdentity, type RequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
 import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import { REMATCH_INVITE_ID } from '../matches/validation';
+import { newInviteId, sendRematchOffer } from '../notifications/outbid';
 import {
   findInvite,
+  findInviteForPair,
+  insertInviteOnce,
   inviteMode,
   inviteUnavailableReason,
   isOpenInvite,
@@ -28,6 +32,81 @@ async function authenticate(c: AppContext, scope: string): Promise<RequestIdenti
 }
 
 export function registerRematchRoutes(app: Hono<{ Bindings: Env }>): void {
+  /**
+   * «Позвать на реванш»: приглашение создаёт живое нажатие того, кто обошёл запись, и только оно.
+   * Раньше строку в `rematch_invites` создавало уведомление об исходе, то есть вызов приходил от
+   * системы — у получателя это выглядело как вызов, которого никто не посылал (DEC-09).
+   * Повторное нажатие возвращает то же приглашение; погашенное или просроченное заново не выдаётся.
+   */
+  app.post('/api/solo-runs/:id/rematch', async (c) => {
+    const identity = await authenticate(c, 'rematch-offer');
+    if (identity instanceof Response) return identity;
+    const runId = c.req.param('id');
+    const now = Date.now();
+
+    const run = await c.env.DB.prepare(`
+      SELECT player_id, display_name, category, status, rules_version, opponent_run_id, solo_outcome, progress
+      FROM match_runs WHERE id = ?1
+    `).bind(runId).first<{
+      player_id: string;
+      display_name: string;
+      category: string;
+      status: string;
+      rules_version: string | null;
+      opponent_run_id: string | null;
+      solo_outcome: string | null;
+      progress: number;
+    }>();
+    // Чужой забег неотличим от несуществующего.
+    if (!run || run.player_id !== identity.playerId) return c.json({ error: 'Run not found.' }, 404);
+    if (run.rules_version !== CURRENT_SOLO_RUN_CONDITIONS.rulesVersion || run.status !== 'completed') {
+      return c.json({ error: 'Only a finished counted solo run can call a rematch.', reason: 'not_solo' }, 409);
+    }
+    // Звать можно только того, чью запись этот забег обошёл: устоявшую запись звать не за чем,
+    // а проигравшему реванш не нужен — он просто играет снова.
+    if (!run.opponent_run_id || run.solo_outcome !== 'player') {
+      return c.json({ error: 'This run did not beat anyone\'s record.', reason: 'not_beaten' }, 409);
+    }
+
+    const record = await c.env.DB.prepare('SELECT player_id, progress FROM match_runs WHERE id = ?1')
+      .bind(run.opponent_run_id)
+      .first<{ player_id: string; progress: number }>();
+    if (!record) return c.json({ error: 'The record is no longer available.', reason: 'expired' }, 410);
+    if (record.player_id === identity.playerId) {
+      return c.json({ error: 'This is your own record.', reason: 'own' }, 403);
+    }
+
+    let invite = await findInviteForPair(c.env.DB, run.opponent_run_id, runId);
+    const fresh = !invite;
+    if (!invite) {
+      await insertInviteOnce(c.env.DB, {
+        id: newInviteId(),
+        recipientPlayerId: record.player_id,
+        recipientRunId: run.opponent_run_id,
+        challengerRunId: runId,
+        category: run.category,
+        recipientProgress: record.progress,
+        challengerProgress: run.progress,
+      });
+      // Параллельное нажатие могло успеть первым: UNIQUE пары оставил одну строку, читаем её.
+      invite = await findInviteForPair(c.env.DB, run.opponent_run_id, runId);
+    }
+    if (!invite) return c.json({ error: 'Rematch invite could not be created.' }, 500);
+    const reason = inviteUnavailableReason(invite, now);
+    if (reason) return c.json({ error: 'The rematch for this run is no longer available.', reason }, 409);
+
+    // Сообщение уходит один раз, на создании: повторное нажатие соперника не звонит получателю снова.
+    if (fresh) {
+      await sendRematchOffer(c.env, {
+        recipientPlayerId: record.player_id,
+        inviteId: invite.id,
+        challengerName: run.display_name,
+      });
+    }
+    const response: CreateRematchInviteResponse = { inviteId: invite.id, expiresAt: invite.expires_at };
+    return c.json(response, 201);
+  });
+
   // Preview for the "rematch with ..." screen. An invite that is not addressed to the caller is
   // indistinguishable from a missing one. An open friend invite has no addressee: anyone but the
   // author sees it until someone starts a run from it.

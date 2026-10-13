@@ -139,6 +139,25 @@ export async function markInviteNotified(db: D1Database, id: string, sent: boole
     .run();
 }
 
+/**
+ * Приглашение этой пары (обойдённая запись, забег-вызов), если его уже создавали. Нужно, чтобы
+ * повторное нажатие «Позвать на реванш» не плодило строки и возвращало то же приглашение.
+ */
+export async function findInviteForPair(
+  db: D1Database,
+  recipientRunId: string,
+  challengerRunId: string,
+): Promise<InviteRow | null> {
+  return db.prepare(`
+    SELECT i.id, i.recipient_player_id, i.recipient_run_id, i.challenger_run_id, i.category,
+           i.recipient_progress, i.challenger_progress, i.created_at, i.expires_at, i.consumed_at,
+           c.rules_version AS challenger_rules_version
+    FROM rematch_invites i
+    LEFT JOIN match_runs c ON c.id = i.challenger_run_id
+    WHERE i.recipient_run_id = ?1 AND i.challenger_run_id = ?2
+  `).bind(recipientRunId, challengerRunId).first<InviteRow>();
+}
+
 export async function findInvite(db: D1Database, id: string): Promise<InviteRow | null> {
   return db.prepare(`
     SELECT i.id, i.recipient_player_id, i.recipient_run_id, i.challenger_run_id, i.category,

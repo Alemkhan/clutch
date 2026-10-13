@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { MyRematchInvite, MyRunSummary } from '@clutch/shared';
-import { fetchMyRuns } from '../lib/api';
+import { createRematchInvite, fetchMyRuns } from '../lib/api';
 import {
   categoryName,
   formatRunTime,
@@ -18,6 +18,23 @@ export type MyRunsState =
   | { status: 'error' }
   | { status: 'ready'; runs: MyRunSummary[]; invites: MyRematchInvite[]; nextCursor: string | null };
 
+/**
+ * Что показывать у забега вместо кнопки реванша. null — звать некого. 'working'/'error' живут
+ * только в этом экране: сервер знает лишь «приглашение есть» ('sent') или «нет» ('available').
+ */
+export type RematchOfferState = 'available' | 'working' | 'sent' | 'error' | null;
+
+export interface RematchOffer {
+  stateOf: (run: MyRunSummary) => RematchOfferState;
+  send: (runId: string) => void;
+}
+
+/** По умолчанию экран показывает то, что сказал сервер, и ничего не нажимает сам. */
+export const SERVER_REMATCH_OFFER: RematchOffer = {
+  stateOf: (run) => run.rematchOffer ?? null,
+  send: () => {},
+};
+
 interface MyRunsViewProps {
   state: MyRunsState;
   loadingMore: boolean;
@@ -28,6 +45,7 @@ interface MyRunsViewProps {
   onLoadMore: () => void;
   onOpenInvite: (inviteId: string) => void;
   onPlay: () => void;
+  offer?: RematchOffer;
 }
 
 function Invite({ invite, now, onOpen }: { invite: MyRematchInvite; now: number; onOpen: (inviteId: string) => void }) {
@@ -37,9 +55,9 @@ function Invite({ invite, now, onOpen }: { invite: MyRematchInvite; now: number;
     <li>
       <button type="button" className="my-run my-run-invite" onClick={() => { onOpen(invite.inviteId); }}>
         <span className="my-run-top">
-          {/* Приглашение создаёт система, когда запись обошли. Писать «зовёт на реванш» нельзя:
-              соперник ничего не нажимал, и у игрока это выглядит как вызов, которого не было. */}
-          <span className="my-run-title">Реванш с {invite.challengerName}: новые вопросы</span>
+          {/* Адресное приглашение теперь рождается только от нажатия соперника, поэтому «зовёт»
+              здесь — правда. Раньше строку создавало уведомление, и вызов приходил от системы. */}
+          <span className="my-run-title">{invite.challengerName} зовёт на реванш</span>
           <span className="my-run-status">{deadline}</span>
         </span>
         <span className="my-run-meta">
@@ -50,8 +68,9 @@ function Invite({ invite, now, onOpen }: { invite: MyRematchInvite; now: number;
   );
 }
 
-function Run({ run, now }: { run: MyRunSummary; now: number }) {
+function Run({ run, now, offer }: { run: MyRunSummary; now: number; offer: RematchOffer }) {
   const status = runStatus(run);
+  const state = offer.stateOf(run);
   return (
     <li className="my-run">
       <span className="my-run-top">
@@ -65,6 +84,24 @@ function Run({ run, now }: { run: MyRunSummary; now: number }) {
         {run.mode === 'race' ? ' · гонка' : ''}
       </span>
       {friendDuelNote(run) && <span className="my-run-meta">{friendDuelNote(run)}</span>}
+      {/* Реванш зовёт игрок: кнопка есть только у забега, который обошёл чью-то запись. */}
+      {state === 'available' && (
+        <button
+          type="button"
+          className="ghost-btn my-run-rematch"
+          onClick={() => { offer.send(run.runId); }}
+        >
+          Позвать на реванш
+        </button>
+      )}
+      {state === 'working' && <span className="my-run-meta" role="status">Зовём…</span>}
+      {state === 'sent' && <span className="my-run-meta">Позвали на реванш — ждём ответа.</span>}
+      {state === 'error' && (
+        <span className="my-run-meta" role="alert">
+          Не удалось позвать.{' '}
+          <button type="button" className="result-save-retry" onClick={() => { offer.send(run.runId); }}>Ещё раз</button>
+        </span>
+      )}
     </li>
   );
 }
@@ -80,6 +117,7 @@ export function MyRunsView({
   onLoadMore,
   onOpenInvite,
   onPlay,
+  offer = SERVER_REMATCH_OFFER,
 }: MyRunsViewProps) {
   const invites = state.status === 'ready'
     ? state.invites.filter((invite) => inviteDeadline(invite.expiresAt, now) !== null)
@@ -124,7 +162,7 @@ export function MyRunsView({
             <>
               {invites.length > 0 && <h2 className="my-runs-heading">Партии</h2>}
               <ul className="my-runs-list">
-                {state.runs.map((run) => <Run key={run.runId} run={run} now={now} />)}
+                {state.runs.map((run) => <Run key={run.runId} run={run} now={now} offer={offer} />)}
               </ul>
               {moreFailed && (
                 <p className="matchmaking-error" role="alert">Не удалось загрузить остальное.</p>
@@ -153,6 +191,21 @@ export function MyRuns({ onBack, onOpenInvite, onPlay }: MyRunsProps) {
   const [attempt, setAttempt] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
   const [moreFailed, setMoreFailed] = useState(false);
+  // Нажатия «Позвать на реванш» по id забега. Сервер после успеха и сам вернёт 'sent',
+  // но список не перезагружается, поэтому ответ показывается сразу отсюда.
+  const [offers, setOffers] = useState<Record<string, 'working' | 'sent' | 'error'>>({});
+
+  const sendOffer = useCallback((runId: string) => {
+    setOffers((current) => (current[runId] === 'working' ? current : { ...current, [runId]: 'working' }));
+    createRematchInvite(runId)
+      .then(() => setOffers((current) => ({ ...current, [runId]: 'sent' })))
+      .catch(() => setOffers((current) => ({ ...current, [runId]: 'error' })));
+  }, []);
+
+  const offer = useMemo<RematchOffer>(() => ({
+    stateOf: (run) => offers[run.runId] ?? run.rematchOffer ?? null,
+    send: sendOffer,
+  }), [offers, sendOffer]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -198,6 +251,7 @@ export function MyRuns({ onBack, onOpenInvite, onPlay }: MyRunsProps) {
       onLoadMore={loadMore}
       onOpenInvite={onOpenInvite}
       onPlay={onPlay}
+      offer={offer}
     />
   );
 }

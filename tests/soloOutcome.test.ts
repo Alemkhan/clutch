@@ -186,13 +186,19 @@ describe('solo outcome against a pace', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const payload = sentPayload();
     expect(payload.chat_id).toBe('42');
-    expect(payload.text).toBe('Игрок обошёл вашу запись. Можно сыграть реванш: вопросы будут новые.');
+    expect(payload.text).toBe('Игрок обошёл вашу запись.');
+    // Исход — это известие. Приглашения completion не создаёт: звать может только нажатие соперника.
+    expect(inviteRows(db)).toHaveLength(0);
+    expect(payload.reply_markup.inline_keyboard).toHaveLength(1);
+    expect(payload.reply_markup.inline_keyboard[0][0].url).toBe('https://t.me/testbot?startapp=unsub');
+
+    // Нажатие претендента создаёт приглашение и отправляет второе сообщение — уже с кнопкой.
+    expect((await call(db, `/api/solo-runs/${run.runId}/rematch`, bob, {})).status).toBe(201);
     expect(inviteRows(db)).toHaveLength(1);
     expect(inviteRows(db)[0]).toMatchObject({
       recipient_run_id: 'alem-run', challenger_run_id: run.runId, notify_status: 'sent',
     });
-    expect(payload.reply_markup.inline_keyboard[0][0].url)
-      .toBe(`https://t.me/testbot?startapp=${inviteRows(db)[0].id}`);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
   it('the record wins on a better score: the owner is told that the record held', async () => {
@@ -262,10 +268,12 @@ describe('solo outcome against a pace', () => {
     expect(again).toEqual(first);
     expect(again.outcome).toBe('player');
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(inviteRows(db)).toHaveLength(1);
+    expect(inviteRows(db)).toHaveLength(0);
 
     const runs = await (await call(db, '/api/my-runs', bob)).json() as MyRunsResponse;
     expect(runs.runs[0]).toMatchObject({ mode: 'solo', outcome: 'player', opponent: { kind: 'player' } });
+    // Обошёл запись — значит может позвать; пока не позвал, кнопка доступна.
+    expect(runs.runs[0].rematchOffer).toBe('available');
   });
 
   it('respects the unsubscribe: the outcome is saved, no message and no invite', async () => {
@@ -297,6 +305,11 @@ describe('solo outcome against a pace', () => {
     const run = await start(db, bob);
     const response = await finish(db, bob, run, 4, true);
     expect(response.status).toBe(200);
+    // Известие не дошло, но исход сохранён, а приглашения тут и не должно быть.
+    expect(storedOutcome(db, run.runId)).toBe('player');
+    expect(inviteRows(db)).toHaveLength(0);
+    // Нажатие создаёт приглашение даже при недоступном Telegram: отметка доставки — 'failed'.
+    expect((await call(db, `/api/solo-runs/${run.runId}/rematch`, bob, {})).status).toBe(201);
     expect(inviteRows(db)[0].notify_status).toBe('failed');
   });
 
@@ -383,6 +396,8 @@ describe('solo rematch invite', () => {
     insertSolo(db, { id: 'alem-run', playerId: 'telegram:42', name: 'Алем', soloScore: 99 });
     const run = await start(db, bob);
     await finish(db, bob, run, 4, true);
+    // Приглашение рождается от нажатия Боба, а не от завершения его забега.
+    expect((await call(db, `/api/solo-runs/${run.runId}/rematch`, bob, {})).status).toBe(201);
     const rows = inviteRows(db);
     expect(rows).toHaveLength(1);
     return { db, inviteId: String(rows[0].id) };

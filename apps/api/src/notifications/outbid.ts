@@ -39,9 +39,9 @@ function cleanName(name: string): string {
   return collapsed.length > MAX_NAME ? `${collapsed.slice(0, MAX_NAME - 1)}…` : collapsed;
 }
 
-export function outbidText(challengerName: string, challengerProgress: number, recipientProgress: number): string {
-  return `${cleanName(challengerName)} обошёл вашу запись: ${challengerProgress}% против ${recipientProgress}%. `
-    + 'Можно сыграть реванш: вопросы будут новые.';
+/** Приглашение зовёт играть: его текст появляется только когда соперник сам нажал «Позвать на реванш». */
+export function rematchOfferText(challengerName: string): string {
+  return `${cleanName(challengerName)} зовёт на реванш: вопросы будут новые.`;
 }
 
 export function newInviteId(): string {
@@ -60,100 +60,91 @@ export interface OutbidEvent {
 }
 
 /**
- * Records the invite once per (recipient run, challenger run), sends `text` with the rematch and
- * unsubscribe buttons, and marks the delivery. Never throws: it runs inside waitUntil, after the
- * challenger already has their answer. The UNIQUE pair makes a repeat a silent no-op.
+ * Известие владельцу записи без приглашения. Строки в `rematch_invites` оно не создаёт: приглашение
+ * рождается только от нажатия соперника, иначе у получателя оно выглядит как вызов, которого никто
+ * не посылал. Не бросает: вызывается из waitUntil, когда у игрока ответ уже есть.
  */
-async function deliverInvite(
-  env: Env,
-  event: OutbidEvent,
-  text: (name: string) => string,
-  withInvite = true,
-): Promise<void> {
+async function sendNews(env: Env, event: OutbidEvent, text: string): Promise<void> {
   try {
     const chatId = telegramChatId(event.recipientRun.playerId);
     if (!chatId || !env.TELEGRAM_BOT_TOKEN) return;
     if (!(await isOutbidEnabled(env.DB, event.recipientRun.playerId))) return;
+    const stopUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, STOP_PAYLOAD);
+    const result = await sendTelegramMessage(
+      env.TELEGRAM_BOT_TOKEN,
+      chatId,
+      text,
+      stopUrl ? [[{ text: 'Не присылать такие сообщения', url: stopUrl }]] : [],
+    ).catch(() => 'failed' as const);
+    if (result === 'blocked') await setOutbidEnabled(env.DB, event.recipientRun.playerId, false);
+  } catch (error) {
+    console.error('Solo result notification failed:', error instanceof Error ? error.message : 'unknown error');
+  }
+}
 
-    // Известие без приглашения: звать на реванш того, чья запись устояла, не за чем, а строка
-    // в rematch_invites выглядела бы у него как вызов, которого соперник не посылал.
-    if (!withInvite) {
-      const onlyStopUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, STOP_PAYLOAD);
-      const plain = await sendTelegramMessage(
-        env.TELEGRAM_BOT_TOKEN,
-        chatId,
-        text(cleanName(event.challengerName)),
-        onlyStopUrl ? [[{ text: 'Не присылать такие сообщения', url: onlyStopUrl }]] : [],
-      ).catch(() => 'failed' as const);
-      if (plain === 'blocked') await setOutbidEnabled(env.DB, event.recipientRun.playerId, false);
-      return;
-    }
-
-    const inviteId = newInviteId();
-    const isNew = await insertInviteOnce(env.DB, {
-      id: inviteId,
-      recipientPlayerId: event.recipientRun.playerId,
-      recipientRunId: event.recipientRun.id,
-      challengerRunId: event.challengerRunId,
-      category: event.recipientRun.category,
-      recipientProgress: event.recipientProgress,
-      challengerProgress: event.challengerProgress,
-    });
-    if (!isNew) return;
-
-    const rematchUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, inviteId);
+/**
+ * Сообщение с кнопкой реванша по **уже созданному** приглашению: его создаёт маршрут в тот момент,
+ * когда соперник нажал «Позвать на реванш». Возвращает true, если Telegram принял сообщение;
+ * сам отказ доставки приглашение не отменяет — оно видно в «Моих партиях» у обеих сторон.
+ */
+export async function sendRematchOffer(env: Env, offer: {
+  recipientPlayerId: string;
+  inviteId: string;
+  challengerName: string;
+}): Promise<boolean> {
+  try {
+    const chatId = telegramChatId(offer.recipientPlayerId);
+    if (!chatId || !env.TELEGRAM_BOT_TOKEN) return false;
+    if (!(await isOutbidEnabled(env.DB, offer.recipientPlayerId))) return false;
+    const rematchUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, offer.inviteId);
     const stopUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, STOP_PAYLOAD);
     if (!rematchUrl || !stopUrl) {
-      await markInviteNotified(env.DB, inviteId, false);
-      return;
+      await markInviteNotified(env.DB, offer.inviteId, false);
+      return false;
     }
     const result = await sendTelegramMessage(
       env.TELEGRAM_BOT_TOKEN,
       chatId,
-      text(cleanName(event.challengerName)),
+      rematchOfferText(offer.challengerName),
       [
         [{ text: 'Сыграть реванш', url: rematchUrl }],
         [{ text: 'Не присылать такие сообщения', url: stopUrl }],
       ],
     ).catch(() => 'failed' as const);
-    await markInviteNotified(env.DB, inviteId, result === 'sent');
-    // The user blocked the bot: stop trying instead of failing on every later outbid.
-    if (result === 'blocked') await setOutbidEnabled(env.DB, event.recipientRun.playerId, false);
+    await markInviteNotified(env.DB, offer.inviteId, result === 'sent');
+    // The user blocked the bot: stop trying instead of failing on every later message.
+    if (result === 'blocked') await setOutbidEnabled(env.DB, offer.recipientPlayerId, false);
+    return result === 'sent';
   } catch (error) {
-    console.error('Outbid notification failed:', error instanceof Error ? error.message : 'unknown error');
+    console.error('Rematch offer failed:', error instanceof Error ? error.message : 'unknown error');
+    return false;
   }
-}
-
-/** Гонка: сообщение только владельцу записи, которую обыграли. */
-export async function notifyOutbid(env: Env, event: OutbidEvent): Promise<void> {
-  await deliverInvite(env, event, () =>
-    outbidText(event.challengerName, event.challengerProgress, event.recipientProgress));
 }
 
 /** Исход соло-забега глазами владельца записи: его запись победила, проиграла или сравнялась. */
 export type SoloRecipientOutcome = 'record_won' | 'record_lost' | 'tie';
 
-/** Реванш обещается только проигравшей записи: приглашение создаётся лишь в этом случае. */
+/**
+ * Только известие об исходе. Реванш здесь не обещается: позвать на него может лишь сам соперник
+ * нажатием, и до этого нажатия обещать игроку нечего.
+ */
 export function soloResultText(challengerName: string, outcome: SoloRecipientOutcome): string {
   const name = cleanName(challengerName);
   if (outcome === 'record_won') return `Ваша запись устояла: ${name} не смог её обойти.`;
-  if (outcome === 'record_lost') return `${name} обошёл вашу запись. Можно сыграть реванш: вопросы будут новые.`;
+  if (outcome === 'record_lost') return `${name} обошёл вашу запись.`;
   return `Ничья с ${name}: результаты сравнялись.`;
 }
 
-/** Соло: владелец записи узнаёт исход в любом случае, не только когда его обыграли. */
+/**
+ * Соло: владелец записи узнаёт исход в любом случае, не только когда его обыграли. Приглашения на
+ * реванш это сообщение не создаёт ни при каком исходе — его создаёт нажатие соперника
+ * (`POST /api/solo-runs/:id/rematch`), и тогда приходит отдельное сообщение с кнопкой.
+ */
 export async function notifySoloResult(
   env: Env,
   event: OutbidEvent & { outcome: SoloRecipientOutcome },
 ): Promise<void> {
-  // Приглашение на реванш создаётся ТОЛЬКО когда запись обошли. Раньше оно создавалось при любом
-  // исходе, и выигравший видел у себя вызов, которого соперник не отправлял.
-  await deliverInvite(
-    env,
-    event,
-    (name) => soloResultText(name, event.outcome),
-    event.outcome === 'record_lost',
-  );
+  await sendNews(env, event, soloResultText(event.challengerName, event.outcome));
 }
 
 export function duelResultText(friendName: string, outcome: SoloRecipientOutcome): string {
@@ -172,19 +163,5 @@ export async function notifyDuelResult(
   env: Env,
   event: OutbidEvent & { outcome: SoloRecipientOutcome },
 ): Promise<void> {
-  try {
-    const chatId = telegramChatId(event.recipientRun.playerId);
-    if (!chatId || !env.TELEGRAM_BOT_TOKEN) return;
-    if (!(await isOutbidEnabled(env.DB, event.recipientRun.playerId))) return;
-    const stopUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, STOP_PAYLOAD);
-    const result = await sendTelegramMessage(
-      env.TELEGRAM_BOT_TOKEN,
-      chatId,
-      duelResultText(event.challengerName, event.outcome),
-      stopUrl ? [[{ text: 'Не присылать такие сообщения', url: stopUrl }]] : [],
-    ).catch(() => 'failed' as const);
-    if (result === 'blocked') await setOutbidEnabled(env.DB, event.recipientRun.playerId, false);
-  } catch (error) {
-    console.error('Duel notification failed:', error instanceof Error ? error.message : 'unknown error');
-  }
+  await sendNews(env, event, duelResultText(event.challengerName, event.outcome));
 }

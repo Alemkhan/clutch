@@ -190,13 +190,17 @@ describe('приглашение на реванш', () => {
     expect(invites(db)).toHaveLength(0);
   });
 
-  it('создаётся, когда запись обошли', async () => {
+  it('не создаётся и когда запись обошли: известие не вызов', async () => {
     const db = database();
     insertRecord(db, 'record-run', 'telegram:42', 'Алем');
-    // Строка приглашения ссылается на забег-вызов внешним ключом.
     insertRecord(db, 'challenger-run', 'guest:11111111-1111-4111-8111-111111111111', 'Друг');
     await notifySoloResult(envOf(db) as never, { ...soloEvent, outcome: 'record_lost' });
-    expect(invites(db)).toHaveLength(1);
+    // Раньше приглашение создавалось здесь, и у владельца записи оно выглядело как вызов,
+    // которого соперник не посылал. Теперь его создаёт только нажатие соперника (DEC-09).
+    expect(invites(db)).toHaveLength(0);
+    const payload = JSON.parse((fetchMock.mock.calls[0] as [string, RequestInit])[1].body as string);
+    expect(payload.text).toBe('Друг обошёл вашу запись.');
+    expect(payload.reply_markup.inline_keyboard).toHaveLength(1);
   });
 });
 

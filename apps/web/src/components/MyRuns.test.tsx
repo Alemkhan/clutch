@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it, vi } from 'vitest';
 import type { MyRematchInvite, MyRunSummary } from '@clutch/shared';
-import { MyRunsView, type MyRunsState } from './MyRuns';
+import { MyRunsView, type MyRunsState, type RematchOffer } from './MyRuns';
 
 const NOW = new Date(2026, 9, 11, 15, 0).getTime();
 const HOUR = 60 * 60 * 1000;
@@ -82,7 +82,7 @@ describe('my runs screen', () => {
 
   it('shows active invites with the time left and opens them by id', () => {
     const html = render(ready([run()], [invite()]));
-    expect(html).toContain('Реванш с Ann: новые вопросы');
+    expect(html).toContain('Ann зовёт на реванш');
     expect(html).toContain('Ещё 5 ч');
     expect(html).toContain('Языки · 100% против 60%');
     expect(html).toContain('my-run-invite');
@@ -90,13 +90,13 @@ describe('my runs screen', () => {
 
   it('hides an invite whose time has run out', () => {
     const html = render(ready([run()], [invite({ expiresAt: NOW - 1 })]));
-    expect(html).not.toContain('Реванш с');
+    expect(html).not.toContain('зовёт на реванш');
     expect(html).not.toContain('Вызовы');
   });
 
   it('shows invites even when there are no runs yet', () => {
     const html = render(ready([], [invite()]));
-    expect(html).toContain('Реванш с');
+    expect(html).toContain('зовёт на реванш');
     expect(html).toContain('Пока нет сыгранных партий');
   });
 
@@ -111,5 +111,36 @@ describe('my runs screen', () => {
     expect(html).toContain('Показать ещё');
     expect(render(ready([run()]))).not.toContain('Показать ещё');
     expect(render(ready([run()], [], 'cursor'), { moreFailed: true })).toContain('Не удалось загрузить остальное');
+  });
+});
+
+describe('calling a rematch from a run', () => {
+  const beat = run({ opponent: { kind: 'player', displayName: 'Ann' }, outcome: 'player', rematchOffer: 'available' });
+
+  const withOffer = (state: MyRunsState, offer: RematchOffer) => renderToStaticMarkup(
+    <MyRunsView state={state} loadingMore={false} moreFailed={false} now={NOW} offer={offer} {...handlers} />,
+  );
+
+  it('offers the button only on a run that beat somebody', () => {
+    expect(render(ready([beat]))).toContain('Позвать на реванш');
+    // Соперника обошёл не этот забег — звать не из чего.
+    expect(render(ready([run({ outcome: 'opponent', rematchOffer: null })]))).not.toContain('Позвать на реванш');
+    expect(render(ready([run()]))).not.toContain('Позвать на реванш');
+  });
+
+  it('replaces the button with the state of the call', () => {
+    const state = ready([beat]);
+    const sent = withOffer(state, { stateOf: () => 'sent', send: () => {} });
+    expect(sent).toContain('Позвали на реванш');
+    expect(sent).not.toContain('Позвать на реванш');
+    expect(withOffer(state, { stateOf: () => 'working', send: () => {} })).toContain('Зовём…');
+    const failed = withOffer(state, { stateOf: () => 'error', send: () => {} });
+    expect(failed).toContain('Не удалось позвать');
+    expect(failed).toContain('Ещё раз');
+  });
+
+  it('shows a call already sent before the screen was opened', () => {
+    // Сервер помнит, что звали: кнопка не возвращается после перезагрузки списка.
+    expect(render(ready([run({ outcome: 'player', rematchOffer: 'sent' })]))).toContain('Позвали на реванш');
   });
 });
