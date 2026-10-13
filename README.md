@@ -160,10 +160,25 @@ npm run dev
 npm run tunnel
 ```
 
-Copy the HTTPS URL printed by ngrok, then open `@BotFather`:
+Copy the HTTPS URL printed by the tunnel, then open `@BotFather`:
 `/mybots` → `@playclutch` → Bot Settings → Configure Mini App and use that
-URL. Keep both terminals running while testing. Restarting ngrok may change the
-URL.
+URL. Keep both terminals running while testing. Restarting the tunnel may change
+the URL.
+
+`npm run tunnel` runs ngrok. On a free ngrok account the page is replaced by an
+interstitial warning, and inside Telegram there is no way past it: the two
+header workarounds it suggests cannot be applied to a WebView's own navigation.
+Use Cloudflare Tunnel instead — free, no interstitial, and its domain is already
+allowed:
+
+```bash
+cloudflared tunnel --url http://localhost:5173
+```
+
+Vite accepts `*.ngrok-free.app`, `*.ngrok-free.dev`, `*.ngrok.app`, `*.ngrok.io`
+and `*.trycloudflare.com`; any other domain goes in `CLUTCH_DEV_ALLOWED_HOSTS`
+(comma-separated) rather than into `vite.config.ts`. A host outside the list is
+answered with "Blocked request", which looks like a broken tunnel.
 
 The tunnel exposes the local app and proxied API. Use it for controlled testing,
 not as a public beta until the remaining release risks in the audit are addressed.

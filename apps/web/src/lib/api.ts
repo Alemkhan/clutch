@@ -29,6 +29,18 @@ const SESSION_REFRESH_WINDOW_MS = 5 * 60 * 1000;
 let memoryGuestSession: GuestSessionResponse | null = null;
 let guestSessionRequest: Promise<GuestSessionResponse> | null = null;
 
+/**
+ * Только в dev: бесплатный ngrok отвечает на запросы заглушкой-предупреждением вместо самого
+ * ответа, и этот заголовок — её официальный обход. Нужен, пока игру смотрят через туннель:
+ * в проде заголовок не уходит, чтобы не тащить в релиз имя чужого сервиса.
+ *
+ * Первую загрузку страницы он не спасает: внутри Telegram WebView заголовки навигации задать
+ * нечем. Там заглушку снимает только туннель без неё (Cloudflare Tunnel) или платный ngrok.
+ */
+const TUNNEL_HEADERS: Record<string, string> = import.meta.env.DEV
+  ? { 'ngrok-skip-browser-warning': '1' }
+  : {};
+
 export class ApiError extends Error {
   constructor(
     public readonly status: number,
@@ -89,7 +101,7 @@ async function rawApiFetch<T>(path: string, init: RequestInit): Promise<T> {
   try {
     const response = await fetch(`${API_BASE}${path}`, {
       ...init,
-      headers: { 'Content-Type': 'application/json', ...init.headers },
+      headers: { 'Content-Type': 'application/json', ...TUNNEL_HEADERS, ...init.headers },
       signal: controller.signal,
     });
     if (!response.ok) {

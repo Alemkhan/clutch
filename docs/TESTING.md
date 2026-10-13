@@ -16,7 +16,8 @@ Vite. Vite перенаправляет `/api` в Worker, поэтому для 
 - npm из этой версии Node.
 - Telegram-бот и его token от `@BotFather` — только для проверки внутри
   Telegram.
-- ngrok CLI и аккаунт ngrok — для публичного HTTPS URL.
+- Туннель для публичного HTTPS URL: `cloudflared` (бесплатно, без заглушки)
+  либо ngrok — у бесплатного ngrok внутри Telegram мешает заглушка, см. 5.2.1.
 - Для полноценной проверки async-соперника: два разных Telegram-аккаунта либо
   один Telegram-аккаунт и отдельная browser guest-сессия.
 
@@ -256,8 +257,46 @@ https://something.ngrok-free.app
 Не добавляйте к нему `:5173`. Туннель уже направлен на этот порт. Оба процесса —
 `npm run dev` и `npm run tunnel` — должны продолжать работать.
 
-Vite сейчас разрешает домены `*.ngrok-free.app`. Для другого tunnel-домена
-потребуется отдельно изменить `allowedHosts` в `apps/web/vite.config.ts`.
+Vite разрешает домены `*.ngrok-free.app`, `*.ngrok-free.dev`, `*.ngrok.app`,
+`*.ngrok.io` и `*.trycloudflare.com`. Свой домен (платный аккаунт, собственный
+туннель) добавляется без правки файла:
+
+```powershell
+$env:CLUTCH_DEV_ALLOWED_HOSTS = "my-tunnel.example.com"
+```
+
+Чужой Host Vite отклоняет ответом «Blocked request. This host is not allowed»,
+и по виду это похоже на поломку туннеля. Если он появился — дело в этом списке.
+
+### 5.2.1. Заглушка бесплатного ngrok
+
+Бесплатный ngrok отдаёт вместо страницы предупреждение:
+
+```text
+Set and send an ngrok-skip-browser-warning request header with any value.
+Or, set and send a custom/non-standard browser User-Agent request header.
+Or, please upgrade to any paid ngrok account.
+```
+
+**Оба header-совета для Telegram не работают.** Заголовки можно задать своим
+запросам (их клиент и так отправляет в dev — см. `TUNNEL_HEADERS` в
+`apps/web/src/lib/api.ts`), но первую загрузку страницы делает сам WebView
+Telegram, и его заголовками управлять нечем. Поэтому остаётся два пути:
+
+- **Cloudflare Tunnel** — бесплатный и без заглушки, домен `*.trycloudflare.com`
+  уже разрешён. Вместо `npm run tunnel`:
+
+  ```powershell
+  cloudflared tunnel --url http://localhost:5173
+  ```
+
+  Адрес меняется при каждом запуске, как у бесплатного ngrok, и его так же надо
+  заново вставлять в BotFather.
+- **Платный ngrok** — любой платный план заглушку снимает, домен остаётся за вами
+  и в BotFather его достаточно вставить один раз.
+
+В браузере на компьютере заглушку можно просто пройти кнопкой «Visit Site» —
+она мешает именно внутри Telegram.
 
 ### 5.3. Привязать HTTPS URL к боту
 
