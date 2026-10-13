@@ -6,6 +6,7 @@ import { getStats } from "../lib/localStats";
 interface HomeDashboardProps {
   onLastStand: () => void;
   onSolo: () => void;
+  onBoard: () => void;
 }
 
 /** Петля игры тремя значками: верный ответ, удар в мини-игре, прогресс. Без текста-инструкции. */
@@ -52,7 +53,7 @@ const LOOP_STEPS = [
   { kind: "progress", label: "Прогресс" },
 ] as const;
 
-export function HomeDashboard({ onLastStand, onSolo }: HomeDashboardProps) {
+export function HomeDashboard({ onLastStand, onSolo, onBoard }: HomeDashboardProps) {
   const [lastStandHook, setLastStandHook] = useState<LastStandHook | null>(
     null,
   );
@@ -109,6 +110,10 @@ export function HomeDashboard({ onLastStand, onSolo }: HomeDashboardProps) {
           }}
         >
           Играть <span aria-hidden="true">→</span>
+        </button>
+        {/* Вход в таблицу дня: нижняя панель не меняется, место для него — на главной карточке. */}
+        <button type="button" className="home-board-link" onClick={() => { onBoard(); }}>
+          Таблица дня
         </button>
       </section>
 

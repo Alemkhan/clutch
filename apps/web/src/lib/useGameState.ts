@@ -10,6 +10,7 @@ export function useGameState() {
   const goToSolo = useCallback(() => setPhase('solo'), []);
   const goToMyRuns = useCallback(() => setPhase('myRuns'), []);
   const goToProfile = useCallback(() => setPhase('profile'), []);
+  const goToBoard = useCallback(() => setPhase('board'), []);
   const goHome = useCallback(() => setPhase('home'), []);
 
   return {
@@ -19,6 +20,7 @@ export function useGameState() {
     goToLastStand,
     goToSolo,
     goToMyRuns,
+    goToBoard,
     goHome,
   };
 }

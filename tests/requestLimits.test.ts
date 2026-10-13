@@ -159,8 +159,11 @@ describe('R2b route rate limits', () => {
       headers: { authorization: guestAuthorization('training'), 'content-type': 'application/json' },
       body: JSON.stringify({ questionId: 'capital_bf', answer: 'x' }),
     }],
-    ['leaderboard:203.0.113.9', '/api/leaderboard', {
-      headers: { 'CF-Connecting-IP': '203.0.113.9' },
+    // Единственный маршрут с ключом по IP: сессию гостя выдают ещё без identity.
+    ['guest:203.0.113.9', '/api/auth/guest', {
+      method: 'POST',
+      headers: { 'CF-Connecting-IP': '203.0.113.9', 'content-type': 'application/json' },
+      body: '{}',
     }],
   ])('returns 429 with a separate %s bucket', async (keyPrefix, path, init) => {
     const db = database();
@@ -177,7 +180,7 @@ describe('R2b route rate limits', () => {
 
   it('fails closed with 503 when the binding throws', async () => {
     const db = database();
-    const response = await app.request('/api/leaderboard', {}, env(db, new FakeRateLimiter('error')));
+    const response = await app.request('/api/auth/guest', { method: 'POST' }, env(db, new FakeRateLimiter('error')));
     expect(response.status).toBe(503);
     expect(await response.json()).toEqual({ error: 'Rate limiter unavailable.' });
   });

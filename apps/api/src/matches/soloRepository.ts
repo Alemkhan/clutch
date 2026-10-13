@@ -8,6 +8,7 @@ import {
   type Opponent,
   type Question,
   type SoloLeaderboardEntry,
+  type SoloLeaderboardStanding,
   type SoloRunResult,
 } from '@clutch/shared';
 import { currentMiniGameConfigJson } from './repository';
@@ -204,4 +205,80 @@ export async function soloLeaderboard(
     LIMIT ?5
   `).bind(category, rulesVersion, from, to, SOLO_BOARD_LIMIT).all<SoloLeaderboardEntry>();
   return result.results;
+}
+
+/**
+ * Место самого игрока в той же таблице, даже если он далеко за топ-50. Порядок и правило «один
+ * лучший забег на игрока» те же, что в `soloLeaderboard`, иначе место не совпадало бы со списком.
+ * null — в этот день игрок не закрыл ни одного забега этой категории.
+ */
+export async function soloStanding(
+  db: D1Database,
+  category: string,
+  rulesVersion: string,
+  from: number,
+  to: number,
+  playerId: string,
+): Promise<SoloLeaderboardStanding | null> {
+  const row = await db.prepare(`
+    WITH ranked_runs AS (
+      SELECT id, player_id, display_name, solo_score, set_par, completed_at,
+             completed_at - created_at AS duration_ms,
+             json_array_length(rounds_json) AS rounds_played,
+             ROW_NUMBER() OVER (
+               PARTITION BY player_id
+               ORDER BY solo_score ASC, json_array_length(rounds_json) ASC, completed_at - created_at ASC, id ASC
+             ) AS player_rank
+      FROM match_runs
+      WHERE category = ?1 AND status = 'completed' AND rules_version = ?2
+        AND reached_target = 1 AND solo_score IS NOT NULL
+        AND completed_at >= ?3 AND completed_at < ?4
+    ),
+    placed AS (
+      SELECT id, player_id, display_name, solo_score, set_par, completed_at, rounds_played,
+             ROW_NUMBER() OVER (
+               ORDER BY solo_score ASC, rounds_played ASC, duration_ms ASC, id ASC
+             ) AS place,
+             COUNT(*) OVER () AS total
+      FROM ranked_runs WHERE player_rank = 1
+    )
+    SELECT me.place AS place, me.total AS total, me.display_name AS displayName,
+           me.solo_score AS soloScore, me.set_par AS setPar, me.rounds_played AS roundsPlayed,
+           me.completed_at AS completedAt,
+           (SELECT above.solo_score FROM placed above WHERE above.place = me.place - 1) AS nextScore
+    FROM placed me WHERE me.player_id = ?5
+  `).bind(category, rulesVersion, from, to, playerId).first<{
+    place: number;
+    total: number;
+    displayName: string;
+    soloScore: number;
+    setPar: number;
+    roundsPlayed: number;
+    completedAt: number;
+    nextScore: number | null;
+  }>();
+  if (!row) return null;
+  return {
+    rank: row.place,
+    total: row.total,
+    entry: {
+      displayName: row.displayName,
+      soloScore: row.soloScore,
+      setPar: row.setPar,
+      roundsPlayed: row.roundsPlayed,
+      completedAt: row.completedAt,
+    },
+    roundsToNext: roundsToPass(row.roundsPlayed, row.setPar, row.nextScore),
+  };
+}
+
+/**
+ * Сколько кругов нужно отыграть, чтобы обойти стоящего выше. Счёт — круги / пар, поэтому разницу
+ * счётов надо перевести в круги **своего** набора: пары у наборов дня разные. Нужен счёт строго
+ * меньше, чем у соседа, отсюда «−1»; эпсилон съедает погрешность деления.
+ */
+function roundsToPass(roundsPlayed: number, setPar: number, nextScore: number | null): number | null {
+  if (nextScore === null || !Number.isFinite(setPar) || setPar <= 0) return null;
+  const target = Math.ceil(nextScore * setPar - 1e-9) - 1;
+  return Math.max(1, roundsPlayed - target);
 }

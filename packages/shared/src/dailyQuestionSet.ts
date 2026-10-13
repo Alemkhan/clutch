@@ -34,9 +34,24 @@ export function dailyBankSize(category: CategoryId): number {
 export const MAX_DAILY_SET_SIZE: number = Math.max(...Object.values(DAILY_SET_SIZES));
 export const DAILY_SET_OPEN_RATIO = 0.3;
 
-/** UTC calendar day as YYYY-MM-DD. The daily set rolls over at 00:00 UTC. */
+/**
+ * Сдвиг границы суток от UTC, в минутах. На чистом UTC сутки переключались в 3–6 утра по местному
+ * времени игроков (UTC+3…+6): ночной забег попадал уже в следующий день, а таблица дня обрывалась
+ * посреди ночи. +5 часов — это полночь в Алматы и 02:00 в Москве.
+ *
+ * Граница одна для всех, а не своя у каждого игрока: набор дня и таблица сравнимы только пока
+ * сутки общие. Со своим часовым поясом у каждого таблица сравнивала бы разные наборы.
+ */
+export const DAY_BOUNDARY_OFFSET_MINUTES = 5 * 60;
+
+/** Календарный день игры как YYYY-MM-DD. Сутки начинаются на `DAY_BOUNDARY_OFFSET_MINUTES` раньше UTC. */
 export function dailyKey(timestampMs: number): string {
-  return new Date(timestampMs).toISOString().slice(0, 10);
+  return new Date(timestampMs + DAY_BOUNDARY_OFFSET_MINUTES * 60_000).toISOString().slice(0, 10);
+}
+
+/** Начало суток с этим ключом в абсолютном времени: обратное к `dailyKey`. */
+export function dayStartMs(dateKey: string): number {
+  return Date.parse(`${dateKey}T00:00:00Z`) - DAY_BOUNDARY_OFFSET_MINUTES * 60_000;
 }
 
 /** Identifier of a set in the day's bank, for example `geography:2026-10-07:5`. */

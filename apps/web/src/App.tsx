@@ -10,6 +10,7 @@ import { readLaunchIntent, type LaunchIntent } from './lib/launchIntent';
 import { LastStand } from './components/LastStand';
 import { SoloRun, type SoloRematch } from './components/SoloRun';
 import { MyRuns } from './components/MyRuns';
+import { SoloBoard } from './components/SoloBoard';
 import { BottomNav, navTabForPhase, type NavTab } from './components/BottomNav';
 import { isSoloPlaying, type SoloStage } from './lib/soloRunFlow';
 import { useTelegramBackButton } from './lib/useTelegramBackButton';
@@ -101,6 +102,7 @@ export default function App() {
             <HomeDashboard
               onLastStand={game.goToLastStand}
               onSolo={startSolo}
+              onBoard={game.goToBoard}
             />
           </motion.div>
         )}
@@ -137,6 +139,12 @@ export default function App() {
               defaultCategory={practiceLevel ? undefined : 'general'}
               onStageChange={setSoloStage}
             />
+          </motion.div>
+        )}
+
+        {game.phase === 'board' && (
+          <motion.div key="board" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <SoloBoard onBack={game.goHome} onPlay={startSolo} />
           </motion.div>
         )}
 

@@ -272,8 +272,8 @@ describe('practice run against a bot', () => {
       disguiseAsCompetitive(db, run);
       const solo = await call(db, '/api/solo-leaderboard?category=geography', bob);
       expect((await solo.json() as SoloLeaderboardResponse).entries).toEqual([]);
-      const race = await call(db, '/api/leaderboard?category=geography', bob);
-      expect((await race.json() as { entries: unknown[] }).entries).toEqual([]);
+      // Таблица гонки удалена вместе с режимом: протекать тренировке больше некуда.
+      expect((await call(db, '/api/leaderboard?category=geography', bob)).status).toBe(404);
       const mine = await call(db, '/api/my-runs', ann);
       expect((await mine.json() as MyRunsResponse).runs).toEqual([]);
     });

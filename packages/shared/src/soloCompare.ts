@@ -63,9 +63,28 @@ export interface SoloLeaderboardEntry {
   completedAt: number;
 }
 
+/**
+ * Место самого игрока. Без него таблица топ-50 ничего не говорит тому, кто в неё не попал:
+ * цель «обойти стоящего выше на один круг» достижима, а «попасть в топ-50» — нет.
+ */
+export interface SoloLeaderboardStanding {
+  /** Место в таблице дня, начиная с 1. */
+  rank: number;
+  /** Сколько всего игроков в таблице дня: «37-й из 140». */
+  total: number;
+  entry: SoloLeaderboardEntry;
+  /**
+   * На сколько кругов нужно улучшиться, чтобы обойти стоящего выше. Считается по пару своего
+   * набора, поэтому это настоящее число кругов, а не разница счётов. null — игрок первый.
+   */
+  roundsToNext: number | null;
+}
+
 export interface SoloLeaderboardResponse {
   category: CategoryId;
-  /** Сутки по UTC, YYYY-MM-DD. */
+  /** Сутки игры, YYYY-MM-DD; граница сдвинута от UTC на `DAY_BOUNDARY_OFFSET_MINUTES`. */
   dateKey: string;
   entries: SoloLeaderboardEntry[];
+  /** Своё место. null — в этот день игрок не закрыл ни одного забега в этой категории. */
+  you: SoloLeaderboardStanding | null;
 }

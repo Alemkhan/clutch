@@ -82,11 +82,15 @@ function telegram(user: { id: number; first_name: string }): string {
   return `tma ${params.toString()}`;
 }
 
-function guest(label: string): string {
+function guestSubject(label: string): string {
   const hex = createHash('sha256').update(label).digest('hex').slice(0, 32).split('');
   hex[12] = '4';
   hex[16] = '8';
-  const subject = `${hex.slice(0, 8).join('')}-${hex.slice(8, 12).join('')}-${hex.slice(12, 16).join('')}-${hex.slice(16, 20).join('')}-${hex.slice(20).join('')}`;
+  return `${hex.slice(0, 8).join('')}-${hex.slice(8, 12).join('')}-${hex.slice(12, 16).join('')}-${hex.slice(16, 20).join('')}-${hex.slice(20).join('')}`;
+}
+
+function guest(label: string): string {
+  const subject = guestSubject(label);
   const now = Math.floor(NOW / 1000);
   const payload = Buffer.from(JSON.stringify({ v: 1, sub: subject, iat: now - 1, exp: now + 3600 })).toString('base64url');
   const signed = `v1.${payload}`;
@@ -379,8 +383,88 @@ describe('solo leaderboard', () => {
   it('does not leak solo runs into the race leaderboard', async () => {
     const db = database();
     insertSolo(db, { id: 'a', playerId: 'p:a', soloScore: 1 });
+    // Таблица гонки удалена вместе с режимом: соло-забегам протекать больше некуда.
     const race = await call(db, '/api/leaderboard?category=geography', viewer);
-    expect((await race.json() as { entries: unknown[] }).entries).toEqual([]);
+    expect(race.status).toBe(404);
+  });
+});
+
+describe('my own place in the day board', () => {
+  const viewer = guest('viewer');
+  const viewerId = `guest:${guestSubject('viewer')}`;
+  const board = (db: TestD1, query = '?category=geography') =>
+    call(db, `/api/solo-leaderboard${query}`, viewer);
+
+  it('is given even when the player is far below the listed top', async () => {
+    const db = database();
+    // Шестьдесят чужих забегов лучше моего: в топ-50 я не попадаю.
+    for (let index = 0; index < 60; index += 1) {
+      insertSolo(db, { id: `r${index}`, playerId: `p:${index}`, soloScore: 0.1 + index * 0.01 });
+    }
+    insertSolo(db, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 2, rounds: 16 });
+
+    const body = await (await board(db)).json() as SoloLeaderboardResponse;
+    expect(body.entries).toHaveLength(50);
+    expect(body.entries.map((entry) => entry.displayName)).not.toContain('Я');
+    // Место считается по всей таблице, а не по отданной странице.
+    expect(body.you).toMatchObject({ rank: 61, total: 61 });
+    expect(body.you?.entry).toMatchObject({ displayName: 'Я', roundsPlayed: 16 });
+  });
+
+  it('counts the rounds needed to pass the player right above', async () => {
+    const db = database();
+    const par = setPar(SET.questions);
+    // Сосед сверху закрыл набор за 7 кругов, я за 9. Чтобы обойти, нужно строго меньше семи:
+    // равные круги разводит тай-брейк по длительности, то есть ничья место не отдаёт. Отсюда три.
+    insertSolo(db, { id: 'above', playerId: 'p:above', soloScore: 7 / par, rounds: 7 });
+    insertSolo(db, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 9 / par, rounds: 9 });
+    const body = await (await board(db)).json() as SoloLeaderboardResponse;
+    expect(body.you).toMatchObject({ rank: 2, total: 2, roundsToNext: 3 });
+
+    // Равный счёт: сосед выше по тай-брейку, обойти его можно одним кругом.
+    const tied = database();
+    insertSolo(tied, { id: 'above', playerId: 'p:above', soloScore: 9 / par, rounds: 9, durationMs: 100 });
+    insertSolo(tied, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 9 / par, rounds: 9, durationMs: 9000 });
+    const close = await (await board(tied)).json() as SoloLeaderboardResponse;
+    expect(close.you).toMatchObject({ rank: 2, roundsToNext: 1 });
+  });
+
+  it('has nobody above the first place and nothing at all without a finished run', async () => {
+    const db = database();
+    insertSolo(db, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 0.5 });
+    const first = await (await board(db)).json() as SoloLeaderboardResponse;
+    expect(first.you).toMatchObject({ rank: 1, total: 1, roundsToNext: null });
+
+    // Не дошёл до цели — в таблице его нет, и места у него нет.
+    const missed = database();
+    insertSolo(missed, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 0.5, reachedTarget: 0 });
+    expect(((await (await board(missed)).json()) as SoloLeaderboardResponse).you).toBeNull();
+
+    // Другая категория и другой день тоже не считаются своим местом.
+    const elsewhere = database();
+    insertSolo(elsewhere, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 0.5, category: 'history' });
+    expect(((await (await board(elsewhere)).json()) as SoloLeaderboardResponse).you).toBeNull();
+  });
+
+  it('takes my best run of the day, like the list does', async () => {
+    const db = database();
+    insertSolo(db, { id: 'worse', playerId: viewerId, name: 'Я-хуже', soloScore: 2, rounds: 16 });
+    insertSolo(db, { id: 'better', playerId: viewerId, name: 'Я', soloScore: 0.9, rounds: 7 });
+    const body = await (await board(db)).json() as SoloLeaderboardResponse;
+    expect(body.entries).toHaveLength(1);
+    expect(body.you).toMatchObject({ rank: 1, total: 1 });
+    expect(body.you?.entry).toMatchObject({ roundsPlayed: 7 });
+  });
+
+  it('follows the shifted day boundary, not midnight UTC', async () => {
+    const db = database();
+    // 21:00 UTC — это уже следующие сутки игры: граница проходит в 19:00 UTC.
+    const afterBoundary = Date.UTC(2026, 9, 11, 21, 0, 0);
+    insertSolo(db, { id: 'next-day', playerId: viewerId, name: 'Я', soloScore: 0.5, completedAt: afterBoundary });
+    expect(((await (await board(db)).json()) as SoloLeaderboardResponse).you).toBeNull();
+
+    const tomorrow = await (await board(db, '?category=geography&date=2026-10-12')).json() as SoloLeaderboardResponse;
+    expect(tomorrow.you).toMatchObject({ rank: 1, total: 1 });
   });
 });
 

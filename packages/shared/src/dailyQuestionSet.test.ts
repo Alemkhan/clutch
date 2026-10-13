@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   createSeededRandom,
   dailyKey,
+  dayStartMs,
   DAILY_BANK_SIZES,
   MAX_DAILY_SET_SIZE,
   dailyBankSize,
@@ -31,12 +32,24 @@ describe('createSeededRandom', () => {
 });
 
 describe('daily keys', () => {
-  it('uses the UTC day and builds set ids', () => {
-    expect(dailyKey(Date.UTC(2026, 9, 7, 23, 59, 59))).toBe('2026-10-07');
+  it('rolls the day at the shifted boundary, not at midnight UTC', () => {
+    // Граница сдвинута на +5 часов: полночь в Алматы, 02:00 в Москве, 19:00 UTC.
+    expect(dailyKey(Date.UTC(2026, 9, 7, 18, 59, 59))).toBe('2026-10-07');
+    expect(dailyKey(Date.UTC(2026, 9, 7, 19, 0, 0))).toBe('2026-10-08');
+    // Полночь UTC — это уже следующий день игры, а не начало суток.
     expect(dailyKey(Date.UTC(2026, 9, 8, 0, 0, 0))).toBe('2026-10-08');
     expect(questionSetId('geography', '2026-10-07', 5)).toBe('geography:2026-10-07:5');
     expect(hashSeed('a')).toBe(hashSeed('a'));
     expect(hashSeed('a')).not.toBe(hashSeed('b'));
+  });
+
+  it('turns a key back into the moment its day started', () => {
+    expect(dayStartMs('2026-10-08')).toBe(Date.UTC(2026, 9, 7, 19, 0, 0));
+    // Туда и обратно: начало суток принадлежит тем же суткам, конец — ещё тем же.
+    for (const key of ['2026-01-01', '2026-10-08', '2026-12-31']) {
+      expect(dailyKey(dayStartMs(key))).toBe(key);
+      expect(dailyKey(dayStartMs(key) + 24 * 60 * 60 * 1000 - 1)).toBe(key);
+    }
   });
 });
 

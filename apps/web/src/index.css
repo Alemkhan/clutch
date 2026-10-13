@@ -2268,6 +2268,130 @@ input:focus-visible {
   cursor: pointer;
 }
 
+/* Таблица дня. Строки и отступы повторяют «Мои партии»: это тот же список, другой порядок. */
+.solo-board {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  padding-bottom: 12px;
+}
+
+.solo-board-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.solo-board-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.solo-board-tab {
+  flex: 0 0 auto;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 254, 250, 0.88);
+  color: var(--ink);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.solo-board-tab.active {
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Своё место — отдельной карточкой над списком: его видно и когда игрок далеко за топ-50. */
+.solo-board-you {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid var(--primary);
+  border-radius: 18px;
+  background: rgba(255, 254, 250, 0.88);
+  box-shadow: var(--shadow-sm);
+}
+
+.solo-board-you-rank {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.solo-board-you-meta,
+.solo-board-you-hint {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.solo-board-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.solo-board-row {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr auto;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 254, 250, 0.88);
+}
+
+.solo-board-row.mine {
+  border-color: var(--primary);
+}
+
+.solo-board-place {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+}
+
+.solo-board-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.solo-board-score {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.solo-board-note {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* Ссылка на таблицу под главной кнопкой: не вторая CTA, а подпись-переход. */
+.home-board-link {
+  align-self: center;
+  margin-top: 10px;
+  padding: 6px 4px;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  opacity: 0.75;
+}
+
 /* Кнопка внутри карточки партии: уже строк, чтобы не выглядела основным действием экрана. */
 .my-run-rematch {
   align-self: flex-start;

@@ -11,6 +11,7 @@ import {
   compareSoloRuns,
   invertOutcome,
   dailyKey,
+  dayStartMs,
   practiceQuestionSet,
   isPracticeLevelId,
   evaluateSoloRun,
@@ -50,6 +51,7 @@ import {
   findSoloOutcome,
   settleRecordOutcome,
   soloLeaderboard,
+  soloStanding,
 } from '../matches/soloRepository';
 import { categories, correctFor, isRoundInput, isStartRequest, parseQuestions } from '../matches/validation';
 import { notifyDuelResult, notifySoloResult } from '../notifications/outbid';
@@ -390,21 +392,34 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
     const category = c.req.query('category') ?? 'general';
     if (!categories.has(category)) return c.json({ error: 'Invalid category.' }, 400);
     const dateKey = c.req.query('date') ?? dailyKey(Date.now());
-    const dayStart = DATE_KEY.test(dateKey) ? Date.parse(`${dateKey}T00:00:00Z`) : Number.NaN;
+    const dayStart = DATE_KEY.test(dateKey) ? dayStartMs(dateKey) : Number.NaN;
     if (!Number.isFinite(dayStart) || dailyKey(dayStart) !== dateKey) {
       return c.json({ error: 'Invalid date.' }, 400);
     }
-    const entries = await soloLeaderboard(
-      c.env.DB,
-      category,
-      CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
-      dayStart,
-      dayStart + DAY_MS,
-    );
+    // Своё место считается отдельным запросом по тому же окну: попадание в топ-50 на него не влияет,
+    // иначе не попавший в список игрок не видел бы о себе ничего.
+    const [entries, you] = await Promise.all([
+      soloLeaderboard(
+        c.env.DB,
+        category,
+        CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
+        dayStart,
+        dayStart + DAY_MS,
+      ),
+      soloStanding(
+        c.env.DB,
+        category,
+        CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
+        dayStart,
+        dayStart + DAY_MS,
+        identity.playerId,
+      ),
+    ]);
     const response: SoloLeaderboardResponse = {
       category: category as SoloLeaderboardResponse['category'],
       dateKey,
       entries,
+      you,
     };
     return c.json(response);
   });

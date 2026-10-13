@@ -19,7 +19,7 @@ const handlers = { onBack: vi.fn(), check: vi.fn() };
 const publicQuestion = (id: string) => toPublicQuestion(generateQuestionById(id)!);
 
 function homeHandlers() {
-  return { onLastStand: vi.fn(), onSolo: vi.fn(), onCategories: vi.fn() };
+  return { onLastStand: vi.fn(), onSolo: vi.fn(), onCategories: vi.fn(), onBoard: vi.fn() };
 }
 
 describe('Training screens', () => {

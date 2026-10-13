@@ -34,6 +34,11 @@ export function roundsText(run: Pick<MyRunSummary, 'mode' | 'roundsPlayed'>): st
   return `${run.roundsPlayed} ${plural(run.roundsPlayed, one, few, many)}`;
 }
 
+/** «7 кругов» — тем же числительным, что и в «Моих партиях», чтобы счёт читался одинаково. */
+export function soloRoundsText(count: number): string {
+  return `${count} ${plural(count, 'круг', 'круга', 'кругов')}`;
+}
+
 /**
  * Чем закончилась партия. Нет соперника у дошедшего до цели забега — «ждём соперника»;
  * у не дошедшего ждать нечего: такой забег в пул не попадает, поэтому «ждём» ему не пишем.
