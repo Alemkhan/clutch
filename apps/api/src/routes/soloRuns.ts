@@ -280,6 +280,17 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
       return c.json({ error: 'Unexpected question for this round.' }, 400);
     }
 
+    // Окно ответа по часам сервера: от закрытия предыдущего круга (у первого — от старта забега)
+    // до этого запроса. Это верхняя граница времени на вопрос: внутрь входят разбор и удар
+    // предыдущего круга, а у продолженного забега — и всё время, пока вкладка была закрыта.
+    const answeredAt = Date.now();
+    const previous = rows[body.roundIndex - 1];
+    const answerWindowMs = Math.max(0, answeredAt - (previous?.settled_at ?? run.created_at));
+    // Заявить время больше окна невозможно: столько вопрос не был открыт.
+    if (body.responseTimeMs > answerWindowMs + ANSWER_WINDOW_SLACK_MS) {
+      return c.json({ error: 'Response time is impossible for this round.', reason: 'impossible_timing' }, 400);
+    }
+
     const correct = correctFor(question, body.selectedAnswer);
     const settledProgressAfter = correct
       ? null
@@ -296,7 +307,8 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
       responseTimeMs: Math.min(body.responseTimeMs, 60_000),
       correct,
       settledProgressAfter,
-      now: Date.now(),
+      answerWindowMs,
+      now: answeredAt,
     });
     // Ошибка пишется в журнал игрока ровно один раз: повтор запроса вставку не проходит (inserted = false).
     // Пишем и тренировочные, и дружеские забеги: сервер всё равно показал игроку верный ответ.
@@ -513,6 +525,13 @@ type HammerSettlement = { kind: 'tap'; activeElapsedMs: number } | { kind: 'forf
  * маркер периодичен, и удачная фаза повторяется каждые 1,2–3,3 секунды.
  */
 const HAMMER_TIMING_SLACK_MS = 5_000;
+
+/**
+ * Запас к измеренному сервером окну ответа. Закрывает разницу часов и задержку запроса. Это
+ * проверка на невозможное заявленное время, а не лимит 15 секунд: лимит так не поставить, пока
+ * набор уходит клиенту целиком, — вопрос можно прочитать заранее и ответить, когда удобно.
+ */
+const ANSWER_WINDOW_SLACK_MS = 5_000;
 
 /**
  * Закрывает ожидающий удара круг. Расстояние до цели считает сервер из присланного момента удара

@@ -15,6 +15,7 @@
     "preflight:production:write-config": "node scripts/preflight-production.mjs --write-config",
     "test": "vitest run",
     "test:preflight:production": "node scripts/preflight-production.mjs --test-fixture",
+    "calibrate:pricing": "node scripts/calibrate-pricing.mjs",
     "test:smoke:local": "node scripts/smoke-local.mjs",
     "typecheck": "npm run typecheck --workspaces",
     "content:check": "vitest run packages/shared/src/generalPack",

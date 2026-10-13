@@ -10,6 +10,8 @@ export interface SoloRoundRow {
   correct: number;
   /** Присланный момент удара. null — круг закрыт без удара. Сырой ввод, из него выведено расстояние. */
   active_elapsed_ms: number | null;
+  /** Окно ответа по часам сервера. null — круги до миграции 0017. */
+  answer_window_ms: number | null;
   skill_distance: number | null;
   skill_result: SkillResult | null;
   progress_awarded: number | null;
@@ -21,8 +23,8 @@ export interface SoloRoundRow {
 export async function listSoloRounds(db: D1Database, runId: string): Promise<SoloRoundRow[]> {
   const result = await db.prepare(`
     SELECT run_id, round_index, question_id, selected_answer, response_time_ms, correct,
-           active_elapsed_ms, skill_distance, skill_result, progress_awarded, progress_after,
-           created_at, settled_at
+           active_elapsed_ms, answer_window_ms, skill_distance, skill_result,
+           progress_awarded, progress_after, created_at, settled_at
     FROM solo_run_rounds WHERE run_id = ?1 ORDER BY round_index ASC
   `).bind(runId).all<SoloRoundRow>();
   return result.results;
@@ -41,14 +43,16 @@ export async function insertSoloAnswer(db: D1Database, input: {
   correct: boolean;
   /** Только для неверного ответа: круг закрыт без удара. */
   settledProgressAfter: number | null;
+  /** Окно, измеренное сервером: от закрытия предыдущего круга до прихода ответа. */
+  answerWindowMs: number;
   now: number;
 }): Promise<boolean> {
   const settled = input.settledProgressAfter !== null;
   const result = await db.prepare(`
     INSERT INTO solo_run_rounds (
       run_id, round_index, question_id, selected_answer, response_time_ms, correct,
-      progress_awarded, progress_after, created_at, settled_at
-    ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)
+      progress_awarded, progress_after, created_at, settled_at, answer_window_ms
+    ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)
     ON CONFLICT (run_id, round_index) DO NOTHING
   `).bind(
     input.runId,
@@ -61,6 +65,7 @@ export async function insertSoloAnswer(db: D1Database, input: {
     input.settledProgressAfter,
     input.now,
     settled ? input.now : null,
+    input.answerWindowMs,
   ).run();
   return result.meta.changes > 0;
 }

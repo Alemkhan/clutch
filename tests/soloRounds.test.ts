@@ -98,9 +98,11 @@ const playedResults = (db: TestD1, runId: string, beforeIndex: number): SkillRes
 
 const roundRow = (db: TestD1, runId: string, roundIndex: number) =>
   db.sqlite.prepare(
-    'SELECT active_elapsed_ms, skill_distance, skill_result, settled_at FROM solo_run_rounds WHERE run_id = ? AND round_index = ?',
+    'SELECT active_elapsed_ms, answer_window_ms, response_time_ms, skill_distance, skill_result, settled_at FROM solo_run_rounds WHERE run_id = ? AND round_index = ?',
   ).get(runId, roundIndex) as {
     active_elapsed_ms: number | null;
+    answer_window_ms: number | null;
+    response_time_ms: number;
     skill_distance: number | null;
     skill_result: SkillResult | null;
     settled_at: number | null;
@@ -316,6 +318,31 @@ describe('the hammer award is derived by the server from the tap moment', () => 
     expect(row.skill_result).toBe('perfect');
   });
 
+});
+
+describe('the server measures the answer window itself', () => {
+  it('stores the gap it observed and refuses a claim that does not fit in it', async () => {
+    const db = database();
+    const run = await start(db, 'ann');
+    const inputs = roundInputs(fullQuestions(db, run.runId), 2, true);
+
+    // Заявить минуту, когда с момента старта забега прошло мгновение, нельзя.
+    const impossible = await answer(db, 'ann', run.runId, 0, { ...inputs[0], responseTimeMs: 60_000 });
+    expect(impossible.status).toBe(400);
+    expect(await impossible.json()).toMatchObject({ reason: 'impossible_timing' });
+    expect(roundCount(db, run.runId)).toBe(0);
+
+    // Обычный ответ проходит, и сервер запоминает своё окно.
+    await perfectRound(db, 'ann', run.runId, 0, inputs[0]);
+    expect(roundRow(db, run.runId, 0).answer_window_ms).toBe(0);
+
+    // Двадцать секунд между кругами видны серверу, даже если клиент назвал одну.
+    vi.setSystemTime(NOW + 20_000);
+    await answer(db, 'ann', run.runId, 1, inputs[1]);
+    expect(roundRow(db, run.runId, 1).answer_window_ms).toBe(20_000);
+    expect(roundRow(db, run.runId, 1).response_time_ms).toBe(1000);
+    vi.setSystemTime(NOW);
+  });
 });
 
 describe('the server closes the run', () => {

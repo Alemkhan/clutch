@@ -117,6 +117,7 @@ export function applyLastStandMinedMigration(sqlite: SQLiteDatabase): void {
 
 export function applyHammerTapElapsedMigration(sqlite: SQLiteDatabase): void {
   sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0016_hammer_tap_elapsed.sql', import.meta.url), 'utf8'));
+  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0017_answer_window.sql', import.meta.url), 'utf8'));
 }
 
 export function createTestD1(applyCurrentMigration = true): TestD1 {

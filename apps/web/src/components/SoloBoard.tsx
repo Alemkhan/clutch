@@ -67,9 +67,9 @@ export function SoloBoardView({ state, category, onCategory, onBack, onRetry, on
               <span className="solo-board-you-rank">
                 {state.board.you.rank}-й из {state.board.you.total}
               </span>
-              <span className="solo-board-you-meta">
-                {soloRoundsText(state.board.you.entry.roundsPlayed)} · пар {state.board.you.entry.setPar}
-              </span>
+              {/* Пар набора игроку не показывается: он откалиброван на старом молотке и занижен
+                  на 12–22% (см. SKILL_SHARE). Круги — честное число, их и показываем. */}
+              <span className="solo-board-you-meta">{soloRoundsText(state.board.you.entry.roundsPlayed)}</span>
               <span className="solo-board-you-hint">{standingHint(state.board.you)}</span>
             </div>
           )}
