@@ -62,82 +62,36 @@ export interface TestD1 {
   sqlite: SQLiteDatabase;
 }
 
-export function applyR1bMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0002_match_conditions.sql', import.meta.url), 'utf8'));
-}
+/**
+ * Схема до снимка условий матча: в `match_runs` нет rules_version, mini_game_id,
+ * mini_game_config_json, opponent_json и ghost_eligible. Нужна ровно одному тесту — проверке
+ * `/api/ready`, который обязан увидеть устаревшую схему и ответить 503. Это тестовая заготовка,
+ * а не миграция: после сжатия истории файла с таким состоянием в репозитории больше нет.
+ */
+const LEGACY_SCHEMA = `
+CREATE TABLE match_runs (
+  id TEXT PRIMARY KEY,
+  player_id TEXT NOT NULL,
+  display_name TEXT NOT NULL,
+  category TEXT NOT NULL,
+  questions_json TEXT NOT NULL,
+  rounds_json TEXT,
+  progress INTEGER NOT NULL DEFAULT 0,
+  correct_count INTEGER NOT NULL DEFAULT 0,
+  status TEXT NOT NULL DEFAULT 'in_progress',
+  opponent_run_id TEXT REFERENCES match_runs(id),
+  created_at INTEGER NOT NULL,
+  completed_at INTEGER
+);
+`;
 
-export function applyQuestionSetMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0003_question_set_id.sql', import.meta.url), 'utf8'));
-}
-
-export function applyLastStandMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0004_last_stand.sql', import.meta.url), 'utf8'));
-}
-
-export function applyRematchMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0005_rematch_notifications.sql', import.meta.url), 'utf8'));
-}
-
-export function applyRematchReleaseMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0006_rematch_invite_release.sql', import.meta.url), 'utf8'));
-}
-
-export function applySoloRunsMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0007_solo_runs.sql', import.meta.url), 'utf8'));
-}
-
-export function applySoloOutcomeMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0008_solo_outcome.sql', import.meta.url), 'utf8'));
-}
-
-export function applyFriendInvitesMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0009_friend_invites.sql', import.meta.url), 'utf8'));
-}
-
-export function applySoloRoundsMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0010_solo_run_rounds.sql', import.meta.url), 'utf8'));
-}
-
-export function applyPlayerMistakesMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0011_player_mistakes.sql', import.meta.url), 'utf8'));
-}
-
-export function applyGeneralCategoryMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0012_general_category.sql', import.meta.url), 'utf8'));
-}
-
-export function applyRecordClaimMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0014_record_claim.sql', import.meta.url), 'utf8'));
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0015_pace_released.sql', import.meta.url), 'utf8'));
-}
-
-export function applyLastStandMinedMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0013_last_stand_mined.sql', import.meta.url), 'utf8'));
-}
-
-export function applyHammerTapElapsedMigration(sqlite: SQLiteDatabase): void {
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0016_hammer_tap_elapsed.sql', import.meta.url), 'utf8'));
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0017_answer_window.sql', import.meta.url), 'utf8'));
-}
-
-export function createTestD1(applyCurrentMigration = true): TestD1 {
+/** `current = false` даёт устаревшую схему: её видит только тест readiness. */
+export function createTestD1(current = true): TestD1 {
   const sqlite = new DatabaseSync(':memory:');
-  sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0001_async_matches.sql', import.meta.url), 'utf8'));
-  if (applyCurrentMigration) {
-    applyR1bMigration(sqlite);
-    applyQuestionSetMigration(sqlite);
-    applyLastStandMigration(sqlite);
-    applyRematchMigration(sqlite);
-    applyRematchReleaseMigration(sqlite);
-    applySoloRunsMigration(sqlite);
-    applySoloOutcomeMigration(sqlite);
-    applyFriendInvitesMigration(sqlite);
-    applySoloRoundsMigration(sqlite);
-    applyPlayerMistakesMigration(sqlite);
-    applyGeneralCategoryMigration(sqlite);
-    applyLastStandMinedMigration(sqlite);
-    applyRecordClaimMigration(sqlite);
-    applyHammerTapElapsedMigration(sqlite);
+  if (current) {
+    sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0001_schema.sql', import.meta.url), 'utf8'));
+  } else {
+    sqlite.exec(LEGACY_SCHEMA);
   }
   const binding = {
     prepare(query: string) {

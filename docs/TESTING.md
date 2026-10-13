@@ -75,9 +75,9 @@ npm exec --workspace @clutch/api -- wrangler d1 migrations apply clutch-db --loc
 появления новых миграций.
 
 Если этого не сделать, игра падает не на старте, а в первом же запросе, и ошибка
-выглядит как ошибка кода. Например, без `0012_general_category.sql` старт забега
-в «Общих знаниях» даёт `D1_ERROR: CHECK constraint failed: category IN
-('geography', 'history', 'languages')`. Что именно не применено, показывает:
+выглядит как ошибка кода: на пустой базе первый же запрос даст `D1_ERROR: no such
+table: match_runs`. Схема лежит в единственном `0001_schema.sql`, поэтому либо
+применено всё, либо ничего. Проверить:
 
 ```powershell
 npm exec --workspace @clutch/api -- wrangler d1 migrations list DB --local

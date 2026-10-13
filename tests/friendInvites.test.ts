@@ -19,18 +19,7 @@ import {
 import app from '../apps/api/src/index';
 import { releaseExpiredRematchInvites } from '../apps/api/src/notifications/expiry';
 import { OPEN_INVITE_TTL_MS } from '../apps/api/src/notifications/repository';
-import {
-  applyFriendInvitesMigration,
-  applyLastStandMigration,
-  applyQuestionSetMigration,
-  applyR1bMigration,
-  applyRematchMigration,
-  applyRematchReleaseMigration,
-  applySoloOutcomeMigration,
-  applySoloRunsMigration,
-  createTestD1,
-  type TestD1,
-} from './helpers/testD1';
+import { createTestD1, type TestD1 } from './helpers/testD1';
 import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
@@ -288,17 +277,12 @@ describe('friend invite: claiming and reservation', () => {
   });
 });
 
-describe('migration 0009', () => {
-  it('keeps existing rematch invites and lets the addressee be empty', () => {
-    const db = createTestD1(false);
+describe('схема приглашений', () => {
+  it('допускает приглашение без адресата и только одно открытое на забег', () => {
+    // Раньше это проверялось как шаг миграции 0009 (пересборка таблицы, чтобы снять NOT NULL).
+    // После сжатия истории шага нет, а свойства схемы остались и проверяются напрямую.
+    const db = createTestD1();
     databases.push(db);
-    applyR1bMigration(db.sqlite);
-    applyQuestionSetMigration(db.sqlite);
-    applyLastStandMigration(db.sqlite);
-    applyRematchMigration(db.sqlite);
-    applyRematchReleaseMigration(db.sqlite);
-    applySoloRunsMigration(db.sqlite);
-    applySoloOutcomeMigration(db.sqlite);
     insertRun(db, 'run-a', 'telegram:1', SOLO, 1);
     insertRun(db, 'run-b', 'telegram:2', SOLO, 1);
     db.sqlite.prepare(`
@@ -306,13 +290,14 @@ describe('migration 0009', () => {
         recipient_progress, challenger_progress, created_at, expires_at, consumed_at, released_at)
       VALUES ('rm_old', 'telegram:1', 'run-a', 'run-b', 'geography', 50, 100, 1, 2, 3, 4)
     `).run();
-    applyFriendInvitesMigration(db.sqlite);
     expect(db.sqlite.prepare('SELECT id, recipient_player_id, recipient_run_id, consumed_at, released_at FROM rematch_invites').all())
       .toEqual([{ id: 'rm_old', recipient_player_id: 'telegram:1', recipient_run_id: 'run-a', consumed_at: 3, released_at: 4 }]);
+    // Открытое приглашение: адресата нет, пока ссылку не погасят.
     db.sqlite.prepare(`
       INSERT INTO rematch_invites (id, challenger_run_id, category, recipient_progress, challenger_progress, created_at, expires_at)
       VALUES ('rm_open', 'run-a', 'geography', 0, 100, 1, 2)
     `).run();
+    // Второе открытое на тот же забег не пройдёт: частичный UNIQUE-индекс.
     expect(() => db.sqlite.prepare(`
       INSERT INTO rematch_invites (id, challenger_run_id, category, recipient_progress, challenger_progress, created_at, expires_at)
       VALUES ('rm_open2', 'run-a', 'geography', 0, 100, 1, 2)
