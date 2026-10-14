@@ -5,7 +5,7 @@ import {
   markInviteNotified,
   setOutbidEnabled,
 } from './repository';
-import { sendTelegramMessage } from './telegram';
+import { sendTelegramMessage, type SendResult } from './telegram';
 
 /**
  * Consent model: opt-out. A Telegram player is notified unless they have unsubscribed. Telegram
@@ -59,12 +59,46 @@ export interface OutbidEvent {
   challengerProgress: number;
 }
 
+type NotificationKind = 'solo_result' | 'duel_result' | 'rematch_offer';
+
+function logDeliveryFailure(
+  kind: NotificationKind,
+  result: Exclude<SendResult, { status: 'sent' }>,
+  correlation: { recipientRunId?: string; challengerRunId?: string; inviteId?: string },
+): void {
+  console.error({
+    event: 'telegram_notification_delivery',
+    kind,
+    deliveryStatus: result.status,
+    reasonCode: result.reasonCode,
+    ...(result.httpStatus === undefined ? {} : { httpStatus: result.httpStatus }),
+    ...correlation,
+  });
+}
+
+function logHandlerFailure(
+  kind: NotificationKind,
+  correlation: { recipientRunId?: string; challengerRunId?: string; inviteId?: string },
+): void {
+  console.error({
+    event: 'telegram_notification_handler',
+    kind,
+    reasonCode: 'unexpected_error',
+    ...correlation,
+  });
+}
+
 /**
  * Известие владельцу записи без приглашения. Строки в `rematch_invites` оно не создаёт: приглашение
  * рождается только от нажатия соперника, иначе у получателя оно выглядит как вызов, которого никто
  * не посылал. Не бросает: вызывается из waitUntil, когда у игрока ответ уже есть.
  */
-async function sendNews(env: Env, event: OutbidEvent, text: string): Promise<void> {
+async function sendNews(
+  env: Env,
+  event: OutbidEvent,
+  kind: Exclude<NotificationKind, 'rematch_offer'>,
+  text: string,
+): Promise<void> {
   try {
     const chatId = telegramChatId(event.recipientRun.playerId);
     if (!chatId || !env.TELEGRAM_BOT_TOKEN) return;
@@ -75,10 +109,19 @@ async function sendNews(env: Env, event: OutbidEvent, text: string): Promise<voi
       chatId,
       text,
       stopUrl ? [[{ text: 'Не присылать такие сообщения', url: stopUrl }]] : [],
-    ).catch(() => 'failed' as const);
-    if (result === 'blocked') await setOutbidEnabled(env.DB, event.recipientRun.playerId, false);
-  } catch (error) {
-    console.error('Solo result notification failed:', error instanceof Error ? error.message : 'unknown error');
+    );
+    if (result.status !== 'sent') {
+      logDeliveryFailure(kind, result, {
+        recipientRunId: event.recipientRun.id,
+        challengerRunId: event.challengerRunId,
+      });
+    }
+    if (result.status === 'blocked') await setOutbidEnabled(env.DB, event.recipientRun.playerId, false);
+  } catch {
+    logHandlerFailure(kind, {
+      recipientRunId: event.recipientRun.id,
+      challengerRunId: event.challengerRunId,
+    });
   }
 }
 
@@ -89,6 +132,8 @@ async function sendNews(env: Env, event: OutbidEvent, text: string): Promise<voi
  */
 export async function sendRematchOffer(env: Env, offer: {
   recipientPlayerId: string;
+  recipientRunId: string;
+  challengerRunId: string;
   inviteId: string;
   challengerName: string;
 }): Promise<boolean> {
@@ -100,6 +145,15 @@ export async function sendRematchOffer(env: Env, offer: {
     const stopUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, STOP_PAYLOAD);
     if (!rematchUrl || !stopUrl) {
       await markInviteNotified(env.DB, offer.inviteId, false);
+      logDeliveryFailure(
+        'rematch_offer',
+        { status: 'failed', reasonCode: 'configuration_error' },
+        {
+          inviteId: offer.inviteId,
+          recipientRunId: offer.recipientRunId,
+          challengerRunId: offer.challengerRunId,
+        },
+      );
       return false;
     }
     const result = await sendTelegramMessage(
@@ -110,13 +164,24 @@ export async function sendRematchOffer(env: Env, offer: {
         [{ text: 'Сыграть реванш', url: rematchUrl }],
         [{ text: 'Не присылать такие сообщения', url: stopUrl }],
       ],
-    ).catch(() => 'failed' as const);
-    await markInviteNotified(env.DB, offer.inviteId, result === 'sent');
+    );
+    await markInviteNotified(env.DB, offer.inviteId, result.status === 'sent');
+    if (result.status !== 'sent') {
+      logDeliveryFailure('rematch_offer', result, {
+        inviteId: offer.inviteId,
+        recipientRunId: offer.recipientRunId,
+        challengerRunId: offer.challengerRunId,
+      });
+    }
     // The user blocked the bot: stop trying instead of failing on every later message.
-    if (result === 'blocked') await setOutbidEnabled(env.DB, offer.recipientPlayerId, false);
-    return result === 'sent';
-  } catch (error) {
-    console.error('Rematch offer failed:', error instanceof Error ? error.message : 'unknown error');
+    if (result.status === 'blocked') await setOutbidEnabled(env.DB, offer.recipientPlayerId, false);
+    return result.status === 'sent';
+  } catch {
+    logHandlerFailure('rematch_offer', {
+      inviteId: offer.inviteId,
+      recipientRunId: offer.recipientRunId,
+      challengerRunId: offer.challengerRunId,
+    });
     return false;
   }
 }
@@ -144,7 +209,7 @@ export async function notifySoloResult(
   env: Env,
   event: OutbidEvent & { outcome: SoloRecipientOutcome },
 ): Promise<void> {
-  await sendNews(env, event, soloResultText(event.challengerName, event.outcome));
+  await sendNews(env, event, 'solo_result', soloResultText(event.challengerName, event.outcome));
 }
 
 export function duelResultText(friendName: string, outcome: SoloRecipientOutcome): string {
@@ -163,5 +228,5 @@ export async function notifyDuelResult(
   env: Env,
   event: OutbidEvent & { outcome: SoloRecipientOutcome },
 ): Promise<void> {
-  await sendNews(env, event, duelResultText(event.challengerName, event.outcome));
+  await sendNews(env, event, 'duel_result', duelResultText(event.challengerName, event.outcome));
 }

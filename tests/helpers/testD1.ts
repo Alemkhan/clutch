@@ -1,7 +1,7 @@
 /// <reference types="node" />
 /// <reference types="@cloudflare/workers-types" />
 
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import type { DatabaseSync as SQLiteDatabase, SQLInputValue } from 'node:sqlite';
 
@@ -85,11 +85,23 @@ CREATE TABLE match_runs (
 );
 `;
 
+/** Папка миграций API: тесты применяют всё её содержимое по порядку имён, как wrangler в smoke. */
+const MIGRATIONS_DIRECTORY = new URL('../../apps/api/migrations/', import.meta.url);
+
+function applyMigrations(sqlite: SQLiteDatabase): void {
+  const files = readdirSync(MIGRATIONS_DIRECTORY)
+    .filter((name) => name.endsWith('.sql'))
+    .sort((left, right) => left.localeCompare(right));
+  for (const file of files) {
+    sqlite.exec(readFileSync(new URL(file, MIGRATIONS_DIRECTORY), 'utf8'));
+  }
+}
+
 /** `current = false` даёт устаревшую схему: её видит только тест readiness. */
 export function createTestD1(current = true): TestD1 {
   const sqlite = new DatabaseSync(':memory:');
   if (current) {
-    sqlite.exec(readFileSync(new URL('../../apps/api/migrations/0001_schema.sql', import.meta.url), 'utf8'));
+    applyMigrations(sqlite);
   } else {
     sqlite.exec(LEGACY_SCHEMA);
   }

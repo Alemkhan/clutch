@@ -161,6 +161,10 @@
       "равносторонний",
       "правильный"
     ],
+    "acceptedEn": [
+      "equilateral",
+      "equilateral triangle"
+    ],
     "distractorsRu": [
       "равнобедренный",
       "прямоугольный",
@@ -204,6 +208,10 @@
     "acceptedRu": [
       "простое",
       "простое число"
+    ],
+    "acceptedEn": [
+      "prime",
+      "prime number"
     ],
     "distractorsRu": [
       "чётное",

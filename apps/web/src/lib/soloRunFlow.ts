@@ -51,6 +51,8 @@ export interface SoloFlowState {
   paceReleased: boolean;
   selectedOption: string;
   lastCorrect: boolean;
+  /** Явный правильный ответ: появляется только после серверного вердикта. */
+  correctAnswer: string;
   /** Пояснение к текущему вопросу: приходит с вердиктом сервера, раньше его нет. */
   explanation: string;
   correctCount: number;
@@ -85,6 +87,7 @@ export function createSoloFlowState(): SoloFlowState {
     paceReleased: false,
     selectedOption: '',
     lastCorrect: false,
+    correctAnswer: '',
     explanation: '',
     correctCount: 0,
     responseTimes: [],
@@ -195,12 +198,17 @@ function matchesPending(state: Readonly<SoloFlowState>, kind: SoloPending['kind'
 /** Вердикт сервера по ответу: верно или нет, пояснение; неверный круг уже закрыт им с нулевой наградой. */
 export function applySoloAnswerVerdict(state: Readonly<SoloFlowState>, response: SoloRoundResponse): SoloFlowState {
   if (!matchesPending(state, 'answer', response)) return state as SoloFlowState;
+  const question = currentSoloQuestion(state);
+  const correctAnswer = question?.answerType === 'open_answer'
+    ? response.correctAnswers?.[0] ?? ''
+    : question?.options.find((option) => option.id === response.correctOptionId)?.text ?? '';
   return {
     ...state,
     stage: 'resolution',
     pending: null,
     syncFailed: false,
     lastCorrect: response.correct,
+    correctAnswer,
     explanation: response.explanation,
     correctCount: response.correct ? state.correctCount + 1 : state.correctCount,
     result: response.result ?? state.result,

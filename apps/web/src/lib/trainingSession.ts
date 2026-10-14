@@ -13,6 +13,8 @@ export interface TrainingState {
   correctCount: number;
   lastCorrect: boolean;
   selectedOption: string;
+  /** Явный правильный ответ из серверного вердикта. */
+  correctAnswer: string;
   /** Пояснение к сыгранному вопросу; приходит вместе с вердиктом сервера. */
   explanation: string;
   /** Проверка не дошла до сервера: ответ сохранён, ждём повтора. */
@@ -27,6 +29,7 @@ export function createTrainingState(questions: PublicQuestion[]): TrainingState 
     correctCount: 0,
     lastCorrect: false,
     selectedOption: '',
+    correctAnswer: '',
     explanation: '',
     checkFailed: false,
   };
@@ -52,6 +55,7 @@ export function applyTrainingVerdict(state: TrainingState, verdict: TrainingChec
     ...state,
     step: 'resolution',
     lastCorrect: verdict.correct,
+    correctAnswer: verdict.correctText ?? verdict.correctAnswers?.[0] ?? '',
     explanation: verdict.explanation,
     correctCount: state.correctCount + (verdict.correct ? 1 : 0),
     checkFailed: false,
@@ -71,5 +75,13 @@ export function continueTraining(state: TrainingState): TrainingState {
   const next = state.index + 1;
   return next >= state.questions.length
     ? { ...state, step: 'done' }
-    : { ...state, index: next, step: 'question', lastCorrect: false, selectedOption: '', explanation: '' };
+    : {
+      ...state,
+      index: next,
+      step: 'question',
+      lastCorrect: false,
+      selectedOption: '',
+      correctAnswer: '',
+      explanation: '',
+    };
 }

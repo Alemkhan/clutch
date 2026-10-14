@@ -247,15 +247,17 @@ npx wrangler pages deploy apps/web/dist --project-name <PAGES_PROJECT_NAME>
 2. `GET <WORKER_PUBLIC_URL>/api/ready` возвращает `status: ok`,
    `environment: production` и `checks.d1: ok`. Ответ 503 означает, что трафик
    направлять рано: проверить binding и применение текущих D1 migrations.
-3. `GET <WORKER_PUBLIC_URL>/api/leaderboard?category=geography` не даёт `5xx`.
+3. Авторизованный `GET <WORKER_PUBLIC_URL>/api/solo-leaderboard?category=general`
+   возвращает таблицу либо пустой список без `5xx`.
 4. Pages открывается и обращается именно к production Worker.
-5. Browser guest получает online-матч, завершает его и видит
-   `Результат сохранён.`.
-6. Telegram-пользователь получает матч без `401` и сохраняет completion.
-7. Игрок A создаёт eligible-run; другой игрок B видит `Запись игрока` с тем же
-   набором вопросов.
-8. Неподходящая/повреждённая ghost-запись не ломает matchmaking.
-9. Offline completion остаётся видимой и сохраняется после восстановления сети.
+5. Browser guest начинает solo-забег, проходит answer → разбор → hammer и после
+   reload продолжает тот же серверный run.
+6. Telegram-пользователь начинает solo без `401`, а его круги появляются в D1.
+7. Игрок A создаёт ждущую запись; игрок B атомарно получает её один раз, а
+   третий игрок не получает уже занятую пару.
+8. Неподходящая/повреждённая запись не ломает matchmaking.
+9. Offline answer/hammer показывает повтор, а после восстановления сети один
+   круг записывается без дубля.
 10. Проверены экранная клавиатура, BackButton, safe areas, background/return и
    звук на реальном телефоне.
 11. В D1 появилась ожидаемая completed-запись без дубликата completion.

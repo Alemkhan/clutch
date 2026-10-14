@@ -176,6 +176,64 @@ describe('solo run HUD while playing', () => {
   });
 });
 
+describe('solo answer resolution', () => {
+  it('distinguishes a wrong multiple-choice answer from the right one', () => {
+    const state = playing(null, 'resolution');
+    const [correctOption, selectedOption] = questions[0].options;
+    const html = render({
+      ...state,
+      lastCorrect: false,
+      selectedOption: selectedOption.id,
+      correctAnswer: correctOption.text,
+      explanation: 'Почему верен именно этот вариант.',
+    });
+
+    expect(html).toContain('Твой ответ');
+    expect(html).toContain(selectedOption.text);
+    expect(html).toContain('Правильный ответ');
+    expect(html).toContain(correctOption.text);
+    expect(html).toContain('resolution-answer selected');
+    expect(html).toContain('resolution-answer correct');
+    expect(html.indexOf('Правильный ответ')).toBeLessThan(html.indexOf('Почему верен'));
+  });
+
+  it('shows a correct multiple-choice answer once, without a duplicate selected row', () => {
+    const state = playing(null, 'resolution');
+    const correctOption = questions[0].options[0];
+    const html = render({
+      ...state,
+      lastCorrect: true,
+      selectedOption: correctOption.id,
+      correctAnswer: correctOption.text,
+      explanation: 'Пояснение.',
+    });
+
+    expect(html).toContain('Правильный ответ');
+    expect(html).not.toContain('Твой ответ');
+    expect(html.match(/resolution-answer correct/g)).toHaveLength(1);
+  });
+
+  it('shows the canonical open answer and does not label the typed text as an MC choice', () => {
+    const openQuestions = generateMatch(1, 1, 'geography');
+    const loaded = applyLoadedSoloRun(beginSoloLoading('geography'), {
+      runId: 'run-open', questions: openQuestions, pace: null, config, bankExhausted: false,
+    });
+    const html = render({
+      ...startSoloPlay(loaded),
+      stage: 'resolution',
+      lastCorrect: false,
+      selectedOption: 'мой неточный ответ',
+      correctAnswer: 'Сьюдад-де-ла-Пас',
+      explanation: 'Каноническое написание.',
+    });
+
+    expect(html).toContain('Правильный ответ');
+    expect(html).toContain('Сьюдад-де-ла-Пас');
+    expect(html).not.toContain('Твой ответ');
+    expect(html).not.toContain('мой неточный ответ');
+  });
+});
+
 describe('solo run result', () => {
   it('reached the target: the result is recorded, with two ways forward and no par or score', () => {
     const html = render(finished([25, 25, 25, 25]), saved({}));
@@ -231,6 +289,30 @@ describe('solo run result', () => {
 
   it('does not render a question after the run is closed', () => {
     expect(render(finished([25, 25, 25, 25]))).not.toContain('question-screen');
+  });
+});
+
+describe('problem report on the resolution', () => {
+  it('offers the report when SoloRun wired it, and not otherwise', () => {
+    const state = playing(null, 'resolution');
+    const wired = renderToStaticMarkup(
+      <SoloRunScreen state={state} save={saving} {...handlers} onReport={vi.fn()} reportState="idle" />,
+    );
+    expect(wired).toContain('Сообщить о проблеме');
+    expect(render(state)).not.toContain('Сообщить о проблеме');
+  });
+
+  it('mirrors the parent status: sent hides the form, error offers a retry', () => {
+    const state = playing(null, 'resolution');
+    const sent = renderToStaticMarkup(
+      <SoloRunScreen state={state} save={saving} {...handlers} onReport={vi.fn()} reportState="sent" />,
+    );
+    expect(sent).toContain('Отправлено, спасибо');
+    const failed = renderToStaticMarkup(
+      <SoloRunScreen state={state} save={saving} {...handlers} onReport={vi.fn()} reportState="error" />,
+    );
+    expect(failed).toContain('role="alert"');
+    expect(failed).toContain('Повторить');
   });
 });
 

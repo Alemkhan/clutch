@@ -61,6 +61,7 @@ function serverRound(state: SoloFlowState, overrides: Partial<SoloRoundResponse>
     roundIndex: pending.request.roundIndex,
     questionId: pending.request.questionId,
     correct: false,
+    correctOptionId: currentSoloQuestion(state)?.options[0]?.id,
     explanation: 'Пояснение сервера.',
     awaitingHammer: false,
     skillResult: null,
@@ -166,7 +167,9 @@ describe('solo run flow with a server that scores the rounds', () => {
 
   it('does not decide whether the answer is right: it waits for the server verdict', () => {
     const checking = recordSoloAnswer(started(questions, null), 'a', 1234);
-    expect(checking).toMatchObject({ stage: 'checking', selectedOption: 'a', lastCorrect: false, correctCount: 0 });
+    expect(checking).toMatchObject({
+      stage: 'checking', selectedOption: 'a', lastCorrect: false, correctAnswer: '', correctCount: 0,
+    });
     expect(checking.pending).toEqual({
       kind: 'answer',
       request: { roundIndex: 0, questionId: questions[0].id, selectedAnswer: 'a', responseTimeMs: 1234 },
@@ -175,9 +178,29 @@ describe('solo run flow with a server that scores the rounds', () => {
     expect(checking.explanation).toBe('');
     expect(soloFlowView(checking)).toMatchObject({ progress: 0, roundsPlayed: 0 });
 
-    const answered = applySoloAnswerVerdict(checking, serverRound(checking, { correct: true, awaitingHammer: true }));
-    expect(answered).toMatchObject({ stage: 'resolution', lastCorrect: true, correctCount: 1, pending: null });
+    const correctOption = questions[0].options[2];
+    const answered = applySoloAnswerVerdict(checking, serverRound(checking, {
+      correct: true, awaitingHammer: true, correctOptionId: correctOption.id,
+    }));
+    expect(answered).toMatchObject({
+      stage: 'resolution', lastCorrect: true, correctAnswer: correctOption.text, correctCount: 1, pending: null,
+    });
     expect(answered.explanation).toBe('Пояснение сервера.');
+  });
+
+  it('uses the first canonical server answer for an open question', () => {
+    const openQuestion = generateMatch(1, 1, 'geography').map(toPublicQuestion);
+    const checking = recordSoloAnswer(started(openQuestion, null), 'Астана', 800);
+    expect(checking.correctAnswer).toBe('');
+
+    const answered = applySoloAnswerVerdict(checking, serverRound(checking, {
+      correct: false,
+      correctOptionId: undefined,
+      correctAnswers: ['Сьюдад-де-ла-Пас', 'Ciudad de la Paz'],
+    }));
+    expect(answered).toMatchObject({
+      stage: 'resolution', lastCorrect: false, correctAnswer: 'Сьюдад-де-ла-Пас', selectedOption: 'Астана',
+    });
   });
 
   it('takes the reward from the server, not from the tap moment', () => {

@@ -11,6 +11,10 @@
       "Микки Маус",
       "Микки"
     ],
+    "acceptedEn": [
+      "Mickey Mouse",
+      "Mickey"
+    ],
     "distractorsRu": [
       "Джерри",
       "Спиди Гонсалес",
@@ -32,6 +36,9 @@
     "acceptedRu": [
       "Шрек"
     ],
+    "acceptedEn": [
+      "Shrek"
+    ],
     "distractorsRu": [
       "Халк",
       "Гринч",
@@ -52,6 +59,9 @@
     "answerRu": "Олаф",
     "acceptedRu": [
       "Олаф"
+    ],
+    "acceptedEn": [
+      "Olaf"
     ],
     "distractorsRu": [
       "Свен",
@@ -120,6 +130,10 @@
       "Король Лев",
       "«Король Лев»"
     ],
+    "acceptedEn": [
+      "The Lion King",
+      "Lion King"
+    ],
     "distractorsRu": [
       "Мадагаскар",
       "Книга джунглей",
@@ -167,6 +181,11 @@
       "Вейдер",
       "Энакин Скайуокер"
     ],
+    "acceptedEn": [
+      "Darth Vader",
+      "Vader",
+      "Anakin Skywalker"
+    ],
     "distractorsRu": [
       "Дарт Мол",
       "Палпатин",
@@ -190,6 +209,10 @@
       "Леонардо ДиКаприо",
       "Ди Каприо",
       "ДиКаприо"
+    ],
+    "acceptedEn": [
+      "Leonardo DiCaprio",
+      "DiCaprio"
     ],
     "distractorsRu": [
       "Брэд Питт",
@@ -236,6 +259,10 @@
       "Воробей",
       "Джек Спарроу",
       "Спарроу"
+    ],
+    "acceptedEn": [
+      "Jack Sparrow",
+      "Sparrow"
     ],
     "distractorsRu": [
       "Гектор Барбосса",
@@ -326,6 +353,9 @@
       "Бен-Гур",
       "«Бен-Гур»"
     ],
+    "acceptedEn": [
+      "Ben-Hur"
+    ],
     "distractorsRu": [
       "Унесённые ветром",
       "Касабланка",
@@ -349,6 +379,9 @@
       "Унесенные призраками",
       "«Унесённые призраками»",
       "«Унесенные призраками»"
+    ],
+    "acceptedEn": [
+      "Spirited Away"
     ],
     "distractorsRu": [
       "Мой сосед Тоторо",
@@ -394,6 +427,10 @@
       "Джеймс Кэмерон",
       "Кэмерон"
     ],
+    "acceptedEn": [
+      "James Cameron",
+      "Cameron"
+    ],
     "distractorsRu": [
       "Билли Уайлдер",
       "Гор Вербински",
@@ -417,6 +454,10 @@
     "acceptedRu": [
       "Роберт Земекис",
       "Земекис"
+    ],
+    "acceptedEn": [
+      "Robert Zemeckis",
+      "Zemeckis"
     ],
     "distractorsRu": [
       "Джосс Уидон",
@@ -442,6 +483,10 @@
       "Фрэнсис Форд Коппола",
       "Коппола"
     ],
+    "acceptedEn": [
+      "Francis Ford Coppola",
+      "Coppola"
+    ],
     "distractorsRu": [
       "Джеймс Мактиг",
       "Рон Ховард",
@@ -465,6 +510,10 @@
     "acceptedRu": [
       "Джеймс Кэмерон",
       "Кэмерон"
+    ],
+    "acceptedEn": [
+      "James Cameron",
+      "Cameron"
     ],
     "distractorsRu": [
       "Стивен Спилберг",
@@ -490,6 +539,10 @@
       "Ридли Скотт",
       "Скотт"
     ],
+    "acceptedEn": [
+      "Ridley Scott",
+      "Scott"
+    ],
     "distractorsRu": [
       "Джосс Уидон",
       "Энг Ли",
@@ -513,6 +566,10 @@
     "acceptedRu": [
       "Майкл Кёртис",
       "Кёртис"
+    ],
+    "acceptedEn": [
+      "Michael Curtiz",
+      "Curtiz"
     ],
     "distractorsRu": [
       "Чарли Чаплин",
@@ -538,6 +595,10 @@
       "Квентин Тарантино",
       "Тарантино"
     ],
+    "acceptedEn": [
+      "Quentin Tarantino",
+      "Tarantino"
+    ],
     "distractorsRu": [
       "Джеймс Мактиг",
       "Стэнли Кубрик",
@@ -561,6 +622,10 @@
     "acceptedRu": [
       "Фрэнк Дарабонт",
       "Дарабонт"
+    ],
+    "acceptedEn": [
+      "Frank Darabont",
+      "Darabont"
     ],
     "distractorsRu": [
       "Чарли Чаплин",
@@ -586,6 +651,10 @@
       "Кристофер Нолан",
       "Нолан"
     ],
+    "acceptedEn": [
+      "Christopher Nolan",
+      "Nolan"
+    ],
     "distractorsRu": [
       "Питер Уир",
       "Альфонсо Куарон",
@@ -609,6 +678,10 @@
     "acceptedRu": [
       "Роберт Земекис",
       "Земекис"
+    ],
+    "acceptedEn": [
+      "Robert Zemeckis",
+      "Zemeckis"
     ],
     "distractorsRu": [
       "Фрэнк Дарабонт",
@@ -634,6 +707,10 @@
       "Дэвид Финчер",
       "Финчер"
     ],
+    "acceptedEn": [
+      "David Fincher",
+      "Fincher"
+    ],
     "distractorsRu": [
       "Майкл Кёртис",
       "Фрэнк Дарабонт",
@@ -657,6 +734,10 @@
     "acceptedRu": [
       "Стивен Спилберг",
       "Спилберг"
+    ],
+    "acceptedEn": [
+      "Steven Spielberg",
+      "Spielberg"
     ],
     "distractorsRu": [
       "Питер Джексон",
@@ -682,6 +763,10 @@
       "Джонатан Демми",
       "Демми"
     ],
+    "acceptedEn": [
+      "Jonathan Demme",
+      "Demme"
+    ],
     "distractorsRu": [
       "Питер Джексон",
       "Дэвид Йейтс",
@@ -705,6 +790,10 @@
     "acceptedRu": [
       "Крис Коламбус",
       "Коламбус"
+    ],
+    "acceptedEn": [
+      "Chris Columbus",
+      "Columbus"
     ],
     "distractorsRu": [
       "Майк Ньюэлл",
@@ -730,6 +819,10 @@
       "Стивен Спилберг",
       "Спилберг"
     ],
+    "acceptedEn": [
+      "Steven Spielberg",
+      "Spielberg"
+    ],
     "distractorsRu": [
       "Гор Вербински",
       "Джонатан Демми",
@@ -753,6 +846,10 @@
     "acceptedRu": [
       "Джеймс Мактиг",
       "Мактиг"
+    ],
+    "acceptedEn": [
+      "James McTeigue",
+      "McTeigue"
     ],
     "distractorsRu": [
       "Билли Уайлдер",
@@ -778,6 +875,10 @@
       "Кристофер Нолан",
       "Нолан"
     ],
+    "acceptedEn": [
+      "Christopher Nolan",
+      "Nolan"
+    ],
     "distractorsRu": [
       "Джеймс Кэмерон",
       "Майкл Кёртис",
@@ -801,6 +902,10 @@
     "acceptedRu": [
       "Питер Джексон",
       "Джексон"
+    ],
+    "acceptedEn": [
+      "Peter Jackson",
+      "Jackson"
     ],
     "distractorsRu": [
       "Энг Ли",
@@ -826,6 +931,10 @@
       "Джосс Уидон",
       "Уидон"
     ],
+    "acceptedEn": [
+      "Joss Whedon",
+      "Whedon"
+    ],
     "distractorsRu": [
       "Мел Гибсон",
       "Ричард Маркуанд",
@@ -849,6 +958,10 @@
     "acceptedRu": [
       "Джордж Лукас",
       "Лукас"
+    ],
+    "acceptedEn": [
+      "George Lucas",
+      "Lucas"
     ],
     "distractorsRu": [
       "Билли Уайлдер",
@@ -874,6 +987,10 @@
       "Серджо Леоне",
       "Леоне"
     ],
+    "acceptedEn": [
+      "Sergio Leone",
+      "Leone"
+    ],
     "distractorsRu": [
       "Сэм Рэйми",
       "Джордж Лукас",
@@ -897,6 +1014,10 @@
     "acceptedRu": [
       "Крис Коламбус",
       "Коламбус"
+    ],
+    "acceptedEn": [
+      "Chris Columbus",
+      "Columbus"
     ],
     "distractorsRu": [
       "Серджо Леоне",
@@ -922,6 +1043,10 @@
       "Питер Джексон",
       "Джексон"
     ],
+    "acceptedEn": [
+      "Peter Jackson",
+      "Jackson"
+    ],
     "distractorsRu": [
       "Майкл Кёртис",
       "Джеймс Кэмерон",
@@ -945,6 +1070,10 @@
     "acceptedRu": [
       "Мел Гибсон",
       "Гибсон"
+    ],
+    "acceptedEn": [
+      "Mel Gibson",
+      "Gibson"
     ],
     "distractorsRu": [
       "Чарли Чаплин",
@@ -970,6 +1099,10 @@
       "Джордж Лукас",
       "Лукас"
     ],
+    "acceptedEn": [
+      "George Lucas",
+      "Lucas"
+    ],
     "distractorsRu": [
       "Джонатан Демми",
       "Майкл Кёртис",
@@ -993,6 +1126,10 @@
     "acceptedRu": [
       "Майк Ньюэлл",
       "Ньюэлл"
+    ],
+    "acceptedEn": [
+      "Mike Newell",
+      "Newell"
     ],
     "distractorsRu": [
       "Энг Ли",
@@ -1018,6 +1155,10 @@
       "Гор Вербински",
       "Вербински"
     ],
+    "acceptedEn": [
+      "Gore Verbinski",
+      "Verbinski"
+    ],
     "distractorsRu": [
       "Квентин Тарантино",
       "Питер Джексон",
@@ -1041,6 +1182,10 @@
     "acceptedRu": [
       "Стэнли Кубрик",
       "Кубрик"
+    ],
+    "acceptedEn": [
+      "Stanley Kubrick",
+      "Kubrick"
     ],
     "distractorsRu": [
       "Рон Ховард",
@@ -1066,6 +1211,10 @@
       "Альфонсо Куарон",
       "Куарон"
     ],
+    "acceptedEn": [
+      "Alfonso Cuaron",
+      "Cuaron"
+    ],
     "distractorsRu": [
       "Дэвид Йейтс",
       "Майкл Кёртис",
@@ -1089,6 +1238,10 @@
     "acceptedRu": [
       "Дэвид Йейтс",
       "Йейтс"
+    ],
+    "acceptedEn": [
+      "David Yates",
+      "Yates"
     ],
     "distractorsRu": [
       "Зак Снайдер",
@@ -1114,6 +1267,10 @@
       "Дэвид Йейтс",
       "Йейтс"
     ],
+    "acceptedEn": [
+      "David Yates",
+      "Yates"
+    ],
     "distractorsRu": [
       "Стэнли Кубрик",
       "Гор Вербински",
@@ -1137,6 +1294,10 @@
     "acceptedRu": [
       "Фрэнсис Форд Коппола",
       "Коппола"
+    ],
+    "acceptedEn": [
+      "Francis Ford Coppola",
+      "Coppola"
     ],
     "distractorsRu": [
       "Дэвид Йейтс",
@@ -1162,6 +1323,10 @@
       "Питер Уир",
       "Уир"
     ],
+    "acceptedEn": [
+      "Peter Weir",
+      "Weir"
+    ],
     "distractorsRu": [
       "Мел Гибсон",
       "Альфонсо Куарон",
@@ -1185,6 +1350,10 @@
     "acceptedRu": [
       "Рон Ховард",
       "Ховард"
+    ],
+    "acceptedEn": [
+      "Ron Howard",
+      "Howard"
     ],
     "distractorsRu": [
       "Крис Коламбус",
@@ -1210,6 +1379,10 @@
       "Гор Вербински",
       "Вербински"
     ],
+    "acceptedEn": [
+      "Gore Verbinski",
+      "Verbinski"
+    ],
     "distractorsRu": [
       "Ричард Маркуанд",
       "Джордж Лукас",
@@ -1233,6 +1406,10 @@
     "acceptedRu": [
       "Энг Ли",
       "Ли"
+    ],
+    "acceptedEn": [
+      "Ang Lee",
+      "Lee"
     ],
     "distractorsRu": [
       "Билли Уайлдер",
@@ -1258,6 +1435,10 @@
       "Орсон Уэллс",
       "Уэллс"
     ],
+    "acceptedEn": [
+      "Orson Welles",
+      "Welles"
+    ],
     "distractorsRu": [
       "Майкл Кёртис",
       "Фрэнк Дарабонт",
@@ -1281,6 +1462,10 @@
     "acceptedRu": [
       "Джон Фавро",
       "Фавро"
+    ],
+    "acceptedEn": [
+      "Jon Favreau",
+      "Favreau"
     ],
     "distractorsRu": [
       "Альфонсо Куарон",
@@ -1306,6 +1491,10 @@
       "Ирвин Кершнер",
       "Кершнер"
     ],
+    "acceptedEn": [
+      "Irvin Kershner",
+      "Kershner"
+    ],
     "distractorsRu": [
       "Орсон Уэллс",
       "Фрэнсис Форд Коппола",
@@ -1329,6 +1518,10 @@
     "acceptedRu": [
       "Сэм Рэйми",
       "Рэйми"
+    ],
+    "acceptedEn": [
+      "Sam Raimi",
+      "Raimi"
     ],
     "distractorsRu": [
       "Энг Ли",
@@ -1354,6 +1547,10 @@
       "Ридли Скотт",
       "Скотт"
     ],
+    "acceptedEn": [
+      "Ridley Scott",
+      "Scott"
+    ],
     "distractorsRu": [
       "Стивен Спилберг",
       "Мел Гибсон",
@@ -1377,6 +1574,10 @@
     "acceptedRu": [
       "Ричард Маркуанд",
       "Маркуанд"
+    ],
+    "acceptedEn": [
+      "Richard Marquand",
+      "Marquand"
     ],
     "distractorsRu": [
       "Серджо Леоне",
@@ -1402,6 +1603,10 @@
       "Зак Снайдер",
       "Снайдер"
     ],
+    "acceptedEn": [
+      "Zack Snyder",
+      "Snyder"
+    ],
     "distractorsRu": [
       "Джонатан Демми",
       "Энг Ли",
@@ -1425,6 +1630,10 @@
     "acceptedRu": [
       "Джосс Уидон",
       "Уидон"
+    ],
+    "acceptedEn": [
+      "Joss Whedon",
+      "Whedon"
     ],
     "distractorsRu": [
       "Орсон Уэллс",
@@ -1450,6 +1659,10 @@
       "Билли Уайлдер",
       "Уайлдер"
     ],
+    "acceptedEn": [
+      "Billy Wilder",
+      "Wilder"
+    ],
     "distractorsRu": [
       "Энг Ли",
       "Серджо Леоне",
@@ -1474,6 +1687,10 @@
       "Чарли Чаплин",
       "Чаплин"
     ],
+    "acceptedEn": [
+      "Charlie Chaplin",
+      "Chaplin"
+    ],
     "distractorsRu": [
       "Джеймс Кэмерон",
       "Стэнли Кубрик",
@@ -1497,6 +1714,10 @@
     "acceptedRu": [
       "Пон Джун Хо",
       "Хо"
+    ],
+    "acceptedEn": [
+      "Bong Joon-ho",
+      "Bong Joon Ho"
     ],
     "distractorsRu": [
       "Дэвид Финчер",

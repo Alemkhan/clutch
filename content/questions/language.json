@@ -76,6 +76,9 @@
     "acceptedRu": [
       "португальский"
     ],
+    "acceptedEn": [
+      "Portuguese"
+    ],
     "distractorsRu": [
       "испанский",
       "бразильский",
@@ -96,6 +99,9 @@
     "answerRu": "антоним",
     "acceptedRu": [
       "антоним"
+    ],
+    "acceptedEn": [
+      "antonym"
     ],
     "distractorsRu": [
       "синоним",
@@ -142,6 +148,11 @@
       "мандаринский",
       "путунхуа"
     ],
+    "acceptedEn": [
+      "Chinese",
+      "Mandarin",
+      "Putonghua"
+    ],
     "distractorsRu": [
       "английский",
       "испанский",
@@ -163,6 +174,10 @@
     "acceptedRu": [
       "омонимы",
       "омоним"
+    ],
+    "acceptedEn": [
+      "homonym",
+      "homonyms"
     ],
     "distractorsRu": [
       "синонимы",
@@ -230,6 +245,10 @@
       "персидский",
       "фарси"
     ],
+    "acceptedEn": [
+      "Persian",
+      "Farsi"
+    ],
     "distractorsRu": [
       "арабский",
       "турецкий",
@@ -251,6 +270,10 @@
     "acceptedRu": [
       "аригато",
       "аригато годзаимас"
+    ],
+    "acceptedEn": [
+      "arigato",
+      "arigatou"
     ],
     "distractorsRu": [
       "конничива",
@@ -274,13 +297,13 @@
       "этимология"
     ],
     "distractorsRu": [
-      "энтомология",
+      "лексикология",
       "морфология",
       "фонетика"
     ],
     "openAnswer": false,
     "sourceHint": "Википедия: Этимология",
-    "reviewNote": "При вводе нечёткое сравнение путает с «энтомологией» — только выбор.",
+    "reviewNote": "Дистрактор «энтомология» заменён на «лексикологию»: нечёткое сравнение засчитывало его как ответ.",
     "origin": "authored",
     "license": "original"
   },
@@ -294,6 +317,9 @@
     "answerRu": "каталанский",
     "acceptedRu": [
       "каталанский"
+    ],
+    "acceptedEn": [
+      "Catalan"
     ],
     "distractorsRu": [
       "испанский",
@@ -318,7 +344,7 @@
     ],
     "distractorsRu": [
       "змееед",
-      "длинношеий",
+      "длинношейный",
       "зееед"
     ],
     "openAnswer": false,
@@ -363,6 +389,9 @@
       "греческая",
       "греческий"
     ],
+    "acceptedEn": [
+      "Greek"
+    ],
     "distractorsRu": [
       "финикийская",
       "арамейская",
@@ -387,6 +416,9 @@
       "Пи",
       "π"
     ],
+    "acceptedEn": [
+      "pi"
+    ],
     "distractorsRu": [
       "сигма",
       "дельта",
@@ -409,6 +441,9 @@
     "acceptedRu": [
       "амхарский",
       "амхарский язык"
+    ],
+    "acceptedEn": [
+      "Amharic"
     ],
     "distractorsRu": [
       "арабский",
@@ -434,6 +469,11 @@
       "семито-хамитская",
       "семитская"
     ],
+    "acceptedEn": [
+      "Afroasiatic",
+      "Afro-Asiatic",
+      "Semitic"
+    ],
     "distractorsRu": [
       "индоевропейская",
       "алтайская",
@@ -456,6 +496,10 @@
     "acceptedRu": [
       "баскский",
       "эускара"
+    ],
+    "acceptedEn": [
+      "Basque",
+      "Euskara"
     ],
     "distractorsRu": [
       "каталанский",

@@ -1,10 +1,4 @@
-import { useEffect, useState } from "react";
-import { fetchLastStandLeaderboard } from "../lib/api";
-import { buildLastStandHook, type LastStandHook } from "../lib/lastStandHook";
-import { getStats } from "../lib/localStats";
-
 interface HomeDashboardProps {
-  onLastStand: () => void;
   onSolo: () => void;
   onBoard: () => void;
 }
@@ -53,25 +47,7 @@ const LOOP_STEPS = [
   { kind: "progress", label: "Прогресс" },
 ] as const;
 
-export function HomeDashboard({ onLastStand, onSolo, onBoard }: HomeDashboardProps) {
-  const [lastStandHook, setLastStandHook] = useState<LastStandHook | null>(
-    null,
-  );
-
-  // Fire-and-forget: the home screen never waits for this. Any failure just means no hook.
-  useEffect(() => {
-    const controller = new AbortController();
-    fetchLastStandLeaderboard(undefined, controller.signal)
-      .then((raw) => {
-        if (!controller.signal.aborted)
-          setLastStandHook(buildLastStandHook(raw));
-      })
-      .catch(() => {});
-    return () => controller.abort();
-  }, []);
-
-  const stats = getStats();
-
+export function HomeDashboard({ onSolo, onBoard }: HomeDashboardProps) {
   return (
     <section className="home-dashboard">
       <header className="home-header">
@@ -79,10 +55,6 @@ export function HomeDashboard({ onLastStand, onSolo, onBoard }: HomeDashboardPro
           <span className="home-brand-mark">C</span>
           <span>CLUTCH</span>
         </div>
-        {/* Ноль в чипе читается как «тут пусто», поэтому серия показывается только когда она есть. */}
-        {stats.currentStreak > 0 && (
-          <span className="chip streak-chip">🔥 {stats.currentStreak}</span>
-        )}
       </header>
 
       <section className="home-hero-card">
@@ -114,31 +86,6 @@ export function HomeDashboard({ onLastStand, onSolo, onBoard }: HomeDashboardPro
         {/* Вход в таблицу дня: нижняя панель не меняется, место для него — на главной карточке. */}
         <button type="button" className="home-board-link" onClick={() => { onBoard(); }}>
           Таблица дня
-        </button>
-      </section>
-
-      <section className="ls-home-card" aria-labelledby="ls-home-title">
-        <div className="ls-home-top">
-          <h2 className="ls-home-title" id="ls-home-title">
-            Last Stand
-          </h2>
-          <span className="ls-home-kicker">До 12 кругов</span>
-        </div>
-        <p className="ls-home-lede">
-          Называй страны из объявленной категории и не совпадай с соперником.
-        </p>
-        {lastStandHook && (
-          <p className="ls-home-hook">{lastStandHook.headline}</p>
-        )}
-        <button
-          type="button"
-          className="ls-home-cta"
-          aria-label="Last Stand: начать забег по категориям стран"
-          onClick={() => {
-            onLastStand();
-          }}
-        >
-          Начать забег <span aria-hidden="true">→</span>
         </button>
       </section>
     </section>

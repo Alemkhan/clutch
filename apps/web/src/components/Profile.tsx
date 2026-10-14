@@ -1,21 +1,28 @@
-import { getStats, winRatePercent } from '../lib/localStats';
-import { ScreenHeader } from './ScreenHeader';
+import { useCallback, useEffect, useState } from 'react';
+import type { SoloProfileResponse } from '@clutch/shared';
+import { fetchSoloProfile } from '../lib/api';
+import { soloRoundsText } from '../lib/myRunsView';
 import { getTelegramIdentity } from '../lib/telegram';
+import { ScreenHeader } from './ScreenHeader';
 import { SoundToggle } from './SoundToggle';
 
 interface ProfileProps {
   onBack: () => void;
 }
 
-export function Profile({ onBack }: ProfileProps) {
-  const stats = getStats();
-  const playerName = getTelegramIdentity()?.displayName || 'Игрок';
+export type ProfileState =
+  | { status: 'loading' }
+  | { status: 'error' }
+  | { status: 'ready'; profile: SoloProfileResponse };
 
-  const badges = [
-    { id: 'hammer', name: 'Первый удар', icon: '◆', earned: stats.matchesPlayed > 0 },
-    { id: 'streak', name: 'На огне', icon: '↗', earned: stats.bestStreak >= 3 },
-    { id: 'star', name: 'Чемпион', icon: '★', earned: stats.wins >= 5 },
-  ];
+interface ProfileViewProps extends ProfileProps {
+  playerName: string;
+  state: ProfileState;
+  onRetry: () => void;
+}
+
+export function ProfileView({ onBack, playerName, state, onRetry }: ProfileViewProps) {
+  const empty = state.status === 'ready' && state.profile.completedRuns === 0;
 
   return (
     <section className="profile-screen">
@@ -24,36 +31,74 @@ export function Profile({ onBack }: ProfileProps) {
       <div className="profile-head">
         <span className="profile-avatar" aria-hidden="true">{playerName.slice(0, 2).toUpperCase()}</span>
         <h1 className="profile-name">{playerName}</h1>
-        <p className="profile-tag">Пилотная сборка — статистика хранится на этом устройстве</p>
+        <p className="profile-tag">Подтверждённая статистика зачётных соло-забегов</p>
       </div>
 
-      <div className="home-stats-card">
-        <div className="mini-stat">
-          <span className="mini-stat-value">{stats.wins}</span>
-          <span className="mini-stat-label">Побед</span>
+      {state.status === 'loading' && (
+        <div className="matchmaking-loading" role="status"><span /> Загружаем статистику</div>
+      )}
+
+      {state.status === 'error' && (
+        <div className="my-runs-message">
+          <p className="matchmaking-error" role="alert">Не удалось загрузить статистику. Проверь соединение и попробуй ещё раз.</p>
+          <button type="button" className="cta-btn" onClick={onRetry}>Повторить</button>
         </div>
-        <div className="mini-stat">
-          <span className="mini-stat-value">{winRatePercent(stats)}%</span>
-          <span className="mini-stat-label">Винрейт</span>
-        </div>
-        <div className="mini-stat">
-          <span className="mini-stat-value">{stats.bestStreak}</span>
-          <span className="mini-stat-label">Лучшая серия</span>
-        </div>
-      </div>
+      )}
+
+      {state.status === 'ready' && (
+        <>
+          <div className="home-stats-card">
+            <div className="mini-stat">
+              <span className="mini-stat-value">{state.profile.completedRuns}</span>
+              <span className="mini-stat-label">Забегов</span>
+            </div>
+            <div className="mini-stat">
+              <span className="mini-stat-value">{state.profile.reachedTargetRuns}</span>
+              <span className="mini-stat-label">Финишей</span>
+            </div>
+            <div className="mini-stat">
+              <span className="mini-stat-value">
+                {state.profile.bestRounds === null ? '—' : soloRoundsText(state.profile.bestRounds)}
+              </span>
+              <span className="mini-stat-label">Лучший финиш</span>
+            </div>
+          </div>
+          {empty && <p className="profile-tag">Сыграй первый зачётный забег — результат появится здесь.</p>}
+        </>
+      )}
 
       <h2 className="section-heading">Настройки</h2>
       <SoundToggle variant="profile" />
-
-      <h2 className="section-heading">Достижения</h2>
-      <div className="badge-grid">
-        {badges.map((b) => (
-          <div key={b.id} className={`badge-item ${b.earned ? '' : 'locked'}`}>
-            <span className="badge-symbol" aria-hidden="true">{b.icon}</span>
-            <span>{b.name}</span>
-          </div>
-        ))}
-      </div>
     </section>
+  );
+}
+
+export function Profile({ onBack }: ProfileProps) {
+  const [state, setState] = useState<ProfileState>({ status: 'loading' });
+  const [requestKey, setRequestKey] = useState(0);
+  const playerName = getTelegramIdentity()?.displayName || 'Игрок';
+  const retry = useCallback(() => {
+    setState({ status: 'loading' });
+    setRequestKey((key) => key + 1);
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchSoloProfile(controller.signal).then(
+      (profile) => setState({ status: 'ready', profile }),
+      (error: unknown) => {
+        if (!(error instanceof DOMException && error.name === 'AbortError')) setState({ status: 'error' });
+      },
+    );
+    return () => controller.abort();
+  }, [requestKey]);
+
+  return (
+    <ProfileView
+      onBack={onBack}
+      playerName={playerName}
+      state={state}
+      onRetry={retry}
+    />
   );
 }

@@ -33,6 +33,26 @@ describe('generateQuestionById', () => {
     }
   });
 
+  it('still rebuilds a legacy open country outline id', () => {
+    const question = generateQuestionById('open_outline_country_md');
+    expect(question).toMatchObject({
+      id: 'open_outline_country_md',
+      answerType: 'open_answer',
+      mediaType: 'outline',
+    });
+  });
+
+  it.each([
+    ['capital_bz', 'Какой город — столица страны Белиз?'],
+    ['flag_capital_bz', 'Какой город — столица страны с этим флагом?'],
+    ['open_capital_bz', 'Напишите название города — столицы страны Белиз.'],
+    ['capital_fixed_bz', 'Напишите название города — столицы страны Белиз.'],
+  ])('uses an unambiguous capital prompt for %s', (id, prompt) => {
+    const question = generateQuestionById(id);
+    expect(question?.prompt).toBe(prompt);
+    expect(question?.prompt).toMatch(/город.*столиц/u);
+  });
+
   it.each([
     '', 'garbage', 'capital_', 'capital_zz', 'outline_country_xk', 'lang_nope', 'hist_flag_nope',
     'unknown_kr', '__proto__', 'capital_constructor',

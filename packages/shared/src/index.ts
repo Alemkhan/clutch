@@ -303,6 +303,14 @@ export interface MyRunsResponse {
   invites: MyRematchInvite[];
 }
 
+/** Подтверждённая сервером сводка только по текущему зачётному solo-режиму. */
+export interface SoloProfileResponse {
+  completedRuns: number;
+  reachedTargetRuns: number;
+  /** Минимальное число кругов среди финишей до 100%; null, пока финишей нет. */
+  bestRounds: number | null;
+}
+
 export interface Opponent {
   id: string;
   displayName: string;
@@ -345,6 +353,7 @@ export const CURRENT_SOLO_RUN_CONDITIONS: AsyncMatchConditions = {
 
 export * from './countries';
 export * from './flagTraits';
+export * from './telemetry';
 export * from './historicFlags';
 export * from './languages';
 export * from './narrowCategories';

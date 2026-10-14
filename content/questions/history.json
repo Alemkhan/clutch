@@ -10,6 +10,9 @@
     "acceptedRu": [
       "Египет"
     ],
+    "acceptedEn": [
+      "Egypt"
+    ],
     "distractorsRu": [
       "Мексика",
       "Перу",
@@ -52,6 +55,9 @@
     "acceptedRu": [
       "Рим"
     ],
+    "acceptedEn": [
+      "Rome"
+    ],
     "distractorsRu": [
       "Афины",
       "Флоренция",
@@ -73,6 +79,10 @@
     "acceptedRu": [
       "Джордж Вашингтон",
       "Вашингтон"
+    ],
+    "acceptedEn": [
+      "George Washington",
+      "Washington"
     ],
     "distractorsRu": [
       "Авраам Линкольн",
@@ -118,6 +128,10 @@
       "Александр Великий",
       "Александр"
     ],
+    "acceptedEn": [
+      "Alexander the Great",
+      "Alexander"
+    ],
     "distractorsRu": [
       "Юлий Цезарь",
       "Дарий",
@@ -159,6 +173,10 @@
     "answerRu": "майя",
     "acceptedRu": [
       "майя"
+    ],
+    "acceptedEn": [
+      "Maya",
+      "Mayans"
     ],
     "distractorsRu": [
       "ацтеки",
@@ -204,6 +222,11 @@
       "Темучин",
       "Тэмуджин"
     ],
+    "acceptedEn": [
+      "Genghis Khan",
+      "Genghis",
+      "Temujin"
+    ],
     "distractorsRu": [
       "Хубилай",
       "Батый",
@@ -228,6 +251,10 @@
       "Шёлковый путь",
       "Шелковый путь"
     ],
+    "acceptedEn": [
+      "Silk Road",
+      "Great Silk Road"
+    ],
     "distractorsRu": [
       "Янтарный путь",
       "Путь из варяг в греки",
@@ -251,6 +278,10 @@
       "Цинь Шихуан",
       "Шихуанди"
     ],
+    "acceptedEn": [
+      "Qin Shi Huang",
+      "Qin Shi Huangdi"
+    ],
     "distractorsRu": [
       "Чингисхан",
       "Хубилай",
@@ -272,6 +303,9 @@
     "acceptedRu": [
       "Константинополь",
       "Царьград"
+    ],
+    "acceptedEn": [
+      "Constantinople"
     ],
     "distractorsRu": [
       "Рим",
@@ -300,6 +334,10 @@
       "Петр Великий",
       "Пётр 1",
       "Петр 1"
+    ],
+    "acceptedEn": [
+      "Peter the Great",
+      "Peter I"
     ],
     "distractorsRu": [
       "Иван Грозный",
@@ -343,6 +381,9 @@
     "acceptedRu": [
       "Ганнибал"
     ],
+    "acceptedEn": [
+      "Hannibal"
+    ],
     "distractorsRu": [
       "Александр Македонский",
       "Юлий Цезарь",
@@ -365,6 +406,9 @@
       "Клеопатра",
       "Клеопатра VII"
     ],
+    "acceptedEn": [
+      "Cleopatra"
+    ],
     "distractorsRu": [
       "Нефертити",
       "Хатшепсут",
@@ -386,6 +430,9 @@
     "acceptedRu": [
       "Виктория",
       "«Виктория»"
+    ],
+    "acceptedEn": [
+      "Victoria"
     ],
     "distractorsRu": [
       "Санта-Мария",
@@ -429,6 +476,9 @@
     "acceptedRu": [
       "Шах-Джахан",
       "Шах Джахан"
+    ],
+    "acceptedEn": [
+      "Shah Jahan"
     ],
     "distractorsRu": [
       "Акбар",
@@ -476,6 +526,10 @@
       "Джеймс Мэдисон",
       "Мэдисон"
     ],
+    "acceptedEn": [
+      "James Madison",
+      "Madison"
+    ],
     "distractorsRu": [
       "Томас Джефферсон",
       "Джон Адамс",
@@ -498,6 +552,10 @@
     "acceptedRu": [
       "Джеральд Форд",
       "Форд"
+    ],
+    "acceptedEn": [
+      "Gerald Ford",
+      "Ford"
     ],
     "distractorsRu": [
       "Ричард Никсон",
@@ -522,6 +580,10 @@
       "Джордж Оруэлл",
       "Оруэлл"
     ],
+    "acceptedEn": [
+      "George Orwell",
+      "Orwell"
+    ],
     "distractorsRu": [
       "Олдос Хаксли",
       "Рэй Брэдбери",
@@ -544,6 +606,9 @@
     "acceptedRu": [
       "Санта-Мария",
       "Санта Мария"
+    ],
+    "acceptedEn": [
+      "Santa Maria"
     ],
     "distractorsRu": [
       "Пинта",
@@ -591,6 +656,10 @@
       "Гарри Трумэн",
       "Трумэн"
     ],
+    "acceptedEn": [
+      "Harry Truman",
+      "Truman"
+    ],
     "distractorsRu": [
       "Франклин Рузвельт",
       "Дуайт Эйзенхауэр",
@@ -613,6 +682,10 @@
     "acceptedRu": [
       "Отто Франк",
       "Отто"
+    ],
+    "acceptedEn": [
+      "Otto Frank",
+      "Otto"
     ],
     "distractorsRu": [
       "Петер Франк",
@@ -662,6 +735,10 @@
       "Хань",
       "династия Хань"
     ],
+    "acceptedEn": [
+      "Han",
+      "Han dynasty"
+    ],
     "distractorsRu": [
       "Тан",
       "Мин",
@@ -707,6 +784,9 @@
     "acceptedRu": [
       "Польша"
     ],
+    "acceptedEn": [
+      "Poland"
+    ],
     "distractorsRu": [
       "Франция",
       "Чехословакия",
@@ -728,6 +808,9 @@
     "answerRu": "Ялта",
     "acceptedRu": [
       "Ялта"
+    ],
+    "acceptedEn": [
+      "Yalta"
     ],
     "distractorsRu": [
       "Севастополь",
@@ -751,6 +834,9 @@
     "acceptedRu": [
       "Колосс Родосский"
     ],
+    "acceptedEn": [
+      "Colossus of Rhodes"
+    ],
     "distractorsRu": [
       "Статуя Зевса в Олимпии",
       "Александрийский маяк",
@@ -773,6 +859,9 @@
     "acceptedRu": [
       "Вавилон"
     ],
+    "acceptedEn": [
+      "Babylon"
+    ],
     "distractorsRu": [
       "Ур",
       "Ниневия",
@@ -794,6 +883,9 @@
     "answerRu": "Фидий",
     "acceptedRu": [
       "Фидий"
+    ],
+    "acceptedEn": [
+      "Phidias"
     ],
     "distractorsRu": [
       "Пракситель",
@@ -818,6 +910,9 @@
       "Фарос",
       "остров Фарос"
     ],
+    "acceptedEn": [
+      "Pharos"
+    ],
     "distractorsRu": [
       "Крит",
       "Родос",
@@ -839,6 +934,9 @@
     "answerRu": "Турция",
     "acceptedRu": [
       "Турция"
+    ],
+    "acceptedEn": [
+      "Turkey"
     ],
     "distractorsRu": [
       "Греция",
@@ -863,6 +961,9 @@
       "Туссен-Лувертюр",
       "Туссен Лувертюр"
     ],
+    "acceptedEn": [
+      "Toussaint Louverture"
+    ],
     "distractorsRu": [
       "Симон Боливар",
       "Хосе де Сан-Мартин",
@@ -886,6 +987,9 @@
       "Революция гвоздик",
       "революция гвоздик"
     ],
+    "acceptedEn": [
+      "Carnation Revolution"
+    ],
     "distractorsRu": [
       "Бархатная революция",
       "Революция роз",
@@ -908,6 +1012,9 @@
     "acceptedRu": [
       "Пол Пот"
     ],
+    "acceptedEn": [
+      "Pol Pot"
+    ],
     "distractorsRu": [
       "Хо Ши Мин",
       "Сукарно",
@@ -929,6 +1036,9 @@
     "answerRu": "Цейлон",
     "acceptedRu": [
       "Цейлон"
+    ],
+    "acceptedEn": [
+      "Ceylon"
     ],
     "distractorsRu": [
       "Бирма",
@@ -976,6 +1086,10 @@
       "Миссури",
       "линкор Миссури"
     ],
+    "acceptedEn": [
+      "Missouri",
+      "USS Missouri"
+    ],
     "distractorsRu": [
       "Аризона",
       "Айова",
@@ -1021,6 +1135,9 @@
     "acceptedRu": [
       "Стоунхендж"
     ],
+    "acceptedEn": [
+      "Stonehenge"
+    ],
     "distractorsRu": [
       "Карнак",
       "Ньюгрейндж",
@@ -1044,6 +1161,10 @@
       "Колизей",
       "Амфитеатр Флавиев"
     ],
+    "acceptedEn": [
+      "Colosseum",
+      "Flavian Amphitheatre"
+    ],
     "distractorsRu": [
       "Пантеон",
       "Форум",
@@ -1065,6 +1186,9 @@
     "answerRu": "Пиза",
     "acceptedRu": [
       "Пиза"
+    ],
+    "acceptedEn": [
+      "Pisa"
     ],
     "distractorsRu": [
       "Флоренция",
@@ -1110,6 +1234,9 @@
     "answerRu": "Бахрейн",
     "acceptedRu": [
       "Бахрейн"
+    ],
+    "acceptedEn": [
+      "Bahrain"
     ],
     "distractorsRu": [
       "Катар",

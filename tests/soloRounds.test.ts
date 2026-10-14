@@ -457,6 +457,48 @@ describe('mistake training on the server', () => {
     return inputs;
   }
 
+  it('uses the same exact-only year policy as solo answers', async () => {
+    async function soloVerdict(selectedAnswer: string): Promise<boolean> {
+      const db = database();
+      const run = await start(db, `solo-${selectedAnswer}`);
+      const questions = fullQuestions(db, run.runId);
+      const year: Question = {
+        ...questions[0],
+        id: 'matcher-policy-year',
+        answerType: 'open_answer',
+        options: [],
+        correctOptionId: '',
+        correctAnswers: ['1896'],
+      };
+      db.sqlite.prepare('UPDATE match_runs SET questions_json = ? WHERE id = ?')
+        .run(JSON.stringify([year, ...questions.slice(1)]), run.runId);
+      const response = await answer(db, `solo-${selectedAnswer}`, run.runId, 0, {
+        questionId: year.id,
+        selectedAnswer,
+        responseTimeMs: 1000,
+      });
+      expect(response.status).toBe(200);
+      return ((await response.json()) as SoloRoundResponse).correct;
+    }
+
+    expect(await soloVerdict('1886')).toBe(false);
+    expect(await soloVerdict(' 1896. ')).toBe(true);
+
+    const db = database();
+    const run = await start(db, 'training-year');
+    const player = db.sqlite.prepare('SELECT player_id FROM match_runs WHERE id = ?').get(run.runId) as { player_id: string };
+    const questionId = 'gp:au-sport-afoq59:open';
+    await recordMistake(db.binding, player.player_id, questionId, NOW);
+    for (const wrong of ['1886', '1996', '1895', '896']) {
+      const response = await trainingCheck(db, 'training-year', questionId, wrong);
+      expect(response.status).toBe(200);
+      expect(((await response.json()) as TrainingCheckResponse).correct).toBe(false);
+    }
+    const exact = await trainingCheck(db, 'training-year', questionId, ' 1896. ');
+    expect(exact.status).toBe(200);
+    expect(((await exact.json()) as TrainingCheckResponse).correct).toBe(true);
+  });
+
   it('does not hand out the answer to a question taken from a fresh run, on either route', async () => {
     const db = database();
     const run = await start(db, 'ann');

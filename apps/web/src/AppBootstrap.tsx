@@ -5,6 +5,7 @@ import {
   observeTelegramInitialization,
   type TelegramBootstrapResult,
 } from './lib/bootstrap';
+import { installSoundUnlock } from './lib/sounds';
 
 export const TELEGRAM_BOOTSTRAP_TIMEOUT_MS = 2_500;
 
@@ -27,6 +28,8 @@ export default function AppBootstrap() {
     setResult,
     TELEGRAM_BOOTSTRAP_TIMEOUT_MS,
   ), []);
+
+  useEffect(() => installSoundUnlock(), []);
 
   if (result === 'loading') return <LoadingShell />;
 

@@ -12,6 +12,9 @@
       "CO2",
       "диоксид углерода"
     ],
+    "acceptedEn": [
+      "carbon dioxide"
+    ],
     "distractorsRu": [
       "кислород",
       "азот",
@@ -99,6 +102,9 @@
     "acceptedRu": [
       "электрон"
     ],
+    "acceptedEn": [
+      "electron"
+    ],
     "distractorsRu": [
       "протон",
       "нейтрон",
@@ -122,6 +128,11 @@
       "амперы",
       "А"
     ],
+    "acceptedEn": [
+      "ampere",
+      "amp",
+      "A"
+    ],
     "distractorsRu": [
       "вольт",
       "ватт",
@@ -142,6 +153,9 @@
     "answerRu": "биология",
     "acceptedRu": [
       "биология"
+    ],
+    "acceptedEn": [
+      "biology"
     ],
     "distractorsRu": [
       "геология",
@@ -165,6 +179,10 @@
       "Исаак Ньютон",
       "Ньютон"
     ],
+    "acceptedEn": [
+      "Isaac Newton",
+      "Newton"
+    ],
     "distractorsRu": [
       "Галилео Галилей",
       "Альберт Эйнштейн",
@@ -186,6 +204,10 @@
     "acceptedRu": [
       "Дмитрий Менделеев",
       "Менделеев"
+    ],
+    "acceptedEn": [
+      "Dmitri Mendeleev",
+      "Mendeleev"
     ],
     "distractorsRu": [
       "Михаил Ломоносов",
@@ -211,6 +233,9 @@
       "сила тяжести",
       "притяжение"
     ],
+    "acceptedEn": [
+      "gravity"
+    ],
     "distractorsRu": [
       "магнетизм",
       "трение",
@@ -231,6 +256,9 @@
     "answerRu": "азот",
     "acceptedRu": [
       "азот"
+    ],
+    "acceptedEn": [
+      "nitrogen"
     ],
     "distractorsRu": [
       "кислород",
@@ -256,6 +284,10 @@
       "герцы",
       "Гц"
     ],
+    "acceptedEn": [
+      "hertz",
+      "Hz"
+    ],
     "distractorsRu": [
       "децибел",
       "джоуль",
@@ -277,6 +309,9 @@
     "acceptedRu": [
       "скорость света"
     ],
+    "acceptedEn": [
+      "speed of light"
+    ],
     "distractorsRu": [
       "ускорение свободного падения",
       "теплоёмкость",
@@ -297,6 +332,9 @@
     "answerRu": "серебро",
     "acceptedRu": [
       "серебро"
+    ],
+    "acceptedEn": [
+      "silver"
     ],
     "distractorsRu": [
       "медь",
@@ -320,6 +358,9 @@
       "сублимация",
       "возгонка"
     ],
+    "acceptedEn": [
+      "sublimation"
+    ],
     "distractorsRu": [
       "конденсация",
       "испарение",
@@ -342,6 +383,10 @@
       "Александр Флеминг",
       "Флеминг"
     ],
+    "acceptedEn": [
+      "Alexander Fleming",
+      "Fleming"
+    ],
     "distractorsRu": [
       "Луи Пастер",
       "Роберт Кох",
@@ -362,6 +407,9 @@
     "answerRu": "водород",
     "acceptedRu": [
       "водород"
+    ],
+    "acceptedEn": [
+      "hydrogen"
     ],
     "distractorsRu": [
       "гелий",
@@ -384,6 +432,10 @@
     "acceptedRu": [
       "беккерель",
       "Бк"
+    ],
+    "acceptedEn": [
+      "becquerel",
+      "Bq"
     ],
     "distractorsRu": [
       "зиверт",
@@ -433,6 +485,10 @@
       "Чарльз Дарвин",
       "Дарвин"
     ],
+    "acceptedEn": [
+      "Charles Darwin",
+      "Darwin"
+    ],
     "distractorsRu": [
       "Жан-Батист Ламарк",
       "Грегор Мендель",
@@ -454,6 +510,9 @@
     "answerRu": "водород",
     "acceptedRu": [
       "водород"
+    ],
+    "acceptedEn": [
+      "hydrogen"
     ],
     "distractorsRu": [
       "азот",
@@ -478,6 +537,9 @@
     "acceptedRu": [
       "кислород"
     ],
+    "acceptedEn": [
+      "oxygen"
+    ],
     "distractorsRu": [
       "калий",
       "галлий",
@@ -500,6 +562,9 @@
     "answerRu": "углерод",
     "acceptedRu": [
       "углерод"
+    ],
+    "acceptedEn": [
+      "carbon"
     ],
     "distractorsRu": [
       "бор",
@@ -524,6 +589,9 @@
     "acceptedRu": [
       "железо"
     ],
+    "acceptedEn": [
+      "iron"
+    ],
     "distractorsRu": [
       "углерод",
       "мышьяк",
@@ -546,6 +614,9 @@
     "answerRu": "золото",
     "acceptedRu": [
       "золото"
+    ],
+    "acceptedEn": [
+      "gold"
     ],
     "distractorsRu": [
       "натрий",
@@ -570,6 +641,9 @@
     "acceptedRu": [
       "серебро"
     ],
+    "acceptedEn": [
+      "silver"
+    ],
     "distractorsRu": [
       "ксенон",
       "иридий",
@@ -592,6 +666,9 @@
     "answerRu": "азот",
     "acceptedRu": [
       "азот"
+    ],
+    "acceptedEn": [
+      "nitrogen"
     ],
     "distractorsRu": [
       "уран",
@@ -616,6 +693,9 @@
     "acceptedRu": [
       "гелий"
     ],
+    "acceptedEn": [
+      "helium"
+    ],
     "distractorsRu": [
       "фтор",
       "кальций",
@@ -638,6 +718,9 @@
     "answerRu": "натрий",
     "acceptedRu": [
       "натрий"
+    ],
+    "acceptedEn": [
+      "sodium"
     ],
     "distractorsRu": [
       "ниобий",
@@ -662,6 +745,9 @@
     "acceptedRu": [
       "медь"
     ],
+    "acceptedEn": [
+      "copper"
+    ],
     "distractorsRu": [
       "самарий",
       "полоний",
@@ -684,6 +770,9 @@
     "answerRu": "кальций",
     "acceptedRu": [
       "кальций"
+    ],
+    "acceptedEn": [
+      "calcium"
     ],
     "distractorsRu": [
       "франций",
@@ -708,6 +797,9 @@
     "acceptedRu": [
       "калий"
     ],
+    "acceptedEn": [
+      "potassium"
+    ],
     "distractorsRu": [
       "платина",
       "никель",
@@ -730,6 +822,9 @@
     "answerRu": "хлор",
     "acceptedRu": [
       "хлор"
+    ],
+    "acceptedEn": [
+      "chlorine"
     ],
     "distractorsRu": [
       "полоний",
@@ -754,6 +849,10 @@
     "acceptedRu": [
       "алюминий"
     ],
+    "acceptedEn": [
+      "aluminium",
+      "aluminum"
+    ],
     "distractorsRu": [
       "мышьяк",
       "марганец",
@@ -776,6 +875,9 @@
     "answerRu": "цинк",
     "acceptedRu": [
       "цинк"
+    ],
+    "acceptedEn": [
+      "zinc"
     ],
     "distractorsRu": [
       "прометий",
@@ -800,6 +902,9 @@
     "acceptedRu": [
       "ртуть"
     ],
+    "acceptedEn": [
+      "mercury"
+    ],
     "distractorsRu": [
       "аргон",
       "бор",
@@ -822,6 +927,9 @@
     "answerRu": "свинец",
     "acceptedRu": [
       "свинец"
+    ],
+    "acceptedEn": [
+      "lead"
     ],
     "distractorsRu": [
       "ниобий",
@@ -846,6 +954,9 @@
     "acceptedRu": [
       "олово"
     ],
+    "acceptedEn": [
+      "tin"
+    ],
     "distractorsRu": [
       "сурьма",
       "натрий",
@@ -868,6 +979,9 @@
     "answerRu": "уран",
     "acceptedRu": [
       "уран"
+    ],
+    "acceptedEn": [
+      "uranium"
     ],
     "distractorsRu": [
       "серебро",
@@ -892,6 +1006,9 @@
     "acceptedRu": [
       "магний"
     ],
+    "acceptedEn": [
+      "magnesium"
+    ],
     "distractorsRu": [
       "фосфор",
       "литий",
@@ -914,6 +1031,9 @@
     "answerRu": "кремний",
     "acceptedRu": [
       "кремний"
+    ],
+    "acceptedEn": [
+      "silicon"
     ],
     "distractorsRu": [
       "молибден",
@@ -938,6 +1058,9 @@
     "acceptedRu": [
       "фосфор"
     ],
+    "acceptedEn": [
+      "phosphorus"
+    ],
     "distractorsRu": [
       "осмий",
       "медь",
@@ -960,6 +1083,10 @@
     "answerRu": "сера",
     "acceptedRu": [
       "сера"
+    ],
+    "acceptedEn": [
+      "sulfur",
+      "sulphur"
     ],
     "distractorsRu": [
       "висмут",
@@ -984,6 +1111,9 @@
     "acceptedRu": [
       "иод"
     ],
+    "acceptedEn": [
+      "iodine"
+    ],
     "distractorsRu": [
       "медь",
       "литий",
@@ -1006,6 +1136,9 @@
     "answerRu": "никель",
     "acceptedRu": [
       "никель"
+    ],
+    "acceptedEn": [
+      "nickel"
     ],
     "distractorsRu": [
       "азот",
@@ -1030,6 +1163,9 @@
     "acceptedRu": [
       "титан"
     ],
+    "acceptedEn": [
+      "titanium"
+    ],
     "distractorsRu": [
       "празеодим",
       "франций",
@@ -1052,6 +1188,9 @@
     "answerRu": "неон",
     "acceptedRu": [
       "неон"
+    ],
+    "acceptedEn": [
+      "neon"
     ],
     "distractorsRu": [
       "стронций",
@@ -1076,6 +1215,9 @@
     "acceptedRu": [
       "аргон"
     ],
+    "acceptedEn": [
+      "argon"
+    ],
     "distractorsRu": [
       "астат",
       "ртуть",
@@ -1098,6 +1240,9 @@
     "answerRu": "платина",
     "acceptedRu": [
       "платина"
+    ],
+    "acceptedEn": [
+      "platinum"
     ],
     "distractorsRu": [
       "рутений",
@@ -1122,6 +1267,9 @@
     "acceptedRu": [
       "литий"
     ],
+    "acceptedEn": [
+      "lithium"
+    ],
     "distractorsRu": [
       "гафний",
       "селен",
@@ -1144,6 +1292,9 @@
     "answerRu": "фтор",
     "acceptedRu": [
       "фтор"
+    ],
+    "acceptedEn": [
+      "fluorine"
     ],
     "distractorsRu": [
       "лантан",
@@ -1168,6 +1319,9 @@
     "acceptedRu": [
       "хром"
     ],
+    "acceptedEn": [
+      "chromium"
+    ],
     "distractorsRu": [
       "неодим",
       "кальций",
@@ -1190,6 +1344,9 @@
     "answerRu": "кобальт",
     "acceptedRu": [
       "кобальт"
+    ],
+    "acceptedEn": [
+      "cobalt"
     ],
     "distractorsRu": [
       "иод",
@@ -1214,6 +1371,9 @@
     "acceptedRu": [
       "марганец"
     ],
+    "acceptedEn": [
+      "manganese"
+    ],
     "distractorsRu": [
       "торий",
       "кремний",
@@ -1236,6 +1396,10 @@
     "answerRu": "вольфрам",
     "acceptedRu": [
       "вольфрам"
+    ],
+    "acceptedEn": [
+      "tungsten",
+      "wolfram"
     ],
     "distractorsRu": [
       "углерод",
@@ -1260,6 +1424,9 @@
     "acceptedRu": [
       "радий"
     ],
+    "acceptedEn": [
+      "radium"
+    ],
     "distractorsRu": [
       "селен",
       "лютеций",
@@ -1282,6 +1449,9 @@
     "answerRu": "радон",
     "acceptedRu": [
       "радон"
+    ],
+    "acceptedEn": [
+      "radon"
     ],
     "distractorsRu": [
       "лантан",
@@ -1306,6 +1476,9 @@
     "acceptedRu": [
       "барий"
     ],
+    "acceptedEn": [
+      "barium"
+    ],
     "distractorsRu": [
       "таллий",
       "тербий",
@@ -1328,6 +1501,9 @@
     "answerRu": "стронций",
     "acceptedRu": [
       "стронций"
+    ],
+    "acceptedEn": [
+      "strontium"
     ],
     "distractorsRu": [
       "неодим",
@@ -1352,6 +1528,9 @@
     "acceptedRu": [
       "бром"
     ],
+    "acceptedEn": [
+      "bromine"
+    ],
     "distractorsRu": [
       "гольмий",
       "углерод",
@@ -1374,6 +1553,9 @@
     "answerRu": "криптон",
     "acceptedRu": [
       "криптон"
+    ],
+    "acceptedEn": [
+      "krypton"
     ],
     "distractorsRu": [
       "калий",
@@ -1398,6 +1580,9 @@
     "acceptedRu": [
       "ксенон"
     ],
+    "acceptedEn": [
+      "xenon"
+    ],
     "distractorsRu": [
       "цирконий",
       "скандий",
@@ -1420,6 +1605,9 @@
     "answerRu": "плутоний",
     "acceptedRu": [
       "плутоний"
+    ],
+    "acceptedEn": [
+      "plutonium"
     ],
     "distractorsRu": [
       "литий",
@@ -1467,6 +1655,9 @@
     "acceptedRu": [
       "плазма"
     ],
+    "acceptedEn": [
+      "plasma"
+    ],
     "distractorsRu": [
       "конденсат Бозе-Эйнштейна",
       "жидкость",
@@ -1489,6 +1680,10 @@
     "acceptedRu": [
       "бозон Хиггса",
       "Хиггс"
+    ],
+    "acceptedEn": [
+      "Higgs boson",
+      "Higgs"
     ],
     "distractorsRu": [
       "фотон",
@@ -1513,6 +1708,9 @@
       "герц",
       "Гц",
       "Hz"
+    ],
+    "acceptedEn": [
+      "hertz"
     ],
     "distractorsRu": [
       "паскаль",

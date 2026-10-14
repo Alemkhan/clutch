@@ -11,6 +11,8 @@ import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
   dailyQuestionSet,
   dailyQuestionSetIds,
+  setPar,
+  soloScore,
   type AsyncMatchRound,
   type AsyncMatchRoundInput,
   type Question,
@@ -83,9 +85,13 @@ function guest(label: string): { authorization: string; playerId: string } {
 /** Чужая завершённая запись на наборе дня: именно её получит следующий игрок соперником. */
 function insertRecord(db: TestD1, id: string, playerId: string, displayName: string): void {
   const set = dailyQuestionSet('geography', NOW, 0);
+  const par = setPar(set.questions);
   let progress = 0;
-  const rounds: AsyncMatchRound[] = [25, 25, 25, 25].map((progressAwarded, index) => {
-    progress += progressAwarded;
+  // A deliberately beatable but valid record. Derive its score from the current set instead
+  // of freezing the old par: beta cuts can change the mix and therefore question pricing.
+  const rewards = [18, 18, 18, 18, 18, 12];
+  const rounds: AsyncMatchRound[] = rewards.map((progressAwarded, index) => {
+    progress = Math.min(100, progress + progressAwarded);
     return {
       questionId: set.questions[index].id,
       correct: true,
@@ -99,19 +105,22 @@ function insertRecord(db: TestD1, id: string, playerId: string, displayName: str
       id, player_id, display_name, category, questions_json, rounds_json, progress,
       correct_count, status, created_at, completed_at, rules_version, mini_game_id,
       mini_game_config_json, ghost_eligible, question_set_id, reached_target, set_par, solo_score
-    ) VALUES (?, ?, ?, 'geography', ?, ?, 100, 4, 'completed', ?, ?, ?, ?, ?, 1, ?, 1, 9, 0.44)
+    ) VALUES (?, ?, ?, 'geography', ?, ?, 100, ?, 'completed', ?, ?, ?, ?, ?, 1, ?, 1, ?, ?)
   `).run(
     id,
     playerId,
     displayName,
     JSON.stringify(set.questions),
     JSON.stringify(rounds),
+    rounds.length,
     NOW - 2000,
     NOW - 1000,
     'solo-to-100-v2',
     CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
     configJson,
     set.questionSetId,
+    par,
+    soloScore(rounds.length, par),
   );
 }
 

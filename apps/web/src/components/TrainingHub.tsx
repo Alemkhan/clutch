@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { PRACTICE_LEVELS, type PracticeLevel, type PublicQuestion } from '@clutch/shared';
-import { checkTrainingAnswer, fetchTrainingMistakes, fetchTrainingQuestions } from '../lib/api';
+import { checkTrainingAnswer, fetchTrainingMistakes, fetchTrainingQuestions, logAnalyticsEvent, submitQuestionReport } from '../lib/api';
 import { ScreenHeader } from './ScreenHeader';
-import { Training } from './Training';
+import { Training, type TrainingReportInput } from './Training';
 
 interface TrainingHubProps {
   onStartBot: (level: PracticeLevel) => void;
@@ -38,6 +38,10 @@ interface MistakePracticeProps {
   exitLabel?: string;
 }
 
+/** Репорт из отработки ошибок: забега нет, runId не приходит. */
+const reportTrainingProblem = (input: TrainingReportInput) =>
+  submitQuestionReport({ ...input, mode: 'training' }).then(() => undefined);
+
 /** Загрузка вопросов отработки с сервера (без ответов) и сама отработка. Журнал ошибок ведёт сервер: id приходят оттуда же, чужие сервер отклоняет. */
 export function MistakePractice({ ids, onBack, exitLabel }: MistakePracticeProps) {
   const [load, setLoad] = useState<MistakeLoad>(ids.length === 0 ? { status: 'ready', questions: [] } : { status: 'loading' });
@@ -54,6 +58,10 @@ export function MistakePractice({ ids, onBack, exitLabel }: MistakePracticeProps
       if (controller.signal.aborted) return;
       // Порядок сессии задал сервер; вопросы приходят в том же порядке.
       setLoad({ status: 'ready', questions: response.questions });
+      // Категория сессии — категория первого вопроса: набор ошибок бывает смешанным.
+      if (response.questions.length > 0) {
+        logAnalyticsEvent('training_started', { category: response.questions[0].category });
+      }
     }).catch(() => {
       if (!controller.signal.aborted) setLoad({ status: 'error' });
     });
@@ -85,6 +93,7 @@ export function MistakePractice({ ids, onBack, exitLabel }: MistakePracticeProps
       check={checkTrainingAnswer}
       onBack={onBack}
       exitLabel={exitLabel}
+      onReport={reportTrainingProblem}
     />
   );
 }

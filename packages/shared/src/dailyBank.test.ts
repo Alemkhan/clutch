@@ -39,7 +39,7 @@ describe('daily bank as a whole', () => {
     }
   });
 
-  it('asks a repeated country with different templates until they run out', () => {
+  it('asks a repeated country with different templates until each answer-type pool runs out', () => {
     clearDailyBankCache();
     const bank = dailyQuestionBank('geography', day);
     const byEntity = new Map<string, string[]>();
@@ -54,9 +54,14 @@ describe('daily bank as a whole', () => {
     for (const templates of byEntity.values()) {
       if (templates.length < 2) continue;
       repeated++;
-      // Never a duplicate while fewer than 4 uses (the smallest template pool is 3 choice + 2 open = 5 total).
-      const firstFour = templates.slice(0, 4);
-      expect(new Set(firstFour).size).toBe(firstFour.length);
+      // MC and open templates are selected from separate pools. After the beta cut the
+      // smallest pools are 3 MC templates (outline-excluded countries) and 2 open ones.
+      const open = templates.filter((template) => template.startsWith('open_'));
+      const choice = templates.filter((template) => !template.startsWith('open_'));
+      const firstOpen = open.slice(0, 2);
+      const firstChoice = choice.slice(0, 3);
+      expect(new Set(firstOpen).size).toBe(firstOpen.length);
+      expect(new Set(firstChoice).size).toBe(firstChoice.length);
     }
     expect(repeated).toBeGreaterThan(0);
   });

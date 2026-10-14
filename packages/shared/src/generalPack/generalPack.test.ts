@@ -126,4 +126,12 @@ describe('Last Stand conversion', () => {
     expect(matchPackSetMember(greek, 'по')).toBeNull();
     expect(matchPackSetMember(greek, 'лямбба')).toBe('lambda');
   });
+
+  it('uses the shared exact policy for numeric answers and keeps ordinary typos', () => {
+    expect(matchesAccepted('1896', ['1896'])).toBe(true);
+    for (const wrong of ['1886', '1996', '1895', '896']) {
+      expect(matchesAccepted(wrong, ['1896'])).toBe(false);
+    }
+    expect(matchesAccepted('Астна', ['Астана'])).toBe(true);
+  });
 });

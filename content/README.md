@@ -50,7 +50,8 @@ npm run content:check
 ## Поля вопроса
 
 `promptRu` вопрос · `answerRu` ответ, который увидит игрок · `acceptedRu` что засчитывать
-при вводе · `distractorsRu` ровно 3 неверных варианта · `openAnswer` можно ли вводом ·
+при вводе · `acceptedEn` английские алиасы, если ответ известен и по-английски ·
+`distractorsRu` ровно 3 неверных варианта · `openAnswer` можно ли вводом ·
 `difficulty` Easy / Medium / Hard / Expert · `sourceTitle`/`sourceUrl` источник ·
 `reviewNote` сомнения.
 

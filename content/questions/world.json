@@ -11,6 +11,11 @@
       "Эверест",
       "Джомолунгма"
     ],
+    "acceptedEn": [
+      "Everest",
+      "Mount Everest",
+      "Chomolungma"
+    ],
     "distractorsRu": [
       "К2",
       "Килиманджаро",
@@ -33,6 +38,10 @@
       "Тихий",
       "Тихий океан"
     ],
+    "acceptedEn": [
+      "Pacific",
+      "Pacific Ocean"
+    ],
     "distractorsRu": [
       "Атлантический",
       "Индийский",
@@ -53,6 +62,9 @@
     "answerRu": "Россия",
     "acceptedRu": [
       "Россия"
+    ],
+    "acceptedEn": [
+      "Russia"
     ],
     "distractorsRu": [
       "Канада",
@@ -76,6 +88,10 @@
       "Байкал",
       "озеро Байкал"
     ],
+    "acceptedEn": [
+      "Baikal",
+      "Lake Baikal"
+    ],
     "distractorsRu": [
       "Танганьика",
       "Каспийское море",
@@ -96,6 +112,9 @@
     "answerRu": "Гренландия",
     "acceptedRu": [
       "Гренландия"
+    ],
+    "acceptedEn": [
+      "Greenland"
     ],
     "distractorsRu": [
       "Мадагаскар",
@@ -118,6 +137,9 @@
     "answerRu": "Сахара",
     "acceptedRu": [
       "Сахара"
+    ],
+    "acceptedEn": [
+      "Sahara"
     ],
     "distractorsRu": [
       "Гоби",
@@ -142,6 +164,9 @@
       "Анхель",
       "водопад Анхель"
     ],
+    "acceptedEn": [
+      "Angel Falls"
+    ],
     "distractorsRu": [
       "Виктория",
       "Ниагарский",
@@ -163,6 +188,9 @@
     "acceptedRu": [
       "Бурдж-Халифа",
       "Бурдж Халифа"
+    ],
+    "acceptedEn": [
+      "Burj Khalifa"
     ],
     "distractorsRu": [
       "Шанхайская башня",
@@ -188,6 +216,10 @@
       "Каспийское море",
       "Каспий"
     ],
+    "acceptedEn": [
+      "Caspian",
+      "Caspian Sea"
+    ],
     "distractorsRu": [
       "Аральское",
       "Мёртвое",
@@ -208,6 +240,9 @@
     "answerRu": "Оймякон",
     "acceptedRu": [
       "Оймякон"
+    ],
+    "acceptedEn": [
+      "Oymyakon"
     ],
     "distractorsRu": [
       "Верхоянск",
@@ -232,6 +267,9 @@
       "Анды",
       "Андийские горы"
     ],
+    "acceptedEn": [
+      "Andes"
+    ],
     "distractorsRu": [
       "Гималаи",
       "Скалистые горы",
@@ -252,6 +290,9 @@
     "answerRu": "Канада",
     "acceptedRu": [
       "Канада"
+    ],
+    "acceptedEn": [
+      "Canada"
     ],
     "distractorsRu": [
       "Мексика",
@@ -275,6 +316,9 @@
     "acceptedRu": [
       "Париж"
     ],
+    "acceptedEn": [
+      "Paris"
+    ],
     "distractorsRu": [
       "Лондон",
       "Берлин",
@@ -296,6 +340,9 @@
     "answerRu": "Лондон",
     "acceptedRu": [
       "Лондон"
+    ],
+    "acceptedEn": [
+      "London"
     ],
     "distractorsRu": [
       "Дублин",
@@ -319,6 +366,9 @@
     "acceptedRu": [
       "Колорадо"
     ],
+    "acceptedEn": [
+      "Colorado"
+    ],
     "distractorsRu": [
       "Техас",
       "Юта",
@@ -340,6 +390,10 @@
     "answerRu": "Ватикан",
     "acceptedRu": [
       "Ватикан"
+    ],
+    "acceptedEn": [
+      "Vatican",
+      "Vatican City"
     ],
     "distractorsRu": [
       "Монако",
@@ -365,6 +419,10 @@
       "Атлантический океан",
       "Атлантика"
     ],
+    "acceptedEn": [
+      "Atlantic",
+      "Atlantic Ocean"
+    ],
     "distractorsRu": [
       "Тихий",
       "Индийский",
@@ -386,6 +444,9 @@
     "answerRu": "Европа",
     "acceptedRu": [
       "Европа"
+    ],
+    "acceptedEn": [
+      "Europe"
     ],
     "distractorsRu": [
       "Азия",
@@ -410,6 +471,9 @@
       "Анды",
       "Андские Кордильеры"
     ],
+    "acceptedEn": [
+      "Andes"
+    ],
     "distractorsRu": [
       "Гималаи",
       "Кордильеры",
@@ -432,6 +496,9 @@
     "acceptedRu": [
       "Бельгия"
     ],
+    "acceptedEn": [
+      "Belgium"
+    ],
     "distractorsRu": [
       "Швейцария",
       "Люксембург",
@@ -453,6 +520,9 @@
     "answerRu": "Индия",
     "acceptedRu": [
       "Индия"
+    ],
+    "acceptedEn": [
+      "India"
     ],
     "distractorsRu": [
       "Китай",
@@ -477,6 +547,9 @@
       "Лос-Анджелес",
       "Лос Анджелес"
     ],
+    "acceptedEn": [
+      "Los Angeles"
+    ],
     "distractorsRu": [
       "Сан-Франциско",
       "Сан-Диего",
@@ -498,6 +571,9 @@
     "answerRu": "Дания",
     "acceptedRu": [
       "Дания"
+    ],
+    "acceptedEn": [
+      "Denmark"
     ],
     "distractorsRu": [
       "Швеция",
@@ -522,6 +598,10 @@
       "Ахмадабад",
       "Ахмедабад"
     ],
+    "acceptedEn": [
+      "Ahmedabad",
+      "Ahmadabad"
+    ],
     "distractorsRu": [
       "Мумбаи",
       "Дели",
@@ -543,6 +623,9 @@
     "answerRu": "Мадагаскар",
     "acceptedRu": [
       "Мадагаскар"
+    ],
+    "acceptedEn": [
+      "Madagascar"
     ],
     "distractorsRu": [
       "Маврикий",
@@ -566,6 +649,9 @@
     "acceptedRu": [
       "Сиань",
       "Си ань"
+    ],
+    "acceptedEn": [
+      "Xi'an"
     ],
     "distractorsRu": [
       "Пекин",
@@ -591,6 +677,11 @@
       "Демократическая Республика Конго",
       "Конго"
     ],
+    "acceptedEn": [
+      "DR Congo",
+      "Democratic Republic of the Congo",
+      "Congo"
+    ],
     "distractorsRu": [
       "Республика Конго",
       "Ангола",
@@ -612,6 +703,9 @@
     "answerRu": "Огайо",
     "acceptedRu": [
       "Огайо"
+    ],
+    "acceptedEn": [
+      "Ohio"
     ],
     "distractorsRu": [
       "Небраска",
@@ -635,6 +729,10 @@
     "acceptedRu": [
       "Неаполь"
     ],
+    "acceptedEn": [
+      "Naples",
+      "Napoli"
+    ],
     "distractorsRu": [
       "Милан",
       "Турин",
@@ -657,6 +755,9 @@
     "acceptedRu": [
       "Монреаль",
       "остров Монреаль"
+    ],
+    "acceptedEn": [
+      "Montreal"
     ],
     "distractorsRu": [
       "Ванкувер",
@@ -703,6 +804,9 @@
     "acceptedRu": [
       "Бангладеш"
     ],
+    "acceptedEn": [
+      "Bangladesh"
+    ],
     "distractorsRu": [
       "Мьянма",
       "Шри-Ланка",
@@ -725,6 +829,9 @@
     "acceptedRu": [
       "Нью-Провиденс",
       "Нью Провиденс"
+    ],
+    "acceptedEn": [
+      "New Providence"
     ],
     "distractorsRu": [
       "Большой Багама",
@@ -749,6 +856,9 @@
       "тайга",
       "Тайга"
     ],
+    "acceptedEn": [
+      "taiga"
+    ],
     "distractorsRu": [
       "тундра",
       "степь",
@@ -770,6 +880,9 @@
     "answerRu": "Сардиния",
     "acceptedRu": [
       "Сардиния"
+    ],
+    "acceptedEn": [
+      "Sardinia"
     ],
     "distractorsRu": [
       "Сицилия",
@@ -795,6 +908,10 @@
       "Гран Чако",
       "Чако"
     ],
+    "acceptedEn": [
+      "Gran Chaco",
+      "Chaco"
+    ],
     "distractorsRu": [
       "Пантанал",
       "Патагония",
@@ -816,6 +933,9 @@
     "answerRu": "Небраска",
     "acceptedRu": [
       "Небраска"
+    ],
+    "acceptedEn": [
+      "Nebraska"
     ],
     "distractorsRu": [
       "Вайоминг",
@@ -839,6 +959,9 @@
     "acceptedRu": [
       "Чили"
     ],
+    "acceptedEn": [
+      "Chile"
+    ],
     "distractorsRu": [
       "Аргентина",
       "Новая Зеландия",
@@ -860,6 +983,9 @@
     "answerRu": "Сицилия",
     "acceptedRu": [
       "Сицилия"
+    ],
+    "acceptedEn": [
+      "Sicily"
     ],
     "distractorsRu": [
       "Сардиния",
@@ -907,6 +1033,9 @@
       "Мексиканский",
       "Мексиканский залив"
     ],
+    "acceptedEn": [
+      "Gulf of Mexico"
+    ],
     "distractorsRu": [
       "Персидский",
       "Калифорнийский",
@@ -928,6 +1057,9 @@
     "answerRu": "Парагвай",
     "acceptedRu": [
       "Парагвай"
+    ],
+    "acceptedEn": [
+      "Paraguay"
     ],
     "distractorsRu": [
       "Уругвай",
@@ -953,6 +1085,9 @@
       "Папуа Новая Гвинея",
       "Папуа-Новая Гвинея"
     ],
+    "acceptedEn": [
+      "Papua New Guinea"
+    ],
     "distractorsRu": [
       "Вануату",
       "Соломоновы Острова",
@@ -975,6 +1110,9 @@
     "acceptedRu": [
       "гуарани",
       "Гуарани"
+    ],
+    "acceptedEn": [
+      "Guarani"
     ],
     "distractorsRu": [
       "кечуа",
@@ -1000,6 +1138,10 @@
       "Южно-Африканская Республика",
       "Южная Африка"
     ],
+    "acceptedEn": [
+      "South Africa",
+      "Republic of South Africa"
+    ],
     "distractorsRu": [
       "Намибия",
       "Зимбабве",
@@ -1021,6 +1163,9 @@
     "answerRu": "Будапешт",
     "acceptedRu": [
       "Будапешт"
+    ],
+    "acceptedEn": [
+      "Budapest"
     ],
     "distractorsRu": [
       "Вена",

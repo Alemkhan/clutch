@@ -842,6 +842,39 @@ button:active {
   font-size: 15px;
 }
 
+.resolution-answer {
+  display: grid;
+  gap: 3px;
+  width: 100%;
+  max-width: 330px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  text-align: left;
+}
+
+.resolution-answer span {
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.resolution-answer strong {
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.resolution-answer.correct {
+  border-color: rgba(22, 140, 81, 0.28);
+  background: rgba(22, 140, 81, 0.07);
+}
+
+.resolution-answer.selected {
+  border-color: rgba(240, 74, 62, 0.24);
+  background: rgba(240, 74, 62, 0.06);
+}
+
 .resolution-explanation {
   color: var(--text-dim);
   line-height: 1.5;
@@ -850,6 +883,103 @@ button:active {
   padding-top: 16px;
   border-top: 1px solid var(--line);
   font-size: 14px;
+}
+
+/* Репорт о проблеме (R22): маленькая текстовая кнопка внизу карточки разбора и компактная панель. */
+.resolution-report {
+  width: 100%;
+  margin-top: 14px;
+  cursor: default;
+}
+
+.resolution-report-toggle {
+  min-height: 40px;
+  width: 100%;
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.resolution-report-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.resolution-report-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.resolution-report-option {
+  min-height: 44px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.resolution-report-option[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: rgba(240, 74, 62, 0.06);
+}
+
+.resolution-report-comment {
+  width: 100%;
+  min-height: 76px;
+  padding: 10px 14px;
+  background: rgba(255, 254, 250, 0.94);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+}
+
+.resolution-report-comment::placeholder {
+  color: var(--text-dim);
+  opacity: 0.5;
+}
+
+.resolution-report-send {
+  min-height: 44px;
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.resolution-report-send:disabled {
+  opacity: 0.5;
+}
+
+.resolution-report-status {
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.resolution-report-error {
+  color: var(--error);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .hammer-earned {

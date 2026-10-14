@@ -11,6 +11,8 @@ import { registerTrainingRoutes } from './routes/training';
 import { registerFriendInviteRoutes } from './routes/friendInvites';
 import { registerShareRoutes } from './routes/share';
 import { registerSystemRoutes } from './routes/system';
+import { registerProfileRoutes } from './routes/profile';
+import { registerTelemetryRoutes } from './routes/telemetry';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -21,6 +23,8 @@ registerShareRoutes(app);
 registerAuthRoutes(app);
 registerRematchRoutes(app);
 registerMyRunsRoutes(app);
+registerProfileRoutes(app);
+registerTelemetryRoutes(app);
 registerSoloRunRoutes(app);
 registerTrainingRoutes(app);
 registerFriendInviteRoutes(app);

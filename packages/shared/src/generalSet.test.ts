@@ -27,6 +27,13 @@ describe('general daily set', () => {
     expect(new Set(questions.map((q) => q.id)).size).toBe(20);
   });
 
+  it('does not put open country outlines into new general sets', () => {
+    for (let index = 0; index < 12; index++) {
+      const questions = buildGeneralSet(`general:2026-10-12:${index}`, '2026-10-12');
+      expect(questions.some((question) => question.id.startsWith('open_outline_country_'))).toBe(false);
+    }
+  });
+
   it('builds a 12-set bank where pack records do not repeat within the day', () => {
     clearDailyBankCache();
     const bank = dailyQuestionBank('general', DAY);

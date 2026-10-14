@@ -77,6 +77,10 @@
       "Билл Гейтс",
       "Гейтс"
     ],
+    "acceptedEn": [
+      "Bill Gates",
+      "Gates"
+    ],
     "distractorsRu": [
       "Стив Джобс",
       "Марк Цукерберг",
@@ -98,6 +102,10 @@
     "acceptedRu": [
       "Марк Цукерберг",
       "Цукерберг"
+    ],
+    "acceptedEn": [
+      "Mark Zuckerberg",
+      "Zuckerberg"
     ],
     "distractorsRu": [
       "Джек Дорси",
@@ -168,6 +176,9 @@
       "ЦП",
       "CPU"
     ],
+    "acceptedEn": [
+      "processor"
+    ],
     "distractorsRu": [
       "видеокарта",
       "оперативная память",
@@ -189,6 +200,10 @@
     "acceptedRu": [
       "Дуровы",
       "Дуров"
+    ],
+    "acceptedEn": [
+      "Durov",
+      "Durovs"
     ],
     "distractorsRu": [
       "Касперские",
@@ -234,6 +249,9 @@
       "вымогатель",
       "шифровальщик"
     ],
+    "acceptedEn": [
+      "ransomware"
+    ],
     "distractorsRu": [
       "троян",
       "червь",
@@ -276,6 +294,10 @@
     "acceptedRu": [
       "Ада Лавлейс",
       "Лавлейс"
+    ],
+    "acceptedEn": [
+      "Ada Lovelace",
+      "Lovelace"
     ],
     "distractorsRu": [
       "Алан Тьюринг",
@@ -346,6 +368,10 @@
       "Чарльз Бэббидж",
       "Бэббидж"
     ],
+    "acceptedEn": [
+      "Charles Babbage",
+      "Babbage"
+    ],
     "distractorsRu": [
       "Алан Тьюринг",
       "Джон фон Нейман",
@@ -368,6 +394,10 @@
     "acceptedRu": [
       "Ада Лавлейс",
       "Лавлейс"
+    ],
+    "acceptedEn": [
+      "Ada Lovelace",
+      "Lovelace"
     ],
     "distractorsRu": [
       "Грейс Хоппер",

@@ -1,33 +1,104 @@
 import type { SkillResult } from '@clutch/shared';
+import { logAnalyticsEvent } from './api';
 import { readSoundEnabled, writeSoundEnabled } from './soundPreference';
 
-const soundFiles = {
-  tick: '/sfx/tick.ogg',
-  timeout: '/sfx/timeout.ogg',
-  correct: '/sfx/correct.ogg',
-  incorrect: '/sfx/incorrect.ogg',
-  hammerTap: '/sfx/hammer-tap.ogg',
-  strikePerfect: '/sfx/strike-perfect.ogg',
-  strikeGreat: '/sfx/strike-great.ogg',
-  strikeGood: '/sfx/strike-good.ogg',
-  strikeWeak: '/sfx/strike-weak.ogg',
-  strikeMiss: '/sfx/strike-miss.ogg',
-  matchWin: '/sfx/match-win.ogg',
-  matchLose: '/sfx/match-lose.ogg',
+export interface SoundSource {
+  src: string;
+  type: string;
+}
+
+const ogg = (name: string): readonly SoundSource[] => [
+  { src: `/sfx/${name}.ogg`, type: 'audio/ogg; codecs="vorbis"' },
+];
+
+// Each sound has an ordered source list. Current licensed assets are OGG-only;
+// another encoding can be added without changing playback callers.
+const soundSources = {
+  tick: ogg('tick'), timeout: ogg('timeout'), correct: ogg('correct'),
+  incorrect: ogg('incorrect'), hammerTap: ogg('hammer-tap'),
+  strikePerfect: ogg('strike-perfect'), strikeGreat: ogg('strike-great'),
+  strikeGood: ogg('strike-good'), strikeWeak: ogg('strike-weak'),
+  strikeMiss: ogg('strike-miss'), matchWin: ogg('match-win'),
+  matchLose: ogg('match-lose'),
 } as const;
 
-export type SoundName = keyof typeof soundFiles;
+export type SoundName = keyof typeof soundSources;
+export type SoundFailureReason = 'unsupported-format' | 'play-rejected' | 'unlock-rejected';
+export type SoundDiagnostic =
+  | { state: 'idle' | 'ready' }
+  | { state: 'failed'; reason: SoundFailureReason; phase: 'play' | 'unlock'; sound: SoundName };
 
-const cache = new Map<SoundName, HTMLAudioElement>();
+let diagnostic: SoundDiagnostic = { state: 'idle' };
+const reportedFailures = new Set<string>();
+const cache = new Map<string, HTMLAudioElement>();
 
-function getAudio(name: SoundName): HTMLAudioElement {
-  let audio = cache.get(name);
+export function getSoundDiagnostic(): SoundDiagnostic {
+  return diagnostic;
+}
+
+function reportFailure(reason: SoundFailureReason, phase: 'play' | 'unlock', sound: SoundName): void {
+  diagnostic = { state: 'failed', reason, phase, sound };
+  const key = `${reason}:${phase}:${sound}`;
+  if (reportedFailures.has(key)) return;
+  reportedFailures.add(key);
+  // Do not include the rejected value: stable fields are enough for diagnosis
+  // and browser errors may contain environment details.
+  console.warn('[audio] playback unavailable', { reason, phase, sound });
+  // Продуктовое событие о тихом фолбэке (R22): те же стабильные поля, без деталей браузера.
+  logAnalyticsEvent('sound_failure', { reason, phase, sound });
+}
+
+function markReady(): void {
+  diagnostic = { state: 'ready' };
+}
+
+export function selectSupportedSources(
+  sources: readonly SoundSource[],
+  canPlayType: (type: string) => CanPlayTypeResult,
+): SoundSource[] {
+  return sources.filter(({ type }) => canPlayType(type) !== '');
+}
+
+function playableSources(name: SoundName): SoundSource[] {
+  const probe = new Audio();
+  if (typeof probe.canPlayType !== 'function') return [...soundSources[name]];
+  return selectSupportedSources(soundSources[name], (type) => probe.canPlayType(type));
+}
+
+function getAudio(source: SoundSource): HTMLAudioElement {
+  let audio = cache.get(source.src);
   if (!audio) {
-    audio = new Audio(soundFiles[name]);
+    audio = new Audio(source.src);
     audio.preload = 'auto';
-    cache.set(name, audio);
+    cache.set(source.src, audio);
   }
   return audio;
+}
+
+async function trySources(name: SoundName, volume: number, phase: 'play' | 'unlock'): Promise<boolean> {
+  const sources = playableSources(name);
+  if (sources.length === 0) {
+    reportFailure('unsupported-format', phase, name);
+    return false;
+  }
+  for (const source of sources) {
+    const instance = getAudio(source).cloneNode(true) as HTMLAudioElement;
+    instance.volume = volume;
+    if (phase === 'unlock') instance.muted = true;
+    try {
+      await instance.play();
+      if (phase === 'unlock') {
+        instance.pause();
+        instance.currentTime = 0;
+      }
+      markReady();
+      return true;
+    } catch {
+      // Try the next supported encoding before exposing a failure state.
+    }
+  }
+  reportFailure(phase === 'unlock' ? 'unlock-rejected' : 'play-rejected', phase, name);
+  return false;
 }
 
 const listeners = new Set<() => void>();
@@ -44,6 +115,7 @@ export function setSoundEnabled(enabled: boolean): void {
 export function toggleSound(): boolean {
   const next = !isSoundEnabled();
   setSoundEnabled(next);
+  if (next) void unlockSound();
   return next;
 }
 
@@ -52,19 +124,42 @@ export function subscribeSound(listener: () => void): () => void {
   return () => { listeners.delete(listener); };
 }
 
-export function playSound(name: SoundName, volume = 1) {
+export function playSound(name: SoundName, volume = 1): Promise<boolean> {
   // Muted: return before any Audio is created, cloned or played.
-  if (!isSoundEnabled()) return;
-  const base = getAudio(name);
-  const instance = base.cloneNode(true) as HTMLAudioElement;
-  instance.volume = volume;
-  instance.play().catch(() => {});
+  if (!isSoundEnabled()) return Promise.resolve(false);
+  return trySources(name, volume, 'play');
+}
+
+export function unlockSound(): Promise<boolean> {
+  if (!isSoundEnabled()) return Promise.resolve(false);
+  return trySources('correct', 0, 'unlock');
+}
+
+export function installSoundUnlock(target: Document = document): () => void {
+  let removed = false;
+  const handleGesture = () => {
+    if (!isSoundEnabled()) return;
+    void unlockSound().then((unlocked) => { if (unlocked) remove(); });
+  };
+  const remove = () => {
+    if (removed) return;
+    removed = true;
+    target.removeEventListener('pointerdown', handleGesture);
+    target.removeEventListener('keydown', handleGesture);
+  };
+  target.addEventListener('pointerdown', handleGesture);
+  target.addEventListener('keydown', handleGesture);
+  return remove;
+}
+
+// Keeps module-level cache and diagnostics isolated between unit cases.
+export function resetSoundsForTests(): void {
+  cache.clear();
+  reportedFailures.clear();
+  diagnostic = { state: 'idle' };
 }
 
 export const strikeSoundFor: Record<SkillResult, SoundName> = {
-  perfect: 'strikePerfect',
-  great: 'strikeGreat',
-  good: 'strikeGood',
-  weak: 'strikeWeak',
-  miss: 'strikeMiss',
+  perfect: 'strikePerfect', great: 'strikeGreat', good: 'strikeGood',
+  weak: 'strikeWeak', miss: 'strikeMiss',
 };

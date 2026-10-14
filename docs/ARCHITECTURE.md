@@ -1,7 +1,8 @@
 # Архитектура: как устроен текущий код
 
-Основа: checkpoint `3015241` с R7c, 2026-10-02; обновлено 2026-10-12 под соло-режим
-и категорию «Общие знания» по умолчанию (DEC-07).
+Основа: checkpoint `3015241` с R7c, 2026-10-02; обновлено 2026-10-14 под
+действующий solo-путь после удаления гонки (R12), категорию «Общие знания»
+(DEC-07) и единый файл схемы (R21).
 API и клиент используют shared-правила. **Схема живёт в одной миграции**
 `apps/api/migrations/0001_schema.sql`: историю из 17 шагов сжали 2026-10-13, до первого
 деплоя (см. комментарий в самом файле). Номера 0002–0017 остались только в истории git.
@@ -18,22 +19,21 @@ API и клиент используют shared-правила. **Схема ж�
 apps/web/                      React 18 + Vite + Framer Motion + Telegram SDK
   src/AppBootstrap.tsx         loading/timeout/error вокруг Telegram init
   src/App.tsx                  переключение экранов по phase, Telegram Back
-  src/lib/useGameState.ts       React/API/analytics orchestration
-  src/lib/gameSession.ts        чистое состояние и переходы игровой сессии
-  src/lib/clientMatchRules.ts   runtime-проверка условий и транскриптов R1c
+  src/lib/useGameState.ts      навигационное состояние верхнего уровня
+  src/lib/gameSession.ts       типы phase и безопасные переходы между разделами
+  src/lib/clientMatchRules.ts  runtime-проверка solo snapshots и server payload
   src/lib/api.ts                HTTP, Telegram/guest auth, timeout 5 секунд
-  src/lib/completionQueue.ts    durable completion, ACK, retry/single-flight
   src/lib/telegram.ts           cached SDK/initData и фоновый viewport
   src/lib/telegramBackButton.ts чистая карта и lifecycle-контроллер BackButton
-  src/lib/sampleData.ts         локальный соперник, генерация и config молотка
   src/lib/useSoloRun.ts, soloRunSession.ts, soloRunFlow.ts, soloResult.ts
-                                основной цикл: забег, чистые переходы, итог
+                                основной цикл: покруговая сеть, чистые переходы, итог
+  src/lib/soloRoundDelivery.ts  retry одного идемпотентного answer/hammer запроса
   src/lib/useFriendInvite.ts, friendDuelResult.ts  «Позвать друга», итог дуэли
-  src/lib/trainingSession.ts, mistakeLog.ts, myRunsView.ts, launchIntent.ts
+  src/lib/trainingSession.ts, myRunsView.ts, launchIntent.ts
                                 тренировка и отработка ошибок, «Мои партии»,
                                 разбор startapp-ссылки (реванш/отписка)
   src/lib/useLastStand.ts, lastStandRun.ts, lastStandHook.ts  режим Last Stand
-  src/lib/localStats.ts         localStorage: победы/поражения/серии
+  src/lib/localStats.ts         устаревшая localStorage-статистика гонки; solo её не пишет
   src/lib/analytics.ts          очередь в памяти + dev console, без подключения
   src/lib/sounds.ts             воспроизведение текущих эффектов
   src/components/              вопросы, MatchHud/SoloHud, HammerGame, итоги, профиль,
@@ -54,17 +54,15 @@ apps/api/
   src/matches/validation.ts    HTTP-входы и проверка сохранённых snapshots
   src/matches/types.ts         внутренний тип строки match_runs
   src/routes/auth.ts           выдача/продление browser guest session
-  src/routes/asyncMatches.ts   сценарии start/complete async-матча
-  src/routes/leaderboard.ts    HTTP-маршрут leaderboard
-  src/routes/soloRuns.ts       старт/завершение соло-забега, таблица соло
+  src/routes/soloRuns.ts       старт, answer/hammer, resume и таблица solo
   src/routes/friendInvites.ts  «Позвать друга»: создание открытого приглашения
   src/routes/rematch.ts        приглашение на реванш, согласие на уведомления
   src/routes/myRuns.ts         история прохождений игрока
   src/routes/share.ts          OG-страница и карточка результата
   src/routes/lastStand.ts      Last Stand: старт, ответ, таблица
   src/routes/system.ts         metadata, liveness/readiness
-  src/matches/{matchmaking,scoring,soloRepository,historyRepository}.ts
-                               подбор из банка наборов дня, оценка круга, D1 соло и истории
+  src/matches/{matchmaking,soloRepository,soloRoundsRepository,historyRepository}.ts
+                               подбор, покруговая запись, D1 solo и истории
   src/notifications/           приглашения на реванш, Telegram-сообщения, плановый возврат просроченных
   src/lastStand/, src/share/   Last Stand и рендер карточки результата
   migrations/0001_schema.sql    вся схема: 6 таблиц и 14 индексов, с причинами в комментариях
@@ -96,13 +94,15 @@ tests/telegramAuth.test.ts      3 unit-теста initData
 tests/botOpponent.test.ts       3 unit-теста профилей и фабрики бота
 tests/guestAuth.test.ts         unit-тесты подписи и срока guest token
 tests/identity.test.ts          разбор Telegram/guest Authorization
-tests/asyncMatches.test.ts      route/SQL-тесты async conditions/completion
+tests/soloRuns.test.ts          старт/resume и выдача solo-набора
+tests/soloRounds.test.ts        серверный answer/hammer и идемпотентность кругов
+tests/soloBookkeeping.test.ts   захват записи, завершение и освобождение пары
 tests/requestLimits.test.ts      лимиты тела/полей и rate-limit маршрутов R2b
 tests/helpers/testD1.ts         in-memory SQLite adapter для API-тестов
-apps/web/src/lib/clientMatchRules.test.ts  13 клиентских тестов R1c
-apps/web/src/lib/gameSession.test.ts       9 тестов чистых переходов сессии
-apps/web/src/lib/api.test.ts               срок и renewal browser guest session
-packages/shared/src/index.test.ts  15 unit-тестов shared
+apps/web/src/lib/clientMatchRules.test.ts  runtime-проверка solo payload
+apps/web/src/lib/soloRunFlow.test.ts       чистые переходы покругового solo
+apps/web/src/lib/api.test.ts               HTTP payload и browser guest session
+packages/shared/src/index.test.ts          целостность активных наборов
 scripts/smoke-local.mjs            изолированный Wrangler/D1 HTTP smoke
 scripts/preflight-production.mjs   production config → dry-run + exact web build
 scripts/lib/production-preflight.mjs  чистая validation/config generation
@@ -111,11 +111,11 @@ scripts/lib/production-preflight.mjs  чистая validation/config generation
 
 ## Как читать основной сценарий
 
-Клиентский путь начинается в `App`, но правила переходов там не живут:
+Клиентский путь начинается в `App`, но правила solo-круга там не живут:
 
 ```text
-App → useGameState (React, сеть, эффекты) → gameSession (чистые переходы)
-                                      ↘ clientMatchRules → shared/matchRules
+App → SoloRun → useSoloRun (React, сеть, retry) → soloRunFlow (чистые переходы)
+                                            ↘ clientMatchRules → shared/soloRun
 ```
 
 Серверный путь начинается с маленькой точки сборки. Доменные SQL-запросы матчей
@@ -125,12 +125,12 @@ schema probe для readiness:
 ```text
 index → routes/system → D1 readiness
      ├→ routes/auth → auth/guest
-     ├→ routes/leaderboard → D1
-     └→ routes/asyncMatches → auth/identity → auth/{telegram,guest}
-                          ├→ http/{rateLimit,jsonBody}
-                          ├→ matches/bots
-                          ├→ matches/validation → shared/matchRules
-                          └→ matches/repository → D1
+     ├→ routes/soloRuns → auth/identity → auth/{telegram,guest}
+     │                 ├→ http/{rateLimit,jsonBody}
+     │                 ├→ matches/{matchmaking,validation}
+     │                 ├→ matches/{soloRepository,soloRoundsRepository}
+     │                 └→ shared/{soloRun,hammerRules}
+     └→ routes/{friendInvites,rematch,myRuns,lastStand,training,share}
 ```
 
 Соло-путь (`routes/soloRuns`, `friendInvites`, `rematch`, `myRuns`) устроен так же:
@@ -138,7 +138,7 @@ SQL в `matches/*Repository` и `notifications/repository`, правила в sh
 
 Новый профиль бота добавляется в `matches/bots.ts`. Новый HTTP-сценарий — в
 `routes`; SQL остаётся в `repository`. Переход вопрос → разбор → skill → итог
-меняется и тестируется в `gameSession`, а общие условия победы — в shared.
+меняется и тестируется в `soloRunFlow`, а условия завершения и scoring — в shared.
 
 ## Соло-забег: действующий основной цикл
 
@@ -247,44 +247,42 @@ SQL в `matches/*Repository` и `notifications/repository`, правила в sh
 | `GET /api/my-runs` | История прохождений игрока |
 | `GET /api/share`, `GET /api/share/card.png` | OG-страница и картинка результата |
 | `POST /api/last-stand/start`, `/:runId/answer`, `GET /api/last-stand/leaderboard` | Last Stand |
-| `GET /api/leaderboard?category=...` | Остаток гонки: ранжирует по сырому `progress`. Клиент его не вызывает, действующая таблица — `/api/solo-leaderboard` по `solo_score` |
 
-До генерации/D1 start и complete проверяют identity, затем отдельный bucket по
-`playerId`; guest и leaderboard используют `CF-Connecting-IP` с безопасным
-локальным fallback. Все четыре bucket имеют предел 30/60 секунд. При превышении
+Маршруты, меняющие solo/приглашения/training, проверяют identity, затем отдельный
+bucket по `playerId`; guest auth использует `CF-Connecting-IP` с безопасным
+локальным fallback. Bucket имеет предел 30/60 секунд. При превышении
 ответ 429 и `Retry-After: 60`, при недоступном binding — 503. Счётчики нативного
 Cloudflare binding локальны для точки присутствия, а не являются глобальным
 распределённым лимитом. Локальная разработка использует симуляцию Wrangler,
 route-тесты — детерминированный fake binding.
 
-Leaderboard сначала ранжирует записи каждого `player_id` по progress,
-correct count, раннему времени завершения и `id`, затем тем же порядком строит
-top-50. `completed_at = NULL` при равенстве идёт после известного времени. Имя и
-все показатели берутся из одной записи. Сравнимость сырого progress между
-разными наборами/условиями пока не утверждена как правило публичного рейтинга.
+Solo board сначала выбирает лучший достигший цели забег каждого `player_id`,
+затем строит top-50 по меньшему `solo_score`, числу кругов, длительности и `id`.
+Ответ отдельно прикладывает место текущего игрока и расстояние до стоящего выше.
 
-Start принимает не более 1024 UTF-8 байт JSON, complete — 16384. Completion
-ограничен 1..10 раундами: id вопроса 1..128 символов, ответ до 512 (пустой
-допустим), время 0..60000 мс; прежний диапазон distance сохранён.
+JSON-body каждого изменяющего маршрута ограничен по UTF-8 байтам. Answer/hammer
+принимают ровно текущий индекс и id вопроса; answer ограничивает строку ответа и
+заявленное время, hammer принимает только сырой `activeElapsedMs`. Повтор одного
+и того же запроса идемпотентен: сервер возвращает уже записанный круг.
 
 Основная таблица — `match_runs`: id, player_id, display_name, category,
 questions_json, rounds_json, progress, correct_count, status, opponent_run_id,
-created_at, completed_at. Миграция 0002 добавляет `rules_version`, `mini_game_id`,
-`mini_game_config_json`, `opponent_json`, `ghost_eligible` и индекс пригодного пула;
-0003 — `question_set_id`; 0007 — `reached_target`, `set_par`, `solo_score`;
-0008 — `solo_outcome` и индекс таблицы соло. Остальные таблицы: `last_stand_runs`
-(0004), `player_notification_prefs` и `rematch_invites` (0005; 0006 добавляет
-`released_at`, 0009 пересобирает таблицу без обязательного адресата).
+created_at, completed_at, снимок условий, claim/pace, `reached_target`, `set_par`,
+`solo_score` и `solo_outcome`. `solo_run_rounds` хранит покруговые answer/hammer,
+включая измеренное сервером окно, момент удара и выведенный результат. Остальные
+таблицы: `player_mistakes`, `rematch_invites`, `player_notification_prefs` и
+`last_stand_runs`. Вся итоговая схема создаётся `0001_schema.sql`; номера прежних
+шагов 0002–0017 — только история до первого deploy.
 Полноценного серверного профиля нет.
 В браузере хранятся подписанный guest token, локальное отображаемое имя,
-versioned completion-очередь до 20 записей и отдельная статистика подтверждённых
-online-матчей. Токен в очередь не копируется. Текущий незавершённый матч не
-восстанавливается.
+id активного solo-забега и устаревшая статистика гонки. Круги живут на сервере,
+поэтому активный solo-забег восстанавливается по id после перезагрузки; вопросы
+и ответы в localStorage не копируются.
 Guest token живёт семь дней и продлевает тот же subject за пять минут до срока.
 
 `CURRENT_ASYNC_MATCH_CONDITIONS` из shared сохранена после удаления гонки:
 в ней лежит конфиг мини-игры `hammer_nail`, которым считается круг соло, и её
-читают `matches/repository.ts`, `scoring.ts` и `soloRepository.ts`. Имя осталось
+читают solo route/repository и shared `hammerRules.ts`. Имя осталось
 историческим. Условия соло — как
 `CURRENT_SOLO_RUN_CONDITIONS`. Числа config молотка (зоны, скорость маркера,
 stage multipliers, offsets) живут в shared и менялись: зона идеального попадания
@@ -298,25 +296,24 @@ Config сериализуется в постоянном порядке и ср
 несовместим с v1/старыми runs, поэтому они не выбираются как ghost; новая схема
 D1 для этого не понадобилась.
 
-Legacy-строки сохраняются с NULL-условиями и ghost_eligible=0. Незавершённые
-legacy/неподдерживаемые матчи получают 409 с просьбой начать заново. Уже
-завершённый результат возвращается как сохранён, без переоценки новыми правилами.
-Для текущего матча completion читает `opponent_json`, а не меняющуюся исходную
-запись и не заново сгенерированного бота. При проигранном conditional UPDATE
-сервер перечитывает сохранённый результат; клиент принимает такой ACK
-идемпотентно и дедуплицирует confirmed-статистику по matchId.
+Legacy-строки сохраняются с NULL-условиями и `ghost_eligible=0`; действующий пул
+их не выбирает. Уже записанный solo-круг не переоценивается новыми правилами:
+повтор answer/hammer получает сохранённый verdict, а конфликт порядка даёт 409 и
+заставляет клиент восстановить серверное состояние.
 
 ## Границы доверия
 
-- Start и complete требуют Telegram initData либо подписанный guest token.
-  `playerId` из тела не принимается; complete сверяет владельца до выдачи даже
-  уже сохранённого результата. Чужой и отсутствующий matchId одинаково дают 404.
+- Solo routes требуют Telegram initData либо подписанный guest token.
+  `playerId` из тела не принимается; answer/hammer/resume сверяют владельца до
+  выдачи даже уже сохранённого результата. Чужой и отсутствующий run id
+  одинаково дают 404.
 - Guest token хранится в localStorage и не является полноценным аккаунтом:
   очистка/кража браузерного хранилища меняет или компрометирует guest identity.
-- **Известная незакрытая проблема.** API возвращает полный `Question`, включая
-  правильные ответы, и будущие результаты соперника; данные стран и генератор
-  лежат в браузерном бандле. Исправляется отдельной задачей, на 2026-10-12 не
-  завершено: до её закрытия таблицы и пул не защищены от подделки.
+- До ответа API возвращает только `PublicQuestion`: без `correctOptionId`,
+  `correctAnswers`, explanation и source metadata. Правильный ответ приходит
+  только вместе с серверным verdict этого круга. Это покрыто route-тестами
+  `noAnswerLeak`; наличие общих типов/генераторов в monorepo не означает их
+  включения в web bundle (отдельный bundle-тест проверяет экспортируемые данные).
 - **Оценку удара считает сервер** (колонка `active_elapsed_ms`). Клиент присылает только
   момент удара — активное время от старта маркера (`activeElapsedMs`), — а
   положение маркера, расстояние до цели и tier выводит общая

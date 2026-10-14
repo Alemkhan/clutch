@@ -55,6 +55,9 @@
     "acceptedRu": [
       "Япония"
     ],
+    "acceptedEn": [
+      "Japan"
+    ],
     "distractorsRu": [
       "Китай",
       "Корея",
@@ -165,6 +168,9 @@
     "answerRu": "Испания",
     "acceptedRu": [
       "Испания"
+    ],
+    "acceptedEn": [
+      "Spain"
     ],
     "distractorsRu": [
       "Италия",
@@ -381,6 +387,9 @@
     "answerRu": "Бразилия",
     "acceptedRu": [
       "Бразилия"
+    ],
+    "acceptedEn": [
+      "Brazil"
     ],
     "distractorsRu": [
       "Колумбия",

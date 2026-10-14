@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { generateQuestionById, toPublicQuestion } from '@clutch/shared';
@@ -19,7 +20,7 @@ const handlers = { onBack: vi.fn(), check: vi.fn() };
 const publicQuestion = (id: string) => toPublicQuestion(generateQuestionById(id)!);
 
 function homeHandlers() {
-  return { onLastStand: vi.fn(), onSolo: vi.fn(), onCategories: vi.fn(), onBoard: vi.fn() };
+  return { onSolo: vi.fn(), onBoard: vi.fn() };
 }
 
 describe('Training screens', () => {
@@ -74,34 +75,42 @@ describe('Training screens', () => {
     expect(html.match(/class="cta-btn"/g)).toHaveLength(1);
   });
 
-  it('home dashboard renders the Last Stand card without a hook before any data arrives', () => {
-    const html = renderToStaticMarkup(
-      <HomeDashboard {...homeHandlers()} />,
-    );
-    expect(html).toContain('ls-home-card');
-    expect(html).toContain('не совпадай с соперником');
-    expect(html).toContain('aria-label="Last Stand: начать забег по категориям стран"');
-    expect(html).toContain('До 12 кругов');
-    expect(html).not.toContain('ls-home-hook');
-    expect(html).not.toContain('Сегодня');
-    expect(html).not.toContain('VS');
-    expect(html.indexOf('home-hero-card')).toBeLessThan(html.indexOf('ls-home-card'));
+  it('home dashboard neither advertises Last Stand nor fetches its leaderboard', () => {
+    const html = renderToStaticMarkup(<HomeDashboard {...homeHandlers()} />);
+    expect(html).not.toMatch(/Last Stand|ls-home|не совпадай с соперником|До 12 кругов/);
+
+    const source = readFileSync(new URL('./HomeDashboard.tsx', import.meta.url), 'utf8');
+    expect(source).not.toContain('fetchLastStandLeaderboard');
+    expect(source).not.toContain('../lib/lastStandHook');
+  });
+
+  it('wires the mistake-training report (mode training, no run) and its start event in the hub', () => {
+    // Сеть остаётся в TrainingHub: экран Training получает репорт инъекцией и без него кнопки не рисует.
+    const hub = readFileSync(new URL('./TrainingHub.tsx', import.meta.url), 'utf8');
+    expect(hub).toContain("mode: 'training'");
+    expect(hub).toContain("logAnalyticsEvent('training_started'");
+    const html = renderToStaticMarkup(<Training {...handlers} questions={[publicQuestion('capital_li')]} />);
+    expect(html).not.toContain('Сообщить о проблеме');
   });
 });
 
 describe('training session transitions', () => {
-  const verdict = (correct: boolean) => ({ correct, explanation: 'Пояснение.' });
+  const verdict = (correct: boolean) => ({ correct, correctText: 'Тбилиси', explanation: 'Пояснение.' });
 
   it('waits for the server verdict, then walks question, resolution and done', () => {
     const questions = [publicQuestion('lang_ka'), publicQuestion('capital_li')];
     let state = createTrainingState(questions);
     state = beginTrainingAnswer(state, questions[0].options[0].id);
     // Верность решает сервер: пока вердикта нет, клиент ничего не засчитывает.
-    expect(state).toMatchObject({ step: 'checking', correctCount: 0, lastCorrect: false, explanation: '' });
+    expect(state).toMatchObject({
+      step: 'checking', correctCount: 0, lastCorrect: false, correctAnswer: '', explanation: '',
+    });
     state = applyTrainingVerdict(state, verdict(true));
-    expect(state).toMatchObject({ step: 'resolution', lastCorrect: true, correctCount: 1, explanation: 'Пояснение.' });
+    expect(state).toMatchObject({
+      step: 'resolution', lastCorrect: true, correctAnswer: 'Тбилиси', correctCount: 1, explanation: 'Пояснение.',
+    });
     state = continueTraining(state);
-    expect(state).toMatchObject({ step: 'question', index: 1, explanation: '' });
+    expect(state).toMatchObject({ step: 'question', index: 1, correctAnswer: '', explanation: '' });
     state = applyTrainingVerdict(beginTrainingAnswer(state, '__timeout__'), verdict(false));
     expect(state.lastCorrect).toBe(false);
     state = continueTraining(state);
@@ -126,6 +135,17 @@ describe('training session transitions', () => {
     expect(trainingAnswerText(choice, '__timeout__')).toBe('');
     const open = publicQuestion('open_capital_li');
     expect(trainingAnswerText(open, 'Вадуц')).toBe('Вадуц');
+  });
+
+  it('keeps the first canonical answer for an open training question', () => {
+    const question = publicQuestion('open_capital_li');
+    const checking = beginTrainingAnswer(createTrainingState([question]), 'Вадуц');
+    const resolved = applyTrainingVerdict(checking, {
+      correct: true,
+      correctAnswers: ['Вадуц', 'Vaduz'],
+      explanation: 'Столица Лихтенштейна.',
+    });
+    expect(resolved.correctAnswer).toBe('Вадуц');
   });
 
   it('an empty list is done at once', () => {

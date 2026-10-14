@@ -99,6 +99,9 @@
       "Д",
       "витамин Д"
     ],
+    "acceptedEn": [
+      "vitamin D"
+    ],
     "distractorsRu": [
       "C",
       "A",
@@ -121,6 +124,9 @@
       "бедренная кость",
       "бедренная",
       "бедро"
+    ],
+    "acceptedEn": [
+      "femur"
     ],
     "distractorsRu": [
       "большеберцовая кость",
@@ -235,6 +241,9 @@
     "acceptedRu": [
       "инсулин"
     ],
+    "acceptedEn": [
+      "insulin"
+    ],
     "distractorsRu": [
       "адреналин",
       "тестостерон",
@@ -277,6 +286,9 @@
     "answerRu": "меланин",
     "acceptedRu": [
       "меланин"
+    ],
+    "acceptedEn": [
+      "melanin"
     ],
     "distractorsRu": [
       "гемоглобин",
@@ -324,6 +336,9 @@
       "ягодичная",
       "большая ягодичная мышца"
     ],
+    "acceptedEn": [
+      "gluteus maximus"
+    ],
     "distractorsRu": [
       "бицепс",
       "икроножная",
@@ -345,6 +360,10 @@
     "acceptedRu": [
       "коленная чашечка",
       "надколенник"
+    ],
+    "acceptedEn": [
+      "patella",
+      "kneecap"
     ],
     "distractorsRu": [
       "бедренная кость",

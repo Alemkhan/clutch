@@ -25,9 +25,6 @@ export const PACK_TOPIC_LABELS_RU: Record<PackTopic, string> = {
   world: 'Мир',
 };
 
-/** Answers this short are compared exactly: «8» must not accept «9», «ро» must not accept «пи». */
-export const EXACT_MATCH_MAX_LENGTH = 4;
-
 export function normalizePackAnswer(text: string): string {
   return normalizeAnswer(text.normalize('NFKC').replace(/ё/g, 'е').replace(/Ё/g, 'Е').replace(/[‐-―−]/g, '-')).replace(/[«»„“”]/g, '');
 }
@@ -35,11 +32,7 @@ export function normalizePackAnswer(text: string): string {
 /** True when the typed text names one of the accepted answers. */
 export function matchesAccepted(input: string, accepted: readonly string[]): boolean {
   const typed = normalizePackAnswer(input);
-  if (!typed) return false;
-  const normalized = accepted.map(normalizePackAnswer);
-  if (normalized.includes(typed)) return true;
-  const fuzzyPool = accepted.filter((_, i) => normalized[i].length > EXACT_MATCH_MAX_LENGTH);
-  return fuzzyPool.length > 0 && typed.length > EXACT_MATCH_MAX_LENGTH && isAnswerCorrect(typed, fuzzyPool.map(normalizePackAnswer)).correct;
+  return isAnswerCorrect(typed, accepted.map(normalizePackAnswer)).correct;
 }
 
 function shuffled<T>(items: readonly T[], seed: string): T[] {

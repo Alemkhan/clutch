@@ -32,6 +32,9 @@
     "acceptedRu": [
       "Париж"
     ],
+    "acceptedEn": [
+      "Paris"
+    ],
     "distractorsRu": [
       "Лондон",
       "Рим",
@@ -75,6 +78,10 @@
       "Винсент Ван Гог",
       "Ван Гог"
     ],
+    "acceptedEn": [
+      "Vincent van Gogh",
+      "Van Gogh"
+    ],
     "distractorsRu": [
       "Поль Гоген",
       "Клод Моне",
@@ -96,6 +103,10 @@
     "acceptedRu": [
       "Сальвадор Дали",
       "Дали"
+    ],
+    "acceptedEn": [
+      "Salvador Dali",
+      "Dali"
     ],
     "distractorsRu": [
       "Рене Магритт",
@@ -121,6 +132,11 @@
       "СПб",
       "Питер"
     ],
+    "acceptedEn": [
+      "Saint Petersburg",
+      "St. Petersburg",
+      "Petersburg"
+    ],
     "distractorsRu": [
       "Москва",
       "Казань",
@@ -143,6 +159,10 @@
       "Микеланджело",
       "Микеланджело Буонарроти"
     ],
+    "acceptedEn": [
+      "Michelangelo",
+      "Michelangelo Buonarroti"
+    ],
     "distractorsRu": [
       "Бернини",
       "Роден",
@@ -163,6 +183,9 @@
     "answerRu": "импрессионизм",
     "acceptedRu": [
       "импрессионизм"
+    ],
+    "acceptedEn": [
+      "Impressionism"
     ],
     "distractorsRu": [
       "кубизм",
@@ -185,6 +208,10 @@
     "acceptedRu": [
       "Казимир Малевич",
       "Малевич"
+    ],
+    "acceptedEn": [
+      "Kazimir Malevich",
+      "Malevich"
     ],
     "distractorsRu": [
       "Василий Кандинский",
@@ -229,6 +256,10 @@
       "Иван Айвазовский",
       "Айвазовский"
     ],
+    "acceptedEn": [
+      "Ivan Aivazovsky",
+      "Aivazovsky"
+    ],
     "distractorsRu": [
       "Иван Шишкин",
       "Исаак Левитан",
@@ -250,6 +281,10 @@
     "acceptedRu": [
       "Микеланджело",
       "Микеланджело Буонарроти"
+    ],
+    "acceptedEn": [
+      "Michelangelo",
+      "Michelangelo Buonarroti"
     ],
     "distractorsRu": [
       "Рафаэль",
@@ -274,6 +309,11 @@
       "Кало",
       "Фрида"
     ],
+    "acceptedEn": [
+      "Frida Kahlo",
+      "Kahlo",
+      "Frida"
+    ],
     "distractorsRu": [
       "Тамара де Лемпицка",
       "Джорджия О’Кифф",
@@ -295,6 +335,10 @@
     "acceptedRu": [
       "Василий Суриков",
       "Суриков"
+    ],
+    "acceptedEn": [
+      "Vasily Surikov",
+      "Surikov"
     ],
     "distractorsRu": [
       "Илья Репин",
@@ -318,6 +362,10 @@
       "Рио-де-Жанейро",
       "Рио"
     ],
+    "acceptedEn": [
+      "Rio de Janeiro",
+      "Rio"
+    ],
     "distractorsRu": [
       "Сан-Паулу",
       "Лиссабон",
@@ -340,6 +388,10 @@
     "acceptedRu": [
       "Леонардо да Винчи",
       "да Винчи"
+    ],
+    "acceptedEn": [
+      "Leonardo da Vinci",
+      "da Vinci"
     ],
     "distractorsRu": [
       "Ян ван Эйк",
@@ -365,6 +417,10 @@
       "Винсент Ван Гог",
       "Ван Гог"
     ],
+    "acceptedEn": [
+      "Vincent van Gogh",
+      "Van Gogh"
+    ],
     "distractorsRu": [
       "Ян Вермеер",
       "Грант Вуд",
@@ -388,6 +444,10 @@
     "acceptedRu": [
       "Ян Вермеер",
       "Вермеер"
+    ],
+    "acceptedEn": [
+      "Jan Vermeer",
+      "Vermeer"
     ],
     "distractorsRu": [
       "Рембрандт",
@@ -413,6 +473,10 @@
       "Пабло Пикассо",
       "Пикассо"
     ],
+    "acceptedEn": [
+      "Pablo Picasso",
+      "Picasso"
+    ],
     "distractorsRu": [
       "Ян ван Эйк",
       "Пьер Огюст Ренуар",
@@ -437,6 +501,10 @@
       "Эжен Делакруа",
       "Делакруа"
     ],
+    "acceptedEn": [
+      "Eugene Delacroix",
+      "Delacroix"
+    ],
     "distractorsRu": [
       "Пьер Огюст Ренуар",
       "Грант Вуд",
@@ -459,6 +527,9 @@
     "answerRu": "Рембрандт",
     "acceptedRu": [
       "Рембрандт"
+    ],
+    "acceptedEn": [
+      "Rembrandt"
     ],
     "distractorsRu": [
       "Франсиско Гойя",
@@ -484,6 +555,10 @@
       "Диего Веласкес",
       "Веласкес"
     ],
+    "acceptedEn": [
+      "Diego Velazquez",
+      "Velazquez"
+    ],
     "distractorsRu": [
       "Клод Моне",
       "Питер Брейгель Старший",
@@ -507,6 +582,10 @@
     "acceptedRu": [
       "Сандро Боттичелли",
       "Боттичелли"
+    ],
+    "acceptedEn": [
+      "Sandro Botticelli",
+      "Botticelli"
     ],
     "distractorsRu": [
       "Диего Веласкес",
@@ -532,6 +611,10 @@
       "Винсент Ван Гог",
       "Ван Гог"
     ],
+    "acceptedEn": [
+      "Vincent van Gogh",
+      "Van Gogh"
+    ],
     "distractorsRu": [
       "Рембрандт",
       "Тициан",
@@ -555,6 +638,10 @@
     "acceptedRu": [
       "Клод Моне",
       "Моне"
+    ],
+    "acceptedEn": [
+      "Claude Monet",
+      "Monet"
     ],
     "distractorsRu": [
       "Илья Ефимович Репин",
@@ -580,6 +667,10 @@
       "Жак Луи Давид",
       "Давид"
     ],
+    "acceptedEn": [
+      "Jacques-Louis David",
+      "David"
+    ],
     "distractorsRu": [
       "Эдуард Мане",
       "Густав Климт",
@@ -603,6 +694,10 @@
     "acceptedRu": [
       "Густав Климт",
       "Климт"
+    ],
+    "acceptedEn": [
+      "Gustav Klimt",
+      "Klimt"
     ],
     "distractorsRu": [
       "Эжен Делакруа",
@@ -628,6 +723,10 @@
       "Леонардо да Винчи",
       "да Винчи"
     ],
+    "acceptedEn": [
+      "Leonardo da Vinci",
+      "da Vinci"
+    ],
     "distractorsRu": [
       "Эдуард Мане",
       "Франсиско Гойя",
@@ -651,6 +750,10 @@
     "acceptedRu": [
       "Иероним Босх",
       "Босх"
+    ],
+    "acceptedEn": [
+      "Hieronymus Bosch",
+      "Bosch"
     ],
     "distractorsRu": [
       "Теодор Жерико",
@@ -676,6 +779,10 @@
       "Сальвадор Дали",
       "Дали"
     ],
+    "acceptedEn": [
+      "Salvador Dali",
+      "Dali"
+    ],
     "distractorsRu": [
       "Сандро Боттичелли",
       "Теодор Жерико",
@@ -699,6 +806,10 @@
     "acceptedRu": [
       "Каспар Давид Фридрих",
       "Фридрих"
+    ],
+    "acceptedEn": [
+      "Caspar David Friedrich",
+      "Friedrich"
     ],
     "distractorsRu": [
       "Теодор Жерико",
@@ -724,6 +835,10 @@
       "Теодор Жерико",
       "Жерико"
     ],
+    "acceptedEn": [
+      "Theodore Gericault",
+      "Gericault"
+    ],
     "distractorsRu": [
       "Ян ван Эйк",
       "Пабло Пикассо",
@@ -747,6 +862,10 @@
     "acceptedRu": [
       "Илья Ефимович Репин",
       "Репин"
+    ],
+    "acceptedEn": [
+      "Ilya Repin",
+      "Repin"
     ],
     "distractorsRu": [
       "Эдуард Мане",
@@ -772,6 +891,10 @@
       "Грант Вуд",
       "Вуд"
     ],
+    "acceptedEn": [
+      "Grant Wood",
+      "Wood"
+    ],
     "distractorsRu": [
       "Сандро Боттичелли",
       "Рембрандт",
@@ -795,6 +918,10 @@
     "acceptedRu": [
       "Эдуард Мане",
       "Мане"
+    ],
+    "acceptedEn": [
+      "Edouard Manet",
+      "Manet"
     ],
     "distractorsRu": [
       "Диего Веласкес",
@@ -820,6 +947,10 @@
       "Франсиско Гойя",
       "Гойя"
     ],
+    "acceptedEn": [
+      "Francisco Goya",
+      "Goya"
+    ],
     "distractorsRu": [
       "Теодор Жерико",
       "Тициан",
@@ -844,6 +975,10 @@
       "Франсиско Гойя",
       "Гойя"
     ],
+    "acceptedEn": [
+      "Francisco Goya",
+      "Goya"
+    ],
     "distractorsRu": [
       "Ян Вермеер",
       "Пьер Огюст Ренуар",
@@ -866,6 +1001,9 @@
     "answerRu": "Рембрандт",
     "acceptedRu": [
       "Рембрандт"
+    ],
+    "acceptedEn": [
+      "Rembrandt"
     ],
     "distractorsRu": [
       "Густав Климт",
@@ -891,6 +1029,10 @@
       "Ян Вермеер",
       "Вермеер"
     ],
+    "acceptedEn": [
+      "Jan Vermeer",
+      "Vermeer"
+    ],
     "distractorsRu": [
       "Густав Климт",
       "Питер Брейгель Старший",
@@ -914,6 +1056,10 @@
     "acceptedRu": [
       "Пьер Огюст Ренуар",
       "Ренуар"
+    ],
+    "acceptedEn": [
+      "Pierre-Auguste Renoir",
+      "Renoir"
     ],
     "distractorsRu": [
       "Леонардо да Винчи",
@@ -939,6 +1085,10 @@
       "Ян ван Эйк",
       "ван Эйк"
     ],
+    "acceptedEn": [
+      "Jan van Eyck",
+      "van Eyck"
+    ],
     "distractorsRu": [
       "Сандро Боттичелли",
       "Жак Луи Давид",
@@ -962,6 +1112,10 @@
     "acceptedRu": [
       "Эдуард Мане",
       "Мане"
+    ],
+    "acceptedEn": [
+      "Edouard Manet",
+      "Manet"
     ],
     "distractorsRu": [
       "Клод Моне",
@@ -987,6 +1141,10 @@
       "Жак Луи Давид",
       "Давид"
     ],
+    "acceptedEn": [
+      "Jacques-Louis David",
+      "David"
+    ],
     "distractorsRu": [
       "Франсиско Гойя",
       "Диего Веласкес",
@@ -1011,6 +1169,10 @@
       "Сандро Боттичелли",
       "Боттичелли"
     ],
+    "acceptedEn": [
+      "Sandro Botticelli",
+      "Botticelli"
+    ],
     "distractorsRu": [
       "Винсент Ван Гог",
       "Ян ван Эйк",
@@ -1033,6 +1195,9 @@
     "answerRu": "Тициан",
     "acceptedRu": [
       "Тициан"
+    ],
+    "acceptedEn": [
+      "Titian"
     ],
     "distractorsRu": [
       "Ян ван Эйк",
@@ -1057,6 +1222,11 @@
     "acceptedRu": [
       "Питер Брейгель Старший",
       "Старший"
+    ],
+    "acceptedEn": [
+      "Pieter Bruegel the Elder",
+      "Bruegel the Elder",
+      "Bruegel"
     ],
     "distractorsRu": [
       "Жак Луи Давид",

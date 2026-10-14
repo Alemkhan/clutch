@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import type { CategoryId, PracticeLevel } from "@clutch/shared";
+import { useEffect, useState } from "react";
+import type { CategoryId, PracticeLevel, QuestionReportKind } from "@clutch/shared";
 import { SOLO_ROUND_CAP } from "@clutch/shared";
 import { CategorySelect } from "./CategorySelect";
 import { HammerGame } from "./HammerGame";
@@ -16,11 +16,13 @@ import {
   type SoloFlowState,
   type SoloStage,
 } from "../lib/soloRunFlow";
+import type { ResolutionReportStatus } from "../lib/reportPanel";
 import { buildPracticeSummary, practiceBotLabel } from "../lib/practiceResult";
 import {
   FRIEND_DUEL_CHIP,
   buildFriendDuelSummary,
 } from "../lib/friendDuelResult";
+import { submitQuestionReport } from "../lib/api";
 import { useSoloRun, type SoloSaveState } from "../lib/useSoloRun";
 
 interface SoloRunScreenProps {
@@ -50,6 +52,9 @@ interface SoloRunScreenProps {
   onMyRuns: () => void;
   /** Тренировка против бота: другой текст и итог, результат не засчитывается. */
   practice?: PracticeLevel;
+  /** Репорт о проблеме на разборе: экран только рисует, сеть и статус живут в SoloRun. */
+  onReport?: (kind: QuestionReportKind, comment: string) => void;
+  reportState?: ResolutionReportStatus;
 }
 
 const noop = () => undefined;
@@ -251,6 +256,9 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
   }
 
   if (!question) return null;
+  const selectedAnswer = question.answerType === "multiple_choice"
+    ? question.options.find((option) => option.id === state.selectedOption)?.text
+    : undefined;
   const hud = (
     <SoloHud
       progress={view.progress}
@@ -301,10 +309,16 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
         ))}
       {state.stage === "resolution" && (
         <ResolutionScreen
+          correctAnswer={state.correctAnswer}
+          selectedAnswer={state.lastCorrect ? undefined : selectedAnswer}
           explanation={state.explanation}
           correct={state.lastCorrect}
-          selectedOptionId={state.selectedOption}
           onContinue={props.onContinue}
+          report={
+            props.onReport
+              ? { onSend: props.onReport, state: props.reportState ?? "idle" }
+              : undefined
+          }
         />
       )}
       {state.stage === "hammer" && (
@@ -349,6 +363,36 @@ export function SoloRun({
   const run = useSoloRun(practice?.id);
   const { stage } = run.state;
   const { begin, resume } = run;
+  // Статус репорта привязан к вопросу: следующий разбор снова начинает с idle.
+  const [report, setReport] = useState<{
+    questionId: string;
+    status: ResolutionReportStatus;
+  } | null>(null);
+  const reportQuestion = currentSoloQuestion(run.state);
+
+  const submitReport = (kind: QuestionReportKind, comment: string) => {
+    const state = run.state;
+    const question = currentSoloQuestion(state);
+    if (!question) return;
+    const playerAnswer =
+      question.answerType === "multiple_choice"
+        ? question.options.find((option) => option.id === state.selectedOption)
+            ?.text
+        : state.selectedOption || undefined;
+    setReport({ questionId: question.id, status: "sending" });
+    void submitQuestionReport({
+      questionId: question.id,
+      ...(state.runId ? { runId: state.runId } : {}),
+      category: state.category,
+      mode: "solo",
+      kind,
+      verdict: state.lastCorrect,
+      ...(playerAnswer ? { playerAnswer } : {}),
+      ...(comment ? { comment } : {}),
+    })
+      .then(() => setReport({ questionId: question.id, status: "sent" }))
+      .catch(() => setReport({ questionId: question.id, status: "error" }));
+  };
 
   useEffect(() => {
     if (rematch) begin(rematch.category, rematch.inviteId);
@@ -385,6 +429,12 @@ export function SoloRun({
       onHome={onHome}
       onMyRuns={onMyRuns}
       practice={practice}
+      onReport={submitReport}
+      reportState={
+        report && reportQuestion && report.questionId === reportQuestion.id
+          ? report.status
+          : "idle"
+      }
     />
   );
 }

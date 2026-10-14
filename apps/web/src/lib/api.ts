@@ -1,13 +1,17 @@
 import type {
+  AnalyticsEventName,
+  AnalyticsEventPayload,
   CategoryId,
   CreateFriendInviteResponse,
   CreateRematchInviteResponse,
   GuestSessionResponse,
   PracticeLevelId,
   MyRunsResponse,
+  QuestionReportRequest,
   SoloAnswerRequest,
   SoloHammerRequest,
   SoloLeaderboardResponse,
+  SoloProfileResponse,
   SoloRoundResponse,
   SoloRunSnapshot,
   StartSoloRunRequest,
@@ -18,6 +22,7 @@ import type {
   TrainingQuestionsRequest,
   TrainingQuestionsResponse,
 } from '@clutch/shared';
+import { ANALYTIC_EVENT_NAMES } from '@clutch/shared';
 import { getTelegramIdentity } from './telegram';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
@@ -284,6 +289,11 @@ export function fetchMyRuns(
   return apiFetch(`/api/my-runs${suffix}`, { method: 'GET' }, signal);
 }
 
+/** Подтверждённая сервером статистика текущего зачётного solo-режима. */
+export function fetchSoloProfile(signal?: AbortSignal): Promise<SoloProfileResponse> {
+  return apiFetch('/api/profile', { method: 'GET' }, signal);
+}
+
 // ---- Rematch and notifications ----
 
 export interface RematchPreview {
@@ -321,6 +331,28 @@ export function createRematchInvite(runId: string, signal?: AbortSignal): Promis
 
 export function setOutbidNotifications(enabled: boolean): Promise<{ enabled: boolean }> {
   return apiFetch('/api/notifications/outbid', { method: 'PUT', body: JSON.stringify({ enabled }) });
+}
+
+// ---- Репорты и аналитика ----
+
+/** Репорт о проблеме с вопросом с экрана разбора: обычный await-вызов, статус рисует вызывающий. */
+export function submitQuestionReport(
+  body: QuestionReportRequest,
+  signal?: AbortSignal,
+): Promise<{ ok: true }> {
+  return apiFetch('/api/reports', { method: 'POST', body: JSON.stringify(body) }, signal);
+}
+
+/**
+ * Минимальная продуктовая аналитика: строго fire-and-forget. Без await, очереди и ретраев;
+ * любая ошибка глотается, событие никогда не ломает UI. Имена — общий allowlist с сервером.
+ */
+export function logAnalyticsEvent(event: AnalyticsEventName, payload?: AnalyticsEventPayload): void {
+  if (!ANALYTIC_EVENT_NAMES.includes(event)) return;
+  void apiFetch('/api/events', {
+    method: 'POST',
+    body: JSON.stringify(payload ? { event, payload } : { event }),
+  }).catch(() => undefined);
 }
 
 // ---- Last Stand ----

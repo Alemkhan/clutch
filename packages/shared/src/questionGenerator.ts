@@ -179,7 +179,7 @@ export function generateCountryToCapital(
     category: 'Geography',
     subcategory: 'Столицы',
     difficulty,
-    prompt: `Назовите столицу: ${correct.nameRu}`,
+    prompt: `Какой город — столица страны ${correct.nameRu}?`,
     options,
     correctOptionId,
     explanation: `${correct.nameRu}: столица — ${correct.capitalRu}.`,
@@ -199,7 +199,7 @@ export function generateFlagToCapital(correct: Country = pickOne(countries)): Qu
     category: 'Geography',
     subcategory: 'Флаги и столицы',
     difficulty: 'Hard',
-    prompt: 'Назовите столицу страны с этим флагом',
+    prompt: 'Какой город — столица страны с этим флагом?',
     mediaType: 'flag',
     mediaUrl: flagUrl(correct.code),
     options,
@@ -262,7 +262,7 @@ export function generateCapitalOpenAnswer(correct: Country = pickOne(countries))
     category: 'Geography',
     subcategory: 'Столица',
     difficulty: 'Hard',
-    prompt: `Напишите столицу: ${correct.nameRu}`,
+    prompt: `Напишите название города — столицы страны ${correct.nameRu}.`,
     options: [],
     correctOptionId: '',
     correctAnswers: [correct.capitalRu, correct.capital],
@@ -305,7 +305,7 @@ export function generateFixedCapitalQuiz(countryCodes: string[]): Question[] {
       category: 'Geography',
       subcategory: 'Столицы',
       difficulty: 'Hard' as const,
-      prompt: `Назовите столицу: ${country.nameRu}`,
+      prompt: `Напишите название города — столицы страны ${country.nameRu}.`,
       options: [],
       correctOptionId: '',
       correctAnswers: [country.capitalRu, country.capital],
@@ -484,7 +484,6 @@ function generateMatchWithRandom(
     const generators = [
       { name: 'open_capital', make: generateCapitalOpenAnswer },
       { name: 'open_flag_country', make: generateFlagToCountryOpen },
-      ...(OUTLINE_EXCLUDED.has(country.code) ? [] : [{ name: 'open_outline_country', make: generateOutlineToCountryOpen }]),
     ];
     return pickLeastUsed(generators, country.code, usage).make(country);
   });

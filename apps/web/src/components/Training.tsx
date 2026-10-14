@@ -1,8 +1,9 @@
-import { useEffect, useReducer, useRef } from 'react';
-import type { PublicQuestion, TrainingCheckResponse } from '@clutch/shared';
+import { useEffect, useReducer, useRef, useState } from 'react';
+import type { PublicQuestion, QuestionReportKind, TrainingCheckResponse } from '@clutch/shared';
 import { QuestionScreen } from './QuestionScreen';
 import { ScreenHeader } from './ScreenHeader';
 import { ResolutionScreen } from './ResolutionScreen';
+import type { ResolutionReportStatus } from '../lib/reportPanel';
 import {
   applyTrainingVerdict,
   beginTrainingAnswer,
@@ -14,6 +15,16 @@ import {
   type TrainingState,
 } from '../lib/trainingSession';
 
+/** Данные репорта, которые Training знает из своей сессии; сеть (mode 'training') подключает MistakePractice. */
+export interface TrainingReportInput {
+  questionId: string;
+  category: string;
+  verdict: boolean;
+  kind: QuestionReportKind;
+  playerAnswer?: string;
+  comment?: string;
+}
+
 interface TrainingProps {
   questions: PublicQuestion[];
   /** Проверка ответа на сервере: клиент не знает правильного ответа заранее. */
@@ -21,6 +32,8 @@ interface TrainingProps {
   onBack: () => void;
   /** Подпись кнопки выхода на итоговых экранах. */
   exitLabel?: string;
+  /** Репорт о проблеме с разбора; без пропа кнопки «Сообщить о проблеме» нет. */
+  onReport?: (input: TrainingReportInput) => Promise<unknown>;
 }
 
 export const TRAINING_NOT_SAVED_NOTE =
@@ -43,11 +56,35 @@ function reducer(state: TrainingState, action: Action): TrainingState {
   }
 }
 
-export function Training({ questions, check, onBack, exitLabel = 'На главный' }: TrainingProps) {
+export function Training({ questions, check, onBack, exitLabel = 'На главный', onReport }: TrainingProps) {
   const [state, dispatch] = useReducer(reducer, questions, createTrainingState);
   const question = state.questions[state.index];
+  const selectedAnswer = question?.answerType === 'multiple_choice'
+    ? question.options.find((option) => option.id === state.selectedOption)?.text
+    : undefined;
   const checkRef = useRef(check);
   checkRef.current = check;
+  // Статус репорта привязан к вопросу: следующий разбор снова начинает с idle.
+  const [report, setReport] = useState<{ questionId: string; status: ResolutionReportStatus } | null>(null);
+
+  const submitReport = (kind: QuestionReportKind, comment: string): void => {
+    const current = state.questions[state.index];
+    if (!onReport || !current) return;
+    const playerAnswer = current.answerType === 'multiple_choice'
+      ? current.options.find((option) => option.id === state.selectedOption)?.text
+      : state.selectedOption || undefined;
+    setReport({ questionId: current.id, status: 'sending' });
+    void onReport({
+      questionId: current.id,
+      category: current.category,
+      verdict: state.lastCorrect,
+      kind,
+      ...(comment ? { comment } : {}),
+      ...(playerAnswer ? { playerAnswer } : {}),
+    })
+      .then(() => setReport({ questionId: current.id, status: 'sent' }))
+      .catch(() => setReport({ questionId: current.id, status: 'error' }));
+  };
 
   // Ответ уходит на проверку; при обрыве он сохраняется, а «Повторить» отправляет его снова.
   const checking = state.step === 'checking' && !state.checkFailed;
@@ -123,11 +160,16 @@ export function Training({ questions, check, onBack, exitLabel = 'На глав�
       )}
       {state.step === 'resolution' && question && (
         <ResolutionScreen
+          correctAnswer={state.correctAnswer}
+          selectedAnswer={state.lastCorrect ? undefined : selectedAnswer}
           explanation={state.explanation}
           correct={state.lastCorrect}
-          selectedOptionId={state.selectedOption}
           variant="training"
           onContinue={() => dispatch({ type: 'continue' })}
+          report={onReport ? {
+            onSend: submitReport,
+            state: report?.questionId === question.id ? report.status : 'idle',
+          } : undefined}
         />
       )}
     </section>

@@ -24,9 +24,43 @@ describe('resultFromDistance', () => {
 });
 
 describe('isAnswerCorrect', () => {
-  it('accepts normalized Russian and English answers with a small typo', () => {
+  it('accepts normalized exact answers and a reasonable typo in a word longer than four characters', () => {
     expect(isAnswerCorrect('  Астана! ', ['Астана', 'Astana']).correct).toBe(true);
     expect(isAnswerCorrect('Astna', ['Астана', 'Astana']).correct).toBe(true);
+  });
+
+  it.each([
+    ['7', ['8']],
+    ['x', ['π']],
+    ['1886', ['1896']],
+    ['1996', ['1896']],
+    ['1895', ['1896']],
+    ['896', ['1896']],
+  ])('requires an exact match for short and numeric facts: %s', (input, answers) => {
+    expect(isAnswerCorrect(input, answers).correct).toBe(false);
+  });
+
+  it('does not accept any other Latin letter in place of D', () => {
+    for (const letter of 'ABCEFGHIJKLMNOPQRSTUVWXYZ') {
+      expect(isAnswerCorrect(letter, ['D']).correct, letter).toBe(false);
+    }
+  });
+
+  it('keeps normalized exact matching for short and numeric facts', () => {
+    expect(isAnswerCorrect(' D. ', ['d']).correct).toBe(true);
+    expect(isAnswerCorrect(' 8! ', ['8']).correct).toBe(true);
+    expect(isAnswerCorrect(' π ', ['π']).correct).toBe(true);
+    expect(isAnswerCorrect(' 1896. ', ['1896']).correct).toBe(true);
+  });
+
+  it('allows at most two edits in long answers and never scales tolerance without a cap', () => {
+    expect(isAnswerCorrect('Сьюдад-де-ла-Пасс', ['Сьюдад-де-ла-Пас']).correct).toBe(true);
+    expect(isAnswerCorrect('Константинопл', ['Константинополь']).correct).toBe(true);
+    expect(isAnswerCorrect('Констнтнопл', ['Константинополь']).correct).toBe(false);
+  });
+
+  it('does not fuzzy-match a short input to a longer answer', () => {
+    expect(isAnswerCorrect('Аста', ['Астана']).correct).toBe(false);
   });
 
   it('rejects an unrelated answer', () => {
@@ -73,6 +107,13 @@ describe('generateMatch', () => {
 
     expect(questions.filter((question) => question.answerType === 'open_answer')).toHaveLength(3);
     expect(new Set(questions.map((question) => question.id.split('_').at(-1))).size).toBe(11);
+  });
+
+  it('does not put open country outlines into newly generated geography sets', () => {
+    for (let seed = 0; seed < 20; seed++) {
+      const questions = generateMatch(20, 1, 'geography', () => seed / 20);
+      expect(questions.some((question) => question.id.startsWith('open_outline_country_'))).toBe(false);
+    }
   });
 
   it('keeps selected geography entities unique through the capital template path', () => {

@@ -10,6 +10,9 @@
     "acceptedRu": [
       "Меркурий"
     ],
+    "acceptedEn": [
+      "Mercury"
+    ],
     "distractorsRu": [
       "Венера",
       "Марс",
@@ -30,6 +33,9 @@
     "answerRu": "Юпитер",
     "acceptedRu": [
       "Юпитер"
+    ],
+    "acceptedEn": [
+      "Jupiter"
     ],
     "distractorsRu": [
       "Сатурн",
@@ -52,6 +58,9 @@
     "acceptedRu": [
       "Луна"
     ],
+    "acceptedEn": [
+      "Moon"
+    ],
     "distractorsRu": [
       "Фобос",
       "Европа",
@@ -72,6 +81,9 @@
     "answerRu": "Сатурн",
     "acceptedRu": [
       "Сатурн"
+    ],
+    "acceptedEn": [
+      "Saturn"
     ],
     "distractorsRu": [
       "Юпитер",
@@ -95,6 +107,10 @@
       "Алексей Леонов",
       "Леонов"
     ],
+    "acceptedEn": [
+      "Alexei Leonov",
+      "Leonov"
+    ],
     "distractorsRu": [
       "Юрий Гагарин",
       "Нил Армстронг",
@@ -117,6 +133,10 @@
       "Нил Армстронг",
       "Армстронг"
     ],
+    "acceptedEn": [
+      "Neil Armstrong",
+      "Armstrong"
+    ],
     "distractorsRu": [
       "Базз Олдрин",
       "Юрий Гагарин",
@@ -138,6 +158,10 @@
     "acceptedRu": [
       "Валентина Терешкова",
       "Терешкова"
+    ],
+    "acceptedEn": [
+      "Valentina Tereshkova",
+      "Tereshkova"
     ],
     "distractorsRu": [
       "Светлана Савицкая",
@@ -205,6 +229,9 @@
       "Млечный Путь",
       "Млечный путь"
     ],
+    "acceptedEn": [
+      "Milky Way"
+    ],
     "distractorsRu": [
       "Андромеда",
       "Треугольник",
@@ -227,6 +254,10 @@
       "Проксима Центавра",
       "Проксима"
     ],
+    "acceptedEn": [
+      "Proxima Centauri",
+      "Proxima"
+    ],
     "distractorsRu": [
       "Сириус",
       "Бетельгейзе",
@@ -248,6 +279,9 @@
     "acceptedRu": [
       "Уран"
     ],
+    "acceptedEn": [
+      "Uranus"
+    ],
     "distractorsRu": [
       "Нептун",
       "Сатурн",
@@ -268,6 +302,9 @@
     "answerRu": "горизонт событий",
     "acceptedRu": [
       "горизонт событий"
+    ],
+    "acceptedEn": [
+      "event horizon"
     ],
     "distractorsRu": [
       "сингулярность",
@@ -293,6 +330,10 @@
       "ПС-1",
       "Спутник"
     ],
+    "acceptedEn": [
+      "Sputnik 1",
+      "Sputnik"
+    ],
     "distractorsRu": [
       "Восток-1",
       "Эксплорер-1",
@@ -313,6 +354,9 @@
     "answerRu": "Титан",
     "acceptedRu": [
       "Титан"
+    ],
+    "acceptedEn": [
+      "Titan"
     ],
     "distractorsRu": [
       "Ганимед",
@@ -360,6 +404,10 @@
       "Олимп",
       "гора Олимп"
     ],
+    "acceptedEn": [
+      "Olympus Mons",
+      "Olympus"
+    ],
     "distractorsRu": [
       "Мауна-Кеа",
       "Эверест",
@@ -381,6 +429,9 @@
     "answerRu": "Венера",
     "acceptedRu": [
       "Венера"
+    ],
+    "acceptedEn": [
+      "Venus"
     ],
     "distractorsRu": [
       "Меркурий",
@@ -405,6 +456,10 @@
       "Юрий Гагарин",
       "Гагарин"
     ],
+    "acceptedEn": [
+      "Yuri Gagarin",
+      "Gagarin"
+    ],
     "distractorsRu": [
       "Герман Титов",
       "Нил Армстронг",
@@ -427,6 +482,10 @@
     "acceptedRu": [
       "Нил Армстронг",
       "Армстронг"
+    ],
+    "acceptedEn": [
+      "Neil Armstrong",
+      "Armstrong"
     ],
     "distractorsRu": [
       "Базз Олдрин",

@@ -100,7 +100,6 @@ export default function App() {
         {game.phase === 'home' && !launchIntent && (
           <motion.div key="home" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <HomeDashboard
-              onLastStand={game.goToLastStand}
               onSolo={startSolo}
               onBoard={game.goToBoard}
             />

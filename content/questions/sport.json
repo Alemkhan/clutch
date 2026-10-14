@@ -140,6 +140,9 @@
     "acceptedRu": [
       "Бразилия"
     ],
+    "acceptedEn": [
+      "Brazil"
+    ],
     "distractorsRu": [
       "Германия",
       "Италия",
@@ -185,6 +188,9 @@
     "acceptedRu": [
       "Москва"
     ],
+    "acceptedEn": [
+      "Moscow"
+    ],
     "distractorsRu": [
       "Лос-Анджелес",
       "Монреаль",
@@ -208,6 +214,10 @@
       "Усейн Болт",
       "Болт"
     ],
+    "acceptedEn": [
+      "Usain Bolt",
+      "Bolt"
+    ],
     "distractorsRu": [
       "Карл Льюис",
       "Тайсон Гэй",
@@ -229,6 +239,10 @@
     "acceptedRu": [
       "Кубок Стэнли",
       "Стэнли"
+    ],
+    "acceptedEn": [
+      "Stanley Cup",
+      "Stanley"
     ],
     "distractorsRu": [
       "Кубок Гагарина",
@@ -273,6 +287,10 @@
     "acceptedRu": [
       "Гарри Каспаров",
       "Каспаров"
+    ],
+    "acceptedEn": [
+      "Garry Kasparov",
+      "Kasparov"
     ],
     "distractorsRu": [
       "Анатолий Карпов",
@@ -337,6 +355,9 @@
     "answerRu": "Афины",
     "acceptedRu": [
       "Афины"
+    ],
+    "acceptedEn": [
+      "Athens"
     ],
     "distractorsRu": [
       "Париж",

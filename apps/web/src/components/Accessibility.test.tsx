@@ -23,17 +23,41 @@ afterEach(() => {
 describe('accessible gameplay semantics', () => {
   it('renders resolution as one named keyboard action', () => {
     const html = renderToStaticMarkup(
-      <ResolutionScreen explanation={question.explanation} correct selectedOptionId="a" onContinue={vi.fn()} />,
+      <ResolutionScreen
+        correctAnswer="Астана"
+        explanation={question.explanation}
+        correct
+        onContinue={vi.fn()}
+      />,
     );
 
     expect(html).toContain(
-      'class="resolution-screen" role="button" tabindex="0" aria-label="Верно. Перейти к мини-игре"',
+      'class="resolution-screen" role="button" tabindex="0" aria-label="Верно. Правильный ответ: Астана. Астана — столица Казахстана. Перейти к мини-игре"',
     );
     expect(shouldActivateAction(false)).toBe(true);
     expect(shouldActivateAction(false, 'Enter')).toBe(true);
     expect(shouldActivateAction(false, ' ')).toBe(true);
     expect(shouldActivateAction(false, 'Escape')).toBe(false);
     expect(shouldActivateAction(true, 'Enter')).toBe(false);
+  });
+
+  it('includes both distinct answers in the accessible name for a wrong training choice', () => {
+    const html = renderToStaticMarkup(
+      <ResolutionScreen
+        correctAnswer="Астана"
+        selectedAnswer="Алматы"
+        explanation="Астана — столица Казахстана."
+        correct={false}
+        variant="training"
+        onContinue={vi.fn()}
+      />,
+    );
+
+    expect(html).toContain(
+      'aria-label="Неверно. Твой ответ: Алматы. Правильный ответ: Астана. Астана — столица Казахстана. Следующий вопрос"',
+    );
+    expect(html).toContain('<span>Твой ответ</span><strong>Алматы</strong>');
+    expect(html).toContain('<span>Правильный ответ</span><strong>Астана</strong>');
   });
 
   it('names the hammer action and exposes its disabled-after-hit state', () => {

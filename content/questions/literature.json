@@ -11,6 +11,10 @@
       "Гарри Поттер",
       "Гарри"
     ],
+    "acceptedEn": [
+      "Harry Potter",
+      "Harry"
+    ],
     "distractorsRu": [
       "Рон Уизли",
       "Невилл Долгопупс",
@@ -54,6 +58,10 @@
       "Александр Пушкин",
       "Пушкин"
     ],
+    "acceptedEn": [
+      "Alexander Pushkin",
+      "Pushkin"
+    ],
     "distractorsRu": [
       "Лев Толстой",
       "Корней Чуковский",
@@ -77,6 +85,11 @@
       "Холмс",
       "Шерлок"
     ],
+    "acceptedEn": [
+      "Sherlock Holmes",
+      "Holmes",
+      "Sherlock"
+    ],
     "distractorsRu": [
       "Эркюль Пуаро",
       "мисс Марпл",
@@ -97,6 +110,9 @@
     "answerRu": "Росинант",
     "acceptedRu": [
       "Росинант"
+    ],
+    "acceptedEn": [
+      "Rocinante"
     ],
     "distractorsRu": [
       "Буцефал",
@@ -120,6 +136,10 @@
       "Александр Пушкин",
       "Пушкин"
     ],
+    "acceptedEn": [
+      "Alexander Pushkin",
+      "Pushkin"
+    ],
     "distractorsRu": [
       "Михаил Лермонтов",
       "Александр Грибоедов",
@@ -141,6 +161,10 @@
     "acceptedRu": [
       "Николай Гоголь",
       "Гоголь"
+    ],
+    "acceptedEn": [
+      "Nikolai Gogol",
+      "Gogol"
     ],
     "distractorsRu": [
       "Иван Тургенев",
@@ -164,6 +188,10 @@
       "капитан Немо",
       "Немо"
     ],
+    "acceptedEn": [
+      "Captain Nemo",
+      "Nemo"
+    ],
     "distractorsRu": [
       "капитан Флинт",
       "капитан Грант",
@@ -186,6 +214,10 @@
       "Михаил Лермонтов",
       "Лермонтов"
     ],
+    "acceptedEn": [
+      "Mikhail Lermontov",
+      "Lermontov"
+    ],
     "distractorsRu": [
       "Александр Пушкин",
       "Иван Тургенев",
@@ -207,6 +239,10 @@
     "acceptedRu": [
       "Иван Тургенев",
       "Тургенев"
+    ],
+    "acceptedEn": [
+      "Ivan Turgenev",
+      "Turgenev"
     ],
     "distractorsRu": [
       "Антон Чехов",
@@ -231,6 +267,10 @@
       "Фродо Бэггинс",
       "Фродо Торбинс"
     ],
+    "acceptedEn": [
+      "Frodo",
+      "Frodo Baggins"
+    ],
     "distractorsRu": [
       "Бильбо Бэггинс",
       "Мерри",
@@ -252,6 +292,10 @@
     "acceptedRu": [
       "Антон Чехов",
       "Чехов"
+    ],
+    "acceptedEn": [
+      "Anton Chekhov",
+      "Chekhov"
     ],
     "distractorsRu": [
       "Александр Островский",
@@ -275,6 +319,10 @@
       "Михаил Лермонтов",
       "Лермонтов"
     ],
+    "acceptedEn": [
+      "Mikhail Lermontov",
+      "Lermontov"
+    ],
     "distractorsRu": [
       "Александр Пушкин",
       "Николай Некрасов",
@@ -295,6 +343,9 @@
     "answerRu": "Верона",
     "acceptedRu": [
       "Верона"
+    ],
+    "acceptedEn": [
+      "Verona"
     ],
     "distractorsRu": [
       "Венеция",
@@ -318,6 +369,11 @@
       "Родион Раскольников",
       "Раскольников",
       "Родион"
+    ],
+    "acceptedEn": [
+      "Rodion Raskolnikov",
+      "Raskolnikov",
+      "Rodion"
     ],
     "distractorsRu": [
       "Пьер Безухов",
@@ -362,6 +418,11 @@
       "Сэмюэл Клеменс",
       "Клеменс",
       "Сэмюэл Ленгхорн Клеменс"
+    ],
+    "acceptedEn": [
+      "Samuel Clemens",
+      "Clemens",
+      "Samuel Langhorne Clemens"
     ],
     "distractorsRu": [
       "Эрик Блэр",
@@ -431,6 +492,10 @@
       "Антуан де Сент-Экзюпери",
       "де Сент-Экзюпери"
     ],
+    "acceptedEn": [
+      "Antoine de Saint-Exupery",
+      "Saint-Exupery"
+    ],
     "distractorsRu": [
       "Гесиод",
       "Чарльз Диккенс",
@@ -454,6 +519,11 @@
     "acceptedRu": [
       "Джон Рональд Руэл Толкин",
       "Толкин"
+    ],
+    "acceptedEn": [
+      "John Ronald Reuel Tolkien",
+      "J. R. R. Tolkien",
+      "Tolkien"
     ],
     "distractorsRu": [
       "Карл Маркс",
@@ -479,6 +549,10 @@
       "Мигель де Сервантес",
       "де Сервантес"
     ],
+    "acceptedEn": [
+      "Miguel de Cervantes",
+      "Cervantes"
+    ],
     "distractorsRu": [
       "Гюстав Флобер",
       "Мурасаки Сикибу",
@@ -503,6 +577,10 @@
       "Джордж Оруэлл",
       "Оруэлл"
     ],
+    "acceptedEn": [
+      "George Orwell",
+      "Orwell"
+    ],
     "distractorsRu": [
       "Марк Твен",
       "Жюль Верн",
@@ -525,6 +603,9 @@
     "answerRu": "Вальмики",
     "acceptedRu": [
       "Вальмики"
+    ],
+    "acceptedEn": [
+      "Valmiki"
     ],
     "distractorsRu": [
       "Эдгар Аллан По",
@@ -550,6 +631,11 @@
       "Данте Алигьери",
       "Алигьери"
     ],
+    "acceptedEn": [
+      "Dante Alighieri",
+      "Dante",
+      "Alighieri"
+    ],
     "distractorsRu": [
       "У Чэнъэнь",
       "Эрнест Хемингуэй",
@@ -573,6 +659,10 @@
     "acceptedRu": [
       "Льюис Кэрролл",
       "Кэрролл"
+    ],
+    "acceptedEn": [
+      "Lewis Carroll",
+      "Carroll"
     ],
     "distractorsRu": [
       "Герман Мелвилл",
@@ -598,6 +688,10 @@
       "Джордж Оруэлл",
       "Оруэлл"
     ],
+    "acceptedEn": [
+      "George Orwell",
+      "Orwell"
+    ],
     "distractorsRu": [
       "Пауло Коэльо",
       "Льюис Кэрролл",
@@ -621,6 +715,10 @@
     "acceptedRu": [
       "Цао Сюэцинь",
       "Сюэцинь"
+    ],
+    "acceptedEn": [
+      "Cao Xueqin",
+      "Xueqin"
     ],
     "distractorsRu": [
       "Ло Гуаньчжун",
@@ -646,6 +744,11 @@
       "Джон Рональд Руэл Толкин",
       "Толкин"
     ],
+    "acceptedEn": [
+      "John Ronald Reuel Tolkien",
+      "J. R. R. Tolkien",
+      "Tolkien"
+    ],
     "distractorsRu": [
       "Мурасаки Сикибу",
       "Фрэнсис Скотт Фицджеральд",
@@ -670,6 +773,10 @@
       "Мурасаки Сикибу",
       "Сикибу"
     ],
+    "acceptedEn": [
+      "Murasaki Shikibu",
+      "Shikibu"
+    ],
     "distractorsRu": [
       "Джейн Остин",
       "Эзоп",
@@ -692,6 +799,9 @@
     "answerRu": "Вергилий",
     "acceptedRu": [
       "Вергилий"
+    ],
+    "acceptedEn": [
+      "Virgil"
     ],
     "distractorsRu": [
       "Жюль Верн",
@@ -717,6 +827,10 @@
       "Фёдор Михайлович Достоевский",
       "Достоевский"
     ],
+    "acceptedEn": [
+      "Fyodor Dostoevsky",
+      "Dostoevsky"
+    ],
     "distractorsRu": [
       "Данте Алигьери",
       "Габриель Гарсиа Маркес",
@@ -740,6 +854,10 @@
     "acceptedRu": [
       "Лев Николаевич Толстой",
       "Толстой"
+    ],
+    "acceptedEn": [
+      "Leo Tolstoy",
+      "Tolstoy"
     ],
     "distractorsRu": [
       "Гесиод",
@@ -765,6 +883,10 @@
       "Ханс Кристиан Андерсен",
       "Андерсен"
     ],
+    "acceptedEn": [
+      "Hans Christian Andersen",
+      "Andersen"
+    ],
     "distractorsRu": [
       "Фрэнсис Скотт Фицджеральд",
       "Сэмюэл Беккет",
@@ -789,6 +911,10 @@
       "Джоан Роулинг",
       "Роулинг"
     ],
+    "acceptedEn": [
+      "J. K. Rowling",
+      "Rowling"
+    ],
     "distractorsRu": [
       "Данте Алигьери",
       "Гюстав Флобер",
@@ -811,6 +937,9 @@
     "answerRu": "Платон",
     "acceptedRu": [
       "Платон"
+    ],
+    "acceptedEn": [
+      "Plato"
     ],
     "distractorsRu": [
       "Джером Дэвид Сэлинджер",
@@ -836,6 +965,10 @@
       "Никколо Макиавелли",
       "Макиавелли"
     ],
+    "acceptedEn": [
+      "Niccolo Machiavelli",
+      "Machiavelli"
+    ],
     "distractorsRu": [
       "Вальмики",
       "Лао-цзы",
@@ -859,6 +992,11 @@
     "acceptedRu": [
       "Габриель Гарсиа Маркес",
       "Маркес"
+    ],
+    "acceptedEn": [
+      "Gabriel Garcia Marquez",
+      "Garcia Marquez",
+      "Marquez"
     ],
     "distractorsRu": [
       "Дэн Браун",
@@ -884,6 +1022,10 @@
       "Джейн Остин",
       "Остин"
     ],
+    "acceptedEn": [
+      "Jane Austen",
+      "Austen"
+    ],
     "distractorsRu": [
       "Джоан Роулинг",
       "Карл Маркс",
@@ -907,6 +1049,10 @@
     "acceptedRu": [
       "Даниель Дефо",
       "Дефо"
+    ],
+    "acceptedEn": [
+      "Daniel Defoe",
+      "Defoe"
     ],
     "distractorsRu": [
       "Джоан Роулинг",
@@ -932,6 +1078,10 @@
       "Виктор Гюго",
       "Гюго"
     ],
+    "acceptedEn": [
+      "Victor Hugo",
+      "Hugo"
+    ],
     "distractorsRu": [
       "Владимир Владимирович Набоков",
       "Антуан де Сент-Экзюпери",
@@ -955,6 +1105,10 @@
     "acceptedRu": [
       "Джоан Роулинг",
       "Роулинг"
+    ],
+    "acceptedEn": [
+      "J. K. Rowling",
+      "Rowling"
     ],
     "distractorsRu": [
       "Марк Твен",
@@ -980,6 +1134,10 @@
       "Лев Николаевич Толстой",
       "Толстой"
     ],
+    "acceptedEn": [
+      "Leo Tolstoy",
+      "Tolstoy"
+    ],
     "distractorsRu": [
       "Гесиод",
       "Данте Алигьери",
@@ -1002,6 +1160,10 @@
     "answerRu": "Лао-цзы",
     "acceptedRu": [
       "Лао-цзы"
+    ],
+    "acceptedEn": [
+      "Laozi",
+      "Lao Tzu"
     ],
     "distractorsRu": [
       "Иоганн Вольфганг фон Гёте",
@@ -1027,6 +1189,10 @@
       "Эрнест Хемингуэй",
       "Хемингуэй"
     ],
+    "acceptedEn": [
+      "Ernest Hemingway",
+      "Hemingway"
+    ],
     "distractorsRu": [
       "Фридрих Ницше",
       "Александр Дюма",
@@ -1050,6 +1216,10 @@
     "acceptedRu": [
       "Фёдор Михайлович Достоевский",
       "Достоевский"
+    ],
+    "acceptedEn": [
+      "Fyodor Dostoevsky",
+      "Dostoevsky"
     ],
     "distractorsRu": [
       "Фрэнсис Скотт Фицджеральд",
@@ -1075,6 +1245,10 @@
       "Пауло Коэльо",
       "Коэльо"
     ],
+    "acceptedEn": [
+      "Paulo Coelho",
+      "Coelho"
+    ],
     "distractorsRu": [
       "Мигель де Сервантес",
       "Габриель Гарсиа Маркес",
@@ -1098,6 +1272,10 @@
     "acceptedRu": [
       "Карл Маркс",
       "Маркс"
+    ],
+    "acceptedEn": [
+      "Karl Marx",
+      "Marx"
     ],
     "distractorsRu": [
       "Фрэнсис Скотт Фицджеральд",
@@ -1123,6 +1301,10 @@
       "Герман Мелвилл",
       "Мелвилл"
     ],
+    "acceptedEn": [
+      "Herman Melville",
+      "Melville"
+    ],
     "distractorsRu": [
       "Эрнест Хемингуэй",
       "Эмили Бронте",
@@ -1146,6 +1328,10 @@
     "acceptedRu": [
       "Александр Дюма",
       "Дюма"
+    ],
+    "acceptedEn": [
+      "Alexandre Dumas",
+      "Dumas"
     ],
     "distractorsRu": [
       "Фрэнсис Скотт Фицджеральд",
@@ -1171,6 +1357,10 @@
       "Мэри Шелли",
       "Шелли"
     ],
+    "acceptedEn": [
+      "Mary Shelley",
+      "Shelley"
+    ],
     "distractorsRu": [
       "Овидий",
       "Эзоп",
@@ -1194,6 +1384,10 @@
     "acceptedRu": [
       "Иоганн Вольфганг фон Гёте",
       "фон Гёте"
+    ],
+    "acceptedEn": [
+      "Johann Wolfgang von Goethe",
+      "Goethe"
     ],
     "distractorsRu": [
       "Джеймс Джойс",
@@ -1219,6 +1413,10 @@
       "Дэн Браун",
       "Браун"
     ],
+    "acceptedEn": [
+      "Dan Brown",
+      "Brown"
+    ],
     "distractorsRu": [
       "Эзоп",
       "Габриель Гарсиа Маркес",
@@ -1242,6 +1440,11 @@
     "acceptedRu": [
       "Джером Дэвид Сэлинджер",
       "Сэлинджер"
+    ],
+    "acceptedEn": [
+      "J. D. Salinger",
+      "Jerome David Salinger",
+      "Salinger"
     ],
     "distractorsRu": [
       "Герман Мелвилл",
@@ -1267,6 +1470,10 @@
       "Роберт Льюис Стивенсон",
       "Стивенсон"
     ],
+    "acceptedEn": [
+      "Robert Louis Stevenson",
+      "Stevenson"
+    ],
     "distractorsRu": [
       "Джейн Остин",
       "Карло Коллоди",
@@ -1290,6 +1497,10 @@
     "acceptedRu": [
       "Джонатан Свифт",
       "Свифт"
+    ],
+    "acceptedEn": [
+      "Jonathan Swift",
+      "Swift"
     ],
     "distractorsRu": [
       "Олдос Хаксли",
@@ -1315,6 +1526,10 @@
       "Альбер Камю",
       "Камю"
     ],
+    "acceptedEn": [
+      "Albert Camus",
+      "Camus"
+    ],
     "distractorsRu": [
       "Лев Николаевич Толстой",
       "Карло Коллоди",
@@ -1338,6 +1553,10 @@
     "acceptedRu": [
       "Джеймс Джойс",
       "Джойс"
+    ],
+    "acceptedEn": [
+      "James Joyce",
+      "Joyce"
     ],
     "distractorsRu": [
       "Эдгар Аллан По",
@@ -1363,6 +1582,10 @@
       "Франц Кафка",
       "Кафка"
     ],
+    "acceptedEn": [
+      "Franz Kafka",
+      "Kafka"
+    ],
     "distractorsRu": [
       "Олдос Хаксли",
       "Гарриет Бичер-Стоу",
@@ -1386,6 +1609,11 @@
     "acceptedRu": [
       "Фрэнсис Скотт Фицджеральд",
       "Фицджеральд"
+    ],
+    "acceptedEn": [
+      "F. Scott Fitzgerald",
+      "Francis Scott Fitzgerald",
+      "Fitzgerald"
     ],
     "distractorsRu": [
       "Даниель Дефо",
@@ -1411,6 +1639,10 @@
       "Карло Коллоди",
       "Коллоди"
     ],
+    "acceptedEn": [
+      "Carlo Collodi",
+      "Collodi"
+    ],
     "distractorsRu": [
       "Лао-цзы",
       "Эмили Бронте",
@@ -1434,6 +1666,11 @@
     "acceptedRu": [
       "Элвин Брукс Уайт",
       "Уайт"
+    ],
+    "acceptedEn": [
+      "E. B. White",
+      "Elwyn Brooks White",
+      "White"
     ],
     "distractorsRu": [
       "Ханс Кристиан Андерсен",
@@ -1459,6 +1696,10 @@
       "Чарльз Диккенс",
       "Диккенс"
     ],
+    "acceptedEn": [
+      "Charles Dickens",
+      "Dickens"
+    ],
     "distractorsRu": [
       "Джованни Боккаччо",
       "Джером Дэвид Сэлинджер",
@@ -1482,6 +1723,10 @@
     "acceptedRu": [
       "Оскар Уайльд",
       "Уайльд"
+    ],
+    "acceptedEn": [
+      "Oscar Wilde",
+      "Wilde"
     ],
     "distractorsRu": [
       "Франц Кафка",
@@ -1507,6 +1752,10 @@
       "Анна Франк",
       "Франк"
     ],
+    "acceptedEn": [
+      "Anne Frank",
+      "Frank"
+    ],
     "distractorsRu": [
       "Габриель Гарсиа Маркес",
       "Джером Дэвид Сэлинджер",
@@ -1530,6 +1779,10 @@
     "acceptedRu": [
       "Фридрих Ницше",
       "Ницше"
+    ],
+    "acceptedEn": [
+      "Friedrich Nietzsche",
+      "Nietzsche"
     ],
     "distractorsRu": [
       "Платон",
@@ -1555,6 +1808,10 @@
       "Эмили Бронте",
       "Бронте"
     ],
+    "acceptedEn": [
+      "Emily Bronte",
+      "Bronte"
+    ],
     "distractorsRu": [
       "Цао Сюэцинь",
       "Даниель Дефо",
@@ -1578,6 +1835,9 @@
     "acceptedRu": [
       "У Чэнъэнь",
       "Чэнъэнь"
+    ],
+    "acceptedEn": [
+      "Wu Cheng'en"
     ],
     "distractorsRu": [
       "Олдос Хаксли",
@@ -1603,6 +1863,10 @@
       "Михаил Афанасьевич Булгаков",
       "Булгаков"
     ],
+    "acceptedEn": [
+      "Mikhail Bulgakov",
+      "Bulgakov"
+    ],
     "distractorsRu": [
       "Овидий",
       "Оскар Уайльд",
@@ -1626,6 +1890,10 @@
     "acceptedRu": [
       "Александр Дюма",
       "Дюма"
+    ],
+    "acceptedEn": [
+      "Alexandre Dumas",
+      "Dumas"
     ],
     "distractorsRu": [
       "Фёдор Михайлович Достоевский",
@@ -1651,6 +1919,10 @@
       "Сэмюэл Беккет",
       "Беккет"
     ],
+    "acceptedEn": [
+      "Samuel Beckett",
+      "Beckett"
+    ],
     "distractorsRu": [
       "Джером Дэвид Сэлинджер",
       "Фёдор Михайлович Достоевский",
@@ -1674,6 +1946,10 @@
     "acceptedRu": [
       "Жюль Верн",
       "Верн"
+    ],
+    "acceptedEn": [
+      "Jules Verne",
+      "Verne"
     ],
     "distractorsRu": [
       "Оскар Уайльд",
@@ -1699,6 +1975,10 @@
       "Жюль Верн",
       "Верн"
     ],
+    "acceptedEn": [
+      "Jules Verne",
+      "Verne"
+    ],
     "distractorsRu": [
       "Вальмики",
       "Овидий",
@@ -1721,6 +2001,9 @@
     "answerRu": "Овидий",
     "acceptedRu": [
       "Овидий"
+    ],
+    "acceptedEn": [
+      "Ovid"
     ],
     "distractorsRu": [
       "Виктор Гюго",
@@ -1746,6 +2029,10 @@
       "Фрэнк Герберт",
       "Герберт"
     ],
+    "acceptedEn": [
+      "Frank Herbert",
+      "Herbert"
+    ],
     "distractorsRu": [
       "Мигель де Сервантес",
       "Сэмюэл Беккет",
@@ -1769,6 +2056,10 @@
     "acceptedRu": [
       "Виктор Гюго",
       "Гюго"
+    ],
+    "acceptedEn": [
+      "Victor Hugo",
+      "Hugo"
     ],
     "distractorsRu": [
       "Вергилий",
@@ -1794,6 +2085,10 @@
       "Марк Твен",
       "Твен"
     ],
+    "acceptedEn": [
+      "Mark Twain",
+      "Twain"
+    ],
     "distractorsRu": [
       "Гесиод",
       "Вальмики",
@@ -1817,6 +2112,10 @@
     "acceptedRu": [
       "Владимир Владимирович Набоков",
       "Набоков"
+    ],
+    "acceptedEn": [
+      "Vladimir Nabokov",
+      "Nabokov"
     ],
     "distractorsRu": [
       "Ханс Кристиан Андерсен",
@@ -1842,6 +2141,10 @@
       "Джованни Боккаччо",
       "Боккаччо"
     ],
+    "acceptedEn": [
+      "Giovanni Boccaccio",
+      "Boccaccio"
+    ],
     "distractorsRu": [
       "Джейн Остин",
       "Джордж Оруэлл",
@@ -1865,6 +2168,10 @@
     "acceptedRu": [
       "Чарльз Диккенс",
       "Диккенс"
+    ],
+    "acceptedEn": [
+      "Charles Dickens",
+      "Dickens"
     ],
     "distractorsRu": [
       "Джеффри Чосер",
@@ -1890,6 +2197,10 @@
       "Брэм Стокер",
       "Стокер"
     ],
+    "acceptedEn": [
+      "Bram Stoker",
+      "Stoker"
+    ],
     "distractorsRu": [
       "Ло Гуаньчжун",
       "Джордж Оруэлл",
@@ -1913,6 +2224,10 @@
     "acceptedRu": [
       "Джон Мильтон",
       "Мильтон"
+    ],
+    "acceptedEn": [
+      "John Milton",
+      "Milton"
     ],
     "distractorsRu": [
       "Джордж Оруэлл",
@@ -1938,6 +2253,10 @@
       "Гюстав Флобер",
       "Флобер"
     ],
+    "acceptedEn": [
+      "Gustave Flaubert",
+      "Flaubert"
+    ],
     "distractorsRu": [
       "Джонатан Свифт",
       "Дэн Браун",
@@ -1962,6 +2281,10 @@
       "Олдос Хаксли",
       "Хаксли"
     ],
+    "acceptedEn": [
+      "Aldous Huxley",
+      "Huxley"
+    ],
     "distractorsRu": [
       "Фёдор Михайлович Достоевский",
       "Роберт Льюис Стивенсон",
@@ -1984,6 +2307,9 @@
     "answerRu": "Гесиод",
     "acceptedRu": [
       "Гесиод"
+    ],
+    "acceptedEn": [
+      "Hesiod"
     ],
     "distractorsRu": [
       "Джон Мильтон",
@@ -2009,6 +2335,10 @@
       "Ло Гуаньчжун",
       "Гуаньчжун"
     ],
+    "acceptedEn": [
+      "Luo Guanzhong",
+      "Guanzhong"
+    ],
     "distractorsRu": [
       "Джеймс Джойс",
       "Вальмики",
@@ -2032,6 +2362,10 @@
     "acceptedRu": [
       "Франц Кафка",
       "Кафка"
+    ],
+    "acceptedEn": [
+      "Franz Kafka",
+      "Kafka"
     ],
     "distractorsRu": [
       "Даниель Дефо",
@@ -2057,6 +2391,10 @@
       "Эдгар Аллан По",
       "По"
     ],
+    "acceptedEn": [
+      "Edgar Allan Poe",
+      "Poe"
+    ],
     "distractorsRu": [
       "Габриель Гарсиа Маркес",
       "Эмили Бронте",
@@ -2081,6 +2419,10 @@
       "Марк Твен",
       "Твен"
     ],
+    "acceptedEn": [
+      "Mark Twain",
+      "Twain"
+    ],
     "distractorsRu": [
       "Александр Дюма",
       "Гюстав Флобер",
@@ -2103,6 +2445,9 @@
     "answerRu": "Эзоп",
     "acceptedRu": [
       "Эзоп"
+    ],
+    "acceptedEn": [
+      "Aesop"
     ],
     "distractorsRu": [
       "Оскар Уайльд",
@@ -2128,6 +2473,10 @@
       "Гарриет Бичер-Стоу",
       "Бичер-Стоу"
     ],
+    "acceptedEn": [
+      "Harriet Beecher Stowe",
+      "Beecher Stowe"
+    ],
     "distractorsRu": [
       "Эмили Бронте",
       "Жюль Верн",
@@ -2151,6 +2500,10 @@
     "acceptedRu": [
       "Джеффри Чосер",
       "Чосер"
+    ],
+    "acceptedEn": [
+      "Geoffrey Chaucer",
+      "Chaucer"
     ],
     "distractorsRu": [
       "Фрэнсис Скотт Фицджеральд",

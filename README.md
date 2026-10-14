@@ -105,6 +105,10 @@ The root build includes workspace typechecks. API route tests use the actual SQL
 migrations in isolated in-memory SQLite via Node's built-in `node:sqlite` module
 (verified on Node 22.17.0). Its experimental warning on that version is expected.
 They do not replace Cloudflare runtime smoke tests or on-device Telegram QA.
+
+For a quick read-only look into the local dev D1: `npm run reports -- --question gp: --limit 5`
+(question reports; also `--player`, `--kind`, `--mode`), `npm run activity` (per-player summary,
+`--days N`), and `npm run player -- guest:xxxx` (everything about one player).
 The tracked GitHub Actions workflow runs `npm ci`, unit/route tests, the local
 Wrangler HTTP smoke, and the production preflight fixture on pushes to `master`
 and pull requests. The fixture includes the full root build. It has not yet run
@@ -203,34 +207,23 @@ Each new run stores its exact opponent snapshot (including bots), so completion
 does not depend on later edits to the source record. The client validates the
 returned `conditions` and opponent transcript before starting, then uses the
 same shared round transition as the API. Local scripts are normalized separately.
-Saved response times are not replayed as a real-time opponent timeline.
-
-Completed online matches are first stored in a versioned browser queue without
-credentials. The client retries transient failures with bounded backoff (and
-honors `Retry-After`), resumes the queue on app bootstrap and browser `online`,
-and removes an entry only after a valid acknowledgement for the same match.
-Terminal 4xx responses remain visible and are not retried. Local runs
-are labeled as practice and are excluded from confirmed online profile stats.
-The queue covers completed payloads only; it does not restore a match in progress.
-
-The text above describes the race path (`POST /api/async-matches`), kept for
-previously issued invites. The current solo flow uses `POST /api/solo-runs`,
-`POST /api/solo-runs/:id/complete` and `GET /api/solo-leaderboard`; see
-[Architecture](docs/ARCHITECTURE.md).
+The current flow is server-authoritative and asynchronous. The server issues one
+question at a time, checks the answer, records the hammer result and returns the
+next question. An active run can be restored after a reload through
+`GET /api/solo-runs/:id`; see [Architecture](docs/ARCHITECTURE.md).
 
 API:
 
 - `POST /api/auth/guest` — issue a signed browser guest session.
-- `POST /api/solo-runs`, `POST /api/solo-runs/:id/complete` — start and store a solo run.
+- `POST /api/solo-runs` — start a solo run.
+- `POST /api/solo-runs/:id/answer`, `POST /api/solo-runs/:id/hammer` — resolve a round.
+- `GET /api/solo-runs/:id` — restore an active run.
 - `GET /api/solo-leaderboard` — daily solo board by `solo_score`.
 - `POST /api/solo-runs/:id/invite` — open "invite a friend" link.
+- `POST /api/solo-runs/:id/rematch` — create a rematch offer after an eligible run.
 - `GET /api/rematch/:id`, `GET /api/my-runs` — rematch invite, run history.
-- `POST /api/async-matches`, `POST /api/async-matches/:id/complete` — legacy race path.
-- `GET /api/leaderboard?category=geography` — legacy race leaderboard.
 
-The start and completion JSON bodies are capped at 1 KiB and 16 KiB. Completion
-accepts 1–10 rounds with bounded question IDs, answers, and response times.
-Guest session issuance, match start/completion, and leaderboard reads use
+Request bodies are bounded per route. Guest session issuance, run actions, and leaderboard reads use
 separate 30-per-minute rate-limit buckets keyed by verified player identity or,
 for unauthenticated routes, `CF-Connecting-IP`. A limit returns 429 with
 `Retry-After: 60`; a binding failure returns 503.

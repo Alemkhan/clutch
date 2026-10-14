@@ -99,6 +99,8 @@ export function registerRematchRoutes(app: Hono<{ Bindings: Env }>): void {
     if (fresh) {
       await sendRematchOffer(c.env, {
         recipientPlayerId: record.player_id,
+        recipientRunId: run.opponent_run_id,
+        challengerRunId: runId,
         inviteId: invite.id,
         challengerName: run.display_name,
       });

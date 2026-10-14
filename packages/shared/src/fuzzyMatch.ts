@@ -31,10 +31,26 @@ export function normalizeAnswer(s: string): string {
     .replace(/[.,!?;:'"]/g, '');
 }
 
+/** Short answers are too easy to turn into another valid fact with one edit. */
+export const EXACT_MATCH_MAX_LENGTH = 4;
+
+/** Two edits are only reasonable when both strings still contain substantial context. */
+export const TWO_EDIT_MIN_LENGTH = 10;
+
+const NUMERIC_ANSWER = /^\p{Decimal_Number}+$/u;
+
+function requiresExactMatch(answer: string): boolean {
+  return answer.length <= EXACT_MATCH_MAX_LENGTH || NUMERIC_ANSWER.test(answer);
+}
+
+function allowedDistance(input: string, answer: string): number {
+  if (requiresExactMatch(input) || requiresExactMatch(answer)) return 0;
+  return Math.min(input.length, answer.length) >= TWO_EDIT_MIN_LENGTH ? 2 : 1;
+}
+
 export function isAnswerCorrect(
   input: string,
-  correctAnswers: string[],
-  maxDistance: number = 1
+  correctAnswers: readonly string[],
 ): { correct: boolean; matchedAnswer: string | null } {
   const normalized = normalizeAnswer(input);
   if (!normalized) return { correct: false, matchedAnswer: null };
@@ -44,8 +60,9 @@ export function isAnswerCorrect(
     if (normalized === normalizedAnswer) {
       return { correct: true, matchedAnswer: answer };
     }
+    const tolerance = allowedDistance(normalized, normalizedAnswer);
+    if (tolerance === 0) continue;
     const distance = levenshtein(normalized, normalizedAnswer);
-    const tolerance = Math.max(maxDistance, Math.floor(normalizedAnswer.length / 5));
     if (distance <= tolerance) {
       return { correct: true, matchedAnswer: answer };
     }

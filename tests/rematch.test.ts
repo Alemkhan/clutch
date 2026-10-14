@@ -242,6 +242,36 @@ describe('a rematch is called by the player who beat the record', () => {
     const status = await request(db, '/api/notifications/outbid', alem);
     expect(await status.json()).toEqual({ enabled: false });
   });
+
+  it('logs a redacted failure with invite and run correlation ids', async () => {
+    fetchMock.mockImplementation(async () => new Response(JSON.stringify({
+      ok: false,
+      error_code: 400,
+      description: 'Bad Request: chat not found; test-bot-token; private Telegram message',
+    }), { status: 400 }));
+    const error = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const db = database();
+    seedBeatenRecord(db);
+
+    expect((await callRematch(db)).status).toBe(201);
+    const invite = inviteRows(db)[0];
+    expect(invite.notify_status).toBe('failed');
+    expect(error).toHaveBeenCalledWith({
+      event: 'telegram_notification_delivery',
+      kind: 'rematch_offer',
+      deliveryStatus: 'failed',
+      reasonCode: 'chat_not_found',
+      httpStatus: 400,
+      inviteId: invite.id,
+      recipientRunId: 'alem-run',
+      challengerRunId: 'bob-run',
+    });
+    const serialized = JSON.stringify(error.mock.calls);
+    expect(serialized).not.toContain('test-bot-token');
+    expect(serialized).not.toContain('private Telegram message');
+    expect(serialized).not.toContain('telegram:42');
+    error.mockRestore();
+  });
 });
 
 describe('the outcome notice does not invite anyone', () => {

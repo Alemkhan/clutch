@@ -10,6 +10,9 @@
     "acceptedRu": [
       "Капитан Америка"
     ],
+    "acceptedEn": [
+      "Captain America"
+    ],
     "distractorsRu": [
       "Железный человек",
       "Тор",
@@ -33,6 +36,10 @@
       "Спанч Боб",
       "Губка Боб Квадратные Штаны"
     ],
+    "acceptedEn": [
+      "SpongeBob",
+      "SpongeBob SquarePants"
+    ],
     "distractorsRu": [
       "Патрик",
       "Сквидвард",
@@ -53,6 +60,9 @@
     "answerRu": "Гэндальф",
     "acceptedRu": [
       "Гэндальф"
+    ],
+    "acceptedEn": [
+      "Gandalf"
     ],
     "distractorsRu": [
       "Саруман",
@@ -76,6 +86,10 @@
       "Альбус Дамблдор",
       "Дамблдор"
     ],
+    "acceptedEn": [
+      "Albus Dumbledore",
+      "Dumbledore"
+    ],
     "distractorsRu": [
       "Северус Снегг",
       "Минерва Макгонагалл",
@@ -98,6 +112,10 @@
       "Готэм",
       "Готэм-сити"
     ],
+    "acceptedEn": [
+      "Gotham",
+      "Gotham City"
+    ],
     "distractorsRu": [
       "Метрополис",
       "Стар-Сити",
@@ -119,6 +137,10 @@
     "acceptedRu": [
       "Питер Паркер",
       "Паркер"
+    ],
+    "acceptedEn": [
+      "Peter Parker",
+      "Parker"
     ],
     "distractorsRu": [
       "Брюс Уэйн",
@@ -164,6 +186,9 @@
     "acceptedRu": [
       "Криптон"
     ],
+    "acceptedEn": [
+      "Krypton"
+    ],
     "distractorsRu": [
       "Татуин",
       "Вулкан",
@@ -185,6 +210,10 @@
     "acceptedRu": [
       "Марио",
       "Супер Марио"
+    ],
+    "acceptedEn": [
+      "Mario",
+      "Super Mario"
     ],
     "distractorsRu": [
       "Луиджи",
@@ -229,6 +258,9 @@
     "acceptedRu": [
       "Танос"
     ],
+    "acceptedEn": [
+      "Thanos"
+    ],
     "distractorsRu": [
       "Альтрон",
       "Локи",
@@ -251,6 +283,10 @@
       "СССР",
       "Советский Союз"
     ],
+    "acceptedEn": [
+      "USSR",
+      "Soviet Union"
+    ],
     "distractorsRu": [
       "Япония",
       "США",
@@ -272,6 +308,9 @@
     "answerRu": "Вестерос",
     "acceptedRu": [
       "Вестерос"
+    ],
+    "acceptedEn": [
+      "Westeros"
     ],
     "distractorsRu": [
       "Эссос",
@@ -318,6 +357,9 @@
       "Овен",
       "овен"
     ],
+    "acceptedEn": [
+      "Aries"
+    ],
     "distractorsRu": [
       "Телец",
       "Близнецы",
@@ -340,6 +382,9 @@
     "acceptedRu": [
       "Рыбы",
       "рыбы"
+    ],
+    "acceptedEn": [
+      "Pisces"
     ],
     "distractorsRu": [
       "Водолей",
