@@ -23,7 +23,8 @@
     "typecheck": "npm run typecheck --workspaces",
     "content:check": "vitest run packages/shared/src/generalPack",
     "content:import": "node scripts/content/import.mjs",
-    "content:wikidata": "node scripts/content/build-wikidata-pack.mjs"
+    "content:wikidata": "node scripts/content/build-wikidata-pack.mjs",
+    "tiebreaker:load": "node scripts/tiebreaker-load.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",

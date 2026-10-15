@@ -11,6 +11,7 @@ export function useGameState() {
   const goToMyRuns = useCallback(() => setPhase('myRuns'), []);
   const goToProfile = useCallback(() => setPhase('profile'), []);
   const goToBoard = useCallback(() => setPhase('board'), []);
+  const goToTiebreaker = useCallback(() => setPhase('tiebreaker'), []);
   const goHome = useCallback(() => setPhase('home'), []);
 
   return {
@@ -21,6 +22,7 @@ export function useGameState() {
     goToSolo,
     goToMyRuns,
     goToBoard,
+    goToTiebreaker,
     goHome,
   };
 }

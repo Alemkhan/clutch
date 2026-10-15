@@ -1,0 +1,24 @@
+[
+  {
+    "id": "sample-test-1",
+    "prompt": "[тестовый вопрос, не для игроков] Сколько часов в сутках?",
+    "unit": "ч",
+    "answer": 24,
+    "sourceUrl": "https://example.org/day-length",
+    "asOfDate": "2026-01-01",
+    "activeDate": "2099-01-01",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Тестовый шаг: часов в сутках",
+          "value": 24,
+          "unit": "ч",
+          "sourceUrl": "https://example.org/day-length",
+          "sourceTitle": "Пример (example.org)",
+          "asOf": "2026"
+        }
+      ],
+      "summary": "Тестовый пример: 24 ч"
+    }
+  }
+]

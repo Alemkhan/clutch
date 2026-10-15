@@ -13,6 +13,7 @@ import { registerShareRoutes } from './routes/share';
 import { registerSystemRoutes } from './routes/system';
 import { registerProfileRoutes } from './routes/profile';
 import { registerTelemetryRoutes } from './routes/telemetry';
+import { registerTiebreakerRoutes } from './routes/tiebreaker';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -25,6 +26,7 @@ registerRematchRoutes(app);
 registerMyRunsRoutes(app);
 registerProfileRoutes(app);
 registerTelemetryRoutes(app);
+registerTiebreakerRoutes(app);
 registerSoloRunRoutes(app);
 registerTrainingRoutes(app);
 registerFriendInviteRoutes(app);

@@ -352,6 +352,14 @@ async function verifyHttpFlow(baseUrl, readinessResponse) {
   assertNoAnswers(snapshot.questions, 'solo snapshot');
 
   // Второй игрок получает свой забег, а не чужой.
+  // «На глазок»: на чистой базе вопроса дня нет (контент в миграции не сидируется), карточка прячется.
+  const tiebreaker = await jsonRequest(baseUrl, '/api/tiebreaker/today', {
+    headers: { authorization: `Bearer ${tokenA}` },
+  }, 200);
+  assert.equal(tiebreaker.question, null);
+  assert.equal(tiebreaker.answered, null);
+  assert.match(tiebreaker.dateKey, /^\d{4}-\d{2}-\d{2}$/);
+
   const tokenB = await guestSession(baseUrl);
   assert.notEqual(tokenB, tokenA);
   const runB = await startSoloRun(baseUrl, tokenB, 'Smoke B');

@@ -2,6 +2,7 @@ import {
   CURRENT_ASYNC_MATCH_CONDITIONS,
   CURRENT_SOLO_RUN_CONDITIONS,
   FRIEND_RULES_VERSION,
+  dailyKey,
   PRACTICE_RULES_VERSION,
   type AsyncMatchRound,
   type MyRunOutcome,
@@ -12,6 +13,7 @@ import {
   type SoloRunResult,
 } from '@clutch/shared';
 import { currentMiniGameConfigJson } from './repository';
+import { findTiebreakAnswer } from './tiebreakerRepository';
 
 /** Забег стартует с записью соперника как темпом (или без неё); сама запись забег не завершает. */
 export async function createSoloRun(db: D1Database, input: {
@@ -141,12 +143,13 @@ export async function findSoloOutcome(db: D1Database, runId: string): Promise<My
   return row?.solo_outcome ?? null;
 }
 
-/** Результат записи-темпа для сравнения. null — запись не завершена или не соло-результат. */
+/** Результат записи-темпа для сравнения, вместе с прикидкой её автора. null — запись не завершена или не соло-результат. */
 export async function findPaceResult(db: D1Database, runId: string): Promise<SoloRunResult | null> {
   const row = await db.prepare(`
-    SELECT reached_target, progress, solo_score, rounds_json, created_at, completed_at
+    SELECT player_id, reached_target, progress, solo_score, rounds_json, created_at, completed_at
     FROM match_runs WHERE id = ?1 AND status = 'completed'
   `).bind(runId).first<{
+    player_id: string;
     reached_target: number | null;
     progress: number;
     solo_score: number | null;
@@ -156,19 +159,23 @@ export async function findPaceResult(db: D1Database, runId: string): Promise<Sol
   }>();
   if (!row || row.reached_target === null || row.solo_score === null
     || row.completed_at === null || !row.rounds_json) return null;
+  let roundsPlayed: number;
   try {
     const rounds = JSON.parse(row.rounds_json) as unknown;
     if (!Array.isArray(rounds)) return null;
-    return {
-      reachedTarget: row.reached_target === 1,
-      progress: row.progress,
-      roundsPlayed: rounds.length,
-      soloScore: row.solo_score,
-      durationMs: Math.max(0, row.completed_at - row.created_at),
-    };
+    roundsPlayed = rounds.length;
   } catch {
     return null;
   }
+  return {
+    reachedTarget: row.reached_target === 1,
+    progress: row.progress,
+    roundsPlayed,
+    soloScore: row.solo_score,
+    // Сутки набора записи: ответ автора действует на все его забеги этих суток.
+    // Вне try: сбой базы не должен выглядеть как «запись непригодна».
+    tiebreak: await findTiebreakAnswer(db, row.player_id, dailyKey(row.created_at)),
+  };
 }
 
 export const SOLO_BOARD_LIMIT = 50;

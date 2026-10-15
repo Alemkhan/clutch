@@ -14,6 +14,7 @@ export * from './questionPricing';
 export * from './soloCompare';
 export * from './practice';
 export * from './friendDuel';
+export * from './tiebreaker';
 
 export type Difficulty = 'Easy' | 'Medium' | 'Hard' | 'Expert';
 
@@ -159,6 +160,12 @@ export interface CompleteSoloRunResponse {
   score: number;
   /** Исход против темпа глазами игрока. null — темпа не было, забег ждёт соперника (это не ничья). */
   outcome: MyRunOutcome | null;
+  /**
+   * Есть, только когда исход решила прикидка «На глазок» (счёт/круги/прогресс равны). Множитель
+   * соперника — только если игрок сам ответил: число не подсказывают тем, кто ещё не отвечал.
+   * Повтор completion и снимок забега поля не несут: восстановить его нечем без новых колонок.
+   */
+  tiebreak?: { ownMultiplier: number | null; opponentMultiplier: number | null };
 }
 
 /** Ответ игрока на вопрос круга. roundIndex с нуля; повтор того же круга сервер не считает дважды. */

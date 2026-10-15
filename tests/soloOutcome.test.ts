@@ -219,7 +219,7 @@ describe('solo outcome against a pace', () => {
     expect(inviteRows(db)).toHaveLength(0);
   });
 
-  it('equal score and rounds go to the shorter run, not to whoever played first', async () => {
+  it('equal score and rounds stay a tie whatever the run duration (no guesses)', async () => {
     const outcomeFor = async (paceDurationMs: number, challengerDurationMs: number) => {
       const db = database();
       insertSolo(db, {
@@ -234,8 +234,9 @@ describe('solo outcome against a pace', () => {
       expect(result.score).toBe(4 / setPar(SET.questions));
       return result.outcome;
     };
-    expect(await outcomeFor(9000, 5000)).toBe('player');
-    expect(await outcomeFor(1000, 5000)).toBe('opponent');
+    // С 2026-10-15 длительность исход не решает: раньше здесь были 'player' и 'opponent'.
+    expect(await outcomeFor(9000, 5000)).toBe('tie');
+    expect(await outcomeFor(1000, 5000)).toBe('tie');
     expect(await outcomeFor(5000, 5000)).toBe('tie');
   });
 

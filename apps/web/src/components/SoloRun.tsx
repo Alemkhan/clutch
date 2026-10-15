@@ -8,6 +8,8 @@ import { ResolutionScreen } from "./ResolutionScreen";
 import { ScreenHeader } from "./ScreenHeader";
 import { SoloHud } from "./SoloHud";
 import { SoloResult } from "./SoloResult";
+import { TiebreakerReminder } from "./TiebreakerCard";
+import { TiebreakerScreen } from "./Tiebreaker";
 import {
   currentSoloQuestion,
   soloFlowView,
@@ -50,6 +52,8 @@ interface SoloRunScreenProps {
   /** В тренировке «домой» ведёт к выбору уровня. */
   onHome: () => void;
   onMyRuns: () => void;
+  /** Напоминание «На глазок» на экране готовности; без него строки нет. */
+  onOpenTiebreaker?: () => void;
   /** Тренировка против бота: другой текст и итог, результат не засчитывается. */
   practice?: PracticeLevel;
   /** Репорт о проблеме на разборе: экран только рисует, сеть и статус живут в SoloRun. */
@@ -203,6 +207,7 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
               <p className="matchmaking-status">{resumeNote(view)}</p>
             )}
           </div>
+          {props.onOpenTiebreaker && <TiebreakerReminder onOpen={props.onOpenTiebreaker} />}
           <button type="button" className="cta-btn" onClick={props.onStart}>
             {state.resumed ? "Продолжить" : "Начать"}
           </button>
@@ -369,6 +374,8 @@ export function SoloRun({
     status: ResolutionReportStatus;
   } | null>(null);
   const reportQuestion = currentSoloQuestion(run.state);
+  // «На глазок» открывается поверх экрана готовности и не трогает забег: назад — в тот же забег.
+  const [tiebreakerOpen, setTiebreakerOpen] = useState(false);
 
   const submitReport = (kind: QuestionReportKind, comment: string) => {
     const state = run.state;
@@ -404,8 +411,11 @@ export function SoloRun({
   }, [stage, onStageChange]);
   useEffect(() => () => onStageChange("categories"), [onStageChange]);
 
+  if (tiebreakerOpen) return <TiebreakerScreen onBack={() => setTiebreakerOpen(false)} />;
+
   return (
     <SoloRunScreen
+      onOpenTiebreaker={() => setTiebreakerOpen(true)}
       state={run.state}
       save={run.save}
       onSelectCategory={run.begin}

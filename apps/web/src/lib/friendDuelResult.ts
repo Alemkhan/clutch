@@ -1,5 +1,6 @@
 import { evaluateSoloRun, type CompleteSoloRunResponse, type MyRunOutcome } from '@clutch/shared';
 import { circles } from './soloResult';
+import { formatMultiplier } from './tiebreakerView';
 import { soloRunView, type SoloRunSession } from './soloRunSession';
 
 /** Итог дружеской дуэли: исход считает сервер (тем же compareSoloRuns), клиент только подписывает. */
@@ -9,6 +10,8 @@ export interface FriendDuelSummary {
   headline: string;
   /** Одна строка с процентами обеих сторон; пусто, если запись друга не отрисована. */
   line: string;
+  /** Строка про «На глазок», если ничью по забегу решила прикидка; иначе пусто. */
+  tiebreakLine: string;
 }
 
 export const FRIEND_DUEL_CHIP = 'Дружеская игра · не в зачёт';
@@ -18,9 +21,22 @@ function nameOf(pace: SoloRunSession['pace']): string {
   return pace?.displayName.trim() || 'Друг';
 }
 
+/** Прикидка показывается только там, где виден исход: здесь, в дружеской дуэли. Числа — только те, что отдал сервер. */
+export function tiebreakLine(tiebreak: CompleteSoloRunResponse['tiebreak']): string {
+  if (!tiebreak) return '';
+  const { ownMultiplier, opponentMultiplier } = tiebreak;
+  const head = 'Ничья по забегу — решила «На глазок»';
+  if (ownMultiplier !== null && opponentMultiplier !== null) {
+    return `${head}: ${formatMultiplier(ownMultiplier)} против ${formatMultiplier(opponentMultiplier)}.`;
+  }
+  if (ownMultiplier !== null) return `${head}: ты ответил, а друг нет.`;
+  if (opponentMultiplier !== null) return `${head}: друг ответил, а ты нет.`;
+  return '';
+}
+
 export function buildFriendDuelSummary(
   session: SoloRunSession,
-  response: Pick<CompleteSoloRunResponse, 'outcome'> | null,
+  response: Pick<CompleteSoloRunResponse, 'outcome' | 'tiebreak'> | null,
 ): FriendDuelSummary {
   const name = nameOf(session.pace);
   const outcome = response?.outcome ?? null;
@@ -41,5 +57,5 @@ export function buildFriendDuelSummary(
       : outcome === 'tie'
         ? 'Ничья с другом'
         : 'Дуэль сыграна';
-  return { outcome, headline, line };
+  return { outcome, headline, line, tiebreakLine: tiebreakLine(response?.tiebreak) };
 }

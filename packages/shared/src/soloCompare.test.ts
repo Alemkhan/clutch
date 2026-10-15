@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { compareSoloRuns, invertOutcome, type SoloRunResult } from './soloCompare';
+import { compareSoloRuns, compareSoloRunsDetailed, invertOutcome, type SoloRunResult } from './soloCompare';
 
 const reached = (overrides: Partial<SoloRunResult> = {}): SoloRunResult => ({
-  reachedTarget: true, progress: 100, roundsPlayed: 6, soloScore: 1, durationMs: 60_000, ...overrides,
+  reachedTarget: true, progress: 100, roundsPlayed: 6, soloScore: 1, tiebreak: null, ...overrides,
 });
 const missed = (overrides: Partial<SoloRunResult> = {}): SoloRunResult => ({
-  reachedTarget: false, progress: 60, roundsPlayed: 20, soloScore: 3, durationMs: 60_000, ...overrides,
+  reachedTarget: false, progress: 60, roundsPlayed: 20, soloScore: 3, tiebreak: null, ...overrides,
 });
 
 describe('compareSoloRuns: both reached the target', () => {
@@ -19,14 +19,26 @@ describe('compareSoloRuns: both reached the target', () => {
     expect(compareSoloRuns(reached({ roundsPlayed: 7 }), reached({ roundsPlayed: 6 }))).toBe('opponent');
   });
 
-  it('equal score and rounds: shorter run duration wins', () => {
-    expect(compareSoloRuns(reached({ durationMs: 40_000 }), reached({ durationMs: 90_000 }))).toBe('player');
-    expect(compareSoloRuns(reached({ durationMs: 90_000 }), reached({ durationMs: 40_000 }))).toBe('opponent');
+  it('equal score and rounds without guesses: a tie (the run duration is not a criterion)', () => {
+    // Раньше здесь побеждал более короткий забег; с 2026-10-15 длительности в сравнении нет.
+    expect(compareSoloRuns(reached(), reached())).toBe('tie');
   });
 
-  it('duration only breaks a tie: score and rounds come first', () => {
-    expect(compareSoloRuns(reached({ soloScore: 0.9, durationMs: 900_000 }), reached({ durationMs: 1 }))).toBe('player');
-    expect(compareSoloRuns(reached({ roundsPlayed: 7, durationMs: 1 }), reached({ roundsPlayed: 6, durationMs: 900_000 }))).toBe('opponent');
+  it('equal score and rounds: the guess decides', () => {
+    const near = { questionId: 'q1', multiplier: 1.4 };
+    const far = { questionId: 'q1', multiplier: 2.8 };
+    expect(compareSoloRunsDetailed(reached({ tiebreak: near }), reached({ tiebreak: far })))
+      .toEqual({ outcome: 'player', byTiebreak: true });
+    expect(compareSoloRuns(reached({ tiebreak: far }), reached({ tiebreak: near }))).toBe('opponent');
+    expect(compareSoloRuns(reached({ tiebreak: far }), reached())).toBe('player');
+  });
+
+  it('the guess never overrides score or rounds', () => {
+    const near = { questionId: 'q1', multiplier: 1 };
+    const far = { questionId: 'q1', multiplier: 9 };
+    expect(compareSoloRunsDetailed(reached({ soloScore: 0.9, tiebreak: far }), reached({ tiebreak: near })))
+      .toEqual({ outcome: 'player', byTiebreak: false });
+    expect(compareSoloRuns(reached({ roundsPlayed: 7, tiebreak: near }), reached({ roundsPlayed: 6, tiebreak: far }))).toBe('opponent');
   });
 
   it('everything equal is a tie', () => {
@@ -57,7 +69,17 @@ describe('compareSoloRuns: nobody reached the target', () => {
   });
 
   it('equal progress and rounds is a tie, duration does not matter', () => {
-    expect(compareSoloRuns(missed({ durationMs: 1 }), missed({ durationMs: 999_000 }))).toBe('tie');
+    expect(compareSoloRuns(missed(), missed())).toBe('tie');
+  });
+
+  it('equal progress and rounds: the guess decides; equal multipliers or other days stay a tie', () => {
+    const near = { questionId: 'q1', multiplier: 1.4 };
+    const far = { questionId: 'q1', multiplier: 2.8 };
+    expect(compareSoloRunsDetailed(missed({ tiebreak: far }), missed({ tiebreak: near })))
+      .toEqual({ outcome: 'opponent', byTiebreak: true });
+    expect(compareSoloRunsDetailed(missed({ tiebreak: near }), missed({ tiebreak: { ...near } })))
+      .toEqual({ outcome: 'tie', byTiebreak: false });
+    expect(compareSoloRuns(missed({ tiebreak: near }), missed({ tiebreak: { questionId: 'q2', multiplier: 9 } }))).toBe('tie');
   });
 
   it('soloScore does not decide when the target was missed', () => {
@@ -81,13 +103,6 @@ describe('compareSoloRuns: symmetry and input checks', () => {
 
   it('rejects non-finite numbers', () => {
     expect(() => compareSoloRuns(reached({ soloScore: Number.NaN }), reached())).toThrow(RangeError);
-    expect(() => compareSoloRuns(reached(), reached({ durationMs: Number.POSITIVE_INFINITY }))).toThrow(RangeError);
-  });
-
-  it('rejects a negative or non-numeric duration', () => {
-    expect(() => compareSoloRuns(reached({ durationMs: -1 }), reached())).toThrow(RangeError);
-    expect(() => compareSoloRuns(reached(), missed({ durationMs: -5 }))).toThrow(RangeError);
-    expect(() => compareSoloRuns(reached({ durationMs: Number.NaN }), reached())).toThrow(RangeError);
-    expect(() => compareSoloRuns(reached({ durationMs: '5' as unknown as number }), reached())).toThrow(RangeError);
+    expect(() => compareSoloRuns(reached(), reached({ progress: Number.POSITIVE_INFINITY }))).toThrow(RangeError);
   });
 });

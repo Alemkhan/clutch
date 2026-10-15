@@ -1,4 +1,7 @@
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
+import { SoloResult } from '../components/SoloResult';
 import {
   FRIEND_RULES_VERSION,
   SOLO_ROUND_CAP,
@@ -11,7 +14,7 @@ import {
 import { normalizeSoloRun } from './clientMatchRules';
 import { FRIEND_DUEL_CHIP, buildFriendDuelSummary } from './friendDuelResult';
 import { friendDuelNote, runStatus, runSummary } from './myRunsView';
-import { applySoloSessionRound, createSoloRunSession } from './soloRunSession';
+import { applySoloSessionRound, createSoloRunSession, soloRunView } from './soloRunSession';
 
 const questions = dailyQuestionSet('geography', Date.UTC(2026, 9, 11), 0).questions;
 const author: Opponent = {
@@ -44,6 +47,29 @@ describe('friend duel on the client', () => {
     expect(pending.outcome).toBeNull();
     expect(pending.headline).toBe('Дуэль сыграна');
     expect(pending.line).toBe('Ты — 100% за 4 круга. Анна — 100% за 4 круга.');
+  });
+
+  it('says the tiebreaker decided a tie, with comma multipliers, only when the server reports it', () => {
+    const summary = buildFriendDuelSummary(played, { outcome: 'player', tiebreak: { ownMultiplier: 1.4, opponentMultiplier: 2.8 } });
+    expect(summary.tiebreakLine).toBe('Ничья по забегу — решила «На глазок»: ×1,4 против ×2,8.');
+    expect(buildFriendDuelSummary(played, { outcome: 'player' }).tiebreakLine).toBe('');
+    expect(buildFriendDuelSummary(played, null).tiebreakLine).toBe('');
+    // Множитель друга не показываем тому, кто сам не отвечал.
+    expect(buildFriendDuelSummary(played, { outcome: 'opponent', tiebreak: { ownMultiplier: null, opponentMultiplier: 1.2 } }).tiebreakLine)
+      .toBe('Ничья по забегу — решила «На глазок»: друг ответил, а ты нет.');
+    expect(buildFriendDuelSummary(played, { outcome: 'player', tiebreak: { ownMultiplier: 1.2, opponentMultiplier: null } }).tiebreakLine)
+      .toBe('Ничья по забегу — решила «На глазок»: ты ответил, а друг нет.');
+  });
+
+  it('renders the tiebreak line on the duel result and nowhere in a ranked result', () => {
+    const view = soloRunView(played);
+    const props = {
+      view, saveStatus: 'saved' as const, response: null, canRetrySave: false,
+      onRetrySave: () => undefined, onReplay: () => undefined, onMyRuns: () => undefined,
+    };
+    const duel = buildFriendDuelSummary(played, { outcome: 'player', tiebreak: { ownMultiplier: 1.4, opponentMultiplier: 2.8 } });
+    expect(renderToStaticMarkup(createElement(SoloResult, { ...props, friendDuel: duel }))).toContain('×1,4 против ×2,8');
+    expect(renderToStaticMarkup(createElement(SoloResult, props))).not.toContain('На глазок');
   });
 
   it('labels the friend duel in My runs for both sides', () => {

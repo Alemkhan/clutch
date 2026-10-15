@@ -81,6 +81,7 @@ export function SoloResult({
       {!friendDuel && <div className={`result-mark ${tone}`} aria-hidden="true">{result.reachedTarget ? '✦' : '↗'}</div>}
       <h1 className={`result-headline ${friendDuel ? duelTone : tone}`}>{friendDuel ? friendDuel.headline : result.headline}</h1>
       <p className="solo-result-summary">{friendDuel ? friendDuel.line || result.summary : result.summary}</p>
+      {friendDuel?.tiebreakLine && <p className="solo-result-summary tb-duel-line">{friendDuel.tiebreakLine}</p>}
 
       {(saveStatus === 'saving' || saveStatus === 'error') && (
         <div

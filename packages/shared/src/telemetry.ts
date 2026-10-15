@@ -30,13 +30,14 @@ export interface QuestionReportRequest {
 }
 
 /** Разрешённые продуктовые события; сервер незнакомое имя отклоняет. */
-export type AnalyticsEventName = 'solo_run_started' | 'solo_run_completed' | 'training_started' | 'sound_failure';
+export type AnalyticsEventName = 'solo_run_started' | 'solo_run_completed' | 'training_started' | 'sound_failure' | 'tiebreaker_answered';
 
 export const ANALYTIC_EVENT_NAMES: readonly AnalyticsEventName[] = [
   'solo_run_started',
   'solo_run_completed',
   'training_started',
   'sound_failure',
+  'tiebreaker_answered',
 ];
 
 export type AnalyticsEventValue = string | boolean | number;

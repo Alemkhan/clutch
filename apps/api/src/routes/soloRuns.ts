@@ -8,7 +8,7 @@ import {
   SOLO_ROUND_CAP,
   SOLO_TARGET_PROGRESS,
   applySoloRound,
-  compareSoloRuns,
+  compareSoloRunsDetailed,
   invertOutcome,
   dailyKey,
   dayStartMs,
@@ -40,6 +40,7 @@ import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import { PRACTICE_BOT_PROFILES, createBotOpponent } from '../matches/bots';
 import { matchmake, pickSet } from '../matches/matchmaking';
 import { claimRecord, currentMiniGameConfigJson, findRecordRun, findRun, findRunOwner, type GhostMatch } from '../matches/repository';
+import { findTiebreakAnswer } from '../matches/tiebreakerRepository';
 import { recordMistake } from '../matches/mistakesRepository';
 import { insertSoloAnswer, listSoloRounds, settleSoloHammer, type SoloRoundRow } from '../matches/soloRoundsRepository';
 import type { RunRow } from '../matches/types';
@@ -656,16 +657,26 @@ async function finalizeSoloRun(
   // Тренировка не сравнивается: бот не запись игрока, а исход тренировки не хранится.
   const completedAt = Date.now();
   const pace = run.opponent_run_id && !practice ? await findPaceResult(c.env.DB, run.opponent_run_id) : null;
-  const outcome = pace
-    ? compareSoloRuns({
+  // Прикидка своей стороны: сутки набора этого забега. Читаем только когда есть с кем сравнивать.
+  const ownTiebreak = pace ? await findTiebreakAnswer(c.env.DB, run.player_id, dailyKey(run.created_at)) : null;
+  const comparison = pace
+    ? compareSoloRunsDetailed({
       reachedTarget: result.reachedTarget,
       progress: result.progress,
       roundsPlayed: result.roundsPlayed,
       soloScore: result.score,
-      durationMs: Math.max(0, completedAt - run.created_at),
+      tiebreak: ownTiebreak,
     }, pace)
     : null;
+  const outcome = comparison?.outcome ?? null;
   result.outcome = outcome;
+  if (comparison?.byTiebreak && pace) {
+    // Число соперника не отдаём тому, кто сам не отвечал: исход честный и без подсказки.
+    result.tiebreak = {
+      ownMultiplier: ownTiebreak?.multiplier ?? null,
+      opponentMultiplier: ownTiebreak ? pace.tiebreak?.multiplier ?? null : null,
+    };
+  }
 
   const didComplete = await completeSoloRun(c.env.DB, {
     matchId: runId,
@@ -701,6 +712,9 @@ async function finalizeSoloRun(
         challengerName: run.display_name,
         recipientProgress: pace?.progress ?? 0,
         challengerProgress: result.progress,
+        ...(comparison?.byTiebreak && pace
+          ? { tiebreak: { recipientMultiplier: pace.tiebreak?.multiplier ?? null, challengerMultiplier: ownTiebreak?.multiplier ?? null } }
+          : {}),
         outcome: recipientView === 'player' ? 'record_won' : recipientView === 'opponent' ? 'record_lost' : 'tie',
       });
     })().catch((error) => {

@@ -1,4 +1,5 @@
 import type { CategoryId, MyRunOutcome } from './index';
+import { resolveTiebreak, type TiebreakAnswer } from './tiebreaker';
 
 /** То, что нужно знать о завершённом соло-забеге, чтобы сравнить его с другим. */
 export interface SoloRunResult {
@@ -8,15 +9,17 @@ export interface SoloRunResult {
   roundsPlayed: number;
   /** rounds / setPar: меньше — лучше. Нормирует разные по трудности наборы. */
   soloScore: number;
-  /** Длительность забега (мс): от старта до завершения. Приходит параметром: функция чистая. */
-  durationMs: number;
+  /**
+   * Прикидка «На глазок» этой стороны за сутки её набора; null — не отвечала или не засчитывается.
+   * Приходит параметром: функция чистая, базу не читает.
+   */
+  tiebreak: TiebreakAnswer | null;
 }
 
 function assertFinite(result: SoloRunResult): void {
-  for (const value of [result.progress, result.roundsPlayed, result.soloScore, result.durationMs]) {
+  for (const value of [result.progress, result.roundsPlayed, result.soloScore]) {
     if (!Number.isFinite(value)) throw new RangeError('solo run result must contain finite numbers');
   }
-  if (result.durationMs < 0) throw new RangeError('solo run duration must not be negative');
 }
 
 /** Меньшее значение выигрывает; равенство — null (решает следующий критерий). */
@@ -26,25 +29,41 @@ function lower(own: number, other: number): MyRunOutcome | null {
   return null;
 }
 
+/** Исход сравнения и то, решила ли его прикидка «На глазок» (а не счёт, круги или прогресс). */
+export interface SoloComparison {
+  outcome: MyRunOutcome;
+  /** true — счёт/круги/прогресс сравнялись, и победителя назвала прикидка. Ничья по прикидке — false. */
+  byTiebreak: boolean;
+}
+
 /**
  * Исход соло-забега `own` против `other` глазами `own`:
  * 'player' — победа, 'opponent' — поражение, 'tie' — ничья.
- * Дошедший до цели бьёт не дошедшего. Оба дошли: меньший soloScore, затем меньше кругов,
- * затем меньшая длительность забега. Не дошёл никто: больший прогресс, затем меньше кругов, затем ничья.
+ * Дошедший до цели бьёт не дошедшего. Оба дошли: меньший soloScore, затем меньше кругов.
+ * Не дошёл никто: больший прогресс, затем меньше кругов. Если и это равно — «На глазок»
+ * (`resolveTiebreak`), и только если прикидки не развели стороны — ничья.
+ *
+ * Длительность забега исход не решает (решение владельца 2026-10-15). Правило действует
+ * с забегов, завершённых после этой даты: исход уже сыгранных хранится в базе и задним числом
+ * не пересчитывается; `rulesVersion` не менялась.
  */
-export function compareSoloRuns(own: SoloRunResult, other: SoloRunResult): MyRunOutcome {
+export function compareSoloRunsDetailed(own: SoloRunResult, other: SoloRunResult): SoloComparison {
   assertFinite(own);
   assertFinite(other);
-  if (own.reachedTarget !== other.reachedTarget) return own.reachedTarget ? 'player' : 'opponent';
-  if (own.reachedTarget) {
-    return lower(own.soloScore, other.soloScore)
-      ?? lower(own.roundsPlayed, other.roundsPlayed)
-      ?? lower(own.durationMs, other.durationMs)
-      ?? 'tie';
+  if (own.reachedTarget !== other.reachedTarget) {
+    return { outcome: own.reachedTarget ? 'player' : 'opponent', byTiebreak: false };
   }
-  return lower(other.progress, own.progress)
-    ?? lower(own.roundsPlayed, other.roundsPlayed)
-    ?? 'tie';
+  const byRun = own.reachedTarget
+    ? lower(own.soloScore, other.soloScore) ?? lower(own.roundsPlayed, other.roundsPlayed)
+    : lower(other.progress, own.progress) ?? lower(own.roundsPlayed, other.roundsPlayed);
+  if (byRun) return { outcome: byRun, byTiebreak: false };
+  const outcome = resolveTiebreak(own.tiebreak, other.tiebreak);
+  return { outcome, byTiebreak: outcome !== 'tie' };
+}
+
+/** Исход без пометки о прикидке; см. `compareSoloRunsDetailed`. */
+export function compareSoloRuns(own: SoloRunResult, other: SoloRunResult): MyRunOutcome {
+  return compareSoloRunsDetailed(own, other).outcome;
 }
 
 /** Исход глазами второй стороны. */

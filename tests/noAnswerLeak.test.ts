@@ -2,8 +2,11 @@
 /// <reference types="@cloudflare/workers-types" />
 
 import { createHash, createHmac } from 'node:crypto';
-import { afterEach, describe, expect, it } from 'vitest';
-import { resolveQuestionById, type StartSoloRunResponse } from '@clutch/shared';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  countries, dailyKey, dailyQuestionBank, resolveQuestionById, toPublicQuestion,
+  type PublicQuestion, type StartSoloRunResponse,
+} from '@clutch/shared';
 import app from '../apps/api/src/index';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
@@ -11,7 +14,16 @@ const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
 const databases: TestD1[] = [];
 const FORBIDDEN_KEYS = ['correctOptionId', 'correctAnswers', 'explanation'];
 
+// Набор дня зависит от даты: без фиксации тест проходил или падал в зависимости от сегодняшнего дня.
+const FIXED_NOW = Date.parse('2026-10-14T12:00:00Z');
+
+beforeEach(() => {
+  vi.useFakeTimers({ toFake: ['Date'] });
+  vi.setSystemTime(FIXED_NOW);
+});
+
 afterEach(() => {
+  vi.useRealTimers();
   for (const database of databases.splice(0)) database.sqlite.close();
 });
 
@@ -51,6 +63,28 @@ function expectNoAnswers(text: string): void {
   for (const key of FORBIDDEN_KEYS) expect(text).not.toContain(`"${key}"`);
 }
 
+const countryNames = new Set(countries.flatMap((country) => [country.name, country.nameRu]).map((name) => name.toLowerCase()));
+
+/**
+ * Ответы открытого вопроса, найденные в его собственной выдаче. Исключение одно: ответ, который
+ * сам является названием страны из данных и стоит в prompt как условие («столица страны Панама» →
+ * «Панама»), — это не утечка. Тогда ищем его в выдаче без prompt: в подписи, адресе картинки и
+ * прочих полях он по-прежнему недопустим.
+ */
+export function findOpenAnswerLeaks(question: PublicQuestion, correctAnswers: readonly string[]): string[] {
+  const full = JSON.stringify(question).toLowerCase();
+  const withoutPrompt = JSON.stringify({ ...question, prompt: '' }).toLowerCase();
+  const prompt = question.prompt.toLowerCase();
+  const leaks: string[] = [];
+  for (const answer of correctAnswers) {
+    if (answer.length < 4) continue; // «8», «Ом»: короткая строка случайно встречается в id и подписях
+    const needle = answer.toLowerCase();
+    const legitimateInPrompt = countryNames.has(needle) && prompt.includes(needle);
+    if ((legitimateInPrompt ? withoutPrompt : full).includes(needle)) leaks.push(answer);
+  }
+  return leaks;
+}
+
 /**
  * Отсутствия полей мало: ответ мог бы уехать в любом другом поле того же вопроса — в подписи,
  * в адресе картинки, в подкатегории. У вопроса с открытым вводом вариантов на экране нет,
@@ -65,14 +99,11 @@ function expectNoOpenAnswerText(questions: StartSoloRunResponse['questions']): n
   let checked = 0;
   for (const question of questions) {
     if (question.answerType !== 'open_answer') continue;
-    const own = JSON.stringify(question).toLowerCase();
     const rebuilt = resolveQuestionById(question.id);
     expect(rebuilt, question.id).not.toBeNull();
-    for (const answer of rebuilt!.correctAnswers ?? []) {
-      if (answer.length < 4) continue; // «8», «Ом»: короткая строка случайно встречается в id и подписях
-      expect(own, `${question.id}: «${answer}»`).not.toContain(answer.toLowerCase());
-      checked += 1;
-    }
+    const answers = (rebuilt!.correctAnswers ?? []).filter((answer) => answer.length >= 4);
+    expect(findOpenAnswerLeaks(question, answers), question.id).toEqual([]);
+    checked += answers.length;
   }
   return checked;
 }
@@ -117,5 +148,34 @@ describe('no route hands out answers to unanswered questions', () => {
 
   it('actually examined open-answer questions', () => {
     expect(openAnswersChecked).toBeGreaterThan(0);
+  });
+
+  it('the leak rule: a capital equal to the country in the prompt is fine, a real leak is not', () => {
+    const base = resolveQuestionById('open_capital_pa')!;
+    expect(base.correctAnswers).toContain('Панама');
+    const publicQuestion = toPublicQuestion(base);
+    expect(findOpenAnswerLeaks(publicQuestion, base.correctAnswers!)).toEqual([]);
+    // Тот же ответ в другом поле — настоящая утечка.
+    expect(findOpenAnswerLeaks({ ...publicQuestion, mediaText: 'Панама' }, ['Панама'])).toEqual(['Панама']);
+    // Ответ, не являющийся названием страны, но стоящий в prompt, — утечка.
+    expect(findOpenAnswerLeaks({ ...publicQuestion, prompt: 'Столица — Лиссабон?' }, ['Лиссабон'])).toEqual(['Лиссабон']);
+  });
+
+  it('the day with a capital-equals-country question in the bank has no leaks', () => {
+    // Ищем первые сутки, где в банке есть вопрос «столица совпадает со страной», — не список под сегодня.
+    let found = 0;
+    for (let day = 0; day < 365 && found === 0; day += 1) {
+      const timestamp = FIXED_NOW + day * 86_400_000;
+      for (const set of dailyQuestionBank('geography', timestamp)) {
+        for (const question of set.questions) {
+          if (question.answerType !== 'open_answer') continue;
+          const equal = (question.correctAnswers ?? []).some((answer) => countryNames.has(answer.toLowerCase()) && question.prompt.toLowerCase().includes(answer.toLowerCase()));
+          if (!equal) continue;
+          found += 1;
+          expect(findOpenAnswerLeaks(toPublicQuestion(question), question.correctAnswers!), `${dailyKey(timestamp)} ${question.id}`).toEqual([]);
+        }
+      }
+    }
+    expect(found).toBeGreaterThan(0);
   });
 });

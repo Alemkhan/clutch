@@ -11,6 +11,7 @@ import { LastStand } from './components/LastStand';
 import { SoloRun, type SoloRematch } from './components/SoloRun';
 import { MyRuns } from './components/MyRuns';
 import { SoloBoard } from './components/SoloBoard';
+import { TiebreakerScreen } from './components/Tiebreaker';
 import { BottomNav, navTabForPhase, type NavTab } from './components/BottomNav';
 import { isSoloPlaying, type SoloStage } from './lib/soloRunFlow';
 import { useTelegramBackButton } from './lib/useTelegramBackButton';
@@ -102,6 +103,7 @@ export default function App() {
             <HomeDashboard
               onSolo={startSolo}
               onBoard={game.goToBoard}
+              onTiebreaker={game.goToTiebreaker}
             />
           </motion.div>
         )}
@@ -144,6 +146,12 @@ export default function App() {
         {game.phase === 'board' && (
           <motion.div key="board" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <SoloBoard onBack={game.goHome} onPlay={startSolo} />
+          </motion.div>
+        )}
+
+        {game.phase === 'tiebreaker' && (
+          <motion.div key="tiebreaker" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <TiebreakerScreen onBack={game.goHome} />
           </motion.div>
         )}
 

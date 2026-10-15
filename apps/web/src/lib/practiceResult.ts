@@ -40,7 +40,8 @@ export function buildPracticeSummary(session: SoloRunSession): PracticeSummary |
     progress: state.progress,
     roundsPlayed: state.roundsPlayed,
     soloScore: state.roundsPlayed,
-    durationMs: 0,
+    // Бот не отвечает на «На глазок», тренировка вне R24.
+    tiebreak: null,
   });
   const outcome = compareSoloRuns(result(own), result(bot));
   return {

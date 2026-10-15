@@ -6,6 +6,7 @@ import {
   initDataUser,
   isTMA,
   miniAppReady,
+  openLink,
   mountMiniAppSync,
   mountViewport,
   restoreInitData,
@@ -68,6 +69,17 @@ export function initializeTelegram(): Promise<void> {
 
 export function getTelegramIdentity(): TelegramIdentity | null {
   return identity;
+}
+
+/** Внешняя ссылка: в Telegram открывается его встроенным браузером, а не уводит Mini App. false — открывать обычной ссылкой. */
+export function openExternalLink(url: string): boolean {
+  if (!isTMA() || !openLink.isAvailable()) return false;
+  try {
+    openLink(url);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function canShareViaTelegram(): boolean {

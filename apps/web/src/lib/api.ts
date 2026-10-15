@@ -20,6 +20,8 @@ import type {
   TrainingCheckResponse,
   TrainingMistakesResponse,
   TrainingQuestionsRequest,
+  TiebreakerAnswerRequest,
+  TiebreakerTodayResponse,
   TrainingQuestionsResponse,
 } from '@clutch/shared';
 import { ANALYTIC_EVENT_NAMES } from '@clutch/shared';
@@ -52,6 +54,8 @@ export class ApiError extends Error {
     public readonly retryAfterMs?: number,
     /** Машинный код причины из тела ответа (например, taken/expired/own у приглашений). */
     public readonly reason?: string,
+    /** Тело ответа с ошибкой, если оно JSON-объект (у 409 «На глазок» там сохранённое состояние). */
+    public readonly body?: unknown,
   ) {
     super(`Clutch API returned ${status}`);
     this.name = 'ApiError';
@@ -87,12 +91,15 @@ function getPlayerName(): string {
   }
 }
 
-async function errorReason(response: Response): Promise<string | undefined> {
+async function errorDetails(response: Response): Promise<{ reason?: string; body?: unknown }> {
   try {
     const body = await response.json() as { reason?: unknown } | null;
-    return typeof body?.reason === 'string' ? body.reason : undefined;
+    return {
+      reason: typeof body?.reason === 'string' ? body.reason : undefined,
+      body: body && typeof body === 'object' ? body : undefined,
+    };
   } catch {
-    return undefined;
+    return {};
   }
 }
 
@@ -111,12 +118,14 @@ async function rawApiFetch<T>(path: string, init: RequestInit): Promise<T> {
     });
     if (!response.ok) {
       const retryAfterSeconds = Number(response.headers.get('Retry-After'));
+      const details = await errorDetails(response);
       throw new ApiError(
         response.status,
         Number.isFinite(retryAfterSeconds) && retryAfterSeconds > 0
           ? retryAfterSeconds * 1000
           : undefined,
-        await errorReason(response),
+        details.reason,
+        details.body,
       );
     }
     return await response.json() as T;
@@ -331,6 +340,21 @@ export function createRematchInvite(runId: string, signal?: AbortSignal): Promis
 
 export function setOutbidNotifications(enabled: boolean): Promise<{ enabled: boolean }> {
   return apiFetch('/api/notifications/outbid', { method: 'PUT', body: JSON.stringify({ enabled }) });
+}
+
+// ---- «На глазок» ----
+
+/** Вопрос дня и, если игрок уже ответил, вскрытие. Чужого состояния не кэшируем: читаем с сервера каждый раз. */
+export function fetchTiebreakerToday(signal?: AbortSignal): Promise<TiebreakerTodayResponse> {
+  return apiFetch('/api/tiebreaker/today', { method: 'GET' }, signal);
+}
+
+/** Один ответ на вопрос дня. 409 несёт reason (already_answered с состоянием в body либо not_todays_question). */
+export function answerTiebreaker(
+  body: TiebreakerAnswerRequest,
+  signal?: AbortSignal,
+): Promise<TiebreakerTodayResponse> {
+  return apiFetch('/api/tiebreaker/answer', { method: 'POST', body: JSON.stringify(body) }, signal);
 }
 
 // ---- Репорты и аналитика ----

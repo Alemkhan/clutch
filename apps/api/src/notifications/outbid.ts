@@ -57,6 +57,11 @@ export interface OutbidEvent {
   challengerName: string;
   recipientProgress: number;
   challengerProgress: number;
+  /**
+   * Задано, только когда исход решила прикидка «На глазок». Множитель null — сторона не отвечала
+   * (или это гость, чей ответ не засчитывается). Сам ответ дня сюда не попадает никогда.
+   */
+  tiebreak?: { recipientMultiplier: number | null; challengerMultiplier: number | null };
 }
 
 type NotificationKind = 'solo_result' | 'duel_result' | 'rematch_offer';
@@ -189,12 +194,37 @@ export async function sendRematchOffer(env: Env, offer: {
 /** Исход соло-забега глазами владельца записи: его запись победила, проиграла или сравнялась. */
 export type SoloRecipientOutcome = 'record_won' | 'record_lost' | 'tie';
 
+/** Множитель с запятой и одним знаком: ×1,4. */
+function formatMultiplier(value: number): string {
+  return `×${value.toFixed(1).replace('.', ',')}`;
+}
+
+/**
+ * Исход решила прикидка: счёт и круги равны. Числа показываем, только когда ответили оба: тому, кто
+ * сам не отвечал, множитель соперника не сообщаем, чтобы не подсказывать число на завтра.
+ */
+function tiebreakText(name: string, outcome: Exclude<SoloRecipientOutcome, 'tie'>, tiebreak: NonNullable<OutbidEvent['tiebreak']>): string {
+  const won = outcome === 'record_won';
+  const verdict = won ? 'победа ваша' : `${name} оказался ближе`;
+  const { recipientMultiplier: own, challengerMultiplier: other } = tiebreak;
+  if (own !== null && other !== null) {
+    return `Ничья по забегу, но «На глазок» ${formatMultiplier(own)} против ${formatMultiplier(other)}: ${verdict}.`;
+  }
+  if (own !== null) return `Ничья по забегу, но «На глазок» ответили только вы: ${verdict}.`;
+  return `Ничья по забегу, но «На глазок» ответил только ${name}: ${verdict}.`;
+}
+
 /**
  * Только известие об исходе. Реванш здесь не обещается: позвать на него может лишь сам соперник
  * нажатием, и до этого нажатия обещать игроку нечего.
  */
-export function soloResultText(challengerName: string, outcome: SoloRecipientOutcome): string {
+export function soloResultText(
+  challengerName: string,
+  outcome: SoloRecipientOutcome,
+  tiebreak?: OutbidEvent['tiebreak'],
+): string {
   const name = cleanName(challengerName);
+  if (tiebreak && outcome !== 'tie') return tiebreakText(name, outcome, tiebreak);
   if (outcome === 'record_won') return `Ваша запись устояла: ${name} не смог её обойти.`;
   if (outcome === 'record_lost') return `${name} обошёл вашу запись.`;
   return `Ничья с ${name}: результаты сравнялись.`;
@@ -209,11 +239,16 @@ export async function notifySoloResult(
   env: Env,
   event: OutbidEvent & { outcome: SoloRecipientOutcome },
 ): Promise<void> {
-  await sendNews(env, event, 'solo_result', soloResultText(event.challengerName, event.outcome));
+  await sendNews(env, event, 'solo_result', soloResultText(event.challengerName, event.outcome, event.tiebreak));
 }
 
-export function duelResultText(friendName: string, outcome: SoloRecipientOutcome): string {
+export function duelResultText(
+  friendName: string,
+  outcome: SoloRecipientOutcome,
+  tiebreak?: OutbidEvent['tiebreak'],
+): string {
   const name = cleanName(friendName);
+  if (tiebreak && outcome !== 'tie') return `${tiebreakText(name, outcome, tiebreak)} Дружеская игра, не в зачёт.`;
   if (outcome === 'record_won') return `${name} сыграл вашу запись по ссылке и не смог её обойти. Дружеская игра, не в зачёт.`;
   if (outcome === 'record_lost') return `${name} обошёл вашу запись по ссылке. Дружеская игра, не в зачёт.`;
   return `Ничья с ${name} на вашей записи. Дружеская игра, не в зачёт.`;
@@ -228,5 +263,5 @@ export async function notifyDuelResult(
   env: Env,
   event: OutbidEvent & { outcome: SoloRecipientOutcome },
 ): Promise<void> {
-  await sendNews(env, event, 'duel_result', duelResultText(event.challengerName, event.outcome));
+  await sendNews(env, event, 'duel_result', duelResultText(event.challengerName, event.outcome, event.tiebreak));
 }

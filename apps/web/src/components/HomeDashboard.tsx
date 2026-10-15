@@ -1,6 +1,9 @@
+import { TiebreakerCard } from "./TiebreakerCard";
+
 interface HomeDashboardProps {
   onSolo: () => void;
   onBoard: () => void;
+  onTiebreaker: () => void;
 }
 
 /** Петля игры тремя значками: верный ответ, удар в мини-игре, прогресс. Без текста-инструкции. */
@@ -47,7 +50,7 @@ const LOOP_STEPS = [
   { kind: "progress", label: "Прогресс" },
 ] as const;
 
-export function HomeDashboard({ onSolo, onBoard }: HomeDashboardProps) {
+export function HomeDashboard({ onSolo, onBoard, onTiebreaker }: HomeDashboardProps) {
   return (
     <section className="home-dashboard">
       <header className="home-header">
@@ -88,6 +91,8 @@ export function HomeDashboard({ onSolo, onBoard }: HomeDashboardProps) {
           Таблица дня
         </button>
       </section>
+
+      <TiebreakerCard onOpen={onTiebreaker} />
     </section>
   );
 }
