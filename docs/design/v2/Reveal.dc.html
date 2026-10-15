@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>v2 · Вскрытие</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 1240px; box-sizing: border-box; background: #f3f0e8; font-family: Inter, sans-serif; color: #171716; padding: 24px 20px 32px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: baseline; justify-content: space-between">
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 24px; letter-spacing: -0.4px">На глазок <span style="color: #d83830">#7</span></div>
+<div style="font-size: 12px; font-weight: 600; color: #706d66">16 октября</div>
+</div>
+<div style="font-size: 15px; line-height: 1.5; color: #3d3b37">Сколько стандартных 20-футовых морских контейнеров поместилось бы по объёму внутри пирамиды Хеопса, если считать её пустой, с первоначальной высотой и без зазоров?</div>
+</div>
+
+<div style="background: #171716; color: #fffefa; border-radius: 20px; padding: 24px 20px 20px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="font-size: 12px; font-weight: 600; color: #a8a49b">Твой промах</div>
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 56px; line-height: 1; color: #6fdc9d">×1,0</div>
+</div>
+<div style="text-align: right; font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px; line-height: 1.25">Лучший<br>ответ дня</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div style="background: rgba(255,255,255,0.07); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 4px">
+<div style="font-size: 12px; color: #a8a49b">Твой ответ</div>
+<div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 20px; line-height: 1.1">75 000</div>
+</div>
+<div style="background: rgba(255,255,255,0.07); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 4px">
+<div style="font-size: 12px; color: #a8a49b">Правильный</div>
+<div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 20px; line-height: 1.1">78 000</div>
+</div>
+</div>
+<button style="height: 48px; border: none; border-radius: 16px; background: #f04a3e; color: #fff; font-family: Inter, sans-serif; font-weight: 700; font-size: 16px; cursor: pointer">Поделиться результатом</button>
+</div>
+
+<div style="background: #fffefa; border-radius: 20px; border: 1px solid rgba(23,23,22,0.11); padding: 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px">Как ответили все</div>
+<div style="font-size: 12px; color: #706d66">214 ответов</div>
+</div>
+<div style="display: flex; align-items: flex-end; gap: 4px; height: 128px; padding-top: 16px; border-bottom: 1.5px solid #171716">
+<sc-for list="{{bins}}" as="b" hint-placeholder-count="12">
+<div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 4px">
+<sc-if value="{{b.me}}" hint-placeholder-val="{{false}}"><div style="font-size: 10px; font-weight: 800; color: #d83830">ты</div></sc-if>
+<div style="{{b.style}}"></div>
+</div>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); font-size: 10px; font-weight: 600; color: #706d66; text-align: center">
+<div>÷1000</div><div>÷100</div><div>÷10</div><div style="color: #171716">точно</div><div>×10</div><div>×100</div><div>×1000</div>
+</div>
+<div style="display: flex; gap: 16px; font-size: 12px; color: #5f5c56">
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #8fa6ee"></span>занизили</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #e8be5a"></span>завысили</span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="background: #fffefa; border-radius: 20px; border: 1px solid rgba(23,23,22,0.11); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px">Как прикинуть</div>
+<div style="font-size: 13px; color: #706d66">4 шага · 2,59 млн м³ ÷ 33,2 м³</div>
+</div>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#171716" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+</div>
+<div style="font-size: 12px; color: #706d66; padding: 0 4px">Источник: en.wikipedia.org · данные на 15.10.2026</div>
+</div>
+
+<div style="background: #e9e5dc; border-radius: 20px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center">
+<div style="font-size: 14px; font-weight: 600">Следующий вопрос</div>
+<div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; font-variant-numeric: tabular-nums">5:12:40</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1240}}'>
+class Component extends DCLogic {
+renderVals() {
+const counts = [0, 1, 3, 8, 22, 41, 58, 39, 24, 11, 5, 2];
+const bins = counts.map((c, i) => {
+const me = i === 6;
+const color = me ? '#f04a3e' : (i < 6 ? '#8fa6ee' : '#e8be5a');
+const h = Math.max(2, Math.round((c / 58) * 104));
+return { me, style: 'width: 100%; border-radius: 4px 4px 0 0; height: ' + h + 'px; background: ' + color };
+});
+return { bins };
+}
+}
+</script>
+</body>
+</html>

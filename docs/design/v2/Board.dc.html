@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>v2 · Таблица дня</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #f3f0e8; font-family: Inter, sans-serif; color: #171716; padding: 32px 0 24px; display: flex; flex-direction: column; gap: 24px; overflow: hidden">
+<div style="padding: 0 20px; display: flex; flex-direction: column; gap: 4px">
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 32px; letter-spacing: -0.6px; line-height: 1.1">Таблица дня</div>
+<div style="font-size: 13px; color: #706d66">Обнулится через 5 ч · полночь по Алматы</div>
+</div>
+<div style="display: flex; gap: 8px; padding: 0 20px; overflow: hidden; mask-image: linear-gradient(90deg, #000 82%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent)">
+<div style="flex: none; height: 40px; display: flex; align-items: center; padding: 0 16px; border-radius: 999px; background: #171716; color: #fffefa; font-size: 14px; font-weight: 700">Общие знания</div>
+<div style="flex: none; height: 40px; display: flex; align-items: center; padding: 0 16px; border-radius: 999px; background: #fffefa; border: 1px solid rgba(23,23,22,0.11); font-size: 14px; font-weight: 600">География</div>
+<div style="flex: none; height: 40px; display: flex; align-items: center; padding: 0 16px; border-radius: 999px; background: #fffefa; border: 1px solid rgba(23,23,22,0.11); font-size: 14px; font-weight: 600">Другие флаги</div>
+<div style="flex: none; height: 40px; display: flex; align-items: center; padding: 0 16px; border-radius: 999px; background: #fffefa; border: 1px solid rgba(23,23,22,0.11); font-size: 14px; font-weight: 600">Языки</div>
+</div>
+
+<div style="margin: 0 20px; background: #171716; color: #fffefa; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 16px">
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 48px; line-height: 1">3</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 17px; line-height: 1.25">До 2-го места — один круг</div>
+<div style="font-size: 13px; color: #a8a49b">Ты: 7 кругов · из 41 дошедшего</div>
+</div>
+</div>
+<button style="height: 48px; border: none; border-radius: 16px; background: #f04a3e; color: #fff; font-family: Inter, sans-serif; font-weight: 700; font-size: 15px; cursor: pointer">Сыграть ещё набор</button>
+</div>
+
+<div style="margin: 0 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="background: #fffefa; border: 1px solid rgba(23,23,22,0.11); border-radius: 20px; overflow: hidden">
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+<div style="{{r.style}}">
+<div style="width: 20px; font-family: Poppins, sans-serif; font-weight: 800; font-size: 15px; color: #706d66">{{r.place}}</div>
+<div style="width: 28px; height: 28px; border-radius: 8px; background: #e9e5dc; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{r.ini}}</div>
+<div style="flex: 1; font-size: 15px; font-weight: 600">{{r.name}}</div>
+<div style="font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums">{{r.laps}}</div>
+</div>
+</sc-for>
+</div>
+<div style="font-size: 12px; color: #706d66; text-align: center">При равных кругах выше тот, кто быстрее</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+const data = [['Игрок 5cb9', 5], ['Игрок 7c47', 6], ['Игрок dbec', 7], ['Игрок 872a', 9], ['Игрок 2dbf', 9], ['Игрок a01f', 10]];
+const rows = data.map(([name, laps], i) => {
+const me = i === 2;
+return {
+place: String(i + 1),
+name: me ? 'Ты' : name,
+ini: me ? 'ТЫ' : name.slice(-2).toUpperCase(),
+laps: laps + ' кр.',
+style: 'display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 20px; background: ' + (me ? '#fde4e1' : 'transparent') + (i === 0 ? '' : '; border-top: 1px solid rgba(23,23,22,0.08)')
+};
+});
+return { rows };
+}
+}
+</script>
+</body>
+</html>

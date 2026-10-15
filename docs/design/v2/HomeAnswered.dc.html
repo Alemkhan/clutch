@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>v2 · Главная после ответа</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#171716}a:hover{color:#000}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #f3f0e8; font-family: Inter, sans-serif; color: #171716; display: flex; flex-direction: column; overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 24px 20px 16px">
+<div style="display: flex; align-items: center; gap: 8px">
+<div style="width: 32px; height: 32px; border-radius: 10px; background: #171716; color: #fffefa; font-family: Poppins, sans-serif; font-weight: 900; font-size: 16px; display: flex; align-items: center; justify-content: center">C</div>
+<div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 2px">CLUTCH</div>
+</div>
+<div style="font-size: 12px; font-weight: 600; color: #706d66">Новый набор через 5 ч</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 24px; padding: 0 20px">
+<div style="background: #171716; color: #fffefa; border-radius: 20px; padding: 24px 20px 20px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="font-size: 12px; font-weight: 600; color: #a8a49b">Набор дня · Общие знания</div>
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 28px; line-height: 1.1; letter-spacing: -0.6px">Ты 3-й сегодня.<br><span style="color: #ff6a5e">До 2-го — один круг.</span></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<div style="background: rgba(255,255,255,0.06); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 4px"><div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 20px; line-height: 1">7</div><div style="font-size: 12px; color: #a8a49b">кругов</div></div>
+<div style="background: rgba(255,255,255,0.06); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 4px"><div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 20px; line-height: 1">3 / 41</div><div style="font-size: 12px; color: #a8a49b">место</div></div>
+<div style="background: rgba(255,255,255,0.06); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 4px"><div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 20px; line-height: 1">ждёт</div><div style="font-size: 12px; color: #a8a49b">запись</div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<button style="height: 56px; border: none; border-radius: 16px; background: #f04a3e; color: #fff; font-family: Inter, sans-serif; font-weight: 700; font-size: 18px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; cursor: pointer">Сыграть ещё набор<span aria-hidden="true">→</span></button>
+<a href="Board.dc.html" style="height: 44px; display: flex; align-items: center; justify-content: center; color: #d8d4cb; font-size: 15px; font-weight: 500">Таблица дня</a>
+</div>
+</div>
+
+<div style="background: #fffefa; border: 1px solid rgba(23,23,22,0.11); border-radius: 20px; padding: 16px 16px 16px 20px; display: flex; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0">
+<div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 16px">На глазок #7 · <span style="color: #168c51">×1,0</span></div>
+<div style="font-size: 12px; color: #706d66">Точнее 80% · следующий через 5:12</div>
+</div>
+<a href="Reveal.dc.html" style="height: 44px; padding: 0 14px; display: flex; align-items: center; border-radius: 12px; background: #171716; color: #fffefa; font-size: 14px; font-weight: 700; text-decoration: none">Ответ дня</a>
+</div>
+</div>
+
+<div style="margin-top: auto; height: 64px; background: #fffefa; border-top: 1px solid rgba(23,23,22,0.11); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center; text-align: center; font-size: 11px; font-weight: 600; color: #706d66">
+<div style="color: #f04a3e">Главная</div><div>Партии</div><div>Тренировка</div><div>Профиль</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
