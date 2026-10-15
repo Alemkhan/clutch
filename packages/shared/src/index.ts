@@ -291,6 +291,11 @@ export interface MyRunSummary {
    * можно позвать; 'sent' — уже позвал; null — звать некого.
    */
   rematchOffer?: 'available' | 'sent' | null;
+  /**
+   * Круги соперника: его запись либо тот, кто сыграл твою. null — у бота, у чужой дружеской
+   * дуэли и у старых данных. Поле опционально: ответ старого сервера его не несёт.
+   */
+  opponentRoundsPlayed?: number | null;
 }
 
 /** Активное приглашение на реванш, адресованное игроку. */
@@ -300,6 +305,9 @@ export interface MyRematchInvite {
   challengerName: string;
   challengerProgress: number;
   yourProgress: number;
+  /** Круги вызвавшего и твои в этой паре; null — у старых данных. */
+  challengerRoundsPlayed?: number | null;
+  recipientRoundsPlayed?: number | null;
   expiresAt: number;
 }
 

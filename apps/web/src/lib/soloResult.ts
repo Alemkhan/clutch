@@ -1,4 +1,4 @@
-import type { CompleteSoloRunResponse, SoloRoundResponse } from '@clutch/shared';
+import type { CompleteSoloRunResponse, SkillResult, SoloLeaderboardStanding, SoloRoundResponse } from '@clutch/shared';
 import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS } from '@clutch/shared';
 import type { SoloRunView } from './soloRunSession';
 
@@ -55,9 +55,8 @@ export function buildSoloResult({ view, save, response }: SoloResultInput): Solo
       headline: 'Дошёл до 100%',
       progress,
       roundsPlayed,
-      summary: server
-        ? 'Результат зафиксирован. Мы сообщим о нём, когда с ним сыграют: исход появится и в «Моих партиях».'
-        : `Ты набрал ${SOLO_TARGET_PROGRESS}% за ${circles(roundsPlayed)}.`,
+      // Заголовок и мета уже говорят «100% за N кругов», а про запись рассказывает её карточка.
+      summary: '',
     };
   }
 
@@ -70,7 +69,7 @@ export function buildSoloResult({ view, save, response }: SoloResultInput): Solo
     headline: 'До 100% не дошёл',
     progress,
     roundsPlayed,
-    summary: `${why} Ты набрал ${progress}% из ${SOLO_TARGET_PROGRESS}% за ${circles(roundsPlayed)}.`,
+    summary: `${why} Ты набрал ${progress}% из ${SOLO_TARGET_PROGRESS}%.`,
   };
 }
 
@@ -115,4 +114,46 @@ export function parseSoloRound(value: unknown, expectedRunId: string): SoloRound
   if (response.result !== null && response.result !== undefined
     && !parseSoloCompletion(response.result, expectedRunId)) return null;
   return { ...(response as SoloRoundResponse), result: response.result ?? null };
+}
+
+/** Тир «идеально» берём из shared-типа, а не строкой в разметке. */
+const PERFECT_TIER: SkillResult = 'perfect';
+
+export interface RunReceiptStat {
+  key: 'correct' | 'perfect' | 'place';
+  value: string;
+  label: string;
+}
+
+/** Место в таблице дня: загрузка и ошибка не ломают экран, число просто остаётся «—». */
+export type RunStandingState =
+  | { status: 'loading' }
+  | { status: 'error' }
+  | { status: 'ready'; standing: SoloLeaderboardStanding | null };
+
+export function countPerfectStrikes(skillResults: readonly SkillResult[]): number {
+  return skillResults.filter((result) => result === PERFECT_TIER).length;
+}
+
+/**
+ * Три числа квитанции. Место показываем только тому, кто дошёл до 100%: у остальных его нет,
+ * а тренировка и дружеская дуэль в таблицу дня не попадают, поэтому третьего числа нет вовсе.
+ */
+export function buildReceiptStats(input: {
+  correctCount: number;
+  /** Сыграно кругов (один круг — один вопрос): с ним «верных» читается как «7/8». */
+  roundsPlayed?: number;
+  skillResults: readonly SkillResult[];
+  /** null — места у забега нет и блок не показывается. */
+  standing: RunStandingState | null;
+}): RunReceiptStat[] {
+  const stats: RunReceiptStat[] = [
+    { key: 'correct', value: input.roundsPlayed ? `${input.correctCount}/${input.roundsPlayed}` : String(input.correctCount), label: 'верных' },
+    { key: 'perfect', value: String(countPerfectStrikes(input.skillResults)), label: 'идеально' },
+  ];
+  if (input.standing) {
+    const you = input.standing.status === 'ready' ? input.standing.standing : null;
+    stats.push({ key: 'place', value: you ? `${you.rank}-й` : '—', label: 'в таблице' });
+  }
+  return stats;
 }

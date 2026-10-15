@@ -3,7 +3,7 @@
 
 import { readFileSync } from 'node:fs';
 import { afterEach, describe, expect, it } from 'vitest';
-import { parseTiebreakerExplanation } from '@clutch/shared';
+import { parseTiebreakerExplanation, TIEBREAKER_CARD_PROMPT_MAX } from '@clutch/shared';
 // @ts-expect-error — .mjs без деклараций типов
 import { buildSql, parseExplanation, sqlString } from '../scripts/tiebreaker-load.mjs';
 import { createTestD1, type TestD1 } from './helpers/testD1';
@@ -47,6 +47,36 @@ describe('tiebreaker-load', () => {
     expect(explanation.steps[0].label).toBe(nasty);
     expect(sqlString("a'b")).toBe("'a''b'");
     expect(() => sqlString('a\0b')).toThrow(RangeError);
+  });
+
+  it('stores the optional short card prompt, escaped, and NULL when absent', () => {
+    const db = createTestD1();
+    databases.push(db);
+    const nasty = "О'Брайен «сказал»; --";
+    db.sqlite.exec(buildSql([
+      question({ cardPrompt: nasty }),
+      question({ id: 'plain', activeDate: '2099-01-02' }),
+    ]) as string);
+    const rows = db.sqlite.prepare('SELECT id, card_prompt FROM tiebreaker_questions ORDER BY active_date').all() as Array<Record<string, unknown>>;
+    expect(rows[0].card_prompt).toBe(nasty);
+    expect(rows[1].card_prompt).toBeNull();
+  });
+
+  it('limits the card prompt to TIEBREAKER_CARD_PROMPT_MAX characters and rejects non-strings and empty text', () => {
+    expect(() => buildSql([question({ cardPrompt: 'я'.repeat(TIEBREAKER_CARD_PROMPT_MAX) })])).not.toThrow();
+    expect(() => buildSql([question({ cardPrompt: 'я'.repeat(TIEBREAKER_CARD_PROMPT_MAX + 1) })])).toThrow(/cardPrompt/);
+    expect(() => buildSql([question({ cardPrompt: 5 })])).toThrow(/cardPrompt/);
+    expect(() => buildSql([question({ cardPrompt: '  ' })])).toThrow(/cardPrompt/);
+  });
+
+  it('accepts the v2 content pack with a short card prompt on every question', () => {
+    const pack = JSON.parse(readFileSync('docs/content/tiebreaker-pack-v2.json', 'utf8')) as Array<{ cardPrompt?: string; prompt: string }>;
+    expect(() => buildSql(pack)).not.toThrow();
+    for (const item of pack) {
+      expect(item.cardPrompt, item.prompt).toBeTruthy();
+      expect(Array.from(item.cardPrompt!).length).toBeLessThanOrEqual(TIEBREAKER_CARD_PROMPT_MAX);
+      expect(item.cardPrompt!.length).toBeLessThan(item.prompt.length);
+    }
   });
 
   it('refuses invalid records and duplicates, naming the record', () => {

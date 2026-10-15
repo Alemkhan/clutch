@@ -1,11 +1,15 @@
 import { useEffect, useRef } from 'react';
-import type { CompleteSoloRunResponse } from '@clutch/shared';
+import { SOLO_TARGET_PROGRESS } from '@clutch/shared';
+import type { CategoryId, CompleteSoloRunResponse, SkillResult } from '@clutch/shared';
 import { playSound } from '../lib/sounds';
-import { buildSoloResult, type SoloSaveStatus } from '../lib/soloResult';
+import { buildReceiptStats, buildSoloResult, circles, type RunStandingState, type SoloSaveStatus } from '../lib/soloResult';
+import { categoryName } from '../lib/myRunsView';
+import { useRunStanding } from '../lib/useRunStanding';
 import type { SoloRunView } from '../lib/soloRunSession';
 import type { PracticeSummary } from '../lib/practiceResult';
 import { FRIEND_DUEL_CHIP, type FriendDuelSummary } from '../lib/friendDuelResult';
 import { useFriendInvite } from '../lib/useFriendInvite';
+import { getTelegramIdentity } from '../lib/telegram';
 
 interface SoloResultProps {
   view: SoloRunView;
@@ -21,6 +25,13 @@ interface SoloResultProps {
   onExitPractice?: () => void;
   /** Дружеская дуэль: вне соревнования, но исход против записи автора показывается. */
   friendDuel?: FriendDuelSummary | null;
+  /** Категория забега: подпись под заголовком и таблица дня, в которой ищем место. */
+  category?: CategoryId;
+  /** Верные ответы и удары забега; верные из ответа сервера главнее. */
+  correctCount?: number;
+  skillResults?: readonly SkillResult[];
+  /** Подмена места (тесты); без неё место берётся из таблицы дня. */
+  standing?: RunStandingState;
 }
 
 /**
@@ -39,11 +50,18 @@ export function SoloResult({
   practice,
   onExitPractice,
   friendDuel,
+  category = 'general',
+  correctCount = 0,
+  skillResults = [],
+  standing,
 }: SoloResultProps) {
   const result = buildSoloResult({ view, save: saveStatus, response });
   const playedRef = useRef(false);
   const practiceWon = practice ? practice.outcome === 'player' : null;
   const invite = useFriendInvite(response?.runId);
+  // Место есть только у сохранённого рейтингового забега, дошедшего до 100%.
+  const ranked = saveStatus === 'saved' && response?.reachedTarget === true && !friendDuel && !practice;
+  const fetched = useRunStanding(category, ranked && !standing);
 
   useEffect(() => {
     if (playedRef.current) return;
@@ -55,11 +73,11 @@ export function SoloResult({
   if (practice) {
     const practiceTone = practice.outcome === 'player' ? 'win' : practice.outcome === 'tie' ? 'tie' : 'loss';
     return (
-      <div className="result-screen solo-result">
+      <div className="result-screen solo-result practice">
         <span className="chip">Тренировка · не засчитывается</span>
         <h1 className={`result-headline ${practiceTone}`}>{practice.headline}</h1>
         <p className="solo-result-summary">{practice.line}</p>
-        <div className="result-actions">
+        <div className="result-actions solo-result-actions">
           <button type="button" className="cta-btn" onClick={() => { onReplay(); }}>Ещё раз</button>
           <button type="button" className="ghost-btn" onClick={() => { onExitPractice?.(); }}>Другой уровень</button>
         </div>
@@ -73,14 +91,42 @@ export function SoloResult({
   // Звать есть кого, только когда результат дошёл до цели и сохранён на сервере.
   // Забег по ссылке вне соревнования: звать с него друзей нельзя.
   const canInvite = saveStatus === 'saved' && response?.reachedTarget === true && !friendDuel;
+  const receipt = result.reachedTarget && !friendDuel;
+  const stats = buildReceiptStats({
+    correctCount: response?.correctCount ?? correctCount,
+    roundsPlayed: result.roundsPlayed,
+    skillResults,
+    standing: receipt && saveStatus === 'saved' ? (standing ?? fetched) : null,
+  });
+  const summaryText = friendDuel ? friendDuel.line || result.summary : result.summary;
+  const viaTelegram = getTelegramIdentity() !== null;
   const duelTone = friendDuel?.outcome === 'player' ? 'win' : friendDuel?.outcome === 'opponent' ? 'loss' : 'tie';
 
   return (
     <div className={`result-screen solo-result ${result.reachedTarget ? 'reached' : 'not-reached'}`}>
-      {friendDuel && <span className="chip">{FRIEND_DUEL_CHIP}</span>}
-      {!friendDuel && <div className={`result-mark ${tone}`} aria-hidden="true">{result.reachedTarget ? '✦' : '↗'}</div>}
-      <h1 className={`result-headline ${friendDuel ? duelTone : tone}`}>{friendDuel ? friendDuel.headline : result.headline}</h1>
-      <p className="solo-result-summary">{friendDuel ? friendDuel.line || result.summary : result.summary}</p>
+      <div className="solo-result-head">
+        {friendDuel && <span className="chip">{FRIEND_DUEL_CHIP}</span>}
+        {!friendDuel && (
+          <div className={`solo-result-icon ${tone}`} aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+              <path d={result.reachedTarget ? 'M5 12l5 5 9-10' : 'M7 17L17 7M9 7h8v8'} />
+            </svg>
+          </div>
+        )}
+        <div className="solo-result-title">
+          <h1 className={`result-headline ${friendDuel ? duelTone : tone}`}>{friendDuel ? friendDuel.headline : result.headline}</h1>
+          <p className="solo-result-meta">за {circles(result.roundsPlayed)} · {categoryName(category)}</p>
+        </div>
+      </div>
+      <div className="solo-result-stats" data-cols={stats.length} aria-label="Итоги забега">
+        {stats.map((stat) => (
+          <div key={stat.key} className="solo-result-stat" data-stat={stat.key}>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
+      </div>
+      {summaryText && <p className="solo-result-summary">{summaryText}</p>}
       {friendDuel?.tiebreakLine && <p className="solo-result-summary tb-duel-line">{friendDuel.tiebreakLine}</p>}
 
       {(saveStatus === 'saving' || saveStatus === 'error') && (
@@ -106,8 +152,23 @@ export function SoloResult({
       {invite.status === 'copied' && <p className="result-insight" role="status">Ссылка скопирована.</p>}
       {invite.status === 'error' && <p className="result-insight" role="alert">Не удалось отправить. Нажми ещё раз.</p>}
 
-      <div className="result-actions">
+      {receipt && saveStatus === 'saved' && (
+        <section className="solo-result-receipt" aria-label="Твоя запись">
+          <div className="solo-result-receipt-row">
+            <h2>Твоя запись</h2>
+            <span className="solo-result-pill">ждёт соперника</span>
+          </div>
+          <p className="solo-result-receipt-line">{SOLO_TARGET_PROGRESS}% за {circles(result.roundsPlayed)}</p>
+          <p>
+            Против неё сыграет другой игрок этого набора. Исход придёт в «Партии»
+            {viaTelegram ? ' и в Telegram.' : '.'}
+          </p>
+        </section>
+      )}
+
+      <div className="result-actions solo-result-actions">
         <button type="button" className="cta-btn" disabled={saving} onClick={() => { onReplay(); }}>Сыграть ещё</button>
+        <div className={`solo-result-secondary${canInvite ? '' : ' single'}`}>
         {canInvite && (
           <button
             type="button"
@@ -119,6 +180,7 @@ export function SoloResult({
           </button>
         )}
         <button type="button" className="ghost-btn" disabled={saving} onClick={() => { onMyRuns(); }}>Мои партии</button>
+        </div>
       </div>
     </div>
   );

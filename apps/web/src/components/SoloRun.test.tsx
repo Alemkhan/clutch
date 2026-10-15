@@ -238,7 +238,8 @@ describe('solo run result', () => {
   it('reached the target: the result is recorded, with two ways forward and no par or score', () => {
     const html = render(finished([25, 25, 25, 25]), saved({}));
     expect(html).toContain('Дошёл до 100%');
-    expect(html).toContain('Результат зафиксирован');
+    expect(html).toContain('Твоя запись');
+    expect(html).not.toContain('Результат зафиксирован');
     expect(html).toContain('Сыграть ещё');
     expect(html).toContain('Мои партии');
     expect(html).not.toMatch(/[Ээ]талон|0,80|par|score|Ничья|Ждём результата|solo-result-outcome/);

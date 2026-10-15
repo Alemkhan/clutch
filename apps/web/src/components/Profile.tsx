@@ -3,31 +3,24 @@ import type { SoloProfileResponse } from '@clutch/shared';
 import { fetchSoloProfile } from '../lib/api';
 import { soloRoundsText } from '../lib/myRunsView';
 import { getTelegramIdentity } from '../lib/telegram';
-import { ScreenHeader } from './ScreenHeader';
 import { SoundToggle } from './SoundToggle';
-
-interface ProfileProps {
-  onBack: () => void;
-}
 
 export type ProfileState =
   | { status: 'loading' }
   | { status: 'error' }
   | { status: 'ready'; profile: SoloProfileResponse };
 
-interface ProfileViewProps extends ProfileProps {
+interface ProfileViewProps {
   playerName: string;
   state: ProfileState;
   onRetry: () => void;
 }
 
-export function ProfileView({ onBack, playerName, state, onRetry }: ProfileViewProps) {
+export function ProfileView({ playerName, state, onRetry }: ProfileViewProps) {
   const empty = state.status === 'ready' && state.profile.completedRuns === 0;
 
   return (
-    <section className="profile-screen">
-      <ScreenHeader onBack={onBack} />
-
+    <section className="profile-screen root-tab">
       <div className="profile-head">
         <span className="profile-avatar" aria-hidden="true">{playerName.slice(0, 2).toUpperCase()}</span>
         <h1 className="profile-name">{playerName}</h1>
@@ -73,7 +66,7 @@ export function ProfileView({ onBack, playerName, state, onRetry }: ProfileViewP
   );
 }
 
-export function Profile({ onBack }: ProfileProps) {
+export function Profile() {
   const [state, setState] = useState<ProfileState>({ status: 'loading' });
   const [requestKey, setRequestKey] = useState(0);
   const playerName = getTelegramIdentity()?.displayName || 'Игрок';
@@ -95,7 +88,6 @@ export function Profile({ onBack }: ProfileProps) {
 
   return (
     <ProfileView
-      onBack={onBack}
       playerName={playerName}
       state={state}
       onRetry={retry}

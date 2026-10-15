@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import type { CategoryId, PracticeLevel, QuestionReportKind } from "@clutch/shared";
-import { SOLO_ROUND_CAP } from "@clutch/shared";
+import { useCallback, useEffect, useState } from "react";
+import type { CategoryId, SkillResult, PracticeLevel, QuestionReportKind } from "@clutch/shared";
+import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS } from "@clutch/shared";
 import { CategorySelect } from "./CategorySelect";
 import { HammerGame } from "./HammerGame";
 import { QuestionScreen } from "./QuestionScreen";
@@ -25,6 +25,7 @@ import {
   buildFriendDuelSummary,
 } from "../lib/friendDuelResult";
 import { submitQuestionReport } from "../lib/api";
+import { strikeGain } from "../lib/hammerStrike";
 import { useSoloRun, type SoloSaveState } from "../lib/useSoloRun";
 
 interface SoloRunScreenProps {
@@ -38,6 +39,9 @@ interface SoloRunScreenProps {
   onStart: () => void;
   onAnswer: (optionId: string, timeMs: number) => void;
   onContinue: () => void;
+  /** Удар только что сыгран (до анимации): HUD сразу показывает новый процент. */
+  strike?: PendingStrike | null;
+  onStrike?: (result: SkillResult, reward: number) => void;
   onHammerComplete: (
     result: unknown,
     progress: number,
@@ -62,6 +66,12 @@ interface SoloRunScreenProps {
 }
 
 const noop = () => undefined;
+
+/** Удар, уже сыгранный на круге roundsPlayed, но ещё не засчитанный в сохранённый прогресс. */
+export interface PendingStrike {
+  roundsPlayed: number;
+  reward: number;
+}
 
 export function toSoloCategory(id: string): CategoryId {
   return id === "geography" || id === "history" || id === "languages"
@@ -256,6 +266,9 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
             : null
         }
         onExitPractice={props.onHome}
+        category={state.category}
+        correctCount={state.correctCount}
+        skillResults={state.skillResults}
       />
     );
   }
@@ -264,9 +277,15 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
   const selectedAnswer = question.answerType === "multiple_choice"
     ? question.options.find((option) => option.id === state.selectedOption)?.text
     : undefined;
+  // Прирост живёт, пока сервер не засчитал круг: потом roundsPlayed растёт и view.progress уже с ним.
+  const pending = props.strike && props.strike.roundsPlayed === view.roundsPlayed
+    && (state.stage === "hammer" || state.stage === "submitting")
+    ? strikeGain(view.progress, props.strike.reward, SOLO_TARGET_PROGRESS)
+    : null;
   const hud = (
     <SoloHud
-      progress={view.progress}
+      progress={pending ? pending.total : view.progress}
+      gain={pending?.gain ?? 0}
       paceProgress={view.paceProgress}
       paceName={pace?.displayName ?? null}
       round={view.round}
@@ -318,6 +337,8 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
           selectedAnswer={state.lastCorrect ? undefined : selectedAnswer}
           explanation={state.explanation}
           correct={state.lastCorrect}
+          timedOut={state.selectedOption === "__timeout__"}
+          final={soloRoundsLeft(view) <= 1}
           onContinue={props.onContinue}
           report={
             props.onReport
@@ -332,6 +353,8 @@ export function SoloRunScreen(props: SoloRunScreenProps) {
           config={state.config}
           questionId={question.id}
           previousSkillResults={state.skillResults}
+          progressBefore={view.progress}
+          onStrike={props.onStrike}
           onComplete={props.onHammerComplete}
         />
       )}
@@ -376,6 +399,13 @@ export function SoloRun({
   const reportQuestion = currentSoloQuestion(run.state);
   // «На глазок» открывается поверх экрана готовности и не трогает забег: назад — в тот же забег.
   const [tiebreakerOpen, setTiebreakerOpen] = useState(false);
+  // Превью удара для HUD: привязано к кругу, потому что засчитывает его только ответ сервера.
+  const [strike, setStrike] = useState<PendingStrike | null>(null);
+  const roundsPlayedNow = soloFlowView(run.state)?.roundsPlayed ?? 0;
+  const handleStrike = useCallback(
+    (_result: SkillResult, reward: number) => setStrike({ roundsPlayed: roundsPlayedNow, reward }),
+    [roundsPlayedNow],
+  );
 
   const submitReport = (kind: QuestionReportKind, comment: string) => {
     const state = run.state;
@@ -432,6 +462,8 @@ export function SoloRun({
       onStart={run.start}
       onAnswer={run.answer}
       onContinue={run.continueAfterResolution}
+      strike={strike}
+      onStrike={handleStrike}
       onHammerComplete={run.completeHammer}
       syncError={run.syncError}
       canRetrySync={run.canRetrySync}

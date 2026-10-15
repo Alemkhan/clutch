@@ -13,12 +13,14 @@ describe('training hub', () => {
   afterEach(() => vi.unstubAllGlobals());
 
   const menu = (summary: MistakeSummary) => renderToStaticMarkup(
-    <TrainingMenu summary={summary} onBots={noop} onMistakes={noop} onBack={noop} />,
+    <TrainingMenu summary={summary} onBots={noop} onMistakes={noop} />,
   );
 
-  it('shows two entries under the shared header and the server-reported mistake count', () => {
+  it('shows two entries under the title without a back button and the server-reported mistake count', () => {
     const html = menu({ status: 'ready', count: 3, ids: ['capital_li'] });
-    expect(html).toContain('screen-header');
+    expect(html).not.toContain('screen-header');
+    expect(html).not.toContain('back-btn');
+    expect(html).toContain('Тренировка');
     expect(html).toContain('Игра против ботов');
     expect(html).toContain('Отработка ошибок');
     expect(html).toContain('Ошибок накоплено: 3');

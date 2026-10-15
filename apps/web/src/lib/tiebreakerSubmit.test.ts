@@ -5,11 +5,12 @@ import { TiebreakerSubmitter, isTiebreakerState } from './tiebreakerSubmit';
 
 const state: TiebreakerTodayResponse = {
   dateKey: '2026-10-15',
-  question: { id: 'q1', prompt: 'Сколько?', unit: 'м' },
+  question: { id: 'q1', number: 7, prompt: 'Сколько?', cardPrompt: null, unit: 'м' },
   answered: {
     guess: 10, multiplier: 2, answer: 5, sourceUrl: 'https://example.org/x', asOfDate: '2026-01-01', explanation: null,
     distribution: new Array<number>(12).fill(0), totalAnswers: 1, percentile: null,
   },
+  answersCount: 1,
 };
 const body = { questionId: 'q1', guess: 10 };
 

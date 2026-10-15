@@ -7,7 +7,6 @@ const NOW = new Date(2026, 9, 11, 15, 0).getTime();
 const HOUR = 60 * 60 * 1000;
 
 const handlers = {
-  onBack: vi.fn(),
   onRetry: vi.fn(),
   onLoadMore: vi.fn(),
   onOpenInvite: vi.fn(),
@@ -40,10 +39,11 @@ const ready = (runs: MyRunSummary[], invites: MyRematchInvite[] = [], nextCursor
 );
 
 describe('my runs screen', () => {
-  it('uses the shared header and shows loading with a way back', () => {
+  it('is a root tab: shows its title without a back button', () => {
     const html = render({ status: 'loading' });
-    expect(html).toContain('screen-header');
-    expect(html).toContain('back-btn');
+    expect(html).not.toContain('screen-header');
+    expect(html).not.toContain('back-btn');
+    expect(html).not.toContain('Назад');
     expect(html).toContain('Мои партии');
     expect(html).toContain('role="status"');
   });
@@ -70,14 +70,33 @@ describe('my runs screen', () => {
     ]));
     expect(html).toContain('География');
     expect(html).toContain('Другие флаги');
-    expect(html).toContain('Ждём соперника');
-    expect(html).toContain('Ничья');
-    expect(html).toContain('Победа');
-    expect(html).toContain('Не дошёл до цели');
+    expect(html).toContain('>Ждём<');
+    expect(html).toContain('>Ничья<');
+    expect(html).toContain('>Победа<');
+    expect(html).toContain('>Не дошёл<');
     expect(html).toContain('Сегодня, 14:00');
     expect(html).toContain('Вчера, 09:00');
     expect(html).toContain('против Ann');
     expect(html).not.toMatch(/[Тт]емп|эталон|score|par\b/);
+  });
+
+  it('puts every outcome badge on its own row, rounds first and the rival in the meta line', () => {
+    const rival = { kind: 'player', displayName: 'Ann' } as const;
+    const html = render(ready([
+      run({ runId: 'w', roundsPlayed: 5, opponentRoundsPlayed: 9, outcome: 'player', opponent: rival }),
+      run({ runId: 'l', roundsPlayed: 9, opponentRoundsPlayed: 5, outcome: 'opponent', opponent: rival }),
+      run({ runId: 't', roundsPlayed: 7, opponentRoundsPlayed: 7, outcome: 'tie', opponent: rival }),
+      run({ runId: 'x', roundsPlayed: 20, reachedTarget: false, progress: 64 }),
+    ]));
+    expect(html).toContain('5 кругов против 9');
+    expect(html).toContain('9 кругов против 5');
+    expect(html).toContain('7 кругов против 7');
+    expect(html).toContain('>Поражение<');
+    // Без кругов соперника — только свои.
+    expect(html).toContain('>20 кругов<');
+    expect(html).toContain('География · Сегодня, 14:00 · против Ann');
+    // История — одна карточка, а не стопка.
+    expect(html.match(/my-runs-card/g)).toHaveLength(1);
   });
 
   it('shows active invites with the time left and opens them by id', () => {
@@ -86,6 +105,15 @@ describe('my runs screen', () => {
     expect(html).toContain('Ещё 5 ч');
     expect(html).toContain('Языки · 100% против 60%');
     expect(html).toContain('my-run-invite');
+    expect(html).toContain('Принять реванш');
+    // Без кругов обеих сторон строки про круги нет.
+    expect(html).not.toContain('Обошёл тебя');
+  });
+
+  it('tells how many rounds the challenger beat you by', () => {
+    const html = render(ready([], [invite({ challengerRoundsPlayed: 5, recipientRoundsPlayed: 9 })]));
+    expect(html).toContain('Обошёл тебя: 5 кругов против твоих 9');
+    expect(render(ready([], [invite({ challengerRoundsPlayed: 5, recipientRoundsPlayed: null })]))).not.toContain('Обошёл тебя');
   });
 
   it('hides an invite whose time has run out', () => {

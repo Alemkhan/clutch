@@ -101,12 +101,28 @@ export function tiebreakerPercentile(ownMultiplier: number, allMultipliers: read
   return Math.floor((worse / others) * 100);
 }
 
+/**
+ * «Лучший ответ дня»: игрок строго ближе всех остальных. Перцентиль 100 бывает только так
+ * (все чужие множители строго больше своего), а при равенстве с кем-то он ниже; выборки
+ * меньше `TIEBREAKER_MIN_ANSWERS_FOR_PERCENTILE` дают null, а не «лучший».
+ */
+export function isBestAnswerOfDay(percentile: number | null): boolean {
+  return percentile === 100;
+}
+
 /** Вопрос дня для клиента: без ответа, источника и чужих данных. */
 export interface TiebreakerQuestionView {
   id: string;
+  /** Порядковый номер вопроса: сколько вопросов с `active_date` не позже этого. «На глазок #7». */
+  number: number;
   prompt: string;
+  /** Короткая формулировка для карточки на главной; null — карточка берёт `prompt`. */
+  cardPrompt: string | null;
   unit: string;
 }
+
+/** Длина короткой формулировки для карточки; лимит проверяют скрипт заливки и тест. */
+export const TIEBREAKER_CARD_PROMPT_MAX = 90;
 
 // ---- Разбор (R24d) ----
 
@@ -218,6 +234,8 @@ export interface TiebreakerTodayResponse {
   question: TiebreakerQuestionView | null;
   /** null — игрок ещё не отвечал (или вопроса нет). */
   answered: TiebreakerAnsweredView | null;
+  /** Сколько игроков уже ответили на вопрос дня. До своего ответа это единственная статистика. */
+  answersCount: number;
 }
 
 /** Тело POST /api/tiebreaker/answer. */

@@ -4,11 +4,17 @@ import { ProfileView, type ProfileState } from './Profile';
 
 function render(state: ProfileState) {
   return renderToStaticMarkup(
-    <ProfileView onBack={vi.fn()} playerName="Анна" state={state} onRetry={vi.fn()} />,
+    <ProfileView playerName="Анна" state={state} onRetry={vi.fn()} />,
   );
 }
 
 describe('server-backed profile', () => {
+  it('is a root tab without a back button', () => {
+    const html = render({ status: 'loading' });
+    expect(html).not.toContain('back-btn');
+    expect(html).not.toContain('Назад');
+  });
+
   it('shows an accessible loading state without invented statistics', () => {
     const html = render({ status: 'loading' });
     expect(html).toContain('role="status"');

@@ -50,9 +50,12 @@ export default function App() {
     game.goHome();
     setLaunchIntent({ type: 'rematch', inviteId });
   }, [game.goHome]);
-  const startSolo = useCallback(() => {
+  // Категория забега: таблица дня зовёт играть в ту категорию, на вкладке которой стоит игрок.
+  const [soloCategory, setSoloCategory] = useState<CategoryId>('general');
+  const startSolo = useCallback((category: CategoryId = 'general') => {
     setSoloRematch(null);
     setPracticeLevel(null);
+    setSoloCategory(category);
     game.goToSolo();
   }, [game.goToSolo]);
   const startPractice = useCallback((level: PracticeLevel) => {
@@ -101,7 +104,7 @@ export default function App() {
         {game.phase === 'home' && !launchIntent && (
           <motion.div key="home" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <HomeDashboard
-              onSolo={startSolo}
+              onSolo={() => startSolo()}
               onBoard={game.goToBoard}
               onTiebreaker={game.goToTiebreaker}
             />
@@ -110,7 +113,7 @@ export default function App() {
 
         {game.phase === 'profile' && (
           <motion.div key="profile" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
-            <Profile onBack={game.goHome} />
+            <Profile />
           </motion.div>
         )}
 
@@ -119,7 +122,6 @@ export default function App() {
             <TrainingHub
               onStartBot={startPractice}
               onPlayingChange={setTrainingPlaying}
-              onBack={game.goHome}
             />
           </motion.div>
         )}
@@ -137,7 +139,7 @@ export default function App() {
               practice={practiceLevel ?? undefined}
               onMyRuns={game.goToMyRuns}
               rematch={soloRematch}
-              defaultCategory={practiceLevel ? undefined : 'general'}
+              defaultCategory={practiceLevel ? undefined : soloCategory}
               onStageChange={setSoloStage}
             />
           </motion.div>
@@ -157,7 +159,7 @@ export default function App() {
 
         {game.phase === 'myRuns' && (
           <motion.div key="myRuns" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
-            <MyRuns onBack={game.goHome} onOpenInvite={openInvite} onPlay={startSolo} />
+            <MyRuns onOpenInvite={openInvite} onPlay={() => startSolo()} />
           </motion.div>
         )}
 

@@ -358,6 +358,7 @@ async function verifyHttpFlow(baseUrl, readinessResponse) {
   }, 200);
   assert.equal(tiebreaker.question, null);
   assert.equal(tiebreaker.answered, null);
+  assert.equal(tiebreaker.answersCount, 0);
   assert.match(tiebreaker.dateKey, /^\d{4}-\d{2}-\d{2}$/);
 
   const tokenB = await guestSession(baseUrl);

@@ -11,6 +11,7 @@ import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import {
   buildAnsweredView,
+  countQuestionAnswers,
   findPlayerAnswer,
   findQuestionByDate,
   insertPlayerAnswer,
@@ -34,7 +35,7 @@ async function authenticate(c: AppContext, scope: string): Promise<RequestIdenti
   return identity;
 }
 
-/** Состояние для клиента: answer/источник/статистика только после собственного ответа игрока. */
+/** Состояние для клиента: answer/источник/статистика только после собственного ответа игрока; до него — лишь число ответивших. */
 async function todayState(
   db: D1Database,
   playerId: string,
@@ -42,10 +43,19 @@ async function todayState(
   question: TiebreakerQuestionRow,
 ): Promise<TiebreakerTodayResponse> {
   const own = await findPlayerAnswer(db, playerId, question.id);
+  const answered = own ? await buildAnsweredView(db, question, own) : null;
   return {
     dateKey,
-    question: { id: question.id, prompt: question.prompt, unit: question.unit },
-    answered: own ? await buildAnsweredView(db, question, own) : null,
+    question: {
+      id: question.id,
+      number: question.number,
+      prompt: question.prompt,
+      cardPrompt: question.cardPrompt,
+      unit: question.unit,
+    },
+    answered,
+    // До своего ответа наружу уходит только число ответивших (решение владельца 2026-10-16).
+    answersCount: answered ? answered.totalAnswers : await countQuestionAnswers(db, question.id),
   };
 }
 
@@ -56,7 +66,7 @@ export function registerTiebreakerRoutes(app: Hono<{ Bindings: Env }>): void {
     if (identity instanceof Response) return identity;
     const dateKey = dailyKey(Date.now());
     const question = await findQuestionByDate(c.env.DB, dateKey);
-    if (!question) return c.json({ dateKey, question: null, answered: null } satisfies TiebreakerTodayResponse);
+    if (!question) return c.json({ dateKey, question: null, answered: null, answersCount: 0 } satisfies TiebreakerTodayResponse);
     return c.json(await todayState(c.env.DB, identity.playerId, dateKey, question));
   });
 

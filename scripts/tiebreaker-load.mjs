@@ -2,7 +2,10 @@
 // INSERT в stdout или пишет в файл, а применяет владелец:
 //   npm run tiebreaker:load -- scripts/fixtures/tiebreaker-sample.json questions.sql
 //   cd apps/api && npx wrangler d1 execute <DB> --local --file ../../questions.sql
-// Вход: JSON-массив { id, prompt, unit, answer, sourceUrl, asOfDate, activeDate, explanation }.
+// Вход: JSON-массив { id, prompt, cardPrompt?, unit, answer, sourceUrl, asOfDate, activeDate, explanation }.
+// cardPrompt — короткая формулировка для карточки на главной (не длиннее CARD_PROMPT_MAX, как
+// TIEBREAKER_CARD_PROMPT_MAX в shared); не задана — карточка покажет полный prompt.
+// Колонка card_prompt появилась в миграции 0004: без неё заливка не применится.
 //
 // Проверка разбора продублирована из packages/shared/src/tiebreaker.ts (parseTiebreakerExplanation):
 // shared — TypeScript, а .mjs без сборки его не импортирует. Совпадение правил держит
@@ -12,6 +15,7 @@ import { fileURLToPath } from 'node:url';
 
 const MAX_STEPS = 8;
 const LIMITS = { label: 200, unit: 40, sourceUrl: 500, sourceTitle: 200, asOf: 40, summary: 400 };
+const CARD_PROMPT_MAX = 90;
 const STEP_KEYS = ['label', 'value', 'unit', 'sourceUrl', 'sourceTitle', 'asOf'];
 
 const isObject = (v) => typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -69,6 +73,9 @@ export function parseQuestion(raw) {
   if (!isObject(raw)) throw new RangeError('question must be an object');
   const id = text(raw, 'id', 128, 'question');
   const prompt = text(raw, 'prompt', 1000, 'question');
+  const cardPrompt = raw.cardPrompt === undefined || raw.cardPrompt === null
+    ? null
+    : text(raw, 'cardPrompt', CARD_PROMPT_MAX, 'question');
   const unit = text(raw, 'unit', LIMITS.unit, 'question', true);
   if (typeof raw.answer !== 'number' || !Number.isFinite(raw.answer) || raw.answer <= 0) {
     throw new RangeError('question.answer must be a finite number > 0');
@@ -78,7 +85,7 @@ export function parseQuestion(raw) {
   const asOfDate = text(raw, 'asOfDate', LIMITS.asOf, 'question');
   const activeDate = text(raw, 'activeDate', 10, 'question');
   if (!/^\d{4}-\d{2}-\d{2}$/.test(activeDate)) throw new RangeError('question.activeDate must be YYYY-MM-DD');
-  return { id, prompt, unit, answer: raw.answer, sourceUrl, asOfDate, activeDate, explanation: parseExplanation(raw.explanation) };
+  return { id, prompt, cardPrompt, unit, answer: raw.answer, sourceUrl, asOfDate, activeDate, explanation: parseExplanation(raw.explanation) };
 }
 
 /** SQL-литерал строки: апострофы удваиваются; NUL в SQL-тексте недопустим. */
@@ -104,11 +111,11 @@ export function buildSql(questions, now = Date.now()) {
     ids.add(q.id);
     dates.add(q.activeDate);
     const values = [
-      sqlString(q.id), sqlString(q.prompt), sqlString(q.unit), String(q.answer), sqlString(q.sourceUrl),
+      sqlString(q.id), sqlString(q.prompt), q.cardPrompt === null ? 'NULL' : sqlString(q.cardPrompt), sqlString(q.unit), String(q.answer), sqlString(q.sourceUrl),
       sqlString(q.asOfDate), sqlString(q.activeDate), sqlString(JSON.stringify(q.explanation)), String(now),
     ];
     return 'INSERT INTO tiebreaker_questions '
-      + '(id, prompt, unit, answer, source_url, as_of_date, active_date, explanation_json, created_at) '
+      + '(id, prompt, card_prompt, unit, answer, source_url, as_of_date, active_date, explanation_json, created_at) '
       + `VALUES (${values.join(', ')});`;
   });
   return `${lines.join('\n')}\n`;

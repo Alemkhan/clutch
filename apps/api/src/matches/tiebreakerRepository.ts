@@ -10,7 +10,11 @@ import {
 /** Строка вопроса целиком: answer и source_url остаются на сервере до ответа игрока. */
 export interface TiebreakerQuestionRow {
   id: string;
+  /** Порядковый номер: число вопросов с active_date не позже этого. */
+  number: number;
   prompt: string;
+  /** Короткая формулировка для карточки; null — не задана. */
+  cardPrompt: string | null;
   unit: string;
   answer: number;
   sourceUrl: string;
@@ -26,7 +30,9 @@ export interface TiebreakerPlayerAnswer {
 
 interface QuestionDbRow {
   id: string;
+  number: number;
   prompt: string;
+  card_prompt: string | null;
   unit: string;
   answer: number;
   source_url: string;
@@ -37,18 +43,29 @@ interface QuestionDbRow {
 /** Вопрос суток по ключу dailyKey(); null — на этот день вопроса нет. */
 export async function findQuestionByDate(db: D1Database, dateKey: string): Promise<TiebreakerQuestionRow | null> {
   const row = await db.prepare(
-    'SELECT id, prompt, unit, answer, source_url, as_of_date, explanation_json FROM tiebreaker_questions WHERE active_date = ?1',
+    `SELECT id, prompt, card_prompt, unit, answer, source_url, as_of_date, explanation_json,
+      (SELECT COUNT(*) FROM tiebreaker_questions earlier WHERE earlier.active_date <= tiebreaker_questions.active_date) AS number
+    FROM tiebreaker_questions WHERE active_date = ?1`,
   ).bind(dateKey).first<QuestionDbRow>();
   if (!row) return null;
   return {
     id: row.id,
+    number: row.number,
     prompt: row.prompt,
+    cardPrompt: row.card_prompt,
     unit: row.unit,
     answer: row.answer,
     sourceUrl: row.source_url,
     asOfDate: row.as_of_date,
     explanationJson: row.explanation_json,
   };
+}
+
+/** Сколько игроков ответили на вопрос: COUNT по idx_tiebreaker_answers_question, без выборки строк. */
+export async function countQuestionAnswers(db: D1Database, questionId: string): Promise<number> {
+  const row = await db.prepare('SELECT COUNT(*) AS total FROM tiebreaker_answers WHERE question_id = ?1')
+    .bind(questionId).first<{ total: number }>();
+  return row?.total ?? 0;
 }
 
 export async function findPlayerAnswer(

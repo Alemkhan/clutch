@@ -7,6 +7,7 @@ import { LastStandIntro, LastStandLeaderboard } from './LastStand';
 import { Profile } from './Profile';
 import { ScreenHeader } from './ScreenHeader';
 import { Training } from './Training';
+import { TrainingMenu } from './TrainingHub';
 
 const noop = vi.fn();
 const BUTTON = /<button type="button" class="back-btn"/g;
@@ -40,11 +41,26 @@ describe('ScreenHeader', () => {
     expect(html).toContain('<h2 class="screen-title">Т</h2>');
   });
 
-  it('draws the back button of all five screens with the same component', () => {
+  it('draws no header or button without onBack, so root tabs keep only their title', () => {
+    const html = renderToStaticMarkup(<ScreenHeader title="Корень" />);
+    expect(html).toBe('<h1 class="screen-title">Корень</h1>');
+    expect(renderToStaticMarkup(<ScreenHeader />)).toBe('');
+  });
+
+  it('has no back button on the root tabs: Profile, My runs and Training', () => {
+    for (const html of [
+      renderToStaticMarkup(<Profile />),
+      renderToStaticMarkup(<TrainingMenu summary={{ status: 'ready', count: 0, ids: [] }} onBots={noop} onMistakes={noop} />),
+    ]) {
+      expect(html).not.toContain('back-btn');
+      expect(html).not.toContain('Назад');
+    }
+  });
+
+  it('draws the back button of all four nested screens with the same component', () => {
     const question = generateQuestionById('capital_li')!;
     const screens = [
       renderToStaticMarkup(<CategorySelect onSelect={noop} onBack={noop} />),
-      renderToStaticMarkup(<Profile onBack={noop} />),
       renderToStaticMarkup(<Training questions={[question]} check={vi.fn()} onBack={noop} />),
       renderToStaticMarkup(<LastStandIntro onStart={noop} onLeaderboard={noop} onBack={noop} />),
       renderToStaticMarkup(

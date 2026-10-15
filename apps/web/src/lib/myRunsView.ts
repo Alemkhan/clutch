@@ -1,4 +1,4 @@
-import type { MyRunSummary } from '@clutch/shared';
+import type { MyRematchInvite, MyRunSummary } from '@clutch/shared';
 import { SOLO_TARGET_PROGRESS } from '@clutch/shared';
 
 /** Тексты экрана «Мои партии». Чистые функции без React: время передаётся снаружи. */
@@ -54,6 +54,38 @@ export function runStatus(run: Pick<MyRunSummary, 'mode' | 'reachedTarget' | 'ou
         ? { kind: 'waiting', text: 'Ждём соперника' }
         : { kind: 'unknown', text: 'Исход не определён' };
   }
+}
+
+const BADGE_TEXT: Record<RunStatusKind, string> = {
+  win: 'Победа',
+  loss: 'Поражение',
+  tie: 'Ничья',
+  waiting: 'Ждём',
+  missed: 'Не дошёл',
+  unknown: 'Без исхода',
+};
+
+/** Короткая плашка исхода для строки истории; kind тот же, что у runStatus. */
+export function runBadge(run: Parameters<typeof runStatus>[0]): RunStatus {
+  const { kind } = runStatus(run);
+  return { kind, text: BADGE_TEXT[kind] };
+}
+
+/**
+ * Главная строка партии: «7 кругов против 9». Круги соперника есть не всегда (бот, старые данные) —
+ * тогда только свои. Чужой забег по моей записи — цифры друга, с его именем.
+ */
+export function runRoundsLine(run: MyRunSummary): string {
+  const own = roundsText(run);
+  if (run.friendDuel === 'hosted') return `${run.opponent?.displayName ?? 'Друг'}: ${own}`;
+  return typeof run.opponentRoundsPlayed === 'number' ? `${own} против ${run.opponentRoundsPlayed}` : own;
+}
+
+/** «Обошёл тебя: 5 кругов против твоих 9»; без кругов с обеих сторон — null. */
+export function inviteRoundsLine(invite: Pick<MyRematchInvite, 'challengerRoundsPlayed' | 'recipientRoundsPlayed'>): string | null {
+  const { challengerRoundsPlayed: theirs, recipientRoundsPlayed: yours } = invite;
+  if (typeof theirs !== 'number' || typeof yours !== 'number') return null;
+  return `Обошёл тебя: ${soloRoundsText(theirs)} против твоих ${yours}`;
 }
 
 export function runSummary(run: MyRunSummary): string {

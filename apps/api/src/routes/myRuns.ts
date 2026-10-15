@@ -58,6 +58,8 @@ export function registerMyRunsRoutes(app: Hono<{ Bindings: Env }>): void {
         challengerName: invite.challenger_name,
         challengerProgress: invite.challenger_progress,
         yourProgress: invite.recipient_progress,
+        challengerRoundsPlayed: invite.challenger_rounds ?? null,
+        recipientRoundsPlayed: invite.recipient_rounds ?? null,
         expiresAt: invite.expires_at,
       })),
     };

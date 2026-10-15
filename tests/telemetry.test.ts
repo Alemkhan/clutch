@@ -206,6 +206,13 @@ describe('analytics events route', () => {
     expect(eventRow(db)).toMatchObject({ event: 'sound_failure', payload_json: null });
   });
 
+  it('accepts the share event of the tiebreaker without a payload', async () => {
+    const db = database();
+    const response = await post(db, '/api/events', guest('share').authorization, { event: 'tiebreaker_shared' });
+    expect(response.status).toBe(202);
+    expect(eventRow(db)).toMatchObject({ event: 'tiebreaker_shared', payload_json: null });
+  });
+
   it('rejects an event outside the shared allowlist', async () => {
     const db = database();
     const player = guest('unknown');

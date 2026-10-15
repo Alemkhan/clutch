@@ -59,7 +59,7 @@ describe('Training screens', () => {
 
   it('the training menu offers bots and the mistake log, and shows an empty mistake list', () => {
     const html = renderToStaticMarkup(
-      <TrainingMenu summary={{ status: 'ready', count: 0, ids: [] }} onBots={vi.fn()} onMistakes={vi.fn()} onBack={vi.fn()} />,
+      <TrainingMenu summary={{ status: 'ready', count: 0, ids: [] }} onBots={vi.fn()} onMistakes={vi.fn()} />,
     );
     expect(html).toContain('Игра против ботов');
     expect(html).toContain('Отработка ошибок');

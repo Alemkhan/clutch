@@ -24,6 +24,10 @@ export interface HistoryRow {
   played_by?: string | null;
   /** 1 — с этого забега уже звали на реванш: кнопку показывать больше не нужно. */
   rematch_offered?: number | null;
+  /** Круги записи, против которой шёл этот забег (по её собственной строке); у бота строки нет. */
+  opponent_rounds?: number | null;
+  /** Круги того, кто сыграл мою запись. */
+  played_by_rounds?: number | null;
 }
 
 /** Курсор — completedAt_id последней отданной партии; в id нет символа "_". */
@@ -50,6 +54,11 @@ export async function listCompletedRuns(
     (SELECT challenger.display_name FROM match_runs challenger
       WHERE challenger.opponent_run_id = match_runs.id AND challenger.status = 'completed'
       ORDER BY challenger.completed_at LIMIT 1) AS played_by,
+    (SELECT json_array_length(rival.rounds_json) FROM match_runs rival
+      WHERE rival.id = match_runs.opponent_run_id AND rival.status = 'completed') AS opponent_rounds,
+    (SELECT json_array_length(challenger.rounds_json) FROM match_runs challenger
+      WHERE challenger.opponent_run_id = match_runs.id AND challenger.status = 'completed'
+      ORDER BY challenger.completed_at LIMIT 1) AS played_by_rounds,
     EXISTS (SELECT 1 FROM rematch_invites offered
       WHERE offered.challenger_run_id = match_runs.id AND offered.recipient_run_id IS NOT NULL) AS rematch_offered`;
   const statement = cursor
@@ -139,6 +148,13 @@ export function toRunSummary(row: HistoryRow, viewerId?: string): MyRunSummary {
           ? { kind: 'player', displayName: row.played_by }
           : null,
     // Соло: сохранённый исход; null — соперника не было (opponent === null) или забег старше миграции.
+    // Круги соперника: его собственная запись либо тот, кто сыграл мою. У бота и у чужой
+    // дружеской дуэли (там «свои» цифры уже друга) — null.
+    opponentRoundsPlayed: friendDuel === 'hosted'
+      ? null
+      : named
+        ? (row.opponent_run_id ? row.opponent_rounds ?? null : null)
+        : row.played_by ? row.played_by_rounds ?? null : null,
     outcome: solo
       ? (friendDuel === 'hosted' && row.solo_outcome ? invertOutcome(row.solo_outcome) : row.solo_outcome ?? null)
       : raceOutcome(row, rounds, opponent),

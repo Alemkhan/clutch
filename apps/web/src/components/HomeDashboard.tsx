@@ -1,9 +1,24 @@
-import { TiebreakerCard } from "./TiebreakerCard";
+import { useState } from "react";
+import type { SoloLeaderboardStanding } from "@clutch/shared";
+import { homeStandingLines } from "../lib/homeStanding";
+import { newSetLabel } from "../lib/tiebreakerClock";
+import { useDayCountdown } from "../lib/useDayCountdown";
+import { useHomeStanding } from "../lib/useHomeStanding";
+import { useTiebreakerToday, type TiebreakerTodayState } from "../lib/useTiebreakerToday";
+import { TiebreakerCardView } from "./TiebreakerCard";
 
 interface HomeDashboardProps {
   onSolo: () => void;
   onBoard: () => void;
   onTiebreaker: () => void;
+}
+
+export interface HomeDashboardViewProps extends HomeDashboardProps {
+  tiebreaker: TiebreakerTodayState;
+  /** Сколько осталось до конца игровых суток, мс. */
+  msLeft: number;
+  /** Своё место в таблице дня; null — не играл сегодня до 100% или данных нет. */
+  standing: SoloLeaderboardStanding | null;
 }
 
 /** Петля игры тремя значками: верный ответ, удар в мини-игре, прогресс. Без текста-инструкции. */
@@ -50,7 +65,15 @@ const LOOP_STEPS = [
   { kind: "progress", label: "Прогресс" },
 ] as const;
 
-export function HomeDashboard({ onSolo, onBoard, onTiebreaker }: HomeDashboardProps) {
+export function HomeDashboardView({
+  tiebreaker,
+  msLeft,
+  standing,
+  onSolo,
+  onBoard,
+  onTiebreaker,
+}: HomeDashboardViewProps) {
+  const lines = standing ? homeStandingLines(standing) : null;
   return (
     <section className="home-dashboard">
       <header className="home-header">
@@ -58,41 +81,84 @@ export function HomeDashboard({ onSolo, onBoard, onTiebreaker }: HomeDashboardPr
           <span className="home-brand-mark">C</span>
           <span>CLUTCH</span>
         </div>
+        <span className="home-new-set">{newSetLabel(msLeft)}</span>
       </header>
 
       <section className="home-hero-card">
-        <span className="home-kicker">Общие знания · 16 тем</span>
-        <h1 className="home-title">
-          Ответь верно.
-          <br />
-          <em>Дойди до 100%.</em>
-        </h1>
-        <p className="home-lede">Верный ответ даёт попытку в мини‑игре.</p>
-        <ol className="home-loop" aria-label="Как идёт забег">
-          {LOOP_STEPS.map((step) => (
-            <li key={step.kind} className="home-loop-step">
-              <span className="home-loop-icon">
-                <LoopIcon kind={step.kind} />
-              </span>
-              <span className="home-loop-label">{step.label}</span>
-            </li>
-          ))}
-        </ol>
-        <button
-          className="cta-btn"
-          onClick={() => {
-            onSolo();
-          }}
-        >
-          Играть <span aria-hidden="true">→</span>
-        </button>
-        {/* Вход в таблицу дня: нижняя панель не меняется, место для него — на главной карточке. */}
-        <button type="button" className="home-board-link" onClick={() => { onBoard(); }}>
-          Таблица дня
-        </button>
+        <div className="home-hero-head">
+          <span className="home-kicker">Набор дня · Общие знания</span>
+          {standing && lines ? (
+            <h1 className="home-title home-title-done">
+              {lines.hint ? (
+                <>
+                  {lines.title}
+                  <br />
+                  <em>{lines.hint}</em>
+                </>
+              ) : (
+                <em>{lines.title}</em>
+              )}
+            </h1>
+          ) : (
+            <h1 className="home-title">
+              Ответь верно.
+              <br />
+              <em>Дойди до 100%.</em>
+            </h1>
+          )}
+        </div>
+        {standing && lines ? (
+          <dl className="home-stats">
+            <div className="home-stat">
+              <dt>кругов</dt>
+              <dd>{standing.entry.roundsPlayed}</dd>
+            </div>
+            <div className="home-stat">
+              <dt>место</dt>
+              <dd>{standing.rank} / {standing.total}</dd>
+            </div>
+          </dl>
+        ) : (
+          <ol className="home-loop" aria-label="Как идёт забег">
+            {LOOP_STEPS.map((step) => (
+              <li key={step.kind} className="home-loop-step">
+                <span className="home-loop-icon">
+                  <LoopIcon kind={step.kind} />
+                </span>
+                <span className="home-loop-label">{step.label}</span>
+              </li>
+            ))}
+          </ol>
+        )}
+        <div className="home-hero-actions">
+          <button
+            className="cta-btn"
+            onClick={() => {
+              onSolo();
+            }}
+          >
+            {standing ? "Сыграть ещё набор" : "Играть"} <span aria-hidden="true">→</span>
+          </button>
+          {/* Вход в таблицу дня: нижняя панель не меняется, место для него — на главной карточке. */}
+          <button type="button" className="home-board-link" onClick={() => { onBoard(); }}>
+            Таблица дня
+          </button>
+        </div>
       </section>
 
-      <TiebreakerCard onOpen={onTiebreaker} />
+      <TiebreakerCardView state={tiebreaker} msLeft={msLeft} onOpen={onTiebreaker} />
     </section>
   );
+}
+
+export function HomeDashboard(props: HomeDashboardProps) {
+  const { state, reload } = useTiebreakerToday();
+  const [dayEpoch, setDayEpoch] = useState(0);
+  // Смена суток: вопрос другой, вчерашнее место не действует — перечитываем и то и другое.
+  const msLeft = useDayCountdown(() => {
+    reload();
+    setDayEpoch((value) => value + 1);
+  });
+  const standing = useHomeStanding(dayEpoch);
+  return <HomeDashboardView {...props} tiebreaker={state} msLeft={msLeft} standing={standing} />;
 }

@@ -2,6 +2,7 @@
   {
     "id": "tb-v2-pyramid-containers",
     "prompt": "Сколько стандартных 20-футовых морских контейнеров поместилось бы по объёму внутри пирамиды Хеопса, если считать её пустой, с первоначальной высотой и без зазоров между контейнерами?",
+    "cardPrompt": "Сколько морских контейнеров влезет в пирамиду Хеопса?",
     "unit": "контейнеров",
     "answer": 78000,
     "sourceUrl": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
@@ -20,6 +21,7 @@
   {
     "id": "tb-v2-air-over-pitch",
     "prompt": "Сколько тонн весит весь столб воздуха над футбольным полем 105 × 68 м — от травы до самого края атмосферы?",
+    "cardPrompt": "Сколько тонн весит воздух над футбольным полем?",
     "unit": "т",
     "answer": 74000,
     "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
@@ -37,6 +39,7 @@
   {
     "id": "tb-v2-euro-pitch",
     "prompt": "Сколько евро ляжет на футбольное поле 105 × 68 м, если выстлать его одним слоем купюр по 50 евро без нахлёста и зазоров?",
+    "cardPrompt": "Сколько евро ляжет на футбольное поле, если выстлать его купюрами по 50 €?",
     "unit": "€",
     "answer": 33000000,
     "sourceUrl": "https://www.ecb.europa.eu/euro/banknotes/images/html/ecb.faq_reproduction_rules_euro_banknotes.en.html",
@@ -54,6 +57,7 @@
   {
     "id": "tb-v2-fiber-ny-london",
     "prompt": "За сколько миллисекунд свет дойдёт от Нью-Йорка до Лондона по оптоволокну, если бы кабель шёл точно по кратчайшей дуге?",
+    "cardPrompt": "За сколько миллисекунд свет пройдёт по оптоволокну из Нью-Йорка в Лондон?",
     "unit": "мс",
     "answer": 27,
     "sourceUrl": "https://www.corning.com/media/worldwide/coc/documents/Fiber/product-information-sheets/PI-1424-AEN.pdf",
@@ -72,6 +76,7 @@
   {
     "id": "tb-v2-tennis-pool",
     "prompt": "Сколько теннисных мячей, насыпанных как попало, заполнят бассейн 50 × 25 × 2 м?",
+    "cardPrompt": "Сколько теннисных мячей поместится в бассейн 50 × 25 × 2 м?",
     "unit": "мячей",
     "answer": 10000000,
     "sourceUrl": "https://www.itftennis.com/media/14104/2025-technical-booklet.pdf",
@@ -89,6 +94,7 @@
   {
     "id": "tb-v2-moby-genome",
     "prompt": "Сколько раз текстовый файл романа «Моби Дик» поместится в запись генома одного человека (одинарный набор хромосом), если на каждую букву ДНК тратить 2 бита?",
+    "cardPrompt": "Сколько «Моби Диков» поместится в геном человека?",
     "unit": "раз",
     "answer": 600,
     "sourceUrl": "https://www.science.org/doi/10.1126/science.abj6987",
@@ -106,6 +112,7 @@
   {
     "id": "tb-v2-iphone-burj",
     "prompt": "Сколько смартфонов iPhone 15, сложенных стопкой плашмя, нужно, чтобы достать до вершины Бурдж-Халифы?",
+    "cardPrompt": "Сколько айфонов в стопке достанут до вершины Бурдж-Халифы?",
     "unit": "телефонов",
     "answer": 106000,
     "sourceUrl": "https://support.apple.com/en-us/111831",
@@ -122,6 +129,7 @@
   {
     "id": "tb-v2-cola-pool-sugar",
     "prompt": "Сколько тонн сахара окажется в бассейне 50 × 25 × 2 м, если залить его «Кока-колой» (обычной, британской рецептуры)?",
+    "cardPrompt": "Сколько тонн сахара в бассейне, залитом «Кока-колой»?",
     "unit": "т",
     "answer": 265,
     "sourceUrl": "https://www.coca-cola.com/gb/en/brands/coca-cola-original-taste",
@@ -138,6 +146,7 @@
   {
     "id": "tb-v2-saturn-karman",
     "prompt": "Сколько ракет Saturn V (той, что везла «Аполлоны» к Луне), поставленных друг на друга, нужно, чтобы дотянуться до границы космоса — линии Кармана?",
+    "cardPrompt": "Сколько ракет Saturn V в стопке дотянутся до границы космоса?",
     "unit": "ракет",
     "answer": 900,
     "sourceUrl": "https://www.fai.org/page/icare-boundary",
@@ -154,6 +163,7 @@
   {
     "id": "tb-v2-balls-equator",
     "prompt": "Сколько футбольных мячей (размер 5), выложенных в ряд вплотную, опояшут Землю по экватору?",
+    "cardPrompt": "Сколько футбольных мячей в ряд опояшут Землю по экватору?",
     "unit": "мячей",
     "answer": 180000000,
     "sourceUrl": "https://www.theifab.com/laws/latest/the-ball/",

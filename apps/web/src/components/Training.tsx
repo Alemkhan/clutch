@@ -104,7 +104,7 @@ export function Training({ questions, check, onBack, exitLabel = 'На глав�
 
   if (questions.length === 0) {
     return (
-      <section className="training-screen">
+      <section className="training-screen root-tab">
         <h2 className="screen-title">Тренировка по ошибкам</h2>
         <p className="training-text">
           Пока здесь пусто: тренировка наполняется вопросами, в которых ты ошибся или не успел ответить в забегах.
@@ -119,7 +119,7 @@ export function Training({ questions, check, onBack, exitLabel = 'На глав�
 
   if (state.step === 'done') {
     return (
-      <section className="training-screen">
+      <section className="training-screen root-tab">
         <h2 className="screen-title">Тренировка завершена</h2>
         <p className="training-text">
           Верно: {state.correctCount} из {state.questions.length}. Верный ответ уменьшает счётчик ошибок по вопросу.
@@ -164,7 +164,9 @@ export function Training({ questions, check, onBack, exitLabel = 'На глав�
           selectedAnswer={state.lastCorrect ? undefined : selectedAnswer}
           explanation={state.explanation}
           correct={state.lastCorrect}
+          timedOut={state.selectedOption === '__timeout__'}
           variant="training"
+          final={state.index + 1 >= state.questions.length}
           onContinue={() => dispatch({ type: 'continue' })}
           report={onReport ? {
             onSend: submitReport,

@@ -15,6 +15,7 @@ import {
 import { playSound, strikeSoundFor } from '../lib/sounds';
 import { preloadImages } from '../lib/preloadImages';
 import { hasSeenHammerIntro, markHammerIntroSeen } from '../lib/hammerIntro';
+import { hammerZoneLabels, remainingText, seriesNote, strikeGain } from '../lib/hammerStrike';
 
 interface HammerGameProps {
   config: MiniGameConfig;
@@ -26,6 +27,13 @@ interface HammerGameProps {
    * только для немедленной анимации и звука; зачётными их делает ответ сервера.
    */
   onComplete: (result: SkillResult, progressAwarded: number, activeElapsedMs: number) => void;
+  /**
+   * Сразу в момент удара (до анимации гвоздя): родитель обновляет HUD новым процентом и приростом.
+   * Это превью по той же scoreHammerTap, что и на сервере; засчитывает всё равно ответ сервера.
+   */
+  onStrike?: (result: SkillResult, progressAwarded: number) => void;
+  /** Процент игрока до этого удара: нужен для подписи «До 100% — ещё N%». Без него строки нет. */
+  progressBefore?: number;
 }
 
 const SINK_PX: Record<SkillResult, number> = {
@@ -47,24 +55,38 @@ export function hammerActionSemantics(struck: boolean, result: SkillResult | nul
   } as const;
 }
 
-export function HammerResult({ result }: { result: SkillResult }) {
+export function HammerResult({ result, remaining, series }: {
+  result: SkillResult;
+  /** Готовая строка «До 100% — ещё N%» (см. remainingText). */
+  remaining?: string;
+  /** Готовая строка «Серия N · зоны стали уже», если стадия давления выросла. */
+  series?: string | null;
+}) {
   return (
     <div className={`strike-result ${result}`} aria-hidden="true">
       <span className="strike-label">
         {{ perfect: 'ИДЕАЛЬНО', great: 'ОТЛИЧНО', good: 'ХОРОШО', weak: 'СЛАБО', miss: 'МИМО' }[result]}
       </span>
       <span className="strike-progress">+{SKILL_REWARDS[result]}%</span>
+      {remaining && <span className="strike-remaining">{remaining}</span>}
+      {series && <span className="strike-series">{series}</span>}
     </div>
   );
 }
 
-export function HammerResultStatus({ result }: { result: SkillResult }) {
+export function HammerResultStatus({ result, remaining, series }: {
+  result: SkillResult;
+  remaining?: string;
+  series?: string | null;
+}) {
   const label = {
     perfect: 'Идеально', great: 'Отлично', good: 'Хорошо', weak: 'Слабо', miss: 'Мимо',
   }[result];
   return (
     <span className="visually-hidden" role="status">
       Результат удара: {label}, +{SKILL_REWARDS[result]}% прогресса.
+      {remaining ? ` ${remaining}.` : ''}
+      {series ? ` ${series}.` : ''}
     </span>
   );
 }
@@ -91,13 +113,14 @@ export function HammerIntro({ onConfirm }: { onConfirm: () => void }) {
   );
 }
 
-export function HammerGame({ config, questionId, previousSkillResults, onComplete }: HammerGameProps) {
+export function HammerGame({ config, questionId, previousSkillResults, onComplete, onStrike, progressBefore }: HammerGameProps) {
   const reduceMotion = useReducedMotion();
   const attempt = useMemo(
     () => hammerAttemptRules(questionId, previousSkillResults, config),
     [config, previousSkillResults, questionId],
   );
   const tierZones = useMemo(() => hammerTierZones(attempt), [attempt]);
+  const zoneLabels = useMemo(() => hammerZoneLabels(attempt), [attempt]);
   const [markerPos, setMarkerPos] = useState(0);
   const [struck, setStruck] = useState(false);
   const [result, setResult] = useState<SkillResult | null>(null);
@@ -184,6 +207,7 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
     );
 
     setResult(skillResult);
+    onStrike?.(skillResult, progress);
     soundTimeoutRef.current = setTimeout(() => playSound(strikeSoundFor[skillResult]), 150);
 
     analytics.track('skill_attempt_completed', {
@@ -193,7 +217,17 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
     // onComplete fires from the nail-sink animation's onAnimationComplete below,
     // once the player has actually seen it settle — not on a fixed timer that has
     // to be kept in sync with the animation's own duration by hand.
-  }, [attempt.stage, attempt.targetCenter, config, introOpen]);
+  }, [attempt.stage, attempt.targetCenter, config, introOpen, onStrike, previousSkillResults, questionId]);
+
+  // Подписи под результатом считаются из тех же shared-правил, что и HUD: награда tier и стадия давления.
+  const strikeNotes = result
+    ? {
+        remaining: progressBefore === undefined
+          ? undefined
+          : remainingText(strikeGain(progressBefore, SKILL_REWARDS[result]).remaining),
+        series: seriesNote(previousSkillResults, result),
+      }
+    : {};
 
   const confirmIntro = () => {
     markHammerIntroSeen();
@@ -252,7 +286,19 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
         )}
       </div>
 
-      <div className="hammer-track" aria-hidden="true">
+      <div className="hammer-lane" aria-hidden="true">
+      <div className="hammer-zone-labels">
+        {zoneLabels.map((label, index) => (
+          <span
+            key={`${label.result}-${index}`}
+            className={`hammer-zone-label hammer-zone-label-${label.result}`}
+            style={{ left: `${label.leftPercent}%` }}
+          >
+            +{label.points}
+          </span>
+        ))}
+      </div>
+      <div className="hammer-track">
         {tierZones.map((zone) => (
           <div
             key={zone.result}
@@ -265,15 +311,16 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
           style={{ left: `${markerPos * 100}%` }}
         />
       </div>
+      </div>
 
       {result ? (
-        <HammerResult result={result} />
+        <HammerResult result={result} {...strikeNotes} />
       ) : (
         <p className="strike-instruction">Тапни, когда маркер в центре</p>
       )}
 
       </div>
-      {result && <HammerResultStatus result={result} />}
+      {result && <HammerResultStatus result={result} {...strikeNotes} />}
     </>
   );
 }

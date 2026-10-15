@@ -6,8 +6,9 @@ import {
   formatRunTime,
   friendDuelNote,
   inviteDeadline,
-  runStatus,
-  runSummary,
+  inviteRoundsLine,
+  runBadge,
+  runRoundsLine,
 } from '../lib/myRunsView';
 import { ScreenHeader } from './ScreenHeader';
 
@@ -40,7 +41,6 @@ interface MyRunsViewProps {
   loadingMore: boolean;
   moreFailed: boolean;
   now: number;
-  onBack: () => void;
   onRetry: () => void;
   onLoadMore: () => void;
   onOpenInvite: (inviteId: string) => void;
@@ -51,35 +51,37 @@ interface MyRunsViewProps {
 function Invite({ invite, now, onOpen }: { invite: MyRematchInvite; now: number; onOpen: (inviteId: string) => void }) {
   const deadline = inviteDeadline(invite.expiresAt, now);
   if (!deadline) return null;
+  const rounds = inviteRoundsLine(invite);
   return (
-    <li>
-      <button type="button" className="my-run my-run-invite" onClick={() => { onOpen(invite.inviteId); }}>
-        <span className="my-run-top">
-          {/* Адресное приглашение теперь рождается только от нажатия соперника, поэтому «зовёт»
-              здесь — правда. Раньше строку создавало уведомление, и вызов приходил от системы. */}
-          <span className="my-run-title">{invite.challengerName} зовёт на реванш</span>
-          <span className="my-run-status">{deadline}</span>
-        </span>
-        <span className="my-run-meta">
-          {categoryName(invite.category)} · {invite.challengerProgress}% против {invite.yourProgress}%
-        </span>
+    <li className="my-run-invite">
+      <span className="my-run-top">
+        {/* Адресное приглашение теперь рождается только от нажатия соперника, поэтому «зовёт»
+            здесь — правда. Раньше строку создавало уведомление, и вызов приходил от системы. */}
+        <span className="my-run-title">{invite.challengerName} зовёт на реванш</span>
+        <span className="my-run-deadline">{deadline}</span>
+      </span>
+      {rounds && <span className="my-run-invite-rounds">{rounds}</span>}
+      <span className="my-run-meta">
+        {categoryName(invite.category)} · {invite.challengerProgress}% против {invite.yourProgress}%
+      </span>
+      <button type="button" className="cta-btn my-run-accept" onClick={() => { onOpen(invite.inviteId); }}>
+        Принять реванш
       </button>
     </li>
   );
 }
 
 function Run({ run, now, offer }: { run: MyRunSummary; now: number; offer: RematchOffer }) {
-  const status = runStatus(run);
+  const status = runBadge(run);
   const state = offer.stateOf(run);
   return (
     <li className="my-run">
       <span className="my-run-top">
-        <span className="my-run-title">{categoryName(run.category)}</span>
+        <span className="my-run-title">{runRoundsLine(run)}</span>
         <span className={`my-run-status ${status.kind}`}>{status.text}</span>
       </span>
-      <span className="my-run-meta">{runSummary(run)}</span>
       <span className="my-run-meta">
-        {formatRunTime(run.completedAt, now)}
+        {categoryName(run.category)} · {formatRunTime(run.completedAt, now)}
         {run.opponent ? ` · против ${run.opponent.displayName}` : ''}
         {run.mode === 'race' ? ' · гонка' : ''}
       </span>
@@ -112,7 +114,6 @@ export function MyRunsView({
   loadingMore,
   moreFailed,
   now,
-  onBack,
   onRetry,
   onLoadMore,
   onOpenInvite,
@@ -124,8 +125,8 @@ export function MyRunsView({
     : [];
 
   return (
-    <section className="my-runs">
-      <ScreenHeader onBack={onBack} title="Мои партии" />
+    <section className="my-runs root-tab">
+      <ScreenHeader title="Мои партии" />
 
       {state.status === 'loading' && (
         <div className="matchmaking-loading" role="status"><span /> Загружаем партии</div>
@@ -143,7 +144,7 @@ export function MyRunsView({
           {invites.length > 0 && (
             <>
               <h2 className="my-runs-heading">Вызовы</h2>
-              <ul className="my-runs-list">
+              <ul className="my-runs-invites">
                 {invites.map((invite) => (
                   <Invite key={invite.inviteId} invite={invite} now={now} onOpen={onOpenInvite} />
                 ))}
@@ -161,7 +162,7 @@ export function MyRunsView({
           {state.runs.length > 0 && (
             <>
               {invites.length > 0 && <h2 className="my-runs-heading">Партии</h2>}
-              <ul className="my-runs-list">
+              <ul className="my-runs-list my-runs-card">
                 {state.runs.map((run) => <Run key={run.runId} run={run} now={now} offer={offer} />)}
               </ul>
               {moreFailed && (
@@ -181,12 +182,11 @@ export function MyRunsView({
 }
 
 interface MyRunsProps {
-  onBack: () => void;
   onOpenInvite: (inviteId: string) => void;
   onPlay: () => void;
 }
 
-export function MyRuns({ onBack, onOpenInvite, onPlay }: MyRunsProps) {
+export function MyRuns({ onOpenInvite, onPlay }: MyRunsProps) {
   const [state, setState] = useState<MyRunsState>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -246,7 +246,6 @@ export function MyRuns({ onBack, onOpenInvite, onPlay }: MyRunsProps) {
       loadingMore={loadingMore}
       moreFailed={moreFailed}
       now={Date.now()}
-      onBack={onBack}
       onRetry={() => setAttempt((value) => value + 1)}
       onLoadMore={loadMore}
       onOpenInvite={onOpenInvite}

@@ -21,7 +21,7 @@ afterEach(() => {
 });
 
 describe('accessible gameplay semantics', () => {
-  it('renders resolution as one named keyboard action', () => {
+  it('renders resolution with one named native action button', () => {
     const html = renderToStaticMarkup(
       <ResolutionScreen
         correctAnswer="Астана"
@@ -31,9 +31,9 @@ describe('accessible gameplay semantics', () => {
       />,
     );
 
-    expect(html).toContain(
-      'class="resolution-screen" role="button" tabindex="0" aria-label="Верно. Правильный ответ: Астана. Астана — столица Казахстана. Перейти к мини-игре"',
-    );
+    // Действие — одна настоящая кнопка с понятным именем; стрелка скрыта от экранных дикторов.
+    expect(html).toContain('<button type="button" class="resolution-action to-hammer">К мини-игре <span aria-hidden="true">→</span></button>');
+    expect(html).not.toContain('role="button"');
     expect(shouldActivateAction(false)).toBe(true);
     expect(shouldActivateAction(false, 'Enter')).toBe(true);
     expect(shouldActivateAction(false, ' ')).toBe(true);
@@ -41,7 +41,7 @@ describe('accessible gameplay semantics', () => {
     expect(shouldActivateAction(true, 'Enter')).toBe(false);
   });
 
-  it('includes both distinct answers in the accessible name for a wrong training choice', () => {
+  it('shows both distinct answers as rows of one card for a wrong training choice', () => {
     const html = renderToStaticMarkup(
       <ResolutionScreen
         correctAnswer="Астана"
@@ -53,9 +53,7 @@ describe('accessible gameplay semantics', () => {
       />,
     );
 
-    expect(html).toContain(
-      'aria-label="Неверно. Твой ответ: Алматы. Правильный ответ: Астана. Астана — столица Казахстана. Следующий вопрос"',
-    );
+    expect(html).toContain('Следующий вопрос <span aria-hidden="true">→</span>');
     expect(html).toContain('<span>Твой ответ</span><strong>Алматы</strong>');
     expect(html).toContain('<span>Правильный ответ</span><strong>Астана</strong>');
   });

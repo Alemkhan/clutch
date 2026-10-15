@@ -6,7 +6,6 @@ import { Training, type TrainingReportInput } from './Training';
 
 interface TrainingHubProps {
   onStartBot: (level: PracticeLevel) => void;
-  onBack: () => void;
   /** true, пока идёт практика ошибок: App прячет нижнюю навигацию. */
   onPlayingChange?: (playing: boolean) => void;
 }
@@ -112,15 +111,14 @@ export function mistakeMeta(summary: MistakeSummary): string {
 }
 
 /** Меню «Тренировки»: два входа. Выделено, чтобы состояния журнала проверялись без сети. */
-export function TrainingMenu({ summary, onBots, onMistakes, onBack }: {
+export function TrainingMenu({ summary, onBots, onMistakes }: {
   summary: MistakeSummary;
   onBots: () => void;
   onMistakes: () => void;
-  onBack: () => void;
 }) {
   return (
-    <section className="training-screen">
-      <ScreenHeader onBack={onBack} title="Тренировка" />
+    <section className="training-screen root-tab">
+      <ScreenHeader title="Тренировка" />
       <p className="training-note">Не идёт в зачёт</p>
       <button type="button" className="training-entry" onClick={onBots}>
         <span className="training-entry-title">Игра против ботов</span>
@@ -134,7 +132,7 @@ export function TrainingMenu({ summary, onBots, onMistakes, onBack }: {
   );
 }
 
-export function TrainingHub({ onStartBot, onBack, onPlayingChange }: TrainingHubProps) {
+export function TrainingHub({ onStartBot, onPlayingChange }: TrainingHubProps) {
   const [view, setView] = useState<View>('menu');
   const [summary, setSummary] = useState<MistakeSummary>({ status: 'loading' });
 
@@ -180,7 +178,6 @@ export function TrainingHub({ onStartBot, onBack, onPlayingChange }: TrainingHub
       summary={summary}
       onBots={() => setView('bots')}
       onMistakes={() => setView('mistakes')}
-      onBack={onBack}
     />
   );
 }

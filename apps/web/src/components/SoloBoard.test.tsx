@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { CategoryId, SoloLeaderboardEntry, SoloLeaderboardResponse, SoloLeaderboardStanding } from '@clutch/shared';
+import { msUntilDayEnd, resetLabel } from '../lib/tiebreakerClock';
 import { SoloBoardView, standingHint, type SoloBoardState } from './SoloBoard';
 
 const NOW = Date.UTC(2026, 9, 13, 12, 0, 0);
@@ -25,7 +26,7 @@ function board(overrides: Partial<SoloLeaderboardResponse> = {}): SoloLeaderboar
 }
 
 function render(state: SoloBoardState, category: CategoryId = 'general') {
-  return renderToStaticMarkup(<SoloBoardView state={state} category={category} {...handlers} />);
+  return renderToStaticMarkup(<SoloBoardView state={state} msLeft={5 * 3_600_000 + 1000} category={category} {...handlers} />);
 }
 
 const ready = (overrides: Partial<SoloLeaderboardResponse> = {}): SoloBoardState => (
@@ -62,7 +63,9 @@ describe('the day board', () => {
 
   it('shows my own place even when I am far outside the listed top', () => {
     const html = render(ready({ entries: [entry('Ann', 7)], you: standing() }));
-    expect(html).toContain('37-й из 140');
+    expect(html).toContain('37-й');
+    expect(html).toContain('из 140');
+    expect(html).toContain('Сыграть ещё набор');
     expect(html).toContain('11 кругов');
     // Цель достижимая, а не «попади в топ-50».
     expect(html).toContain('До 36-го места — один круг.');
@@ -92,6 +95,37 @@ describe('the day board', () => {
   });
 });
 
+afterEach(() => vi.useRealTimers());
+
+describe('the reset line and the footer', () => {
+  it('says when the board resets, in Almaty midnight terms', () => {
+    expect(render(ready())).toContain('Обнулится через 5 ч · полночь по Алматы');
+  });
+
+  it('counts down to the day boundary with fake timers', () => {
+    vi.useFakeTimers();
+    // Граница суток — 00:00 по Алматы (UTC+5): 19:00 UTC.
+    vi.setSystemTime(Date.UTC(2026, 9, 13, 18, 30, 0));
+    expect(resetLabel(msUntilDayEnd(Date.now()))).toBe('Обнулится меньше чем через час · полночь по Алматы');
+    vi.setSystemTime(Date.UTC(2026, 9, 13, 14, 30, 0));
+    expect(resetLabel(msUntilDayEnd(Date.now()))).toBe('Обнулится через 4 ч · полночь по Алматы');
+    vi.setSystemTime(Date.UTC(2026, 9, 13, 19, 0, 1));
+    expect(resetLabel(msUntilDayEnd(Date.now()))).toBe('Обнулится через 23 ч · полночь по Алматы');
+  });
+
+  it('keeps the tie-break rule under the list', () => {
+    expect(render(ready({ entries: [entry('Ann', 7)] }))).toContain('При равных кругах выше тот, кто быстрее.');
+    expect(render(ready())).not.toContain('При равных кругах');
+  });
+
+  it('wires the play buttons and does not highlight a row when I am absent', () => {
+    handlers.onPlay.mockClear();
+    const html = render(ready({ entries: [entry('Ann', 7)], you: null }));
+    expect(html).toContain('Играть');
+    expect(html).not.toContain('solo-board-row mine');
+  });
+});
+
 describe('the hint under my place', () => {
   it('counts the rounds needed to pass the player above', () => {
     expect(standingHint(standing({ rank: 5, roundsToNext: 1 }))).toBe('До 4-го места — один круг.');
@@ -100,6 +134,6 @@ describe('the hint under my place', () => {
   });
 
   it('says there is nobody above the first place', () => {
-    expect(standingHint(standing({ rank: 1, roundsToNext: null }))).toBe('Выше никого: это первое место дня.');
+    expect(standingHint(standing({ rank: 1, roundsToNext: null }))).toBe('Ты первый сегодня.');
   });
 });

@@ -14,11 +14,14 @@
   --opponent: #4d75e8;
   --success: #168c51;
   --perfect: #df9e00;
+  /* Гистограмма «На глазок»: ответы ниже правильного (занизили) и выше (завысили). */
+  --tb-under: #8fa6ee;
+  --tb-over: #e8be5a;
   --line: rgba(23, 23, 22, 0.11);
   --line-strong: rgba(23, 23, 22, 0.18);
-  --radius: 24px;
+  --radius: 20px;
   --radius-sm: 16px;
-  --radius-btn: 18px;
+  --radius-btn: 16px;
   --btn-h: 56px;
   --btn-h-sm: 48px;
   --nav-h: 64px;
@@ -75,7 +78,7 @@ main {
         )
     )
     calc(
-      14px +
+      20px +
         var(
           --tg-viewport-content-safe-area-inset-right,
           env(safe-area-inset-right, 0px)
@@ -89,7 +92,7 @@ main {
         )
     )
     calc(
-      14px +
+      20px +
         var(
           --tg-viewport-content-safe-area-inset-left,
           env(safe-area-inset-left, 0px)
@@ -202,14 +205,23 @@ button:active {
   flex-direction: column;
   width: 100%;
   min-width: 0;
-  gap: 14px;
+  /* Сетка v2: между секциями 24; поля экрана 20 задаёт main. */
+  gap: 24px;
 }
 
 .home-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   min-height: 44px;
+}
+
+.home-new-set {
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: right;
 }
 
 .chip {
@@ -229,8 +241,8 @@ button:active {
   z-index: 1;
   max-width: 360px;
   color: #fffefa;
-  font-size: clamp(30px, 8.8vw, 40px);
-  line-height: 1.02;
+  font-size: 32px;
+  line-height: 1.05;
 }
 
 .hero-wrap {
@@ -282,9 +294,9 @@ button:active {
   padding: 12px 16px;
   background: transparent;
   color: var(--text);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
-  border-radius: 14px;
+  border-radius: 16px;
 }
 
 .home-stats-card {
@@ -320,19 +332,24 @@ button:active {
 .screen-title {
   font-weight: 900;
   letter-spacing: -0.02em;
-  line-height: 1.05;
-  font-size: clamp(30px, 8.5vw, 38px);
+  line-height: 1.1;
+  font-size: 32px;
 }
 
 .screen-subtitle {
   color: var(--text-dim);
-  font-size: 15px;
+  font-size: 16px;
   margin-top: -8px;
 }
 
 .screen-header {
   display: flex;
   align-items: center;
+}
+
+/* Корневые вкладки без «← Назад»: заголовок не прилипает к верху, как под кнопкой на вложенных экранах. */
+.root-tab {
+  padding-top: 12px;
 }
 
 .back-btn {
@@ -351,24 +368,29 @@ button:active {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 24px;
+}
+
+/* Подпись стоит в 4 px от заголовка: 24 общего зазора минус 20. */
+.category-select .screen-subtitle {
+  margin-top: -20px;
 }
 
 .category-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .category-card {
   display: flex;
   align-items: center;
-  padding: 12px 14px;
+  padding: 12px 16px;
   text-align: left;
-  gap: 13px;
-  min-height: 74px;
+  gap: 12px;
+  min-height: 72px;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 20px;
   background: rgba(255, 254, 250, 0.9);
   box-shadow: none;
 }
@@ -410,7 +432,7 @@ button:active {
 }
 
 .category-meta {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-dim);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -434,8 +456,8 @@ button:active {
   align-items: center;
   min-height: 0;
   justify-content: flex-start;
-  gap: 18px;
-  padding-top: clamp(28px, 8dvh, 74px);
+  gap: 24px;
+  padding-top: clamp(24px, 8dvh, 72px);
 }
 
 .vs-wrap {
@@ -511,14 +533,14 @@ button:active {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .profile-head {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   text-align: center;
 }
 
@@ -545,7 +567,7 @@ button:active {
 
 .profile-tag {
   color: var(--text-dim);
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .section-heading {
@@ -645,7 +667,7 @@ button:active {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: clamp(12px, 2dvh, 17px);
+  gap: 12px;
   min-height: 0;
 }
 
@@ -663,7 +685,7 @@ button:active {
   align-self: center;
   overflow: hidden;
   max-width: 100%;
-  padding: 7px 11px;
+  padding: 8px 12px;
   border: 1px solid var(--line);
   background: rgba(255, 254, 250, 0.74);
   color: var(--text-dim);
@@ -754,7 +776,7 @@ button:active {
 .options {
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 12px;
 }
 
 .option-btn {
@@ -764,10 +786,10 @@ button:active {
   text-align: left;
   width: 100%;
   gap: 12px;
-  min-height: 58px;
-  padding: 10px 13px;
+  min-height: 56px;
+  padding: 10px 16px;
   border: 1px solid var(--line);
-  border-radius: 17px;
+  border-radius: 16px;
   background: rgba(255, 254, 250, 0.94);
   box-shadow: none;
 }
@@ -807,24 +829,30 @@ button:active {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
-  justify-content: flex-start;
-  gap: 14px;
-  padding-top: clamp(10px, 4dvh, 34px);
+  gap: 24px;
+  padding-top: 8px;
 }
 
-.resolution-screen:focus-visible,
 .hammer-game:focus-visible {
   outline: 3px solid rgba(77, 117, 232, 0.45);
   outline-offset: -3px;
 }
 
+/* R26c: заголовок и подзаголовок разбора. */
+.resolution-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .resolution-status {
+  font-family: var(--font-display);
   font-weight: 900;
   letter-spacing: -0.02em;
-  font-size: clamp(34px, 10vw, 44px);
+  font-size: 32px;
+  line-height: 1.1;
 }
 
 .resolution-status.correct {
@@ -832,76 +860,91 @@ button:active {
 }
 
 .resolution-status.incorrect {
-  color: var(--error);
+  color: var(--primary-dim);
 }
 
 .resolution-message {
-  font-weight: 600;
-  margin-top: 2px;
   color: var(--text);
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* R26c: свой и правильный ответ — две строки одной карточки. */
+.resolution-answers {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
 }
 
 .resolution-answer {
-  display: grid;
-  gap: 3px;
-  width: 100%;
-  max-width: 330px;
-  margin-top: 14px;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  text-align: left;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+}
+
+.resolution-answer + .resolution-answer {
+  border-top: 1px solid var(--line);
 }
 
 .resolution-answer span {
+  flex: none;
   color: var(--text-dim);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 14px;
 }
 
 .resolution-answer strong {
+  min-width: 0;
+  font-size: 18px;
+  font-weight: 700;
   line-height: 1.35;
+  text-align: right;
   overflow-wrap: anywhere;
 }
 
 .resolution-answer.correct {
-  border-color: rgba(22, 140, 81, 0.28);
-  background: rgba(22, 140, 81, 0.07);
+  background: rgba(22, 140, 81, 0.08);
 }
 
-.resolution-answer.selected {
-  border-color: rgba(240, 74, 62, 0.24);
-  background: rgba(240, 74, 62, 0.06);
+.resolution-answer.correct strong {
+  color: var(--success);
+}
+
+.resolution-answer.selected strong {
+  color: var(--error);
+  text-decoration: line-through;
 }
 
 .resolution-explanation {
-  color: var(--text-dim);
+  color: var(--text);
   line-height: 1.5;
-  max-width: 330px;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-  font-size: 14px;
+  font-size: 16px;
 }
 
-/* Репорт о проблеме (R22): маленькая текстовая кнопка внизу карточки разбора и компактная панель. */
+/* Репорт о проблеме (R22): текстовая ссылка (R26c) и компактная панель. */
 .resolution-report {
   width: 100%;
-  margin-top: 14px;
   cursor: default;
 }
 
 .resolution-report-toggle {
-  min-height: 40px;
-  width: 100%;
-  padding: 8px 14px;
+  min-height: 44px;
+  padding: 8px 0;
   background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 12px;
+  border: 0;
   color: var(--text-dim);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.resolution-report-toggle:focus-visible,
+.resolution-action:focus-visible {
+  outline: 3px solid rgba(77, 117, 232, 0.45);
+  outline-offset: 2px;
 }
 
 .resolution-report-panel {
@@ -982,28 +1025,50 @@ button:active {
   font-weight: 600;
 }
 
-.hammer-earned {
-  background: var(--primary);
-  color: white;
-  font-weight: 700;
+/* R26c: низ разбора — подпись и главная кнопка; не уходит под нижнюю панель. */
+.resolution-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+  /* Длинный разбор или открытая панель репорта прокручиваются под кнопкой, а не уводят её за экран.
+     Нижние 14 px и отступ под safe area уже даёт main: футер залезает на них своим padding. */
+  position: sticky;
+  bottom: -14px;
+  margin-bottom: -14px;
+  padding-top: 8px;
+  padding-bottom: 14px;
+  background: linear-gradient(to bottom, transparent, var(--bg) 8px);
+}
+
+.resolution-footnote {
+  color: var(--text-dim);
+  font-size: 14px;
+  text-align: center;
+}
+
+.resolution-action {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   min-height: 56px;
-  margin-top: 0;
-  padding: 0 18px;
-  border-radius: 17px;
-  font-size: 15px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--text);
+  color: var(--surface);
+  font-size: 18px;
+  font-weight: 700;
 }
 
-.continue-hint {
-  color: var(--text-dim);
-  font-size: 14px;
-  opacity: 0.6;
-  min-height: 48px;
-  margin-top: 0;
-  padding: 14px 18px;
+.resolution-action.to-hammer {
+  background: var(--primary);
+  color: white;
+}
+
+.resolution-action:active {
+  transform: scale(0.99);
 }
 
 .open-answer {
@@ -1228,20 +1293,97 @@ button:active {
   color: var(--error);
 }
 
+/* R26d · Молоток: прирост виден в HUD, подписи зон над дорожкой */
+.match-hud-gain-chip {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #e3f3ea;
+  color: var(--success);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.match-hud-competitor.player .match-hud-name {
+  flex: 1 1 auto;
+}
+
+.match-hud-competitor.player .match-hud-value {
+  margin-left: 0;
+}
+
+.match-hud-gain {
+  display: block;
+  flex: 0 0 auto;
+  height: 100%;
+  background: var(--success);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .match-hud-gain {
+    animation: hud-gain-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transform-origin: left center;
+  }
+}
+
+@keyframes hud-gain-in {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.hammer-lane {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.hammer-zone-labels {
+  position: relative;
+  height: 14px;
+}
+
+.hammer-zone-label {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  color: var(--text-dim);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
+.hammer-zone-label-perfect {
+  color: var(--primary-dim);
+  font-weight: 900;
+}
+
+.strike-remaining {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.strike-series {
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
 /* === RESULT === */
 
 .result-screen {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
-  text-align: center;
-  gap: clamp(14px, 2.4dvh, 22px);
-  padding-top: clamp(8px, 2dvh, 18px);
-  /* Запас снизу сдвигает центр композиции чуть выше геометрического. */
+  text-align: left;
+  gap: 24px;
+  padding-top: 8px;
   padding-bottom: calc(
-    clamp(8px, 5dvh, 48px) +
+    8px +
       var(
         --tg-viewport-content-safe-area-inset-bottom,
         env(safe-area-inset-bottom, 0px)
@@ -1249,17 +1391,9 @@ button:active {
   );
 }
 
-/* Автополя крайних элементов центрируют сцену в свободном месте, а при
-   переполнении схлопываются в 0: верх не обрезается, main прокручивается. */
-.result-screen > :first-child {
-  margin-top: auto;
-}
-.result-screen > :last-child {
-  margin-bottom: auto;
-}
-
 .result-headline {
-  font-size: clamp(26px, 10vw, 48px);
+  font-size: 32px;
+  line-height: 1.1;
   max-width: 100%;
   overflow-wrap: anywhere;
   font-weight: 900;
@@ -1442,14 +1576,14 @@ button:active {
 @media (max-width: 380px) {
   main {
     padding-right: calc(
-      10px +
+      20px +
         var(
           --tg-viewport-content-safe-area-inset-right,
           env(safe-area-inset-right, 0px)
         )
     );
     padding-left: calc(
-      10px +
+      20px +
         var(
           --tg-viewport-content-safe-area-inset-left,
           env(safe-area-inset-left, 0px)
@@ -1620,11 +1754,11 @@ input:focus-visible {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 20px;
   width: 100%;
   min-width: 0;
-  padding: 20px 18px 18px;
-  border-radius: 28px;
+  padding: 24px 20px 20px;
+  border-radius: 20px;
   background: #171716;
   box-shadow: 0 22px 48px rgba(23, 23, 22, 0.2);
   color: #fffefa;
@@ -1655,6 +1789,15 @@ input:focus-visible {
   border: 18px solid rgba(255, 254, 250, 0.06);
 }
 
+.home-hero-head,
+.home-hero-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .home-kicker {
   position: relative;
   z-index: 1;
@@ -1675,13 +1818,43 @@ input:focus-visible {
   font-style: normal;
 }
 
-.home-lede {
+/* После зачётного финиша заголовок — место в таблице дня; строка короче, поэтому кегль меньше. */
+.home-title-done {
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.home-stats {
   position: relative;
   z-index: 1;
-  max-width: 310px;
-  color: rgba(255, 255, 255, 0.64);
-  font-size: 14px;
-  line-height: 1.5;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.home-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.home-stat dt {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 12px;
+}
+
+.home-stat dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
 }
 
 .home-loop {
@@ -1739,6 +1912,7 @@ input:focus-visible {
 .home-hero-card .cta-btn {
   position: relative;
   z-index: 1;
+  border-radius: 16px;
 }
 
 /* Universal match HUD */
@@ -1795,6 +1969,7 @@ input:focus-visible {
 
 .match-hud-name {
   overflow: hidden;
+  flex: 0 1 auto;
   min-width: 0;
   color: var(--text-dim);
   font-size: 12px;
@@ -1804,6 +1979,7 @@ input:focus-visible {
 }
 
 .match-hud-value {
+  flex: 0 0 auto;
   margin-left: auto;
   font-family: var(--font-display);
   font-size: 16px;
@@ -1817,6 +1993,7 @@ input:focus-visible {
 }
 
 .match-hud-track {
+  display: flex;
   overflow: hidden;
   height: 7px;
   border-radius: 999px;
@@ -1825,6 +2002,7 @@ input:focus-visible {
 
 .match-hud-fill {
   display: block;
+  flex: 0 0 auto;
   width: 0;
   height: 100%;
   border-radius: inherit;
@@ -1983,8 +2161,10 @@ input:focus-visible {
 /* The top offset belongs to the body: on the section it pushed Back off the top edge. */
 
 .matchmaking-eyebrow {
+  /* Подпись стоит в 4 px от заголовка: 24 общего зазора минус 20. */
+  margin-bottom: -20px;
   color: var(--primary);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1992,9 +2172,9 @@ input:focus-visible {
 
 .matchmaking-card {
   width: 100%;
-  padding: 24px 18px 20px;
+  padding: 20px;
   border: 1px solid var(--line);
-  border-radius: 26px;
+  border-radius: 20px;
   background: var(--surface);
   box-shadow: var(--shadow);
 }
@@ -2007,16 +2187,20 @@ input:focus-visible {
   max-width: 310px;
   margin: auto auto 0;
   color: var(--text-dim);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.45;
+}
+
+.matchmaking-body > .matchmaking-status {
+  margin: 0 auto;
 }
 
 .matchmaking-loading {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
   color: var(--text-dim);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -2038,7 +2222,7 @@ input:focus-visible {
 .matchmaking-actions {
   display: grid;
   width: 100%;
-  gap: 10px;
+  gap: 12px;
 }
 
 .match-source {
@@ -2067,7 +2251,7 @@ input:focus-visible {
 }
 
 .question-prompt {
-  font-size: clamp(21px, 5.8vw, 27px);
+  font-size: 24px;
   font-weight: 900;
   line-height: 1.18;
   letter-spacing: -0.025em;
@@ -2085,48 +2269,10 @@ input:focus-visible {
 
 .open-answer-input,
 .open-answer-submit {
-  min-height: 58px;
-  border-radius: 17px;
+  min-height: 56px;
+  border-radius: 16px;
 }
 
-/* Resolution */
-
-.resolution-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 28px 22px;
-  border: 1px solid var(--line);
-  border-radius: 26px;
-  background: rgba(255, 254, 250, 0.9);
-  box-shadow: var(--shadow-sm);
-}
-
-.resolution-symbol {
-  display: grid;
-  place-items: center;
-  width: 72px;
-  height: 72px;
-  margin-bottom: 16px;
-  border-radius: 23px;
-  background: var(--success);
-  box-shadow: 0 14px 28px rgba(22, 140, 81, 0.18);
-  color: white;
-  font-family: var(--font-display);
-  font-size: 36px;
-  font-weight: 800;
-  transform: rotate(-3deg);
-}
-
-.resolution-card.incorrect .resolution-symbol {
-  background: var(--text);
-  box-shadow: 0 14px 28px rgba(23, 23, 22, 0.14);
-}
-
-.hammer-earned span {
-  font-size: 22px;
-}
 
 /* Hammer isolation */
 
@@ -2153,31 +2299,6 @@ input:focus-visible {
 
 /* Result */
 
-.result-mark {
-  display: grid;
-  place-items: center;
-  width: 78px;
-  height: 78px;
-  border-radius: 25px;
-  background: var(--success);
-  box-shadow: 0 16px 34px rgba(22, 140, 81, 0.2);
-  color: white;
-  font-family: var(--font-display);
-  font-size: 38px;
-  font-weight: 900;
-  transform: rotate(-4deg);
-  animation: impact-pop 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.result-mark.loss {
-  background: var(--text);
-  box-shadow: 0 16px 34px rgba(23, 23, 22, 0.15);
-}
-
-.result-mark.tie {
-  background: var(--perfect);
-}
-
 /* Profile */
 
 .badge-symbol {
@@ -2192,11 +2313,6 @@ input:focus-visible {
 }
 
 @media (max-width: 380px) {
-  .home-hero-card {
-    min-height: 330px;
-    padding: 20px 17px 17px;
-  }
-
   .match-hud {
     padding-right: 9px;
     padding-left: 9px;
@@ -2215,18 +2331,26 @@ input:focus-visible {
     max-width: 50px;
   }
 
+  /* Аватар уже подписан «ТЫ»: с чипом прироста имя игрока не ужимается до «Т.», а уходит. */
+  .match-hud-competitor.player .match-hud-identity:has(.match-hud-gain-chip) .match-hud-name {
+    display: none;
+  }
+
   .match-hud-value {
     font-size: 14px;
   }
 }
 
 @media (max-height: 720px) {
-  .home-hero-card {
-    min-height: 315px;
+  .question-screen {
+    gap: 8px;
   }
 
-  .question-screen {
-    gap: 9px;
+  /* На низком экране main подбирает снизу 8 px, а не 14. */
+  .resolution-footer {
+    bottom: -8px;
+    margin-bottom: -8px;
+    padding-bottom: 8px;
   }
 
   .match-hud {
@@ -2234,34 +2358,20 @@ input:focus-visible {
     padding-bottom: 9px;
   }
 
-  .question-prompt {
-    font-size: clamp(19px, 5.3vw, 23px);
+  .options {
+    gap: 8px;
   }
 
   .option-btn {
-    min-height: 53px;
+    min-height: 52px;
     padding-top: 8px;
     padding-bottom: 8px;
-  }
-
-  .resolution-card {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-
-  .resolution-symbol {
-    width: 58px;
-    height: 58px;
-    margin-bottom: 10px;
-    border-radius: 19px;
-    font-size: 30px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .bootstrap-spinner,
-  .matchmaking-loading span,
-  .result-mark {
+  .matchmaking-loading span {
     animation: none;
   }
 }
@@ -2319,9 +2429,9 @@ input:focus-visible {
   gap: 4px;
   width: 100%;
   min-height: 56px;
-  padding: 14px 18px;
+  padding: 16px 20px;
   border: 1px solid var(--line);
-  border-radius: 22px;
+  border-radius: 20px;
   background: rgba(255, 254, 250, 0.88);
   box-shadow: var(--shadow-sm);
   color: var(--text);
@@ -2335,19 +2445,20 @@ input:focus-visible {
 
 .training-entry-title {
   font-family: var(--font-display);
+  font-size: 16px;
   font-weight: 700;
 }
 
 .training-entry-meta {
   color: var(--text-dim);
-  font-size: 0.875rem;
+  font-size: 14px;
 }
 
 .my-runs {
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 12px;
+  gap: 24px;
   width: 100%;
   min-width: 0;
   overflow-wrap: anywhere;
@@ -2372,30 +2483,22 @@ input:focus-visible {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
-  padding: 24px 0;
+  gap: 12px;
+  padding: 12px 0;
   text-align: center;
 }
 
+/* R26f: строка истории — часть одной карточки, без собственной рамки. */
 .my-run {
   display: flex;
   flex-direction: column;
   gap: 4px;
   width: 100%;
   min-width: 0;
-  padding: 14px 16px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: rgba(255, 254, 250, 0.88);
-  box-shadow: var(--shadow-sm);
+  padding: 16px 0;
   color: var(--text);
   font: inherit;
   text-align: left;
-}
-
-.my-run-invite {
-  border-color: var(--primary);
-  cursor: pointer;
 }
 
 /* Таблица дня. Строки и отступы повторяют «Мои партии»: это тот же список, другой порядок. */
@@ -2423,12 +2526,13 @@ input:focus-visible {
 
 .solo-board-tab {
   flex: 0 0 auto;
-  padding: 8px 14px;
+  min-height: 44px;
+  padding: 0 16px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: rgba(255, 254, 250, 0.88);
   color: var(--ink);
-  font-size: 0.9rem;
+  font-size: 14px;
   cursor: pointer;
 }
 
@@ -2438,62 +2542,99 @@ input:focus-visible {
   font-weight: 600;
 }
 
-/* Своё место — отдельной карточкой над списком: его видно и когда игрок далеко за топ-50. */
+/* R26g: своё место — карточка с действием, список — одна карточка со строками-разделителями. */
+.solo-board-reset {
+  margin: -8px 0 0;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
 .solo-board-you {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 14px 16px;
+  padding: 20px;
   border: 1px solid var(--primary);
-  border-radius: 18px;
+  border-radius: 20px;
   background: rgba(255, 254, 250, 0.88);
   box-shadow: var(--shadow-sm);
 }
 
-.solo-board-you-rank {
-  font-size: 1.2rem;
-  font-weight: 700;
+.solo-board-you-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-variant-numeric: tabular-nums;
 }
 
-.solo-board-you-meta,
+.solo-board-you-rank {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.solo-board-you-total,
+.solo-board-you-meta {
+  color: var(--text-dim);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
 .solo-board-you-hint {
-  font-size: 0.85rem;
-  opacity: 0.75;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.solo-board-play {
+  margin-top: 12px;
+}
+
+.solo-board-you-missing {
+  gap: 0;
 }
 
 .solo-board-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
   margin: 0;
-  padding: 0;
+  padding: 0 20px;
   list-style: none;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 254, 250, 0.88);
 }
 
 .solo-board-row {
   display: grid;
-  grid-template-columns: 2.2rem 1fr auto;
+  grid-template-columns: 2.2rem minmax(0, 1fr) auto;
   align-items: baseline;
   gap: 10px;
   min-width: 0;
-  padding: 10px 14px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: rgba(255, 254, 250, 0.88);
+  padding: 12px 0;
+  font-size: 16px;
+}
+
+.solo-board-row + .solo-board-row {
+  border-top: 1px solid var(--line);
 }
 
 .solo-board-row.mine {
-  border-color: var(--primary);
+  margin: 0 -20px;
+  padding: 12px 20px;
+  background: rgba(240, 74, 62, 0.1);
+  font-weight: 700;
 }
 
 .solo-board-place {
   font-variant-numeric: tabular-nums;
-  opacity: 0.6;
+  color: var(--text-dim);
 }
 
 .solo-board-name {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .solo-board-score {
@@ -2503,31 +2644,32 @@ input:focus-visible {
 
 .solo-board-note {
   margin: 0;
-  font-size: 0.85rem;
-  opacity: 0.7;
+  font-size: 14px;
+  color: var(--text-dim);
 }
 
 /* Ссылка на таблицу под главной кнопкой: не вторая CTA, а подпись-переход. */
 .home-board-link {
-  align-self: center;
-  margin-top: 10px;
-  padding: 6px 4px;
+  align-self: stretch;
+  min-height: 44px;
+  padding: 0 4px;
   border: 0;
   background: none;
-  color: var(--ink);
-  font-size: 0.9rem;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: rgba(255, 254, 250, 0.82);
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
-  opacity: 0.75;
 }
 
 /* Кнопка внутри карточки партии: уже строк, чтобы не выглядела основным действием экрана. */
 .my-run-rematch {
   align-self: flex-start;
-  margin-top: 6px;
-  padding: 8px 14px;
-  font-size: 0.9rem;
+  width: auto;
+  min-height: 44px;
+  margin-top: 8px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  font-size: 14px;
 }
 
 .my-run-top {
@@ -2540,12 +2682,14 @@ input:focus-visible {
 .my-run-title {
   min-width: 0;
   font-family: var(--font-display);
+  font-size: 16px;
   font-weight: 800;
+  font-variant-numeric: tabular-nums;
 }
 
 .my-run-status {
   flex-shrink: 0;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
   color: var(--text-dim);
 }
@@ -2564,7 +2708,7 @@ input:focus-visible {
 
 .my-run-meta {
   color: var(--text-dim);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.4;
 }
 
@@ -2572,7 +2716,7 @@ input:focus-visible {
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 14px;
+  gap: 12px;
   width: 100%;
   min-width: 0;
   overflow-wrap: anywhere;
@@ -2592,11 +2736,11 @@ input:focus-visible {
 }
 
 .training-note {
-  padding: 10px 14px;
-  border-radius: 14px;
+  padding: 12px 16px;
+  border-radius: 12px;
   background: var(--surface-2);
   color: var(--text-dim);
-  font-size: 0.8125rem;
+  font-size: 14px;
   line-height: 1.4;
 }
 
@@ -2985,32 +3129,43 @@ input:focus-visible {
 
 
 /* === «НА ГЛАЗОК» (прикидка дня) === */
+/* Сетка v2: поля 20 (задаёт main), между секциями 24, внутри карточки 20, радиус карточки 20. */
 
 .tb-card {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   width: 100%;
   min-width: 0;
-  padding: 14px 16px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: rgba(255, 254, 250, 0.88);
-  box-shadow: var(--shadow-sm);
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--surface-2);
 }
 
-.tb-card-kicker {
-  color: var(--primary);
-  font-size: 11px;
+.tb-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tb-card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
   font-weight: 900;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  line-height: 1.2;
 }
 
-.tb-card-text {
-  font-size: 15px;
-  line-height: 1.35;
-  overflow-wrap: anywhere;
+.tb-num {
+  color: var(--primary-dim);
+}
+
+.tb-card-timer {
+  flex-shrink: 0;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Длинный вопрос не раздувает главную: полный текст — на экране ответа. */
@@ -3019,22 +3174,79 @@ input:focus-visible {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  margin-bottom: -8px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: break-word;
 }
 
-.tb-card-mult {
-  font-weight: 900;
+.tb-card-meta {
+  color: var(--text-dim);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.tb-card-btn,
+.tb-card-open,
+.tb-share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border-radius: 16px;
 }
 
 .tb-card-btn {
-  min-height: 44px;
-  border: 1px solid var(--line-strong);
+  width: 100%;
+  min-height: 48px;
+  background: var(--text);
+  color: var(--surface);
+  font-size: 16px;
 }
 
 .tb-card-skeleton {
-  height: 38px;
+  height: 48px;
   border-radius: 12px;
-  background: var(--surface-2);
-  opacity: 0.6;
+  background: var(--line);
+}
+
+.tb-card-done {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 16px 16px 20px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.tb-card-done-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.tb-card-done-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.tb-card-mult {
+  font-variant-numeric: tabular-nums;
+}
+
+.tb-card-open {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: var(--text);
+  color: var(--surface);
+  font-size: 14px;
 }
 
 .tb-reminder {
@@ -3061,30 +3273,63 @@ input:focus-visible {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 24px;
+  min-width: 0;
+}
+
+.tb-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tb-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.tb-date {
+  flex-shrink: 0;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.tb-prompt {
+  margin-top: -12px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+.tb-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   min-width: 0;
   /* Запас под экранную клавиатуру: форму можно прокрутить выше её края. */
   padding-bottom: 40vh;
 }
 
-.tb-prompt {
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1.3;
-  overflow-wrap: anywhere;
-}
-
-.tb-form,
 .tb-confirm,
 .tb-reveal {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
 }
 
+.tb-reveal {
+  gap: 24px;
+}
+
 .tb-label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text-dim);
 }
@@ -3096,29 +3341,29 @@ input:focus-visible {
 
 .tb-hint {
   color: var(--error);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.4;
 }
 
 .tb-note {
   color: var(--text-dim);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.4;
 }
 
 .tb-guest {
-  padding: 10px 12px;
+  padding: 12px;
   border: 1px solid var(--line-strong);
-  border-radius: 14px;
+  border-radius: 12px;
   background: var(--surface-2);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.4;
 }
 
 .tb-confirm-text {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.4;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .cta-btn:disabled {
@@ -3126,155 +3371,157 @@ input:focus-visible {
   box-shadow: none;
 }
 
-.tb-answer-label {
-  color: var(--text-dim);
-  font-size: 13px;
-  font-weight: 700;
+/* Итог: промах крупно, затем свой и правильный ответ одной карточкой со строками. */
+.tb-result {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 20px 20px;
+  border-radius: 20px;
+  background: var(--text);
+  color: var(--surface);
 }
 
-.tb-answer {
-  font-size: clamp(28px, 9vw, 38px);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  overflow-wrap: anywhere;
+.tb-result-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.tb-source {
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--text-dim);
-  overflow-wrap: anywhere;
-}
-
-.tb-source a {
-  display: inline-block;
-  padding: 4px 0;
-  color: var(--text);
-  font-weight: 700;
-  text-underline-offset: 3px;
-}
-
-.tb-explain {
-  display: grid;
-  gap: 8px;
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--surface);
-}
-
-.tb-explain-title {
-  font-size: 15px;
-  font-weight: 800;
-}
-
-.tb-steps {
-  display: grid;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: tb-step;
-}
-
-/* display: grid у li снимает маркер списка, поэтому номер шага рисуется счётчиком. */
-.tb-step {
-  position: relative;
-  display: grid;
-  gap: 2px;
+.tb-result-miss {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   min-width: 0;
-  padding-left: 22px;
-  overflow-wrap: anywhere;
-  counter-increment: tb-step;
 }
 
-.tb-step::before {
-  content: counter(tb-step) ".";
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-weight: 700;
-}
-
-.tb-step-label {
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.tb-step-value {
-  font-size: 17px;
-  font-weight: 800;
-}
-
-.tb-step-source {
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--text-dim);
-}
-
-.tb-step-source a {
-  display: inline-block;
-  padding: 4px 0;
-  color: var(--text);
-  font-weight: 700;
-  text-underline-offset: 3px;
-}
-
-.tb-explain-summary {
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.4;
-  overflow-wrap: anywhere;
-}
-
-.tb-yours {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.tb-yours > div {
-  min-width: 0;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-}
-
-.tb-yours dt {
-  color: var(--text-dim);
+.tb-result-label {
+  color: rgba(255, 254, 250, 0.62);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-.tb-yours dd {
-  margin: 2px 0 0;
+.tb-miss {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 15vw, 56px);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.tb-miss.best {
+  color: var(--success);
+}
+
+.tb-result-standing {
+  max-width: 45%;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: right;
+}
+
+.tb-result-note {
+  color: rgba(255, 254, 250, 0.62);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.tb-compare {
+  border-top: 1px solid rgba(255, 254, 250, 0.14);
+  border-bottom: 1px solid rgba(255, 254, 250, 0.14);
+}
+
+.tb-compare-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.tb-compare-row + .tb-compare-row {
+  border-top: 1px solid rgba(255, 254, 250, 0.14);
+}
+
+.tb-compare dt {
+  color: rgba(255, 254, 250, 0.62);
+  font-size: 14px;
+}
+
+/* Перенос по словам: «контейнеров» не рвётся посреди слова, а длинное число без пробелов — рвётся. */
+.tb-compare dd {
+  margin: 0;
+  font-family: var(--font-display);
   font-size: 18px;
   font-weight: 800;
-  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  text-align: right;
+  word-break: normal;
 }
 
-.tb-percentile {
-  font-size: 17px;
+.tb-share-btn {
+  width: 100%;
+  min-height: 48px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 16px;
+}
+
+.tb-share-note {
+  font-size: 12px;
+  text-align: center;
+}
+
+.tb-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.tb-block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tb-block-title {
+  font-family: var(--font-display);
+  font-size: 16px;
   font-weight: 800;
-  color: var(--success);
+}
+
+.tb-block-meta {
+  flex-shrink: 0;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
 }
 
 .tb-chart {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin: 6px 0 0;
+  gap: 12px;
+  margin: 0;
 }
 
 .tb-bars {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   align-items: end;
-  gap: 3px;
-  height: 120px;
-  border-bottom: 2px solid var(--line-strong);
+  gap: 4px;
+  height: 128px;
+  border-bottom: 1.5px solid var(--text);
 }
 
 .tb-bar-slot {
@@ -3293,8 +3540,15 @@ input:focus-visible {
   display: block;
   width: 100%;
   border-radius: 4px 4px 0 0;
-  background: var(--line-strong);
   transform-origin: bottom;
+}
+
+.tb-bar.under {
+  background: var(--tb-under);
+}
+
+.tb-bar.over {
+  background: var(--tb-over);
 }
 
 .tb-bar.mine {
@@ -3304,37 +3558,242 @@ input:focus-visible {
 .tb-bar-flag {
   position: absolute;
   top: 0;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
+  line-height: 1;
   color: var(--primary-dim);
 }
 
+/* Деления стоят на границах корзин (целые степени десяти), поэтому позиционируются, а не делят сетку. */
 .tb-axis {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 6px;
-  color: var(--text-dim);
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1.2;
+  position: relative;
+  height: 14px;
 }
 
-.tb-axis span:first-child {
+.tb-axis-tick {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  color: var(--text-dim);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
+.tb-axis-tick.start {
+  transform: none;
+}
+
+.tb-axis-tick.end {
+  transform: translateX(-100%);
+}
+
+.tb-axis-tick.exact {
+  color: var(--text);
+}
+
+.tb-legend {
+  display: flex;
+  gap: 16px;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.tb-legend span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tb-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.tb-swatch.under {
+  background: var(--tb-under);
+}
+
+.tb-swatch.over {
+  background: var(--tb-over);
+}
+
+.tb-explain-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tb-explain {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.tb-explain-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  padding: 16px 20px;
+  background: none;
+  color: var(--text);
   text-align: left;
 }
 
-.tb-axis span:last-child {
-  text-align: right;
+.tb-explain-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
 }
 
-.tb-chart-caption {
+.tb-explain-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.tb-explain-sub {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   color: var(--text-dim);
   font-size: 12px;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+/* Сводка уже есть в раскрытом разборе: дважды её не показываем. */
+.tb-explain.open .tb-explain-sub {
+  display: none;
+}
+
+.tb-explain-chevron {
+  flex-shrink: 0;
+}
+
+.tb-explain.open .tb-explain-chevron {
+  transform: rotate(180deg);
+}
+
+.tb-explain-body {
+  display: grid;
+  gap: 12px;
+  padding: 4px 20px 20px;
+}
+
+.tb-steps {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: tb-step;
+}
+
+/* display: grid у li снимает маркер списка, поэтому номер шага рисуется счётчиком. */
+.tb-step {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding-left: 22px;
+  overflow-wrap: break-word;
+  counter-increment: tb-step;
+}
+
+.tb-step::before {
+  content: counter(tb-step) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+}
+
+.tb-step-label {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.tb-step-value {
+  font-size: 16px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.tb-step-source {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.tb-step-source a {
+  display: inline-block;
+  padding: 4px 0;
+  color: var(--text);
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+
+.tb-explain-summary {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.tb-source {
+  padding: 0 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-dim);
+  overflow-wrap: break-word;
+}
+
+.tb-source a {
+  display: inline-block;
+  padding: 4px 0;
+  color: var(--text);
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+
+.tb-next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 20px;
+  background: var(--surface-2);
+}
+
+.tb-next-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tb-next-timer {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .tb-bar {
     animation: tb-bar-grow 0.45s ease-out both;
+  }
+
+  .tb-explain-chevron {
+    transition: transform 0.2s ease;
   }
 }
 
@@ -3345,4 +3804,236 @@ input:focus-visible {
   to {
     transform: scaleY(1);
   }
+}
+
+/* R26e · Итог забега: раскладка v2, всё слева, сетка 24 px */
+.solo-result {
+  gap: 24px;
+}
+.solo-result .chip {
+  align-self: flex-start;
+}
+.solo-result-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.solo-result-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: var(--success);
+  color: white;
+}
+.solo-result-icon.tie {
+  background: var(--perfect);
+}
+.solo-result-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 100%;
+}
+.solo-result-meta {
+  margin: 0;
+  color: var(--text);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+.solo-result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+.solo-result-stats[data-cols='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.solo-result-stat {
+  min-width: 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.solo-result-stat + .solo-result-stat {
+  border-left: 1px solid var(--line);
+}
+.solo-result-stat strong {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.solo-result-stat span {
+  color: var(--text-dim);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.solo-result-receipt {
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--surface-2);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.solo-result-receipt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.solo-result-receipt h2 {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 600;
+}
+.solo-result-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--opponent);
+  font-size: 12px;
+  font-weight: 700;
+}
+.solo-result-receipt p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.solo-result-receipt .solo-result-receipt-line {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.result-save-status {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+.result-save-status.error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  color: var(--error);
+}
+.result-save-status .result-save-retry {
+  padding: 6px 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+}
+.solo-result-actions {
+  gap: 12px;
+  margin-top: auto;
+}
+.solo-result-actions .cta-btn {
+  min-height: 56px;
+  border-radius: 16px;
+  font-size: 18px;
+}
+.solo-result-actions .ghost-btn {
+  min-height: 48px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  font-size: 15px;
+}
+.solo-result-secondary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.solo-result-secondary.single {
+  grid-template-columns: minmax(0, 1fr);
+}
+.solo-result-secondary .ghost-btn {
+  min-width: 0;
+}
+
+/* R26f · «Партии»: вызов отдельной карточкой, история — одна карточка со строками. */
+.my-runs-invites {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.my-run-invite {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--primary);
+  border-radius: 20px;
+  background: rgba(255, 254, 250, 0.88);
+  box-shadow: var(--shadow-sm);
+}
+
+.my-run-invite .my-run-title {
+  display: -webkit-box;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 18px;
+}
+
+.my-run-deadline {
+  flex-shrink: 0;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.my-run-invite-rounds {
+  font-size: 16px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.my-run-accept {
+  margin-top: 4px;
+}
+
+.my-runs-card {
+  gap: 0;
+  margin: 0;
+  padding: 4px 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 254, 250, 0.88);
+  box-shadow: var(--shadow-sm);
+}
+
+.my-runs-card .my-run + .my-run {
+  border-top: 1px solid var(--line);
+}
+
+.my-runs-card .my-run-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.my-runs-card .my-run-meta {
+  /* Длинное имя соперника переносится на вторую строку, а не теряется за многоточием. */
+  display: -webkit-box;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }

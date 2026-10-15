@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 
 interface ScreenHeaderProps {
-  onBack: () => void;
+  /** Без onBack кнопки нет: так выглядят корневые вкладки нижней панели. */
+  onBack?: () => void;
   /** Своя подпись кнопки (без стрелки). По умолчанию «← Назад». */
   backLabel?: string;
   /** Подробное имя для скринридера, если оно точнее видимой подписи. Должно содержать её. */
@@ -14,7 +15,7 @@ interface ScreenHeaderProps {
   className?: string;
 }
 
-/** Шапка экрана: кнопка «Назад» и, при необходимости, заголовок. Единая разметка и семантика. */
+/** Шапка экрана: кнопка «Назад» (если есть onBack) и, при необходимости, заголовок. Единая разметка и семантика. */
 export function ScreenHeader({
   onBack,
   backLabel,
@@ -24,18 +25,23 @@ export function ScreenHeader({
   leading,
   className,
 }: ScreenHeaderProps) {
+  if (!onBack && leading === undefined) {
+    return title !== undefined ? <Title className="screen-title">{title}</Title> : null;
+  }
   return (
     <>
       <header className={className ? `screen-header ${className}` : 'screen-header'}>
         {leading}
-        <button
-          type="button"
-          className="back-btn"
-          aria-label={backAriaLabel}
-          onClick={() => { onBack(); }}
-        >
-          {backLabel ?? (<><span aria-hidden="true">←</span> Назад</>)}
-        </button>
+        {onBack && (
+          <button
+            type="button"
+            className="back-btn"
+            aria-label={backAriaLabel}
+            onClick={() => { onBack(); }}
+          >
+            {backLabel ?? (<><span aria-hidden="true">←</span> Назад</>)}
+          </button>
+        )}
       </header>
       {title !== undefined && <Title className="screen-title">{title}</Title>}
     </>

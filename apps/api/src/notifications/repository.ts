@@ -227,16 +227,18 @@ export async function listActiveInvitesForRecipient(
   playerId: string,
   now: number,
   limit: number,
-): Promise<Array<Omit<InviteRow, 'challenger_rules_version'> & { challenger_name: string }>> {
+): Promise<Array<Omit<InviteRow, 'challenger_rules_version'> & { challenger_name: string; challenger_rounds: number | null; recipient_rounds: number | null }>> {
   const result = await db.prepare(`
     SELECT i.id, i.recipient_player_id, i.recipient_run_id, i.challenger_run_id, i.category,
            i.recipient_progress, i.challenger_progress, i.created_at, i.expires_at, i.consumed_at,
-           m.display_name AS challenger_name
+           m.display_name AS challenger_name,
+           json_array_length(m.rounds_json) AS challenger_rounds,
+           (SELECT json_array_length(r.rounds_json) FROM match_runs r WHERE r.id = i.recipient_run_id) AS recipient_rounds
     FROM rematch_invites i
     JOIN match_runs m ON m.id = i.challenger_run_id
     WHERE i.recipient_player_id = ?1 AND i.consumed_at IS NULL AND i.expires_at > ?2
     ORDER BY i.created_at DESC, i.id DESC
     LIMIT ?3
-  `).bind(playerId, now, limit).all<Omit<InviteRow, 'challenger_rules_version'> & { challenger_name: string }>();
+  `).bind(playerId, now, limit).all<Omit<InviteRow, 'challenger_rules_version'> & { challenger_name: string; challenger_rounds: number | null; recipient_rounds: number | null }>();
   return result.results;
 }

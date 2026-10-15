@@ -71,10 +71,17 @@ const EXPLANATION = {
   summary: 'Секретная-формула ≈ 1 400 × 2 000',
 };
 
-function addQuestion(db: TestD1, id: string, activeDate: string, answerValue = 1000, explanationJson = JSON.stringify(EXPLANATION)) {
+function addQuestion(
+  db: TestD1,
+  id: string,
+  activeDate: string,
+  answerValue = 1000,
+  explanationJson = JSON.stringify(EXPLANATION),
+  cardPrompt: string | null = null,
+) {
   db.sqlite.prepare(
-    'INSERT INTO tiebreaker_questions (id, prompt, unit, answer, source_url, as_of_date, active_date, explanation_json, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-  ).run(id, `Сколько ${id}?`, 'шт.', answerValue, 'https://example.org/secret-source', '2026-01-01', activeDate, explanationJson, 1);
+    'INSERT INTO tiebreaker_questions (id, prompt, card_prompt, unit, answer, source_url, as_of_date, active_date, explanation_json, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+  ).run(id, `Сколько ${id}?`, cardPrompt, 'шт.', answerValue, 'https://example.org/secret-source', '2026-01-01', activeDate, explanationJson, 1);
 }
 
 function addAnswers(db: TestD1, questionId: string, count: number, answerValue = 1000) {
@@ -99,7 +106,7 @@ describe('GET /api/tiebreaker/today', () => {
     addQuestion(db, 'yesterday', '2026-10-14');
     const response = await get(db, guest('a').authorization);
     expect(response.status).toBe(200);
-    expect(await response.json()).toEqual({ dateKey: TODAY, question: null, answered: null });
+    expect(await response.json()).toEqual({ dateKey: TODAY, question: null, answered: null, answersCount: 0 });
   });
 
   it('does not leak the answer, source, distribution or counts before the player answers', async () => {
@@ -109,14 +116,57 @@ describe('GET /api/tiebreaker/today', () => {
     addAnswers(db, 'q1', 12, 123456);
     const response = await get(db, guest('a').authorization);
     const text = await response.text();
+    // До своего ответа: номер вопроса и число ответивших — и больше никакой статистики.
     expect(JSON.parse(text)).toEqual({
       dateKey: TODAY,
-      question: { id: 'q1', prompt: 'Сколько q1?', unit: 'шт.' },
+      question: { id: 'q1', number: 1, prompt: 'Сколько q1?', cardPrompt: null, unit: 'шт.' },
       answered: null,
+      answersCount: 12,
     });
     for (const secret of ['123456', 'secret-source', 'source', 'distribution', 'totalAnswers', 'percentile', '2026-01-01', 'multiplier', 'explanation', 'Секретный-шаг', 'step-one', 'step-two', 'Источник-', 'Секретная-формула']) {
       expect(text).not.toContain(secret);
     }
+  });
+
+  it('numbers the question by the count of questions up to its date, not by insertion order', async () => {
+    vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
+    const db = database();
+    addQuestion(db, 'later', '2026-10-17');
+    addQuestion(db, 'today', TODAY);
+    addQuestion(db, 'first', '2026-10-01');
+    addQuestion(db, 'second', '2026-10-09');
+    const body = await (await get(db, guest('a').authorization)).json() as Record<string, any>;
+    expect(body.question.id).toBe('today');
+    expect(body.question.number).toBe(3);
+  });
+
+  it('returns the short card prompt when set, null when not, and keeps the full prompt', async () => {
+    vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
+    const withCard = database();
+    addQuestion(withCard, 'q1', TODAY, 1000, undefined, 'Коротко о q1?');
+    const a = await (await get(withCard, guest('a').authorization)).json() as Record<string, any>;
+    expect(a.question).toMatchObject({ prompt: 'Сколько q1?', cardPrompt: 'Коротко о q1?' });
+    const without = database();
+    addQuestion(without, 'q1', TODAY);
+    const b = await (await get(without, guest('a').authorization)).json() as Record<string, any>;
+    expect(b.question.cardPrompt).toBeNull();
+  });
+
+  it('counts answers before and after the own answer, from all players of this question only', async () => {
+    vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
+    const db = database();
+    addQuestion(db, 'q1', TODAY);
+    addQuestion(db, 'old', '2026-10-14');
+    addAnswers(db, 'q1', 3);
+    db.sqlite.prepare(
+      'INSERT INTO tiebreaker_answers (player_id, question_id, date_key, guess, multiplier, created_at) VALUES (?, ?, ?, ?, ?, ?)',
+    ).run('x', 'old', '2026-10-14', 5, 1, 1);
+    const player = guest('a');
+    expect(((await (await get(db, player.authorization)).json()) as Record<string, any>).answersCount).toBe(3);
+    const posted = await (await answer(db, player.authorization, { questionId: 'q1', guess: 700 })).json() as Record<string, any>;
+    expect(posted.answersCount).toBe(4);
+    expect(posted.answered.totalAnswers).toBe(4);
+    expect(((await (await get(db, player.authorization)).json()) as Record<string, any>).answersCount).toBe(4);
   });
 
   it('does not leak the answer to a player who only answered another day', async () => {
@@ -163,7 +213,7 @@ describe('POST /api/tiebreaker/answer', () => {
     const response = await answer(db, player.authorization, { questionId: 'q1', guess: 250, multiplier: 1 });
     expect(response.status).toBe(201);
     const body = await response.json() as Record<string, any>;
-    expect(body.question).toEqual({ id: 'q1', prompt: 'Сколько q1?', unit: 'шт.' });
+    expect(body.question).toEqual({ id: 'q1', number: 1, prompt: 'Сколько q1?', cardPrompt: null, unit: 'шт.' });
     expect(body.answered).toMatchObject({
       guess: 250,
       multiplier: 4,

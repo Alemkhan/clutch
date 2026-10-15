@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import type { CategoryId, SoloLeaderboardResponse, SoloLeaderboardStanding } from '@clutch/shared';
 import { fetchSoloLeaderboard } from '../lib/api';
 import { categoryName, soloRoundsText } from '../lib/myRunsView';
+import { resetLabel } from '../lib/tiebreakerClock';
+import { useDayCountdown } from '../lib/useDayCountdown';
 import { ScreenHeader } from './ScreenHeader';
 
 /** Категории в том же порядке, что на экране выбора: общие знания первыми. */
@@ -14,24 +16,27 @@ export type SoloBoardState =
 
 interface SoloBoardViewProps {
   state: SoloBoardState;
+  /** Сколько осталось до конца игровых суток: таблица обнуляется вместе с набором. */
+  msLeft: number;
   category: CategoryId;
   onCategory: (category: CategoryId) => void;
   onBack: () => void;
   onRetry: () => void;
-  onPlay: () => void;
+  onPlay: (category: CategoryId) => void;
 }
 
 /** «до 36-го один круг»: цель достижима, в отличие от «попасть в топ-50». */
 export function standingHint(standing: SoloLeaderboardStanding): string {
-  if (standing.roundsToNext === null) return 'Выше никого: это первое место дня.';
+  if (standing.roundsToNext === null) return 'Ты первый сегодня.';
   const gap = standing.roundsToNext === 1 ? 'один круг' : soloRoundsText(standing.roundsToNext);
   return `До ${standing.rank - 1}-го места — ${gap}.`;
 }
 
-export function SoloBoardView({ state, category, onCategory, onBack, onRetry, onPlay }: SoloBoardViewProps) {
+export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onRetry, onPlay }: SoloBoardViewProps) {
   return (
     <section className="solo-board">
       <ScreenHeader onBack={onBack} title="Таблица дня" />
+      <p className="solo-board-reset">{resetLabel(msLeft)}</p>
 
       <div className="solo-board-tabs" role="tablist" aria-label="Категория">
         {CATEGORIES.map((id) => (
@@ -64,42 +69,51 @@ export function SoloBoardView({ state, category, onCategory, onBack, onRetry, on
           {/* Своё место видно всегда, даже когда игрок далеко за топ-50. */}
           {state.board.you && (
             <div className="solo-board-you">
-              <span className="solo-board-you-rank">
-                {state.board.you.rank}-й из {state.board.you.total}
-              </span>
+              <div className="solo-board-you-head">
+                <span className="solo-board-you-rank">{state.board.you.rank}-й</span>
+                <span className="solo-board-you-total">из {state.board.you.total}</span>
+              </div>
               {/* Пар набора игроку не показывается: он откалиброван на старом молотке и занижен
                   на 12–22% (см. SKILL_SHARE). Круги — честное число, их и показываем. */}
               <span className="solo-board-you-meta">{soloRoundsText(state.board.you.entry.roundsPlayed)}</span>
               <span className="solo-board-you-hint">{standingHint(state.board.you)}</span>
+              <button type="button" className="cta-btn solo-board-play" onClick={() => onPlay(category)}>Сыграть ещё набор</button>
+            </div>
+          )}
+
+          {!state.board.you && state.board.entries.length > 0 && (
+            <div className="solo-board-you solo-board-you-missing">
+              <p className="solo-board-note">
+                Твоего забега сегодня здесь нет: в таблицу попадают только дошедшие до 100%.
+              </p>
+              <button type="button" className="cta-btn solo-board-play" onClick={() => onPlay(category)}>Играть</button>
             </div>
           )}
 
           {state.board.entries.length === 0 && (
             <div className="my-runs-message">
               <p className="matchmaking-error">Сегодня в этой категории ещё никто не дошёл до цели.</p>
-              <button type="button" className="cta-btn" onClick={onPlay}>Играть</button>
+              <button type="button" className="cta-btn" onClick={() => onPlay(category)}>Играть</button>
             </div>
           )}
 
           {state.board.entries.length > 0 && (
-            <ol className="solo-board-list">
-              {state.board.entries.map((entry, index) => (
-                <li
-                  key={`${entry.completedAt}-${entry.displayName}-${index}`}
-                  className={state.board.you?.rank === index + 1 ? 'solo-board-row mine' : 'solo-board-row'}
-                >
-                  <span className="solo-board-place">{index + 1}</span>
-                  <span className="solo-board-name">{entry.displayName}</span>
-                  <span className="solo-board-score">{soloRoundsText(entry.roundsPlayed)}</span>
-                </li>
-              ))}
-            </ol>
-          )}
-
-          {!state.board.you && state.board.entries.length > 0 && (
-            <p className="solo-board-note">
-              Твоего забега сегодня здесь нет: в таблицу попадают только дошедшие до 100%.
-            </p>
+            <>
+              <ol className="solo-board-list">
+                {state.board.entries.map((entry, index) => (
+                  <li
+                    key={`${entry.completedAt}-${entry.displayName}-${index}`}
+                    className={state.board.you?.rank === index + 1 ? 'solo-board-row mine' : 'solo-board-row'}
+                  >
+                    <span className="solo-board-place">{index + 1}</span>
+                    <span className="solo-board-name">{entry.displayName}</span>
+                    <span className="solo-board-score">{soloRoundsText(entry.roundsPlayed)}</span>
+                  </li>
+                ))}
+              </ol>
+              {/* Правда для текущей таблицы: SQL сортирует по кругам, затем по длительности. */}
+              <p className="solo-board-note">При равных кругах выше тот, кто быстрее.</p>
+            </>
           )}
         </>
       )}
@@ -109,13 +123,14 @@ export function SoloBoardView({ state, category, onCategory, onBack, onRetry, on
 
 interface SoloBoardProps {
   onBack: () => void;
-  onPlay: () => void;
+  onPlay: (category: CategoryId) => void;
 }
 
 export function SoloBoard({ onBack, onPlay }: SoloBoardProps) {
   const [category, setCategory] = useState<CategoryId>('general');
   const [state, setState] = useState<SoloBoardState>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
+  const msLeft = useDayCountdown();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -129,6 +144,7 @@ export function SoloBoard({ onBack, onPlay }: SoloBoardProps) {
   return (
     <SoloBoardView
       state={state}
+      msLeft={msLeft}
       category={category}
       onCategory={setCategory}
       onBack={onBack}

@@ -31,7 +31,7 @@ describe('sound controls markup', () => {
   });
 
   it('is present in the real Profile and MatchHud', () => {
-    expect(renderToStaticMarkup(<Profile onBack={noop} />)).toContain('class="sound-toggle-row"');
+    expect(renderToStaticMarkup(<Profile />)).toContain('class="sound-toggle-row"');
     expect(
       renderToStaticMarkup(<MatchHud player={0} opponent={0} opponentName="Алекс" round={1} totalRounds={10} />),
     ).toContain('class="sound-toggle-hud"');

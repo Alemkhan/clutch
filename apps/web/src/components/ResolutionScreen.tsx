@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { QuestionReportKind } from "@clutch/shared";
 import { playSound } from "../lib/sounds";
 import { shouldActivateAction } from "../lib/accessibility";
@@ -41,7 +41,11 @@ interface ResolutionScreenProps {
   /** Вторичное пояснение к уже явно названному правильному ответу. */
   explanation: string;
   correct: boolean;
+  /** Время вышло: ответа игрока нет, строка «Твой ответ» не нужна. */
+  timedOut?: boolean;
   onContinue: () => void;
+  /** Последний вопрос: дальше не следующий вопрос, а итог (если не ведёт к мини-игре). */
+  final?: boolean;
   /** Training has no attempt or mini-game: it is plain question practice. */
   variant?: "match" | "training";
   /** Кнопка «Сообщить о проблеме» есть только там, где репорт подключён (соло и отработка). */
@@ -53,7 +57,9 @@ export function ResolutionScreen({
   selectedAnswer,
   explanation,
   correct,
+  timedOut = false,
   onContinue,
+  final = false,
   variant = "match",
   report,
 }: ResolutionScreenProps) {
@@ -76,27 +82,18 @@ export function ResolutionScreen({
     onContinue();
   };
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (!shouldActivateAction(false, event.key)) return;
-    event.preventDefault();
-    continueOnce();
-  };
-
   const training = variant === "training";
-  const actionLabel = training
-    ? "Следующий вопрос"
+  // «Следующий вопрос» там, где мини-игры нет: тренировка, отработка и любой неверный ответ.
+  const toHammer = !training && correct;
+  const actionLabel = toHammer ? "К мини-игре" : final ? "К итогу" : "Следующий вопрос";
+  const subtitle = timedOut
+    ? "Время вышло"
     : correct
-      ? "Перейти к мини-игре"
-      : "Продолжить к следующему раунду";
-  const accessibleLabel = [
-    correct ? "Верно." : "Неверно.",
-    !correct && selectedAnswer ? `Твой ответ: ${selectedAnswer}.` : "",
-    `Правильный ответ: ${correctAnswer}.`,
-    explanation,
-    actionLabel,
-  ]
-    .filter(Boolean)
-    .join(" ");
+      ? training
+        ? "Верный ответ"
+        : "Попытка заработана"
+      : "Неверный ответ";
+  const showMine = !correct && !timedOut && Boolean(selectedAnswer);
 
   const sendReport = () => {
     if (!report || !canSendReport(panel, report.state) || !panel.kind) return;
@@ -104,29 +101,15 @@ export function ResolutionScreen({
   };
 
   return (
-    <div
-      className="resolution-screen"
-      role="button"
-      tabIndex={0}
-      aria-label={accessibleLabel}
-      onClick={continueOnce}
-      onKeyDown={handleKeyDown}
-    >
-      <div className={`resolution-card ${correct ? "correct" : "incorrect"}`}>
-        <div className="resolution-symbol" aria-hidden="true">
-          {correct ? "✓" : "×"}
-        </div>
-        <div
-          className={`resolution-status ${correct ? "correct" : "incorrect"}`}
-        >
+    <div className="resolution-screen" onClick={continueOnce}>
+      <div className="resolution-head">
+        <div className={`resolution-status ${correct ? "correct" : "incorrect"}`}>
           {correct ? "Верно!" : "Мимо"}
         </div>
-        {training ? null : correct ? (
-          <p className="resolution-message">Попытка заработана</p>
-        ) : (
-          <p className="resolution-message">В этом раунде без мини-игры</p>
-        )}
-        {!correct && selectedAnswer && (
+        <p className="resolution-message">{subtitle}</p>
+      </div>
+      <div className="resolution-answers">
+        {showMine && (
           <p className="resolution-answer selected">
             <span>Твой ответ</span>
             <strong>{selectedAnswer}</strong>
@@ -136,82 +119,88 @@ export function ResolutionScreen({
           <span>Правильный ответ</span>
           <strong>{correctAnswer}</strong>
         </p>
-        <p className="resolution-explanation">{explanation}</p>
-        {report && (
-          <div
-            className="resolution-report"
-            onClick={stopReportAreaEvent}
-            onKeyDown={stopReportAreaEvent}
-          >
-            {report.state === "sent" ? (
-              <p className="resolution-report-status" role="status">
-                Отправлено, спасибо
-              </p>
-            ) : !panel.open ? (
+      </div>
+      <p className="resolution-explanation">{explanation}</p>
+      {report && (
+        <div
+          className="resolution-report"
+          onClick={stopReportAreaEvent}
+          onKeyDown={stopReportAreaEvent}
+        >
+          {report.state === "sent" ? (
+            <p className="resolution-report-status" role="status">
+              Отправлено, спасибо
+            </p>
+          ) : !panel.open ? (
+            <button
+              type="button"
+              className="resolution-report-toggle"
+              onClick={() => setPanel(openReportPanel)}
+            >
+              Сообщить о проблеме
+            </button>
+          ) : (
+            <div className="resolution-report-panel">
+              <div className="resolution-report-options" role="group" aria-label="Что не так?">
+                {REPORT_KINDS.map(({ kind, label }) => (
+                  <button
+                    key={kind}
+                    type="button"
+                    className="resolution-report-option"
+                    aria-pressed={panel.kind === kind}
+                    onClick={() => setPanel((state) => selectReportKind(state, kind))}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <textarea
+                className="resolution-report-comment"
+                aria-label="Комментарий (необязательно)"
+                placeholder="Комментарий (необязательно)"
+                maxLength={500}
+                value={panel.comment}
+                onChange={(event) =>
+                  setPanel((state) => editReportComment(state, event.target.value))
+                }
+              />
+              {report.state === "sending" && (
+                <p className="resolution-report-status" role="status">
+                  Отправляем…
+                </p>
+              )}
+              {report.state === "error" && (
+                <p className="resolution-report-error" role="alert">
+                  Не удалось отправить. Попробуй ещё раз.
+                </p>
+              )}
               <button
                 type="button"
-                className="resolution-report-toggle"
-                onClick={() => setPanel(openReportPanel)}
+                className="resolution-report-send"
+                disabled={!canSendReport(panel, report.state)}
+                onClick={sendReport}
               >
-                Сообщить о проблеме
+                {report.state === "error" ? "Повторить" : "Отправить"}
               </button>
-            ) : (
-              <div className="resolution-report-panel">
-                <div className="resolution-report-options" role="group" aria-label="Что не так?">
-                  {REPORT_KINDS.map(({ kind, label }) => (
-                    <button
-                      key={kind}
-                      type="button"
-                      className="resolution-report-option"
-                      aria-pressed={panel.kind === kind}
-                      onClick={() => setPanel((state) => selectReportKind(state, kind))}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
-                <textarea
-                  className="resolution-report-comment"
-                  aria-label="Комментарий (необязательно)"
-                  placeholder="Комментарий (необязательно)"
-                  maxLength={500}
-                  value={panel.comment}
-                  onChange={(event) =>
-                    setPanel((state) => editReportComment(state, event.target.value))
-                  }
-                />
-                {report.state === "sending" && (
-                  <p className="resolution-report-status" role="status">
-                    Отправляем…
-                  </p>
-                )}
-                {report.state === "error" && (
-                  <p className="resolution-report-error" role="alert">
-                    Не удалось отправить. Попробуй ещё раз.
-                  </p>
-                )}
-                <button
-                  type="button"
-                  className="resolution-report-send"
-                  disabled={!canSendReport(panel, report.state)}
-                  onClick={sendReport}
-                >
-                  {report.state === "error" ? "Повторить" : "Отправить"}
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-      {training ? (
-        <div className="continue-hint">Тапни, чтобы продолжить</div>
-      ) : correct ? (
-        <div className="hammer-earned">
-          Перейти к мини-игре <span aria-hidden="true">→</span>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="continue-hint">Тапни, чтобы продолжить</div>
       )}
+      <div className="resolution-footer">
+        {!toHammer && !training && (
+          <p className="resolution-footnote">В этом раунде без мини-игры</p>
+        )}
+        <button
+          type="button"
+          className={`resolution-action${toHammer ? " to-hammer" : ""}`}
+          onClick={(event) => {
+            event.stopPropagation();
+            continueOnce();
+          }}
+        >
+          {actionLabel} <span aria-hidden="true">→</span>
+        </button>
+      </div>
     </div>
   );
 }

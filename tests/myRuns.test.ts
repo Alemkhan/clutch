@@ -76,9 +76,14 @@ function insertRun(db: TestD1, options: {
   completedAt: number;
   solo?: boolean;
   opponent?: 'player' | 'bot' | null;
+  /** Чью запись играл этот забег; по умолчанию 'ghost-source' при opponent: 'player'. */
+  opponentRunId?: string;
+  /** Сколько кругов в забеге (по 25%); по умолчанию четыре. */
+  rounds?: number;
 }) {
   const set = dailyQuestionSet('geography', NOW, 0);
-  const rounds: AsyncMatchRound[] = [0, 1, 2, 3].map((index) => ({
+  const count = options.rounds ?? 4;
+  const rounds: AsyncMatchRound[] = Array.from({ length: count }, (_, index) => index).map((index) => ({
     questionId: set.questions[index].id,
     correct: true,
     responseTimeMs: 1000,
@@ -115,7 +120,7 @@ function insertRun(db: TestD1, options: {
     CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
     configJson,
     opponent,
-    options.opponent === 'player' ? 'ghost-source' : null,
+    options.opponentRunId ?? (options.opponent === 'player' ? 'ghost-source' : null),
     set.questionSetId,
     options.solo ? 1 : null,
     options.solo ? 5 : null,
@@ -204,6 +209,36 @@ describe('GET /api/my-runs', () => {
   });
 });
 
+describe('GET /api/my-runs opponent rounds', () => {
+  it('gives the rounds of the record I played, of the one who played mine, and null without a rival', async () => {
+    const db = database();
+    insertRun(db, { id: 'ghost-source', label: 'zed', completedAt: NOW - 9 * HOUR, rounds: 6 });
+    insertRun(db, { id: 'ann-beat', label: 'ann', completedAt: NOW - 3 * HOUR, opponent: 'player', rounds: 5 });
+    insertRun(db, { id: 'ann-bot', label: 'ann', completedAt: NOW - 2 * HOUR, opponent: 'bot' });
+    insertRun(db, { id: 'ann-alone', label: 'ann', completedAt: NOW - HOUR, solo: true });
+    // Боб сыграл запись Анны: у неё в своей строке соперника нет, круги берутся с его стороны.
+    insertRun(db, { id: 'bob-vs-ann', label: 'bob', completedAt: NOW - 30 * 60_000, opponent: 'player', opponentRunId: 'ann-alone', rounds: 3 });
+
+    const ann = await (await fetchRuns(db, 'ann')).json() as MyRunsResponse;
+    const byId = Object.fromEntries(ann.runs.map((run) => [run.runId, run]));
+    expect(byId['ann-beat']).toMatchObject({ roundsPlayed: 5, opponentRoundsPlayed: 6 });
+    expect(byId['ann-bot'].opponentRoundsPlayed).toBeNull();
+    expect(byId['ann-alone']).toMatchObject({ roundsPlayed: 4, opponent: { displayName: 'bob' }, opponentRoundsPlayed: 3 });
+
+    const zed = await (await fetchRuns(db, 'zed')).json() as MyRunsResponse;
+    expect(zed.runs[0]).toMatchObject({ runId: 'ghost-source', opponentRoundsPlayed: 5 });
+  });
+
+  it('gives both sides rounds in a rematch invite', async () => {
+    const db = database();
+    insertRun(db, { id: 'bob-win', label: 'bob', completedAt: NOW - 2 * HOUR, rounds: 7 });
+    insertRun(db, { id: 'ann-loss', label: 'ann', completedAt: NOW - 3 * HOUR, rounds: 9 });
+    insertInvite(db, { id: 'live', recipientLabel: 'ann', challengerRunId: 'bob-win', recipientRunId: 'ann-loss', expiresAt: NOW + HOUR });
+    const ann = await (await fetchRuns(db, 'ann')).json() as MyRunsResponse;
+    expect(ann.invites[0]).toMatchObject({ challengerRoundsPlayed: 7, recipientRoundsPlayed: 9 });
+  });
+});
+
 describe('GET /api/my-runs invites', () => {
   it('lists only active invites addressed to the caller', async () => {
     const db = database();
@@ -219,7 +254,8 @@ describe('GET /api/my-runs invites', () => {
     const ann = await (await fetchRuns(db, 'ann')).json() as MyRunsResponse;
     expect(ann.invites).toEqual([{
       inviteId: 'live', category: 'geography', challengerName: 'bob',
-      challengerProgress: 100, yourProgress: 60, expiresAt: NOW + HOUR,
+      challengerProgress: 100, yourProgress: 60, challengerRoundsPlayed: 4, recipientRoundsPlayed: 4,
+      expiresAt: NOW + HOUR,
     }]);
 
     const bob = await (await fetchRuns(db, 'bob')).json() as MyRunsResponse;

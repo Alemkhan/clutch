@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   TIEBREAKER_BUCKET_COUNT, TIEBREAKER_MAX_GUESS, TIEBREAKER_MIN_ANSWERS_FOR_PERCENTILE,
-  isValidTiebreakerGuess, parseTiebreakerGuess, resolveTiebreak, tiebreakerBucketIndex,
+  isBestAnswerOfDay, isValidTiebreakerGuess, parseTiebreakerGuess, resolveTiebreak, tiebreakerBucketIndex,
   tiebreakerDistribution, tiebreakerMultiplier, tiebreakerPercentile, parseTiebreakerExplanation,
 } from './tiebreaker';
 
@@ -93,6 +93,19 @@ describe('tiebreakerPercentile', () => {
     expect(tiebreakerPercentile(1, ten)).toBe(100);
     expect(tiebreakerPercentile(10, ten)).toBe(0);
     expect(tiebreakerPercentile(5, ten)).toBe(Math.floor((5 / 9) * 100));
+  });
+});
+
+describe('isBestAnswerOfDay', () => {
+  const ten = Array.from({ length: 10 }, (_, i) => 1 + i);
+  it('is true only when the player is strictly closer than everyone else', () => {
+    expect(isBestAnswerOfDay(tiebreakerPercentile(1, ten))).toBe(true);
+  });
+  it('is false for a tie with someone, for any lower rank and below the sample threshold', () => {
+    expect(isBestAnswerOfDay(tiebreakerPercentile(1, [1, 1, ...ten.slice(2)]))).toBe(false);
+    expect(isBestAnswerOfDay(tiebreakerPercentile(2, ten))).toBe(false);
+    expect(isBestAnswerOfDay(tiebreakerPercentile(1, ten.slice(0, 9)))).toBe(false);
+    expect(isBestAnswerOfDay(null)).toBe(false);
   });
 });
 

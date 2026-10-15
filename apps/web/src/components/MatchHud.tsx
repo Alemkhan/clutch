@@ -18,11 +18,15 @@ export interface CompetitorProps {
   name: string;
   value: number;
   side: 'player' | 'opponent';
+  /** Прирост от последнего удара: value уже включает его, полоса рисует его отдельным сегментом. */
+  gain?: number;
 }
 
-export function Competitor({ name, value, side }: CompetitorProps) {
+export function Competitor({ name, value, side, gain = 0 }: CompetitorProps) {
   const reduceMotion = useReducedMotion();
   const progress = Math.min(100, Math.max(0, value));
+  const gainShown = Math.min(progress, Math.max(0, gain));
+  const baseProgress = progress - gainShown;
 
   return (
     <div className={`match-hud-competitor ${side}`}>
@@ -30,7 +34,8 @@ export function Competitor({ name, value, side }: CompetitorProps) {
         <span className="match-hud-avatar" aria-hidden="true">
           {side === 'player' ? 'ТЫ' : initials(name)}
         </span>
-        <span className="match-hud-name">{name}</span>
+        <span className="match-hud-name" title={name}>{name}</span>
+        {gainShown > 0 && <span className="match-hud-gain-chip">+{gainShown}</span>}
         <strong className="match-hud-value">{value}%</strong>
       </div>
       <div
@@ -46,9 +51,12 @@ export function Competitor({ name, value, side }: CompetitorProps) {
           className="match-hud-fill"
           aria-hidden="true"
           initial={false}
-          animate={{ width: `${progress}%` }}
+          animate={{ width: `${baseProgress}%` }}
           transition={{ duration: reduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
         />
+        {gainShown > 0 && (
+          <span className="match-hud-gain" aria-hidden="true" style={{ width: `${gainShown}%` }} />
+        )}
       </div>
     </div>
   );
