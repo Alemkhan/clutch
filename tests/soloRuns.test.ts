@@ -20,7 +20,7 @@ import {
 import app from '../apps/api/src/index';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
-import { recordMistake } from '../apps/api/src/matches/mistakesRepository';
+import { recordMistake } from '../apps/api/src/training/mistakesRepository';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
 const configJson = JSON.stringify(CURRENT_HAMMER_MINI_GAME.config);

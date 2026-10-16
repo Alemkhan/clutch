@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import App from './App';
-import { initializeTelegram } from './lib/telegram';
+import { initializeTelegram } from './platform/telegram';
 import {
   observeTelegramInitialization,
   type TelegramBootstrapResult,
-} from './lib/bootstrap';
-import { installSoundUnlock } from './lib/sounds';
+} from './app/bootstrap';
+import { installSoundUnlock } from './platform/sounds';
 
 export const TELEGRAM_BOOTSTRAP_TIMEOUT_MS = 2_500;
 

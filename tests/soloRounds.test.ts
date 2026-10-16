@@ -16,7 +16,7 @@ import {
   type TrainingQuestionsResponse,
 } from '@clutch/shared';
 import app from '../apps/api/src/index';
-import { listTrainableMistakes, payBackMistake, recordMistake } from '../apps/api/src/matches/mistakesRepository';
+import { listTrainableMistakes, payBackMistake, recordMistake } from '../apps/api/src/training/mistakesRepository';
 import { fullQuestions, missTapElapsedMs, perfectTapElapsedMs, roundInputs } from './helpers/soloPlay';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 

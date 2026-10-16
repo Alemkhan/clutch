@@ -9,7 +9,7 @@ import {
   createBotOpponent,
   pickBotProfile,
   type BotProfile,
-} from '../apps/api/src/matches/bots';
+} from '../apps/api/src/solo/bots';
 
 describe('createBotOpponent', () => {
   it('preserves the current Alex pattern and stops at the first 100 progress', () => {

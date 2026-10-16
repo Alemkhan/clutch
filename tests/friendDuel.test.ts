@@ -19,7 +19,7 @@ import {
   type StartSoloRunResponse,
 } from '@clutch/shared';
 import app from '../apps/api/src/index';
-import { listCompletedRuns, toRunSummary } from '../apps/api/src/matches/historyRepository';
+import { listCompletedRuns, toRunSummary } from '../apps/api/src/myRuns/historyRepository';
 import { insertInviteOnce, insertOpenInviteOnce } from '../apps/api/src/notifications/repository';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';

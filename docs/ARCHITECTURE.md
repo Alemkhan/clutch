@@ -20,25 +20,23 @@ API и клиент используют shared-правила. **Схема ж�
 apps/web/                      React 18 + Vite + Framer Motion + Telegram SDK
   src/AppBootstrap.tsx         loading/timeout/error вокруг Telegram init
   src/App.tsx                  переключение экранов по phase, Telegram Back
-  src/lib/useGameState.ts      навигационное состояние верхнего уровня
-  src/lib/gameSession.ts       типы phase и безопасные переходы между разделами
-  src/lib/clientMatchRules.ts  runtime-проверка solo snapshots и server payload
-  src/lib/api.ts                HTTP, Telegram/guest auth, timeout 5 секунд
-  src/lib/telegram.ts           cached SDK/initData и фоновый viewport
-  src/lib/telegramBackButton.ts чистая карта и lifecycle-контроллер BackButton
-  src/lib/useSoloRun.ts, soloRunSession.ts, soloRunFlow.ts, soloResult.ts
-                                основной цикл: покруговая сеть, чистые переходы, итог
-  src/lib/soloRoundDelivery.ts  retry одного идемпотентного answer/hammer запроса
-  src/lib/useFriendInvite.ts, friendDuelResult.ts  «Позвать друга», итог дуэли
-  src/lib/trainingSession.ts, myRunsView.ts, launchIntent.ts
-                                тренировка и отработка ошибок, «Мои партии»,
-                                разбор startapp-ссылки (реванш/отписка)
-  src/lib/useLastStand.ts, lastStandRun.ts  режим Last Stand (заморожен 2026-10-16)
-  src/lib/analytics.ts          очередь в памяти + dev console, без подключения
-  src/lib/sounds.ts             воспроизведение текущих эффектов
-  src/components/              вопросы, MatchHud/SoloHud, HammerGame, итоги, профиль,
-                               BottomNav (четыре раздела), SoloRun/SoloResult,
-                               TrainingHub/Training, MyRuns, RematchEntry, LastStand
+  src/app/                     оболочка: useGameState (навигация верхнего уровня),
+                               gameSession (phase и безопасные переходы), bootstrap, launchIntent
+  src/platform/                api.ts (HTTP, Telegram/guest auth, timeout 5 секунд),
+                               telegram.ts (cached SDK/initData, viewport), telegramBackButton.ts,
+                               analytics.ts (очередь в памяти + dev console, без подключения),
+                               sounds.ts, soundPreference.ts, accessibility.ts, share.ts
+  src/ui/                      BottomNav (четыре раздела), ScreenHeader, SoundToggle, TimerBar
+  src/features/round/          QuestionScreen, ResolutionScreen, MatchHud, OpenAnswerInput:
+                               вопрос и разбор, общие для соло и тренировки
+  src/features/hammer/         HammerGame и его чистые модули (intro, motion, strike)
+  src/features/solo/           основной цикл: SoloRun/SoloHud/SoloResult, useSoloRun,
+                               soloRunSession, soloRunFlow (чистые переходы), soloResultModel,
+                               soloRoundDelivery (retry одного идемпотентного запроса),
+                               clientMatchRules (runtime-проверка solo snapshots и server payload),
+                               useFriendInvite, friendDuelResult, RematchEntry, CategorySelect
+  src/features/{board,home,tiebreaker,myRuns,training,profile}/  экраны разделов и их модули
+  src/features/lastStand/      режим Last Stand (заморожен 2026-10-16)
   src/index.css                общие стили и более поздние V2-переопределения
   public/{sprites,sfx,flags-historic}/
 apps/api/
@@ -49,22 +47,20 @@ apps/api/
   src/auth/telegram.ts         проверка подписи и срока Telegram initData
   src/http/jsonBody.ts         ограниченное по UTF-8 байтам чтение JSON
   src/http/rateLimit.ts        общий адаптер Cloudflare RateLimit и IP-ключ
-  src/matches/bots.ts          BotProfile и фабрика снимка bot opponent
-  src/matches/repository.ts    D1-запросы создания, подбора и завершения
-  src/matches/validation.ts    HTTP-входы и проверка сохранённых snapshots
-  src/matches/types.ts         внутренний тип строки match_runs
-  src/routes/auth.ts           выдача/продление browser guest session
-  src/routes/soloRuns.ts       старт, answer/hammer, resume и таблица solo
-  src/routes/friendInvites.ts  «Позвать друга»: создание открытого приглашения
-  src/routes/rematch.ts        приглашение на реванш, согласие на уведомления
-  src/routes/myRuns.ts         история прохождений игрока
-  src/routes/share.ts          OG-страница и карточка результата
-  src/routes/lastStand.ts      Last Stand: старт, ответ, таблица
-  src/routes/system.ts         metadata, liveness/readiness
-  src/matches/{matchmaking,soloRepository,soloRoundsRepository,historyRepository}.ts
-                               подбор, покруговая запись, D1 solo и истории
+  src/http/system.ts           metadata, liveness/readiness
+  src/auth/auth.ts             выдача/продление browser guest session
+  src/solo/                    soloRuns.ts (старт, answer/hammer, resume, таблица solo),
+                               soloRepository/soloRoundsRepository (D1 solo), matchmaking (подбор),
+                               repository (создание, подбор и завершение), bots (BotProfile и снимок
+                               bot opponent), validation (HTTP-входы и сохранённые snapshots),
+                               types (внутренний тип строки match_runs)
+  src/rematch/                 friendInvites.ts («Позвать друга»), rematch.ts (реванш, согласие на уведомления)
+  src/myRuns/, src/profile/, src/training/, src/tiebreaker/, src/telemetry/
+                               по одному route и (где нужен) repository на фичу
+  src/share/share.ts           OG-страница и карточка результата
+  src/lastStand/lastStand.ts   Last Stand: старт, ответ, таблица
   src/notifications/           приглашения на реванш, Telegram-сообщения, плановый возврат просроченных
-  src/lastStand/, src/share/   Last Stand и рендер карточки результата
+  src/lastStand/, src/share/   Last Stand и рендер карточки результата (остальные файлы папок)
   migrations/0001_schema.sql    вся схема: 6 таблиц и 14 индексов, с причинами в комментариях
   wrangler.toml                Worker, D1, Rate Limiting binding и cron возврата приглашений
 packages/shared/src/
@@ -96,9 +92,9 @@ tests/soloRounds.test.ts        серверный answer/hammer и идемпо
 tests/soloBookkeeping.test.ts   захват записи, завершение и освобождение пары
 tests/requestLimits.test.ts      лимиты тела/полей и rate-limit маршрутов R2b
 tests/helpers/testD1.ts         in-memory SQLite adapter для API-тестов
-apps/web/src/lib/clientMatchRules.test.ts  runtime-проверка solo payload
-apps/web/src/lib/soloRunFlow.test.ts       чистые переходы покругового solo
-apps/web/src/lib/api.test.ts               HTTP payload и browser guest session
+apps/web/src/features/solo/clientMatchRules.test.ts  runtime-проверка solo payload
+apps/web/src/features/solo/soloRunFlow.test.ts       чистые переходы покругового solo
+apps/web/src/platform/api.test.ts               HTTP payload и browser guest session
 packages/shared/src/index.test.ts          целостность активных наборов
 scripts/smoke-local.mjs            изолированный Wrangler/D1 HTTP smoke
 scripts/preflight-production.mjs   production config → dry-run + exact web build
@@ -120,21 +116,21 @@ App → SoloRun → useSoloRun (React, сеть, retry) → soloRunFlow (чис�
 schema probe для readiness:
 
 ```text
-index → routes/system → D1 readiness
-     ├→ routes/auth → auth/guest
-     ├→ routes/soloRuns → auth/identity → auth/{telegram,guest}
+index → http/system → D1 readiness
+     ├→ auth/auth → auth/guest
+     ├→ solo/soloRuns → auth/identity → auth/{telegram,guest}
      │                 ├→ http/{rateLimit,jsonBody}
-     │                 ├→ matches/{matchmaking,validation}
-     │                 ├→ matches/{soloRepository,soloRoundsRepository}
+     │                 ├→ solo/{matchmaking,validation}
+     │                 ├→ solo/{soloRepository,soloRoundsRepository}
      │                 └→ shared/{soloRun,hammerRules}
-     └→ routes/{friendInvites,rematch,myRuns,lastStand,training,share}
+     └→ {rematch/{friendInvites,rematch},myRuns,lastStand,training,share,...}
 ```
 
-Соло-путь (`routes/soloRuns`, `friendInvites`, `rematch`, `myRuns`) устроен так же:
-SQL в `matches/*Repository` и `notifications/repository`, правила в shared.
+Соло-путь (`solo/soloRuns`, `rematch/*`, `myRuns`) устроен так же:
+SQL в `*Repository` и `notifications/repository`, правила в shared.
 
-Новый профиль бота добавляется в `matches/bots.ts`. Новый HTTP-сценарий — в
-`routes`; SQL остаётся в `repository`. Переход вопрос → разбор → skill → итог
+Новый профиль бота добавляется в `solo/bots.ts`. Новый HTTP-сценарий — в
+папке своей фичи; SQL остаётся в `repository`. Переход вопрос → разбор → skill → итог
 меняется и тестируется в `soloRunFlow`, а условия завершения и scoring — в shared.
 
 ## Соло-забег: действующий основной цикл
@@ -155,7 +151,7 @@ SQL в `matches/*Repository` и `notifications/repository`, правила в sh
 - **Старт и завершение:** `POST /api/solo-runs`, `POST /api/solo-runs/:id/answer`, `/hammer` (покруговая отправка), `GET /api/solo-runs/:id` (продолжение); `POST /api/training/questions`, `/check` (отработка ошибок);
   таблица за сутки — `GET /api/solo-leaderboard` (только дошедшие до цели, по
   категории и `solo_score`; индекс `idx_match_runs_solo_board`).
-- **Подбор:** `matches/matchmaking.ts` берёт свободную запись на несыгранном
+- **Подбор:** `solo/matchmaking.ts` берёт свободную запись на несыгранном
   игроком наборе из банка дня, иначе несыгранный набор с ботом, иначе любую
   свободную запись, иначе давнее всего сыгранный набор. Если игрок прошёл все
   наборы дня, клиент может прямо сказать, что набор повторяется.
@@ -186,7 +182,7 @@ SQL в `matches/*Repository` и `notifications/repository`, правила в sh
   `gp:<запись>:open|mc` и `gp:set-<набор>:<участник>`. Неизвестный id даёт `null`,
   как и раньше.
 - **Матч — пара (DEC-09).** Подбор отдаёт запись одному: `claimRecord` в
-  `matches/repository.ts` делает условный `UPDATE ... WHERE claimed_by IS NULL`
+  `solo/repository.ts` делает условный `UPDATE ... WHERE claimed_by IS NULL`
   и возвращает `changes > 0`. Это замена `SKIP LOCKED`, которого в D1 нет.
   Пул (`findGhostInSets`) берёт только записи с незанятым или просроченным
   захватом и только те, у которых `opponent_run_id IS NULL`: забег, уже

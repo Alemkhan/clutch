@@ -1,20 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import type { CategoryId, PracticeLevel } from '@clutch/shared';
-import { useGameState } from './lib/useGameState';
-import { HomeDashboard } from './components/HomeDashboard';
-import { Profile } from './components/Profile';
-import { TrainingHub } from './components/TrainingHub';
-import { RematchEntry } from './components/RematchEntry';
-import { readLaunchIntent, type LaunchIntent } from './lib/launchIntent';
-import { LastStand } from './components/LastStand';
-import { SoloRun, type SoloRematch } from './components/SoloRun';
-import { MyRuns } from './components/MyRuns';
-import { SoloBoard } from './components/SoloBoard';
-import { TiebreakerScreen } from './components/Tiebreaker';
-import { BottomNav, navTabForPhase, type NavTab } from './components/BottomNav';
-import { isSoloPlaying, type SoloStage } from './lib/soloRunFlow';
-import { useTelegramBackButton } from './lib/useTelegramBackButton';
+import { useGameState } from './app/useGameState';
+import { HomeDashboard } from './features/home/HomeDashboard';
+import { Profile } from './features/profile/Profile';
+import { TrainingHub } from './features/training/TrainingHub';
+import { RematchEntry } from './features/solo/RematchEntry';
+import { readLaunchIntent, type LaunchIntent } from './app/launchIntent';
+import { LastStand } from './features/lastStand/LastStand';
+import { SoloRun, type SoloRematch } from './features/solo/SoloRun';
+import { MyRuns } from './features/myRuns/MyRuns';
+import { SoloBoard } from './features/board/SoloBoard';
+import { TiebreakerScreen } from './features/tiebreaker/Tiebreaker';
+import { BottomNav, navTabForPhase, type NavTab } from './ui/BottomNav';
+import { isSoloPlaying, type SoloStage } from './features/solo/soloRunFlow';
+import { useTelegramBackButton } from './platform/useTelegramBackButton';
 
 const screenTransition = {
   initial: { opacity: 0, y: 8 },

@@ -1,0 +1,88 @@
+import { readFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { generateQuestionById } from '@clutch/shared';
+import { CategorySelect } from '../features/solo/CategorySelect';
+import { LastStandIntro, LastStandLeaderboard } from '../features/lastStand/LastStand';
+import { Profile } from '../features/profile/Profile';
+import { ScreenHeader } from './ScreenHeader';
+import { Training } from '../features/training/Training';
+import { TrainingMenu } from '../features/training/TrainingHub';
+
+const noop = vi.fn();
+const BUTTON = /<button type="button" class="back-btn"/g;
+
+function backButtons(html: string): number {
+  return (html.match(BUTTON) ?? []).length;
+}
+
+describe('ScreenHeader', () => {
+  beforeEach(() => vi.stubGlobal('localStorage', {
+    getItem() { throw new Error('denied'); },
+    setItem() { throw new Error('denied'); },
+  }));
+  afterEach(() => vi.unstubAllGlobals());
+
+  it('renders a typed button with a visible label and an optional title', () => {
+    const html = renderToStaticMarkup(<ScreenHeader onBack={noop} title="Заголовок" />);
+    expect(html).toContain('<header class="screen-header">');
+    expect(html).toContain('<button type="button" class="back-btn">');
+    expect(html).toContain('<span aria-hidden="true">←</span> Назад');
+    expect(html).toContain('<h1 class="screen-title">Заголовок</h1>');
+  });
+
+  it('keeps a more precise accessible name and a custom label when given', () => {
+    const html = renderToStaticMarkup(
+      <ScreenHeader onBack={noop} backAriaLabel="Закрыть таблицу дня" backLabel="Выйти" titleAs="h2" title="Т" />,
+    );
+    expect(html).toContain('aria-label="Закрыть таблицу дня"');
+    expect(html).toContain('>Выйти<');
+    expect(html).not.toContain('←');
+    expect(html).toContain('<h2 class="screen-title">Т</h2>');
+  });
+
+  it('draws no header or button without onBack, so root tabs keep only their title', () => {
+    const html = renderToStaticMarkup(<ScreenHeader title="Корень" />);
+    expect(html).toBe('<h1 class="screen-title">Корень</h1>');
+    expect(renderToStaticMarkup(<ScreenHeader />)).toBe('');
+  });
+
+  it('has no back button on the root tabs: Profile, My runs and Training', () => {
+    for (const html of [
+      renderToStaticMarkup(<Profile />),
+      renderToStaticMarkup(<TrainingMenu summary={{ status: 'ready', count: 0, ids: [] }} onBots={noop} onMistakes={noop} />),
+    ]) {
+      expect(html).not.toContain('back-btn');
+      expect(html).not.toContain('Назад');
+    }
+  });
+
+  it('draws the back button of all four nested screens with the same component', () => {
+    const question = generateQuestionById('capital_li')!;
+    const screens = [
+      renderToStaticMarkup(<CategorySelect onSelect={noop} onBack={noop} />),
+      renderToStaticMarkup(<Training questions={[question]} check={vi.fn()} onBack={noop} />),
+      renderToStaticMarkup(<LastStandIntro onStart={noop} onLeaderboard={noop} onBack={noop} />),
+      renderToStaticMarkup(
+        <LastStandLeaderboard view={{ status: 'loading' }} onRetry={noop} onClose={noop} />,
+      ),
+    ];
+    for (const html of screens) {
+      expect(backButtons(html)).toBe(1);
+      expect(html).toContain('<header class="screen-header');
+    }
+  });
+
+  it('is the only place that writes the back button markup', () => {
+    const root = fileURLToPath(new URL('..', import.meta.url));
+    const walk = (dir: string): string[] =>
+      readdirSync(dir, { withFileTypes: true }).flatMap((entry) =>
+        entry.isDirectory() ? walk(join(dir, entry.name)) : [join(dir, entry.name)]);
+    const offenders = walk(root)
+      .filter((file) => file.endsWith('.tsx') && !file.endsWith('.test.tsx') && !file.endsWith('ScreenHeader.tsx'))
+      .filter((file) => readFileSync(file, 'utf8').includes('back-btn'));
+    expect(offenders).toEqual([]);
+  });
+});

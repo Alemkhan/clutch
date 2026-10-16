@@ -20,7 +20,7 @@ import {
   type StartSoloRunResponse,
 } from '@clutch/shared';
 import app from '../apps/api/src/index';
-import { PRACTICE_BOT_PROFILES, createBotOpponent } from '../apps/api/src/matches/bots';
+import { PRACTICE_BOT_PROFILES, createBotOpponent } from '../apps/api/src/solo/bots';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 

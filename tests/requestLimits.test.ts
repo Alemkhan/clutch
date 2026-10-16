@@ -6,7 +6,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import app from '../apps/api/src/index';
 import { readJsonBody } from '../apps/api/src/http/jsonBody';
 import { MAX_DAILY_SET_SIZE } from '@clutch/shared';
-import { isRoundInput } from '../apps/api/src/matches/validation';
+import { isRoundInput } from '../apps/api/src/solo/validation';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';

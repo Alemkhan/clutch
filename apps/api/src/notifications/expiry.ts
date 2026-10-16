@@ -1,4 +1,4 @@
-import { releaseExpiredClaims } from '../matches/repository';
+import { releaseExpiredClaims } from '../solo/repository';
 import { releaseExpiredInvites } from './repository';
 
 /** Пачка за один проход: не упираемся в лимиты воркера; остаток уйдёт со следующим запуском. */

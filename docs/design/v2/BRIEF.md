@@ -19,13 +19,13 @@
 
 | Макет | Экран в коде |
 | --- | --- |
-| `Main.dc.html`, `HomeAnswered.dc.html` | `HomeDashboard.tsx`, `TiebreakerCard.tsx` |
-| `Reveal.dc.html` | `Tiebreaker.tsx` (вскрытие) |
-| `HammerResult.dc.html` | `HammerGame.tsx`, `SoloHud.tsx` / `MatchHud.tsx` |
-| `Resolution.dc.html` | `ResolutionScreen.tsx` |
-| `Result.dc.html` | `SoloResult.tsx` |
-| `MyRuns.dc.html` | `MyRuns.tsx` |
-| `Board.dc.html` | `SoloBoard.tsx` |
+| `Main.dc.html`, `HomeAnswered.dc.html` | `features/home/HomeDashboard.tsx`, `features/tiebreaker/TiebreakerCard.tsx` |
+| `Reveal.dc.html` | `features/tiebreaker/Tiebreaker.tsx` (вскрытие) |
+| `HammerResult.dc.html` | `features/hammer/HammerGame.tsx`, `features/solo/SoloHud.tsx` / `features/round/MatchHud.tsx` |
+| `Resolution.dc.html` | `features/round/ResolutionScreen.tsx` |
+| `Result.dc.html` | `features/solo/SoloResult.tsx` |
+| `MyRuns.dc.html` | `features/myRuns/MyRuns.tsx` |
+| `Board.dc.html` | `features/board/SoloBoard.tsx` |
 
 ## Сетка v2 (общая для всех задач)
 
@@ -83,7 +83,7 @@ hex-фолбэком). Открыто: HUD в макетах без соперн
 
 ### R26c · Разбор: одна кнопка внизу
 
-`ResolutionScreen.tsx`: внизу всегда кнопка — «К мини-игре →» при верном ответе,
+`features/round/ResolutionScreen.tsx`: внизу всегда кнопка — «К мини-игре →» при верном ответе,
 «Следующий вопрос →» при неверном; над ней строка «В этом раунде без мини-игры».
 Тап по фону продолжает работать, кроме открытой панели репорта. «Сообщить о
 проблеме» — текстовая ссылка. Свой и правильный ответ — две строки одной карточки,
@@ -104,7 +104,7 @@ hex-фолбэком). Открыто: HUD в макетах без соперн
 
 ### R26e · Итог забега: квитанция записи
 
-`SoloResult.tsx`: под заголовком — строка «за N кругов · категория», три числа
+`features/solo/SoloResult.tsx`: под заголовком — строка «за N кругов · категория», три числа
 (верных ответов, идеальных ударов, место в таблице дня), карточка «Твоя запись ·
 ждёт соперника» с текстом про «Партии» и Telegram. Кнопки: «Сыграть ещё»
 главная, «Позвать друга» и «Мои партии» — вторичные в одну строку.
