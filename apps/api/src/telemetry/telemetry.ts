@@ -69,78 +69,136 @@ function readPayload(value: unknown): { ok: true; json: string | null } | { ok: 
   return json.length <= PAYLOAD_JSON_MAX ? { ok: true, json } : { ok: false, reason: 'too_long' };
 }
 
+
 /** Репорты о проблемах и минимальная аналитика (beta-cut R22, п. 5): приём без влияния на игру. */
 export function registerTelemetryRoutes(app: Hono<{ Bindings: Env }>): void {
-  app.post('/api/reports', async (c) => {
-    const identity = await authenticate(c, 'reports');
-    if (identity instanceof Response) return identity;
-    const parsed = await readJsonBody(c.req.raw, REPORT_BODY_MAX_BYTES);
-    if (!parsed.ok) return c.json({ error: parsed.error }, parsed.status);
-    if (!parsed.value || typeof parsed.value !== 'object') {
-      return c.json({ error: 'Invalid report.', reason: 'invalid_report' }, 400);
-    }
-    const body = parsed.value as Record<string, unknown>;
-    const bad = (reason: string) => c.json({ error: 'Invalid report.', reason }, 400);
+  app.post('/api/reports', handleReport);
+  app.post('/api/events', handleEvent);
+}
 
-    const questionId = readText(body.questionId, QUESTION_ID_MAX);
-    const runId = readText(body.runId, RUN_ID_MAX);
-    const category = readText(body.category, CATEGORY_MAX);
-    const playerAnswer = readText(body.playerAnswer, PLAYER_ANSWER_MAX);
-    const comment = readText(body.comment, COMMENT_MAX);
-    if (typeof body.mode !== 'string' || !REPORT_MODES.has(body.mode)) return bad('invalid_mode');
-    if (typeof body.kind !== 'string' || !REPORT_KINDS.has(body.kind)) return bad('invalid_kind');
-    if (typeof body.verdict !== 'boolean') return bad('invalid_report');
-    // questionId обязателен: его отсутствие readText превращает в null.
-    if (questionId === null) return bad('invalid_report');
-    if (isTextOutcomeError(questionId)) return bad(questionId === 'too_long' ? 'too_long' : 'invalid_report');
-    if (isTextOutcomeError(runId)) return bad(runId === 'too_long' ? 'too_long' : 'invalid_report');
-    if (isTextOutcomeError(category)) return bad(category === 'too_long' ? 'too_long' : 'invalid_report');
-    if (isTextOutcomeError(playerAnswer)) return bad(playerAnswer === 'too_long' ? 'too_long' : 'invalid_report');
-    if (isTextOutcomeError(comment)) return bad(comment === 'too_long' ? 'too_long' : 'invalid_report');
+/** Причина отказа для поля, не прошедшего readText: too_long как есть, остальное — общая причина запроса. */
+const textFailure = (outcome: 'invalid' | 'too_long', fallback: string): string =>
+  outcome === 'too_long' ? 'too_long' : fallback;
 
-    await c.env.DB.prepare(`
-      INSERT INTO question_reports (
-        id, player_id, question_id, run_id, category, mode, kind, verdict, player_answer, comment, created_at
-      ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)
-    `).bind(
-      crypto.randomUUID(),
-      identity.playerId,
-      questionId,
-      runId,
-      category,
-      body.mode,
-      body.kind,
-      body.verdict ? 1 : 0,
-      playerAnswer,
-      comment,
-      Date.now(),
-    ).run();
-    return c.json({ ok: true }, 201);
-  });
+interface ReportFields {
+  questionId: string;
+  runId: string | null;
+  category: string | null;
+  mode: string;
+  kind: string;
+  verdict: boolean;
+  playerAnswer: string | null;
+  comment: string | null;
+}
 
-  app.post('/api/events', async (c) => {
-    const identity = await authenticate(c, 'events');
-    if (identity instanceof Response) return identity;
-    const parsed = await readJsonBody(c.req.raw, EVENT_BODY_MAX_BYTES);
-    if (!parsed.ok) return c.json({ error: parsed.error }, parsed.status);
-    if (!parsed.value || typeof parsed.value !== 'object') {
-      return c.json({ error: 'Invalid event.', reason: 'invalid_event' }, 400);
-    }
-    const body = parsed.value as Record<string, unknown>;
-    if (typeof body.event !== 'string' || body.event.length === 0 || body.event.length > EVENT_NAME_MAX
-      || !EVENT_NAMES.has(body.event)) {
-      return c.json({ error: 'Unknown analytics event.', reason: 'unknown_event' }, 400);
-    }
-    const runId = readText(body.runId, RUN_ID_MAX);
-    const questionId = readText(body.questionId, QUESTION_ID_MAX);
-    if (isTextOutcomeError(runId)) return c.json({ error: 'Invalid event.', reason: runId === 'too_long' ? 'too_long' : 'invalid_event' }, 400);
-    if (isTextOutcomeError(questionId)) return c.json({ error: 'Invalid event.', reason: questionId === 'too_long' ? 'too_long' : 'invalid_event' }, 400);
-    const payload = readPayload(body.payload);
-    if (!payload.ok) return c.json({ error: 'Invalid event payload.', reason: payload.reason }, 400);
+type ReportParse = { ok: true; fields: ReportFields } | { ok: false; reason: string };
 
-    await c.env.DB.prepare(
-      'INSERT INTO analytics_events (player_id, event, run_id, question_id, payload_json, created_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6)',
-    ).bind(identity.playerId, body.event, runId, questionId, payload.json, Date.now()).run();
-    return c.json({ ok: true }, 202);
-  });
+function parseReport(body: Record<string, unknown>): ReportParse {
+  const questionId = readText(body.questionId, QUESTION_ID_MAX);
+  const runId = readText(body.runId, RUN_ID_MAX);
+  const category = readText(body.category, CATEGORY_MAX);
+  const playerAnswer = readText(body.playerAnswer, PLAYER_ANSWER_MAX);
+  const comment = readText(body.comment, COMMENT_MAX);
+  if (typeof body.mode !== 'string' || !REPORT_MODES.has(body.mode)) return { ok: false, reason: 'invalid_mode' };
+  if (typeof body.kind !== 'string' || !REPORT_KINDS.has(body.kind)) return { ok: false, reason: 'invalid_kind' };
+  if (typeof body.verdict !== 'boolean') return { ok: false, reason: 'invalid_report' };
+  // questionId обязателен: его отсутствие readText превращает в null.
+  if (questionId === null) return { ok: false, reason: 'invalid_report' };
+  for (const field of [questionId, runId, category, playerAnswer, comment]) {
+    if (isTextOutcomeError(field)) return { ok: false, reason: textFailure(field, 'invalid_report') };
+  }
+  return {
+    ok: true,
+    // Ошибочные значения отсеяны циклом выше.
+    fields: {
+      questionId: questionId as string,
+      runId: runId as string | null,
+      category: category as string | null,
+      mode: body.mode,
+      kind: body.kind,
+      verdict: body.verdict,
+      playerAnswer: playerAnswer as string | null,
+      comment: comment as string | null,
+    },
+  };
+}
+
+async function insertReport(c: AppContext, playerId: string, report: ReportFields): Promise<void> {
+  await c.env.DB.prepare(`
+    INSERT INTO question_reports (
+      id, player_id, question_id, run_id, category, mode, kind, verdict, player_answer, comment, created_at
+    ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)
+  `).bind(
+    crypto.randomUUID(),
+    playerId,
+    report.questionId,
+    report.runId,
+    report.category,
+    report.mode,
+    report.kind,
+    report.verdict ? 1 : 0,
+    report.playerAnswer,
+    report.comment,
+    Date.now(),
+  ).run();
+}
+
+async function handleReport(c: AppContext): Promise<Response> {
+  const identity = await authenticate(c, 'reports');
+  if (identity instanceof Response) return identity;
+  const parsed = await readJsonBody(c.req.raw, REPORT_BODY_MAX_BYTES);
+  if (!parsed.ok) return c.json({ error: parsed.error }, parsed.status);
+  if (!parsed.value || typeof parsed.value !== 'object') {
+    return c.json({ error: 'Invalid report.', reason: 'invalid_report' }, 400);
+  }
+  const report = parseReport(parsed.value as Record<string, unknown>);
+  if (!report.ok) return c.json({ error: 'Invalid report.', reason: report.reason }, 400);
+
+  await insertReport(c, identity.playerId, report.fields);
+  return c.json({ ok: true }, 201);
+}
+
+interface EventFields {
+  event: string;
+  runId: string | null;
+  questionId: string | null;
+  payloadJson: string | null;
+}
+
+type EventParse = { ok: true; fields: EventFields } | { ok: false; error: string; reason: string };
+
+function parseEvent(body: Record<string, unknown>): EventParse {
+  if (typeof body.event !== 'string' || body.event.length === 0 || body.event.length > EVENT_NAME_MAX
+    || !EVENT_NAMES.has(body.event)) {
+    return { ok: false, error: 'Unknown analytics event.', reason: 'unknown_event' };
+  }
+  const runId = readText(body.runId, RUN_ID_MAX);
+  const questionId = readText(body.questionId, QUESTION_ID_MAX);
+  if (isTextOutcomeError(runId)) {
+    return { ok: false, error: 'Invalid event.', reason: textFailure(runId, 'invalid_event') };
+  }
+  if (isTextOutcomeError(questionId)) {
+    return { ok: false, error: 'Invalid event.', reason: textFailure(questionId, 'invalid_event') };
+  }
+  const payload = readPayload(body.payload);
+  if (!payload.ok) return { ok: false, error: 'Invalid event payload.', reason: payload.reason };
+  return { ok: true, fields: { event: body.event, runId, questionId, payloadJson: payload.json } };
+}
+
+async function handleEvent(c: AppContext): Promise<Response> {
+  const identity = await authenticate(c, 'events');
+  if (identity instanceof Response) return identity;
+  const parsed = await readJsonBody(c.req.raw, EVENT_BODY_MAX_BYTES);
+  if (!parsed.ok) return c.json({ error: parsed.error }, parsed.status);
+  if (!parsed.value || typeof parsed.value !== 'object') {
+    return c.json({ error: 'Invalid event.', reason: 'invalid_event' }, 400);
+  }
+  const event = parseEvent(parsed.value as Record<string, unknown>);
+  if (!event.ok) return c.json({ error: event.error, reason: event.reason }, 400);
+
+  const { fields } = event;
+  await c.env.DB.prepare(
+    'INSERT INTO analytics_events (player_id, event, run_id, question_id, payload_json, created_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6)',
+  ).bind(identity.playerId, fields.event, fields.runId, fields.questionId, fields.payloadJson, Date.now()).run();
+  return c.json({ ok: true }, 202);
 }

@@ -1,4 +1,4 @@
-import type { Hono } from 'hono';
+import type { Context, Hono } from 'hono';
 import type { Env } from '../env';
 import type { ShareCardData, ShareOutcome } from './cardLayout';
 
@@ -72,65 +72,74 @@ function parseShareQuery(query: Record<string, string>): ParsedShare {
 const CARD_CACHE_CONTROL = 'public, max-age=31536000, immutable';
 
 export function registerShareRoutes(app: Hono<{ Bindings: Env }>): void {
-  app.get('/api/share/card.png', async (c) => {
-    const parsed = parseShareQuery(c.req.query());
-    if (!parsed.ok) return parsed.response;
-    const { data } = parsed;
+  app.get('/api/share/card.png', handleShareCard);
+  app.get('/api/share', handleSharePage);
+}
 
-    // Cache API: повторные обращения Телеграма не перерисовывают картинку.
-    const cache = typeof caches !== 'undefined' ? (caches as unknown as { default?: Cache }).default : undefined;
-    try {
-      const hit = await cache?.match(c.req.url);
-      if (hit) return hit;
-    } catch {
-      // кеш недоступен — рисуем заново
-    }
+type AppContext = Context<{ Bindings: Env }>;
 
-    try {
-      const { renderShareCardPng } = await import('./workerRenderer');
-      const png = await renderShareCardPng(data);
-      const response = new Response(png, {
-        status: 200,
-        headers: { 'Content-Type': 'image/png', 'Cache-Control': CARD_CACHE_CONTROL },
-      });
-      try {
-        const store = cache?.put(c.req.url, response.clone());
-        if (store) c.executionCtx.waitUntil(store.catch(() => undefined));
-      } catch {
-        // нет executionCtx или кеша — ответ всё равно отдаём
-      }
-      return response;
-    } catch (error) {
-      console.error('share card render failed', error);
-      // Сбой шрифта или рендера: откат на статичную картинку, превью не ломается.
-      const origin = resolveOrigin(c.env.PUBLIC_WEB_ORIGIN, c.req.url);
-      return new Response(null, {
-        status: 302,
-        headers: { Location: `${origin}/share/${data.outcome}.png`, 'Cache-Control': 'public, max-age=300' },
-      });
-    }
-  });
+function defaultCache(): Cache | undefined {
+  return typeof caches !== 'undefined' ? (caches as unknown as { default?: Cache }).default : undefined;
+}
 
+/** Кладёт отрисованную картинку в кеш после ответа; без кеша или executionCtx ответ всё равно отдаётся. */
+function storeInCache(c: AppContext, cache: Cache | undefined, response: Response): void {
+  try {
+    const store = cache?.put(c.req.url, response.clone());
+    if (store) c.executionCtx.waitUntil(store.catch(() => undefined));
+  } catch {
+    // нет executionCtx или кеша — ответ всё равно отдаём
+  }
+}
 
-  app.get('/api/share', (c) => {
-    const parsed = parseShareQuery(c.req.query());
-    if (!parsed.ok) return parsed.response;
-    const { outcome, p, q, name } = parsed.data;
+async function handleShareCard(c: AppContext): Promise<Response> {
+  const parsed = parseShareQuery(c.req.query());
+  if (!parsed.ok) return parsed.response;
+  const { data } = parsed;
 
-    // Адрес назначения берётся только из конфигурации, не из запроса.
-    const target = c.env.TELEGRAM_MINI_APP_LINK?.trim();
-    if (!target) return text('Ссылка на приложение не настроена', 503);
+  // Cache API: повторные обращения Телеграма не перерисовывают картинку.
+  const cache = defaultCache();
+  try {
+    const hit = await cache?.match(c.req.url);
+    if (hit) return hit;
+  } catch {
+    // кеш недоступен — рисуем заново
+  }
 
+  try {
+    const { renderShareCardPng } = await import('./workerRenderer');
+    const png = await renderShareCardPng(data);
+    const response = new Response(png, {
+      status: 200,
+      headers: { 'Content-Type': 'image/png', 'Cache-Control': CARD_CACHE_CONTROL },
+    });
+    storeInCache(c, cache, response);
+    return response;
+  } catch (error) {
+    console.error('share card render failed', error);
+    // Сбой шрифта или рендера: откат на статичную картинку, превью не ломается.
     const origin = resolveOrigin(c.env.PUBLIC_WEB_ORIGIN, c.req.url);
-    const title = escapeHtml(shareTitle(outcome, p, q, name));
-    const description = escapeHtml(DESCRIPTION);
-    const cardParams = new URLSearchParams({ o: outcome, p: String(p), q: String(q) });
-    if (name) cardParams.set('n', name);
-    const image = escapeHtml(`${origin}/api/share/card.png?${cardParams.toString()}`);
-    const href = escapeHtml(target);
-    const scriptTarget = JSON.stringify(target).replace(/</g, '\\u003c');
+    return new Response(null, {
+      status: 302,
+      headers: { Location: `${origin}/share/${data.outcome}.png`, 'Cache-Control': 'public, max-age=300' },
+    });
+  }
+}
 
-    const html = `<!doctype html>
+function renderSharePageHtml(
+  { outcome, p, q, name }: ShareCardData,
+  target: string,
+  origin: string,
+): string {
+  const title = escapeHtml(shareTitle(outcome, p, q, name));
+  const description = escapeHtml(DESCRIPTION);
+  const cardParams = new URLSearchParams({ o: outcome, p: String(p), q: String(q) });
+  if (name) cardParams.set('n', name);
+  const image = escapeHtml(`${origin}/api/share/card.png?${cardParams.toString()}`);
+  const href = escapeHtml(target);
+  const scriptTarget = JSON.stringify(target).replace(/</g, '\\u003c');
+
+  return `<!doctype html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
@@ -153,10 +162,19 @@ export function registerShareRoutes(app: Hono<{ Bindings: Env }>): void {
 <script>window.location.replace(${scriptTarget});</script>
 </body>
 </html>`;
+}
 
-    return new Response(html, {
-      status: 200,
-      headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' },
-    });
+function handleSharePage(c: AppContext): Response {
+  const parsed = parseShareQuery(c.req.query());
+  if (!parsed.ok) return parsed.response;
+
+  // Адрес назначения берётся только из конфигурации, не из запроса.
+  const target = c.env.TELEGRAM_MINI_APP_LINK?.trim();
+  if (!target) return text('Ссылка на приложение не настроена', 503);
+
+  const origin = resolveOrigin(c.env.PUBLIC_WEB_ORIGIN, c.req.url);
+  return new Response(renderSharePageHtml(parsed.data, target, origin), {
+    status: 200,
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' },
   });
 }
