@@ -2,6 +2,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { CategoryId, SoloLeaderboardEntry, SoloLeaderboardResponse, SoloLeaderboardStanding } from '@clutch/shared';
 import { msUntilDayEnd, resetLabel } from '../lib/tiebreakerClock';
+import { finishedText, initials, roundsShort } from '../lib/myRunsView';
 import { SoloBoardView, standingHint, type SoloBoardState } from './SoloBoard';
 
 const NOW = Date.UTC(2026, 9, 13, 12, 0, 0);
@@ -55,20 +56,21 @@ describe('the day board', () => {
   it('lists the top with places and rounds, not raw scores', () => {
     const html = render(ready({ entries: [entry('Ann', 7), entry('Боб', 9)] }));
     expect(html).toContain('Ann');
-    expect(html).toContain('7 кругов');
-    expect(html).toContain('9 кругов');
+    expect(html).toContain('>7 кр.<');
+    expect(html).toContain('>9 кр.<');
+    expect(html).toContain('>AN<');
+    expect(html).toContain('>БО<');
     // Сырой счёт игроку не показывается: 0.875 ни о чём не говорит.
     expect(html).not.toContain('0.875');
   });
 
   it('shows my own place even when I am far outside the listed top', () => {
     const html = render(ready({ entries: [entry('Ann', 7)], you: standing() }));
-    expect(html).toContain('37-й');
-    expect(html).toContain('из 140');
+    expect(html).toMatch(/solo-board-you-rank">37</);
     expect(html).toContain('Сыграть ещё набор');
-    expect(html).toContain('11 кругов');
+    expect(html).toContain('Ты: 11 кругов · из 140 дошедших');
     // Цель достижимая, а не «попади в топ-50».
-    expect(html).toContain('До 36-го места — один круг.');
+    expect(html).toContain('До 36-го места — один круг<');
   });
 
   it('says plainly when my run is not in today\'s board at all', () => {
@@ -87,6 +89,10 @@ describe('the day board', () => {
     const mine = standing({ rank: 1, total: 3, entry: entry('Я', 7), roundsToNext: null });
     const html = render(ready({ entries: [entry('Я', 7), entry('Ann', 9)], you: mine }));
     expect(html).toContain('solo-board-row mine');
+    // В своей строке — «Ты» и «ТЫ» вместо имени и его инициалов; имя остаётся в title.
+    expect(html).toContain('>ТЫ<');
+    expect(html).toContain('title="Я">Ты<');
+    expect(html).toContain('Ты первый сегодня<');
   });
 
   it('survives a long name', () => {
@@ -114,7 +120,7 @@ describe('the reset line and the footer', () => {
   });
 
   it('keeps the tie-break rule under the list', () => {
-    expect(render(ready({ entries: [entry('Ann', 7)] }))).toContain('При равных кругах выше тот, кто быстрее.');
+    expect(render(ready({ entries: [entry('Ann', 7)] }))).toContain('При равных кругах выше тот, кто быстрее<');
     expect(render(ready())).not.toContain('При равных кругах');
   });
 
@@ -128,12 +134,37 @@ describe('the reset line and the footer', () => {
 
 describe('the hint under my place', () => {
   it('counts the rounds needed to pass the player above', () => {
-    expect(standingHint(standing({ rank: 5, roundsToNext: 1 }))).toBe('До 4-го места — один круг.');
-    expect(standingHint(standing({ rank: 5, roundsToNext: 2 }))).toBe('До 4-го места — 2 круга.');
-    expect(standingHint(standing({ rank: 9, roundsToNext: 5 }))).toBe('До 8-го места — 5 кругов.');
+    expect(standingHint(standing({ rank: 5, roundsToNext: 1 }))).toBe('До 4-го места — один круг');
+    expect(standingHint(standing({ rank: 5, roundsToNext: 2 }))).toBe('До 4-го места — 2 круга');
+    expect(standingHint(standing({ rank: 9, roundsToNext: 5 }))).toBe('До 8-го места — 5 кругов');
   });
 
   it('says there is nobody above the first place', () => {
-    expect(standingHint(standing({ rank: 1, roundsToNext: null }))).toBe('Ты первый сегодня.');
+    expect(standingHint(standing({ rank: 1, roundsToNext: null }))).toBe('Ты первый сегодня');
+  });
+});
+
+describe('the list helpers', () => {
+  it('declines «дошедший» by the count', () => {
+    expect(finishedText(1)).toBe('из 1 дошедшего');
+    expect(finishedText(3)).toBe('из 3 дошедших');
+    expect(finishedText(11)).toBe('из 11 дошедших');
+    expect(finishedText(21)).toBe('из 21 дошедшего');
+    expect(finishedText(41)).toBe('из 41 дошедшего');
+    expect(finishedText(111)).toBe('из 111 дошедших');
+    expect(finishedText(12)).toBe('из 12 дошедших');
+    expect(finishedText(140)).toBe('из 140 дошедших');
+  });
+
+  it('takes two initials: the code of an anonymous player, otherwise the first letters', () => {
+    expect(initials('Игрок 5cb9')).toBe('B9');
+    expect(initials('Анна')).toBe('АН');
+    expect(initials('x')).toBe('X');
+    expect(initials('😀😀a')).toBe('😀😀');
+    expect(initials('  ')).toBe('?');
+  });
+
+  it('shortens rounds for the list', () => {
+    expect(roundsShort(7)).toBe('7 кр.');
   });
 });

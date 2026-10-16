@@ -142,7 +142,7 @@ describe('resolution layout and one-shot continue', () => {
     expect(out).toContain('В этом раунде без мини-игры');
     expect(out).toContain('Следующий вопрос');
     expect(out).toContain('class="resolution-answers"');
-    expect(out.indexOf('Твой ответ')).toBeLessThan(out.indexOf('Правильный ответ'));
+    expect(out.indexOf('Твой ответ')).toBeLessThan(out.indexOf('Правильный'));
     expect(out.indexOf('В этом раунде без мини-игры')).toBeLessThan(out.indexOf('Следующий вопрос'));
   });
 

@@ -81,11 +81,41 @@ export function runRoundsLine(run: MyRunSummary): string {
   return typeof run.opponentRoundsPlayed === 'number' ? `${own} против ${run.opponentRoundsPlayed}` : own;
 }
 
-/** «Обошёл тебя: 5 кругов против твоих 9»; без кругов с обеих сторон — null. */
-export function inviteRoundsLine(invite: Pick<MyRematchInvite, 'challengerRoundsPlayed' | 'recipientRoundsPlayed'>): string | null {
+/** Части строки вызова: выделенное «N кругов» показывается жирным. Нет кругов с обеих сторон — null. */
+export function inviteRoundsParts(
+  invite: Pick<MyRematchInvite, 'challengerRoundsPlayed' | 'recipientRoundsPlayed'>,
+): { lead: string; strong: string; rest: string } | null {
   const { challengerRoundsPlayed: theirs, recipientRoundsPlayed: yours } = invite;
   if (typeof theirs !== 'number' || typeof yours !== 'number') return null;
-  return `Обошёл тебя: ${soloRoundsText(theirs)} против твоих ${yours}`;
+  return { lead: 'Обошёл тебя: ', strong: soloRoundsText(theirs), rest: ` против твоих ${yours}` };
+}
+
+/** «Обошёл тебя: 5 кругов против твоих 9»; без кругов с обеих сторон — null. */
+export function inviteRoundsLine(invite: Pick<MyRematchInvite, 'challengerRoundsPlayed' | 'recipientRoundsPlayed'>): string | null {
+  const parts = inviteRoundsParts(invite);
+  return parts && `${parts.lead}${parts.strong}${parts.rest}`;
+}
+
+/** «из 1 дошедшего», «из 3 дошедших», «из 21 дошедшего»: родительный падеж, ед. ч. только для …1 (кроме 11). */
+export function finishedText(total: number): string {
+  const lastTwo = total % 100;
+  return `из ${total} ${total % 10 === 1 && lastTwo !== 11 ? 'дошедшего' : 'дошедших'}`;
+}
+
+/** Короткая запись кругов в списке таблицы: «7 кр.». */
+export function roundsShort(count: number): string {
+  return `${count} кр.`;
+}
+
+/**
+ * Инициалы для квадрата-аватара. «Игрок 5cb9» у всех начинается одинаково, поэтому для безымянных
+ * берутся последние два знака кода, как в макете; иначе — первые два знака имени.
+ */
+export function initials(name: string): string {
+  const trimmed = name.trim();
+  const anonymous = /^Игрок\s+(\S+)$/u.exec(trimmed);
+  const chars = Array.from(anonymous ? anonymous[1].slice(-2) : trimmed).slice(0, 2);
+  return (chars.join('') || '?').toLocaleUpperCase('ru-RU');
 }
 
 export function runSummary(run: MyRunSummary): string {

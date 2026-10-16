@@ -44,7 +44,8 @@ describe('my runs screen', () => {
     expect(html).not.toContain('screen-header');
     expect(html).not.toContain('back-btn');
     expect(html).not.toContain('Назад');
-    expect(html).toContain('Мои партии');
+    expect(html).toContain('>Партии<');
+    expect(html).not.toContain('Мои партии');
     expect(html).toContain('role="status"');
   });
 
@@ -76,7 +77,8 @@ describe('my runs screen', () => {
     expect(html).toContain('>Не дошёл<');
     expect(html).toContain('Сегодня, 14:00');
     expect(html).toContain('Вчера, 09:00');
-    expect(html).toContain('против Ann');
+    expect(html).toContain(' · Ann');
+    expect(html).not.toContain('против Ann');
     expect(html).not.toMatch(/[Тт]емп|эталон|score|par\b/);
   });
 
@@ -94,7 +96,7 @@ describe('my runs screen', () => {
     expect(html).toContain('>Поражение<');
     // Без кругов соперника — только свои.
     expect(html).toContain('>20 кругов<');
-    expect(html).toContain('География · Сегодня, 14:00 · против Ann');
+    expect(html).toContain('География · Сегодня, 14:00 · Ann');
     // История — одна карточка, а не стопка.
     expect(html.match(/my-runs-card/g)).toHaveLength(1);
   });
@@ -104,6 +106,7 @@ describe('my runs screen', () => {
     expect(html).toContain('Ann зовёт на реванш');
     expect(html).toContain('Ещё 5 ч');
     expect(html).toContain('Языки · 100% против 60%');
+    expect(html).toContain('<h2 class="my-runs-heading">Вызовы</h2>');
     expect(html).toContain('my-run-invite');
     expect(html).toContain('Принять реванш');
     // Без кругов обеих сторон строки про круги нет.
@@ -112,8 +115,27 @@ describe('my runs screen', () => {
 
   it('tells how many rounds the challenger beat you by', () => {
     const html = render(ready([], [invite({ challengerRoundsPlayed: 5, recipientRoundsPlayed: 9 })]));
-    expect(html).toContain('Обошёл тебя: 5 кругов против твоих 9');
+    expect(html).toContain('Обошёл тебя: <strong>5 кругов</strong> против твоих 9 · Языки');
+    expect(html).not.toContain('100% против');
     expect(render(ready([], [invite({ challengerRoundsPlayed: 5, recipientRoundsPlayed: null })]))).not.toContain('Обошёл тебя');
+  });
+
+  it('names the history section and puts each outcome in a pill with its own class', () => {
+    const rival = { kind: 'player', displayName: 'Ann' } as const;
+    const html = render(ready([
+      run({ runId: 'w', outcome: 'player', opponent: rival }),
+      run({ runId: 'l', outcome: 'opponent', opponent: rival }),
+      run({ runId: 't', outcome: 'tie', opponent: rival }),
+      run({ runId: 'a' }),
+      run({ runId: 'x', reachedTarget: false, progress: 64 }),
+    ]));
+    expect(html).toContain('<h2 class="my-runs-heading">История</h2>');
+    expect(html).not.toContain('Вызовы');
+    expect(html).toContain('my-run-status win">Победа<');
+    expect(html).toContain('my-run-status loss">Поражение<');
+    expect(html).toContain('my-run-status tie">Ничья<');
+    expect(html).toContain('my-run-status waiting">Ждём<');
+    expect(html).toContain('my-run-status missed">Не дошёл<');
   });
 
   it('hides an invite whose time has run out', () => {

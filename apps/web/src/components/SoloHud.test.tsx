@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { HammerResult } from './HammerGame';
+import { HammerResult, strikeLabelText } from './HammerGame';
 import { SoloHud } from './SoloHud';
 import { strikeGain } from '../lib/hammerStrike';
 
@@ -37,5 +37,19 @@ describe('HammerResult notes', () => {
     );
     expect(html).toContain('До 100% — ещё 64%');
     expect(html).toContain('Серия 2 · зоны стали уже');
+  });
+});
+
+describe('strike label', () => {
+  it('puts the name and percent in one element', () => {
+    expect(strikeLabelText('great')).toBe('ОТЛИЧНО +18%');
+    const html = renderToStaticMarkup(<HammerResult result="great" />);
+    expect(html).toContain('<span class="strike-label">ОТЛИЧНО +18%</span>');
+    expect(html).not.toContain('strike-progress');
+  });
+
+  it('shows a miss without +0%', () => {
+    expect(strikeLabelText('miss')).toBe('МИМО');
+    expect(renderToStaticMarkup(<HammerResult result="miss" />)).not.toContain('+0%');
   });
 });

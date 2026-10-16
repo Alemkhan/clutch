@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { CategoryId, SoloLeaderboardResponse, SoloLeaderboardStanding } from '@clutch/shared';
 import { fetchSoloLeaderboard } from '../lib/api';
-import { categoryName, soloRoundsText } from '../lib/myRunsView';
+import { categoryName, finishedText, initials, roundsShort, soloRoundsText } from '../lib/myRunsView';
 import { resetLabel } from '../lib/tiebreakerClock';
 import { useDayCountdown } from '../lib/useDayCountdown';
 import { ScreenHeader } from './ScreenHeader';
@@ -27,9 +27,9 @@ interface SoloBoardViewProps {
 
 /** «до 36-го один круг»: цель достижима, в отличие от «попасть в топ-50». */
 export function standingHint(standing: SoloLeaderboardStanding): string {
-  if (standing.roundsToNext === null) return 'Ты первый сегодня.';
+  if (standing.roundsToNext === null) return 'Ты первый сегодня';
   const gap = standing.roundsToNext === 1 ? 'один круг' : soloRoundsText(standing.roundsToNext);
-  return `До ${standing.rank - 1}-го места — ${gap}.`;
+  return `До ${standing.rank - 1}-го места — ${gap}`;
 }
 
 export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onRetry, onPlay }: SoloBoardViewProps) {
@@ -69,21 +69,24 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
           {/* Своё место видно всегда, даже когда игрок далеко за топ-50. */}
           {state.board.you && (
             <div className="solo-board-you">
-              <div className="solo-board-you-head">
-                <span className="solo-board-you-rank">{state.board.you.rank}-й</span>
-                <span className="solo-board-you-total">из {state.board.you.total}</span>
+              <div className="solo-board-you-row">
+                <span className="solo-board-you-rank">{state.board.you.rank}<span className="visually-hidden">-е место</span></span>
+                <div className="solo-board-you-info">
+                  <span className="solo-board-you-hint">{standingHint(state.board.you)}</span>
+                  {/* Пар набора игроку не показывается: он откалиброван на старом молотке и занижен
+                      на 12–22% (см. SKILL_SHARE). Круги — честное число, их и показываем. */}
+                  <span className="solo-board-you-meta">
+                    Ты: {soloRoundsText(state.board.you.entry.roundsPlayed)} · {finishedText(state.board.you.total)}
+                  </span>
+                </div>
               </div>
-              {/* Пар набора игроку не показывается: он откалиброван на старом молотке и занижен
-                  на 12–22% (см. SKILL_SHARE). Круги — честное число, их и показываем. */}
-              <span className="solo-board-you-meta">{soloRoundsText(state.board.you.entry.roundsPlayed)}</span>
-              <span className="solo-board-you-hint">{standingHint(state.board.you)}</span>
               <button type="button" className="cta-btn solo-board-play" onClick={() => onPlay(category)}>Сыграть ещё набор</button>
             </div>
           )}
 
           {!state.board.you && state.board.entries.length > 0 && (
-            <div className="solo-board-you solo-board-you-missing">
-              <p className="solo-board-note">
+            <div className="solo-board-you">
+              <p className="solo-board-you-text">
                 Твоего забега сегодня здесь нет: в таблицу попадают только дошедшие до 100%.
               </p>
               <button type="button" className="cta-btn solo-board-play" onClick={() => onPlay(category)}>Играть</button>
@@ -100,19 +103,23 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
           {state.board.entries.length > 0 && (
             <>
               <ol className="solo-board-list">
-                {state.board.entries.map((entry, index) => (
-                  <li
-                    key={`${entry.completedAt}-${entry.displayName}-${index}`}
-                    className={state.board.you?.rank === index + 1 ? 'solo-board-row mine' : 'solo-board-row'}
-                  >
-                    <span className="solo-board-place">{index + 1}</span>
-                    <span className="solo-board-name">{entry.displayName}</span>
-                    <span className="solo-board-score">{soloRoundsText(entry.roundsPlayed)}</span>
-                  </li>
-                ))}
+                {state.board.entries.map((entry, index) => {
+                  const mine = state.board.you?.rank === index + 1;
+                  return (
+                    <li
+                      key={`${entry.completedAt}-${entry.displayName}-${index}`}
+                      className={mine ? 'solo-board-row mine' : 'solo-board-row'}
+                    >
+                      <span className="solo-board-place">{index + 1}</span>
+                      <span className="solo-board-avatar" aria-hidden="true">{mine ? 'ТЫ' : initials(entry.displayName)}</span>
+                      <span className="solo-board-name" title={entry.displayName}>{mine ? 'Ты' : entry.displayName}</span>
+                      <span className="solo-board-score">{roundsShort(entry.roundsPlayed)}</span>
+                    </li>
+                  );
+                })}
               </ol>
               {/* Правда для текущей таблицы: SQL сортирует по кругам, затем по длительности. */}
-              <p className="solo-board-note">При равных кругах выше тот, кто быстрее.</p>
+              <p className="solo-board-note">При равных кругах выше тот, кто быстрее</p>
             </>
           )}
         </>

@@ -55,7 +55,7 @@ describe('accessible gameplay semantics', () => {
 
     expect(html).toContain('Следующий вопрос <span aria-hidden="true">→</span>');
     expect(html).toContain('<span>Твой ответ</span><strong>Алматы</strong>');
-    expect(html).toContain('<span>Правильный ответ</span><strong>Астана</strong>');
+    expect(html).toContain('<span>Правильный</span><strong>Астана</strong>');
   });
 
   it('names the hammer action and exposes its disabled-after-hit state', () => {
@@ -85,7 +85,7 @@ describe('accessible gameplay semantics', () => {
     const statusHtml = renderToStaticMarkup(<HammerResultStatus result="perfect" />);
 
     expect(visibleHtml).toBe(
-      '<div class="strike-result perfect" aria-hidden="true"><span class="strike-label">ИДЕАЛЬНО</span><span class="strike-progress">+25%</span></div>',
+      '<div class="strike-result perfect" aria-hidden="true"><span class="strike-label">ИДЕАЛЬНО +25%</span></div>',
     );
     expect(statusHtml).toBe(
       '<span class="visually-hidden" role="status">Результат удара: Идеально, +25% прогресса.</span>',

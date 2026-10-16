@@ -190,11 +190,11 @@ describe('solo answer resolution', () => {
 
     expect(html).toContain('Твой ответ');
     expect(html).toContain(selectedOption.text);
-    expect(html).toContain('Правильный ответ');
+    expect(html).toContain('Правильный');
     expect(html).toContain(correctOption.text);
     expect(html).toContain('resolution-answer selected');
     expect(html).toContain('resolution-answer correct');
-    expect(html.indexOf('Правильный ответ')).toBeLessThan(html.indexOf('Почему верен'));
+    expect(html.indexOf('Правильный')).toBeLessThan(html.indexOf('Почему верен'));
   });
 
   it('shows a correct multiple-choice answer once, without a duplicate selected row', () => {
@@ -208,7 +208,7 @@ describe('solo answer resolution', () => {
       explanation: 'Пояснение.',
     });
 
-    expect(html).toContain('Правильный ответ');
+    expect(html).toContain('Правильный');
     expect(html).not.toContain('Твой ответ');
     expect(html.match(/resolution-answer correct/g)).toHaveLength(1);
   });
@@ -227,7 +227,7 @@ describe('solo answer resolution', () => {
       explanation: 'Каноническое написание.',
     });
 
-    expect(html).toContain('Правильный ответ');
+    expect(html).toContain('Правильный');
     expect(html).toContain('Сьюдад-де-ла-Пас');
     expect(html).not.toContain('Твой ответ');
     expect(html).not.toContain('мой неточный ответ');

@@ -116,7 +116,7 @@ export function ResolutionScreen({
           </p>
         )}
         <p className="resolution-answer correct">
-          <span>Правильный ответ</span>
+          <span>Правильный</span>
           <strong>{correctAnswer}</strong>
         </p>
       </div>
@@ -186,10 +186,11 @@ export function ResolutionScreen({
           )}
         </div>
       )}
+      {/* Подпись прокручивается с разбором: закреплена только кнопка, иначе подпись висит поверх текста. */}
+      {!toHammer && !training && (
+        <p className="resolution-footnote">В этом раунде без мини-игры</p>
+      )}
       <div className="resolution-footer">
-        {!toHammer && !training && (
-          <p className="resolution-footnote">В этом раунде без мини-игры</p>
-        )}
         <button
           type="button"
           className={`resolution-action${toHammer ? " to-hammer" : ""}`}

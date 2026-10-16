@@ -55,6 +55,13 @@ export function hammerActionSemantics(struck: boolean, result: SkillResult | nul
   } as const;
 }
 
+/** Подпись удара одной строкой: «ОТЛИЧНО +18%»; промах (0%) — только «МИМО», без «+0%». */
+export function strikeLabelText(result: SkillResult): string {
+  const name = { perfect: 'ИДЕАЛЬНО', great: 'ОТЛИЧНО', good: 'ХОРОШО', weak: 'СЛАБО', miss: 'МИМО' }[result];
+  const points = SKILL_REWARDS[result];
+  return points > 0 ? `${name} +${points}%` : name;
+}
+
 export function HammerResult({ result, remaining, series }: {
   result: SkillResult;
   /** Готовая строка «До 100% — ещё N%» (см. remainingText). */
@@ -64,10 +71,7 @@ export function HammerResult({ result, remaining, series }: {
 }) {
   return (
     <div className={`strike-result ${result}`} aria-hidden="true">
-      <span className="strike-label">
-        {{ perfect: 'ИДЕАЛЬНО', great: 'ОТЛИЧНО', good: 'ХОРОШО', weak: 'СЛАБО', miss: 'МИМО' }[result]}
-      </span>
-      <span className="strike-progress">+{SKILL_REWARDS[result]}%</span>
+      <span className="strike-label">{strikeLabelText(result)}</span>
       {remaining && <span className="strike-remaining">{remaining}</span>}
       {series && <span className="strike-series">{series}</span>}
     </div>
