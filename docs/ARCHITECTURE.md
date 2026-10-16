@@ -37,7 +37,8 @@ apps/web/                      React 18 + Vite + Framer Motion + Telegram SDK
                                useFriendInvite, friendDuelResult, RematchEntry, CategorySelect
   src/features/{board,home,tiebreaker,myRuns,training,profile}/  экраны разделов и их модули
   src/features/lastStand/      режим Last Stand (заморожен 2026-10-16)
-  src/index.css                общие стили и более поздние V2-переопределения
+  src/index.css                только список @import в порядке каскада (порядок значим)
+  src/styles/                  tokens.css (:root), base.css, v2-shell.css и общие @media-блоки
   public/{sprites,sfx,flags-historic}/
 apps/api/
   src/index.ts                 composition root: Hono, CORS, регистрация routes
@@ -101,6 +102,18 @@ scripts/preflight-production.mjs   production config → dry-run + exact web bui
 scripts/lib/production-preflight.mjs  чистая validation/config generation
 .github/workflows/ci.yml           unit → local HTTP smoke → preflight fixture/build
 ```
+
+### Стили
+
+Обычный CSS, один вход `apps/web/src/index.css` (его импортирует `main.tsx`); в нём
+только `@import`. Файлы лежат рядом с фичами (`features/<name>/*.css`, `ui/*.css`),
+глобальные — в `styles/`. Порядок импортов совпадает с порядком правил в бывшем
+едином файле и определяет каскад: не переставляй и не объединяй куски без
+визуальной проверки. `*.v2.css` — переопределения v2, стоящие позже старой секции
+экрана; при работе над экраном их сливают со старым куском (с проверкой экрана).
+`cssDuplicates.test.ts` следит, что каждый `.css` подключён ровно один раз и что
+на объединённом тексте селектор верхнего уровня объявлен один раз. CSS из
+компонентов не импортируется: это сломало бы порядок.
 
 ## Как читать основной сценарий
 

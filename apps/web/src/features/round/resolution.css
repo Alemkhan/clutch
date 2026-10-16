@@ -1,0 +1,301 @@
+/* === RESOLUTION === */
+
+.resolution-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  cursor: pointer;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.hammer-game:focus-visible {
+  outline: 3px solid rgba(77, 117, 232, 0.45);
+  outline-offset: -3px;
+}
+
+/* R26c: заголовок и подзаголовок разбора. */
+.resolution-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.resolution-status {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-size: 36px;
+  line-height: 1.1;
+}
+
+.resolution-status.correct {
+  color: var(--success);
+}
+
+.resolution-status.incorrect {
+  color: var(--primary-dim);
+}
+
+.resolution-message {
+  color: var(--on-neutral);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* R26c: свой и правильный ответ — две строки одной карточки. */
+.resolution-answers {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.resolution-answer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+}
+
+.resolution-answer + .resolution-answer {
+  border-top: 1px solid var(--line);
+}
+
+.resolution-answer span {
+  flex: none;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.resolution-answer strong {
+  min-width: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.resolution-answer.correct {
+  background: rgba(22, 140, 81, 0.08);
+}
+
+.resolution-answer.correct strong {
+  color: var(--success);
+}
+
+.resolution-answer.selected strong {
+  color: var(--error);
+  text-decoration: line-through;
+}
+
+.resolution-explanation {
+  color: var(--on-neutral);
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+/* Репорт о проблеме (R22): текстовая ссылка (R26c) и компактная панель. */
+.resolution-report {
+  width: 100%;
+  cursor: default;
+}
+
+.resolution-report-toggle {
+  min-height: 44px;
+  padding: 8px 0;
+  background: transparent;
+  border: 0;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.resolution-report-toggle:focus-visible,
+.resolution-action:focus-visible {
+  outline: 3px solid rgba(77, 117, 232, 0.45);
+  outline-offset: 2px;
+}
+
+.resolution-report-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.resolution-report-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.resolution-report-option {
+  min-height: 44px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.resolution-report-option[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: rgba(240, 74, 62, 0.06);
+}
+
+.resolution-report-comment {
+  width: 100%;
+  min-height: 76px;
+  padding: 10px 14px;
+  background: rgba(255, 254, 250, 0.94);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+}
+
+.resolution-report-comment::placeholder {
+  color: var(--text-dim);
+  opacity: 0.5;
+}
+
+.resolution-report-send {
+  min-height: 44px;
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.resolution-report-send:disabled {
+  opacity: 0.5;
+}
+
+.resolution-report-status {
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.resolution-report-error {
+  color: var(--error);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* R26c: низ разбора — подпись и главная кнопка; не уходит под нижнюю панель. */
+.resolution-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+  /* Длинный разбор или открытая панель репорта прокручиваются под кнопкой, а не уводят её за экран.
+     Нижние 14 px и отступ под safe area уже даёт main: футер залезает на них своим padding. */
+  position: sticky;
+  bottom: -14px;
+  margin-bottom: -14px;
+  padding-top: 8px;
+  padding-bottom: 14px;
+  /* Без собственного фона: страница — градиент, плоская заливка давала видимый прямоугольник. Кнопка непрозрачна. */
+}
+
+.resolution-footnote {
+  margin-top: auto;
+  color: var(--text-dim);
+  font-size: 13px;
+  text-align: center;
+}
+
+.resolution-footnote + .resolution-footer {
+  margin-top: 0;
+}
+
+.resolution-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 56px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--text);
+  color: var(--surface);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.resolution-action.to-hammer {
+  background: var(--primary);
+  color: white;
+}
+
+.resolution-action:active {
+  transform: scale(0.99);
+}
+
+.open-answer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.open-answer-input {
+  width: 100%;
+  padding: 18px 20px;
+  border: 2px solid var(--surface-2);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 600;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  border-color: var(--line-strong);
+  background: rgba(255, 254, 250, 0.94);
+}
+
+.open-answer-input:focus {
+  border-color: var(--primary);
+}
+
+.open-answer-input::placeholder {
+  color: var(--text-dim);
+  opacity: 0.5;
+}
+
+.open-answer-input:disabled {
+  opacity: 0.5;
+}
+
+.open-answer-submit {
+  width: 100%;
+  padding: 18px;
+  background: var(--primary);
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.open-answer-submit:disabled {
+  opacity: 0.4;
+  background: var(--surface-2);
+}
+

@@ -1,0 +1,45 @@
+/* Hammer mini-game: explanation step before the first attempt */
+.hammer-intro {
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+  margin: 0 auto 16px;
+  padding: 18px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.hammer-intro-title {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+.hammer-intro-list {
+  margin: 0 0 12px;
+  padding-left: 20px;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.hammer-intro-list li + li {
+  margin-top: 6px;
+}
+.hammer-intro-note {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+.hammer-intro-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+

@@ -1,0 +1,12 @@
+/* Ссылка на таблицу под главной кнопкой: не вторая CTA, а подпись-переход. */
+.home-board-link {
+  align-self: stretch;
+  min-height: 44px;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: rgba(255, 254, 250, 0.82);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}

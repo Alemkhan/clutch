@@ -1,0 +1,35 @@
+/* === SCREEN HEADER (shared) === */
+
+.screen-title {
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-size: 32px;
+}
+
+.screen-subtitle {
+  color: var(--text-dim);
+  font-size: 16px;
+  margin-top: -8px;
+}
+
+.screen-header {
+  display: flex;
+  align-items: center;
+}
+
+/* Корневые вкладки без «← Назад»: заголовок не прилипает к верху, как под кнопкой на вложенных экранах. */
+.root-tab {
+  padding-top: 12px;
+}
+
+.back-btn {
+  align-self: flex-start;
+  background: none;
+  font-size: 15px;
+  font-weight: 700;
+  min-height: 44px;
+  padding: 8px 0;
+  color: var(--text);
+}
+

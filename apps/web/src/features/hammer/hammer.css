@@ -1,0 +1,245 @@
+/* === HAMMER GAME === */
+
+.hammer-game {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  gap: clamp(12px, 2.2dvh, 20px);
+}
+
+.hammer-game[aria-disabled="true"] {
+  cursor: default;
+}
+
+.stump-headline {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 6.5vw, 26px);
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+.stump-scene {
+  position: relative;
+  width: 100%;
+  width: auto;
+  height: clamp(230px, 42dvh, 330px);
+  aspect-ratio: 896 / 1216;
+}
+
+.stump-scene.shake {
+  animation: log-shake 320ms ease-out;
+}
+
+.stump-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.nail-slot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 15%;
+  height: 34%;
+  overflow: hidden;
+  transform: translateX(-50%);
+}
+
+.nail-slot img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+}
+
+/* Rotation/position are driven by Framer Motion (see HammerGame.tsx); this only
+   sets the static layout box the animated transform is applied within. */
+.hammer-tool {
+  position: absolute;
+  width: 46%;
+  left: 10%;
+  top: -18%;
+  transform-origin: 85% 85%;
+  pointer-events: none;
+}
+
+.strike-burst {
+  position: absolute;
+  width: 42%;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: impact-pop 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hammer-track {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  height: 56px;
+  border: 1px solid var(--line-strong);
+  background: var(--zone-1);
+}
+
+.hammer-zone {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+.hammer-zone-weak {
+  background: var(--zone-1);
+}
+.hammer-zone-good {
+  background: var(--zone-2);
+}
+.hammer-zone-great {
+  background: var(--zone-3);
+}
+.hammer-zone-perfect {
+  background: var(--zone-4);
+}
+
+.marker {
+  position: absolute;
+  top: 6px;
+  height: calc(100% - 12px);
+  border-radius: 3px;
+  transform: translateX(-50%);
+  width: 6px;
+  background: var(--text);
+  box-shadow: 0 0 0 2px var(--surface);
+}
+
+.strike-instruction {
+  font-size: 16px;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.strike-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+/* Подпись и процент удара — одна строка (макет v2); на узком экране кегль уменьшается, строка не переносится. */
+.strike-label {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 9.6vw, 36px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.strike-result.perfect .strike-label {
+  color: var(--perfect);
+}
+
+.strike-result.great .strike-label {
+  color: var(--success);
+}
+
+.strike-result.good .strike-label {
+  color: var(--text);
+}
+
+.strike-result.weak .strike-label {
+  color: var(--text-dim);
+}
+
+.strike-result.miss .strike-label {
+  color: var(--error);
+}
+
+/* R26d · Молоток: прирост виден в HUD, подписи зон над дорожкой */
+.match-hud-gain-chip {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #e3f3ea;
+  color: var(--success);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.match-hud-competitor.player .match-hud-name {
+  flex: 1 1 auto;
+}
+
+.match-hud-competitor.player .match-hud-value {
+  margin-left: 0;
+}
+
+.match-hud-gain {
+  display: block;
+  flex: 0 0 auto;
+  height: 100%;
+  background: var(--success);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .match-hud-gain {
+    animation: hud-gain-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transform-origin: left center;
+  }
+}
+
+@keyframes hud-gain-in {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.hammer-lane {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.hammer-zone-labels {
+  position: relative;
+  height: 14px;
+}
+
+.hammer-zone-label {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  color: var(--on-neutral);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
+.hammer-zone-label-perfect {
+  color: var(--text);
+}
+
+.strike-remaining {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.strike-series {
+  color: var(--text-dim);
+  font-size: 13px;
+}
+

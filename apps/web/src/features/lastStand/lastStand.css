@@ -1,0 +1,193 @@
+/* Last Stand */
+
+.ls-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+.ls-center {
+  justify-content: center;
+  text-align: center;
+  align-items: stretch;
+}
+
+.ls-hint {
+  margin: 0;
+  color: var(--text-dim);
+  line-height: 1.45;
+  font-size: 0.9rem;
+}
+
+.ls-rules {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.ls-round-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ls-category {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 8vw, 2.4rem);
+  line-height: 1.12;
+  hyphens: auto;
+}
+
+.ls-answer {
+  scroll-margin-bottom: 24px;
+}
+
+.ls-notice {
+  padding: 12px 14px;
+  border-radius: 14px;
+  line-height: 1.4;
+}
+
+.ls-notice-occupied {
+  background: rgba(238, 58, 48, 0.12);
+  border: 2px solid var(--error);
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.ls-notice-invalid {
+  background: rgba(245, 180, 0, 0.14);
+  border: 1px solid var(--perfect);
+}
+
+.ls-notice-error {
+  background: rgba(238, 58, 48, 0.08);
+  border: 1px solid var(--error);
+}
+
+.ls-opponents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-dim);
+  font-size: 0.875rem;
+}
+
+.ls-source {
+  padding: 1px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.ls-reveal,
+.ls-board {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ls-reveal-row,
+.ls-board-row {
+  display: grid;
+  gap: 4px 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 254, 250, 0.92);
+}
+
+.ls-reveal-row {
+  grid-template-columns: 1fr auto;
+}
+
+.ls-reveal-answer {
+  font-weight: 800;
+}
+
+.ls-reveal-time {
+  grid-column: 1 / -1;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.ls-reveal-row.me {
+  border-color: var(--opponent);
+}
+
+.ls-reveal-row.fastest .ls-reveal-flag {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.ls-board-row {
+  grid-template-columns: 2.2em 1fr auto;
+  align-items: center;
+}
+
+.ls-board-place {
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.ls-board-score {
+  font-weight: 700;
+}
+
+/* Разбор выбывания на загаданном: подпись и сам ответ, чтобы причина читалась сразу. */
+.ls-mine-reveal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 14px 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.ls-mine-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.ls-mine-answer {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 7vw, 2.1rem);
+  font-weight: 900;
+  color: var(--error);
+  overflow-wrap: anywhere;
+}
+
+.ls-score {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 10vw, 3rem);
+  font-weight: 800;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-screen * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+

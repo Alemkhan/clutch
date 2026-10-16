@@ -1,0 +1,65 @@
+:root {
+  --error: #ee3a30;
+  --font-display:
+    "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --bg: #f3f0e8;
+  --surface: #fffefa;
+  --surface-2: #e9e5dc;
+  --primary: #f04a3e;
+  --primary-dim: #d83830;
+  --text: #171716;
+  --text-dim: #706d66;
+  --opponent: #4d75e8;
+  --success: #168c51;
+  --perfect: #df9e00;
+  /* Гистограмма «На глазок»: ответы ниже правильного (занизили) и выше (завысили). */
+  /* Зоны дорожки молотка: тёплая шкала от бледного края к красному центру (макет v2).
+     Фолбэк-hex — значения макета; на палитре v6 производные сами пересчитаются. */
+  --zone-1: #f3e2c2;
+  --zone-1: color-mix(in srgb, var(--perfect) 22%, var(--surface));
+  --zone-2: #f1cf8a;
+  --zone-2: color-mix(in srgb, var(--perfect) 50%, var(--surface));
+  --zone-3: #f0a64f;
+  --zone-3: color-mix(in srgb, var(--perfect) 72%, var(--primary));
+  --zone-4: #d83830;
+  --zone-4: var(--primary-dim);
+  --tb-under: #8fa6ee;
+  --tb-over: #e8be5a;
+  /* Пилюли исхода: тинт и тёмный текст из существующих цветов. Сначала фиксированные
+     значения для старых WebView, затем color-mix. Контраст текста к фону: 5.6-6.6 : 1. */
+  --tint-win: #deeee2;
+  --tint-win: color-mix(in srgb, var(--success) 14%, var(--surface));
+  --on-win: #165d39;
+  --on-win: color-mix(in srgb, var(--success) 60%, var(--text));
+  --tint-loss: #fde3de;
+  --tint-loss: color-mix(in srgb, var(--error) 14%, var(--surface));
+  --on-loss: #982c26;
+  --on-loss: color-mix(in srgb, var(--error) 60%, var(--text));
+  --tint-wait: #e6ebf7;
+  --tint-wait: color-mix(in srgb, var(--opponent) 14%, var(--surface));
+  --on-wait: #374f94;
+  --on-wait: color-mix(in srgb, var(--opponent) 60%, var(--text));
+  --tint-tie: #fbf1d7;
+  --tint-tie: color-mix(in srgb, var(--perfect) 14%, var(--surface));
+  --on-tie: #7b5b0b;
+  --on-tie: color-mix(in srgb, var(--perfect) 50%, var(--text));
+  --on-neutral: #44423e;
+  --on-neutral: color-mix(in srgb, var(--text-dim) 50%, var(--text));
+  --line: rgba(23, 23, 22, 0.11);
+  --line-strong: rgba(23, 23, 22, 0.18);
+  --radius: 20px;
+  --radius-sm: 16px;
+  --radius-btn: 16px;
+  --btn-h: 56px;
+  --btn-h-sm: 48px;
+  --nav-h: 64px;
+  --safe-bottom: var(
+    --tg-viewport-content-safe-area-inset-bottom,
+    env(safe-area-inset-bottom, 0px)
+  );
+  --shadow: 0 18px 45px rgba(36, 31, 22, 0.09);
+  --shadow-sm: 0 6px 18px rgba(36, 31, 22, 0.06);
+}
+

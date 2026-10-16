@@ -1,0 +1,112 @@
+@keyframes impact-pop {
+  from {
+    transform: scale(0.2) rotate(-14deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.12) rotate(4deg);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+@keyframes log-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px) rotate(-0.8deg);
+  }
+  40% {
+    transform: translateX(4px) rotate(0.6deg);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+@media (max-width: 380px) {
+  main {
+    padding-right: calc(
+      20px +
+        var(
+          --tg-viewport-content-safe-area-inset-right,
+          env(safe-area-inset-right, 0px)
+        )
+    );
+    padding-left: calc(
+      20px +
+        var(
+          --tg-viewport-content-safe-area-inset-left,
+          env(safe-area-inset-left, 0px)
+        )
+    );
+  }
+
+  .category-icon {
+  }
+
+  .result-comparison,
+  .result-stats {
+    gap: 18px;
+  }
+}
+
+@media (max-height: 720px) {
+  main {
+    padding-top: calc(
+      8px +
+        var(
+          --tg-viewport-content-safe-area-inset-top,
+          env(safe-area-inset-top, 0px)
+        )
+    );
+    padding-bottom: calc(
+      8px +
+        var(
+          --tg-viewport-content-safe-area-inset-bottom,
+          env(safe-area-inset-bottom, 0px)
+        )
+    );
+  }
+
+  .question-screen {
+  }
+
+  .question-media-slot {
+    height: clamp(104px, 18dvh, 130px);
+  }
+
+  .stump-scene {
+    height: 220px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .question-media-slot {
+    height: 110px;
+  }
+
+  .stump-scene {
+    height: 180px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strike-burst {
+    animation: none;
+  }
+  .stump-scene.shake {
+    transition: none;
+    animation: none;
+  }
+  /* .hammer-tool and .nail-slot img are animated by Framer Motion, which respects
+     reduced motion via useReducedMotion() in HammerGame.tsx, not CSS. */
+}
+

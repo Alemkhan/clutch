@@ -1,0 +1,154 @@
+/* R26e · Итог забега: раскладка v2, всё слева, сетка 24 px */
+.solo-result {
+  gap: 24px;
+}
+.solo-result .chip {
+  align-self: flex-start;
+}
+.solo-result-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.solo-result-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: var(--success);
+  color: white;
+}
+.solo-result-icon.tie {
+  background: var(--perfect);
+}
+.solo-result-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 100%;
+}
+.solo-result-meta {
+  margin: 0;
+  color: var(--text);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+.solo-result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+.solo-result-stats[data-cols='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.solo-result-stat {
+  min-width: 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.solo-result-stat + .solo-result-stat {
+  border-left: 1px solid var(--line);
+}
+.solo-result-stat strong {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.solo-result-stat span {
+  color: var(--text-dim);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.solo-result-receipt {
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--surface-2);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.solo-result-receipt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.solo-result-receipt h2 {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 600;
+}
+.solo-result-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--opponent);
+  font-size: 12px;
+  font-weight: 700;
+}
+.solo-result-receipt p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.solo-result-receipt .solo-result-receipt-line {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.result-save-status {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+.result-save-status.error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  color: var(--error);
+}
+.result-save-status .result-save-retry {
+  padding: 6px 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+}
+.solo-result-actions {
+  gap: 12px;
+  margin-top: auto;
+}
+.solo-result-actions .cta-btn {
+  min-height: 56px;
+  border-radius: 16px;
+  font-size: 18px;
+}
+.solo-result-actions .ghost-btn {
+  min-height: 48px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  font-size: 15px;
+}
+.solo-result-secondary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.solo-result-secondary.single {
+  grid-template-columns: minmax(0, 1fr);
+}
+.solo-result-secondary .ghost-btn {
+  min-width: 0;
+}

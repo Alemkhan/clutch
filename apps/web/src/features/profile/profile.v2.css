@@ -1,0 +1,15 @@
+/* Result */
+
+/* Profile */
+
+.badge-symbol {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  background: var(--text);
+  color: white;
+  font-size: 22px !important;
+}
+

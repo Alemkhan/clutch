@@ -1,0 +1,33 @@
+
+.training-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.training-header {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.training-header .back-btn {
+  align-self: center;
+}
+
+.training-text {
+  line-height: 1.5;
+}
+
+.training-note {
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.4;
+}
+

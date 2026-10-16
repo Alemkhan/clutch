@@ -1,0 +1,72 @@
+/* === V2 MOBILE UI ========================================================
+   Shared screens are deliberately game-agnostic. Temporary sprite art is
+   isolated to the hammer mini-game until the production art pass. */
+
+main.app-shell {
+  position: relative;
+  isolation: isolate;
+  gap: 10px;
+  background:
+    radial-gradient(
+      circle at 105% 8%,
+      rgba(240, 74, 62, 0.12),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at -10% 92%,
+      rgba(77, 117, 232, 0.08),
+      transparent 25%
+    ),
+    var(--bg);
+}
+
+main.app-shell::before {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  pointer-events: none;
+  content: "";
+  background-image: radial-gradient(
+    rgba(23, 23, 22, 0.06) 0.65px,
+    transparent 0.65px
+  );
+  background-size: 7px 7px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.22), transparent 42%);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(77, 117, 232, 0.35);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.cta-btn span {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+/* Подпись со стрелкой разносится по краям; одинокая подпись стоит по центру. */
+.cta-btn:has(> span) {
+  justify-content: space-between;
+}
+

@@ -1,0 +1,23 @@
+/* Hammer isolation */
+
+.phase-hammer {
+  background:
+    radial-gradient(
+      circle at 50% 38%,
+      rgba(240, 74, 62, 0.12),
+      transparent 28%
+    ),
+    var(--bg);
+}
+
+.stump-headline::before {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--primary);
+  content: "ТОЧНОСТЬ";
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+

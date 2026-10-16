@@ -1,0 +1,13 @@
+/* Categories */
+
+.category-card:not(.locked):active {
+  border-color: rgba(240, 74, 62, 0.35);
+  background: white;
+}
+
+.category-arrow {
+  margin-left: auto;
+  color: var(--text-dim);
+  font-size: 20px;
+}
+

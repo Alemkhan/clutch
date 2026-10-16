@@ -300,14 +300,14 @@ describe('reveal helpers and layout rules', () => {
   });
 
   it('wraps long units by words, not in the middle of a word', () => {
-    const css = readFileSync(new URL('../../index.css', import.meta.url), 'utf8');
+    const css = readFileSync(new URL('./tiebreaker.css', import.meta.url), 'utf8');
     const rule = /.tb-compare dd {([^}]*)}/.exec(css)?.[1] ?? '';
     expect(rule).toContain('overflow-wrap: break-word');
     expect(rule).not.toContain('anywhere');
   });
 
   it('keeps the two histogram side colours as tokens next to the palette', () => {
-    const css = readFileSync(new URL('../../index.css', import.meta.url), 'utf8');
+    const css = readFileSync(new URL('../../styles/tokens.css', import.meta.url), 'utf8');
     expect(css).toMatch(/:root {[^}]*--tb-under: #8fa6ee;[^}]*--tb-over: #e8be5a;/);
   });
 });

@@ -1,0 +1,191 @@
+/* Home */
+
+.home-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.home-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border-radius: 10px;
+  background: var(--text);
+  color: var(--surface);
+  font-size: 16px;
+  letter-spacing: 0;
+  transform: rotate(-4deg);
+}
+
+.home-hero-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  min-width: 0;
+  padding: 24px 20px 20px;
+  border-radius: 20px;
+  background: #171716;
+  box-shadow: 0 22px 48px rgba(23, 23, 22, 0.2);
+  color: #fffefa;
+}
+
+.home-hero-card::before,
+.home-hero-card::after {
+  position: absolute;
+  content: "";
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.home-hero-card::before {
+  top: -100px;
+  right: -84px;
+  width: 160px;
+  height: 160px;
+  border: 34px solid rgba(240, 74, 62, 0.42);
+  transform: rotate(12deg);
+}
+
+.home-hero-card::after {
+  bottom: 64px;
+  left: -34px;
+  width: 86px;
+  height: 86px;
+  border: 18px solid rgba(255, 254, 250, 0.06);
+}
+
+.home-hero-head,
+.home-hero-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.home-kicker {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.home-title em {
+  color: #ff665a;
+  font-style: normal;
+}
+
+/* После зачётного финиша заголовок — место в таблице дня; строка короче, поэтому кегль меньше. */
+.home-title-done {
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.home-stats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.home-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.home-stat dt {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 12px;
+}
+
+.home-stat dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.home-loop {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: auto;
+  padding: 0;
+  list-style: none;
+}
+
+.home-loop-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  text-align: center;
+}
+
+/* Стрелка в зазоре сетки: три значка должны читаться как последовательность, а не как список. */
+.home-loop-step:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 11px;
+  right: -7px;
+  transform: translateX(50%);
+  color: rgba(255, 255, 255, 0.34);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.home-loop-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ff8176;
+}
+
+.home-loop-label {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.home-hero-card .cta-btn {
+  position: relative;
+  z-index: 1;
+  border-radius: 16px;
+}
+

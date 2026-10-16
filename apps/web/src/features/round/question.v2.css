@@ -1,0 +1,30 @@
+/* Question */
+
+.timer-ring-bg {
+  stroke: rgba(23, 23, 22, 0.1);
+}
+
+.question-prompt {
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+}
+
+.option-btn:not(:disabled):active {
+  border-color: rgba(240, 74, 62, 0.42);
+  background: white;
+}
+
+.option-text {
+  font-size: clamp(15px, 4.1vw, 17px);
+  font-weight: 700;
+}
+
+.open-answer-input,
+.open-answer-submit {
+  min-height: 56px;
+  border-radius: 16px;
+}
+
+

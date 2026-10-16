@@ -1,0 +1,64 @@
+@media (max-width: 380px) {
+  .match-hud {
+    padding-right: 9px;
+    padding-left: 9px;
+  }
+
+  .match-hud-grid {
+    gap: 7px;
+  }
+
+  .match-hud-avatar {
+    width: 24px;
+    height: 24px;
+  }
+
+  .match-hud-name {
+    max-width: 50px;
+  }
+
+  /* Аватар уже подписан «ТЫ»: с чипом прироста имя игрока не ужимается до «Т.», а уходит. */
+  .match-hud-competitor.player .match-hud-identity:has(.match-hud-gain-chip) .match-hud-name {
+    display: none;
+  }
+
+  .match-hud-value {
+    font-size: 14px;
+  }
+}
+
+@media (max-height: 720px) {
+  .question-screen {
+    gap: 8px;
+  }
+
+  /* На низком экране main подбирает снизу 8 px, а не 14. */
+  .resolution-footer {
+    bottom: -8px;
+    margin-bottom: -8px;
+    padding-bottom: 8px;
+  }
+
+  .match-hud {
+    padding-top: 8px;
+    padding-bottom: 9px;
+  }
+
+  .options {
+    gap: 8px;
+  }
+
+  .option-btn {
+    min-height: 52px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bootstrap-spinner,
+  .matchmaking-loading span {
+    animation: none;
+  }
+}
+
