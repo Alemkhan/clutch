@@ -50,7 +50,8 @@ apps/api/
   src/http/rateLimit.ts        общий адаптер Cloudflare RateLimit и IP-ключ
   src/http/system.ts           metadata, liveness/readiness
   src/auth/auth.ts             выдача/продление browser guest session
-  src/solo/                    soloRuns.ts (старт, answer/hammer, resume, таблица solo),
+  src/solo/                    soloRuns.ts (регистрация маршрутов, resume), startSoloRun (старт), soloRounds (answer/hammer),
+                               finalizeSoloRun (закрытие забега), soloLeaderboard (таблица solo), soloShared,
                                soloRepository/soloRoundsRepository (D1 solo), matchmaking (подбор),
                                repository (создание, подбор и завершение), bots (BotProfile и снимок
                                bot opponent), validation (HTTP-входы и сохранённые snapshots),
