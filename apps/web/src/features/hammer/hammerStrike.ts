@@ -87,3 +87,23 @@ export function seriesNote(previous: readonly SkillResult[], result: SkillResult
   const streak = [...previous, result].filter((item) => item !== 'miss').length;
   return `Серия ${streak} · зоны стали уже`;
 }
+
+export interface StrikeNotes {
+  remaining?: string;
+  series?: string | null;
+}
+
+/** Подписи под результатом: те же shared-правила, что и у HUD (награда tier и стадия давления). */
+export function strikeNotes(
+  result: SkillResult | null,
+  progressBefore: number | undefined,
+  previous: readonly SkillResult[],
+): StrikeNotes {
+  if (!result) return {};
+  return {
+    remaining: progressBefore === undefined
+      ? undefined
+      : remainingText(strikeGain(progressBefore, SKILL_REWARDS[result]).remaining),
+    series: seriesNote(previous, result),
+  };
+}
