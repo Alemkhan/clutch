@@ -163,6 +163,20 @@ export function currentSoloQuestion(state: Readonly<SoloFlowState>) {
 }
 
 /** Ответ игрока уходит на проверку серверу; верность мы узнаем только из его ответа. */
+/** Диагностика расхождения «выбранный текст / отправленный id» (см. SoloAnswerRequest); на верность не влияет. */
+function optionDiagnostics(
+  question: NonNullable<ReturnType<typeof currentSoloQuestion>>,
+  selectedOption: string,
+): Pick<SoloAnswerRequest, 'selectedText' | 'optionCount' | 'firstOptionId'> {
+  if (question.answerType === 'open_answer') return {};
+  const text = question.options.find((option) => option.id === selectedOption)?.text;
+  return {
+    ...(text === undefined ? {} : { selectedText: text.slice(0, 200) }),
+    optionCount: question.options.length,
+    ...(question.options[0] ? { firstOptionId: question.options[0].id } : {}),
+  };
+}
+
 export function recordSoloAnswer(
   state: Readonly<SoloFlowState>,
   selectedOption: string,
@@ -183,6 +197,7 @@ export function recordSoloAnswer(
         questionId: question.id,
         selectedAnswer: selectedOption,
         responseTimeMs,
+        ...optionDiagnostics(question, selectedOption),
       },
     },
   };
@@ -207,6 +222,10 @@ export function applySoloAnswerVerdict(state: Readonly<SoloFlowState>, response:
     stage: 'resolution',
     pending: null,
     syncFailed: false,
+    // Разбор показывает то, что записал сервер: при повторе с другого экрана это не локальный выбор.
+    selectedOption: question?.answerType === 'multiple_choice' && response.selectedAnswer !== undefined
+      ? response.selectedAnswer
+      : state.selectedOption,
     lastCorrect: response.correct,
     correctAnswer,
     explanation: response.explanation,

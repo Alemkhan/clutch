@@ -176,6 +176,101 @@ describe('answers never reach the browser before the round is played', () => {
   });
 });
 
+describe('answer option mismatch diagnostics', () => {
+  const mismatchEvents = (db: TestD1) =>
+    db.sqlite.prepare("SELECT run_id, question_id, payload_json FROM analytics_events WHERE event = 'answer_option_mismatch'").all() as
+      { run_id: string; question_id: string; payload_json: string }[];
+
+  async function startGeneral(db: TestD1, label: string) {
+    const response = await call(db, label, '/api/solo-runs', { displayName: label, category: 'general' });
+    expect(response.status).toBe(201);
+    const run = await response.json() as StartSoloRunResponse;
+    const question = fullQuestions(db, run.runId)[0];
+    if (question.answerType !== 'multiple_choice') throw new Error('expected a multiple-choice first question');
+    return { run, question };
+  }
+
+  const send = (db: TestD1, label: string, runId: string, question: Question, extra: Record<string, unknown>) =>
+    call(db, label, `/api/solo-runs/${runId}/answer`, {
+      roundIndex: 0, questionId: question.id, responseTimeMs: 100, ...extra,
+    });
+
+  it('writes no event when the shown text matches the stored option', async () => {
+    const db = database();
+    const { run, question } = await startGeneral(db, 'ann');
+    const option = question.options[0];
+    const response = await send(db, 'ann', run.runId, question, {
+      selectedAnswer: option.id, selectedText: option.text, optionCount: question.options.length, firstOptionId: question.options[0].id,
+    });
+    expect(response.status).toBe(200);
+    expect(mismatchEvents(db)).toEqual([]);
+  });
+
+  it('records the event on a mismatch and leaves the verdict to selectedAnswer', async () => {
+    const db = database();
+    const { run, question } = await startGeneral(db, 'ann');
+    const right = question.options.find((option) => option.id === question.correctOptionId)!;
+    const other = question.options.find((option) => option.id !== question.correctOptionId)!;
+    // Игрок видел текст верного варианта, а id ушёл чужой.
+    const response = await send(db, 'ann', run.runId, question, { selectedAnswer: other.id, selectedText: right.text });
+    expect(response.status).toBe(200);
+    expect(await response.json()).toMatchObject({ correct: false });
+    expect(roundRow(db, run.runId, 0)).toBeDefined();
+    const events = mismatchEvents(db);
+    expect(events).toHaveLength(1);
+    expect(events[0]).toMatchObject({ run_id: run.runId, question_id: question.id });
+    expect(JSON.parse(events[0].payload_json)).toMatchObject({
+      roundIndex: 0, selectedAnswer: other.id, selectedText: right.text, storedText: other.text, correctOptionId: question.correctOptionId,
+    });
+  });
+
+  it('the opposite mismatch does not turn a wrong answer into a correct one either way', async () => {
+    const db = database();
+    const { run, question } = await startGeneral(db, 'ann');
+    const right = question.options.find((option) => option.id === question.correctOptionId)!;
+    const other = question.options.find((option) => option.id !== question.correctOptionId)!;
+    const response = await send(db, 'ann', run.runId, question, { selectedAnswer: right.id, selectedText: other.text });
+    expect(await response.json()).toMatchObject({ correct: true });
+    expect(mismatchEvents(db)).toHaveLength(1);
+  });
+
+  it('an old client without the new fields works as before', async () => {
+    const db = database();
+    const { run, question } = await startGeneral(db, 'ann');
+    const response = await send(db, 'ann', run.runId, question, { selectedAnswer: question.correctOptionId });
+    expect(await response.json()).toMatchObject({ correct: true, awaitingHammer: true });
+    expect(mismatchEvents(db)).toEqual([]);
+  });
+
+  it('records a replay that carries a different answer, keeps the stored verdict, and ignores an identical retry', async () => {
+    const db = database();
+    const { run, question } = await startGeneral(db, 'ann');
+    const other = question.options.find((option) => option.id !== question.correctOptionId)!;
+    const first = await (await send(db, 'ann', run.runId, question, { selectedAnswer: other.id })).json();
+    expect(first).toMatchObject({ correct: false });
+    const same = await send(db, 'ann', run.runId, question, { selectedAnswer: other.id });
+    expect(same.status).toBe(200);
+    const conflict = await (await send(db, 'ann', run.runId, question, { selectedAnswer: question.correctOptionId })).json();
+    expect(conflict).toEqual(first);
+    // Ответ называет записанный вариант, а не присланный повтором.
+    expect(conflict).toMatchObject({ selectedAnswer: other.id });
+    const events = db.sqlite.prepare("SELECT payload_json FROM analytics_events WHERE event = 'answer_replay_conflict'").all() as { payload_json: string }[];
+    expect(events).toHaveLength(1);
+    expect(JSON.parse(events[0].payload_json)).toMatchObject({ roundIndex: 0, selectedAnswer: question.correctOptionId, storedAnswer: other.id, storedCorrect: 0 });
+  });
+
+  it('refuses a malformed diagnostic field and a repeat does not duplicate the event', async () => {
+    const db = database();
+    const { run, question } = await startGeneral(db, 'ann');
+    const bad = await send(db, 'ann', run.runId, question, { selectedAnswer: 'a', selectedText: 'x'.repeat(201) });
+    expect(bad.status).toBe(400);
+    const body = { selectedAnswer: 'zzz', selectedText: 'Нечто' };
+    expect((await send(db, 'ann', run.runId, question, body)).status).toBe(200);
+    expect((await send(db, 'ann', run.runId, question, body)).status).toBe(200);
+    expect(mismatchEvents(db)).toHaveLength(1);
+  });
+});
+
 describe('a round is counted once', () => {
   it('a repeated answer returns the stored verdict and does not add a round', async () => {
     const db = database();

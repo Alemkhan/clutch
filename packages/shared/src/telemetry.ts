@@ -30,7 +30,7 @@ export interface QuestionReportRequest {
 }
 
 /** Разрешённые продуктовые события; сервер незнакомое имя отклоняет. */
-export type AnalyticsEventName = 'solo_run_started' | 'solo_run_completed' | 'training_started' | 'sound_failure' | 'tiebreaker_answered' | 'tiebreaker_shared';
+export type AnalyticsEventName = 'solo_run_started' | 'solo_run_completed' | 'training_started' | 'sound_failure' | 'tiebreaker_answered' | 'tiebreaker_shared' | 'answer_option_mismatch' | 'answer_replay_conflict';
 
 export const ANALYTIC_EVENT_NAMES: readonly AnalyticsEventName[] = [
   'solo_run_started',
@@ -39,6 +39,8 @@ export const ANALYTIC_EVENT_NAMES: readonly AnalyticsEventName[] = [
   'sound_failure',
   'tiebreaker_answered',
   'tiebreaker_shared',
+  'answer_option_mismatch',
+  'answer_replay_conflict',
 ];
 
 export type AnalyticsEventValue = string | boolean | number;

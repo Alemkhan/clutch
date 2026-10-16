@@ -173,6 +173,13 @@ export interface SoloAnswerRequest {
   questionId: string;
   selectedAnswer: string;
   responseTimeMs: number;
+  /**
+   * Диагностика (необязательна): что игрок видел на кнопке. Верность по ним НЕ считается; сервер
+   * лишь сверяет текст с вариантом `selectedAnswer` и пишет событие `answer_option_mismatch`.
+   */
+  selectedText?: string;
+  optionCount?: number;
+  firstOptionId?: string;
 }
 
 /**
@@ -196,6 +203,11 @@ export interface SoloRoundResponse {
   correct: boolean;
   /** Только у вопроса с вариантами. */
   correctOptionId?: string;
+  /**
+   * Только у вопроса с вариантами: вариант, который сервер записал на этот круг. Обычно это выбор
+   * игрока, но при повторе с другого экрана записан первый; разбор показывает именно его.
+   */
+  selectedAnswer?: string;
   /** Только у открытого вопроса. */
   correctAnswers?: string[];
   explanation: string;

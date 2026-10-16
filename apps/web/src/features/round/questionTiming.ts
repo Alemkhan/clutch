@@ -85,6 +85,17 @@ export function nextCountdownTick(
   return second >= 1 && second <= 3 && !playedSeconds.has(second) ? second : null;
 }
 
+/**
+ * Тап раньше этого срока после появления вариантов выбор не принимает: человек за такое время вопрос
+ * не прочтёт, зато так приходит второй тап двойного касания по экрану разбора («любой тап — дальше»),
+ * который иначе молча отвечает за игрока на следующий вопрос.
+ */
+export const MIN_OPTION_TAP_MS = 350;
+
+export function isTooEarlyForOptionTap(timing: QuestionTiming, nowMs: number): boolean {
+  return nowMs - timing.startedAtMs < MIN_OPTION_TAP_MS;
+}
+
 export class QuestionSubmissionGate {
   private decided = false;
 

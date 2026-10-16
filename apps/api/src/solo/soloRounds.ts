@@ -27,6 +27,7 @@ import {
 } from './soloShared';
 import type { RunRow } from './types';
 import { correctFor, isRoundInput } from './validation';
+import { answerOptionMismatch, answerReplayConflict, hasValidAnswerDiagnostics, reportAnswerDiagnostic } from './answerDiagnostics';
 
 /**
  * Чем закрывается круг: настоящим ударом игрока или отказом от него.
@@ -56,6 +57,7 @@ function isAnswerRequest(value: unknown): value is SoloAnswerRequest {
   if (!value || typeof value !== 'object') return false;
   const body = value as Record<string, unknown>;
   return isRoundIndex(body.roundIndex)
+    && hasValidAnswerDiagnostics(body)
     && isRoundInput({
       questionId: body.questionId,
       selectedAnswer: body.selectedAnswer,
@@ -91,6 +93,8 @@ export async function handleSoloAnswer(c: AppContext): Promise<Response> {
     if (rows[body.roundIndex].question_id !== body.questionId) {
       return c.json({ error: 'Unexpected question for this round.' }, 400);
     }
+    const conflict = answerReplayConflict(rows[body.roundIndex], body, Date.now());
+    if (conflict) await reportAnswerDiagnostic(c.env.DB, 'answer_replay_conflict', identity.playerId, run.id, body.questionId, conflict);
     return respondWithRound(c, loaded, rows, body.roundIndex);
   }
   if (body.roundIndex > rows.length) {
@@ -153,6 +157,8 @@ async function recordAnswer(
   });
   // Ошибка пишется в журнал игрока ровно один раз: повтор запроса вставку не проходит (inserted = false).
   // Пишем и тренировочные, и дружеские забеги: сервер всё равно показал игроку верный ответ.
+  const mismatch = inserted ? answerOptionMismatch(question, body) : null;
+  if (mismatch) await reportAnswerDiagnostic(c.env.DB, 'answer_option_mismatch', identity.playerId, run.id, question.id, mismatch);
   if (inserted && !correct) await recordMistake(c.env.DB, identity.playerId, question.id, Date.now());
   return respondWithRound(c, loaded, await listSoloRounds(c.env.DB, run.id), body.roundIndex);
 }
@@ -264,7 +270,7 @@ async function respondWithRound(
     correct: row.correct === 1,
     ...(question.answerType === 'open_answer'
       ? { correctAnswers: question.correctAnswers ?? [] }
-      : { correctOptionId: question.correctOptionId }),
+      : { correctOptionId: question.correctOptionId, selectedAnswer: row.selected_answer }),
     explanation: question.explanation,
     awaitingHammer: !settled,
     skillResult: row.skill_result,

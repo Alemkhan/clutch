@@ -3,6 +3,8 @@ import {
   createQuestionReadiness,
   createQuestionTiming,
   displayedQuestionSecond,
+  isTooEarlyForOptionTap,
+  MIN_OPTION_TAP_MS,
   markQuestionMediaError,
   markQuestionMediaReady,
   nextCountdownTick,
@@ -10,6 +12,15 @@ import {
   remainingQuestionMs,
   retryQuestionMedia,
 } from './questionTiming';
+
+describe('early option taps', () => {
+  it('ignores the second tap of a double tap on the resolution screen but not a real answer', () => {
+    const timing = createQuestionTiming(5_000, 15_000);
+    expect(isTooEarlyForOptionTap(timing, 5_020)).toBe(true);
+    expect(isTooEarlyForOptionTap(timing, 5_000 + MIN_OPTION_TAP_MS - 1)).toBe(true);
+    expect(isTooEarlyForOptionTap(timing, 5_000 + MIN_OPTION_TAP_MS)).toBe(false);
+  });
+});
 
 describe('question timing', () => {
   it('derives remaining time from the absolute deadline after a throttled large jump', () => {

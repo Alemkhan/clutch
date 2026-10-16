@@ -281,8 +281,8 @@ function runPlayer(db, playerId, limit) {
   } else {
     printTable(
       ['время', 'event', 'payload_json'],
-      events.map((row) => [time(row.created_at), cell(row.event, 40), cell(row.payload_json, 80)]),
-      [20, 40, 80],
+      events.map((row) => [time(row.created_at), cell(row.event, 40), cell(row.payload_json, 160)]),
+      [20, 40, 160],
     );
   }
 

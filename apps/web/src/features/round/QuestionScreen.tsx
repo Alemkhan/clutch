@@ -8,6 +8,7 @@ import {
   markQuestionMediaError,
   markQuestionMediaReady,
   retryQuestionMedia,
+  isTooEarlyForOptionTap,
   type QuestionDecision,
   QuestionSubmissionGate,
 } from './questionTiming';
@@ -50,6 +51,7 @@ export function QuestionScreen({ question, onAnswer }: QuestionScreenProps) {
 
   const handleSelect = (optionId: string) => {
     if (!readiness.timing) return;
+    if (isTooEarlyForOptionTap(readiness.timing, Date.now())) return;
     gateRef.current ??= new QuestionSubmissionGate(readiness.timing);
     const decision = gateRef.current.answer(optionId, Date.now());
     if (decision) applyDecision(decision, true);

@@ -172,7 +172,15 @@ describe('solo run flow with a server that scores the rounds', () => {
     });
     expect(checking.pending).toEqual({
       kind: 'answer',
-      request: { roundIndex: 0, questionId: questions[0].id, selectedAnswer: 'a', responseTimeMs: 1234 },
+      request: {
+        roundIndex: 0,
+        questionId: questions[0].id,
+        selectedAnswer: 'a',
+        responseTimeMs: 1234,
+        selectedText: questions[0].options[0].text,
+        optionCount: questions[0].options.length,
+        firstOptionId: questions[0].options[0].id,
+      },
     });
     // До ответа сервера ни пояснения, ни прогресса нет.
     expect(checking.explanation).toBe('');
@@ -186,6 +194,26 @@ describe('solo run flow with a server that scores the rounds', () => {
       stage: 'resolution', lastCorrect: true, correctAnswer: correctOption.text, correctCount: 1, pending: null,
     });
     expect(answered.explanation).toBe('Пояснение сервера.');
+  });
+
+  it('shows the option the server recorded when it differs from the local choice', () => {
+    const checking = recordSoloAnswer(started(questions, null), 'c', 900);
+    const answered = applySoloAnswerVerdict(checking, serverRound(checking, {
+      correct: false, awaitingHammer: false, correctOptionId: 'c', selectedAnswer: 'a',
+    }));
+    expect(answered.selectedOption).toBe('a');
+    // Старый сервер без поля: остаётся локальный выбор.
+    const legacy = applySoloAnswerVerdict(checking, serverRound(checking, { correct: true, awaitingHammer: true, correctOptionId: 'c' }));
+    expect(legacy.selectedOption).toBe('c');
+  });
+
+  it('sends only the plain answer for an open question and for a timeout', () => {
+    const openQuestion = generateMatch(1, 1, 'geography').map(toPublicQuestion);
+    expect(recordSoloAnswer(started(openQuestion, null), 'Астана', 800).pending?.request).toEqual({
+      roundIndex: 0, questionId: openQuestion[0].id, selectedAnswer: 'Астана', responseTimeMs: 800,
+    });
+    const timeout = recordSoloAnswer(started(questions, null), '__timeout__', 15000).pending?.request;
+    expect(timeout).not.toHaveProperty('selectedText');
   });
 
   it('uses the first canonical server answer for an open question', () => {
