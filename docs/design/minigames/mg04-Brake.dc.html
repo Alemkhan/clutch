@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Тормоз</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #f3f0e8; font-family: Inter, sans-serif; color: #171716; padding: 16px 20px 32px; display: flex; flex-direction: column; gap: 20px">
+<div style="background: #fffefa; border-radius: 20px; border: 1px solid rgba(23,23,22,0.11); padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 8px">
+<div style="width: 28px; height: 28px; border-radius: 8px; background: #171716; color: #fffefa; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">ТЫ</div>
+<div style="font-weight: 600; color: #706d66; flex: 1">Ты</div>
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 20px">60%</div>
+<div style="width: 1px; align-self: stretch; background: rgba(23,23,22,0.11); margin: 0 4px"></div>
+<div style="text-align: right; font-size: 12px; color: #706d66; line-height: 1.3"><b style="color: #171716; font-size: 14px">Круг 6</b><br>из 20</div>
+</div>
+<div style="height: 8px; border-radius: 999px; background: #e9e5dc; display: flex; overflow: hidden"><div style="width: 60%; background: #f04a3e"></div></div>
+</div>
+
+<div style="flex: 1; border-radius: 20px; background: #9cc27e; position: relative; overflow: hidden">
+<svg width="350" height="420" viewBox="0 0 350 420" style="position: absolute; left: 0; top: 0" aria-hidden="true">
+<rect x="105" y="0" width="140" height="420" fill="#4a4d52"></rect>
+<rect x="105" y="74" width="140" height="80" fill="#f3e2c2" opacity="0.9"></rect>
+<rect x="105" y="88" width="140" height="52" fill="#f1cf8a"></rect>
+<rect x="105" y="100" width="140" height="28" fill="#f0a64f"></rect>
+<rect x="105" y="109" width="140" height="10" fill="#e8432b"></rect>
+<rect x="105" y="60" width="140" height="6" fill="#fffefa"></rect>
+<path d="M175 170 V420" stroke="#fffefa" stroke-width="4" stroke-dasharray="18 16"></path>
+<g transform="translate(150 280)">
+<rect x="0" y="0" width="50" height="84" rx="12" fill="#f04a3e"></rect>
+<rect x="6" y="14" width="38" height="20" rx="5" fill="#bfe0f2"></rect>
+<rect x="6" y="54" width="38" height="16" rx="4" fill="#d83830"></rect>
+<rect x="4" y="-2" width="10" height="5" rx="2" fill="#ffe9a8"></rect>
+<rect x="36" y="-2" width="10" height="5" rx="2" fill="#ffe9a8"></rect>
+</g>
+<path d="M175 270 V180" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-dasharray="3 6"></path>
+</svg>
+<div style="position: absolute; left: 16px; top: 16px; display: flex; flex-direction: column; gap: 4px">
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 22px; color: #12301c">Тормоз</div>
+<div style="font-size: 13px; color: #1f4a2c">Встань в красной полосе</div>
+</div>
+<div style="position: absolute; right: 16px; top: 16px; background: #171716; color: #fffefa; border-radius: 12px; padding: 8px 12px; text-align: right">
+<div style="font-family: Poppins, sans-serif; font-weight: 800; font-size: 22px; line-height: 1; font-variant-numeric: tabular-nums">82</div>
+<div style="font-size: 11px; color: #a8a49b">км/ч</div>
+</div>
+</div>
+
+<div style="display: flex; align-items: center; gap: 16px">
+<div style="width: 76px; height: 76px; border-radius: 50%; background: #171716; color: #fffefa; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; flex: none">ТОРМОЗ</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="font-size: 16px; font-weight: 700">Тапни в любом месте — тормоз</div>
+<div style="font-size: 13px; color: #706d66; line-height: 1.4">Машина разгоняется, путь торможения растёт со скоростью</div>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

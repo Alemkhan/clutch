@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Кёрлинг</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #f3f0e8; font-family: Inter, sans-serif; color: #171716; padding: 16px 20px 32px; display: flex; flex-direction: column; gap: 20px">
+<div style="background: #fffefa; border-radius: 20px; border: 1px solid rgba(23,23,22,0.11); padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 8px">
+<div style="width: 28px; height: 28px; border-radius: 8px; background: #171716; color: #fffefa; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">ТЫ</div>
+<div style="font-weight: 600; color: #706d66; flex: 1">Ты</div>
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 20px">24%</div>
+<div style="width: 1px; align-self: stretch; background: rgba(23,23,22,0.11); margin: 0 4px"></div>
+<div style="text-align: right; font-size: 12px; color: #706d66; line-height: 1.3"><b style="color: #171716; font-size: 14px">Круг 2</b><br>из 20</div>
+</div>
+<div style="height: 8px; border-radius: 999px; background: #e9e5dc; display: flex; overflow: hidden"><div style="width: 24%; background: #f04a3e"></div></div>
+</div>
+
+<div style="flex: 1; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 12px">
+<div style="border-radius: 14px; background: #fffefa; border: 1px solid rgba(23,23,22,0.11); position: relative; overflow: hidden; display: flex; flex-direction: column-reverse">
+<div style="height: 100%; background: linear-gradient(#e8432b, #f0a64f 30%, #f1cf8a 60%, #e9e5dc)"></div>
+<div style="position: absolute; left: -2px; right: -2px; top: 38%; height: 6px; background: #171716; border-radius: 3px; box-shadow: 0 0 0 2px #fffefa"></div>
+<div style="position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font-size: 10px; font-weight: 800; color: #5f5c56">сила</div>
+</div>
+<div style="border-radius: 20px; background: #e6f1f7; position: relative; overflow: hidden">
+<svg width="294" height="470" viewBox="0 0 294 470" style="position: absolute; left: 0; top: 0" aria-hidden="true">
+<path d="M0 0 H294" stroke="#c9dbe6"></path>
+<circle cx="147" cy="120" r="92" fill="#f3e2c2"></circle>
+<circle cx="147" cy="120" r="66" fill="#f1cf8a"></circle>
+<circle cx="147" cy="120" r="40" fill="#f0a64f"></circle>
+<circle cx="147" cy="120" r="16" fill="#e8432b"></circle>
+<path d="M147 0 V470 M0 120 H294" stroke="rgba(23,23,22,0.15)" stroke-width="1.5"></path>
+<path d="M147 400 C147 330, 160 260, 150 170" fill="none" stroke="#4d75e8" stroke-width="2.5" stroke-dasharray="5 6"></path>
+<circle cx="150" cy="170" r="14" fill="none" stroke="#4d75e8" stroke-width="2" stroke-dasharray="3 3"></circle>
+<circle cx="147" cy="410" r="22" fill="#5f6b75"></circle>
+<circle cx="147" cy="410" r="15" fill="#f04a3e"></circle>
+<rect x="139" y="398" width="16" height="8" rx="4" fill="#171716"></rect>
+</svg>
+<div style="position: absolute; left: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 4px">
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 22px">Кёрлинг</div>
+<div style="font-size: 13px; color: #3d3b37">Остановись в центре дома</div>
+</div>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px; text-align: center">
+<div style="font-size: 16px; font-weight: 700">Тапни — бросок с текущей силой</div>
+<div style="font-size: 13px; color: #706d66">Пунктир — где остановится камень при этой силе</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

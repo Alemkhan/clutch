@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Налей до черты</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #f3f0e8; font-family: Inter, sans-serif; color: #171716; padding: 16px 20px 32px; display: flex; flex-direction: column; gap: 20px">
+<div style="background: #fffefa; border-radius: 20px; border: 1px solid rgba(23,23,22,0.11); padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 8px">
+<div style="width: 28px; height: 28px; border-radius: 8px; background: #171716; color: #fffefa; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">ТЫ</div>
+<div style="font-weight: 600; color: #706d66; flex: 1">Ты</div>
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 20px">12%</div>
+<div style="width: 1px; align-self: stretch; background: rgba(23,23,22,0.11); margin: 0 4px"></div>
+<div style="text-align: right; font-size: 12px; color: #706d66; line-height: 1.3"><b style="color: #171716; font-size: 14px">Круг 2</b><br>из 20</div>
+</div>
+<div style="height: 8px; border-radius: 999px; background: #e9e5dc; display: flex; overflow: hidden"><div style="width: 12%; background: #f04a3e"></div></div>
+</div>
+
+<div style="flex: 1; border-radius: 20px; background: #fbe9d7; position: relative; overflow: hidden">
+<div style="position: absolute; left: 16px; top: 16px; display: flex; flex-direction: column; gap: 4px">
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 22px">Налей до черты</div>
+<div style="font-size: 13px; color: #5f4a38">Останови струю на красной черте</div>
+</div>
+<svg width="350" height="470" viewBox="0 0 350 470" style="position: absolute; left: 0; top: 0" aria-hidden="true">
+<rect x="150" y="70" width="70" height="22" rx="6" fill="#8a8f96"></rect>
+<rect x="176" y="92" width="18" height="16" fill="#8a8f96"></rect>
+<rect x="181" y="108" width="8" height="190" fill="#f0a64f" opacity="0.9"></rect>
+<path d="M115 160 L255 160 L238 430 L132 430 Z" fill="rgba(255,255,255,0.65)" stroke="#5f6b75" stroke-width="3" stroke-linejoin="round"></path>
+<path d="M125 300 L245 300 L238 430 L132 430 Z" fill="#f0a64f"></path>
+<path d="M125 300 L245 300 L244 312 L126 312 Z" fill="#fff4dc"></path>
+<g>
+<rect x="266" y="190" width="16" height="70" rx="3" fill="#f3e2c2"></rect>
+<rect x="266" y="200" width="16" height="50" fill="#f1cf8a"></rect>
+<rect x="266" y="210" width="16" height="30" fill="#f0a64f"></rect>
+<rect x="266" y="221" width="16" height="8" fill="#e8432b"></rect>
+</g>
+<path d="M118 225 L252 225" stroke="#e8432b" stroke-width="3" stroke-dasharray="8 5"></path>
+<g font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#5f4a38">
+<text x="288" y="229">+25</text>
+<text x="288" y="208">+18</text>
+<text x="288" y="196">+12</text>
+<text x="288" y="266">+5</text>
+</g>
+<path d="M90 300 V240" stroke="#5f4a38" stroke-width="2" stroke-linecap="round"></path>
+<path d="M84 248 L90 238 L96 248" fill="none" stroke="#5f4a38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px; text-align: center">
+<div style="font-size: 16px; font-weight: 700">Тапни — закрыть кран</div>
+<div style="font-size: 13px; color: #706d66">Струя то сильнее, то слабее — у каждого вопроса своя</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

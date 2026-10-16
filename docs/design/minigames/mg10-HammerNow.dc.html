@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Молоток · как есть</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #f3f0e8; font-family: Inter, sans-serif; color: #171716; padding: 16px 20px 32px; display: flex; flex-direction: column; gap: 16px">
+<div style="background: #fffefa; border-radius: 20px; border: 1px solid rgba(23,23,22,0.11); padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 8px">
+<div style="width: 28px; height: 28px; border-radius: 8px; background: #171716; color: #fffefa; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">ТЫ</div>
+<div style="font-weight: 600; color: #706d66; flex: 1">Ты</div>
+<div style="font-size: 12px; font-weight: 800; color: #168c51; background: #e3f3ea; border-radius: 999px; padding: 4px 8px">+18</div>
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 20px">18%</div>
+<div style="width: 1px; align-self: stretch; background: rgba(23,23,22,0.11); margin: 0 4px"></div>
+<div style="text-align: right; font-size: 12px; color: #706d66; line-height: 1.3"><b style="color: #171716; font-size: 14px">Круг 1</b><br>осталось 20</div>
+</div>
+<div style="height: 8px; border-radius: 999px; background: #e9e5dc; display: flex; overflow: hidden"><div style="width: 18%; background: #168c51"></div></div>
+</div>
+
+<div style="text-align: center; display: flex; flex-direction: column; gap: 4px; margin-top: 16px">
+<div style="font-size: 12px; font-weight: 800; letter-spacing: 2px; color: #f04a3e">ТОЧНОСТЬ</div>
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 30px; letter-spacing: -0.8px">Бей по пню!</div>
+</div>
+
+<div style="position: relative; width: 300px; height: 320px; align-self: center">
+<img src="../../../apps/web/public/sprites/stump.png" alt="" style="position: absolute; left: 0; top: 70px; width: 300px; height: 250px; object-fit: contain">
+<div style="position: absolute; left: 50%; top: 40px; width: 45px; height: 90px; overflow: hidden; transform: translateX(-50%)">
+<img src="../../../apps/web/public/sprites/nail.png" alt="" style="position: absolute; left: 0; bottom: -60px; width: 100%">
+</div>
+<img src="../../../apps/web/public/sprites/hammer-tool.png" alt="" style="position: absolute; width: 138px; left: 70px; top: -10px; transform: rotate(24deg) translate(14px, 10px); transform-origin: 85% 85%">
+<img src="../../../apps/web/public/sprites/burst-hit.png" alt="" style="position: absolute; width: 120px; left: 90px; top: 40px; opacity: 0.9">
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px; margin-top: auto">
+<div style="position: relative; height: 16px; font-size: 11px; font-weight: 700; color: #5f5c56">
+<span style="position: absolute; left: 9%; transform: translateX(-50%)">+5</span>
+<span style="position: absolute; left: 21%; transform: translateX(-50%)">+12</span>
+<span style="position: absolute; left: 35%; transform: translateX(-50%)">+18</span>
+<span style="position: absolute; left: 50%; transform: translateX(-50%); color: #171716">+25</span>
+<span style="position: absolute; left: 65%; transform: translateX(-50%)">+18</span>
+<span style="position: absolute; left: 79%; transform: translateX(-50%)">+12</span>
+<span style="position: absolute; left: 91%; transform: translateX(-50%)">+5</span>
+</div>
+<div style="position: relative; height: 56px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(23,23,22,0.18); background: #fffefa">
+<div style="position: absolute; left: 4%; width: 92%; top: 0; bottom: 0; background: #f3e2c2"></div>
+<div style="position: absolute; left: 14%; width: 72%; top: 0; bottom: 0; background: #f1cf8a"></div>
+<div style="position: absolute; left: 28%; width: 44%; top: 0; bottom: 0; background: #f0a64f"></div>
+<div style="position: absolute; left: 47%; width: 6%; top: 0; bottom: 0; background: #d83830"></div>
+<div style="position: absolute; left: 58%; top: 6px; bottom: 6px; width: 6px; border-radius: 3px; background: #171716; transform: translateX(-50%)"></div>
+</div>
+</div>
+
+<div style="text-align: center; display: flex; flex-direction: column; gap: 4px">
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 34px; line-height: 1.1; color: #168c51">ОТЛИЧНО +18%</div>
+<div style="font-size: 16px; font-weight: 600">До 100% — ещё 82%</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Нож в бревно</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #f3f0e8; font-family: Inter, sans-serif; color: #171716; padding: 16px 20px 32px; display: flex; flex-direction: column; gap: 20px">
+<div style="background: #fffefa; border-radius: 20px; border: 1px solid rgba(23,23,22,0.11); padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 8px">
+<div style="width: 28px; height: 28px; border-radius: 8px; background: #171716; color: #fffefa; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">ТЫ</div>
+<div style="font-weight: 600; color: #706d66; flex: 1">Ты</div>
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 20px">36%</div>
+<div style="width: 1px; align-self: stretch; background: rgba(23,23,22,0.11); margin: 0 4px"></div>
+<div style="text-align: right; font-size: 12px; color: #706d66; line-height: 1.3"><b style="color: #171716; font-size: 14px">Круг 3</b><br>из 20</div>
+</div>
+<div style="height: 8px; border-radius: 999px; background: #e9e5dc; display: flex; overflow: hidden"><div style="width: 36%; background: #f04a3e"></div></div>
+</div>
+
+<div style="flex: 1; border-radius: 20px; background: #26313a; position: relative; overflow: hidden">
+<div style="position: absolute; left: 16px; top: 16px; display: flex; flex-direction: column; gap: 4px; color: #fffefa">
+<div style="font-family: Poppins, sans-serif; font-weight: 900; font-size: 22px">Нож в бревно</div>
+<div style="font-size: 13px; color: #b9c3cc">Попади в красную метку</div>
+</div>
+<svg width="350" height="470" viewBox="0 0 350 470" style="position: absolute; left: 0; top: 0" aria-hidden="true">
+<circle cx="175" cy="200" r="110" fill="#a8743f"></circle>
+<circle cx="175" cy="200" r="86" fill="none" stroke="#8e5f30" stroke-width="3"></circle>
+<circle cx="175" cy="200" r="60" fill="none" stroke="#8e5f30" stroke-width="3"></circle>
+<circle cx="175" cy="200" r="34" fill="none" stroke="#8e5f30" stroke-width="3"></circle>
+<circle cx="175" cy="200" r="10" fill="#7a4f25"></circle>
+<path d="M119.6 95.8 A118 118 0 0 1 230.4 95.8" fill="none" stroke="#f3e2c2" stroke-width="16"></path>
+<path d="M138.5 87.8 A118 118 0 0 1 211.5 87.8" fill="none" stroke="#f1cf8a" stroke-width="16"></path>
+<path d="M154.5 83.8 A118 118 0 0 1 195.5 83.8" fill="none" stroke="#f0a64f" stroke-width="16"></path>
+<path d="M166.8 82.3 A118 118 0 0 1 183.2 82.3" fill="none" stroke="#e8432b" stroke-width="16"></path>
+<path d="M296 150 A128 128 0 0 1 300 230" fill="none" stroke="#b9c3cc" stroke-width="3" stroke-linecap="round"></path>
+<path d="M292 222 L300 234 L306 220" fill="none" stroke="#b9c3cc" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M175 330 V370" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-dasharray="3 5"></path>
+<path d="M175 372 L183 400 L183 420 L167 420 L167 400 Z" fill="#dfe6ec"></path>
+<rect x="164" y="420" width="22" height="6" rx="2" fill="#171716"></rect>
+<rect x="168" y="426" width="14" height="34" rx="4" fill="#e8432b"></rect>
+</svg>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px; text-align: center">
+<div style="font-size: 16px; font-weight: 700">Тапни — нож летит в бревно</div>
+<div style="font-size: 13px; color: #706d66">Метка: красный центр +25 · оранжевый +18 · жёлтый +12 · светлый +5</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
