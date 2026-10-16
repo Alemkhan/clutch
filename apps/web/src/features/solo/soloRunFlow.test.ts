@@ -48,7 +48,7 @@ function paceOf(questions: PublicQuestion[], awards: number[]): Opponent {
 
 function started(questions: PublicQuestion[], pace: Opponent | null): SoloFlowState {
   const loaded = applyLoadedSoloRun(beginSoloLoading('geography'), {
-    runId: 'run-1', questions, pace, config, bankExhausted: false,
+    runId: 'run-1', questions, pace, config, miniGameId: 'hammer_nail', bankExhausted: false,
   });
   return startSoloPlay(loaded);
 }
@@ -104,7 +104,7 @@ describe('solo run flow', () => {
     const loading = beginSoloLoading('history');
     expect(loading).toMatchObject({ stage: 'loading', category: 'history' });
     expect(failSoloLoading(loading, 'нет сети')).toMatchObject({ stage: 'error', error: 'нет сети' });
-    const ready = applyLoadedSoloRun(loading, { runId: 'r', questions, pace: null, config, bankExhausted: true });
+    const ready = applyLoadedSoloRun(loading, { runId: 'r', questions, pace: null, config, miniGameId: 'hammer_nail', bankExhausted: true });
     expect(ready).toMatchObject({ stage: 'ready', runId: 'r', bankExhausted: true });
     expect(soloFlowView(ready)).toMatchObject({ progress: 0, round: 1 });
     expect(startSoloPlay(ready).stage).toBe('question');
@@ -288,6 +288,7 @@ describe('a run interrupted after several rounds continues from the same place',
     questions,
     pace: null,
     config,
+    miniGameId: 'hammer_nail',
     bankExhausted: false,
     category: 'geography',
     status: 'in_progress',

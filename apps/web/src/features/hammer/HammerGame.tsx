@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { MiniGameConfig, SkillResult } from '@clutch/shared';
-import { hammerAttemptRules } from '@clutch/shared';
-import { preloadImages } from './preloadImages';
+import { SKILL_REWARDS, SOLO_TARGET_PROGRESS, hammerAttemptRules } from '@clutch/shared';
 import { hasSeenHammerIntro, markHammerIntroSeen } from './hammerIntro';
-import { strikeNotes } from './hammerStrike';
+import { strikeGain, strikeNotes } from './hammerStrike';
 import { useHammerStrike, useMarkerClock } from './useHammerStrike';
 import { HammerIntro } from './HammerIntroCard';
 import { HammerLane } from './HammerLane';
@@ -28,7 +27,7 @@ interface HammerGameProps {
    * Это превью по той же scoreHammerTap, что и на сервере; засчитывает всё равно ответ сервера.
    */
   onStrike?: (result: SkillResult, progressAwarded: number) => void;
-  /** Процент игрока до этого удара: нужен для подписи «До 100% — ещё N%». Без него строки нет. */
+  /** Процент игрока до этого удара: глубина гвоздя и строка «Гвоздь вошёл на N% · до 100% — ещё M%». Без него гвоздь в начальном положении, строки нет. */
   progressBefore?: number;
 }
 
@@ -36,7 +35,7 @@ export function hammerActionSemantics(struck: boolean, result: SkillResult | nul
   return {
     tabIndex: struck ? -1 : 0,
     'aria-disabled': struck,
-    'aria-label': result ? 'Удар завершён' : 'Нажмите, чтобы ударить по пню',
+    'aria-label': result ? 'Удар завершён' : 'Нажмите, чтобы ударить по гвоздю',
   } as const;
 }
 
@@ -52,12 +51,17 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
     attempt, config, questionId, previousSkillResults, introOpen, clock, onComplete, onStrike,
   });
 
-  // Спрайты вспышек — несколько мегабайт; прогреваем кэш на монтировании, ошибки игнорируются.
-  useEffect(() => {
-    preloadImages(['/sprites/burst-hit.png', '/sprites/burst-perfect.png']);
-  }, []);
-
-  const notes = strikeNotes(result, progressBefore, previousSkillResults);
+  const baseNotes = strikeNotes(result, progressBefore, previousSkillResults);
+  const gain = result && progressBefore !== undefined ? strikeGain(progressBefore, SKILL_REWARDS[result]) : null;
+  // Строка макета: «Гвоздь вошёл на N% · до 100% — ещё M%». Глубина = реальный процент игрока после удара.
+  const notes = gain
+    ? {
+        ...baseNotes,
+        remaining: gain.remaining > 0
+          ? `Гвоздь вошёл на ${gain.total}% · до ${SOLO_TARGET_PROGRESS}% — ещё ${gain.remaining}%`
+          : `Гвоздь вошёл на ${gain.total}% · цель ${SOLO_TARGET_PROGRESS}% достигнута`,
+      }
+    : baseNotes;
   const confirmIntro = () => {
     markHammerIntroSeen();
     setIntroOpen(false);
@@ -74,8 +78,19 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
         onClick={handleTap}
         onKeyDown={onKeyDown}
       >
-        {!result && <h2 className="stump-headline">Бей по пню!</h2>}
-        <HammerScene struck={struck} result={result} onNailSettled={onNailSettled} />
+        {!result && (
+          <div className="hammer-headline">
+            <h2 className="hammer-headline-title">Молоток</h2>
+            <p className="hammer-headline-sub">Чем точнее удар, тем глубже гвоздь</p>
+          </div>
+        )}
+        <HammerScene
+          struck={struck}
+          result={result}
+          progressBefore={progressBefore}
+          gain={gain?.gain ?? 0}
+          onNailSettled={onNailSettled}
+        />
         <HammerLane attempt={attempt} markerPos={clock.markerPos} />
         {result ? (
           <HammerResult result={result} {...notes} />

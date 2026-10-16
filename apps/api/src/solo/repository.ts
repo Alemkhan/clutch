@@ -1,4 +1,4 @@
-import { CURRENT_HAMMER_MINI_GAME, CURRENT_SOLO_RUN_CONDITIONS, MIN_POOL_ROUNDS, type Opponent, type Question } from '@clutch/shared';
+import { CURRENT_HAMMER_MINI_GAME, CURRENT_SOLO_RUN_CONDITIONS, MINI_GAME_IDS, MIN_POOL_ROUNDS, type Opponent, type Question } from '@clutch/shared';
 import type { RunRow } from './types';
 import { candidateSnapshot } from './validation';
 
@@ -136,8 +136,10 @@ export async function findGhostInSets(
         WHERE player_id = ?2 AND question_set_id IS NOT NULL
       )` : '';
   const reachedClause = options.reachedTargetOnly ? ' AND reached_target = 1' : '';
-  const setPlaceholders = questionSetIds.map((_, index) => `?${index + 7}`).join(', ');
-  const claimPlaceholder = questionSetIds.length + 7;
+  const setPlaceholders = questionSetIds.map((_, index) => `?${index + 6}`).join(', ');
+  const claimPlaceholder = questionSetIds.length + 6;
+  const miniGameFirst = claimPlaceholder + 1;
+  const miniGamePlaceholders = MINI_GAME_IDS.map((_, index) => `?${miniGameFirst + index}`).join(', ');
   const result = await db.prepare(`
     SELECT ${runColumns}, question_set_id
     FROM match_runs
@@ -145,8 +147,8 @@ export async function findGhostInSets(
       AND status = 'completed'
       AND CASE WHEN json_valid(rounds_json) THEN json_array_length(rounds_json) ELSE 0 END >= ?1
       AND rules_version = ?3
-      AND mini_game_id = ?4
-      AND mini_game_config_json = ?5
+      AND mini_game_id IN (${miniGamePlaceholders})
+      AND mini_game_config_json = ?4
       AND player_id <> ?2
       AND id NOT IN (
         SELECT opponent_run_id FROM match_runs
@@ -155,7 +157,7 @@ export async function findGhostInSets(
       AND NOT EXISTS (
         SELECT 1 FROM rematch_invites reserved
         WHERE reserved.challenger_run_id = match_runs.id AND reserved.recipient_run_id IS NULL
-          AND reserved.consumed_at IS NULL AND reserved.released_at IS NULL AND reserved.expires_at > ?6
+          AND reserved.consumed_at IS NULL AND reserved.released_at IS NULL AND reserved.expires_at > ?5
       )
       -- Матч — это пара: запись достаётся одному сопернику, а забег, который сам играл против
       -- чьей-то записи, второй раз в пул не возвращается.
@@ -166,11 +168,11 @@ export async function findGhostInSets(
     MIN_POOL_ROUNDS,
     playerId,
     options.rulesVersion ?? CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
-    CURRENT_HAMMER_MINI_GAME.id,
     currentMiniGameConfigJson,
     options.now ?? Date.now(),
     ...questionSetIds,
     (options.now ?? Date.now()) - CLAIM_IDLE_MS,
+    ...MINI_GAME_IDS,
   ).all<RunRow>();
   for (const row of result.results) {
     const snapshot = candidateSnapshot(row);
@@ -228,12 +230,13 @@ export async function findRecordRun(
     SELECT ${runColumns}, question_set_id
     FROM match_runs
     WHERE id = ?1 AND status = 'completed' AND reached_target = 1
-      AND rules_version = ?2 AND mini_game_id = ?3 AND mini_game_config_json = ?4
+      AND rules_version = ?2 AND mini_game_id IN (${MINI_GAME_IDS.map((_, index) => `?${index + 4}`).join(', ')})
+      AND mini_game_config_json = ?3
   `).bind(
     runId,
     rulesVersion,
-    CURRENT_HAMMER_MINI_GAME.id,
     currentMiniGameConfigJson,
+    ...MINI_GAME_IDS,
   ).first<RunRow>();
   if (!row?.question_set_id) return null;
   const snapshot = candidateSnapshot(row);

@@ -127,6 +127,8 @@ export interface StartSoloRunResponse {
   target: number;
   roundCap: number;
   rulesVersion: string;
+  /** Мини-игра этого забега: выбрана сервером при старте (или унаследована от записи соперника). */
+  miniGameId: MiniGameId;
   /** true: все наборы дня в категории уже пройдены, выдан наименее давно сыгранный. */
   bankExhausted: boolean;
 }
@@ -341,10 +343,29 @@ export interface Opponent {
   rounds: OpponentRound[];
 }
 
+/** Мини-игры зачётного забега. Считаются одной математикой (CURRENT_HAMMER_MINI_GAME). */
+export const MINI_GAME_IDS = ['hammer_nail', 'tower_stack'] as const;
+export type MiniGameId = (typeof MINI_GAME_IDS)[number];
+
+export const MINI_GAME_TITLES: Record<MiniGameId, string> = {
+  hammer_nail: 'Молоток',
+  tower_stack: 'Башня',
+};
+
+/** Одна строка правила для экрана старта забега. */
+export const MINI_GAME_RULES: Record<MiniGameId, string> = {
+  hammer_nail: 'Остановите молоток точно над гвоздём: чем точнее удар, тем больше прогресса.',
+  tower_stack: 'Уроните блок ровно на башню: чем точнее совпадение, тем больше прогресса.',
+};
+
+export function isMiniGameId(value: unknown): value is MiniGameId {
+  return typeof value === 'string' && (MINI_GAME_IDS as readonly string[]).includes(value);
+}
+
 export interface AsyncMatchConditions {
   rulesVersion: string;
   miniGame: {
-    id: 'hammer_nail';
+    id: MiniGameId;
     config: MiniGameConfig;
   };
 }

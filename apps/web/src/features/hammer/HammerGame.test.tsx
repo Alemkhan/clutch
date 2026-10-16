@@ -51,4 +51,15 @@ describe('HammerGame first-visit gating', () => {
     expect(html).not.toContain('Как забить гвоздь');
     expect(html).not.toContain('Как это работает');
   });
+
+  it('renders the board scene with the new headline and no stump or sprite', () => {
+    localStorage.setItem('clutch_hammer_intro_seen_v1', '1');
+    const html = renderToStaticMarkup(<HammerGame {...props} progressBefore={36} />);
+    expect(html).toContain('Молоток');
+    expect(html).toContain('Чем точнее удар, тем глубже гвоздь');
+    expect(html).toContain('Нажмите, чтобы ударить по гвоздю');
+    expect(html).toContain('<svg');
+    expect(html).not.toContain('пню');
+    expect(html).not.toContain('/sprites/');
+  });
 });

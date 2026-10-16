@@ -1,6 +1,7 @@
 import { SOLO_TARGET_PROGRESS } from "@clutch/shared";
 import { HammerGame } from "../../hammer/HammerGame";
 import { strikeGain } from "../../hammer/hammerStrike";
+import { TowerGame } from "../../tower/TowerGame";
 import { QuestionScreen } from "../../round/QuestionScreen";
 import { ResolutionScreen } from "../../round/ResolutionScreen";
 import {
@@ -95,6 +96,22 @@ function RoundResolution({ props, state, view, question }: RoundStageProps) {
   );
 }
 
+/** Мини-игра забега: её выбрал сервер при старте; контракт пропсов у обеих игр один. */
+function MiniGame({ props, state, view, question }: RoundStageProps) {
+  const Game = state.miniGameId === "tower_stack" ? TowerGame : HammerGame;
+  return (
+    <Game
+      key={view.roundsPlayed}
+      config={state.config}
+      questionId={question.id}
+      previousSkillResults={state.skillResults}
+      progressBefore={view.progress}
+      onStrike={props.onStrike}
+      onComplete={props.onHammerComplete}
+    />
+  );
+}
+
 export function SoloRoundStage({ props, state, view, question }: RoundStageProps) {
   return (
     <div className="solo-play">
@@ -113,15 +130,7 @@ export function SoloRoundStage({ props, state, view, question }: RoundStageProps
         <RoundResolution props={props} state={state} view={view} question={question} />
       )}
       {state.stage === "hammer" && (
-        <HammerGame
-          key={view.roundsPlayed}
-          config={state.config}
-          questionId={question.id}
-          previousSkillResults={state.skillResults}
-          progressBefore={view.progress}
-          onStrike={props.onStrike}
-          onComplete={props.onHammerComplete}
-        />
+        <MiniGame props={props} state={state} view={view} question={question} />
       )}
     </div>
   );

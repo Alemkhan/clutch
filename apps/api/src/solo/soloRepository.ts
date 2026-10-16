@@ -1,10 +1,10 @@
 import {
-  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   FRIEND_RULES_VERSION,
   dailyKey,
   PRACTICE_RULES_VERSION,
   type AsyncMatchRound,
+  type MiniGameId,
   type MyRunOutcome,
   type Opponent,
   type Question,
@@ -23,6 +23,8 @@ export async function createSoloRun(db: D1Database, input: {
   category: string;
   /** Набор запоминается и для тренировки: увиденные вопросы не должны вернуться в зачёте. */
   questionSetId: string | null;
+  /** Мини-игра забега: выбрана при старте или унаследована от записи соперника. */
+  miniGameId: MiniGameId;
   questions: Question[];
   paceRunId: string | null;
   pace: Opponent | null;
@@ -48,7 +50,7 @@ export async function createSoloRun(db: D1Database, input: {
     input.practice
       ? PRACTICE_RULES_VERSION
       : input.friend ? FRIEND_RULES_VERSION : CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
-    CURRENT_HAMMER_MINI_GAME.id,
+    input.miniGameId,
     currentMiniGameConfigJson,
     input.pace ? JSON.stringify(input.pace) : null,
     input.questionSetId,

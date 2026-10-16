@@ -1,9 +1,12 @@
 import {
+  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   FRIEND_RULES_VERSION,
   PRACTICE_RULES_VERSION,
   SOLO_ROUND_CAP,
   SOLO_TARGET_PROGRESS,
+  isMiniGameId,
+  type MiniGameId,
   isPracticeLevelId,
   practiceQuestionSet,
   toPublicQuestion,
@@ -23,6 +26,7 @@ import {
   releaseInvite,
   type InviteRow,
 } from '../notifications/repository';
+import { pickMiniGameId } from './miniGame';
 import { PRACTICE_BOT_PROFILES, createBotOpponent } from './bots';
 import { matchmake } from './matchmaking';
 import { claimRecord, findRecordRun, findRun, type GhostMatch } from './repository';
@@ -155,19 +159,22 @@ async function startPracticeRun(
   // уже зная вопросы. См. practiceQuestionSet.
   const { questionSetId, questions } = practiceQuestionSet(request.category, runId, now);
   const bot = createBotOpponent(questions, PRACTICE_BOT_PROFILES[level]);
+  // Соперник — бот, а не запись человека: игра случайная, поровну.
+  const miniGameId = pickMiniGameId(null);
   await createSoloRun(c.env.DB, {
     id: runId,
     playerId: identity.playerId,
     displayName: identity.displayName || request.displayName.trim(),
     category: request.category,
     questionSetId,
+    miniGameId,
     questions,
     paceRunId: null,
     pace: bot,
     practice: true,
     now,
   });
-  return c.json(startResponse(runId, questions, bot, PRACTICE_RULES_VERSION, false), 201);
+  return c.json(startResponse(runId, questions, bot, PRACTICE_RULES_VERSION, miniGameId, false), 201);
 }
 
 /** Продолжение незаконченного забега игрока в категории; null — продолжать нечего. */
@@ -182,6 +189,7 @@ async function resumeActiveRun(c: AppContext, identity: RequestIdentity, categor
     storedQuestions,
     parsePace(existing.opponent_json),
     existing.rules_version ?? CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
+    isMiniGameId(existing.mini_game_id) ? existing.mini_game_id : CURRENT_HAMMER_MINI_GAME.id,
     false,
   ), 201);
 }
@@ -225,6 +233,8 @@ async function startMatchedRun(
 ): Promise<Response> {
   const { ghost, questionSetId, questions, bankExhausted } = await pickSetAndOpponent(c, identity, mode, runId, now);
   const invite = mode.kind === 'regular' ? null : mode.invite;
+  // Играем в ту же игру, что и записанный соперник; без записи — случайная.
+  const miniGameId = pickMiniGameId(ghost);
   const friendDuel = mode.kind === 'friend';
   if (invite && !await consumeInvite(c.env.DB, invite.id, identity.playerId, runId)) {
     return c.json({ error: 'Rematch invite is no longer available.', reason: 'taken' }, 410);
@@ -236,6 +246,7 @@ async function startMatchedRun(
       displayName: identity.displayName || request.displayName.trim(),
       category: mode.category,
       questionSetId,
+      miniGameId,
       questions,
       paceRunId: ghost?.row.id ?? null,
       pace: ghost?.opponent ?? null,
@@ -247,7 +258,7 @@ async function startMatchedRun(
     throw error;
   }
   const rulesVersion = friendDuel ? FRIEND_RULES_VERSION : CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
-  return c.json(startResponse(runId, questions, ghost?.opponent ?? null, rulesVersion, bankExhausted), 201);
+  return c.json(startResponse(runId, questions, ghost?.opponent ?? null, rulesVersion, miniGameId, bankExhausted), 201);
 }
 
 function startResponse(
@@ -255,6 +266,7 @@ function startResponse(
   questions: readonly Question[],
   pace: StartSoloRunResponse['pace'],
   rulesVersion: StartSoloRunResponse['rulesVersion'],
+  miniGameId: MiniGameId,
   bankExhausted: boolean,
 ): StartSoloRunResponse {
   return {
@@ -264,6 +276,7 @@ function startResponse(
     target: SOLO_TARGET_PROGRESS,
     roundCap: SOLO_ROUND_CAP,
     rulesVersion,
+    miniGameId,
     bankExhausted,
   };
 }

@@ -3,6 +3,7 @@ import {
   SOLO_ROUND_CAP,
   SOLO_TARGET_PROGRESS,
   evaluateSoloRun,
+  type MiniGameId,
   toPublicQuestion,
   type CompleteSoloRunResponse,
   type SoloPlayedRound,
@@ -60,6 +61,7 @@ async function handleResumeSoloRun(c: AppContext): Promise<Response> {
     target: SOLO_TARGET_PROGRESS,
     roundCap: SOLO_ROUND_CAP,
     rulesVersion: run.rules_version ?? CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
+    miniGameId: run.mini_game_id as MiniGameId,
     bankExhausted: false,
     rounds: rows.filter((row) => row.settled_at !== null).map((row): SoloPlayedRound => ({
       questionId: row.question_id,

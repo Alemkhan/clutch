@@ -6,6 +6,7 @@ import { practiceBotLabel } from "../practiceResult";
 import { soloPaceOf, type SoloFlowState } from "../soloRunFlow";
 import type { SoloRunScreenProps } from "../soloScreenTypes";
 import { MatchmakingFrame } from "./MatchmakingFrame";
+import { MiniGameCard } from "./MiniGameCard";
 
 interface ReadyView {
   roundsPlayed: number;
@@ -53,6 +54,7 @@ export function PracticeReadyStage({ props, state, view, practice }: ReadyStageP
       <h1 className="screen-title">
         {state.resumed ? "Продолжаем тренировку" : "Всё готово"}
       </h1>
+      <MiniGameCard miniGameId={state.miniGameId} />
       <div className="matchmaking-card">
         <p className="matchmaking-status">
           Против: {pace ? practiceBotLabel(pace.displayName) : "бот"}. Не
@@ -88,6 +90,7 @@ export function SoloReadyStage({ props, state, view }: ReadyStageProps) {
           давнее всех
         </span>
       )}
+      <MiniGameCard miniGameId={state.miniGameId} />
       <div className="matchmaking-card">
         <p className="matchmaking-status">
           Дойди до {view.target}%, но не больше чем за {SOLO_ROUND_CAP}{" "}

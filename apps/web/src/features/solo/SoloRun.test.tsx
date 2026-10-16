@@ -50,7 +50,7 @@ function pace(awards: number[], name = 'Alex'): Opponent {
 
 function playing(opponent: Opponent | null, stage: SoloFlowState['stage'] = 'question', rounds: number[] = []): SoloFlowState {
   const loaded = applyLoadedSoloRun(beginSoloLoading('geography'), {
-    runId: 'run-1', questions, pace: opponent, config, bankExhausted: false,
+    runId: 'run-1', questions, pace: opponent, config, miniGameId: 'hammer_nail', bankExhausted: false,
   });
   const session = rounds.reduce(applySoloSessionRound, loaded.session!);
   return { ...startSoloPlay({ ...loaded, session }), stage };
@@ -216,7 +216,7 @@ describe('solo answer resolution', () => {
   it('shows the canonical open answer and does not label the typed text as an MC choice', () => {
     const openQuestions = generateMatch(1, 1, 'geography');
     const loaded = applyLoadedSoloRun(beginSoloLoading('geography'), {
-      runId: 'run-open', questions: openQuestions, pace: null, config, bankExhausted: false,
+      runId: 'run-open', questions: openQuestions, pace: null, config, miniGameId: 'hammer_nail', bankExhausted: false,
     });
     const html = render({
       ...startSoloPlay(loaded),

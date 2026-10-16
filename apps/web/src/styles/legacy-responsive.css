@@ -83,7 +83,7 @@
     height: clamp(104px, 18dvh, 130px);
   }
 
-  .stump-scene {
+  .hammer-scene {
     height: 220px;
   }
 }
@@ -93,20 +93,22 @@
     height: 110px;
   }
 
-  .stump-scene {
+  .hammer-scene {
     height: 180px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .strike-burst {
+  .hammer-impact,
+  .hammer-gain-mark,
+  .hammer-scale-gain {
     animation: none;
   }
-  .stump-scene.shake {
+  .hammer-scene.shake {
     transition: none;
     animation: none;
   }
-  /* .hammer-tool and .nail-slot img are animated by Framer Motion, which respects
-     reduced motion via useReducedMotion() in HammerGame.tsx, not CSS. */
+  /* The nail is animated by Framer Motion and the hammer by an inline transition; both respect
+     reduced motion via useReducedMotion() in HammerScene.tsx, not CSS. */
 }
 

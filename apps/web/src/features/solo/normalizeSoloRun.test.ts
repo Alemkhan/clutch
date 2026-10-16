@@ -12,7 +12,7 @@ const questions = generateMatch(12, 0, 'geography');
 function response(overrides: Partial<StartSoloRunResponse> = {}): StartSoloRunResponse {
   return {
     runId: 'run-1', questions, pace: null, target: SOLO_TARGET_PROGRESS, roundCap: SOLO_ROUND_CAP,
-    rulesVersion: 'solo-to-100-v2', bankExhausted: false, ...overrides,
+    rulesVersion: 'solo-to-100-v2', miniGameId: 'hammer_nail', bankExhausted: false, ...overrides,
   };
 }
 

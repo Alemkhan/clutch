@@ -2,6 +2,7 @@ import type {
   CategoryId,
   CompleteSoloRunResponse,
   MiniGameConfig,
+  MiniGameId,
   Opponent,
   SkillResult,
   SoloAnswerRequest,
@@ -42,6 +43,7 @@ export interface SoloFlowState {
   runId?: string;
   session: SoloRunSession | null;
   config: MiniGameConfig;
+  miniGameId: MiniGameId;
   bankExhausted: boolean;
   /** Забег по дружеской ссылке: вне соревнования. */
   friendDuel: boolean;
@@ -81,6 +83,7 @@ export function createSoloFlowState(): SoloFlowState {
     category: 'general',
     session: null,
     config: CURRENT_SOLO_RUN_CONDITIONS.miniGame.config,
+    miniGameId: CURRENT_SOLO_RUN_CONDITIONS.miniGame.id,
     bankExhausted: false,
     friendDuel: false,
     resumed: false,
@@ -113,6 +116,7 @@ export function applyLoadedSoloRun(state: SoloFlowState, run: NormalizedSoloRun)
     runId: run.runId,
     session: createSoloRunSession(run.questions, run.pace),
     config: run.config,
+    miniGameId: run.miniGameId,
     bankExhausted: run.bankExhausted,
     friendDuel: run.friendDuel === true,
   };
@@ -137,6 +141,7 @@ export function restoreSoloRun(snapshot: NormalizedSoloSnapshot): SoloFlowState 
     runId: snapshot.runId,
     session,
     config: snapshot.config,
+    miniGameId: snapshot.miniGameId,
     friendDuel: snapshot.friendDuel === true,
     resumed: true,
     paceReleased: snapshot.paceReleased === true,

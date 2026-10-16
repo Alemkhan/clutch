@@ -3,15 +3,17 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CURRENT_HAMMER_MINI_GAME, SKILL_REWARDS, scoreHammerTap, type SkillResult } from '@clutch/shared';
 import { find, mount, type Mounted } from './hammerTestHarness';
 import { HammerGame } from './HammerGame';
+import { nailDepthAfter, nailOffset } from './HammerScene';
 
 vi.mock('react', async (importOriginal) => {
   const actual: any = await importOriginal();
   const h = await import('./hammerTestHarness');
   return { ...actual, ...h.hookOverrides };
 });
+const reduced = vi.hoisted(() => ({ value: false }));
 vi.mock('framer-motion', () => ({
-  motion: { img: 'img' },
-  useReducedMotion: () => false,
+  motion: { g: 'g' },
+  useReducedMotion: () => reduced.value,
 }));
 const log: string[] = [];
 vi.mock('../../platform/sounds', () => ({
@@ -21,7 +23,6 @@ vi.mock('../../platform/sounds', () => ({
 vi.mock('../../platform/analytics', () => ({
   analytics: { track: (name: string, data?: unknown) => log.push(`analytics:${name}:${JSON.stringify(data ?? null)}`) },
 }));
-vi.mock('./preloadImages', () => ({ preloadImages: () => log.push('preload') }));
 
 class MemoryStorage {
   values = new Map<string, string>();
@@ -42,6 +43,7 @@ function runFrame(timestamp: number) {
 
 beforeEach(() => {
   log.length = 0;
+  reduced.value = false;
   frames = [];
   nextFrameId = 1;
   vi.useFakeTimers();
@@ -65,7 +67,7 @@ function setup(extra: Record<string, unknown> = {}, seen = true) {
   const props = { config, questionId: 'q1', previousSkillResults: [] as SkillResult[], onComplete, onStrike, progressBefore: 40, ...extra };
   const view: Mounted = mount(() => ({ type: HammerGame, props }));
   const game = () => find(view.tree(), (n) => n.props.className === 'hammer-game')!;
-  const nail = () => find(view.tree(), (n) => n.props.src === '/sprites/nail.png')!;
+  const nail = () => find(view.tree(), (n) => n.props.className === 'hammer-nail')!;
   return { view, props, onComplete, onStrike, game, nail };
 }
 
@@ -73,7 +75,6 @@ describe('HammerGame dynamics', () => {
   it('starts the attempt once and moves the marker frame by frame', () => {
     const { view } = setup();
     expect(log.filter((l) => l.startsWith('analytics:skill_attempt_started'))).toHaveLength(1);
-    expect(log).toContain('preload');
     runFrame(1000);
     runFrame(1016);
     view.flush();
@@ -102,7 +103,7 @@ describe('HammerGame dynamics', () => {
     ]);
     expect(pendingFrames()).toBe(0);
     expect(onComplete).not.toHaveBeenCalled();
-    expect(nail().props.animate).toEqual({ y: expect.any(Number) });
+    expect(nail().props.animate).toEqual({ y: nailOffset(nailDepthAfter(40, expected.progressAwarded)) });
     expect(find(view.tree(), (n) => String(n.props.className).startsWith('strike-result'))).not.toBeNull();
 
     vi.advanceTimersByTime(149);
@@ -144,6 +145,82 @@ describe('HammerGame dynamics', () => {
     expect(pendingFrames()).toBe(1);
     game().props.onClick();
     expect(onStrike).toHaveBeenCalledTimes(1);
+    view.unmount();
+  });
+
+  it('nail depth follows progressBefore before the strike and the real gain after it', () => {
+    const { view, game, nail } = setup({ progressBefore: 40 });
+    runFrame(1000);
+    runFrame(1016);
+    view.flush();
+    expect(nail().props.animate).toEqual({ y: nailOffset(40) });
+    game().props.onClick();
+    view.flush();
+    const award = scoreHammerTap('q1', [], config, 16).progressAwarded;
+    expect(nail().props.animate).toEqual({ y: nailOffset(40 + award) });
+    expect(nailOffset(40 + award)).toBeGreaterThanOrEqual(nailOffset(40));
+    view.unmount();
+  });
+
+  it('caps the nail at 100% and marks the real (smaller) gain', () => {
+    // Берём момент удара, дающий максимальную награду, чтобы прирост у цели точно был урезан.
+    let frameCount = 1;
+    while (scoreHammerTap('q1', [], config, frameCount * 16).progressAwarded < SKILL_REWARDS.perfect) frameCount += 1;
+    const { view, game, nail } = setup({ progressBefore: 98 });
+    for (let i = 0; i <= frameCount; i += 1) runFrame(1000 + i * 16);
+    view.flush();
+    game().props.onClick();
+    view.flush();
+    expect(nail().props.animate).toEqual({ y: nailOffset(100) });
+    const mark = find(view.tree(), (n) => n.props['data-testid'] === 'gain-mark')!;
+    expect(JSON.stringify(mark.children)).toContain('"+"');
+    expect(JSON.stringify(mark.children)).toContain('2');
+    expect(JSON.stringify(mark.children)).not.toContain('25');
+    expect(JSON.stringify(view.tree())).toContain('Гвоздь вошёл на 100%');
+    view.unmount();
+  });
+
+  it('without progressBefore the nail stays put and no gain mark is drawn', () => {
+    const { view, game, nail } = setup({ progressBefore: undefined });
+    runFrame(1000);
+    runFrame(1016);
+    view.flush();
+    expect(nail().props.animate).toEqual({ y: 0 });
+    game().props.onClick();
+    view.flush();
+    expect(nail().props.animate).toEqual({ y: 0 });
+    expect(find(view.tree(), (n) => n.props['data-testid'] === 'gain-mark')).toBeNull();
+    view.unmount();
+  });
+
+  it('reduced motion: no swing or flash, nail goes straight to depth and the round still completes', () => {
+    reduced.value = true;
+    const { view, game, nail, onComplete } = setup();
+    runFrame(1000);
+    runFrame(1016);
+    view.flush();
+    game().props.onClick();
+    view.flush();
+    const expected = scoreHammerTap('q1', [], config, 16);
+    expect(find(view.tree(), (n) => n.props['data-testid'] === 'impact')).toBeNull();
+    expect(find(view.tree(), (n) => n.props.className === 'hammer-tool')!.props.style.transition).toBe('none');
+    expect(nail().props.transition.duration).toBe(0);
+    expect(nail().props.animate).toEqual({ y: nailOffset(nailDepthAfter(40, expected.progressAwarded)) });
+    expect(onComplete).toHaveBeenCalledTimes(1);
+    expect(onComplete).toHaveBeenCalledWith(expected.result, SKILL_REWARDS[expected.result], 16);
+    view.unmount();
+  });
+
+  it('completes the round after a strike that does not move the nail (miss)', () => {
+    const { view, game, onComplete } = setup({ progressBefore: 100 });
+    runFrame(1000);
+    runFrame(1016);
+    view.flush();
+    game().props.onClick();
+    view.flush();
+    expect(onComplete).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(500);
+    expect(onComplete).toHaveBeenCalledTimes(1);
     view.unmount();
   });
 });

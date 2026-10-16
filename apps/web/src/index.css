@@ -21,6 +21,7 @@
 @import './features/profile/profile.v2.css';
 @import './styles/v2-responsive.css';
 @import './features/hammer/hammerIntro.css';
+@import './features/tower/tower.css';
 @import './features/training/trainingEntry.css';
 @import './features/myRuns/runsAndBoard.v2.css';
 @import './features/home/homeBoardLink.css';

@@ -4,7 +4,7 @@
 // (question_reports, миграция 0002), кто и сколько играл (match_runs +
 // analytics_events), и всё об одном игроке. player_id печатается целиком —
 // его копируют из вывода и передают в `player` для детализации:
-//   npm run reports -- --question gp: --limit 5
+//   npm run reports -- --question gp: --limit 5   (в конце — удары по мини-играм)
 //   npm run activity -- --days 30
 //   npm run player -- guest:xxxx
 //
@@ -145,6 +145,41 @@ function runReports(db, filters) {
   }
   console.log(`Репорты о вопросах (${describeReportFilters(filters)}):`);
   printReportsTable(rows);
+  runMiniGameSplit(db);
+}
+
+// Распределение уровней ударов по мини-играм: зачётные забеги (solo-to-100-v2), завершённые.
+// Нужно, чтобы сравнить игры между собой (математика у них одна, различаться может только поведение игроков).
+const SKILL_LEVELS = ['perfect', 'great', 'good', 'weak', 'miss'];
+
+function runMiniGameSplit(db) {
+  let rows;
+  try {
+    rows = db.prepare(`
+      SELECT COALESCE(r.mini_game_id, '?') AS game, s.skill_result AS level, COUNT(*) AS total
+      FROM solo_run_rounds s
+      JOIN match_runs r ON r.id = s.run_id
+      WHERE r.rules_version = 'solo-to-100-v2' AND r.status = 'completed' AND s.skill_result IS NOT NULL
+      GROUP BY game, level
+    `).all();
+  } catch (error) {
+    console.error(`Не прочитать удары по мини-играм: ${error.message}`);
+    return;
+  }
+  console.log('\nУдары по мини-играм (зачётные завершённые забеги):');
+  if (rows.length === 0) {
+    console.log('Ударов пока нет.');
+    return;
+  }
+  const games = [...new Set(rows.map((row) => row.game))].sort();
+  const table = games.map((game) => {
+    const counts = Object.fromEntries(SKILL_LEVELS.map((level) => [level, 0]));
+    for (const row of rows) if (row.game === game) counts[row.level] = row.total;
+    const total = SKILL_LEVELS.reduce((sum, level) => sum + counts[level], 0);
+    const cells = SKILL_LEVELS.map((level) => `${counts[level]} (${total ? Math.round((counts[level] / total) * 100) : 0}%)`);
+    return [game, String(total), ...cells];
+  });
+  printTable(['игра', 'ударов', ...SKILL_LEVELS], table, [14, 8, 12, 12, 12, 12, 12]);
 }
 
 // --- activity -----------------------------------------------------------------

@@ -2,6 +2,7 @@ import {
   CURRENT_SOLO_RUN_CONDITIONS,
   FRIEND_RULES_VERSION,
   PRACTICE_RULES_VERSION,
+  isMiniGameId,
   type Opponent,
   type Question,
 } from '@clutch/shared';
@@ -70,7 +71,8 @@ export async function openSoloRun(c: AppContext, identity: RequestIdentity, runI
   const practice = run.rules_version === PRACTICE_RULES_VERSION;
   const friend = run.rules_version === FRIEND_RULES_VERSION;
   if ((!practice && !friend && run.rules_version !== CURRENT_SOLO_RUN_CONDITIONS.rulesVersion)
-    || run.mini_game_config_json !== currentMiniGameConfigJson) {
+    || run.mini_game_config_json !== currentMiniGameConfigJson
+    || !isMiniGameId(run.mini_game_id)) {
     return c.json({ error: 'This is not a solo run.' }, 409);
   }
   const questions = parseQuestions(run.questions_json);

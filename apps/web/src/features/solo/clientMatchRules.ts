@@ -8,6 +8,8 @@ import {
   SOLO_TARGET_PROGRESS,
   SKILL_REWARDS,
   type MiniGameConfig,
+  type MiniGameId,
+  isMiniGameId,
   type Opponent,
   type OpponentRound,
   type PublicQuestion,
@@ -86,6 +88,8 @@ export interface NormalizedSoloRun {
   /** Темп для полосы; null — записи нет или она не подходит к набору. Забег темп не завершает. */
   pace: Opponent | null;
   config: MiniGameConfig;
+  /** Мини-игра этого забега: ставит сервер, клиент только рисует нужную. */
+  miniGameId: MiniGameId;
   bankExhausted: boolean;
   /** Забег по дружеской ссылке: вне соревнования, исход против записи автора считается. */
   friendDuel?: boolean;
@@ -118,6 +122,7 @@ export function normalizeSoloRun(run: StartSoloRunResponse, practice = false): N
     || run.target !== SOLO_TARGET_PROGRESS || run.roundCap !== SOLO_ROUND_CAP) {
     throw new Error('Solo run conditions are not supported by this client.');
   }
+  if (!isMiniGameId(run.miniGameId)) throw new Error('Mini-game is not supported by this client.');
   validatePublicQuestions(run.questions);
   const pace = normalizeSoloPace(run.pace ?? null, run.questions);
   if (practice && !pace) throw new Error('Practice run has no usable bot.');
@@ -126,6 +131,7 @@ export function normalizeSoloRun(run: StartSoloRunResponse, practice = false): N
     questions: run.questions,
     pace,
     config: validateMiniGameConfig(CURRENT_SOLO_RUN_CONDITIONS.miniGame.config),
+    miniGameId: run.miniGameId,
     bankExhausted: run.bankExhausted === true,
     friendDuel,
   };

@@ -30,7 +30,7 @@ describe('friend duel on the client', () => {
   it('accepts the friend rules version and marks the run, without loosening anything else', () => {
     const response: StartSoloRunResponse = {
       runId: 'r', questions, pace: author, target: SOLO_TARGET_PROGRESS, roundCap: SOLO_ROUND_CAP,
-      rulesVersion: FRIEND_RULES_VERSION, bankExhausted: false,
+      rulesVersion: FRIEND_RULES_VERSION, miniGameId: 'hammer_nail', bankExhausted: false,
     };
     expect(normalizeSoloRun(response).friendDuel).toBe(true);
     expect(normalizeSoloRun({ ...response, rulesVersion: 'solo-to-100-v2' }).friendDuel).toBe(false);

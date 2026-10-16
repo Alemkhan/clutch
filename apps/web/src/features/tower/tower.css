@@ -1,0 +1,96 @@
+/* === TOWER GAME === */
+
+.tower-game {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  gap: clamp(10px, 2dvh, 18px);
+  width: 100%;
+}
+
+.tower-game[aria-disabled="true"] {
+  cursor: default;
+}
+
+.tower-stage {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+}
+
+.tower-caption {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  left: 14px;
+  right: 14px;
+  pointer-events: none;
+}
+
+.tower-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.tower-match {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #3d3b37;
+}
+
+.tower-scene {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: linear-gradient(#cfe3f2, #eef4f7);
+}
+
+.tower-ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #8bb07a;
+}
+
+.tower-floor {
+  position: absolute;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: inset 0 -3px 0 rgba(23, 23, 22, 0.14);
+}
+
+.tower-guide {
+  position: absolute;
+  width: 0;
+  border-left: 1.5px dashed rgba(23, 23, 22, 0.4);
+}
+
+.tower-thresholds {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #5f5c56;
+  text-align: center;
+}
+
+.tower-threshold.is-hit {
+  color: var(--success);
+}

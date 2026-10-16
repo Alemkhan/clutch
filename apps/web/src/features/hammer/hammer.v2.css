@@ -9,15 +9,3 @@
     ),
     var(--bg);
 }
-
-.stump-headline::before {
-  display: block;
-  margin-bottom: 5px;
-  color: var(--primary);
-  content: "ТОЧНОСТЬ";
-  font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.14em;
-}
-

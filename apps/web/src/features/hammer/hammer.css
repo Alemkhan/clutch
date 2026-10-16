@@ -14,72 +14,99 @@
   cursor: default;
 }
 
-.stump-headline {
-  font-family: var(--font-display);
-  font-size: clamp(22px, 6.5vw, 26px);
-  font-weight: 900;
-  text-align: center;
-  letter-spacing: -0.01em;
+.hammer-headline {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.stump-scene {
+.hammer-headline-title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 6vw, 22px);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.hammer-headline-sub {
+  font-size: 13px;
+  color: #5f4a38;
+  color: color-mix(in srgb, var(--text) 70%, #c8925a);
+}
+
+/* Сцена: доска в разрезе, гвоздь, молоток и шкала — один SVG (см. HammerScene.tsx). */
+.hammer-scene {
   position: relative;
   width: 100%;
-  width: auto;
   height: clamp(230px, 42dvh, 330px);
-  aspect-ratio: 896 / 1216;
+  border-radius: var(--radius);
+  background: #efe1c9;
+  overflow: hidden;
+  pointer-events: none;
 }
 
-.stump-scene.shake {
+.hammer-scene.shake {
   animation: log-shake 320ms ease-out;
 }
 
-.stump-img {
-  position: absolute;
-  inset: 0;
+.hammer-scene-svg {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  pointer-events: none;
 }
 
-.nail-slot {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 15%;
-  height: 34%;
-  overflow: hidden;
-  transform: translateX(-50%);
+.hammer-impact {
+  stroke: #f0a64f;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hammer-impact-pop 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.nail-slot img {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: auto;
+.hammer-impact.perfect {
+  stroke: #d83830;
+  filter: drop-shadow(0 0 4px var(--perfect));
+  animation-name: hammer-impact-pop-big;
 }
 
-/* Rotation/position are driven by Framer Motion (see HammerGame.tsx); this only
-   sets the static layout box the animated transform is applied within. */
-.hammer-tool {
-  position: absolute;
-  width: 46%;
-  left: 10%;
-  top: -18%;
-  transform-origin: 85% 85%;
-  pointer-events: none;
+.hammer-gain-mark,
+.hammer-scale-gain {
+  animation: gain-fade 260ms ease-out both;
 }
 
-.strike-burst {
-  position: absolute;
-  width: 42%;
-  left: 50%;
-  top: 20%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  animation: impact-pop 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+@keyframes hammer-impact-pop {
+  from {
+    transform: scale(0.2) rotate(-14deg);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.1) rotate(4deg);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+@keyframes hammer-impact-pop-big {
+  from {
+    transform: scale(0.2) rotate(-14deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.7) rotate(4deg);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.45) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes gain-fade {
+  from {
+    opacity: 0;
+  }
 }
 
 .hammer-track {
