@@ -10,7 +10,8 @@ API и клиент используют shared-правила. **Схема ж�
 Основной и единственный режим матча — **соло-забег до 100%** (`solo-to-100-v2`).
 Режим гонки (`race-to-100-v3`, `POST /api/async-matches`) **удалён 2026-10-13**
 (R12): он отдавал клиенту набор вместе с ответами, а живых приглашений на него
-не оставалось. Разделы ниже описывают действующий путь; ссылки на гонку в
+не оставалось. Остатки (чтение легаси-строк, `matchRules.ts`, `MyRunSummary.mode`)
+удалены из кода 2026-10-16. Разделы ниже описывают действующий путь; ссылки на гонку в
 истории документа сохранены как история, а не как описание кода.
 
 ## Карта репозитория
@@ -32,8 +33,7 @@ apps/web/                      React 18 + Vite + Framer Motion + Telegram SDK
   src/lib/trainingSession.ts, myRunsView.ts, launchIntent.ts
                                 тренировка и отработка ошибок, «Мои партии»,
                                 разбор startapp-ссылки (реванш/отписка)
-  src/lib/useLastStand.ts, lastStandRun.ts, lastStandHook.ts  режим Last Stand
-  src/lib/localStats.ts         устаревшая localStorage-статистика гонки; solo её не пишет
+  src/lib/useLastStand.ts, lastStandRun.ts  режим Last Stand (заморожен 2026-10-16)
   src/lib/analytics.ts          очередь в памяти + dev console, без подключения
   src/lib/sounds.ts             воспроизведение текущих эффектов
   src/components/              вопросы, MatchHud/SoloHud, HammerGame, итоги, профиль,
@@ -70,8 +70,6 @@ apps/api/
 packages/shared/src/
   index.ts                     типы, versioned conditions и exports
   hammerRules.ts               pressure stage, target, thresholds, distance и scoring
-  matchRules.ts                чистые правила раунда/матча и пригодности ghost
-  matchRules.test.ts           детерминированные регрессии для этих правил
   questionGenerator.ts         сборка набора по категории (страны, флаги, языки)
   generalPack/                 загрузка пакета общих знаний из content/*.json и проверка формы записей
 content/questions/<тема>.json  вопросы общих знаний (605 записей, 16 тем)
@@ -89,7 +87,6 @@ content/sets/<тема>.json       закрытые категории «наз�
   narrowCategories.ts, lastStand.ts  Last Stand; круг берёт категорию из узких страновых
                                и из закрытых наборов пакета (35 узких и 12 средних, с 2026-10-12)
   questionPricing.ts           оценка «цены» вопроса по формату
-  questionBank.ts, showQuiz.ts  заготовки, не подключённые к основному циклу
 tests/telegramAuth.test.ts      3 unit-теста initData
 tests/botOpponent.test.ts       3 unit-теста профилей и фабрики бота
 tests/guestAuth.test.ts         unit-тесты подписи и срока guest token
@@ -275,15 +272,14 @@ created_at, completed_at, снимок условий, claim/pace, `reached_targ
 шагов 0002–0017 — только история до первого deploy.
 Полноценного серверного профиля нет.
 В браузере хранятся подписанный guest token, локальное отображаемое имя,
-id активного solo-забега и устаревшая статистика гонки. Круги живут на сервере,
+id активного solo-забега. Круги живут на сервере,
 поэтому активный solo-забег восстанавливается по id после перезагрузки; вопросы
 и ответы в localStorage не копируются.
 Guest token живёт семь дней и продлевает тот же subject за пять минут до срока.
 
-`CURRENT_ASYNC_MATCH_CONDITIONS` из shared сохранена после удаления гонки:
-в ней лежит конфиг мини-игры `hammer_nail`, которым считается круг соло, и её
-читают solo route/repository и shared `hammerRules.ts`. Имя осталось
-историческим. Условия соло — как
+`CURRENT_HAMMER_MINI_GAME` (shared; до 2026-10-16 `CURRENT_ASYNC_MATCH_CONDITIONS`):
+конфиг мини-игры `hammer_nail`, которым считается круг соло; его читают solo
+route/repository и shared `hammerRules.ts`. Условия соло — как
 `CURRENT_SOLO_RUN_CONDITIONS`. Числа config молотка (зоны, скорость маркера,
 stage multipliers, offsets) живут в shared и менялись: зона идеального попадания
 сужена с 0.15 до 0.06, полоса «хорошо» с 0.35 до 0.28, а скорость маркера больше

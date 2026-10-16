@@ -156,7 +156,7 @@ describe('solo run HUD while playing', () => {
     expect(html).not.toMatch(/[Тт]емп/);
   });
 
-  it('draws the rival like the race HUD: avatar, name and bar, without any explanation', () => {
+  it('draws the rival with avatar, name and bar: avatar, name and bar, without any explanation', () => {
     const html = render(playing(pace([25, 25]), 'question', [5, 5]));
     expect(html).toContain('match-hud-competitor opponent');
     expect(html).toContain('>A<');

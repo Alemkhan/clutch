@@ -74,7 +74,7 @@ describe('friend duel on the client', () => {
 
   it('labels the friend duel in My runs for both sides', () => {
     const base: MyRunSummary = {
-      runId: 'r', category: 'geography', mode: 'solo', roundsPlayed: 4, progress: 100, correctCount: 4,
+      runId: 'r', category: 'geography', roundsPlayed: 4, progress: 100, correctCount: 4,
       reachedTarget: true, setPar: 4, soloScore: 1, startedAt: 1, completedAt: 2,
       opponent: { kind: 'player', displayName: 'Боб' }, outcome: 'opponent',
     };

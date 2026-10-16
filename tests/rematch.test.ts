@@ -4,7 +4,7 @@
 import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   dailyQuestionSet,
   type AsyncMatchRound,
@@ -15,7 +15,7 @@ import { notifySoloResult } from '../apps/api/src/notifications/outbid';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
-const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
+const configJson = JSON.stringify(CURRENT_HAMMER_MINI_GAME.config);
 const databases: TestD1[] = [];
 let pending: Promise<unknown>[] = [];
 let fetchMock: ReturnType<typeof vi.fn>;
@@ -128,8 +128,8 @@ function insertCompleted(db: TestD1, id: string, playerId: string, name: string,
     JSON.stringify(rounds(SET.questions, awards)),
     awards.reduce((sum, award) => Math.min(100, sum + award), 0),
     Date.now() - 1000,
-    CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion,
-    CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
+    CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
+    CURRENT_HAMMER_MINI_GAME.id,
     configJson,
     SET.questionSetId,
   );
@@ -198,7 +198,7 @@ describe('a rematch is called by the player who beat the record', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
-  it('refuses a run that beat nobody, a foreign run and a race run', async () => {
+  it('refuses a run that beat nobody, a foreign run and an own run', async () => {
     const db = database();
     seedBeatenRecord(db, 'opponent');
     // Проигравший реванш не зовёт: он просто играет снова.

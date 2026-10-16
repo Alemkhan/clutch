@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { CURRENT_ASYNC_MATCH_CONDITIONS, type Question } from '@clutch/shared';
+import { CURRENT_HAMMER_MINI_GAME, type Question } from '@clutch/shared';
 import { shouldActivateAction } from '../lib/accessibility';
 import { ResolutionScreen } from './ResolutionScreen';
 import { HammerGame, HammerResult, HammerResultStatus, hammerActionSemantics } from './HammerGame';
@@ -63,7 +63,7 @@ describe('accessible gameplay semantics', () => {
     vi.stubGlobal('localStorage', { getItem: () => '1', setItem: () => undefined });
     const html = renderToStaticMarkup(
       <HammerGame
-        config={CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config}
+        config={CURRENT_HAMMER_MINI_GAME.config}
         questionId="question-1"
         previousSkillResults={[]}
         onComplete={vi.fn()}

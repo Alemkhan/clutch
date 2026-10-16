@@ -10,7 +10,7 @@ import {
   findInvite,
   findInviteForPair,
   insertInviteOnce,
-  inviteMode,
+  isSoloInvite,
   inviteUnavailableReason,
   isOpenInvite,
   isOutbidEnabled,
@@ -130,8 +130,8 @@ export function registerRematchRoutes(app: Hono<{ Bindings: Env }>): void {
     if (friend && challenger.player_id === identity.playerId) {
       return c.json({ error: 'This is your own invite.', reason: 'own' }, 403);
     }
-    // Режима гонки больше нет: приглашение на неё принять нечем, для игрока оно как истёкшее.
-    const reason = inviteUnavailableReason(invite, Date.now()) ?? (inviteMode(invite) === 'solo' ? null : 'expired');
+    // Приглашение от забега не соло-версии (легаси-строка) принять нечем: для игрока оно как истёкшее.
+    const reason = inviteUnavailableReason(invite, Date.now()) ?? (isSoloInvite(invite) ? null : 'expired');
     if (reason) return c.json({ error: 'Rematch invite is no longer available.', reason }, 410);
     return c.json({
       inviteId: invite.id,

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   SKILL_DISTANCE_THRESHOLDS,
   dailyQuestionBank,
   hammerAttemptRules,
@@ -16,7 +16,7 @@ import {
   type PressureStage,
 } from './index';
 
-const config = CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config;
+const config = CURRENT_HAMMER_MINI_GAME.config;
 
 describe('hammer pressure rules', () => {
   it('advances on every non-miss result, ignores misses, and caps at stage three', () => {

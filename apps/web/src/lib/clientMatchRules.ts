@@ -1,5 +1,5 @@
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   DAILY_SET_SIZES,
   FRIEND_RULES_VERSION,
@@ -48,7 +48,7 @@ function validatePublicQuestions(questions: readonly PublicQuestion[]): void {
 export function validateMiniGameConfig(value: unknown): MiniGameConfig {
   if (!value || typeof value !== 'object') throw new Error('Mini-game config is missing.');
   const config = value as Record<string, unknown>;
-  const current = CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config;
+  const current = CURRENT_HAMMER_MINI_GAME.config;
   const pressure = config.pressure as Record<string, unknown> | undefined;
   if (Object.keys(config).length !== 5
     || config.markerSpeedMin !== current.markerSpeedMin

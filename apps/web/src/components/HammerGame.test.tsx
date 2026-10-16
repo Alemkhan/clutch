@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { CURRENT_ASYNC_MATCH_CONDITIONS } from '@clutch/shared';
+import { CURRENT_HAMMER_MINI_GAME } from '@clutch/shared';
 import { HammerGame, HammerIntro } from './HammerGame';
 
 class MemoryStorage {
@@ -32,7 +32,7 @@ describe('HammerGame first-visit gating', () => {
   afterEach(() => vi.unstubAllGlobals());
 
   const props = {
-    config: CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+    config: CURRENT_HAMMER_MINI_GAME.config,
     questionId: 'q1',
     previousSkillResults: [],
     onComplete: () => {},

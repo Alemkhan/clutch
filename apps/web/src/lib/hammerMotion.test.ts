@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   hammerAttemptRules,
   normalizedHammerDistance,
   scoreHammerDistance,
@@ -46,7 +46,7 @@ describe('hammer motion', () => {
     const attempt = hammerAttemptRules(
       'reduced-motion-question',
       ['great', 'weak'],
-      CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+      CURRENT_HAMMER_MINI_GAME.config,
     );
     const positions = Array.from({ length: 400 }, (_, step) =>
       markerPositionAtElapsed(step * 10, attempt.markerSpeed));
@@ -59,7 +59,7 @@ describe('hammer motion', () => {
       scoreHammerDistance(
         normalizedHammerDistance(position, attempt.targetCenter),
         attempt.stage,
-        CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+        CURRENT_HAMMER_MINI_GAME.config,
       ).result === 'perfect').length;
     expect(perfect / positions.length).toBeLessThan(0.15);
   });
@@ -68,7 +68,7 @@ describe('hammer motion', () => {
     const attempt = hammerAttemptRules(
       'geometry-question',
       ['great', 'weak'],
-      CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+      CURRENT_HAMMER_MINI_GAME.config,
     );
     const zones = hammerTierZones(attempt);
     expect(zones.map(({ result }) => result)).toEqual([
@@ -89,7 +89,7 @@ describe('hammer motion', () => {
   });
 
   it('draws the perfect zone exactly where a strike scores perfect', () => {
-    const config = CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config;
+    const config = CURRENT_HAMMER_MINI_GAME.config;
     for (const previous of [[], ['great'], ['great', 'weak'], ['good', 'good', 'good']] as const) {
       const attempt = hammerAttemptRules('draw-score-question', previous, config);
       const perfect = hammerTierZones(attempt).find((zone) => zone.result === 'perfect')!;

@@ -8,7 +8,6 @@ export type AnswerType = 'multiple_choice' | 'open_answer';
 
 export * from './fuzzyMatch';
 export * from './hammerRules';
-export * from './matchRules';
 export * from './soloRun';
 export * from './questionPricing';
 export * from './soloCompare';
@@ -266,13 +265,10 @@ export type MyRunOutcome = 'player' | 'opponent' | 'tie';
 export interface MyRunSummary {
   runId: string;
   category: CategoryId;
-  mode: 'race' | 'solo';
   roundsPlayed: number;
   progress: number;
   correctCount: number;
-  /** null у гонки: цель достигается там же, где и победа, отдельного признака нет. */
-  reachedTarget: boolean | null;
-  /** Только у соло-забега. */
+  reachedTarget: boolean;
   setPar: number | null;
   soloScore: number | null;
   startedAt: number;
@@ -341,29 +337,28 @@ export interface AsyncMatchConditions {
   };
 }
 
-// Режима гонки больше нет, но константа осталась: её конфиг мини-игры считает круг соло
-// (matches/repository, scoring, soloRepository), а rulesVersion опознаёт старые гоночные записи.
-export const CURRENT_ASYNC_MATCH_CONDITIONS: AsyncMatchConditions = {
-  rulesVersion: 'race-to-100-v3',
-  miniGame: {
-    id: 'hammer_nail',
-    config: {
-      markerSpeedMin: 0.6,
-      markerSpeedMax: 1.6,
-      targetWidth: 0.85,
-      perfectWidth: SKILL_DISTANCE_THRESHOLDS.perfect,
-      pressure: {
-        stageMultipliers: [1, 0.9, 0.8, 0.7],
-        maxTargetOffsets: [0.06, 0.09, 0.12, 0.15],
-      },
+/** Мини-игра молотка: её конфиг считает круг соло-забега, тренировки и дуэли. */
+export const CURRENT_HAMMER_MINI_GAME: AsyncMatchConditions['miniGame'] = {
+  id: 'hammer_nail',
+  config: {
+    markerSpeedMin: 0.6,
+    markerSpeedMax: 1.6,
+    targetWidth: 0.85,
+    perfectWidth: SKILL_DISTANCE_THRESHOLDS.perfect,
+    pressure: {
+      stageMultipliers: [1, 0.9, 0.8, 0.7],
+      maxTargetOffsets: [0.06, 0.09, 0.12, 0.15],
     },
   },
 };
 
-/** Соло-забег до цели: та же схема и тот же молоток, своя версия правил (гоночные записи в соло-пул не попадают). */
+/** A finished run needs at least this many played rounds to be offered as an opponent. */
+export const MIN_POOL_ROUNDS = 3;
+
+/** Соло-забег до цели: версия правил зачётных забегов и конфиг молотка. */
 export const CURRENT_SOLO_RUN_CONDITIONS: AsyncMatchConditions = {
   rulesVersion: 'solo-to-100-v2',
-  miniGame: CURRENT_ASYNC_MATCH_CONDITIONS.miniGame,
+  miniGame: CURRENT_HAMMER_MINI_GAME,
 };
 
 export * from './countries';

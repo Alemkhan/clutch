@@ -1,3 +1,4 @@
+// Заморожено 2026-10-16: входа из интерфейса нет, код и тесты поддерживаются, новых функций не добавлять.
 import { LAST_STAND_MAX_ROUNDS, type RecordedAnswer } from '@clutch/shared';
 import type { LastStandOpponent } from './bots';
 

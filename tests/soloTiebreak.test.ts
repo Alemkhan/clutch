@@ -4,7 +4,7 @@
 import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   dailyKey,
   dailyQuestionSet,
@@ -21,7 +21,7 @@ import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 
 // R24c1: исход решает прикидка «На глазок», когда счёт и круги равны.
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
-const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
+const configJson = JSON.stringify(CURRENT_HAMMER_MINI_GAME.config);
 const NOW = Date.UTC(2026, 9, 11, 12, 0, 0);
 const TODAY = dailyKey(NOW);
 const SOLO = CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
@@ -123,7 +123,7 @@ function insertRecord(db: TestD1, options: { id: string; playerId: string; compl
     ) VALUES (?, ?, ?, 'geography', ?, ?, 100, 4, 'completed', ?, ?, ?, ?, ?, 1, ?, 1, ?, ?)
   `).run(
     options.id, options.playerId, options.id, JSON.stringify(SET.questions), JSON.stringify(rounds),
-    completedAt - 1000, completedAt, SOLO, CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, configJson,
+    completedAt - 1000, completedAt, SOLO, CURRENT_HAMMER_MINI_GAME.id, configJson,
     SET.questionSetId, setPar(SET.questions), EQUAL_SCORE,
   );
 }

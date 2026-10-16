@@ -1,5 +1,5 @@
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   FRIEND_RULES_VERSION,
   MAX_DAILY_SET_SIZE,
@@ -59,7 +59,7 @@ import { notifyDuelResult, notifySoloResult } from '../notifications/outbid';
 import {
   consumeInvite,
   findInvite,
-  inviteMode,
+  isSoloInvite,
   inviteUnavailableReason,
   isOpenInvite,
   releaseInvite,
@@ -167,8 +167,8 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
       if (reason || (friend && !record)) {
         return c.json({ error: 'Rematch invite is no longer available.', reason: reason ?? 'expired' }, 410);
       }
-      if (inviteMode(invite) !== 'solo') {
-        return c.json({ error: 'This rematch invite is for race mode.' }, 409);
+      if (!isSoloInvite(invite)) {
+        return c.json({ error: 'Rematch invite is no longer available.', reason: 'expired' }, 410);
       }
       category = invite.category as typeof category;
     }
@@ -195,7 +195,7 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
         }
       }
     }
-    // Тот же подбор набора, что в гонке, но по соло-пулу: только забеги, дошедшие до цели.
+    // Подбор набора по соло-пулу: только забеги, дошедшие до цели.
     const picked = record
       ? { ghost: record, questionSetId: record.questionSetId, questions: record.questions, bankExhausted: false }
       : await matchmake(
@@ -563,7 +563,7 @@ async function settleHammerRow(
     ? scoreHammerTap(
       question.id,
       previousResults,
-      CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+      CURRENT_HAMMER_MINI_GAME.config,
       settlement.activeElapsedMs,
     )
     : { distance: 1, result: 'miss' as const, progressAwarded: 0 };

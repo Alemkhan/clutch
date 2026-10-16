@@ -2138,7 +2138,7 @@ input:focus-visible {
   font-weight: 600;
 }
 
-/* Solo run HUD: the same identities and bars as the race HUD */
+/* Solo run HUD: identities and bars of the shared Match HUD */
 
 .solo-play {
   display: flex;

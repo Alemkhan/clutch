@@ -29,9 +29,8 @@ function plural(count: number, one: string, few: string, many: string): string {
   return last >= 2 && last <= 4 ? few : many;
 }
 
-export function roundsText(run: Pick<MyRunSummary, 'mode' | 'roundsPlayed'>): string {
-  const [one, few, many] = run.mode === 'solo' ? ['круг', 'круга', 'кругов'] : ['раунд', 'раунда', 'раундов'];
-  return `${run.roundsPlayed} ${plural(run.roundsPlayed, one, few, many)}`;
+export function roundsText(run: Pick<MyRunSummary, 'roundsPlayed'>): string {
+  return `${run.roundsPlayed} ${plural(run.roundsPlayed, 'круг', 'круга', 'кругов')}`;
 }
 
 /** «7 кругов» — тем же числительным, что и в «Моих партиях», чтобы счёт читался одинаково. */
@@ -43,14 +42,14 @@ export function soloRoundsText(count: number): string {
  * Чем закончилась партия. Нет соперника у дошедшего до цели забега — «ждём соперника»;
  * у не дошедшего ждать нечего: такой забег в пул не попадает, поэтому «ждём» ему не пишем.
  */
-export function runStatus(run: Pick<MyRunSummary, 'mode' | 'reachedTarget' | 'outcome' | 'opponent' | 'friendDuel'>): RunStatus {
-  if (run.mode === 'solo' && run.reachedTarget === false && run.friendDuel !== 'hosted') return { kind: 'missed', text: 'Не дошёл до цели' };
+export function runStatus(run: Pick<MyRunSummary, 'reachedTarget' | 'outcome' | 'opponent' | 'friendDuel'>): RunStatus {
+  if (!run.reachedTarget && run.friendDuel !== 'hosted') return { kind: 'missed', text: 'Не дошёл до цели' };
   switch (run.outcome) {
     case 'player': return { kind: 'win', text: 'Победа' };
     case 'opponent': return { kind: 'loss', text: 'Поражение' };
     case 'tie': return { kind: 'tie', text: 'Ничья' };
     default:
-      return run.mode === 'solo' && run.opponent === null
+      return run.opponent === null
         ? { kind: 'waiting', text: 'Ждём соперника' }
         : { kind: 'unknown', text: 'Исход не определён' };
   }
@@ -90,12 +89,6 @@ export function inviteRoundsParts(
   return { lead: 'Обошёл тебя: ', strong: soloRoundsText(theirs), rest: ` против твоих ${yours}` };
 }
 
-/** «Обошёл тебя: 5 кругов против твоих 9»; без кругов с обеих сторон — null. */
-export function inviteRoundsLine(invite: Pick<MyRematchInvite, 'challengerRoundsPlayed' | 'recipientRoundsPlayed'>): string | null {
-  const parts = inviteRoundsParts(invite);
-  return parts && `${parts.lead}${parts.strong}${parts.rest}`;
-}
-
 /** «из 1 дошедшего», «из 3 дошедших», «из 21 дошедшего»: родительный падеж, ед. ч. только для …1 (кроме 11). */
 export function finishedText(total: number): string {
   const lastTwo = total % 100;
@@ -125,7 +118,7 @@ export function runSummary(run: MyRunSummary): string {
     const name = run.opponent?.displayName ?? 'Друг';
     return run.reachedTarget ? `${name}: ${SOLO_TARGET_PROGRESS}% за ${rounds}` : `${name}: ${run.progress}% за ${rounds}`;
   }
-  if (run.mode === 'solo' && run.reachedTarget) return `Дошёл до ${SOLO_TARGET_PROGRESS}% за ${rounds}`;
+  if (run.reachedTarget) return `Дошёл до ${SOLO_TARGET_PROGRESS}% за ${rounds}`;
   return `${run.progress}% за ${rounds}`;
 }
 

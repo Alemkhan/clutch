@@ -6,7 +6,6 @@ export function useGameState() {
   const [phase, setPhase] = useState<Phase>('home');
 
   const goToTraining = useCallback(() => setPhase('training'), []);
-  const goToLastStand = useCallback(() => setPhase('lastStand'), []);
   const goToSolo = useCallback(() => setPhase('solo'), []);
   const goToMyRuns = useCallback(() => setPhase('myRuns'), []);
   const goToProfile = useCallback(() => setPhase('profile'), []);
@@ -18,7 +17,6 @@ export function useGameState() {
     phase,
     goToProfile,
     goToTraining,
-    goToLastStand,
     goToSolo,
     goToMyRuns,
     goToBoard,

@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   SKILL_REWARDS,
   hammerAttemptRules,
   type SkillResult,
 } from '@clutch/shared';
 import { MIN_ZONE_LABEL_GAP, hammerZoneLabels, remainingText, seriesNote, strikeGain } from './hammerStrike';
 
-const config = CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config;
+const config = CURRENT_HAMMER_MINI_GAME.config;
 const hit: SkillResult[] = ['great', 'good', 'perfect'];
 
 describe('hammerZoneLabels', () => {

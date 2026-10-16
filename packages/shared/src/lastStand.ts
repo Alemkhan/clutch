@@ -1,3 +1,4 @@
+// Заморожено 2026-10-16: входа из интерфейса нет, код и тесты поддерживаются, новых функций не добавлять.
 import { countries } from './countries';
 import { createSeededRandom, dailyKey, hashSeed } from './dailyQuestionSet';
 

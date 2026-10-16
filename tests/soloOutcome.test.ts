@@ -4,7 +4,7 @@
 import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   dailyQuestionSet,
   setPar,
@@ -22,7 +22,7 @@ import { createTestD1, type TestD1 } from './helpers/testD1';
 import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
-const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
+const configJson = JSON.stringify(CURRENT_HAMMER_MINI_GAME.config);
 const NOW = Date.UTC(2026, 9, 11, 12, 0, 0);
 const SOLO = CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
 const SET = dailyQuestionSet('geography', NOW, 0);
@@ -140,7 +140,7 @@ function insertSolo(db: TestD1, options: {
     (options.completedAt ?? NOW - 1000) - (options.durationMs ?? 1000),
     options.completedAt ?? NOW - 1000,
     SOLO,
-    CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
+    CURRENT_HAMMER_MINI_GAME.id,
     configJson,
     SET.questionSetId,
     options.reachedTarget ?? 1,
@@ -261,7 +261,7 @@ describe('solo outcome against a pace', () => {
     expect(inviteRows(db)).toHaveLength(0);
 
     const runs = await (await call(db, '/api/my-runs', bob)).json() as MyRunsResponse;
-    expect(runs.runs[0]).toMatchObject({ mode: 'solo', outcome: null, opponent: null });
+    expect(runs.runs[0]).toMatchObject({ outcome: null, opponent: null });
   });
 
   it('shows the outcome in my runs and repeats it on a retried completion without a second message', async () => {
@@ -276,7 +276,7 @@ describe('solo outcome against a pace', () => {
     expect(inviteRows(db)).toHaveLength(0);
 
     const runs = await (await call(db, '/api/my-runs', bob)).json() as MyRunsResponse;
-    expect(runs.runs[0]).toMatchObject({ mode: 'solo', outcome: 'player', opponent: { kind: 'player' } });
+    expect(runs.runs[0]).toMatchObject({ outcome: 'player', opponent: { kind: 'player' } });
     // Обошёл запись — значит может позвать; пока не позвал, кнопка доступна.
     expect(runs.runs[0].rematchOffer).toBe('available');
   });
@@ -381,13 +381,6 @@ describe('solo leaderboard', () => {
     expect((await call(db, '/api/solo-leaderboard', '')).status).toBe(401);
   });
 
-  it('does not leak solo runs into the race leaderboard', async () => {
-    const db = database();
-    insertSolo(db, { id: 'a', playerId: 'p:a', soloScore: 1 });
-    // Таблица гонки удалена вместе с режимом: соло-забегам протекать больше некуда.
-    const race = await call(db, '/api/leaderboard?category=geography', viewer);
-    expect(race.status).toBe(404);
-  });
 });
 
 describe('my own place in the day board', () => {
@@ -532,12 +525,12 @@ describe('solo rematch invite', () => {
     expect(inviteRows(db)[0].consumed_at).toBeNull();
   });
 
-  it('rejects an invite of the retired race mode with a clear error and does not spend it', async () => {
+  it('ignores an invite from a legacy run of the removed race mode and does not spend it', async () => {
     const { db, inviteId } = await invited();
-    // Тот же игрок, но приглашение из гонки: вызов брошен гоночным забегом.
+    // Тот же игрок, но приглашение от легаси-забега: вызов брошен забегом удалённого режима.
     insertSolo(db, { id: 'race-challenger', playerId: 'p:race', soloScore: 1 });
     db.sqlite.prepare('UPDATE match_runs SET rules_version = ? WHERE id = ?')
-      .run(CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion, 'race-challenger');
+      .run('race-to-100-v3', 'race-challenger');
     const raceInviteId = 'rm_RRRRRRRRRRRRRRRRRRRRRR';
     db.sqlite.prepare(`
       INSERT INTO rematch_invites (
@@ -547,15 +540,15 @@ describe('solo rematch invite', () => {
     `).run(raceInviteId, NOW, NOW + 100_000);
 
     const soloWithRace = await startWith(db, alemAuth(), raceInviteId);
-    expect(soloWithRace.status).toBe(409);
-    expect(await soloWithRace.json()).toEqual({ error: 'This rematch invite is for race mode.' });
+    expect(soloWithRace.status).toBe(410);
+    expect(await soloWithRace.json()).toEqual({ error: 'Rematch invite is no longer available.', reason: 'expired' });
 
     const consumed = db.sqlite.prepare('SELECT COUNT(*) AS count FROM rematch_invites WHERE consumed_at IS NOT NULL')
       .get() as { count: number };
     expect(consumed.count).toBe(0);
 
     expect((await call(db, `/api/rematch/${inviteId}`, alemAuth())).status).toBe(200);
-    // Режима гонки нет: приглашение на неё в превью выглядит как истёкшее.
+    // Легаси-приглашение в превью выглядит как истёкшее.
     const racePreview = await call(db, `/api/rematch/${raceInviteId}`, alemAuth());
     expect(racePreview.status).toBe(410);
   });

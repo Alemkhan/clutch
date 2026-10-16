@@ -1,3 +1,4 @@
+// Заморожено 2026-10-16: входа из интерфейса нет, код и тесты поддерживаются, новых функций не добавлять.
 import { useEffect, useRef, useState } from 'react';
 import { ScreenHeader } from './ScreenHeader';
 import { TimerBar } from './TimerBar';

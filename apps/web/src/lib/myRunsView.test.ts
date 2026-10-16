@@ -4,7 +4,7 @@ import { categoryName, formatRunTime, inviteDeadline, roundsText, runStatus, run
 
 function run(overrides: Partial<MyRunSummary> = {}): MyRunSummary {
   return {
-    runId: 'r1', category: 'geography', mode: 'solo', roundsPlayed: 7, progress: 100, correctCount: 6,
+    runId: 'r1', category: 'geography', roundsPlayed: 7, progress: 100, correctCount: 6,
     reachedTarget: true, setPar: 8, soloScore: 0.9, startedAt: 0, completedAt: 0, opponent: null, outcome: null,
     ...overrides,
   };
@@ -27,8 +27,8 @@ describe('run status', () => {
     expect(runStatus(run({ outcome: 'tie', opponent: rival })).text).toBe('Ничья');
   });
 
-  it('does not invent an outcome for a race it cannot judge', () => {
-    expect(runStatus(run({ mode: 'race', reachedTarget: null, opponent: { kind: 'bot', displayName: 'Alex' } })).kind).toBe('unknown');
+  it('does not invent an outcome for a run against a bot it cannot judge', () => {
+    expect(runStatus(run({ outcome: null, opponent: { kind: 'bot', displayName: 'Alex' } })).kind).toBe('unknown');
   });
 });
 
@@ -37,7 +37,6 @@ describe('run text', () => {
     expect(roundsText(run({ roundsPlayed: 1 }))).toBe('1 круг');
     expect(roundsText(run({ roundsPlayed: 4 }))).toBe('4 круга');
     expect(roundsText(run({ roundsPlayed: 12 }))).toBe('12 кругов');
-    expect(roundsText(run({ mode: 'race', roundsPlayed: 6 }))).toBe('6 раундов');
   });
 
   it('summarises reached and missed runs without par or score', () => {

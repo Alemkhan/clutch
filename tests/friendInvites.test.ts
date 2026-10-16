@@ -4,7 +4,7 @@
 import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   PRACTICE_RULES_VERSION,
   SOLO_ROUND_CAP,
@@ -23,7 +23,7 @@ import { createTestD1, type TestD1 } from './helpers/testD1';
 import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
-const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
+const configJson = JSON.stringify(CURRENT_HAMMER_MINI_GAME.config);
 const NOW = Date.UTC(2026, 9, 11, 12, 0, 0);
 const SOLO = CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
 const databases: TestD1[] = [];
@@ -120,7 +120,7 @@ function insertRun(
   `).run(
     id, playerId, id, JSON.stringify(set.questions), status === 'completed' ? JSON.stringify(rounds) : null,
     status, NOW - 2000, status === 'completed' ? NOW - 1000 : null, rulesVersion,
-    CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, configJson, set.questionSetId, reachedTarget,
+    CURRENT_HAMMER_MINI_GAME.id, configJson, set.questionSetId, reachedTarget,
   );
 }
 

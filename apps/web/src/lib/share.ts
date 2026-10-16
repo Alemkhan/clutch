@@ -53,14 +53,6 @@ export function buildShareUrl(input: ShareInput, apiBase: string | undefined, or
   return `${base}/api/share?${params.toString()}`;
 }
 
-export function shareHeadline({ playerProgress, opponentProgress, matchSource }: ShareInput): string {
-  if (matchSource === 'local') return 'Потренировался в Clutch';
-  const outcome = shareOutcome(playerProgress, opponentProgress);
-  if (outcome === 'win') return 'Я вытащил клатч!';
-  if (outcome === 'tie') return 'Ничья в Clutch';
-  return 'Почти получилось!';
-}
-
 export function buildShareText(input: ShareInput): string {
   const { playerProgress: p, opponentProgress: o, matchSource } = input;
   const name = input.opponentName.trim();

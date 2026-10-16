@@ -81,7 +81,6 @@ describe('Training screens', () => {
 
     const source = readFileSync(new URL('./HomeDashboard.tsx', import.meta.url), 'utf8');
     expect(source).not.toContain('fetchLastStandLeaderboard');
-    expect(source).not.toContain('../lib/lastStandHook');
   });
 
   it('wires the mistake-training report (mode training, no run) and its start event in the hub', () => {

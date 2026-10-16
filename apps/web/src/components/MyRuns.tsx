@@ -84,7 +84,6 @@ function Run({ run, now, offer }: { run: MyRunSummary; now: number; offer: Remat
         <span className="my-run-meta">
           {categoryName(run.category)} · {formatRunTime(run.completedAt, now)}
           {run.opponent ? ` · ${run.opponent.displayName}` : ''}
-          {run.mode === 'race' ? ' · гонка' : ''}
         </span>
         {friendDuelNote(run) && <span className="my-run-meta">{friendDuelNote(run)}</span>}
         {/* Реванш зовёт игрок: кнопка есть только у забега, который обошёл чью-то запись. */}

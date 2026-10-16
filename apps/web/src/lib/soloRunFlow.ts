@@ -20,7 +20,7 @@ import {
 } from './soloRunSession';
 
 /**
- * Экранные шаги соло-забега. Чистые переходы без React и сети, как gameSession для гонки.
+ * Экранные шаги соло-забега. Чистые переходы без React и сети.
  *
  * Клиент не знает правильных ответов и не считает награду: каждый шаг круга уходит на сервер, а следующий
  * экран строится из его ответа. Пока запрос не подтверждён (`pending`), круг не засчитан, и его можно
@@ -275,14 +275,6 @@ export function soloFlowView(state: Readonly<SoloFlowState>): SoloRunView | null
 /** Сколько кругов реально осталось: потолок или конец набора, что ближе. */
 export function soloRoundsLeft(view: Pick<SoloRunView, 'roundsToCap' | 'questionsLeft'>): number {
   return Math.min(view.roundsToCap, view.questionsLeft);
-}
-
-export function bestSoloSkill(results: readonly SkillResult[]): SkillResult | null {
-  let best: SkillResult | null = null;
-  for (const result of results) {
-    if (!best || SKILL_REWARDS[result] > SKILL_REWARDS[best]) best = result;
-  }
-  return best;
 }
 
 export function soloPaceOf(state: Readonly<SoloFlowState>): Opponent | null {

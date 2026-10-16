@@ -1,5 +1,5 @@
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   FRIEND_RULES_VERSION,
   dailyKey,
@@ -48,7 +48,7 @@ export async function createSoloRun(db: D1Database, input: {
     input.practice
       ? PRACTICE_RULES_VERSION
       : input.friend ? FRIEND_RULES_VERSION : CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
-    CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
+    CURRENT_HAMMER_MINI_GAME.id,
     currentMiniGameConfigJson,
     input.pace ? JSON.stringify(input.pace) : null,
     input.questionSetId,

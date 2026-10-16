@@ -15,7 +15,7 @@ const handlers = {
 
 function run(overrides: Partial<MyRunSummary> = {}): MyRunSummary {
   return {
-    runId: 'r1', category: 'geography', mode: 'solo', roundsPlayed: 7, progress: 100, correctCount: 6,
+    runId: 'r1', category: 'geography', roundsPlayed: 7, progress: 100, correctCount: 6,
     reachedTarget: true, setPar: 8, soloScore: 0.9, startedAt: NOW - HOUR, completedAt: NOW - HOUR,
     opponent: null, outcome: null, ...overrides,
   };

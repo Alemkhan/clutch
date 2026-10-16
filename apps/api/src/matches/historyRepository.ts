@@ -1,5 +1,4 @@
-import { CURRENT_SOLO_RUN_CONDITIONS, FRIEND_RULES_VERSION, PRACTICE_RULES_VERSION, evaluateMatch, invertOutcome, type AsyncMatchRound, type MyRunOutcome, type MyRunSummary } from '@clutch/shared';
-import { parseQuestions } from './validation';
+import { CURRENT_SOLO_RUN_CONDITIONS, FRIEND_RULES_VERSION, PRACTICE_RULES_VERSION, invertOutcome, type AsyncMatchRound, type MyRunOutcome, type MyRunSummary } from '@clutch/shared';
 
 export interface HistoryRow {
   id: string;
@@ -66,7 +65,7 @@ export async function listCompletedRuns(
         SELECT ${columns} FROM match_runs
         WHERE status = 'completed' AND completed_at IS NOT NULL
           AND (
-            (player_id = ?1 AND rules_version IS NOT '${PRACTICE_RULES_VERSION}')
+            (player_id = ?1 AND rules_version LIKE 'solo-%' AND rules_version IS NOT '${PRACTICE_RULES_VERSION}')
             OR (rules_version = '${FRIEND_RULES_VERSION}' AND opponent_run_id IN (
               SELECT id FROM match_runs WHERE player_id = ?1
             ))
@@ -78,7 +77,7 @@ export async function listCompletedRuns(
         SELECT ${columns} FROM match_runs
         WHERE status = 'completed' AND completed_at IS NOT NULL
           AND (
-            (player_id = ?1 AND rules_version IS NOT '${PRACTICE_RULES_VERSION}')
+            (player_id = ?1 AND rules_version LIKE 'solo-%' AND rules_version IS NOT '${PRACTICE_RULES_VERSION}')
             OR (rules_version = '${FRIEND_RULES_VERSION}' AND opponent_run_id IN (
               SELECT id FROM match_runs WHERE player_id = ?1
             ))
@@ -97,46 +96,23 @@ function parseJson(text: string | null): unknown {
   }
 }
 
-/** Исход гонки восстанавливается правилами shared; не вышло — null, а не догадка. */
-function raceOutcome(
-  row: HistoryRow,
-  rounds: AsyncMatchRound[],
-  opponent: { rounds?: unknown } | null,
-): MyRunOutcome | null {
-  const questions = parseQuestions(row.questions_json);
-  if (!questions || !opponent || !Array.isArray(opponent.rounds)) return null;
-  try {
-    const state = evaluateMatch(
-      questions.map((question) => question.id),
-      rounds,
-      opponent.rounds as AsyncMatchRound[],
-      { frozenOpponent: true },
-    );
-    return state.status === 'completed' ? state.outcome ?? null : null;
-  } catch {
-    return null;
-  }
-}
-
 /** viewerId нужен, чтобы отличить дуэль друга по моей записи от моей собственной игры. */
 export function toRunSummary(row: HistoryRow, viewerId?: string): MyRunSummary {
   const friendDuel = row.rules_version === FRIEND_RULES_VERSION
     ? (viewerId !== undefined && row.player_id !== undefined && row.player_id !== viewerId ? 'hosted' : 'played')
     : null;
-  const solo = row.rules_version?.startsWith('solo-') ?? false;
   const rounds = (parseJson(row.rounds_json) as AsyncMatchRound[] | null) ?? [];
   const opponent = parseJson(row.opponent_json) as { displayName?: unknown; rounds?: unknown } | null;
   const named = opponent !== null && typeof opponent.displayName === 'string';
   return {
     runId: row.id,
     category: row.category,
-    mode: solo ? 'solo' : 'race',
     roundsPlayed: rounds.length,
     progress: row.progress,
     correctCount: row.correct_count,
-    reachedTarget: solo ? row.reached_target === 1 : null,
-    setPar: solo ? row.set_par : null,
-    soloScore: solo ? row.solo_score : null,
+    reachedTarget: row.reached_target === 1,
+    setPar: row.set_par,
+    soloScore: row.solo_score,
     startedAt: row.created_at,
     completedAt: row.completed_at,
     opponent: friendDuel === 'hosted'
@@ -155,9 +131,7 @@ export function toRunSummary(row: HistoryRow, viewerId?: string): MyRunSummary {
       : named
         ? (row.opponent_run_id ? row.opponent_rounds ?? null : null)
         : row.played_by ? row.played_by_rounds ?? null : null,
-    outcome: solo
-      ? (friendDuel === 'hosted' && row.solo_outcome ? invertOutcome(row.solo_outcome) : row.solo_outcome ?? null)
-      : raceOutcome(row, rounds, opponent),
+    outcome: friendDuel === 'hosted' && row.solo_outcome ? invertOutcome(row.solo_outcome) : row.solo_outcome ?? null,
     friendDuel,
     rematchOffer: rematchOffer(row, friendDuel),
   };

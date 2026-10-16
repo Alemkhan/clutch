@@ -4,7 +4,7 @@
 import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   FRIEND_RULES_VERSION,
   PRACTICE_RULES_VERSION,
@@ -25,7 +25,7 @@ import { createTestD1, type TestD1 } from './helpers/testD1';
 import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
-const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
+const configJson = JSON.stringify(CURRENT_HAMMER_MINI_GAME.config);
 const NOW = Date.UTC(2026, 9, 11, 12, 0, 0);
 const SOLO = CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
 const SET = dailyQuestionSet('geography', NOW, 0);
@@ -110,7 +110,7 @@ function insertRecord(db: TestD1, id: string, playerId: string) {
     ) VALUES (?, ?, ?, 'geography', ?, ?, 100, 4, 'completed', ?, ?, ?, ?, ?, 1, ?, 1, 20, 0.2)
   `).run(
     id, playerId, id, JSON.stringify(SET.questions), JSON.stringify(rounds),
-    NOW - 2000, NOW - 1000, SOLO, CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, configJson, SET.questionSetId,
+    NOW - 2000, NOW - 1000, SOLO, CURRENT_HAMMER_MINI_GAME.id, configJson, SET.questionSetId,
   );
 }
 
@@ -211,7 +211,7 @@ describe('friend duel: the duel itself still counts', () => {
     const mine = await call(db, 'bob', '/api/my-runs');
     const runs = (await mine.json() as MyRunsResponse).runs;
     expect(runs).toHaveLength(1);
-    expect(runs[0]).toMatchObject({ runId: run.runId, mode: 'solo', friendDuel: 'played', outcome: result.outcome });
+    expect(runs[0]).toMatchObject({ runId: run.runId, friendDuel: 'played', outcome: result.outcome });
     expect(runs[0].opponent).toEqual({ kind: 'player', displayName: 'ann-run' });
   });
 
@@ -221,7 +221,7 @@ describe('friend duel: the duel itself still counts', () => {
     const rows = await listCompletedRuns(db.binding, AUTHOR, 20, null);
     const summaries = rows.map((row) => toRunSummary(row, AUTHOR));
     const hosted = summaries.find((summary) => summary.runId === run.runId);
-    expect(hosted).toMatchObject({ friendDuel: 'hosted', mode: 'solo' });
+    expect(hosted).toMatchObject({ friendDuel: 'hosted' });
     expect(hosted?.outcome).toBe(invertOutcome(result.outcome!));
     expect(hosted?.opponent?.displayName).toBe('bob');
     // Собственная запись автора остаётся обычной партией.

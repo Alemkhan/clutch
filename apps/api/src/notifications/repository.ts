@@ -26,11 +26,9 @@ export interface InviteRow {
   challenger_rules_version: string | null;
 }
 
-export type InviteMode = 'race' | 'solo';
-
-/** Приглашение ведёт в тот режим, в котором сыгран забег-вызов; всё, что не соло, — гонка. */
-export function inviteMode(invite: Pick<InviteRow, 'challenger_rules_version'>): InviteMode {
-  return invite.challenger_rules_version === CURRENT_SOLO_RUN_CONDITIONS.rulesVersion ? 'solo' : 'race';
+/** Принять можно только приглашение от соло-забега; легаси-строки других версий правил игнорируются. */
+export function isSoloInvite(invite: Pick<InviteRow, 'challenger_rules_version'>): boolean {
+  return invite.challenger_rules_version === CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
 }
 
 /** Открытое приглашение: адресата и его записи нет, пока ссылку не погасят. */

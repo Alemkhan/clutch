@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   hammerAttemptRules,
   type AsyncMatchRoundInput,
   type Question,
@@ -9,7 +9,7 @@ import {
 } from '@clutch/shared';
 import type { TestD1 } from './testD1';
 
-const hammerConfig = CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config;
+const hammerConfig = CURRENT_HAMMER_MINI_GAME.config;
 
 /**
  * Момент удара, который приводит маркер ровно в центр цели. Нужен потому, что оценку удара

@@ -8,7 +8,7 @@
 import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   dailyQuestionSet,
   dailyQuestionSetIds,
   setPar,
@@ -24,7 +24,7 @@ import { createTestD1, type TestD1 } from './helpers/testD1';
 import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
-const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
+const configJson = JSON.stringify(CURRENT_HAMMER_MINI_GAME.config);
 const NOW = Date.UTC(2026, 9, 13, 12, 0, 0);
 const databases: TestD1[] = [];
 const allowRateLimiter: RateLimit = { limit: async () => ({ success: true }) };
@@ -116,7 +116,7 @@ function insertRecord(db: TestD1, id: string, playerId: string, displayName: str
     NOW - 2000,
     NOW - 1000,
     'solo-to-100-v2',
-    CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
+    CURRENT_HAMMER_MINI_GAME.id,
     configJson,
     set.questionSetId,
     par,

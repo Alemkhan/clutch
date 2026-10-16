@@ -4,7 +4,7 @@
 import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   PRACTICE_LEVELS,
   PRACTICE_RULES_VERSION,
@@ -25,7 +25,7 @@ import { createTestD1, type TestD1 } from './helpers/testD1';
 import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
-const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
+const configJson = JSON.stringify(CURRENT_HAMMER_MINI_GAME.config);
 const NOW = Date.UTC(2026, 9, 11, 12, 0, 0);
 const SOLO = CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
 const SET = dailyQuestionSet('geography', NOW, 0);
@@ -118,7 +118,7 @@ function insertLiveRecord(db: TestD1, id: string, playerId: string) {
     ) VALUES (?, ?, ?, 'geography', ?, ?, 100, 4, 'completed', ?, ?, ?, ?, ?, 1, ?, 1, 20, 0.2)
   `).run(
     id, playerId, id, JSON.stringify(SET.questions), JSON.stringify(rounds),
-    NOW - 2000, NOW - 1000, SOLO, CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id, configJson, SET.questionSetId,
+    NOW - 2000, NOW - 1000, SOLO, CURRENT_HAMMER_MINI_GAME.id, configJson, SET.questionSetId,
   );
 }
 

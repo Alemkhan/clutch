@@ -4,7 +4,7 @@
 import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   SOLO_ROUND_CAP,
   dailyBankSize,
@@ -23,7 +23,7 @@ import { fullQuestions, playRounds, roundInputs } from './helpers/soloPlay';
 import { recordMistake } from '../apps/api/src/matches/mistakesRepository';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
-const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
+const configJson = JSON.stringify(CURRENT_HAMMER_MINI_GAME.config);
 // Время задано явно: набор дня зависит от даты, реальные часы не используются.
 const NOW = Date.UTC(2026, 9, 11, 12, 0, 0);
 const SOLO = CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
@@ -148,7 +148,7 @@ function insertRun(db: TestD1, options: {
     NOW - 2000,
     NOW - 1000,
     options.rulesVersion,
-    CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
+    CURRENT_HAMMER_MINI_GAME.id,
     configJson,
     set.questionSetId,
     options.reachedTarget,
@@ -242,7 +242,7 @@ describe('solo run', () => {
     insertRun(db, {
       id: 'race-run',
       playerId: 'guest:other',
-      rulesVersion: CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion,
+      rulesVersion: 'race-to-100-v3',
       reachedTarget: null,
     });
     expect((await start(db, 'fay')).pace).toBeNull();
@@ -255,7 +255,7 @@ describe('solo run', () => {
     expect((await request(db, `/api/solo-runs/${run.runId}/answer`, '', {})).status).toBe(401);
 
     // Старая запись режима гонки соло-маршрутами не принимается.
-    insertRun(db, { id: 'race-run', playerId: guest('ivy').playerId, rulesVersion: CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion, reachedTarget: null });
+    insertRun(db, { id: 'race-run', playerId: guest('ivy').playerId, rulesVersion: 'race-to-100-v3', reachedTarget: null });
     expect((await finish(db, 'ivy', 'race-run', roundInputs(fullQuestions(db, run.runId), 4, true))).status).toBe(409);
   });
 });

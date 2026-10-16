@@ -4,7 +4,7 @@
 import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  CURRENT_ASYNC_MATCH_CONDITIONS,
+  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   dailyQuestionSet,
   type AsyncMatchRound,
@@ -14,11 +14,12 @@ import app from '../apps/api/src/index';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
 const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
-const configJson = JSON.stringify(CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config);
+const configJson = JSON.stringify(CURRENT_HAMMER_MINI_GAME.config);
 // Время задано явно: ни одна проверка не зависит от реальных часов.
 const NOW = Date.UTC(2026, 9, 11, 12, 0, 0);
 const HOUR = 3_600_000;
-const RACE = CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion;
+// Версия правил удалённого режима: такие строки в списке не показываются.
+const LEGACY = 'race-to-100-v3';
 const SOLO = CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
 const databases: TestD1[] = [];
 
@@ -74,6 +75,8 @@ function insertRun(db: TestD1, options: {
   id: string;
   label: string;
   completedAt: number;
+  /** Строка удалённого режима гонки: в списке её быть не должно. */
+  legacy?: boolean;
   solo?: boolean;
   opponent?: 'player' | 'bot' | null;
   /** Чью запись играл этот забег; по умолчанию 'ghost-source' при opponent: 'player'. */
@@ -116,15 +119,15 @@ function insertRun(db: TestD1, options: {
     JSON.stringify(rounds),
     options.completedAt - 1000,
     options.completedAt,
-    options.solo ? SOLO : RACE,
-    CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
+    options.legacy ? LEGACY : SOLO,
+    CURRENT_HAMMER_MINI_GAME.id,
     configJson,
     opponent,
     options.opponentRunId ?? (options.opponent === 'player' ? 'ghost-source' : null),
     set.questionSetId,
-    options.solo ? 1 : null,
-    options.solo ? 5 : null,
-    options.solo ? 0.8 : null,
+    1,
+    5,
+    0.8,
   );
 }
 
@@ -159,10 +162,11 @@ describe('GET /api/my-runs', () => {
     expect(response.status).toBe(401);
   });
 
-  it('returns only the caller runs, newest first, with mode, par, score and opponent', async () => {
+  it('returns only the caller runs, newest first, with par, score and opponent', async () => {
     const db = database();
     insertRun(db, { id: 'ghost-source', label: 'zed', completedAt: NOW - 9 * HOUR });
-    insertRun(db, { id: 'race-old', label: 'ann', completedAt: NOW - 3 * HOUR, opponent: 'player' });
+    insertRun(db, { id: 'race-old', label: 'ann', completedAt: NOW - 3 * HOUR, opponent: 'player', legacy: true });
+    insertRun(db, { id: 'player-old', label: 'ann', completedAt: NOW - 3 * HOUR, opponent: 'player' });
     insertRun(db, { id: 'solo-new', label: 'ann', completedAt: NOW - HOUR, solo: true });
     insertRun(db, { id: 'bot-mid', label: 'ann', completedAt: NOW - 2 * HOUR, opponent: 'bot' });
     insertRun(db, { id: 'bob-run', label: 'bob', completedAt: NOW - HOUR });
@@ -172,14 +176,14 @@ describe('GET /api/my-runs', () => {
     ).run(guest('ann').playerId, NOW);
 
     const body = await (await fetchRuns(db, 'ann')).json() as MyRunsResponse;
-    expect(body.runs.map((run) => run.runId)).toEqual(['solo-new', 'bot-mid', 'race-old']);
+    expect(body.runs.map((run) => run.runId)).toEqual(['solo-new', 'bot-mid', 'player-old']);
     expect(body.runs[0]).toMatchObject({
-      mode: 'solo', roundsPlayed: 4, progress: 100, reachedTarget: true,
+      roundsPlayed: 4, progress: 100, reachedTarget: true,
       setPar: 5, soloScore: 0.8, opponent: null, outcome: null, completedAt: NOW - HOUR,
     });
     expect(body.runs[1]).toMatchObject({
-      mode: 'race', reachedTarget: null, setPar: null, soloScore: null,
-      opponent: { kind: 'bot', displayName: 'Соперник' }, outcome: 'player',
+      reachedTarget: true, setPar: 5, soloScore: 0.8,
+      opponent: { kind: 'bot', displayName: 'Соперник' }, outcome: null,
     });
     expect(body.runs[2].opponent?.kind).toBe('player');
 

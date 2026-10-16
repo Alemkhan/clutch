@@ -1,9 +1,9 @@
-import { CURRENT_ASYNC_MATCH_CONDITIONS, MIN_POOL_ROUNDS, type Opponent, type Question } from '@clutch/shared';
+import { CURRENT_HAMMER_MINI_GAME, CURRENT_SOLO_RUN_CONDITIONS, MIN_POOL_ROUNDS, type Opponent, type Question } from '@clutch/shared';
 import type { RunRow } from './types';
 import { candidateSnapshot } from './validation';
 
 export const currentMiniGameConfigJson = JSON.stringify(
-  CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.config,
+  CURRENT_HAMMER_MINI_GAME.config,
 );
 
 const runColumns = `
@@ -30,7 +30,7 @@ export interface GhostMatch {
  * One query over the whole day's bank: the freshest finished run of another player, with at
  * least MIN_POOL_ROUNDS played rounds, that this player has not faced yet. Its set is the set
  * to play. With unplayedSetsOnly the run must also sit on a set this player never started,
- * so a live opponent is never bought with repeated questions. Whether the run reached 100 is irrelevant for the race pool: ghost_eligible is not a filter; the solo pool filters reached_target.
+ * so a live opponent is never bought with repeated questions. The solo pool filters reached_target; ghost_eligible is not a filter.
  * There is deliberately no fallback that drops the "already faced" condition.
  * A run held by a live open friend invite (not consumed, not released, not expired) is not offered:
  * it is reserved for the link. The check uses expires_at, so it does not wait for the cron pass.
@@ -165,8 +165,8 @@ export async function findGhostInSets(
   `).bind(
     MIN_POOL_ROUNDS,
     playerId,
-    options.rulesVersion ?? CURRENT_ASYNC_MATCH_CONDITIONS.rulesVersion,
-    CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
+    options.rulesVersion ?? CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
+    CURRENT_HAMMER_MINI_GAME.id,
     currentMiniGameConfigJson,
     options.now ?? Date.now(),
     ...questionSetIds,
@@ -232,7 +232,7 @@ export async function findRecordRun(
   `).bind(
     runId,
     rulesVersion,
-    CURRENT_ASYNC_MATCH_CONDITIONS.miniGame.id,
+    CURRENT_HAMMER_MINI_GAME.id,
     currentMiniGameConfigJson,
   ).first<RunRow>();
   if (!row?.question_set_id) return null;
