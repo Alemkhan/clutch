@@ -25,11 +25,19 @@ interface SoloBoardViewProps {
   onPlay: (category: CategoryId) => void;
 }
 
-/** «до 36-го один круг»: цель достижима, в отличие от «попасть в топ-50». */
+/**
+ * «До 4-го места — один круг»: цель достижима, в отличие от «попасть в топ-50». Если стоящий выше
+ * имеет те же круги, счёт круга ничего не даст — выше поставила прикидка «На глазок».
+ */
 export function standingHint(standing: SoloLeaderboardStanding): string {
   if (standing.roundsToNext === null) return 'Ты первый сегодня';
+  if (standing.outrankedByGuess) {
+    if (standing.tiebreak === 'guest') return 'Равных разводит «На глазок» — только с Telegram';
+    if (standing.tiebreak === 'answered') return 'Выше с теми же кругами — по «На глазок»';
+    return 'Ответь «На глазок» — поднимет над равными';
+  }
   const gap = standing.roundsToNext === 1 ? 'один круг' : soloRoundsText(standing.roundsToNext);
-  return `До ${standing.rank - 1}-го места — ${gap}`;
+  return `До ${standing.placeAbove ?? standing.rank - 1}-го места — ${gap}`;
 }
 
 export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onRetry, onPlay }: SoloBoardViewProps) {
@@ -104,13 +112,17 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
             <>
               <ol className="solo-board-list">
                 {state.board.entries.map((entry, index) => {
-                  const mine = state.board.you?.rank === index + 1;
+                  // Место общее у ничьих (1, 2, 2, 4), поэтому «своя» строка — по месту и имени-метке.
+                  const mine = state.board.you !== null
+                    && state.board.you.rank === entry.rank
+                    && state.board.you.entry.completedAt === entry.completedAt
+                    && state.board.you.entry.displayName === entry.displayName;
                   return (
                     <li
                       key={`${entry.completedAt}-${entry.displayName}-${index}`}
                       className={mine ? 'solo-board-row mine' : 'solo-board-row'}
                     >
-                      <span className="solo-board-place">{index + 1}</span>
+                      <span className="solo-board-place">{entry.rank}</span>
                       <span className="solo-board-avatar" aria-hidden="true">{mine ? 'ТЫ' : initials(entry.displayName)}</span>
                       <span className="solo-board-name" title={entry.displayName}>{mine ? 'Ты' : entry.displayName}</span>
                       <span className="solo-board-score">{roundsShort(entry.roundsPlayed)}</span>
@@ -118,8 +130,8 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
                   );
                 })}
               </ol>
-              {/* Правда для текущей таблицы: SQL сортирует по кругам, затем по длительности. */}
-              <p className="solo-board-note">При равных кругах выше тот, кто быстрее</p>
+              {/* Правда для текущей таблицы: равных разводит прикидка дня (R25), длительность не участвует. */}
+              <p className="solo-board-note">При равных кругах выше тот, чья прикидка «На глазок» точнее</p>
             </>
           )}
         </>

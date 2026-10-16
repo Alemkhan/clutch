@@ -5,8 +5,10 @@ import {
   tiebreakerMultiplier,
   type TiebreakerTodayResponse,
 } from '@clutch/shared';
+import { deferred } from '../solo/soloShared';
 import { resolveRequestIdentity, type RequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
+import { categoriesWithBoardRun, notifyBumpedFromTopTen, snapshotTopTen, type TopTenSnapshot } from '../notifications/outOfTop';
 import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import {
@@ -99,6 +101,18 @@ export function registerTiebreakerRoutes(app: Hono<{ Bindings: Env }>): void {
       return c.json({ error: 'This is not the question of the day.', reason: 'not_todays_question' }, 409);
     }
 
+    // R25: ответ может переставить равных. Снимок верха таблицы до записи, только для Telegram:
+    // ответ гостя в таблице не учитывается и ничего не сдвигает.
+    let scope: { categories: string[]; before: TopTenSnapshot } | null = null;
+    if (identity.playerId.startsWith('telegram:')) {
+      try {
+        const categories = await categoriesWithBoardRun(c.env.DB, identity.playerId, dateKey);
+        if (categories.length > 0) scope = { categories, before: await snapshotTopTen(c.env.DB, categories, dateKey) };
+      } catch {
+        scope = null;
+      }
+    }
+
     const inserted = await insertPlayerAnswer(c.env.DB, {
       playerId: identity.playerId,
       questionId: question.id,
@@ -108,6 +122,20 @@ export function registerTiebreakerRoutes(app: Hono<{ Bindings: Env }>): void {
       now,
     });
     const state = await todayState(c.env.DB, identity.playerId, dateKey, question);
+    if (inserted && scope) {
+      const { categories, before } = scope;
+      deferred(c, (async () => {
+        await notifyBumpedFromTopTen(c.env, {
+          triggerPlayerId: identity.playerId,
+          triggerName: identity.displayName ?? 'Игрок',
+          dateKey,
+          before,
+          after: await snapshotTopTen(c.env.DB, categories, dateKey),
+        });
+      })().catch(() => {
+        console.error({ event: 'telegram_notification_handler', kind: 'top_ten', reasonCode: 'unexpected_error' });
+      }));
+    }
     if (!inserted) return c.json({ error: 'Already answered.', reason: 'already_answered', ...state }, 409);
     return c.json(state, 201);
   });

@@ -181,42 +181,92 @@ export async function findPaceResult(db: D1Database, runId: string): Promise<Sol
 export const SOLO_BOARD_LIMIT = 50;
 
 /**
- * Лучший забег каждого игрока за сутки [from, to) по категории: только дошедшие до цели,
- * меньший solo_score выше; при равенстве меньше кругов, короче забег, id.
+ * Таблица дня как общий запрос (параметры: ?1 категория, ?2 rules_version, ?3 начало суток,
+ * ?4 конец, ?5 ключ суток для прикидки). Один лучший забег на игрока (меньший счёт, меньше кругов,
+ * раньше финиш, id). Место — RANK: делят его равные счёт, круги и прикидка «На глазок» дня
+ * (меньший множитель выше; без ответа и гость — ниже всех ответивших). Длительность забега
+ * не участвует (решение владельца 2026-10-16). Порядок показа внутри места — по времени финиша.
  */
+const BOARD_CTE = `
+  WITH ranked_runs AS (
+    SELECT id, player_id, display_name, solo_score, set_par, completed_at,
+           json_array_length(rounds_json) AS rounds_played,
+           ROW_NUMBER() OVER (
+             PARTITION BY player_id
+             ORDER BY solo_score ASC, json_array_length(rounds_json) ASC, completed_at ASC, id ASC
+           ) AS player_rank
+    FROM match_runs
+    WHERE category = ?1 AND status = 'completed' AND rules_version = ?2
+      AND reached_target = 1 AND solo_score IS NOT NULL
+      AND completed_at >= ?3 AND completed_at < ?4
+  ),
+  best AS (
+    SELECT r.id, r.player_id, r.display_name, r.solo_score, r.set_par, r.completed_at, r.rounds_played,
+           CASE WHEN r.player_id LIKE 'telegram:%' THEN t.multiplier END AS multiplier
+    FROM ranked_runs r
+    LEFT JOIN tiebreaker_answers t ON t.player_id = r.player_id AND t.date_key = ?5
+    WHERE r.player_rank = 1
+  ),
+  placed AS (
+    SELECT *,
+           RANK() OVER (
+             ORDER BY solo_score ASC, rounds_played ASC, COALESCE(multiplier, 1e18) ASC
+           ) AS place,
+           COUNT(*) OVER () AS total
+    FROM best
+  )`;
+
+/** Лучший забег каждого игрока за сутки [from, to) по категории: только дошедшие до цели. */
 export async function soloLeaderboard(
   db: D1Database,
   category: string,
   rulesVersion: string,
   from: number,
   to: number,
+  dateKey: string,
 ): Promise<SoloLeaderboardEntry[]> {
-  const result = await db.prepare(`
-    WITH ranked_runs AS (
-      SELECT id, display_name, solo_score, set_par, completed_at, completed_at - created_at AS duration_ms,
-             json_array_length(rounds_json) AS rounds_played,
-             ROW_NUMBER() OVER (
-               PARTITION BY player_id
-               ORDER BY solo_score ASC, json_array_length(rounds_json) ASC, completed_at - created_at ASC, id ASC
-             ) AS player_rank
-      FROM match_runs
-      WHERE category = ?1 AND status = 'completed' AND rules_version = ?2
-        AND reached_target = 1 AND solo_score IS NOT NULL
-        AND completed_at >= ?3 AND completed_at < ?4
-    )
-    SELECT display_name AS displayName, solo_score AS soloScore, set_par AS setPar,
+  const result = await db.prepare(`${BOARD_CTE}
+    SELECT place AS rank, display_name AS displayName, solo_score AS soloScore, set_par AS setPar,
            rounds_played AS roundsPlayed, completed_at AS completedAt
-    FROM ranked_runs
-    WHERE player_rank = 1
-    ORDER BY soloScore ASC, roundsPlayed ASC, duration_ms ASC, id ASC
-    LIMIT ?5
-  `).bind(category, rulesVersion, from, to, SOLO_BOARD_LIMIT).all<SoloLeaderboardEntry>();
+    FROM placed
+    ORDER BY place ASC, completed_at ASC, id ASC
+    LIMIT ?6
+  `).bind(category, rulesVersion, from, to, dateKey, SOLO_BOARD_LIMIT).all<SoloLeaderboardEntry>();
+  return result.results;
+}
+
+/** Строка верха таблицы для сравнения «до/после» в известии «выбили из десятки». */
+export interface BoardPlace {
+  playerId: string;
+  displayName: string;
+  place: number;
+  soloScore: number;
+  roundsPlayed: number;
+}
+
+/** Все места не ниже `maxPlace` (с учётом ничьих; потолок строк страхует от гигантской ничьей). */
+export async function soloBoardTop(
+  db: D1Database,
+  category: string,
+  rulesVersion: string,
+  from: number,
+  to: number,
+  dateKey: string,
+  maxPlace: number,
+): Promise<BoardPlace[]> {
+  const result = await db.prepare(`${BOARD_CTE}
+    SELECT player_id AS playerId, display_name AS displayName, place, solo_score AS soloScore,
+           rounds_played AS roundsPlayed
+    FROM placed WHERE place <= ?6
+    ORDER BY place ASC, completed_at ASC, id ASC
+    LIMIT 500
+  `).bind(category, rulesVersion, from, to, dateKey, maxPlace).all<BoardPlace>();
   return result.results;
 }
 
 /**
- * Место самого игрока в той же таблице, даже если он далеко за топ-50. Порядок и правило «один
- * лучший забег на игрока» те же, что в `soloLeaderboard`, иначе место не совпадало бы со списком.
+ * Место самого игрока в той же таблице, даже если он далеко за топ-50. Запрос тот же, что в
+ * `soloLeaderboard`, иначе место не совпадало бы со списком.
  * null — в этот день игрок не закрыл ни одного забега этой категории.
  */
 export async function soloStanding(
@@ -225,36 +275,18 @@ export async function soloStanding(
   rulesVersion: string,
   from: number,
   to: number,
+  dateKey: string,
   playerId: string,
 ): Promise<SoloLeaderboardStanding | null> {
-  const row = await db.prepare(`
-    WITH ranked_runs AS (
-      SELECT id, player_id, display_name, solo_score, set_par, completed_at,
-             completed_at - created_at AS duration_ms,
-             json_array_length(rounds_json) AS rounds_played,
-             ROW_NUMBER() OVER (
-               PARTITION BY player_id
-               ORDER BY solo_score ASC, json_array_length(rounds_json) ASC, completed_at - created_at ASC, id ASC
-             ) AS player_rank
-      FROM match_runs
-      WHERE category = ?1 AND status = 'completed' AND rules_version = ?2
-        AND reached_target = 1 AND solo_score IS NOT NULL
-        AND completed_at >= ?3 AND completed_at < ?4
-    ),
-    placed AS (
-      SELECT id, player_id, display_name, solo_score, set_par, completed_at, rounds_played,
-             ROW_NUMBER() OVER (
-               ORDER BY solo_score ASC, rounds_played ASC, duration_ms ASC, id ASC
-             ) AS place,
-             COUNT(*) OVER () AS total
-      FROM ranked_runs WHERE player_rank = 1
-    )
+  const row = await db.prepare(`${BOARD_CTE}
     SELECT me.place AS place, me.total AS total, me.display_name AS displayName,
            me.solo_score AS soloScore, me.set_par AS setPar, me.rounds_played AS roundsPlayed,
-           me.completed_at AS completedAt,
-           (SELECT above.solo_score FROM placed above WHERE above.place = me.place - 1) AS nextScore
-    FROM placed me WHERE me.player_id = ?5
-  `).bind(category, rulesVersion, from, to, playerId).first<{
+           me.completed_at AS completedAt, me.multiplier AS multiplier,
+           (SELECT a.solo_score FROM placed a WHERE a.place < me.place ORDER BY a.place DESC LIMIT 1) AS nextScore,
+           (SELECT a.rounds_played FROM placed a WHERE a.place < me.place ORDER BY a.place DESC LIMIT 1) AS nextRounds,
+           (SELECT MAX(a.place) FROM placed a WHERE a.place < me.place) AS placeAbove
+    FROM placed me WHERE me.player_id = ?6
+  `).bind(category, rulesVersion, from, to, dateKey, playerId).first<{
     place: number;
     total: number;
     displayName: string;
@@ -262,13 +294,17 @@ export async function soloStanding(
     setPar: number;
     roundsPlayed: number;
     completedAt: number;
+    multiplier: number | null;
     nextScore: number | null;
+    nextRounds: number | null;
+    placeAbove: number | null;
   }>();
   if (!row) return null;
   return {
     rank: row.place,
     total: row.total,
     entry: {
+      rank: row.place,
       displayName: row.displayName,
       soloScore: row.soloScore,
       setPar: row.setPar,
@@ -276,6 +312,11 @@ export async function soloStanding(
       completedAt: row.completedAt,
     },
     roundsToNext: roundsToPass(row.roundsPlayed, row.setPar, row.nextScore),
+    placeAbove: row.placeAbove,
+    // Равны и счёт, и круги — выше его поставила только прикидка.
+    outrankedByGuess: row.nextScore !== null && row.nextScore === row.soloScore
+      && row.nextRounds === row.roundsPlayed,
+    tiebreak: !playerId.startsWith('telegram:') ? 'guest' : row.multiplier === null ? 'not_answered' : 'answered',
   };
 }
 

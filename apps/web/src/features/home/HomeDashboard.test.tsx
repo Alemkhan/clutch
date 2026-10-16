@@ -11,8 +11,11 @@ function standing(overrides: Partial<SoloLeaderboardStanding> = {}): SoloLeaderb
   return {
     rank: 3,
     total: 41,
-    entry: { displayName: 'Я', soloScore: 0.9, setPar: 8, roundsPlayed: 7, completedAt: 1 },
+    entry: { rank: 3, displayName: 'Я', soloScore: 0.9, setPar: 8, roundsPlayed: 7, completedAt: 1 },
     roundsToNext: 1,
+    placeAbove: (overrides.rank ?? 3) - 1,
+    outrankedByGuess: false,
+    tiebreak: 'answered',
     ...overrides,
   };
 }
@@ -77,6 +80,11 @@ describe('the place line after a counted finish', () => {
     expect(out).toContain('Дойди до 100%');
     expect(out).toContain('Играть');
     expect(out).not.toContain('Сыграть ещё набор');
+  });
+
+  it('uses the place above under ties and the guess wording for equal rounds', () => {
+    expect(homeStandingLines(standing({ rank: 4, roundsToNext: 1, placeAbove: 2 }))).toEqual({ title: 'Ты 4-й сегодня.', hint: 'До 2-го — один круг.' });
+    expect(homeStandingLines(standing({ rank: 3, outrankedByGuess: true }))).toEqual({ title: 'Ты 3-й сегодня.', hint: 'Выше — по «На глазок».' });
   });
 
   it('builds the lines as pure text', () => {

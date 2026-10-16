@@ -75,6 +75,11 @@ export function invertOutcome(outcome: MyRunOutcome): MyRunOutcome {
 
 /** Строка таблицы результатов соло за сутки. */
 export interface SoloLeaderboardEntry {
+  /**
+   * Место в таблице дня. Ничья делит место: равные круги и равная прикидка «На глазок» (или оба без
+   * неё) дают один номер, нумерация соревновательная (1, 2, 2, 4).
+   */
+  rank: number;
   displayName: string;
   soloScore: number;
   setPar: number;
@@ -87,7 +92,7 @@ export interface SoloLeaderboardEntry {
  * цель «обойти стоящего выше на один круг» достижима, а «попасть в топ-50» — нет.
  */
 export interface SoloLeaderboardStanding {
-  /** Место в таблице дня, начиная с 1. */
+  /** Место в таблице дня, начиная с 1; общее у ничьих (1, 2, 2, 4). */
   rank: number;
   /** Сколько всего игроков в таблице дня: «37-й из 140». */
   total: number;
@@ -97,6 +102,18 @@ export interface SoloLeaderboardStanding {
    * набора, поэтому это настоящее число кругов, а не разница счётов. null — игрок первый.
    */
   roundsToNext: number | null;
+  /** Место ближайшего стоящего строго выше (при ничьих это не `rank - 1`). null — игрок первый. */
+  placeAbove: number | null;
+  /**
+   * Ближайший стоящий выше имеет те же круги: обошёл он только прикидкой «На глазок», так что
+   * `roundsToNext` здесь ничего не объясняет.
+   */
+  outrankedByGuess: boolean;
+  /**
+   * Прикидка дня для этого игрока: `answered` — засчитана, `not_answered` — Telegram-игрок ещё не
+   * ответил, `guest` — гостю прикидка не засчитывается никогда.
+   */
+  tiebreak: 'answered' | 'not_answered' | 'guest';
 }
 
 export interface SoloLeaderboardResponse {

@@ -357,13 +357,15 @@ describe('solo leaderboard', () => {
     expect(body.entries.map((entry) => entry.displayName)).toEqual(['g']);
   });
 
-  it('breaks equal scores by fewer rounds, then shorter run duration', async () => {
+  it('breaks equal scores by fewer rounds; run duration no longer decides, equal runs share a place', async () => {
     const db = database();
     insertSolo(db, { id: 'slow', playerId: 'p:1', soloScore: 1, completedAt: NOW - 500, durationMs: 9000 });
     insertSolo(db, { id: 'fast', playerId: 'p:2', soloScore: 1, completedAt: NOW - 10, durationMs: 2000 });
     insertSolo(db, { id: 'long', playerId: 'p:4', soloScore: 1, completedAt: NOW - 900, durationMs: 100, rounds: 6 });
     const body = await (await board(db, '?category=geography')).json() as SoloLeaderboardResponse;
-    expect(body.entries.map((entry) => entry.displayName)).toEqual(['fast', 'slow', 'long']);
+    // slow и fast равны (круги и счёт, прикидки нет): место общее, показ по времени финиша.
+    expect(body.entries.map((entry) => entry.displayName)).toEqual(['slow', 'fast', 'long']);
+    expect(body.entries.map((entry) => entry.rank)).toEqual([1, 1, 3]);
   });
 
   it('selects another UTC day and category, and validates input and auth', async () => {
@@ -409,25 +411,25 @@ describe('my own place in the day board', () => {
     const db = database();
     const par = setPar(SET.questions);
     // Сосед сверху закрыл набор за 7 кругов, я за 9. Чтобы обойти, нужно строго меньше семи:
-    // равные круги разводит тай-брейк по длительности, то есть ничья место не отдаёт. Отсюда три.
+    // равные круги разводит прикидка «На глазок», без неё место общее. Отсюда три.
     insertSolo(db, { id: 'above', playerId: 'p:above', soloScore: 7 / par, rounds: 7 });
     insertSolo(db, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 9 / par, rounds: 9 });
     const body = await (await board(db)).json() as SoloLeaderboardResponse;
     expect(body.you).toMatchObject({ rank: 2, total: 2, roundsToNext: 3 });
 
-    // Равный счёт: сосед выше по тай-брейку, обойти его можно одним кругом.
+    // Равный счёт без прикидки: место общее, сосед не «выше», но круг до обгона по-прежнему один.
     const tied = database();
     insertSolo(tied, { id: 'above', playerId: 'p:above', soloScore: 9 / par, rounds: 9, durationMs: 100 });
     insertSolo(tied, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 9 / par, rounds: 9, durationMs: 9000 });
     const close = await (await board(tied)).json() as SoloLeaderboardResponse;
-    expect(close.you).toMatchObject({ rank: 2, roundsToNext: 1 });
+    expect(close.you).toMatchObject({ rank: 1, placeAbove: null, roundsToNext: null, outrankedByGuess: false, tiebreak: 'guest' });
   });
 
   it('has nobody above the first place and nothing at all without a finished run', async () => {
     const db = database();
     insertSolo(db, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 0.5 });
     const first = await (await board(db)).json() as SoloLeaderboardResponse;
-    expect(first.you).toMatchObject({ rank: 1, total: 1, roundsToNext: null });
+    expect(first.you).toMatchObject({ rank: 1, total: 1, roundsToNext: null, placeAbove: null });
 
     // Не дошёл до цели — в таблице его нет, и места у него нет.
     const missed = database();

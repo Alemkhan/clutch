@@ -31,6 +31,7 @@ export async function handleSoloLeaderboard(c: AppContext): Promise<Response> {
       CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
       dayStart,
       dayStart + DAY_MS,
+      dateKey,
     ),
     soloStanding(
       c.env.DB,
@@ -38,6 +39,7 @@ export async function handleSoloLeaderboard(c: AppContext): Promise<Response> {
       CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
       dayStart,
       dayStart + DAY_MS,
+      dateKey,
       identity.playerId,
     ),
   ]);

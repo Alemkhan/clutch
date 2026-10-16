@@ -11,6 +11,7 @@ import {
   type Question,
 } from '@clutch/shared';
 import { notifyDuelResult, notifySoloResult } from '../notifications/outbid';
+import { notifyBumpedFromTopTen, snapshotTopTen, type TopTenSnapshot } from '../notifications/outOfTop';
 import { findTiebreakAnswer } from '../tiebreaker/tiebreakerRepository';
 import { findRun, findRunOwner } from './repository';
 import type { SoloRoundRow } from './soloRoundsRepository';
@@ -162,6 +163,20 @@ export async function finalizeSoloRun(
   result.outcome = outcome;
   if (decision.tiebreak) result.tiebreak = decision.tiebreak;
 
+  // R25: снимок верха таблицы до записи забега; сбой снимка не должен ломать завершение.
+  const dateKey = dailyKey(completedAt);
+  const ranked = !practice && !friend && result.reachedTarget;
+  let topBefore: TopTenSnapshot | null = null;
+  let category = '';
+  if (ranked) {
+    try {
+      category = (await findRunOwner(c.env.DB, runId))?.category ?? '';
+      if (category) topBefore = await snapshotTopTen(c.env.DB, [category], dateKey);
+    } catch {
+      topBefore = null;
+    }
+  }
+
   const didComplete = await completeSoloRun(c.env.DB, {
     matchId: runId,
     rounds,
@@ -190,6 +205,21 @@ export async function finalizeSoloRun(
         ? { recipientMultiplier: pace.tiebreak?.multiplier ?? null, challengerMultiplier: ownTiebreak?.multiplier ?? null }
         : null,
     );
+  }
+  if (topBefore) {
+    const before = topBefore;
+    deferred(c, (async () => {
+      const after = await snapshotTopTen(c.env.DB, [category], dateKey);
+      await notifyBumpedFromTopTen(c.env, {
+        triggerPlayerId: run.player_id,
+        triggerName: run.display_name,
+        dateKey,
+        before,
+        after,
+      });
+    })().catch(() => {
+      console.error({ event: 'telegram_notification_handler', kind: 'top_ten', reasonCode: 'unexpected_error' });
+    }));
   }
   return result;
 }

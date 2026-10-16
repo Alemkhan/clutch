@@ -14,12 +14,12 @@ const handlers = {
   onPlay: vi.fn(),
 };
 
-function entry(name: string, roundsPlayed: number, setPar = 8): SoloLeaderboardEntry {
-  return { displayName: name, soloScore: roundsPlayed / setPar, setPar, roundsPlayed, completedAt: NOW };
+function entry(name: string, roundsPlayed: number, setPar = 8, rank = 1): SoloLeaderboardEntry {
+  return { rank, displayName: name, soloScore: roundsPlayed / setPar, setPar, roundsPlayed, completedAt: NOW };
 }
 
 function standing(overrides: Partial<SoloLeaderboardStanding> = {}): SoloLeaderboardStanding {
-  return { rank: 37, total: 140, entry: entry('Я', 11), roundsToNext: 1, ...overrides };
+  return { rank: 37, total: 140, entry: entry('Я', 11), roundsToNext: 1, placeAbove: (overrides.rank ?? 37) - 1, outrankedByGuess: false, tiebreak: 'answered', ...overrides };
 }
 
 function board(overrides: Partial<SoloLeaderboardResponse> = {}): SoloLeaderboardResponse {
@@ -120,8 +120,18 @@ describe('the reset line and the footer', () => {
   });
 
   it('keeps the tie-break rule under the list', () => {
-    expect(render(ready({ entries: [entry('Ann', 7)] }))).toContain('При равных кругах выше тот, кто быстрее<');
+    expect(render(ready({ entries: [entry('Ann', 7)] }))).toContain('При равных кругах выше тот, чья прикидка «На глазок» точнее<');
     expect(render(ready())).not.toContain('При равных кругах');
+  });
+
+  it('shows the server place, shared by ties, and the new footer', () => {
+    const html = render(ready({
+      entries: [entry('Ann', 5, 8, 1), entry('Bob', 6, 8, 2), entry('Cat', 6, 8, 2), entry('Dan', 7, 8, 4)],
+      you: null,
+    }));
+    expect([...html.matchAll(/solo-board-place">(\d+)</g)].map((m) => m[1])).toEqual(['1', '2', '2', '4']);
+    expect(html).toContain('При равных кругах выше тот, чья прикидка «На глазок» точнее');
+    expect(html).not.toContain('быстрее');
   });
 
   it('wires the play buttons and does not highlight a row when I am absent', () => {
@@ -137,6 +147,17 @@ describe('the hint under my place', () => {
     expect(standingHint(standing({ rank: 5, roundsToNext: 1 }))).toBe('До 4-го места — один круг');
     expect(standingHint(standing({ rank: 5, roundsToNext: 2 }))).toBe('До 4-го места — 2 круга');
     expect(standingHint(standing({ rank: 9, roundsToNext: 5 }))).toBe('До 8-го места — 5 кругов');
+  });
+
+  it('names the place above when ties share a number (1, 2, 2, 4)', () => {
+    expect(standingHint(standing({ rank: 4, roundsToNext: 1, placeAbove: 2 }))).toBe('До 2-го места — один круг');
+  });
+
+  it('explains an equal-rounds gap by the guess, per kind of viewer', () => {
+    const tied = { rank: 3, roundsToNext: 1, placeAbove: 2, outrankedByGuess: true } as const;
+    expect(standingHint(standing({ ...tied, tiebreak: 'not_answered' }))).toBe('Ответь «На глазок» — поднимет над равными');
+    expect(standingHint(standing({ ...tied, tiebreak: 'answered' }))).toBe('Выше с теми же кругами — по «На глазок»');
+    expect(standingHint(standing({ ...tied, tiebreak: 'guest' }))).toBe('Равных разводит «На глазок» — только с Telegram');
   });
 
   it('says there is nobody above the first place', () => {

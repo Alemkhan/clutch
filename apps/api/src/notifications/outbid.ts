@@ -33,7 +33,7 @@ export function telegramChatId(playerId: string): string | null {
   return match ? match[1] : null;
 }
 
-function cleanName(name: string): string {
+export function cleanName(name: string): string {
   const collapsed = name.replace(/\s+/gu, ' ').trim();
   if (!collapsed) return 'Соперник';
   return collapsed.length > MAX_NAME ? `${collapsed.slice(0, MAX_NAME - 1)}…` : collapsed;

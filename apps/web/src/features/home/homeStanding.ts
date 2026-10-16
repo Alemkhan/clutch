@@ -12,5 +12,7 @@ export function homeStandingLines(standing: SoloLeaderboardStanding): HomeStandi
   if (standing.rank <= 1) return { title: 'Ты первый сегодня.', hint: null };
   if (standing.roundsToNext === null) return { title: `Ты ${standing.rank}-й сегодня.`, hint: null };
   const gap = standing.roundsToNext === 1 ? 'один круг' : soloRoundsText(standing.roundsToNext);
-  return { title: `Ты ${standing.rank}-й сегодня.`, hint: `До ${standing.rank - 1}-го — ${gap}.` };
+  // Равных с теми же кругами обходит прикидка «На глазок»: «до N-го — 1 круг» было бы неправдой.
+  if (standing.outrankedByGuess) return { title: `Ты ${standing.rank}-й сегодня.`, hint: 'Выше — по «На глазок».' };
+  return { title: `Ты ${standing.rank}-й сегодня.`, hint: `До ${standing.placeAbove ?? standing.rank - 1}-го — ${gap}.` };
 }

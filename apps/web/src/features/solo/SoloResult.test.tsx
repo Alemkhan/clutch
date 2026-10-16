@@ -20,8 +20,8 @@ function response(patch: Partial<CompleteSoloRunResponse> = {}): CompleteSoloRun
 }
 
 const you: SoloLeaderboardStanding = {
-  rank: 3, total: 40, roundsToNext: 1,
-  entry: { displayName: 'Я', soloScore: 1, setPar: 6, roundsPlayed: 4, completedAt: 1 },
+  rank: 3, total: 40, roundsToNext: 1, placeAbove: 2, outrankedByGuess: false, tiebreak: 'answered',
+  entry: { rank: 3, displayName: 'Я', soloScore: 1, setPar: 6, roundsPlayed: 4, completedAt: 1 },
 };
 const skills: SkillResult[] = ['perfect', 'great', 'perfect', 'miss'];
 
