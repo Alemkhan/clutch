@@ -3,8 +3,8 @@
 Все вопросы и наборы лежат здесь, по темам. Код читает эти файлы сам.
 
 ```text
-questions/<тема>.json   вопросы с одним ответом (гонка: выбор из 4 или ввод)
-sets/<тема>.json        наборы «назови …» (Last Stand и вопрос «что из этого — …?»)
+questions/<тема>.json   вопросы с одним ответом (выбор из 4 или ввод)
+sets/<тема>.json        наборы «назови …» (вопрос «что из этого — …?» и замороженный Last Stand)
 ```
 
 Темы: science, space, nature, body, history, literature, art, music, film, popculture,
@@ -60,3 +60,6 @@ npm run content:check
 `titleRu` «Назови …» · `mcPromptRu` «Что из этого — …?» · `members` все верные ответы
 (от очевидных к редким; у каждого `id`, `answerRu`, `acceptedRu`) · `nonMembersRu`
 не меньше 3 правдоподобных неверных.
+
+Вопросы «На глазок» лежат не здесь, а в `docs/content/` (пак `tiebreaker-pack-v2.json` и разбор).
+Статус одобрения всего пакета и риски по происхождению — [CONTENT_REVIEW](../docs/CONTENT_REVIEW.md).

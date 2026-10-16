@@ -3,9 +3,10 @@
 Этот runbook описывает будущий production-выпуск Cloudflare Pages + Workers +
 D1 + Telegram Mini App. Он не является подтверждением готового деплоя.
 
-На 2026-10-02 удалённые ресурсы, production secrets, BotFather-настройки и
-production D1 из этой рабочей копии не проверены. Команды с `--remote`, deploy,
-создание ресурсов и изменение BotFather выполняются только владельцем отдельно.
+**Ни один шаг не выполнялся:** удалённые ресурсы, production secrets, BotFather-настройки и
+production D1 не созданы и не проверены. Команды с `--remote`, deploy, создание ресурсов и
+изменение BotFather выполняются только владельцем отдельно. Локальная настройка и туннель —
+в [README](../README.md) и [TESTING](TESTING.md).
 
 ## 1. Жёсткие стоп-условия
 
@@ -14,13 +15,12 @@ production D1 из этой рабочей копии не проверены. �
 - `npm test`, local HTTP smoke и `npm run preflight:production` проходят на
   checkpoint, который будет выпущен. Preflight включает полный root build.
 - GitHub Actions прошёл на том же commit, а не только локально.
-- Утверждён набор категорий и редакционно проверен публикуемый контент.
-- Утверждён визуальный baseline хотя бы основного flow и hammer mini-game.
-- Выбрана политика новых question sets, повторов и совместимых ghosts.
-- Решено, является ли leaderboard просто casual-статистикой или защищённым
-  соревнованием. Оценку удара клиент больше не присылает (сервер выводит её из
-  момента удара), но время ответа всё ещё сообщает он, и подобранный момент
-  удара формулой не исключён.
+- Утверждён набор категорий и редакционно проверен публикуемый контент
+  ([CONTENT_REVIEW](CONTENT_REVIEW.md)).
+- Решено (DEC-03), является ли таблица casual-статистикой или защищённым соревнованием.
+  Сервер сам выводит оценку удара, но время ответа сообщает клиент, лимит 15 секунд не
+  применяется, подобранный момент удара не исключён ([AUDIT](AUDIT.md) A06).
+- Визуальный baseline утверждён владельцем (MVP, 2026-10-13); палитра v6 не выбрана.
 - Выполнен walkthrough из [TESTING](TESTING.md) на реальном телефоне в Telegram.
 - Созданы отдельные production D1 и Rate Limiting namespace. Development IDs из
   текущего `wrangler.toml` нельзя автоматически считать production-ресурсами.
@@ -59,6 +59,14 @@ CLUTCH_PAGES_PROJECT_NAME=<...>
 WEB_PUBLIC_URL=https://<...>
 TELEGRAM_BOT_USERNAME=<...>
 ```
+
+Нужны также production-значения, которых нет в `CLUTCH_PRODUCTION_*`: `TELEGRAM_MINI_APP_LINK`
+(ссылка `https://t.me/<бот>?startapp`, куда ведёт страница шаринга; сейчас в `wrangler.toml`
+стоит dev-значение), `PUBLIC_WEB_ORIGIN` (origin web для абсолютного URL картинки шаринга) и
+web-переменная `VITE_TELEGRAM_BOT_LINK` (ссылка бота для шаринга «На глазок»; без неё
+шаринг ведёт на адрес страницы). **Сгенерированный preflight-config задаёт в `vars` только
+`ENVIRONMENT = "production"`** — `TELEGRAM_MINI_APP_LINK` и `PUBLIC_WEB_ORIGIN` пока приходится
+добавлять вручную (в config перед review либо через Dashboard); это известная неполнота.
 
 Нужно создать:
 
@@ -125,7 +133,8 @@ Get-ChildItem apps/api/migrations
 npm exec --workspace @clutch/api -- wrangler d1 migrations list DB --local
 ```
 
-Проверить миграции на свежей локальной базе и повторить полный test/build.
+Применить миграции на свежей локальной базе и повторить полный test/build. Сейчас это
+`0001_schema.sql` и аддитивные `0002`–`0005` (в том числе `ALTER TABLE ADD COLUMN`).
 
 ### 5.2. Remote production D1
 
@@ -145,17 +154,14 @@ Cloudflare создаёт backup перед применением migration и 
 конкретную migration, но это не заменяет план восстановления данных:
 [D1 migration commands](https://developers.cloudflare.com/d1/wrangler-commands/).
 
-**Прежнее предупреждение про пересборку таблиц снято 2026-10-13.** История
-миграций сжата в единственный `0001_schema.sql`, и три шага, которые пересобирали
-`match_runs`, `rematch_invites` и `last_stand_runs` целиком ради расширения
-`CHECK` (их SQLite не умеет менять через `ALTER`), из пути первого деплоя ушли.
-Первое применение — один набор `CREATE TABLE` на пустой базе: временных таблиц
-не создаётся, терять нечего. Копию базы перед первым применением делать не от
-чего, потому что данных в ней ещё нет.
+Первое применение — `CREATE TABLE`/`CREATE INDEX` и один `ADD COLUMN` на пустой базе:
+пересборок таблиц нет (история была сжата в `0001_schema.sql`), копию делать не от чего.
+Для последующих миграций, которые пересобирают таблицы (SQLite не умеет менять `CHECK`
+через `ALTER`), заранее делайте резервную копию: применение идёт без транзакции.
 
-Не переписывайте уже применённые SQL-файлы. Сжатие истории было допустимо ровно
-один раз — пока на remote ничего не разворачивали. После первого применения
-любое изменение схемы — новая migration.
+Не переписывайте применённые SQL-файлы. Сжатие истории было допустимо ровно один раз —
+пока на remote ничего не разворачивали. После первого применения любое изменение
+схемы — новая migration.
 
 ## 6. Worker API
 
@@ -258,6 +264,8 @@ npx wrangler pages deploy apps/web/dist --project-name <PAGES_PROJECT_NAME>
 8. Неподходящая/повреждённая запись не ломает matchmaking.
 9. Offline answer/hammer показывает повтор, а после восстановления сети один
    круг записывается без дубля.
+   - Если есть вопрос «На глазок» на сегодня: ответ принимается один раз, вскрытие
+     показывает распределение.
 10. Проверены экранная клавиатура, BackButton, safe areas, background/return и
    звук на реальном телефоне.
 11. В D1 появилась ожидаемая completed-запись без дубликата completion.
@@ -279,12 +287,14 @@ npx wrangler pages deploy apps/web/dist --project-name <PAGES_PROJECT_NAME>
 - `401`, `429`, start/completion failures;
 - D1 rows read/written, storage и медленные queries;
 - долю источников `player` против `bot`;
-- `save_failed`, abandoned и retry exhaustion после появления реального
-  analytics receiver;
+- таблицы `analytics_events` и `question_reports` (события `sound_failure`,
+  `answer_option_mismatch`, `answer_replay_conflict`, репорты вопросов; смотреть
+  `npm run reports`/`activity` против нужной базы или SQL);
+- доставку Telegram-сообщений по структурным логам (`reasonCode`);
 - жалобы на media loading, клавиатуру, safe areas и звук.
 
 На старте ограничьте рекламный трафик. Не запускайте сразу несколько TikTok
-роликов, пока один небольшой поток не подтвердил сохранение и ghost reuse.
+роликов, пока один небольшой поток не подтвердил сохранение и подбор записей соперников.
 
 ## 11. Rollback
 
