@@ -16,6 +16,7 @@ import {
 import { formatCountdownClock } from './tiebreakerClock';
 import { shareTiebreakerResult } from './tiebreakerShare';
 import { buildGuessPreviewUrl, previewBase } from '../../platform/share';
+import { preparedMessageShare } from '../../platform/shareMessage';
 import { useDayCountdown } from './useDayCountdown';
 import { parseTiebreakerInput, tiebreakerInputHint } from './tiebreakerInput';
 import { TiebreakerSubmitter } from './tiebreakerSubmit';
@@ -480,20 +481,22 @@ export function TiebreakerScreen({ onBack }: { onBack: () => void }) {
     if (state.status !== 'ready' || !state.today.question || !state.today.answered) return;
     const { question, answered } = state.today;
     const hasNative = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
+    const previewUrl = buildGuessPreviewUrl(
+      previewBase(import.meta.env.VITE_API_URL as string | undefined, window.location.origin),
+      question.number,
+      answered.multiplier,
+      answered.percentile,
+      isBestAnswerOfDay(answered.percentile),
+    );
     void shareTiebreakerResult(
       question.number,
       answered,
-      buildGuessPreviewUrl(
-        previewBase(import.meta.env.VITE_API_URL as string | undefined, window.location.origin),
-        question.number,
-        answered.multiplier,
-        answered.percentile,
-        isBestAnswerOfDay(answered.percentile),
-      ),
+      previewUrl,
       {
         telegramShare: canShareViaTelegram(),
         nativeShare: hasNative,
         effects: {
+          telegramMessage: preparedMessageShare(previewUrl),
           telegramShare: shareViaTelegram,
           nativeShare: hasNative ? (data) => navigator.share(data) : undefined,
           copy: (text) => navigator.clipboard.writeText(text),

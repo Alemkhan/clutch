@@ -141,6 +141,11 @@ export interface CreateFriendInviteResponse {
   expiresAt: number;
 }
 
+/** POST /api/share/prepared: id подготовленного сообщения для Telegram shareMessage. */
+export interface PreparedShareResponse {
+  id: string;
+}
+
 /**
  * Итог нажатия «Позвать на реванш». Ссылки здесь нет: приглашение адресное, и его уносит
  * сообщение бота владельцу обойдённой записи, а не share с экрана звавшего.

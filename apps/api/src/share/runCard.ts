@@ -132,13 +132,19 @@ function tileGrid(tiles: readonly RoundTile[], x: number, y: number, width: numb
   return parts.join('');
 }
 
+/** Вызов на карточке и в сообщении: обогнать запись, пройти быстрее или дойти до 100%. */
+export function runCallLine(data: Pick<RunCardData, 'invite' | 'progress'>): string {
+  if (data.invite) return 'Обгонишь эту запись?';
+  return data.progress >= 100 ? 'Сможешь быстрее?' : 'А ты дойдёшь до 100%?';
+}
+
 export function buildRunCardSvg(data: RunCardData): string {
   const reached = data.progress >= 100;
   const caption = [CATEGORY[data.category], dayLabel(data.day)].filter(Boolean).join(' · ');
   const kicker = data.invite
     ? data.invite.name ? `${displayName(data.invite.name)} зовёт на дуэль` : 'Тебя зовут на дуэль'
     : 'Мой результат дня';
-  const call = data.invite ? 'Обгонишь эту запись?' : reached ? 'Сможешь быстрее?' : 'А ты дойдёшь до 100%?';
+  const call = runCallLine(data);
   return [
     open(),
     header(caption),

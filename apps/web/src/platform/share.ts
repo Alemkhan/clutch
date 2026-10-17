@@ -23,6 +23,8 @@ export interface ShareCapabilities {
 }
 
 export interface ShareEffects {
+  /** Сначала карточка сообщением (shareMessage); 'failed' — откат на telegramShare со ссылкой. */
+  telegramMessage?: () => Promise<'shared' | 'cancelled' | 'failed'>;
   telegramShare: (url: string, text: string) => boolean;
   nativeShare?: (data: { text: string; url: string }) => Promise<void>;
   copy?: (text: string) => Promise<void>;
@@ -159,6 +161,8 @@ export async function executeShare(
 ): Promise<ShareResult> {
   try {
     if (strategy === 'telegram') {
+      const message = effects.telegramMessage ? await effects.telegramMessage() : 'failed';
+      if (message !== 'failed') return message;
       return effects.telegramShare(payload.url, payload.text) ? 'shared' : 'failed';
     }
     if (strategy === 'native') {

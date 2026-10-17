@@ -219,14 +219,18 @@ async function cardResponse(c: AppContext, svg: () => string): Promise<Response>
   }
 }
 
+/** Куда ведёт ссылка: приглашение открывает дуэль с записью (id проверен по формату), остальное — Mini App. */
+export function shareTarget(env: Env, inviteId: string | null): string | null {
+  const base = env.TELEGRAM_MINI_APP_LINK?.trim();
+  if (!base) return null;
+  return inviteId ? miniAppLink(base, inviteId) : base;
+}
+
 export function registerPreviewRoutes(app: Hono<{ Bindings: Env }>): void {
   app.get('/api/share/run', (c) => {
     const parsed = parseRunShare(c.req.query());
     if (!parsed.ok) return parsed.response;
-    const base = c.env.TELEGRAM_MINI_APP_LINK?.trim();
-    // Приглашение открывает дуэль с записью; id проверен по формату, адрес — только из конфигурации.
-    const target = parsed.data.inviteId ? miniAppLink(base, parsed.data.inviteId) : base || null;
-    return pageResponse(c, runShareTitle(parsed.data), RUN_DESCRIPTION, target);
+    return pageResponse(c, runShareTitle(parsed.data), RUN_DESCRIPTION, shareTarget(c.env, parsed.data.inviteId));
   });
   app.get('/api/share/run.png', (c) => {
     const parsed = parseRunShare(c.req.query());
@@ -236,7 +240,7 @@ export function registerPreviewRoutes(app: Hono<{ Bindings: Env }>): void {
   app.get('/api/share/guess', (c) => {
     const parsed = parseGuessShare(c.req.query());
     if (!parsed.ok) return parsed.response;
-    return pageResponse(c, guessShareTitle(parsed.data), GUESS_DESCRIPTION, c.env.TELEGRAM_MINI_APP_LINK?.trim() || null);
+    return pageResponse(c, guessShareTitle(parsed.data), GUESS_DESCRIPTION, shareTarget(c.env, null));
   });
   app.get('/api/share/guess.png', (c) => {
     const parsed = parseGuessShare(c.req.query());

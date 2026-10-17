@@ -4,6 +4,7 @@ import type {
   CategoryId,
   CreateFriendInviteResponse,
   CreateRematchInviteResponse,
+  PreparedShareResponse,
   GuestSessionResponse,
   PracticeLevelId,
   MyRunsResponse,
@@ -321,6 +322,11 @@ export function fetchRematchPreview(inviteId: string, signal?: AbortSignal): Pro
 }
 
 /** «Позвать друга»: ссылка на открытое приглашение по своему завершённому забегу; повтор даёт ту же ссылку. */
+/** Сообщение-карточка для Telegram shareMessage по ссылке-превью (/api/share/run|guess). */
+export function prepareShareMessage(url: string, signal?: AbortSignal): Promise<PreparedShareResponse> {
+  return apiFetch('/api/share/prepared', { method: 'POST', body: JSON.stringify({ url }) }, signal);
+}
+
 export function createFriendInvite(runId: string, signal?: AbortSignal): Promise<CreateFriendInviteResponse> {
   return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}/invite`, { method: 'POST', body: '{}' }, signal);
 }

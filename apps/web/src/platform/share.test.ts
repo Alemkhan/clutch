@@ -143,3 +143,21 @@ describe('preview links', () => {
     expect(previewBase(undefined, 'https://web.example')).toBe('https://web.example');
   });
 });
+
+describe('executeShare with a prepared message', () => {
+  const payload = { text: 'hi', url: 'https://api.example/api/share/run?t=P&p=25&c=general&d=2026-10-17' };
+
+  it('sends the card as a message and skips the link when it worked or was declined', async () => {
+    for (const outcome of ['shared', 'cancelled'] as const) {
+      const telegramShare = vi.fn(() => true);
+      await expect(executeShare('telegram', payload, { telegramMessage: async () => outcome, telegramShare })).resolves.toBe(outcome);
+      expect(telegramShare).not.toHaveBeenCalled();
+    }
+  });
+
+  it('falls back to the link when the message could not be prepared', async () => {
+    const telegramShare = vi.fn(() => true);
+    await expect(executeShare('telegram', payload, { telegramMessage: async () => 'failed', telegramShare })).resolves.toBe('shared');
+    expect(telegramShare).toHaveBeenCalledWith(payload.url, payload.text);
+  });
+});

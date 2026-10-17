@@ -11,6 +11,7 @@ import {
   mountViewport,
   restoreInitData,
   retrieveRawInitData,
+  shareMessage,
   shareURL,
 } from '@telegram-apps/sdk-react';
 
@@ -84,6 +85,22 @@ export function openExternalLink(url: string): boolean {
 
 export function canShareViaTelegram(): boolean {
   return isTMA() && shareURL.isAvailable();
+}
+
+/** Отправка подготовленного ботом сообщения (Mini Apps 8.0+): карточка и кнопка «Играть». */
+export function canShareMessage(): boolean {
+  return isTMA() && shareMessage.isAvailable();
+}
+
+/** USER_DECLINED — человек закрыл окно сам: это отмена, а не повод открывать второе окно. */
+export async function shareMessageViaTelegram(id: string): Promise<'shared' | 'cancelled' | 'failed'> {
+  if (!shareMessage.isAvailable()) return 'failed';
+  try {
+    await shareMessage(id);
+    return 'shared';
+  } catch (error) {
+    return error instanceof Error && error.message.includes('USER_DECLINED') ? 'cancelled' : 'failed';
+  }
 }
 
 export function shareViaTelegram(url: string, text: string): boolean {

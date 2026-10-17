@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { chooseShareStrategy, executeShare } from '../../platform/share';
+import { preparedMessageShare } from '../../platform/shareMessage';
 import { canShareViaTelegram, shareViaTelegram } from '../../platform/telegram';
 import { resolveGameLink } from '../tiebreaker/tiebreakerShare';
 import { circles } from './soloResultModel';
@@ -46,6 +47,7 @@ export function useSoloShare(): { status: SoloShareStatus; share: (text: string,
       chooseShareStrategy({ telegramShare: canShareViaTelegram(), nativeShare: hasNative }),
       { text, url },
       {
+        telegramMessage: previewUrl ? preparedMessageShare(previewUrl) : undefined,
         telegramShare: shareViaTelegram,
         nativeShare: hasNative ? (data) => navigator.share(data) : undefined,
         copy: (value) => navigator.clipboard.writeText(value),

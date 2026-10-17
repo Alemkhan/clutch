@@ -147,3 +147,47 @@ describe('preview cards (real resvg)', () => {
     expect(renamed).toContain(CYRILLIC_FAMILY);
   });
 });
+
+describe('POST /api/share/prepared', () => {
+  it('builds the message from the validated preview only, on this worker', async () => {
+    const { preparedMessageFor, preparedInlineMessageBody } = await import('../apps/api/src/share/prepared');
+    const message = preparedMessageFor(
+      `https://evil.example/api/share/run?t=PPOPP&p=100&c=general&i=${INVITE}&n=Alex&to=https://evil.example`,
+      'https://api.example',
+      env() as never,
+    );
+    expect(message).toEqual({
+      previewUrl: `https://api.example/api/share/run?t=PPOPP&p=100&c=general&i=${INVITE}&n=Alex`,
+      title: 'Alex зовёт на дуэль: 100% за 5 кругов',
+      text: 'Alex зовёт на дуэль: 100% за 5 кругов\nОбгонишь эту запись?',
+      target: `${LINK}=${INVITE}`,
+    });
+    const body = preparedInlineMessageBody('42', message!) as { user_id: number; result: Record<string, unknown> };
+    expect(body.user_id).toBe(42);
+    expect(body.result).toMatchObject({
+      type: 'article',
+      input_message_content: { link_preview_options: { url: message!.previewUrl, prefer_large_media: true, show_above_text: true } },
+      reply_markup: { inline_keyboard: [[{ text: 'Играть в Clutch', url: `${LINK}=${INVITE}` }]] },
+    });
+    expect(JSON.stringify(body)).not.toContain('parse_mode');
+  });
+
+  it.each([
+    'https://api.example/api/share?o=win&p=1&q=0',
+    'https://api.example/api/share/run?t=P&p=500&c=general',
+    'not a url',
+    42,
+  ])('refuses %s', async (url) => {
+    const { preparedMessageFor } = await import('../apps/api/src/share/prepared');
+    expect(preparedMessageFor(url, 'https://api.example', env() as never)).toBeNull();
+  });
+
+  it('requires a signed-in player', async () => {
+    const response = await app.request('https://api.example/api/share/prepared', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ url: 'https://api.example/api/share/guess?k=1&m=2' }),
+    }, env());
+    expect(response.status).toBe(401);
+  });
+});
