@@ -110,14 +110,14 @@ describe('my runs screen', () => {
     expect(html).toContain('my-run-invite');
     expect(html).toContain('Принять реванш');
     // Без кругов обеих сторон строки про круги нет.
-    expect(html).not.toContain('Обошёл тебя');
+    expect(html).not.toContain('Соперник:');
   });
 
-  it('tells how many rounds the challenger beat you by', () => {
+  it('tells how many rounds the challenger played against yours', () => {
     const html = render(ready([], [invite({ challengerRoundsPlayed: 5, recipientRoundsPlayed: 9 })]));
-    expect(html).toContain('Обошёл тебя: <strong>5 кругов</strong> против твоих 9 · Языки');
+    expect(html).toContain('Соперник: <strong>5 кругов</strong> против твоих 9 · Языки');
     expect(html).not.toContain('100% против');
-    expect(render(ready([], [invite({ challengerRoundsPlayed: 5, recipientRoundsPlayed: null })]))).not.toContain('Обошёл тебя');
+    expect(render(ready([], [invite({ challengerRoundsPlayed: 5, recipientRoundsPlayed: null })]))).not.toContain('Соперник:');
   });
 
   it('names the history section and puts each outcome in a pill with its own class', () => {
@@ -171,9 +171,11 @@ describe('calling a rematch from a run', () => {
     <MyRunsView state={state} loadingMore={false} moreFailed={false} now={NOW} offer={offer} {...handlers} />,
   );
 
-  it('offers the button only on a run that beat somebody', () => {
+  it('offers the button on a run against a human record, whatever the outcome', () => {
     expect(render(ready([beat]))).toContain('Позвать на реванш');
-    // Соперника обошёл не этот забег — звать не из чего.
+    const lost = run({ opponent: { kind: 'player', displayName: 'Ann' }, outcome: 'opponent', rematchOffer: 'available' });
+    expect(render(ready([lost]))).toContain('Позвать на реванш');
+    // Нет записи-соперника — звать некого.
     expect(render(ready([run({ outcome: 'opponent', rematchOffer: null })]))).not.toContain('Позвать на реванш');
     expect(render(ready([run()]))).not.toContain('Позвать на реванш');
   });

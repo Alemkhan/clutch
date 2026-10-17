@@ -307,7 +307,7 @@ export interface MyRunSummary {
    */
   friendDuel?: 'played' | 'hosted' | null;
   /**
-   * Реванш зовёт игрок, а не система. 'available' — этот забег обошёл чью-то запись, и её владельца
+   * Реванш зовёт игрок, а не система. 'available' — этот забег сыгран против записи человека (любой исход), и её владельца
    * можно позвать; 'sent' — уже позвал; null — звать некого.
    */
   rematchOffer?: 'available' | 'sent' | null;

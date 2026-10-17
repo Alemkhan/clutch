@@ -86,7 +86,7 @@ function Run({ run, now, offer }: { run: MyRunSummary; now: number; offer: Remat
           {run.opponent ? ` · ${run.opponent.displayName}` : ''}
         </span>
         {friendDuelNote(run) && <span className="my-run-meta">{friendDuelNote(run)}</span>}
-        {/* Реванш зовёт игрок: кнопка есть только у забега, который обошёл чью-то запись. */}
+        {/* Реванш зовёт игрок: кнопка есть у забега против записи человека при любом исходе. */}
         {state === 'available' && (
           <button
             type="button"

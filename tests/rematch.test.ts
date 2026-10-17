@@ -159,7 +159,7 @@ function seedBeatenRecord(db: TestD1, outcome: 'player' | 'opponent' | 'tie' = '
 const callRematch = (db: TestD1, runId = 'bob-run', authorization = bobAuthorization) =>
   request(db, `/api/solo-runs/${runId}/rematch`, authorization, { method: 'POST', body: '{}' });
 
-describe('a rematch is called by the player who beat the record', () => {
+describe('a rematch is called by the player who played against a human record', () => {
   it('creates the invite on the press and messages the record owner once', async () => {
     const db = database();
     seedBeatenRecord(db);
@@ -198,14 +198,34 @@ describe('a rematch is called by the player who beat the record', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
-  it('refuses a run that beat nobody, a foreign run and an own run', async () => {
+  it.each(['opponent', 'tie'] as const)('creates the invite after a %s outcome too', async (outcome) => {
     const db = database();
-    seedBeatenRecord(db, 'opponent');
-    // Проигравший реванш не зовёт: он просто играет снова.
-    expect((await callRematch(db)).status).toBe(409);
+    seedBeatenRecord(db, outcome);
+    const response = await callRematch(db);
+    expect(response.status).toBe(201);
+    const rows = inviteRows(db);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ recipient_run_id: 'alem-run', challenger_run_id: 'bob-run' });
+    // Известие нейтрально к исходу: не говорит, что звавший победил.
+    const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(JSON.parse(init.body as string).text).toBe('Боб зовёт на реванш: вопросы будут новые.');
+    // Пара уникальна: повторное нажатие возвращает то же приглашение.
+    const again = await callRematch(db);
+    expect(await again.json()).toEqual(await response.json());
+    expect(inviteRows(db)).toHaveLength(1);
+  });
+
+  it('refuses a run without a human opponent record, a foreign run and an own run', async () => {
+    const db = database();
+    seedBeatenRecord(db);
+    // Забег без записи-соперника (без темпа, бот): звать некого.
+    db.sqlite.prepare("UPDATE match_runs SET opponent_run_id = NULL WHERE id = 'bob-run'").run();
+    const noOpponent = await callRematch(db);
+    expect(noOpponent.status).toBe(409);
+    expect(await noOpponent.json()).toMatchObject({ reason: 'no_opponent' });
     expect(inviteRows(db)).toHaveLength(0);
 
-    db.sqlite.prepare("UPDATE match_runs SET solo_outcome = 'player' WHERE id = 'bob-run'").run();
+    db.sqlite.prepare("UPDATE match_runs SET opponent_run_id = 'alem-run', solo_outcome = 'player' WHERE id = 'bob-run'").run();
     // Чужой забег неотличим от несуществующего.
     expect((await callRematch(db, 'bob-run', alem)).status).toBe(404);
     expect((await callRematch(db, 'no-such-run')).status).toBe(404);

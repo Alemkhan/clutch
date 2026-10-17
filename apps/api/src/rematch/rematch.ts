@@ -53,15 +53,15 @@ interface ChallengerRun {
   progress: number;
 }
 
-interface BeatenRecord {
+interface OpponentRecord {
   player_id: string;
   progress: number;
 }
 
-/** Забег вызывающего, который обошёл чью-то запись (`opponent_run_id` непуст). */
-type BeatingRun = ChallengerRun & { opponent_run_id: string };
+/** Зачётный забег вызывающего против записи человека (`opponent_run_id` непуст), любой исход. */
+type OpponentRun = ChallengerRun & { opponent_run_id: string };
 
-async function loadBeatingRun(c: AppContext, identity: RequestIdentity, runId: string): Promise<BeatingRun | Response> {
+async function loadOpponentRun(c: AppContext, identity: RequestIdentity, runId: string): Promise<OpponentRun | Response> {
   const run = await c.env.DB.prepare(`
     SELECT player_id, display_name, category, status, rules_version, opponent_run_id, solo_outcome, progress
     FROM match_runs WHERE id = ?1
@@ -71,22 +71,22 @@ async function loadBeatingRun(c: AppContext, identity: RequestIdentity, runId: s
   if (run.rules_version !== CURRENT_SOLO_RUN_CONDITIONS.rulesVersion || run.status !== 'completed') {
     return c.json({ error: 'Only a finished counted solo run can call a rematch.', reason: 'not_solo' }, 409);
   }
-  // Звать можно только того, чью запись этот забег обошёл: устоявшую запись звать не за чем,
-  // а проигравшему реванш не нужен — он просто играет снова.
-  if (!run.opponent_run_id || run.solo_outcome !== 'player') {
-    return c.json({ error: 'This run did not beat anyone\'s record.', reason: 'not_beaten' }, 409);
+  // Звать можно владельца записи, против которой сыгран забег, при любом исходе (победа, поражение,
+  // ничья): проигравший как раз хочет отыграться. Без записи-соперника (без темпа, бот) звать некого.
+  if (!run.opponent_run_id || !['player', 'opponent', 'tie'].includes(run.solo_outcome ?? '')) {
+    return c.json({ error: 'This run has no human opponent record to call.', reason: 'no_opponent' }, 409);
   }
-  return run as BeatingRun;
+  return run as OpponentRun;
 }
 
-async function loadBeatenRecord(
+async function loadOpponentRecord(
   c: AppContext,
   identity: RequestIdentity,
-  run: BeatingRun,
-): Promise<BeatenRecord | Response> {
+  run: OpponentRun,
+): Promise<OpponentRecord | Response> {
   const record = await c.env.DB.prepare('SELECT player_id, progress FROM match_runs WHERE id = ?1')
     .bind(run.opponent_run_id)
-    .first<BeatenRecord>();
+    .first<OpponentRecord>();
   if (!record) return c.json({ error: 'The record is no longer available.', reason: 'expired' }, 410);
   if (record.player_id === identity.playerId) {
     return c.json({ error: 'This is your own record.', reason: 'own' }, 403);
@@ -98,8 +98,8 @@ async function loadBeatenRecord(
 async function findOrCreateInvite(
   c: AppContext,
   runId: string,
-  run: BeatingRun,
-  record: BeatenRecord,
+  run: OpponentRun,
+  record: OpponentRecord,
 ): Promise<{ invite: InviteRow | null; fresh: boolean }> {
   let invite = await findInviteForPair(c.env.DB, run.opponent_run_id, runId);
   const fresh = !invite;
@@ -120,7 +120,7 @@ async function findOrCreateInvite(
 }
 
 /**
- * «Позвать на реванш»: приглашение создаёт живое нажатие того, кто обошёл запись, и только оно.
+ * «Позвать на реванш»: приглашение создаёт живое нажатие игрока, сыгравшего против записи (любой исход), и только оно.
  * Раньше строку в `rematch_invites` создавало уведомление об исходе, то есть вызов приходил от
  * системы — у получателя это выглядело как вызов, которого никто не посылал (DEC-09).
  * Повторное нажатие возвращает то же приглашение; погашенное или просроченное заново не выдаётся.
@@ -131,9 +131,9 @@ async function handleCreateRematch(c: AppContext): Promise<Response> {
   const runId = runIdParam(c);
   const now = Date.now();
 
-  const run = await loadBeatingRun(c, identity, runId);
+  const run = await loadOpponentRun(c, identity, runId);
   if (run instanceof Response) return run;
-  const record = await loadBeatenRecord(c, identity, run);
+  const record = await loadOpponentRecord(c, identity, run);
   if (record instanceof Response) return record;
 
   const { invite, fresh } = await findOrCreateInvite(c, runId, run, record);
@@ -182,7 +182,7 @@ async function handleRematchPreview(c: AppContext): Promise<Response> {
   return c.json({
     inviteId: invite.id,
     category: invite.category,
-    /** Открытая ссылка «Позвать друга», а не реванш по обойдённой записи. */
+    /** Открытая ссылка «Позвать друга», а не реванш по записи соперника. */
     friend,
     challengerName: challenger.display_name,
     challengerProgress: invite.challenger_progress,

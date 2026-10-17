@@ -86,7 +86,7 @@ export function inviteRoundsParts(
 ): { lead: string; strong: string; rest: string } | null {
   const { challengerRoundsPlayed: theirs, recipientRoundsPlayed: yours } = invite;
   if (typeof theirs !== 'number' || typeof yours !== 'number') return null;
-  return { lead: 'Обошёл тебя: ', strong: soloRoundsText(theirs), rest: ` против твоих ${yours}` };
+  return { lead: 'Соперник: ', strong: soloRoundsText(theirs), rest: ` против твоих ${yours}` };
 }
 
 /** «из 1 дошедшего», «из 3 дошедших», «из 21 дошедшего»: родительный падеж, ед. ч. только для …1 (кроме 11). */

@@ -77,7 +77,7 @@ function RematchInvite({ inviteId, onStartRematch, onClose }: {
               <>
                 <h1 className="screen-title">Реванш с {state.preview.challengerName}</h1>
                 <p className="matchmaking-status">
-                  {state.preview.challengerName} обошёл вашу запись: {state.preview.challengerProgress}% против {state.preview.yourProgress}%.
+                  {state.preview.challengerName}: {state.preview.challengerProgress}% против твоих {state.preview.yourProgress}%.
                   Это будет новый забег по другому набору: твой результат сравнят с его.
                 </p>
               </>

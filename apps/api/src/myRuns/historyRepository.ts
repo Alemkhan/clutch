@@ -138,15 +138,15 @@ export function toRunSummary(row: HistoryRow, viewerId?: string): MyRunSummary {
 }
 
 /**
- * Можно ли с этого забега позвать на реванш. Звать вправе только обошедший чью-то запись и только
- * со своего зачётного соло-забега: дружеская дуэль вне соревнования, а устоявшую запись звать
- * не за чем. Условия те же, что проверяет `POST /api/solo-runs/:id/rematch`.
+ * Можно ли с этого забега позвать на реванш. Звать вправе сыгравший против записи человека, при
+ * любом исходе, и только со своего зачётного соло-забега: дружеская дуэль вне соревнования.
+ * Условия те же, что проверяет `POST /api/solo-runs/:id/rematch`.
  */
 function rematchOffer(
   row: HistoryRow,
   friendDuel: MyRunSummary['friendDuel'],
 ): MyRunSummary['rematchOffer'] {
   if (friendDuel || row.rules_version !== CURRENT_SOLO_RUN_CONDITIONS.rulesVersion) return null;
-  if (!row.opponent_run_id || row.solo_outcome !== 'player') return null;
+  if (!row.opponent_run_id || !['player', 'opponent', 'tie'].includes(row.solo_outcome ?? '')) return null;
   return row.rematch_offered ? 'sent' : 'available';
 }
