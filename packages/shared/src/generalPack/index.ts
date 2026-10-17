@@ -14,3 +14,4 @@ export const generalPackSets: PackSet[] = contentSets;
 export function isPackRecordLive(record: PackRecord): boolean {
   return record.editorialStatus === 'approved';
 }
+export { expandPersonAnswers, isPersonPrompt } from './personAnswers';

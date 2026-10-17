@@ -4,7 +4,7 @@ import { resolveRequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import { telegramChatId } from '../notifications/outbid';
-import { guessShareTitle, parseGuessShare, parseRunShare, runShareTitle, shareTarget } from './previews';
+import { guessShareTitle, isReachableOrigin, parseGuessShare, parseRunShare, publicOrigin, runShareTitle, shareTarget } from './previews';
 import { runCallLine } from './runCard';
 
 /**
@@ -95,8 +95,13 @@ export function registerPreparedShareRoutes(app: Hono<{ Bindings: Env }>): void 
     const userId = telegramChatId(identity.playerId);
     if (!userId) return c.json({ error: 'Only Telegram players can share a message.', reason: 'telegram_only' }, 409);
 
+    // Превью, которое Telegram не скачает, роняет отправку («!» в чате): тогда клиент шлёт обычную ссылку.
+    const origin = publicOrigin(c);
+    if (!isReachableOrigin(origin)) {
+      return c.json({ error: 'The preview is not reachable from Telegram.', reason: 'preview_unreachable' }, 409);
+    }
     const body = await c.req.json<{ url?: unknown }>().catch(() => null);
-    const message = preparedMessageFor(body?.url, new URL(c.req.url).origin, c.env);
+    const message = preparedMessageFor(body?.url, origin, c.env);
     if (!message) return c.json({ error: 'Invalid share link.' }, 400);
 
     try {

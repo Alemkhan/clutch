@@ -15,6 +15,7 @@ import { TiebreakerScreen } from './features/tiebreaker/Tiebreaker';
 import { BottomNav, navTabForPhase, type NavTab } from './ui/BottomNav';
 import { isSoloPlaying, type SoloStage } from './features/solo/soloRunFlow';
 import { useTelegramBackButton } from './platform/useTelegramBackButton';
+import { setClientErrorScreen } from './platform/clientErrors';
 
 const screenTransition = {
   initial: { opacity: 0, y: 8 },
@@ -73,6 +74,7 @@ export default function App() {
 
   // Практика ошибок внутри «Тренировки» — это игра: панель на ней скрыта.
   const [trainingPlaying, setTrainingPlaying] = useState(false);
+  useEffect(() => { setClientErrorScreen(shellPhase); }, [shellPhase]);
   const navTab = navTabForPhase(game.phase);
   const showNav = navTab !== null && !(game.phase === 'home' && launchIntent) && !(game.phase === 'training' && trainingPlaying);
   const selectNavTab = useCallback((tab: NavTab) => {

@@ -8,10 +8,17 @@ import type {
   SoloAnswerRequest,
   SoloHammerRequest,
   SoloRoundResponse,
+  SoloRunSnapshot,
+  StartSoloRunResponse,
 } from '@clutch/shared';
 import { CURRENT_SOLO_RUN_CONDITIONS, SKILL_REWARDS } from '@clutch/shared';
 import { ApiError } from '../../platform/api';
-import type { NormalizedSoloRun, NormalizedSoloSnapshot } from './clientMatchRules';
+import {
+  normalizeSoloRun,
+  normalizeSoloSnapshot,
+  type NormalizedSoloRun,
+  type NormalizedSoloSnapshot,
+} from './clientMatchRules';
 import {
   applySoloSessionRound,
   createSoloRunSession,
@@ -150,6 +157,20 @@ export function restoreSoloRun(snapshot: NormalizedSoloSnapshot): SoloFlowState 
     skillResults,
     result: completed ? snapshot.result : null,
   };
+}
+
+/**
+ * Ответ на старт. Новый забег ждёт кнопку «Начать»; продолженный (`resumed`) сервер присылает снимком
+ * с уже сыгранными кругами, и входим в него тем же путём, что и при восстановлении, а не с круга 0.
+ * Бросает, если ответ не проходит проверку клиента.
+ */
+export function enterStartedSoloRun(
+  previous: SoloFlowState,
+  raw: StartSoloRunResponse,
+  practice: boolean,
+): SoloFlowState {
+  if (raw?.resumed === true) return restoreSoloRun(normalizeSoloSnapshot(raw as SoloRunSnapshot, practice));
+  return applyLoadedSoloRun(previous, normalizeSoloRun(raw, practice));
 }
 
 export function startSoloPlay(state: SoloFlowState): SoloFlowState {

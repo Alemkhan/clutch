@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { logAnalyticsEvent } from '../../platform/api';
 import { chooseShareStrategy, executeShare } from '../../platform/share';
 import { preparedMessageShare } from '../../platform/shareMessage';
 import { canShareViaTelegram, shareViaTelegram } from '../../platform/telegram';
@@ -30,7 +31,7 @@ export function buildSoloShareText(input: SoloShareInput): string {
 export type SoloShareStatus = 'idle' | 'copied' | 'failed';
 
 /** Telegram → системное «Поделиться» → буфер обмена, как у «На глазок». Статус гаснет через 3 с. */
-export function useSoloShare(): { status: SoloShareStatus; share: (text: string, previewUrl?: string) => void } {
+export function useSoloShare(): { status: SoloShareStatus; share: (text: string, reached?: boolean, previewUrl?: string) => void } {
   const [status, setStatus] = useState<SoloShareStatus>('idle');
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export function useSoloShare(): { status: SoloShareStatus; share: (text: string,
     return () => window.clearTimeout(id);
   }, [status]);
 
-  const share = useCallback((text: string, previewUrl?: string) => {
+  const share = useCallback((text: string, reached = false, previewUrl?: string) => {
     const hasNative = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
     // Превью со своей карточкой результата; без него — прямо в бота.
     const url = previewUrl ?? resolveGameLink(import.meta.env.VITE_TELEGRAM_BOT_LINK as string | undefined, window.location.origin);
@@ -53,6 +54,7 @@ export function useSoloShare(): { status: SoloShareStatus; share: (text: string,
         copy: (value) => navigator.clipboard.writeText(value),
       },
     ).then((result) => {
+      if (result === 'shared' || result === 'copied') logAnalyticsEvent('result_shared', { reached });
       setStatus(result === 'copied' ? 'copied' : result === 'failed' ? 'failed' : 'idle');
     });
   }, []);

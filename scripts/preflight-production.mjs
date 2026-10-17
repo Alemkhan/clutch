@@ -11,6 +11,7 @@ import {
   PRODUCTION_ENV_KEYS,
   PRODUCTION_PREFLIGHT_FIXTURE_ENV,
   productionConfigOutputPath,
+  readDevelopmentCrons,
   validateProductionEnvironment,
 } from './lib/production-preflight.mjs';
 
@@ -40,6 +41,7 @@ function safeChildEnvironment(overrides = {}) {
     'TELEGRAM_BOT_TOKEN',
     'CLUTCH_VITE_ENV_DIR',
     'VITE_API_URL',
+    'VITE_TELEGRAM_BOT_LINK',
     ...PRODUCTION_ENV_KEYS,
   ]) {
     delete environment[key];
@@ -135,14 +137,13 @@ async function verifyWorkerBundle(bundleDirectory) {
   assert.ok(sizes.some((size) => size > 0), 'Wrangler dry-run bundle is empty.');
 }
 
-async function verifyWebBuild(apiUrl) {
+async function verifyWebBuild(apiUrl, botLink) {
   const files = await filesBelow(webDistDirectory);
   assert.ok(files.some((file) => basename(file) === 'index.html'), 'Web build has no index.html.');
-  const expected = Buffer.from(apiUrl);
-  for (const file of files) {
-    if ((await readFile(file)).includes(expected)) return;
-  }
-  throw new Error('Built web client does not contain the exact production API URL.');
+  const contents = await Promise.all(files.map((file) => readFile(file)));
+  const contains = (value) => contents.some((content) => content.includes(Buffer.from(value)));
+  if (!contains(apiUrl)) throw new Error('Built web client does not contain the exact production API URL.');
+  if (!contains(botLink)) throw new Error('Built web client does not contain the exact production bot link.');
 }
 
 function delay(milliseconds) {
@@ -183,6 +184,7 @@ async function main() {
   const config = createProductionWranglerConfig(inputs, {
     main: apiEntry,
     migrations: migrationsDirectory,
+    crons: readDevelopmentCrons(developmentConfigText),
   });
   const serializedConfig = `${JSON.stringify(config, null, 2)}\n`;
   await writeFile(configPath, serializedConfig, 'utf8');
@@ -210,10 +212,11 @@ async function main() {
     env: safeChildEnvironment({
       CLUTCH_VITE_ENV_DIR: emptyWebEnvDirectory,
       VITE_API_URL: inputs.apiUrl,
+      VITE_TELEGRAM_BOT_LINK: inputs.botLink,
     }),
     label: 'Production web build',
   });
-  await verifyWebBuild(inputs.apiUrl);
+  await verifyWebBuild(inputs.apiUrl, inputs.botLink);
 
   if (options.writeConfig) {
     const outputPath = productionConfigOutputPath(repositoryRoot);

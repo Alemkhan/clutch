@@ -1,8 +1,7 @@
 import { useCallback } from 'react';
 import type { CategoryId, PracticeLevelId } from '@clutch/shared';
 import { logAnalyticsEvent, startSoloRun } from '../../platform/api';
-import { normalizeSoloRun } from './clientMatchRules';
-import { applyLoadedSoloRun, beginSoloLoading, failSoloLoading, soloStartErrorMessage } from './soloRunFlow';
+import { beginSoloLoading, enterStartedSoloRun, failSoloLoading, soloStartErrorMessage } from './soloRunFlow';
 import type { SoloRunContext } from './soloRunContext';
 import { saveActiveSoloRun } from './soloRunStore';
 
@@ -18,9 +17,10 @@ export function useSoloRunStart(ctx: SoloRunContext, botLevel?: PracticeLevelId)
     setState(beginSoloLoading(category));
     void startSoloRun(category, request.signal, rematchInviteId, botLevel).then((raw) => {
       if (!coordinatorRef.current.isCurrent(request.token)) return;
-      let run;
+      let entered;
       try {
-        run = normalizeSoloRun(raw, practice);
+        // Заранее проверяем ответ на текущем состоянии; в setState применим его же к актуальному.
+        entered = enterStartedSoloRun(stateRef.current, raw, practice);
       } catch (error) {
         console.error('Invalid solo run response:', error);
         if (!coordinatorRef.current.settle(request.token)) return;
@@ -28,10 +28,10 @@ export function useSoloRunStart(ctx: SoloRunContext, botLevel?: PracticeLevelId)
         return;
       }
       if (!coordinatorRef.current.settle(request.token)) return;
-      saveActiveSoloRun({ runId: run.runId, practice });
-      setState((previous) => applyLoadedSoloRun(previous, run));
-      // Продуктовое событие (R22): забег создан (продолжение закрытого — не «старт»).
-      logAnalyticsEvent('solo_run_started', { category });
+      saveActiveSoloRun({ runId: raw.runId, practice });
+      setState((previous) => enterStartedSoloRun(previous, raw, practice));
+      // Продуктовое событие (R22): забег создан. Продолжение начатого — не «старт».
+      if (!entered.resumed) logAnalyticsEvent('solo_run_started', { category });
     }).catch((error: unknown) => {
       if (!coordinatorRef.current.settle(request.token)) return;
       setState((previous) => failSoloLoading(previous, soloStartErrorMessage(error)));

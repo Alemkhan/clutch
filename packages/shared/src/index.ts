@@ -131,6 +131,11 @@ export interface StartSoloRunResponse {
   miniGameId: MiniGameId;
   /** true: все наборы дня в категории уже пройдены, выдан наименее давно сыгранный. */
   bankExhausted: boolean;
+  /**
+   * true: незаконченный забег продолжен, а не создан. Тело — снимок (`SoloRunSnapshot`:
+   * `rounds`, `status`, `category`...), клиент входит в него так же, как при восстановлении.
+   */
+  resumed?: true;
 }
 
 

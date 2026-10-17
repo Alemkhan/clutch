@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
-import { createFriendInvite } from '../../platform/api';
+import { createFriendInvite, logAnalyticsEvent } from '../../platform/api';
 import { buildFriendInvitePayload, buildRunPreviewUrl, chooseShareStrategy, executeShare, previewBase, type RunPreview } from '../../platform/share';
 import { preparedMessageShare } from '../../platform/shareMessage';
 import { canShareViaTelegram, getTelegramIdentity, shareViaTelegram } from '../../platform/telegram';
@@ -43,6 +43,7 @@ export function useFriendInvite(runId: string | undefined, preview?: Omit<RunPre
           copy: (text) => navigator.clipboard.writeText(text),
         },
       );
+      if (result === 'shared' || result === 'copied') logAnalyticsEvent('friend_invite_shared');
       setStatus(result === 'cancelled' ? 'idle' : result === 'failed' ? 'error' : result);
     } catch {
       setStatus('error');

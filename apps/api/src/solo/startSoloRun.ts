@@ -1,11 +1,9 @@
 import {
-  CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   FRIEND_RULES_VERSION,
   PRACTICE_RULES_VERSION,
   SOLO_ROUND_CAP,
   SOLO_TARGET_PROGRESS,
-  isMiniGameId,
   type MiniGameId,
   isPracticeLevelId,
   practiceQuestionSet,
@@ -29,10 +27,11 @@ import {
 import { pickMiniGameId } from './miniGame';
 import { PRACTICE_BOT_PROFILES, createBotOpponent } from './bots';
 import { matchmake } from './matchmaking';
-import { claimRecord, findRecordRun, findRun, type GhostMatch } from './repository';
+import { claimRecord, findRecordRun, type GhostMatch } from './repository';
 import { createSoloRun, findActiveSoloRun } from './soloRepository';
-import { authenticate, parsePace, type AppContext } from './soloShared';
-import { isStartRequest, parseQuestions } from './validation';
+import { buildSoloSnapshot } from './soloSnapshot';
+import { authenticate, openSoloRun, type AppContext } from './soloShared';
+import { isStartRequest } from './validation';
 
 type Category = StartAsyncMatchRequest['category'];
 
@@ -177,21 +176,20 @@ async function startPracticeRun(
   return c.json(startResponse(runId, questions, bot, PRACTICE_RULES_VERSION, miniGameId, false), 201);
 }
 
-/** Продолжение незаконченного забега игрока в категории; null — продолжать нечего. */
+/**
+ * Продолжение незаконченного забега игрока в категории; null — продолжать нечего.
+ * Отдаём снимок (с уже сыгранными кругами), а не «свежий» старт: иначе клиент начал бы с круга 0
+ * и повторно отвечал на круги, которые сервер уже записал.
+ */
 async function resumeActiveRun(c: AppContext, identity: RequestIdentity, category: Category): Promise<Response | null> {
   const active = await findActiveSoloRun(c.env.DB, identity.playerId, category);
   if (!active) return null;
-  const existing = await findRun(c.env.DB, active.id);
-  const storedQuestions = existing && parseQuestions(existing.questions_json);
-  if (!existing || !storedQuestions) return null;
-  return c.json(startResponse(
-    existing.id,
-    storedQuestions,
-    parsePace(existing.opponent_json),
-    existing.rules_version ?? CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
-    isMiniGameId(existing.mini_game_id) ? existing.mini_game_id : CURRENT_HAMMER_MINI_GAME.id,
-    false,
-  ), 201);
+  const loaded = await openSoloRun(c, identity, active.id);
+  if (loaded instanceof Response) return null;
+  const snapshot = await buildSoloSnapshot(c, loaded);
+  if (snapshot instanceof Response) return snapshot;
+  const response: StartSoloRunResponse = { ...snapshot, resumed: true };
+  return c.json(response, 201);
 }
 
 /** Подбор набора по соло-пулу (только забеги, дошедшие до цели) и атомарный захват записи-соперника. */

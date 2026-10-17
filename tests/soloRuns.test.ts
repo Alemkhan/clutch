@@ -14,6 +14,7 @@ import {
   type AsyncMatchRound,
   type AsyncMatchRoundInput,
   type CompleteSoloRunResponse,
+  type SoloRunSnapshot,
   type StartSoloRunResponse,
   type Question,
 } from '@clutch/shared';
@@ -257,6 +258,42 @@ describe('solo run', () => {
     // Старая запись режима гонки соло-маршрутами не принимается.
     insertRun(db, { id: 'race-run', playerId: guest('ivy').playerId, rulesVersion: 'race-to-100-v3', reachedTarget: null });
     expect((await finish(db, 'ivy', 'race-run', roundInputs(fullQuestions(db, run.runId), 4, true))).status).toBe(409);
+  });
+});
+
+describe('a second start while a run is unfinished', () => {
+  it('resumes it as a snapshot with the played rounds, shaped like the GET snapshot', async () => {
+    const db = database();
+    const first = await start(db, 'ann');
+    const played = await finish(db, 'ann', first.runId, roundInputs(fullQuestions(db, first.runId), 3, true));
+    expect(played.status).toBe(400);
+
+    const again = await startRun(db, 'ann');
+    expect(again.status).toBe(201);
+    const resumed = await again.json() as SoloRunSnapshot & { resumed?: true };
+    expect(resumed.resumed).toBe(true);
+    expect(resumed.runId).toBe(first.runId);
+    expect(resumed.rounds).toHaveLength(3);
+    expect(resumed.rounds.map((round) => round.questionId)).toEqual(first.questions.slice(0, 3).map((question) => question.id));
+    expect(resumed).toMatchObject({ status: 'in_progress', category: 'geography', result: null });
+
+    const got = await app.request(`/api/solo-runs/${first.runId}`, {
+      headers: { authorization: guest('ann').authorization },
+    }, {
+      DB: db.binding, API_RATE_LIMITER: allowRateLimiter, TELEGRAM_BOT_TOKEN: 'test',
+      SESSION_SIGNING_SECRET: sessionSecret, ENVIRONMENT: 'test',
+    });
+    const { resumed: _flag, ...startShape } = resumed;
+    expect(await got.json()).toEqual(startShape);
+    const runs = db.sqlite.prepare("SELECT COUNT(*) AS n FROM match_runs WHERE player_id = ?").get(guest('ann').playerId) as { n: number };
+    expect(runs.n).toBe(1);
+  });
+
+  it('keeps a plain new start free of the resume flag', async () => {
+    const db = database();
+    const run = await start(db, 'bob') as StartSoloRunResponse & { rounds?: unknown };
+    expect(run.resumed).toBeUndefined();
+    expect(run.rounds).toBeUndefined();
   });
 });
 

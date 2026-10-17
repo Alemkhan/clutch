@@ -202,7 +202,7 @@ export function SoloResult({
                 roundsPlayed: result.roundsPlayed,
                 perfectHits: countPerfectStrikes(skillResults),
                 categoryLabel: categoryName(category),
-              }), preview
+              }), result.reachedTarget, preview
                 ? buildRunPreviewUrl(previewBase(import.meta.env.VITE_API_URL as string | undefined, window.location.origin), preview)
                 : undefined);
             }}

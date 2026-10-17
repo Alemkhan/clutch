@@ -7,6 +7,10 @@
 //   npm run reports -- --question gp: --limit 5   (в конце — удары по мини-играм)
 //   npm run activity -- --days 30
 //   npm run player -- guest:xxxx
+//   npm run funnel -- --days 14     (воронка по дням + приглашения)
+//   npm run retention               (когорты первого забега, D1 / D7)
+//   npm run errors -- --days 7      (топ client_error)
+// Prod: npm run reports:pull, затем любая команда с --db .prod-data/<файл>.sqlite
 //
 // Ничего не меняет: только читает (readOnly). Продуктовых решений не принимает.
 //
@@ -30,6 +34,9 @@ const USAGE = `Использование:
     [--kind wrong_answer|answer_not_accepted|other] [--mode solo|training] [--limit N]
   node scripts/telemetry-view.mjs activity [--days N] [--limit N]
   node scripts/telemetry-view.mjs player <playerId> [--limit N]
+  node scripts/telemetry-view.mjs funnel   [--days N]
+  node scripts/telemetry-view.mjs retention
+  node scripts/telemetry-view.mjs errors   [--days N] [--limit N]
 Общее: --db <файл.sqlite> — явный путь к базе (по умолчанию локальная D1 из apps/api/.wrangler).`;
 
 function fail(message) {
@@ -325,6 +332,152 @@ function runPlayer(db, playerId, limit) {
   printReportsTable(reports);
 }
 
+// --- funnel / retention / errors ----------------------------------------------
+
+// Сутки игры сдвинуты на +5 ч к UTC (DAY_BOUNDARY_OFFSET_MINUTES в packages/shared/src/dailyQuestionSet.ts).
+const DAY_OFFSET_SECONDS = 5 * 3600;
+const gameDaySql = (column) => `strftime('%Y-%m-%d', ${column} / 1000 + ${DAY_OFFSET_SECONDS}, 'unixepoch')`;
+const gameDayOf = (ms) => new Date(ms + DAY_OFFSET_SECONDS * 1000).toISOString().slice(0, 10);
+const addDays = (day, n) => new Date(Date.parse(`${day}T00:00:00Z`) + n * 86_400_000).toISOString().slice(0, 10);
+
+function runFunnel(db, days) {
+  const since = Date.now() - days * 86_400_000;
+  let events;
+  let reached;
+  let invites;
+  try {
+    events = db.prepare(`
+      SELECT ${gameDaySql('created_at')} AS day, event, COUNT(DISTINCT player_id) AS players
+      FROM analytics_events
+      WHERE created_at >= ? AND event IN ('app_opened', 'solo_run_started', 'solo_run_completed', 'result_shared', 'friend_invite_shared')
+      GROUP BY day, event
+    `).all(since);
+    reached = db.prepare(`
+      SELECT ${gameDaySql('created_at')} AS day, COUNT(DISTINCT player_id) AS players
+      FROM match_runs
+      WHERE created_at >= ? AND rules_version = 'solo-to-100-v2' AND status = 'completed' AND reached_target = 1
+      GROUP BY day
+    `).all(since);
+    invites = db.prepare(`
+      SELECT ${gameDaySql('created_at')} AS day, COUNT(*) AS created,
+             SUM(CASE WHEN consumed_at IS NOT NULL THEN 1 ELSE 0 END) AS accepted
+      FROM rematch_invites WHERE created_at >= ? GROUP BY day
+    `).all(since);
+  } catch (error) {
+    console.error(`Не прочитать воронку: ${error.message}`);
+    process.exit(2);
+  }
+  const table = new Map();
+  const row = (day) => {
+    if (!table.has(day)) {
+      table.set(day, { app_opened: 0, solo_run_started: 0, solo_run_completed: 0, reached: 0, result_shared: 0, friend_invite_shared: 0, created: 0, accepted: 0 });
+    }
+    return table.get(day);
+  };
+  for (const e of events) row(e.day)[e.event] = e.players;
+  for (const r of reached) row(r.day).reached = r.players;
+  for (const i of invites) {
+    row(i.day).created = i.created;
+    row(i.day).accepted = i.accepted;
+  }
+  console.log(`Воронка за ${days} дн. (уникальные игроки по игровым суткам, граница +5 ч к UTC):`);
+  const dayKeys = [...table.keys()].sort();
+  if (dayKeys.length === 0) {
+    console.log('  нет данных');
+    return;
+  }
+  printTable(
+    ['день', 'открыли', 'начали', 'закончили', 'дошли до 100%', 'поделились', 'позвали друга', 'приглаш. создано', 'принято'],
+    dayKeys.map((day) => {
+      const r = table.get(day);
+      return [day, String(r.app_opened), String(r.solo_run_started), String(r.solo_run_completed), String(r.reached), String(r.result_shared), String(r.friend_invite_shared), String(r.created), String(r.accepted)];
+    }),
+    [10, 8, 7, 9, 13, 10, 13, 16, 7],
+  );
+  console.log('«открыли» считается только с релиза с событием app_opened; раньше — 0.');
+}
+
+function runRetention(db) {
+  let rows;
+  try {
+    rows = db.prepare(`
+      SELECT player_id, ${gameDaySql('created_at')} AS day
+      FROM match_runs WHERE rules_version LIKE 'solo-%'
+      GROUP BY player_id, day
+    `).all();
+  } catch (error) {
+    console.error(`Не прочитать когорты: ${error.message}`);
+    process.exit(2);
+  }
+  const daysByPlayer = new Map();
+  for (const r of rows) {
+    if (!daysByPlayer.has(r.player_id)) daysByPlayer.set(r.player_id, new Set());
+    daysByPlayer.get(r.player_id).add(r.day);
+  }
+  // TELEMETRY_NOW (ISO) — только для тестов: фиксирует «сейчас».
+  const today = gameDayOf(process.env.TELEMETRY_NOW ? Date.parse(process.env.TELEMETRY_NOW) : Date.now());
+  const cohorts = new Map();
+  for (const set of daysByPlayer.values()) {
+    const first = [...set].sort()[0];
+    if (!cohorts.has(first)) cohorts.set(first, []);
+    cohorts.get(first).push(set);
+  }
+  const returned = (members, first, n) => {
+    const target = addDays(first, n);
+    if (target > today) return '—';
+    const back = members.filter((set) => set.has(target)).length;
+    const share = `${back} (${Math.round((back / members.length) * 100)}%)`;
+    // Игровой день ещё идёт: пока это не итог.
+    if (target === today) return back === 0 ? 'идёт' : `идёт, ${share}`;
+    return share;
+  };
+  console.log('Возвраты по когортам: день первого забега (сутки +5 ч), вернулись на D1 / D7 (день с забегом):');
+  if (cohorts.size === 0) {
+    console.log('  нет данных');
+    return;
+  }
+  printTable(
+    ['когорта', 'игроков', 'D1', 'D7'],
+    [...cohorts.keys()].sort().map((first) => {
+      const members = cohorts.get(first);
+      return [first, String(members.length), returned(members, first, 1), returned(members, first, 7)];
+    }),
+    [10, 8, 16, 16],
+  );
+  console.log('«идёт» — игровой день ещё не закончился, значение может вырасти; «—» — срок ещё не наступил.');
+}
+
+function runErrors(db, days, limit) {
+  const since = Date.now() - days * 86_400_000;
+  let rows;
+  try {
+    rows = db.prepare(`
+      SELECT json_extract(payload_json, '$.message') AS message,
+             json_extract(payload_json, '$.screen') AS screen,
+             json_extract(payload_json, '$.kind') AS kind,
+             COUNT(*) AS total, COUNT(DISTINCT player_id) AS players, MAX(created_at) AS last_at
+      FROM analytics_events
+      WHERE event = 'client_error' AND created_at >= ?
+      GROUP BY message, screen, kind
+      ORDER BY players DESC, total DESC
+      LIMIT ?
+    `).all(since, limit);
+  } catch (error) {
+    console.error(`Не прочитать ошибки: ${error.message}`);
+    process.exit(2);
+  }
+  console.log(`Ошибки клиента за ${days} дн., топ ${limit} (по числу игроков):`);
+  if (rows.length === 0) {
+    console.log('  нет данных');
+    return;
+  }
+  printTable(
+    ['игроков', 'раз', 'kind', 'screen', 'message', 'последняя'],
+    rows.map((r) => [String(r.players), String(r.total), cell(r.kind, 10), cell(r.screen, 20), cell(r.message, 64), time(r.last_at)]),
+    [8, 5, 10, 20, 64, 20],
+  );
+}
+
 // --- аргументы ----------------------------------------------------------------
 
 function parsePositive(name, value, fallback) {
@@ -389,6 +542,24 @@ if (command === 'reports') {
   const limit = parsePositive('limit', flags.limit, 20);
   databaseFlag = flags.db;
   runner = (db) => runPlayer(db, positional[0], limit);
+} else if (command === 'funnel') {
+  const { flags, positional } = parseArgs(process.argv.slice(3), new Set(['db', 'days']));
+  if (positional.length > 0) fail(`Лишний аргумент: ${positional[0]}\n${USAGE}`);
+  const days = parsePositive('days', flags.days, 14);
+  databaseFlag = flags.db;
+  runner = (db) => runFunnel(db, days);
+} else if (command === 'retention') {
+  const { flags, positional } = parseArgs(process.argv.slice(3), new Set(['db']));
+  if (positional.length > 0) fail(`Лишний аргумент: ${positional[0]}\n${USAGE}`);
+  databaseFlag = flags.db;
+  runner = (db) => runRetention(db);
+} else if (command === 'errors') {
+  const { flags, positional } = parseArgs(process.argv.slice(3), new Set(['db', 'days', 'limit']));
+  if (positional.length > 0) fail(`Лишний аргумент: ${positional[0]}\n${USAGE}`);
+  const days = parsePositive('days', flags.days, 7);
+  const limit = parsePositive('limit', flags.limit, 20);
+  databaseFlag = flags.db;
+  runner = (db) => runErrors(db, days, limit);
 } else {
   fail(`Неизвестная команда: ${command}\n${USAGE}`);
 }
@@ -402,7 +573,7 @@ if (!path) {
 const db = new DatabaseSync(path, { readOnly: true });
 try {
   const tables = new Set(db.prepare("SELECT name FROM sqlite_master WHERE type = 'table'").all().map((row) => row.name));
-  for (const table of ['match_runs', 'question_reports', 'analytics_events']) {
+  for (const table of ['match_runs', 'question_reports', 'analytics_events', 'rematch_invites']) {
     if (!tables.has(table)) {
       console.error(`В базе нет таблицы ${table}.`);
       console.error('Примени миграцию: npx wrangler d1 migrations apply DB --local (из apps/api)');

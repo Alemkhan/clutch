@@ -191,3 +191,29 @@ describe('POST /api/share/prepared', () => {
     expect(response.status).toBe(401);
   });
 });
+
+describe('public origin behind a tunnel', () => {
+  const tunnel = { 'X-Forwarded-Host': 'depose-payday-puppy.ngrok-free.dev', 'X-Forwarded-Proto': 'https' };
+
+  async function page(environment: string) {
+    const response = await app.request('http://127.0.0.1:8787/api/share/guess?k=1&m=2', { headers: tunnel }, env({ ENVIRONMENT: environment }));
+    return response.text();
+  }
+
+  it('points the image at the tunnel in development', async () => {
+    expect(await page('development')).toContain('content="https://depose-payday-puppy.ngrok-free.dev/api/share/guess.png?k=1&amp;m=2"');
+  });
+
+  it('ignores forwarded headers in production', async () => {
+    expect(await page('production')).toContain('content="http://127.0.0.1:8787/api/share/guess.png?k=1&amp;m=2"');
+  });
+
+  it('knows which origins Telegram can fetch', async () => {
+    const { isReachableOrigin } = await import('../apps/api/src/share/previews');
+    expect(isReachableOrigin('https://depose-payday-puppy.ngrok-free.dev')).toBe(true);
+    expect(isReachableOrigin('https://clutch-api.example.workers.dev')).toBe(true);
+    for (const origin of ['http://127.0.0.1:8787', 'https://localhost:8787', 'http://example.com', 'https://192.168.1.5', 'https://10.0.0.2']) {
+      expect(isReachableOrigin(origin)).toBe(false);
+    }
+  });
+});

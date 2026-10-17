@@ -2,6 +2,8 @@ node_modules/
 dist/
 .wrangler/
 /apps/api/wrangler.production.generated.jsonc
+# Заполненные prod-входы релиза (шаблон — release.env.example)
+/release.env
 .dev.vars*
 .env*
 !.env.example
@@ -26,3 +28,7 @@ screenshots/
 /promo/public/take-*.mp4
 # Музыка и эффекты промо синтезируются заново: node promo/audio/synth.mjs
 /promo/public/audio/*.wav
+# Локальный lock-файл скиллов агента, не часть проекта
+/skills-lock.json
+# Снимок prod-базы для отчётов: npm run reports:pull
+/.prod-data/

@@ -6,10 +6,11 @@ import {
   generateMatch,
   toPublicQuestion,
   type Opponent,
+  type SoloRunSnapshot,
   type PublicQuestion,
   type SoloRoundResponse,
 } from '@clutch/shared';
-import type { NormalizedSoloSnapshot } from './clientMatchRules';
+import { normalizeSoloSnapshot, type NormalizedSoloSnapshot } from './clientMatchRules';
 import {
   applyLoadedSoloRun,
   applySoloAnswerVerdict,
@@ -18,6 +19,7 @@ import {
   completeSoloHammer,
   continueSoloAfterResolution,
   currentSoloQuestion,
+  enterStartedSoloRun,
   failSoloLoading,
   failSoloSync,
   isSoloPlaying,
@@ -326,5 +328,44 @@ describe('a run interrupted after several rounds continues from the same place',
       })),
     }));
     expect(state).toMatchObject({ stage: 'result', result });
+  });
+});
+
+describe('a start that resumes an unfinished run', () => {
+  const questions = generateMatch(24, 0, 'geography').map(toPublicQuestion);
+  const base = {
+    runId: 'run-1', questions, pace: null, target: SOLO_TARGET_PROGRESS, roundCap: SOLO_ROUND_CAP,
+    rulesVersion: CURRENT_SOLO_RUN_CONDITIONS.rulesVersion, miniGameId: 'hammer_nail' as const,
+    bankExhausted: false, category: 'geography' as const, status: 'in_progress' as const, result: null,
+  };
+  const played = (index: number, skillResult: 'perfect' | 'miss', progressAwarded: number) => ({
+    questionId: questions[index].id, correct: true, skillResult, progressAwarded, responseTimeMs: 1500,
+  });
+  const resumedStart = (rounds: SoloRunSnapshot['rounds']): SoloRunSnapshot & { resumed: true } => ({
+    ...base, rounds, resumed: true,
+  });
+
+  it('enters it like a restore: played rounds kept, play goes on from the first unplayed one', () => {
+    const raw = resumedStart([played(0, 'perfect', 25), played(1, 'perfect', 25), played(2, 'perfect', 25)]);
+    const entered = enterStartedSoloRun(beginSoloLoading('geography'), raw, false);
+    expect(entered).toEqual(restoreSoloRun(normalizeSoloSnapshot(raw)));
+    expect(entered).toMatchObject({ stage: 'ready', resumed: true, correctCount: 3, pending: null });
+    expect(soloFlowView(entered)).toMatchObject({ progress: 75, roundsPlayed: 3 });
+    expect(currentSoloQuestion(startSoloPlay(entered))?.id).toBe(questions[3].id);
+  });
+
+  it('treats a correct answer whose hammer the server forfeited as a played miss', () => {
+    const raw = resumedStart([played(0, 'perfect', 25), played(1, 'perfect', 25), played(2, 'perfect', 25), played(3, 'miss', 0)]);
+    const entered = enterStartedSoloRun(beginSoloLoading('geography'), raw, false);
+    expect(entered).toEqual(restoreSoloRun(normalizeSoloSnapshot(raw)));
+    expect(entered.skillResults).toEqual(['perfect', 'perfect', 'perfect', 'miss']);
+    expect(currentSoloQuestion(startSoloPlay(entered))?.id).toBe(questions[4].id);
+  });
+
+  it('keeps a plain new start as it was: ready at round 0, not resumed', () => {
+    const { status: _status, result: _result, category: _category, ...fresh } = base;
+    const entered = enterStartedSoloRun(beginSoloLoading('geography'), fresh, false);
+    expect(entered).toMatchObject({ stage: 'ready', resumed: false, correctCount: 0, runId: 'run-1' });
+    expect(soloFlowView(entered)).toMatchObject({ roundsPlayed: 0 });
   });
 });

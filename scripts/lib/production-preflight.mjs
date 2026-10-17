@@ -7,6 +7,9 @@ export const PRODUCTION_ENV_KEYS = [
   'CLUTCH_PRODUCTION_RATE_LIMIT_NAMESPACE_ID',
   'CLUTCH_PRODUCTION_API_URL',
   'CLUTCH_PAGES_PROJECT_NAME',
+  'CLUTCH_PRODUCTION_TELEGRAM_MINI_APP_LINK',
+  'CLUTCH_PRODUCTION_TELEGRAM_BOT_LINK',
+  'CLUTCH_PRODUCTION_PUBLIC_WEB_ORIGIN',
 ];
 
 export function parseProductionPreflightArguments(arguments_) {
@@ -72,6 +75,28 @@ function normalizeApiUrl(value, errors) {
   return `${url.origin}${pathname === '' ? '' : pathname}`;
 }
 
+const botUsernamePattern = '([A-Za-z][A-Za-z0-9_]{4,31})';
+const miniAppLinkPattern = new RegExp(`^https://t\\.me/${botUsernamePattern}\\?startapp$`, 'u');
+const botLinkPattern = new RegExp(`^https://t\\.me/${botUsernamePattern}(?:\\?startapp)?$`, 'u'); // с ?startapp шаринг открывает Mini App сразу
+
+function validateWebOrigin(value, key, errors) {
+  if (value === undefined) return undefined;
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    errors.push(`${key} must be a valid absolute URL.`);
+    return undefined;
+  }
+  if (url.protocol !== 'https:' || url.username || url.password
+    || url.search || url.hash || value.includes('?') || value.includes('#')
+    || url.pathname !== '/') {
+    errors.push(`${key} must be an https origin without credentials, path, query, or hash.`);
+    return undefined;
+  }
+  return url.origin;
+}
+
 export function validateProductionEnvironment(environment) {
   const errors = [];
   const workerName = requiredValue(environment, 'CLUTCH_PRODUCTION_WORKER_NAME', errors);
@@ -84,6 +109,9 @@ export function validateProductionEnvironment(environment) {
   );
   const rawApiUrl = requiredValue(environment, 'CLUTCH_PRODUCTION_API_URL', errors);
   const pagesProjectName = requiredValue(environment, 'CLUTCH_PAGES_PROJECT_NAME', errors);
+  const miniAppLink = requiredValue(environment, 'CLUTCH_PRODUCTION_TELEGRAM_MINI_APP_LINK', errors);
+  const botLink = requiredValue(environment, 'CLUTCH_PRODUCTION_TELEGRAM_BOT_LINK', errors);
+  const rawWebOrigin = requiredValue(environment, 'CLUTCH_PRODUCTION_PUBLIC_WEB_ORIGIN', errors);
 
   validateResourceName(workerName, 'CLUTCH_PRODUCTION_WORKER_NAME', errors);
   validateResourceName(d1Name, 'CLUTCH_PRODUCTION_D1_NAME', errors);
@@ -96,22 +124,51 @@ export function validateProductionEnvironment(environment) {
     errors.push('CLUTCH_PRODUCTION_RATE_LIMIT_NAMESPACE_ID must be a positive numeric ID.');
   }
   const apiUrl = normalizeApiUrl(rawApiUrl, errors);
+  const publicWebOrigin = validateWebOrigin(rawWebOrigin, 'CLUTCH_PRODUCTION_PUBLIC_WEB_ORIGIN', errors);
+  const miniAppMatch = miniAppLink === undefined ? null : miniAppLinkPattern.exec(miniAppLink);
+  const botMatch = botLink === undefined ? null : botLinkPattern.exec(botLink);
+  if (miniAppLink !== undefined && !miniAppMatch) {
+    errors.push('CLUTCH_PRODUCTION_TELEGRAM_MINI_APP_LINK must look like https://t.me/<bot>?startapp.');
+  }
+  if (botLink !== undefined && !botMatch) {
+    errors.push('CLUTCH_PRODUCTION_TELEGRAM_BOT_LINK must look like https://t.me/<bot>?startapp or https://t.me/<bot>.');
+  }
+  if (miniAppMatch && botMatch && miniAppMatch[1].toLowerCase() !== botMatch[1].toLowerCase()) {
+    errors.push('CLUTCH_PRODUCTION_TELEGRAM_MINI_APP_LINK and CLUTCH_PRODUCTION_TELEGRAM_BOT_LINK must name the same bot.');
+  }
 
   if (errors.length > 0) {
     throw new Error(`Production preflight configuration is invalid:\n${errors.map((error) => `- ${error}`).join('\n')}`);
   }
-  return { workerName, d1Name, d1Id, rateLimitNamespaceId, apiUrl, pagesProjectName };
+  return {
+    workerName,
+    d1Name,
+    d1Id,
+    rateLimitNamespaceId,
+    apiUrl,
+    pagesProjectName,
+    miniAppLink,
+    botLink,
+    publicWebOrigin,
+  };
 }
 
 export function createProductionWranglerConfig(inputs, paths) {
   if (!isAbsolute(paths.main) || !isAbsolute(paths.migrations)) {
     throw new Error('Production Wrangler main and migrations paths must be absolute.');
   }
+  if (!Array.isArray(paths.crons) || paths.crons.length === 0) {
+    throw new Error('Production Wrangler config needs the cron triggers read from the development config.');
+  }
   return {
     name: inputs.workerName,
     main: paths.main.replaceAll('\\', '/'),
     compatibility_date: '2024-10-01',
-    vars: { ENVIRONMENT: 'production' },
+    vars: {
+      ENVIRONMENT: 'production',
+      TELEGRAM_MINI_APP_LINK: inputs.miniAppLink,
+      PUBLIC_WEB_ORIGIN: inputs.publicWebOrigin,
+    },
     ratelimits: [{
       name: 'API_RATE_LIMITER',
       namespace_id: inputs.rateLimitNamespaceId,
@@ -123,8 +180,17 @@ export function createProductionWranglerConfig(inputs, paths) {
       database_id: inputs.d1Id,
       migrations_dir: paths.migrations.replaceAll('\\', '/'),
     }],
+    triggers: { crons: [...paths.crons] },
     observability: { enabled: true },
   };
+}
+
+/** Cron-расписание берётся из tracked wrangler.toml, чтобы prod-config не разъехался с ним. */
+export function readDevelopmentCrons(configText) {
+  const match = /^\s*crons\s*=\s*\[([^\]]*)\]/mu.exec(configText);
+  const crons = match ? [...match[1].matchAll(/"([^"]+)"/gu)].map((item) => item[1]) : [];
+  if (crons.length === 0) throw new Error('Development Wrangler config is missing triggers.crons.');
+  return crons;
 }
 
 function trackedValue(configText, key) {
@@ -159,4 +225,7 @@ export const PRODUCTION_PREFLIGHT_FIXTURE_ENV = Object.freeze({
   CLUTCH_PRODUCTION_RATE_LIMIT_NAMESPACE_ID: '9000002',
   CLUTCH_PRODUCTION_API_URL: 'https://api.clutch.invalid/',
   CLUTCH_PAGES_PROJECT_NAME: 'clutch-production-fixture',
+  CLUTCH_PRODUCTION_TELEGRAM_MINI_APP_LINK: 'https://t.me/clutchfixturebot?startapp',
+  CLUTCH_PRODUCTION_TELEGRAM_BOT_LINK: 'https://t.me/clutchfixturebot',
+  CLUTCH_PRODUCTION_PUBLIC_WEB_ORIGIN: 'https://clutch-web.invalid',
 });

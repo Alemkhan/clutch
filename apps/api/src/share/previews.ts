@@ -135,6 +135,33 @@ function requestOrigin(c: AppContext): string {
   return new URL(c.req.url).origin;
 }
 
+const FORWARDED_HOST = /^[a-z0-9.-]+(:d{1,5})?$/iu;
+
+/**
+ * Адрес, по которому этот Worker видят снаружи: его ссылки уходят в Telegram, и тот их скачивает.
+ * В dev запрос приходит через туннель (ngrok) и прокси Vite с changeOrigin, поэтому сам URL запроса —
+ * 127.0.0.1:8787; настоящий хост туннеля лежит в X-Forwarded-Host. На проде заголовкам не верим:
+ * адрес Worker — это адрес запроса.
+ */
+export function publicOrigin(c: AppContext): string {
+  if (c.env.ENVIRONMENT !== 'production') {
+    const host = c.req.header('X-Forwarded-Host')?.split(',')[0].trim();
+    const proto = c.req.header('X-Forwarded-Proto')?.split(',')[0].trim();
+    if (host && FORWARDED_HOST.test(host)) return `${proto === 'http' ? 'http' : 'https'}://${host}`;
+  }
+  return requestOrigin(c);
+}
+
+/** Telegram скачивает превью при отправке: localhost и http он не достанет, и сообщение не уйдёт. */
+export function isReachableOrigin(origin: string): boolean {
+  const { protocol, hostname } = new URL(origin);
+  return protocol === 'https:'
+    && hostname !== 'localhost'
+    && !hostname.endsWith('.localhost')
+    && !/^(127.|10.|192.168.|172.(1[6-9]|2d|3[01]).|0.)/u.test(hostname)
+    && hostname !== '[::1]';
+}
+
 /** Статичная карточка игры лежит на сайте (Pages); без PUBLIC_WEB_ORIGIN — рядом с API. */
 function webOrigin(c: AppContext): string {
   return c.env.PUBLIC_WEB_ORIGIN?.trim().replace(/\/+$/u, '') || requestOrigin(c);
@@ -143,8 +170,7 @@ function webOrigin(c: AppContext): string {
 /** Тот же запрос, но к картинке: путь + .png, параметры как есть (уже проверены). */
 function imageUrl(c: AppContext): string {
   const url = new URL(c.req.url);
-  url.pathname = `${url.pathname}.png`;
-  return url.toString();
+  return `${publicOrigin(c)}${url.pathname}.png${url.search}`;
 }
 
 function renderPage(title: string, description: string, image: string, target: string): string {

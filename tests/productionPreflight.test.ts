@@ -9,6 +9,7 @@ import {
   PRODUCTION_ENV_KEYS,
   PRODUCTION_PREFLIGHT_FIXTURE_ENV,
   productionConfigOutputPath,
+  readDevelopmentCrons,
   validateProductionEnvironment,
 } from '../scripts/lib/production-preflight.mjs';
 
@@ -77,11 +78,16 @@ describe('production preflight configuration', () => {
     expect(createProductionWranglerConfig(inputs, {
       main,
       migrations,
+      crons: ['*/15 * * * *'],
     })).toEqual({
       name: 'clutch-api-production-fixture',
       main: main.replaceAll('\\', '/'),
       compatibility_date: '2024-10-01',
-      vars: { ENVIRONMENT: 'production' },
+      vars: {
+        ENVIRONMENT: 'production',
+        TELEGRAM_MINI_APP_LINK: 'https://t.me/clutchfixturebot?startapp',
+        PUBLIC_WEB_ORIGIN: 'https://clutch-web.invalid',
+      },
       ratelimits: [{
         name: 'API_RATE_LIMITER',
         namespace_id: '9000002',
@@ -93,6 +99,7 @@ describe('production preflight configuration', () => {
         database_id: '11111111-1111-4111-8111-111111111111',
         migrations_dir: migrations.replaceAll('\\', '/'),
       }],
+      triggers: { crons: ['*/15 * * * *'] },
       observability: { enabled: true },
     });
   });
@@ -102,7 +109,45 @@ describe('production preflight configuration', () => {
     expect(() => createProductionWranglerConfig(inputs, {
       main: 'apps/api/src/index.ts',
       migrations: 'apps/api/migrations',
+      crons: ['*/15 * * * *'],
     })).toThrowError(/must be absolute/u);
+  });
+
+  it('refuses to generate a config without cron triggers', () => {
+    const inputs = validateProductionEnvironment(PRODUCTION_PREFLIGHT_FIXTURE_ENV);
+    expect(() => createProductionWranglerConfig(inputs, {
+      main: resolve('r', 'index.ts'),
+      migrations: resolve('r', 'migrations'),
+      crons: [],
+    })).toThrowError(/cron/u);
+  });
+
+  it('reads cron triggers from the development config', () => {
+    expect(readDevelopmentCrons('[triggers]\ncrons = ["*/15 * * * *"]\n')).toEqual(['*/15 * * * *']);
+    expect(() => readDevelopmentCrons('name = "x"')).toThrowError(/triggers\.crons/u);
+  });
+
+  it.each([
+    ['CLUTCH_PRODUCTION_TELEGRAM_MINI_APP_LINK', 'https://t.me/clutchfixturebot', /MINI_APP_LINK/u],
+    ['CLUTCH_PRODUCTION_TELEGRAM_MINI_APP_LINK', 'http://t.me/clutchfixturebot?startapp', /MINI_APP_LINK/u],
+    ['CLUTCH_PRODUCTION_TELEGRAM_BOT_LINK', 'https://t.me/clutchfixturebot?start=x', /BOT_LINK/u],
+    ['CLUTCH_PRODUCTION_TELEGRAM_BOT_LINK', 'https://t.me/otherbot', /same bot/u],
+    ['CLUTCH_PRODUCTION_PUBLIC_WEB_ORIGIN', 'https://clutch-web.invalid/app', /PUBLIC_WEB_ORIGIN/u],
+    ['CLUTCH_PRODUCTION_PUBLIC_WEB_ORIGIN', 'http://clutch-web.invalid', /PUBLIC_WEB_ORIGIN/u],
+    ['CLUTCH_PRODUCTION_PUBLIC_WEB_ORIGIN', 'https://clutch-web.invalid?x=1', /PUBLIC_WEB_ORIGIN/u],
+  ])('rejects invalid Telegram/web value %s', (key, value, message) => {
+    expect(() => validateProductionEnvironment({
+      ...PRODUCTION_PREFLIGHT_FIXTURE_ENV,
+      [key]: value,
+    })).toThrowError(message);
+  });
+
+  it('compares bot names case-insensitively and accepts a trailing slash on the origin', () => {
+    expect(validateProductionEnvironment({
+      ...PRODUCTION_PREFLIGHT_FIXTURE_ENV,
+      CLUTCH_PRODUCTION_TELEGRAM_BOT_LINK: 'https://t.me/ClutchFixtureBot',
+      CLUTCH_PRODUCTION_PUBLIC_WEB_ORIGIN: 'https://clutch-web.invalid/',
+    }).publicWebOrigin).toBe('https://clutch-web.invalid');
   });
 
   it.each([

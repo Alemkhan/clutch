@@ -3,6 +3,7 @@ import { createSeededRandom, hashSeed } from '../seededRandom';
 import { isAnswerCorrect, normalizeAnswer } from '../fuzzyMatch';
 import type { LastStandCategory, LastStandScale } from '../lastStand';
 import type { PackQuestion, PackSet, PackTopic } from './types';
+import { expandPersonAnswers } from './personAnswers';
 
 export const PACK_CATEGORY_RU = 'Общие знания';
 
@@ -72,7 +73,8 @@ export function packQuestionToRaceQuestion(q: PackQuestion, answerType: AnswerTy
     subcategory: PACK_TOPIC_LABELS_RU[q.topic],
     difficulty: q.difficulty,
     prompt: q.promptRu,
-    correctAnswers: [...q.acceptedRu, ...(q.acceptedEn ?? [])],
+    // Для вопросов про человека сервер и клиент видят один расширенный список (personAnswers.ts).
+    correctAnswers: expandPersonAnswers(q.promptRu, [...q.acceptedRu, ...(q.acceptedEn ?? [])]),
     explanation: q.explanationRu ?? `Правильный ответ: ${q.answerRu}.`,
     sourceUrl: q.sourceUrl,
     sourceTitle: q.sourceTitle,

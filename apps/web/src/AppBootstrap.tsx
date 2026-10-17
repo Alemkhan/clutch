@@ -1,11 +1,26 @@
 import { useEffect, useState } from 'react';
 import App from './App';
-import { initializeTelegram } from './platform/telegram';
+import { getTelegramIdentity, initializeTelegram } from './platform/telegram';
 import {
   observeTelegramInitialization,
   type TelegramBootstrapResult,
 } from './app/bootstrap';
 import { installSoundUnlock } from './platform/sounds';
+import { logAnalyticsEvent } from './platform/api';
+import { readLaunchIntent } from './app/launchIntent';
+
+let appOpenedSent = false;
+
+/** Раз за загрузку страницы. Дружеская ссылка и реванш делят один формат, поэтому по ссылке entry = rematch. */
+export function trackAppOpened(): void {
+  if (appOpenedSent) return;
+  appOpenedSent = true;
+  const intent = readLaunchIntent();
+  logAnalyticsEvent('app_opened', {
+    source: getTelegramIdentity() ? 'telegram' : 'browser',
+    entry: intent?.type === 'rematch' ? 'rematch' : 'direct',
+  });
+}
 
 export const TELEGRAM_BOOTSTRAP_TIMEOUT_MS = 2_500;
 
@@ -30,6 +45,10 @@ export default function AppBootstrap() {
   ), []);
 
   useEffect(() => installSoundUnlock(), []);
+
+  useEffect(() => {
+    if (result !== 'loading') trackAppOpened();
+  }, [result]);
 
   if (result === 'loading') return <LoadingShell />;
 

@@ -30,6 +30,8 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm test
+      - name: Typecheck and build web
+        run: npm run build
       - name: Run local Worker HTTP smoke
         run: npm run test:smoke:local
       - name: Run production preflight fixture
