@@ -14,7 +14,8 @@ import {
   shareViaTelegram,
 } from '../../platform/telegram';
 import { formatCountdownClock } from './tiebreakerClock';
-import { resolveGameLink, shareTiebreakerResult } from './tiebreakerShare';
+import { shareTiebreakerResult } from './tiebreakerShare';
+import { buildGuessPreviewUrl, previewBase } from '../../platform/share';
 import { useDayCountdown } from './useDayCountdown';
 import { parseTiebreakerInput, tiebreakerInputHint } from './tiebreakerInput';
 import { TiebreakerSubmitter } from './tiebreakerSubmit';
@@ -482,7 +483,13 @@ export function TiebreakerScreen({ onBack }: { onBack: () => void }) {
     void shareTiebreakerResult(
       question.number,
       answered,
-      resolveGameLink(import.meta.env.VITE_TELEGRAM_BOT_LINK as string | undefined, window.location.origin),
+      buildGuessPreviewUrl(
+        previewBase(import.meta.env.VITE_API_URL as string | undefined, window.location.origin),
+        question.number,
+        answered.multiplier,
+        answered.percentile,
+        isBestAnswerOfDay(answered.percentile),
+      ),
       {
         telegramShare: canShareViaTelegram(),
         nativeShare: hasNative,

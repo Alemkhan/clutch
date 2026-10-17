@@ -37,6 +37,7 @@ export function SoloResultStage({ props, state, view }: {
       category={state.category}
       correctCount={state.correctCount}
       skillResults={state.skillResults}
+      roundAwards={state.session?.rounds.map((round) => round.progressAwarded)}
     />
   );
 }

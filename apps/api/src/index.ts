@@ -9,6 +9,7 @@ import { registerMyRunsRoutes } from './myRuns/myRuns';
 import { registerSoloRunRoutes } from './solo/soloRuns';
 import { registerTrainingRoutes } from './training/training';
 import { registerFriendInviteRoutes } from './rematch/friendInvites';
+import { registerPreviewRoutes } from './share/previews';
 import { registerShareRoutes } from './share/share';
 import { registerSystemRoutes } from './http/system';
 import { registerProfileRoutes } from './profile/profile';
@@ -21,6 +22,7 @@ app.use('/api/*', cors({ allowHeaders: ['Content-Type', 'Authorization'] }));
 
 registerSystemRoutes(app);
 registerShareRoutes(app);
+registerPreviewRoutes(app);
 registerAuthRoutes(app);
 registerRematchRoutes(app);
 registerMyRunsRoutes(app);

@@ -7,6 +7,9 @@ export interface ShareCardData {
   name: string | null;
 }
 
+/** Семейство кириллических подмножеств Inter после переименования в renderCard.ts. */
+export const CYRILLIC_FAMILY = 'InteC';
+
 export const CARD_WIDTH = 1200;
 export const CARD_HEIGHT = 630;
 

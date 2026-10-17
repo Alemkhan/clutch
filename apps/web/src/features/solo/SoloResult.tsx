@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { SOLO_TARGET_PROGRESS } from '@clutch/shared';
+import { SOLO_TARGET_PROGRESS, dailyKey } from '@clutch/shared';
 import type { CategoryId, CompleteSoloRunResponse, SkillResult } from '@clutch/shared';
 import { playSound } from '../../platform/sounds';
 import { buildReceiptStats, buildSoloResult, circles, countPerfectStrikes, type RunStandingState, type SoloSaveStatus } from './soloResultModel';
@@ -11,6 +11,7 @@ import type { PracticeSummary } from './practiceResult';
 import { FRIEND_DUEL_CHIP, type FriendDuelSummary } from './friendDuelResult';
 import { useFriendInvite } from './useFriendInvite';
 import { getTelegramIdentity } from '../../platform/telegram';
+import { buildRunPreviewUrl, previewBase, roundTiles } from '../../platform/share';
 
 interface SoloResultProps {
   view: SoloRunView;
@@ -31,6 +32,8 @@ interface SoloResultProps {
   /** Верные ответы и удары забега; верные из ответа сервера главнее. */
   correctCount?: number;
   skillResults?: readonly SkillResult[];
+  /** Прогресс каждого сыгранного круга по порядку: квадраты на карточке превью. */
+  roundAwards?: readonly number[];
   /** Подмена места (тесты); без неё место берётся из таблицы дня. */
   standing?: RunStandingState;
 }
@@ -54,12 +57,16 @@ export function SoloResult({
   category = 'general',
   correctCount = 0,
   skillResults = [],
+  roundAwards = [],
   standing,
 }: SoloResultProps) {
   const result = buildSoloResult({ view, save: saveStatus, response });
+  const preview = roundAwards.length > 0
+    ? { tiles: roundTiles(roundAwards, skillResults), progress: result.progress, category, day: dailyKey(Date.now()) }
+    : undefined;
   const playedRef = useRef(false);
   const practiceWon = practice ? practice.outcome === 'player' : null;
-  const invite = useFriendInvite(response?.runId);
+  const invite = useFriendInvite(response?.runId, preview);
   const resultShare = useSoloShare();
   // Место есть только у сохранённого рейтингового забега, дошедшего до 100%.
   const ranked = saveStatus === 'saved' && response?.reachedTarget === true && !friendDuel && !practice;
@@ -195,7 +202,9 @@ export function SoloResult({
                 roundsPlayed: result.roundsPlayed,
                 perfectHits: countPerfectStrikes(skillResults),
                 categoryLabel: categoryName(category),
-              }));
+              }), preview
+                ? buildRunPreviewUrl(previewBase(import.meta.env.VITE_API_URL as string | undefined, window.location.origin), preview)
+                : undefined);
             }}
           >
             Поделиться

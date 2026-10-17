@@ -6,6 +6,10 @@ import {
   chooseShareStrategy,
   executeShare,
   buildShareUrl,
+  buildGuessPreviewUrl,
+  buildRunPreviewUrl,
+  previewBase,
+  roundTiles,
   type ShareInput,
 } from './share';
 
@@ -110,5 +114,32 @@ describe('friend invite payload', () => {
     const payload = buildFriendInvitePayload('https://t.me/bot?startapp=rm_x');
     expect(payload.url).toBe('https://t.me/bot?startapp=rm_x');
     expect(payload.text).not.toMatch(/\d|темп/i);
+  });
+});
+
+describe('preview links', () => {
+  it('maps rounds to tiles, skipping misses for rounds that scored', () => {
+    expect(roundTiles([25, 0, 0, 18, 12, 5], ['perfect', 'miss', 'great', 'good', 'weak'])).toBe('PXXGOW');
+    expect(roundTiles([10], ['perfect'])).toBe('P');
+    expect(roundTiles(Array(25).fill(0), [])).toHaveLength(20);
+  });
+
+  it('builds the run preview, with the invite and name only for a duel', () => {
+    const preview = { tiles: 'PPOPP', progress: 100, category: 'general' as const, day: '2026-10-17' };
+    expect(buildRunPreviewUrl('https://api.example', preview))
+      .toBe('https://api.example/api/share/run?t=PPOPP&p=100&c=general&d=2026-10-17');
+    expect(buildRunPreviewUrl('https://api.example', { ...preview, inviteId: 'rm_x', name: ` ${'Я'.repeat(40)} ` }))
+      .toBe(`https://api.example/api/share/run?t=PPOPP&p=100&c=general&d=2026-10-17&i=rm_x&n=${encodeURIComponent('Я'.repeat(32))}`);
+  });
+
+  it('builds the guess preview without the guess itself', () => {
+    expect(buildGuessPreviewUrl('https://api.example', 12, 1.26, 84.4, false)).toBe('https://api.example/api/share/guess?k=12&m=1.3&pc=84');
+    expect(buildGuessPreviewUrl('https://api.example', 12, 1, 100, true)).toBe('https://api.example/api/share/guess?k=12&m=1&pc=best');
+    expect(buildGuessPreviewUrl('https://api.example', 12, 3e12, null, false)).toBe('https://api.example/api/share/guess?k=12&m=999999999');
+  });
+
+  it('uses the API origin when configured, the page origin otherwise', () => {
+    expect(previewBase('https://api.example/', 'https://web.example')).toBe('https://api.example');
+    expect(previewBase(undefined, 'https://web.example')).toBe('https://web.example');
   });
 });

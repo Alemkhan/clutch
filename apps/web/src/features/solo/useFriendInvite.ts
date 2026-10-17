@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { createFriendInvite } from '../../platform/api';
-import { buildFriendInvitePayload, chooseShareStrategy, executeShare } from '../../platform/share';
-import { canShareViaTelegram, shareViaTelegram } from '../../platform/telegram';
+import { buildFriendInvitePayload, buildRunPreviewUrl, chooseShareStrategy, executeShare, previewBase, type RunPreview } from '../../platform/share';
+import { canShareViaTelegram, getTelegramIdentity, shareViaTelegram } from '../../platform/telegram';
 
 export type FriendInviteStatus = 'idle' | 'working' | 'shared' | 'copied' | 'error';
 
@@ -10,7 +10,7 @@ export type FriendInviteStatus = 'idle' | 'working' | 'shared' | 'copied' | 'err
  * тогда) и уходит через общий механизм share. Созданная ссылка запоминается: повторное нажатие
  * после сбоя отправки не ходит в сеть и успевает до потери пользовательского жеста.
  */
-export function useFriendInvite(runId: string | undefined) {
+export function useFriendInvite(runId: string | undefined, preview?: Omit<RunPreview, 'inviteId' | 'name'>) {
   const [status, setStatus] = useState<FriendInviteStatus>('idle');
   const urlRef = useRef<string>();
   const busyRef = useRef(false);
@@ -20,7 +20,17 @@ export function useFriendInvite(runId: string | undefined) {
     busyRef.current = true;
     setStatus('working');
     try {
-      if (!urlRef.current) urlRef.current = (await createFriendInvite(runId)).url;
+      if (!urlRef.current) {
+        const invite = await createFriendInvite(runId);
+        // Ссылка-превью с карточкой записи и именем; она уводит в то же приглашение.
+        urlRef.current = preview
+          ? buildRunPreviewUrl(previewBase(import.meta.env.VITE_API_URL as string | undefined, window.location.origin), {
+            ...preview,
+            inviteId: invite.inviteId,
+            name: getTelegramIdentity()?.displayName,
+          })
+          : invite.url;
+      }
       const hasNative = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
       const result = await executeShare(
         chooseShareStrategy({ telegramShare: canShareViaTelegram(), nativeShare: hasNative }),
@@ -37,6 +47,7 @@ export function useFriendInvite(runId: string | undefined) {
     } finally {
       busyRef.current = false;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [runId]);
 
   return { status, send };

@@ -1,3 +1,4 @@
+import type { CategoryId, SkillResult } from '@clutch/shared';
 import type { MatchSource } from '../features/solo/matchmaking';
 
 export type ShareOutcome = 'win' | 'loss' | 'tie';
@@ -51,6 +52,69 @@ export function buildShareUrl(input: ShareInput, apiBase: string | undefined, or
     if (name) params.set('n', name);
   }
   return `${base}/api/share?${params.toString()}`;
+}
+
+/** Куда смотрят ссылки-превью: API (VITE_API_URL), а без него — тот же origin (dev-прокси /api). */
+export function previewBase(apiBase: string | undefined, origin: string): string {
+  return (apiBase?.trim() || origin).replace(/\/+$/, '');
+}
+
+const TILE_BY_SKILL: Partial<Record<SkillResult, string>> = { perfect: 'P', great: 'G', good: 'O', weak: 'W' };
+
+/**
+ * Круги забега буквами для карточки: точность удара, а «X» — круг без прогресса (неверный ответ
+ * или «мимо»; на карточке они одинаковы). Удар круга с прогрессом — следующий не-«мимо» в списке.
+ */
+export function roundTiles(awards: readonly number[], skills: readonly SkillResult[]): string {
+  let next = 0;
+  return awards.map((award) => {
+    if (award <= 0) return 'X';
+    while (skills[next] === 'miss') next += 1;
+    const tile = TILE_BY_SKILL[skills[next]] ?? 'W';
+    next += 1;
+    return tile;
+  }).join('').slice(0, 20);
+}
+
+export interface RunPreview {
+  tiles: string;
+  progress: number;
+  category: CategoryId;
+  day: string;
+  /** Приглашение на дуэль с этой записью и имя того, кто зовёт. */
+  inviteId?: string;
+  name?: string;
+}
+
+/** Страница-превью результата забега (/api/share/run): своя картинка, затем Mini App. */
+export function buildRunPreviewUrl(base: string, preview: RunPreview): string {
+  const params = new URLSearchParams({
+    t: preview.tiles,
+    p: String(Math.round(Math.min(100, Math.max(0, preview.progress)))),
+    c: preview.category,
+    d: preview.day,
+  });
+  if (preview.inviteId) {
+    params.set('i', preview.inviteId);
+    const name = Array.from(preview.name?.trim() ?? '').slice(0, MAX_SHARE_NAME_LENGTH).join('').trim();
+    if (name) params.set('n', name);
+  }
+  return `${base}/api/share/run?${params.toString()}`;
+}
+
+/** Страница-превью «На глазок» (/api/share/guess). Своей догадки и ответа в ссылке нет. */
+export function buildGuessPreviewUrl(
+  base: string,
+  number: number,
+  multiplier: number,
+  percentile: number | null,
+  best: boolean,
+): string {
+  const miss = Math.min(999_999_999, Math.max(1, Math.round(multiplier * 10) / 10));
+  const params = new URLSearchParams({ k: String(number), m: Number.isInteger(miss) ? String(miss) : miss.toFixed(1) });
+  if (best) params.set('pc', 'best');
+  else if (percentile !== null) params.set('pc', String(Math.round(percentile)));
+  return `${base}/api/share/guess?${params.toString()}`;
 }
 
 export function buildShareText(input: ShareInput): string {

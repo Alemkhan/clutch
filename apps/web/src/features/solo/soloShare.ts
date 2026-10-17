@@ -29,7 +29,7 @@ export function buildSoloShareText(input: SoloShareInput): string {
 export type SoloShareStatus = 'idle' | 'copied' | 'failed';
 
 /** Telegram → системное «Поделиться» → буфер обмена, как у «На глазок». Статус гаснет через 3 с. */
-export function useSoloShare(): { status: SoloShareStatus; share: (text: string) => void } {
+export function useSoloShare(): { status: SoloShareStatus; share: (text: string, previewUrl?: string) => void } {
   const [status, setStatus] = useState<SoloShareStatus>('idle');
 
   useEffect(() => {
@@ -38,9 +38,10 @@ export function useSoloShare(): { status: SoloShareStatus; share: (text: string)
     return () => window.clearTimeout(id);
   }, [status]);
 
-  const share = useCallback((text: string) => {
+  const share = useCallback((text: string, previewUrl?: string) => {
     const hasNative = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
-    const url = resolveGameLink(import.meta.env.VITE_TELEGRAM_BOT_LINK as string | undefined, window.location.origin);
+    // Превью со своей карточкой результата; без него — прямо в бота.
+    const url = previewUrl ?? resolveGameLink(import.meta.env.VITE_TELEGRAM_BOT_LINK as string | undefined, window.location.origin);
     void executeShare(
       chooseShareStrategy({ telegramShare: canShareViaTelegram(), nativeShare: hasNative }),
       { text, url },
