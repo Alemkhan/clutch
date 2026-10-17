@@ -54,6 +54,23 @@ describe('sound playback', () => {
     expect(getSoundDiagnostic()).toEqual({ state: 'ready' });
   });
 
+  it('falls back to AAC where Ogg Vorbis is unsupported, as on iOS', async () => {
+    const playedSrc: string[] = [];
+    vi.stubGlobal('Audio', class {
+      preload = '';
+      volume = 1;
+      muted = false;
+      currentTime = 1;
+      constructor(public src = '') {}
+      canPlayType(type: string) { return type.startsWith('audio/mp4') ? 'probably' : ''; }
+      cloneNode() { return new Audio(this.src); }
+      pause() {}
+      play() { playedSrc.push(this.src); return Promise.resolve(); }
+    });
+    await expect(playSound('correct')).resolves.toBe(true);
+    expect(playedSrc).toEqual(['/sfx/correct.m4a']);
+  });
+
   it('keeps a safe diagnostic when play rejects', async () => {
     playResults.push('reject');
     await expect(playSound('correct')).resolves.toBe(false);

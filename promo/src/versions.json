@@ -1,0 +1,5 @@
+{
+  "a": { "length": 12.4, "drop": 2.2, "hotFromBar": 3, "finalBar": 5, "padFrom": 0.8, "rollFrom": 0.95, "gaps": [[6.27,6.66]] },
+  "b": { "length": 12.8, "drop": 6, "hotFromBar": 0, "finalBar": 2, "padFrom": 0, "padTo": 4.2, "tension": true, "rollFrom": 5.5, "gaps": [] },
+  "promo": { "length": 13.4, "drop": 1.5, "hotFromBar": 4, "finalBar": 6, "padFrom": 0, "rollFrom": 0.5, "gaps": [[6.08,6.36]] }
+}

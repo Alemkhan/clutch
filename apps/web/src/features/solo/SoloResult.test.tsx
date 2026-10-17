@@ -52,11 +52,11 @@ describe('solo result receipt', () => {
     expect(render()).toContain('«Партии» и в Telegram.');
   });
 
-  it('without the invite button the lone «Мои партии» takes the full width', () => {
+  it('without the invite button «Поделиться» takes its slot, so a short run can be shared too', () => {
     const html = render({ friendDuel: null, response: response({ reachedTarget: false, progress: 40 }) });
-    expect(html).toContain('solo-result-secondary single');
     expect(html).not.toContain('Позвать друга');
-    expect(render()).not.toContain('solo-result-secondary single');
+    expect(html).toContain('>Поделиться<');
+    expect(render()).not.toContain('>Поделиться<');
   });
 
   it('reached the target: line, three numbers, record card, two secondary buttons', () => {
@@ -101,6 +101,7 @@ describe('solo result receipt', () => {
     expect(html.match(/20 кругов/g)).toHaveLength(2);
     expect(html).not.toContain('Твоя запись');
     expect(html).not.toContain('Позвать друга');
+    expect(html).toContain('>Поделиться<');
     expect(html).toContain('Мои партии');
   });
 

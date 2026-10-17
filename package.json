@@ -24,7 +24,8 @@
     "content:check": "vitest run packages/shared/src/generalPack",
     "content:import": "node scripts/content/import.mjs",
     "content:wikidata": "node scripts/content/build-wikidata-pack.mjs",
-    "tiebreaker:load": "node scripts/tiebreaker-load.mjs"
+    "tiebreaker:load": "node scripts/tiebreaker-load.mjs",
+    "content:day": "vite-node scripts/content/export-day.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",

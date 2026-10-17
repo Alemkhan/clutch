@@ -355,7 +355,7 @@
   },
   {
     "id": "au-language-wjml6i",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "language",
     "difficulty": "Expert",
@@ -373,7 +373,7 @@
     ],
     "openAnswer": false,
     "sourceHint": "Этимологический словарь",
-    "reviewNote": "Путь заимствования шёл через испанский и европейские языки — нужен источник, сформулировать точно.",
+    "reviewNote": "Заблокировано 2026-10-17: в русский «шоколад» пришёл через французский/голландский, «науатль» — исходный язык; вариант «испанский» тоже спорный.",
     "origin": "authored",
     "license": "original"
   },
@@ -432,7 +432,7 @@
   },
   {
     "id": "q-language-16xmw8a",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "language",
     "difficulty": "Hard",
@@ -454,7 +454,8 @@
     "explanationRu": "Амхарский язык использует эфиопское письмо (геэз).",
     "sourceTitle": "Languages Quiz @isaacm.1063 @Peskovii",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "reviewNote": "Заблокировано 2026-10-17: формулировка с ошибкой («слоговей письменности»), вопрос не читается."
   },
   {
     "id": "q-language-1uekw9u",

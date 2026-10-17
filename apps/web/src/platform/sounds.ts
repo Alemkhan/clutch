@@ -7,19 +7,20 @@ export interface SoundSource {
   type: string;
 }
 
-const ogg = (name: string): readonly SoundSource[] => [
+// Safari and Telegram on iOS cannot decode Ogg Vorbis, so every sound also ships as AAC
+// (converted from the same OGG files with ffmpeg).
+const encodings = (name: string): readonly SoundSource[] => [
   { src: `/sfx/${name}.ogg`, type: 'audio/ogg; codecs="vorbis"' },
+  { src: `/sfx/${name}.m4a`, type: 'audio/mp4; codecs="mp4a.40.2"' },
 ];
 
-// Each sound has an ordered source list. Current licensed assets are OGG-only;
-// another encoding can be added without changing playback callers.
 const soundSources = {
-  tick: ogg('tick'), timeout: ogg('timeout'), correct: ogg('correct'),
-  incorrect: ogg('incorrect'), hammerTap: ogg('hammer-tap'),
-  strikePerfect: ogg('strike-perfect'), strikeGreat: ogg('strike-great'),
-  strikeGood: ogg('strike-good'), strikeWeak: ogg('strike-weak'),
-  strikeMiss: ogg('strike-miss'), matchWin: ogg('match-win'),
-  matchLose: ogg('match-lose'),
+  tick: encodings('tick'), timeout: encodings('timeout'), correct: encodings('correct'),
+  incorrect: encodings('incorrect'), hammerTap: encodings('hammer-tap'),
+  strikePerfect: encodings('strike-perfect'), strikeGreat: encodings('strike-great'),
+  strikeGood: encodings('strike-good'), strikeWeak: encodings('strike-weak'),
+  strikeMiss: encodings('strike-miss'), matchWin: encodings('match-win'),
+  matchLose: encodings('match-lose'),
 } as const;
 
 export type SoundName = keyof typeof soundSources;

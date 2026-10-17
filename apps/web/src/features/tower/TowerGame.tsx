@@ -25,7 +25,7 @@ export function towerActionSemantics(struck: boolean, result: SkillResult | null
   return {
     tabIndex: struck ? -1 : 0,
     'aria-disabled': struck,
-    'aria-label': result ? 'Блок упал' : 'Нажмите, чтобы уронить блок',
+    'aria-label': result ? 'Блок упал' : 'Нажми, чтобы уронить блок',
   } as const;
 }
 

@@ -5,7 +5,7 @@ export function registerSystemRoutes(app: Hono<{ Bindings: Env }>): void {
   app.get('/', (c) => c.json({
     name: 'Clutch API',
     status: 'ok',
-    tagline: 'Knowledge earns the attempt. Skill wins the game.',
+    tagline: 'Ответь верно. Дойди до 100%.',
   }));
 
   app.get('/api/health', (c) => c.json({

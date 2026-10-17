@@ -1,0 +1,21 @@
+{
+  "name": "clutch-promo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "capture": "cd .. && npx vite-node promo/capture.ts",
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts Promo out/clutch-promo.mp4 && node audio/master.mjs out/clutch-promo.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.536",
+    "@remotion/google-fonts": "^4.0.536",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.536"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.31",
+    "typescript": "^7.0.2"
+  }
+}

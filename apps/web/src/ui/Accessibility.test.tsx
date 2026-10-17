@@ -71,7 +71,7 @@ describe('accessible gameplay semantics', () => {
     );
 
     expect(html).toContain(
-      'class="hammer-game" role="button" tabindex="0" aria-disabled="false" aria-label="Нажмите, чтобы ударить по гвоздю"',
+      'class="hammer-game" role="button" tabindex="0" aria-disabled="false" aria-label="Нажми, чтобы ударить по гвоздю"',
     );
     expect(hammerActionSemantics(true, 'great')).toEqual({
       tabIndex: -1,

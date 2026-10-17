@@ -351,7 +351,7 @@
   },
   {
     "id": "q-body-55xn39",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "body",
     "difficulty": "Easy",
@@ -374,7 +374,8 @@
     "explanationRu": "Надколенник (patella) — крупнейшая сесамовидная кость скелета человека.",
     "sourceTitle": "Анатомия человека — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "reviewNote": "Заблокировано 2026-10-17: вопрос сам называет ответ («пателла») и просит латинское название, а ответ русский."
   },
   {
     "id": "q-body-yp4k8t",

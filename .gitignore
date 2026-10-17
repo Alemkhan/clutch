@@ -17,3 +17,12 @@ screenshots/
 /rea/
 # Пакет для внешнего дизайн-ревью: скриншоты и описание, только локально
 /design-review/
+# Выгрузки вопросов дня для вычитки: npm run content:day
+/content/review/
+# Промо-ролик: запись забега и рендеры собираются заново (promo/capture.ts, npm run render)
+/promo/node_modules/
+/promo/capture/
+/promo/out/
+/promo/public/take-*.mp4
+# Музыка и эффекты промо синтезируются заново: node promo/audio/synth.mjs
+/promo/public/audio/*.wav

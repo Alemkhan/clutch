@@ -276,6 +276,11 @@
   border-color: var(--primary);
 }
 
+/* The red border is the focus indicator here; the global blue focus ring drew a second frame. */
+.open-answer-input:focus-visible {
+  outline: none;
+}
+
 .open-answer-input::placeholder {
   color: var(--text-dim);
   opacity: 0.5;
@@ -294,8 +299,9 @@
   font-weight: 700;
 }
 
+/* Inactive until something is typed: readable, but clearly not the primary action. */
 .open-answer-submit:disabled {
-  opacity: 0.4;
   background: var(--surface-2);
+  color: var(--text-dim);
 }
 

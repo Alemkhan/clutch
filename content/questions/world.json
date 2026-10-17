@@ -925,7 +925,7 @@
   },
   {
     "id": "q-world-1osdpf",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "world",
     "difficulty": "Expert",
@@ -946,7 +946,8 @@
     "explanationRu": "Сенат Небраски является единственным однопалатным законодательным органом штатов США.",
     "sourceTitle": "Isaac & Jake vs. 10 Smart Players",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "reviewNote": "Заблокировано 2026-10-17: грамматическая ошибка («однопалатный легислатуру») и слишком американская тема."
   },
   {
     "id": "q-world-p3h56b",

@@ -354,8 +354,8 @@ export const MINI_GAME_TITLES: Record<MiniGameId, string> = {
 
 /** Одна строка правила для экрана старта забега. */
 export const MINI_GAME_RULES: Record<MiniGameId, string> = {
-  hammer_nail: 'Остановите молоток точно над гвоздём: чем точнее удар, тем больше прогресса.',
-  tower_stack: 'Уроните блок ровно на башню: чем точнее совпадение, тем больше прогресса.',
+  hammer_nail: 'Останови молоток точно над гвоздём: чем точнее удар, тем больше прогресса.',
+  tower_stack: 'Урони блок ровно на башню: чем точнее совпадение, тем больше прогресса.',
 };
 
 export function isMiniGameId(value: unknown): value is MiniGameId {

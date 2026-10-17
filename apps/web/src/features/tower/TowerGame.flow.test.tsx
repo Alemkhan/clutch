@@ -103,7 +103,7 @@ describe('TowerGame', () => {
 
   it('uses the tower accessibility label and keyboard', () => {
     const { view, game, onStrike } = setup();
-    expect(game().props['aria-label']).toBe('Нажмите, чтобы уронить блок');
+    expect(game().props['aria-label']).toBe('Нажми, чтобы уронить блок');
     const preventDefault = vi.fn();
     game().props.onKeyDown({ key: 'Enter', preventDefault });
     expect(onStrike).toHaveBeenCalledTimes(1);

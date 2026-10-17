@@ -35,7 +35,7 @@ export function hammerActionSemantics(struck: boolean, result: SkillResult | nul
   return {
     tabIndex: struck ? -1 : 0,
     'aria-disabled': struck,
-    'aria-label': result ? 'Удар завершён' : 'Нажмите, чтобы ударить по гвоздю',
+    'aria-label': result ? 'Удар завершён' : 'Нажми, чтобы ударить по гвоздю',
   } as const;
 }
 

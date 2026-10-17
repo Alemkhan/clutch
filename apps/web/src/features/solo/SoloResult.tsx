@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react';
 import { SOLO_TARGET_PROGRESS } from '@clutch/shared';
 import type { CategoryId, CompleteSoloRunResponse, SkillResult } from '@clutch/shared';
 import { playSound } from '../../platform/sounds';
-import { buildReceiptStats, buildSoloResult, circles, type RunStandingState, type SoloSaveStatus } from './soloResultModel';
+import { buildReceiptStats, buildSoloResult, circles, countPerfectStrikes, type RunStandingState, type SoloSaveStatus } from './soloResultModel';
+import { buildSoloShareText, useSoloShare } from './soloShare';
 import { categoryName } from '../myRuns/myRunsView';
 import { useRunStanding } from './useRunStanding';
 import type { SoloRunView } from './soloRunSession';
@@ -59,6 +60,7 @@ export function SoloResult({
   const playedRef = useRef(false);
   const practiceWon = practice ? practice.outcome === 'player' : null;
   const invite = useFriendInvite(response?.runId);
+  const resultShare = useSoloShare();
   // Место есть только у сохранённого рейтингового забега, дошедшего до 100%.
   const ranked = saveStatus === 'saved' && response?.reachedTarget === true && !friendDuel && !practice;
   const fetched = useRunStanding(category, ranked && !standing);
@@ -151,6 +153,8 @@ export function SoloResult({
 
       {invite.status === 'copied' && <p className="result-insight" role="status">Ссылка скопирована.</p>}
       {invite.status === 'error' && <p className="result-insight" role="alert">Не удалось отправить. Нажми ещё раз.</p>}
+      {resultShare.status === 'copied' && <p className="result-insight" role="status">Результат скопирован.</p>}
+      {resultShare.status === 'failed' && <p className="result-insight" role="alert">Не удалось поделиться. Нажми ещё раз.</p>}
 
       {receipt && saveStatus === 'saved' && (
         <section className="solo-result-receipt" aria-label="Твоя запись">
@@ -168,8 +172,9 @@ export function SoloResult({
 
       <div className="result-actions solo-result-actions">
         <button type="button" className="cta-btn" disabled={saving} onClick={() => { onReplay(); }}>Сыграть ещё</button>
-        <div className={`solo-result-secondary${canInvite ? '' : ' single'}`}>
-        {canInvite && (
+        {/* A run that reached 100% is shared as a duel link; any other run as a result line. */}
+        <div className="solo-result-secondary">
+        {canInvite ? (
           <button
             type="button"
             className="ghost-btn"
@@ -177,6 +182,23 @@ export function SoloResult({
             onClick={() => { void invite.send(); }}
           >
             Позвать друга
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="ghost-btn"
+            disabled={saving}
+            onClick={() => {
+              resultShare.share(buildSoloShareText({
+                reachedTarget: result.reachedTarget,
+                progress: result.progress,
+                roundsPlayed: result.roundsPlayed,
+                perfectHits: countPerfectStrikes(skillResults),
+                categoryLabel: categoryName(category),
+              }));
+            }}
+          >
+            Поделиться
           </button>
         )}
         <button type="button" className="ghost-btn" disabled={saving} onClick={() => { onMyRuns(); }}>Мои партии</button>

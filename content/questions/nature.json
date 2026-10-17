@@ -456,18 +456,19 @@
     ],
     "distractorsRu": [
       "белка-летяга",
-      "летяга",
-      "страус"
+      "шерстокрыл",
+      "сахарная летяга"
     ],
     "openAnswer": true,
     "explanationRu": "Летучие мыши — единственные млекопитающие, способные к машущему полёту.",
     "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "reviewNote": "Неверные варианты заменены 2026-10-17: были страус (не млекопитающее) и «летяга» дважды."
   },
   {
     "id": "q-nature-1ydqa37",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "nature",
     "difficulty": "Easy",
@@ -485,11 +486,12 @@
     "explanationRu": "Утконос относится к отряду однопроходных млекопитающих.",
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "reviewNote": "Заблокировано 2026-10-17: повтор au-nature-1xx1hxt (утконос), оба попадали в один день."
   },
   {
     "id": "q-nature-5z7drd",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "nature",
     "difficulty": "Easy",
@@ -508,7 +510,8 @@
     "explanationRu": "Детёнышей всех сумчатых в английском языке и международно называют «джои».",
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "reviewNote": "Заблокировано 2026-10-17: по-русски детёныш — «кенгурёнок», «джои» — английское слово; неверные варианты «теля, панда, щенок» бессмысленны."
   },
   {
     "id": "q-nature-578ait",

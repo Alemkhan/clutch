@@ -57,7 +57,7 @@ describe('HammerGame first-visit gating', () => {
     const html = renderToStaticMarkup(<HammerGame {...props} progressBefore={36} />);
     expect(html).toContain('Молоток');
     expect(html).toContain('Чем точнее удар, тем глубже гвоздь');
-    expect(html).toContain('Нажмите, чтобы ударить по гвоздю');
+    expect(html).toContain('Нажми, чтобы ударить по гвоздю');
     expect(html).toContain('<svg');
     expect(html).not.toContain('пню');
     expect(html).not.toContain('/sprites/');

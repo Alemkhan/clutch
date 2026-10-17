@@ -1,14 +1,24 @@
-/* Hammer mini-game: explanation step before the first attempt */
+/* Mini-game explanation before the first attempt (Hammer and Tower). A sheet over the dimmed
+   field rather than a block above it: in flow it pushed the field below the fold on short
+   Telegram viewports, and the player first saw the game half-hidden. The field ignores taps
+   while the intro is open, so the dim area needs no click handling. */
 .hammer-intro {
-  width: 100%;
+  position: fixed;
+  z-index: 40;
+  left: 50%;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
   max-width: 420px;
+  max-height: calc(100dvh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
   box-sizing: border-box;
-  margin: 0 auto 16px;
+  margin: 0;
   padding: 18px 16px;
   background: var(--surface);
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 0 0 100vmax rgba(23, 22, 20, 0.45), var(--shadow);
   text-align: left;
   overflow-wrap: anywhere;
 }

@@ -278,7 +278,8 @@ describe('solo run result', () => {
   it('keeps the buttons off while saving and shows a failed save with retry', () => {
     const pending = render(finished([25, 25, 25, 25]));
     expect(pending).toContain('Сохраняем результат');
-    expect(pending.match(/disabled=""/g)?.length).toBe(2);
+    // «Сыграть ещё», «Поделиться» и «Мои партии» ждут ответа сервера.
+    expect(pending.match(/disabled=""/g)?.length).toBe(3);
     const html = render(finished([25, 25, 25, 25]), {
       status: 'error', response: null, error: 'Не удалось сохранить результат.', canRetry: true,
     });
