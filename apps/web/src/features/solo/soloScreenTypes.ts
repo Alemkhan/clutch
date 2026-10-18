@@ -1,4 +1,4 @@
-import type { CategoryId, PracticeLevel, QuestionReportKind, SkillResult } from "@clutch/shared";
+import type { CategoryId, PracticeLevel, QuestionReportKind, SkillResult, SoloMode } from "@clutch/shared";
 import type { ResolutionReportStatus } from "../round/reportPanel";
 import type { SoloFlowState } from "./soloRunFlow";
 import type { SoloSaveState } from "./useSoloRun";
@@ -44,4 +44,6 @@ export interface SoloRunScreenProps {
   /** Репорт о проблеме на разборе: экран только рисует, сеть и статус живут в SoloRun. */
   onReport?: (kind: QuestionReportKind, comment: string) => void;
   reportState?: ResolutionReportStatus;
+  /** Сыграть в другом режиме (с экрана результата): свободная игра, дуэль. */
+  onPlayMode?: (mode: SoloMode, category: CategoryId) => void;
 }

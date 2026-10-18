@@ -3,8 +3,8 @@
 /* The top offset belongs to the body: on the section it pushed Back off the top edge. */
 
 .matchmaking-eyebrow {
-  /* Подпись стоит в 4 px от заголовка: 24 общего зазора минус 20. */
-  margin-bottom: -20px;
+  /* Подпись стоит в 4 px от заголовка: 14 общего зазора минус 10. */
+  margin-bottom: -10px;
   color: var(--primary);
   font-size: 12px;
   font-weight: 900;
@@ -14,7 +14,7 @@
 
 .matchmaking-card {
   width: 100%;
-  padding: 20px;
+  padding: 12px 16px;
   border: 1px solid var(--line);
   border-radius: 20px;
   background: var(--surface);

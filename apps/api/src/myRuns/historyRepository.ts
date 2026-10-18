@@ -1,4 +1,4 @@
-import { CURRENT_SOLO_RUN_CONDITIONS, FRIEND_RULES_VERSION, PRACTICE_RULES_VERSION, invertOutcome, type AsyncMatchRound, type MyRunOutcome, type MyRunSummary } from '@clutch/shared';
+import { DUEL_RULES_VERSION, FRIEND_RULES_VERSION, invertOutcome, type AsyncMatchRound, type MyRunOutcome, type MyRunSummary } from '@clutch/shared';
 
 export interface HistoryRow {
   id: string;
@@ -39,7 +39,11 @@ export function parseHistoryCursor(value: string): { completedAt: number; id: st
   return match ? { completedAt: Number(match[1]), id: match[2] } : null;
 }
 
-/** Завершённые партии игрока, новые сверху; строк на одну больше limit — признак следующей страницы. */
+/**
+ * Завершённые партии игрока, новые сверху; строк на одну больше limit — признак следующей страницы.
+ * Партии — это дуэли (свои и дружеские): победы и поражения есть только у них. Забег дня живёт в
+ * таблице дня, свободная игра нигде не учитывается (решение владельца 2026-10-19).
+ */
 export async function listCompletedRuns(
   db: D1Database,
   playerId: string,
@@ -65,7 +69,7 @@ export async function listCompletedRuns(
         SELECT ${columns} FROM match_runs
         WHERE status = 'completed' AND completed_at IS NOT NULL
           AND (
-            (player_id = ?1 AND rules_version LIKE 'solo-%' AND rules_version IS NOT '${PRACTICE_RULES_VERSION}')
+            (player_id = ?1 AND rules_version IN ('${DUEL_RULES_VERSION}', '${FRIEND_RULES_VERSION}'))
             OR (rules_version = '${FRIEND_RULES_VERSION}' AND opponent_run_id IN (
               SELECT id FROM match_runs WHERE player_id = ?1
             ))
@@ -77,7 +81,7 @@ export async function listCompletedRuns(
         SELECT ${columns} FROM match_runs
         WHERE status = 'completed' AND completed_at IS NOT NULL
           AND (
-            (player_id = ?1 AND rules_version LIKE 'solo-%' AND rules_version IS NOT '${PRACTICE_RULES_VERSION}')
+            (player_id = ?1 AND rules_version IN ('${DUEL_RULES_VERSION}', '${FRIEND_RULES_VERSION}'))
             OR (rules_version = '${FRIEND_RULES_VERSION}' AND opponent_run_id IN (
               SELECT id FROM match_runs WHERE player_id = ?1
             ))
@@ -146,7 +150,7 @@ function rematchOffer(
   row: HistoryRow,
   friendDuel: MyRunSummary['friendDuel'],
 ): MyRunSummary['rematchOffer'] {
-  if (friendDuel || row.rules_version !== CURRENT_SOLO_RUN_CONDITIONS.rulesVersion) return null;
+  if (friendDuel || row.rules_version !== DUEL_RULES_VERSION) return null;
   if (!row.opponent_run_id || !['player', 'opponent', 'tie'].includes(row.solo_outcome ?? '')) return null;
   return row.rematch_offered ? 'sent' : 'available';
 }

@@ -1,6 +1,8 @@
 import {
   CURRENT_SOLO_RUN_CONDITIONS,
+  DAILY_RULES_VERSION,
   FRIEND_RULES_VERSION,
+  seenQuestionKey,
   dailyKey,
   PRACTICE_RULES_VERSION,
   type AsyncMatchRound,
@@ -32,6 +34,8 @@ export async function createSoloRun(db: D1Database, input: {
   practice?: boolean;
   /** Забег по дружеской ссылке: своя версия правил, вне пула, таблицы и приглашений; исход считается. */
   friend?: boolean;
+  /** Версия правил режима (забег дня, свободная игра, дуэль); по умолчанию — дуэль. */
+  rulesVersion?: string;
   now: number;
 }): Promise<void> {
   await db.prepare(`
@@ -49,7 +53,7 @@ export async function createSoloRun(db: D1Database, input: {
     input.now,
     input.practice
       ? PRACTICE_RULES_VERSION
-      : input.friend ? FRIEND_RULES_VERSION : CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
+      : input.friend ? FRIEND_RULES_VERSION : input.rulesVersion ?? CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
     input.miniGameId,
     currentMiniGameConfigJson,
     input.pace ? JSON.stringify(input.pace) : null,
@@ -71,6 +75,8 @@ export async function completeSoloRun(db: D1Database, input: {
   practice?: boolean;
   /** Дружеская дуэль: результат и исход сохраняются, но забег не может стать записью соперника. */
   friend?: boolean;
+  /** Записью соперника становится только дуэль: забег дня и свободная игра в пул не идут. */
+  recordable?: boolean;
   now: number;
 }): Promise<boolean> {
   const update = await db.prepare(`
@@ -85,7 +91,7 @@ export async function completeSoloRun(db: D1Database, input: {
     input.progress,
     input.correctCount,
     input.now,
-    input.practice || input.friend ? 0 : input.reachedTarget ? 1 : 0,
+    input.practice || input.friend || input.recordable === false ? 0 : input.reachedTarget ? 1 : 0,
     input.practice ? null : input.setPar,
     input.practice ? null : input.soloScore,
     input.practice ? null : input.outcome,
@@ -127,6 +133,7 @@ export async function findActiveSoloRun(
   db: D1Database,
   playerId: string,
   category: string,
+  rulesVersion: string = CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
 ): Promise<{ id: string } | null> {
   return db.prepare(`
     SELECT id FROM match_runs
@@ -134,7 +141,40 @@ export async function findActiveSoloRun(
       AND rules_version = ?3
     ORDER BY created_at DESC
     LIMIT 1
-  `).bind(playerId, category, CURRENT_SOLO_RUN_CONDITIONS.rulesVersion).first<{ id: string }>();
+  `).bind(playerId, category, rulesVersion).first<{ id: string }>();
+}
+
+/**
+ * Попытка забега дня: забег игрока на наборе дня этой категории (любого статуса).
+ * В таблицу идёт первая попытка, поэтому начатый забег дня второй раз не выдаётся.
+ */
+export async function findDailyAttempt(
+  db: D1Database,
+  playerId: string,
+  questionSetId: string,
+): Promise<{ id: string; status: 'in_progress' | 'completed' } | null> {
+  return db.prepare(`
+    SELECT id, status FROM match_runs
+    WHERE player_id = ?1 AND question_set_id = ?2 AND rules_version = ?3
+    ORDER BY created_at ASC
+    LIMIT 1
+  `).bind(playerId, questionSetId, DAILY_RULES_VERSION).first<{ id: string; status: 'in_progress' | 'completed' }>();
+}
+
+/** Сколько сыгранных кругов смотрим назад, выбирая невиденные вопросы для свежего набора. */
+const SEEN_ROUNDS_LIMIT = 3000;
+
+/** Вопросы, которые игрок уже видел в кругах (ключи seenQuestionKey), самые свежие первыми. */
+export async function seenQuestionKeys(db: D1Database, playerId: string): Promise<Set<string>> {
+  const result = await db.prepare(`
+    SELECT round.question_id AS id
+    FROM solo_run_rounds round
+    JOIN match_runs run ON run.id = round.run_id
+    WHERE run.player_id = ?1
+    ORDER BY round.created_at DESC
+    LIMIT ?2
+  `).bind(playerId, SEEN_ROUNDS_LIMIT).all<{ id: string }>();
+  return new Set(result.results.map((row) => seenQuestionKey(row.id)));
 }
 
 /** Сохранённый исход завершённого забега; null — ждёт соперника или забег старше миграции. */

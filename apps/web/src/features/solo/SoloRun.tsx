@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { CategoryId, PracticeLevel } from "@clutch/shared";
+import type { CategoryId, PracticeLevel, SoloMode } from "@clutch/shared";
 import { CategorySelect } from "./CategorySelect";
 import { TiebreakerScreen } from "../tiebreaker/Tiebreaker";
 import {
@@ -71,6 +71,10 @@ interface SoloRunProps {
   practice?: PracticeLevel;
   /** Нужен приложению: системная «Назад» скрыта во время игры, а молоток получает свой фон. */
   onStageChange: (stage: SoloStage) => void;
+  /** Режим забега: забег дня, свободная игра или дуэль; по умолчанию — забег дня. */
+  mode?: SoloMode;
+  /** Сыграть в другом режиме с экрана результата. */
+  onPlayMode?: (mode: SoloMode, category: CategoryId) => void;
 }
 
 export function SoloRun({
@@ -80,8 +84,10 @@ export function SoloRun({
   defaultCategory,
   practice,
   onStageChange,
+  mode = "daily",
+  onPlayMode,
 }: SoloRunProps) {
-  const run = useSoloRun(practice?.id);
+  const run = useSoloRun(practice?.id, mode);
   const { stage } = run.state;
   const { begin, resume } = run;
   const { submitReport, reportState } = useQuestionReport(run.state);
@@ -128,6 +134,7 @@ export function SoloRun({
       practice={practice}
       onReport={submitReport}
       reportState={reportState}
+      onPlayMode={onPlayMode}
     />
   );
 }

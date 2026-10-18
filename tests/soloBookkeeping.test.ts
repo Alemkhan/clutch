@@ -152,7 +152,7 @@ describe('итог доходит до владельца записи', () => {
 
     const player = guest('challenger');
     const started = await request(db, '/api/solo-runs', player.authorization, {
-      displayName: 'Друг', category: 'geography',
+      displayName: 'Друг', category: 'geography', mode: 'duel',
     });
     expect(started.status).toBe(201);
     const run = await started.json() as StartSoloRunResponse;
@@ -220,7 +220,7 @@ describe('тренировка не трогает наборы зачётног
     const bank = dailyQuestionSetIds('geography', NOW);
 
     const practice = await request(db, '/api/solo-runs', player.authorization, {
-      displayName: 'Игрок', category: 'geography', botLevel: 'novice',
+      displayName: 'Игрок', category: 'geography', mode: 'duel', botLevel: 'novice',
     });
     expect(practice.status).toBe(201);
     const practiceRun = await practice.json() as StartSoloRunResponse;
@@ -232,9 +232,9 @@ describe('тренировка не трогает наборы зачётног
     expect(practiceSetId.startsWith('practice:')).toBe(true);
     expect(bank).not.toContain(practiceSetId);
 
-    // Поэтому зачётный забег получает первый, ещё не сыгранный набор дня.
+    // Поэтому забег дня получает свой набор дня, как будто тренировки не было.
     const ranked = await request(db, '/api/solo-runs', player.authorization, {
-      displayName: 'Игрок', category: 'geography',
+      displayName: 'Игрок', category: 'geography', mode: 'daily',
     });
     expect(ranked.status).toBe(201);
     const rankedRun = await ranked.json() as StartSoloRunResponse;
@@ -250,7 +250,7 @@ describe('тренировка не трогает наборы зачётног
     const player = guest('trainee-2');
     for (let attempt = 0; attempt < 3; attempt += 1) {
       const response = await request(db, '/api/solo-runs', player.authorization, {
-        displayName: 'Игрок', category: 'geography', botLevel: 'novice',
+        displayName: 'Игрок', category: 'geography', mode: 'duel', botLevel: 'novice',
       });
       expect(response.status).toBe(201);
     }
@@ -271,7 +271,7 @@ describe('повторный старт не теряет соперника', (
     const bank = dailyQuestionSetIds('geography', NOW);
 
     const first = await request(db, '/api/solo-runs', player.authorization, {
-      displayName: 'Друг', category: 'geography',
+      displayName: 'Друг', category: 'geography', mode: 'duel',
     });
     expect(first.status).toBe(201);
     const firstRun = await first.json() as StartSoloRunResponse;
@@ -279,7 +279,7 @@ describe('повторный старт не теряет соперника', (
 
     // Игрок закрыл приложение и зашёл снова, ничего не доиграв.
     const second = await request(db, '/api/solo-runs', player.authorization, {
-      displayName: 'Друг', category: 'geography',
+      displayName: 'Друг', category: 'geography', mode: 'duel',
     });
     expect(second.status).toBe(201);
     const secondRun = await second.json() as StartSoloRunResponse;
@@ -301,14 +301,14 @@ describe('матч — это пара', () => {
     insertRecord(db, 'record-run', 'guest:11111111-1111-4111-8111-111111111111', 'Алем');
 
     const first = await request(db, '/api/solo-runs', guest('claimer-1').authorization, {
-      displayName: 'Первый', category: 'geography',
+      displayName: 'Первый', category: 'geography', mode: 'duel',
     });
     const firstRun = await first.json() as StartSoloRunResponse;
     expect(firstRun.pace?.id).toBe('record-run');
 
     // Второй стартует на том же наборе дня, но запись уже занята.
     const second = await request(db, '/api/solo-runs', guest('claimer-2').authorization, {
-      displayName: 'Второй', category: 'geography',
+      displayName: 'Второй', category: 'geography', mode: 'duel',
     });
     const secondRun = await second.json() as StartSoloRunResponse;
     expect(secondRun.pace).toBeNull();
@@ -323,7 +323,7 @@ describe('матч — это пара', () => {
 
     const challenger = guest('challenger-x');
     const started = await request(db, '/api/solo-runs', challenger.authorization, {
-      displayName: 'Претендент', category: 'geography',
+      displayName: 'Претендент', category: 'geography', mode: 'duel',
     });
     const run = await started.json() as StartSoloRunResponse;
     expect(run.pace?.id).toBe('record-run');
@@ -336,7 +336,7 @@ describe('матч — это пара', () => {
 
     // Его забег дошёл до цели, но он уже сыграл матч: третьему он не достанется.
     const third = await request(db, '/api/solo-runs', guest('third').authorization, {
-      displayName: 'Третий', category: 'geography',
+      displayName: 'Третий', category: 'geography', mode: 'duel',
     });
     expect((await third.json() as StartSoloRunResponse).pace).toBeNull();
   });
@@ -345,7 +345,7 @@ describe('матч — это пара', () => {
     const db = database();
     const owner = guest('owner');
     const ownerStart = await request(db, '/api/solo-runs', owner.authorization, {
-      displayName: 'Алем', category: 'geography',
+      displayName: 'Алем', category: 'geography', mode: 'duel',
     });
     const ownerRun = await ownerStart.json() as StartSoloRunResponse;
     expect(ownerRun.pace).toBeNull();
@@ -358,7 +358,7 @@ describe('матч — это пара', () => {
 
     const rival = guest('rival');
     const rivalStart = await request(db, '/api/solo-runs', rival.authorization, {
-      displayName: 'Друг', category: 'geography',
+      displayName: 'Друг', category: 'geography', mode: 'duel',
     });
     const rivalRun = await rivalStart.json() as StartSoloRunResponse;
     expect(rivalRun.pace?.id).toBe(ownerRun.runId);
@@ -390,7 +390,7 @@ describe('запись ждёт молчащего претендента, а н
     insertRecord(db, 'record-run', 'guest:11111111-1111-4111-8111-111111111111', 'Алем');
     const player = guest('quitter');
     const started = await request(db, '/api/solo-runs', player.authorization, {
-      displayName: 'Претендент', category: 'geography',
+      displayName: 'Претендент', category: 'geography', mode: 'duel',
     });
     const run = await started.json() as StartSoloRunResponse;
     expect(run.pace?.id).toBe('record-run');
@@ -404,7 +404,7 @@ describe('запись ждёт молчащего претендента, а н
       roundInputs(questions, 2, true),
     );
     const other = await request(db, '/api/solo-runs', guest('other').authorization, {
-      displayName: 'Другой', category: 'geography',
+      displayName: 'Другой', category: 'geography', mode: 'duel',
     });
     expect((await other.json() as StartSoloRunResponse).pace).toBeNull();
 
@@ -415,7 +415,7 @@ describe('запись ждёт молчащего претендента, а н
     db.sqlite.prepare('UPDATE match_runs SET claimed_at = ? WHERE id = ?').run(longAgo, 'record-run');
 
     const late = await request(db, '/api/solo-runs', guest('late').authorization, {
-      displayName: 'Поздний', category: 'geography',
+      displayName: 'Поздний', category: 'geography', mode: 'duel',
     });
     const lateRun = await late.json() as StartSoloRunResponse;
     expect(lateRun.pace?.id).toBe('record-run');
@@ -433,7 +433,7 @@ describe('запись ждёт молчащего претендента, а н
     insertRecord(db, 'record-run', 'guest:11111111-1111-4111-8111-111111111111', 'Алем');
     const player = guest('finisher');
     const run = await (await request(db, '/api/solo-runs', player.authorization, {
-      displayName: 'Претендент', category: 'geography',
+      displayName: 'Претендент', category: 'geography', mode: 'duel',
     })).json() as StartSoloRunResponse;
     const questions = fullQuestions(db, run.runId);
     expect((await playRounds(
@@ -447,7 +447,7 @@ describe('запись ждёт молчащего претендента, а н
     db.sqlite.prepare('UPDATE solo_run_rounds SET created_at = ?, settled_at = ? WHERE run_id = ?').run(longAgo, longAgo, run.runId);
     db.sqlite.prepare('UPDATE match_runs SET claimed_at = ? WHERE id = ?').run(longAgo, 'record-run');
     const late = await request(db, '/api/solo-runs', guest('late-2').authorization, {
-      displayName: 'Поздний', category: 'geography',
+      displayName: 'Поздний', category: 'geography', mode: 'duel',
     });
     expect((await late.json() as StartSoloRunResponse).pace).toBeNull();
   });

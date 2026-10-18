@@ -31,11 +31,16 @@ const today = (overrides: Partial<TiebreakerTodayResponse> = {}): TiebreakerToda
   },
 });
 
-const render = (props: { tiebreaker?: TiebreakerTodayState; standing?: SoloLeaderboardStanding | null } = {}) => renderToStaticMarkup(
+const render = (props: {
+  tiebreaker?: TiebreakerTodayState;
+  standing?: SoloLeaderboardStanding | null;
+  dailyAttempt?: 'none' | 'in_progress' | 'completed';
+} = {}) => renderToStaticMarkup(
   <HomeDashboardView
     tiebreaker={props.tiebreaker ?? today()}
     msLeft={MS_LEFT}
     standing={props.standing ?? null}
+    dailyAttempt={props.dailyAttempt ?? 'none'}
     onSolo={vi.fn()}
     onBoard={vi.fn()}
     onTiebreaker={vi.fn()}
@@ -52,13 +57,15 @@ describe('home header', () => {
 
 describe('the place line after a counted finish', () => {
   it('shows «Ты N-й сегодня. До (N-1)-го — M кругов» from the leaderboard, with the real numbers', () => {
-    const out = render({ standing: standing({ roundsToNext: 2 }) });
+    const out = render({ standing: standing({ roundsToNext: 2 }), dailyAttempt: 'completed' });
     expect(out).toContain('Ты 3-й сегодня.');
     expect(out).toContain('До 2-го — 2 круга.');
     expect(out).toContain('3 / 41');
     expect(out).toContain('>7<');
-    expect(out).toContain('Сыграть ещё набор');
-    // Играть остаётся единственной главной кнопкой.
+    // Забег дня сыгран: главная зовёт в дуэль, второй раз забег дня не предлагает.
+    expect(out).toMatch(/class="cta-btn"[^>]*>Дуэль/);
+    expect(out).not.toMatch(/<button[^>]*>Забег дня/);
+    expect(out).toContain('Свободная игра');
     expect(out.match(/class="cta-btn"/g)).toHaveLength(1);
   });
 
@@ -78,8 +85,19 @@ describe('the place line after a counted finish', () => {
     expect(out).not.toContain('сегодня.');
     expect(out).not.toContain('home-stats');
     expect(out).toContain('Дойди до 100%');
-    expect(out).toContain('Играть');
-    expect(out).not.toContain('Сыграть ещё набор');
+    expect(out).toMatch(/class="cta-btn"[^>]*>Забег дня/);
+    expect(out).toContain('>Дуэль<');
+    expect(out).toContain('>Свободная игра<');
+  });
+
+  it('says the run of the day is played when it missed the target, and offers a duel', () => {
+    const out = render({ standing: null, dailyAttempt: 'completed' });
+    expect(out).toContain('Забег дня сыгран.');
+    expect(out).toMatch(/class="cta-btn"[^>]*>Дуэль/);
+  });
+
+  it('continues an unfinished run of the day', () => {
+    expect(render({ standing: null, dailyAttempt: 'in_progress' })).toContain('Продолжить забег дня');
   });
 
   it('uses the place above under ties and the guess wording for equal rounds', () => {

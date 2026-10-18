@@ -3,9 +3,14 @@ import { useEffect, useRef, useState } from 'react';
 interface OpenAnswerInputProps {
   onSubmit: (answer: string) => void;
   disabled: boolean;
+  /**
+   * «Пропустить»: честный отказ вместо набранной наугад белиберды. Засчитывается как неверный ответ
+   * (круг тратится, удара нет), иначе пропуском обходили бы трудные вопросы бесплатно.
+   */
+  onSkip?: () => void;
 }
 
-export function OpenAnswerInput({ onSubmit, disabled }: OpenAnswerInputProps) {
+export function OpenAnswerInput({ onSubmit, disabled, onSkip }: OpenAnswerInputProps) {
   const [value, setValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -62,6 +67,11 @@ export function OpenAnswerInput({ onSubmit, disabled }: OpenAnswerInputProps) {
       >
         Отправить
       </button>
+      {onSkip && (
+        <button type="button" className="open-answer-skip" onClick={onSkip} disabled={disabled}>
+          Пропустить
+        </button>
+      )}
     </div>
   );
 }

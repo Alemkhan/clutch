@@ -1,6 +1,5 @@
 import {
   CURRENT_SOLO_RUN_CONDITIONS,
-  SOLO_ROUND_CAP,
   SOLO_TARGET_PROGRESS,
   evaluateSoloRun,
   toPublicQuestion,
@@ -26,11 +25,11 @@ export async function buildSoloSnapshot(c: AppContext, loaded: LoadedSoloRun): P
 
   const pendingIndex = rows.findIndex((row) => row.settled_at === null);
   if (pendingIndex >= 0 && run.status === 'in_progress') {
-    const settled = await settleHammerRow(c, run, questions, rows, pendingIndex, { kind: 'forfeit' });
+    const settled = await settleHammerRow(c, loaded, rows, pendingIndex, { kind: 'forfeit' });
     if (settled instanceof Response) return settled;
     rows = settled;
   }
-  const state = evaluateSoloRun(questionIds(questions), settledRounds(rows));
+  const state = evaluateSoloRun(questionIds(questions), settledRounds(rows), loaded.roundCap);
   let result: CompleteSoloRunResponse | null = null;
   if (state.status === 'completed') {
     const finished = await finalizeSoloRun(c, loaded, rows);
@@ -46,7 +45,8 @@ export async function buildSoloSnapshot(c: AppContext, loaded: LoadedSoloRun): P
     // Соперника отпустили, пока игрока не было: экран должен сказать об этом прямо.
     ...(run.pace_released === 1 ? { paceReleased: true } : {}),
     target: SOLO_TARGET_PROGRESS,
-    roundCap: SOLO_ROUND_CAP,
+    // У дуэли — круг, на котором соперник дошёл до цели: клиент кончает партию там же, где сервер.
+    roundCap: loaded.roundCap,
     rulesVersion: run.rules_version ?? CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
     miniGameId: run.mini_game_id as MiniGameId,
     bankExhausted: false,

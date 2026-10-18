@@ -39,11 +39,13 @@ export function soloRoundsText(count: number): string {
 }
 
 /**
- * Чем закончилась партия. Нет соперника у дошедшего до цели забега — «ждём соперника»;
- * у не дошедшего ждать нечего: такой забег в пул не попадает, поэтому «ждём» ему не пишем.
+ * Чем закончилась партия. Исход дуэли главнее всего: партия обрывается на финише соперника, и
+ * не дошедший до 100% против записи — это поражение, а не «не дошёл». «Не дошёл» — только без
+ * соперника. Нет соперника у дошедшего до цели забега — «ждём соперника»; у не дошедшего ждать
+ * нечего: такой забег в пул не попадает, поэтому «ждём» ему не пишем.
  */
 export function runStatus(run: Pick<MyRunSummary, 'reachedTarget' | 'outcome' | 'opponent' | 'friendDuel'>): RunStatus {
-  if (!run.reachedTarget && run.friendDuel !== 'hosted') return { kind: 'missed', text: 'Не дошёл до цели' };
+  if (!run.outcome && !run.reachedTarget && run.friendDuel !== 'hosted') return { kind: 'missed', text: 'Не дошёл до цели' };
   switch (run.outcome) {
     case 'player': return { kind: 'win', text: 'Победа' };
     case 'opponent': return { kind: 'loss', text: 'Поражение' };

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import type { CategoryId, PracticeLevel } from '@clutch/shared';
+import type { CategoryId, PracticeLevel, SoloMode } from '@clutch/shared';
 import { useGameState } from './app/useGameState';
 import { HomeDashboard } from './features/home/HomeDashboard';
 import { Profile } from './features/profile/Profile';
@@ -53,12 +53,18 @@ export default function App() {
   }, [game.goHome]);
   // Категория забега: таблица дня зовёт играть в ту категорию, на вкладке которой стоит игрок.
   const [soloCategory, setSoloCategory] = useState<CategoryId>('general');
-  const startSolo = useCallback((category: CategoryId = 'general') => {
+  // Режим забега и ключ экрана: смена режима с экрана результата открывает забег заново.
+  const [soloMode, setSoloMode] = useState<SoloMode>('daily');
+  const [soloKey, setSoloKey] = useState(0);
+  const startSolo = useCallback((category: CategoryId = 'general', mode: SoloMode = 'daily') => {
     setSoloRematch(null);
     setPracticeLevel(null);
     setSoloCategory(category);
+    setSoloMode(mode);
+    setSoloKey((key) => key + 1);
     game.goToSolo();
   }, [game.goToSolo]);
+  const playMode = useCallback((mode: SoloMode, category: CategoryId) => startSolo(category, mode), [startSolo]);
   const startPractice = useCallback((level: PracticeLevel) => {
     setSoloRematch(null);
     setPracticeLevel(level);
@@ -106,7 +112,7 @@ export default function App() {
         {game.phase === 'home' && !launchIntent && (
           <motion.div key="home" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <HomeDashboard
-              onSolo={() => startSolo()}
+              onSolo={(mode) => startSolo('general', mode)}
               onBoard={game.goToBoard}
               onTiebreaker={game.goToTiebreaker}
             />
@@ -137,6 +143,9 @@ export default function App() {
         {game.phase === 'solo' && (
           <motion.div key="solo" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <SoloRun
+              key={soloKey}
+              mode={soloMode}
+              onPlayMode={playMode}
               onHome={practiceLevel ? game.goToTraining : game.goHome}
               practice={practiceLevel ?? undefined}
               onMyRuns={game.goToMyRuns}
@@ -149,7 +158,7 @@ export default function App() {
 
         {game.phase === 'board' && (
           <motion.div key="board" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
-            <SoloBoard onBack={game.goHome} onPlay={startSolo} />
+            <SoloBoard onBack={game.goHome} onPlay={(category, mode) => startSolo(category, mode)} />
           </motion.div>
         )}
 

@@ -6,11 +6,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
+  DAILY_RULES_VERSION,
   dailyQuestionSet,
   setPar,
   type AsyncMatchRound,
   type AsyncMatchRoundInput,
   type CompleteSoloRunResponse,
+  type DuelBoardResponse,
   type MyRunsResponse,
   type Question,
   type SoloLeaderboardResponse,
@@ -109,6 +111,8 @@ function insertSolo(db: TestD1, options: {
   durationMs?: number;
   category?: string;
   rounds?: number;
+  /** Версия правил: по умолчанию дуэль (запись-соперник); таблица дня читает забеги дня. */
+  rules?: string;
 }) {
   const roundsCount = options.rounds ?? 4;
   let progress = 0;
@@ -139,7 +143,7 @@ function insertSolo(db: TestD1, options: {
     roundsCount,
     (options.completedAt ?? NOW - 1000) - (options.durationMs ?? 1000),
     options.completedAt ?? NOW - 1000,
-    SOLO,
+    options.rules ?? SOLO,
     CURRENT_HAMMER_MINI_GAME.id,
     configJson,
     SET.questionSetId,
@@ -149,8 +153,13 @@ function insertSolo(db: TestD1, options: {
   );
 }
 
+/** Забег дня в таблице: та же строка, но версии забега дня. */
+function insertDaily(db: TestD1, options: Parameters<typeof insertSolo>[1]) {
+  insertSolo(db, { ...options, rules: DAILY_RULES_VERSION });
+}
+
 async function start(db: TestD1, authorization: string): Promise<StartSoloRunResponse> {
-  const response = await call(db, '/api/solo-runs', authorization, { displayName: 'Игрок', category: 'geography' });
+  const response = await call(db, '/api/solo-runs', authorization, { displayName: 'Игрок', category: 'geography', mode: 'duel' });
   expect(response.status).toBe(201);
   return await response.json() as StartSoloRunResponse;
 }
@@ -175,6 +184,26 @@ function inviteRows(db: TestD1) {
 }
 
 const sentPayload = () => JSON.parse((fetchMock.mock.calls[0] as [string, RequestInit])[1].body as string);
+
+describe('the duel board of the day', () => {
+  it('counts a finished duel for both sides: a win for the challenger, a loss for the record', async () => {
+    const db = database();
+    const bob = guest('bob');
+    insertSolo(db, { id: 'alem-run', playerId: 'telegram:42', name: 'Алем', soloScore: 99 });
+    const run = await start(db, bob);
+    expect((await (await finish(db, bob, run, 4, true)).json() as CompleteSoloRunResponse).outcome).toBe('player');
+
+    const board = await (await call(db, '/api/duel-board', bob)).json() as DuelBoardResponse;
+    expect(board.entries).toEqual([
+      { rank: 1, displayName: 'Игрок', wins: 1, draws: 0, losses: 0 },
+      { rank: 2, displayName: 'Алем', wins: 0, draws: 0, losses: 1 },
+    ]);
+    expect(board.you).toMatchObject({ wins: 1, losses: 0 });
+    // Забег дня и дуэли — разные таблицы: дуэль в таблицу забегов дня не попадает.
+    const day = await (await call(db, '/api/solo-leaderboard?category=geography', bob)).json() as SoloLeaderboardResponse;
+    expect(day.entries).toEqual([]);
+  });
+});
 
 describe('solo outcome against a pace', () => {
   const bob = guest('bob');
@@ -330,14 +359,14 @@ describe('solo leaderboard', () => {
 
   it('sorts by score, drops runs that missed the target, other days and other categories', async () => {
     const db = database();
-    insertSolo(db, { id: 'a', playerId: 'p:a', soloScore: 1.5 });
-    insertSolo(db, { id: 'b', playerId: 'p:b', soloScore: 0.8 });
-    insertSolo(db, { id: 'c', playerId: 'p:c', soloScore: 0.1, reachedTarget: 0 });
-    insertSolo(db, { id: 'd', playerId: 'p:d', soloScore: 0.2, completedAt: NOW - 36 * 60 * 60 * 1000 });
-    insertSolo(db, { id: 'e', playerId: 'p:e', soloScore: 0.3, category: 'history' });
-    insertSolo(db, { id: 'f', playerId: 'p:f', soloScore: 1.1, rounds: 5 });
+    insertDaily(db, { id: 'a', playerId: 'p:a', soloScore: 1.5 });
+    insertDaily(db, { id: 'b', playerId: 'p:b', soloScore: 0.8 });
+    insertDaily(db, { id: 'c', playerId: 'p:c', soloScore: 0.1, reachedTarget: 0 });
+    insertDaily(db, { id: 'd', playerId: 'p:d', soloScore: 0.2, completedAt: NOW - 36 * 60 * 60 * 1000 });
+    insertDaily(db, { id: 'e', playerId: 'p:e', soloScore: 0.3, category: 'history' });
+    insertDaily(db, { id: 'f', playerId: 'p:f', soloScore: 1.1, rounds: 5 });
     // Второй, худший забег игрока a таблицу не дублирует.
-    insertSolo(db, { id: 'a2', playerId: 'p:a', soloScore: 2, name: 'a-worse' });
+    insertDaily(db, { id: 'a2', playerId: 'p:a', soloScore: 2, name: 'a-worse' });
 
     const response = await board(db, '?category=geography');
     expect(response.status).toBe(200);
@@ -350,8 +379,8 @@ describe('solo leaderboard', () => {
 
   it('defaults to the general category', async () => {
     const db = database();
-    insertSolo(db, { id: 'g', playerId: 'p:g', soloScore: 1, category: 'general' });
-    insertSolo(db, { id: 'geo', playerId: 'p:geo', soloScore: 1 });
+    insertDaily(db, { id: 'g', playerId: 'p:g', soloScore: 1, category: 'general' });
+    insertDaily(db, { id: 'geo', playerId: 'p:geo', soloScore: 1 });
     const body = await (await board(db)).json() as SoloLeaderboardResponse;
     expect(body.category).toBe('general');
     expect(body.entries.map((entry) => entry.displayName)).toEqual(['g']);
@@ -359,9 +388,9 @@ describe('solo leaderboard', () => {
 
   it('breaks equal scores by fewer rounds; run duration no longer decides, equal runs share a place', async () => {
     const db = database();
-    insertSolo(db, { id: 'slow', playerId: 'p:1', soloScore: 1, completedAt: NOW - 500, durationMs: 9000 });
-    insertSolo(db, { id: 'fast', playerId: 'p:2', soloScore: 1, completedAt: NOW - 10, durationMs: 2000 });
-    insertSolo(db, { id: 'long', playerId: 'p:4', soloScore: 1, completedAt: NOW - 900, durationMs: 100, rounds: 6 });
+    insertDaily(db, { id: 'slow', playerId: 'p:1', soloScore: 1, completedAt: NOW - 500, durationMs: 9000 });
+    insertDaily(db, { id: 'fast', playerId: 'p:2', soloScore: 1, completedAt: NOW - 10, durationMs: 2000 });
+    insertDaily(db, { id: 'long', playerId: 'p:4', soloScore: 1, completedAt: NOW - 900, durationMs: 100, rounds: 6 });
     const body = await (await board(db, '?category=geography')).json() as SoloLeaderboardResponse;
     // slow и fast равны (круги и счёт, прикидки нет): место общее, показ по времени финиша.
     expect(body.entries.map((entry) => entry.displayName)).toEqual(['slow', 'fast', 'long']);
@@ -370,8 +399,8 @@ describe('solo leaderboard', () => {
 
   it('selects another UTC day and category, and validates input and auth', async () => {
     const db = database();
-    insertSolo(db, { id: 'old', playerId: 'p:o', soloScore: 1, completedAt: NOW - 36 * 60 * 60 * 1000 });
-    insertSolo(db, { id: 'hist', playerId: 'p:h', soloScore: 1, category: 'history' });
+    insertDaily(db, { id: 'old', playerId: 'p:o', soloScore: 1, completedAt: NOW - 36 * 60 * 60 * 1000 });
+    insertDaily(db, { id: 'hist', playerId: 'p:h', soloScore: 1, category: 'history' });
     const previous = await (await board(db, '?category=geography&date=2026-10-10')).json() as SoloLeaderboardResponse;
     expect(previous.entries.map((entry) => entry.displayName)).toEqual(['old']);
     const history = await (await board(db, '?category=history')).json() as SoloLeaderboardResponse;
@@ -395,9 +424,9 @@ describe('my own place in the day board', () => {
     const db = database();
     // Шестьдесят чужих забегов лучше моего: в топ-50 я не попадаю.
     for (let index = 0; index < 60; index += 1) {
-      insertSolo(db, { id: `r${index}`, playerId: `p:${index}`, soloScore: 0.1 + index * 0.01 });
+      insertDaily(db, { id: `r${index}`, playerId: `p:${index}`, soloScore: 0.1 + index * 0.01 });
     }
-    insertSolo(db, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 2, rounds: 16 });
+    insertDaily(db, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 2, rounds: 16 });
 
     const body = await (await board(db)).json() as SoloLeaderboardResponse;
     expect(body.entries).toHaveLength(50);
@@ -412,40 +441,40 @@ describe('my own place in the day board', () => {
     const par = setPar(SET.questions);
     // Сосед сверху закрыл набор за 7 кругов, я за 9. Чтобы обойти, нужно строго меньше семи:
     // равные круги разводит прикидка «На глазок», без неё место общее. Отсюда три.
-    insertSolo(db, { id: 'above', playerId: 'p:above', soloScore: 7 / par, rounds: 7 });
-    insertSolo(db, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 9 / par, rounds: 9 });
+    insertDaily(db, { id: 'above', playerId: 'p:above', soloScore: 7 / par, rounds: 7 });
+    insertDaily(db, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 9 / par, rounds: 9 });
     const body = await (await board(db)).json() as SoloLeaderboardResponse;
     expect(body.you).toMatchObject({ rank: 2, total: 2, roundsToNext: 3 });
 
     // Равный счёт без прикидки: место общее, сосед не «выше», но круг до обгона по-прежнему один.
     const tied = database();
-    insertSolo(tied, { id: 'above', playerId: 'p:above', soloScore: 9 / par, rounds: 9, durationMs: 100 });
-    insertSolo(tied, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 9 / par, rounds: 9, durationMs: 9000 });
+    insertDaily(tied, { id: 'above', playerId: 'p:above', soloScore: 9 / par, rounds: 9, durationMs: 100 });
+    insertDaily(tied, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 9 / par, rounds: 9, durationMs: 9000 });
     const close = await (await board(tied)).json() as SoloLeaderboardResponse;
     expect(close.you).toMatchObject({ rank: 1, placeAbove: null, roundsToNext: null, outrankedByGuess: false, tiebreak: 'guest' });
   });
 
   it('has nobody above the first place and nothing at all without a finished run', async () => {
     const db = database();
-    insertSolo(db, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 0.5 });
+    insertDaily(db, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 0.5 });
     const first = await (await board(db)).json() as SoloLeaderboardResponse;
     expect(first.you).toMatchObject({ rank: 1, total: 1, roundsToNext: null, placeAbove: null });
 
     // Не дошёл до цели — в таблице его нет, и места у него нет.
     const missed = database();
-    insertSolo(missed, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 0.5, reachedTarget: 0 });
+    insertDaily(missed, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 0.5, reachedTarget: 0 });
     expect(((await (await board(missed)).json()) as SoloLeaderboardResponse).you).toBeNull();
 
     // Другая категория и другой день тоже не считаются своим местом.
     const elsewhere = database();
-    insertSolo(elsewhere, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 0.5, category: 'history' });
+    insertDaily(elsewhere, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 0.5, category: 'history' });
     expect(((await (await board(elsewhere)).json()) as SoloLeaderboardResponse).you).toBeNull();
   });
 
   it('takes my best run of the day, like the list does', async () => {
     const db = database();
-    insertSolo(db, { id: 'worse', playerId: viewerId, name: 'Я-хуже', soloScore: 2, rounds: 16 });
-    insertSolo(db, { id: 'better', playerId: viewerId, name: 'Я', soloScore: 0.9, rounds: 7 });
+    insertDaily(db, { id: 'worse', playerId: viewerId, name: 'Я-хуже', soloScore: 2, rounds: 16 });
+    insertDaily(db, { id: 'better', playerId: viewerId, name: 'Я', soloScore: 0.9, rounds: 7 });
     const body = await (await board(db)).json() as SoloLeaderboardResponse;
     expect(body.entries).toHaveLength(1);
     expect(body.you).toMatchObject({ rank: 1, total: 1 });
@@ -456,7 +485,7 @@ describe('my own place in the day board', () => {
     const db = database();
     // 21:00 UTC — это уже следующие сутки игры: граница проходит в 19:00 UTC.
     const afterBoundary = Date.UTC(2026, 9, 11, 21, 0, 0);
-    insertSolo(db, { id: 'next-day', playerId: viewerId, name: 'Я', soloScore: 0.5, completedAt: afterBoundary });
+    insertDaily(db, { id: 'next-day', playerId: viewerId, name: 'Я', soloScore: 0.5, completedAt: afterBoundary });
     expect(((await (await board(db)).json()) as SoloLeaderboardResponse).you).toBeNull();
 
     const tomorrow = await (await board(db, '?category=geography&date=2026-10-12')).json() as SoloLeaderboardResponse;
@@ -468,7 +497,7 @@ describe('solo rematch invite', () => {
   const bob = guest('bob');
   const alemAuth = () => telegram({ id: 42, first_name: 'Алем' });
   const startWith = (db: TestD1, authorization: string, rematchInviteId: string) =>
-    call(db, '/api/solo-runs', authorization, { displayName: 'Алем', category: 'geography', rematchInviteId });
+    call(db, '/api/solo-runs', authorization, { displayName: 'Алем', category: 'geography', mode: 'duel', rematchInviteId });
 
   /** Боб обыгрывает запись Алема в соло; Алем получает приглашение. */
   async function invited() {

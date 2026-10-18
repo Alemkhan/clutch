@@ -1,6 +1,9 @@
 import {
   CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
+  duelRoundCap,
+  soloModeOf,
+  type SoloMode,
   DAILY_SET_SIZES,
   FRIEND_RULES_VERSION,
   PRACTICE_RULES_VERSION,
@@ -93,6 +96,10 @@ export interface NormalizedSoloRun {
   bankExhausted: boolean;
   /** Забег по дружеской ссылке: вне соревнования, исход против записи автора считается. */
   friendDuel?: boolean;
+  /** Забег дня, свободная игра или дуэль; null — тренировка или дружеская дуэль. */
+  mode?: SoloMode | null;
+  /** Потолок кругов: у дуэли — круг, на котором соперник дошёл до цели. */
+  roundCap?: number;
 }
 
 /** Темп — только картинка: битую запись не рисуем, но и забег из-за неё не отменяем. */
@@ -117,15 +124,20 @@ export function normalizeSoloRun(run: StartSoloRunResponse, practice = false): N
     throw new Error('Solo run response is invalid.');
   }
   const friendDuel = !practice && run.rulesVersion === FRIEND_RULES_VERSION;
-  const expectedRules = practice ? PRACTICE_RULES_VERSION : CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
-  if ((run.rulesVersion !== expectedRules && !friendDuel)
-    || run.target !== SOLO_TARGET_PROGRESS || run.roundCap !== SOLO_ROUND_CAP) {
+  const mode = practice ? null : soloModeOf(run.rulesVersion);
+  const knownRules = practice ? run.rulesVersion === PRACTICE_RULES_VERSION : friendDuel || mode !== null;
+  if (!knownRules || run.target !== SOLO_TARGET_PROGRESS
+    || !Number.isInteger(run.roundCap) || run.roundCap < 1 || run.roundCap > SOLO_ROUND_CAP) {
     throw new Error('Solo run conditions are not supported by this client.');
   }
   if (!isMiniGameId(run.miniGameId)) throw new Error('Mini-game is not supported by this client.');
   validatePublicQuestions(run.questions);
   const pace = normalizeSoloPace(run.pace ?? null, run.questions);
   if (practice && !pace) throw new Error('Practice run has no usable bot.');
+  // Потолок дуэли сервер считает по записи соперника; клиент обязан кончить партию там же.
+  // Тренировка доигрывается до общего потолка: бот не запись игрока.
+  const roundCap = practice ? SOLO_ROUND_CAP : duelRoundCap(pace);
+  if (run.roundCap !== roundCap) throw new Error('Solo run round cap does not match the opponent.');
   return {
     runId: run.runId,
     questions: run.questions,
@@ -134,6 +146,8 @@ export function normalizeSoloRun(run: StartSoloRunResponse, practice = false): N
     miniGameId: run.miniGameId,
     bankExhausted: run.bankExhausted === true,
     friendDuel,
+    mode,
+    roundCap,
   };
 }
 

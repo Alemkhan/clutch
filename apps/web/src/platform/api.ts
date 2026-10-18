@@ -4,6 +4,7 @@ import type {
   CategoryId,
   CreateFriendInviteResponse,
   CreateRematchInviteResponse,
+  DuelBoardResponse,
   PreparedShareResponse,
   GuestSessionResponse,
   PracticeLevelId,
@@ -226,6 +227,7 @@ export function startSoloRun(
   signal?: AbortSignal,
   rematchInviteId?: string,
   botLevel?: PracticeLevelId,
+  mode?: StartSoloRunRequest['mode'],
 ): Promise<StartSoloRunResponse> {
   const telegram = getTelegramIdentity();
   const body: StartSoloRunRequest = {
@@ -233,6 +235,7 @@ export function startSoloRun(
     category,
     ...(rematchInviteId ? { rematchInviteId } : {}),
     ...(botLevel ? { botLevel } : {}),
+    ...(mode && !botLevel && !rematchInviteId ? { mode } : {}),
   };
   return apiFetch('/api/solo-runs', { method: 'POST', body: JSON.stringify(body) }, signal);
 }
@@ -337,6 +340,11 @@ export function fetchSoloLeaderboard(
   signal?: AbortSignal,
 ): Promise<SoloLeaderboardResponse> {
   return apiFetch(`/api/solo-leaderboard?category=${encodeURIComponent(category)}`, { method: 'GET' }, signal);
+}
+
+/** Таблица дуэлей дня: победы, ничьи и поражения каждого (по всем категориям). */
+export function fetchDuelBoard(signal?: AbortSignal): Promise<DuelBoardResponse> {
+  return apiFetch('/api/duel-board', { method: 'GET' }, signal);
 }
 
 /** «Позвать на реванш» с обошедшего запись забега: приглашение создаёт это нажатие и только оно. */

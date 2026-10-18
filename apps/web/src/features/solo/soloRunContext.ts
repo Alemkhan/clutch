@@ -1,4 +1,5 @@
 import type { Dispatch, MutableRefObject, SetStateAction } from 'react';
+import type { SoloMode } from '@clutch/shared';
 import type { MatchRequestCoordinator } from './matchmaking';
 import type { SoloFlowState } from './soloRunFlow';
 import type { SyncIssue } from './soloSyncIssue';
@@ -12,4 +13,6 @@ export interface SoloRunContext {
   inviteRef: MutableRefObject<string | undefined>;
   stateRef: MutableRefObject<SoloFlowState>;
   practice: boolean;
+  /** Режим, в котором открыт экран: забег дня, свободная игра или дуэль. */
+  mode: SoloMode;
 }

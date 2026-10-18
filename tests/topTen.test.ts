@@ -5,7 +5,7 @@ import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   CURRENT_HAMMER_MINI_GAME,
-  CURRENT_SOLO_RUN_CONDITIONS,
+  DAILY_RULES_VERSION,
   dailyKey,
   dailyQuestionSet,
   setPar,
@@ -24,7 +24,8 @@ const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
 const configJson = JSON.stringify(CURRENT_HAMMER_MINI_GAME.config);
 const NOW = Date.UTC(2026, 9, 11, 12, 0, 0);
 const TODAY = dailyKey(NOW);
-const SOLO = CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
+// Таблица дня и известие о десятке читают только забеги дня.
+const SOLO = DAILY_RULES_VERSION;
 const SET = dailyQuestionSet('geography', NOW, 0);
 const PAR = setPar(SET.questions);
 const databases: TestD1[] = [];

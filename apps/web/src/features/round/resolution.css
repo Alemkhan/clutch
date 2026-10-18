@@ -305,3 +305,20 @@
   color: var(--text-dim);
 }
 
+/* Пропуск — тихая кнопка под «Отправить»: доступна сразу, но не спорит с ответом. */
+.open-answer-skip {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px;
+  border: 0;
+  background: none;
+  color: var(--text-dim);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.open-answer-skip:disabled {
+  opacity: 0.5;
+}
+

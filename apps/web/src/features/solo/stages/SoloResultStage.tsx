@@ -37,6 +37,11 @@ export function SoloResultStage({ props, state, view }: {
       category={state.category}
       correctCount={state.correctCount}
       skillResults={state.skillResults}
+      mode={state.mode}
+      roundCap={state.session?.roundCap}
+      pace={state.session?.pace ?? null}
+      miniGameId={state.miniGameId}
+      onPlayMode={props.onPlayMode ? (mode) => props.onPlayMode?.(mode, state.category) : undefined}
       roundAwards={state.session?.rounds.map((round) => round.progressAwarded)}
     />
   );

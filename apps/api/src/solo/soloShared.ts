@@ -1,10 +1,12 @@
 import {
-  CURRENT_SOLO_RUN_CONDITIONS,
   FRIEND_RULES_VERSION,
   PRACTICE_RULES_VERSION,
+  duelRoundCap,
   isMiniGameId,
+  soloModeOf,
   type Opponent,
   type Question,
+  type SoloMode,
 } from '@clutch/shared';
 import type { Context } from 'hono';
 import { resolveRequestIdentity, type RequestIdentity } from '../auth/identity';
@@ -62,6 +64,13 @@ export interface LoadedSoloRun {
   questions: Question[];
   practice: boolean;
   friend: boolean;
+  /** Забег дня, свободная игра или дуэль; null у тренировки и дружеской дуэли. */
+  mode: SoloMode | null;
+  /**
+   * Потолок кругов этого забега. Против записи (дуэль, дружеская дуэль) — круг, на котором запись
+   * дошла до цели: дальше игрок уже проиграл. Темп снят (запись ушла другому) — общий потолок.
+   */
+  roundCap: number;
 }
 
 /** Забег должен принадлежать игроку, быть соло (обычным, тренировкой или дружеским) и текущей версии игры. */
@@ -70,14 +79,17 @@ export async function openSoloRun(c: AppContext, identity: RequestIdentity, runI
   if (!run || run.player_id !== identity.playerId) return c.json({ error: 'Run not found.' }, 404);
   const practice = run.rules_version === PRACTICE_RULES_VERSION;
   const friend = run.rules_version === FRIEND_RULES_VERSION;
-  if ((!practice && !friend && run.rules_version !== CURRENT_SOLO_RUN_CONDITIONS.rulesVersion)
+  const mode = soloModeOf(run.rules_version);
+  if ((!practice && !friend && !mode)
     || run.mini_game_config_json !== currentMiniGameConfigJson
     || !isMiniGameId(run.mini_game_id)) {
     return c.json({ error: 'This is not a solo run.' }, 409);
   }
   const questions = parseQuestions(run.questions_json);
   if (!questions) return c.json({ error: 'Stored run questions are invalid.' }, 409);
-  return { run, questions, practice, friend };
+  // Тренировка против бота доигрывается до конца: бот не запись игрока, исход не считается.
+  const roundCap = duelRoundCap(practice ? null : parsePace(run.opponent_json));
+  return { run, questions, practice, friend, mode, roundCap };
 }
 
 /** Идентификатор забега из пути маршрута `/api/solo-runs/:id/...`. */

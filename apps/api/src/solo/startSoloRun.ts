@@ -1,15 +1,20 @@
 import {
-  CURRENT_SOLO_RUN_CONDITIONS,
+  DAILY_RULES_VERSION,
+  DUEL_RULES_VERSION,
+  FREE_RULES_VERSION,
   FRIEND_RULES_VERSION,
   PRACTICE_RULES_VERSION,
-  SOLO_ROUND_CAP,
   SOLO_TARGET_PROGRESS,
+  dailyKey,
+  duelRoundCap,
+  isSoloMode,
   type MiniGameId,
   isPracticeLevelId,
   practiceQuestionSet,
   toPublicQuestion,
   type PracticeLevelId,
   type Question,
+  type SoloMode,
   type StartAsyncMatchRequest,
   type StartSoloRunResponse,
 } from '@clutch/shared';
@@ -24,11 +29,11 @@ import {
   releaseInvite,
   type InviteRow,
 } from '../notifications/repository';
-import { pickMiniGameId } from './miniGame';
+import { dailyMiniGameId, pickMiniGameId } from './miniGame';
 import { PRACTICE_BOT_PROFILES, createBotOpponent } from './bots';
-import { matchmake } from './matchmaking';
+import { dailySet, freeSet, matchmakeDuel, type PickedSet } from './matchmaking';
 import { claimRecord, findRecordRun, type GhostMatch } from './repository';
-import { createSoloRun, findActiveSoloRun } from './soloRepository';
+import { createSoloRun, findActiveSoloRun, findDailyAttempt } from './soloRepository';
 import { buildSoloSnapshot } from './soloSnapshot';
 import { authenticate, openSoloRun, type AppContext } from './soloShared';
 import { isStartRequest } from './validation';
@@ -39,6 +44,7 @@ type Category = StartAsyncMatchRequest['category'];
 interface StartRequest {
   displayName: string;
   category: Category;
+  mode: SoloMode;
   botLevel: unknown;
   rematchInviteId: string | undefined;
 }
@@ -46,23 +52,27 @@ interface StartRequest {
 /**
  * Как начинается забег.
  * - practice: бот вместо записи игрока, вне соревнования (PRACTICE_RULES_VERSION);
- * - rematch: приглашение адресовано игроку, соперник подбирается обычным подбором;
- * - friend: открытое приглашение «Позвать друга», соперник — сама запись автора на её наборе;
- * - regular: обычный старт, возможно с продолжением незаконченного забега.
+ * - daily: забег дня — общий набор дня, в таблицу идёт первая попытка;
+ * - free: свободная игра — свежий набор, вне таблицы, без соперника;
+ * - duel: дуэль — запись другого игрока на её наборе, либо свежий набор, который сам ждёт соперника;
+ * - rematch: дуэль по приглашению на реванш (адресовано игроку);
+ * - friend: открытое приглашение «Позвать друга», соперник — сама запись автора на её наборе.
  */
 type StartMode =
   | { kind: 'practice'; level: PracticeLevelId }
-  | { kind: 'regular'; category: Category }
+  | { kind: 'daily' | 'free' | 'duel'; category: Category }
   | { kind: 'rematch'; category: Category; invite: InviteRow }
   | { kind: 'friend'; category: Category; invite: InviteRow; record: GhostMatch };
 
-/** Набор и соперник нового забега. */
-interface StartPick {
-  ghost: GhostMatch | null;
-  questionSetId: string;
-  questions: Question[];
-  bankExhausted: boolean;
-}
+type MatchedMode = Exclude<StartMode, { kind: 'practice' }>;
+
+const RULES_BY_KIND: Readonly<Record<MatchedMode['kind'], string>> = {
+  daily: DAILY_RULES_VERSION,
+  free: FREE_RULES_VERSION,
+  duel: DUEL_RULES_VERSION,
+  rematch: DUEL_RULES_VERSION,
+  friend: FRIEND_RULES_VERSION,
+};
 
 export async function handleStartSoloRun(c: AppContext): Promise<Response> {
   const identity = await authenticate(c, 'solo-start');
@@ -76,13 +86,26 @@ export async function handleStartSoloRun(c: AppContext): Promise<Response> {
   if (mode instanceof Response) return mode;
   if (mode.kind === 'practice') return startPracticeRun(c, identity, request, mode.level, runId, now);
 
-  // Незаконченный забег продолжается, а не заменяется новым. Иначе повторный старт создавал
-  // новую строку, брошенный забег навсегда занимал набор, игрок уезжал на следующий набор дня
-  // и терял запись соперника, которая осталась на прежнем. Реванш и дружеская ссылка идут
-  // своей дорогой: у них свой набор и своё приглашение.
-  if (mode.kind === 'regular') {
-    const resumed = await resumeActiveRun(c, identity, mode.category);
-    if (resumed) return resumed;
+  if (mode.kind === 'daily') {
+    // Забег дня один: начатый продолжается, законченный второй раз не выдаётся.
+    const { questionSetId } = dailySet(mode.category, now);
+    const attempt = await findDailyAttempt(c.env.DB, identity.playerId, questionSetId);
+    if (attempt?.status === 'completed') {
+      return c.json({ error: 'The run of the day is already played.', reason: 'daily_played' }, 409);
+    }
+    if (attempt) {
+      const resumed = await resumeRun(c, identity, attempt.id);
+      if (resumed) return resumed;
+    }
+  } else if (mode.kind === 'free' || mode.kind === 'duel') {
+    // Незаконченный забег режима продолжается, а не заменяется новым: иначе брошенная дуэль
+    // навсегда держала бы запись соперника, а свободная игра плодила бы пустые строки.
+    // Реванш и дружеская ссылка идут своей дорогой: у них свой набор и своё приглашение.
+    const active = await findActiveSoloRun(c.env.DB, identity.playerId, mode.category, RULES_BY_KIND[mode.kind]);
+    if (active) {
+      const resumed = await resumeRun(c, identity, active.id);
+      if (resumed) return resumed;
+    }
   }
   return startMatchedRun(c, identity, request, mode, runId, now);
 }
@@ -93,9 +116,12 @@ async function readStartRequest(c: AppContext): Promise<StartRequest | Response>
   if (!isStartRequest(parsed.value)) {
     return c.json({ error: 'Invalid displayName or category.' }, 400);
   }
+  const mode = (parsed.value as { mode?: unknown }).mode ?? 'daily';
+  if (!isSoloMode(mode)) return c.json({ error: 'Invalid mode.' }, 400);
   return {
     displayName: parsed.value.displayName,
     category: parsed.value.category,
+    mode,
     botLevel: (parsed.value as { botLevel?: unknown }).botLevel,
     rematchInviteId: parsed.value.rematchInviteId,
   };
@@ -114,10 +140,10 @@ async function resolveStartMode(
     }
     return { kind: 'practice', level: request.botLevel };
   }
-  if (!request.rematchInviteId) return { kind: 'regular', category: request.category };
+  if (!request.rematchInviteId) return { kind: request.mode, category: request.category };
 
   // Реванш: приглашение должно быть адресовано игроку, не потрачено, не просрочено и из соло.
-  // Категория берётся из приглашения, набор — обычным подбором (новый, не сыгранный получателем).
+  // Категория берётся из приглашения, набор — подбором дуэли (новый, не сыгранный получателем).
   // «Позвать друга» — открытое приглашение без адресата: его гасит первый, кто начал забег, и играет
   // против самой записи автора на её наборе. Эта запись зарезервирована и в общем подборе не участвует.
   const invite = await findInvite(c.env.DB, request.rematchInviteId);
@@ -128,7 +154,7 @@ async function resolveStartMode(
   }
   let record: GhostMatch | null = null;
   if (friend) {
-    record = await findRecordRun(c.env.DB, invite.challenger_run_id, CURRENT_SOLO_RUN_CONDITIONS.rulesVersion);
+    record = await findRecordRun(c.env.DB, invite.challenger_run_id, [DUEL_RULES_VERSION, FREE_RULES_VERSION]);
     if (record?.row.player_id === identity.playerId) {
       return c.json({ error: 'This is your own invite.', reason: 'own' }, 403);
     }
@@ -153,9 +179,7 @@ async function startPracticeRun(
   runId: string,
   now: number,
 ): Promise<Response> {
-  // Свой набор, НЕ из дневного банка: иначе тренировка показывала бы зачётные наборы
-  // и помечала их сыгранными, то есть позволяла пройти день с ботами и сыграть зачёт
-  // уже зная вопросы. См. practiceQuestionSet.
+  // Свой набор, НЕ из дневного банка: иначе тренировка показывала бы набор забега дня.
   const { questionSetId, questions } = practiceQuestionSet(request.category, runId, now);
   const bot = createBotOpponent(questions, PRACTICE_BOT_PROFILES[level]);
   // Соперник — бот, а не запись человека: игра случайная, поровну.
@@ -173,18 +197,17 @@ async function startPracticeRun(
     practice: true,
     now,
   });
-  return c.json(startResponse(runId, questions, bot, PRACTICE_RULES_VERSION, miniGameId, false), 201);
+  // Бот не запись игрока: тренировка доигрывается до общего потолка кругов.
+  return c.json(startResponse(runId, questions, bot, PRACTICE_RULES_VERSION, miniGameId, false, null), 201);
 }
 
 /**
- * Продолжение незаконченного забега игрока в категории; null — продолжать нечего.
+ * Продолжение незаконченного забега; null — продолжить не вышло (забег другой версии игры).
  * Отдаём снимок (с уже сыгранными кругами), а не «свежий» старт: иначе клиент начал бы с круга 0
  * и повторно отвечал на круги, которые сервер уже записал.
  */
-async function resumeActiveRun(c: AppContext, identity: RequestIdentity, category: Category): Promise<Response | null> {
-  const active = await findActiveSoloRun(c.env.DB, identity.playerId, category);
-  if (!active) return null;
-  const loaded = await openSoloRun(c, identity, active.id);
+async function resumeRun(c: AppContext, identity: RequestIdentity, runId: string): Promise<Response | null> {
+  const loaded = await openSoloRun(c, identity, runId);
   if (loaded instanceof Response) return null;
   const snapshot = await buildSoloSnapshot(c, loaded);
   if (snapshot instanceof Response) return snapshot;
@@ -192,51 +215,46 @@ async function resumeActiveRun(c: AppContext, identity: RequestIdentity, categor
   return c.json(response, 201);
 }
 
-/** Подбор набора по соло-пулу (только забеги, дошедшие до цели) и атомарный захват записи-соперника. */
+/** Набор и соперник нового забега по режиму; запись-соперник дуэли захватывается атомарно. */
 async function pickSetAndOpponent(
   c: AppContext,
   identity: RequestIdentity,
-  mode: Exclude<StartMode, { kind: 'practice' }>,
+  mode: MatchedMode,
   runId: string,
   now: number,
-): Promise<StartPick> {
-  const record = mode.kind === 'friend' ? mode.record : null;
-  const picked = record
-    ? { ghost: record, questionSetId: record.questionSetId, questions: record.questions, bankExhausted: false }
-    : await matchmake(
-      c.env.DB,
-      mode.category,
-      identity.playerId,
-      now,
-      { rulesVersion: CURRENT_SOLO_RUN_CONDITIONS.rulesVersion, reachedTargetOnly: true },
-    );
-  // Матч — это пара. Запись забирается атомарно: при одновременных стартах ровно один игрок
-  // получает её, остальные играют без соперника, а их забеги сами становятся ждущими записями.
-  // Запись по ссылке «Позвать друга» уже закреплена приглашением, её захватывать не нужно.
-  let { ghost } = picked;
-  if (ghost && !record && !await claimRecord(c.env.DB, ghost.row.id, runId, now)) {
-    ghost = null;
+): Promise<PickedSet> {
+  if (mode.kind === 'daily') return dailySet(mode.category, now);
+  if (mode.kind === 'free') return freeSet(c.env.DB, mode.category, identity.playerId, runId, now);
+  if (mode.kind === 'friend') {
+    const { record } = mode;
+    return { ghost: record, questionSetId: record.questionSetId, questions: record.questions, bankExhausted: false };
   }
-  return { ghost, questionSetId: picked.questionSetId, questions: picked.questions, bankExhausted: picked.bankExhausted };
+  const picked = await matchmakeDuel(c.env.DB, mode.category, identity.playerId, runId, now);
+  // Матч — это пара. Запись забирается атомарно: при одновременных стартах ровно один игрок
+  // получает её, остальные играют её набор без соперника, а их забеги сами становятся записями.
+  if (picked.ghost && !await claimRecord(c.env.DB, picked.ghost.row.id, runId, now)) {
+    return { ...picked, ghost: null };
+  }
+  return picked;
 }
 
-/** Обычный, реванш или дружеский старт: подбор, погашение приглашения, строка забега, ответ. */
+/** Забег дня, свободная игра, дуэль, реванш или дружеский: подбор, погашение приглашения, строка, ответ. */
 async function startMatchedRun(
   c: AppContext,
   identity: RequestIdentity,
   request: StartRequest,
-  mode: Exclude<StartMode, { kind: 'practice' }>,
+  mode: MatchedMode,
   runId: string,
   now: number,
 ): Promise<Response> {
   const { ghost, questionSetId, questions, bankExhausted } = await pickSetAndOpponent(c, identity, mode, runId, now);
-  const invite = mode.kind === 'regular' ? null : mode.invite;
-  // Играем в ту же игру, что и записанный соперник; без записи — случайная.
-  const miniGameId = pickMiniGameId(ghost);
-  const friendDuel = mode.kind === 'friend';
+  const invite = mode.kind === 'rematch' || mode.kind === 'friend' ? mode.invite : null;
+  // Забег дня — одна игра на всех в эти сутки; против записи — её игра; иначе случайная.
+  const miniGameId = mode.kind === 'daily' ? dailyMiniGameId(mode.category, dailyKey(now)) : pickMiniGameId(ghost);
   if (invite && !await consumeInvite(c.env.DB, invite.id, identity.playerId, runId)) {
     return c.json({ error: 'Rematch invite is no longer available.', reason: 'taken' }, 410);
   }
+  const rulesVersion = RULES_BY_KIND[mode.kind];
   try {
     await createSoloRun(c.env.DB, {
       id: runId,
@@ -248,15 +266,16 @@ async function startMatchedRun(
       questions,
       paceRunId: ghost?.row.id ?? null,
       pace: ghost?.opponent ?? null,
-      friend: friendDuel,
+      friend: mode.kind === 'friend',
+      rulesVersion,
       now,
     });
   } catch (error) {
     if (invite) await releaseInvite(c.env.DB, invite.id).catch(() => undefined);
     throw error;
   }
-  const rulesVersion = friendDuel ? FRIEND_RULES_VERSION : CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
-  return c.json(startResponse(runId, questions, ghost?.opponent ?? null, rulesVersion, miniGameId, bankExhausted), 201);
+  const pace = ghost?.opponent ?? null;
+  return c.json(startResponse(runId, questions, pace, rulesVersion, miniGameId, bankExhausted, pace), 201);
 }
 
 function startResponse(
@@ -266,13 +285,15 @@ function startResponse(
   rulesVersion: StartSoloRunResponse['rulesVersion'],
   miniGameId: MiniGameId,
   bankExhausted: boolean,
+  /** Запись соперника, по которой считается потолок кругов; у тренировки нет. */
+  record: StartSoloRunResponse['pace'],
 ): StartSoloRunResponse {
   return {
     runId,
     questions: questions.map(toPublicQuestion),
     pace,
     target: SOLO_TARGET_PROGRESS,
-    roundCap: SOLO_ROUND_CAP,
+    roundCap: duelRoundCap(record),
     rulesVersion,
     miniGameId,
     bankExhausted,

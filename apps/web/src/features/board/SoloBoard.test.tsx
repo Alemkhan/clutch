@@ -1,9 +1,9 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import type { CategoryId, SoloLeaderboardEntry, SoloLeaderboardResponse, SoloLeaderboardStanding } from '@clutch/shared';
+import type { CategoryId, DuelBoardResponse, SoloLeaderboardEntry, SoloLeaderboardResponse, SoloLeaderboardStanding } from '@clutch/shared';
 import { msUntilDayEnd, resetLabel } from '../tiebreaker/tiebreakerClock';
 import { finishedText, initials, roundsShort } from '../myRuns/myRunsView';
-import { SoloBoardView, standingHint, type SoloBoardState } from './SoloBoard';
+import { DuelBoardView, SoloBoardView, duelRecord, standingHint, type DuelBoardState, type SoloBoardState } from './SoloBoard';
 
 const NOW = Date.UTC(2026, 9, 13, 12, 0, 0);
 
@@ -67,7 +67,8 @@ describe('the day board', () => {
   it('shows my own place even when I am far outside the listed top', () => {
     const html = render(ready({ entries: [entry('Ann', 7)], you: standing() }));
     expect(html).toMatch(/solo-board-you-rank">37</);
-    expect(html).toContain('Сыграть ещё набор');
+    // Попытка дня сыграна: таблица зовёт в дуэль, а не во второй забег дня.
+    expect(html).toMatch(/cta-btn solo-board-play">Дуэль</);
     expect(html).toContain('Ты: 11 кругов · из 140 дошедших');
     // Цель достижимая, а не «попади в топ-50».
     expect(html).toContain('До 36-го места — один круг<');
@@ -75,14 +76,14 @@ describe('the day board', () => {
 
   it('says plainly when my run is not in today\'s board at all', () => {
     const html = render(ready({ entries: [entry('Ann', 7)], you: null }));
-    expect(html).toContain('Твоего забега сегодня здесь нет');
+    expect(html).toContain('Твоего забега дня здесь нет');
     expect(html).not.toContain('из 140');
   });
 
   it('offers a game when nobody finished the day yet', () => {
     const html = render(ready());
     expect(html).toContain('ещё никто не дошёл до цели');
-    expect(html).toContain('Играть');
+    expect(html).toContain('>Забег дня<');
   });
 
   it('marks my own row when I am inside the listed top', () => {
@@ -137,7 +138,7 @@ describe('the reset line and the footer', () => {
   it('wires the play buttons and does not highlight a row when I am absent', () => {
     handlers.onPlay.mockClear();
     const html = render(ready({ entries: [entry('Ann', 7)], you: null }));
-    expect(html).toContain('Играть');
+    expect(html).toContain('>Забег дня<');
     expect(html).not.toContain('solo-board-row mine');
   });
 });
@@ -187,5 +188,38 @@ describe('the list helpers', () => {
 
   it('shortens rounds for the list', () => {
     expect(roundsShort(7)).toBe('7 кр.');
+  });
+});
+
+describe('the duel board', () => {
+  const board = (patch: Partial<DuelBoardResponse> = {}): DuelBoardState => ({
+    status: 'ready',
+    board: {
+      dateKey: '2026-10-19',
+      entries: [
+        { rank: 1, displayName: 'Ann', wins: 5, draws: 1, losses: 0 },
+        { rank: 2, displayName: 'Bob', wins: 5, draws: 0, losses: 2 },
+      ],
+      you: { rank: 2, displayName: 'Bob', wins: 5, draws: 0, losses: 2 },
+      ...patch,
+    },
+  });
+  const renderDuels = (state: DuelBoardState) => renderToStaticMarkup(
+    <DuelBoardView state={state} msLeft={5 * 60 * 60 * 1000} onBack={vi.fn()} onRetry={vi.fn()} onDuel={vi.fn()} />,
+  );
+
+  it('shows each record as wins–draws–losses, mine on top, and calls to a duel', () => {
+    const html = renderDuels(board());
+    expect(html).toContain('Ты сегодня: 5–0–2 · 2-е место');
+    expect(html).toContain('>5–1–0<');
+    expect(html).toContain('>5–0–2<');
+    expect(html).toMatch(/cta-btn solo-board-play">Дуэль</);
+    expect(duelRecord({ wins: 3, draws: 2, losses: 1 })).toBe('3–2–1');
+  });
+
+  it('says so when nobody finished a duel today', () => {
+    const html = renderDuels(board({ entries: [], you: null }));
+    expect(html).toContain('Сегодня у тебя ещё нет законченных дуэлей.');
+    expect(html).toContain('Сегодня ещё никто не довёл дуэль до конца.');
   });
 });

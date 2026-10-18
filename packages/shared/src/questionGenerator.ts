@@ -476,7 +476,8 @@ function generateMatchWithRandom(
         { name: 'flag_country', make: generateFlagToCountry },
         { name: 'capital', make: generateCountryToCapital },
         { name: 'flag_capital', make: generateFlagToCapital },
-        ...(OUTLINE_EXCLUDED.has(country.code) ? [] : [{ name: 'outline_country', make: generateOutlineToCountry }]),
+        // Вопросы по контуру страны сняты (решение владельца 2026-10-19): контур почти никто не узнаёт.
+        // Генераторы остаются только для восстановления уже сыгранных вопросов по id.
       ];
       return pickLeastUsed(generators, country.code, usage).make(country);
     }

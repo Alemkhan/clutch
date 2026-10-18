@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { SOLO_TARGET_PROGRESS, dailyKey } from '@clutch/shared';
-import type { CategoryId, CompleteSoloRunResponse, SkillResult } from '@clutch/shared';
+import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS, dailyKey } from '@clutch/shared';
+import type { CategoryId, CompleteSoloRunResponse, MiniGameId, Opponent, SkillResult, SoloMode } from '@clutch/shared';
 import { playSound } from '../../platform/sounds';
 import { buildReceiptStats, buildSoloResult, circles, countPerfectStrikes, type RunStandingState, type SoloSaveStatus } from './soloResultModel';
 import { buildSoloShareText, useSoloShare } from './soloShare';
@@ -36,7 +36,44 @@ interface SoloResultProps {
   roundAwards?: readonly number[];
   /** Подмена места (тесты); без неё место берётся из таблицы дня. */
   standing?: RunStandingState;
+  /** Режим забега: от него зависят главная кнопка, место в таблице и «ждёт соперника». */
+  mode?: SoloMode | null;
+  /** Потолок кругов забега: у дуэли — круг, на котором финишировал соперник. */
+  roundCap?: number;
+  /** Запись соперника (дуэль): по ней видно, что партию кончил его финиш. */
+  pace?: Opponent | null;
+  miniGameId?: MiniGameId;
+  /** Сыграть в другом режиме: дуэль, свободная игра. */
+  onPlayMode?: (mode: SoloMode) => void;
 }
+
+/** Партию кончил финиш соперника: заголовок говорит это словами мини-игры. */
+export function opponentFinishedHeadline(miniGameId: MiniGameId | undefined): string {
+  return miniGameId === 'tower_stack' ? 'Соперник достроил башню первым' : 'Соперник забил гвоздь первым';
+}
+
+/** Заголовок итога дуэли: победа, поражение (словами мини-игры, если партию кончил финиш соперника) или ничья. */
+export function duelHeadline(
+  outcome: CompleteSoloRunResponse['outcome'],
+  rival: string,
+  opponentFinished: boolean,
+  miniGameId: MiniGameId | undefined,
+): { text: string; tone: 'win' | 'loss' | 'tie' } | null {
+  // Имя не склоняем («над Дамир»): оно стоит в именительном падеже.
+  if (outcome === 'player') return { text: `Победа: ${rival} позади`, tone: 'win' };
+  if (outcome === 'opponent') {
+    return { text: opponentFinished ? opponentFinishedHeadline(miniGameId) : `${rival} оказался быстрее`, tone: 'loss' };
+  }
+  if (outcome === 'tie') return { text: 'Ничья', tone: 'tie' };
+  return null;
+}
+
+/** Главная кнопка итога по режиму: после забега дня — дуэль, после свободной игры и дуэли — ещё одна. */
+const NEXT_ACTION: Readonly<Record<SoloMode, { mode: SoloMode; label: string }>> = {
+  daily: { mode: 'duel', label: 'Дуэль' },
+  free: { mode: 'free', label: 'Ещё набор' },
+  duel: { mode: 'duel', label: 'Ещё дуэль' },
+};
 
 /**
  * Два разных итога: дошёл до 100% либо упёрся в потолок. Второй не выдаётся за победу.
@@ -59,8 +96,16 @@ export function SoloResult({
   skillResults = [],
   roundAwards = [],
   standing,
+  mode = null,
+  roundCap = SOLO_ROUND_CAP,
+  pace = null,
+  miniGameId,
+  onPlayMode,
 }: SoloResultProps) {
   const result = buildSoloResult({ view, save: saveStatus, response });
+  // Дуэль кончилась на круге финиша соперника, а игрок до 100% не дошёл: он проиграл раньше конца набора.
+  const opponentFinished = pace !== null && !practice && !result.reachedTarget
+    && roundCap < SOLO_ROUND_CAP && result.roundsPlayed >= roundCap;
   const preview = roundAwards.length > 0
     ? { tiles: roundTiles(roundAwards, skillResults), progress: result.progress, category, day: dailyKey(Date.now()) }
     : undefined;
@@ -68,8 +113,8 @@ export function SoloResult({
   const practiceWon = practice ? practice.outcome === 'player' : null;
   const invite = useFriendInvite(response?.runId, preview);
   const resultShare = useSoloShare();
-  // Место есть только у сохранённого рейтингового забега, дошедшего до 100%.
-  const ranked = saveStatus === 'saved' && response?.reachedTarget === true && !friendDuel && !practice;
+  // Место есть только у сохранённого забега дня, дошедшего до 100%.
+  const ranked = saveStatus === 'saved' && response?.reachedTarget === true && mode === 'daily';
   const fetched = useRunStanding(category, ranked && !standing);
 
   useEffect(() => {
@@ -99,15 +144,29 @@ export function SoloResult({
   const tone = result.reachedTarget ? 'win' : 'tie';
   // Звать есть кого, только когда результат дошёл до цели и сохранён на сервере.
   // Забег по ссылке вне соревнования: звать с него друзей нельзя.
-  const canInvite = saveStatus === 'saved' && response?.reachedTarget === true && !friendDuel;
+  // Забег дня не зовёт друга: тот узнал бы вопросы дня до своей попытки.
+  const canInvite = saveStatus === 'saved' && response?.reachedTarget === true && !friendDuel
+    && (mode === 'duel' || mode === 'free');
   const receipt = result.reachedTarget && !friendDuel;
+  // «Ждёт соперника»: только дуэль, сыгранная без записи; её забег сам стал вызовом.
+  const waitingDuel = receipt && mode === 'duel' && pace === null;
   const stats = buildReceiptStats({
     correctCount: response?.correctCount ?? correctCount,
     roundsPlayed: result.roundsPlayed,
     skillResults,
-    standing: receipt && saveStatus === 'saved' ? (standing ?? fetched) : null,
+    standing: ranked ? (standing ?? fetched) : null,
   });
-  const summaryText = friendDuel ? friendDuel.line || result.summary : result.summary;
+  const finishLine = opponentFinished
+    ? `Он дошёл до ${SOLO_TARGET_PROGRESS}% за ${circles(roundCap)}. У тебя ${result.progress}%.`
+    : '';
+  const summaryText = friendDuel
+    ? [finishLine, friendDuel.line].filter(Boolean).join(' ') || result.summary
+    : finishLine || result.summary;
+  // Дуэль: исход известен сразу (сервер вернул его вместе с последним кругом), и он главный на экране.
+  const duel = mode === 'duel' && pace !== null && !friendDuel ? duelHeadline(response?.outcome ?? null, pace.displayName, opponentFinished, miniGameId) : null;
+  const headline = duel?.text ?? (opponentFinished && !friendDuel ? opponentFinishedHeadline(miniGameId) : result.headline);
+  const headTone = duel?.tone ?? (opponentFinished ? 'loss' : tone);
+  const next = mode ? NEXT_ACTION[mode] : null;
   const viaTelegram = getTelegramIdentity() !== null;
   const duelTone = friendDuel?.outcome === 'player' ? 'win' : friendDuel?.outcome === 'opponent' ? 'loss' : 'tie';
 
@@ -123,7 +182,7 @@ export function SoloResult({
           </div>
         )}
         <div className="solo-result-title">
-          <h1 className={`result-headline ${friendDuel ? duelTone : tone}`}>{friendDuel ? friendDuel.headline : result.headline}</h1>
+          <h1 className={`result-headline ${friendDuel ? duelTone : headTone}`}>{friendDuel ? friendDuel.headline : headline}</h1>
           <p className="solo-result-meta">за {circles(result.roundsPlayed)} · {categoryName(category)}</p>
         </div>
       </div>
@@ -163,7 +222,7 @@ export function SoloResult({
       {resultShare.status === 'copied' && <p className="result-insight" role="status">Результат скопирован.</p>}
       {resultShare.status === 'failed' && <p className="result-insight" role="alert">Не удалось поделиться. Нажми ещё раз.</p>}
 
-      {receipt && saveStatus === 'saved' && (
+      {waitingDuel && saveStatus === 'saved' && (
         <section className="solo-result-receipt" aria-label="Твоя запись">
           <div className="solo-result-receipt-row">
             <h2>Твоя запись</h2>
@@ -171,14 +230,21 @@ export function SoloResult({
           </div>
           <p className="solo-result-receipt-line">{SOLO_TARGET_PROGRESS}% за {circles(result.roundsPlayed)}</p>
           <p>
-            Против неё сыграет другой игрок этого набора. Исход придёт в «Партии»
+            Против неё сыграет следующий, кто выйдет на дуэль. Исход придёт в «Партии»
             {viaTelegram ? ' и в Telegram.' : '.'}
           </p>
         </section>
       )}
 
       <div className="result-actions solo-result-actions">
-        <button type="button" className="cta-btn" disabled={saving} onClick={() => { onReplay(); }}>Сыграть ещё</button>
+        {next && onPlayMode ? (
+          <button type="button" className="cta-btn" disabled={saving} onClick={() => { onPlayMode(next.mode); }}>{next.label}</button>
+        ) : (
+          <button type="button" className="cta-btn" disabled={saving} onClick={() => { onReplay(); }}>Сыграть ещё</button>
+        )}
+        {mode === 'daily' && onPlayMode && (
+          <button type="button" className="ghost-btn" disabled={saving} onClick={() => { onPlayMode('free'); }}>Свободная игра</button>
+        )}
         {/* A run that reached 100% is shared as a duel link; any other run as a result line. */}
         <div className="solo-result-secondary">
         {canInvite ? (

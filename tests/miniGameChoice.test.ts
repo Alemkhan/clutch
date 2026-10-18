@@ -104,7 +104,7 @@ const rowOf = (db: TestD1, id: string) =>
   db.sqlite.prepare('SELECT * FROM match_runs WHERE id = ?').get(id) as Record<string, unknown>;
 
 async function start(db: TestD1, label: string, extra: Record<string, unknown> = {}) {
-  const response = await call(db, label, '/api/solo-runs', { displayName: label, category: 'geography', ...extra });
+  const response = await call(db, label, '/api/solo-runs', { displayName: label, category: 'geography', mode: 'duel', ...extra });
   expect(response.status).toBe(201);
   return await response.json() as StartSoloRunResponse;
 }

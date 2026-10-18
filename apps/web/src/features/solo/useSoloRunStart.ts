@@ -7,7 +7,7 @@ import { saveActiveSoloRun } from './soloRunStore';
 
 /** Старт забега (в том числе реванш и тренировка) и повтор после ошибки. */
 export function useSoloRunStart(ctx: SoloRunContext, botLevel?: PracticeLevelId) {
-  const { coordinatorRef, inviteRef, stateRef, setState, setSyncIssue, practice } = ctx;
+  const { coordinatorRef, inviteRef, stateRef, setState, setSyncIssue, practice, mode } = ctx;
 
   const begin = useCallback((category: CategoryId, rematchInviteId?: string) => {
     inviteRef.current = rematchInviteId;
@@ -15,7 +15,7 @@ export function useSoloRunStart(ctx: SoloRunContext, botLevel?: PracticeLevelId)
     if (!request) return;
     setSyncIssue(null);
     setState(beginSoloLoading(category));
-    void startSoloRun(category, request.signal, rematchInviteId, botLevel).then((raw) => {
+    void startSoloRun(category, request.signal, rematchInviteId, botLevel, mode).then((raw) => {
       if (!coordinatorRef.current.isCurrent(request.token)) return;
       let entered;
       try {
@@ -28,7 +28,7 @@ export function useSoloRunStart(ctx: SoloRunContext, botLevel?: PracticeLevelId)
         return;
       }
       if (!coordinatorRef.current.settle(request.token)) return;
-      saveActiveSoloRun({ runId: raw.runId, practice });
+      saveActiveSoloRun({ runId: raw.runId, practice, mode: entered.mode });
       setState((previous) => enterStartedSoloRun(previous, raw, practice));
       // Продуктовое событие (R22): забег создан. Продолжение начатого — не «старт».
       if (!entered.resumed) logAnalyticsEvent('solo_run_started', { category });
@@ -36,7 +36,7 @@ export function useSoloRunStart(ctx: SoloRunContext, botLevel?: PracticeLevelId)
       if (!coordinatorRef.current.settle(request.token)) return;
       setState((previous) => failSoloLoading(previous, soloStartErrorMessage(error)));
     });
-  }, [botLevel, practice]);
+  }, [botLevel, practice, mode]);
 
   const retryStart = useCallback(() => begin(stateRef.current.category, inviteRef.current), [begin]);
 

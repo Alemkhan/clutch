@@ -67,9 +67,9 @@ describe('Training screens', () => {
     expect(html).not.toMatch(/[Тт]емп/);
   });
 
-  it('home dashboard has one main action, and it starts the solo run', () => {
+  it('home dashboard has one main action, and it starts the run of the day', () => {
     const html = renderToStaticMarkup(<HomeDashboard {...homeHandlers()} />);
-    expect(html).toContain('Играть');
+    expect(html).toMatch(/class="cta-btn"[^>]*>Забег дня/);
     expect(html).not.toMatch(/гонк|обгони|первым|race|Мои партии|Найти соперника|Забег до 100|[Тт]емп|Видео|Челлендж|челлендж|Robb|Смотреть клип|10 вопросов|Точность решает/);
     // Единственная большая кнопка экрана; её обработчик в App — запуск соло-забега.
     expect(html.match(/class="cta-btn"/g)).toHaveLength(1);

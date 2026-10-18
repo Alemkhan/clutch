@@ -109,15 +109,17 @@ describe('generateMatch', () => {
     expect(new Set(questions.map((question) => question.id.split('_').at(-1))).size).toBe(11);
   });
 
-  it('does not put open country outlines into newly generated geography sets', () => {
+  it('does not put country outlines of any kind into newly generated geography sets', () => {
     for (let seed = 0; seed < 20; seed++) {
-      const questions = generateMatch(20, 1, 'geography', () => seed / 20);
-      expect(questions.some((question) => question.id.startsWith('open_outline_country_'))).toBe(false);
+      for (const openRatio of [0, 0.3, 1]) {
+        const questions = generateMatch(20, openRatio, 'geography', () => seed / 20);
+        expect(questions.some((question) => question.mediaType === 'outline' || question.id.includes('outline'))).toBe(false);
+      }
     }
   });
 
   it('keeps selected geography entities unique through the capital template path', () => {
-    vi.spyOn(Math, 'random').mockReturnValue(0.3);
+    vi.spyOn(Math, 'random').mockReturnValue(0.4);
     const questions = generateMatch(10, 0, 'geography');
 
     expect(questions.some((question) => question.id.startsWith('capital_'))).toBe(true);

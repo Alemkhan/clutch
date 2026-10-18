@@ -92,7 +92,7 @@ export function ResolutionScreen({
       ? training
         ? "Верный ответ"
         : "Попытка заработана"
-      : "Неверный ответ";
+      : selectedAnswer === "" ? "Пропущено" : "Неверный ответ";
   const showMine = !correct && !timedOut && Boolean(selectedAnswer);
 
   const sendReport = () => {

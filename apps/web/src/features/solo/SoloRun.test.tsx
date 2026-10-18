@@ -236,7 +236,8 @@ describe('solo answer resolution', () => {
 
 describe('solo run result', () => {
   it('reached the target: the result is recorded, with two ways forward and no par or score', () => {
-    const html = render(finished([25, 25, 25, 25]), saved({}));
+    // Дуэль без соперника: её забег ждёт соперника как запись.
+    const html = render({ ...finished([25, 25, 25, 25]), mode: 'duel' }, saved({}));
     expect(html).toContain('Дошёл до 100%');
     expect(html).toContain('Твоя запись');
     expect(html).not.toContain('Результат зафиксирован');
@@ -247,9 +248,12 @@ describe('solo run result', () => {
   });
 
   it('offers to call a friend only for a saved run that reached the target, never in practice', () => {
-    expect(render(finished([25, 25, 25, 25]), saved({}))).toContain('Позвать друга');
-    expect(render(finished([25, 25, 25, 25]))).not.toContain('Позвать друга');
-    expect(render(finished([25, 25, 25, 25]), saved({ reachedTarget: false }))).not.toContain('Позвать друга');
+    const duel = { ...finished([25, 25, 25, 25]), mode: 'duel' as const };
+    expect(render(duel, saved({}))).toContain('Позвать друга');
+    expect(render(duel)).not.toContain('Позвать друга');
+    expect(render(duel, saved({ reachedTarget: false }))).not.toContain('Позвать друга');
+    // Забег дня друга не зовёт: тот узнал бы вопросы дня до своей попытки.
+    expect(render({ ...finished([25, 25, 25, 25]), mode: 'daily' }, saved({}))).not.toContain('Позвать друга');
     const practice = renderToStaticMarkup(
       <SoloRunScreen state={finished([25, 25, 25, 25], pace([25, 25, 25, 25]))} save={saved({})} practice={PRACTICE_LEVELS[0]} {...handlers} />,
     );

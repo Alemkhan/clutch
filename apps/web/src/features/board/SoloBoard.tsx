@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import type { CategoryId, SoloLeaderboardResponse, SoloLeaderboardStanding } from '@clutch/shared';
-import { fetchSoloLeaderboard } from '../../platform/api';
+import { useEffect, useState, type ReactNode } from 'react';
+import type { CategoryId, DuelBoardResponse, SoloLeaderboardResponse, SoloLeaderboardStanding, SoloMode } from '@clutch/shared';
+import { fetchDuelBoard, fetchSoloLeaderboard } from '../../platform/api';
 import { categoryName, finishedText, initials, roundsShort, soloRoundsText } from '../myRuns/myRunsView';
 import { resetLabel } from '../tiebreaker/tiebreakerClock';
 import { useDayCountdown } from '../tiebreaker/useDayCountdown';
@@ -22,7 +22,9 @@ interface SoloBoardViewProps {
   onCategory: (category: CategoryId) => void;
   onBack: () => void;
   onRetry: () => void;
-  onPlay: (category: CategoryId) => void;
+  onPlay: (category: CategoryId, mode: SoloMode) => void;
+  /** Переключатель «Забег дня / Дуэли» над таблицей. */
+  kindSwitch?: ReactNode;
 }
 
 /**
@@ -40,11 +42,17 @@ export function standingHint(standing: SoloLeaderboardStanding): string {
   return `До ${standing.placeAbove ?? standing.rank - 1}-го места — ${gap}`;
 }
 
-export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onRetry, onPlay }: SoloBoardViewProps) {
+export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onRetry, onPlay, kindSwitch }: SoloBoardViewProps) {
+  // Попытка забега дня одна: сыгравшего таблица зовёт в дуэль, а не во второй забег дня.
+  const played = state.status === 'ready' && (state.board.you !== null || state.board.dailyAttempt === 'completed');
+  const playButton = played
+    ? { label: 'Дуэль', mode: 'duel' as const }
+    : { label: 'Забег дня', mode: 'daily' as const };
   return (
     <section className="solo-board">
       <ScreenHeader onBack={onBack} title="Таблица дня" />
       <p className="solo-board-reset">{resetLabel(msLeft)}</p>
+      {kindSwitch}
 
       <div className="solo-board-tabs" role="tablist" aria-label="Категория">
         {CATEGORIES.map((id) => (
@@ -88,23 +96,23 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
                   </span>
                 </div>
               </div>
-              <button type="button" className="cta-btn solo-board-play" onClick={() => onPlay(category)}>Сыграть ещё набор</button>
+              <button type="button" className="cta-btn solo-board-play" onClick={() => onPlay(category, playButton.mode)}>{playButton.label}</button>
             </div>
           )}
 
           {!state.board.you && state.board.entries.length > 0 && (
             <div className="solo-board-you">
               <p className="solo-board-you-text">
-                Твоего забега сегодня здесь нет: в таблицу попадают только дошедшие до 100%.
+                Твоего забега дня здесь нет: в таблицу идёт первая попытка, если она дошла до 100%.
               </p>
-              <button type="button" className="cta-btn solo-board-play" onClick={() => onPlay(category)}>Играть</button>
+              <button type="button" className="cta-btn solo-board-play" onClick={() => onPlay(category, playButton.mode)}>{playButton.label}</button>
             </div>
           )}
 
           {state.board.entries.length === 0 && (
             <div className="my-runs-message">
               <p className="matchmaking-error">Сегодня в этой категории ещё никто не дошёл до цели.</p>
-              <button type="button" className="cta-btn" onClick={() => onPlay(category)}>Играть</button>
+              <button type="button" className="cta-btn" onClick={() => onPlay(category, playButton.mode)}>{playButton.label}</button>
             </div>
           )}
 
@@ -140,26 +148,145 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
   );
 }
 
+export type BoardKind = 'daily' | 'duels';
+
+/** «Забег дня» и «Дуэли» — две разные таблицы: место по кругам и счёт побед. */
+export function BoardKindSwitch({ kind, onKind }: { kind: BoardKind; onKind: (kind: BoardKind) => void }) {
+  const items: ReadonlyArray<[BoardKind, string]> = [['daily', 'Забег дня'], ['duels', 'Дуэли']];
+  return (
+    <div className="board-kind" role="tablist" aria-label="Таблица">
+      {items.map(([id, label]) => (
+        <button
+          key={id}
+          type="button"
+          role="tab"
+          aria-selected={id === kind}
+          className={id === kind ? 'board-kind-btn active' : 'board-kind-btn'}
+          onClick={() => { if (id !== kind) onKind(id); }}
+        >
+          {label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export type DuelBoardState =
+  | { status: 'loading' }
+  | { status: 'error' }
+  | { status: 'ready'; board: DuelBoardResponse };
+
+/** Счёт как в UFC: победы–ничьи–поражения. */
+export function duelRecord(entry: { wins: number; draws: number; losses: number }): string {
+  return `${entry.wins}–${entry.draws}–${entry.losses}`;
+}
+
+export function DuelBoardView({ state, msLeft, onBack, onRetry, onDuel, kindSwitch }: {
+  state: DuelBoardState;
+  msLeft: number;
+  onBack: () => void;
+  onRetry: () => void;
+  onDuel: () => void;
+  kindSwitch?: ReactNode;
+}) {
+  return (
+    <section className="solo-board">
+      <ScreenHeader onBack={onBack} title="Таблица дня" />
+      <p className="solo-board-reset">{resetLabel(msLeft)}</p>
+      {kindSwitch}
+
+      {state.status === 'loading' && (
+        <div className="matchmaking-loading" role="status"><span /> Загружаем таблицу</div>
+      )}
+
+      {state.status === 'error' && (
+        <div className="my-runs-message">
+          <p className="matchmaking-error" role="alert">Не удалось загрузить таблицу. Проверь соединение и попробуй ещё раз.</p>
+          <button type="button" className="cta-btn" onClick={onRetry}>Повторить</button>
+        </div>
+      )}
+
+      {state.status === 'ready' && (
+        <>
+          <div className="solo-board-you">
+            <p className="solo-board-you-text">
+              {state.board.you
+                ? `Ты сегодня: ${duelRecord(state.board.you)} · ${state.board.you.rank}-е место`
+                : 'Сегодня у тебя ещё нет законченных дуэлей.'}
+            </p>
+            <button type="button" className="cta-btn solo-board-play" onClick={onDuel}>Дуэль</button>
+          </div>
+
+          {state.board.entries.length === 0 ? (
+            <div className="my-runs-message">
+              <p className="matchmaking-error">Сегодня ещё никто не довёл дуэль до конца.</p>
+            </div>
+          ) : (
+            <>
+              <ol className="solo-board-list">
+                {state.board.entries.map((entry, index) => (
+                  <li key={`${entry.rank}-${entry.displayName}-${index}`} className="solo-board-row">
+                    <span className="solo-board-place">{entry.rank}</span>
+                    <span className="solo-board-avatar" aria-hidden="true">{initials(entry.displayName)}</span>
+                    <span className="solo-board-name" title={entry.displayName}>{entry.displayName}</span>
+                    <span className="solo-board-score" aria-label={`Победы ${entry.wins}, ничьи ${entry.draws}, поражения ${entry.losses}`}>
+                      {duelRecord(entry)}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+              <p className="solo-board-note">Победы – ничьи – поражения за сегодня во всех категориях. Выше тот, у кого больше побед, при равных — меньше поражений</p>
+            </>
+          )}
+        </>
+      )}
+    </section>
+  );
+}
+
 interface SoloBoardProps {
   onBack: () => void;
-  onPlay: (category: CategoryId) => void;
+  onPlay: (category: CategoryId, mode: SoloMode) => void;
 }
 
 export function SoloBoard({ onBack, onPlay }: SoloBoardProps) {
+  const [kind, setKind] = useState<BoardKind>('daily');
   const [category, setCategory] = useState<CategoryId>('general');
   const [state, setState] = useState<SoloBoardState>({ status: 'loading' });
+  const [duels, setDuels] = useState<DuelBoardState>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
   const msLeft = useDayCountdown();
 
   useEffect(() => {
     const controller = new AbortController();
-    setState({ status: 'loading' });
-    fetchSoloLeaderboard(category, controller.signal)
-      .then((board) => { if (!controller.signal.aborted) setState({ status: 'ready', board }); })
-      .catch(() => { if (!controller.signal.aborted) setState({ status: 'error' }); });
+    if (kind === 'daily') {
+      setState({ status: 'loading' });
+      fetchSoloLeaderboard(category, controller.signal)
+        .then((board) => { if (!controller.signal.aborted) setState({ status: 'ready', board }); })
+        .catch(() => { if (!controller.signal.aborted) setState({ status: 'error' }); });
+    } else {
+      setDuels({ status: 'loading' });
+      fetchDuelBoard(controller.signal)
+        .then((board) => { if (!controller.signal.aborted) setDuels({ status: 'ready', board }); })
+        .catch(() => { if (!controller.signal.aborted) setDuels({ status: 'error' }); });
+    }
     return () => controller.abort();
-  }, [category, attempt]);
+  }, [kind, category, attempt]);
 
+  const kindSwitch = <BoardKindSwitch kind={kind} onKind={setKind} />;
+  const retry = () => setAttempt((value) => value + 1);
+  if (kind === 'duels') {
+    return (
+      <DuelBoardView
+        state={duels}
+        msLeft={msLeft}
+        onBack={onBack}
+        onRetry={retry}
+        onDuel={() => onPlay('general', 'duel')}
+        kindSwitch={kindSwitch}
+      />
+    );
+  }
   return (
     <SoloBoardView
       state={state}
@@ -167,8 +294,9 @@ export function SoloBoard({ onBack, onPlay }: SoloBoardProps) {
       category={category}
       onCategory={setCategory}
       onBack={onBack}
-      onRetry={() => setAttempt((value) => value + 1)}
+      onRetry={retry}
       onPlay={onPlay}
+      kindSwitch={kindSwitch}
     />
   );
 }

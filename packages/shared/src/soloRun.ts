@@ -35,12 +35,14 @@ function assertValidAward(round: SoloRunRound): void {
 
 /**
  * Применяет один уже оценённый круг, не изменяя прежнее состояние.
- * Забег кончается по цели или по потолку кругов; запись соперника его не завершает.
+ * Забег кончается по цели или по потолку кругов. `roundCap` у дуэли ниже общего потолка:
+ * круг, на котором соперник дошёл до цели (см. `duelRoundCap`).
  * `expectedQuestionId` берётся из авторитетного набора, не из клиента.
  */
 export function applySoloRound(
   state: Readonly<SoloRunState>,
   input: Readonly<ApplySoloRoundInput>,
+  roundCap: number = SOLO_ROUND_CAP,
 ): SoloRunState {
   if (state.status === 'completed') {
     throw new Error('cannot apply a round after the run has completed');
@@ -53,7 +55,7 @@ export function applySoloRound(
   const progress = Math.min(SOLO_TARGET_PROGRESS, state.progress + input.round.progressAwarded);
   const roundsPlayed = state.roundsPlayed + 1;
   const reachedTarget = progress === SOLO_TARGET_PROGRESS;
-  const completed = reachedTarget || roundsPlayed >= SOLO_ROUND_CAP;
+  const completed = reachedTarget || roundsPlayed >= roundCap;
 
   return {
     roundsPlayed,
@@ -84,6 +86,7 @@ function assertQuestionIds(questionIds: readonly string[]): void {
 export function evaluateSoloRun(
   questionIds: readonly string[],
   rounds: readonly SoloRunRound[],
+  roundCap: number = SOLO_ROUND_CAP,
 ): SoloRunState {
   assertQuestionIds(questionIds);
   if (rounds.length > questionIds.length) {
@@ -92,7 +95,7 @@ export function evaluateSoloRun(
 
   let state = createSoloRunState();
   for (let index = 0; index < rounds.length; index += 1) {
-    state = applySoloRound(state, { expectedQuestionId: questionIds[index], round: rounds[index] });
+    state = applySoloRound(state, { expectedQuestionId: questionIds[index], round: rounds[index] }, roundCap);
   }
 
   // Вопросы кончились раньше цели и потолка: забег закрыт без цели.

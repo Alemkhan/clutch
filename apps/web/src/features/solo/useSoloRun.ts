@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
-import type { CompleteSoloRunResponse, PracticeLevelId } from '@clutch/shared';
+import type { CompleteSoloRunResponse, PracticeLevelId, SoloMode } from '@clutch/shared';
 import { MatchRequestCoordinator } from './matchmaking';
 import {
   completeSoloHammer,
@@ -33,7 +33,7 @@ const SAVING: SoloSaveState = { status: 'saving', response: null, canRetry: fals
  * забег не теряет: id забега лежит в localStorage, остальное хранит сервер.
  * botLevel: тренировка против бота. Остальное — как в обычном забеге.
  */
-export function useSoloRun(botLevel?: PracticeLevelId) {
+export function useSoloRun(botLevel?: PracticeLevelId, mode: SoloMode = 'daily') {
   const [state, setState] = useState<SoloFlowState>(createSoloFlowState);
   const [syncIssue, setSyncIssue] = useState<SyncIssue | null>(null);
   const coordinatorRef = useRef(new MatchRequestCoordinator());
@@ -41,7 +41,7 @@ export function useSoloRun(botLevel?: PracticeLevelId) {
   const stateRef = useRef(state);
   stateRef.current = state;
   const ctx: SoloRunContext = {
-    setState, setSyncIssue, coordinatorRef, inviteRef, stateRef, practice: botLevel !== undefined,
+    setState, setSyncIssue, coordinatorRef, inviteRef, stateRef, practice: botLevel !== undefined, mode,
   };
 
   const { begin, retryStart } = useSoloRunStart(ctx, botLevel);

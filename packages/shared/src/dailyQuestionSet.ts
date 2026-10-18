@@ -65,7 +65,7 @@ export function dailyQuestionSetIds(category: CategoryId, timestampMs: number = 
   return Array.from({ length: dailyBankSize(category) }, (_, index) => questionSetId(category, dateKey, index));
 }
 
-type DailySet = { questionSetId: string; questions: Question[] };
+export type DailySet = { questionSetId: string; questions: Question[] };
 
 /** Only a few recent days/categories are kept: a long-lived isolate must not grow without bound. */
 const BANK_CACHE_LIMIT = 6;

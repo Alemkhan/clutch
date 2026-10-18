@@ -49,34 +49,70 @@ afterEach(() => { vi.restoreAllMocks(); });
 describe('solo result receipt', () => {
   it('mentions Telegram in the record card only for a Telegram player', () => {
     vi.spyOn(telegram, 'getTelegramIdentity').mockReturnValue({ id: 1, displayName: 'Я' } as never);
-    expect(render()).toContain('«Партии» и в Telegram.');
+    expect(render({ mode: 'duel' })).toContain('«Партии» и в Telegram.');
   });
 
   it('without the invite button «Поделиться» takes its slot, so a short run can be shared too', () => {
-    const html = render({ friendDuel: null, response: response({ reachedTarget: false, progress: 40 }) });
+    const html = render({ mode: 'duel', friendDuel: null, response: response({ reachedTarget: false, progress: 40 }) });
     expect(html).not.toContain('Позвать друга');
     expect(html).toContain('>Поделиться<');
-    expect(render()).not.toContain('>Поделиться<');
+    expect(render({ mode: 'duel' })).not.toContain('>Поделиться<');
   });
 
-  it('reached the target: line, three numbers, record card, two secondary buttons', () => {
-    const html = render();
+  it('the run of the day: place in the table, shared not invited, then a duel or free play', () => {
+    const html = render({ mode: 'daily', onPlayMode: vi.fn() });
     expect(html).toContain('за 4 круга · География');
     expect(html).toMatch(/data-stat="correct"><strong>5\/4<\/strong><span>верных/);
     expect(html).toMatch(/data-stat="perfect"><strong>2<\/strong><span>идеально/);
     expect(html).toMatch(/data-stat="place"><strong>3-й<\/strong><span>в таблице/);
+    // Не дуэль: ни карточки «ждёт соперника», ни побед и поражений.
+    expect(html).not.toContain('Твоя запись');
+    expect(html).not.toMatch(/Победа|Поражение|Ничья/);
+    // Друга с забега дня не зовут: он узнал бы вопросы дня.
+    expect(html).not.toContain('Позвать друга');
+    expect(html).toContain('>Поделиться<');
+    expect(html).toMatch(/class="cta-btn"[^>]*>Дуэль</);
+    expect(html).toContain('>Свободная игра<');
+    expect(html).toContain('Мои партии');
+  });
+
+  it('a duel without an opponent waits as a record and can be sent to a friend', () => {
+    const html = render({ mode: 'duel', onPlayMode: vi.fn() });
     expect(html).toContain('Твоя запись');
     expect(html).toContain('ждёт соперника');
-    expect(html).toContain('100% за 4 круга');
-    expect(html).toContain('Против неё сыграет другой игрок этого набора. Исход придёт в «Партии»');
-    expect(html).not.toContain('Результат зафиксирован');
-    expect(html).not.toContain('solo-result-summary');
-    // «за N кругов» только в мета-строке и в карточке записи.
-    expect(html.match(/за 4 круга/g)).toHaveLength(2);
-    expect(html).not.toContain('Telegram');
+    expect(html).toContain('Против неё сыграет следующий, кто выйдет на дуэль. Исход придёт в «Партии»');
+    expect(html).not.toContain('data-stat="place"');
     expect(html).toContain('Позвать друга');
-    expect(html).toContain('Мои партии');
-    expect(html).not.toMatch(/Победа|Поражение|Ничья/);
+    expect(html).toMatch(/class="cta-btn"[^>]*>Ещё дуэль</);
+  });
+
+  it('a duel the opponent finished first says so in the words of the mini-game', () => {
+    const pace = { id: 'p', displayName: 'Аня', rounds: [25, 25, 25, 25].map((progressAwarded, index) => (
+      { questionId: questions[index].id, correct: true, responseTimeMs: 1000, skillScore: 1, progressAwarded })) };
+    const lost = { mode: 'duel' as const, pace, roundCap: 4, view: view([25, 0, 12, 0]), response: response({ reachedTarget: false, progress: 37, roundsPlayed: 4 }) };
+    expect(render({ ...lost, miniGameId: 'hammer_nail' })).toContain('Соперник забил гвоздь первым');
+    expect(render({ ...lost, miniGameId: 'tower_stack' })).toContain('Соперник достроил башню первым');
+    expect(render(lost)).toContain('Он дошёл до 100% за 4 круга. У тебя 37%.');
+  });
+
+  it('a duel shows its outcome right away: win, loss, tie', () => {
+    const pace = { id: 'p', displayName: 'Дамир', rounds: [25, 25, 25, 25].map((progressAwarded, index) => (
+      { questionId: questions[index].id, correct: true, responseTimeMs: 1000, skillScore: 1, progressAwarded })) };
+    const duel = { mode: 'duel' as const, pace, roundCap: 4 };
+    expect(render({ ...duel, response: response({ outcome: 'player', roundsPlayed: 4 }) })).toContain('Победа: Дамир позади');
+    expect(render({ ...duel, response: response({ outcome: 'tie' }) })).toContain('>Ничья<');
+    const lost = render({ ...duel, miniGameId: 'hammer_nail', view: view([25, 0, 12, 0]), response: response({ outcome: 'opponent', reachedTarget: false, progress: 37 }) });
+    expect(lost).toContain('Соперник забил гвоздь первым');
+    expect(lost).toContain('result-headline loss');
+    expect(lost).not.toContain('До 100% не дошёл');
+  });
+
+  it('free play: no table, no record card, the next set is one tap away', () => {
+    const html = render({ mode: 'free', onPlayMode: vi.fn() });
+    expect(html).not.toContain('data-stat="place"');
+    expect(html).not.toContain('Твоя запись');
+    expect(html).toMatch(/class="cta-btn"[^>]*>Ещё набор</);
+    expect(html).toContain('Позвать друга');
   });
 
   it('place is a dash while loading, on error or without a standing', () => {
@@ -84,7 +120,7 @@ describe('solo result receipt', () => {
       { status: 'loading' }, { status: 'error' }, { status: 'ready', standing: null },
     ];
     for (const standing of states) {
-      const html = render({ standing });
+      const html = render({ standing, mode: 'daily' });
       expect(html).toMatch(/data-stat="place"><strong>—<\/strong>/);
       expect(html).toContain('Сыграть ещё');
     }

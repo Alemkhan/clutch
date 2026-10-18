@@ -6,6 +6,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
+  DAILY_RULES_VERSION,
   PRACTICE_LEVELS,
   PRACTICE_RULES_VERSION,
   dailyQuestionSet,
@@ -242,13 +243,13 @@ describe('practice run against a bot', () => {
     expect(rowOf(db, run.runId).status).toBe('in_progress');
   });
 
-  it('does not count as a played competitive set', async () => {
+  it('does not use up the run of the day', async () => {
     const db = database();
     await finish(db, ann, await startPractice(db, ann), 4);
     const real = await call(db, '/api/solo-runs', ann, { displayName: 'Игрок', category: 'geography' });
     expect(real.status).toBe(201);
     const body = await real.json() as StartSoloRunResponse;
-    expect(body.rulesVersion).toBe(SOLO);
+    expect(body.rulesVersion).toBe(DAILY_RULES_VERSION);
     expect(body.bankExhausted).toBe(false);
     expect(body.pace).toBeNull();
   });
@@ -259,7 +260,7 @@ describe('practice run against a bot', () => {
       const run = await startPractice(db, ann);
       expect((await finish(db, ann, run, 4)).status).toBe(200);
       disguiseAsCompetitive(db, run);
-      const other = await call(db, '/api/solo-runs', bob, { displayName: 'Боб', category: 'geography' });
+      const other = await call(db, '/api/solo-runs', bob, { displayName: 'Боб', category: 'geography', mode: 'duel' });
       const started = await other.json() as StartSoloRunResponse;
       expect(started.pace).toBeNull();
       expect(rowOf(db, started.runId).opponent_run_id).toBeNull();

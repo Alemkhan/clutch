@@ -41,8 +41,9 @@ function summary(
   rounds: AsyncMatchRound[],
   correctCount: number,
   outcome: MyRunOutcome | null,
+  roundCap: number,
 ): CompleteSoloRunResponse {
-  const final = evaluateSoloRun(questionIds(questions), soloRounds(rounds));
+  const final = evaluateSoloRun(questionIds(questions), soloRounds(rounds), roundCap);
   const par = setPar(questions);
   return {
     runId,
@@ -68,6 +69,7 @@ async function storedResult(c: AppContext, loaded: LoadedSoloRun): Promise<Compl
     JSON.parse(fresh.rounds_json) as AsyncMatchRound[],
     fresh.correct_count,
     await findSoloOutcome(c.env.DB, runId),
+    loaded.roundCap,
   );
 }
 
@@ -150,7 +152,7 @@ export async function finalizeSoloRun(
 
   const rounds = storedRounds(rows);
   const correctCount = rows.filter((row) => row.correct === 1).length;
-  const result = summary(runId, questions, rounds, correctCount, null);
+  const result = summary(runId, questions, rounds, correctCount, null, loaded.roundCap);
 
   // Сравнение с записью-темпом. Тренировка не сравнивается: бот не запись игрока,
   // а исход тренировки не хранится.
@@ -165,7 +167,8 @@ export async function finalizeSoloRun(
 
   // R25: снимок верха таблицы до записи забега; сбой снимка не должен ломать завершение.
   const dateKey = dailyKey(completedAt);
-  const ranked = !practice && !friend && result.reachedTarget;
+  // В таблицу идёт только забег дня; свободная игра и дуэли — вне её.
+  const ranked = loaded.mode === 'daily' && result.reachedTarget;
   let topBefore: TopTenSnapshot | null = null;
   let category = '';
   if (ranked) {
@@ -188,6 +191,7 @@ export async function finalizeSoloRun(
     outcome,
     practice,
     friend,
+    recordable: loaded.mode === 'duel',
     now: completedAt,
   });
   if (!didComplete) {

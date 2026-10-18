@@ -6,9 +6,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
+  DAILY_RULES_VERSION,
+  FREE_RULES_VERSION,
   SOLO_ROUND_CAP,
-  dailyBankSize,
   dailyQuestionSet,
+  seenQuestionKey,
   setPar,
   soloScore,
   type AsyncMatchRound,
@@ -89,10 +91,11 @@ function inputs(questions: Question[], count: number, correct: boolean): AsyncMa
   }));
 }
 
-async function startRun(db: TestD1, label: string, path = '/api/solo-runs') {
+async function startRun(db: TestD1, label: string, path = '/api/solo-runs', mode?: string) {
   const response = await request(db, path, guest(label).authorization, {
     displayName: label,
     category: 'geography',
+    ...(mode ? { mode } : {}),
   });
   return response;
 }
@@ -157,27 +160,39 @@ function insertRun(db: TestD1, options: {
 }
 
 describe('solo run', () => {
-  it('flags an exhausted day bank instead of silently repeating a set', async () => {
+  it('gives the run of the day once: the same set for everyone, a second start is refused', async () => {
     const db = database();
-    const size = dailyBankSize('geography');
-    let first: StartSoloRunResponse | undefined;
-    // Забеги надо доигрывать: незаконченный теперь продолжается, а не уступает место новому.
-    for (let step = 0; step < size; step++) {
-      const run = await start(db, 'grinder');
-      expect(run.bankExhausted).toBe(false);
-      first ??= run;
+    const run = await start(db, 'grinder');
+    expect(run.rulesVersion).toBe(DAILY_RULES_VERSION);
+    expect(run.questions.map((q) => q.id)).toEqual(dailyQuestionSet('geography', NOW, 0).questions.map((q) => q.id));
+    expect((await start(db, 'other')).questions).toEqual(run.questions);
+    expect((await finish(db, 'grinder', run.runId, inputs(fullQuestions(db, run.runId), 4, true))).status).toBe(200);
+    const again = await startRun(db, 'grinder');
+    expect(again.status).toBe(409);
+    expect(await again.json()).toMatchObject({ reason: 'daily_played' });
+  });
+
+  it('free play never repeats a question the player has already seen while fresh ones remain', async () => {
+    const db = database();
+    const seen = new Set<string>();
+    for (let step = 0; step < 6; step++) {
+      const run = await (await startRun(db, 'grinder', '/api/solo-runs', 'free')).json() as StartSoloRunResponse;
+      expect(run.rulesVersion).toBe(FREE_RULES_VERSION);
+      expect(run.pace).toBeNull();
+      const played = fullQuestions(db, run.runId).slice(0, 4);
+      for (const question of played) {
+        expect(seen.has(seenQuestionKey(question.id))).toBe(false);
+        seen.add(seenQuestionKey(question.id));
+      }
       expect((await finish(db, 'grinder', run.runId, inputs(fullQuestions(db, run.runId), 4, true))).status).toBe(200);
     }
-    const repeat = await start(db, 'grinder');
-    expect(repeat.bankExhausted).toBe(true);
-    expect(repeat.questions).toEqual(first!.questions);
   });
 
   it('reaches the target, is saved with par and score, and repeats canonically', async () => {
     const db = database();
     const run = await start(db, 'ann');
     expect(run.pace).toBeNull();
-    expect(run.rulesVersion).toBe(SOLO);
+    expect(run.rulesVersion).toBe(DAILY_RULES_VERSION);
     expect(run.roundCap).toBe(SOLO_ROUND_CAP);
 
     // Четыре точных удара по 25: цель достигнута на четвёртом круге.
@@ -193,7 +208,7 @@ describe('solo run', () => {
       reached_target: 1,
       set_par: result.par,
       solo_score: result.score,
-      rules_version: SOLO,
+      rules_version: DAILY_RULES_VERSION,
     });
 
     const again = await finish(db, 'ann', run.runId, roundInputs(fullQuestions(db, run.runId), 4, true));
@@ -223,19 +238,19 @@ describe('solo run', () => {
     expect(rowOf(db, run.runId)).toMatchObject({ status: 'in_progress' });
   });
 
-  it('gives a pace from a finished solo run, and the pace cannot end the run', async () => {
+  it('a duel ends on the round the record reached the target: the challenger has already lost', async () => {
     const db = database();
     insertRun(db, { id: 'pace-run', playerId: 'guest:other', rulesVersion: SOLO, reachedTarget: 1 });
-    const run = await start(db, 'eve');
+    const run = await (await startRun(db, 'eve', '/api/solo-runs', 'duel')).json() as StartSoloRunResponse;
     expect(run.pace?.id).toBe('pace-run');
     expect(run.pace?.rounds).toHaveLength(4);
+    expect(run.roundCap).toBe(4);
 
-    // Темп добирает 100 на четвёртом круге, но забег игрока от этого не кончается.
-    expect((await finish(db, 'eve', run.runId, roundInputs(fullQuestions(db, run.runId), 4, false))).status).toBe(400);
-    expect(rowOf(db, run.runId)).toMatchObject({ status: 'in_progress' });
-    const full = await finish(db, 'eve', run.runId, roundInputs(fullQuestions(db, run.runId), SOLO_ROUND_CAP, false));
-    expect(full.status).toBe(200);
-    expect(await full.json()).toMatchObject({ roundsPlayed: SOLO_ROUND_CAP, reachedTarget: false });
+    // Запись добрала 100 на четвёртом круге: после четвёртого круга партия кончена, исход — поражение.
+    const done = await finish(db, 'eve', run.runId, roundInputs(fullQuestions(db, run.runId), 4, false));
+    expect(done.status).toBe(200);
+    expect(await done.json()).toMatchObject({ roundsPlayed: 4, reachedTarget: false });
+    expect(rowOf(db, run.runId)).toMatchObject({ status: 'completed' });
   });
 
   it('does not mix legacy race records into the solo pool', async () => {
@@ -246,7 +261,7 @@ describe('solo run', () => {
       rulesVersion: 'race-to-100-v3',
       reachedTarget: null,
     });
-    expect((await start(db, 'fay')).pace).toBeNull();
+    expect(((await (await startRun(db, 'fay', '/api/solo-runs', 'duel')).json()) as StartSoloRunResponse).pace).toBeNull();
   });
 
   it('refuses another player, a race match id and unauthenticated calls', async () => {

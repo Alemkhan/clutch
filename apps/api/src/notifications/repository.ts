@@ -1,4 +1,4 @@
-import { CURRENT_SOLO_RUN_CONDITIONS } from '@clutch/shared';
+import { DUEL_RULES_VERSION, FREE_RULES_VERSION } from '@clutch/shared';
 
 /** Реванш играется на новом наборе и ничью запись не держит, поэтому живёт долго. */
 export const INVITE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
@@ -26,9 +26,14 @@ export interface InviteRow {
   challenger_rules_version: string | null;
 }
 
-/** Принять можно только приглашение от соло-забега; легаси-строки других версий правил игнорируются. */
+/**
+ * Принять можно только приглашение от дуэли (реванш, «Позвать друга») или свободной игры
+ * («Позвать друга»); легаси-строки других версий правил игнорируются. Забег дня не зовёт: друг
+ * сыграл бы набор дня заранее и знал бы вопросы своей попытки в таблицу.
+ */
 export function isSoloInvite(invite: Pick<InviteRow, 'challenger_rules_version'>): boolean {
-  return invite.challenger_rules_version === CURRENT_SOLO_RUN_CONDITIONS.rulesVersion;
+  return invite.challenger_rules_version === DUEL_RULES_VERSION
+    || invite.challenger_rules_version === FREE_RULES_VERSION;
 }
 
 /** Открытое приглашение: адресата и его записи нет, пока ссылку не погасят. */

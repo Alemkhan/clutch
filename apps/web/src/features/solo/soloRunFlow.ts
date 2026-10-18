@@ -8,6 +8,7 @@ import type {
   SoloAnswerRequest,
   SoloHammerRequest,
   SoloRoundResponse,
+  SoloMode,
   SoloRunSnapshot,
   StartSoloRunResponse,
 } from '@clutch/shared';
@@ -54,6 +55,8 @@ export interface SoloFlowState {
   bankExhausted: boolean;
   /** Забег по дружеской ссылке: вне соревнования. */
   friendDuel: boolean;
+  /** Забег дня, свободная игра или дуэль; null — тренировка, дружеская дуэль или ещё не начат. */
+  mode: SoloMode | null;
   /** Забег продолжен после закрытой вкладки. */
   resumed: boolean;
   /** Соперник отпущен за время отсутствия: полоса соперника исчезла не просто так. */
@@ -93,6 +96,7 @@ export function createSoloFlowState(): SoloFlowState {
     miniGameId: CURRENT_SOLO_RUN_CONDITIONS.miniGame.id,
     bankExhausted: false,
     friendDuel: false,
+    mode: null,
     resumed: false,
     paceReleased: false,
     selectedOption: '',
@@ -121,11 +125,12 @@ export function applyLoadedSoloRun(state: SoloFlowState, run: NormalizedSoloRun)
     ...state,
     stage: 'ready',
     runId: run.runId,
-    session: createSoloRunSession(run.questions, run.pace),
+    session: createSoloRunSession(run.questions, run.pace, run.roundCap),
     config: run.config,
     miniGameId: run.miniGameId,
     bankExhausted: run.bankExhausted,
     friendDuel: run.friendDuel === true,
+    mode: run.mode ?? null,
   };
 }
 
@@ -134,7 +139,7 @@ export function applyLoadedSoloRun(state: SoloFlowState, run: NormalizedSoloRun)
  * Закрытый забег сразу показывает итог; открытый ждёт кнопку «Продолжить» на следующем вопросе.
  */
 export function restoreSoloRun(snapshot: NormalizedSoloSnapshot): SoloFlowState {
-  let session = createSoloRunSession(snapshot.questions, snapshot.pace);
+  let session = createSoloRunSession(snapshot.questions, snapshot.pace, snapshot.roundCap);
   const skillResults: SkillResult[] = [];
   for (const round of snapshot.rounds) {
     session = applySoloSessionRound(session, round.progressAwarded);
@@ -150,6 +155,7 @@ export function restoreSoloRun(snapshot: NormalizedSoloSnapshot): SoloFlowState 
     config: snapshot.config,
     miniGameId: snapshot.miniGameId,
     friendDuel: snapshot.friendDuel === true,
+    mode: snapshot.mode ?? null,
     resumed: true,
     paceReleased: snapshot.paceReleased === true,
     correctCount: snapshot.rounds.filter((round) => round.correct).length,
@@ -330,6 +336,9 @@ export function soloStartErrorMessage(error: unknown): string {
   if (error instanceof ApiError && error.reason === 'taken') return 'Ссылку уже занял другой игрок.';
   if (error instanceof ApiError && error.reason === 'expired') return 'Срок ссылки вышел.';
   if (error instanceof ApiError && error.reason === 'own') return 'Это твоя ссылка. Отправь её другу.';
+  if (error instanceof ApiError && error.reason === 'daily_played') {
+    return 'Забег дня уже сыгран: в таблицу идёт первая попытка. Сыграй свободную игру или дуэль.';
+  }
   if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
     return 'Не удалось подтвердить сессию или доступ. Вернись в Telegram или обнови страницу.';
   }

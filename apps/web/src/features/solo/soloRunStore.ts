@@ -1,3 +1,5 @@
+import type { SoloMode } from '@clutch/shared';
+
 /**
  * Какой соло-забег идёт на этом устройстве. Круги сохраняются на сервере сразу, так что закрытая вкладка
  * забег не теряет; здесь хранится только его id, чтобы найти и продолжить. Ответов и вопросов тут нет.
@@ -8,6 +10,8 @@ export interface ActiveSoloRun {
   runId: string;
   /** Тренировка против бота живёт отдельно от зачётного забега: продолжается только на своём экране. */
   practice: boolean;
+  /** Режим забега: продолжается только из того же режима (остальное сервер продолжит сам). */
+  mode?: SoloMode | null;
 }
 
 export function saveActiveSoloRun(run: ActiveSoloRun): void {
@@ -24,7 +28,7 @@ export function loadActiveSoloRun(): ActiveSoloRun | null {
     if (!raw) return null;
     const value = JSON.parse(raw) as Partial<ActiveSoloRun> | null;
     return value && typeof value.runId === 'string' && value.runId.length > 0 && typeof value.practice === 'boolean'
-      ? { runId: value.runId, practice: value.practice }
+      ? { runId: value.runId, practice: value.practice, mode: value.mode ?? null }
       : null;
   } catch {
     return null;

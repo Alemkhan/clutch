@@ -103,7 +103,7 @@ export async function handleSoloAnswer(c: AppContext): Promise<Response> {
   if (rows.some((row) => row.settled_at === null)) {
     return c.json({ error: 'The previous round is waiting for its hammer.', reason: 'hammer_pending' }, 409);
   }
-  const prior = evaluateSoloRun(questionIds(questions), settledRounds(rows));
+  const prior = evaluateSoloRun(questionIds(questions), settledRounds(rows), loaded.roundCap);
   if (run.status === 'completed' || prior.status === 'completed') {
     return c.json({ error: 'The run is already finished.', reason: 'completed' }, 409);
   }
@@ -142,7 +142,7 @@ async function recordAnswer(
     : applySoloRound(prior, {
       expectedQuestionId: question.id,
       round: { questionId: question.id, progressAwarded: 0 },
-    }).progress;
+    }, loaded.roundCap).progress;
   // Если параллельный запрос успел раньше, вставка ничего не изменит и ниже вернётся записанное им.
   const inserted = await insertSoloAnswer(c.env.DB, {
     runId: run.id,
@@ -185,7 +185,7 @@ export async function handleSoloHammer(c: AppContext): Promise<Response> {
   if (row.correct !== 1) return c.json({ error: 'Only a correct answer earns a hammer.', reason: 'not_correct' }, 409);
 
   if (row.settled_at === null) {
-    const settled = await settleHammerRow(c, run, questions, rows, body.roundIndex, {
+    const settled = await settleHammerRow(c, loaded, rows, body.roundIndex, {
       kind: 'tap',
       activeElapsedMs: body.activeElapsedMs,
     });
@@ -203,12 +203,12 @@ export async function handleSoloHammer(c: AppContext): Promise<Response> {
  */
 export async function settleHammerRow(
   c: AppContext,
-  run: RunRow,
-  questions: Question[],
+  loaded: LoadedSoloRun,
   rows: SoloRoundRow[],
   index: number,
   settlement: HammerSettlement,
 ): Promise<SoloRoundRow[] | Response> {
+  const { run, questions, roundCap } = loaded;
   const question = questions[index];
   const row = rows[index];
   const before = rows.slice(0, index);
@@ -228,10 +228,10 @@ export async function settleHammerRow(
       settlement.activeElapsedMs,
     )
     : { distance: 1, result: 'miss' as const, progressAwarded: 0 };
-  const next = applySoloRound(evaluateSoloRun(questionIds(questions), settledRounds(before)), {
+  const next = applySoloRound(evaluateSoloRun(questionIds(questions), settledRounds(before), roundCap), {
     expectedQuestionId: question.id,
     round: { questionId: question.id, progressAwarded: scored.progressAwarded },
-  });
+  }, roundCap);
   await settleSoloHammer(c.env.DB, {
     runId: run.id,
     roundIndex: index,
@@ -255,7 +255,7 @@ async function respondWithRound(
   const { run, questions } = loaded;
   const row = rows[index];
   const question = questions[index];
-  const state = evaluateSoloRun(questionIds(questions), settledRounds(rows.slice(0, index + 1)));
+  const state = evaluateSoloRun(questionIds(questions), settledRounds(rows.slice(0, index + 1)), loaded.roundCap);
   let result: CompleteSoloRunResponse | null = null;
   if (state.status === 'completed' && index === rows.length - 1) {
     const finished = await finalizeSoloRun(c, loaded, rows);

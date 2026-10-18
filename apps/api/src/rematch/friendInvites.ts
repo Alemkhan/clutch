@@ -1,4 +1,4 @@
-import { CURRENT_SOLO_RUN_CONDITIONS, type CreateFriendInviteResponse } from '@clutch/shared';
+import { DUEL_RULES_VERSION, FREE_RULES_VERSION, type CreateFriendInviteResponse } from '@clutch/shared';
 import type { Context, Hono } from 'hono';
 import { resolveRequestIdentity, type RequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
@@ -47,13 +47,14 @@ export function registerFriendInviteRoutes(app: Hono<{ Bindings: Env }>): void {
     }>();
     // Чужой забег неотличим от несуществующего.
     if (!owner || owner.player_id !== identity.playerId) return c.json({ error: 'Run not found.' }, 404);
-    if (owner.rules_version !== CURRENT_SOLO_RUN_CONDITIONS.rulesVersion) {
-      return c.json({ error: 'Only a counted solo run can be shared.', reason: 'not_solo' }, 409);
+    // Звать можно с дуэли и свободной игры. Забег дня не зовёт: друг заранее узнал бы вопросы дня.
+    if (owner.rules_version !== DUEL_RULES_VERSION && owner.rules_version !== FREE_RULES_VERSION) {
+      return c.json({ error: 'Only a duel or a free run can be shared.', reason: 'not_solo' }, 409);
     }
     if (owner.status !== 'completed' || owner.reached_target !== 1) {
       return c.json({ error: 'Only a finished run that reached the target can be shared.', reason: 'not_reached' }, 409);
     }
-    if (!await findRecordRun(c.env.DB, runId, CURRENT_SOLO_RUN_CONDITIONS.rulesVersion)) {
+    if (!await findRecordRun(c.env.DB, runId, [DUEL_RULES_VERSION, FREE_RULES_VERSION])) {
       return c.json({ error: 'This run can no longer serve as a record.', reason: 'not_reached' }, 409);
     }
 

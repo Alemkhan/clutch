@@ -1,14 +1,15 @@
 import { useState } from "react";
-import type { SoloLeaderboardStanding } from "@clutch/shared";
+import type { SoloLeaderboardStanding, SoloMode } from "@clutch/shared";
 import { homeStandingLines } from "./homeStanding";
 import { newSetLabel } from "../tiebreaker/tiebreakerClock";
 import { useDayCountdown } from "../tiebreaker/useDayCountdown";
-import { useHomeStanding } from "./useHomeStanding";
+import { useHomeStanding, type DailyAttempt } from "./useHomeStanding";
 import { useTiebreakerToday, type TiebreakerTodayState } from "../tiebreaker/useTiebreakerToday";
 import { TiebreakerCardView } from "../tiebreaker/TiebreakerCard";
 
 interface HomeDashboardProps {
-  onSolo: () => void;
+  /** Забег дня, дуэль или свободная игра в «Общих знаниях». */
+  onSolo: (mode: SoloMode) => void;
   onBoard: () => void;
   onTiebreaker: () => void;
 }
@@ -19,6 +20,8 @@ export interface HomeDashboardViewProps extends HomeDashboardProps {
   msLeft: number;
   /** Своё место в таблице дня; null — не играл сегодня до 100% или данных нет. */
   standing: SoloLeaderboardStanding | null;
+  /** Попытка забега дня: сыгранный забег дня второй раз не предлагаем. */
+  dailyAttempt?: DailyAttempt;
 }
 
 /** Петля игры тремя значками: верный ответ, удар в мини-игре, прогресс. Без текста-инструкции. */
@@ -69,11 +72,14 @@ export function HomeDashboardView({
   tiebreaker,
   msLeft,
   standing,
+  dailyAttempt = "none",
   onSolo,
   onBoard,
   onTiebreaker,
 }: HomeDashboardViewProps) {
   const lines = standing ? homeStandingLines(standing) : null;
+  // Забег дня сыгран (в таблицу идёт первая попытка): главная зовёт в дуэль.
+  const dailyDone = dailyAttempt === "completed";
   return (
     <section className="home-dashboard">
       <header className="home-header">
@@ -86,8 +92,14 @@ export function HomeDashboardView({
 
       <section className="home-hero-card">
         <div className="home-hero-head">
-          <span className="home-kicker">Набор дня · Общие знания</span>
-          {standing && lines ? (
+          <span className="home-kicker">Забег дня · Общие знания</span>
+          {dailyDone && !standing ? (
+            <h1 className="home-title home-title-done">
+              Забег дня сыгран.
+              <br />
+              <em>Новый набор — завтра.</em>
+            </h1>
+          ) : standing && lines ? (
             <h1 className="home-title home-title-done">
               {lines.hint ? (
                 <>
@@ -134,11 +146,22 @@ export function HomeDashboardView({
           <button
             className="cta-btn"
             onClick={() => {
-              onSolo();
+              onSolo(dailyDone ? "duel" : "daily");
             }}
           >
-            {standing ? "Сыграть ещё набор" : "Играть"} <span aria-hidden="true">→</span>
+            {dailyDone ? "Дуэль" : dailyAttempt === "in_progress" ? "Продолжить забег дня" : "Забег дня"}{" "}
+            <span aria-hidden="true">→</span>
           </button>
+          <div className="home-mode-row">
+            {!dailyDone && (
+              <button type="button" className="home-mode-btn" onClick={() => { onSolo("duel"); }}>
+                Дуэль
+              </button>
+            )}
+            <button type="button" className="home-mode-btn" onClick={() => { onSolo("free"); }}>
+              Свободная игра
+            </button>
+          </div>
           {/* Вход в таблицу дня: нижняя панель не меняется, место для него — на главной карточке. */}
           <button type="button" className="home-board-link" onClick={() => { onBoard(); }}>
             Таблица дня
@@ -159,6 +182,6 @@ export function HomeDashboard(props: HomeDashboardProps) {
     reload();
     setDayEpoch((value) => value + 1);
   });
-  const standing = useHomeStanding(dayEpoch);
-  return <HomeDashboardView {...props} tiebreaker={state} msLeft={msLeft} standing={standing} />;
+  const { standing, dailyAttempt } = useHomeStanding(dayEpoch);
+  return <HomeDashboardView {...props} tiebreaker={state} msLeft={msLeft} standing={standing} dailyAttempt={dailyAttempt} />;
 }

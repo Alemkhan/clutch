@@ -39,14 +39,15 @@ export function useSoloRunRestore(ctx: SoloRunContext, begin: (category: Categor
   const resume = useCallback((fallbackCategory?: CategoryId) => {
     if (stateRef.current.stage !== 'categories') return;
     const stored = loadActiveSoloRun();
-    if (!stored || stored.practice !== practice) {
+    // Забег другого режима не подхватываем: «Свободная игра» не должна открыть недоигранную дуэль.
+    if (!stored || stored.practice !== practice || (!practice && stored.mode !== ctx.mode)) {
       // Нечего продолжать: «Играть» с главной начинает забег в категории по умолчанию.
       if (fallbackCategory) begin(fallbackCategory);
       return;
     }
     setState(beginSoloLoading(stateRef.current.category));
     restoreFromServer(stored.runId, () => setState(createSoloFlowState()));
-  }, [practice, begin, restoreFromServer]);
+  }, [practice, ctx.mode, begin, restoreFromServer]);
 
   /** Назад с загрузки, ошибки или готового забега: отменяем запрос и возвращаемся к выбору категории. */
   const backToCategories = useCallback(() => {

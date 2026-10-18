@@ -9,6 +9,7 @@ export type AnswerType = 'multiple_choice' | 'open_answer';
 export * from './fuzzyMatch';
 export * from './hammerRules';
 export * from './soloRun';
+export * from './soloModes';
 export * from './questionPricing';
 export * from './soloCompare';
 export * from './practice';
@@ -99,6 +100,8 @@ export interface AsyncMatchRound {
 export interface StartAsyncMatchRequest {
   displayName: string;
   category: CategoryId;
+  /** Режим забега; без него — забег дня. Реванш и ссылка друга задают режим сами. */
+  mode?: 'daily' | 'free' | 'duel';
   /** One-time rematch invite id (the part after "rm_" is random); checked against the caller on the server. */
   rematchInviteId?: string;
 }
@@ -116,6 +119,8 @@ export interface StartSoloRunRequest {
   rematchInviteId?: string;
   /** Тренировка: уровень бота. Забег не идёт в соревнование; с реваншем не сочетается. */
   botLevel?: PracticeLevelId;
+  /** Забег дня, свободная игра или дуэль; без поля — забег дня. */
+  mode?: 'daily' | 'free' | 'duel';
 }
 
 export interface StartSoloRunResponse {
@@ -398,7 +403,10 @@ export const CURRENT_HAMMER_MINI_GAME: AsyncMatchConditions['miniGame'] = {
 /** A finished run needs at least this many played rounds to be offered as an opponent. */
 export const MIN_POOL_ROUNDS = 3;
 
-/** Соло-забег до цели: версия правил зачётных забегов и конфиг молотка. */
+/**
+ * Соло-забег до цели: версия правил и конфиг молотка. Версия — это дуэль (DUEL_RULES_VERSION):
+ * её записи — пул соперников. Забег дня и свободная игра — свои версии, см. soloModes.ts.
+ */
 export const CURRENT_SOLO_RUN_CONDITIONS: AsyncMatchConditions = {
   rulesVersion: 'solo-to-100-v2',
   miniGame: CURRENT_HAMMER_MINI_GAME,
@@ -416,5 +424,6 @@ export * from './lastStand';
 export * from './seededRandom';
 export * from './generalPack';
 export * from './generalSet';
+export * from './freshQuestionSet';
 // Explicit: the facade shadows the generator-only versions that `export *` above also brings in.
 export { isKnownQuestionId, questionIdCategory, resolveQuestionById } from './questionResolve';

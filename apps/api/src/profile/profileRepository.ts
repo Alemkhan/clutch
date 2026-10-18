@@ -1,4 +1,4 @@
-import { CURRENT_SOLO_RUN_CONDITIONS, type SoloProfileResponse } from '@clutch/shared';
+import { DAILY_RULES_VERSION, DUEL_RULES_VERSION, FREE_RULES_VERSION, type SoloProfileResponse } from '@clutch/shared';
 
 interface SoloProfileRow {
   completed_runs: number;
@@ -21,8 +21,8 @@ export async function getSoloProfile(
       MIN(CASE WHEN reached_target = 1 THEN json_array_length(rounds_json) END) AS best_rounds
     FROM match_runs
     WHERE player_id = ?1 AND status = 'completed' AND completed_at IS NOT NULL
-      AND rules_version = ?2
-  `).bind(playerId, CURRENT_SOLO_RUN_CONDITIONS.rulesVersion).first<SoloProfileRow>();
+      AND rules_version IN (?2, ?3, ?4)
+  `).bind(playerId, DAILY_RULES_VERSION, FREE_RULES_VERSION, DUEL_RULES_VERSION).first<SoloProfileRow>();
 
   return {
     completedRuns: row?.completed_runs ?? 0,

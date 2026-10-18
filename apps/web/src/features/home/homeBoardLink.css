@@ -10,3 +10,27 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+/* Второй ряд: дуэль и свободная игра. Тише главной кнопки, но это настоящие кнопки, а не ссылки. */
+.home-mode-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.home-mode-btn {
+  min-height: 46px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 254, 250, 0.18);
+  border-radius: 14px;
+  background: rgba(255, 254, 250, 0.08);
+  color: #fffefa;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.home-mode-btn:focus-visible {
+  outline: 3px solid #ff665a;
+  outline-offset: 2px;
+}

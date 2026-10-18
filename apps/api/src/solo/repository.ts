@@ -122,13 +122,23 @@ export async function releaseExpiredClaims(db: D1Database, now: number, limit: n
   return stale.results.length;
 }
 
+/**
+ * Где искать запись: на наборах из списка либо на любом наборе категории, начатом не раньше `since`
+ * (дуэль: свои наборы у каждой записи, банка дня у неё нет).
+ */
+export type GhostScope = { questionSetIds: readonly string[] } | { category: string; since: number };
+
+/** Сколько живёт запись для дуэли: старше двух недель её уже не предлагаем. */
+export const DUEL_RECORD_TTL_MS = 14 * 24 * 60 * 60 * 1000;
+
 export async function findGhostInSets(
   db: D1Database,
-  questionSetIds: readonly string[],
+  scope: GhostScope,
   playerId: string,
   options: PoolOptions & { unplayedSetsOnly?: boolean } = {},
 ): Promise<GhostMatch | null> {
-  if (questionSetIds.length === 0) return null;
+  const questionSetIds = 'questionSetIds' in scope ? scope.questionSetIds : [];
+  if ('questionSetIds' in scope && questionSetIds.length === 0) return null;
   // "Played" means any run of the set by this player, whatever its status.
   const unplayedClause = options.unplayedSetsOnly ? `
       AND question_set_id NOT IN (
@@ -136,14 +146,17 @@ export async function findGhostInSets(
         WHERE player_id = ?2 AND question_set_id IS NOT NULL
       )` : '';
   const reachedClause = options.reachedTargetOnly ? ' AND reached_target = 1' : '';
-  const setPlaceholders = questionSetIds.map((_, index) => `?${index + 6}`).join(', ');
-  const claimPlaceholder = questionSetIds.length + 6;
+  const scopeValues: unknown[] = 'questionSetIds' in scope ? [...questionSetIds] : [scope.category, scope.since];
+  const scopeClause = 'questionSetIds' in scope
+    ? `question_set_id IN (${questionSetIds.map((_, index) => `?${index + 6}`).join(', ')})`
+    : 'category = ?6 AND created_at >= ?7 AND question_set_id IS NOT NULL';
+  const claimPlaceholder = scopeValues.length + 6;
   const miniGameFirst = claimPlaceholder + 1;
   const miniGamePlaceholders = MINI_GAME_IDS.map((_, index) => `?${miniGameFirst + index}`).join(', ');
   const result = await db.prepare(`
     SELECT ${runColumns}, question_set_id
     FROM match_runs
-    WHERE question_set_id IN (${setPlaceholders})
+    WHERE ${scopeClause}
       AND status = 'completed'
       AND CASE WHEN json_valid(rounds_json) THEN json_array_length(rounds_json) ELSE 0 END >= ?1
       AND rules_version = ?3
@@ -170,7 +183,7 @@ export async function findGhostInSets(
     options.rulesVersion ?? CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
     currentMiniGameConfigJson,
     options.now ?? Date.now(),
-    ...questionSetIds,
+    ...scopeValues,
     (options.now ?? Date.now()) - CLAIM_IDLE_MS,
     ...MINI_GAME_IDS,
   ).all<RunRow>();
@@ -224,17 +237,19 @@ export async function findRun(db: D1Database, matchId: string): Promise<RunRow |
 export async function findRecordRun(
   db: D1Database,
   runId: string,
-  rulesVersion: string,
+  rulesVersion: string | readonly string[],
 ): Promise<GhostMatch | null> {
+  // Записью для «Позвать друга» служат дуэль и свободная игра; версии передаются одной строкой JSON.
+  const versions = JSON.stringify(typeof rulesVersion === 'string' ? [rulesVersion] : rulesVersion);
   const row = await db.prepare(`
     SELECT ${runColumns}, question_set_id
     FROM match_runs
     WHERE id = ?1 AND status = 'completed' AND reached_target = 1
-      AND rules_version = ?2 AND mini_game_id IN (${MINI_GAME_IDS.map((_, index) => `?${index + 4}`).join(', ')})
+      AND rules_version IN (SELECT value FROM json_each(?2)) AND mini_game_id IN (${MINI_GAME_IDS.map((_, index) => `?${index + 4}`).join(', ')})
       AND mini_game_config_json = ?3
   `).bind(
     runId,
-    rulesVersion,
+    versions,
     currentMiniGameConfigJson,
     ...MINI_GAME_IDS,
   ).first<RunRow>();

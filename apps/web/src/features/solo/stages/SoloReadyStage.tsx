@@ -1,9 +1,10 @@
-import { SOLO_ROUND_CAP } from "@clutch/shared";
+import { SOLO_ROUND_CAP, opponentFinishRound, type SoloMode } from "@clutch/shared";
 import type { PracticeLevel } from "@clutch/shared";
 import { TiebreakerReminder } from "../../tiebreaker/TiebreakerCard";
 import { FRIEND_DUEL_CHIP } from "../friendDuelResult";
 import { practiceBotLabel } from "../practiceResult";
 import { soloPaceOf, type SoloFlowState } from "../soloRunFlow";
+import { circles } from "../soloResultModel";
 import type { SoloRunScreenProps } from "../soloScreenTypes";
 import { MatchmakingFrame } from "./MatchmakingFrame";
 import { MiniGameCard } from "./MiniGameCard";
@@ -21,7 +22,7 @@ interface ReadyStageProps {
 }
 
 function resumeNote(view: ReadyView): string {
-  return `Уже сыграно кругов: ${view.roundsPlayed}, прогресс ${view.progress}% из ${view.target}%.`;
+  return `Продолжаем: сыграно ${circles(view.roundsPlayed)}, ${view.progress}% из ${view.target}%.`;
 }
 
 /** «Начать»/«Продолжить» и, для продолженного забега, «Начать заново». */
@@ -74,30 +75,40 @@ export function PracticeReadyStage({ props, state, view, practice }: ReadyStageP
   );
 }
 
+const MODE_TITLE: Readonly<Record<SoloMode, string>> = {
+  daily: "Забег дня",
+  free: "Свободная игра",
+  duel: "Дуэль",
+};
+
+/**
+ * Одна короткая строка о забеге: экран готовности должен помещаться целиком вместе с кнопкой
+ * «Начать». Как устроен круг, объясняет карточка мини-игры, здесь только то, чем режим отличается.
+ */
+function readyLine(state: SoloFlowState, target: number): string {
+  const cap = state.session?.roundCap ?? SOLO_ROUND_CAP;
+  const pace = soloPaceOf(state);
+  const finish = opponentFinishRound(pace);
+  // Против записи (дуэль, вызов друга): её финиш и есть потолок партии.
+  if (pace && finish !== null && (state.friendDuel || state.mode === "duel")) {
+    return `${pace.displayName}: ${target}% за ${circles(finish)}. Успей быстрее.`;
+  }
+  if (state.mode === "daily") return `Общий набор дня, в таблицу — первая попытка. До ${target}% за ${cap} кругов.`;
+  if (state.mode === "free") return `Новые вопросы, вне таблицы. До ${target}% за ${cap} кругов.`;
+  if (state.mode === "duel") return `Соперника пока нет: твой забег станет вызовом. До ${target}% за ${cap} кругов.`;
+  return `До ${target}% за ${cap} кругов.`;
+}
+
 export function SoloReadyStage({ props, state, view }: ReadyStageProps) {
+  const title = state.friendDuel ? "Вызов друга" : state.mode ? MODE_TITLE[state.mode] : "Забег";
   return (
     <MatchmakingFrame onBack={props.onExit ?? props.onBackToCategories}>
-      <span className="matchmaking-eyebrow">
-        {state.friendDuel ? "Вызов друга" : "Соло-забег"}
-      </span>
-      <h1 className="screen-title">
-        {state.resumed ? "Продолжаем забег" : "Забег готов"}
-      </h1>
+      <h1 className="screen-title">{title}</h1>
       {state.friendDuel && <span className="chip">{FRIEND_DUEL_CHIP}</span>}
-      {state.bankExhausted && (
-        <span className="match-source source-player abandoned-note">
-          Все наборы дня в этой категории пройдены — выдан тот, что ты играл
-          давнее всех
-        </span>
-      )}
       <MiniGameCard miniGameId={state.miniGameId} />
       <div className="matchmaking-card">
-        <p className="matchmaking-status">
-          Дойди до {view.target}%, но не больше чем за {SOLO_ROUND_CAP}{" "}
-          кругов. Верный ответ даёт попытку в мини-игре, удар двигает
-          прогресс.
-        </p>
-        {state.resumed && <p className="matchmaking-status">{resumeNote(view)}</p>}
+        <p className="matchmaking-status">{readyLine(state, view.target)}</p>
+        {state.resumed && view.roundsPlayed > 0 && <p className="matchmaking-status">{resumeNote(view)}</p>}
       </div>
       {props.onOpenTiebreaker && <TiebreakerReminder onOpen={props.onOpenTiebreaker} />}
       <StartButtons resumed={state.resumed} onStart={props.onStart} onRestart={props.onBackToCategories} />

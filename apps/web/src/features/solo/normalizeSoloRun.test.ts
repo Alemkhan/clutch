@@ -40,9 +40,13 @@ describe('normalizeSoloRun', () => {
     expect(normalizeSoloRun(response())).toMatchObject({ runId: 'run-1', pace: null, bankExhausted: false });
   });
 
-  it('keeps a valid pace, even one that already reached 100', () => {
+  it('keeps a valid pace, even one that already reached 100, and ends the duel on its finish', () => {
     const pace = { id: 'p', displayName: 'Alex', rounds: [paceRound(0, 25), paceRound(1, 25), paceRound(2, 25), paceRound(3, 25)] };
-    expect(normalizeSoloRun(response({ pace })).pace).toEqual(pace);
+    const run = normalizeSoloRun(response({ pace, roundCap: 4 }));
+    expect(run.pace).toEqual(pace);
+    expect(run.roundCap).toBe(4);
+    // Потолок обязан совпасть с финишем записи: иначе клиент и сервер кончили бы партию на разных кругах.
+    expect(() => normalizeSoloRun(response({ pace }))).toThrow();
   });
 
   it('drops a pace that does not match the set instead of failing the run', () => {

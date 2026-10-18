@@ -123,4 +123,26 @@ export interface SoloLeaderboardResponse {
   entries: SoloLeaderboardEntry[];
   /** Своё место. null — в этот день игрок не закрыл ни одного забега в этой категории. */
   you: SoloLeaderboardStanding | null;
+  /**
+   * Попытка забега дня самого игрока (только за сегодня): 'none' — не начинал, 'in_progress' —
+   * начат и не закончен, 'completed' — сыгран, второй раз не выдаётся. Старый сервер поля не шлёт.
+   */
+  dailyAttempt?: 'none' | 'in_progress' | 'completed';
+}
+
+/** Строка таблицы дуэлей дня: победы, ничьи, поражения (как W–D–L в UFC). */
+export interface DuelBoardEntry {
+  rank: number;
+  displayName: string;
+  wins: number;
+  draws: number;
+  losses: number;
+}
+
+/** GET /api/duel-board: дуэли этих суток по всем категориям. */
+export interface DuelBoardResponse {
+  dateKey: string;
+  entries: DuelBoardEntry[];
+  /** Своя строка; null — сегодня ни одной закончившейся дуэли. */
+  you: DuelBoardEntry | null;
 }

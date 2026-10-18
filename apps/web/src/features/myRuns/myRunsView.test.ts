@@ -17,7 +17,12 @@ describe('run status', () => {
 
   it('never says waiting for a run that missed the target', () => {
     expect(runStatus(run({ reachedTarget: false, progress: 60 })).kind).toBe('missed');
-    expect(runStatus(run({ reachedTarget: false, outcome: 'player', opponent: { kind: 'player', displayName: 'Ann' } })).kind).toBe('missed');
+  });
+
+  it('calls a duel lost on the opponent finish a loss, not a miss', () => {
+    // Дуэль кончается на финише соперника: не дошёл до 100% против записи — значит проиграл.
+    expect(runStatus(run({ reachedTarget: false, progress: 80, outcome: 'opponent', opponent: { kind: 'player', displayName: 'Дамир' } })))
+      .toEqual({ kind: 'loss', text: 'Поражение' });
   });
 
   it('names win, loss and tie, and keeps a tie apart from waiting', () => {

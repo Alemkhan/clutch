@@ -1,4 +1,4 @@
-import { CURRENT_SOLO_RUN_CONDITIONS, dayStartMs } from '@clutch/shared';
+import { DAILY_RULES_VERSION, dayStartMs } from '@clutch/shared';
 import type { Env } from '../env';
 import { soloBoardTop, type BoardPlace } from '../solo/soloRepository';
 import { cleanName, miniAppLink, STOP_PAYLOAD, telegramChatId } from './outbid';
@@ -33,7 +33,7 @@ export async function snapshotTopTen(
   const from = dayStartMs(dateKey);
   const entries = await Promise.all(categories.map(async (category) => [
     category,
-    await soloBoardTop(db, category, CURRENT_SOLO_RUN_CONDITIONS.rulesVersion, from, from + DAY_MS, dateKey, TOP_TEN),
+    await soloBoardTop(db, category, DAILY_RULES_VERSION, from, from + DAY_MS, dateKey, TOP_TEN),
   ] as const));
   return new Map(entries);
 }
@@ -45,7 +45,7 @@ export async function categoriesWithBoardRun(db: D1Database, playerId: string, d
     SELECT DISTINCT category FROM match_runs
     WHERE player_id = ?1 AND status = 'completed' AND rules_version = ?2 AND reached_target = 1
       AND solo_score IS NOT NULL AND completed_at >= ?3 AND completed_at < ?4
-  `).bind(playerId, CURRENT_SOLO_RUN_CONDITIONS.rulesVersion, from, from + DAY_MS).all<{ category: string }>();
+  `).bind(playerId, DAILY_RULES_VERSION, from, from + DAY_MS).all<{ category: string }>();
   return rows.results.map((row) => row.category);
 }
 

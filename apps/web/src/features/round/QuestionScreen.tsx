@@ -139,7 +139,7 @@ export function QuestionScreen({ question, onAnswer }: QuestionScreenProps) {
       {ready && (timedOut ? (
         <div className="timeout-message" role="alert">Время вышло!</div>
       ) : isOpen ? (
-        <OpenAnswerInput onSubmit={handleOpenSubmit} disabled={selected !== null} />
+        <OpenAnswerInput onSubmit={handleOpenSubmit} onSkip={() => handleOpenSubmit('')} disabled={selected !== null} />
       ) : (
         <div className="options">
           {question.options.map((option) => (

@@ -75,7 +75,7 @@ function call(db: TestD1, label: string, method: 'GET' | 'POST', path: string, b
 }
 
 const startRun = (db: TestD1, label: string, extra: Record<string, unknown> = {}) =>
-  call(db, label, 'POST', '/api/solo-runs', { displayName: label, category: 'geography', ...extra });
+  call(db, label, 'POST', '/api/solo-runs', { displayName: label, category: 'geography', mode: 'duel', ...extra });
 
 /** Игрок проходит забег через API до цели (четыре точных удара). */
 async function finishedRun(db: TestD1, label: string): Promise<string> {

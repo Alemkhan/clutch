@@ -14,8 +14,10 @@ import {
  */
 export interface SoloRunSession {
   questions: readonly PublicQuestion[];
-  /** Темп соперника: данные для отрисовки. В правила забега не попадает. null — записи нет. */
+  /** Темп соперника: полоса и потолок кругов дуэли (`roundCap`). null — записи нет. */
   pace: Opponent | null;
+  /** Потолок кругов: у дуэли — круг, на котором соперник дошёл до цели (см. duelRoundCap). */
+  roundCap: number;
   rounds: readonly SoloRunRound[];
   run: SoloRunState;
 }
@@ -39,8 +41,9 @@ export interface SoloRunView {
 export function createSoloRunSession(
   questions: readonly PublicQuestion[],
   pace: Opponent | null = null,
+  roundCap: number = SOLO_ROUND_CAP,
 ): SoloRunSession {
-  return { questions, pace, rounds: [], run: evaluate(questions, []) };
+  return { questions, pace, roundCap, rounds: [], run: evaluate(questions, [], roundCap) };
 }
 
 /** Применяет оценённый круг текущего вопроса. На завершённом забеге бросает ошибку shared. */
@@ -52,12 +55,12 @@ export function applySoloSessionRound(
   if (!question) throw new Error('no question left in the solo run');
   const round: SoloRunRound = { questionId: question.id, progressAwarded };
   const rounds = [...session.rounds, round];
-  return { ...session, rounds, run: evaluate(session.questions, rounds) };
+  return { ...session, rounds, run: evaluate(session.questions, rounds, session.roundCap) };
 }
 
 /** Единственная точка правил: shared сам бросит на круге после конца и закроет забег по набору. */
-function evaluate(questions: readonly PublicQuestion[], rounds: readonly SoloRunRound[]): SoloRunState {
-  return evaluateSoloRun(questions.map((question) => question.id), rounds);
+function evaluate(questions: readonly PublicQuestion[], rounds: readonly SoloRunRound[], roundCap: number): SoloRunState {
+  return evaluateSoloRun(questions.map((question) => question.id), rounds, roundCap);
 }
 
 /** Прогресс темпа считается теми же правилами, но в состояние игрока не подмешивается. */
@@ -81,7 +84,7 @@ export function soloRunView(session: SoloRunSession): SoloRunView {
     target: SOLO_TARGET_PROGRESS,
     round: completed ? run.roundsPlayed : run.roundsPlayed + 1,
     roundsPlayed: run.roundsPlayed,
-    roundsToCap: Math.max(0, SOLO_ROUND_CAP - run.roundsPlayed),
+    roundsToCap: Math.max(0, session.roundCap - run.roundsPlayed),
     questionsLeft: Math.max(0, session.questions.length - run.roundsPlayed),
     completed,
     reachedTarget: run.reachedTarget,

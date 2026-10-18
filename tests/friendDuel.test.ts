@@ -15,6 +15,7 @@ import {
   type CompleteSoloRunResponse,
   type MyRunsResponse,
   type Question,
+  type DuelBoardResponse,
   type SoloLeaderboardResponse,
   type StartSoloRunResponse,
 } from '@clutch/shared';
@@ -131,7 +132,7 @@ async function playFriend(db: TestD1, label = 'bob') {
   insertRecord(db, 'ann-run', AUTHOR);
   await openInvite(db);
   const started = await call(db, label, '/api/solo-runs', {
-    displayName: label, category: 'geography', rematchInviteId: OPEN_INVITE,
+    displayName: label, category: 'geography', mode: 'duel', rematchInviteId: OPEN_INVITE,
   });
   expect(started.status).toBe(201);
   const run = await started.json() as StartSoloRunResponse;
@@ -158,7 +159,7 @@ describe('friend duel: out of the competition', () => {
     // Запись автора убрана из пула, чтобы осталась только проверка забега друга.
     db.sqlite.prepare('UPDATE match_runs SET reached_target = 0 WHERE id = ?').run('ann-run');
     db.sqlite.prepare('UPDATE match_runs SET reached_target = 1, set_par = 20, solo_score = 0.2 WHERE id = ?').run(run.runId);
-    const other = await call(db, 'carol', '/api/solo-runs', { displayName: 'carol', category: 'geography' });
+    const other = await call(db, 'carol', '/api/solo-runs', { displayName: 'carol', category: 'geography', mode: 'duel' });
     const started = await other.json() as StartSoloRunResponse;
     expect(started.pace).toBeNull();
     expect(rowOf(db, started.runId).opponent_run_id).toBeNull();
@@ -168,9 +169,12 @@ describe('friend duel: out of the competition', () => {
     const db = database();
     const { run } = await playFriend(db);
     db.sqlite.prepare('UPDATE match_runs SET reached_target = 1, set_par = 20, solo_score = 0.01 WHERE id = ?').run(run.runId);
+    // Таблица дня — только забеги дня: ни дружеская дуэль, ни запись-дуэль автора туда не попадают.
     const board = await call(db, 'carol', '/api/solo-leaderboard?category=geography');
     const names = (await board.json() as SoloLeaderboardResponse).entries.map((entry) => entry.displayName);
-    expect(names).toEqual(['ann-run']);
+    expect(names).toEqual([]);
+    const duels = await call(db, 'carol', '/api/duel-board');
+    expect((await duels.json() as DuelBoardResponse).entries).toEqual([]);
   });
 
   it('3. cannot be turned into a new friend link', async () => {
@@ -189,7 +193,7 @@ describe('friend duel: out of the competition', () => {
     await openInvite(db);
     const before = inviteCount(db);
     const started = await call(db, 'bob', '/api/solo-runs', {
-      displayName: 'bob', category: 'geography', rematchInviteId: OPEN_INVITE,
+      displayName: 'bob', category: 'geography', mode: 'duel', rematchInviteId: OPEN_INVITE,
     });
     const run = await started.json() as StartSoloRunResponse;
     await playRounds((path, body) => call(db, 'bob', path, body), run.runId, roundInputs(fullQuestions(db, run.runId), 4, true));
@@ -245,17 +249,15 @@ describe('friend duel: the duel itself still counts', () => {
 });
 
 describe('friend duel: what stays competitive', () => {
-  it('6. keeps the record of the inviter in the table and the pool', async () => {
+  it('6. keeps the record of the inviter in the pool', async () => {
     const db = database();
     await playFriend(db);
     expect(rowOf(db, 'ann-run').rules_version).toBe(SOLO);
-    const board = await call(db, 'carol', '/api/solo-leaderboard?category=geography');
-    expect((await board.json() as SoloLeaderboardResponse).entries.map((e) => e.displayName)).toEqual(['ann-run']);
-    const next = await call(db, 'dave', '/api/solo-runs', { displayName: 'dave', category: 'geography' });
+    const next = await call(db, 'dave', '/api/solo-runs', { displayName: 'dave', category: 'geography', mode: 'duel' });
     expect((await next.json() as StartSoloRunResponse).pace?.id).toBe('ann-run');
   });
 
-  it('7. keeps a run started from a rematch invite competitive and on the table', async () => {
+  it('7. keeps a run started from a rematch invite a counted duel', async () => {
     const db = database();
     insertRecord(db, 'ann-run', AUTHOR);
     const bob = guest('bob');
@@ -271,7 +273,7 @@ describe('friend duel: what stays competitive', () => {
       challengerProgress: 100,
     });
     const started = await call(db, 'bob', '/api/solo-runs', {
-      displayName: 'bob', category: 'geography', rematchInviteId: 'rm_rematch0000000000000AB',
+      displayName: 'bob', category: 'geography', mode: 'duel', rematchInviteId: 'rm_rematch0000000000000AB',
     });
     expect(started.status).toBe(201);
     const run = await started.json() as StartSoloRunResponse;
@@ -279,14 +281,14 @@ describe('friend duel: what stays competitive', () => {
     const done = await playRounds((path, body) => call(db, 'bob', path, body), run.runId, roundInputs(fullQuestions(db, run.runId), 4, true));
     expect(done.status).toBe(200);
     expect(rowOf(db, run.runId)).toMatchObject({ rules_version: SOLO, reached_target: 1 });
+    // Реванш — дуэль, а не забег дня: в таблицу забегов дня он не идёт.
     const board = await call(db, 'carol', '/api/solo-leaderboard?category=geography');
-    const names = (await board.json() as SoloLeaderboardResponse).entries.map((e) => e.displayName);
-    expect(names).toContain('bob');
+    expect((await board.json() as SoloLeaderboardResponse).entries.map((e) => e.displayName)).not.toContain('bob');
   });
 
   it('8. keeps practice out of the competition', async () => {
     const db = database();
-    const started = await call(db, 'bob', '/api/solo-runs', { displayName: 'bob', category: 'geography', botLevel: 'amateur' });
+    const started = await call(db, 'bob', '/api/solo-runs', { displayName: 'bob', category: 'geography', mode: 'duel', botLevel: 'amateur' });
     const run = await started.json() as StartSoloRunResponse;
     expect(run.rulesVersion).toBe(PRACTICE_RULES_VERSION);
     await playRounds((path, body) => call(db, 'bob', path, body), run.runId, roundInputs(fullQuestions(db, run.runId), 4, true));

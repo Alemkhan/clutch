@@ -1,5 +1,6 @@
 import type { Hono } from 'hono';
 import type { Env } from '../env';
+import { handleDuelBoard } from './duelBoard';
 import { handleSoloLeaderboard } from './soloLeaderboard';
 import { handleSoloAnswer, handleSoloHammer } from './soloRounds';
 import { authenticate, openSoloRun, runIdParam, type AppContext } from './soloShared';
@@ -12,6 +13,7 @@ export function registerSoloRunRoutes(app: Hono<{ Bindings: Env }>): void {
   app.post('/api/solo-runs/:id/hammer', handleSoloHammer);
   app.get('/api/solo-runs/:id', handleResumeSoloRun);
   app.get('/api/solo-leaderboard', handleSoloLeaderboard);
+  app.get('/api/duel-board', handleDuelBoard);
 }
 
 // Продолжение забега после закрытой вкладки: снимок собирает buildSoloSnapshot (общий со стартом).

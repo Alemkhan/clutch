@@ -141,7 +141,7 @@ function answered(db: TestD1, playerId: string, dateKey: string, multiplier: num
 }
 
 async function play(db: TestD1, authorization: string, start: Record<string, unknown> = {}) {
-  const started = await call(db, '/api/solo-runs', authorization, { displayName: 'Игрок', category: 'geography', ...start });
+  const started = await call(db, '/api/solo-runs', authorization, { displayName: 'Игрок', category: 'geography', mode: 'duel', ...start });
   expect(started.status).toBe(201);
   const run = await started.json() as StartSoloRunResponse;
   const done = await playRounds(
