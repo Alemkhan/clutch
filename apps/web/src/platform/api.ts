@@ -2,6 +2,7 @@ import type {
   AnalyticsEventName,
   AnalyticsEventPayload,
   CategoryId,
+  CompleteSoloRunResponse,
   CreateFriendInviteResponse,
   CreateRematchInviteResponse,
   DuelBoardResponse,
@@ -267,6 +268,14 @@ export function hammerSoloRound(
 /** Состояние забега для продолжения после закрытой вкладки. */
 export function fetchSoloRunSnapshot(runId: string, signal?: AbortSignal): Promise<SoloRunSnapshot> {
   return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}`, { method: 'GET' }, signal);
+}
+
+/** Отказ от незавершённого забега; сервер сохраняет сыгранные круги и закрывает запись. */
+export function abandonSoloRun(runId: string, signal?: AbortSignal): Promise<CompleteSoloRunResponse> {
+  return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}/abandon`, {
+    method: 'POST',
+    body: '{}',
+  }, signal);
 }
 
 /** Журнал ошибок ведёт сервер: сколько ошибок можно отработать и id ближайшей сессии. */

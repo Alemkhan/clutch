@@ -18,6 +18,10 @@ export interface SoloRunScreenProps {
   /** Забег начат с главной без выбора категории: «Назад» ведёт на главную, а не в пустой выбор. */
   onExit?: () => void;
   onStart: () => void;
+  onRestart?: () => void;
+  onAbandon?: () => Promise<boolean>;
+  abandoning?: boolean;
+  abandonError?: string | null;
   onAnswer: (optionId: string, timeMs: number) => void;
   onContinue: () => void;
   /** Удар только что сыгран (до анимации): HUD сразу показывает новый процент. */
@@ -46,4 +50,6 @@ export interface SoloRunScreenProps {
   reportState?: ResolutionReportStatus;
   /** Сыграть в другом режиме (с экрана результата): свободная игра, дуэль. */
   onPlayMode?: (mode: SoloMode, category: CategoryId) => void;
+  /** Разобрать ошибки забега в тренировке. */
+  onPracticeMistakes?: () => void;
 }

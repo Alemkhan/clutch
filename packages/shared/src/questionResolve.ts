@@ -8,6 +8,7 @@ import {
   generalPackQuestions,
   generalPackSets,
   isPackRecordLive,
+  PACK_TOPIC_LABELS_RU,
   packQuestionToRaceQuestion,
   packSetToRaceQuestion,
 } from './generalPack';
@@ -44,6 +45,11 @@ export function isKnownQuestionId(id: unknown): boolean {
   return isGeneratorQuestionId(id) || resolvePackId(id) !== null;
 }
 
+/** Казахстанский вопрос относится к своей категории, даже если попал и в общий пул. */
 export function questionIdCategory(id: unknown): CategoryId | null {
-  return generatorQuestionIdCategory(id) ?? (resolvePackId(id) ? 'general' : null);
+  const generated = generatorQuestionIdCategory(id);
+  if (generated) return generated;
+  const question = resolvePackId(id);
+  if (!question) return null;
+  return question.subcategory === PACK_TOPIC_LABELS_RU.kazakhstan ? 'kz_history' : 'general';
 }

@@ -33,4 +33,18 @@ describe('QuestionScreen readiness', () => {
     expect(html).not.toContain('Казахстан');
     expect(html).not.toContain('timer-ring');
   });
+
+  it('renders artwork media with its artwork styling and descriptive alt text', () => {
+    const html = renderToStaticMarkup(
+      <QuestionScreen
+        question={{ ...question, mediaType: 'image', mediaUrl: 'https://example.com/artwork.jpg' }}
+        onAnswer={vi.fn()}
+      />,
+    );
+
+    expect(html).toContain('question-media-slot pending artwork');
+    expect(html).toContain('class="question-media artwork"');
+    expect(html).toContain('alt="Иллюстрация к вопросу"');
+    expect(html).toContain('src="https://example.com/artwork.jpg"');
+  });
 });

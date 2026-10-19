@@ -2,7 +2,9 @@ import { SKILL_DISTANCE_THRESHOLDS, type MiniGameConfig, type SkillResult } from
 import type { PracticeLevelId } from './practice';
 
 /** Категория вопросов. Единственное объявление; questionGenerator его ре-экспортирует. */
-export type CategoryId = 'general' | 'geography' | 'history' | 'languages';
+export type CategoryId = 'general' | 'geography' | 'history' | 'languages' | 'kz_history';
+/** Категории, чьи вопросы собирают генераторы (questionGenerator.ts); general и kz_history — из пакета. */
+export type GeneratedCategoryId = Exclude<CategoryId, 'general' | 'kz_history'>;
 
 export type AnswerType = 'multiple_choice' | 'open_answer';
 
@@ -37,7 +39,8 @@ export interface Question {
   explanation: string;
   sourceUrl?: string;
   sourceTitle?: string;
-  mediaType?: 'flag' | 'outline' | null;
+  /** image — иллюстрация (картина в вопросе о живописи), см. PackImage. */
+  mediaType?: 'flag' | 'outline' | 'image' | null;
   mediaUrl?: string | null;
   mediaText?: string | null;
   status: 'draft' | 'approved';

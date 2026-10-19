@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { PRACTICE_LEVELS, type PracticeLevel, type PublicQuestion } from '@clutch/shared';
 import { checkTrainingAnswer, fetchTrainingMistakes, fetchTrainingQuestions, logAnalyticsEvent, submitQuestionReport } from '../../platform/api';
 import { ScreenHeader } from '../../ui/ScreenHeader';
@@ -6,6 +6,8 @@ import { Training, type TrainingReportInput } from './Training';
 
 interface TrainingHubProps {
   onStartBot: (level: PracticeLevel) => void;
+  /** Открыть сразу отработку ошибок (переход с экрана итога), если ошибки есть. */
+  openMistakes?: boolean;
   /** true, пока идёт практика ошибок: App прячет нижнюю навигацию. */
   onPlayingChange?: (playing: boolean) => void;
 }
@@ -132,9 +134,16 @@ export function TrainingMenu({ summary, onBots, onMistakes }: {
   );
 }
 
-export function TrainingHub({ onStartBot, onPlayingChange }: TrainingHubProps) {
+export function TrainingHub({ onStartBot, onPlayingChange, openMistakes = false }: TrainingHubProps) {
   const [view, setView] = useState<View>('menu');
   const [summary, setSummary] = useState<MistakeSummary>({ status: 'loading' });
+  // С экрана итога — сразу в отработку, как только список ошибок пришёл; дальше обычное меню.
+  const openedRef = useRef(!openMistakes);
+  useEffect(() => {
+    if (openedRef.current || summary.status === 'loading') return;
+    openedRef.current = true;
+    if (summary.status === 'ready' && summary.count > 0) setView('mistakes');
+  }, [summary]);
 
   // Список ошибок берётся с сервера при каждом возврате в меню: после отработки он изменился.
   useEffect(() => {

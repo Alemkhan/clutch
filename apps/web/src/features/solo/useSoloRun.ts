@@ -10,6 +10,8 @@ import {
   startSoloPlay,
   type SoloFlowState,
 } from './soloRunFlow';
+import { abandonSoloRun } from '../../platform/api';
+import { clearActiveSoloRun } from './soloRunStore';
 import type { SoloRunContext } from './soloRunContext';
 import type { SoloSaveStatus } from './soloResultModel';
 import type { SyncIssue } from './soloSyncIssue';
@@ -36,6 +38,9 @@ const SAVING: SoloSaveState = { status: 'saving', response: null, canRetry: fals
 export function useSoloRun(botLevel?: PracticeLevelId, mode: SoloMode = 'daily') {
   const [state, setState] = useState<SoloFlowState>(createSoloFlowState);
   const [syncIssue, setSyncIssue] = useState<SyncIssue | null>(null);
+  const [abandoning, setAbandoning] = useState(false);
+  const [abandonError, setAbandonError] = useState<string | null>(null);
+  const abandonBusyRef = useRef(false);
   const coordinatorRef = useRef(new MatchRequestCoordinator());
   const inviteRef = useRef<string>();
   const stateRef = useRef(state);
@@ -62,6 +67,25 @@ export function useSoloRun(botLevel?: PracticeLevelId, mode: SoloMode = 'daily')
     setState(retrySoloSync);
   }, []);
 
+  const abandon = useCallback(async (): Promise<boolean> => {
+    const runId = stateRef.current.runId;
+    if (!runId || abandonBusyRef.current) return false;
+    abandonBusyRef.current = true;
+    setAbandoning(true);
+    setAbandonError(null);
+    try {
+      await abandonSoloRun(runId);
+      clearActiveSoloRun();
+      return true;
+    } catch (error) {
+      setAbandonError(error instanceof Error ? error.message : 'Не удалось закрыть забег. Попробуй ещё раз.');
+      return false;
+    } finally {
+      abandonBusyRef.current = false;
+      setAbandoning(false);
+    }
+  }, []);
+
   useRoundDelivery(state, ctx, restoreFromServer);
   useSoloRunLifecycle(state, ctx, retrySync);
 
@@ -83,5 +107,8 @@ export function useSoloRun(botLevel?: PracticeLevelId, mode: SoloMode = 'daily')
     continueAfterResolution,
     completeHammer,
     retrySync,
+    abandon,
+    abandoning,
+    abandonError,
   };
 }

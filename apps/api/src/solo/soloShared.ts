@@ -3,6 +3,7 @@ import {
   PRACTICE_RULES_VERSION,
   duelRoundCap,
   isMiniGameId,
+  resolveQuestionById,
   soloModeOf,
   type Opponent,
   type Question,
@@ -85,8 +86,21 @@ export async function openSoloRun(c: AppContext, identity: RequestIdentity, runI
     || !isMiniGameId(run.mini_game_id)) {
     return c.json({ error: 'This is not a solo run.' }, 409);
   }
-  const questions = parseQuestions(run.questions_json);
-  if (!questions) return c.json({ error: 'Stored run questions are invalid.' }, 409);
+  const storedQuestions = parseQuestions(run.questions_json);
+  if (!storedQuestions) return c.json({ error: 'Stored run questions are invalid.' }, 409);
+  // Старые забеги могли быть сохранены до добавления иллюстраций. Обновляем только медиа:
+  // текст и варианты остаются теми, с которыми игрок начал этот набор.
+  const questions = storedQuestions.map((question) => {
+    const canonical = resolveQuestionById(question.id);
+    if (!canonical) return question;
+    const { mediaType: _oldMediaType, mediaUrl: _oldMediaUrl, mediaText: _oldMediaText, ...withoutMedia } = question;
+    return {
+      ...withoutMedia,
+      ...(canonical.mediaType ? { mediaType: canonical.mediaType } : {}),
+      ...(canonical.mediaUrl ? { mediaUrl: canonical.mediaUrl } : {}),
+      ...(canonical.mediaText ? { mediaText: canonical.mediaText } : {}),
+    };
+  });
   // Тренировка против бота доигрывается до конца: бот не запись игрока, исход не считается.
   const roundCap = duelRoundCap(practice ? null : parsePace(run.opponent_json));
   return { run, questions, practice, friend, mode, roundCap };

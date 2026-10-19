@@ -59,6 +59,19 @@
   max-width: min(54vw, 210px);
 }
 
+/* Картина: крупнее флага и без рамки-карточки — чтобы её запомнили такой, какая она есть. */
+.question-media-slot.artwork {
+  max-width: 100%;
+  height: clamp(150px, 30dvh, 240px);
+}
+
+.question-media.artwork {
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
 .question-media-slot:not(.ready) .question-media {
   opacity: 0;
 }

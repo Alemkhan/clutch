@@ -21,7 +21,9 @@ export type PackTopic =
   | 'math'
   | 'language'
   | 'tech'
-  | 'world';
+  | 'world'
+  /** История Казахстана (по программе ЕНТ): своя категория, в общий пул — только с `generalPool`. */
+  | 'kazakhstan';
 
 export type EditorialStatus = 'pending' | 'approved' | 'blocked';
 
@@ -59,6 +61,23 @@ export interface PackQuestion extends PackRecordBase {
   explanationRu?: string;
   /** False when the answer is too long or too loose to type (lists, phrases): multiple choice only. */
   openAnswer: boolean;
+  /**
+   * Картинка к вопросу (сама картина в вопросах о живописи): файл Wikimedia Commons, только
+   * свободные или перешедшие в общественное достояние. Запоминается лучше подписи.
+   */
+  image?: PackImage;
+  /**
+   * Только для темы «kazakhstan»: вопрос, который знает большинство в СНГ (Байконур, Абай),
+   * идёт и в общие знания. Без флага он живёт лишь в категории «История Казахстана».
+   */
+  generalPool?: boolean;
+}
+
+export interface PackImage {
+  /** https://commons.wikimedia.org/wiki/Special:FilePath/<файл>?width=<px> — превью нужной ширины. */
+  url: string;
+  /** Страница файла на Commons: автор, лицензия. */
+  pageUrl: string;
 }
 
 export interface PackSetMember {

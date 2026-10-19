@@ -181,8 +181,10 @@ describe('answer option mismatch diagnostics', () => {
     db.sqlite.prepare("SELECT run_id, question_id, payload_json FROM analytics_events WHERE event = 'answer_option_mismatch'").all() as
       { run_id: string; question_id: string; payload_json: string }[];
 
-  async function startGeneral(db: TestD1, label: string) {
-    const response = await call(db, label, '/api/solo-runs', { displayName: label, category: 'general' });
+  async function startMultipleChoiceRun(db: TestD1, label: string) {
+    // «Другие флаги» гарантированно состоит из multiple-choice вопросов; порядок общего
+    // банка может законно начинаться с ручного ввода и не должен ломать диагностику протокола.
+    const response = await call(db, label, '/api/solo-runs', { displayName: label, category: 'history' });
     expect(response.status).toBe(201);
     const run = await response.json() as StartSoloRunResponse;
     const question = fullQuestions(db, run.runId)[0];
@@ -197,7 +199,7 @@ describe('answer option mismatch diagnostics', () => {
 
   it('writes no event when the shown text matches the stored option', async () => {
     const db = database();
-    const { run, question } = await startGeneral(db, 'ann');
+    const { run, question } = await startMultipleChoiceRun(db, 'ann');
     const option = question.options[0];
     const response = await send(db, 'ann', run.runId, question, {
       selectedAnswer: option.id, selectedText: option.text, optionCount: question.options.length, firstOptionId: question.options[0].id,
@@ -208,7 +210,7 @@ describe('answer option mismatch diagnostics', () => {
 
   it('records the event on a mismatch and leaves the verdict to selectedAnswer', async () => {
     const db = database();
-    const { run, question } = await startGeneral(db, 'ann');
+    const { run, question } = await startMultipleChoiceRun(db, 'ann');
     const right = question.options.find((option) => option.id === question.correctOptionId)!;
     const other = question.options.find((option) => option.id !== question.correctOptionId)!;
     // Игрок видел текст верного варианта, а id ушёл чужой.
@@ -226,7 +228,7 @@ describe('answer option mismatch diagnostics', () => {
 
   it('the opposite mismatch does not turn a wrong answer into a correct one either way', async () => {
     const db = database();
-    const { run, question } = await startGeneral(db, 'ann');
+    const { run, question } = await startMultipleChoiceRun(db, 'ann');
     const right = question.options.find((option) => option.id === question.correctOptionId)!;
     const other = question.options.find((option) => option.id !== question.correctOptionId)!;
     const response = await send(db, 'ann', run.runId, question, { selectedAnswer: right.id, selectedText: other.text });
@@ -236,7 +238,7 @@ describe('answer option mismatch diagnostics', () => {
 
   it('an old client without the new fields works as before', async () => {
     const db = database();
-    const { run, question } = await startGeneral(db, 'ann');
+    const { run, question } = await startMultipleChoiceRun(db, 'ann');
     const response = await send(db, 'ann', run.runId, question, { selectedAnswer: question.correctOptionId });
     expect(await response.json()).toMatchObject({ correct: true, awaitingHammer: true });
     expect(mismatchEvents(db)).toEqual([]);
@@ -244,7 +246,7 @@ describe('answer option mismatch diagnostics', () => {
 
   it('records a replay that carries a different answer, keeps the stored verdict, and ignores an identical retry', async () => {
     const db = database();
-    const { run, question } = await startGeneral(db, 'ann');
+    const { run, question } = await startMultipleChoiceRun(db, 'ann');
     const other = question.options.find((option) => option.id !== question.correctOptionId)!;
     const first = await (await send(db, 'ann', run.runId, question, { selectedAnswer: other.id })).json();
     expect(first).toMatchObject({ correct: false });
@@ -261,7 +263,7 @@ describe('answer option mismatch diagnostics', () => {
 
   it('refuses a malformed diagnostic field and a repeat does not duplicate the event', async () => {
     const db = database();
-    const { run, question } = await startGeneral(db, 'ann');
+    const { run, question } = await startMultipleChoiceRun(db, 'ann');
     const bad = await send(db, 'ann', run.runId, question, { selectedAnswer: 'a', selectedText: 'x'.repeat(201) });
     expect(bad.status).toBe(400);
     const body = { selectedAnswer: 'zzz', selectedText: 'Нечто' };

@@ -1,0 +1,2488 @@
+[
+  {
+    "id": "kz-issyk",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "«Золотой человек» — сакский воин в одеянии из золотых бляшек — найден в 1969 году в кургане…",
+    "answerRu": "Иссык",
+    "acceptedRu": [
+      "Иссык"
+    ],
+    "acceptedEn": [
+      "Issyk",
+      "Esik"
+    ],
+    "distractorsRu": [
+      "Берель",
+      "Бесшатыр",
+      "Шиликты"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Курган Иссык под Алматы раскопала экспедиция Кемаля Акишева. «Золотой человек» стал одним из символов Казахстана.",
+    "sourceHint": "Википедия: Иссыкский курган",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-tomyris",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Царица массагетов, разбившая войско персидского царя Кира II (VI век до н. э.), — это…",
+    "answerRu": "Томирис",
+    "acceptedRu": [
+      "Томирис",
+      "Тумар"
+    ],
+    "acceptedEn": [
+      "Tomyris"
+    ],
+    "distractorsRu": [
+      "Зарина",
+      "Айша-биби",
+      "Домалак-ана"
+    ],
+    "openAnswer": true,
+    "explanationRu": "О победе Томирис над Киром рассказывает Геродот.",
+    "sourceHint": "Википедия: Томирис",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-kangju",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Какое древнее государство располагалось в среднем течении Сырдарьи?",
+    "answerRu": "Кангюй",
+    "acceptedRu": [
+      "Кангюй",
+      "Канцзюй"
+    ],
+    "acceptedEn": [
+      "Kangju"
+    ],
+    "distractorsRu": [
+      "Усунь",
+      "Хунну",
+      "Тюргешский каганат"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Кангюй упоминают китайские хроники; центр — в долине Сырдарьи.",
+    "sourceHint": "Википедия: Кангюй",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-usun",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Где жили усуни — древний союз племён?",
+    "answerRu": "Семиречье",
+    "acceptedRu": [
+      "Семиречье",
+      "Жетысу",
+      "Семиречье (Жетысу)"
+    ],
+    "distractorsRu": [
+      "Приаралье",
+      "Сарыарка",
+      "Мангышлак"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ставка усуней, Чигучэн («город Красной долины»), стояла у Иссык-Куля.",
+    "sourceHint": "Википедия: Усуни",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-botai",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Как называется энеолитическое поселение в Северном Казахстане, известное большими жилищами и находками костей лошадей?",
+    "answerRu": "Ботай",
+    "acceptedRu": [
+      "Ботай"
+    ],
+    "distractorsRu": [
+      "Тамгалы",
+      "Бесшатыр",
+      "Отрар"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ботайская культура известна крупными поселениями, жилищами и многочисленными находками костей лошадей. Вывод о раннем одомашнивании лошади в Ботае оспаривается современной археогенетикой и археозоологией.",
+    "sourceHint": "Википедия: Ботайская культура",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-andronovo",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Как называется археологическая культура бронзового века, широко распространённая на территории Казахстана?",
+    "answerRu": "Андроновская",
+    "acceptedRu": [
+      "Андроновская",
+      "Андроновская культура"
+    ],
+    "distractorsRu": [
+      "Трипольская",
+      "Майкопская",
+      "Дьяковская"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Андроновцы — скотоводы и металлурги II тысячелетия до н. э.",
+    "sourceHint": "Википедия: Андроновская культура",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-tamgaly",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Петроглифы какого урочища в Алматинской области внесены в список Всемирного наследия ЮНЕСКО в 2004 году?",
+    "answerRu": "Тамгалы",
+    "acceptedRu": [
+      "Тамгалы",
+      "Танбалы"
+    ],
+    "distractorsRu": [
+      "Ботай",
+      "Берель",
+      "Иссык"
+    ],
+    "openAnswer": false,
+    "explanationRu": "В Тамгалы около пяти тысяч рисунков на скалах, от бронзового века до Средневековья.",
+    "sourceHint": "Википедия: Тамгалы",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-turk-552",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "В каком году основан Тюркский каганат?",
+    "answerRu": "552",
+    "acceptedRu": [
+      "552",
+      "552 год",
+      "552 г"
+    ],
+    "distractorsRu": [
+      "603",
+      "704",
+      "840"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Каганат основал Бумын, разбив жужаней.",
+    "sourceHint": "Википедия: Тюркский каганат",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-bumyn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто основал Тюркский каганат в 552 году?",
+    "answerRu": "Бумын",
+    "acceptedRu": [
+      "Бумын",
+      "Бумын-каган",
+      "Бумын каган"
+    ],
+    "distractorsRu": [
+      "Истеми",
+      "Ушлик",
+      "Сатук Богра-хан"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Бумын-каган — из рода Ашина; его брат Истеми правил западной частью каганата.",
+    "sourceHint": "Википедия: Бумын-каган",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-west-turk",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "В 603 году Тюркский каганат распался на две части. Какая из них владела землями Казахстана?",
+    "answerRu": "Западно-Тюркский каганат",
+    "acceptedRu": [
+      "Западно-Тюркский каганат"
+    ],
+    "distractorsRu": [
+      "Восточно-Тюркский каганат",
+      "Уйгурский каганат",
+      "Кимакский каганат"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ставка западных тюрков стояла в Семиречье, у Суяба.",
+    "sourceHint": "Википедия: Западно-тюркский каганат",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-ushlik",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Expert",
+    "promptRu": "Кто основал Тюргешский каганат в 704 году?",
+    "answerRu": "Ушлик",
+    "acceptedRu": [
+      "Ушлик",
+      "Уч-элиг",
+      "Ушлик-каган"
+    ],
+    "distractorsRu": [
+      "Сулу",
+      "Бумын",
+      "Истеми"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Тюргеши правили Семиречьем до 756 года.",
+    "sourceHint": "Википедия: Тюргешский каганат",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-karluk",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Какое государство сменило Тюргешский каганат в Семиречье в 756 году?",
+    "answerRu": "Карлукский каганат",
+    "acceptedRu": [
+      "Карлукский каганат",
+      "Карлукское государство"
+    ],
+    "distractorsRu": [
+      "Огузское государство",
+      "Кимакский каганат",
+      "Караханидское государство"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Карлукский каганат существовал до 940 года, затем его земли вошли в державу Караханидов.",
+    "sourceHint": "Википедия: Карлукский каганат",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-talas-751",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Какую армию разгромили арабо-карлукские силы в битве у Атлаха (Таласа) в 751 году?",
+    "answerRu": "империи Тан",
+    "acceptedRu": [
+      "империи Тан",
+      "Тан",
+      "Китая",
+      "Китай",
+      "империя Тан"
+    ],
+    "distractorsRu": [
+      "Византии",
+      "Сасанидского Ирана",
+      "Тюргешского каганата"
+    ],
+    "openAnswer": false,
+    "explanationRu": "В битве была разгромлена армия Тан. Дальнейшее историческое значение сражения оценивают по-разному, а исламизация региона происходила постепенно.",
+    "sourceHint": "Википедия: Таласская битва",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-yangikent",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Столица Огузского государства на Сырдарье — это…",
+    "answerRu": "Янгикент",
+    "acceptedRu": [
+      "Янгикент",
+      "Жанакент",
+      "Жанкент"
+    ],
+    "acceptedEn": [
+      "Yangikent",
+      "Jankent"
+    ],
+    "distractorsRu": [
+      "Баласагун",
+      "Отрар",
+      "Тараз"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Янгикент («Новый город») — ставка огузского ябгу в X веке.",
+    "sourceHint": "Википедия: Янгикент",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-karakhanid-960",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "В каком государстве ислам стал государственной религией в 960 году?",
+    "answerRu": "Караханидское государство",
+    "acceptedRu": [
+      "Караханидское государство",
+      "Караханиды",
+      "Караханидский каганат"
+    ],
+    "distractorsRu": [
+      "Огузское государство",
+      "Кимакский каганат",
+      "Карлукский каганат"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Первым ислам принял караханидский правитель Сатук Богра-хан.",
+    "sourceHint": "Википедия: Караханиды",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-farabi",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Какого учёного из Отрара называли «Вторым учителем» — после Аристотеля?",
+    "answerRu": "Аль-Фараби",
+    "acceptedRu": [
+      "Аль-Фараби",
+      "Фараби",
+      "Абу Наср аль-Фараби",
+      "Әл-Фараби"
+    ],
+    "acceptedEn": [
+      "Al-Farabi",
+      "Farabi"
+    ],
+    "distractorsRu": [
+      "Ибн Сина",
+      "Аль-Бируни",
+      "Махмуд Кашгари"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Аль-Фараби (870–950) комментировал Аристотеля и писал о музыке, логике, государстве.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Аль-Фараби",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-kashgari",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто автор «Диван лугат ат-турк» («Словаря тюркских наречий», XI век)?",
+    "answerRu": "Махмуд Кашгари",
+    "acceptedRu": [
+      "Махмуд Кашгари",
+      "Кашгари"
+    ],
+    "distractorsRu": [
+      "Юсуф Баласагуни",
+      "Ходжа Ахмед Яссауи",
+      "Аль-Фараби"
+    ],
+    "openAnswer": false,
+    "explanationRu": "В словаре Кашгари — первая известная карта мира тюрков.",
+    "sourceHint": "Википедия: Диван лугат ат-турк",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-balasaguni",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто автор поэмы «Кутадгу билиг» («Благодатное знание», XI век)?",
+    "answerRu": "Юсуф Баласагуни",
+    "acceptedRu": [
+      "Юсуф Баласагуни",
+      "Баласагуни"
+    ],
+    "distractorsRu": [
+      "Махмуд Кашгари",
+      "Ходжа Ахмед Яссауи",
+      "Мухаммед Хайдар Дулати"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Поэму о том, как править справедливо, Баласагуни поднёс караханидскому правителю.",
+    "sourceHint": "Википедия: Кутадгу билиг",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-kipchak",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Как в русских летописях называли кыпчаков?",
+    "answerRu": "Половцы",
+    "acceptedRu": [
+      "Половцы",
+      "половцы",
+      "Половцами"
+    ],
+    "acceptedEn": [
+      "Polovtsy",
+      "Cumans"
+    ],
+    "distractorsRu": [
+      "Печенеги",
+      "Хазары",
+      "Булгары"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Кыпчаки кочевали от Иртыша до Дуная; на Западе их звали куманами.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Кыпчаки",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-desht",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Как персидские авторы с XI века называли степь от Иртыша до Дуная?",
+    "answerRu": "Дешт-и-Кипчак",
+    "acceptedRu": [
+      "Дешт-и-Кипчак",
+      "Дешт-и-Кыпчак",
+      "Дашт-и-Кипчак"
+    ],
+    "distractorsRu": [
+      "Дешт-и-Огуз",
+      "Дешт-и-Хазар",
+      "Дешт-и-Туран"
+    ],
+    "openAnswer": false,
+    "explanationRu": "«Кыпчакская степь» — по господствовавшим там кыпчакам.",
+    "sourceHint": "Википедия: Дешт-и-Кипчак",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-otrar-1218",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Наместник Отрара, по чьему приказу в 1218 году перебили торговый караван Чингисхана, — это…",
+    "answerRu": "Кайыр-хан",
+    "acceptedRu": [
+      "Кайыр-хан",
+      "Гайыр-хан",
+      "Кайырхан",
+      "Иналчук"
+    ],
+    "distractorsRu": [
+      "Жанибек",
+      "Тохтамыш",
+      "Барак-хан"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Расправа над караваном дала Чингисхану повод для похода на Хорезм.",
+    "sourceHint": "Википедия: Отрарская катастрофа",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-batu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Какой внук Чингисхана основал Золотую Орду (Улус Джучи)?",
+    "answerRu": "Батый",
+    "acceptedRu": [
+      "Батый",
+      "Бату",
+      "Батухан",
+      "Бату-хан"
+    ],
+    "acceptedEn": [
+      "Batu",
+      "Batu Khan"
+    ],
+    "distractorsRu": [
+      "Хубилай",
+      "Хулагу",
+      "Мунке"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Батый — сын Джучи; столицей Орды стал Сарай-Бату на Волге.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Батый",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-ak-orda",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Какой город был столицей Ак Орды?",
+    "answerRu": "Сыгнак",
+    "acceptedRu": [
+      "Сыгнак",
+      "Сыганак",
+      "Сығанақ"
+    ],
+    "acceptedEn": [
+      "Sygnak",
+      "Sighnaq"
+    ],
+    "distractorsRu": [
+      "Сарай-Бату",
+      "Отрар",
+      "Туркестан"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Сыгнак стоял на Сырдарье; руины — в Кызылординской области.",
+    "sourceHint": "Википедия: Белая Орда",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-mogul",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Expert",
+    "promptRu": "Кто стал первым ханом Могулистана (1348)?",
+    "answerRu": "Тоглук-Тимур",
+    "acceptedRu": [
+      "Тоглук-Тимур",
+      "Туглук-Тимур",
+      "Тогылык Темир"
+    ],
+    "distractorsRu": [
+      "Урус-хан",
+      "Абулхаир",
+      "Есен-Буга"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Хана посадили эмиры из рода дулат; Могулистан занимал Семиречье и Восточный Туркестан.",
+    "sourceHint": "Википедия: Могулистан",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-yasawi-city",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Easy",
+    "promptRu": "В каком городе стоит мавзолей Ходжи Ахмеда Яссауи?",
+    "answerRu": "Туркестан",
+    "acceptedRu": [
+      "Туркестан",
+      "Туркестане"
+    ],
+    "acceptedEn": [
+      "Turkestan",
+      "Turkistan"
+    ],
+    "distractorsRu": [
+      "Тараз",
+      "Отрар",
+      "Сайрам"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Мавзолей в списке Всемирного наследия ЮНЕСКО с 2003 года.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Мавзолей Ходжи Ахмеда Ясави",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-yasawi-timur",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "По чьему приказу в конце XIV века построили мавзолей Ходжи Ахмеда Яссауи?",
+    "answerRu": "Тимура",
+    "acceptedRu": [
+      "Тимура",
+      "Тимур",
+      "Амир Темир",
+      "Тамерлан",
+      "Тимура (Тамерлана)"
+    ],
+    "acceptedEn": [
+      "Timur",
+      "Tamerlane"
+    ],
+    "distractorsRu": [
+      "Чингисхана",
+      "Улугбека",
+      "Абылай-хана"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Строительство начали в 1389 году и не закончили: после смерти Тимура в 1405-м работы встали.",
+    "sourceHint": "Википедия: Мавзолей Ходжи Ахмеда Ясави",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-taraz-2000",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Какой город на Великом шёлковом пути в 2002 году отметил своё 2000-летие?",
+    "answerRu": "Тараз",
+    "acceptedRu": [
+      "Тараз",
+      "Таразом"
+    ],
+    "acceptedEn": [
+      "Taraz"
+    ],
+    "distractorsRu": [
+      "Туркестан",
+      "Шымкент",
+      "Отрар"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Тараз упоминается с VI века; юбилей отсчитали по данным археологов.",
+    "sourceHint": "Википедия: Тараз",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-dulati",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто автор «Тарих-и Рашиди» — книги, где описано образование Казахского ханства?",
+    "answerRu": "Мухаммед Хайдар Дулати",
+    "acceptedRu": [
+      "Мухаммед Хайдар Дулати",
+      "Дулати",
+      "Хайдар Дулати"
+    ],
+    "distractorsRu": [
+      "Кадыргали Жалаири",
+      "Махмуд Кашгари",
+      "Фазлаллах Рузбихан"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Дулати писал на персидском в Кашмире в 1540-х.",
+    "sourceHint": "Википедия: Тарих-и Рашиди",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-khanate-1465",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "В каком году, по традиционной датировке, образовалось Казахское ханство?",
+    "answerRu": "1465",
+    "acceptedRu": [
+      "1465",
+      "1465 год",
+      "1465 г"
+    ],
+    "distractorsRu": [
+      "1428",
+      "1511",
+      "1598"
+    ],
+    "openAnswer": true,
+    "explanationRu": "В 2015 году Казахстан отметил 550-летие ханства.",
+    "sourceHint": "Википедия: Казахское ханство",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-kerey-zhanibek",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Easy",
+    "promptRu": "Кто основал Казахское ханство?",
+    "answerRu": "Керей и Жанибек",
+    "acceptedRu": [
+      "Керей и Жанибек"
+    ],
+    "distractorsRu": [
+      "Касым и Хакназар",
+      "Есим и Тауке",
+      "Абылай и Абулхаир"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Султаны Керей и Жанибек — потомки Урус-хана из Ак Орды.",
+    "sourceHint": "Википедия: Казахское ханство",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-migration",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Куда откочевали Керей и Жанибек от хана Абулхаира?",
+    "answerRu": "В Могулистан",
+    "acceptedRu": [
+      "В Могулистан",
+      "Могулистан",
+      "Моголистан"
+    ],
+    "distractorsRu": [
+      "В Ногайскую Орду",
+      "В Сибирское ханство",
+      "В Бухару"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Хан Могулистана Есен-Буга дал им земли в долинах Чу и Козыбаши.",
+    "sourceHint": "Википедия: Казахское ханство",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-kasym",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "При каком хане появился свод законов «Светлый путь Касым-хана» («Қасым ханның қасқа жолы»)?",
+    "answerRu": "Касым-хан",
+    "acceptedRu": [
+      "Касым-хан",
+      "Касым",
+      "Қасым"
+    ],
+    "acceptedEn": [
+      "Kasym Khan",
+      "Qasim Khan"
+    ],
+    "distractorsRu": [
+      "Тауке-хан",
+      "Есим-хан",
+      "Хакназар-хан"
+    ],
+    "openAnswer": true,
+    "explanationRu": "При Касыме (1511–1521) население ханства, по Дулати, достигло миллиона человек.",
+    "sourceHint": "Википедия: Касым-хан",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-tauke",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "При каком хане принят свод законов «Жеті жарғы»?",
+    "answerRu": "Тауке-хан",
+    "acceptedRu": [
+      "Тауке-хан",
+      "Тауке",
+      "Тәуке"
+    ],
+    "acceptedEn": [
+      "Tauke Khan"
+    ],
+    "distractorsRu": [
+      "Касым-хан",
+      "Есим-хан",
+      "Абылай-хан"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Тауке правил в 1680–1715 годах.",
+    "sourceHint": "Википедия: Жеті жарғы",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-zheti-zhargy",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Что значит название свода законов «Жеті жарғы»?",
+    "answerRu": "«Семь установлений»",
+    "acceptedRu": [
+      "Семь установлений",
+      "Семь уложений"
+    ],
+    "distractorsRu": [
+      "«Семь биев»",
+      "«Семь родов»",
+      "«Семь рек»"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Свод определял суд биев, наказания, наследство и порядок кочевий.",
+    "sourceHint": "Википедия: Жеті жарғы",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-orbulak",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "В 1643 году хан Жангир с небольшим отрядом остановил джунгарское войско у…",
+    "answerRu": "Орбулака",
+    "acceptedRu": [
+      "Орбулака",
+      "Орбулак"
+    ],
+    "distractorsRu": [
+      "Аныракая",
+      "Буланты",
+      "Отрара"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Жангир велел вырыть окопы в ущелье; на помощь подошло войско Жалантоса из Самарканда.",
+    "sourceHint": "Википедия: Орбулакская битва",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-tole",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Кто был бием Старшего жуза при Тауке-хане?",
+    "answerRu": "Толе би",
+    "acceptedRu": [
+      "Толе би",
+      "Толе",
+      "Төле би"
+    ],
+    "acceptedEn": [
+      "Tole Bi"
+    ],
+    "distractorsRu": [
+      "Казыбек би",
+      "Айтеке би",
+      "Бухар жырау"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Толе би, Казыбек би и Айтеке би — трое великих биев трёх жузов.",
+    "sourceHint": "Википедия: Толе би",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-aiteke",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Какой жуз представлял Айтеке би?",
+    "answerRu": "Младший жуз",
+    "acceptedRu": [
+      "Младший жуз",
+      "Младший",
+      "Кіші жүз"
+    ],
+    "distractorsRu": [
+      "Старший жуз",
+      "Средний жуз",
+      "Букеевскую Орду"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Казыбек би представлял Средний жуз, Толе би — Старший.",
+    "sourceHint": "Википедия: Айтеке би",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-kazybek",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Какого бия прозвали «Қаз дауысты» — «с гусиным голосом»?",
+    "answerRu": "Казыбек би",
+    "acceptedRu": [
+      "Казыбек би",
+      "Казыбек",
+      "Қазыбек би"
+    ],
+    "acceptedEn": [
+      "Kazybek Bi",
+      "Qazybek Bi"
+    ],
+    "distractorsRu": [
+      "Толе би",
+      "Айтеке би",
+      "Бухар жырау"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Казыбек би — из Среднего жуза; прозвище — за красноречие на переговорах с джунгарами.",
+    "sourceHint": "Википедия: Казыбек би",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-aktaban",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "В каком году нашествие джунгар положило начало «Годам великого бедствия» (Ақтабан шұбырынды)?",
+    "answerRu": "1723",
+    "acceptedRu": [
+      "1723",
+      "1723 год",
+      "1723 г"
+    ],
+    "distractorsRu": [
+      "1710",
+      "1729",
+      "1756"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Казахи бежали от Каратау к Сырдарье и дальше, теряя скот и людей.",
+    "sourceHint": "Википедия: Годы великого бедствия",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-anyrakay",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Как называется место решающей победы казахского ополчения над джунгарами, традиционно датируемой 1729 годом?",
+    "answerRu": "Аныракай",
+    "acceptedRu": [
+      "Аныракай",
+      "Аңырақай",
+      "Анракай"
+    ],
+    "distractorsRu": [
+      "Буланты",
+      "Орбулак",
+      "Отрар"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Традиционная датировка Аныракайской битвы — 1729 год, но в источниках встречается и 1730 год. Название иногда переводят как «место стонов».",
+    "sourceHint": "Википедия: Аныракайская битва",
+    "reviewNote": "Год битвы в источниках — 1729 или 1730; в ЕНТ принят 1729.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-abulkhair",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Какой хан Младшего жуза в 1731 году принял подданство России?",
+    "answerRu": "Абулхаир",
+    "acceptedRu": [
+      "Абулхаир",
+      "Абулхаир-хан",
+      "Әбілқайыр"
+    ],
+    "acceptedEn": [
+      "Abulkhair",
+      "Abul Khair Khan"
+    ],
+    "distractorsRu": [
+      "Абылай",
+      "Тауке",
+      "Кенесары"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Абулхаир искал защиты от джунгар и поддержки против соперников.",
+    "sourceHint": "Википедия: Абулхаир-хан",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-year-1731",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "В каком году Младший жуз принял российское подданство?",
+    "answerRu": "1731",
+    "acceptedRu": [
+      "1731",
+      "1731 год",
+      "1731 г"
+    ],
+    "distractorsRu": [
+      "1740",
+      "1717",
+      "1822"
+    ],
+    "openAnswer": true,
+    "explanationRu": "В 1740 году российской власти присягнула часть знати Среднего жуза. Включение земель Казахстана в состав Российской империи происходило постепенно и растянулось на длительный период.",
+    "sourceHint": "Википедия: Присоединение Казахстана к России",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-ablai",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Easy",
+    "promptRu": "Кого в 1771 году провозгласили ханом всех трёх жузов?",
+    "answerRu": "Абылай",
+    "acceptedRu": [
+      "Абылай",
+      "Абылай-хан",
+      "Аблай",
+      "Аблай-хан"
+    ],
+    "acceptedEn": [
+      "Ablai Khan"
+    ],
+    "distractorsRu": [
+      "Абулхаир",
+      "Тауке",
+      "Кенесары"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Церемония прошла в Туркестане, у мавзолея Яссауи.",
+    "sourceHint": "Википедия: Абылай-хан",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-bukhar",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Поэт-жырау, советник Абылай-хана, — это…",
+    "answerRu": "Бухар жырау",
+    "acceptedRu": [
+      "Бухар жырау",
+      "Бухар",
+      "Бұқар жырау"
+    ],
+    "distractorsRu": [
+      "Махамбет Утемисов",
+      "Доспамбет жырау",
+      "Шалкииз жырау"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Бухару приписывают больше ста лет жизни (1668–1781).",
+    "sourceHint": "Википедия: Бухар-жырау",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-bukey",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Какое ханство образовалось в 1801 году между Уралом и Волгой?",
+    "answerRu": "Букеевская Орда",
+    "acceptedRu": [
+      "Букеевская Орда",
+      "Внутренняя Орда",
+      "Букеевская (Внутренняя) Орда"
+    ],
+    "distractorsRu": [
+      "Ногайская Орда",
+      "Ак Орда",
+      "Кокандское ханство"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Султан Букей увёл туда около пяти тысяч семей Младшего жуза.",
+    "sourceHint": "Википедия: Букеевская Орда",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-syrym",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Кто возглавил восстание в Младшем жузе в 1783–1797 годах?",
+    "answerRu": "Сырым Датов",
+    "acceptedRu": [
+      "Сырым Датов",
+      "Сырым",
+      "Сырым Датулы"
+    ],
+    "distractorsRu": [
+      "Исатай Тайманов",
+      "Кенесары Касымов",
+      "Жанкожа Нурмухамедов"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Сырым боролся и с царской администрацией, и с ханом Нуралы.",
+    "sourceHint": "Википедия: Сырым Датов",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-ustav-1822",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Какой документ 1822 года упразднил ханскую власть в Среднем жузе?",
+    "answerRu": "«Устав о сибирских киргизах»",
+    "acceptedRu": [
+      "Устав о сибирских киргизах"
+    ],
+    "distractorsRu": [
+      "«Устав об оренбургских киргизах»",
+      "«Временное положение» 1868 года",
+      "«Степное положение» 1891 года"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Вместо ханства ввели округа во главе со старшими султанами.",
+    "sourceHint": "Википедия: Устав о сибирских киргизах",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-speransky",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Expert",
+    "promptRu": "Кто автор «Устава о сибирских киргизах» 1822 года?",
+    "answerRu": "Михаил Сперанский",
+    "acceptedRu": [
+      "Михаил Сперанский",
+      "Сперанский"
+    ],
+    "distractorsRu": [
+      "Алексей Ермолов",
+      "Василий Перовский",
+      "Герасим Колпаковский"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Проект был подготовлен по итогам сибирской ревизии и работы Сперанского по управлению Сибирью; в 1822 году его утвердил Александр I.",
+    "sourceHint": "Википедия: Устав о сибирских киргизах",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-year-1824",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "В каком году упразднили ханскую власть в Младшем жузе?",
+    "answerRu": "1824",
+    "acceptedRu": [
+      "1824",
+      "1824 год",
+      "1824 г"
+    ],
+    "distractorsRu": [
+      "1822",
+      "1731",
+      "1845"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Это сделал «Устав об оренбургских киргизах».",
+    "sourceHint": "Википедия: Младший жуз",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-zhangir",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Против какого хана выступили Исатай Тайманов и Махамбет Утемисов в 1836–1838 годах?",
+    "answerRu": "Жангир-хан",
+    "acceptedRu": [
+      "Жангир-хан",
+      "Жангир"
+    ],
+    "distractorsRu": [
+      "Букей",
+      "Кенесары",
+      "Абулхаир"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Восстание шло во Внутренней (Букеевской) Орде из-за отнятых пастбищ.",
+    "sourceHint": "Википедия: Восстание Исатая Тайманова",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-makhambet",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Поэт и соратник Исатая Тайманова — это…",
+    "answerRu": "Махамбет Утемисов",
+    "acceptedRu": [
+      "Махамбет Утемисов",
+      "Махамбет",
+      "Махамбет Өтемісұлы"
+    ],
+    "distractorsRu": [
+      "Бухар жырау",
+      "Абай Кунанбаев",
+      "Шортанбай"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Стихи Махамбета — призывы к борьбе; их учат в школе.",
+    "sourceHint": "Википедия: Махамбет Утемисов",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-kenesary-grand",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Чьим внуком был Кенесары Касымов?",
+    "answerRu": "Абылай-хана",
+    "acceptedRu": [
+      "Абылай-хана",
+      "Абылай",
+      "Абылай-хан",
+      "Аблая"
+    ],
+    "distractorsRu": [
+      "Абулхаира",
+      "Тауке",
+      "Букея"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Отец Кенесары — Касым-султан, сын Абылая.",
+    "sourceHint": "Википедия: Кенесары Касымов",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-kenesary-years",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "В какие годы шло восстание Кенесары Касымова?",
+    "answerRu": "1837–1847",
+    "acceptedRu": [
+      "1837–1847",
+      "1837-1847"
+    ],
+    "distractorsRu": [
+      "1783–1797",
+      "1836–1838",
+      "1868–1869"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Это было самое крупное восстание казахов XIX века; Кенесары провозгласили ханом.",
+    "sourceHint": "Википедия: Восстание Кенесары Касымова",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-verny",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Easy",
+    "promptRu": "Как называлось укрепление, из которого вырос современный Алматы?",
+    "answerRu": "Верный",
+    "acceptedRu": [
+      "Верный",
+      "Верное",
+      "Верный (укрепление)"
+    ],
+    "acceptedEn": [
+      "Verny"
+    ],
+    "distractorsRu": [
+      "Акмолинск",
+      "Аулие-Ата",
+      "Перовск"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Укрепление заложили в 1854 году как Заилийское, вскоре переименовали в Верное; город Верный получил городской статус в 1867 году.",
+    "generalPool": true,
+    "sourceHint": "Википедия: История Алма-Аты",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-akmeshit",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Кокандская крепость Ак-Мечеть, взятая русскими войсками в 1853 году, сегодня — город…",
+    "answerRu": "Кызылорда",
+    "acceptedRu": [
+      "Кызылорда",
+      "Кызыл-Орда",
+      "Қызылорда"
+    ],
+    "acceptedEn": [
+      "Kyzylorda"
+    ],
+    "distractorsRu": [
+      "Шымкент",
+      "Туркестан",
+      "Тараз"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Город успел побыть Перовском, потом Ак-Мечетью, а с 1925 года — Кзыл-Ордой.",
+    "sourceHint": "Википедия: Кызылорда",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-valikhanov",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Какой учёный-путешественник в 1858–1859 годах тайно побывал в Кашгаре?",
+    "answerRu": "Чокан Валиханов",
+    "acceptedRu": [
+      "Чокан Валиханов",
+      "Валиханов",
+      "Шокан Уалиханов"
+    ],
+    "distractorsRu": [
+      "Ибрай Алтынсарин",
+      "Пётр Семёнов-Тян-Шанский",
+      "Николай Пржевальский"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Валиханов шёл с караваном под видом купца и привёз первое научное описание Кашгарии.",
+    "sourceHint": "Википедия: Чокан Валиханов",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-altynsarin",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Какой просветитель в 1864 году открыл школу для казахских детей в Тургае?",
+    "answerRu": "Ибрай Алтынсарин",
+    "acceptedRu": [
+      "Ибрай Алтынсарин",
+      "Алтынсарин",
+      "Ыбырай Алтынсарин"
+    ],
+    "distractorsRu": [
+      "Чокан Валиханов",
+      "Абай Кунанбаев",
+      "Ахмет Байтурсынов"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Алтынсарин писал для своих учеников учебники и хрестоматию на казахском.",
+    "sourceHint": "Википедия: Алтынсарин, Ибрай",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-abai",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто автор «Слов назидания» («Қара сөздер»)?",
+    "answerRu": "Абай Кунанбаев",
+    "acceptedRu": [
+      "Абай Кунанбаев",
+      "Абай",
+      "Абай Құнанбайұлы"
+    ],
+    "distractorsRu": [
+      "Шакарим Кудайбердиев",
+      "Мухтар Ауэзов",
+      "Махамбет Утемисов"
+    ],
+    "openAnswer": false,
+    "explanationRu": "45 коротких философских текстов Абай написал в 1890–1898 годах.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Слова назидания",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-kurmangazy",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто автор знаменитого кюя «Сарыарка»?",
+    "answerRu": "Курмангазы",
+    "acceptedRu": [
+      "Курмангазы",
+      "Курмангазы Сагырбайулы"
+    ],
+    "distractorsRu": [
+      "Дина Нурпеисова",
+      "Таттимбет",
+      "Даулеткерей"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Курмангазы — домбрист XIX века; его имя носит Казахская национальная консерватория.",
+    "sourceHint": "Википедия: Курмангазы Сагырбайулы",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-decree-1916",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Поводом к восстанию 1916 года стал царский указ о…",
+    "answerRu": "мобилизации на тыловые работы",
+    "acceptedRu": [
+      "мобилизации на тыловые работы",
+      "реквизиции инородцев на тыловые работы"
+    ],
+    "distractorsRu": [
+      "переселении крестьян в степь",
+      "новом налоге на скот",
+      "закрытии мечетей"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Указ от 25 июня 1916 года забирал мужчин 19–43 лет рыть окопы на фронте.",
+    "sourceHint": "Википедия: Среднеазиатское восстание 1916 года",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-amangeldy",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Кто возглавил восстание 1916 года в Тургайской области?",
+    "answerRu": "Амангельды Иманов",
+    "acceptedRu": [
+      "Амангельды Иманов",
+      "Амангельды",
+      "Амангелди Иманов"
+    ],
+    "distractorsRu": [
+      "Бекболат Ашекеев",
+      "Алихан Букейханов",
+      "Кенесары Касымов"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ханом восставших избрали Абдулгаппара Жанбосынова, сардарбеком — Амангельды.",
+    "sourceHint": "Википедия: Иманов, Амангельды",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-bukeikhanov",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Кто возглавил правительство Алаш-Орда в 1917 году?",
+    "answerRu": "Алихан Букейханов",
+    "acceptedRu": [
+      "Алихан Букейханов",
+      "Букейханов",
+      "Әлихан Бөкейхан"
+    ],
+    "distractorsRu": [
+      "Ахмет Байтурсынов",
+      "Мустафа Шокай",
+      "Миржакып Дулатов"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Автономию Алаш провозгласил Второй всеказахский съезд в декабре 1917 года.",
+    "sourceHint": "Википедия: Алаш-Орда",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-baitursynov-qazaq",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто редактировал газету «Қазақ» (1913–1918)?",
+    "answerRu": "Ахмет Байтурсынов",
+    "acceptedRu": [
+      "Ахмет Байтурсынов",
+      "Байтурсынов"
+    ],
+    "distractorsRu": [
+      "Миржакып Дулатов",
+      "Алихан Букейханов",
+      "Магжан Жумабаев"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Тираж «Қазақа» доходил до восьми тысяч — для степи огромный.",
+    "sourceHint": "Википедия: Казах (газета)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-baitursynov-abc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто создал казахский алфавит на арабской основе — «төте жазу»?",
+    "answerRu": "Ахмет Байтурсынов",
+    "acceptedRu": [
+      "Ахмет Байтурсынов",
+      "Байтурсынов"
+    ],
+    "distractorsRu": [
+      "Миржакып Дулатов",
+      "Ибрай Алтынсарин",
+      "Мухтар Ауэзов"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Байтурсынова называют «Ұлт ұстазы» — учителем нации.",
+    "sourceHint": "Википедия: Тёте жазу",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-dulatov",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто автор сборника стихов «Оян, қазақ!» («Проснись, казах!», 1909)?",
+    "answerRu": "Миржакып Дулатов",
+    "acceptedRu": [
+      "Миржакып Дулатов",
+      "Дулатов",
+      "Міржақып Дулатұлы"
+    ],
+    "distractorsRu": [
+      "Ахмет Байтурсынов",
+      "Магжан Жумабаев",
+      "Абай Кунанбаев"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Сборник запретили и изымали, а автора посадили в тюрьму.",
+    "sourceHint": "Википедия: Дулатов, Миржакып",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-shokay",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Какую автономию в 1917–1918 годах возглавлял Мустафа Шокай?",
+    "answerRu": "Туркестанскую (Кокандскую)",
+    "acceptedRu": [
+      "Туркестанскую (Кокандскую)",
+      "Туркестанскую",
+      "Кокандскую",
+      "Туркестанская автономия",
+      "Кокандская автономия"
+    ],
+    "distractorsRu": [
+      "Алаш-Орду",
+      "Букеевскую Орду",
+      "Бухарскую республику"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Первым главой правительства автономии был Мухамеджан Тынышпаев; Мустафа Шокай сменил его в конце 1917 года. Автономию разгромили большевики в феврале 1918 года, после чего Шокай эмигрировал.",
+    "sourceHint": "Википедия: Туркестанская автономия",
+    "reviewNote": "Первым председателем правительства был Мухамеджан Тынышпаев, Шокай сменил его в конце 1917 года.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-orenburg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Какой город стал первой столицей Киргизской (Казахской) АССР в 1920 году?",
+    "answerRu": "Оренбург",
+    "acceptedRu": [
+      "Оренбург",
+      "Оренбурге"
+    ],
+    "acceptedEn": [
+      "Orenburg"
+    ],
+    "distractorsRu": [
+      "Кызылорда",
+      "Алма-Ата",
+      "Семипалатинск"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Столица ушла в Кзыл-Орду в 1925 году, когда Оренбург отошёл РСФСР.",
+    "sourceHint": "Википедия: Казахская АССР",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-kyzylorda-capital",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Какой город был столицей Казахской АССР с 1925 по 1929 год?",
+    "answerRu": "Кызылорда",
+    "acceptedRu": [
+      "Кызылорда",
+      "Кзыл-Орда",
+      "Кызыл-Орда"
+    ],
+    "acceptedEn": [
+      "Kyzylorda"
+    ],
+    "distractorsRu": [
+      "Оренбург",
+      "Алма-Ата",
+      "Акмолинск"
+    ],
+    "openAnswer": true,
+    "explanationRu": "В 1929 году столицу перенесли в Алма-Ату, к строящемуся Турксибу.",
+    "sourceHint": "Википедия: Кызылорда",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-kazssr-1936",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "В каком году Казахстан стал союзной республикой — Казахской ССР?",
+    "answerRu": "1936",
+    "acceptedRu": [
+      "1936",
+      "1936 год",
+      "1936 г"
+    ],
+    "distractorsRu": [
+      "1920",
+      "1925",
+      "1924"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Это случилось 5 декабря 1936 года с принятием новой Конституции СССР.",
+    "sourceHint": "Википедия: Казахская Советская Социалистическая Республика",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-turksib",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Как называется железная дорога, в 1930 году соединившая Сибирь и Среднюю Азию через Казахстан?",
+    "answerRu": "Турксиб",
+    "acceptedRu": [
+      "Турксиб",
+      "Туркестано-Сибирская",
+      "Туркестано-Сибирская магистраль"
+    ],
+    "acceptedEn": [
+      "Turksib"
+    ],
+    "distractorsRu": [
+      "БАМ",
+      "Транссиб",
+      "Трансаральская"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Стройка 1927–1930 годов — одна из главных первых пятилеток.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Туркестано-Сибирская железная дорога",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-goloshchekin",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто руководил Казахстаном в годы «Малого Октября» и коллективизации (1925–1933)?",
+    "answerRu": "Филипп Голощёкин",
+    "acceptedRu": [
+      "Филипп Голощёкин",
+      "Филипп Голощекин",
+      "Голощёкин",
+      "Голощекин"
+    ],
+    "distractorsRu": [
+      "Динмухамед Кунаев",
+      "Леонид Брежнев",
+      "Геннадий Колбин"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Конфискация скота и насильственное оседание привели к голоду 1931–1933 годов.",
+    "sourceHint": "Википедия: Голощёкин, Филипп Исаевич",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-asharshylyk",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Как в Казахстане называют голод 1931–1933 годов?",
+    "answerRu": "Ашаршылық",
+    "acceptedRu": [
+      "Ашаршылық",
+      "Ашаршылык"
+    ],
+    "distractorsRu": [
+      "Ақтабан шұбырынды",
+      "Желтоқсан",
+      "Жұт"
+    ],
+    "openAnswer": false,
+    "explanationRu": "От голода погибли, по разным оценкам, 1,5–2,3 миллиона человек.",
+    "sourceHint": "Википедия: Голод в Казахстане (1930—1933)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-alzhir",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "У какого города находился лагерь «АЛЖИР» для жён «изменников Родины»?",
+    "answerRu": "Акмолинск",
+    "acceptedRu": [
+      "Акмолинск",
+      "Акмолинска",
+      "Акмола"
+    ],
+    "distractorsRu": [
+      "Караганда",
+      "Семипалатинск",
+      "Петропавловск"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Название — сокращение: Акмолинский лагерь жён изменников Родины. Сейчас там мемориал.",
+    "sourceHint": "Википедия: АЛЖИР",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-panfilov",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Easy",
+    "promptRu": "В каком городе сформировали дивизию генерала Панфилова, оборонявшую Москву в 1941 году?",
+    "answerRu": "Алма-Ата",
+    "acceptedRu": [
+      "Алма-Ата",
+      "Алма-Ате",
+      "Алматы"
+    ],
+    "acceptedEn": [
+      "Alma-Ata"
+    ],
+    "distractorsRu": [
+      "Караганда",
+      "Семипалатинск",
+      "Ташкент"
+    ],
+    "openAnswer": true,
+    "explanationRu": "316-ю стрелковую дивизию собрали летом 1941 года в Алма-Ате из жителей Казахстана и Киргизии.",
+    "generalPool": true,
+    "sourceHint": "Википедия: 8-я гвардейская стрелковая дивизия",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-momyshuly",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Кто из командиров панфиловцев написал книгу «За нами Москва»?",
+    "answerRu": "Бауыржан Момышулы",
+    "acceptedRu": [
+      "Бауыржан Момышулы",
+      "Момышулы",
+      "Баурджан Момыш-улы"
+    ],
+    "distractorsRu": [
+      "Талгат Бигельдинов",
+      "Рахимжан Кошкарбаев",
+      "Нуркен Абдиров"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Звание Героя Советского Союза Момышулы присвоили только в 1990 году, посмертно.",
+    "sourceHint": "Википедия: Момышулы, Бауыржан",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-mametova",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Какая пулемётчица, Герой Советского Союза, погибла в 1943 году в боях за Невель?",
+    "answerRu": "Маншук Маметова",
+    "acceptedRu": [
+      "Маншук Маметова",
+      "Маметова",
+      "Маншук"
+    ],
+    "distractorsRu": [
+      "Алия Молдагулова",
+      "Хиуаз Доспанова",
+      "Зоя Космодемьянская"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Маншук Маметова — первая казашка, получившая звание Героя Советского Союза.",
+    "sourceHint": "Википедия: Маметова, Маншук Жиенгалиевна",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-koshkarbaev",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто вместе с Григорием Булатовым установил красный флаг на фасаде Рейхстага 30 апреля 1945 года?",
+    "answerRu": "Рахимжан Кошкарбаев",
+    "acceptedRu": [
+      "Рахимжан Кошкарбаев",
+      "Кошкарбаев"
+    ],
+    "distractorsRu": [
+      "Бауыржан Момышулы",
+      "Талгат Бигельдинов",
+      "Нуркен Абдиров"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Кошкарбаев и Григорий Булатов установили красный флаг на фасаде Рейхстага 30 апреля 1945 года. Это событие следует отличать от водружения Знамени Победы.",
+    "sourceHint": "Википедия: Кошкарбаев, Рахимжан",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-karaganda",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Какой угольный бассейн называли «третьей всесоюзной кочегаркой»?",
+    "answerRu": "Карагандинский",
+    "acceptedRu": [
+      "Карагандинский",
+      "Карагандинский угольный бассейн",
+      "Карагандинский бассейн"
+    ],
+    "distractorsRu": [
+      "Экибастузский",
+      "Печорский",
+      "Кузнецкий"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Первыми двумя были Донбасс и Кузбасс.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Карагандинский угольный бассейн",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-tselina",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "В каком году началось освоение целинных и залежных земель?",
+    "answerRu": "1954",
+    "acceptedRu": [
+      "1954",
+      "1954 год",
+      "1954 г"
+    ],
+    "distractorsRu": [
+      "1949",
+      "1961",
+      "1946"
+    ],
+    "openAnswer": true,
+    "explanationRu": "На целину приехали сотни тысяч человек со всего Союза.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Освоение целины",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-tselinograd",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Easy",
+    "promptRu": "Как называлась нынешняя Астана в 1961–1992 годах?",
+    "answerRu": "Целиноград",
+    "acceptedRu": [
+      "Целиноград"
+    ],
+    "acceptedEn": [
+      "Tselinograd"
+    ],
+    "distractorsRu": [
+      "Акмолинск",
+      "Акмола",
+      "Нур-Султан"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Акмолинск → Целиноград → Акмола → Астана → Нур-Султан → снова Астана (с 2022 года).",
+    "generalPool": true,
+    "sourceHint": "Википедия: История Астаны",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-baikonur",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Easy",
+    "promptRu": "С какого космодрома 12 апреля 1961 года стартовал Юрий Гагарин?",
+    "answerRu": "Байконур",
+    "acceptedRu": [
+      "Байконур"
+    ],
+    "acceptedEn": [
+      "Baikonur",
+      "Baykonur"
+    ],
+    "distractorsRu": [
+      "Плесецк",
+      "Капустин Яр",
+      "Восточный"
+    ],
+    "openAnswer": true,
+    "explanationRu": "С Байконура же в 1957 году запустили первый искусственный спутник Земли.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Байконур (космодром)",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-aubakirov",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Кто стал первым казахом в космосе (1991)?",
+    "answerRu": "Токтар Аубакиров",
+    "acceptedRu": [
+      "Токтар Аубакиров",
+      "Аубакиров",
+      "Тохтар Аубакиров"
+    ],
+    "distractorsRu": [
+      "Талгат Мусабаев",
+      "Айдын Аимбетов",
+      "Мухтар Аймаханов"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Аубакиров слетал на станцию «Мир» в октябре 1991 года.",
+    "sourceHint": "Википедия: Аубакиров, Токтар Онгарбаевич",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-polygon",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Easy",
+    "promptRu": "Указом от 29 августа 1991 года в Казахстане закрыли…",
+    "answerRu": "Семипалатинский ядерный полигон",
+    "acceptedRu": [
+      "Семипалатинский ядерный полигон",
+      "Семипалатинский полигон"
+    ],
+    "distractorsRu": [
+      "космодром Байконур",
+      "полигон Сары-Шаган",
+      "полигон Азгир"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Первый взрыв на полигоне прогремел ровно за 42 года до закрытия — 29 августа 1949 года.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Семипалатинский ядерный полигон",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-nevada",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Кто в 1989 году возглавил антиядерное движение «Невада — Семипалатинск»?",
+    "answerRu": "Олжас Сулейменов",
+    "acceptedRu": [
+      "Олжас Сулейменов",
+      "Сулейменов"
+    ],
+    "distractorsRu": [
+      "Мухтар Шаханов",
+      "Абдижамил Нурпеисов",
+      "Мухтар Ауэзов"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Движение сыграло важную роль в общественном протесте против ядерных испытаний. Семипалатинский полигон был закрыт указом президента Казахской ССР 29 августа 1991 года.",
+    "sourceHint": "Википедия: Невада — Семипалатинск",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-kunaev",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Кто руководил Компартией Казахстана в 1964–1986 годах?",
+    "answerRu": "Динмухамед Кунаев",
+    "acceptedRu": [
+      "Динмухамед Кунаев",
+      "Кунаев"
+    ],
+    "distractorsRu": [
+      "Геннадий Колбин",
+      "Нурсултан Назарбаев",
+      "Филипп Голощёкин"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Кунаев трижды стал Героем Социалистического Труда.",
+    "sourceHint": "Википедия: Кунаев, Динмухамед Ахмедович",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-zheltoksan",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Декабрьские события 1986 года в Алма-Ате начались после назначения первым секретарём…",
+    "answerRu": "Геннадия Колбина",
+    "acceptedRu": [
+      "Геннадия Колбина",
+      "Колбина",
+      "Колбин",
+      "Геннадий Колбин"
+    ],
+    "distractorsRu": [
+      "Нурсултана Назарбаева",
+      "Динмухамеда Кунаева",
+      "Филиппа Голощёкина"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Колбин не был связан с Казахстаном; молодёжь вышла на площадь 17 декабря.",
+    "sourceHint": "Википедия: Желтоксан",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-sovereignty",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Когда принята Декларация о государственном суверенитете Казахской ССР?",
+    "answerRu": "25 октября 1990 года",
+    "acceptedRu": [
+      "25 октября 1990 года",
+      "25 октября 1990"
+    ],
+    "distractorsRu": [
+      "16 декабря 1991 года",
+      "30 августа 1995 года",
+      "28 января 1993 года"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Сейчас 25 октября — День Республики.",
+    "sourceHint": "Википедия: Декларация о государственном суверенитете Казахской ССР",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-independence",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "В какой день Казахстан провозгласил независимость?",
+    "answerRu": "16 декабря 1991 года",
+    "acceptedRu": [
+      "16 декабря 1991 года",
+      "16 декабря 1991",
+      "16 декабря"
+    ],
+    "distractorsRu": [
+      "25 октября 1990 года",
+      "29 августа 1991 года",
+      "30 августа 1995 года"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Теперь 16 декабря — День Независимости.",
+    "sourceHint": "Википедия: Конституционный закон о государственной независимости Республики Казахстан",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-last-republic",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Какая союзная республика последней приняла закон о государственной независимости в 1991 году?",
+    "answerRu": "Казахстан",
+    "acceptedRu": [
+      "Казахстан"
+    ],
+    "acceptedEn": [
+      "Kazakhstan"
+    ],
+    "distractorsRu": [
+      "Россия",
+      "Туркмения",
+      "Белоруссия"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Казахстан принял закон о государственной независимости 16 декабря 1991 года. Формулировка относится к принятию закона союзной республикой: РСФСР независимость от СССР не провозглашала, а приняла декларацию о государственном суверенитете в 1990 году.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Распад СССР",
+    "reviewNote": "Россия независимость формально не провозглашала: была Декларация о суверенитете 12 июня 1990 года.",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-almaty-cis",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "В каком городе 21 декабря 1991 года подписали декларацию, расширившую СНГ до 11 государств?",
+    "answerRu": "Алма-Ата",
+    "acceptedRu": [
+      "Алма-Ата",
+      "Алма-Ате",
+      "Алматы"
+    ],
+    "acceptedEn": [
+      "Alma-Ata"
+    ],
+    "distractorsRu": [
+      "Минск",
+      "Москва",
+      "Ташкент"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Алма-Атинская декларация закрепила: СССР прекращает существование.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Алма-Атинская декларация",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-tenge",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "В каком году ввели национальную валюту — тенге?",
+    "answerRu": "1993",
+    "acceptedRu": [
+      "1993",
+      "1993 год",
+      "1993 г"
+    ],
+    "distractorsRu": [
+      "1991",
+      "1992",
+      "1995"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Тенге ввели 15 ноября 1993 года; теперь это День национальной валюты.",
+    "sourceHint": "Википедия: Казахстанский тенге",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-constitution-1993",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "В каком году приняли первую Конституцию независимого Казахстана?",
+    "answerRu": "1993",
+    "acceptedRu": [
+      "1993",
+      "1993 год",
+      "1993 г"
+    ],
+    "distractorsRu": [
+      "1991",
+      "1995",
+      "1998"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Её приняли 28 января 1993 года, а через два с половиной года заменили новой.",
+    "sourceHint": "Википедия: Конституция Казахстана 1993 года",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-constitution-1995",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "В какой день Конституцию Казахстана 1995 года приняли на всенародном референдуме?",
+    "answerRu": "30 августа",
+    "acceptedRu": [
+      "30 августа",
+      "30 августа 1995 года",
+      "30 августа 1995"
+    ],
+    "distractorsRu": [
+      "16 декабря",
+      "25 октября",
+      "28 января"
+    ],
+    "openAnswer": false,
+    "explanationRu": "30 августа отмечают как День Конституции.",
+    "sourceHint": "Википедия: Конституция Казахстана",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-capital-1997",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "В каком году столицу Казахстана официально перенесли из Алматы в Акмолу?",
+    "answerRu": "1997",
+    "acceptedRu": [
+      "1997",
+      "1997 год",
+      "1997 г"
+    ],
+    "distractorsRu": [
+      "1994",
+      "1998",
+      "2001"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Перенос состоялся 10 декабря 1997 года; Астаной город стал в мае 1998-го.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Перенос столицы Казахстана",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-eaeu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Какие два государства вместе с Казахстаном подписали в 2014 году в Астане договор о Евразийском экономическом союзе?",
+    "answerRu": "Россия и Беларусь",
+    "acceptedRu": [
+      "Россия и Беларусь"
+    ],
+    "distractorsRu": [
+      "Россия и Армения",
+      "Россия и Киргизия",
+      "Беларусь и Узбекистан"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Армения и Киргизия присоединились в 2015 году.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Евразийский экономический союз",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-expo",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Easy",
+    "promptRu": "В каком году Астана принимала международную выставку ЭКСПО?",
+    "answerRu": "2017",
+    "acceptedRu": [
+      "2017",
+      "2017 год",
+      "2017 г"
+    ],
+    "distractorsRu": [
+      "2015",
+      "2019",
+      "2011"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Тема выставки — «Энергия будущего»; её символ — шар «Нур Алем».",
+    "sourceHint": "Википедия: Экспо-2017",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-guryev",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Medium",
+    "promptRu": "Как назывался Атырау до 4 октября 1991 года?",
+    "answerRu": "Гурьев",
+    "acceptedRu": [
+      "Гурьев"
+    ],
+    "acceptedEn": [
+      "Guryev",
+      "Guriev"
+    ],
+    "distractorsRu": [
+      "Уральск",
+      "Новый Узень",
+      "Красноводск"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Город основали в XVII веке купцы Гурьевы.",
+    "sourceHint": "Википедия: Атырау",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-shevchenko",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Как назывался Актау в 1964–1991 годах?",
+    "answerRu": "Шевченко",
+    "acceptedRu": [
+      "Шевченко"
+    ],
+    "acceptedEn": [
+      "Shevchenko"
+    ],
+    "distractorsRu": [
+      "Гурьев",
+      "Новый Узень",
+      "Красноводск"
+    ],
+    "openAnswer": true,
+    "explanationRu": "Город назвали в честь Тараса Шевченко, отбывавшего ссылку на Мангышлаке.",
+    "sourceHint": "Википедия: Актау",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-auezov",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал роман-эпопею «Путь Абая»?",
+    "answerRu": "Мухтар Ауэзов",
+    "acceptedRu": [
+      "Мухтар Ауэзов",
+      "Ауэзов",
+      "Мұхтар Әуезов"
+    ],
+    "distractorsRu": [
+      "Габит Мусрепов",
+      "Сабит Муканов",
+      "Ильяс Есенберлин"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Эпопея в четырёх книгах писалась с 1942 по 1956 год.",
+    "generalPool": true,
+    "sourceHint": "Википедия: Путь Абая",
+    "origin": "authored",
+    "license": "original"
+  },
+  {
+    "id": "kz-esenberlin",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "kazakhstan",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал историческую трилогию «Кочевники»?",
+    "answerRu": "Ильяс Есенберлин",
+    "acceptedRu": [
+      "Ильяс Есенберлин",
+      "Есенберлин"
+    ],
+    "distractorsRu": [
+      "Мухтар Ауэзов",
+      "Абдижамил Нурпеисов",
+      "Габит Мусрепов"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Трилогия рассказывает историю Казахского ханства от основания до Кенесары.",
+    "sourceHint": "Википедия: Кочевники (трилогия)",
+    "origin": "authored",
+    "license": "original"
+  }
+]

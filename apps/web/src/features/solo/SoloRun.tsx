@@ -19,7 +19,7 @@ import { SoloRoundStage } from "./stages/SoloRoundStage";
 export type { PendingStrike } from "./soloScreenTypes";
 
 export function toSoloCategory(id: string): CategoryId {
-  return id === "geography" || id === "history" || id === "languages"
+  return id === "geography" || id === "history" || id === "languages" || id === "kz_history"
     ? id
     : "general";
 }
@@ -75,6 +75,8 @@ interface SoloRunProps {
   mode?: SoloMode;
   /** Сыграть в другом режиме с экрана результата. */
   onPlayMode?: (mode: SoloMode, category: CategoryId) => void;
+  /** Разобрать ошибки забега в тренировке. */
+  onPracticeMistakes?: () => void;
 }
 
 export function SoloRun({
@@ -86,6 +88,7 @@ export function SoloRun({
   onStageChange,
   mode = "daily",
   onPlayMode,
+  onPracticeMistakes,
 }: SoloRunProps) {
   const run = useSoloRun(practice?.id, mode);
   const { stage } = run.state;
@@ -111,6 +114,17 @@ export function SoloRun({
     run.backToCategories();
     onHome();
   };
+  const restartRun = async () => {
+    const category = run.state.category;
+    if (!await run.abandon()) return;
+    if (practice || mode !== "daily") run.begin(category);
+    else run.backToCategories();
+  };
+  const abandonAndExit = async () => {
+    if (!await run.abandon()) return false;
+    run.backToCategories();
+    return true;
+  };
   return (
     <SoloRunScreen
       onOpenTiebreaker={() => setTiebreakerOpen(true)}
@@ -121,6 +135,10 @@ export function SoloRun({
       onBackToCategories={run.backToCategories}
       onExit={defaultCategory && !rematch && !practice ? exitToHome : undefined}
       onStart={run.start}
+      onRestart={() => void restartRun()}
+      onAbandon={abandonAndExit}
+      abandoning={run.abandoning}
+      abandonError={run.abandonError}
       onAnswer={run.answer}
       onContinue={run.continueAfterResolution}
       strike={strike}
@@ -135,6 +153,7 @@ export function SoloRun({
       onReport={submitReport}
       reportState={reportState}
       onPlayMode={onPlayMode}
+      onPracticeMistakes={onPracticeMistakes}
     />
   );
 }

@@ -80,13 +80,22 @@ export default function App() {
 
   // Практика ошибок внутри «Тренировки» — это игра: панель на ней скрыта.
   const [trainingPlaying, setTrainingPlaying] = useState(false);
+  // Тренировка открыта с экрана итога: сразу отработка ошибок. Вкладка снизу открывает меню.
+  const [trainingMistakes, setTrainingMistakes] = useState(false);
+  const goToMistakes = useCallback(() => {
+    setTrainingMistakes(true);
+    game.goToTraining();
+  }, [game.goToTraining]);
   useEffect(() => { setClientErrorScreen(shellPhase); }, [shellPhase]);
   const navTab = navTabForPhase(game.phase);
   const showNav = navTab !== null && !(game.phase === 'home' && launchIntent) && !(game.phase === 'training' && trainingPlaying);
   const selectNavTab = useCallback((tab: NavTab) => {
     if (tab === 'home') game.goHome();
     else if (tab === 'myRuns') game.goToMyRuns();
-    else if (tab === 'training') game.goToTraining();
+    else if (tab === 'training') {
+      setTrainingMistakes(false);
+      game.goToTraining();
+    }
     else game.goToProfile();
   }, [game.goHome, game.goToMyRuns, game.goToTraining, game.goToProfile]);
 
@@ -128,6 +137,8 @@ export default function App() {
         {game.phase === 'training' && (
           <motion.div key="training" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <TrainingHub
+              key={trainingMistakes ? 'mistakes' : 'menu'}
+              openMistakes={trainingMistakes}
               onStartBot={startPractice}
               onPlayingChange={setTrainingPlaying}
             />
@@ -146,6 +157,7 @@ export default function App() {
               key={soloKey}
               mode={soloMode}
               onPlayMode={playMode}
+              onPracticeMistakes={goToMistakes}
               onHome={practiceLevel ? game.goToTraining : game.goHome}
               practice={practiceLevel ?? undefined}
               onMyRuns={game.goToMyRuns}

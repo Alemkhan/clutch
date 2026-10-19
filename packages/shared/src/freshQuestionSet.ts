@@ -1,9 +1,16 @@
 import { countries } from './countries';
 import { DAILY_SET_OPEN_RATIO, dailyKey, dailySetSize, type DailySet } from './dailyQuestionSet';
 import { packQuestionToRaceQuestion, packSetToRaceQuestion, type PackRecord } from './generalPack';
-import { GENERAL_SET_GENERATED, GENERAL_SET_OPEN_COUNT, GENERAL_SET_PACK_COUNT, livePackRecords } from './generalSet';
+import {
+  GENERAL_SET_GENERATED,
+  GENERAL_SET_OPEN_COUNT,
+  GENERAL_SET_PACK_COUNT,
+  KZ_SET_OPEN_COUNT,
+  liveKzRecords,
+  livePackRecords,
+} from './generalSet';
 import { historicFlags } from './historicFlags';
-import type { CategoryId, Question } from './index';
+import type { CategoryId, GeneratedCategoryId, Question } from './index';
 import { languages } from './languages';
 import { generateMatch } from './questionGenerator';
 import { createSeededRandom, hashSeed } from './seededRandom';
@@ -21,7 +28,7 @@ export function seenQuestionKey(questionId: string): string {
   return questionId.replace(/:(open|mc)$/u, '');
 }
 
-const CAPACITY: Readonly<Record<Exclude<CategoryId, 'general'>, number>> = {
+const CAPACITY: Readonly<Record<GeneratedCategoryId, number>> = {
   geography: countries.length,
   history: historicFlags.length,
   languages: languages.length,
@@ -45,22 +52,27 @@ function unseenFirst<T>(items: readonly T[], keyOf: (item: T) => string, seen: R
 }
 
 /** Кандидаты генератора с запасом: из них выбираются невиденные. */
-function generatedCandidates(category: Exclude<CategoryId, 'general'>, wanted: number, openRatio: number, seed: string): Question[] {
+function generatedCandidates(category: GeneratedCategoryId, wanted: number, openRatio: number, seed: string): Question[] {
   const count = Math.min(CAPACITY[category], wanted * 4);
   return generateMatch(count, openRatio, category, createSeededRandom(hashSeed(seed)));
 }
 
-function freshGeneralQuestions(seed: string, seen: ReadonlySet<string>, pool: readonly PackRecord[]): Question[] {
-  const records = unseenFirst(shuffled(pool, `${seed}:pack`), (record) => `gp:${record.id}`, seen, GENERAL_SET_PACK_COUNT);
+/** Невиденные записи пакета впереди; открытым вводом — до `openCount` из тех, где он разрешён. */
+function freshPackQuestions(seed: string, seen: ReadonlySet<string>, pool: readonly PackRecord[], count: number, openCount: number): Question[] {
+  const records = unseenFirst(shuffled(pool, `${seed}:pack`), (record) => `gp:${record.id}`, seen, count);
   const open = new Set(
     shuffled(records.filter((r) => r.kind === 'single' && r.openAnswer).map((r) => r.id), `${seed}:open`)
-      .slice(0, GENERAL_SET_OPEN_COUNT),
+      .slice(0, openCount),
   );
-  const packQuestions = records.map((record) => {
+  return records.map((record) => {
     const questionSeed = `${seed}:${record.id}`;
     if (record.kind === 'set') return packSetToRaceQuestion(record, questionSeed);
     return packQuestionToRaceQuestion(record, open.has(record.id) ? 'open_answer' : 'multiple_choice', questionSeed);
   });
+}
+
+function freshGeneralQuestions(seed: string, seen: ReadonlySet<string>, pool: readonly PackRecord[]): Question[] {
+  const packQuestions = freshPackQuestions(seed, seen, pool, GENERAL_SET_PACK_COUNT, GENERAL_SET_OPEN_COUNT);
   const generated = GENERAL_SET_GENERATED.flatMap(({ category, count }) =>
     unseenFirst(generatedCandidates(category, count, DAILY_SET_OPEN_RATIO, `${seed}:${category}`), (q) => seenQuestionKey(q.id), seen, count));
   return [...packQuestions, ...generated];
@@ -72,11 +84,14 @@ export function freshQuestionSet(
   seen: ReadonlySet<string> = new Set(),
   timestampMs: number = Date.now(),
   pool: readonly PackRecord[] = livePackRecords(),
+  kzPool: readonly PackRecord[] = liveKzRecords(),
 ): DailySet {
   const dateKey = dailyKey(timestampMs);
   const questionSetId = `fresh:${category}:${dateKey}:${hashSeed(`fresh:${seed}`)}`;
   const questions = category === 'general'
     ? freshGeneralQuestions(questionSetId, seen, pool)
+    : category === 'kz_history'
+    ? freshPackQuestions(questionSetId, seen, kzPool, dailySetSize(category), KZ_SET_OPEN_COUNT)
     : unseenFirst(
       generatedCandidates(category, dailySetSize(category), DAILY_SET_OPEN_RATIO, questionSetId),
       (q) => seenQuestionKey(q.id),

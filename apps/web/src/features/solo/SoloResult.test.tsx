@@ -107,6 +107,14 @@ describe('solo result receipt', () => {
     expect(lost).not.toContain('До 100% не дошёл');
   });
 
+  it('mistakes of the run lead to training, and only when there are any', () => {
+    const missed = render({ mode: 'daily', onPracticeMistakes: vi.fn(), response: response({ correctCount: 2, roundsPlayed: 4 }) });
+    expect(missed).toContain('Разобрать ошибки: 2 →');
+    expect(render({ mode: 'daily', onPracticeMistakes: vi.fn(), response: response({ correctCount: 4, roundsPlayed: 4 }) }))
+      .not.toContain('Разобрать ошибки');
+    expect(render({ mode: 'daily', response: response({ correctCount: 2, roundsPlayed: 4 }) })).not.toContain('Разобрать ошибки');
+  });
+
   it('free play: no table, no record card, the next set is one tap away', () => {
     const html = render({ mode: 'free', onPlayMode: vi.fn() });
     expect(html).not.toContain('data-stat="place"');

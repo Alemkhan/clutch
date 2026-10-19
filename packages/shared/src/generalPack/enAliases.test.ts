@@ -26,9 +26,7 @@ const NO_EN: Readonly<Record<string, string>> = {
   'au-film-1q1568o': 'без общеупотребительной английской формы (Матроскин)',
   'au-film-kiwyjc': 'без общеупотребительной английской формы (дядя Фёдор)',
   'au-film-1nbagf': 'латиница уже в acceptedRu (Pixar)',
-  'au-film-1k6fif6': 'без общеупотребительной английской формы (Эльдар Рязанов)',
   'au-film-95lm7o': 'латиница уже в acceptedRu (ВАЛЛ-И)',
-  'au-film-10s2r15': 'без общеупотребительной английской формы (Леонид Гайдай)',
   'q-film-mm200o': 'латиница уже в acceptedRu (Титаник)',
   'q-film-15lc29g': 'латиница уже в acceptedRu (Мстители: Финал)',
   'au-food-1tq921o': 'без общеупотребительной английской формы (кукуруза)',
@@ -153,6 +151,17 @@ const NO_EN: Readonly<Record<string, string>> = {
   'q-tech-e9w22r': 'латиница уже в acceptedRu (Энигма)',
   'q-world-adabw3': 'без общеупотребительной английской формы (Бхола)',
   'q-world-utbur8': 'без общеупотребительной английской формы (авокадо)',
+  'kz-turk-552': 'число (552)',
+  'kz-khanate-1465': 'число (1465)',
+  'kz-aktaban': 'число (1723)',
+  'kz-year-1731': 'число (1731)',
+  'kz-year-1824': 'число (1824)',
+  'kz-kazssr-1936': 'число (1936)',
+  'kz-tselina': 'число (1954)',
+  'kz-tenge': 'число (1993)',
+  'kz-constitution-1993': 'число (1993)',
+  'kz-capital-1997': 'число (1997)',
+  'kz-expo': 'число (2017)',
 };
 
 const openApproved = generalPackQuestions.filter((q) => q.editorialStatus === 'approved' && q.openAnswer);

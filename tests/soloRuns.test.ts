@@ -19,6 +19,8 @@ import {
   type SoloRunSnapshot,
   type StartSoloRunResponse,
   type Question,
+  packQuestionToRaceQuestion,
+  generalPackQuestions,
 } from '@clutch/shared';
 import app from '../apps/api/src/index';
 import { createTestD1, type TestD1 } from './helpers/testD1';
@@ -110,9 +112,13 @@ function finish(db: TestD1, label: string, runId: string, rounds: AsyncMatchRoun
   return playRounds((path, body) => request(db, path, guest(label).authorization, body), runId, rounds);
 }
 
+function abandon(db: TestD1, label: string, runId: string) {
+  return request(db, `/api/solo-runs/${runId}/abandon`, guest(label).authorization, {});
+}
+
 function rowOf(db: TestD1, id: string) {
   return db.sqlite.prepare(
-    'SELECT status, progress, reached_target, set_par, solo_score, rules_version, ghost_eligible FROM match_runs WHERE id = ?',
+    'SELECT status, progress, reached_target, set_par, solo_score, rules_version, ghost_eligible, solo_outcome FROM match_runs WHERE id = ?',
   ).get(id) as Record<string, unknown>;
 }
 
@@ -253,6 +259,59 @@ describe('solo run', () => {
     expect(rowOf(db, run.runId)).toMatchObject({ status: 'completed' });
   });
 
+  it('abandoning a duel settles a pending hammer as a miss, records a loss, and reverses the pace outcome', async () => {
+    const db = database();
+    insertRun(db, { id: 'pace-run', playerId: guest('pace-owner').playerId, rulesVersion: SOLO, reachedTarget: 1 });
+    const run = await (await startRun(db, 'abandon-duel', '/api/solo-runs', 'duel')).json() as StartSoloRunResponse;
+    const question = fullQuestions(db, run.runId)[0];
+    const answer = await request(db, `/api/solo-runs/${run.runId}/answer`, guest('abandon-duel').authorization, {
+      roundIndex: 0,
+      questionId: question.id,
+      selectedAnswer: question.answerType === 'open_answer' ? question.correctAnswers![0] : question.correctOptionId,
+      responseTimeMs: 1000,
+    });
+    expect(answer.status).toBe(200);
+    expect((await answer.json()).awaitingHammer).toBe(true);
+
+    const closed = await abandon(db, 'abandon-duel', run.runId);
+    expect(closed.status).toBe(200);
+    expect(await closed.json()).toMatchObject({ outcome: 'opponent', roundsPlayed: 1, reachedTarget: false });
+    expect(rowOf(db, run.runId)).toMatchObject({ status: 'completed', solo_outcome: 'opponent', reached_target: 0, ghost_eligible: 0 });
+    expect((db.sqlite.prepare('SELECT solo_outcome FROM match_runs WHERE id = ?').get('pace-run') as { solo_outcome: string }).solo_outcome)
+      .toBe('player');
+    expect(db.sqlite.prepare('SELECT skill_result, progress_awarded FROM solo_run_rounds WHERE run_id = ?').get(run.runId))
+      .toEqual({ skill_result: 'miss', progress_awarded: 0 });
+
+    const retry = await abandon(db, 'abandon-duel', run.runId);
+    expect(retry.status).toBe(200);
+    expect(await retry.json()).toMatchObject({ outcome: 'opponent', roundsPlayed: 1, reachedTarget: false });
+    const next = await (await startRun(db, 'abandon-duel', '/api/solo-runs', 'duel')).json() as StartSoloRunResponse;
+    expect(next.runId).not.toBe(run.runId);
+    expect(next.resumed).toBeUndefined();
+  });
+
+  it('abandon closes daily and free runs without an outcome; daily attempt stays spent and free can restart', async () => {
+    const db = database();
+    const daily = await (await startRun(db, 'abandon-daily', '/api/solo-runs', 'daily')).json() as StartSoloRunResponse;
+    expect((await abandon(db, 'abandon-daily', daily.runId)).status).toBe(200);
+    expect(rowOf(db, daily.runId)).toMatchObject({ status: 'completed', solo_outcome: null, reached_target: 0, ghost_eligible: 0 });
+    expect((await startRun(db, 'abandon-daily', '/api/solo-runs', 'daily')).status).toBe(409);
+
+    const free = await (await startRun(db, 'abandon-free', '/api/solo-runs', 'free')).json() as StartSoloRunResponse;
+    expect((await abandon(db, 'abandon-free', free.runId)).status).toBe(200);
+    expect(rowOf(db, free.runId)).toMatchObject({ status: 'completed', solo_outcome: null, reached_target: 0, ghost_eligible: 0 });
+    const next = await (await startRun(db, 'abandon-free', '/api/solo-runs', 'free')).json() as StartSoloRunResponse;
+    expect(next.runId).not.toBe(free.runId);
+    expect(next.resumed).toBeUndefined();
+  });
+
+  it('only the owner can abandon a run', async () => {
+    const db = database();
+    const run = await start(db, 'abandon-owner');
+    expect((await abandon(db, 'different-player', run.runId)).status).toBe(404);
+    expect(rowOf(db, run.runId)).toMatchObject({ status: 'in_progress' });
+  });
+
   it('does not mix legacy race records into the solo pool', async () => {
     const db = database();
     insertRun(db, {
@@ -277,6 +336,58 @@ describe('solo run', () => {
 });
 
 describe('a second start while a run is unfinished', () => {
+  it('restores current artwork media on an old stored question without exposing its answer', async () => {
+    const db = database();
+    const run = await start(db, 'art-resume');
+    const artwork = generalPackQuestions.find((question) => question.editorialStatus === 'approved' && question.image)!;
+    const canonical = packQuestionToRaceQuestion(artwork, 'multiple_choice');
+    const { mediaType: _mediaType, mediaUrl: _mediaUrl, mediaText: _mediaText, ...oldStoredQuestion } = canonical;
+    db.sqlite.prepare('UPDATE match_runs SET questions_json = ? WHERE id = ?')
+      .run(JSON.stringify([oldStoredQuestion]), run.runId);
+
+    const resumed = await app.request(`/api/solo-runs/${run.runId}`, {
+      headers: { authorization: guest('art-resume').authorization },
+    }, {
+      DB: db.binding, API_RATE_LIMITER: allowRateLimiter, TELEGRAM_BOT_TOKEN: 'test',
+      SESSION_SIGNING_SECRET: sessionSecret, ENVIRONMENT: 'test',
+    });
+
+    expect(resumed.status).toBe(200);
+    const snapshot = await resumed.json() as SoloRunSnapshot;
+    expect(snapshot.questions[0]).toMatchObject({ mediaType: 'image', mediaUrl: artwork.image!.url });
+    expect(snapshot.questions[0].prompt).toBe(oldStoredQuestion.prompt);
+    expect(snapshot.questions[0].options).toEqual(oldStoredQuestion.options);
+    expect(snapshot.questions[0]).not.toHaveProperty('correctOptionId');
+    expect(snapshot.questions[0]).not.toHaveProperty('correctAnswers');
+    expect(snapshot.questions[0]).not.toHaveProperty('explanation');
+  });
+
+  it('does not restore an image that the current approved art record excludes', async () => {
+    const db = database();
+    const run = await start(db, 'excluded-art-resume');
+    const excluded = generalPackQuestions.find((question) => question.topic === 'art'
+      && question.editorialStatus === 'approved' && !question.image)!;
+    const oldQuestion = {
+      ...packQuestionToRaceQuestion(excluded, 'multiple_choice'),
+      mediaType: 'image' as const,
+      mediaUrl: 'https://example.com/removed-artwork.jpg',
+    };
+    db.sqlite.prepare('UPDATE match_runs SET questions_json = ? WHERE id = ?')
+      .run(JSON.stringify([oldQuestion]), run.runId);
+
+    const resumed = await app.request(`/api/solo-runs/${run.runId}`, {
+      headers: { authorization: guest('excluded-art-resume').authorization },
+    }, {
+      DB: db.binding, API_RATE_LIMITER: allowRateLimiter, TELEGRAM_BOT_TOKEN: 'test',
+      SESSION_SIGNING_SECRET: sessionSecret, ENVIRONMENT: 'test',
+    });
+
+    expect(resumed.status).toBe(200);
+    const snapshot = await resumed.json() as SoloRunSnapshot;
+    expect(snapshot.questions[0]).not.toHaveProperty('mediaType');
+    expect(snapshot.questions[0]).not.toHaveProperty('mediaUrl');
+  });
+
   it('resumes it as a snapshot with the played rounds, shaped like the GET snapshot', async () => {
     const db = database();
     const first = await start(db, 'ann');

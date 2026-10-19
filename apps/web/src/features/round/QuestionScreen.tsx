@@ -104,12 +104,12 @@ export function QuestionScreen({ question, onAnswer }: QuestionScreenProps) {
       </div>
 
       {question.mediaUrl && (
-        <div className={`question-media-slot ${readiness.status}`}>
+        <div className={`question-media-slot ${readiness.status}${question.mediaType === 'image' ? ' artwork' : ''}`}>
           <img
             key={readiness.requestKey}
             src={question.mediaUrl}
-            alt={question.mediaType === 'outline' ? 'Контур страны' : 'Флаг'}
-            className={`question-media ${question.mediaType === 'outline' ? 'outline' : ''}`}
+            alt={question.mediaType === 'outline' ? 'Контур страны' : question.mediaType === 'image' ? 'Иллюстрация к вопросу' : 'Флаг'}
+            className={`question-media ${question.mediaType === 'outline' ? 'outline' : question.mediaType === 'image' ? 'artwork' : ''}`}
             loading="eager"
             onLoad={handleMediaLoad}
             onError={handleMediaError}

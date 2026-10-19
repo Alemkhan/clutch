@@ -18,6 +18,7 @@ const DISPLAY_NAMES: Record<string, string> = {
   geography: 'География',
   history: 'Другие флаги',
   languages: 'Языки',
+  kz_history: 'История Казахстана',
 };
 /** Payload без отдельного экрана: клиент его не знает и просто открывает Mini App. */
 export const PLAY_PAYLOAD = 'play';

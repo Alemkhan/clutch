@@ -206,6 +206,23 @@ describe('friend duel: out of the competition', () => {
 });
 
 describe('friend duel: the duel itself still counts', () => {
+  it('closing an unfinished friend duel records a loss without changing the author record outcome', async () => {
+    const db = database();
+    insertRecord(db, 'ann-run', AUTHOR);
+    await openInvite(db);
+    const started = await call(db, 'bob', '/api/solo-runs', {
+      displayName: 'bob', category: 'geography', mode: 'duel', rematchInviteId: OPEN_INVITE,
+    });
+    const run = await started.json() as StartSoloRunResponse;
+    const abandoned = await call(db, 'bob', `/api/solo-runs/${run.runId}/abandon`, {});
+    expect(abandoned.status).toBe(200);
+    expect(await abandoned.json()).toMatchObject({ outcome: 'opponent', reachedTarget: false });
+    expect(rowOf(db, run.runId)).toMatchObject({ status: 'completed', solo_outcome: 'opponent', ghost_eligible: 0 });
+    expect(rowOf(db, 'ann-run').solo_outcome).toBeNull();
+    await Promise.all(pending);
+    expect(inviteCount(db)).toBe(1);
+  });
+
   it('5. gives the friend an outcome against the record of the author', async () => {
     const db = database();
     const { run, result } = await playFriend(db);

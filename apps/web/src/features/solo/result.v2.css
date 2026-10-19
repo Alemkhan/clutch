@@ -141,6 +141,18 @@
   background: var(--surface);
   font-size: 15px;
 }
+.solo-result-mistakes {
+  align-self: center;
+  min-height: 44px;
+  padding: 0 8px;
+  border: 0;
+  background: none;
+  color: var(--text-dim);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .solo-result-secondary {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

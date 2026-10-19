@@ -20,7 +20,7 @@ apps/web/                React 18 + Vite + Framer Motion + Telegram SDK
   src/features/
     solo/                основной цикл: SoloRun, useSoloRun (+ Start/Restore/Lifecycle),
                          soloRunFlow (чистые переходы), soloRoundDelivery (retry одного
-                         идемпотентного запроса), soloRunStore (id активного забега),
+                         идемпотентного запроса), soloRunStore (id и категория активного забега),
                          clientMatchRules (runtime-проверка ответов сервера), stages/*,
                          SoloResult, SoloHud, CategorySelect, RematchEntry, useFriendInvite
     round/               QuestionScreen, ResolutionScreen, MatchHud, OpenAnswerInput,
@@ -100,11 +100,16 @@ shared/{soloRun,hammerRules}`. SQL живёт в `*Repository` (системны
 
 **Покруговой протокол.** `POST /api/solo-runs` (старт; повторный старт продолжает
 незаконченный забег пары игрок+категория), `POST /api/solo-runs/:id/answer`, `/hammer`,
-`GET /api/solo-runs/:id` (продолжение). Вопрос уходит как `PublicQuestion` без ответа.
+`/abandon`, `GET /api/solo-runs/:id` (продолжение). Отказ идемпотентно закрывает забег,
+незавершённый удар пишет как промах, а в дуэли сохраняет поражение. Вопрос уходит как
+`PublicQuestion` без ответа.
 Круг пишется в `solo_run_rounds` по ходу игры: верный ответ сразу, удар закрывает круг
 условным `UPDATE … WHERE settled_at IS NULL`, повтор запроса получает сохранённый ответ;
 конфликт порядка — 409, и клиент восстанавливает серверное состояние. Закрытая вкладка забег
-не теряет: клиент хранит в localStorage только id активного забега.
+не теряет: клиент хранит в localStorage id и категорию активного забега; явный выбор другой
+категории имеет приоритет над восстановлением. При чтении старого забега `openSoloRun`
+синхронизирует только media-поля с текущей канонической записью вопроса, не меняя сохранённые
+текст, варианты и ответы.
 
 **Подбор** (`solo/matchmaking.ts`): свободная запись на несыгранном наборе из банка дня,
 иначе несыгранный набор с ботом, иначе любая свободная запись, иначе давнее всего сыгранный

@@ -26,10 +26,13 @@ function resumeNote(view: ReadyView): string {
 }
 
 /** «Начать»/«Продолжить» и, для продолженного забега, «Начать заново». */
-function StartButtons({ resumed, onStart, onRestart }: {
+function StartButtons({ resumed, onStart, onRestart, restartLabel = "Начать заново", abandoning = false, abandonError }: {
   resumed: boolean;
   onStart: () => void;
   onRestart: () => void;
+  restartLabel?: string;
+  abandoning?: boolean;
+  abandonError?: string | null;
 }) {
   return (
     <>
@@ -37,10 +40,11 @@ function StartButtons({ resumed, onStart, onRestart }: {
         {resumed ? "Продолжить" : "Начать"}
       </button>
       {resumed && (
-        <button type="button" className="ghost-btn" onClick={onRestart}>
-          Начать заново
+        <button type="button" className="ghost-btn" disabled={abandoning} onClick={onRestart}>
+          {abandoning ? "Закрываем…" : restartLabel}
         </button>
       )}
+      {abandonError && <p className="matchmaking-error" role="alert">{abandonError}</p>}
     </>
   );
 }
@@ -48,7 +52,7 @@ function StartButtons({ resumed, onStart, onRestart }: {
 export function PracticeReadyStage({ props, state, view, practice }: ReadyStageProps & { practice: PracticeLevel }) {
   const pace = soloPaceOf(state);
   return (
-    <MatchmakingFrame onBack={props.onExit ?? props.onBackToCategories}>
+    <MatchmakingFrame onBack={state.resumed ? props.onBackToCategories : props.onExit ?? props.onBackToCategories}>
       <span className="matchmaking-eyebrow">
         Тренировка · {practice.name}
       </span>
@@ -70,7 +74,7 @@ export function PracticeReadyStage({ props, state, view, practice }: ReadyStageP
           </p>
         )}
       </div>
-      <StartButtons resumed={state.resumed} onStart={props.onStart} onRestart={props.onBackToCategories} />
+      <StartButtons resumed={state.resumed} onStart={props.onStart} onRestart={props.onRestart ?? props.onBackToCategories} abandoning={props.abandoning} abandonError={props.abandonError} />
     </MatchmakingFrame>
   );
 }
@@ -102,7 +106,7 @@ function readyLine(state: SoloFlowState, target: number): string {
 export function SoloReadyStage({ props, state, view }: ReadyStageProps) {
   const title = state.friendDuel ? "Вызов друга" : state.mode ? MODE_TITLE[state.mode] : "Забег";
   return (
-    <MatchmakingFrame onBack={props.onExit ?? props.onBackToCategories}>
+    <MatchmakingFrame onBack={state.resumed ? props.onBackToCategories : props.onExit ?? props.onBackToCategories}>
       <h1 className="screen-title">{title}</h1>
       {state.friendDuel && <span className="chip">{FRIEND_DUEL_CHIP}</span>}
       <MiniGameCard miniGameId={state.miniGameId} />
@@ -111,7 +115,16 @@ export function SoloReadyStage({ props, state, view }: ReadyStageProps) {
         {state.resumed && view.roundsPlayed > 0 && <p className="matchmaking-status">{resumeNote(view)}</p>}
       </div>
       {props.onOpenTiebreaker && <TiebreakerReminder onOpen={props.onOpenTiebreaker} />}
-      <StartButtons resumed={state.resumed} onStart={props.onStart} onRestart={props.onBackToCategories} />
+      <StartButtons
+        resumed={state.resumed}
+        onStart={props.onStart}
+        onRestart={props.onRestart ?? props.onBackToCategories}
+        restartLabel={state.resumed && state.mode === "daily" && !state.friendDuel
+          ? "Бросить и выбрать категорию"
+          : "Начать заново"}
+        abandoning={props.abandoning}
+        abandonError={props.abandonError}
+      />
       {!state.resumed && !state.friendDuel && props.onExit && (
         <button type="button" className="ghost-btn" onClick={props.onBackToCategories}>
           Другие категории

@@ -143,6 +143,7 @@ export async function finalizeSoloRun(
   c: AppContext,
   loaded: LoadedSoloRun,
   rows: SoloRoundRow[],
+  options: { abandoned?: boolean } = {},
 ): Promise<CompleteSoloRunResponse | Response> {
   const { run, questions, practice, friend } = loaded;
   const runId = run.id;
@@ -157,10 +158,14 @@ export async function finalizeSoloRun(
   // Сравнение с записью-темпом. Тренировка не сравнивается: бот не запись игрока,
   // а исход тренировки не хранится.
   const completedAt = Date.now();
+  const abandoned = options.abandoned === true;
+  if (abandoned) result.reachedTarget = false;
   const pace = run.opponent_run_id && !practice ? await findPaceResult(c.env.DB, run.opponent_run_id) : null;
   // Прикидка своей стороны: сутки набора этого забега. Читаем только когда есть с кем сравнивать.
-  const ownTiebreak = pace ? await findTiebreakAnswer(c.env.DB, run.player_id, dailyKey(run.created_at)) : null;
-  const decision = decideOutcome(result, pace, ownTiebreak);
+  const ownTiebreak = !abandoned && pace ? await findTiebreakAnswer(c.env.DB, run.player_id, dailyKey(run.created_at)) : null;
+  const decision = abandoned
+    ? { outcome: loaded.mode === 'duel' || loaded.friend ? 'opponent' as const : null, byTiebreak: false, tiebreak: undefined }
+    : decideOutcome(result, pace, ownTiebreak);
   const { outcome } = decision;
   result.outcome = outcome;
   if (decision.tiebreak) result.tiebreak = decision.tiebreak;
@@ -168,7 +173,7 @@ export async function finalizeSoloRun(
   // R25: снимок верха таблицы до записи забега; сбой снимка не должен ломать завершение.
   const dateKey = dailyKey(completedAt);
   // В таблицу идёт только забег дня; свободная игра и дуэли — вне её.
-  const ranked = loaded.mode === 'daily' && result.reachedTarget;
+  const ranked = !abandoned && loaded.mode === 'daily' && result.reachedTarget;
   let topBefore: TopTenSnapshot | null = null;
   let category = '';
   if (ranked) {
@@ -185,13 +190,13 @@ export async function finalizeSoloRun(
     rounds,
     progress: result.progress,
     correctCount,
-    reachedTarget: result.reachedTarget,
+    reachedTarget: abandoned ? false : result.reachedTarget,
     setPar: result.par,
     soloScore: result.score,
     outcome,
     practice,
     friend,
-    recordable: loaded.mode === 'duel',
+    recordable: !abandoned && loaded.mode === 'duel',
     now: completedAt,
   });
   if (!didComplete) {

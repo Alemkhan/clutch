@@ -71,6 +71,7 @@ const records = items.map((item, i) => {
     distractorsRu: item.distractorsRu ?? [],
     openAnswer: item.openAnswer !== false,
     explanationRu: item.explanationRu,
+    generalPool: item.generalPool === true ? true : undefined,
   };
 });
 

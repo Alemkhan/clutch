@@ -1,4 +1,4 @@
-import type { Question } from './index';
+import type { CategoryId, Question } from './index';
 import { generateMatch, type TemplateUsage } from './questionGenerator';
 import {
   generalPackQuestions,
@@ -35,9 +35,34 @@ function shuffled<T>(items: readonly T[], seed: string): T[] {
   return out;
 }
 
-/** Записи пакета, которые видят игроки: только одобренные. */
+/**
+ * Набор «Истории Казахстана»: только записи пакета темы kazakhstan, без генераторов.
+ * 15 вопросов, из них до 4 открытым вводом (годы, имена).
+ */
+export const KZ_SET_SIZE = 15;
+export const KZ_SET_OPEN_COUNT = 4;
+/** Меньше одобренных вопросов — категория в меню «Скоро», старт забега отклоняется. */
+export const KZ_MIN_LIVE = 20;
+
+const isKazakhstan = (record: PackRecord): boolean => record.topic === 'kazakhstan';
+
+/**
+ * Записи общего пула, которые видят игроки: только одобренные. Казахстанские — лишь с
+ * `generalPool` (их знает большинство в СНГ), остальные живут в своей категории.
+ */
 export function livePackRecords(): PackRecord[] {
-  return [...generalPackQuestions, ...generalPackSets].filter(isPackRecordLive);
+  return [...generalPackQuestions, ...generalPackSets]
+    .filter((record) => isPackRecordLive(record) && (!isKazakhstan(record) || (record.kind === 'single' && record.generalPool === true)));
+}
+
+/** Одобренные записи категории «История Казахстана», включая попавшие и в общий пул. */
+export function liveKzRecords(): PackRecord[] {
+  return [...generalPackQuestions, ...generalPackSets].filter((record) => isPackRecordLive(record) && isKazakhstan(record));
+}
+
+/** Открыта ли категория для игры. Генераторные и общие знания — всегда. */
+export function isCategoryOpen(category: CategoryId, kzPool: readonly PackRecord[] = liveKzRecords()): boolean {
+  return category !== 'kz_history' || kzPool.length >= KZ_MIN_LIVE;
 }
 
 /**
@@ -45,9 +70,8 @@ export function livePackRecords(): PackRecord[] {
  * по `general:<dateKey>` пул; если одобренных записей не хватает на весь банк, список идёт по кругу,
  * и каждый следующий круг перемешивается своим сидом (`...:cycle<n>`). Запись в окне не повторяется.
  */
-function packWindow(pool: readonly PackRecord[], dateKey: string, start: number, count: number): PackRecord[] {
+function packWindow(pool: readonly PackRecord[], base: string, start: number, count: number): PackRecord[] {
   if (pool.length === 0) return [];
-  const base = `general:${dateKey}`;
   const cycles = new Map<number, PackRecord[]>();
   const at = (position: number): PackRecord => {
     const cycle = Math.floor(position / pool.length);
@@ -78,6 +102,36 @@ function setIndexOf(questionSetId: string): number {
 }
 
 /**
+ * Записи в формате забега. Открытым вводом - только одиночные записи, у которых он разрешён;
+ * выбор детерминирован по id набора.
+ */
+function packRaceQuestions(records: readonly PackRecord[], questionSetId: string, openCount: number): Question[] {
+  const open = new Set(
+    shuffled(
+      records.filter((r) => r.kind === 'single' && r.openAnswer).map((r) => r.id),
+      `${questionSetId}:open`,
+    ).slice(0, openCount),
+  );
+  return records.map((record) => {
+    const seed = `${questionSetId}:${record.id}`;
+    if (record.kind === 'set') return packSetToRaceQuestion(record, seed);
+    return packQuestionToRaceQuestion(record, open.has(record.id) ? 'open_answer' : 'multiple_choice', seed);
+  });
+}
+
+/**
+ * Один набор «Истории Казахстана»: окно дня по пулу темы, как у общего режима, но без генераторов.
+ * `pool` нужен только тестам.
+ */
+export function buildKzSet(questionSetId: string, dateKey: string, pool: readonly PackRecord[] = liveKzRecords()): Question[] {
+  const index = setIndexOf(questionSetId);
+  const records = packWindow(pool, `kz_history:${dateKey}`, index * KZ_SET_SIZE, KZ_SET_SIZE);
+  const createdAt = `${dateKey}T00:00:00.000Z`;
+  return shuffled(packRaceQuestions(records, questionSetId, KZ_SET_OPEN_COUNT), `${questionSetId}:order`)
+    .map((q) => ({ ...q, createdAt }));
+}
+
+/**
  * Один набор общего режима. Детерминирован: одинаковые `questionSetId` и день всегда дают
  * байт-идентичный набор. `usage` — общий ledger шаблонов всего банка дня, как у других категорий.
  * `pool` нужен только тестам (нехватка одобренных записей).
@@ -89,21 +143,8 @@ export function buildGeneralSet(
   pool: readonly PackRecord[] = livePackRecords(),
 ): Question[] {
   const index = setIndexOf(questionSetId);
-  const records = packWindow(pool, dateKey, index * GENERAL_SET_PACK_COUNT, GENERAL_SET_PACK_COUNT);
-
-  // Открытым вводом - только одиночные записи, у которых он разрешён; выбор детерминирован.
-  const open = new Set(
-    shuffled(
-      records.filter((r) => r.kind === 'single' && r.openAnswer).map((r) => r.id),
-      `${questionSetId}:open`,
-    ).slice(0, GENERAL_SET_OPEN_COUNT),
-  );
-
-  const packQuestions = records.map((record) => {
-    const seed = `${questionSetId}:${record.id}`;
-    if (record.kind === 'set') return packSetToRaceQuestion(record, seed);
-    return packQuestionToRaceQuestion(record, open.has(record.id) ? 'open_answer' : 'multiple_choice', seed);
-  });
+  const records = packWindow(pool, `general:${dateKey}`, index * GENERAL_SET_PACK_COUNT, GENERAL_SET_PACK_COUNT);
+  const packQuestions = packRaceQuestions(records, questionSetId, GENERAL_SET_OPEN_COUNT);
 
   const generated = GENERAL_SET_GENERATED.flatMap(({ category, count }) =>
     generateMatch(count, GENERATED_OPEN_RATIO, category, createSeededRandom(hashSeed(`${questionSetId}:${category}`)), usage),

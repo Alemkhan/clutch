@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { SOLO_TARGET_PROGRESS } from "@clutch/shared";
 import { HammerGame } from "../../hammer/HammerGame";
 import { strikeGain } from "../../hammer/hammerStrike";
@@ -113,6 +114,20 @@ function MiniGame({ props, state, view, question }: RoundStageProps) {
 }
 
 export function SoloRoundStage({ props, state, view, question }: RoundStageProps) {
+  const [confirmExit, setConfirmExit] = useState(false);
+  const [exitBusy, setExitBusy] = useState(false);
+  const [exitError, setExitError] = useState<string | null>(null);
+  const abandon = async () => {
+    if (!props.onAbandon || exitBusy) return;
+    setExitBusy(true);
+    setExitError(null);
+    try {
+      if (await props.onAbandon()) props.onHome();
+      else setExitError(props.abandonError ?? "Не удалось закрыть забег. Попробуй ещё раз.");
+    } finally {
+      setExitBusy(false);
+    }
+  };
   return (
     <div className="solo-play">
       <RoundHud props={props} state={state} view={view} />
@@ -131,6 +146,28 @@ export function SoloRoundStage({ props, state, view, question }: RoundStageProps
       )}
       {state.stage === "hammer" && (
         <MiniGame props={props} state={state} view={view} question={question} />
+      )}
+      {props.onAbandon && (
+        <div className="solo-exit">
+          {!confirmExit ? (
+            <button type="button" className="ghost-btn solo-exit__trigger" onClick={() => setConfirmExit(true)}>
+              Выйти
+            </button>
+          ) : (
+            <div className="solo-exit__confirm" role="group" aria-label="Подтверждение выхода">
+              <p>{state.mode === "duel"
+                ? "Выйти из дуэли? Это засчитается поражением."
+                : "Выйти и закрыть текущий забег?"}</p>
+              <button type="button" className="ghost-btn" disabled={exitBusy} onClick={() => setConfirmExit(false)}>
+                Продолжить
+              </button>
+              <button type="button" className="ghost-btn" disabled={exitBusy} onClick={() => void abandon()}>
+                {exitBusy ? "Закрываем…" : "Подтвердить выход"}
+              </button>
+              {(exitError || props.abandonError) && <p className="matchmaking-error" role="alert">{exitError ?? props.abandonError}</p>}
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

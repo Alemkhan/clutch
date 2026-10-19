@@ -131,7 +131,7 @@ npx wrangler d1 migrations apply DB --remote --config apps/api/wrangler.producti
 ```
 
 Первое применение — `CREATE TABLE`/`CREATE INDEX` и аддитивные `ALTER TABLE ADD COLUMN` на
-пустой базе (`0001_schema.sql`, `0002`–`0005`). Cloudflare делает backup перед применением,
+пустой базе (`0001_schema.sql`, `0002`–`0006`). Cloudflare делает backup перед применением,
 но это не план восстановления ([D1 commands](https://developers.cloudflare.com/d1/wrangler-commands/)).
 Применённые файлы не переписывать: любое изменение схемы после этого — новая migration. Для
 будущих миграций, пересобирающих таблицы, заранее делайте резервную копию.

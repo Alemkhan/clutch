@@ -50,6 +50,7 @@ const CATEGORY: Record<CategoryId, string> = {
   geography: 'География',
   history: 'История',
   languages: 'Языки',
+  kz_history: 'История Казахстана',
 };
 
 const MONTHS = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];

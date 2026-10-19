@@ -26,12 +26,13 @@ import {
 
 type AppContext = Context<{ Bindings: Env }>;
 
-const CATEGORIES: readonly CategoryId[] = ['general', 'geography', 'history', 'languages'];
+const CATEGORIES: readonly CategoryId[] = ['general', 'geography', 'history', 'languages', 'kz_history'];
 const CATEGORY_LABEL: Record<CategoryId, string> = {
   general: 'Общие знания',
   geography: 'География',
   history: 'История',
   languages: 'Языки',
+  kz_history: 'История Казахстана',
 };
 const MAX_NAME_LENGTH = 32;
 const INVITE_ID = /^rm_[A-Za-z0-9_-]{22}$/u;

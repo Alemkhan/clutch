@@ -102,6 +102,95 @@ async function trySources(name: SoundName, volume: number, phase: 'play' | 'unlo
   return false;
 }
 
+/**
+ * Web Audio: один контекст на страницу. iOS (и Telegram на iOS) разрешает каждому `<audio>` играть
+ * только из нажатия, поэтому звук победы на экране итога и звуки после ответа сервера там молчали
+ * (аналитика: play-rejected у половины игроков). Контекст, разбуженный одним касанием, дальше играет
+ * любые звуки без жеста. Нет Web Audio или контекст ещё спит — старый путь через `<audio>`.
+ */
+type WebAudioContext = AudioContext;
+let context: WebAudioContext | null | undefined;
+const buffers = new Map<SoundName, Promise<AudioBuffer | null>>();
+
+function audioContext(): WebAudioContext | null {
+  if (context !== undefined) return context;
+  const Ctor = (globalThis as { AudioContext?: typeof AudioContext; webkitAudioContext?: typeof AudioContext }).AudioContext
+    ?? (globalThis as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  try {
+    context = Ctor ? new Ctor() : null;
+  } catch {
+    context = null;
+  }
+  return context;
+}
+
+/** Старый Safari знает только колбэчную форму decodeAudioData. */
+function decode(ctx: WebAudioContext, data: ArrayBuffer): Promise<AudioBuffer> {
+  return new Promise((resolve, reject) => {
+    const result = ctx.decodeAudioData(data, resolve, reject) as Promise<AudioBuffer> | undefined;
+    result?.then(resolve, reject);
+  });
+}
+
+/** Первая кодировка, которую контекст сумел декодировать; null — ни одной. Кешируется на звук. */
+function loadBuffer(ctx: WebAudioContext, name: SoundName): Promise<AudioBuffer | null> {
+  let pending = buffers.get(name);
+  if (!pending) {
+    pending = (async () => {
+      for (const source of playableSources(name)) {
+        try {
+          const response = await fetch(source.src);
+          if (!response.ok) continue;
+          return await decode(ctx, await response.arrayBuffer());
+        } catch {
+          // следующая кодировка
+        }
+      }
+      return null;
+    })();
+    buffers.set(name, pending);
+  }
+  return pending;
+}
+
+/** Играет через Web Audio; false — контекста нет, он спит или звук не декодировался. */
+async function playBuffer(name: SoundName, volume: number): Promise<boolean> {
+  const ctx = audioContext();
+  if (!ctx || ctx.state !== 'running') return false;
+  const buffer = await loadBuffer(ctx, name);
+  if (!buffer) return false;
+  const source = ctx.createBufferSource();
+  source.buffer = buffer;
+  const gain = ctx.createGain();
+  gain.gain.value = volume;
+  source.connect(gain);
+  gain.connect(ctx.destination);
+  source.start();
+  markReady();
+  return true;
+}
+
+/** Будит контекст. Вызывать прямо из обработчика жеста: resume вне жеста iOS не разрешит. */
+async function resumeContext(): Promise<boolean> {
+  const ctx = audioContext();
+  if (!ctx) return false;
+  try {
+    // Тихий звук в том же жесте: старый iOS будит контекст только им.
+    const silent = ctx.createBufferSource();
+    silent.buffer = ctx.createBuffer(1, 1, 22050);
+    silent.connect(ctx.destination);
+    silent.start();
+    await ctx.resume();
+  } catch {
+    return false;
+  }
+  if (ctx.state !== 'running') return false;
+  markReady();
+  // Звуки декодируются заранее: первый удар не ждёт загрузки.
+  for (const name of Object.keys(soundSources) as SoundName[]) void loadBuffer(ctx, name);
+  return true;
+}
+
 const listeners = new Set<() => void>();
 
 export function isSoundEnabled(): boolean {
@@ -125,16 +214,20 @@ export function subscribeSound(listener: () => void): () => void {
   return () => { listeners.delete(listener); };
 }
 
-export function playSound(name: SoundName, volume = 1): Promise<boolean> {
+export async function playSound(name: SoundName, volume = 1): Promise<boolean> {
   // Muted: return before any Audio is created, cloned or played.
-  if (!isSoundEnabled()) return Promise.resolve(false);
+  if (!isSoundEnabled()) return false;
+  if (await playBuffer(name, volume)) return true;
   return trySources(name, volume, 'play');
 }
 
-export function unlockSound(): Promise<boolean> {
-  if (!isSoundEnabled()) return Promise.resolve(false);
+export async function unlockSound(): Promise<boolean> {
+  if (!isSoundEnabled()) return false;
+  if (await resumeContext()) return true;
   return trySources('correct', 0, 'unlock');
 }
+
+const UNLOCK_EVENTS = ['touchend', 'pointerup', 'click', 'keydown'] as const;
 
 export function installSoundUnlock(target: Document = document): () => void {
   let removed = false;
@@ -142,20 +235,22 @@ export function installSoundUnlock(target: Document = document): () => void {
     if (!isSoundEnabled()) return;
     void unlockSound().then((unlocked) => { if (unlocked) remove(); });
   };
+  // iOS считает разрешающим жестом окончание касания и клик, а не pointerdown: на нём разблокировка
+  // отклонялась (unlock-rejected в аналитике).
   const remove = () => {
     if (removed) return;
     removed = true;
-    target.removeEventListener('pointerdown', handleGesture);
-    target.removeEventListener('keydown', handleGesture);
+    for (const type of UNLOCK_EVENTS) target.removeEventListener(type, handleGesture);
   };
-  target.addEventListener('pointerdown', handleGesture);
-  target.addEventListener('keydown', handleGesture);
+  for (const type of UNLOCK_EVENTS) target.addEventListener(type, handleGesture);
   return remove;
 }
 
 // Keeps module-level cache and diagnostics isolated between unit cases.
 export function resetSoundsForTests(): void {
   cache.clear();
+  buffers.clear();
+  context = undefined;
   reportedFailures.clear();
   diagnostic = { state: 'idle' };
 }

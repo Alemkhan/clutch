@@ -3,8 +3,10 @@ import {
   generateMatch,
   isAnswerCorrect,
   resultFromDistance,
+  toPublicQuestion,
   type CategoryId,
 } from './index';
+import { generalPackQuestions, packQuestionToRaceQuestion } from './generalPack';
 
 describe('resultFromDistance', () => {
   it.each([
@@ -65,6 +67,20 @@ describe('isAnswerCorrect', () => {
 
   it('rejects an unrelated answer', () => {
     expect(isAnswerCorrect('Алматы', ['Астана', 'Astana']).correct).toBe(false);
+  });
+});
+
+describe('public question media', () => {
+  it('keeps artwork fields while omitting answers and explanations', () => {
+    const record = generalPackQuestions.find((question) => question.editorialStatus === 'approved' && question.image)!;
+    const raceQuestion = packQuestionToRaceQuestion(record, 'multiple_choice');
+    const publicQuestion = toPublicQuestion(raceQuestion);
+
+    expect(publicQuestion.mediaType).toBe('image');
+    expect(publicQuestion.mediaUrl).toBe(record.image!.url);
+    expect(publicQuestion).not.toHaveProperty('correctOptionId');
+    expect(publicQuestion).not.toHaveProperty('correctAnswers');
+    expect(publicQuestion).not.toHaveProperty('explanation');
   });
 });
 

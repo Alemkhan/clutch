@@ -296,6 +296,25 @@ describe('solo run result', () => {
   it('does not render a question after the run is closed', () => {
     expect(render(finished([25, 25, 25, 25]))).not.toContain('question-screen');
   });
+
+  it('labels a resumed daily restart as abandoning the attempt and offers an active exit control', () => {
+    const ready = { ...playing(null, 'ready'), resumed: true, mode: 'daily' as const };
+    const html = renderToStaticMarkup(
+      <SoloRunScreen state={ready} save={saving} {...handlers} onRestart={vi.fn()} />,
+    );
+    expect(html).toContain('Бросить и выбрать категорию');
+    expect(html).not.toContain('Начать заново');
+
+    const active = renderToStaticMarkup(
+      <SoloRunScreen
+        state={playing(null, 'question')}
+        save={saving}
+        {...handlers}
+        onAbandon={vi.fn(async () => true)}
+      />,
+    );
+    expect(active).toContain('Выйти');
+  });
 });
 
 describe('problem report on the resolution', () => {
@@ -324,7 +343,7 @@ describe('problem report on the resolution', () => {
 
 describe('toSoloCategory', () => {
   it('keeps the four categories and falls back to general for anything else', () => {
-    for (const id of ['general', 'geography', 'history', 'languages']) expect(toSoloCategory(id)).toBe(id);
+    for (const id of ['general', 'geography', 'history', 'languages', 'kz_history']) expect(toSoloCategory(id)).toBe(id);
     for (const junk of ['', 'sports', 'science', 'GENERAL', '__proto__']) expect(toSoloCategory(junk)).toBe('general');
   });
 

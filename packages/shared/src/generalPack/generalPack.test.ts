@@ -95,6 +95,17 @@ describe('race conversion', () => {
     expect(() => packQuestionToRaceQuestion(mcOnly, 'open_answer')).toThrow(RangeError);
   });
 
+  it('preserves Wikimedia artwork on every approved image question', () => {
+    const illustrated = generalPackQuestions.filter((q) => q.editorialStatus === 'approved' && q.image);
+    expect(illustrated).toHaveLength(25);
+
+    for (const question of illustrated) {
+      const race = packQuestionToRaceQuestion(question, 'multiple_choice');
+      expect(race.mediaType, question.id).toBe('image');
+      expect(race.mediaUrl, question.id).toBe(question.image!.url);
+    }
+  });
+
   it('turns a set into «что из этого» with one member among non-members', () => {
     const planets = generalPackSets.find((s) => s.id === 'set-solar-planets')!;
     const race = packSetToRaceQuestion(planets, 'day-1');

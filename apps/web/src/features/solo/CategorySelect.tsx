@@ -1,3 +1,4 @@
+import { isCategoryOpen } from '@clutch/shared';
 import { ScreenHeader } from '../../ui/ScreenHeader';
 
 interface CategorySelectProps {
@@ -7,9 +8,11 @@ interface CategorySelectProps {
 
 const CATEGORIES = [
   { id: 'general', name: 'Общие знания', icon: '💡', available: true, blurb: 'наука, кино, музыка, спорт, история — 16 тем' },
-  { id: 'geography', name: 'География', icon: '🌍', available: true, blurb: '195 стран · флаги, столицы, контуры' },
+  { id: 'geography', name: 'География', icon: '🌍', available: true, blurb: '195 стран · флаги и столицы' },
   { id: 'history', name: 'Другие флаги', icon: '🏴', available: true, blurb: '44 флага · империи, города, забытые государства' },
   { id: 'languages', name: 'Языки', icon: '🗣️', available: true, blurb: '37 языков · угадаешь по письму?' },
+  // Открывается сама, когда одобренных вопросов наберётся KZ_MIN_LIVE; до того — «Скоро».
+  { id: 'kz_history', name: 'История Казахстана', icon: '🇰🇿', available: isCategoryOpen('kz_history'), blurb: 'по программе ЕНТ · от саков до независимости' },
 ];
 
 export function CategorySelect({ onSelect, onBack }: CategorySelectProps) {

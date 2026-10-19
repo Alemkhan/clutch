@@ -28,7 +28,7 @@ export function useSoloRunStart(ctx: SoloRunContext, botLevel?: PracticeLevelId)
         return;
       }
       if (!coordinatorRef.current.settle(request.token)) return;
-      saveActiveSoloRun({ runId: raw.runId, practice, mode: entered.mode });
+      saveActiveSoloRun({ runId: raw.runId, practice, mode: entered.mode, category });
       setState((previous) => enterStartedSoloRun(previous, raw, practice));
       // Продуктовое событие (R22): забег создан. Продолжение начатого — не «старт».
       if (!entered.resumed) logAnalyticsEvent('solo_run_started', { category });

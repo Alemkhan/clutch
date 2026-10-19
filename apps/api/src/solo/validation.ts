@@ -3,6 +3,7 @@ import {
   MIN_POOL_ROUNDS,
   SKILL_REWARDS,
   isAnswerCorrect,
+  isCategoryOpen,
   type AsyncMatchRound,
   type AsyncMatchRoundInput,
   type Opponent,
@@ -11,7 +12,7 @@ import {
 } from '@clutch/shared';
 import type { RunRow } from './types';
 
-export const categories = new Set(['general', 'geography', 'history', 'languages']);
+export const categories = new Set(['general', 'geography', 'history', 'languages', 'kz_history']);
 
 export const REMATCH_INVITE_ID = /^rm_[A-Za-z0-9_-]{22}$/;
 
@@ -25,6 +26,8 @@ export function isStartRequest(value: unknown): value is StartAsyncMatchRequest 
     && body.displayName.length <= 64
     && typeof body.category === 'string'
     && categories.has(body.category)
+    // «История Казахстана» закрыта, пока одобренных вопросов меньше KZ_MIN_LIVE.
+    && isCategoryOpen(body.category as StartAsyncMatchRequest['category'])
     && (body.rematchInviteId === undefined
       || (typeof body.rematchInviteId === 'string' && REMATCH_INVITE_ID.test(body.rematchInviteId)));
 }

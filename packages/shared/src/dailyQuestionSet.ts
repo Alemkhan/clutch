@@ -1,6 +1,6 @@
 import { generateMatch, type TemplateUsage } from './questionGenerator';
 import type { CategoryId, Question } from './index';
-import { buildGeneralSet } from './generalSet';
+import { KZ_SET_SIZE, buildGeneralSet, buildKzSet } from './generalSet';
 import { createSeededRandom, hashSeed } from './seededRandom';
 
 export { createSeededRandom, hashSeed };
@@ -16,12 +16,15 @@ export const DAILY_SET_SIZES: Readonly<Record<CategoryId, number>> = {
   geography: 20,
   history: 18,
   languages: 18,
+  kz_history: KZ_SET_SIZE,
 };
 export const DAILY_BANK_SIZES: Readonly<Record<CategoryId, number>> = {
   general: 12,
   geography: 12,
   history: 6,
   languages: 6,
+  // Пул вопросов пока мал: банк короткий, иначе наборы дня повторяли бы друг друга.
+  kz_history: 4,
 };
 
 export function dailySetSize(category: CategoryId): number {
@@ -83,6 +86,7 @@ function buildDailyBank(category: CategoryId, dateKey: string): DailySet[] {
       const general = buildGeneralSet(id, dateKey, usage);
       return { questionSetId: id, questions: general.map((question) => ({ ...question, createdAt })) };
     }
+    if (category === 'kz_history') return { questionSetId: id, questions: buildKzSet(id, dateKey) };
     const questions = generateMatch(
       dailySetSize(category),
       DAILY_SET_OPEN_RATIO,
@@ -157,6 +161,8 @@ export function practiceQuestionSet(
   const createdAt = `${dateKey}T00:00:00.000Z`;
   const questions = category === 'general'
     ? buildGeneralSet(questionSetId, dateKey)
+    : category === 'kz_history'
+    ? buildKzSet(questionSetId, dateKey)
     : generateMatch(
       dailySetSize(category),
       DAILY_SET_OPEN_RATIO,

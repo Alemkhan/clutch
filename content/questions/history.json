@@ -573,7 +573,7 @@
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "history",
-    "difficulty": "Easy",
+    "difficulty": "Hard",
     "promptRu": "Кто написал знаменитую антиутопию «1984»?",
     "answerRu": "Джордж Оруэлл",
     "acceptedRu": [
@@ -589,7 +589,7 @@
       "Рэй Брэдбери",
       "Герберт Уэллс"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Роман «1984» был опубликован Джорджем Оруэллом в 1949 году.",
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",

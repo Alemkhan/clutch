@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import type { CategoryId, DuelBoardResponse, SoloLeaderboardResponse, SoloLeaderboardStanding, SoloMode } from '@clutch/shared';
+import { isCategoryOpen, type CategoryId, type DuelBoardResponse, type SoloLeaderboardResponse, type SoloLeaderboardStanding, type SoloMode } from '@clutch/shared';
 import { fetchDuelBoard, fetchSoloLeaderboard } from '../../platform/api';
 import { categoryName, finishedText, initials, roundsShort, soloRoundsText } from '../myRuns/myRunsView';
 import { resetLabel } from '../tiebreaker/tiebreakerClock';
@@ -7,7 +7,8 @@ import { useDayCountdown } from '../tiebreaker/useDayCountdown';
 import { ScreenHeader } from '../../ui/ScreenHeader';
 
 /** Категории в том же порядке, что на экране выбора: общие знания первыми. */
-const CATEGORIES: ReadonlyArray<CategoryId> = ['general', 'geography', 'history', 'languages'];
+const CATEGORIES: ReadonlyArray<CategoryId> = (['general', 'geography', 'history', 'languages', 'kz_history'] as const)
+  .filter((category) => isCategoryOpen(category));
 
 export type SoloBoardState =
   | { status: 'loading' }

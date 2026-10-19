@@ -103,12 +103,12 @@ describe('sound playback', () => {
   it('unlocks muted audio on the first successful pointer gesture', async () => {
     const target = new EventTarget() as Document;
     const remove = installSoundUnlock(target);
-    target.dispatchEvent(new Event('pointerdown'));
+    target.dispatchEvent(new Event('click'));
     await Promise.resolve();
     await Promise.resolve();
     expect(played).toBe(1);
     expect(getSoundDiagnostic()).toEqual({ state: 'ready' });
-    target.dispatchEvent(new Event('pointerdown'));
+    target.dispatchEvent(new Event('click'));
     expect(played).toBe(1);
     remove();
   });
@@ -117,11 +117,11 @@ describe('sound playback', () => {
     playResults.push('reject', 'resolve');
     const target = new EventTarget() as Document;
     installSoundUnlock(target);
-    target.dispatchEvent(new Event('pointerdown'));
+    target.dispatchEvent(new Event('click'));
     await Promise.resolve();
     await Promise.resolve();
     expect(getSoundDiagnostic()).toMatchObject({ state: 'failed', reason: 'unlock-rejected' });
-    target.dispatchEvent(new Event('pointerdown'));
+    target.dispatchEvent(new Event('click'));
     await Promise.resolve();
     await Promise.resolve();
     expect(played).toBe(2);
@@ -140,5 +140,64 @@ describe('sound playback', () => {
     expect(toggleSound()).toBe(true);
     await Promise.resolve();
     expect(played).toBe(1);
+  });
+});
+
+describe('sound playback through Web Audio (iOS)', () => {
+  let started: string[];
+  let htmlPlays: number;
+
+  beforeEach(() => {
+    resetSoundPreferenceMemory();
+    resetSoundsForTests();
+    started = [];
+    htmlPlays = 0;
+    vi.stubGlobal('localStorage', { getItem: () => null, setItem: () => {} });
+    vi.stubGlobal('Audio', class {
+      preload = '';
+      volume = 1;
+      muted = false;
+      constructor(public src = '') {}
+      canPlayType(type: string) { return type.startsWith('audio/mp4') ? 'maybe' : ''; }
+      cloneNode() { return new Audio(this.src); }
+      pause() {}
+      play() { htmlPlays += 1; return Promise.reject(new Error('NotAllowedError')); }
+    });
+    vi.stubGlobal('fetch', async (src: string) => ({ ok: true, arrayBuffer: async () => new TextEncoder().encode(src).buffer }));
+    vi.stubGlobal('AudioContext', class {
+      state: AudioContextState = 'suspended';
+      destination = {};
+      async resume() { this.state = 'running'; }
+      createBuffer() { return {}; }
+      createGain() { return { gain: { value: 1 }, connect() {} }; }
+      createBufferSource() {
+        const node = { buffer: null as unknown, connect() {}, start: () => { started.push(String((node.buffer as { src?: string } | null)?.src ?? 'silent')); } };
+        return node;
+      }
+      decodeAudioData(data: ArrayBuffer, ok: (buffer: unknown) => void) { ok({ src: new TextDecoder().decode(data) }); }
+    });
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
+
+  it('after one tap plays the win sound without a gesture and without an <audio> element', async () => {
+    const target = new EventTarget() as Document;
+    installSoundUnlock(target);
+    target.dispatchEvent(new Event('touchend'));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    await expect(playSound('matchWin')).resolves.toBe(true);
+    expect(started).toContain('/sfx/match-win.m4a');
+    expect(htmlPlays).toBe(0);
+    expect(getSoundDiagnostic()).toEqual({ state: 'ready' });
+  });
+
+  it('before any tap falls back to <audio> and reports the rejection', async () => {
+    await expect(playSound('matchWin')).resolves.toBe(false);
+    expect(htmlPlays).toBe(1);
+    expect(getSoundDiagnostic()).toMatchObject({ state: 'failed', reason: 'play-rejected' });
   });
 });

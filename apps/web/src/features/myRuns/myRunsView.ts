@@ -15,6 +15,7 @@ const CATEGORY_NAMES: Record<MyRunSummary['category'], string> = {
   geography: 'География',
   history: 'Другие флаги',
   languages: 'Языки',
+  kz_history: 'История Казахстана',
 };
 
 export function categoryName(category: MyRunSummary['category']): string {

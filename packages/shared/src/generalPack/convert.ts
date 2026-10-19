@@ -24,6 +24,7 @@ export const PACK_TOPIC_LABELS_RU: Record<PackTopic, string> = {
   language: 'Язык',
   tech: 'Технологии',
   world: 'Мир',
+  kazakhstan: 'История Казахстана',
 };
 
 export function normalizePackAnswer(text: string): string {
@@ -80,6 +81,7 @@ export function packQuestionToRaceQuestion(q: PackQuestion, answerType: AnswerTy
     sourceTitle: q.sourceTitle,
     status: q.editorialStatus === 'approved' ? ('approved' as const) : ('draft' as const),
     createdAt: '2026-10-12T00:00:00.000Z',
+    ...(q.image ? { mediaType: 'image' as const, mediaUrl: q.image.url } : {}),
   };
   if (answerType === 'open_answer') {
     if (!q.openAnswer) throw new RangeError(`${q.id} is multiple choice only`);

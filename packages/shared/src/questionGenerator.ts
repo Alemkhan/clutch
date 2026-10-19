@@ -1,4 +1,4 @@
-import type { CategoryId, Question, Difficulty } from './index';
+import type { CategoryId, GeneratedCategoryId, Question, Difficulty } from './index';
 import { countries, flagUrl, outlineUrl, ISLAND_COUNTRIES, type Country } from './countries';
 import { FLAG_TRAITS } from './flagTraits';
 import { historicFlags, historicFlagUrl, type HistoricFlag } from './historicFlags';
@@ -429,12 +429,12 @@ function generateMatchWithRandom(
     throw new RangeError('openRatio must be a finite number between 0 and 1.');
   }
 
-  const capacities: Record<Exclude<CategoryId, 'general'>, number> = {
+  const capacities: Record<GeneratedCategoryId, number> = {
     geography: countries.length,
     history: historicFlags.length,
     languages: languages.length,
   };
-  // 'general' нарочно не обслуживается: набор общего режима собирает generalSet.ts.
+  // 'general' и 'kz_history' нарочно не обслуживаются: их наборы собирает generalSet.ts из пакета.
   if (category !== 'geography' && category !== 'history' && category !== 'languages') {
     throw new RangeError(`Unknown category: ${String(category)}.`);
   }

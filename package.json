@@ -30,7 +30,10 @@
     "content:import": "node scripts/content/import.mjs",
     "content:wikidata": "node scripts/content/build-wikidata-pack.mjs",
     "tiebreaker:load": "node scripts/tiebreaker-load.mjs",
-    "content:day": "vite-node scripts/content/export-day.ts"
+    "content:day": "vite-node scripts/content/export-day.ts",
+    "content:paintings": "node scripts/content/painting-images.mjs",
+    "content:review": "node scripts/content/review.mjs",
+    "content:approve": "node scripts/content/approve.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",

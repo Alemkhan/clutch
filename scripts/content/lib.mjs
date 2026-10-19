@@ -7,10 +7,10 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 
 export const TOPICS = [
   'science', 'space', 'nature', 'body', 'history', 'literature', 'art', 'music',
-  'film', 'popculture', 'sport', 'food', 'math', 'language', 'tech', 'world',
+  'film', 'popculture', 'sport', 'food', 'math', 'language', 'tech', 'world', 'kazakhstan',
 ];
 
-const QUESTION_KEYS = ['id', 'editorialStatus', 'kind', 'topic', 'difficulty', 'promptRu', 'answerRu', 'acceptedRu', 'acceptedEn', 'distractorsRu', 'openAnswer', 'explanationRu', 'sourceUrl', 'sourceTitle', 'sourceHint', 'reviewNote', 'origin', 'license'];
+const QUESTION_KEYS = ['id', 'editorialStatus', 'kind', 'topic', 'difficulty', 'promptRu', 'answerRu', 'acceptedRu', 'acceptedEn', 'distractorsRu', 'openAnswer', 'explanationRu', 'image', 'generalPool', 'sourceUrl', 'sourceTitle', 'sourceHint', 'reviewNote', 'origin', 'license'];
 const SET_KEYS = ['id', 'editorialStatus', 'kind', 'topic', 'titleRu', 'mcPromptRu', 'members', 'nonMembersRu', 'sourceUrl', 'sourceTitle', 'sourceHint', 'reviewNote', 'origin', 'license'];
 
 export function hash(text) {

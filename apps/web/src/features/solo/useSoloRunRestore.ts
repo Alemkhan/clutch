@@ -4,7 +4,7 @@ import { fetchSoloRunSnapshot, isTransientApiError } from '../../platform/api';
 import { normalizeSoloSnapshot } from './clientMatchRules';
 import { beginSoloLoading, createSoloFlowState, restoreSoloRun } from './soloRunFlow';
 import type { SoloRunContext } from './soloRunContext';
-import { clearActiveSoloRun, loadActiveSoloRun } from './soloRunStore';
+import { activeRunMatchesSelection, clearActiveSoloRun, loadActiveSoloRun } from './soloRunStore';
 
 /** Подтягивание забега с сервера: продолжение после закрытой вкладки и возврат к категориям. */
 export function useSoloRunRestore(ctx: SoloRunContext, begin: (category: CategoryId) => void) {
@@ -39,13 +39,20 @@ export function useSoloRunRestore(ctx: SoloRunContext, begin: (category: Categor
   const resume = useCallback((fallbackCategory?: CategoryId) => {
     if (stateRef.current.stage !== 'categories') return;
     const stored = loadActiveSoloRun();
+    // Явно открытая категория имеет приоритет над сохранённым забегом; legacy-id без category
+    // также не может молча перехватить этот выбор.
+    if (stored && !activeRunMatchesSelection(stored, fallbackCategory)) {
+      clearActiveSoloRun();
+      if (fallbackCategory) begin(fallbackCategory);
+      return;
+    }
     // Забег другого режима не подхватываем: «Свободная игра» не должна открыть недоигранную дуэль.
     if (!stored || stored.practice !== practice || (!practice && stored.mode !== ctx.mode)) {
       // Нечего продолжать: «Играть» с главной начинает забег в категории по умолчанию.
       if (fallbackCategory) begin(fallbackCategory);
       return;
     }
-    setState(beginSoloLoading(stateRef.current.category));
+    setState(beginSoloLoading(stored.category ?? fallbackCategory ?? stateRef.current.category));
     restoreFromServer(stored.runId, () => setState(createSoloFlowState()));
   }, [practice, ctx.mode, begin, restoreFromServer]);
 

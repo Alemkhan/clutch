@@ -218,7 +218,7 @@
       "Марк Шагал",
       "Илья Репин"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "sourceHint": "Википедия: Чёрный квадрат",
     "origin": "authored",
     "license": "original"
@@ -265,10 +265,14 @@
       "Исаак Левитан",
       "Виктор Васнецов"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "sourceHint": "Википедия: Девятый вал",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Hovhannes_Aivazovsky_-_The_Ninth_Wave_-_Google_Art_Project.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Hovhannes_Aivazovsky_-_The_Ninth_Wave_-_Google_Art_Project.jpg"
+    }
   },
   {
     "id": "au-art-xjj4im",
@@ -345,10 +349,14 @@
       "Василий Перов",
       "Василий Верещагин"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "sourceHint": "Википедия: Боярыня Морозова (картина)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Vasily_Surikov_-_%D0%91%D0%BE%D1%8F%D1%80%D1%8B%D0%BD%D1%8F_%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2%D0%B0_-_Google_Art_Project.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Vasily_Surikov_-_%D0%91%D0%BE%D1%8F%D1%80%D1%8B%D0%BD%D1%8F_%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2%D0%B0_-_Google_Art_Project.jpg"
+    }
   },
   {
     "id": "au-art-ozk375",
@@ -382,7 +390,7 @@
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Easy",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Мона Лиза»?",
     "answerRu": "Леонардо да Винчи",
     "acceptedRu": [
@@ -398,19 +406,23 @@
       "Сальвадор Дали",
       "Пьер Огюст Ренуар"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Мона Лиза» — Леонардо да Винчи.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q12418",
     "sourceTitle": "Wikidata: Мона Лиза",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg"
+    }
   },
   {
     "id": "wd-painting-Q45585",
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Easy",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Звёздная ночь»?",
     "answerRu": "Винсент Ван Гог",
     "acceptedRu": [
@@ -426,19 +438,23 @@
       "Грант Вуд",
       "Франсиско Гойя"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Звёздная ночь» — Винсент Ван Гог.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q45585",
     "sourceTitle": "Wikidata: Звёздная ночь",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
+    }
   },
   {
     "id": "wd-painting-Q185372",
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Easy",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Девушка с жемчужной серёжкой»?",
     "answerRu": "Ян Вермеер",
     "acceptedRu": [
@@ -454,19 +470,23 @@
       "Сальвадор Дали",
       "Теодор Жерико"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Девушка с жемчужной серёжкой» — Ян Вермеер.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q185372",
     "sourceTitle": "Wikidata: Девушка с жемчужной серёжкой",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/1665_Girl_with_a_Pearl_Earring.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:1665_Girl_with_a_Pearl_Earring.jpg"
+    }
   },
   {
     "id": "wd-painting-Q175036",
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Easy",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Герника»?",
     "answerRu": "Пабло Пикассо",
     "acceptedRu": [
@@ -482,7 +502,7 @@
       "Пьер Огюст Ренуар",
       "Сандро Боттичелли"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Герника» — Пабло Пикассо.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q175036",
     "sourceTitle": "Wikidata: Герника",
@@ -494,7 +514,7 @@
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Easy",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Свобода, ведущая народ»?",
     "answerRu": "Эжен Делакруа",
     "acceptedRu": [
@@ -510,19 +530,23 @@
       "Грант Вуд",
       "Диего Веласкес"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Свобода, ведущая народ» — Эжен Делакруа.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q29530",
     "sourceTitle": "Wikidata: Свобода, ведущая народ",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/La_Libert%C3%A9_guidant_le_peuple_-_Eug%C3%A8ne_Delacroix_-_Mus%C3%A9e_du_Louvre_Peintures_RF_129_-_apr%C3%A8s_restauration_2024.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:La_Libert%C3%A9_guidant_le_peuple_-_Eug%C3%A8ne_Delacroix_-_Mus%C3%A9e_du_Louvre_Peintures_RF_129_-_apr%C3%A8s_restauration_2024.jpg"
+    }
   },
   {
     "id": "wd-painting-Q219831",
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Easy",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Ночной дозор»?",
     "answerRu": "Рембрандт",
     "acceptedRu": [
@@ -536,19 +560,23 @@
       "Клод Моне",
       "Диего Веласкес"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Ночной дозор» — Рембрандт.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q219831",
     "sourceTitle": "Wikidata: Ночной дозор",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/La_ronda_de_noche%2C_por_Rembrandt_van_Rijn.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:La_ronda_de_noche%2C_por_Rembrandt_van_Rijn.jpg"
+    }
   },
   {
     "id": "wd-painting-Q208758",
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Easy",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Менины (Фрейлины)»?",
     "answerRu": "Диего Веласкес",
     "acceptedRu": [
@@ -564,19 +592,23 @@
       "Питер Брейгель Старший",
       "Иероним Босх"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Менины (Фрейлины)» — Диего Веласкес.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q208758",
     "sourceTitle": "Wikidata: Менины (Фрейлины)",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Las_Meninas%2C_by_Diego_Vel%C3%A1zquez%2C_from_Prado_in_Google_Earth.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Las_Meninas%2C_by_Diego_Vel%C3%A1zquez%2C_from_Prado_in_Google_Earth.jpg"
+    }
   },
   {
     "id": "wd-painting-Q151047",
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Easy",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Рождение Венеры»?",
     "answerRu": "Сандро Боттичелли",
     "acceptedRu": [
@@ -592,7 +624,7 @@
       "Леонардо да Винчи",
       "Эдуард Мане"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Рождение Венеры» — Сандро Боттичелли.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q151047",
     "sourceTitle": "Wikidata: Рождение Венеры",
@@ -604,7 +636,7 @@
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Medium",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Едоки картофеля»?",
     "answerRu": "Винсент Ван Гог",
     "acceptedRu": [
@@ -620,19 +652,23 @@
       "Тициан",
       "Леонардо да Винчи"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Едоки картофеля» — Винсент Ван Гог.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q154469",
     "sourceTitle": "Wikidata: Едоки картофеля",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Van-willem-vincent-gogh-die-kartoffelesser-03850.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Van-willem-vincent-gogh-die-kartoffelesser-03850.jpg"
+    }
   },
   {
     "id": "wd-painting-Q328523",
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Medium",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Впечатление. Восходящее солнце»?",
     "answerRu": "Клод Моне",
     "acceptedRu": [
@@ -648,19 +684,23 @@
       "Каспар Давид Фридрих",
       "Густав Климт"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Впечатление. Восходящее солнце» — Клод Моне.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q328523",
     "sourceTitle": "Wikidata: Впечатление. Восходящее солнце",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Monet_-_Impression%2C_Sunrise.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Monet_-_Impression%2C_Sunrise.jpg"
+    }
   },
   {
     "id": "wd-painting-Q1752990",
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Medium",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Смерть Сократа»?",
     "answerRu": "Жак Луи Давид",
     "acceptedRu": [
@@ -676,19 +716,23 @@
       "Густав Климт",
       "Иероним Босх"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Смерть Сократа» — Жак Луи Давид.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1752990",
     "sourceTitle": "Wikidata: Смерть Сократа",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Death_of_Socrates_MET_DP-13139-001.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:The_Death_of_Socrates_MET_DP-13139-001.jpg"
+    }
   },
   {
     "id": "wd-painting-Q698487",
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Medium",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Поцелуй»?",
     "answerRu": "Густав Климт",
     "acceptedRu": [
@@ -704,19 +748,23 @@
       "Клод Моне",
       "Каспар Давид Фридрих"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Поцелуй» — Густав Климт.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q698487",
     "sourceTitle": "Wikidata: Поцелуй",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg"
+    }
   },
   {
     "id": "wd-painting-Q474338",
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Medium",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Дама с горностаем»?",
     "answerRu": "Леонардо да Винчи",
     "acceptedRu": [
@@ -732,19 +780,23 @@
       "Франсиско Гойя",
       "Теодор Жерико"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Дама с горностаем» — Леонардо да Винчи.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q474338",
     "sourceTitle": "Wikidata: Дама с горностаем",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lady_with_an_Ermine_-_Leonardo_da_Vinci_-_Google_Art_Project.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Lady_with_an_Ermine_-_Leonardo_da_Vinci_-_Google_Art_Project.jpg"
+    }
   },
   {
     "id": "wd-painting-Q321303",
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Medium",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Сад земных наслаждений»?",
     "answerRu": "Иероним Босх",
     "acceptedRu": [
@@ -760,7 +812,7 @@
       "Жак Луи Давид",
       "Эжен Делакруа"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Сад земных наслаждений» — Иероним Босх.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q321303",
     "sourceTitle": "Wikidata: Сад земных наслаждений",
@@ -772,7 +824,7 @@
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Medium",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Постоянство памяти»?",
     "answerRu": "Сальвадор Дали",
     "acceptedRu": [
@@ -788,7 +840,7 @@
       "Теодор Жерико",
       "Грант Вуд"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Постоянство памяти» — Сальвадор Дали.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q25729",
     "sourceTitle": "Wikidata: Постоянство памяти",
@@ -800,7 +852,7 @@
     "editorialStatus": "approved",
     "kind": "single",
     "topic": "art",
-    "difficulty": "Medium",
+    "difficulty": "Hard",
     "promptRu": "Кто написал картину «Странник над морем тумана»?",
     "answerRu": "Каспар Давид Фридрих",
     "acceptedRu": [
@@ -816,12 +868,16 @@
       "Сальвадор Дали",
       "Илья Ефимович Репин"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Странник над морем тумана» — Каспар Давид Фридрих.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q311243",
     "sourceTitle": "Wikidata: Странник над морем тумана",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Friedrich%2C_Caspar_David_-_Wanderer_%C3%BCber_dem_Nebelmeer.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Friedrich%2C_Caspar_David_-_Wanderer_%C3%BCber_dem_Nebelmeer.jpg"
+    }
   },
   {
     "id": "wd-painting-Q212616",
@@ -844,12 +900,16 @@
       "Пабло Пикассо",
       "Диего Веласкес"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Плот «Медузы»» — Теодор Жерико.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q212616",
     "sourceTitle": "Wikidata: Плот «Медузы»",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/JEAN_LOUIS_TH%C3%89ODORE_G%C3%89RICAULT_-_La_Balsa_de_la_Medusa_(Museo_del_Louvre%2C_1818-19).jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:JEAN_LOUIS_TH%C3%89ODORE_G%C3%89RICAULT_-_La_Balsa_de_la_Medusa_(Museo_del_Louvre%2C_1818-19).jpg"
+    }
   },
   {
     "id": "wd-painting-Q478271",
@@ -872,12 +932,16 @@
       "Густав Климт",
       "Эжен Делакруа"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Запорожцы» — Илья Ефимович Репин.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q478271",
     "sourceTitle": "Wikidata: Запорожцы",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Ilja_Jefimowitsch_Repin_-_Reply_of_the_Zaporozhian_Cossacks_-_Yorck.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Ilja_Jefimowitsch_Repin_-_Reply_of_the_Zaporozhian_Cossacks_-_Yorck.jpg"
+    }
   },
   {
     "id": "wd-painting-Q464782",
@@ -900,12 +964,16 @@
       "Рембрандт",
       "Винсент Ван Гог"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Американская готика» — Грант Вуд.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q464782",
     "sourceTitle": "Wikidata: Американская готика",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Grant_Wood_-_American_Gothic_(1930).jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Grant_Wood_-_American_Gothic_(1930).jpg"
+    }
   },
   {
     "id": "wd-painting-Q152509",
@@ -928,7 +996,7 @@
       "Тициан",
       "Ян Вермеер"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Завтрак на траве» — Эдуард Мане.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q152509",
     "sourceTitle": "Wikidata: Завтрак на траве",
@@ -956,7 +1024,7 @@
       "Тициан",
       "Леонардо да Винчи"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Маха обнажённая» — Франсиско Гойя.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q152867",
     "sourceTitle": "Wikidata: Маха обнажённая",
@@ -984,12 +1052,16 @@
       "Пьер Огюст Ренуар",
       "Леонардо да Винчи"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Третье мая 1808 года в Мадриде» — Франсиско Гойя.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1091086",
     "sourceTitle": "Wikidata: Третье мая 1808 года в Мадриде",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/El_Tres_de_Mayo%2C_by_Francisco_de_Goya%2C_from_Prado_in_Google_Earth.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:El_Tres_de_Mayo%2C_by_Francisco_de_Goya%2C_from_Prado_in_Google_Earth.jpg"
+    }
   },
   {
     "id": "wd-painting-Q661378",
@@ -1010,12 +1082,16 @@
       "Илья Ефимович Репин",
       "Каспар Давид Фридрих"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Урок анатомии доктора Тульпа» — Рембрандт.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q661378",
     "sourceTitle": "Wikidata: Урок анатомии доктора Тульпа",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Rembrandt_-_The_Anatomy_Lesson_of_Dr_Nicolaes_Tulp.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Rembrandt_-_The_Anatomy_Lesson_of_Dr_Nicolaes_Tulp.jpg"
+    }
   },
   {
     "id": "wd-painting-Q167605",
@@ -1038,12 +1114,16 @@
       "Питер Брейгель Старший",
       "Теодор Жерико"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Молочница» — Ян Вермеер.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q167605",
     "sourceTitle": "Wikidata: Молочница",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Johannes_Vermeer_-_Het_melkmeisje_-_Google_Art_Project.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Johannes_Vermeer_-_Het_melkmeisje_-_Google_Art_Project.jpg"
+    }
   },
   {
     "id": "wd-painting-Q683274",
@@ -1066,12 +1146,16 @@
       "Каспар Давид Фридрих",
       "Эжен Делакруа"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Бал в Мулен де ла Галетт» — Пьер Огюст Ренуар.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q683274",
     "sourceTitle": "Wikidata: Бал в Мулен де ла Галетт",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Renoir%2C_Pierre-Auguste_-_Dance_at_Le_Moulin_de_la_Galette%2C_1876.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Renoir%2C_Pierre-Auguste_-_Dance_at_Le_Moulin_de_la_Galette%2C_1876.jpg"
+    }
   },
   {
     "id": "wd-painting-Q220859",
@@ -1094,12 +1178,16 @@
       "Жак Луи Давид",
       "Грант Вуд"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Портрет четы Арнольфини» — Ян ван Эйк.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q220859",
     "sourceTitle": "Wikidata: Портрет четы Арнольфини",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Van_Eyck_-_Arnolfini_Portrait.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Van_Eyck_-_Arnolfini_Portrait.jpg"
+    }
   },
   {
     "id": "wd-painting-Q737062",
@@ -1122,7 +1210,7 @@
       "Каспар Давид Фридрих",
       "Сандро Боттичелли"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Олимпия» — Эдуард Мане.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q737062",
     "sourceTitle": "Wikidata: Олимпия",
@@ -1150,12 +1238,16 @@
       "Диего Веласкес",
       "Тициан"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Клятва Горациев» — Жак Луи Давид.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q476458",
     "sourceTitle": "Wikidata: Клятва Горациев",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Le_Serment_des_Horaces_-_Jacques-Louis_David_-_Mus%C3%A9e_du_Louvre_Peintures_INV_3692_%3B_MR_1432.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Le_Serment_des_Horaces_-_Jacques-Louis_David_-_Mus%C3%A9e_du_Louvre_Peintures_INV_3692_%3B_MR_1432.jpg"
+    }
   },
   {
     "id": "wd-painting-Q549847",
@@ -1178,12 +1270,16 @@
       "Ян ван Эйк",
       "Эдуард Мане"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Весна» — Сандро Боттичелли.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q549847",
     "sourceTitle": "Wikidata: Весна",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Sandro_Botticelli_-_La_Primavera_-_Google_Art_Project.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Sandro_Botticelli_-_La_Primavera_-_Google_Art_Project.jpg"
+    }
   },
   {
     "id": "wd-painting-Q727875",
@@ -1204,7 +1300,7 @@
       "Грант Вуд",
       "Винсент Ван Гог"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Венера Урбинская» — Тициан.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q727875",
     "sourceTitle": "Wikidata: Венера Урбинская",
@@ -1233,11 +1329,15 @@
       "Ян ван Эйк",
       "Густав Климт"
     ],
-    "openAnswer": true,
+    "openAnswer": false,
     "explanationRu": "Автор картины «Охотники на снегу» — Питер Брейгель Старший.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q500985",
     "sourceTitle": "Wikidata: Охотники на снегу",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Pieter_Bruegel_the_Elder_-_Hunters_in_the_Snow_(Winter)_-_Google_Art_Project.jpg?width=640",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Pieter_Bruegel_the_Elder_-_Hunters_in_the_Snow_(Winter)_-_Google_Art_Project.jpg"
+    }
   }
 ]

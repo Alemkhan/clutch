@@ -3,8 +3,10 @@ import { expandPersonAnswers, generalPackQuestions, matchesAccepted, packQuestio
 import { isAnswerCorrect } from '../fuzzyMatch';
 
 const byId = (id: string) => generalPackQuestions.find((q) => q.id === id)!;
+// Вопросы об авторах теперь только с вариантами, но разбор имени проверяется на них же: открытый
+// формат здесь включается принудительно.
 const accepts = (id: string, typed: string) => {
-  const q = packQuestionToRaceQuestion(byId(id), 'open_answer');
+  const q = packQuestionToRaceQuestion({ ...byId(id), openAnswer: true }, 'open_answer');
   return isAnswerCorrect(typed.toLowerCase().replace(/ё/g, 'е'), (q.correctAnswers ?? []).map((a) => a.toLowerCase().replace(/ё/g, 'е'))).correct;
 };
 const littlePrince = generalPackQuestions.find((q) => q.promptRu.includes('«Маленький принц»'))!;
@@ -48,9 +50,8 @@ describe('expandPersonAnswers', () => {
   it('never adds a lone first name or a short word across the whole pack', () => {
     let personal = 0;
     for (const q of generalPackQuestions) {
-      if (!q.openAnswer) continue;
       const base = [...q.acceptedRu, ...(q.acceptedEn ?? [])];
-      const expanded = packQuestionToRaceQuestion(q, 'open_answer').correctAnswers ?? [];
+      const expanded = packQuestionToRaceQuestion({ ...q, openAnswer: true }, 'open_answer').correctAnswers ?? [];
       if (expanded.length === base.length) continue;
       personal++;
       const firstNames = new Set(base.map((a) => a.trim().split(/\s+/)[0].toLowerCase()).filter((w) => base.some((a) => a.trim().split(/\s+/).length > 1 && a.toLowerCase().startsWith(`${w} `))));

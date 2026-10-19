@@ -45,6 +45,8 @@ interface SoloResultProps {
   miniGameId?: MiniGameId;
   /** Сыграть в другом режиме: дуэль, свободная игра. */
   onPlayMode?: (mode: SoloMode) => void;
+  /** Разобрать ошибки забега: неверные ответы сервер уже записал в журнал тренировки. */
+  onPracticeMistakes?: () => void;
 }
 
 /** Партию кончил финиш соперника: заголовок говорит это словами мини-игры. */
@@ -101,6 +103,7 @@ export function SoloResult({
   pace = null,
   miniGameId,
   onPlayMode,
+  onPracticeMistakes,
 }: SoloResultProps) {
   const result = buildSoloResult({ view, save: saveStatus, response });
   // Дуэль кончилась на круге финиша соперника, а игрок до 100% не дошёл: он проиграл раньше конца набора.
@@ -167,6 +170,7 @@ export function SoloResult({
   const headline = duel?.text ?? (opponentFinished && !friendDuel ? opponentFinishedHeadline(miniGameId) : result.headline);
   const headTone = duel?.tone ?? (opponentFinished ? 'loss' : tone);
   const next = mode ? NEXT_ACTION[mode] : null;
+  const mistakes = Math.max(0, result.roundsPlayed - (response?.correctCount ?? correctCount));
   const viaTelegram = getTelegramIdentity() !== null;
   const duelTone = friendDuel?.outcome === 'player' ? 'win' : friendDuel?.outcome === 'opponent' ? 'loss' : 'tie';
 
@@ -278,6 +282,12 @@ export function SoloResult({
         )}
         <button type="button" className="ghost-btn" disabled={saving} onClick={() => { onMyRuns(); }}>Мои партии</button>
         </div>
+        {/* Ошибки забега уже в журнале тренировки; без ссылки туда почти никто не доходил. */}
+        {onPracticeMistakes && mistakes > 0 && (
+          <button type="button" className="solo-result-mistakes" disabled={saving} onClick={() => { onPracticeMistakes(); }}>
+            Разобрать ошибки: {mistakes} →
+          </button>
+        )}
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import bodyQ from '../../../../content/questions/body.json';
 import filmQ from '../../../../content/questions/film.json';
 import foodQ from '../../../../content/questions/food.json';
 import historyQ from '../../../../content/questions/history.json';
+import kazakhstanQ from '../../../../content/questions/kazakhstan.json';
 import languageQ from '../../../../content/questions/language.json';
 import literatureQ from '../../../../content/questions/literature.json';
 import mathQ from '../../../../content/questions/math.json';
@@ -25,6 +26,7 @@ import bodyS from '../../../../content/sets/body.json';
 import filmS from '../../../../content/sets/film.json';
 import foodS from '../../../../content/sets/food.json';
 import historyS from '../../../../content/sets/history.json';
+import kazakhstanS from '../../../../content/sets/kazakhstan.json';
 import languageS from '../../../../content/sets/language.json';
 import literatureS from '../../../../content/sets/literature.json';
 import mathS from '../../../../content/sets/math.json';
@@ -40,13 +42,13 @@ import worldS from '../../../../content/sets/world.json';
 const QUESTION_FILES: Record<PackTopic, unknown> = {
   science: scienceQ, space: spaceQ, nature: natureQ, body: bodyQ, history: historyQ, literature: literatureQ,
   art: artQ, music: musicQ, film: filmQ, popculture: popcultureQ, sport: sportQ, food: foodQ, math: mathQ,
-  language: languageQ, tech: techQ, world: worldQ,
+  language: languageQ, tech: techQ, world: worldQ, kazakhstan: kazakhstanQ,
 };
 
 const SET_FILES: Record<PackTopic, unknown> = {
   science: scienceS, space: spaceS, nature: natureS, body: bodyS, history: historyS, literature: literatureS,
   art: artS, music: musicS, film: filmS, popculture: popcultureS, sport: sportS, food: foodS, math: mathS,
-  language: languageS, tech: techS, world: worldS,
+  language: languageS, tech: techS, world: worldS, kazakhstan: kazakhstanS,
 };
 
 const DIFFICULTIES = ['Easy', 'Medium', 'Hard', 'Expert'];
@@ -101,6 +103,19 @@ function questionsOf(topic: PackTopic, raw: unknown): PackQuestion[] {
     texts(r, 'distractorsRu', where, 3);
     if (typeof r.openAnswer !== 'boolean') fail(where, '«openAnswer» must be true or false');
     text(r, 'explanationRu', where, true);
+    if (r.generalPool !== undefined && (r.generalPool !== true || topic !== 'kazakhstan')) {
+      fail(where, '«generalPool» is only «true» and only in kazakhstan.json');
+    }
+    if (r.image !== undefined) {
+      const image = r.image as Json;
+      // Только Commons: там лежат лишь свободные файлы, и превью отдаётся нужной ширины.
+      if (typeof image?.url !== 'string' || !image.url.startsWith('https://commons.wikimedia.org/wiki/Special:FilePath/')) {
+        fail(where, '«image.url» must be a Wikimedia Commons Special:FilePath link');
+      }
+      if (typeof image?.pageUrl !== 'string' || !image.pageUrl.startsWith('https://commons.wikimedia.org/wiki/File:')) {
+        fail(where, '«image.pageUrl» must be a Wikimedia Commons file page');
+      }
+    }
     return r as unknown as PackQuestion;
   });
 }
