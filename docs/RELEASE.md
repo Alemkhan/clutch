@@ -4,9 +4,11 @@
 Команды — PowerShell из корня репозитория. Документ описывает будущий выпуск и **не
 подтверждает**, что что-либо развёрнуто.
 
-**Ни один шаг не выполнялся:** remote-ресурсы, secrets, BotFather и production D1 не созданы
-и не проверены. Облачные команды (`d1 create`, `--remote`, `deploy`, `secret put`,
-`pages project create`) запускает только владелец. Деплой ручной, CI его не делает.
+**Статус 2026-10-20:** OAuth-авторизация подтверждена; созданы пустая production D1
+`clutch-prod` (`7d4de210-608e-40c1-96d5-26fa18ef475d`) и Direct Upload Pages-проект
+`clutch-app` (`https://clutch-app-ct8.pages.dev`). Миграции, secrets, Worker/Pages deploy и
+BotFather ещё не выполнялись. Облачные команды (`--remote`, `deploy`, `secret put`) запускает
+только владелец. Деплой ручной, CI его не делает.
 Локальная настройка и туннель — [README](../README.md) и [TESTING](TESTING.md).
 
 ## Стоп-условия
