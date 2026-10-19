@@ -6,9 +6,11 @@
 
 **Статус 2026-10-20:** OAuth-авторизация подтверждена; созданы пустая production D1
 `clutch-prod` (`7d4de210-608e-40c1-96d5-26fa18ef475d`) и Direct Upload Pages-проект
-`clutch-app` (`https://clutch-app-ct8.pages.dev`). Миграции, secrets, Worker/Pages deploy и
-BotFather ещё не выполнялись. Облачные команды (`--remote`, `deploy`, `secret put`) запускает
-только владелец. Деплой ручной, CI его не делает.
+`clutch-app` (`https://clutch-app-ct8.pages.dev`); D1 мигрирована 0001–0006. Production
+preflight прошёл для API `https://clutch-api-prod.kettikteam-official.workers.dev`, создана
+Worker-заготовка `clutch-api-prod` и установлен `SESSION_SIGNING_SECRET`.
+`TELEGRAM_BOT_TOKEN`, Worker/Pages deploy и BotFather ещё не выполнены. Облачные команды
+(`deploy`, `secret put`) запускает только владелец. Деплой ручной, CI его не делает.
 Локальная настройка и туннель — [README](../README.md) и [TESTING](TESTING.md).
 
 ## Стоп-условия
