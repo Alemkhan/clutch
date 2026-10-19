@@ -259,7 +259,7 @@ Git commit: 8db0bbc
 GitHub Actions run: не проверен
 Worker version/deployment ID: 03300b08-bb92-4eeb-9902-8ec9a5ea04e6
 Pages deployment URL: https://b5207fd0.clutch-app-ct8.pages.dev
-D1 migrations applied: 0001–0006, список неприменённых пуст
+D1 migrations applied: 0001–0006, список неприменённых пуст; 10 вопросов «На глазок» загружены
 Telegram bot username (подтверждено владельцем): @playclutchbot
 Smoke tester/device/Telegram version: не выполнено, нужен настоящий телефон
 npm run smoke:remote result: успешно — health, ready/D1, Pages, Worker URL в bundle
