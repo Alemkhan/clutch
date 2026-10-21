@@ -297,17 +297,17 @@ GitHub Actions CI запускается при push в `main` (и на pull req
 После выпуска сохраните:
 
 ```text
-Git commit: 707d7e367c1c09b4d47463ada7e921c060a0997b
-GitHub Actions run: 39656981208 — success
+Git commit: f24d57eb5fc9166a543873654a375937e8d5ea47
+GitHub Actions run: статус нового run не прочитан; локально 1173/1173, preflight и build прошли
 Worker version/deployment ID: 73368a8d-18c8-420d-b3be-8e4f801a2f9b
-Pages deployment URL: https://68a59512.clutch-app-ct8.pages.dev
+Pages deployment URL: https://63a00c25.clutch-app-ct8.pages.dev
 D1 migrations applied: 0001–0009, список неприменённых пуст; 10 вопросов «На глазок» загружены
 Telegram bot username (подтверждено владельцем): @playclutchbot
 Smoke tester/device/Telegram version: не выполнено, нужен настоящий телефон
 npm run smoke:remote result: успешно — health, ready/D1, Pages, Worker URL в bundle
 Smoke result (ручной): не выполнен
 Known limitations: JS bundle 879 КБ (gzip 251 КБ); телефонный walkthrough после исправления не выполнен
-Rollback target: Worker 2c164125-964d-4e9c-9582-698b557dab9d; Pages https://8f79d540.clutch-app-ct8.pages.dev
+Rollback target: Worker 2c164125-964d-4e9c-9582-698b557dab9d; Pages https://68a59512.clutch-app-ct8.pages.dev
 ```
 
 Без этих данных релиз считается выполненным вручную, но не воспроизводимым.
