@@ -159,7 +159,11 @@ describe('Wiki Path daily API', () => {
       ownRank: 1,
     });
     const guestBoard = await app.request(`/api/wiki-path/board?date=${TODAY}`, { headers: { authorization: player.authorization } }, env(db));
-    expect(guestBoard.status).toBe(403);
+    expect(guestBoard.status).toBe(200);
+    const guestBoardBody = await json(guestBoard);
+    expect(guestBoardBody.ownRank).toBeNull();
+    expect(guestBoardBody.entries.map((entry: { playerId: string }) => entry.playerId))
+      .toEqual([b.playerId, a.playerId, c.playerId]);
   });
 
   it('maps Wikimedia failures to gateway and timeout statuses', async () => {

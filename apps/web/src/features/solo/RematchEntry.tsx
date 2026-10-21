@@ -3,6 +3,7 @@ import type { CategoryId } from '@clutch/shared';
 import {
   ApiError,
   fetchRematchPreview,
+  setDailyNotifications,
   setOutbidNotifications,
   type RematchPreview,
 } from '../../platform/api';
@@ -113,12 +114,12 @@ function RematchInvite({ inviteId, onStartRematch, onClose }: {
 
 type UnsubscribeState = 'working' | 'off' | 'on' | 'error';
 
-function Unsubscribe({ onClose }: { onClose: () => void }) {
+function Unsubscribe({ onClose, daily = false }: { onClose: () => void; daily?: boolean }) {
   const [state, setState] = useState<UnsubscribeState>('working');
 
   const change = (enabled: boolean) => {
     setState('working');
-    setOutbidNotifications(enabled)
+    (daily ? setDailyNotifications(enabled) : setOutbidNotifications(enabled))
       .then(() => setState(enabled ? 'on' : 'off'))
       .catch(() => setState('error'));
   };
@@ -136,7 +137,9 @@ function Unsubscribe({ onClose }: { onClose: () => void }) {
         {state === 'off' && (
           <>
             <h1 className="screen-title">Сообщения отключены</h1>
-            <p className="matchmaking-status">Мы больше не пишем, когда вашу запись обходят.</p>
+            <p className="matchmaking-status">{daily
+              ? 'Мы больше не присылаем ежедневные задания.'
+              : 'Мы больше не пишем, когда вашу запись обходят.'}</p>
             <button className="cta-btn" onClick={onClose}>На главную</button>
             <button className="ghost-btn" onClick={() => change(true)}>Включить обратно</button>
           </>
@@ -144,7 +147,9 @@ function Unsubscribe({ onClose }: { onClose: () => void }) {
         {state === 'on' && (
           <>
             <h1 className="screen-title">Сообщения включены</h1>
-            <p className="matchmaking-status">Напишем, когда вашу запись обойдут.</p>
+            <p className="matchmaking-status">{daily
+              ? 'Будем присылать новые ежедневные задания.'
+              : 'Напишем, когда вашу запись обойдут.'}</p>
             <button className="cta-btn" onClick={onClose}>На главную</button>
           </>
         )}
@@ -162,7 +167,11 @@ function Unsubscribe({ onClose }: { onClose: () => void }) {
 }
 
 export function RematchEntry({ intent, onStartRematch, onClose }: RematchEntryProps) {
-  return intent.type === 'rematch'
-    ? <RematchInvite inviteId={intent.inviteId} onStartRematch={onStartRematch} onClose={onClose} />
-    : <Unsubscribe onClose={onClose} />;
+  if (intent.type === 'rematch') {
+    return <RematchInvite inviteId={intent.inviteId} onStartRematch={onStartRematch} onClose={onClose} />;
+  }
+  if (intent.type === 'unsubscribe' || intent.type === 'daily-unsubscribe') {
+    return <Unsubscribe onClose={onClose} daily={intent.type === 'daily-unsubscribe'} />;
+  }
+  return null;
 }

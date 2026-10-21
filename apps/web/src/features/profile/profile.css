@@ -41,6 +41,12 @@
   font-size: 14px;
 }
 
+.profile-setting-error {
+  margin-top: -16px;
+  color: var(--error);
+  font-size: 13px;
+}
+
 .section-heading {
   font-size: 18px;
   font-weight: 800;
@@ -130,4 +136,3 @@
   color: var(--error);
   padding: 24px;
 }
-

@@ -144,8 +144,9 @@ API с идентифицирующим `User-Agent`, ограничивает �
 только id зафиксированной ревизии и разрешённые ссылки. HTML этой точной ревизии загружается
 по `oldid` и кэшируется на edge Worker, но в D1 не хранится. Перед переходом сервер проверяет,
 что цель есть среди ссылок текущей ревизии. Один `wiki_path_runs` на игрока и игровые сутки; обновление клика
-защищено условным `UPDATE`. Таблица включает только завершившие Telegram-аккаунты, сортирует
-по числу кликов и использует соревновенный rank; время завершения лишь стабилизирует вывод.
+защищено условным `UPDATE`. Вкладка «Вики-путь» живёт на общем экране «Таблица дня», включает
+только завершившие Telegram-аккаунты, сортирует по числу кликов и использует соревновенный
+rank; время завершения лишь стабилизирует вывод. Финиш маршрута сразу открывает эту вкладку.
 
 **Таблица дня.** `GET /api/solo-leaderboard`: лучший дошедший до цели забег каждого игрока
 за игровые сутки, топ-50 по счёту, кругам и множителю прикидки (гость и не ответивший —
@@ -169,6 +170,11 @@ API с идентифицирующим `User-Agent`, ограничивает �
   отправки); отправка через `waitUntil`;
 - cron раз в 15 минут (`wrangler.toml`) → `releaseExpiredRematchInvites` возвращает
   просроченные приглашения в пул.
+Отдельная opt-in настройка `GET`/`PUT /api/notifications/daily` управляет общей ежедневной
+сводкой «На глазок» + «Вики-путь». После 17:00 Алматы тот же cron берёт до 20 активных за
+30 дней подписчиков за проход; `daily_notification_deliveries` с PK `(player_id, date_key)`
+не допускает повторной отправки. Deep-link payload `daily_guess`/`daily_wiki` открывает
+нужный экран, `daily_off` отключает только эту сводку. Блокировка бота также выключает её.
 `SendResult` несёт ограниченный `reasonCode` и `httpStatus`, тело ответа Telegram наружу не
 выносится; сбои пишутся структурным логом с correlation id.
 
@@ -198,7 +204,7 @@ API с идентифицирующим `User-Agent`, ограничивает �
 | `POST /api/solo-runs`, `…/:id/answer`, `…/:id/hammer`, `GET …/:id` | Старт, круг, удар, продолжение |
 | `GET /api/solo-leaderboard` | Таблица дня |
 | `POST /api/solo-runs/:id/invite`, `…/:id/rematch`, `GET /api/rematch/:id` | «Позвать друга», реванш |
-| `GET`/`PUT /api/notifications/outbid` | Согласие на уведомления |
+| `GET`/`PUT /api/notifications/outbid`, `…/daily` | Настройки уведомлений |
 | `GET /api/my-runs`, `GET /api/profile` | История (курсор), сводка |
 | `GET /api/tiebreaker/today`, `POST /api/tiebreaker/answer` | «На глазок» |
 | `GET /api/wiki-path/today`, `POST …/start`, `GET …/runs/:id`, `POST …/:id/click`, `GET …/board` | «Вики-путь» |
@@ -222,6 +228,7 @@ D1, схема — `apps/api/migrations/` (`0001_schema.sql` + новые фай
 момент удара `active_elapsed_ms`, выведенное расстояние), `player_mistakes`,
 `player_notification_prefs`, `rematch_invites`, `last_stand_runs`, `question_reports`,
 `analytics_events`, `tiebreaker_questions`, `tiebreaker_answers`, `top_ten_notices`,
+`daily_notification_deliveries`,
 `wiki_path_challenges`, `wiki_path_page_revisions`, `wiki_path_page_refs`,
 `wiki_path_challenge_targets`, `wiki_path_runs`.
 Строки удалённой гонки (`race-to-100-v3`) остались как legacy с NULL-условиями и в пул не

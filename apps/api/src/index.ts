@@ -17,6 +17,7 @@ import { registerProfileRoutes } from './profile/profile';
 import { registerTelemetryRoutes } from './telemetry/telemetry';
 import { registerTiebreakerRoutes } from './tiebreaker/tiebreaker';
 import { registerWikiPathRoutes } from './wikiPath/wikiPath';
+import { registerDailyNotificationRoutes, sendDailyChallengeDigests } from './notifications/daily';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -33,6 +34,7 @@ registerProfileRoutes(app);
 registerTelemetryRoutes(app);
 registerTiebreakerRoutes(app);
 registerWikiPathRoutes(app);
+registerDailyNotificationRoutes(app);
 registerSoloRunRoutes(app);
 registerTrainingRoutes(app);
 registerFriendInviteRoutes(app);
@@ -41,8 +43,12 @@ registerLastStandRoutes(app);
 export { validateTelegramInitData } from './auth/telegram';
 // Тот же Hono-app (fetch и app.request не меняются) плюс плановый обработчик cron.
 export default Object.assign(app, {
-  async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
-    const summary = await releaseExpiredRematchInvites(env.DB, Date.now());
-    console.log('rematch expiry', JSON.stringify(summary));
+  async scheduled(controller: ScheduledController, env: Env): Promise<void> {
+    const now = controller.scheduledTime || Date.now();
+    const [expiry, digest] = await Promise.all([
+      releaseExpiredRematchInvites(env.DB, now),
+      sendDailyChallengeDigests(env, now),
+    ]);
+    console.log('scheduled maintenance', JSON.stringify({ expiry, digest }));
   },
 });

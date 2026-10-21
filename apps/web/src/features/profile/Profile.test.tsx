@@ -52,4 +52,14 @@ describe('server-backed profile', () => {
     expect(html).toContain('>—<');
     expect(html).not.toContain('этом устройстве');
   });
+
+  it('offers the opt-in daily digest only to Telegram players', () => {
+    const state: ProfileState = { status: 'ready', profile: { completedRuns: 1, reachedTargetRuns: 1, bestRounds: 4 } };
+    const telegram = renderToStaticMarkup(
+      <ProfileView playerName="Анна" state={state} onRetry={vi.fn()} telegram />,
+    );
+    expect(telegram).toContain('Ежедневные задания');
+    expect(telegram).toContain('aria-pressed="false"');
+    expect(render(state)).toContain('доступны внутри Telegram');
+  });
 });

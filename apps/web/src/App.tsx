@@ -10,7 +10,7 @@ import { readLaunchIntent, type LaunchIntent } from './app/launchIntent';
 import { LastStand } from './features/lastStand/LastStand';
 import { SoloRun, type SoloRematch } from './features/solo/SoloRun';
 import { MyRuns } from './features/myRuns/MyRuns';
-import { SoloBoard } from './features/board/SoloBoard';
+import { SoloBoard, type BoardKind } from './features/board/SoloBoard';
 import { TiebreakerScreen } from './features/tiebreaker/Tiebreaker';
 import { WikiPathScreen } from './features/wikiPath/WikiPathScreen';
 import { useWikiPathToday } from './features/wikiPath/useWikiPathToday';
@@ -35,16 +35,24 @@ const screenWrapperStyle = {
   minWidth: 0,
 };
 
-function WikiPathEntry({ onBack }: { onBack: () => void }) {
+function WikiPathEntry({ onBack, onCompleted }: { onBack: () => void; onCompleted: () => void }) {
   const today = useWikiPathToday();
-  return <WikiPathScreen today={today.state} onRetryToday={today.reload} onBack={onBack} />;
+  return <WikiPathScreen today={today.state} onRetryToday={today.reload} onBack={onBack} onCompleted={onCompleted} />;
 }
 
 export default function App() {
   const game = useGameState();
   const [launchIntent, setLaunchIntent] = useState<LaunchIntent | null>(readLaunchIntent);
+  const launchOverlay = launchIntent?.type === 'rematch'
+    || launchIntent?.type === 'unsubscribe'
+    || launchIntent?.type === 'daily-unsubscribe';
   const closeLaunchIntent = useCallback(() => setLaunchIntent(null), []);
   const [soloRematch, setSoloRematch] = useState<SoloRematch | null>(null);
+  const [boardKind, setBoardKind] = useState<BoardKind>('daily');
+  const openBoard = useCallback((kind: BoardKind = 'daily') => {
+    setBoardKind(kind);
+    game.goToBoard();
+  }, [game.goToBoard]);
   // Тренировка против бота: уровень, с которым открыт экран solo. null — обычный забег.
   const [practiceLevel, setPracticeLevel] = useState<PracticeLevel | null>(null);
   const startRematch = useCallback((inviteId: string, category: CategoryId) => {
@@ -89,13 +97,23 @@ export default function App() {
   const [trainingPlaying, setTrainingPlaying] = useState(false);
   // Тренировка открыта с экрана итога: сразу отработка ошибок. Вкладка снизу открывает меню.
   const [trainingMistakes, setTrainingMistakes] = useState(false);
+
+  useEffect(() => {
+    if (launchIntent?.type === 'daily-tiebreaker') {
+      game.goToTiebreaker();
+      setLaunchIntent(null);
+    } else if (launchIntent?.type === 'daily-wiki-path') {
+      game.goToWikiPath();
+      setLaunchIntent(null);
+    }
+  }, [launchIntent, game.goToTiebreaker, game.goToWikiPath]);
   const goToMistakes = useCallback(() => {
     setTrainingMistakes(true);
     game.goToTraining();
   }, [game.goToTraining]);
   useEffect(() => { setClientErrorScreen(shellPhase); }, [shellPhase]);
   const navTab = navTabForPhase(game.phase);
-  const showNav = navTab !== null && !(game.phase === 'home' && launchIntent) && !(game.phase === 'training' && trainingPlaying);
+  const showNav = navTab !== null && !(game.phase === 'home' && launchOverlay) && !(game.phase === 'training' && trainingPlaying);
   const selectNavTab = useCallback((tab: NavTab) => {
     if (tab === 'home') game.goHome();
     else if (tab === 'myRuns') game.goToMyRuns();
@@ -119,17 +137,17 @@ export default function App() {
     <>
     <main ref={shellRef} className={`app-shell phase-${shellPhase}${showNav ? ' has-nav' : ''}`}>
       <AnimatePresence mode="wait">
-        {game.phase === 'home' && launchIntent && (
+        {game.phase === 'home' && launchIntent && launchOverlay && (
           <motion.div key="launch" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <RematchEntry intent={launchIntent} onStartRematch={startRematch} onClose={closeLaunchIntent} />
           </motion.div>
         )}
 
-        {game.phase === 'home' && !launchIntent && (
+        {game.phase === 'home' && !launchOverlay && (
           <motion.div key="home" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <HomeDashboard
               onSolo={(mode) => startSolo('general', mode)}
-              onBoard={game.goToBoard}
+              onBoard={() => openBoard('daily')}
               onTiebreaker={game.goToTiebreaker}
               onWikiPath={game.goToWikiPath}
             />
@@ -178,7 +196,12 @@ export default function App() {
 
         {game.phase === 'board' && (
           <motion.div key="board" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
-            <SoloBoard onBack={game.goHome} onPlay={(category, mode) => startSolo(category, mode)} />
+            <SoloBoard
+              initialKind={boardKind}
+              onBack={game.goHome}
+              onPlay={(category, mode) => startSolo(category, mode)}
+              onWikiPath={game.goToWikiPath}
+            />
           </motion.div>
         )}
 
@@ -190,7 +213,7 @@ export default function App() {
 
         {game.phase === 'wikiPath' && (
           <motion.div key="wikiPath" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
-            <WikiPathEntry onBack={game.goHome} />
+            <WikiPathEntry onBack={game.goHome} onCompleted={() => openBoard('wikiPath')} />
           </motion.div>
         )}
 

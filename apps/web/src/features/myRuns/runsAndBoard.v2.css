@@ -368,10 +368,10 @@
 }
 
 
-/* «Забег дня / Дуэли»: две таблицы с разным счётом, переключатель-сегмент над вкладками категорий. */
+/* Три таблицы дня с разным счётом: общий переключатель над содержимым выбранной таблицы. */
 .board-kind {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 4px;
   padding: 4px;
   border-radius: 14px;

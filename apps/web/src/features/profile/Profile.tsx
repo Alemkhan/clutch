@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { SoloProfileResponse } from '@clutch/shared';
-import { fetchSoloProfile } from '../../platform/api';
+import { fetchDailyNotifications, fetchSoloProfile, setDailyNotifications } from '../../platform/api';
 import { soloRoundsText } from '../myRuns/myRunsView';
 import { getTelegramIdentity } from '../../platform/telegram';
 import { SoundToggle } from '../../ui/SoundToggle';
@@ -14,9 +14,53 @@ interface ProfileViewProps {
   playerName: string;
   state: ProfileState;
   onRetry: () => void;
+  telegram?: boolean;
 }
 
-export function ProfileView({ playerName, state, onRetry }: ProfileViewProps) {
+type DailySettingState = 'loading' | 'on' | 'off' | 'saving' | 'error';
+
+export function DailyNotificationsToggle() {
+  const [state, setState] = useState<DailySettingState>('loading');
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchDailyNotifications(controller.signal).then(
+      ({ enabled }) => { if (!controller.signal.aborted) setState(enabled ? 'on' : 'off'); },
+      (error: unknown) => {
+        if (!(error instanceof DOMException && error.name === 'AbortError')) setState('error');
+      },
+    );
+    return () => controller.abort();
+  }, []);
+
+  const enabled = state === 'on';
+  const change = () => {
+    if (state === 'loading' || state === 'saving') return;
+    const next = !enabled;
+    setState('saving');
+    setDailyNotifications(next).then(
+      () => setState(next ? 'on' : 'off'),
+      () => setState('error'),
+    );
+  };
+
+  return <>
+    <button
+      type="button"
+      className="sound-toggle-row"
+      aria-pressed={enabled}
+      aria-label={`Ежедневные задания ${enabled ? 'включены' : 'выключены'}`}
+      disabled={state === 'loading' || state === 'saving'}
+      onClick={change}
+    >
+      <span className="sound-toggle-title" aria-hidden="true">Ежедневные задания</span>
+      <span className="sound-toggle-state" aria-hidden="true">{state === 'loading' || state === 'saving' ? '…' : enabled ? 'вкл' : 'выкл'}</span>
+    </button>
+    {state === 'error' && <p className="profile-setting-error" role="alert">Не удалось сохранить настройку. Нажми ещё раз.</p>}
+  </>;
+}
+
+export function ProfileView({ playerName, state, onRetry, telegram = false }: ProfileViewProps) {
   const empty = state.status === 'ready' && state.profile.completedRuns === 0;
 
   return (
@@ -62,6 +106,9 @@ export function ProfileView({ playerName, state, onRetry }: ProfileViewProps) {
 
       <h2 className="section-heading">Настройки</h2>
       <SoundToggle variant="profile" />
+      {telegram
+        ? <DailyNotificationsToggle />
+        : <p className="profile-tag">Ежедневные сообщения доступны внутри Telegram.</p>}
     </section>
   );
 }
@@ -91,6 +138,7 @@ export function Profile() {
       playerName={playerName}
       state={state}
       onRetry={retry}
+      telegram={getTelegramIdentity() !== null}
     />
   );
 }

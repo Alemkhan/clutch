@@ -43,6 +43,7 @@ describe('WikiPathScreen', () => {
         today={{ status: 'absent' }}
         onRetryToday={vi.fn()}
         onBack={vi.fn()}
+        onCompleted={vi.fn()}
       />,
     );
 
@@ -51,6 +52,7 @@ describe('WikiPathScreen', () => {
     expect(result).toContain('class="back-btn"');
     expect(result).not.toContain('<main');
   });
+
 });
 
 describe('wiki article link allowlist', () => {

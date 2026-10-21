@@ -372,6 +372,14 @@ export function setOutbidNotifications(enabled: boolean): Promise<{ enabled: boo
   return apiFetch('/api/notifications/outbid', { method: 'PUT', body: JSON.stringify({ enabled }) });
 }
 
+export function fetchDailyNotifications(signal?: AbortSignal): Promise<{ enabled: boolean }> {
+  return apiFetch('/api/notifications/daily', { method: 'GET' }, signal);
+}
+
+export function setDailyNotifications(enabled: boolean): Promise<{ enabled: boolean }> {
+  return apiFetch('/api/notifications/daily', { method: 'PUT', body: JSON.stringify({ enabled }) });
+}
+
 // ---- «На глазок» ----
 
 /** Вопрос дня и, если игрок уже ответил, вскрытие. Чужого состояния не кэшируем: читаем с сервера каждый раз. */

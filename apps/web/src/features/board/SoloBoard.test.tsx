@@ -1,9 +1,9 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import type { CategoryId, DuelBoardResponse, SoloLeaderboardEntry, SoloLeaderboardResponse, SoloLeaderboardStanding } from '@clutch/shared';
+import type { CategoryId, DuelBoardResponse, SoloLeaderboardEntry, SoloLeaderboardResponse, SoloLeaderboardStanding, WikiPathBoardResponse } from '@clutch/shared';
 import { msUntilDayEnd, resetLabel } from '../tiebreaker/tiebreakerClock';
 import { finishedText, initials, roundsShort } from '../myRuns/myRunsView';
-import { DuelBoardView, SoloBoardView, duelRecord, standingHint, type DuelBoardState, type SoloBoardState } from './SoloBoard';
+import { BoardKindSwitch, DuelBoardView, SoloBoardView, WikiPathBoardView, duelRecord, standingHint, type DuelBoardState, type SoloBoardState, type WikiPathBoardState } from './SoloBoard';
 
 const NOW = Date.UTC(2026, 9, 13, 12, 0, 0);
 
@@ -221,5 +221,47 @@ describe('the duel board', () => {
     const html = renderDuels(board({ entries: [], you: null }));
     expect(html).toContain('Сегодня у тебя ещё нет законченных дуэлей.');
     expect(html).toContain('Сегодня ещё никто не довёл дуэль до конца.');
+  });
+});
+
+describe('the shared Wiki Path board tab', () => {
+  const wikiBoard = (patch: Partial<WikiPathBoardResponse> = {}): WikiPathBoardState => ({
+    status: 'ready',
+    board: {
+      challengeId: 'wiki-2026-10-21',
+      ownRank: 2,
+      entries: [
+        { rank: 1, playerId: 'telegram:1', displayName: 'Аня', clicks: 5, completedAt: 1 },
+        { rank: 2, playerId: 'telegram:2', displayName: 'Бек', clicks: 7, completedAt: 2 },
+        { rank: 2, playerId: 'telegram:3', displayName: 'Алем', clicks: 7, completedAt: 3 },
+      ],
+      ...patch,
+    },
+  });
+  const renderWiki = (state: WikiPathBoardState) => renderToStaticMarkup(
+    <WikiPathBoardView state={state} msLeft={5 * 60 * 60 * 1000} onBack={vi.fn()} onRetry={vi.fn()} onPlay={vi.fn()} />,
+  );
+
+  it('is the third tab of the existing day board', () => {
+    const html = renderToStaticMarkup(<BoardKindSwitch kind="wikiPath" onKind={vi.fn()} />);
+    expect(html).toContain('Забег дня');
+    expect(html).toContain('Дуэли');
+    expect(html).toContain('Вики-путь');
+    expect(html).toContain('aria-selected="true"');
+  });
+
+  it('shows shared places and click counts with the common board rows', () => {
+    const html = renderWiki(wikiBoard());
+    expect(html).toContain('Твоё место сегодня: 2');
+    expect([...html.matchAll(/solo-board-place">(\d+)</g)].map((match) => match[1]))
+      .toEqual(['1', '2', '2']);
+    expect(html).toContain('5 пер.');
+    expect(html).toContain('Меньше переходов — выше');
+  });
+
+  it('offers the route from the empty personal state', () => {
+    const html = renderWiki(wikiBoard({ ownRank: null }));
+    expect(html).toContain('Ты ещё не завершил');
+    expect(html).toMatch(/cta-btn solo-board-play">Вики-путь</);
   });
 });

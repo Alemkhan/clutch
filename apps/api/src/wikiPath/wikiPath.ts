@@ -246,7 +246,6 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
   app.get('/api/wiki-path/board', async (c) => {
     const identity = await authenticate(c, 'wiki-path-board');
     if (identity instanceof Response) return identity;
-    if (identity.kind !== 'telegram') return c.json({ error: 'Telegram account required.', reason: 'telegram_required' }, 403);
     const dateKey = c.req.query('date') ?? dailyKey(Date.now());
     if (!/^\d{4}-\d{2}-\d{2}$/.test(dateKey) || Number.isNaN(Date.parse(`${dateKey}T00:00:00Z`))) {
       return c.json({ error: 'Invalid date.' }, 400);
@@ -258,7 +257,7 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
       playerId: row.player_id, displayName: row.display_name, clicks: row.clicks, completedAt: row.completed_at!,
     })));
     const entries: WikiPathBoardEntry[] = ranked.slice(0, 50);
-    const own = ranked.find((entry) => entry.playerId === identity.playerId);
+    const own = identity.kind === 'telegram' ? ranked.find((entry) => entry.playerId === identity.playerId) : undefined;
     return c.json({ challengeId: challenge.id, entries, ownRank: own?.rank ?? null });
   });
 }

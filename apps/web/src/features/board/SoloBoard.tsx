@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { isCategoryOpen, type CategoryId, type DuelBoardResponse, type SoloLeaderboardResponse, type SoloLeaderboardStanding, type SoloMode } from '@clutch/shared';
-import { fetchDuelBoard, fetchSoloLeaderboard } from '../../platform/api';
+import { isCategoryOpen, type CategoryId, type DuelBoardResponse, type SoloLeaderboardResponse, type SoloLeaderboardStanding, type SoloMode, type WikiPathBoardResponse } from '@clutch/shared';
+import { fetchDuelBoard, fetchSoloLeaderboard, fetchWikiPathBoard } from '../../platform/api';
 import { categoryName, finishedText, initials, roundsShort, soloRoundsText } from '../myRuns/myRunsView';
 import { resetLabel } from '../tiebreaker/tiebreakerClock';
 import { useDayCountdown } from '../tiebreaker/useDayCountdown';
@@ -149,11 +149,15 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
   );
 }
 
-export type BoardKind = 'daily' | 'duels';
+export type BoardKind = 'daily' | 'duels' | 'wikiPath';
 
-/** «Забег дня» и «Дуэли» — две разные таблицы: место по кругам и счёт побед. */
+/** Общий экран трёх таблиц дня: основной забег, дуэли и кратчайший Вики-путь. */
 export function BoardKindSwitch({ kind, onKind }: { kind: BoardKind; onKind: (kind: BoardKind) => void }) {
-  const items: ReadonlyArray<[BoardKind, string]> = [['daily', 'Забег дня'], ['duels', 'Дуэли']];
+  const items: ReadonlyArray<[BoardKind, string]> = [
+    ['daily', 'Забег дня'],
+    ['duels', 'Дуэли'],
+    ['wikiPath', 'Вики-путь'],
+  ];
   return (
     <div className="board-kind" role="tablist" aria-label="Таблица">
       {items.map(([id, label]) => (
@@ -176,6 +180,66 @@ export type DuelBoardState =
   | { status: 'loading' }
   | { status: 'error' }
   | { status: 'ready'; board: DuelBoardResponse };
+
+export type WikiPathBoardState =
+  | { status: 'loading' }
+  | { status: 'error' }
+  | { status: 'ready'; board: WikiPathBoardResponse };
+
+export function WikiPathBoardView({ state, msLeft, onBack, onRetry, onPlay, kindSwitch }: {
+  state: WikiPathBoardState;
+  msLeft: number;
+  onBack: () => void;
+  onRetry: () => void;
+  onPlay: () => void;
+  kindSwitch?: ReactNode;
+}) {
+  return (
+    <section className="solo-board">
+      <ScreenHeader onBack={onBack} title="Таблица дня" />
+      <p className="solo-board-reset">{resetLabel(msLeft)}</p>
+      {kindSwitch}
+
+      {state.status === 'loading' && (
+        <div className="matchmaking-loading" role="status"><span /> Загружаем таблицу</div>
+      )}
+      {state.status === 'error' && (
+        <div className="my-runs-message">
+          <p className="matchmaking-error" role="alert">Не удалось загрузить таблицу. Проверь соединение и попробуй ещё раз.</p>
+          <button type="button" className="cta-btn" onClick={onRetry}>Повторить</button>
+        </div>
+      )}
+      {state.status === 'ready' && <>
+        <div className="solo-board-you">
+          <p className="solo-board-you-text">{state.board.ownRank === null
+            ? 'Ты ещё не завершил сегодняшний Вики-путь.'
+            : `Твоё место сегодня: ${state.board.ownRank}`}</p>
+          {state.board.ownRank === null && (
+            <button type="button" className="cta-btn solo-board-play" onClick={onPlay}>Вики-путь</button>
+          )}
+        </div>
+
+        {state.board.entries.length === 0 ? (
+          <div className="my-runs-message">
+            <p className="matchmaking-error">Сегодня маршрут ещё никто не завершил.</p>
+          </div>
+        ) : <>
+          <ol className="solo-board-list">
+            {state.board.entries.map((entry) => (
+              <li key={entry.playerId} className="solo-board-row">
+                <span className="solo-board-place">{entry.rank}</span>
+                <span className="solo-board-avatar" aria-hidden="true">{initials(entry.displayName)}</span>
+                <span className="solo-board-name" title={entry.displayName}>{entry.displayName}</span>
+                <span className="solo-board-score" aria-label={`${entry.clicks} переходов`}>{entry.clicks} пер.</span>
+              </li>
+            ))}
+          </ol>
+          <p className="solo-board-note">Меньше переходов — выше. При равенстве место общее</p>
+        </>}
+      </>}
+    </section>
+  );
+}
 
 /** Счёт как в UFC: победы–ничьи–поражения. */
 export function duelRecord(entry: { wins: number; draws: number; losses: number }): string {
@@ -248,13 +312,16 @@ export function DuelBoardView({ state, msLeft, onBack, onRetry, onDuel, kindSwit
 interface SoloBoardProps {
   onBack: () => void;
   onPlay: (category: CategoryId, mode: SoloMode) => void;
+  onWikiPath: () => void;
+  initialKind?: BoardKind;
 }
 
-export function SoloBoard({ onBack, onPlay }: SoloBoardProps) {
-  const [kind, setKind] = useState<BoardKind>('daily');
+export function SoloBoard({ onBack, onPlay, onWikiPath, initialKind = 'daily' }: SoloBoardProps) {
+  const [kind, setKind] = useState<BoardKind>(initialKind);
   const [category, setCategory] = useState<CategoryId>('general');
   const [state, setState] = useState<SoloBoardState>({ status: 'loading' });
   const [duels, setDuels] = useState<DuelBoardState>({ status: 'loading' });
+  const [wikiPath, setWikiPath] = useState<WikiPathBoardState>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
   const msLeft = useDayCountdown();
 
@@ -265,11 +332,16 @@ export function SoloBoard({ onBack, onPlay }: SoloBoardProps) {
       fetchSoloLeaderboard(category, controller.signal)
         .then((board) => { if (!controller.signal.aborted) setState({ status: 'ready', board }); })
         .catch(() => { if (!controller.signal.aborted) setState({ status: 'error' }); });
-    } else {
+    } else if (kind === 'duels') {
       setDuels({ status: 'loading' });
       fetchDuelBoard(controller.signal)
         .then((board) => { if (!controller.signal.aborted) setDuels({ status: 'ready', board }); })
         .catch(() => { if (!controller.signal.aborted) setDuels({ status: 'error' }); });
+    } else {
+      setWikiPath({ status: 'loading' });
+      fetchWikiPathBoard(controller.signal)
+        .then((board) => { if (!controller.signal.aborted) setWikiPath({ status: 'ready', board }); })
+        .catch(() => { if (!controller.signal.aborted) setWikiPath({ status: 'error' }); });
     }
     return () => controller.abort();
   }, [kind, category, attempt]);
@@ -284,6 +356,18 @@ export function SoloBoard({ onBack, onPlay }: SoloBoardProps) {
         onBack={onBack}
         onRetry={retry}
         onDuel={() => onPlay('general', 'duel')}
+        kindSwitch={kindSwitch}
+      />
+    );
+  }
+  if (kind === 'wikiPath') {
+    return (
+      <WikiPathBoardView
+        state={wikiPath}
+        msLeft={msLeft}
+        onBack={onBack}
+        onRetry={retry}
+        onPlay={onWikiPath}
         kindSwitch={kindSwitch}
       />
     );

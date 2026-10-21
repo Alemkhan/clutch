@@ -18,7 +18,9 @@ export function trackAppOpened(): void {
   const intent = readLaunchIntent();
   logAnalyticsEvent('app_opened', {
     source: getTelegramIdentity() ? 'telegram' : 'browser',
-    entry: intent?.type === 'rematch' ? 'rematch' : 'direct',
+    entry: intent?.type === 'rematch' ? 'rematch'
+      : intent?.type === 'daily-tiebreaker' || intent?.type === 'daily-wiki-path' ? 'daily_message'
+        : 'direct',
   });
 }
 

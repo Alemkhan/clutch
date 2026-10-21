@@ -1,7 +1,6 @@
 .wp-card,
 .wp-screen .wp-start,
 .wp-completion,
-.wp-board,
 .wp-error {
   display: flex;
   flex-direction: column;
@@ -192,14 +191,6 @@
 .wp-completion-check { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 50%; background: var(--primary); color: white; font-size: 24px; font-weight: 900; }
 .wp-completion > p { margin: 0; line-height: 1.45; }
 .wp-completion > p strong { font-variant-numeric: tabular-nums; }
-.wp-board { width: 100%; gap: 10px; padding: 16px; }
-.wp-board h3 { margin: 0; font-size: 16px; }
-.wp-board ol { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.wp-board li { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; align-items: baseline; gap: 8px; font-size: 13px; }
-.wp-board-rank { font-weight: 800; }
-.wp-board-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.wp-own-rank { margin: 0; font-size: 13px; font-weight: 700; }
-.wp-board-error { color: var(--text-dim); font-size: 13px; }
 
 @media (min-width: 560px) {
   .wp-card { flex-direction: row; align-items: center; justify-content: space-between; }
