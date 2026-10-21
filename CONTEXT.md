@@ -143,13 +143,19 @@ Match HUD показывает личности, проценты и полос�
 
 ## Проверки (2026-10-20)
 
-- `npm test` — **1146/1146** (108 файлов); `npm run build` — успешно
+- `npm test` — **1149/1149** (109 файлов); `npm run build` — успешно
   (web JS 862 КБ / gzip 247 КБ); `npm run content:check` — **26/26**.
 - `npm run test:smoke:local` — успешно на чистой временной D1 из миграций 0001–0006.
 - Production preflight и генерация production Wrangler-конфига — успешно для
   `clutch-api-prod`, `clutch-prod` и `https://clutch-app-ct8.pages.dev`.
 - Production Worker `/api/health` и `/api/ready` отвечают `status: ok`, D1-check — `ok`;
   `npm run smoke:remote` успешно проверил API, Pages и ссылку bundle на Worker.
+- Добавлена локальная Ansible production release automation для Linux/WSL с отдельными
+  подтверждениями production/CI, проверкой `main` и `origin/main`, opt-in миграциями и
+  ignored evidence. YAML, allowlist-загрузчик и 3 его теста проверены; сам playbook и CI
+  workflow пока не запускались на Linux/WSL, облачные команды Ansible не выполнялись.
+- GitHub Actions CI теперь слушает push в `main`; запуск workflow после этой правки ещё не
+  подтверждён.
 - В production D1 загружены 10 вопросов «На глазок» на 2026-10-16…25; read-only
   проверка после импорта подтвердила 10 строк и один вопрос на 2026-10-20.
 - Целевые тесты отказа/перезапуска, сохранения категории и изображений — **102/102**;

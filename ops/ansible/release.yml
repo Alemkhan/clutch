@@ -1,0 +1,479 @@
+---
+- name: Release Clutch to Cloudflare production
+  hosts: release
+  gather_facts: true
+  vars:
+    repo_root: "{{ playbook_dir | dirname | dirname }}"
+    release_config_path: "{{ repo_root }}/apps/api/wrangler.production.generated.jsonc"
+    release_env_path: "{{ repo_root }}/release.env"
+    release_evidence_dir: "{{ repo_root }}/ops/ansible/evidence"
+    release_confirm_production: false
+    release_confirm_ci: false
+    release_apply_migrations: false
+    release_npm_ci: false
+    release_evidence_timestamp: "{{ ansible_date_time.iso8601_micro }}"
+
+  tasks:
+    - name: Initialize evidence fields
+      ansible.builtin.set_fact:
+        release_stage: "initializing"
+        release_environment: {}
+        release_migrations_output: "not run"
+        release_worker_deploy_output: "not run"
+        release_pages_deploy_output: "not run"
+
+    - name: Create ignored local evidence directory
+      ansible.builtin.file:
+        path: "{{ release_evidence_dir }}"
+        state: directory
+        mode: "0700"
+
+    - name: Run guarded production release
+      block:
+        - name: Require Linux or WSL control host
+          ansible.builtin.assert:
+            that:
+              - ansible_system == 'Linux'
+            fail_msg: "Use Ansible from Linux or WSL. Native Windows Ansible is not supported."
+
+        - name: Require explicit production confirmation
+          ansible.builtin.assert:
+            that:
+              - release_confirm_production | bool
+            fail_msg: "Pass -e release_confirm_production=true to authorize production changes."
+
+        - name: Check release inputs exist
+          ansible.builtin.stat:
+            path: "{{ release_env_path }}"
+          register: release_env_stat
+
+        - name: Require ignored release.env
+          ansible.builtin.assert:
+            that:
+              - release_env_stat.stat.exists
+              - release_env_stat.stat.isreg
+            fail_msg: "Create release.env from release.env.example before running this playbook."
+
+        - name: Verify release.env is ignored by Git
+          ansible.builtin.command:
+            argv: [git, check-ignore, --quiet, --, release.env]
+          args:
+            chdir: "{{ repo_root }}"
+          changed_when: false
+
+        - name: Require clean tracked worktree
+          ansible.builtin.command:
+            argv:
+              - git
+              - status
+              - --porcelain
+              - --untracked-files=no
+          args:
+            chdir: "{{ repo_root }}"
+          register: release_git_status
+          changed_when: false
+
+        - name: Require clean tracked files
+          ansible.builtin.assert:
+            that:
+              - release_git_status.stdout | trim == ''
+            fail_msg: "Tracked files or the index have changes. Commit them before releasing."
+
+        - name: Read current branch
+          ansible.builtin.command:
+            argv: [git, branch, --show-current]
+          args:
+            chdir: "{{ repo_root }}"
+          register: release_git_branch
+          changed_when: false
+
+        - name: Require main branch
+          ansible.builtin.assert:
+            that:
+              - release_git_branch.stdout | trim == 'main'
+            fail_msg: "Production releases must run from branch main."
+
+        - name: Refresh origin main before comparing the release commit
+          ansible.builtin.command:
+            argv: [git, fetch, --quiet, origin, main]
+          args:
+            chdir: "{{ repo_root }}"
+          changed_when: false
+
+        - name: Record release commit
+          ansible.builtin.command:
+            argv: [git, rev-parse, HEAD]
+          args:
+            chdir: "{{ repo_root }}"
+          register: release_git_commit
+          changed_when: false
+
+        - name: Store release commit for evidence
+          ansible.builtin.set_fact:
+            release_commit: "{{ release_git_commit.stdout | trim }}"
+
+        - name: Read tracked upstream branch
+          ansible.builtin.command:
+            argv: [git, rev-parse, --abbrev-ref, --symbolic-full-name, "@{upstream}"]
+          args:
+            chdir: "{{ repo_root }}"
+          register: release_git_upstream_name
+          changed_when: false
+
+        - name: Read tracked upstream commit
+          ansible.builtin.command:
+            argv: [git, rev-parse, "@{upstream}"]
+          args:
+            chdir: "{{ repo_root }}"
+          register: release_git_upstream_commit
+          changed_when: false
+
+        - name: Require the pushed origin main commit
+          ansible.builtin.assert:
+            that:
+              - release_git_upstream_name.stdout | trim == 'origin/main'
+              - release_git_upstream_commit.stdout | trim == release_commit
+            fail_msg: "Push the exact release commit to origin/main before production deploy."
+
+        - name: Require explicit confirmation that CI passed
+          ansible.builtin.assert:
+            that:
+              - release_confirm_ci | bool
+            fail_msg: >-
+              Confirm GitHub Actions passed for this exact commit, then pass
+              -e release_confirm_ci=true. This playbook does not query GitHub.
+
+        - name: Check Node and npm are available
+          ansible.builtin.command:
+            argv: [npm, --version]
+          args:
+            chdir: "{{ repo_root }}"
+          changed_when: false
+
+        - name: Read required Node version
+          ansible.builtin.set_fact:
+            release_required_node_version: "{{ lookup('file', repo_root ~ '/.nvmrc') | trim }}"
+
+        - name: Read installed Node version
+          ansible.builtin.command:
+            argv: [node, --version]
+          args:
+            chdir: "{{ repo_root }}"
+          register: release_node_version
+          changed_when: false
+
+        - name: Require the Node version pinned by the repository
+          ansible.builtin.assert:
+            that:
+              - release_node_version.stdout | trim == 'v' ~ release_required_node_version
+            fail_msg: "Use the Node version pinned in .nvmrc ({{ release_required_node_version }})."
+
+        - name: Optionally install locked dependencies
+          ansible.builtin.command:
+            argv: [npm, ci]
+          args:
+            chdir: "{{ repo_root }}"
+          when: release_npm_ci | bool
+
+        - name: Read allowlisted public production settings from release.env
+          ansible.builtin.command:
+            argv:
+              - node
+              - ops/ansible/read-release-env.mjs
+              - "{{ release_env_path }}"
+          args:
+            chdir: "{{ repo_root }}"
+          register: release_env_json
+          changed_when: false
+          no_log: true
+
+        - name: Set production environment for release commands
+          ansible.builtin.set_fact:
+            release_environment: "{{ release_env_json.stdout | from_json }}"
+          no_log: true
+
+        - name: Run test suite
+          ansible.builtin.command:
+            argv: [npm, test]
+          args:
+            chdir: "{{ repo_root }}"
+          environment: "{{ release_environment }}"
+
+        - name: Validate content pack
+          ansible.builtin.command:
+            argv: [npm, run, content:check]
+          args:
+            chdir: "{{ repo_root }}"
+          environment: "{{ release_environment }}"
+
+        - name: Run local Worker smoke test
+          ansible.builtin.command:
+            argv: [npm, run, test:smoke:local]
+          args:
+            chdir: "{{ repo_root }}"
+          environment: "{{ release_environment }}"
+
+        - name: Run production preflight
+          ansible.builtin.command:
+            argv: [npm, run, preflight:production]
+          args:
+            chdir: "{{ repo_root }}"
+          environment: "{{ release_environment }}"
+
+        - name: Check generated config ignore rule
+          ansible.builtin.command:
+            argv:
+              - git
+              - check-ignore
+              - --quiet
+              - --
+              - apps/api/wrangler.production.generated.jsonc
+          args:
+            chdir: "{{ repo_root }}"
+          changed_when: false
+
+        - name: Check whether generated config already exists
+          ansible.builtin.stat:
+            path: "{{ release_config_path }}"
+          register: release_config_stat
+
+        - name: Remove only the verified ignored generated config
+          ansible.builtin.file:
+            path: "{{ release_config_path }}"
+            state: absent
+          when: release_config_stat.stat.exists
+
+        - name: Safely regenerate production Wrangler config
+          ansible.builtin.command:
+            argv: [npm, run, preflight:production:write-config]
+          args:
+            chdir: "{{ repo_root }}"
+          environment: "{{ release_environment }}"
+
+        - name: List production D1 migrations (always)
+          ansible.builtin.command:
+            argv:
+              - npx
+              - wrangler
+              - d1
+              - migrations
+              - list
+              - DB
+              - --remote
+              - --config
+              - "{{ release_config_path }}"
+          args:
+            chdir: "{{ repo_root }}"
+          register: release_migrations_list
+          changed_when: false
+
+        - name: Require no pending migrations unless apply was explicitly requested
+          ansible.builtin.assert:
+            that:
+              - "'No migrations to apply' in release_migrations_list.stdout"
+            fail_msg: >-
+              Wrangler reports pending D1 migrations. Review the list and rerun with
+              -e release_apply_migrations=true to apply them explicitly.
+          when: not (release_apply_migrations | bool)
+
+        - name: Apply production D1 migrations only when explicitly requested
+          ansible.builtin.command:
+            argv:
+              - npx
+              - wrangler
+              - d1
+              - migrations
+              - apply
+              - DB
+              - --remote
+              - --config
+              - "{{ release_config_path }}"
+          args:
+            chdir: "{{ repo_root }}"
+          when: release_apply_migrations | bool
+
+        - name: List production D1 migrations after explicit apply
+          ansible.builtin.command:
+            argv:
+              - npx
+              - wrangler
+              - d1
+              - migrations
+              - list
+              - DB
+              - --remote
+              - --config
+              - "{{ release_config_path }}"
+          args:
+            chdir: "{{ repo_root }}"
+          register: release_migrations_after_apply
+          changed_when: false
+          when: release_apply_migrations | bool
+
+        - name: Require no migrations remain after explicit apply
+          ansible.builtin.assert:
+            that:
+              - "'No migrations to apply' in release_migrations_after_apply.stdout"
+            fail_msg: "D1 still reports pending migrations after apply. Stop the release."
+          when: release_apply_migrations | bool
+
+        - name: Save migration list for local evidence
+          ansible.builtin.set_fact:
+            release_migrations_output: "{{ (release_migrations_after_apply.stdout if release_apply_migrations | bool else release_migrations_list.stdout) | default('') }}"
+
+        - name: Deploy production Worker
+          ansible.builtin.command:
+            argv:
+              - npx
+              - wrangler
+              - deploy
+              - --config
+              - "{{ release_config_path }}"
+          args:
+            chdir: "{{ repo_root }}"
+          register: release_worker_deploy
+
+        - name: Save Worker deployment output for local evidence
+          ansible.builtin.set_fact:
+            release_worker_deploy_output: "{{ release_worker_deploy.stdout | default('') }}"
+
+        - name: Check production Worker health
+          ansible.builtin.uri:
+            url: "{{ release_environment.CLUTCH_PRODUCTION_API_URL }}/api/health"
+            method: GET
+            return_content: true
+            status_code: 200
+          register: release_worker_health
+          retries: 10
+          delay: 6
+          until:
+            - release_worker_health.status | default(0) == 200
+            - release_worker_health.json.status | default('') == 'ok'
+
+        - name: Check production Worker readiness
+          ansible.builtin.uri:
+            url: "{{ release_environment.CLUTCH_PRODUCTION_API_URL }}/api/ready"
+            method: GET
+            return_content: true
+            status_code: 200
+          register: release_worker_ready
+          retries: 10
+          delay: 6
+          until:
+            - release_worker_ready.status | default(0) == 200
+            - release_worker_ready.json.status | default('') == 'ok'
+
+        - name: Require healthy production Worker
+          ansible.builtin.assert:
+            that:
+              - release_worker_health.json.status == 'ok'
+              - release_worker_health.json.environment == 'production'
+              - release_worker_ready.json.status == 'ok'
+              - release_worker_ready.json.environment == 'production'
+              - release_worker_ready.json.checks.d1 == 'ok'
+            fail_msg: "Production Worker health/readiness checks did not pass. Stop the release."
+
+        - name: Create isolated empty env directory for production web build
+          ansible.builtin.tempfile:
+            state: directory
+            prefix: clutch-release-web-env-
+          register: release_empty_env
+
+        - name: Build web with production Vite settings and empty env directory
+          ansible.builtin.command:
+            argv: [npm, run, build]
+          args:
+            chdir: "{{ repo_root }}"
+          environment:
+            CLUTCH_VITE_ENV_DIR: "{{ release_empty_env.path }}"
+            VITE_API_URL: "{{ release_environment.CLUTCH_PRODUCTION_API_URL }}"
+            VITE_TELEGRAM_BOT_LINK: "{{ release_environment.CLUTCH_PRODUCTION_TELEGRAM_BOT_LINK }}"
+
+        - name: Publish web using Cloudflare Pages Direct Upload
+          ansible.builtin.command:
+            argv:
+              - npx
+              - wrangler
+              - pages
+              - deploy
+              - apps/web/dist
+              - --project-name
+              - "{{ release_environment.CLUTCH_PAGES_PROJECT_NAME }}"
+              - --branch
+              - main
+          args:
+            chdir: "{{ repo_root }}"
+          register: release_pages_deploy
+
+        - name: Save Pages deployment output for local evidence
+          ansible.builtin.set_fact:
+            release_pages_deploy_output: "{{ release_pages_deploy.stdout | default('') }}"
+
+        - name: Run remote read-only smoke checks
+          ansible.builtin.command:
+            argv:
+              - npm
+              - run
+              - smoke:remote
+              - --
+              - "{{ release_environment.CLUTCH_PRODUCTION_API_URL }}"
+              - "{{ release_environment.CLUTCH_PRODUCTION_PUBLIC_WEB_ORIGIN }}"
+          args:
+            chdir: "{{ repo_root }}"
+
+        - name: Mark release automation complete
+          ansible.builtin.set_fact:
+            release_stage: "remote-smoke-passed"
+
+      rescue:
+        - name: Mark release automation failed
+          ansible.builtin.set_fact:
+            release_stage: "failed at or before {{ ansible_failed_task.name | default('unknown task') }}"
+
+        - name: Stop after recording failure state
+          ansible.builtin.fail:
+            msg: "Production release stopped; local evidence will record the last failed stage."
+
+      always:
+        - name: Remove temporary empty web env directory
+          ansible.builtin.file:
+            path: "{{ release_empty_env.path }}"
+            state: absent
+          when: release_empty_env is defined and release_empty_env.path is defined
+
+        - name: Write local ignored release evidence
+          ansible.builtin.copy:
+            dest: "{{ release_evidence_dir }}/{{ release_evidence_timestamp | regex_replace('[^A-Za-z0-9_.-]', '_') }}.md"
+            mode: "0600"
+            content: |
+              # Clutch production release automation
+
+              - Started: {{ release_evidence_timestamp }}
+              - Stage: {{ release_stage | default('initialization failed') }}
+              - Branch: {{ release_git_branch.stdout | default('not checked') | trim }}
+              - Commit: {{ release_commit | default('not checked') }}
+              - Upstream: {{ release_git_upstream_name.stdout | default('not checked') | trim }}
+              - CI explicitly confirmed: {{ release_confirm_ci | bool }}
+              - D1 migrations explicitly applied: {{ release_apply_migrations | bool }}
+              - Worker URL: {{ release_environment.CLUTCH_PRODUCTION_API_URL | default('not loaded') }}
+              - Pages project: {{ release_environment.CLUTCH_PAGES_PROJECT_NAME | default('not loaded') }}
+
+              ## Worker deploy output
+
+              ```text
+              {{ release_worker_deploy_output | default('not run') }}
+              ```
+
+              ## D1 migration list
+
+              ```text
+              {{ release_migrations_output | default('not run') }}
+              ```
+
+              ## Pages deploy output
+
+              ```text
+              {{ release_pages_deploy_output | default('not run') }}
+              ```
+
+              This local artifact does not update docs/RELEASE.md release evidence.

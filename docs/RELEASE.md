@@ -250,6 +250,48 @@ Rollback сразу меняет активную версию
 выпустить исправляющую forward migration; восстановление из backup/Time Travel — отдельное
 аварийное решение. Worker rollback не чинит удалённые или несовместимо изменённые ресурсы.
 
+## Ansible release automation (Linux/WSL)
+
+Полный выпуск можно выполнить локальным Ansible control host на Linux или WSL. Native
+Windows Ansible не поддерживается. Playbook работает только с `localhost`, запускает те же
+проверки, читает только публичные production-настройки из ignored `release.env`, формирует
+production Wrangler config, всегда показывает удалённый список D1 migrations, развёртывает
+Worker и Pages Direct Upload, затем запускает read-only remote smoke. Cloudflare OAuth login
+и production Worker secrets настраиваются отдельно; automation не создаёт, не копирует и не
+меняет секреты.
+
+Из корня репозитория в Linux/WSL, где доступны Node 22, npm и Ansible:
+
+```sh
+ANSIBLE_CONFIG=ops/ansible/ansible.cfg \
+ansible-playbook -i ops/ansible/inventory.ini ops/ansible/release.yml \
+  -e release_confirm_production=true -e release_confirm_ci=true
+```
+
+`release.env` должен находиться в корне репозитория. Команда проверит чистоту tracked-файлов,
+ветку `main`, обновит `origin/main`, проверит совпадение с `HEAD` и запишет hash коммита.
+`release_confirm_ci=true` — отдельное ручное подтверждение, что GitHub Actions прошёл именно
+на этом commit; Ansible сам GitHub не опрашивает. Незатреканные файлы не блокируют выпуск.
+`npm ci` пропускается по умолчанию; включите его через `-e release_npm_ci=true`. После
+проверки списка migrations они применяются только при явном `-e release_apply_migrations=true`:
+
+```sh
+ANSIBLE_CONFIG=ops/ansible/ansible.cfg \
+ansible-playbook -i ops/ansible/inventory.ini ops/ansible/release.yml \
+  -e release_confirm_production=true -e release_confirm_ci=true \
+  -e release_apply_migrations=true -e release_npm_ci=true
+```
+
+Перед регенерацией playbook проверяет, что `apps/api/wrangler.production.generated.jsonc`
+игнорируется Git, и удаляет только этот точный generated-файл, поскольку штатный генератор
+отказывается перезаписывать его. Временный пустой env-каталог используется для production web
+build. Локальный отчёт каждого запуска сохраняется в ignored `ops/ansible/evidence/`; он не
+переписывает этот раздел `Release evidence`. После выпуска владелец вручную проверяет
+результат и дополняет evidence, а затем выполняет walkthrough на настоящем телефоне.
+
+GitHub Actions CI запускается при push в `main` (и на pull request); он проверяет код,
+но не выполняет production deploy.
+
 ## Release evidence
 
 После выпуска сохраните:
