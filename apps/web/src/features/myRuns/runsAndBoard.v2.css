@@ -367,6 +367,55 @@
   text-align: center;
 }
 
+.wiki-path-board-item + .wiki-path-board-item {
+  border-top: 1px solid var(--line);
+}
+
+.wiki-path-board-row {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.wiki-path-board-row[aria-expanded="true"] .wiki-path-board-chevron {
+  transform: rotate(180deg);
+}
+
+.wiki-path-board-chevron {
+  flex: none;
+  color: var(--text-dim);
+  transition: transform 160ms ease;
+}
+
+.wiki-path-board-route {
+  padding: 0 20px 16px 80px;
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.wiki-path-board-route p {
+  margin: 0;
+}
+
+.wiki-path-board-route ol {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wiki-path-board-chevron {
+    transition: none;
+  }
+}
+
 
 /* Три таблицы дня с разным счётом: общий переключатель над содержимым выбранной таблицы. */
 .board-kind {

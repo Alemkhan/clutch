@@ -3,6 +3,7 @@
 
 import { createHmac, createHash } from 'node:crypto';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { WIKI_PATH_HTML_MAX_LENGTH } from '@clutch/shared';
 import app from '../apps/api/src/index';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
@@ -126,6 +127,23 @@ describe('Wiki Path daily API', () => {
     expect(await json(resume)).toMatchObject({ run: { clicks: 1 }, currentPage: { title: 'Middle' } });
   });
 
+  it('accepts a large Wikipedia article and caps only the HTML sent to the client', async () => {
+    vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
+    const db = database(); addChallenge(db, 'Россия', 'Goal');
+    const largeHtml = `<p>${'x'.repeat(WIKI_PATH_HTML_MAX_LENGTH + 25_000)}</p>`;
+    mockWiki({
+      'Россия': { pageid: 9, revid: 99, title: 'Россия', text: largeHtml, links: [{ ns: 0, title: 'Goal' }] },
+      Goal: { pageid: 3, revid: 33, title: 'Goal' },
+    });
+    const player = guest('large-article');
+    const response = await app.request('/api/wiki-path/start', { method: 'POST', headers: { authorization: player.authorization } }, env(db));
+    expect(response.status).toBe(201);
+    const body = await json(response);
+    expect(body.currentPage).toMatchObject({ pageId: '9', title: 'Россия' });
+    expect(body.currentPage.html).toHaveLength(WIKI_PATH_HTML_MAX_LENGTH);
+    expect(db.sqlite.prepare('SELECT title FROM wiki_path_page_revisions WHERE page_id = 9').get()).toEqual({ title: 'Россия' });
+  });
+
   it('recognizes a canonical redirect as the goal and ranks Telegram players with shared places', async () => {
     vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
     const db = database(); addChallenge(db, 'Start', 'Goal alias');
@@ -164,6 +182,35 @@ describe('Wiki Path daily API', () => {
     expect(guestBoardBody.ownRank).toBeNull();
     expect(guestBoardBody.entries.map((entry: { playerId: string }) => entry.playerId))
       .toEqual([b.playerId, a.playerId, c.playerId]);
+  });
+
+  it('reveals the ordered article chain for a completed board entry', async () => {
+    vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
+    const db = database(); addChallenge(db);
+    mockWiki({
+      Start: { pageid: 1, revid: 11, title: 'Start', links: [{ ns: 0, title: 'Middle' }] },
+      Middle: { pageid: 2, revid: 22, title: 'Middle', links: [{ ns: 0, title: 'Goal' }] },
+      Goal: { pageid: 3, revid: 33, title: 'Goal' },
+    });
+    const player = await telegram(2001);
+    const viewer = guest('route-viewer');
+    const start = await app.request('/api/wiki-path/start', { method: 'POST', headers: { authorization: player.authorization } }, env(db));
+    const started = await json(start);
+    const middle = await app.request(`/api/wiki-path/runs/${started.run.runId}/click`, {
+      method: 'POST', headers: { authorization: player.authorization, 'content-type': 'application/json' }, body: JSON.stringify({ title: 'Middle' }),
+    }, env(db));
+    expect(middle.status).toBe(200);
+    const finish = await app.request(`/api/wiki-path/runs/${started.run.runId}/click`, {
+      method: 'POST', headers: { authorization: player.authorization, 'content-type': 'application/json' }, body: JSON.stringify({ title: 'Goal' }),
+    }, env(db));
+    expect(finish.status).toBe(200);
+
+    const board = await app.request(`/api/wiki-path/board?date=${TODAY}`, { headers: { authorization: viewer.authorization } }, env(db));
+    const boardBody = await json(board);
+    expect(boardBody.entries[0]).toMatchObject({ runId: started.run.runId, clicks: 2 });
+    const route = await app.request(`/api/wiki-path/board/runs/${started.run.runId}`, { headers: { authorization: viewer.authorization } }, env(db));
+    expect(route.status).toBe(200);
+    expect(await json(route)).toEqual({ runId: started.run.runId, displayName: 'Player 2001', clicks: 2, titles: ['Start', 'Middle', 'Goal'] });
   });
 
   it('maps Wikimedia failures to gateway and timeout statuses', async () => {

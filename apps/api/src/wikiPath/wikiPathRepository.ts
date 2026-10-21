@@ -47,6 +47,25 @@ export async function findPlayerRun(db: D1Database, playerId: string, dateKey: s
     .bind(playerId, dateKey).first<WikiRunRow>();
 }
 
+export async function findPublicCompletedRun(db: D1Database, runId: string, dateKey: string): Promise<WikiRunRow | null> {
+  return db.prepare(`SELECT * FROM wiki_path_runs
+    WHERE id = ?1 AND date_key = ?2 AND status = 'completed' AND player_id LIKE 'telegram:%'`)
+    .bind(runId, dateKey).first<WikiRunRow>();
+}
+
+export async function pathTitles(db: D1Database, challengeId: string, path: readonly string[]): Promise<string[] | null> {
+  if (path.length === 0 || !path.every((pageId) => /^\d+$/.test(pageId))) return null;
+  const result = await db.prepare(`SELECT s.page_id, s.title FROM wiki_path_page_refs a
+    JOIN wiki_path_page_revisions s ON s.page_id = a.page_id AND s.revision_id = a.revision_id
+    WHERE a.challenge_id = ?1
+      AND s.page_id IN (SELECT CAST(value AS INTEGER) FROM json_each(?2))
+    GROUP BY s.page_id, s.title`)
+    .bind(challengeId, JSON.stringify(path)).all<{ page_id: number; title: string }>();
+  const titles = new Map((result.results ?? []).map((row) => [String(row.page_id), row.title]));
+  const resolved = path.map((pageId) => titles.get(pageId));
+  return resolved.every((title): title is string => typeof title === 'string') ? resolved : null;
+}
+
 export async function getSnapshot(db: D1Database, pageId: number, revisionId?: number): Promise<StoredWikiPage | null> {
   const query = revisionId === undefined
     ? 'SELECT * FROM wiki_path_page_revisions WHERE page_id = ?1 ORDER BY revision_id DESC LIMIT 1'
@@ -133,9 +152,9 @@ export function titleKey(title: string): string {
   return title.replaceAll('_', ' ').trim().replace(/\s+/g, ' ').normalize('NFC').toLocaleLowerCase('ru-RU');
 }
 
-export async function listBoard(db: D1Database, dateKey: string, limit = 50): Promise<Array<Pick<WikiRunRow, 'player_id' | 'display_name' | 'clicks' | 'completed_at'>>> {
-  const result = await db.prepare(`SELECT player_id, display_name, clicks, completed_at FROM wiki_path_runs
+export async function listBoard(db: D1Database, dateKey: string, limit = 50): Promise<Array<Pick<WikiRunRow, 'id' | 'player_id' | 'display_name' | 'clicks' | 'completed_at'>>> {
+  const result = await db.prepare(`SELECT id, player_id, display_name, clicks, completed_at FROM wiki_path_runs
     WHERE date_key = ?1 AND status = 'completed' AND player_id LIKE 'telegram:%'
-    ORDER BY clicks ASC, completed_at ASC, player_id ASC LIMIT ?2`).bind(dateKey, limit).all<Pick<WikiRunRow, 'player_id' | 'display_name' | 'clicks' | 'completed_at'>>();
+    ORDER BY clicks ASC, completed_at ASC, player_id ASC LIMIT ?2`).bind(dateKey, limit).all<Pick<WikiRunRow, 'id' | 'player_id' | 'display_name' | 'clicks' | 'completed_at'>>();
   return result.results ?? [];
 }

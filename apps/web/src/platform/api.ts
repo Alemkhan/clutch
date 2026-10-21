@@ -27,6 +27,7 @@ import type {
   TiebreakerTodayResponse,
   TrainingQuestionsResponse,
   WikiPathBoardResponse,
+  WikiPathBoardRouteResponse,
   WikiPathClickRequest,
   WikiPathClickResponse,
   WikiPathTodayResponse,
@@ -421,6 +422,11 @@ export function clickWikiPath(
 /** Таблица завершивших сегодняшний маршрут. */
 export function fetchWikiPathBoard(signal?: AbortSignal): Promise<WikiPathBoardResponse> {
   return apiFetch('/api/wiki-path/board', { method: 'GET' }, signal);
+}
+
+/** Цепочка статей завершённого результата из таблицы дня. */
+export function fetchWikiPathBoardRoute(runId: string, signal?: AbortSignal): Promise<WikiPathBoardRouteResponse> {
+  return apiFetch(`/api/wiki-path/board/runs/${encodeURIComponent(runId)}`, { method: 'GET' }, signal);
 }
 
 // ---- Репорты и аналитика ----

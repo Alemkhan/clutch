@@ -3,7 +3,7 @@ export interface WikiLink {
   label: string;
 }
 
-import { WIKI_PATH_ALLOWED_LINKS_MAX_COUNT, WIKI_PATH_HTML_MAX_LENGTH, WIKI_PATH_TITLE_MAX_LENGTH } from '@clutch/shared';
+import { WIKI_PATH_ALLOWED_LINKS_MAX_COUNT, WIKI_PATH_TITLE_MAX_LENGTH } from '@clutch/shared';
 
 export interface WikiPageSnapshot {
   pageId: number;
@@ -101,8 +101,7 @@ export async function fetchWikiPage(title: string): Promise<WikiPageSnapshot> {
     || typeof page.title !== 'string' || typeof page.text !== 'string' || !Array.isArray(page.links)) {
     throw new WikiPageError('wiki_unavailable');
   }
-  if (page.title.length > WIKI_PATH_TITLE_MAX_LENGTH
-    || new TextEncoder().encode(page.text).byteLength > WIKI_PATH_HTML_MAX_LENGTH) {
+  if (page.title.length > WIKI_PATH_TITLE_MAX_LENGTH) {
     throw new WikiPageError('wiki_unavailable');
   }
   const links = new Map<string, WikiLink>();
@@ -125,8 +124,7 @@ export async function fetchWikiRevision(revisionId: number): Promise<Omit<WikiPa
   const page = await requestParsedPage(query, true);
   if (!Number.isSafeInteger(page.pageid) || page.revid !== revisionId
     || typeof page.title !== 'string' || typeof page.text !== 'string'
-    || page.title.length > WIKI_PATH_TITLE_MAX_LENGTH
-    || new TextEncoder().encode(page.text).byteLength > WIKI_PATH_HTML_MAX_LENGTH) {
+    || page.title.length > WIKI_PATH_TITLE_MAX_LENGTH) {
     throw new WikiPageError('wiki_unavailable');
   }
   return { pageId: page.pageid!, title: page.title, revisionId, html: page.text };

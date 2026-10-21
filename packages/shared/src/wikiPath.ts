@@ -1,7 +1,8 @@
 /** Shared client/server contracts for the daily Wikipedia navigation challenge. */
 
 export const WIKI_PATH_TITLE_MAX_LENGTH = 300;
-// Leaves headroom under D1's 2 MB maximum row size for the link allowlist and metadata.
+// Maximum HTML characters returned to the client. HTML is not persisted in D1;
+// the Worker applies a separate byte limit to the complete MediaWiki response.
 export const WIKI_PATH_HTML_MAX_LENGTH = 1_500_000;
 export const WIKI_PATH_ALLOWED_LINKS_MAX_COUNT = 2_500;
 
@@ -70,6 +71,7 @@ export interface WikiPathClickResponse {
 
 export interface WikiPathBoardEntry {
   rank: number;
+  runId: string;
   playerId: string;
   displayName: string;
   clicks: number;
@@ -80,6 +82,14 @@ export interface WikiPathBoardResponse {
   challengeId: string;
   entries: WikiPathBoardEntry[];
   ownRank: number | null;
+}
+
+/** Public article chain for one completed entry in today's Wiki Path board. */
+export interface WikiPathBoardRouteResponse {
+  runId: string;
+  displayName: string;
+  clicks: number;
+  titles: string[];
 }
 
 /** Assign competition ranks (1, 2, 2, 4) after sorting by fewest clicks. */

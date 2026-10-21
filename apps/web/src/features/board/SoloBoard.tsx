@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { isCategoryOpen, type CategoryId, type DuelBoardResponse, type SoloLeaderboardResponse, type SoloLeaderboardStanding, type SoloMode, type WikiPathBoardResponse } from '@clutch/shared';
-import { fetchDuelBoard, fetchSoloLeaderboard, fetchWikiPathBoard } from '../../platform/api';
+import { isCategoryOpen, type CategoryId, type DuelBoardResponse, type SoloLeaderboardResponse, type SoloLeaderboardStanding, type SoloMode, type WikiPathBoardResponse, type WikiPathBoardRouteResponse } from '@clutch/shared';
+import { fetchDuelBoard, fetchSoloLeaderboard, fetchWikiPathBoard, fetchWikiPathBoardRoute } from '../../platform/api';
 import { categoryName, finishedText, initials, roundsShort, soloRoundsText } from '../myRuns/myRunsView';
 import { resetLabel } from '../tiebreaker/tiebreakerClock';
 import { useDayCountdown } from '../tiebreaker/useDayCountdown';
@@ -186,6 +186,21 @@ export type WikiPathBoardState =
   | { status: 'error' }
   | { status: 'ready'; board: WikiPathBoardResponse };
 
+type WikiPathRouteState =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'error' }
+  | { status: 'ready'; route: WikiPathBoardRouteResponse };
+
+export function wikiPathClicksText(clicks: number): string {
+  const mod100 = clicks % 100;
+  const mod10 = clicks % 10;
+  const word = mod100 >= 11 && mod100 <= 14
+    ? 'переходов'
+    : mod10 === 1 ? 'переход' : mod10 >= 2 && mod10 <= 4 ? 'перехода' : 'переходов';
+  return `${clicks} ${word}`;
+}
+
 export function WikiPathBoardView({ state, msLeft, onBack, onRetry, onPlay, kindSwitch }: {
   state: WikiPathBoardState;
   msLeft: number;
@@ -194,6 +209,23 @@ export function WikiPathBoardView({ state, msLeft, onBack, onRetry, onPlay, kind
   onPlay: () => void;
   kindSwitch?: ReactNode;
 }) {
+  const [selectedRunId, setSelectedRunId] = useState<string | null>(null);
+  const [routeState, setRouteState] = useState<WikiPathRouteState>({ status: 'idle' });
+  const [routeAttempt, setRouteAttempt] = useState(0);
+
+  useEffect(() => {
+    if (!selectedRunId) {
+      setRouteState({ status: 'idle' });
+      return undefined;
+    }
+    const controller = new AbortController();
+    setRouteState({ status: 'loading' });
+    fetchWikiPathBoardRoute(selectedRunId, controller.signal)
+      .then((route) => { if (!controller.signal.aborted) setRouteState({ status: 'ready', route }); })
+      .catch(() => { if (!controller.signal.aborted) setRouteState({ status: 'error' }); });
+    return () => controller.abort();
+  }, [selectedRunId, routeAttempt]);
+
   return (
     <section className="solo-board">
       <ScreenHeader onBack={onBack} title="Таблица дня" />
@@ -226,11 +258,33 @@ export function WikiPathBoardView({ state, msLeft, onBack, onRetry, onPlay, kind
         ) : <>
           <ol className="solo-board-list">
             {state.board.entries.map((entry) => (
-              <li key={entry.playerId} className="solo-board-row">
-                <span className="solo-board-place">{entry.rank}</span>
-                <span className="solo-board-avatar" aria-hidden="true">{initials(entry.displayName)}</span>
-                <span className="solo-board-name" title={entry.displayName}>{entry.displayName}</span>
-                <span className="solo-board-score" aria-label={`${entry.clicks} переходов`}>{entry.clicks} пер.</span>
+              <li key={entry.runId} className="wiki-path-board-item">
+                <button
+                  type="button"
+                  className="solo-board-row wiki-path-board-row"
+                  aria-expanded={selectedRunId === entry.runId}
+                  onClick={() => setSelectedRunId((current) => current === entry.runId ? null : entry.runId)}
+                >
+                  <span className="solo-board-place">{entry.rank}</span>
+                  <span className="solo-board-avatar" aria-hidden="true">{initials(entry.displayName)}</span>
+                  <span className="solo-board-name" title={entry.displayName}>{entry.displayName}</span>
+                  <span className="solo-board-score">{wikiPathClicksText(entry.clicks)}</span>
+                  <span className="wiki-path-board-chevron" aria-hidden="true">⌄</span>
+                </button>
+                {selectedRunId === entry.runId && (
+                  <div className="wiki-path-board-route" aria-live="polite">
+                    {routeState.status === 'loading' && <p>Загружаем путь…</p>}
+                    {routeState.status === 'error' && <>
+                      <p role="alert">Не удалось загрузить путь.</p>
+                      <button type="button" className="ghost-btn" onClick={() => setRouteAttempt((value) => value + 1)}>Повторить</button>
+                    </>}
+                    {routeState.status === 'ready' && (
+                      <ol aria-label={`Путь игрока ${routeState.route.displayName}`}>
+                        {routeState.route.titles.map((title, index) => <li key={`${index}-${title}`}>{title}</li>)}
+                      </ol>
+                    )}
+                  </div>
+                )}
               </li>
             ))}
           </ol>

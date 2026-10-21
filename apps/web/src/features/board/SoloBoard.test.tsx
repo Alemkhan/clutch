@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { CategoryId, DuelBoardResponse, SoloLeaderboardEntry, SoloLeaderboardResponse, SoloLeaderboardStanding, WikiPathBoardResponse } from '@clutch/shared';
 import { msUntilDayEnd, resetLabel } from '../tiebreaker/tiebreakerClock';
 import { finishedText, initials, roundsShort } from '../myRuns/myRunsView';
-import { BoardKindSwitch, DuelBoardView, SoloBoardView, WikiPathBoardView, duelRecord, standingHint, type DuelBoardState, type SoloBoardState, type WikiPathBoardState } from './SoloBoard';
+import { BoardKindSwitch, DuelBoardView, SoloBoardView, WikiPathBoardView, duelRecord, standingHint, wikiPathClicksText, type DuelBoardState, type SoloBoardState, type WikiPathBoardState } from './SoloBoard';
 
 const NOW = Date.UTC(2026, 9, 13, 12, 0, 0);
 
@@ -231,9 +231,9 @@ describe('the shared Wiki Path board tab', () => {
       challengeId: 'wiki-2026-10-21',
       ownRank: 2,
       entries: [
-        { rank: 1, playerId: 'telegram:1', displayName: 'Аня', clicks: 5, completedAt: 1 },
-        { rank: 2, playerId: 'telegram:2', displayName: 'Бек', clicks: 7, completedAt: 2 },
-        { rank: 2, playerId: 'telegram:3', displayName: 'Алем', clicks: 7, completedAt: 3 },
+        { rank: 1, runId: 'run-1', playerId: 'telegram:1', displayName: 'Аня', clicks: 5, completedAt: 1 },
+        { rank: 2, runId: 'run-2', playerId: 'telegram:2', displayName: 'Бек', clicks: 7, completedAt: 2 },
+        { rank: 2, runId: 'run-3', playerId: 'telegram:3', displayName: 'Алем', clicks: 7, completedAt: 3 },
       ],
       ...patch,
     },
@@ -255,8 +255,12 @@ describe('the shared Wiki Path board tab', () => {
     expect(html).toContain('Твоё место сегодня: 2');
     expect([...html.matchAll(/solo-board-place">(\d+)</g)].map((match) => match[1]))
       .toEqual(['1', '2', '2']);
-    expect(html).toContain('5 пер.');
+    expect(html).toContain('5 переходов');
+    expect(html).toContain('aria-expanded="false"');
     expect(html).toContain('Меньше переходов — выше');
+    expect(wikiPathClicksText(1)).toBe('1 переход');
+    expect(wikiPathClicksText(2)).toBe('2 перехода');
+    expect(wikiPathClicksText(11)).toBe('11 переходов');
   });
 
   it('offers the route from the empty personal state', () => {

@@ -6,6 +6,7 @@ import {
   WIKI_PATH_HTML_MAX_LENGTH,
   WIKI_PATH_TITLE_MAX_LENGTH,
   type WikiPathBoardEntry,
+  type WikiPathBoardRouteResponse,
   type WikiPathChallenge,
   type WikiPathPage,
   type WikiPathRunSummary,
@@ -21,11 +22,13 @@ import {
   findChallenge,
   findChallengeTarget,
   findPlayerRun,
+  findPublicCompletedRun,
   findRun,
   getSnapshot,
   getSnapshotByTitle,
   isReplayedTarget,
   listBoard,
+  pathTitles,
   saveChallengeTarget,
   saveSnapshot,
   titleKey,
@@ -254,10 +257,23 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
     if (!challenge) return c.json({ error: 'Challenge not found.', reason: 'no_challenge_today' }, 404);
     const rows = await listBoard(c.env.DB, dateKey, 1000);
     const ranked = rankWikiPathEntries(rows.map((row) => ({
-      playerId: row.player_id, displayName: row.display_name, clicks: row.clicks, completedAt: row.completed_at!,
+      runId: row.id, playerId: row.player_id, displayName: row.display_name, clicks: row.clicks, completedAt: row.completed_at!,
     })));
     const entries: WikiPathBoardEntry[] = ranked.slice(0, 50);
     const own = identity.kind === 'telegram' ? ranked.find((entry) => entry.playerId === identity.playerId) : undefined;
     return c.json({ challengeId: challenge.id, entries, ownRank: own?.rank ?? null });
+  });
+
+  app.get('/api/wiki-path/board/runs/:runId', async (c) => {
+    const identity = await authenticate(c, 'wiki-path-board-route');
+    if (identity instanceof Response) return identity;
+    const dateKey = dailyKey(Date.now());
+    const run = await findPublicCompletedRun(c.env.DB, c.req.param('runId'), dateKey);
+    if (!run) return c.json({ error: 'Completed board route not found.' }, 404);
+    const path = parsePath(run);
+    if (!path || path.length !== run.clicks + 1) return c.json({ error: 'Stored Wiki Path run is invalid.' }, 409);
+    const titles = await pathTitles(c.env.DB, run.challenge_id, path);
+    if (!titles) return c.json({ error: 'Stored Wiki Path route is incomplete.' }, 409);
+    return c.json({ runId: run.id, displayName: run.display_name, clicks: run.clicks, titles } satisfies WikiPathBoardRouteResponse);
   });
 }

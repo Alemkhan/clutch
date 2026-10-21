@@ -17,10 +17,10 @@ describe('wiki path shared contracts', () => {
 
   it('sorts board entries by click count and gives ties the same rank', () => {
     const ranked = rankWikiPathEntries([
-      { playerId: 'c', displayName: 'C', clicks: 5, completedAt: 300 },
-      { playerId: 'a', displayName: 'A', clicks: 2, completedAt: 100 },
-      { playerId: 'b', displayName: 'B', clicks: 2, completedAt: 200 },
-      { playerId: 'd', displayName: 'D', clicks: 7, completedAt: 400 },
+      { runId: 'run-c', playerId: 'c', displayName: 'C', clicks: 5, completedAt: 300 },
+      { runId: 'run-a', playerId: 'a', displayName: 'A', clicks: 2, completedAt: 100 },
+      { runId: 'run-b', playerId: 'b', displayName: 'B', clicks: 2, completedAt: 200 },
+      { runId: 'run-d', playerId: 'd', displayName: 'D', clicks: 7, completedAt: 400 },
     ]);
     expect(ranked.map(({ playerId, rank }) => [playerId, rank])).toEqual([
       ['a', 1], ['b', 1], ['c', 3], ['d', 4],
@@ -29,8 +29,8 @@ describe('wiki path shared contracts', () => {
 
   it('keeps input order for tied entries and does not mutate the input', () => {
     const entries = [
-      { playerId: 'second', displayName: 'Second', clicks: 3, completedAt: 20 },
-      { playerId: 'first', displayName: 'First', clicks: 3, completedAt: 10 },
+      { runId: 'run-second', playerId: 'second', displayName: 'Second', clicks: 3, completedAt: 20 },
+      { runId: 'run-first', playerId: 'first', displayName: 'First', clicks: 3, completedAt: 10 },
     ];
     const ranked = rankWikiPathEntries(entries);
     expect(ranked.map(({ playerId, rank }) => [playerId, rank])).toEqual([
