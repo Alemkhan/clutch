@@ -4,7 +4,7 @@
 Команды — PowerShell из корня репозитория. Фактическое состояние первого выпуска записано
 ниже и в разделе Release evidence.
 
-**Статус 2026-10-21:** OAuth-авторизация подтверждена; созданы production D1
+**Статус 2026-10-22:** OAuth-авторизация подтверждена; созданы production D1
 `clutch-prod` (`7d4de210-608e-40c1-96d5-26fa18ef475d`) и Direct Upload Pages-проект
 `clutch-app` (`https://clutch-app-ct8.pages.dev`); D1 мигрирована 0001–0009. Production
 preflight прошёл для API `https://clutch-api-prod.kettikteam-official.workers.dev`, оба
@@ -297,17 +297,17 @@ GitHub Actions CI запускается при push в `main` (и на pull req
 После выпуска сохраните:
 
 ```text
-Git commit: 64b56cb27c0dac78f878e4720c770f936ac288ed
-GitHub Actions run: 39645086647 — success
-Worker version/deployment ID: 2c164125-964d-4e9c-9582-698b557dab9d
-Pages deployment URL: https://8f79d540.clutch-app-ct8.pages.dev
+Git commit: 707d7e367c1c09b4d47463ada7e921c060a0997b
+GitHub Actions run: 39656981208 — success
+Worker version/deployment ID: 73368a8d-18c8-420d-b3be-8e4f801a2f9b
+Pages deployment URL: https://68a59512.clutch-app-ct8.pages.dev
 D1 migrations applied: 0001–0009, список неприменённых пуст; 10 вопросов «На глазок» загружены
 Telegram bot username (подтверждено владельцем): @playclutchbot
 Smoke tester/device/Telegram version: не выполнено, нужен настоящий телефон
 npm run smoke:remote result: успешно — health, ready/D1, Pages, Worker URL в bundle
 Smoke result (ручной): не выполнен
-Known limitations: JS bundle 877 КБ (gzip 251 КБ); BotFather и телефонный walkthrough не проверены
-Rollback target: Worker 03300b08-bb92-4eeb-9902-8ec9a5ea04e6; Pages https://b5207fd0.clutch-app-ct8.pages.dev
+Known limitations: JS bundle 879 КБ (gzip 251 КБ); телефонный walkthrough после исправления не выполнен
+Rollback target: Worker 2c164125-964d-4e9c-9582-698b557dab9d; Pages https://8f79d540.clutch-app-ct8.pages.dev
 ```
 
 Без этих данных релиз считается выполненным вручную, но не воспроизводимым.
