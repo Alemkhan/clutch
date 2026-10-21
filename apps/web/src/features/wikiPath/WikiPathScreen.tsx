@@ -17,6 +17,7 @@ export interface WikiPathScreenProps {
   onRetryToday: () => void;
   onBack: () => void;
   onCompleted: () => void;
+  onPageLoaded: () => void;
 }
 
 export async function followApprovedWikiLink(
@@ -30,6 +31,16 @@ export async function followApprovedWikiLink(
   return true;
 }
 
+/** A failed request never notifies the shell; retries notify only after a page is returned. */
+export async function loadWikiPathTransition<T>(
+  request: () => Promise<T>,
+  onPageLoaded: (result: T) => void,
+): Promise<T> {
+  const result = await request();
+  onPageLoaded(result);
+  return result;
+}
+
 function Completion({ run }: { run: WikiPathRunSummary }) {
   return <section className="wp-completion" aria-live="polite">
     <span className="wp-completion-check" aria-hidden="true">✓</span>
@@ -39,7 +50,7 @@ function Completion({ run }: { run: WikiPathRunSummary }) {
   </section>;
 }
 
-export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted }: WikiPathScreenProps) {
+export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted, onPageLoaded }: WikiPathScreenProps) {
   const [screen, setScreen] = useState<ScreenState>({ status: 'idle' });
   const [pendingTitle, setPendingTitle] = useState<string | null>(null);
   const [navigationMessage, setNavigationMessage] = useState('Нажимай только на разрешённые ссылки в статье.');
@@ -76,7 +87,10 @@ export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted }: Wik
     setPendingTitle(title);
     setNavigationMessage(`Открываю «${title}»…`);
     try {
-      const result = await clickWikiPath(run.runId, { title });
+      const result = await loadWikiPathTransition(
+        () => clickWikiPath(run.runId, { title }),
+        (response) => { if (response.run.status === 'in_progress') onPageLoaded(); },
+      );
       if (result.run.status === 'completed') {
         const activeChallenge = screen.status === 'active' ? screen.challenge : challenge;
         if (activeChallenge) setScreen({ status: 'completed', challenge: activeChallenge, run: result.run });

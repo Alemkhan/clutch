@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import type { WikiPathTodayResponse } from '@clutch/shared';
 import { WikiPathCard } from './WikiPathCard';
 import { allowedWikiTitles, approvedWikiLink, normalizeWikiTitle } from './wikiArticle';
-import { followApprovedWikiLink, WikiPathScreen } from './WikiPathScreen';
+import { followApprovedWikiLink, loadWikiPathTransition, WikiPathScreen } from './WikiPathScreen';
 import type { WikiPathTodayState } from './useWikiPathToday';
 
 const challenge = { id: 'day-1', date: '2026-10-21', startTitle: 'Абай Кунанбаев', targetTitle: 'Альберт Эйнштейн' };
@@ -44,6 +44,7 @@ describe('WikiPathScreen', () => {
         onRetryToday={vi.fn()}
         onBack={vi.fn()}
         onCompleted={vi.fn()}
+        onPageLoaded={vi.fn()}
       />,
     );
 
@@ -70,5 +71,23 @@ describe('wiki article link allowlist', () => {
     expect(navigate).toHaveBeenCalledWith('Казахская литература');
     expect(await followApprovedWikiLink('https://example.com', allowed, navigate)).toBe(false);
     expect(navigate).toHaveBeenCalledTimes(1);
+  });
+
+  it('scrolls the shell only after a transition succeeds; retry is the successful page change', async () => {
+    const onPageLoaded = vi.fn();
+    type TransitionResult = { run: { status: 'in_progress' }; currentPage: { title: string } };
+    const request = vi.fn<() => Promise<TransitionResult>>()
+      .mockRejectedValueOnce(new Error('network'))
+      .mockResolvedValueOnce({ run: { status: 'in_progress' }, currentPage: { title: 'Новая статья' } });
+
+    await expect(loadWikiPathTransition(request, () => onPageLoaded())).rejects.toThrow('network');
+    expect(onPageLoaded).not.toHaveBeenCalled();
+
+    const response = await loadWikiPathTransition(request, (result) => {
+      if (result.run.status === 'in_progress') onPageLoaded();
+    });
+    expect(response.currentPage.title).toBe('Новая статья');
+    expect(onPageLoaded).toHaveBeenCalledTimes(1);
+    expect(request).toHaveBeenCalledTimes(2);
   });
 });

@@ -35,9 +35,9 @@ const screenWrapperStyle = {
   minWidth: 0,
 };
 
-function WikiPathEntry({ onBack, onCompleted }: { onBack: () => void; onCompleted: () => void }) {
+function WikiPathEntry({ onBack, onCompleted, onPageLoaded }: { onBack: () => void; onCompleted: () => void; onPageLoaded: () => void }) {
   const today = useWikiPathToday();
-  return <WikiPathScreen today={today.state} onRetryToday={today.reload} onBack={onBack} onCompleted={onCompleted} />;
+  return <WikiPathScreen today={today.state} onRetryToday={today.reload} onBack={onBack} onCompleted={onCompleted} onPageLoaded={onPageLoaded} />;
 }
 
 export default function App() {
@@ -86,6 +86,9 @@ export default function App() {
     game.goToSolo();
   }, [game.goToSolo]);
   const shellRef = useRef<HTMLElement>(null);
+  const scrollShellToTop = useCallback(() => {
+    shellRef.current?.scrollTo({ top: 0, behavior: 'auto' });
+  }, []);
   const reduceMotion = useReducedMotion();
   const screenDuration = reduceMotion ? 0 : 0.18;
   const [soloStage, setSoloStage] = useState<SoloStage>('categories');
@@ -213,7 +216,7 @@ export default function App() {
 
         {game.phase === 'wikiPath' && (
           <motion.div key="wikiPath" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
-            <WikiPathEntry onBack={game.goHome} onCompleted={() => openBoard('wikiPath')} />
+            <WikiPathEntry onBack={game.goHome} onCompleted={() => openBoard('wikiPath')} onPageLoaded={scrollShellToTop} />
           </motion.div>
         )}
 
