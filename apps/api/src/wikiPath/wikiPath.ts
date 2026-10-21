@@ -268,6 +268,10 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
     const identity = await authenticate(c, 'wiki-path-board-route');
     if (identity instanceof Response) return identity;
     const dateKey = dailyKey(Date.now());
+    const viewerRun = await findPlayerRun(c.env.DB, identity.playerId, dateKey);
+    if (identity.kind !== 'telegram' || viewerRun?.status !== 'completed') {
+      return c.json({ error: 'Complete today\'s Wiki Path before viewing routes.', reason: 'complete_your_route' }, 403);
+    }
     const run = await findPublicCompletedRun(c.env.DB, c.req.param('runId'), dateKey);
     if (!run) return c.json({ error: 'Completed board route not found.' }, 404);
     const path = parsePath(run);

@@ -94,6 +94,15 @@ export function sanitizeWikiArticle(page: Pick<WikiPathPage, 'title' | 'html' | 
     }
   });
 
+  // Wide tables keep their natural column widths and scroll as one unit on phones.
+  // Wrapping after attribute cleanup keeps this application-owned marker intact.
+  parsed.body.querySelectorAll('table').forEach((table) => {
+    const scroller = parsed.createElement('div');
+    scroller.setAttribute('data-wiki-table-scroll', '');
+    table.before(scroller);
+    scroller.append(table);
+  });
+
   return { title: page.title, html: parsed.body.innerHTML, allowedTitles: allowed };
 }
 

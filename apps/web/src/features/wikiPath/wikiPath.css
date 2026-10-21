@@ -175,9 +175,17 @@
 .wp-article a[data-wiki-title] { color: var(--primary-dim); text-underline-offset: 3px; cursor: pointer; }
 .wp-article a[aria-disabled="true"] { color: var(--text-dim); text-decoration: none; cursor: default; }
 .wp-article img { display: block; width: auto; max-width: 100%; height: auto; margin: 12px auto; border-radius: 10px; }
-.wp-article table { display: block; width: 100%; max-width: 100%; overflow-x: auto; border-collapse: collapse; }
+.wp-article [data-wiki-table-scroll] {
+  width: 100%;
+  max-width: 100%;
+  margin: 12px 0;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.wp-article table { width: max-content; min-width: 100%; border-collapse: collapse; table-layout: auto; }
 .wp-article td,
-.wp-article th { min-width: 0; padding: 6px; border: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }
+.wp-article th { min-width: 56px; padding: 6px; border: 1px solid var(--line); vertical-align: top; overflow-wrap: normal; word-break: normal; }
 .wp-article th[scope="row"] { width: clamp(96px, 32%, 118px); min-width: 96px; max-width: 118px; }
 .wp-article th[scope="row"] + td { width: auto; }
 .wp-article figure { max-width: 100%; margin: 12px 0; }

@@ -267,5 +267,7 @@ describe('the shared Wiki Path board tab', () => {
     const html = renderWiki(wikiBoard({ ownRank: null }));
     expect(html).toContain('Ты ещё не завершил');
     expect(html).toMatch(/cta-btn solo-board-play">Вики-путь</);
+    expect(html).toContain('Заверши маршрут, чтобы посмотреть пути других игроков.');
+    expect(html).not.toContain('aria-expanded=');
   });
 });

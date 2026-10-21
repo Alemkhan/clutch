@@ -249,6 +249,9 @@ export function WikiPathBoardView({ state, msLeft, onBack, onRetry, onPlay, kind
           {state.board.ownRank === null && (
             <button type="button" className="cta-btn solo-board-play" onClick={onPlay}>Вики-путь</button>
           )}
+          {state.board.ownRank === null && state.board.entries.length > 0 && (
+            <p className="solo-board-you-text">Заверши маршрут, чтобы посмотреть пути других игроков.</p>
+          )}
         </div>
 
         {state.board.entries.length === 0 ? (
@@ -259,18 +262,27 @@ export function WikiPathBoardView({ state, msLeft, onBack, onRetry, onPlay, kind
           <ol className="solo-board-list">
             {state.board.entries.map((entry) => (
               <li key={entry.runId} className="wiki-path-board-item">
-                <button
-                  type="button"
-                  className="solo-board-row wiki-path-board-row"
-                  aria-expanded={selectedRunId === entry.runId}
-                  onClick={() => setSelectedRunId((current) => current === entry.runId ? null : entry.runId)}
-                >
-                  <span className="solo-board-place">{entry.rank}</span>
-                  <span className="solo-board-avatar" aria-hidden="true">{initials(entry.displayName)}</span>
-                  <span className="solo-board-name" title={entry.displayName}>{entry.displayName}</span>
-                  <span className="solo-board-score">{wikiPathClicksText(entry.clicks)}</span>
-                  <span className="wiki-path-board-chevron" aria-hidden="true">⌄</span>
-                </button>
+                {state.board.ownRank === null ? (
+                  <div className="solo-board-row">
+                    <span className="solo-board-place">{entry.rank}</span>
+                    <span className="solo-board-avatar" aria-hidden="true">{initials(entry.displayName)}</span>
+                    <span className="solo-board-name" title={entry.displayName}>{entry.displayName}</span>
+                    <span className="solo-board-score">{wikiPathClicksText(entry.clicks)}</span>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    className="solo-board-row wiki-path-board-row"
+                    aria-expanded={selectedRunId === entry.runId}
+                    onClick={() => setSelectedRunId((current) => current === entry.runId ? null : entry.runId)}
+                  >
+                    <span className="solo-board-place">{entry.rank}</span>
+                    <span className="solo-board-avatar" aria-hidden="true">{initials(entry.displayName)}</span>
+                    <span className="solo-board-name" title={entry.displayName}>{entry.displayName}</span>
+                    <span className="solo-board-score">{wikiPathClicksText(entry.clicks)}</span>
+                    <span className="wiki-path-board-chevron" aria-hidden="true">⌄</span>
+                  </button>
+                )}
                 {selectedRunId === entry.runId && (
                   <div className="wiki-path-board-route" aria-live="polite">
                     {routeState.status === 'loading' && <p>Загружаем путь…</p>}

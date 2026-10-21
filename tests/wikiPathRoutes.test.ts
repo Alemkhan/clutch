@@ -193,7 +193,7 @@ describe('Wiki Path daily API', () => {
       Goal: { pageid: 3, revid: 33, title: 'Goal' },
     });
     const player = await telegram(2001);
-    const viewer = guest('route-viewer');
+    const viewer = await telegram(2002);
     const start = await app.request('/api/wiki-path/start', { method: 'POST', headers: { authorization: player.authorization } }, env(db));
     const started = await json(start);
     const middle = await app.request(`/api/wiki-path/runs/${started.run.runId}/click`, {
@@ -208,6 +208,18 @@ describe('Wiki Path daily API', () => {
     const board = await app.request(`/api/wiki-path/board?date=${TODAY}`, { headers: { authorization: viewer.authorization } }, env(db));
     const boardBody = await json(board);
     expect(boardBody.entries[0]).toMatchObject({ runId: started.run.runId, clicks: 2 });
+    const locked = await app.request(`/api/wiki-path/board/runs/${started.run.runId}`, { headers: { authorization: viewer.authorization } }, env(db));
+    expect(locked.status).toBe(403);
+    expect(await json(locked)).toMatchObject({ reason: 'complete_your_route' });
+
+    const viewerStart = await app.request('/api/wiki-path/start', { method: 'POST', headers: { authorization: viewer.authorization } }, env(db));
+    const viewerStarted = await json(viewerStart);
+    for (const title of ['Middle', 'Goal']) {
+      const transition = await app.request(`/api/wiki-path/runs/${viewerStarted.run.runId}/click`, {
+        method: 'POST', headers: { authorization: viewer.authorization, 'content-type': 'application/json' }, body: JSON.stringify({ title }),
+      }, env(db));
+      expect(transition.status).toBe(200);
+    }
     const route = await app.request(`/api/wiki-path/board/runs/${started.run.runId}`, { headers: { authorization: viewer.authorization } }, env(db));
     expect(route.status).toBe(200);
     expect(await json(route)).toEqual({ runId: started.run.runId, displayName: 'Player 2001', clicks: 2, titles: ['Start', 'Middle', 'Goal'] });
