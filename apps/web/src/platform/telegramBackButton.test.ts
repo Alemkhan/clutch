@@ -28,6 +28,7 @@ describe('Telegram BackButton mapping', () => {
     expect(telegramBackAction('lastStand')).toBe('home');
     expect(telegramBackAction('myRuns')).toBe('home');
     expect(telegramBackAction('training')).toBe('home');
+    expect(telegramBackAction('wikiPath')).toBe('home');
     expect(telegramBackAction('solo')).toBe('home');
     // В активном забеге соло кнопка скрыта.
     expect(telegramBackAction('solo', true)).toBe('hidden');

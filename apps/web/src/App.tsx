@@ -12,6 +12,8 @@ import { SoloRun, type SoloRematch } from './features/solo/SoloRun';
 import { MyRuns } from './features/myRuns/MyRuns';
 import { SoloBoard } from './features/board/SoloBoard';
 import { TiebreakerScreen } from './features/tiebreaker/Tiebreaker';
+import { WikiPathScreen } from './features/wikiPath/WikiPathScreen';
+import { useWikiPathToday } from './features/wikiPath/useWikiPathToday';
 import { BottomNav, navTabForPhase, type NavTab } from './ui/BottomNav';
 import { isSoloPlaying, type SoloStage } from './features/solo/soloRunFlow';
 import { useTelegramBackButton } from './platform/useTelegramBackButton';
@@ -32,6 +34,11 @@ const screenWrapperStyle = {
   width: '100%',
   minWidth: 0,
 };
+
+function WikiPathEntry({ onBack }: { onBack: () => void }) {
+  const today = useWikiPathToday();
+  return <WikiPathScreen today={today.state} onRetryToday={today.reload} onBack={onBack} />;
+}
 
 export default function App() {
   const game = useGameState();
@@ -124,6 +131,7 @@ export default function App() {
               onSolo={(mode) => startSolo('general', mode)}
               onBoard={game.goToBoard}
               onTiebreaker={game.goToTiebreaker}
+              onWikiPath={game.goToWikiPath}
             />
           </motion.div>
         )}
@@ -177,6 +185,12 @@ export default function App() {
         {game.phase === 'tiebreaker' && (
           <motion.div key="tiebreaker" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <TiebreakerScreen onBack={game.goHome} />
+          </motion.div>
+        )}
+
+        {game.phase === 'wikiPath' && (
+          <motion.div key="wikiPath" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <WikiPathEntry onBack={game.goHome} />
           </motion.div>
         )}
 

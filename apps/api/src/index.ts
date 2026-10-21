@@ -16,6 +16,7 @@ import { registerSystemRoutes } from './http/system';
 import { registerProfileRoutes } from './profile/profile';
 import { registerTelemetryRoutes } from './telemetry/telemetry';
 import { registerTiebreakerRoutes } from './tiebreaker/tiebreaker';
+import { registerWikiPathRoutes } from './wikiPath/wikiPath';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -31,6 +32,7 @@ registerMyRunsRoutes(app);
 registerProfileRoutes(app);
 registerTelemetryRoutes(app);
 registerTiebreakerRoutes(app);
+registerWikiPathRoutes(app);
 registerSoloRunRoutes(app);
 registerTrainingRoutes(app);
 registerFriendInviteRoutes(app);

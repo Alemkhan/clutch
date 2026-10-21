@@ -20,7 +20,7 @@ const handlers = { onBack: vi.fn(), check: vi.fn() };
 const publicQuestion = (id: string) => toPublicQuestion(generateQuestionById(id)!);
 
 function homeHandlers() {
-  return { onSolo: vi.fn(), onBoard: vi.fn(), onTiebreaker: vi.fn() };
+  return { onSolo: vi.fn(), onBoard: vi.fn(), onTiebreaker: vi.fn(), onWikiPath: vi.fn() };
 }
 
 describe('Training screens', () => {

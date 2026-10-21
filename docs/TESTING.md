@@ -98,7 +98,9 @@ Health: `…:5173/api/health`, readiness D1: `…:5173/api/ready` (503 при `2
 1. **Бот:** в `@BotFather` — `/newbot` (или существующий тестовый); токен положить в
    `apps/api/.dev.vars` (см. README). Токен должен принадлежать боту, через которого
    открывается Mini App, иначе проверка `initData` даст `401`. После правки `.dev.vars`
-   перезапустите `npm run dev`.
+   полностью перезапустите `npm run dev`. В dev клиент всегда обращается к локальному
+   Worker через Vite `/api` proxy: оставшийся в `apps/web/.env` production `VITE_API_URL`
+   больше не уводит туннель на production API с токеном другого бота.
 2. **Туннель** (второй терминал, `npm run dev` работает):
    - **Cloudflare Tunnel** — бесплатно, без заглушки; рекомендуется:
      `cloudflared tunnel --url http://localhost:5173`.

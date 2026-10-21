@@ -15,7 +15,7 @@ export function telegramBackAction(
 ): TelegramBackAction {
   // В активном забеге системная «Назад» скрыта: случайный выход потерял бы несохранённый забег.
   if (phase === 'solo') return soloPlaying ? 'hidden' : 'home';
-  if (phase === 'profile' || phase === 'training' || phase === 'lastStand' || phase === 'myRuns' || phase === 'board' || phase === 'tiebreaker') return 'home';
+  if (phase === 'profile' || phase === 'training' || phase === 'lastStand' || phase === 'myRuns' || phase === 'board' || phase === 'tiebreaker' || phase === 'wikiPath') return 'home';
   return 'hidden';
 }
 

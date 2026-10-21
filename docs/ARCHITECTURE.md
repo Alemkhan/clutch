@@ -26,7 +26,7 @@ apps/web/                React 18 + Vite + Framer Motion + Telegram SDK
     round/               QuestionScreen, ResolutionScreen, MatchHud, OpenAnswerInput,
                          reportPanel — общие для соло и тренировки
     hammer/              HammerGame и его части (scene, lane, result, intro, motion, strike)
-    home/, board/, tiebreaker/, myRuns/, training/, profile/   экраны разделов
+    home/, board/, tiebreaker/, wikiPath/, myRuns/, training/, profile/   экраны разделов
     lastStand/           замороженный режим (входа с главной нет)
   src/index.css          только список @import, порядок значим
   src/styles/            tokens.css, base.css, v2-shell.css, legacy-/v2-responsive.css
@@ -44,7 +44,7 @@ apps/api/                Hono на Cloudflare Workers + D1
   src/rematch/           friendInvites («Позвать друга»), rematch (реванш, согласие)
   src/notifications/     Telegram-сообщения (outbid.ts: результат записи, дуэль, реванш),
                          outOfTop.ts, expiry.ts (плановый возврат), repository
-  src/{myRuns,profile,training,tiebreaker,telemetry,share,lastStand}/  фича = route + repository
+  src/{myRuns,profile,training,tiebreaker,wikiPath,telemetry,share,lastStand}/  фича = route + repository
   migrations/            0001_schema.sql + новые файлы; описание таблиц — комментарии в SQL
   wrangler.toml          Worker, D1, Rate Limiting, cron раз в 15 минут (dev-конфиг)
 packages/shared/src/     типы и правила для клиента и API
@@ -138,6 +138,15 @@ shared/{soloRun,hammerRules}`. SQL живёт в `*Repository` (системны
 прикидки — `dailyKey(created_at)` каждого забега. `CompleteSoloRunResponse.tiebreak`
 приходит, только когда исход решила прикидка. Загрузка пака — `npm run tiebreaker:load`.
 
+**«Вики-путь».** Клиент получает статью только через Clutch API, повторно очищает HTML и
+делает активными лишь ссылки из `allowedLinks`. Worker запрашивает русскую MediaWiki Parse
+API с идентифицирующим `User-Agent`, ограничивает время и размер ответа, сохраняет в D1
+только id зафиксированной ревизии и разрешённые ссылки. HTML этой точной ревизии загружается
+по `oldid` и кэшируется на edge Worker, но в D1 не хранится. Перед переходом сервер проверяет,
+что цель есть среди ссылок текущей ревизии. Один `wiki_path_runs` на игрока и игровые сутки; обновление клика
+защищено условным `UPDATE`. Таблица включает только завершившие Telegram-аккаунты, сортирует
+по числу кликов и использует соревновенный rank; время завершения лишь стабилизирует вывод.
+
 **Таблица дня.** `GET /api/solo-leaderboard`: лучший дошедший до цели забег каждого игрока
 за игровые сутки, топ-50 по счёту, кругам и множителю прикидки (гость и не ответивший —
 после ответивших); длительность не участвует; место — `RANK()` (1, 2, 2, 4). Строки
@@ -192,6 +201,7 @@ shared/{soloRun,hammerRules}`. SQL живёт в `*Repository` (системны
 | `GET`/`PUT /api/notifications/outbid` | Согласие на уведомления |
 | `GET /api/my-runs`, `GET /api/profile` | История (курсор), сводка |
 | `GET /api/tiebreaker/today`, `POST /api/tiebreaker/answer` | «На глазок» |
+| `GET /api/wiki-path/today`, `POST …/start`, `GET …/runs/:id`, `POST …/:id/click`, `GET …/board` | «Вики-путь» |
 | `GET /api/training/mistakes`, `POST …/questions`, `…/check` | Отработка ошибок |
 | `POST /api/reports`, `POST /api/events` | Репорт вопроса, события |
 | `GET /api/share`, `GET /api/share/card.png` | OG-страница и картинка результата |
@@ -211,7 +221,9 @@ D1, схема — `apps/api/migrations/` (`0001_schema.sql` + новые фай
 `solo_run_rounds` (покруговые answer/hammer, измеренное сервером окно `answer_window_ms`,
 момент удара `active_elapsed_ms`, выведенное расстояние), `player_mistakes`,
 `player_notification_prefs`, `rematch_invites`, `last_stand_runs`, `question_reports`,
-`analytics_events`, `tiebreaker_questions`, `tiebreaker_answers`, `top_ten_notices`.
+`analytics_events`, `tiebreaker_questions`, `tiebreaker_answers`, `top_ten_notices`,
+`wiki_path_challenges`, `wiki_path_page_revisions`, `wiki_path_page_refs`,
+`wiki_path_challenge_targets`, `wiki_path_runs`.
 Строки удалённой гонки (`race-to-100-v3`) остались как legacy с NULL-условиями и в пул не
 попадают. В браузере хранятся: guest token (7 дней, продлевается с тем же subject), имя,
 id активного забега, настройка звука, флаг показа интро молотка; вопросы и ответы в

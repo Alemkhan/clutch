@@ -4,6 +4,7 @@ import type { SoloLeaderboardStanding, TiebreakerTodayResponse } from '@clutch/s
 import { HomeDashboardView } from './HomeDashboard';
 import { homeStandingLines } from './homeStanding';
 import type { TiebreakerTodayState } from '../tiebreaker/useTiebreakerToday';
+import type { WikiPathTodayState } from '../wikiPath/useWikiPathToday';
 
 const MS_LEFT = (5 * 3600 + 12 * 60 + 40) * 1000;
 
@@ -31,19 +32,25 @@ const today = (overrides: Partial<TiebreakerTodayResponse> = {}): TiebreakerToda
   },
 });
 
+const wikiPath: WikiPathTodayState = { status: 'absent' };
+
 const render = (props: {
   tiebreaker?: TiebreakerTodayState;
+  wikiPath?: WikiPathTodayState;
   standing?: SoloLeaderboardStanding | null;
   dailyAttempt?: 'none' | 'in_progress' | 'completed';
 } = {}) => renderToStaticMarkup(
   <HomeDashboardView
     tiebreaker={props.tiebreaker ?? today()}
+    wikiPath={props.wikiPath ?? wikiPath}
+    onRetryWikiPath={vi.fn()}
     msLeft={MS_LEFT}
     standing={props.standing ?? null}
     dailyAttempt={props.dailyAttempt ?? 'none'}
     onSolo={vi.fn()}
     onBoard={vi.fn()}
     onTiebreaker={vi.fn()}
+    onWikiPath={vi.fn()}
   />,
 );
 
@@ -122,5 +129,21 @@ describe('the tiebreaker card on the home screen', () => {
 
   it('keeps the bottom navigation out of the home screen markup', () => {
     expect(render()).not.toContain('bottom-nav');
+  });
+});
+
+describe('the Wiki Path card on the home screen', () => {
+  it('shows the daily route after the main modes and hides it when there is no challenge', () => {
+    const out = render({ wikiPath: {
+      status: 'available',
+      today: {
+        challenge: { id: 'wiki-1', date: '2026-10-21', startTitle: 'Абай Кунанбаев', targetTitle: 'Альберт Эйнштейн' },
+        run: null,
+      },
+    } });
+    expect(out).toContain('Вики-путь');
+    expect(out).toContain('Абай Кунанбаев');
+    expect(out.indexOf('home-hero-card')).toBeLessThan(out.indexOf('wp-card'));
+    expect(render()).not.toContain('wp-card');
   });
 });

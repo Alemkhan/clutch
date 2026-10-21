@@ -26,11 +26,18 @@ import type {
   TiebreakerAnswerRequest,
   TiebreakerTodayResponse,
   TrainingQuestionsResponse,
+  WikiPathBoardResponse,
+  WikiPathClickRequest,
+  WikiPathClickResponse,
+  WikiPathTodayResponse,
+  StartWikiPathResponse,
 } from '@clutch/shared';
 import { ANALYTIC_EVENT_NAMES } from '@clutch/shared';
 import { getTelegramIdentity } from './telegram';
 
-const API_BASE = import.meta.env.VITE_API_URL ?? '';
+// Dev and tunnel traffic must reach the local Worker through Vite's /api proxy. Otherwise a
+// production VITE_API_URL left in apps/web/.env validates Telegram initData with another bot.
+const API_BASE = import.meta.env.DEV ? '' : import.meta.env.VITE_API_URL ?? '';
 const DISPLAY_NAME_SEED_KEY = 'clutch_display_name_seed_v1';
 const PLAYER_NAME_KEY = 'clutch_player_name_v1';
 const GUEST_SESSION_KEY = 'clutch_guest_session_v1';
@@ -378,6 +385,34 @@ export function answerTiebreaker(
   signal?: AbortSignal,
 ): Promise<TiebreakerTodayResponse> {
   return apiFetch('/api/tiebreaker/answer', { method: 'POST', body: JSON.stringify(body) }, signal);
+}
+
+// ---- «Вики-путь» ----
+
+/** Состояние сегодняшнего общего маршрута и личный прогресс. */
+export function fetchWikiPathToday(signal?: AbortSignal): Promise<WikiPathTodayResponse> {
+  return apiFetch('/api/wiki-path/today', { method: 'GET' }, signal);
+}
+
+/** Начать маршрут или продолжить незавершённый; сервер возвращает текущую статью. */
+export function startWikiPath(signal?: AbortSignal): Promise<StartWikiPathResponse> {
+  return apiFetch('/api/wiki-path/start', { method: 'POST', body: '{}' }, signal);
+}
+
+/** Переход проверяет сервер по списку ссылок текущей статьи. */
+export function clickWikiPath(
+  runId: string,
+  body: WikiPathClickRequest,
+  signal?: AbortSignal,
+): Promise<WikiPathClickResponse> {
+  return apiFetch(`/api/wiki-path/runs/${encodeURIComponent(runId)}/click`, {
+    method: 'POST', body: JSON.stringify(body),
+  }, signal);
+}
+
+/** Таблица завершивших сегодняшний маршрут. */
+export function fetchWikiPathBoard(signal?: AbortSignal): Promise<WikiPathBoardResponse> {
+  return apiFetch('/api/wiki-path/board', { method: 'GET' }, signal);
 }
 
 // ---- Репорты и аналитика ----

@@ -17,6 +17,7 @@ export * from './soloCompare';
 export * from './practice';
 export * from './friendDuel';
 export * from './tiebreaker';
+export * from './wikiPath';
 
 export type Difficulty = 'Easy' | 'Medium' | 'Hard' | 'Expert';
 

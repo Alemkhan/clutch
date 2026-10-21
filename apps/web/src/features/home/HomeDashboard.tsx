@@ -6,16 +6,21 @@ import { useDayCountdown } from "../tiebreaker/useDayCountdown";
 import { useHomeStanding, type DailyAttempt } from "./useHomeStanding";
 import { useTiebreakerToday, type TiebreakerTodayState } from "../tiebreaker/useTiebreakerToday";
 import { TiebreakerCardView } from "../tiebreaker/TiebreakerCard";
+import { WikiPathCard } from "../wikiPath/WikiPathCard";
+import { useWikiPathToday, type WikiPathTodayState } from "../wikiPath/useWikiPathToday";
 
 interface HomeDashboardProps {
   /** Забег дня, дуэль или свободная игра в «Общих знаниях». */
   onSolo: (mode: SoloMode) => void;
   onBoard: () => void;
   onTiebreaker: () => void;
+  onWikiPath: () => void;
 }
 
 export interface HomeDashboardViewProps extends HomeDashboardProps {
   tiebreaker: TiebreakerTodayState;
+  wikiPath: WikiPathTodayState;
+  onRetryWikiPath: () => void;
   /** Сколько осталось до конца игровых суток, мс. */
   msLeft: number;
   /** Своё место в таблице дня; null — не играл сегодня до 100% или данных нет. */
@@ -76,6 +81,9 @@ export function HomeDashboardView({
   onSolo,
   onBoard,
   onTiebreaker,
+  onWikiPath,
+  wikiPath,
+  onRetryWikiPath,
 }: HomeDashboardViewProps) {
   const lines = standing ? homeStandingLines(standing) : null;
   // Забег дня сыгран (в таблицу идёт первая попытка): главная зовёт в дуэль.
@@ -170,18 +178,21 @@ export function HomeDashboardView({
       </section>
 
       <TiebreakerCardView state={tiebreaker} msLeft={msLeft} onOpen={onTiebreaker} />
+      <WikiPathCard state={wikiPath} onOpen={onWikiPath} onRetry={onRetryWikiPath} />
     </section>
   );
 }
 
 export function HomeDashboard(props: HomeDashboardProps) {
   const { state, reload } = useTiebreakerToday();
+  const { state: wikiPath, reload: reloadWikiPath } = useWikiPathToday();
   const [dayEpoch, setDayEpoch] = useState(0);
   // Смена суток: вопрос другой, вчерашнее место не действует — перечитываем и то и другое.
   const msLeft = useDayCountdown(() => {
     reload();
+    reloadWikiPath();
     setDayEpoch((value) => value + 1);
   });
   const { standing, dailyAttempt } = useHomeStanding(dayEpoch);
-  return <HomeDashboardView {...props} tiebreaker={state} msLeft={msLeft} standing={standing} dailyAttempt={dailyAttempt} />;
+  return <HomeDashboardView {...props} tiebreaker={state} wikiPath={wikiPath} onRetryWikiPath={reloadWikiPath} msLeft={msLeft} standing={standing} dailyAttempt={dailyAttempt} />;
 }
