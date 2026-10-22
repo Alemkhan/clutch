@@ -36,6 +36,43 @@ describe('tower geometry', () => {
     }
   });
 
+  it('scores mirrored hits identically across the track, including edge positions', () => {
+    // Stage 3 permits the widest target offset (centres .425..575); include both
+    // allowed edges and the track endpoints to catch direction-dependent drift.
+    const targetCenters = [0.425, 0.45, 0.5, 0.55, 0.575];
+    const offsets = [0, 0.001, 0.01, 0.03, 0.075, 0.12, 0.2, 0.25, 0.35, 0.425];
+
+    for (const center of targetCenters) {
+      for (const offset of offsets) {
+        if (offset > center || offset > 1 - center) continue;
+        const leftPosition = center - offset;
+        const rightPosition = center + offset;
+        const leftDistance = normalizedHammerDistance(leftPosition, center);
+        const rightDistance = normalizedHammerDistance(rightPosition, center);
+        expect(leftDistance).toBeCloseTo(rightDistance, 12);
+        expect(scoreHammerDistance(leftDistance, 3, config).result)
+          .toBe(scoreHammerDistance(rightDistance, 3, config).result);
+
+        const left = towerLanding(leftPosition, center, 'good');
+        const right = towerLanding(rightPosition, center, 'good');
+        expect(left.overlapPercent).toBe(right.overlapPercent);
+        expect(left.landed?.width ?? 0).toBeCloseTo(right.landed?.width ?? 0, 9);
+        expect(left.overhang?.width ?? 0).toBeCloseTo(right.overhang?.width ?? 0, 9);
+        expect(left.side).toBe(offset === 0 ? right.side : -1);
+        expect(right.side).toBe(1);
+      }
+    }
+
+    // A block centred at either end still fits the scene and mirrors exactly.
+    for (const center of [0.425, 0.575]) {
+      const left = towerLanding(0, center, 'miss').overhang!;
+      const right = towerLanding(1, center, 'miss').overhang!;
+      expect(left.width).toBeCloseTo(BLOCK_WIDTH_PERCENT, 9);
+      expect(right.width).toBeCloseTo(BLOCK_WIDTH_PERCENT, 9);
+      expect(left.left).toBeCloseTo(100 - (right.left + right.width), 9);
+    }
+  });
+
   it('breaks off the overhang on the side of the miss, and drops the whole block on a miss', () => {
     const right = towerLanding(0.6, 0.5, 'great');
     expect(right.side).toBe(1);

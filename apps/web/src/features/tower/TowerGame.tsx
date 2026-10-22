@@ -65,6 +65,9 @@ export function TowerGame({ config, questionId, previousSkillResults, onComplete
         role="button"
         {...towerActionSemantics(struck || introOpen, result)}
         aria-hidden={introOpen || undefined}
+        onPointerDown={(event) => {
+          if (event.button === 0 && event.isPrimary) handleTap(event);
+        }}
         onClick={handleTap}
         onKeyDown={onKeyDown}
       >

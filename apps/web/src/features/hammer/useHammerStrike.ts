@@ -9,9 +9,10 @@ export interface MarkerClock {
   markerPos: number;
   /** Маркер остановлен ударом. */
   stoppedRef: MutableRefObject<boolean>;
-  /** Активное время бега маркера, мс: то, что уходит на сервер как момент удара. */
+  /** Активное время бега маркера, мс; также используется башней. */
   elapsedRef: MutableRefObject<number>;
-  rafRef: MutableRefObject<number>;
+  /** Зафиксировать позицию и активное время в момент события ввода. */
+  stopAt: (eventTimestamp?: number) => number;
 }
 
 /**
@@ -61,7 +62,24 @@ export function useMarkerClock(attempt: HammerAttemptRules, introOpen: boolean):
     };
   }, [attempt.targetCenter, attempt.markerSpeed, introOpen]);
 
-  return { markerPos, stoppedRef, elapsedRef, rafRef };
+  const stopAt = useCallback((eventTimestamp?: number) => {
+    // rAF и PointerEvent используют одну monotonic шкалу. Старый Safari мог отдавать
+    // epoch timestamp; переводим его к той же шкале до расчёта ограниченного delta.
+    const timestamp = eventTimestamp === undefined || !Number.isFinite(eventTimestamp)
+      ? lastFrameRef.current
+      : eventTimestamp > 1e12
+        ? eventTimestamp - performance.timeOrigin
+        : eventTimestamp;
+    if (!document.hidden && timestamp !== null) {
+      elapsedRef.current += cappedFrameDeltaMs(lastFrameRef.current, timestamp);
+    }
+    stoppedRef.current = true;
+    cancelAnimationFrame(rafRef.current);
+    setMarkerPos(markerPositionAtElapsed(elapsedRef.current, attempt.markerSpeed));
+    return elapsedRef.current;
+  }, [attempt.markerSpeed]);
+
+  return { markerPos, stoppedRef, elapsedRef, stopAt };
 }
 
 interface StrikeInput {
@@ -78,7 +96,7 @@ interface StrikeInput {
 /** Удар: остановка маркера, предпросмотр результата, звук; onComplete — когда гвоздь осел. */
 export function useHammerStrike(input: StrikeInput) {
   const { attempt, config, questionId, previousSkillResults, introOpen, clock, onComplete, onStrike } = input;
-  const { stoppedRef, elapsedRef, rafRef } = clock;
+  const { stoppedRef, stopAt } = clock;
   const [struck, setStruck] = useState(false);
   const [result, setResult] = useState<SkillResult | null>(null);
   const tapElapsedRef = useRef(0);
@@ -93,16 +111,14 @@ export function useHammerStrike(input: StrikeInput) {
     };
   }, [attempt.targetCenter, attempt.markerSpeed, introOpen]);
 
-  const handleTap = useCallback(() => {
+  const handleTap = useCallback((event?: { timeStamp: number }) => {
     if (introOpen || stoppedRef.current) return;
-    stoppedRef.current = true;
+    const activeElapsedMs = stopAt(event?.timeStamp);
     setStruck(true);
-    cancelAnimationFrame(rafRef.current);
     playSound('hammerTap');
 
     // Момент удара — это то, что уйдёт на сервер; он же даёт предпросмотр через ту самую
     // функцию, которой сервер посчитает награду, поэтому разойтись в оценке они не могут.
-    const activeElapsedMs = elapsedRef.current;
     tapElapsedRef.current = activeElapsedMs;
     const { result: skillResult, progressAwarded: progress } = scoreHammerTap(
       questionId,
@@ -119,7 +135,7 @@ export function useHammerStrike(input: StrikeInput) {
       skillResult,
       progressAwarded: progress,
     });
-  }, [attempt.stage, attempt.targetCenter, config, introOpen, onStrike, previousSkillResults, questionId]);
+  }, [config, introOpen, onStrike, previousSkillResults, questionId, stopAt, stoppedRef]);
 
   // onComplete вызывается, когда игрок реально увидел осевший гвоздь, а не по таймеру,
   // который пришлось бы вручную согласовывать с длительностью анимации.
@@ -133,7 +149,7 @@ export function useHammerStrike(input: StrikeInput) {
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      handleTap();
+      handleTap(event);
     }
   };
 

@@ -75,6 +75,9 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
         role="button"
         {...hammerActionSemantics(struck || introOpen, result)}
         aria-hidden={introOpen || undefined}
+        onPointerDown={(event) => {
+          if (event.button === 0 && event.isPrimary) handleTap(event);
+        }}
         onClick={handleTap}
         onKeyDown={onKeyDown}
       >

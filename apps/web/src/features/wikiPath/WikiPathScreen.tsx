@@ -141,7 +141,9 @@ export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted, onPag
       <strong>{page?.title}</strong>
     </nav>}
     {screen.status === 'idle' && (today.status === 'available' || today.status === 'in_progress') && <section className="wp-start">
-      <p>{today.status === 'in_progress' ? `Ты уже прошёл ${today.today.run?.clicks ?? 0} переходов.` : 'Пройди от стартовой статьи до цели, переходя по ссылкам внутри статей.'}</p>
+      <p className="wp-start-progress">Дана стартовая статья и цель. Пройди путь с наименьшим числом переходов.</p>
+      {today.status === 'in_progress' && <p className="wp-start-progress">Ты уже прошёл {today.today.run?.clicks ?? 0} переходов. Продолжай с того же места.</p>}
+      <p>Переходи только по ссылкам внутри текущей статьи. Попытка одна в день — её можно продолжить позже.</p>
       <button type="button" className="wp-primary" onClick={() => { void runAction(startWikiPath, today.status === 'in_progress' ? 'Продолжаю маршрут…' : 'Загружаю стартовую статью…'); }}>
         {today.status === 'in_progress' ? 'Продолжить' : 'Начать маршрут'}
       </button>

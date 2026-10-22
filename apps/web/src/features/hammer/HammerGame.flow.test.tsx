@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { CURRENT_HAMMER_MINI_GAME, SKILL_REWARDS, scoreHammerTap, type SkillResult } from '@clutch/shared';
+import { CURRENT_HAMMER_MINI_GAME, SKILL_REWARDS, hammerAttemptRules, markerPositionAtElapsed, scoreHammerTap, type SkillResult } from '@clutch/shared';
 import { find, mount, type Mounted } from './hammerTestHarness';
 import { HammerGame } from './HammerGame';
 import { nailDepthAfter, nailOffset } from './HammerScene';
@@ -121,6 +121,50 @@ describe('HammerGame dynamics', () => {
     view.unmount();
   });
 
+  it('freezes at pointerdown between frames and sends that exact elapsed once', () => {
+    const { view, game, nail, onComplete, onStrike } = setup();
+    runFrame(1000);
+    runFrame(1032);
+    view.flush();
+    const marker = () => find(view.tree(), (n) => n.props.className === 'marker')!;
+    const speed = hammerAttemptRules('q1', [], config).markerSpeed;
+    expect(marker().props.style.left).toBe(`${markerPositionAtElapsed(32, speed) * 100}%`);
+
+    game().props.onPointerDown({ button: 0, isPrimary: true, timeStamp: 1040 });
+    view.flush();
+    const frozenLeft = `${markerPositionAtElapsed(40, speed) * 100}%`;
+    expect(marker().props.style.left).toBe(frozenLeft);
+    expect(onStrike).toHaveBeenCalledWith(scoreHammerTap('q1', [], config, 40).result, scoreHammerTap('q1', [], config, 40).progressAwarded);
+    expect(pendingFrames()).toBe(0);
+
+    game().props.onClick({ timeStamp: 1100 });
+    game().props.onPointerDown({ button: 0, isPrimary: true, timeStamp: 1101 });
+    runFrame(1102);
+    view.flush();
+    expect(marker().props.style.left).toBe(frozenLeft);
+    expect(onStrike).toHaveBeenCalledTimes(1);
+    nail().props.onAnimationComplete();
+    expect(onComplete).toHaveBeenCalledWith(scoreHammerTap('q1', [], config, 40).result, SKILL_REWARDS[scoreHammerTap('q1', [], config, 40).result], 40);
+    expect(onComplete).toHaveBeenCalledTimes(1);
+    view.unmount();
+  });
+
+  it('ignores secondary pointers and caps time across a delayed frame', () => {
+    const { view, game, nail, onComplete, onStrike } = setup();
+    runFrame(1000);
+    runFrame(1016);
+    view.flush();
+    game().props.onPointerDown({ button: 2, isPrimary: true, timeStamp: 1020 });
+    game().props.onPointerDown({ button: 0, isPrimary: false, timeStamp: 1020 });
+    expect(onStrike).not.toHaveBeenCalled();
+    game().props.onPointerDown({ button: 0, isPrimary: true, timeStamp: 2000 });
+    view.flush();
+    expect(onStrike).toHaveBeenCalledTimes(1);
+    nail().props.onAnimationComplete();
+    expect(onComplete.mock.calls[0][2]).toBe(66);
+    view.unmount();
+  });
+
   it('Enter and Space strike with preventDefault; other keys do not', () => {
     const { view, game, onStrike } = setup();
     const preventDefault = vi.fn();
@@ -129,6 +173,18 @@ describe('HammerGame dynamics', () => {
     game().props.onKeyDown({ key: ' ', preventDefault });
     expect(preventDefault).toHaveBeenCalledTimes(1);
     expect(onStrike).toHaveBeenCalledTimes(1);
+    view.unmount();
+  });
+
+  it('uses keyboard event time between frames', () => {
+    const { view, game, nail, onComplete } = setup();
+    runFrame(1000);
+    runFrame(1016);
+    view.flush();
+    game().props.onKeyDown({ key: 'Enter', timeStamp: 1024, preventDefault: vi.fn() });
+    view.flush();
+    nail().props.onAnimationComplete();
+    expect(onComplete.mock.calls[0][2]).toBe(24);
     view.unmount();
   });
 

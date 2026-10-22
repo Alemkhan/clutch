@@ -42,6 +42,38 @@ describe('hammer pressure rules', () => {
     },
   );
 
+  it('keeps mirrored points on every tier boundary equal at real targets and all stages', () => {
+    for (const stage of [0, 1, 2, 3] as PressureStage[]) {
+      const thresholds = hammerThresholdsForStage(stage, config);
+      const targetCenters = ['question-alpha', 'question-beta', 'z']
+        .map((questionId) => hammerTargetCenter(questionId, stage, config));
+      for (const center of targetCenters) {
+        for (const boundary of Object.values(thresholds)) {
+          const offset = boundary / 2;
+          const leftDistance = normalizedHammerDistance(center - offset, center);
+          const rightDistance = normalizedHammerDistance(center + offset, center);
+          expect(leftDistance).toBeCloseTo(rightDistance, 12);
+          expect(scoreHammerDistance(leftDistance, stage, config).result)
+            .toBe(scoreHammerDistance(rightDistance, stage, config).result);
+        }
+      }
+    }
+  });
+
+  it('preserves the .28 inclusive boundary without widening tiers perceptibly', () => {
+    const center = 0.45;
+    const boundary = 0.28;
+    const mirroredDistances = [center - boundary / 2, center + boundary / 2]
+      .map((position) => normalizedHammerDistance(position, center));
+    expect(mirroredDistances.map((distance) => scoreHammerDistance(distance, 0, config).result))
+      .toEqual(['great', 'great']);
+
+    for (const sign of [-1, 1]) {
+      const justOutside = normalizedHammerDistance(center + sign * (boundary + 1e-9) / 2, center);
+      expect(scoreHammerDistance(justOutside, 0, config).result).toBe('good');
+    }
+  });
+
   it('applies the exact stage multipliers', () => {
     expect(([0, 1, 2, 3] as PressureStage[]).map(
       (stage) => hammerThresholdsForStage(stage, config).weak,

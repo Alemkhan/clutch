@@ -54,6 +54,27 @@ describe('WikiPathScreen', () => {
     expect(result).not.toContain('<main');
   });
 
+  it('explains the route and daily attempt before starting or resuming', () => {
+    const renderScreen = (status: 'available' | 'in_progress') => renderToStaticMarkup(
+      <WikiPathScreen
+        today={{ status, today: today(status === 'in_progress' ? inProgress : null) }}
+        onRetryToday={vi.fn()}
+        onBack={vi.fn()}
+        onCompleted={vi.fn()}
+        onPageLoaded={vi.fn()}
+      />,
+    );
+
+    for (const status of ['available', 'in_progress'] as const) {
+      const result = renderScreen(status);
+      expect(result).toContain('Дана стартовая статья и цель');
+      expect(result).toContain('наименьшим числом переходов');
+      expect(result).toContain('только по ссылкам внутри текущей статьи');
+      expect(result).toContain('Попытка одна в день');
+      expect(result).toContain('её можно продолжить позже');
+    }
+  });
+
 });
 
 describe('wiki article link allowlist', () => {

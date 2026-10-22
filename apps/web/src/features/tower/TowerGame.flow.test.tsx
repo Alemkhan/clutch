@@ -101,6 +101,28 @@ describe('TowerGame', () => {
     view.unmount();
   });
 
+  it('freezes on pointerdown before the delayed mobile click and scores only once', () => {
+    const { view, game, classed, onComplete, onStrike } = setup();
+    runFrame(1000);
+    runFrame(1032);
+    view.flush();
+
+    game().props.onPointerDown({ button: 0, isPrimary: true, timeStamp: 1040 });
+    view.flush();
+    const expected = scoreHammerTap('q1', [], config, 40);
+    expect(onStrike).toHaveBeenCalledWith(expected.result, expected.progressAwarded);
+    expect(onStrike).toHaveBeenCalledTimes(1);
+    expect(pendingFrames()).toBe(0);
+
+    // Mobile browsers may dispatch click after pointerdown; the stopped ref makes it a no-op.
+    game().props.onClick({ timeStamp: 1120 });
+    expect(onStrike).toHaveBeenCalledTimes(1);
+    const settler = classed('tower-fragment') ?? classed('tower-landed')!;
+    settler.props.onAnimationComplete();
+    expect(onComplete).toHaveBeenCalledWith(expected.result, SKILL_REWARDS[expected.result], 40);
+    view.unmount();
+  });
+
   it('uses the tower accessibility label and keyboard', () => {
     const { view, game, onStrike } = setup();
     expect(game().props['aria-label']).toBe('Нажми, чтобы уронить блок');

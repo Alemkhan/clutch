@@ -175,13 +175,16 @@ export function scoreHammerDistance(
     throw new RangeError('Skill distance must be between 0 and 1');
   }
   const thresholds = hammerThresholdsForStage(stage, config);
-  const result: SkillResult = distance <= thresholds.perfect
+  // Keep mathematically mirrored hits on an inclusive boundary in the same tier
+  // despite the last-bit differences from binary floating-point subtraction.
+  const boundaryTolerance = 1e-12;
+  const result: SkillResult = distance <= thresholds.perfect + boundaryTolerance
     ? 'perfect'
-    : distance <= thresholds.great
+    : distance <= thresholds.great + boundaryTolerance
       ? 'great'
-      : distance <= thresholds.good
+      : distance <= thresholds.good + boundaryTolerance
         ? 'good'
-        : distance <= thresholds.weak
+        : distance <= thresholds.weak + boundaryTolerance
           ? 'weak'
           : 'miss';
   return { result, progressAwarded: SKILL_REWARDS[result] };
