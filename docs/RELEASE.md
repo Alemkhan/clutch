@@ -4,9 +4,9 @@
 Команды — PowerShell из корня репозитория. Фактическое состояние первого выпуска записано
 ниже и в разделе Release evidence.
 
-**Статус 2026-10-22:** OAuth-авторизация подтверждена; созданы production D1
+**Статус 2026-10-27:** OAuth-авторизация подтверждена; созданы production D1
 `clutch-prod` (`7d4de210-608e-40c1-96d5-26fa18ef475d`) и Direct Upload Pages-проект
-`clutch-app` (`https://clutch-app-ct8.pages.dev`); D1 мигрирована 0001–0009. Production
+`clutch-app` (`https://clutch-app-ct8.pages.dev`); D1 мигрирована 0001–0010. Production
 preflight прошёл для API `https://clutch-api-prod.kettikteam-official.workers.dev`, оба
 секрета установлены, Worker и Pages развёрнуты, remote smoke и GitHub Actions прошли.
 BotFather и walkthrough на настоящем телефоне ещё не подтверждены; публичный запуск пока
@@ -297,17 +297,17 @@ GitHub Actions CI запускается при push в `main` (и на pull req
 После выпуска сохраните:
 
 ```text
-Git commit: 495ce941bcc0d5fb6baed7e1bda33eda9947c1ef
-GitHub Actions run: статус нового run не прочитан; локально 1181/1181, preflight и build прошли
-Worker version/deployment ID: cb8d8de0-8b2d-41c8-ac96-812dcd84f26d
-Pages deployment URL: https://94852a32.clutch-app-ct8.pages.dev
-D1 migrations applied: 0001–0009, список неприменённых пуст; 10 вопросов «На глазок» загружены
+Git commit: 6c50e88af2d1d61f12f359edab81999e68db9b6e
+GitHub Actions run: 40400432617 — success; локально 1189/1189, preflight и build прошли
+Worker version/deployment ID: ca3ec0d8-5eb9-4814-8ee4-ad8d74ce93a0
+Pages deployment URL: https://8329d1d5.clutch-app-ct8.pages.dev
+D1 migrations applied: 0001–0010; v3 содержит 7 вопросов «На глазок» и 7 маршрутов «Вики-пути»
 Telegram bot username (подтверждено владельцем): @playclutchbot
 Smoke tester/device/Telegram version: не выполнено, нужен настоящий телефон
 npm run smoke:remote result: успешно — health, ready/D1, Pages, Worker URL в bundle
 Smoke result (ручной): не выполнен
-Known limitations: JS bundle 879 КБ (gzip 251 КБ); телефонный walkthrough после исправления не выполнен
-Rollback target: Worker 73368a8d-18c8-420d-b3be-8e4f801a2f9b; Pages https://63a00c25.clutch-app-ct8.pages.dev
+Known limitations: JS bundle 890 КБ (gzip 256 КБ); телефонный walkthrough после исправления не выполнен
+Rollback target: Worker cb8d8de0-8b2d-41c8-ac96-812dcd84f26d; Pages https://94852a32.clutch-app-ct8.pages.dev
 ```
 
 Без этих данных релиз считается выполненным вручную, но не воспроизводимым.
