@@ -23,6 +23,7 @@ describe('tiebreaker-load', () => {
   it('turns the sample file into SQL that the real schema accepts', () => {
     const db = createTestD1();
     databases.push(db);
+    db.sqlite.exec('DELETE FROM tiebreaker_questions');
     const sql = buildSql(sample, 1234) as string;
     expect(sql).toMatch(/^INSERT INTO tiebreaker_questions /);
     db.sqlite.exec(sql);
@@ -35,6 +36,7 @@ describe('tiebreaker-load', () => {
     const nasty = `О'Брайен "сказал"; DROP TABLE tiebreaker_questions; --\nвторая строка ''`;
     const db = createTestD1();
     databases.push(db);
+    db.sqlite.exec('DELETE FROM tiebreaker_questions');
     const q = question({
       prompt: nasty,
       explanation: { ...sample[0].explanation, summary: nasty, steps: [{ ...sample[0].explanation.steps[0], label: nasty }] },
@@ -52,6 +54,7 @@ describe('tiebreaker-load', () => {
   it('stores the optional short card prompt, escaped, and NULL when absent', () => {
     const db = createTestD1();
     databases.push(db);
+    db.sqlite.exec('DELETE FROM tiebreaker_questions');
     const nasty = "О'Брайен «сказал»; --";
     db.sqlite.exec(buildSql([
       question({ cardPrompt: nasty }),

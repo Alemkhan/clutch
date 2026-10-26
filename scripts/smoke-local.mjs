@@ -351,16 +351,22 @@ async function verifyHttpFlow(baseUrl, readinessResponse) {
   assert.equal(snapshot.rounds.length, 1);
   assertNoAnswers(snapshot.questions, 'solo snapshot');
 
-  // Второй игрок получает свой забег, а не чужой.
-  // «На глазок»: на чистой базе вопроса дня нет (контент в миграции не сидируется), карточка прячется.
+  // «На глазок»: чистая база может содержать календарный пакет из миграции. В обоих
+  // случаях до ответа сервер не раскрывает число и не приписывает гостю прохождение.
   const tiebreaker = await jsonRequest(baseUrl, '/api/tiebreaker/today', {
     headers: { authorization: `Bearer ${tokenA}` },
   }, 200);
-  assert.equal(tiebreaker.question, null);
+  if (tiebreaker.question !== null) {
+    assert.equal(typeof tiebreaker.question.id, 'string');
+    assert.equal(typeof tiebreaker.question.prompt, 'string');
+    assert.equal('answer' in tiebreaker.question, false);
+    assert.equal('explanation' in tiebreaker.question, false);
+  }
   assert.equal(tiebreaker.answered, null);
   assert.equal(tiebreaker.answersCount, 0);
   assert.match(tiebreaker.dateKey, /^\d{4}-\d{2}-\d{2}$/);
 
+  // Второй игрок получает свой забег, а не чужой.
   const tokenB = await guestSession(baseUrl);
   assert.notEqual(tokenB, tokenA);
   const runB = await startSoloRun(baseUrl, tokenB, 'Smoke B');

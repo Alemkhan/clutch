@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import {
   isBestAnswerOfDay,
   TIEBREAKER_MIN_ANSWERS_FOR_PERCENTILE,
@@ -40,6 +40,12 @@ import {
   type TiebreakerTodayState,
 } from "./useTiebreakerToday";
 import { ScreenHeader } from "../../ui/ScreenHeader";
+import {
+  calculatorReducer,
+  calculatorValue,
+  initialCalculatorState,
+  type CalculatorOperator,
+} from "./tiebreakerCalculator";
 
 export type TiebreakerSubmitStatus =
   "idle" | "sending" | "network" | "rejected" | "stale";
@@ -55,6 +61,63 @@ interface AnswerFormProps {
   /** Для тестов: начальный ввод и шаг подтверждения. */
   initialText?: string;
   initialConfirm?: boolean;
+}
+
+function TiebreakerCalculator({ onInsert }: { onInsert: (value: number) => void }) {
+  const [state, dispatch] = useReducer(calculatorReducer, initialCalculatorState);
+  const value = calculatorValue(state);
+  const keys: Array<{ label: string; action: { type: "digit"; value: string } | { type: "decimal" } | { type: "operator"; value: CalculatorOperator } | { type: "equals" } | { type: "clear" } | { type: "backspace" }; className?: string; ariaLabel?: string }> = [
+    { label: "7", action: { type: "digit", value: "7" } },
+    { label: "8", action: { type: "digit", value: "8" } },
+    { label: "9", action: { type: "digit", value: "9" } },
+    { label: "÷", action: { type: "operator", value: "÷" }, className: "operator" },
+    { label: "4", action: { type: "digit", value: "4" } },
+    { label: "5", action: { type: "digit", value: "5" } },
+    { label: "6", action: { type: "digit", value: "6" } },
+    { label: "×", action: { type: "operator", value: "×" }, className: "operator" },
+    { label: "1", action: { type: "digit", value: "1" } },
+    { label: "2", action: { type: "digit", value: "2" } },
+    { label: "3", action: { type: "digit", value: "3" } },
+    { label: "−", action: { type: "operator", value: "−" }, className: "operator" },
+    { label: "0", action: { type: "digit", value: "0" } },
+    { label: ",", action: { type: "decimal" }, ariaLabel: "Десятичная запятая" },
+    { label: "=", action: { type: "equals" }, className: "operator", ariaLabel: "Вычислить" },
+    { label: "+", action: { type: "operator", value: "+" }, className: "operator" },
+  ];
+
+  return (
+    <details className="tb-calculator">
+      <summary>Калькулятор</summary>
+      <div className="tb-calculator-body">
+        <div className="tb-calculator-display" aria-label="Текущее число" aria-live="polite">
+          {state.display}
+        </div>
+        <div className="tb-calculator-utility">
+          <button type="button" onClick={() => dispatch({ type: "clear" })}>Очистить</button>
+          <button type="button" aria-label="Удалить последний символ" onClick={() => dispatch({ type: "backspace" })}>⌫</button>
+        </div>
+        <div className="tb-calculator-keys" role="group" aria-label="Клавиши калькулятора">
+          {keys.map((key, index) => (
+            <button
+              key={`${key.label}-${index}`}
+              type="button"
+              className={key.className ?? ""}
+              aria-label={key.ariaLabel}
+              onClick={() => dispatch(key.action)}
+            >
+              {key.label}
+            </button>
+          ))}
+        </div>
+        {state.error && <p className="tb-calculator-error" role="alert">{state.error}</p>}
+        {state.operator === null && state.replaceDisplay && value !== null && (
+          <button type="button" className="tb-calculator-insert" onClick={() => onInsert(value)}>
+            Вставить в ответ
+          </button>
+        )}
+      </div>
+    </details>
+  );
 }
 
 export function TiebreakerAnswerForm({
@@ -140,6 +203,13 @@ export function TiebreakerAnswerForm({
           {hint}
         </p>
       )}
+      <TiebreakerCalculator
+        onInsert={(value) => {
+          setText(String(value).replace(".", ","));
+          setTouched(true);
+          setConfirming(false);
+        }}
+      />
       {guest && (
         <p className="tb-guest" role="note">
           В развязке ничьих считается только ответ из Telegram. Здесь можно

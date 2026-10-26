@@ -174,6 +174,10 @@ describe('screen and reveal', () => {
     const out = screen(ready({}));
     expect(out).toContain(question.prompt);
     expect(out).toContain('tb-form');
+    expect(out).toContain('<details class="tb-calculator">');
+    expect(out).toContain('Калькулятор');
+    expect(out).toContain('aria-label="Удалить последний символ"');
+    expect(out).toContain('aria-label="Вычислить"');
     expect(out).toContain('#7');
     expect(out).not.toContain('Правильный');
     expect(out).not.toContain('Твой промах');

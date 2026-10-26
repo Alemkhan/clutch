@@ -1,0 +1,122 @@
+[
+  {
+    "id": "tb-v3-cent-court",
+    "prompt": "Сколько монет по 1 евроценту поместится на баскетбольной площадке 28 × 15 м одним слоем в плотной шестиугольной раскладке?",
+    "cardPrompt": "Сколько евроцентов поместится на баскетбольной площадке?",
+    "unit": "монет",
+    "answer": 1800000,
+    "sourceUrl": "https://www.ecb.europa.eu/euro/coins/common/html/index.en.html",
+    "asOfDate": "2026-10-27",
+    "activeDate": "2026-10-27",
+    "explanation": {
+      "steps": [
+        { "label": "Площадка FIBA: 28 × 15 м", "value": 420, "unit": "м²", "sourceUrl": "https://www.venueguide.fiba.basketball/vanue-design", "sourceTitle": "FIBA Venue Guide — court flooring" },
+        { "label": "Диаметр монеты 1 евроцент", "value": 16.25, "unit": "мм", "sourceUrl": "https://www.ecb.europa.eu/euro/coins/common/html/index.en.html", "sourceTitle": "ЕЦБ — общие стороны монет евро" },
+        { "label": "Доля площади при плотной шестиугольной раскладке кругов", "value": 0.9069, "unit": "", "sourceUrl": "https://mathworld.wolfram.com/CirclePacking.html", "sourceTitle": "Wolfram MathWorld — Circle Packing" }
+      ],
+      "summary": "420 м² × 0,9069 ÷ площадь монеты ≈ 1,8 млн монет"
+    }
+  },
+  {
+    "id": "tb-v3-euro-iss-mass",
+    "prompt": "Сколько монет по 1 евро понадобилось бы, чтобы их общая масса сравнялась с массой Международной космической станции?",
+    "cardPrompt": "Сколько монет по 1 евро весят как МКС?",
+    "unit": "монет",
+    "answer": 56000000,
+    "sourceUrl": "https://www.ecb.europa.eu/euro/coins/common/html/index.en.html",
+    "asOfDate": "2026-10-27",
+    "activeDate": "2026-10-28",
+    "explanation": {
+      "steps": [
+        { "label": "Масса МКС в собранном виде", "value": 419725, "unit": "кг", "sourceUrl": "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/", "sourceTitle": "NASA — Space Station Facts and Figures" },
+        { "label": "Масса одной монеты 1 евро", "value": 7.5, "unit": "г", "sourceUrl": "https://www.ecb.europa.eu/euro/coins/common/html/index.en.html", "sourceTitle": "ЕЦБ — общие стороны монет евро" }
+      ],
+      "summary": "419 725 кг ÷ 7,5 г ≈ 56 млн монет"
+    }
+  },
+  {
+    "id": "tb-v3-tennis-iss-altitude",
+    "prompt": "Сколько стандартных теннисных мячей, сложенных строго один над другим, нужно, чтобы подняться от поверхности Земли до высоты орбиты МКС — примерно 400 км?",
+    "cardPrompt": "Сколько теннисных мячей в стопке до орбиты МКС?",
+    "unit": "мячей",
+    "answer": 6000000,
+    "sourceUrl": "https://science.nasa.gov/earth/earth-observatory/human-spaceflight-factsheet/",
+    "asOfDate": "2026-10-27",
+    "activeDate": "2026-10-29",
+    "explanation": {
+      "steps": [
+        { "label": "Высота орбиты МКС (округлённо)", "value": 400, "unit": "км", "sourceUrl": "https://science.nasa.gov/earth/earth-observatory/human-spaceflight-factsheet/", "sourceTitle": "NASA — Human Spaceflight Factsheet" },
+        { "label": "Диаметр стандартного теннисного мяча (середина допуска ITF)", "value": 6.7, "unit": "см", "sourceUrl": "https://www.itftennis.com/media/15639/2026-technical-booklet.pdf", "sourceTitle": "ITF Technical Booklet 2026" }
+      ],
+      "summary": "400 км ÷ 6,7 см ≈ 6 млн мячей"
+    }
+  },
+  {
+    "id": "tb-v3-a4-karman-line",
+    "prompt": "Сколько листов бумаги A4, приставленных короткими сторонами друг к другу, образуют линию длиной до границы космоса в 100 км?",
+    "cardPrompt": "Сколько листов A4 образуют линию длиной 100 км?",
+    "unit": "листов",
+    "answer": 480000,
+    "sourceUrl": "https://www.fai.org/page/icare-boundary",
+    "asOfDate": "2026-10-27",
+    "activeDate": "2026-10-30",
+    "explanation": {
+      "steps": [
+        { "label": "Высота линии Кармана по конвенции FAI", "value": 100, "unit": "км", "sourceUrl": "https://www.fai.org/page/icare-boundary", "sourceTitle": "FAI — 100 km Altitude Boundary for Astronautics" },
+        { "label": "Короткая сторона листа A4", "value": 210, "unit": "мм", "sourceUrl": "https://www.iso.org/standard/36631.html", "sourceTitle": "ISO 216 — Writing paper and certain classes of printed matter" }
+      ],
+      "summary": "100 км ÷ 210 мм ≈ 480 000 листов"
+    }
+  },
+  {
+    "id": "tb-v3-water-bottles-pool",
+    "prompt": "Сколько бутылок объёмом 1,5 л потребуется, чтобы заполнить водой бассейн размером 50 × 25 × 2 м?",
+    "cardPrompt": "Сколько бутылок воды заполнит бассейн?",
+    "unit": "бутылок",
+    "answer": 1700000,
+    "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+    "asOfDate": "2026-10-27",
+    "activeDate": "2026-10-31",
+    "explanation": {
+      "steps": [
+        { "label": "Объём бассейна по заданным в вопросе размерам", "value": 2500, "unit": "м³", "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8", "sourceTitle": "Расчёт по размерам из вопроса" },
+        { "label": "Объём одной бутылки (задан в вопросе)", "value": 1.5, "unit": "л", "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8", "sourceTitle": "NIST — SI conversion factors" }
+      ],
+      "summary": "2 500 000 л ÷ 1,5 л ≈ 1,7 млн бутылок"
+    }
+  },
+  {
+    "id": "tb-v3-courts-hectare",
+    "prompt": "Сколько баскетбольных площадок FIBA размером 28 × 15 м поместится по площади на одном гектаре?",
+    "cardPrompt": "Сколько площадок FIBA помещается на гектаре?",
+    "unit": "площадок",
+    "answer": 24,
+    "sourceUrl": "https://www.venueguide.fiba.basketball/vanue-design",
+    "asOfDate": "2026-10-27",
+    "activeDate": "2026-11-01",
+    "explanation": {
+      "steps": [
+        { "label": "Площадь баскетбольной площадки FIBA: 28 × 15 м", "value": 420, "unit": "м²", "sourceUrl": "https://www.venueguide.fiba.basketball/vanue-design", "sourceTitle": "FIBA Venue Guide — court flooring" },
+        { "label": "Площадь гектара", "value": 10000, "unit": "м²", "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8", "sourceTitle": "NIST — SI conversion factors" }
+      ],
+      "summary": "10 000 м² ÷ 420 м² ≈ 24 площадки"
+    }
+  },
+  {
+    "id": "tb-v3-euro-coins-karman",
+    "prompt": "Сколько монет по 2 евро, сложенных ровной стопкой, составят башню высотой 100 км — до линии Кармана?",
+    "cardPrompt": "Сколько монет по 2 евро составят башню до линии Кармана?",
+    "unit": "монет",
+    "answer": 45000000,
+    "sourceUrl": "https://www.fai.org/page/icare-boundary",
+    "asOfDate": "2026-10-27",
+    "activeDate": "2026-11-02",
+    "explanation": {
+      "steps": [
+        { "label": "Высота линии Кармана по конвенции FAI", "value": 100, "unit": "км", "sourceUrl": "https://www.fai.org/page/icare-boundary", "sourceTitle": "FAI — 100 km Altitude Boundary for Astronautics" },
+        { "label": "Толщина монеты 2 евро", "value": 2.2, "unit": "мм", "sourceUrl": "https://www.ecb.europa.eu/euro/coins/common/html/index.en.html", "sourceTitle": "ЕЦБ — общие стороны монет евро" }
+      ],
+      "summary": "100 км ÷ 2,2 мм ≈ 45 млн монет"
+    }
+  }
+]

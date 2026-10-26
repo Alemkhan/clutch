@@ -1,7 +1,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ApiError, answerSoloRound, checkTrainingAnswer, fetchMyRuns, fetchSoloProfile, fetchSoloRunSnapshot, fetchTrainingMistakes, fetchTrainingQuestions, hammerSoloRound, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError, logAnalyticsEvent, startSoloRun, submitQuestionReport } from './api';
+import { ApiError, answerSoloRound, checkTrainingAnswer, fetchMyRuns, fetchSoloProfile, fetchSoloRunSnapshot, fetchTrainingMistakes, fetchTrainingQuestions, hammerSoloRound, guestRenewalAuthorization, isGuestSessionUsable, isTransientApiError, logAnalyticsEvent, startSoloRun, startWikiPath, submitQuestionReport } from './api';
 
 afterEach(() => {
+  vi.useRealTimers();
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
@@ -63,6 +64,37 @@ describe('match start cancellation', () => {
     await vi.waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
     controller.abort();
     await expect(request).rejects.toMatchObject({ name: 'AbortError' });
+  });
+});
+
+describe('Wiki Path request timeout', () => {
+  it('allows a slow Wiki Path start 15 seconds while other requests keep the 5 second default', async () => {
+    vi.useFakeTimers();
+    const fetchMock = vi.fn((input: string | URL | Request, init?: RequestInit) => {
+      const path = String(input);
+      if (path.includes('/api/auth/guest')) {
+        return Promise.resolve(new Response(JSON.stringify({ token: 'guest-token', expiresAt: Date.now() + 60 * 60 * 1000 }), { status: 200 }));
+      }
+      return new Promise<Response>((_resolve, reject) => {
+        init?.signal?.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')), { once: true });
+      });
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    let settled = false;
+    const request = startWikiPath();
+    const result = request.then(
+      () => ({ error: null }),
+      (error: unknown) => ({ error }),
+    ).finally(() => { settled = true; });
+    await vi.advanceTimersByTimeAsync(0);
+    const wikiInit = fetchMock.mock.calls.at(-1)?.[1] as RequestInit;
+    expect(String(fetchMock.mock.calls.at(-1)?.[0])).toBe('/api/wiki-path/start');
+    await vi.advanceTimersByTimeAsync(5_000);
+    expect(wikiInit.signal?.aborted).toBe(false);
+    expect(settled).toBe(false);
+    await vi.advanceTimersByTimeAsync(10_000);
+    await expect(result).resolves.toMatchObject({ error: { name: 'AbortError' } });
+    expect(wikiInit.signal?.aborted).toBe(true);
   });
 });
 

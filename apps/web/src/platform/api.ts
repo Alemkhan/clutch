@@ -43,6 +43,8 @@ const DISPLAY_NAME_SEED_KEY = 'clutch_display_name_seed_v1';
 const PLAYER_NAME_KEY = 'clutch_player_name_v1';
 const GUEST_SESSION_KEY = 'clutch_guest_session_v1';
 const SESSION_REFRESH_WINDOW_MS = 5 * 60 * 1000;
+const WIKI_PATH_REQUEST_TIMEOUT_MS = 15_000;
+const DEFAULT_REQUEST_TIMEOUT_MS = 5_000;
 
 let memoryGuestSession: GuestSessionResponse | null = null;
 let guestSessionRequest: Promise<GuestSessionResponse> | null = null;
@@ -114,13 +116,13 @@ async function errorDetails(response: Response): Promise<{ reason?: string; body
   }
 }
 
-async function rawApiFetch<T>(path: string, init: RequestInit): Promise<T> {
+async function rawApiFetch<T>(path: string, init: RequestInit, timeoutMs = DEFAULT_REQUEST_TIMEOUT_MS): Promise<T> {
   const controller = new AbortController();
   const callerSignal = init.signal;
   const abortFromCaller = () => controller.abort(callerSignal?.reason);
   if (callerSignal?.aborted) abortFromCaller();
   else callerSignal?.addEventListener('abort', abortFromCaller, { once: true });
-  const timeout = setTimeout(() => controller.abort(), 5000);
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetch(`${API_BASE}${path}`, {
       ...init,
@@ -218,7 +220,12 @@ async function authorizationHeader(): Promise<string> {
   return `Bearer ${(await getGuestSession()).token}`;
 }
 
-async function apiFetch<T>(path: string, init: RequestInit, signal?: AbortSignal): Promise<T> {
+async function apiFetch<T>(
+  path: string,
+  init: RequestInit,
+  signal?: AbortSignal,
+  timeoutMs = DEFAULT_REQUEST_TIMEOUT_MS,
+): Promise<T> {
   signal?.throwIfAborted();
   const authorization = await authorizationHeader();
   signal?.throwIfAborted();
@@ -226,7 +233,7 @@ async function apiFetch<T>(path: string, init: RequestInit, signal?: AbortSignal
     ...init,
     headers: { ...init.headers, Authorization: authorization },
     signal,
-  });
+  }, timeoutMs);
 }
 
 // ---- Соло-забег и «Мои партии» ----
@@ -405,7 +412,7 @@ export function fetchWikiPathToday(signal?: AbortSignal): Promise<WikiPathTodayR
 
 /** Начать маршрут или продолжить незавершённый; сервер возвращает текущую статью. */
 export function startWikiPath(signal?: AbortSignal): Promise<StartWikiPathResponse> {
-  return apiFetch('/api/wiki-path/start', { method: 'POST', body: '{}' }, signal);
+  return apiFetch('/api/wiki-path/start', { method: 'POST', body: '{}' }, signal, WIKI_PATH_REQUEST_TIMEOUT_MS);
 }
 
 /** Переход проверяет сервер по списку ссылок текущей статьи. */
@@ -416,7 +423,7 @@ export function clickWikiPath(
 ): Promise<WikiPathClickResponse> {
   return apiFetch(`/api/wiki-path/runs/${encodeURIComponent(runId)}/click`, {
     method: 'POST', body: JSON.stringify(body),
-  }, signal);
+  }, signal, WIKI_PATH_REQUEST_TIMEOUT_MS);
 }
 
 /** Таблица завершивших сегодняшний маршрут. */

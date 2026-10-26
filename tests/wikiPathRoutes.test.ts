@@ -144,6 +144,36 @@ describe('Wiki Path daily API', () => {
     expect(db.sqlite.prepare('SELECT title FROM wiki_path_page_revisions WHERE page_id = 9').get()).toEqual({ title: 'Россия' });
   });
 
+  it('loads the start and target articles concurrently before creating the run', async () => {
+    vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
+    const db = database(); addChallenge(db);
+    let releaseRequests!: () => void;
+    const requestsMayFinish = new Promise<void>((resolve) => { releaseRequests = resolve; });
+    let activeRequests = 0;
+    let maxActiveRequests = 0;
+    vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
+      activeRequests += 1;
+      maxActiveRequests = Math.max(maxActiveRequests, activeRequests);
+      await requestsMayFinish;
+      activeRequests -= 1;
+      const query = new URL(new Request(input, init).url).searchParams;
+      const title = query.get('page');
+      const page = title === 'Start'
+        ? { pageid: 1, revid: 11, title: 'Start', text: '<p>Start</p>', links: [] }
+        : { pageid: 3, revid: 33, title: 'Goal', text: '<p>Goal</p>', links: [] };
+      return Response.json({ parse: page });
+    }));
+    const player = guest('parallel-start');
+    const responsePromise = app.request('/api/wiki-path/start', { method: 'POST', headers: { authorization: player.authorization } }, env(db));
+    await vi.waitFor(() => expect(activeRequests).toBe(2));
+    releaseRequests();
+    const response = await responsePromise;
+    expect(response.status).toBe(201);
+    expect(maxActiveRequests).toBe(2);
+    expect(db.sqlite.prepare('SELECT COUNT(*) AS count FROM wiki_path_page_revisions').get()).toEqual({ count: 2 });
+    expect(db.sqlite.prepare('SELECT COUNT(*) AS count FROM wiki_path_runs').get()).toEqual({ count: 1 });
+  });
+
   it('recognizes a canonical redirect as the goal and ranks Telegram players with shared places', async () => {
     vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
     const db = database(); addChallenge(db, 'Start', 'Goal alias');

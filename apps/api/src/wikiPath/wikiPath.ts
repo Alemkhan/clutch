@@ -163,9 +163,13 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
       let loadedPage: WikiPageSnapshot | undefined;
       const alreadyStarted = Boolean(run);
       if (!run) {
-        const page = await loadOrFetch(c.env.DB, challenge.id, challenge.start_title, now);
+        // Fetch both immutable pages together: sequential Wikimedia requests can exceed the
+        // browser's request budget even when each page is individually fast.
+        const [page] = await Promise.all([
+          loadOrFetch(c.env.DB, challenge.id, challenge.start_title, now),
+          targetForChallenge(c.env.DB, challenge, now),
+        ]);
         loadedPage = page;
-        await targetForChallenge(c.env.DB, challenge, now);
         await createRun(c.env.DB, {
           id: crypto.randomUUID(), playerId: identity.playerId,
           displayName: identity.displayName?.trim().slice(0, 40) || 'Игрок', challenge, page, now,
