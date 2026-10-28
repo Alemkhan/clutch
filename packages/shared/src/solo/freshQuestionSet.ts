@@ -1,6 +1,6 @@
-import { countries } from './countries';
+import { countries } from '../questions/countries';
 import { DAILY_SET_OPEN_RATIO, dailyKey, dailySetSize, type DailySet } from './dailyQuestionSet';
-import { packQuestionToRaceQuestion, packSetToRaceQuestion, type PackRecord } from './generalPack';
+import { packQuestionToRaceQuestion, packSetToRaceQuestion, type PackRecord } from '../generalPack';
 import {
   GENERAL_SET_GENERATED,
   GENERAL_SET_OPEN_COUNT,
@@ -8,12 +8,12 @@ import {
   KZ_SET_OPEN_COUNT,
   liveKzRecords,
   livePackRecords,
-} from './generalSet';
-import { historicFlags } from './historicFlags';
-import type { CategoryId, GeneratedCategoryId, Question } from './index';
-import { languages } from './languages';
-import { generateMatch } from './questionGenerator';
-import { createSeededRandom, hashSeed } from './seededRandom';
+} from '../questions/generalSet';
+import { historicFlags } from '../questions/historicFlags';
+import type { CategoryId, GeneratedCategoryId, Question } from '../index';
+import { languages } from '../questions/languages';
+import { generateMatch } from '../questions/questionGenerator';
+import { createSeededRandom, hashSeed } from '../questions/seededRandom';
 
 /**
  * Свежий набор для свободной игры и дуэли: собирается под забег, а не берётся из банка дня.

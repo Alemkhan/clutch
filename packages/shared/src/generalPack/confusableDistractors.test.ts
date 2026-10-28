@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { levenshtein } from '../fuzzyMatch';
+import { levenshtein } from '../questions/fuzzyMatch';
 import { CONFUSABLE_DISTRACTOR_PAIRS } from './confusableDistractors.baseline';
 import { generalPackQuestions, matchesAccepted, normalizePackAnswer } from './index';
 

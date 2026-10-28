@@ -1,4 +1,4 @@
-import type { CategoryId, Question } from './index';
+import type { CategoryId, Question } from '../index';
 import {
   generateQuestionById,
   isKnownQuestionId as isGeneratorQuestionId,
@@ -11,7 +11,7 @@ import {
   PACK_TOPIC_LABELS_RU,
   packQuestionToRaceQuestion,
   packSetToRaceQuestion,
-} from './generalPack';
+} from '../generalPack';
 
 const GP_PREFIX = 'gp:';
 

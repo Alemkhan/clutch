@@ -1,6 +1,6 @@
 # Clutch — контекст для следующей сессии
 
-Обновлено: **2026-10-27** (production). Это снимок состояния, а не обещание
+Обновлено: **2026-10-28** (структурная уборка после production 2026-10-27). Это снимок состояния, а не обещание
 готовности к релизу. История и подробные отчёты по R1–R26 — в
 [docs/archive/CONTEXT_HISTORY.md](docs/archive/CONTEXT_HISTORY.md) и
 [docs/archive/ROADMAP_DONE.md](docs/archive/ROADMAP_DONE.md); по умолчанию их не читать.
@@ -101,12 +101,15 @@ Match HUD показывает личности, проценты и полос�
 - `apps/api/src/{solo,rematch,myRuns,profile,training,tiebreaker,wikiPath,telemetry,share,notifications,lastStand,auth,http}` —
   по папке на фичу; SQL в `*Repository`; `index.ts` — только сборка.
 - `apps/api/migrations/0001_schema.sql` + новые файлы — схема D1.
-- `packages/shared/src` — правила соло/молотка (`soloRun`, `hammerRules`, `soloCompare`),
-  `tiebreaker`, контракт и ranking `wikiPath`, генераторы вопросов, `generalPack/`,
-  `generalSet`, `questionResolve`.
-- `content/` — пакет вопросов «Общие знания» (JSON); `docs/content/` — пак «На глазок».
+- `packages/shared/src/{solo,hammer,questions,tiebreaker,wikiPath,telemetry,lastStand}` —
+  доменные правила и контракты; `index.ts` сохраняет единый публичный API, `generalPack/`
+  загружает пакет «Общих знаний».
+- `content/` — пакет вопросов «Общие знания» и импортируемые JSON-паки «На глазок»;
+  `docs/content/` — их редакторские разборы и черновики. Runtime «На глазок» живёт в D1.
 - `scripts/` — `smoke-local`, `preflight-production`, `calibrate-pricing`,
   `telemetry-view` (`reports`, `funnel`, `retention`, `errors`; `--db` для выгрузки prod через `reports:pull`), `smoke-remote`, `tiebreaker-load`, импорт контента, `content:day` (вопросы дня с ответами для вычитки перед съёмкой/релизом).
+- `promo/` — намеренно отдельный локальный Remotion-проект со своим lock-файлом; не входит
+  в корневой workspace, CI и production release.
 
 ## Что не путать
 
@@ -160,11 +163,14 @@ Match HUD показывает личности, проценты и полос�
 
 Открытые задачи — [ROADMAP](docs/ROADMAP.md); находки — [AUDIT](docs/AUDIT.md).
 
-## Проверки (2026-10-27)
+## Проверки (2026-10-28)
 
 - `npm test` — **1189/1189** (114 файлов); после перевода калькулятора на `big.js`
   целевые тесты — **40/40**, `npm run build` — успешно (web JS 890 КБ / gzip 256 КБ),
   `npm audit --workspace @clutch/web` — 0 уязвимостей; `npm run content:check` — **26/26**.
+- После структурной уборки shared разложен по доменам, frontend API — по `*Api.ts`, крупные
+  `Tiebreaker` и `SoloBoard` — по представлениям; публичные facade-импорты сохранены.
+  Повторно прошли `npm run typecheck`, **1189/1189** тестов и production build.
 - `npm run test:smoke:local` — успешно на чистой временной D1 из миграций 0001–0010.
 - Калькулятор «На глазок» проверен unit/UI-тестами и Playwright на viewport 390 × 844;
   реальный Telegram и открытая клавиатура остаются ручной проверкой.

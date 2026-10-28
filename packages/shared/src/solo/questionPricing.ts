@@ -1,5 +1,5 @@
-import { SKILL_REWARDS } from './hammerRules';
-import type { Question } from './index';
+import { SKILL_REWARDS } from '../hammer/hammerRules';
+import type { Question } from '../index';
 import { SOLO_TARGET_PROGRESS } from './soloRun';
 
 /*

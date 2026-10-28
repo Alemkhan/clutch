@@ -3,7 +3,7 @@
 // Writes content/review/day-<date>-<category>.md (git-ignored). The day starts at midnight in Almaty.
 import fs from 'node:fs';
 import path from 'node:path';
-import { dailyQuestionBank, dayStartMs } from '../../packages/shared/src/dailyQuestionSet';
+import { dailyQuestionBank, dayStartMs } from '../../packages/shared/src/solo/dailyQuestionSet';
 import type { CategoryId, Question } from '../../packages/shared/src/index';
 
 const CATEGORIES: CategoryId[] = ['general', 'geography', 'history', 'languages'];

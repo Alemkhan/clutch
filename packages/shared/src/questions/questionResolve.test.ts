@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dailyQuestionBank } from './dailyQuestionSet';
+import { dailyQuestionBank } from '../solo/dailyQuestionSet';
 import { isKnownQuestionId, questionIdCategory, resolveQuestionById } from './questionResolve';
 
 const DAY = Date.UTC(2026, 9, 12);

@@ -1,4 +1,4 @@
-import type { CategoryId, GeneratedCategoryId, Question, Difficulty } from './index';
+import type { CategoryId, GeneratedCategoryId, Question, Difficulty } from '../index';
 import { countries, flagUrl, outlineUrl, ISLAND_COUNTRIES, type Country } from './countries';
 import { FLAG_TRAITS } from './flagTraits';
 import { historicFlags, historicFlagUrl, type HistoricFlag } from './historicFlags';

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { generateMatch, generateQuestionById, isKnownQuestionId, questionIdCategory } from './index';
+import { generateMatch, generateQuestionById, isKnownQuestionId, questionIdCategory } from '../index';
 
 describe('generateQuestionById', () => {
   it.each([

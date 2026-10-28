@@ -11,7 +11,7 @@ import {
   generateCountryToCapital,
   isAnswerCorrect,
   type CategoryId,
-} from './index';
+} from '../index';
 
 const day = Date.UTC(2026, 9, 8, 12, 0, 0);
 const templateOf = (id: string) => id.replace(/_[a-z]{2}$/, '');

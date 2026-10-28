@@ -19,7 +19,7 @@ import {
   type LastStandCategory,
   type LastStandRound,
 } from './lastStand';
-import { countries } from './countries';
+import { countries } from '../questions/countries';
 
 // Fixtures: the module must not depend on any real narrow list.
 const narrow = (id: string, members: string[]): LastStandCategory => ({ id, scale: 'narrow', members });

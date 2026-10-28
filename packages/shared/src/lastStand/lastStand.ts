@@ -1,6 +1,6 @@
 // Заморожено 2026-10-16: входа из интерфейса нет, код и тесты поддерживаются, новых функций не добавлять.
-import { countries } from './countries';
-import { createSeededRandom, dailyKey, hashSeed } from './dailyQuestionSet';
+import { countries } from '../questions/countries';
+import { createSeededRandom, dailyKey, hashSeed } from '../solo/dailyQuestionSet';
 
 /**
  * Last Stand rules. Not a quiz: the contest is to not coincide with an opponent's answer.

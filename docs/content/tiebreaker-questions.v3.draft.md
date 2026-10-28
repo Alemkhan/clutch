@@ -1,8 +1,8 @@
 # «На глазок»: недельный пак v3
 
 Статус: пакет подготовлен и одобрен владельцем 2026-10-27; даты показа **2026-10-27…2026-11-02**.
-Канонические данные для импорта: [tiebreaker-pack-v3.json](tiebreaker-pack-v3.json).
-Для генерации SQL используется `npm run tiebreaker:load -- docs/content/tiebreaker-pack-v3.json`;
+Канонические данные для импорта: [tiebreaker-pack-v3.json](../../content/tiebreaker/packs/tiebreaker-pack-v3.json).
+Для генерации SQL используется `npm run tiebreaker:load -- content/tiebreaker/packs/tiebreaker-pack-v3.json`;
 скрипт только печатает SQL и сам в D1 не пишет.
 
 Все ответы округлены до двух значащих цифр. Вопросы задают нужные размеры и допущения,

@@ -10,7 +10,7 @@ import {
 
 /**
  * Состояние соло-забега на клиенте. Правила (цель, потолок, закрытие забега) живут
- * в shared/soloRun.ts; здесь только хранение и выдача данных экрану. Без DOM и таймеров.
+ * в shared/solo/soloRun.ts; здесь только хранение и выдача данных экрану. Без DOM и таймеров.
  */
 export interface SoloRunSession {
   questions: readonly PublicQuestion[];

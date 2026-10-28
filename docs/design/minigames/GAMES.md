@@ -24,7 +24,7 @@
 
 ### Опора — нынешний контракт молотка
 
-Всё нужное уже есть в `packages/shared/src/hammerRules.ts`:
+Всё нужное уже есть в `packages/shared/src/hammer/hammerRules.ts`:
 
 - `hammerAttemptRules(questionId, previousResults, config)` — стадия давления (0–3), центр цели
   и скорость, детерминированные хешем id вопроса (`stableQuestionHash`), без `Math.random`.

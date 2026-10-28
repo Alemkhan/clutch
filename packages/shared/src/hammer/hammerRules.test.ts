@@ -14,7 +14,7 @@ import {
   scoreHammerTap,
   stableQuestionHash,
   type PressureStage,
-} from './index';
+} from '../index';
 
 const config = CURRENT_HAMMER_MINI_GAME.config;
 

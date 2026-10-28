@@ -1,4 +1,4 @@
-import type { CategoryId, Question } from './index';
+import type { CategoryId, Question } from '../index';
 import { generateMatch, type TemplateUsage } from './questionGenerator';
 import {
   generalPackQuestions,
@@ -7,7 +7,7 @@ import {
   packQuestionToRaceQuestion,
   packSetToRaceQuestion,
   type PackRecord,
-} from './generalPack';
+} from '../generalPack';
 import { createSeededRandom, hashSeed } from './seededRandom';
 
 /**

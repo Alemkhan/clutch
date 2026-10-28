@@ -1,5 +1,5 @@
-import type { CategoryId, MyRunOutcome } from './index';
-import { resolveTiebreak, type TiebreakAnswer } from './tiebreaker';
+import type { CategoryId, MyRunOutcome } from '../index';
+import { resolveTiebreak, type TiebreakAnswer } from '../tiebreaker/tiebreaker';
 
 /** То, что нужно знать о завершённом соло-забеге, чтобы сравнить его с другим. */
 export interface SoloRunResult {

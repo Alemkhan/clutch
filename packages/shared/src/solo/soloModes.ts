@@ -1,4 +1,4 @@
-import type { Opponent } from './index';
+import type { Opponent } from '../index';
 import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS } from './soloRun';
 
 /**

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { dailySetSize } from './dailyQuestionSet';
-import { freshQuestionSet } from './freshQuestionSet';
+import { dailySetSize } from '../solo/dailyQuestionSet';
+import { freshQuestionSet } from '../solo/freshQuestionSet';
 import { KZ_MIN_LIVE, KZ_SET_OPEN_COUNT, KZ_SET_SIZE, buildKzSet, isCategoryOpen, liveKzRecords, livePackRecords } from './generalSet';
-import { generalPackQuestions, PACK_TOPIC_LABELS_RU, type PackRecord } from './generalPack';
+import { generalPackQuestions, PACK_TOPIC_LABELS_RU, type PackRecord } from '../generalPack';
 
 // Вопросы темы лежат на проверке (pending); тесты играют ими как одобренными.
 const kz: PackRecord[] = generalPackQuestions

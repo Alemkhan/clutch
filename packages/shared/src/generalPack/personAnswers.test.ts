@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { expandPersonAnswers, generalPackQuestions, matchesAccepted, packQuestionToRaceQuestion } from './index';
-import { isAnswerCorrect } from '../fuzzyMatch';
+import { isAnswerCorrect } from '../questions/fuzzyMatch';
 
 const byId = (id: string) => generalPackQuestions.find((q) => q.id === id)!;
 // Вопросы об авторах теперь только с вариантами, но разбор имени проверяется на них же: открытый

@@ -1,4 +1,4 @@
-import { normalizeAnswer } from '../fuzzyMatch';
+import { normalizeAnswer } from '../questions/fuzzyMatch';
 
 const key = (text: string): string => normalizeAnswer(text.replace(/ё/gi, 'е'));
 

@@ -1,6 +1,6 @@
 # Архитектура: как устроен текущий код
 
-Сверено с кодом 2026-10-16 (коммит `cc61513`). Клиент и API используют общие правила из
+Сверено с кодом 2026-10-28. Клиент и API используют общие правила из
 `packages/shared`. Единственный режим матча — **соло-забег до 100%** (`solo-to-100-v2`) плюс
 тренировка и дружеская дуэль. Режим гонки удалён (R12; снятые разделы —
 [archive/ARCHITECTURE_RETIRED.md](archive/ARCHITECTURE_RETIRED.md)); Last Stand заморожен.
@@ -13,9 +13,9 @@ apps/web/                React 18 + Vite + Framer Motion + Telegram SDK
   src/App.tsx            экран по `phase`; системный Back через telegramBackButton
   src/app/               useGameState (навигация верхнего уровня), gameSession (phase и
                          безопасные переходы), bootstrap, launchIntent (startapp-параметры)
-  src/platform/          api.ts (HTTP, Telegram/guest auth, таймаут 5 с), telegram.ts,
-                         telegramBackButton.ts, analytics.ts (очередь в памяти), sounds.ts,
-                         soundPreference.ts, accessibility.ts, share.ts
+  src/platform/          api.ts — совместимый facade; apiClient.ts — HTTP и Telegram/guest
+                         auth; *Api.ts — запросы по доменам; telegramBackButton.ts,
+                         analytics.ts, sounds.ts, soundPreference.ts, accessibility.ts, share.ts
   src/ui/                BottomNav (4 раздела), ScreenHeader, SoundToggle, TimerBar
   src/features/
     solo/                основной цикл: SoloRun, useSoloRun (+ Start/Restore/Lifecycle),
@@ -26,7 +26,9 @@ apps/web/                React 18 + Vite + Framer Motion + Telegram SDK
     round/               QuestionScreen, ResolutionScreen, MatchHud, OpenAnswerInput,
                          reportPanel — общие для соло и тренировки
     hammer/              HammerGame и его части (scene, lane, result, intro, motion, strike)
-    home/, board/, tiebreaker/, wikiPath/, myRuns/, training/, profile/   экраны разделов
+    home/, wikiPath/, myRuns/, training/, profile/   экраны разделов
+    board/               controller и отдельные представления daily/duels/wikiPath
+    tiebreaker/          controller, форма ответа, вскрытие и экранное представление
     lastStand/           замороженный режим (входа с главной нет)
   src/index.css          только список @import, порядок значим
   src/styles/            tokens.css, base.css, v2-shell.css, legacy-/v2-responsive.css
@@ -47,23 +49,22 @@ apps/api/                Hono на Cloudflare Workers + D1
   src/{myRuns,profile,training,tiebreaker,wikiPath,telemetry,share,lastStand}/  фича = route + repository
   migrations/            0001_schema.sql + новые файлы; описание таблиц — комментарии в SQL
   wrangler.toml          Worker, D1, Rate Limiting, cron раз в 15 минут (dev-конфиг)
-packages/shared/src/     типы и правила для клиента и API
-  soloRun.ts, soloCompare.ts, hammerRules.ts, questionPricing.ts   правила забега, исход,
-                         молоток (стадия, цель, скорость, зоны), `setPar`
-  tiebreaker.ts          «На глазок»: множитель, ввод, resolveTiebreak, корзины
-  telemetry.ts           allowlist событий и типы репортов
-  questionGenerator.ts, countries.ts, historicFlags.ts, languages.ts, flagTraits.ts,
-  fuzzyMatch.ts          генераторы географии/флагов/языков и сверка открытого ответа
-  generalPack/, generalSet.ts, questionResolve.ts   пакет «Общих знаний» из content/*.json,
-                         набор дня, восстановление вопроса по id (генераторы + `gp:`-id)
-  dailyQuestionSet.ts    размеры наборов, банк дня, `dailyKey`, граница суток
-  practice.ts, friendDuel.ts   версии `solo-practice-v1`/`solo-friend-v1`, уровни ботов
-  lastStand.ts, narrowCategories.ts   замороженный режим
-content/                 пакет вопросов (605 вопросов + 52 набора, 16 тем) — см. content/README
+packages/shared/src/     публичный index.ts + типы и правила для клиента и API
+  solo/                  забег, сравнение, режимы, банк дня, practice/friend duel и `setPar`
+  hammer/                математика молотка и башни: стадии, скорость, зоны, награды
+  questions/             генераторы, страны/флаги/языки, наборы и resolve вопроса по id
+  generalPack/           пакет «Общих знаний» из content/questions и content/sets
+  tiebreaker/            «На глазок»: множитель, ввод, resolveTiebreak, корзины
+  wikiPath/              контракты и ranking «Вики-пути»
+  telemetry/             allowlist событий и типы репортов
+  lastStand/             замороженный режим
+content/                 пакет вопросов (605 вопросов + 52 набора, 16 тем) — см. content/README;
+                         исходники импортируемых паков «На глазок» — content/tiebreaker/packs/
 tests/                   API/route-тесты на реальной SQLite (`helpers/testD1.ts`)
                          + кросс-пакетные; остальные тесты лежат рядом с кодом
 scripts/                 smoke-local, preflight-production (+lib), calibrate-pricing,
                          telemetry-view, tiebreaker-load, content/*, share-cards, screens
+promo/                   отдельный локальный Remotion-проект; не входит в workspace, CI и release
 .github/workflows/ci.yml npm ci → npm test → smoke:local → preflight fixture (с build)
 ```
 
@@ -83,7 +84,7 @@ scripts/                 smoke-local, preflight-production (+lib), calibrate-pri
 Клиент: `App → SoloRun → useSoloRun (React, сеть, retry) → soloRunFlow (чистые переходы)`,
 `clientMatchRules` проверяет ответы сервера по shared. Сервер: `index → solo/soloRuns →
 auth/identity → http/{rateLimit,jsonBody} → solo/{matchmaking,validation,repository…} →
-shared/{soloRun,hammerRules}`. SQL живёт в `*Repository` (системный route держит только
+shared/{solo/soloRun,hammer/hammerRules}`. SQL живёт в `*Repository` (системный route держит только
 фиксированный read-only probe readiness), правила — в shared. Новый профиль бота — в
 `solo/bots.ts`; новый HTTP-сценарий — в папке своей фичи; переходы вопрос → разбор → удар →
 итог меняются в `soloRunFlow`, а условия завершения и scoring — в shared.
@@ -136,7 +137,9 @@ shared/{soloRun,hammerRules}`. SQL живёт в `*Repository` (системны
 /api/tiebreaker/answer`: множитель считает сервер; чужой день — 409 `not_todays_question`,
 повтор — 409 `already_answered`; тело до 512 байт. В исход идут только `telegram:`; сутки
 прикидки — `dailyKey(created_at)` каждого забега. `CompleteSoloRunResponse.tiebreak`
-приходит, только когда исход решила прикидка. Загрузка пака — `npm run tiebreaker:load`.
+приходит, только когда исход решила прикидка. JSON-исходники паков лежат в
+`content/tiebreaker/packs/`; загрузчик `npm run tiebreaker:load -- <путь-к-json>` готовит SQL,
+который владелец применяет отдельно.
 
 **«Вики-путь».** Клиент получает статью только через Clutch API, повторно очищает HTML и
 делает активными лишь ссылки из `allowedLinks`. Worker запрашивает русскую MediaWiki Parse

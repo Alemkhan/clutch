@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { clearDailyBankCache, dailyBankSize, dailyQuestionBank, dailyQuestionSet } from './dailyQuestionSet';
+import { clearDailyBankCache, dailyBankSize, dailyQuestionBank, dailyQuestionSet } from '../solo/dailyQuestionSet';
 import { buildGeneralSet, livePackRecords } from './generalSet';
-import { generalPackQuestions } from './generalPack';
+import { generalPackQuestions } from '../generalPack';
 import { generateMatch } from './questionGenerator';
 
 const DAY = Date.UTC(2026, 9, 12);

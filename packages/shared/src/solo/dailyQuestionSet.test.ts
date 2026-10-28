@@ -12,7 +12,7 @@ import {
   generateMatch,
   hashSeed,
   questionSetId,
-} from './index';
+} from '../index';
 
 const day1 = Date.UTC(2026, 9, 7, 12, 0, 0);
 const day2 = Date.UTC(2026, 9, 8, 12, 0, 0);

@@ -689,7 +689,7 @@ remote D1.
   (PK `player_id, question_id`, множитель хранится округлённым до 4 знаков,
   `date_key` для поиска ответа за сутки). Колонки для бота нет: в рейтинговом
   соло ботов нет, бот живёт только в тренировке, её исход не хранится. Чистые
-  правила — `packages/shared/src/tiebreaker.ts` (множитель, ввод, `resolveTiebreak`,
+  правила — `packages/shared/src/tiebreaker/tiebreaker.ts` (множитель, ввод, `resolveTiebreak`,
   12 лог-корзин по guess/answer, перцентиль от 10 ответов); `compareSoloRuns` не
   тронут. Попутно `noAnswerLeak.test.ts` перестал зависеть от даты: столица,
   совпадающая со страной в тексте вопроса («Панама»), не считается утечкой.
@@ -754,7 +754,7 @@ JSON даёт `explanation: null`. Блок «Как прикинуть» на �
 телефон и Telegram — нет.
 
 **Контент.** Пак v2 одобрен владельцем 2026-10-15: 10 составных вопросов
-([tiebreaker-pack-v2.json](../content/tiebreaker-pack-v2.json), разбор с
+([tiebreaker-pack-v2.json](../../content/tiebreaker/packs/tiebreaker-pack-v2.json), разбор с
 источниками — [v2.draft](../content/tiebreaker-questions.v2.draft.md); вопрос о
 солнечной энергии снят как гуглящийся). Даты показа 2026-10-16…2026-10-25,
 залит только в локальную D1. После 25-го карточка снова скрыта — нужен

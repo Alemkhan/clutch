@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { validateNarrowCategories } from '../lastStand';
+import { validateNarrowCategories } from '../lastStand/lastStand';
 import {
   generalPackQuestions,
   generalPackSets,

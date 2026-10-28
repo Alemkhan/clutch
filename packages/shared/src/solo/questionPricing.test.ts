@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Question } from './index';
+import type { Question } from '../index';
 import {
   MEAN_REWARD_PER_CORRECT,
   questionDifficulty,

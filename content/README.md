@@ -70,5 +70,5 @@ npm run content:check
 (от очевидных к редким; у каждого `id`, `answerRu`, `acceptedRu`) · `nonMembersRu`
 не меньше 3 правдоподобных неверных.
 
-Вопросы «На глазок» лежат не здесь, а в `docs/content/` (пак `tiebreaker-pack-v2.json` и разбор).
+Импортируемые паки «На глазок» лежат в `content/tiebreaker/packs/`; разборы и черновики — в `docs/content/`.
 Статус одобрения всего пакета и риски по происхождению — [CONTENT_REVIEW](../docs/CONTENT_REVIEW.md).

@@ -1,4 +1,4 @@
-import type { MyRunOutcome } from './index';
+import type { MyRunOutcome } from '../index';
 
 /**
  * «На глазок»: прикидка дня, которая разрешает ничью матча (docs/archive/ROADMAP_DONE.md, R24).

@@ -1,7 +1,7 @@
 import type { AnswerType, Question } from '../index';
-import { createSeededRandom, hashSeed } from '../seededRandom';
-import { isAnswerCorrect, normalizeAnswer } from '../fuzzyMatch';
-import type { LastStandCategory, LastStandScale } from '../lastStand';
+import { createSeededRandom, hashSeed } from '../questions/seededRandom';
+import { isAnswerCorrect, normalizeAnswer } from '../questions/fuzzyMatch';
+import type { LastStandCategory, LastStandScale } from '../lastStand/lastStand';
 import type { PackQuestion, PackSet, PackTopic } from './types';
 import { expandPersonAnswers } from './personAnswers';
 

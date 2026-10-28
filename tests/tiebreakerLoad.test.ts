@@ -73,7 +73,7 @@ describe('tiebreaker-load', () => {
   });
 
   it('accepts the v2 content pack with a short card prompt on every question', () => {
-    const pack = JSON.parse(readFileSync('docs/content/tiebreaker-pack-v2.json', 'utf8')) as Array<{ cardPrompt?: string; prompt: string }>;
+    const pack = JSON.parse(readFileSync('content/tiebreaker/packs/tiebreaker-pack-v2.json', 'utf8')) as Array<{ cardPrompt?: string; prompt: string }>;
     expect(() => buildSql(pack)).not.toThrow();
     for (const item of pack) {
       expect(item.cardPrompt, item.prompt).toBeTruthy();

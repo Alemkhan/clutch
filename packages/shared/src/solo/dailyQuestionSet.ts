@@ -1,7 +1,7 @@
-import { generateMatch, type TemplateUsage } from './questionGenerator';
-import type { CategoryId, Question } from './index';
-import { KZ_SET_SIZE, buildGeneralSet, buildKzSet } from './generalSet';
-import { createSeededRandom, hashSeed } from './seededRandom';
+import { generateMatch, type TemplateUsage } from '../questions/questionGenerator';
+import type { CategoryId, Question } from '../index';
+import { KZ_SET_SIZE, buildGeneralSet, buildKzSet } from '../questions/generalSet';
+import { createSeededRandom, hashSeed } from '../questions/seededRandom';
 
 export { createSeededRandom, hashSeed };
 

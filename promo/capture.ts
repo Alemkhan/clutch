@@ -7,7 +7,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium, type Page } from '@playwright/test';
-import { dailyQuestionBank } from '../packages/shared/src/dailyQuestionSet';
+import { dailyQuestionBank } from '../packages/shared/src/solo/dailyQuestionSet';
 import type { Question } from '../packages/shared/src/index';
 
 // CLUTCH_TAKE names the take (promo/public/<take>.mp4); CLUTCH_STRIKES lists strikes in order,

@@ -1,5 +1,5 @@
-import { SKILL_DISTANCE_THRESHOLDS, type MiniGameConfig, type SkillResult } from './hammerRules';
-import type { PracticeLevelId } from './practice';
+import { SKILL_DISTANCE_THRESHOLDS, type MiniGameConfig, type SkillResult } from './hammer/hammerRules';
+import type { PracticeLevelId } from './solo/practice';
 
 /** Категория вопросов. Единственное объявление; questionGenerator его ре-экспортирует. */
 export type CategoryId = 'general' | 'geography' | 'history' | 'languages' | 'kz_history';
@@ -8,16 +8,16 @@ export type GeneratedCategoryId = Exclude<CategoryId, 'general' | 'kz_history'>;
 
 export type AnswerType = 'multiple_choice' | 'open_answer';
 
-export * from './fuzzyMatch';
-export * from './hammerRules';
-export * from './soloRun';
-export * from './soloModes';
-export * from './questionPricing';
-export * from './soloCompare';
-export * from './practice';
-export * from './friendDuel';
-export * from './tiebreaker';
-export * from './wikiPath';
+export * from './questions/fuzzyMatch';
+export * from './hammer/hammerRules';
+export * from './solo/soloRun';
+export * from './solo/soloModes';
+export * from './solo/questionPricing';
+export * from './solo/soloCompare';
+export * from './solo/practice';
+export * from './solo/friendDuel';
+export * from './tiebreaker/tiebreaker';
+export * from './wikiPath/wikiPath';
 
 export type Difficulty = 'Easy' | 'Medium' | 'Hard' | 'Expert';
 
@@ -416,18 +416,18 @@ export const CURRENT_SOLO_RUN_CONDITIONS: AsyncMatchConditions = {
   miniGame: CURRENT_HAMMER_MINI_GAME,
 };
 
-export * from './countries';
-export * from './flagTraits';
-export * from './telemetry';
-export * from './historicFlags';
-export * from './languages';
-export * from './narrowCategories';
-export * from './questionGenerator';
-export * from './dailyQuestionSet';
-export * from './lastStand';
-export * from './seededRandom';
+export * from './questions/countries';
+export * from './questions/flagTraits';
+export * from './telemetry/telemetry';
+export * from './questions/historicFlags';
+export * from './questions/languages';
+export * from './questions/narrowCategories';
+export * from './questions/questionGenerator';
+export * from './solo/dailyQuestionSet';
+export * from './lastStand/lastStand';
+export * from './questions/seededRandom';
 export * from './generalPack';
-export * from './generalSet';
-export * from './freshQuestionSet';
+export * from './questions/generalSet';
+export * from './solo/freshQuestionSet';
 // Explicit: the facade shadows the generator-only versions that `export *` above also brings in.
-export { isKnownQuestionId, questionIdCategory, resolveQuestionById } from './questionResolve';
+export { isKnownQuestionId, questionIdCategory, resolveQuestionById } from './questions/questionResolve';

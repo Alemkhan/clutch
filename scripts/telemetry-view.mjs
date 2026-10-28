@@ -334,7 +334,7 @@ function runPlayer(db, playerId, limit) {
 
 // --- funnel / retention / errors ----------------------------------------------
 
-// Сутки игры сдвинуты на +5 ч к UTC (DAY_BOUNDARY_OFFSET_MINUTES в packages/shared/src/dailyQuestionSet.ts).
+// Сутки игры сдвинуты на +5 ч к UTC (DAY_BOUNDARY_OFFSET_MINUTES в packages/shared/src/solo/dailyQuestionSet.ts).
 const DAY_OFFSET_SECONDS = 5 * 3600;
 const gameDaySql = (column) => `strftime('%Y-%m-%d', ${column} / 1000 + ${DAY_OFFSET_SECONDS}, 'unixepoch')`;
 const gameDayOf = (ms) => new Date(ms + DAY_OFFSET_SECONDS * 1000).toISOString().slice(0, 10);

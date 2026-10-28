@@ -4,7 +4,7 @@
     {
       "name": "clutch",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "C:/Users/Alemkhan/JSProjects/clutch"],
+      "runtimeArgs": ["run", "dev"],
       "port": 5173
     }
   ]

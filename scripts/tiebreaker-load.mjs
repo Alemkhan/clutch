@@ -7,7 +7,7 @@
 // TIEBREAKER_CARD_PROMPT_MAX в shared); не задана — карточка покажет полный prompt.
 // Колонка card_prompt появилась в миграции 0004: без неё заливка не применится.
 //
-// Проверка разбора продублирована из packages/shared/src/tiebreaker.ts (parseTiebreakerExplanation):
+// Проверка разбора продублирована из packages/shared/src/tiebreaker/tiebreaker.ts (parseTiebreakerExplanation):
 // shared — TypeScript, а .mjs без сборки его не импортирует. Совпадение правил держит
 // tests/tiebreakerLoad.test.ts, который прогоняет оба валидатора на одних и тех же случаях.
 import fs from 'node:fs';
