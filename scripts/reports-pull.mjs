@@ -35,7 +35,20 @@ export function buildSqliteFromSql(sqlPath, sqlitePath) {
   rmSync(sqlitePath, { force: true });
   const db = new DatabaseSync(sqlitePath);
   try {
+    // D1 exports may insert child rows before creating their parent tables.
+    // Defer enforcement during import, then validate the completed snapshot.
+    db.exec('PRAGMA foreign_keys = OFF');
     db.exec(readFileSync(sqlPath, 'utf8'));
+    db.exec('PRAGMA foreign_keys = ON');
+    const violations = db.prepare('PRAGMA foreign_key_check').all();
+    if (violations.length > 0) {
+      const details = violations.slice(0, 5).map((row) => {
+        const { table, rowid, parent, fkid } = row;
+        return `${table} row ${rowid ?? 'unknown'} references ${parent} (constraint ${fkid})`;
+      }).join('; ');
+      const remaining = violations.length > 5 ? `; and ${violations.length - 5} more` : '';
+      throw new PullError(`SQL-выгрузка содержит нарушения внешних ключей (${violations.length}): ${details}${remaining}.`);
+    }
     const tables = db.prepare("SELECT name FROM sqlite_master WHERE type = 'table'").all().map((row) => row.name);
     return tables;
   } finally {

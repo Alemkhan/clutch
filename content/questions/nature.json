@@ -755,5 +755,36 @@
     "sourceTitle": "Список рек по длине — Википедия",
     "origin": "notebooklm",
     "license": "original"
+  },
+  {
+    "id": "au-nature-10ffykx",
+    "editorialStatus": "blocked",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Назовите одну из стран, где орангутаны до сих пор обитают в дикой природе.",
+    "answerRu": "Индонезия",
+    "acceptedRu": [
+      "Индонезия",
+      "Республика Индонезия",
+      "Малайзия"
+    ],
+    "acceptedEn": [
+      "Indonesia",
+      "Republic of Indonesia",
+      "Malaysia"
+    ],
+    "distractorsRu": [
+      "Таиланд",
+      "Вьетнам",
+      "Филиппины"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://www.worldwildlife.org/species/orangutan",
+    "sourceTitle": "Всемирный фонд дикой природы (WWF) — Орангутаны",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "В дикой природе орангутаны обитают только на островах Борнео и Суматра. Суматра принадлежит Индонезии, а Борнео разделён между Индонезией, Малайзией и Брунеем. При этом естественные популяции орангутанов встречаются только в индонезийской и малайзийской частях Борнео.",
+    "reviewNote": "Заблокировано 2026-11-01: орангутаны также живут в Малайзии; вопрос допускает несколько правильных ответов."
   }
 ]

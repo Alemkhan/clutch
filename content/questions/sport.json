@@ -413,5 +413,68 @@
     "sourceHint": "Википедия: Бокс",
     "origin": "authored",
     "license": "original"
+  },
+  {
+    "id": "au-sport-p4kqt2",
+    "editorialStatus": "blocked",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Какой вид спорта считается национальным в Доминиканской Республике?",
+    "answerRu": "Бейсбол",
+    "acceptedRu": [
+      "Бейсбол",
+      "Игра в бейсбол"
+    ],
+    "acceptedEn": [
+      "Baseball"
+    ],
+    "distractorsRu": [
+      "Футбол",
+      "Баскетбол",
+      "Волейбол"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://tur.mirex.gob.do/deportes",
+    "sourceTitle": "Посольство Доминиканской Республики в Турции — Спорт",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "Бейсбол считается национальным видом спорта Доминиканской Республики и занимает особое место в культуре страны. Доминиканские бейсболисты известны во всём мире, а многие выступают в американской Главной лиге бейсбола (MLB).",
+    "reviewNote": "Заблокировано 2026-11-01: источник подтверждает популярность спорта, но не официальный статус «национального»."
+  },
+  {
+    "id": "au-sport-scp7uv",
+    "editorialStatus": "blocked",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Какая страна завоевала больше всего олимпийских медалей в лёгкой атлетике за всю историю?",
+    "answerRu": "США",
+    "acceptedRu": [
+      "США",
+      "Соединённые Штаты",
+      "Соединенные Штаты",
+      "Соединённые Штаты Америки",
+      "Соединенные Штаты Америки",
+      "Америка"
+    ],
+    "acceptedEn": [
+      "USA",
+      "US",
+      "United States",
+      "United States of America"
+    ],
+    "distractorsRu": [
+      "Великобритания",
+      "Ямайка",
+      "Кения"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://www.olympedia.org/sports/ATH",
+    "sourceTitle": "Olympedia — Лёгкая атлетика: медальный зачёт за всю историю",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "США — абсолютный лидер по количеству олимпийских медалей в лёгкой атлетике. По данным Olympedia, американские спортсмены завоевали 864 медали: 358 золотых, 281 серебряную и 225 бронзовых.",
+    "reviewNote": "Заблокировано 2026-11-01: «больше всего олимпийских медалей» зависит от метода подсчёта и обновляемой статистики."
   }
 ]

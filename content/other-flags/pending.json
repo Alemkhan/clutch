@@ -1,0 +1,2019 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-31T17:15:20.104Z",
+  "items": [
+    {
+      "id": "kazakhstan_city:Q622780:coat-of-arms-of-aksu-kazakhstan-jpg",
+      "group": "kazakhstan_city",
+      "labelRu": "Аксу",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q622780",
+      "sourceTitle": "Wikidata: Аксу",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coat_of_arms_of_Aksu_(Kazakhstan).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Coat_of_arms_of_Aksu_%28Kazakhstan%29.jpg/960px-Coat_of_arms_of_Aksu_%28Kazakhstan%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Aksu_(Kazakhstan).jpg",
+        "license": "Public domain",
+        "author": "Yegor Kokin"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q622780:flag-of-aksu-kazakhstan-jpg",
+      "group": "kazakhstan_city",
+      "labelRu": "Аксу",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q622780",
+      "sourceTitle": "Wikidata: Аксу",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Aksu_(Kazakhstan).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Flag_of_Aksu_%28Kazakhstan%29.jpg/960px-Flag_of_Aksu_%28Kazakhstan%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Aksu_(Kazakhstan).jpg",
+        "license": "Public domain",
+        "author": "Yegor Kokin"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q198989:coat-of-arms-of-aktau-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Актау",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q198989",
+      "sourceTitle": "Wikidata: Актау",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coat_of_arms_of_Aktau.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Coat_of_arms_of_Aktau.svg/960px-Coat_of_arms_of_Aktau.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Aktau.svg",
+        "license": "Public domain",
+        "author": "Bingread"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q477232:aktobe-seal-2-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Актобе",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q477232",
+      "sourceTitle": "Wikidata: Актобе",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Aktobe_seal_-_2.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Aktobe_seal_-_2.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Aktobe_seal_-_2.png",
+        "license": "Public domain",
+        "author": "Unknown authorUnknown author"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q35493:coat-of-arms-of-almaty-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Алма-Ата",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q35493",
+      "sourceTitle": "Wikidata: Алма-Ата",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coat_of_arms_of_Almaty.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Coat_of_arms_of_Almaty.svg/960px-Coat_of_arms_of_Almaty.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Almaty.svg",
+        "license": "Public domain",
+        "author": "Initial vector copy: Leonid 2"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q35493:flag-of-almaty-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Алма-Ата",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q35493",
+      "sourceTitle": "Wikidata: Алма-Ата",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Almaty.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Flag_of_Almaty.svg/960px-Flag_of_Almaty.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Almaty.svg",
+        "license": "Public domain",
+        "author": "Leonid 2"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q2139924:coat-of-arms-of-zyryanovsk-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Алтай",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q2139924",
+      "sourceTitle": "Wikidata: Алтай",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coat_of_arms_of_Zyryanovsk.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/Coat_of_arms_of_Zyryanovsk.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Zyryanovsk.png",
+        "license": "Public domain",
+        "author": "авторы герба: И.Вяткин и Я.Бурковский. Компьютерная обработка Виктора Наймиллер."
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q165450:emblem-aral-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Аральск",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q165450",
+      "sourceTitle": "Wikidata: Аральск",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Emblem_Aral.png",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Emblem_Aral.png/960px-Emblem_Aral.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Emblem_Aral.png",
+        "license": "Public domain",
+        "author": "Кырмызов"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q698941:coat-of-arms-of-arkalyk-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Аркалык",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q698941",
+      "sourceTitle": "Wikidata: Аркалык",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coat_of_arms_of_Arkalyk.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/Coat_of_arms_of_Arkalyk.svg/960px-Coat_of_arms_of_Arkalyk.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Arkalyk.svg",
+        "license": "Public domain",
+        "author": "Leonid 2"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q718108:png",
+      "group": "kazakhstan_city",
+      "labelRu": "Арыс",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q718108",
+      "sourceTitle": "Wikidata: Арыс",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Арыс_герб.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/03/%D0%90%D1%80%D1%8B%D1%81_%D0%B3%D0%B5%D1%80%D0%B1.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:%D0%90%D1%80%D1%8B%D1%81_%D0%B3%D0%B5%D1%80%D0%B1.png",
+        "license": "Public domain",
+        "author": "The original uploader was Wassily at Russian Wikipedia."
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q1520:emblem-of-astana-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Астана",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1520",
+      "sourceTitle": "Wikidata: Астана",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Emblem_of_Astana.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Emblem_of_Astana.svg/960px-Emblem_of_Astana.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Emblem_of_Astana.svg",
+        "license": "Public domain",
+        "author": "Leonid 2"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q1520:emblem-of-astana-latin-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Астана",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1520",
+      "sourceTitle": "Wikidata: Астана",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Emblem_of_Astana_(latin).svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Emblem_of_Astana_%28latin%29.svg/960px-Emblem_of_Astana_%28latin%29.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Emblem_of_Astana_(latin).svg",
+        "license": "Public domain",
+        "author": "Leonid 2 modified by User:Kurmanbek"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q1520:emblem-of-nur-sultan-1-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Астана",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1520",
+      "sourceTitle": "Wikidata: Астана",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Emblem_of_Nur-Sultan-1.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Emblem_of_Nur-Sultan-1.svg/960px-Emblem_of_Nur-Sultan-1.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Emblem_of_Nur-Sultan-1.svg",
+        "license": "Public domain",
+        "author": "Leonid 2 modified by User:Sushant savla as per request at Commons:Graphic Lab/Illustration workshop#Emblem of Nur-Sultan"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q1520:flag-of-astana-kazakhstan-latin-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Астана",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1520",
+      "sourceTitle": "Wikidata: Астана",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Astana,_Kazakhstan_(latin).svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_Astana%2C_Kazakhstan_%28latin%29.svg/960px-Flag_of_Astana%2C_Kazakhstan_%28latin%29.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Astana%2C_Kazakhstan_(latin).svg",
+        "license": "Public domain",
+        "author": "Kurmanbek"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q486913:flag-of-atyrau-kazakhstan-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Атырау",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q486913",
+      "sourceTitle": "Wikidata: Атырау",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Atyrau,_Kazakhstan.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Flag_of_Atyrau%2C_Kazakhstan.svg/960px-Flag_of_Atyrau%2C_Kazakhstan.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Atyrau%2C_Kazakhstan.svg",
+        "license": "Public domain",
+        "author": "Jelican9"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q486913:coat-of-arms-of-atyrau-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Атырау",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q486913",
+      "sourceTitle": "Wikidata: Атырау",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coat_of_arms_of_Atyrau.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Coat_of_arms_of_Atyrau.svg/960px-Coat_of_arms_of_Atyrau.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Atyrau.svg",
+        "license": "Public domain",
+        "author": "Leonid 2"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q165413:svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Байконур",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q165413",
+      "sourceTitle": "Wikidata: Байконур",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Флаг_города_Байконур.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/%D0%A4%D0%BB%D0%B0%D0%B3_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B0_%D0%91%D0%B0%D0%B9%D0%BA%D0%BE%D0%BD%D1%83%D1%80.svg/960px-%D0%A4%D0%BB%D0%B0%D0%B3_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B0_%D0%91%D0%B0%D0%B9%D0%BA%D0%BE%D0%BD%D1%83%D1%80.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:%D0%A4%D0%BB%D0%B0%D0%B3_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B0_%D0%91%D0%B0%D0%B9%D0%BA%D0%BE%D0%BD%D1%83%D1%80.svg",
+        "license": "CC BY-SA 3.0",
+        "author": "Dalakop"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q165413:coat-of-arms-baikonur-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Байконур",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q165413",
+      "sourceTitle": "Wikidata: Байконур",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coat_of_arms_Baikonur.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Coat_of_arms_Baikonur.svg/960px-Coat_of_arms_Baikonur.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_Baikonur.svg",
+        "license": "Public domain",
+        "author": "Original: Unknown author Vector:  Stepan Sychev (Baldi)"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q805515:coats-of-arms-of-balqash-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Балхаш",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q805515",
+      "sourceTitle": "Wikidata: Балхаш",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coats_of_arms_of_Balqash.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Coats_of_arms_of_Balqash.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coats_of_arms_of_Balqash.png",
+        "license": "Public domain",
+        "author": "Unknown authorUnknown author"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q740832:seal-zhezkazgan-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Жезказган",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q740832",
+      "sourceTitle": "Wikidata: Жезказган",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Seal_Zhezkazgan.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Seal_Zhezkazgan.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Seal_Zhezkazgan.png",
+        "license": "Public domain",
+        "author": "The original uploader was BernardTom at English Wikipedia.\n\n(Original text: BernardTom)"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q484706:seal-of-karaganda-kazakhstan-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Караганда",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q484706",
+      "sourceTitle": "Wikidata: Караганда",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Seal_of_Karaganda,_Kazakhstan.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Seal_of_Karaganda%2C_Kazakhstan.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Seal_of_Karaganda%2C_Kazakhstan.png",
+        "license": "Public domain",
+        "author": "Aibek Begalin Айбек Бегалин"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q1315249:png",
+      "group": "kazakhstan_city",
+      "labelRu": "Кентау",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1315249",
+      "sourceTitle": "Wikidata: Кентау",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Герб_Кентау.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/%D0%93%D0%B5%D1%80%D0%B1_%D0%9A%D0%B5%D0%BD%D1%82%D0%B0%D1%83.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:%D0%93%D0%B5%D1%80%D0%B1_%D0%9A%D0%B5%D0%BD%D1%82%D0%B0%D1%83.png",
+        "license": "Public domain",
+        "author": "The original uploader was Wassily at Russian Wikipedia."
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q490643:kokshetau-seal-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Кокшетау",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q490643",
+      "sourceTitle": "Wikidata: Кокшетау",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Kokshetau_seal.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Kokshetau_seal.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Kokshetau_seal.png",
+        "license": "CC BY-SA 3.0",
+        "author": "The original uploader was BernardTom at English Wikipedia."
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q1816833:flag-of-kapchagay-kazakhstan-gif",
+      "group": "kazakhstan_city",
+      "labelRu": "Конаев",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1816833",
+      "sourceTitle": "Wikidata: Конаев",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Kapchagay,_Kazakhstan.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Flag_of_Kapchagay%2C_Kazakhstan.gif?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Kapchagay%2C_Kazakhstan.gif",
+        "license": "Public domain",
+        "author": "Republic of Kazakhstan"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q488990:flag-of-kostanay-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Костанай",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q488990",
+      "sourceTitle": "Wikidata: Костанай",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Kostanay.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Flag_of_Kostanay.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Kostanay.png",
+        "license": "Public domain",
+        "author": "Zebra848"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q488990:kostanay-city-seal-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Костанай",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q488990",
+      "sourceTitle": "Wikidata: Костанай",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Kostanay_city_seal.png",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Kostanay_city_seal.png/960px-Kostanay_city_seal.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Kostanay_city_seal.png",
+        "license": "Public domain",
+        "author": "Unknown authorUnknown author"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q491123:kyzylorda-coat-of-arms-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Кызылорда",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q491123",
+      "sourceTitle": "Wikidata: Кызылорда",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Kyzylorda_coat-of-arms.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Kyzylorda_coat-of-arms.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Kyzylorda_coat-of-arms.png",
+        "license": "Public domain",
+        "author": ".\n\nOriginal uploader was EFacade at ru.wikipedia"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q486282:flag-of-pavlodar-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Павлодар",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q486282",
+      "sourceTitle": "Wikidata: Павлодар",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Pavlodar.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Flag_of_Pavlodar.svg/960px-Flag_of_Pavlodar.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Pavlodar.svg",
+        "license": "Public domain",
+        "author": "Leonid 2"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q486282:png",
+      "group": "kazakhstan_city",
+      "labelRu": "Павлодар",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q486282",
+      "sourceTitle": "Wikidata: Павлодар",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Павлодар_таңбасы.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B4%D0%B0%D1%80_%D1%82%D0%B0%D2%A3%D0%B1%D0%B0%D1%81%D1%8B.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B4%D0%B0%D1%80_%D1%82%D0%B0%D2%A3%D0%B1%D0%B0%D1%81%D1%8B.png",
+        "license": "Public domain",
+        "author": "Ольга Полстянкина, Кунанбай Абельдинов"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q488379:seal-petropavl-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Петропавловск",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q488379",
+      "sourceTitle": "Wikidata: Петропавловск",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Seal_Petropavl.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Seal_Petropavl.svg/960px-Seal_Petropavl.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Seal_Petropavl.svg",
+        "license": "Public domain",
+        "author": null,
+        "authorNote": "not stated on the Commons file page"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q1019405:coats-of-arms-of-priosjorsk-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Приозёрск",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1019405",
+      "sourceTitle": "Wikidata: Приозёрск",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coats_of_arms_of_Priosjorsk.PNG",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/16/Coats_of_arms_of_Priosjorsk.PNG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coats_of_arms_of_Priosjorsk.PNG",
+        "license": "Public domain",
+        "author": "Unknown authorUnknown author"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q986100:coa-ridder-kazakhstan-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Риддер",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q986100",
+      "sourceTitle": "Wikidata: Риддер",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "CoA_Ridder,_Kazakhstan.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/CoA_Ridder%2C_Kazakhstan.svg/960px-CoA_Ridder%2C_Kazakhstan.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:CoA_Ridder%2C_Kazakhstan.svg",
+        "license": "Public domain",
+        "author": "Unknown authorUnknown author"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q1008853:coat-of-arms-of-rudnyi-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Рудный",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1008853",
+      "sourceTitle": "Wikidata: Рудный",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coat_of_arms_of_Rudnyi.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Coat_of_arms_of_Rudnyi.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Rudnyi.png",
+        "license": "Public domain",
+        "author": "Unknown authorUnknown author"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q1703483:png",
+      "group": "kazakhstan_city",
+      "labelRu": "Сарань",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1703483",
+      "sourceTitle": "Wikidata: Сарань",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Герб_Сарани.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/15/%D0%93%D0%B5%D1%80%D0%B1_%D0%A1%D0%B0%D1%80%D0%B0%D0%BD%D0%B8.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:%D0%93%D0%B5%D1%80%D0%B1_%D0%A1%D0%B0%D1%80%D0%B0%D0%BD%D0%B8.png",
+        "license": "Public domain",
+        "author": "Unknown authorUnknown author"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q1020484:coa-satpaev-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Сатпаев",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1020484",
+      "sourceTitle": "Wikidata: Сатпаев",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coa-satpaev.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Coa-satpaev.svg/960px-Coa-satpaev.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coa-satpaev.svg",
+        "license": "Public domain",
+        "author": "Bingread"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q61944:semey-coat-of-arms-jpg",
+      "group": "kazakhstan_city",
+      "labelRu": "Семей",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q61944",
+      "sourceTitle": "Wikidata: Семей",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Semey_Coat_of_Arms.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Semey_Coat_of_Arms.jpg/960px-Semey_Coat_of_Arms.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Semey_Coat_of_Arms.jpg",
+        "license": "Public domain",
+        "author": "Erlan Amirbek"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q491102:png",
+      "group": "kazakhstan_city",
+      "labelRu": "Талдыкорган",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q491102",
+      "sourceTitle": "Wikidata: Талдыкорган",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Герб_Талдыкоргана.png",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/%D0%93%D0%B5%D1%80%D0%B1_%D0%A2%D0%B0%D0%BB%D0%B4%D1%8B%D0%BA%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B0.png/960px-%D0%93%D0%B5%D1%80%D0%B1_%D0%A2%D0%B0%D0%BB%D0%B4%D1%8B%D0%BA%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B0.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:%D0%93%D0%B5%D1%80%D0%B1_%D0%A2%D0%B0%D0%BB%D0%B4%D1%8B%D0%BA%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B0.png",
+        "license": "CC BY-SA 3.0",
+        "author": "Igor10"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q486545:seal-taraz-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Тараз",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q486545",
+      "sourceTitle": "Wikidata: Тараз",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Seal_Taraz.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/Seal_Taraz.svg/960px-Seal_Taraz.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Seal_Taraz.svg",
+        "license": "Public domain",
+        "author": "飯江誰出茂"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q2302185:coats-of-arms-of-tekeli-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Текели",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q2302185",
+      "sourceTitle": "Wikidata: Текели",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coats_of_arms_of_Tekeli.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Coats_of_arms_of_Tekeli.svg/960px-Coats_of_arms_of_Tekeli.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coats_of_arms_of_Tekeli.svg",
+        "license": "Public domain",
+        "author": "Leonid 2"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q1001104:coat-of-arms-of-temirtau-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Темиртау",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1001104",
+      "sourceTitle": "Wikidata: Темиртау",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coat_of_arms_of_Temirtau.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Coat_of_arms_of_Temirtau.svg/960px-Coat_of_arms_of_Temirtau.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Temirtau.svg",
+        "license": "Public domain",
+        "author": "Wassily"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q848638:flag-of-turkistan-city-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Туркестан",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q848638",
+      "sourceTitle": "Wikidata: Туркестан",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Turkistan_(City).png",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Flag_of_Turkistan_%28City%29.png/960px-Flag_of_Turkistan_%28City%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Turkistan_(City).png",
+        "license": "Public domain",
+        "author": "Aml-401"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q848638:coat-of-arms-of-turkistan-city-jpg",
+      "group": "kazakhstan_city",
+      "labelRu": "Туркестан",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q848638",
+      "sourceTitle": "Wikidata: Туркестан",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coat_of_arms_of_Turkistan_(city).jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Coat_of_arms_of_Turkistan_%28city%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Turkistan_(city).jpg",
+        "license": "Public domain",
+        "author": "Unknown authorUnknown author"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q487439:oral-seal-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Уральск",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q487439",
+      "sourceTitle": "Wikidata: Уральск",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Oral_seal.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Oral_seal.svg/960px-Oral_seal.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Oral_seal.svg",
+        "license": "Public domain",
+        "author": "Bingread at Russian Wikipedia"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q162548:oskemen-logo-2019-jpg",
+      "group": "kazakhstan_city",
+      "labelRu": "Усть-Каменогорск",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q162548",
+      "sourceTitle": "Wikidata: Усть-Каменогорск",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Oskemen_Logo_2019.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Oskemen_Logo_2019.jpg/960px-Oskemen_Logo_2019.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Oskemen_Logo_2019.jpg",
+        "license": "Public domain",
+        "author": "Akimat of Oskemen"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q1019377:png",
+      "group": "kazakhstan_city",
+      "labelRu": "Шахтинск",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1019377",
+      "sourceTitle": "Wikidata: Шахтинск",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Шахтинск.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/%D0%A8%D0%B0%D1%85%D1%82%D0%B8%D0%BD%D1%81%D0%BA.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:%D0%A8%D0%B0%D1%85%D1%82%D0%B8%D0%BD%D1%81%D0%BA.png",
+        "license": "Public domain",
+        "author": "Kkvazar"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q485496:shymkent-flag-svg",
+      "group": "kazakhstan_city",
+      "labelRu": "Шымкент",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q485496",
+      "sourceTitle": "Wikidata: Шымкент",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Shymkent_flag.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Shymkent_flag.svg/960px-Shymkent_flag.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Shymkent_flag.svg",
+        "license": "CC BY-SA 4.0",
+        "author": "GaelVector"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q485496:coat-of-arms-of-shymkent-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Шымкент",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q485496",
+      "sourceTitle": "Wikidata: Шымкент",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Coat_of_arms_of_Shymkent.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Coat_of_arms_of_Shymkent.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Shymkent.png",
+        "license": "Public domain",
+        "author": "Unknown authorUnknown author"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "kazakhstan_city:Q496442:ekibastuz-seal-png",
+      "group": "kazakhstan_city",
+      "labelRu": "Экибастуз",
+      "adoptedYear": null,
+      "assetKind": "coat_of_arms",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q496442",
+      "sourceTitle": "Wikidata: Экибастуз",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Ekibastuz_seal.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/Ekibastuz_seal.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Ekibastuz_seal.png",
+        "license": "Public domain",
+        "author": null,
+        "authorNote": "not stated on the Commons file page"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "organisation:Q458:flag-of-europe-svg",
+      "group": "organisation",
+      "labelRu": "Европейский союз",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q458",
+      "sourceTitle": "Wikidata: Европейский союз",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Europe.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/960px-Flag_of_Europe.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Europe.svg",
+        "license": "Public domain",
+        "author": "User:Verdy p, User:-xfi-, User:Paddu, User:Nightstallion, User:Funakoshi, User:Jeltz, User:Dbenbenn, User:Zscout370"
+      },
+      "assetLicenseStatus": "free",
+      "trademarkReview": "required",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "organisation:Q47543:oic-logo-since-2011-svg",
+      "group": "organisation",
+      "labelRu": "Организация Исламского сотрудничества",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q47543",
+      "sourceTitle": "Wikidata: Организация Исламского сотрудничества",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "OIC_Logo_since_2011.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/OIC_Logo_since_2011.svg/960px-OIC_Logo_since_2011.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:OIC_Logo_since_2011.svg",
+        "license": "Public domain",
+        "author": "Abyssmanx"
+      },
+      "assetLicenseStatus": "free",
+      "trademarkReview": "required",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "organisation:Q1065:flag-of-the-united-nations-svg",
+      "group": "organisation",
+      "labelRu": "Организация Объединённых Наций",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1065",
+      "sourceTitle": "Wikidata: Организация Объединённых Наций",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_the_United_Nations.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Flag_of_the_United_Nations.svg/960px-Flag_of_the_United_Nations.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_the_United_Nations.svg",
+        "license": "Public domain",
+        "author": "See File history below for details.\n\n Denelson83, Zscout370 ve Madden"
+      },
+      "assetLicenseStatus": "free",
+      "trademarkReview": "required",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "organisation:Q7184:flag-of-nato-svg",
+      "group": "organisation",
+      "labelRu": "Организация Североатлантического договора",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q7184",
+      "sourceTitle": "Wikidata: Организация Североатлантического договора",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_NATO.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Flag_of_NATO.svg/960px-Flag_of_NATO.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_NATO.svg",
+        "license": "Public domain",
+        "author": "Current file:\n\nFound by 475847394d347339 in websites noted in the source section.\nPrevious file\n\nVectorization:  Mysid and uploaded to Flag of NATO.svg\nCode cleaned up by Artem Karimov."
+      },
+      "assetLicenseStatus": "free",
+      "trademarkReview": "required",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "organisation:Q7785:commonwealth-flag-2013-png",
+      "group": "organisation",
+      "labelRu": "Содружество наций",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q7785",
+      "sourceTitle": "Wikidata: Содружество наций",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Commonwealth_Flag_2013.png",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Commonwealth_Flag_2013.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Commonwealth_Flag_2013.png",
+        "license": "CC0",
+        "author": "Rhodoramagatrm54"
+      },
+      "assetLicenseStatus": "free",
+      "trademarkReview": "required",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "organisation:Q7779:flag-of-the-cis-svg",
+      "group": "organisation",
+      "labelRu": "Содружество Независимых Государств",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q7779",
+      "sourceTitle": "Wikidata: Содружество Независимых Государств",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_the_CIS.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Flag_of_the_CIS.svg/960px-Flag_of_the_CIS.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_the_CIS.svg",
+        "license": "Public domain",
+        "author": "The original uploader was Denelson83 at  Wikimedia Commons. Redrawn from scratch by MapGrid in 2021."
+      },
+      "assetLicenseStatus": "free",
+      "trademarkReview": "required",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "organisation:Q7809:flag-of-unesco-svg",
+      "group": "organisation",
+      "labelRu": "ЮНЕСКО",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q7809",
+      "sourceTitle": "Wikidata: ЮНЕСКО",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_UNESCO.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Flag_of_UNESCO.svg/960px-Flag_of_UNESCO.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_UNESCO.svg",
+        "license": "Public domain",
+        "author": "Mouagip"
+      },
+      "assetLicenseStatus": "free",
+      "trademarkReview": "required",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1221:flag-of-idaho-svg",
+      "group": "us_state",
+      "labelRu": "Айдахо",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1221",
+      "sourceTitle": "Wikidata: Айдахо",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Idaho.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_Idaho.svg/960px-Flag_of_Idaho.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Idaho.svg",
+        "license": "Public domain",
+        "author": "Paul B. Evans, based on a work by the Adjutant General of Idaho and Emma Edwards Green"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1546:flag-of-iowa-svg",
+      "group": "us_state",
+      "labelRu": "Айова",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1546",
+      "sourceTitle": "Wikidata: Айова",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Iowa.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Flag_of_Iowa.svg/960px-Flag_of_Iowa.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Iowa.svg",
+        "license": "Public domain",
+        "author": null,
+        "authorNote": "not stated on the Commons file page"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q173:flag-of-alabama-svg",
+      "group": "us_state",
+      "labelRu": "Алабама",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q173",
+      "sourceTitle": "Wikidata: Алабама",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Alabama.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Alabama.svg/960px-Flag_of_Alabama.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Alabama.svg",
+        "license": "Public domain",
+        "author": "Steve Hall"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q797:flag-of-alaska-svg",
+      "group": "us_state",
+      "labelRu": "Аляска",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q797",
+      "sourceTitle": "Wikidata: Аляска",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Alaska.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Alaska.svg/960px-Flag_of_Alaska.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Alaska.svg",
+        "license": "Public domain",
+        "author": "Benny Benson"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q816:flag-of-arizona-svg",
+      "group": "us_state",
+      "labelRu": "Аризона",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q816",
+      "sourceTitle": "Wikidata: Аризона",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Arizona.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Flag_of_Arizona.svg/960px-Flag_of_Arizona.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Arizona.svg",
+        "license": "Public domain",
+        "author": "Original: Unknown author Vector:  Madden"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1612:flag-of-arkansas-svg",
+      "group": "us_state",
+      "labelRu": "Арканзас",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1612",
+      "sourceTitle": "Wikidata: Арканзас",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Arkansas.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Flag_of_Arkansas.svg/960px-Flag_of_Arkansas.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Arkansas.svg",
+        "license": "Public domain",
+        "author": null,
+        "authorNote": "not stated on the Commons file page"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1214:flag-of-wyoming-svg",
+      "group": "us_state",
+      "labelRu": "Вайоминг",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1214",
+      "sourceTitle": "Wikidata: Вайоминг",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Wyoming.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Wyoming.svg/960px-Flag_of_Wyoming.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Wyoming.svg",
+        "license": "Public domain",
+        "author": "User:Dbenbenn"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1223:flag-of-washington-svg",
+      "group": "us_state",
+      "labelRu": "Вашингтон",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1223",
+      "sourceTitle": "Wikidata: Вашингтон",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Washington.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Flag_of_Washington.svg/960px-Flag_of_Washington.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Washington.svg",
+        "license": "Public domain",
+        "author": "WA Secretary of State"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q16551:flag-of-vermont-svg",
+      "group": "us_state",
+      "labelRu": "Вермонт",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q16551",
+      "sourceTitle": "Wikidata: Вермонт",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Vermont.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Vermont.svg/960px-Flag_of_Vermont.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Vermont.svg",
+        "license": "Public domain",
+        "author": "User:SimtropolitanOriginal by User:Denelson83"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1370:flag-of-virginia-svg",
+      "group": "us_state",
+      "labelRu": "Виргиния",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1370",
+      "sourceTitle": "Wikidata: Виргиния",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Virginia.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Flag_of_Virginia.svg/960px-Flag_of_Virginia.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Virginia.svg",
+        "license": "Public domain",
+        "author": "LadyofHats with additional editing by 痛 and Patrickneil / Charles Keck"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1537:flag-of-wisconsin-svg",
+      "group": "us_state",
+      "labelRu": "Висконсин",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1537",
+      "sourceTitle": "Wikidata: Висконсин",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Wisconsin.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/22/Flag_of_Wisconsin.svg/960px-Flag_of_Wisconsin.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Wisconsin.svg",
+        "license": "Public domain",
+        "author": null,
+        "authorNote": "not stated on the Commons file page"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q782:flag-of-hawaii-svg",
+      "group": "us_state",
+      "labelRu": "Гавайи",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q782",
+      "sourceTitle": "Wikidata: Гавайи",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Hawaii.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Flag_of_Hawaii.svg/960px-Flag_of_Hawaii.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Hawaii.svg",
+        "license": "Public domain",
+        "author": "Dbenbenn"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1393:flag-of-delaware-svg",
+      "group": "us_state",
+      "labelRu": "Делавэр",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1393",
+      "sourceTitle": "Wikidata: Делавэр",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Delaware.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Flag_of_Delaware.svg/960px-Flag_of_Delaware.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Delaware.svg",
+        "license": "Public domain",
+        "author": "xrmap flag collection"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1428:flag-of-the-state-of-georgia-svg",
+      "group": "us_state",
+      "labelRu": "Джорджия",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1428",
+      "sourceTitle": "Wikidata: Джорджия",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_the_State_of_Georgia.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Flag_of_the_State_of_Georgia.svg/960px-Flag_of_the_State_of_Georgia.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_the_State_of_Georgia.svg",
+        "license": "Public domain",
+        "author": null,
+        "authorNote": "not stated on the Commons file page"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1371:flag-of-west-virginia-svg",
+      "group": "us_state",
+      "labelRu": "Западная Виргиния",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1371",
+      "sourceTitle": "Wikidata: Западная Виргиния",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_West_Virginia.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/22/Flag_of_West_Virginia.svg/960px-Flag_of_West_Virginia.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_West_Virginia.svg",
+        "license": "Public domain",
+        "author": "Militaryace, Denelson83"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1204:flag-of-illinois-svg",
+      "group": "us_state",
+      "labelRu": "Иллинойс",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1204",
+      "sourceTitle": "Wikidata: Иллинойс",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Illinois.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Flag_of_Illinois.svg/960px-Flag_of_Illinois.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Illinois.svg",
+        "license": "Public domain",
+        "author": "Denelson83"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1415:flag-of-indiana-svg",
+      "group": "us_state",
+      "labelRu": "Индиана",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1415",
+      "sourceTitle": "Wikidata: Индиана",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Indiana.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Flag_of_Indiana.svg/960px-Flag_of_Indiana.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Indiana.svg",
+        "license": "Public domain",
+        "author": "The Indiana state flag was designed by Paul Hadley in 1917. This SVG file was made by Zscout370 with some modifications by HoosierMan1816."
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q99:flag-of-california-svg",
+      "group": "us_state",
+      "labelRu": "Калифорния",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q99",
+      "sourceTitle": "Wikidata: Калифорния",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_California.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Flag_of_California.svg/960px-Flag_of_California.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_California.svg",
+        "license": "Public domain",
+        "author": "Original:  Donald Graeme Kelley\nVectorization:  Devin Cook"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1558:flag-of-kansas-svg",
+      "group": "us_state",
+      "labelRu": "Канзас",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1558",
+      "sourceTitle": "Wikidata: Канзас",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Kansas.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Flag_of_Kansas.svg/960px-Flag_of_Kansas.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Kansas.svg",
+        "license": "Public domain",
+        "author": "Xrmap"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1603:flag-of-kentucky-svg",
+      "group": "us_state",
+      "labelRu": "Кентукки",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1603",
+      "sourceTitle": "Wikidata: Кентукки",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Kentucky.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Flag_of_Kentucky.svg/960px-Flag_of_Kentucky.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Kentucky.svg",
+        "license": "Public domain",
+        "author": "Commonwealth of Kentucky"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1261:flag-of-colorado-svg",
+      "group": "us_state",
+      "labelRu": "Колорадо",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1261",
+      "sourceTitle": "Wikidata: Колорадо",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Colorado.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Flag_of_Colorado.svg/960px-Flag_of_Colorado.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Colorado.svg",
+        "license": "Public domain",
+        "author": "Original: Andrew Carlyle Carson Vector:  Fleminra"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q779:flag-of-connecticut-svg",
+      "group": "us_state",
+      "labelRu": "Коннектикут",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q779",
+      "sourceTitle": "Wikidata: Коннектикут",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Connecticut.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Flag_of_Connecticut.svg/960px-Flag_of_Connecticut.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Connecticut.svg",
+        "license": "Public domain",
+        "author": "Jean-Pierre Demailly, xrmap authors, Commons users (SVG)"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1588:flag-of-louisiana-svg",
+      "group": "us_state",
+      "labelRu": "Луизиана",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1588",
+      "sourceTitle": "Wikidata: Луизиана",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Louisiana.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Flag_of_Louisiana.svg/960px-Flag_of_Louisiana.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Louisiana.svg",
+        "license": "Public domain",
+        "author": "Curtis Vann, Jr."
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q771:flag-of-massachusetts-svg",
+      "group": "us_state",
+      "labelRu": "Массачусетс",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q771",
+      "sourceTitle": "Wikidata: Массачусетс",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Massachusetts.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Flag_of_Massachusetts.svg/960px-Flag_of_Massachusetts.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Massachusetts.svg",
+        "license": "Public domain",
+        "author": "State of Massachusetts"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1527:flag-of-minnesota-svg",
+      "group": "us_state",
+      "labelRu": "Миннесота",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1527",
+      "sourceTitle": "Wikidata: Миннесота",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Minnesota.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_Minnesota.svg/960px-Flag_of_Minnesota.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Minnesota.svg",
+        "license": "Public domain",
+        "author": "Original: Minnesota State Emblems Redesign Commission Vector:  Jamie Eilat, Undertiago"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1494:flag-of-mississippi-svg",
+      "group": "us_state",
+      "labelRu": "Миссисипи",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1494",
+      "sourceTitle": "Wikidata: Миссисипи",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Mississippi.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Flag_of_Mississippi.svg/960px-Flag_of_Mississippi.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Mississippi.svg",
+        "license": "Copyrighted free use",
+        "author": "Rocky Vaughn, Sue Anna Joe, Dominique Pugh, Clay Moss, Kara Giles, Micah Whitson and the Mississippi Department of Archives and History"
+      },
+      "assetLicenseStatus": "manual_review",
+      "rightsNote": "Нужна отдельная проверка условий правообладателя.",
+      "reviewStatus": "blocked"
+    },
+    {
+      "id": "us_state:Q1581:flag-of-missouri-svg",
+      "group": "us_state",
+      "labelRu": "Миссури",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1581",
+      "sourceTitle": "Wikidata: Миссури",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Missouri.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Flag_of_Missouri.svg/960px-Flag_of_Missouri.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Missouri.svg",
+        "license": "Public domain",
+        "author": "Marie Watkins Oliver"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1166:flag-of-michigan-svg",
+      "group": "us_state",
+      "labelRu": "Мичиган",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1166",
+      "sourceTitle": "Wikidata: Мичиган",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Michigan.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Flag_of_Michigan.svg/960px-Flag_of_Michigan.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Michigan.svg",
+        "license": "Public domain",
+        "author": null,
+        "authorNote": "not stated on the Commons file page"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1212:flag-of-montana-svg",
+      "group": "us_state",
+      "labelRu": "Монтана",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1212",
+      "sourceTitle": "Wikidata: Монтана",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Montana.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_Montana.svg/960px-Flag_of_Montana.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Montana.svg",
+        "license": "Public domain",
+        "author": "N.a"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q724:flag-of-maine-svg",
+      "group": "us_state",
+      "labelRu": "Мэн",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q724",
+      "sourceTitle": "Wikidata: Мэн",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Maine.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Flag_of_Maine.svg/960px-Flag_of_Maine.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Maine.svg",
+        "license": "Public domain",
+        "author": null,
+        "authorNote": "not stated on the Commons file page"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1391:flag-of-maryland-svg",
+      "group": "us_state",
+      "labelRu": "Мэриленд",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1391",
+      "sourceTitle": "Wikidata: Мэриленд",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Maryland.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Flag_of_Maryland.svg/960px-Flag_of_Maryland.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Maryland.svg",
+        "license": "Public domain",
+        "author": "Michael Wheeler"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1553:flag-of-nebraska-svg",
+      "group": "us_state",
+      "labelRu": "Небраска",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1553",
+      "sourceTitle": "Wikidata: Небраска",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Nebraska.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Flag_of_Nebraska.svg/960px-Flag_of_Nebraska.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Nebraska.svg",
+        "license": "Public domain",
+        "author": "Liamgabby79"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1227:flag-of-nevada-svg",
+      "group": "us_state",
+      "labelRu": "Невада",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1227",
+      "sourceTitle": "Wikidata: Невада",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Nevada.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Flag_of_Nevada.svg/960px-Flag_of_Nevada.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Nevada.svg",
+        "license": "Public domain",
+        "author": "Caleb Moore"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q759:flag-of-new-hampshire-svg",
+      "group": "us_state",
+      "labelRu": "Нью-Гэмпшир",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q759",
+      "sourceTitle": "Wikidata: Нью-Гэмпшир",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_New_Hampshire.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Flag_of_New_Hampshire.svg/960px-Flag_of_New_Hampshire.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_New_Hampshire.svg",
+        "license": "Public domain",
+        "author": "Xrmap flag collection"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1408:flag-of-new-jersey-svg",
+      "group": "us_state",
+      "labelRu": "Нью-Джерси",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1408",
+      "sourceTitle": "Wikidata: Нью-Джерси",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_New_Jersey.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Flag_of_New_Jersey.svg/960px-Flag_of_New_Jersey.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_New_Jersey.svg",
+        "license": "Public domain",
+        "author": "author of xrmap, with modifications by Denelson83 and ChrisRuvolo"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1384:flag-of-new-york-svg",
+      "group": "us_state",
+      "labelRu": "Нью-Йорк",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1384",
+      "sourceTitle": "Wikidata: Нью-Йорк",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_New_York.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_New_York.svg/960px-Flag_of_New_York.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_New_York.svg",
+        "license": "Public domain",
+        "author": "State of New York"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1522:flag-of-new-mexico-svg",
+      "group": "us_state",
+      "labelRu": "Нью-Мексико",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1522",
+      "sourceTitle": "Wikidata: Нью-Мексико",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_New_Mexico.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_New_Mexico.svg/960px-Flag_of_New_Mexico.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_New_Mexico.svg",
+        "license": "Public domain",
+        "author": null,
+        "authorNote": "not stated on the Commons file page"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1397:flag-of-ohio-svg",
+      "group": "us_state",
+      "labelRu": "Огайо",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1397",
+      "sourceTitle": "Wikidata: Огайо",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Ohio.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Ohio.svg/960px-Flag_of_Ohio.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Ohio.svg",
+        "license": "Public domain",
+        "author": "John Eisenmann"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1649:flag-of-oklahoma-svg",
+      "group": "us_state",
+      "labelRu": "Оклахома",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1649",
+      "sourceTitle": "Wikidata: Оклахома",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Oklahoma.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6e/Flag_of_Oklahoma.svg/960px-Flag_of_Oklahoma.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Oklahoma.svg",
+        "license": "Public domain",
+        "author": "xrmap"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q824:flag-of-oregon-svg",
+      "group": "us_state",
+      "labelRu": "Орегон",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q824",
+      "sourceTitle": "Wikidata: Орегон",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Oregon.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_Oregon.svg/960px-Flag_of_Oregon.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Oregon.svg",
+        "license": "Public domain",
+        "author": "User:Denelson83"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1400:flag-of-pennsylvania-svg",
+      "group": "us_state",
+      "labelRu": "Пенсильвания",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1400",
+      "sourceTitle": "Wikidata: Пенсильвания",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Pennsylvania.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Flag_of_Pennsylvania.svg/960px-Flag_of_Pennsylvania.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Pennsylvania.svg",
+        "license": "Public domain",
+        "author": "Simtropolitan, Jean-Pierre Demailly (old version)\npermission=\n\n\n\nInsignia\n\nThis image shows a flag, a coat of arms, a seal or some other official insignia. The use of such symbols is restricted in many countries. These restrictions are independent of the copyright status."
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1387:flag-of-rhode-island-svg",
+      "group": "us_state",
+      "labelRu": "Род-Айленд",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1387",
+      "sourceTitle": "Wikidata: Род-Айленд",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Rhode_Island.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Rhode_Island.svg/960px-Flag_of_Rhode_Island.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Rhode_Island.svg",
+        "license": "Public domain",
+        "author": "Xrmap flag collection 2.7"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1207:flag-of-north-dakota-svg",
+      "group": "us_state",
+      "labelRu": "Северная Дакота",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1207",
+      "sourceTitle": "Wikidata: Северная Дакота",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_North_Dakota.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Flag_of_North_Dakota.svg/960px-Flag_of_North_Dakota.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_North_Dakota.svg",
+        "license": "Public domain",
+        "author": "Unknown authorUnknown author"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1454:flag-of-north-carolina-svg",
+      "group": "us_state",
+      "labelRu": "Северная Каролина",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1454",
+      "sourceTitle": "Wikidata: Северная Каролина",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_North_Carolina.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Flag_of_North_Carolina.svg/960px-Flag_of_North_Carolina.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_North_Carolina.svg",
+        "license": "Public domain",
+        "author": null,
+        "authorNote": "not stated on the Commons file page"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1509:flag-of-tennessee-svg",
+      "group": "us_state",
+      "labelRu": "Теннесси",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1509",
+      "sourceTitle": "Wikidata: Теннесси",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Tennessee.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Tennessee.svg/960px-Flag_of_Tennessee.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Tennessee.svg",
+        "license": "Public domain",
+        "author": "-xfi-"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1439:flag-of-texas-svg",
+      "group": "us_state",
+      "labelRu": "Техас",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1439",
+      "sourceTitle": "Wikidata: Техас",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Texas.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Flag_of_Texas.svg/960px-Flag_of_Texas.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Texas.svg",
+        "license": "Public domain",
+        "author": "Paul B. Joiner"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q812:flag-of-florida-svg",
+      "group": "us_state",
+      "labelRu": "Флорида",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q812",
+      "sourceTitle": "Wikidata: Флорида",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Florida.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Flag_of_Florida.svg/960px-Flag_of_Florida.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Florida.svg",
+        "license": "Public domain",
+        "author": "Template:Brendon Tiana"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1211:flag-of-south-dakota-svg",
+      "group": "us_state",
+      "labelRu": "Южная Дакота",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1211",
+      "sourceTitle": "Wikidata: Южная Дакота",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_South_Dakota.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_South_Dakota.svg/960px-Flag_of_South_Dakota.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_South_Dakota.svg",
+        "license": "Public domain",
+        "author": "xrmap"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q1456:flag-of-south-carolina-svg",
+      "group": "us_state",
+      "labelRu": "Южная Каролина",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q1456",
+      "sourceTitle": "Wikidata: Южная Каролина",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_South_Carolina.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Flag_of_South_Carolina.svg/960px-Flag_of_South_Carolina.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_South_Carolina.svg",
+        "license": "Public domain",
+        "author": "Design by South Carolina General Assembly, SVG by Steve Hall"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "us_state:Q829:flag-of-utah-svg",
+      "group": "us_state",
+      "labelRu": "Юта",
+      "adoptedYear": null,
+      "assetKind": "flag",
+      "wikidataUrl": "https://www.wikidata.org/wiki/Q829",
+      "sourceTitle": "Wikidata: Юта",
+      "sourceCheckedAt": "2026-10-31",
+      "asset": {
+        "fileName": "Flag_of_Utah.svg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Flag_of_Utah.svg/960px-Flag_of_Utah.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "pageUrl": "https://commons.wikimedia.org/wiki/File:Flag_of_Utah.svg",
+        "license": "Public domain",
+        "author": "The State of Utah"
+      },
+      "assetLicenseStatus": "free",
+      "reviewStatus": "pending"
+    }
+  ]
+}

@@ -497,5 +497,38 @@
     "sourceTitle": "Last Person Standing Wins $500 (Ages 8-45 Quiz)",
     "origin": "notebooklm",
     "license": "original"
+  },
+  {
+    "id": "au-space-sc1q4o",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Easy",
+    "promptRu": "Как называется астрономическое явление, при котором день и ночь примерно равны по продолжительности?",
+    "answerRu": "Равноденствие",
+    "acceptedRu": [
+      "Равноденствие",
+      "Весеннее равноденствие",
+      "Осеннее равноденствие"
+    ],
+    "acceptedEn": [
+      "Equinox",
+      "Spring equinox",
+      "Autumn equinox",
+      "Fall equinox",
+      "Vernal equinox"
+    ],
+    "distractorsRu": [
+      "Полнолуние",
+      "Солнечное затмение",
+      "Солнцестояние"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://science.nasa.gov/solar-system/what-is-an-equinox/",
+    "sourceTitle": "NASA Science — What Is an Equinox?",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "Равноденствие происходит дважды в год — примерно в марте и сентябре, когда Солнце пересекает небесный экватор. В это время продолжительность дня и ночи на большей части Земли близка к 12 часам, хотя не обязательно одинакова до минуты.",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
   }
 ]

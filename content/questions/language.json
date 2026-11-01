@@ -512,5 +512,67 @@
     "sourceTitle": "Languages Quiz @isaacm.1063 @Peskovii",
     "origin": "notebooklm",
     "license": "original"
+  },
+  {
+    "id": "au-language-153sbpg",
+    "editorialStatus": "blocked",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Medium",
+    "promptRu": "Какая буква греческого алфавита имеет форму треугольника?",
+    "answerRu": "Дельта",
+    "acceptedRu": [
+      "Дельта",
+      "Буква дельта"
+    ],
+    "acceptedEn": [
+      "Delta",
+      "Delta letter"
+    ],
+    "distractorsRu": [
+      "Альфа",
+      "Сигма",
+      "Лямбда"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://www.britannica.com/topic/Greek-alphabet",
+    "sourceTitle": "Encyclopaedia Britannica — Греческий алфавит",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "Заглавная греческая буква дельта (Δ) напоминает треугольник. Это четвёртая буква греческого алфавита. В математике и физике символ Δ часто обозначает изменение или разность величин.",
+    "reviewNote": "Заблокировано 2026-11-01: вопрос неоднозначен — заглавная лямбда Λ также имеет треугольную форму."
+  },
+  {
+    "id": "au-language-rsxwyi",
+    "editorialStatus": "blocked",
+    "kind": "single",
+    "topic": "language",
+    "difficulty": "Medium",
+    "promptRu": "Назовите один из официальных языков африканской страны Чад.",
+    "answerRu": "Французский",
+    "acceptedRu": [
+      "Французский",
+      "Французский язык",
+      "Арабский",
+      "Арабский язык"
+    ],
+    "acceptedEn": [
+      "French",
+      "French language",
+      "Arabic",
+      "Arabic language"
+    ],
+    "distractorsRu": [
+      "Английский",
+      "Испанский",
+      "Португальский"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://www.diplomatie.gouv.fr/fr/information-par-pays/tchad/presentation-du-tchad",
+    "sourceTitle": "Министерство иностранных дел Франции — Информация о Чаде",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "В Чаде два официальных языка: французский и арабский. Французский получил официальный статус благодаря колониальному прошлому страны. Помимо этих двух языков, в Чаде распространено множество местных языков и диалектов.",
+    "reviewNote": "Заблокировано 2026-11-01: у Чада два официальных языка; один правильный ответ не задан."
   }
 ]

@@ -2516,5 +2516,1493 @@
     "sourceTitle": "Wikidata: Кентерберийские рассказы",
     "origin": "wikidata",
     "license": "CC0"
+  },
+  {
+    "id": "wd-book-work-Q25338",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Антуан де Сент-Экзюпери?",
+    "answerRu": "Маленький принц",
+    "acceptedRu": [
+      "Маленький принц"
+    ],
+    "distractorsRu": [
+      "Хижина дяди Тома",
+      "Улисс",
+      "Вокруг света за восемьдесят дней"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Антуан де Сент-Экзюпери — автор произведения «Маленький принц».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q25338",
+    "sourceTitle": "Wikidata: Маленький принц",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q15228",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Джон Рональд Руэл Толкин?",
+    "answerRu": "Властелин колец",
+    "acceptedRu": [
+      "Властелин колец"
+    ],
+    "distractorsRu": [
+      "Приключения Оливера Твиста",
+      "Алхимик",
+      "Энеида"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Джон Рональд Руэл Толкин — автор произведения «Властелин колец».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q15228",
+    "sourceTitle": "Wikidata: Властелин колец",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q480",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Мигель де Сервантес?",
+    "answerRu": "Дон Кихот",
+    "acceptedRu": [
+      "Дон Кихот"
+    ],
+    "distractorsRu": [
+      "Капитал",
+      "Дюна",
+      "Отверженные"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Мигель де Сервантес — автор произведения «Дон Кихот».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q480",
+    "sourceTitle": "Wikidata: Дон Кихот",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q208460",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Джордж Оруэлл?",
+    "answerRu": "1984",
+    "acceptedRu": [
+      "1984"
+    ],
+    "distractorsRu": [
+      "Франкенштейн, или Современный Прометей",
+      "Повесть о Гэндзи",
+      "Гарри Поттер и философский камень"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Джордж Оруэлл — автор произведения «1984».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q208460",
+    "sourceTitle": "Wikidata: 1984",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q37293",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Вальмики?",
+    "answerRu": "Рамаяна",
+    "acceptedRu": [
+      "Рамаяна"
+    ],
+    "distractorsRu": [
+      "Русалочка",
+      "Код да Винчи",
+      "Моби Дик"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Вальмики — автор произведения «Рамаяна».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q37293",
+    "sourceTitle": "Wikidata: Рамаяна",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q40185",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Данте Алигьери?",
+    "answerRu": "Божественная комедия",
+    "acceptedRu": [
+      "Божественная комедия"
+    ],
+    "distractorsRu": [
+      "Дон Кихот",
+      "Процесс",
+      "Над пропастью во ржи"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Данте Алигьери — автор произведения «Божественная комедия».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q40185",
+    "sourceTitle": "Wikidata: Божественная комедия",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q92640",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Льюис Кэрролл?",
+    "answerRu": "Алиса в Стране чудес",
+    "acceptedRu": [
+      "Алиса в Стране чудес"
+    ],
+    "distractorsRu": [
+      "Моби Дик",
+      "Государь",
+      "Путешествия Гулливера"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Льюис Кэрролл — автор произведения «Алиса в Стране чудес».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q92640",
+    "sourceTitle": "Wikidata: Алиса в Стране чудес",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q8265",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Цао Сюэцинь?",
+    "answerRu": "Сон в красном тереме",
+    "acceptedRu": [
+      "Сон в красном тереме"
+    ],
+    "distractorsRu": [
+      "Код да Винчи",
+      "Приключения Оливера Твиста",
+      "Приключения Пиноккио. История деревянной куклы"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Цао Сюэцинь — автор произведения «Сон в красном тереме».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q8265",
+    "sourceTitle": "Wikidata: Сон в красном тереме",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q8269",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Мурасаки Сикибу?",
+    "answerRu": "Повесть о Гэндзи",
+    "acceptedRu": [
+      "Повесть о Гэндзи"
+    ],
+    "distractorsRu": [
+      "Посторонний",
+      "Дюна",
+      "Братья Карамазовы"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Мурасаки Сикибу — автор произведения «Повесть о Гэндзи».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q8269",
+    "sourceTitle": "Wikidata: Повесть о Гэндзи",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q60220",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Вергилий?",
+    "answerRu": "Энеида",
+    "acceptedRu": [
+      "Энеида"
+    ],
+    "distractorsRu": [
+      "Двадцать тысяч льё под водой",
+      "Алиса в Стране чудес",
+      "Капитал"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Вергилий — автор произведения «Энеида».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q60220",
+    "sourceTitle": "Wikidata: Энеида",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q165318",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Фёдор Михайлович Достоевский?",
+    "answerRu": "Преступление и наказание",
+    "acceptedRu": [
+      "Преступление и наказание"
+    ],
+    "distractorsRu": [
+      "Алхимик",
+      "Троецарствие",
+      "Остров сокровищ"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Фёдор Михайлович Достоевский — автор произведения «Преступление и наказание».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q165318",
+    "sourceTitle": "Wikidata: Преступление и наказание",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q147787",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Лев Николаевич Толстой?",
+    "answerRu": "Анна Каренина",
+    "acceptedRu": [
+      "Анна Каренина"
+    ],
+    "distractorsRu": [
+      "Отверженные",
+      "Государство",
+      "Маленький принц"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Лев Николаевич Толстой — автор произведения «Анна Каренина».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q147787",
+    "sourceTitle": "Wikidata: Анна Каренина",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q11859",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Ханс Кристиан Андерсен?",
+    "answerRu": "Русалочка",
+    "acceptedRu": [
+      "Русалочка"
+    ],
+    "distractorsRu": [
+      "Грозовой перевал",
+      "Хоббит, или Туда и обратно",
+      "Приключения Гекльберри Финна"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ханс Кристиан Андерсен — автор произведения «Русалочка».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q11859",
+    "sourceTitle": "Wikidata: Русалочка",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q43361",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Джоан Роулинг?",
+    "answerRu": "Гарри Поттер и философский камень",
+    "acceptedRu": [
+      "Гарри Поттер и философский камень"
+    ],
+    "distractorsRu": [
+      "Анна Каренина",
+      "Басни Эзопа",
+      "Братья Карамазовы"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Джоан Роулинг — автор произведения «Гарри Поттер и философский камень».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q43361",
+    "sourceTitle": "Wikidata: Гарри Поттер и философский камень",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q123397",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Платон?",
+    "answerRu": "Государство",
+    "acceptedRu": [
+      "Государство"
+    ],
+    "distractorsRu": [
+      "Кентерберийские рассказы",
+      "Рождественская песнь в прозе",
+      "Война и мир"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Платон — автор произведения «Государство».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q123397",
+    "sourceTitle": "Wikidata: Государство",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q131719",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Никколо Макиавелли?",
+    "answerRu": "Государь",
+    "acceptedRu": [
+      "Государь"
+    ],
+    "distractorsRu": [
+      "Алхимик",
+      "Жизнь и удивительные приключения Робинзона Крузо",
+      "Гарри Поттер и философский камень"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Никколо Макиавелли — автор произведения «Государь».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q131719",
+    "sourceTitle": "Wikidata: Государь",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q178869",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Easy",
+    "promptRu": "Какое из этих произведений написал Габриель Гарсиа Маркес?",
+    "answerRu": "Сто лет одиночества",
+    "acceptedRu": [
+      "Сто лет одиночества"
+    ],
+    "distractorsRu": [
+      "Дао дэ цзин",
+      "Государство",
+      "Русалочка"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Габриель Гарсиа Маркес — автор произведения «Сто лет одиночества».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q178869",
+    "sourceTitle": "Wikidata: Сто лет одиночества",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q170583",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Джейн Остин?",
+    "answerRu": "Гордость и предубеждение",
+    "acceptedRu": [
+      "Гордость и предубеждение"
+    ],
+    "distractorsRu": [
+      "Гарри Поттер и философский камень",
+      "Государь",
+      "Хоббит, или Туда и обратно"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Джейн Остин — автор произведения «Гордость и предубеждение».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q170583",
+    "sourceTitle": "Wikidata: Гордость и предубеждение",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q483034",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Даниель Дефо?",
+    "answerRu": "Жизнь и удивительные приключения Робинзона Крузо",
+    "acceptedRu": [
+      "Жизнь и удивительные приключения Робинзона Крузо"
+    ],
+    "distractorsRu": [
+      "Великий Гэтсби",
+      "Портрет Дориана Грея",
+      "Гордость и предубеждение"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Даниель Дефо — автор произведения «Жизнь и удивительные приключения Робинзона Крузо».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q483034",
+    "sourceTitle": "Wikidata: Жизнь и удивительные приключения Робинзона Крузо",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q180736",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Виктор Гюго?",
+    "answerRu": "Отверженные",
+    "acceptedRu": [
+      "Отверженные"
+    ],
+    "distractorsRu": [
+      "Русалочка",
+      "Жизнь и удивительные приключения Робинзона Крузо",
+      "Процесс"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Виктор Гюго — автор произведения «Отверженные».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q180736",
+    "sourceTitle": "Wikidata: Отверженные",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q134425",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Лао-цзы?",
+    "answerRu": "Дао дэ цзин",
+    "acceptedRu": [
+      "Дао дэ цзин"
+    ],
+    "distractorsRu": [
+      "Государство",
+      "Улисс",
+      "Троецарствие"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Лао-цзы — автор произведения «Дао дэ цзин».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q134425",
+    "sourceTitle": "Wikidata: Дао дэ цзин",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q26505",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Эрнест Хемингуэй?",
+    "answerRu": "Старик и море",
+    "acceptedRu": [
+      "Старик и море"
+    ],
+    "distractorsRu": [
+      "Приключения Гекльберри Финна",
+      "Над пропастью во ржи",
+      "Двадцать тысяч льё под водой"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Эрнест Хемингуэй — автор произведения «Старик и море».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q26505",
+    "sourceTitle": "Wikidata: Старик и море",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q179021",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Пауло Коэльо?",
+    "answerRu": "Алхимик",
+    "acceptedRu": [
+      "Алхимик"
+    ],
+    "distractorsRu": [
+      "Божественная комедия",
+      "Анна Каренина",
+      "Братья Карамазовы"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Пауло Коэльо — автор произведения «Алхимик».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q179021",
+    "sourceTitle": "Wikidata: Алхимик",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q58784",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Карл Маркс?",
+    "answerRu": "Капитал",
+    "acceptedRu": [
+      "Капитал"
+    ],
+    "distractorsRu": [
+      "Алхимик",
+      "Русалочка",
+      "Три мушкетёра"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Карл Маркс — автор произведения «Капитал».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q58784",
+    "sourceTitle": "Wikidata: Капитал",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q174596",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Герман Мелвилл?",
+    "answerRu": "Моби Дик",
+    "acceptedRu": [
+      "Моби Дик"
+    ],
+    "distractorsRu": [
+      "Грозовой перевал",
+      "Превращение",
+      "Дюна"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Герман Мелвилл — автор произведения «Моби Дик».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q174596",
+    "sourceTitle": "Wikidata: Моби Дик",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q140527",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Александр Дюма?",
+    "answerRu": "Три мушкетёра",
+    "acceptedRu": [
+      "Три мушкетёра"
+    ],
+    "distractorsRu": [
+      "Анна Каренина",
+      "Дао дэ цзин",
+      "Вокруг света за восемьдесят дней"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Александр Дюма — автор произведения «Три мушкетёра».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q140527",
+    "sourceTitle": "Wikidata: Три мушкетёра",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q150827",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Мэри Шелли?",
+    "answerRu": "Франкенштейн, или Современный Прометей",
+    "acceptedRu": [
+      "Франкенштейн, или Современный Прометей"
+    ],
+    "distractorsRu": [
+      "Божественная комедия",
+      "Паутина Шарлотты",
+      "Граф Монте-Кристо"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Мэри Шелли — автор произведения «Франкенштейн, или Современный Прометей».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q150827",
+    "sourceTitle": "Wikidata: Франкенштейн, или Современный Прометей",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q29478",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Иоганн Вольфганг фон Гёте?",
+    "answerRu": "Фауст",
+    "acceptedRu": [
+      "Фауст"
+    ],
+    "distractorsRu": [
+      "Процесс",
+      "Остров сокровищ",
+      "Повесть о Гэндзи"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Иоганн Вольфганг фон Гёте — автор произведения «Фауст».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q29478",
+    "sourceTitle": "Wikidata: Фауст",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q81689",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Дэн Браун?",
+    "answerRu": "Код да Винчи",
+    "acceptedRu": [
+      "Код да Винчи"
+    ],
+    "distractorsRu": [
+      "Франкенштейн, или Современный Прометей",
+      "Приключения Гекльберри Финна",
+      "Кентерберийские рассказы"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Дэн Браун — автор произведения «Код да Винчи».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q81689",
+    "sourceTitle": "Wikidata: Код да Винчи",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q183883",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Джером Дэвид Сэлинджер?",
+    "answerRu": "Над пропастью во ржи",
+    "acceptedRu": [
+      "Над пропастью во ржи"
+    ],
+    "distractorsRu": [
+      "Теогония",
+      "Государство",
+      "Энеида"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Джером Дэвид Сэлинджер — автор произведения «Над пропастью во ржи».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q183883",
+    "sourceTitle": "Wikidata: Над пропастью во ржи",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q185118",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Роберт Льюис Стивенсон?",
+    "answerRu": "Остров сокровищ",
+    "acceptedRu": [
+      "Остров сокровищ"
+    ],
+    "distractorsRu": [
+      "Хоббит, или Туда и обратно",
+      "Мастер и Маргарита",
+      "Отверженные"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Роберт Льюис Стивенсон — автор произведения «Остров сокровищ».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q185118",
+    "sourceTitle": "Wikidata: Остров сокровищ",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q181488",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какое из этих произведений написал Джонатан Свифт?",
+    "answerRu": "Путешествия Гулливера",
+    "acceptedRu": [
+      "Путешествия Гулливера"
+    ],
+    "distractorsRu": [
+      "Процесс",
+      "Преступление и наказание",
+      "Алиса в Стране чудес"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Джонатан Свифт — автор произведения «Путешествия Гулливера».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q181488",
+    "sourceTitle": "Wikidata: Путешествия Гулливера",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q163297",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Альбер Камю?",
+    "answerRu": "Посторонний",
+    "acceptedRu": [
+      "Посторонний"
+    ],
+    "distractorsRu": [
+      "Мастер и Маргарита",
+      "Метаморфозы",
+      "В ожидании Годо"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Альбер Камю — автор произведения «Посторонний».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q163297",
+    "sourceTitle": "Wikidata: Посторонний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q6511",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Джеймс Джойс?",
+    "answerRu": "Улисс",
+    "acceptedRu": [
+      "Улисс"
+    ],
+    "distractorsRu": [
+      "Преступление и наказание",
+      "Государь",
+      "Дракула"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Джеймс Джойс — автор произведения «Улисс».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q6511",
+    "sourceTitle": "Wikidata: Улисс",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q184222",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Франц Кафка?",
+    "answerRu": "Превращение",
+    "acceptedRu": [
+      "Превращение"
+    ],
+    "distractorsRu": [
+      "Гарри Поттер и философский камень",
+      "Приключения Тома Сойера",
+      "Алхимик"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Франц Кафка — автор произведения «Превращение».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q184222",
+    "sourceTitle": "Wikidata: Превращение",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q214371",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Фрэнсис Скотт Фицджеральд?",
+    "answerRu": "Великий Гэтсби",
+    "acceptedRu": [
+      "Великий Гэтсби"
+    ],
+    "distractorsRu": [
+      "Гарри Поттер и Тайная комната",
+      "Приключения Пиноккио. История деревянной куклы",
+      "Басни Эзопа"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Фрэнсис Скотт Фицджеральд — автор произведения «Великий Гэтсби».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q214371",
+    "sourceTitle": "Wikidata: Великий Гэтсби",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q8065468",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Карло Коллоди?",
+    "answerRu": "Приключения Пиноккио. История деревянной куклы",
+    "acceptedRu": [
+      "Приключения Пиноккио. История деревянной куклы"
+    ],
+    "distractorsRu": [
+      "Сто лет одиночества",
+      "Собор Парижской Богоматери",
+      "Приключения Оливера Твиста"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Карло Коллоди — автор произведения «Приключения Пиноккио. История деревянной куклы».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q8065468",
+    "sourceTitle": "Wikidata: Приключения Пиноккио. История деревянной куклы",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q45735",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Элвин Брукс Уайт?",
+    "answerRu": "Паутина Шарлотты",
+    "acceptedRu": [
+      "Паутина Шарлотты"
+    ],
+    "distractorsRu": [
+      "1984",
+      "Приключения Гекльберри Финна",
+      "Моби Дик"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Элвин Брукс Уайт — автор произведения «Паутина Шарлотты».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q45735",
+    "sourceTitle": "Wikidata: Паутина Шарлотты",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q164974",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Чарльз Диккенс?",
+    "answerRu": "Приключения Оливера Твиста",
+    "acceptedRu": [
+      "Приключения Оливера Твиста"
+    ],
+    "distractorsRu": [
+      "Потерянный рай",
+      "Старик и море",
+      "Госпожа Бовари"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Чарльз Диккенс — автор произведения «Приключения Оливера Твиста».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q164974",
+    "sourceTitle": "Wikidata: Приключения Оливера Твиста",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q82464",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Оскар Уайльд?",
+    "answerRu": "Портрет Дориана Грея",
+    "acceptedRu": [
+      "Портрет Дориана Грея"
+    ],
+    "distractorsRu": [
+      "Ворон",
+      "Приключения Тома Сойера",
+      "О, дивный новый мир"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Оскар Уайльд — автор произведения «Портрет Дориана Грея».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q82464",
+    "sourceTitle": "Wikidata: Портрет Дориана Грея",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q6911",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Анна Франк?",
+    "answerRu": "Дневник Анны Франк",
+    "acceptedRu": [
+      "Дневник Анны Франк"
+    ],
+    "distractorsRu": [
+      "Моби Дик",
+      "Код да Винчи",
+      "Три мушкетёра"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Анна Франк — автор произведения «Дневник Анны Франк».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q6911",
+    "sourceTitle": "Wikidata: Дневник Анны Франк",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q199774",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Фридрих Ницше?",
+    "answerRu": "Так говорил Заратустра",
+    "acceptedRu": [
+      "Так говорил Заратустра"
+    ],
+    "distractorsRu": [
+      "Дао дэ цзин",
+      "В ожидании Годо",
+      "Портрет Дориана Грея"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Фридрих Ницше — автор произведения «Так говорил Заратустра».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q199774",
+    "sourceTitle": "Wikidata: Так говорил Заратустра",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q202975",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Эмили Бронте?",
+    "answerRu": "Грозовой перевал",
+    "acceptedRu": [
+      "Грозовой перевал"
+    ],
+    "distractorsRu": [
+      "Вокруг света за восемьдесят дней",
+      "Троецарствие",
+      "Паутина Шарлотты"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Эмили Бронте — автор произведения «Грозовой перевал».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q202975",
+    "sourceTitle": "Wikidata: Грозовой перевал",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q70784",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал У Чэнъэнь?",
+    "answerRu": "Путешествие на Запад",
+    "acceptedRu": [
+      "Путешествие на Запад"
+    ],
+    "distractorsRu": [
+      "Процесс",
+      "Метаморфозы",
+      "Рождественская песнь в прозе"
+    ],
+    "openAnswer": false,
+    "explanationRu": "У Чэнъэнь — автор произведения «Путешествие на Запад».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q70784",
+    "sourceTitle": "Wikidata: Путешествие на Запад",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q188538",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Михаил Афанасьевич Булгаков?",
+    "answerRu": "Мастер и Маргарита",
+    "acceptedRu": [
+      "Мастер и Маргарита"
+    ],
+    "distractorsRu": [
+      "Троецарствие",
+      "Госпожа Бовари",
+      "Приключения Тома Сойера"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Михаил Афанасьевич Булгаков — автор произведения «Мастер и Маргарита».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q188538",
+    "sourceTitle": "Wikidata: Мастер и Маргарита",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q19871",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Сэмюэл Беккет?",
+    "answerRu": "В ожидании Годо",
+    "acceptedRu": [
+      "В ожидании Годо"
+    ],
+    "distractorsRu": [
+      "Собор Парижской Богоматери",
+      "О, дивный новый мир",
+      "Метаморфозы"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Сэмюэл Беккет — автор произведения «В ожидании Годо».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q19871",
+    "sourceTitle": "Wikidata: В ожидании Годо",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q1219561",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Жюль Верн?",
+    "answerRu": "Вокруг света за восемьдесят дней",
+    "acceptedRu": [
+      "Вокруг света за восемьдесят дней"
+    ],
+    "distractorsRu": [
+      "Приключения Тома Сойера",
+      "Декамерон",
+      "Портрет Дориана Грея"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Жюль Верн — автор произведения «Вокруг света за восемьдесят дней».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1219561",
+    "sourceTitle": "Wikidata: Вокруг света за восемьдесят дней",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q184742",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Какое из этих произведений написал Овидий?",
+    "answerRu": "Метаморфозы",
+    "acceptedRu": [
+      "Метаморфозы"
+    ],
+    "distractorsRu": [
+      "Дракула",
+      "Старик и море",
+      "Алхимик"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Овидий — автор произведения «Метаморфозы».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q184742",
+    "sourceTitle": "Wikidata: Метаморфозы",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q190192",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Фрэнк Герберт?",
+    "answerRu": "Дюна",
+    "acceptedRu": [
+      "Дюна"
+    ],
+    "distractorsRu": [
+      "Гарри Поттер и философский камень",
+      "Теогония",
+      "Так говорил Заратустра"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Фрэнк Герберт — автор произведения «Дюна».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q190192",
+    "sourceTitle": "Wikidata: Дюна",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q326914",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Марк Твен?",
+    "answerRu": "Приключения Тома Сойера",
+    "acceptedRu": [
+      "Приключения Тома Сойера"
+    ],
+    "distractorsRu": [
+      "Три мушкетёра",
+      "Над пропастью во ржи",
+      "Государство"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Марк Твен — автор произведения «Приключения Тома Сойера».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q326914",
+    "sourceTitle": "Wikidata: Приключения Тома Сойера",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q127149",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Владимир Владимирович Набоков?",
+    "answerRu": "Лолита",
+    "acceptedRu": [
+      "Лолита"
+    ],
+    "distractorsRu": [
+      "Маленький принц",
+      "Троецарствие",
+      "Жизнь и удивительные приключения Робинзона Крузо"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Владимир Владимирович Набоков — автор произведения «Лолита».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q127149",
+    "sourceTitle": "Wikidata: Лолита",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q16438",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Джованни Боккаччо?",
+    "answerRu": "Декамерон",
+    "acceptedRu": [
+      "Декамерон"
+    ],
+    "distractorsRu": [
+      "Приключения Тома Сойера",
+      "В ожидании Годо",
+      "Код да Винчи"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Джованни Боккаччо — автор произведения «Декамерон».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q16438",
+    "sourceTitle": "Wikidata: Декамерон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q41542",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Брэм Стокер?",
+    "answerRu": "Дракула",
+    "acceptedRu": [
+      "Дракула"
+    ],
+    "distractorsRu": [
+      "Капитал",
+      "В ожидании Годо",
+      "Дневник Анны Франк"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Брэм Стокер — автор произведения «Дракула».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q41542",
+    "sourceTitle": "Wikidata: Дракула",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q28754",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Джон Мильтон?",
+    "answerRu": "Потерянный рай",
+    "acceptedRu": [
+      "Потерянный рай"
+    ],
+    "distractorsRu": [
+      "Двадцать тысяч льё под водой",
+      "Божественная комедия",
+      "Гарри Поттер и Тайная комната"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Джон Мильтон — автор произведения «Потерянный рай».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q28754",
+    "sourceTitle": "Wikidata: Потерянный рай",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q193417",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Гюстав Флобер?",
+    "answerRu": "Госпожа Бовари",
+    "acceptedRu": [
+      "Госпожа Бовари"
+    ],
+    "distractorsRu": [
+      "Путешествия Гулливера",
+      "Властелин колец",
+      "Басни Эзопа"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Гюстав Флобер — автор произведения «Госпожа Бовари».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q193417",
+    "sourceTitle": "Wikidata: Госпожа Бовари",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q191949",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Олдос Хаксли?",
+    "answerRu": "О, дивный новый мир",
+    "acceptedRu": [
+      "О, дивный новый мир"
+    ],
+    "distractorsRu": [
+      "Сон в красном тереме",
+      "Алиса в Стране чудес",
+      "Маленький принц"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Олдос Хаксли — автор произведения «О, дивный новый мир».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q191949",
+    "sourceTitle": "Wikidata: О, дивный новый мир",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q156498",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Гесиод?",
+    "answerRu": "Теогония",
+    "acceptedRu": [
+      "Теогония"
+    ],
+    "distractorsRu": [
+      "Приключения Оливера Твиста",
+      "Двадцать тысяч льё под водой",
+      "Энеида"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Гесиод — автор произведения «Теогония».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q156498",
+    "sourceTitle": "Wikidata: Теогония",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q70806",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Ло Гуаньчжун?",
+    "answerRu": "Троецарствие",
+    "acceptedRu": [
+      "Троецарствие"
+    ],
+    "distractorsRu": [
+      "Портрет Дориана Грея",
+      "Посторонний",
+      "Энеида"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ло Гуаньчжун — автор произведения «Троецарствие».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q70806",
+    "sourceTitle": "Wikidata: Троецарствие",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q22726",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Эдгар Аллан По?",
+    "answerRu": "Ворон",
+    "acceptedRu": [
+      "Ворон"
+    ],
+    "distractorsRu": [
+      "Двадцать тысяч льё под водой",
+      "Так говорил Заратустра",
+      "Энеида"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Эдгар Аллан По — автор произведения «Ворон».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q22726",
+    "sourceTitle": "Wikidata: Ворон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q865902",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Эзоп?",
+    "answerRu": "Басни Эзопа",
+    "acceptedRu": [
+      "Басни Эзопа"
+    ],
+    "distractorsRu": [
+      "Метаморфозы",
+      "В ожидании Годо",
+      "Маленький принц"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Эзоп — автор произведения «Басни Эзопа».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q865902",
+    "sourceTitle": "Wikidata: Басни Эзопа",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q2222",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Гарриет Бичер-Стоу?",
+    "answerRu": "Хижина дяди Тома",
+    "acceptedRu": [
+      "Хижина дяди Тома"
+    ],
+    "distractorsRu": [
+      "Дневник Анны Франк",
+      "О, дивный новый мир",
+      "Капитал"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Гарриет Бичер-Стоу — автор произведения «Хижина дяди Тома».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q2222",
+    "sourceTitle": "Wikidata: Хижина дяди Тома",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-book-work-Q191663",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Expert",
+    "promptRu": "Какое из этих произведений написал Джеффри Чосер?",
+    "answerRu": "Кентерберийские рассказы",
+    "acceptedRu": [
+      "Кентерберийские рассказы"
+    ],
+    "distractorsRu": [
+      "Война и мир",
+      "Божественная комедия",
+      "Ворон"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Джеффри Чосер — автор произведения «Кентерберийские рассказы».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q191663",
+    "sourceTitle": "Wikidata: Кентерберийские рассказы",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
   }
 ]

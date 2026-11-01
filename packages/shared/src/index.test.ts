@@ -7,6 +7,7 @@ import {
   type CategoryId,
 } from './index';
 import { generalPackQuestions, packQuestionToRaceQuestion } from './generalPack';
+import { historicFlags } from './questions/historicFlags';
 
 describe('resultFromDistance', () => {
   it.each([
@@ -144,7 +145,7 @@ describe('generateMatch', () => {
 
   it.each([
     ['geography', 197],
-    ['history', 44],
+    ['history', historicFlags.length],
     ['languages', 37],
   ] as const)('supports the full %s capacity and rejects one more', (category, capacity) => {
     const random = vi.spyOn(Math, 'random').mockReturnValue(0);

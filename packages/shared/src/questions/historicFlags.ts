@@ -1,14 +1,22 @@
+import { otherFlags } from './otherFlags';
+
 export interface HistoricFlag {
   id: string;
   labelRu: string;
   era: string;
-  file: string;
+  file?: string;
+  mediaUrl?: string;
+  assetKind?: 'flag' | 'coat_of_arms';
   factRu: string;
+  sourceUrl?: string;
+  assetPageUrl?: string;
+  assetLicense?: string;
+  assetAuthor?: string | null;
 }
 
 // Flags served from /flags-historic/ (downloaded from Wikimedia Commons).
 // factRu doubles as the resolution-screen trivia — each one is a mini TikTok hook.
-export const historicFlags: HistoricFlag[] = [
+const historicOnlyFlags: HistoricFlag[] = [
   { id: 'soviet-union', labelRu: 'СССР', era: '1923–1991', file: 'soviet-union.png', factRu: 'Флаг страны, занимавшей 1/6 суши. Под ним Гагарин полетел в космос — и под ним же страна исчезла с карты.' },
   { id: 'yugoslavia', labelRu: 'Югославия (СФРЮ)', era: '1946–1992', file: 'yugoslavia.png', factRu: 'Шесть республик, один флаг с красной звездой — и десятилетие войн после распада.' },
   { id: 'gdr', labelRu: 'ГДР', era: '1959–1990', file: 'gdr.png', factRu: 'От флага ФРГ отличался только молотом и циркулем в центре. Страна исчезла в 1990-м.' },
@@ -55,6 +63,10 @@ export const historicFlags: HistoricFlag[] = [
   { id: 'british-india', labelRu: 'Британская Индия', era: '1858–1947', file: 'british-india.png', factRu: 'Красный энсейн со Звездой Индии — флаг раджа, под которым Британия правила субконтинентом.' },
 ];
 
-export function historicFlagUrl(file: string): string {
-  return `/flags-historic/${file}`;
+export const historicFlags: HistoricFlag[] = [...historicOnlyFlags, ...otherFlags];
+
+export function historicFlagUrl(flag: HistoricFlag): string {
+  if (flag.mediaUrl) return flag.mediaUrl;
+  if (!flag.file) throw new Error(`У символа ${flag.id} нет изображения.`);
+  return `/flags-historic/${flag.file}`;
 }

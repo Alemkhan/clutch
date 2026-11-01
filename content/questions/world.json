@@ -1178,5 +1178,94 @@
     "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original"
+  },
+  {
+    "id": "au-world-1p6s818",
+    "editorialStatus": "blocked",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "На каком языке чаще всего говорят в Дубае?",
+    "answerRu": "Английский",
+    "acceptedRu": [
+      "Английский",
+      "Английский язык",
+      "На английском"
+    ],
+    "acceptedEn": [
+      "English",
+      "English language"
+    ],
+    "distractorsRu": [
+      "Арабский",
+      "Хинди",
+      "Урду"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://research-portal.st-andrews.ac.uk/en/publications/multilingualism-and-linguistic-hybridity-in-dubai/",
+    "sourceTitle": "Университет Сент-Эндрюс — Многоязычие в Дубае",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "Хотя официальным языком ОАЭ является арабский, английский служит основным языком общения между людьми разных национальностей в Дубае.",
+    "reviewNote": "Заблокировано 2026-11-01: «чаще всего говорят» требует статистической метрики; источник её не задаёт."
+  },
+  {
+    "id": "au-world-1hw79pa",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "В какой стране находится Бавария?",
+    "answerRu": "Германия",
+    "acceptedRu": [
+      "Германия",
+      "ФРГ",
+      "Федеративная Республика Германия"
+    ],
+    "acceptedEn": [
+      "Germany",
+      "Federal Republic of Germany"
+    ],
+    "distractorsRu": [
+      "Австрия",
+      "Бельгия",
+      "Швейцария"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://www.bayern.de/",
+    "sourceTitle": "Официальный портал правительства Баварии",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "Бавария — федеральная земля на юго-востоке Германии. Её столица — Мюнхен. Регион знаменит Октоберфестом, Альпами и замком Нойшванштайн.",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "au-world-pjdn2o",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Easy",
+    "promptRu": "В какой стране находится остров Ява?",
+    "answerRu": "Индонезия",
+    "acceptedRu": [
+      "Индонезия",
+      "Республика Индонезия"
+    ],
+    "acceptedEn": [
+      "Indonesia",
+      "Republic of Indonesia"
+    ],
+    "distractorsRu": [
+      "Малайзия",
+      "Филиппины",
+      "Таиланд"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://www.britannica.com/place/Java-island-Indonesia",
+    "sourceTitle": "Encyclopaedia Britannica — Java",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "Ява — остров Индонезии, один из самых густонаселённых островов мира. На нём расположена Джакарта, крупнейший город страны.",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
   }
 ]

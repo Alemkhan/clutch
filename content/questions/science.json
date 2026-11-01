@@ -1722,5 +1722,5725 @@
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original"
+  },
+  {
+    "id": "wd-element-number-1",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «водород»?",
+    "answerRu": "1",
+    "acceptedRu": [
+      "1"
+    ],
+    "distractorsRu": [
+      "113",
+      "38",
+      "75"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Водород — элемент номер 1 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q556",
+    "sourceTitle": "Wikidata: водород",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-H",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «водород»?",
+    "answerRu": "H",
+    "acceptedRu": [
+      "H"
+    ],
+    "distractorsRu": [
+      "Yb",
+      "Ir",
+      "Ga"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «водород» — H.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q556",
+    "sourceTitle": "Wikidata: водород",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-2",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «гелий»?",
+    "answerRu": "2",
+    "acceptedRu": [
+      "2"
+    ],
+    "distractorsRu": [
+      "75",
+      "86",
+      "101"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Гелий — элемент номер 2 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q560",
+    "sourceTitle": "Wikidata: гелий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-He",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «гелий»?",
+    "answerRu": "He",
+    "acceptedRu": [
+      "He"
+    ],
+    "distractorsRu": [
+      "Nh",
+      "O",
+      "Tc"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «гелий» — He.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q560",
+    "sourceTitle": "Wikidata: гелий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-3",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «литий»?",
+    "answerRu": "3",
+    "acceptedRu": [
+      "3"
+    ],
+    "distractorsRu": [
+      "16",
+      "60",
+      "28"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Литий — элемент номер 3 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q568",
+    "sourceTitle": "Wikidata: литий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Li",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «литий»?",
+    "answerRu": "Li",
+    "acceptedRu": [
+      "Li"
+    ],
+    "distractorsRu": [
+      "Dy",
+      "Ra",
+      "Be"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «литий» — Li.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q568",
+    "sourceTitle": "Wikidata: литий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-4",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «бериллий»?",
+    "answerRu": "4",
+    "acceptedRu": [
+      "4"
+    ],
+    "distractorsRu": [
+      "85",
+      "12",
+      "26"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Бериллий — элемент номер 4 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q569",
+    "sourceTitle": "Wikidata: бериллий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Be",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «бериллий»?",
+    "answerRu": "Be",
+    "acceptedRu": [
+      "Be"
+    ],
+    "distractorsRu": [
+      "Hs",
+      "Tl",
+      "C"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «бериллий» — Be.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q569",
+    "sourceTitle": "Wikidata: бериллий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-5",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «бор»?",
+    "answerRu": "5",
+    "acceptedRu": [
+      "5"
+    ],
+    "distractorsRu": [
+      "26",
+      "94",
+      "108"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Бор — элемент номер 5 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q618",
+    "sourceTitle": "Wikidata: бор",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-B",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «бор»?",
+    "answerRu": "B",
+    "acceptedRu": [
+      "B"
+    ],
+    "distractorsRu": [
+      "Li",
+      "Pm",
+      "Ds"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «бор» — B.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q618",
+    "sourceTitle": "Wikidata: бор",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-6",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «углерод»?",
+    "answerRu": "6",
+    "acceptedRu": [
+      "6"
+    ],
+    "distractorsRu": [
+      "95",
+      "109",
+      "37"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Углерод — элемент номер 6 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q623",
+    "sourceTitle": "Wikidata: углерод",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-C",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «углерод»?",
+    "answerRu": "C",
+    "acceptedRu": [
+      "C"
+    ],
+    "distractorsRu": [
+      "Zr",
+      "Pt",
+      "He"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «углерод» — C.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q623",
+    "sourceTitle": "Wikidata: углерод",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «азот»?",
+    "answerRu": "7",
+    "acceptedRu": [
+      "7"
+    ],
+    "distractorsRu": [
+      "36",
+      "102",
+      "93"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Азот — элемент номер 7 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q627",
+    "sourceTitle": "Wikidata: азот",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-N",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «азот»?",
+    "answerRu": "N",
+    "acceptedRu": [
+      "N"
+    ],
+    "distractorsRu": [
+      "Er",
+      "Tl",
+      "Bk"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «азот» — N.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q627",
+    "sourceTitle": "Wikidata: азот",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-8",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «кислород»?",
+    "answerRu": "8",
+    "acceptedRu": [
+      "8"
+    ],
+    "distractorsRu": [
+      "104",
+      "65",
+      "31"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Кислород — элемент номер 8 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q629",
+    "sourceTitle": "Wikidata: кислород",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-O",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «кислород»?",
+    "answerRu": "O",
+    "acceptedRu": [
+      "O"
+    ],
+    "distractorsRu": [
+      "Se",
+      "Li",
+      "Dy"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «кислород» — O.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q629",
+    "sourceTitle": "Wikidata: кислород",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «фтор»?",
+    "answerRu": "9",
+    "acceptedRu": [
+      "9"
+    ],
+    "distractorsRu": [
+      "46",
+      "109",
+      "73"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Фтор — элемент номер 9 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q650",
+    "sourceTitle": "Wikidata: фтор",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-F",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «фтор»?",
+    "answerRu": "F",
+    "acceptedRu": [
+      "F"
+    ],
+    "distractorsRu": [
+      "Po",
+      "Sm",
+      "Bh"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «фтор» — F.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q650",
+    "sourceTitle": "Wikidata: фтор",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-10",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «неон»?",
+    "answerRu": "10",
+    "acceptedRu": [
+      "10"
+    ],
+    "distractorsRu": [
+      "52",
+      "29",
+      "35"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Неон — элемент номер 10 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q654",
+    "sourceTitle": "Wikidata: неон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ne",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «неон»?",
+    "answerRu": "Ne",
+    "acceptedRu": [
+      "Ne"
+    ],
+    "distractorsRu": [
+      "Ba",
+      "Po",
+      "Ru"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «неон» — Ne.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q654",
+    "sourceTitle": "Wikidata: неон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-11",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «натрий»?",
+    "answerRu": "11",
+    "acceptedRu": [
+      "11"
+    ],
+    "distractorsRu": [
+      "60",
+      "4",
+      "28"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Натрий — элемент номер 11 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q658",
+    "sourceTitle": "Wikidata: натрий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Na",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «натрий»?",
+    "answerRu": "Na",
+    "acceptedRu": [
+      "Na"
+    ],
+    "distractorsRu": [
+      "Rg",
+      "Db",
+      "Am"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «натрий» — Na.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q658",
+    "sourceTitle": "Wikidata: натрий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-12",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «магний»?",
+    "answerRu": "12",
+    "acceptedRu": [
+      "12"
+    ],
+    "distractorsRu": [
+      "99",
+      "75",
+      "100"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Магний — элемент номер 12 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q660",
+    "sourceTitle": "Wikidata: магний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Mg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «магний»?",
+    "answerRu": "Mg",
+    "acceptedRu": [
+      "Mg"
+    ],
+    "distractorsRu": [
+      "Hf",
+      "Zn",
+      "Cu"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «магний» — Mg.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q660",
+    "sourceTitle": "Wikidata: магний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-13",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «алюминий»?",
+    "answerRu": "13",
+    "acceptedRu": [
+      "13"
+    ],
+    "distractorsRu": [
+      "50",
+      "96",
+      "114"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Алюминий — элемент номер 13 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q663",
+    "sourceTitle": "Wikidata: алюминий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Al",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «алюминий»?",
+    "answerRu": "Al",
+    "acceptedRu": [
+      "Al"
+    ],
+    "distractorsRu": [
+      "N",
+      "Ho",
+      "Ds"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «алюминий» — Al.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q663",
+    "sourceTitle": "Wikidata: алюминий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-14",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «кремний»?",
+    "answerRu": "14",
+    "acceptedRu": [
+      "14"
+    ],
+    "distractorsRu": [
+      "22",
+      "61",
+      "96"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Кремний — элемент номер 14 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q670",
+    "sourceTitle": "Wikidata: кремний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Si",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «кремний»?",
+    "answerRu": "Si",
+    "acceptedRu": [
+      "Si"
+    ],
+    "distractorsRu": [
+      "Pa",
+      "As",
+      "Ru"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «кремний» — Si.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q670",
+    "sourceTitle": "Wikidata: кремний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-15",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «фосфор»?",
+    "answerRu": "15",
+    "acceptedRu": [
+      "15"
+    ],
+    "distractorsRu": [
+      "80",
+      "23",
+      "48"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Фосфор — элемент номер 15 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q674",
+    "sourceTitle": "Wikidata: фосфор",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-P",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «фосфор»?",
+    "answerRu": "P",
+    "acceptedRu": [
+      "P"
+    ],
+    "distractorsRu": [
+      "No",
+      "Ag",
+      "Os"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «фосфор» — P.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q674",
+    "sourceTitle": "Wikidata: фосфор",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-16",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «сера»?",
+    "answerRu": "16",
+    "acceptedRu": [
+      "16"
+    ],
+    "distractorsRu": [
+      "118",
+      "81",
+      "2"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Сера — элемент номер 16 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q682",
+    "sourceTitle": "Wikidata: сера",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-S",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «сера»?",
+    "answerRu": "S",
+    "acceptedRu": [
+      "S"
+    ],
+    "distractorsRu": [
+      "Ce",
+      "Bh",
+      "Fl"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «сера» — S.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q682",
+    "sourceTitle": "Wikidata: сера",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-17",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «хлор»?",
+    "answerRu": "17",
+    "acceptedRu": [
+      "17"
+    ],
+    "distractorsRu": [
+      "70",
+      "101",
+      "35"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Хлор — элемент номер 17 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q688",
+    "sourceTitle": "Wikidata: хлор",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Cl",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «хлор»?",
+    "answerRu": "Cl",
+    "acceptedRu": [
+      "Cl"
+    ],
+    "distractorsRu": [
+      "S",
+      "Nb",
+      "Mn"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «хлор» — Cl.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q688",
+    "sourceTitle": "Wikidata: хлор",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-18",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «аргон»?",
+    "answerRu": "18",
+    "acceptedRu": [
+      "18"
+    ],
+    "distractorsRu": [
+      "42",
+      "103",
+      "33"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Аргон — элемент номер 18 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q696",
+    "sourceTitle": "Wikidata: аргон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ar",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «аргон»?",
+    "answerRu": "Ar",
+    "acceptedRu": [
+      "Ar"
+    ],
+    "distractorsRu": [
+      "V",
+      "Xe",
+      "Nh"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «аргон» — Ar.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q696",
+    "sourceTitle": "Wikidata: аргон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-19",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «калий»?",
+    "answerRu": "19",
+    "acceptedRu": [
+      "19"
+    ],
+    "distractorsRu": [
+      "74",
+      "107",
+      "42"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Калий — элемент номер 19 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q703",
+    "sourceTitle": "Wikidata: калий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-K",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «калий»?",
+    "answerRu": "K",
+    "acceptedRu": [
+      "K"
+    ],
+    "distractorsRu": [
+      "Og",
+      "Cl",
+      "Mo"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «калий» — K.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q703",
+    "sourceTitle": "Wikidata: калий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-20",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «кальций»?",
+    "answerRu": "20",
+    "acceptedRu": [
+      "20"
+    ],
+    "distractorsRu": [
+      "43",
+      "62",
+      "95"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Кальций — элемент номер 20 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q706",
+    "sourceTitle": "Wikidata: кальций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ca",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «кальций»?",
+    "answerRu": "Ca",
+    "acceptedRu": [
+      "Ca"
+    ],
+    "distractorsRu": [
+      "Pm",
+      "Os",
+      "Er"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «кальций» — Ca.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q706",
+    "sourceTitle": "Wikidata: кальций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-21",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «скандий»?",
+    "answerRu": "21",
+    "acceptedRu": [
+      "21"
+    ],
+    "distractorsRu": [
+      "85",
+      "92",
+      "17"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Скандий — элемент номер 21 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q713",
+    "sourceTitle": "Wikidata: скандий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Sc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «скандий»?",
+    "answerRu": "Sc",
+    "acceptedRu": [
+      "Sc"
+    ],
+    "distractorsRu": [
+      "Cm",
+      "Os",
+      "Rf"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «скандий» — Sc.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q713",
+    "sourceTitle": "Wikidata: скандий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-22",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «титан»?",
+    "answerRu": "22",
+    "acceptedRu": [
+      "22"
+    ],
+    "distractorsRu": [
+      "33",
+      "79",
+      "81"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Титан — элемент номер 22 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q716",
+    "sourceTitle": "Wikidata: титан",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ti",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «титан»?",
+    "answerRu": "Ti",
+    "acceptedRu": [
+      "Ti"
+    ],
+    "distractorsRu": [
+      "Fm",
+      "Pt",
+      "As"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «титан» — Ti.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q716",
+    "sourceTitle": "Wikidata: титан",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-23",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «ванадий»?",
+    "answerRu": "23",
+    "acceptedRu": [
+      "23"
+    ],
+    "distractorsRu": [
+      "81",
+      "42",
+      "64"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ванадий — элемент номер 23 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q722",
+    "sourceTitle": "Wikidata: ванадий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-V",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «ванадий»?",
+    "answerRu": "V",
+    "acceptedRu": [
+      "V"
+    ],
+    "distractorsRu": [
+      "Tc",
+      "Si",
+      "Po"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «ванадий» — V.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q722",
+    "sourceTitle": "Wikidata: ванадий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-24",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «хром»?",
+    "answerRu": "24",
+    "acceptedRu": [
+      "24"
+    ],
+    "distractorsRu": [
+      "63",
+      "71",
+      "106"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Хром — элемент номер 24 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q725",
+    "sourceTitle": "Wikidata: хром",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Cr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «хром»?",
+    "answerRu": "Cr",
+    "acceptedRu": [
+      "Cr"
+    ],
+    "distractorsRu": [
+      "Hg",
+      "Bk",
+      "Np"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «хром» — Cr.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q725",
+    "sourceTitle": "Wikidata: хром",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-25",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «марганец»?",
+    "answerRu": "25",
+    "acceptedRu": [
+      "25"
+    ],
+    "distractorsRu": [
+      "110",
+      "68",
+      "53"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Марганец — элемент номер 25 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q731",
+    "sourceTitle": "Wikidata: марганец",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Mn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «марганец»?",
+    "answerRu": "Mn",
+    "acceptedRu": [
+      "Mn"
+    ],
+    "distractorsRu": [
+      "Fe",
+      "Er",
+      "H"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «марганец» — Mn.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q731",
+    "sourceTitle": "Wikidata: марганец",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-26",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «железо»?",
+    "answerRu": "26",
+    "acceptedRu": [
+      "26"
+    ],
+    "distractorsRu": [
+      "53",
+      "7",
+      "88"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Железо — элемент номер 26 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q677",
+    "sourceTitle": "Wikidata: железо",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Fe",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «железо»?",
+    "answerRu": "Fe",
+    "acceptedRu": [
+      "Fe"
+    ],
+    "distractorsRu": [
+      "Lv",
+      "Rn",
+      "Os"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «железо» — Fe.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q677",
+    "sourceTitle": "Wikidata: железо",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-27",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «кобальт»?",
+    "answerRu": "27",
+    "acceptedRu": [
+      "27"
+    ],
+    "distractorsRu": [
+      "100",
+      "82",
+      "68"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Кобальт — элемент номер 27 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q740",
+    "sourceTitle": "Wikidata: кобальт",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Co",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «кобальт»?",
+    "answerRu": "Co",
+    "acceptedRu": [
+      "Co"
+    ],
+    "distractorsRu": [
+      "Sg",
+      "Hf",
+      "Tb"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «кобальт» — Co.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q740",
+    "sourceTitle": "Wikidata: кобальт",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-28",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «никель»?",
+    "answerRu": "28",
+    "acceptedRu": [
+      "28"
+    ],
+    "distractorsRu": [
+      "109",
+      "67",
+      "11"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Никель — элемент номер 28 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q744",
+    "sourceTitle": "Wikidata: никель",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ni",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «никель»?",
+    "answerRu": "Ni",
+    "acceptedRu": [
+      "Ni"
+    ],
+    "distractorsRu": [
+      "Br",
+      "La",
+      "Og"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «никель» — Ni.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q744",
+    "sourceTitle": "Wikidata: никель",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-29",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «медь»?",
+    "answerRu": "29",
+    "acceptedRu": [
+      "29"
+    ],
+    "distractorsRu": [
+      "51",
+      "76",
+      "90"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Медь — элемент номер 29 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q753",
+    "sourceTitle": "Wikidata: медь",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Cu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «медь»?",
+    "answerRu": "Cu",
+    "acceptedRu": [
+      "Cu"
+    ],
+    "distractorsRu": [
+      "Bi",
+      "Sm",
+      "Xe"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «медь» — Cu.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q753",
+    "sourceTitle": "Wikidata: медь",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-30",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой атомный номер у элемента «цинк»?",
+    "answerRu": "30",
+    "acceptedRu": [
+      "30"
+    ],
+    "distractorsRu": [
+      "14",
+      "116",
+      "23"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Цинк — элемент номер 30 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q758",
+    "sourceTitle": "Wikidata: цинк",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Zn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Easy",
+    "promptRu": "Какой символ у химического элемента «цинк»?",
+    "answerRu": "Zn",
+    "acceptedRu": [
+      "Zn"
+    ],
+    "distractorsRu": [
+      "Er",
+      "Pu",
+      "Ti"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «цинк» — Zn.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q758",
+    "sourceTitle": "Wikidata: цинк",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-31",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «галлий»?",
+    "answerRu": "31",
+    "acceptedRu": [
+      "31"
+    ],
+    "distractorsRu": [
+      "73",
+      "18",
+      "102"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Галлий — элемент номер 31 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q861",
+    "sourceTitle": "Wikidata: галлий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ga",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «галлий»?",
+    "answerRu": "Ga",
+    "acceptedRu": [
+      "Ga"
+    ],
+    "distractorsRu": [
+      "C",
+      "Np",
+      "Rb"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «галлий» — Ga.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q861",
+    "sourceTitle": "Wikidata: галлий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-32",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «германий»?",
+    "answerRu": "32",
+    "acceptedRu": [
+      "32"
+    ],
+    "distractorsRu": [
+      "24",
+      "102",
+      "99"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Германий — элемент номер 32 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q867",
+    "sourceTitle": "Wikidata: германий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ge",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «германий»?",
+    "answerRu": "Ge",
+    "acceptedRu": [
+      "Ge"
+    ],
+    "distractorsRu": [
+      "V",
+      "Ho",
+      "Db"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «германий» — Ge.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q867",
+    "sourceTitle": "Wikidata: германий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-33",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «мышьяк»?",
+    "answerRu": "33",
+    "acceptedRu": [
+      "33"
+    ],
+    "distractorsRu": [
+      "69",
+      "22",
+      "14"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Мышьяк — элемент номер 33 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q871",
+    "sourceTitle": "Wikidata: мышьяк",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-As",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «мышьяк»?",
+    "answerRu": "As",
+    "acceptedRu": [
+      "As"
+    ],
+    "distractorsRu": [
+      "I",
+      "Fr",
+      "Bk"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «мышьяк» — As.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q871",
+    "sourceTitle": "Wikidata: мышьяк",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-34",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «селен»?",
+    "answerRu": "34",
+    "acceptedRu": [
+      "34"
+    ],
+    "distractorsRu": [
+      "96",
+      "106",
+      "113"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Селен — элемент номер 34 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q876",
+    "sourceTitle": "Wikidata: селен",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Se",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «селен»?",
+    "answerRu": "Se",
+    "acceptedRu": [
+      "Se"
+    ],
+    "distractorsRu": [
+      "Lr",
+      "N",
+      "Mo"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «селен» — Se.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q876",
+    "sourceTitle": "Wikidata: селен",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-35",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «бром»?",
+    "answerRu": "35",
+    "acceptedRu": [
+      "35"
+    ],
+    "distractorsRu": [
+      "93",
+      "103",
+      "41"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Бром — элемент номер 35 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q879",
+    "sourceTitle": "Wikidata: бром",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Br",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «бром»?",
+    "answerRu": "Br",
+    "acceptedRu": [
+      "Br"
+    ],
+    "distractorsRu": [
+      "Mg",
+      "Eu",
+      "Cd"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «бром» — Br.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q879",
+    "sourceTitle": "Wikidata: бром",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-36",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «криптон»?",
+    "answerRu": "36",
+    "acceptedRu": [
+      "36"
+    ],
+    "distractorsRu": [
+      "45",
+      "9",
+      "104"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Криптон — элемент номер 36 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q888",
+    "sourceTitle": "Wikidata: криптон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Kr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «криптон»?",
+    "answerRu": "Kr",
+    "acceptedRu": [
+      "Kr"
+    ],
+    "distractorsRu": [
+      "Po",
+      "C",
+      "Lv"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «криптон» — Kr.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q888",
+    "sourceTitle": "Wikidata: криптон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-37",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «рубидий»?",
+    "answerRu": "37",
+    "acceptedRu": [
+      "37"
+    ],
+    "distractorsRu": [
+      "102",
+      "51",
+      "64"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Рубидий — элемент номер 37 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q895",
+    "sourceTitle": "Wikidata: рубидий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Rb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «рубидий»?",
+    "answerRu": "Rb",
+    "acceptedRu": [
+      "Rb"
+    ],
+    "distractorsRu": [
+      "He",
+      "Mn",
+      "Au"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «рубидий» — Rb.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q895",
+    "sourceTitle": "Wikidata: рубидий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-38",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «стронций»?",
+    "answerRu": "38",
+    "acceptedRu": [
+      "38"
+    ],
+    "distractorsRu": [
+      "81",
+      "101",
+      "44"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Стронций — элемент номер 38 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q938",
+    "sourceTitle": "Wikidata: стронций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Sr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «стронций»?",
+    "answerRu": "Sr",
+    "acceptedRu": [
+      "Sr"
+    ],
+    "distractorsRu": [
+      "Lv",
+      "Cf",
+      "Ga"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «стронций» — Sr.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q938",
+    "sourceTitle": "Wikidata: стронций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-39",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «иттрий»?",
+    "answerRu": "39",
+    "acceptedRu": [
+      "39"
+    ],
+    "distractorsRu": [
+      "83",
+      "27",
+      "110"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Иттрий — элемент номер 39 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q941",
+    "sourceTitle": "Wikidata: иттрий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Y",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «иттрий»?",
+    "answerRu": "Y",
+    "acceptedRu": [
+      "Y"
+    ],
+    "distractorsRu": [
+      "Rn",
+      "Hg",
+      "Be"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «иттрий» — Y.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q941",
+    "sourceTitle": "Wikidata: иттрий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-40",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «цирконий»?",
+    "answerRu": "40",
+    "acceptedRu": [
+      "40"
+    ],
+    "distractorsRu": [
+      "108",
+      "37",
+      "9"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Цирконий — элемент номер 40 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1038",
+    "sourceTitle": "Wikidata: цирконий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Zr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «цирконий»?",
+    "answerRu": "Zr",
+    "acceptedRu": [
+      "Zr"
+    ],
+    "distractorsRu": [
+      "Pu",
+      "Ra",
+      "At"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «цирконий» — Zr.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1038",
+    "sourceTitle": "Wikidata: цирконий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-41",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «ниобий»?",
+    "answerRu": "41",
+    "acceptedRu": [
+      "41"
+    ],
+    "distractorsRu": [
+      "50",
+      "75",
+      "114"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ниобий — элемент номер 41 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1046",
+    "sourceTitle": "Wikidata: ниобий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Nb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «ниобий»?",
+    "answerRu": "Nb",
+    "acceptedRu": [
+      "Nb"
+    ],
+    "distractorsRu": [
+      "Fe",
+      "Lu",
+      "Zr"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «ниобий» — Nb.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1046",
+    "sourceTitle": "Wikidata: ниобий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-42",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «молибден»?",
+    "answerRu": "42",
+    "acceptedRu": [
+      "42"
+    ],
+    "distractorsRu": [
+      "118",
+      "96",
+      "69"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Молибден — элемент номер 42 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1053",
+    "sourceTitle": "Wikidata: молибден",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Mo",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «молибден»?",
+    "answerRu": "Mo",
+    "acceptedRu": [
+      "Mo"
+    ],
+    "distractorsRu": [
+      "Rg",
+      "Ta",
+      "Os"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «молибден» — Mo.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1053",
+    "sourceTitle": "Wikidata: молибден",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-43",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «технеций»?",
+    "answerRu": "43",
+    "acceptedRu": [
+      "43"
+    ],
+    "distractorsRu": [
+      "60",
+      "22",
+      "31"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Технеций — элемент номер 43 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1054",
+    "sourceTitle": "Wikidata: технеций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Tc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «технеций»?",
+    "answerRu": "Tc",
+    "acceptedRu": [
+      "Tc"
+    ],
+    "distractorsRu": [
+      "Sm",
+      "Nb",
+      "Re"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «технеций» — Tc.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1054",
+    "sourceTitle": "Wikidata: технеций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-44",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «рутений»?",
+    "answerRu": "44",
+    "acceptedRu": [
+      "44"
+    ],
+    "distractorsRu": [
+      "21",
+      "50",
+      "75"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Рутений — элемент номер 44 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1086",
+    "sourceTitle": "Wikidata: рутений",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ru",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «рутений»?",
+    "answerRu": "Ru",
+    "acceptedRu": [
+      "Ru"
+    ],
+    "distractorsRu": [
+      "Dy",
+      "S",
+      "Lv"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «рутений» — Ru.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1086",
+    "sourceTitle": "Wikidata: рутений",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-45",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «родий»?",
+    "answerRu": "45",
+    "acceptedRu": [
+      "45"
+    ],
+    "distractorsRu": [
+      "70",
+      "16",
+      "31"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Родий — элемент номер 45 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1087",
+    "sourceTitle": "Wikidata: родий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Rh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «родий»?",
+    "answerRu": "Rh",
+    "acceptedRu": [
+      "Rh"
+    ],
+    "distractorsRu": [
+      "P",
+      "Dy",
+      "Xe"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «родий» — Rh.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1087",
+    "sourceTitle": "Wikidata: родий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-46",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «палладий»?",
+    "answerRu": "46",
+    "acceptedRu": [
+      "46"
+    ],
+    "distractorsRu": [
+      "31",
+      "5",
+      "62"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Палладий — элемент номер 46 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1089",
+    "sourceTitle": "Wikidata: палладий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Pd",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «палладий»?",
+    "answerRu": "Pd",
+    "acceptedRu": [
+      "Pd"
+    ],
+    "distractorsRu": [
+      "Bk",
+      "Mt",
+      "O"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «палладий» — Pd.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1089",
+    "sourceTitle": "Wikidata: палладий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-47",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «серебро»?",
+    "answerRu": "47",
+    "acceptedRu": [
+      "47"
+    ],
+    "distractorsRu": [
+      "80",
+      "13",
+      "31"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Серебро — элемент номер 47 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1090",
+    "sourceTitle": "Wikidata: серебро",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ag",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «серебро»?",
+    "answerRu": "Ag",
+    "acceptedRu": [
+      "Ag"
+    ],
+    "distractorsRu": [
+      "Lr",
+      "Pt",
+      "Ne"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «серебро» — Ag.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1090",
+    "sourceTitle": "Wikidata: серебро",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-48",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «кадмий»?",
+    "answerRu": "48",
+    "acceptedRu": [
+      "48"
+    ],
+    "distractorsRu": [
+      "67",
+      "83",
+      "32"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Кадмий — элемент номер 48 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1091",
+    "sourceTitle": "Wikidata: кадмий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Cd",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «кадмий»?",
+    "answerRu": "Cd",
+    "acceptedRu": [
+      "Cd"
+    ],
+    "distractorsRu": [
+      "In",
+      "B",
+      "Pt"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «кадмий» — Cd.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1091",
+    "sourceTitle": "Wikidata: кадмий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-49",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «индий»?",
+    "answerRu": "49",
+    "acceptedRu": [
+      "49"
+    ],
+    "distractorsRu": [
+      "90",
+      "38",
+      "67"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Индий — элемент номер 49 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1094",
+    "sourceTitle": "Wikidata: индий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-In",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «индий»?",
+    "answerRu": "In",
+    "acceptedRu": [
+      "In"
+    ],
+    "distractorsRu": [
+      "Pr",
+      "La",
+      "Tm"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «индий» — In.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1094",
+    "sourceTitle": "Wikidata: индий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-50",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «олово»?",
+    "answerRu": "50",
+    "acceptedRu": [
+      "50"
+    ],
+    "distractorsRu": [
+      "49",
+      "113",
+      "27"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Олово — элемент номер 50 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1096",
+    "sourceTitle": "Wikidata: олово",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Sn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «олово»?",
+    "answerRu": "Sn",
+    "acceptedRu": [
+      "Sn"
+    ],
+    "distractorsRu": [
+      "Fe",
+      "Al",
+      "Cd"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «олово» — Sn.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1096",
+    "sourceTitle": "Wikidata: олово",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-51",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «сурьма»?",
+    "answerRu": "51",
+    "acceptedRu": [
+      "51"
+    ],
+    "distractorsRu": [
+      "107",
+      "77",
+      "22"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Сурьма — элемент номер 51 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1099",
+    "sourceTitle": "Wikidata: сурьма",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Sb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «сурьма»?",
+    "answerRu": "Sb",
+    "acceptedRu": [
+      "Sb"
+    ],
+    "distractorsRu": [
+      "Ba",
+      "Lu",
+      "Y"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «сурьма» — Sb.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1099",
+    "sourceTitle": "Wikidata: сурьма",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-52",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «теллур»?",
+    "answerRu": "52",
+    "acceptedRu": [
+      "52"
+    ],
+    "distractorsRu": [
+      "39",
+      "104",
+      "43"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Теллур — элемент номер 52 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1100",
+    "sourceTitle": "Wikidata: теллур",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Te",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «теллур»?",
+    "answerRu": "Te",
+    "acceptedRu": [
+      "Te"
+    ],
+    "distractorsRu": [
+      "Rf",
+      "Kr",
+      "Ds"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «теллур» — Te.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1100",
+    "sourceTitle": "Wikidata: теллур",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-53",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «иод»?",
+    "answerRu": "53",
+    "acceptedRu": [
+      "53"
+    ],
+    "distractorsRu": [
+      "98",
+      "17",
+      "25"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Иод — элемент номер 53 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1103",
+    "sourceTitle": "Wikidata: иод",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-I",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «иод»?",
+    "answerRu": "I",
+    "acceptedRu": [
+      "I"
+    ],
+    "distractorsRu": [
+      "Mt",
+      "Tl",
+      "Bh"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «иод» — I.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1103",
+    "sourceTitle": "Wikidata: иод",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-54",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «ксенон»?",
+    "answerRu": "54",
+    "acceptedRu": [
+      "54"
+    ],
+    "distractorsRu": [
+      "29",
+      "85",
+      "3"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ксенон — элемент номер 54 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1106",
+    "sourceTitle": "Wikidata: ксенон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Xe",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «ксенон»?",
+    "answerRu": "Xe",
+    "acceptedRu": [
+      "Xe"
+    ],
+    "distractorsRu": [
+      "Y",
+      "Mn",
+      "Ho"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «ксенон» — Xe.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1106",
+    "sourceTitle": "Wikidata: ксенон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-55",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «цезий»?",
+    "answerRu": "55",
+    "acceptedRu": [
+      "55"
+    ],
+    "distractorsRu": [
+      "88",
+      "66",
+      "20"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Цезий — элемент номер 55 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1108",
+    "sourceTitle": "Wikidata: цезий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Cs",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «цезий»?",
+    "answerRu": "Cs",
+    "acceptedRu": [
+      "Cs"
+    ],
+    "distractorsRu": [
+      "Si",
+      "Ga",
+      "Lv"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «цезий» — Cs.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1108",
+    "sourceTitle": "Wikidata: цезий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-56",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «барий»?",
+    "answerRu": "56",
+    "acceptedRu": [
+      "56"
+    ],
+    "distractorsRu": [
+      "19",
+      "116",
+      "87"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Барий — элемент номер 56 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1112",
+    "sourceTitle": "Wikidata: барий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ba",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «барий»?",
+    "answerRu": "Ba",
+    "acceptedRu": [
+      "Ba"
+    ],
+    "distractorsRu": [
+      "Cr",
+      "Po",
+      "Ag"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «барий» — Ba.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1112",
+    "sourceTitle": "Wikidata: барий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-57",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «лантан»?",
+    "answerRu": "57",
+    "acceptedRu": [
+      "57"
+    ],
+    "distractorsRu": [
+      "78",
+      "116",
+      "13"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Лантан — элемент номер 57 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1801",
+    "sourceTitle": "Wikidata: лантан",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-La",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «лантан»?",
+    "answerRu": "La",
+    "acceptedRu": [
+      "La"
+    ],
+    "distractorsRu": [
+      "Os",
+      "Fm",
+      "Be"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «лантан» — La.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1801",
+    "sourceTitle": "Wikidata: лантан",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-58",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «церий»?",
+    "answerRu": "58",
+    "acceptedRu": [
+      "58"
+    ],
+    "distractorsRu": [
+      "115",
+      "76",
+      "101"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Церий — элемент номер 58 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1385",
+    "sourceTitle": "Wikidata: церий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ce",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «церий»?",
+    "answerRu": "Ce",
+    "acceptedRu": [
+      "Ce"
+    ],
+    "distractorsRu": [
+      "Ta",
+      "Sm",
+      "Rb"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «церий» — Ce.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1385",
+    "sourceTitle": "Wikidata: церий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-59",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой атомный номер у элемента «празеодим»?",
+    "answerRu": "59",
+    "acceptedRu": [
+      "59"
+    ],
+    "distractorsRu": [
+      "68",
+      "44",
+      "26"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Празеодим — элемент номер 59 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1386",
+    "sourceTitle": "Wikidata: празеодим",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Pr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой символ у химического элемента «празеодим»?",
+    "answerRu": "Pr",
+    "acceptedRu": [
+      "Pr"
+    ],
+    "distractorsRu": [
+      "Nh",
+      "Cl",
+      "Rf"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «празеодим» — Pr.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1386",
+    "sourceTitle": "Wikidata: празеодим",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-60",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «неодим»?",
+    "answerRu": "60",
+    "acceptedRu": [
+      "60"
+    ],
+    "distractorsRu": [
+      "16",
+      "27",
+      "78"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Неодим — элемент номер 60 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1388",
+    "sourceTitle": "Wikidata: неодим",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Nd",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «неодим»?",
+    "answerRu": "Nd",
+    "acceptedRu": [
+      "Nd"
+    ],
+    "distractorsRu": [
+      "Ag",
+      "Tb",
+      "Os"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «неодим» — Nd.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1388",
+    "sourceTitle": "Wikidata: неодим",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-61",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «прометий»?",
+    "answerRu": "61",
+    "acceptedRu": [
+      "61"
+    ],
+    "distractorsRu": [
+      "34",
+      "20",
+      "85"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Прометий — элемент номер 61 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1809",
+    "sourceTitle": "Wikidata: прометий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Pm",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «прометий»?",
+    "answerRu": "Pm",
+    "acceptedRu": [
+      "Pm"
+    ],
+    "distractorsRu": [
+      "F",
+      "Mc",
+      "Xe"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «прометий» — Pm.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1809",
+    "sourceTitle": "Wikidata: прометий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-62",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «самарий»?",
+    "answerRu": "62",
+    "acceptedRu": [
+      "62"
+    ],
+    "distractorsRu": [
+      "112",
+      "86",
+      "23"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Самарий — элемент номер 62 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1819",
+    "sourceTitle": "Wikidata: самарий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Sm",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «самарий»?",
+    "answerRu": "Sm",
+    "acceptedRu": [
+      "Sm"
+    ],
+    "distractorsRu": [
+      "Rh",
+      "Yb",
+      "Pd"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «самарий» — Sm.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1819",
+    "sourceTitle": "Wikidata: самарий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-63",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «европий»?",
+    "answerRu": "63",
+    "acceptedRu": [
+      "63"
+    ],
+    "distractorsRu": [
+      "54",
+      "92",
+      "7"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Европий — элемент номер 63 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1396",
+    "sourceTitle": "Wikidata: европий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Eu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «европий»?",
+    "answerRu": "Eu",
+    "acceptedRu": [
+      "Eu"
+    ],
+    "distractorsRu": [
+      "Na",
+      "Ce",
+      "Hf"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «европий» — Eu.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1396",
+    "sourceTitle": "Wikidata: европий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-64",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «гадолиний»?",
+    "answerRu": "64",
+    "acceptedRu": [
+      "64"
+    ],
+    "distractorsRu": [
+      "102",
+      "13",
+      "95"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Гадолиний — элемент номер 64 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1832",
+    "sourceTitle": "Wikidata: гадолиний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Gd",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «гадолиний»?",
+    "answerRu": "Gd",
+    "acceptedRu": [
+      "Gd"
+    ],
+    "distractorsRu": [
+      "Sm",
+      "Ba",
+      "Eu"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «гадолиний» — Gd.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1832",
+    "sourceTitle": "Wikidata: гадолиний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-65",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «тербий»?",
+    "answerRu": "65",
+    "acceptedRu": [
+      "65"
+    ],
+    "distractorsRu": [
+      "44",
+      "83",
+      "2"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Тербий — элемент номер 65 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1838",
+    "sourceTitle": "Wikidata: тербий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Tb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «тербий»?",
+    "answerRu": "Tb",
+    "acceptedRu": [
+      "Tb"
+    ],
+    "distractorsRu": [
+      "Fe",
+      "La",
+      "Mn"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «тербий» — Tb.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1838",
+    "sourceTitle": "Wikidata: тербий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-66",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «диспрозий»?",
+    "answerRu": "66",
+    "acceptedRu": [
+      "66"
+    ],
+    "distractorsRu": [
+      "93",
+      "48",
+      "112"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Диспрозий — элемент номер 66 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1843",
+    "sourceTitle": "Wikidata: диспрозий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Dy",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «диспрозий»?",
+    "answerRu": "Dy",
+    "acceptedRu": [
+      "Dy"
+    ],
+    "distractorsRu": [
+      "Li",
+      "Sc",
+      "Bk"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «диспрозий» — Dy.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1843",
+    "sourceTitle": "Wikidata: диспрозий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-67",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «гольмий»?",
+    "answerRu": "67",
+    "acceptedRu": [
+      "67"
+    ],
+    "distractorsRu": [
+      "34",
+      "112",
+      "25"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Гольмий — элемент номер 67 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1846",
+    "sourceTitle": "Wikidata: гольмий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ho",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «гольмий»?",
+    "answerRu": "Ho",
+    "acceptedRu": [
+      "Ho"
+    ],
+    "distractorsRu": [
+      "Ta",
+      "Br",
+      "Nb"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «гольмий» — Ho.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1846",
+    "sourceTitle": "Wikidata: гольмий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-68",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «эрбий»?",
+    "answerRu": "68",
+    "acceptedRu": [
+      "68"
+    ],
+    "distractorsRu": [
+      "56",
+      "111",
+      "70"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Эрбий — элемент номер 68 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1849",
+    "sourceTitle": "Wikidata: эрбий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Er",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «эрбий»?",
+    "answerRu": "Er",
+    "acceptedRu": [
+      "Er"
+    ],
+    "distractorsRu": [
+      "Po",
+      "Tb",
+      "Ne"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «эрбий» — Er.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1849",
+    "sourceTitle": "Wikidata: эрбий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-69",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «тулий»?",
+    "answerRu": "69",
+    "acceptedRu": [
+      "69"
+    ],
+    "distractorsRu": [
+      "104",
+      "118",
+      "97"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Тулий — элемент номер 69 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1853",
+    "sourceTitle": "Wikidata: тулий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Tm",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «тулий»?",
+    "answerRu": "Tm",
+    "acceptedRu": [
+      "Tm"
+    ],
+    "distractorsRu": [
+      "Br",
+      "Se",
+      "Gd"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «тулий» — Tm.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1853",
+    "sourceTitle": "Wikidata: тулий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-70",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «иттербий»?",
+    "answerRu": "70",
+    "acceptedRu": [
+      "70"
+    ],
+    "distractorsRu": [
+      "116",
+      "102",
+      "47"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Иттербий — элемент номер 70 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1855",
+    "sourceTitle": "Wikidata: иттербий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Yb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «иттербий»?",
+    "answerRu": "Yb",
+    "acceptedRu": [
+      "Yb"
+    ],
+    "distractorsRu": [
+      "Tc",
+      "Cs",
+      "Ba"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «иттербий» — Yb.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1855",
+    "sourceTitle": "Wikidata: иттербий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-71",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «лютеций»?",
+    "answerRu": "71",
+    "acceptedRu": [
+      "71"
+    ],
+    "distractorsRu": [
+      "68",
+      "92",
+      "112"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Лютеций — элемент номер 71 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1857",
+    "sourceTitle": "Wikidata: лютеций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Lu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «лютеций»?",
+    "answerRu": "Lu",
+    "acceptedRu": [
+      "Lu"
+    ],
+    "distractorsRu": [
+      "Cn",
+      "Th",
+      "Ga"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «лютеций» — Lu.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1857",
+    "sourceTitle": "Wikidata: лютеций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-72",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «гафний»?",
+    "answerRu": "72",
+    "acceptedRu": [
+      "72"
+    ],
+    "distractorsRu": [
+      "97",
+      "5",
+      "113"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Гафний — элемент номер 72 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1119",
+    "sourceTitle": "Wikidata: гафний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Hf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «гафний»?",
+    "answerRu": "Hf",
+    "acceptedRu": [
+      "Hf"
+    ],
+    "distractorsRu": [
+      "U",
+      "Bh",
+      "Pb"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «гафний» — Hf.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1119",
+    "sourceTitle": "Wikidata: гафний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-73",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «тантал»?",
+    "answerRu": "73",
+    "acceptedRu": [
+      "73"
+    ],
+    "distractorsRu": [
+      "1",
+      "50",
+      "107"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Тантал — элемент номер 73 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1123",
+    "sourceTitle": "Wikidata: тантал",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ta",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «тантал»?",
+    "answerRu": "Ta",
+    "acceptedRu": [
+      "Ta"
+    ],
+    "distractorsRu": [
+      "U",
+      "Ar",
+      "Rf"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «тантал» — Ta.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1123",
+    "sourceTitle": "Wikidata: тантал",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-74",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «вольфрам»?",
+    "answerRu": "74",
+    "acceptedRu": [
+      "74"
+    ],
+    "distractorsRu": [
+      "97",
+      "107",
+      "86"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Вольфрам — элемент номер 74 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q743",
+    "sourceTitle": "Wikidata: вольфрам",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-W",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «вольфрам»?",
+    "answerRu": "W",
+    "acceptedRu": [
+      "W"
+    ],
+    "distractorsRu": [
+      "Ge",
+      "Si",
+      "Pr"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «вольфрам» — W.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q743",
+    "sourceTitle": "Wikidata: вольфрам",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-75",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «рений»?",
+    "answerRu": "75",
+    "acceptedRu": [
+      "75"
+    ],
+    "distractorsRu": [
+      "48",
+      "108",
+      "24"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Рений — элемент номер 75 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q737",
+    "sourceTitle": "Wikidata: рений",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Re",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «рений»?",
+    "answerRu": "Re",
+    "acceptedRu": [
+      "Re"
+    ],
+    "distractorsRu": [
+      "Ac",
+      "V",
+      "Mo"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «рений» — Re.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q737",
+    "sourceTitle": "Wikidata: рений",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-76",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «осмий»?",
+    "answerRu": "76",
+    "acceptedRu": [
+      "76"
+    ],
+    "distractorsRu": [
+      "106",
+      "24",
+      "30"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Осмий — элемент номер 76 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q751",
+    "sourceTitle": "Wikidata: осмий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Os",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «осмий»?",
+    "answerRu": "Os",
+    "acceptedRu": [
+      "Os"
+    ],
+    "distractorsRu": [
+      "Be",
+      "Ac",
+      "Tb"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «осмий» — Os.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q751",
+    "sourceTitle": "Wikidata: осмий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-77",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «иридий»?",
+    "answerRu": "77",
+    "acceptedRu": [
+      "77"
+    ],
+    "distractorsRu": [
+      "58",
+      "66",
+      "93"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Иридий — элемент номер 77 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q877",
+    "sourceTitle": "Wikidata: иридий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ir",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «иридий»?",
+    "answerRu": "Ir",
+    "acceptedRu": [
+      "Ir"
+    ],
+    "distractorsRu": [
+      "Rg",
+      "Na",
+      "Bh"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «иридий» — Ir.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q877",
+    "sourceTitle": "Wikidata: иридий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-78",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «платина»?",
+    "answerRu": "78",
+    "acceptedRu": [
+      "78"
+    ],
+    "distractorsRu": [
+      "5",
+      "106",
+      "14"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Платина — элемент номер 78 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q880",
+    "sourceTitle": "Wikidata: платина",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Pt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «платина»?",
+    "answerRu": "Pt",
+    "acceptedRu": [
+      "Pt"
+    ],
+    "distractorsRu": [
+      "Tb",
+      "U",
+      "Ag"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «платина» — Pt.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q880",
+    "sourceTitle": "Wikidata: платина",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-79",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «золото»?",
+    "answerRu": "79",
+    "acceptedRu": [
+      "79"
+    ],
+    "distractorsRu": [
+      "108",
+      "54",
+      "36"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Золото — элемент номер 79 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q897",
+    "sourceTitle": "Wikidata: золото",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Au",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «золото»?",
+    "answerRu": "Au",
+    "acceptedRu": [
+      "Au"
+    ],
+    "distractorsRu": [
+      "Br",
+      "Md",
+      "Cs"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «золото» — Au.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q897",
+    "sourceTitle": "Wikidata: золото",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-80",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «ртуть»?",
+    "answerRu": "80",
+    "acceptedRu": [
+      "80"
+    ],
+    "distractorsRu": [
+      "29",
+      "73",
+      "118"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ртуть — элемент номер 80 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q925",
+    "sourceTitle": "Wikidata: ртуть",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Hg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «ртуть»?",
+    "answerRu": "Hg",
+    "acceptedRu": [
+      "Hg"
+    ],
+    "distractorsRu": [
+      "Mc",
+      "At",
+      "Bh"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «ртуть» — Hg.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q925",
+    "sourceTitle": "Wikidata: ртуть",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-81",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «таллий»?",
+    "answerRu": "81",
+    "acceptedRu": [
+      "81"
+    ],
+    "distractorsRu": [
+      "77",
+      "35",
+      "52"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Таллий — элемент номер 81 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q932",
+    "sourceTitle": "Wikidata: таллий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Tl",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «таллий»?",
+    "answerRu": "Tl",
+    "acceptedRu": [
+      "Tl"
+    ],
+    "distractorsRu": [
+      "Ne",
+      "Es",
+      "Po"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «таллий» — Tl.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q932",
+    "sourceTitle": "Wikidata: таллий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-82",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «свинец»?",
+    "answerRu": "82",
+    "acceptedRu": [
+      "82"
+    ],
+    "distractorsRu": [
+      "39",
+      "6",
+      "100"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Свинец — элемент номер 82 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q708",
+    "sourceTitle": "Wikidata: свинец",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Pb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «свинец»?",
+    "answerRu": "Pb",
+    "acceptedRu": [
+      "Pb"
+    ],
+    "distractorsRu": [
+      "Sm",
+      "Cl",
+      "Hg"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «свинец» — Pb.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q708",
+    "sourceTitle": "Wikidata: свинец",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-83",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «висмут»?",
+    "answerRu": "83",
+    "acceptedRu": [
+      "83"
+    ],
+    "distractorsRu": [
+      "72",
+      "96",
+      "105"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Висмут — элемент номер 83 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q942",
+    "sourceTitle": "Wikidata: висмут",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Bi",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «висмут»?",
+    "answerRu": "Bi",
+    "acceptedRu": [
+      "Bi"
+    ],
+    "distractorsRu": [
+      "Nh",
+      "He",
+      "Fl"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «висмут» — Bi.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q942",
+    "sourceTitle": "Wikidata: висмут",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-84",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «полоний»?",
+    "answerRu": "84",
+    "acceptedRu": [
+      "84"
+    ],
+    "distractorsRu": [
+      "115",
+      "41",
+      "30"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Полоний — элемент номер 84 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q979",
+    "sourceTitle": "Wikidata: полоний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Po",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «полоний»?",
+    "answerRu": "Po",
+    "acceptedRu": [
+      "Po"
+    ],
+    "distractorsRu": [
+      "Cn",
+      "Sb",
+      "Eu"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «полоний» — Po.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q979",
+    "sourceTitle": "Wikidata: полоний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-85",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «астат»?",
+    "answerRu": "85",
+    "acceptedRu": [
+      "85"
+    ],
+    "distractorsRu": [
+      "57",
+      "23",
+      "12"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Астат — элемент номер 85 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q999",
+    "sourceTitle": "Wikidata: астат",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-At",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «астат»?",
+    "answerRu": "At",
+    "acceptedRu": [
+      "At"
+    ],
+    "distractorsRu": [
+      "Pd",
+      "Xe",
+      "Db"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «астат» — At.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q999",
+    "sourceTitle": "Wikidata: астат",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-86",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «радон»?",
+    "answerRu": "86",
+    "acceptedRu": [
+      "86"
+    ],
+    "distractorsRu": [
+      "19",
+      "94",
+      "55"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Радон — элемент номер 86 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1133",
+    "sourceTitle": "Wikidata: радон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Rn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «радон»?",
+    "answerRu": "Rn",
+    "acceptedRu": [
+      "Rn"
+    ],
+    "distractorsRu": [
+      "Ts",
+      "I",
+      "Ga"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «радон» — Rn.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1133",
+    "sourceTitle": "Wikidata: радон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-87",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «франций»?",
+    "answerRu": "87",
+    "acceptedRu": [
+      "87"
+    ],
+    "distractorsRu": [
+      "60",
+      "4",
+      "35"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Франций — элемент номер 87 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q671",
+    "sourceTitle": "Wikidata: франций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Fr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «франций»?",
+    "answerRu": "Fr",
+    "acceptedRu": [
+      "Fr"
+    ],
+    "distractorsRu": [
+      "Xe",
+      "Gd",
+      "K"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «франций» — Fr.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q671",
+    "sourceTitle": "Wikidata: франций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-88",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «радий»?",
+    "answerRu": "88",
+    "acceptedRu": [
+      "88"
+    ],
+    "distractorsRu": [
+      "96",
+      "12",
+      "30"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Радий — элемент номер 88 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1128",
+    "sourceTitle": "Wikidata: радий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ra",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «радий»?",
+    "answerRu": "Ra",
+    "acceptedRu": [
+      "Ra"
+    ],
+    "distractorsRu": [
+      "Sg",
+      "Y",
+      "Cd"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «радий» — Ra.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1128",
+    "sourceTitle": "Wikidata: радий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-89",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой атомный номер у элемента «актиний»?",
+    "answerRu": "89",
+    "acceptedRu": [
+      "89"
+    ],
+    "distractorsRu": [
+      "37",
+      "78",
+      "23"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Актиний — элемент номер 89 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1121",
+    "sourceTitle": "Wikidata: актиний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ac",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Какой символ у химического элемента «актиний»?",
+    "answerRu": "Ac",
+    "acceptedRu": [
+      "Ac"
+    ],
+    "distractorsRu": [
+      "Pa",
+      "Hg",
+      "Md"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «актиний» — Ac.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1121",
+    "sourceTitle": "Wikidata: актиний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-90",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «торий»?",
+    "answerRu": "90",
+    "acceptedRu": [
+      "90"
+    ],
+    "distractorsRu": [
+      "22",
+      "35",
+      "114"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Торий — элемент номер 90 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1115",
+    "sourceTitle": "Wikidata: торий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Th",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «торий»?",
+    "answerRu": "Th",
+    "acceptedRu": [
+      "Th"
+    ],
+    "distractorsRu": [
+      "Sg",
+      "Hs",
+      "Zr"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «торий» — Th.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1115",
+    "sourceTitle": "Wikidata: торий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-91",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «протактиний»?",
+    "answerRu": "91",
+    "acceptedRu": [
+      "91"
+    ],
+    "distractorsRu": [
+      "80",
+      "17",
+      "66"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Протактиний — элемент номер 91 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1109",
+    "sourceTitle": "Wikidata: протактиний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Pa",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «протактиний»?",
+    "answerRu": "Pa",
+    "acceptedRu": [
+      "Pa"
+    ],
+    "distractorsRu": [
+      "Lu",
+      "I",
+      "Am"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «протактиний» — Pa.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1109",
+    "sourceTitle": "Wikidata: протактиний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-92",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «уран»?",
+    "answerRu": "92",
+    "acceptedRu": [
+      "92"
+    ],
+    "distractorsRu": [
+      "54",
+      "25",
+      "86"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Уран — элемент номер 92 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1098",
+    "sourceTitle": "Wikidata: уран",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-U",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «уран»?",
+    "answerRu": "U",
+    "acceptedRu": [
+      "U"
+    ],
+    "distractorsRu": [
+      "Gd",
+      "Rh",
+      "Hg"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «уран» — U.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1098",
+    "sourceTitle": "Wikidata: уран",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-93",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «нептуний»?",
+    "answerRu": "93",
+    "acceptedRu": [
+      "93"
+    ],
+    "distractorsRu": [
+      "70",
+      "47",
+      "85"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Нептуний — элемент номер 93 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1105",
+    "sourceTitle": "Wikidata: нептуний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Np",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «нептуний»?",
+    "answerRu": "Np",
+    "acceptedRu": [
+      "Np"
+    ],
+    "distractorsRu": [
+      "La",
+      "Pm",
+      "O"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «нептуний» — Np.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1105",
+    "sourceTitle": "Wikidata: нептуний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-94",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «плутоний»?",
+    "answerRu": "94",
+    "acceptedRu": [
+      "94"
+    ],
+    "distractorsRu": [
+      "42",
+      "104",
+      "111"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Плутоний — элемент номер 94 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1102",
+    "sourceTitle": "Wikidata: плутоний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Pu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «плутоний»?",
+    "answerRu": "Pu",
+    "acceptedRu": [
+      "Pu"
+    ],
+    "distractorsRu": [
+      "In",
+      "Na",
+      "Er"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «плутоний» — Pu.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1102",
+    "sourceTitle": "Wikidata: плутоний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-95",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «америций»?",
+    "answerRu": "95",
+    "acceptedRu": [
+      "95"
+    ],
+    "distractorsRu": [
+      "100",
+      "38",
+      "46"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Америций — элемент номер 95 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1872",
+    "sourceTitle": "Wikidata: америций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Am",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «америций»?",
+    "answerRu": "Am",
+    "acceptedRu": [
+      "Am"
+    ],
+    "distractorsRu": [
+      "Zn",
+      "Pt",
+      "Ra"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «америций» — Am.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1872",
+    "sourceTitle": "Wikidata: америций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-96",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «кюрий»?",
+    "answerRu": "96",
+    "acceptedRu": [
+      "96"
+    ],
+    "distractorsRu": [
+      "32",
+      "49",
+      "1"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Кюрий — элемент номер 96 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1876",
+    "sourceTitle": "Wikidata: кюрий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Cm",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «кюрий»?",
+    "answerRu": "Cm",
+    "acceptedRu": [
+      "Cm"
+    ],
+    "distractorsRu": [
+      "Ds",
+      "Se",
+      "Ga"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «кюрий» — Cm.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1876",
+    "sourceTitle": "Wikidata: кюрий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-97",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «берклий»?",
+    "answerRu": "97",
+    "acceptedRu": [
+      "97"
+    ],
+    "distractorsRu": [
+      "45",
+      "117",
+      "56"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Берклий — элемент номер 97 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1882",
+    "sourceTitle": "Wikidata: берклий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Bk",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «берклий»?",
+    "answerRu": "Bk",
+    "acceptedRu": [
+      "Bk"
+    ],
+    "distractorsRu": [
+      "Pm",
+      "Lu",
+      "Fe"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «берклий» — Bk.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1882",
+    "sourceTitle": "Wikidata: берклий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-98",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «калифорний»?",
+    "answerRu": "98",
+    "acceptedRu": [
+      "98"
+    ],
+    "distractorsRu": [
+      "89",
+      "2",
+      "109"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Калифорний — элемент номер 98 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1888",
+    "sourceTitle": "Wikidata: калифорний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Cf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «калифорний»?",
+    "answerRu": "Cf",
+    "acceptedRu": [
+      "Cf"
+    ],
+    "distractorsRu": [
+      "Fr",
+      "V",
+      "Al"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «калифорний» — Cf.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1888",
+    "sourceTitle": "Wikidata: калифорний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-99",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «эйнштейний»?",
+    "answerRu": "99",
+    "acceptedRu": [
+      "99"
+    ],
+    "distractorsRu": [
+      "40",
+      "52",
+      "6"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Эйнштейний — элемент номер 99 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1892",
+    "sourceTitle": "Wikidata: эйнштейний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Es",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «эйнштейний»?",
+    "answerRu": "Es",
+    "acceptedRu": [
+      "Es"
+    ],
+    "distractorsRu": [
+      "C",
+      "Tb",
+      "Fm"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «эйнштейний» — Es.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1892",
+    "sourceTitle": "Wikidata: эйнштейний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-100",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «фермий»?",
+    "answerRu": "100",
+    "acceptedRu": [
+      "100"
+    ],
+    "distractorsRu": [
+      "8",
+      "92",
+      "61"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Фермий — элемент номер 100 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1896",
+    "sourceTitle": "Wikidata: фермий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Fm",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «фермий»?",
+    "answerRu": "Fm",
+    "acceptedRu": [
+      "Fm"
+    ],
+    "distractorsRu": [
+      "Bh",
+      "Al",
+      "Tb"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «фермий» — Fm.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1896",
+    "sourceTitle": "Wikidata: фермий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-101",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «менделевий»?",
+    "answerRu": "101",
+    "acceptedRu": [
+      "101"
+    ],
+    "distractorsRu": [
+      "52",
+      "30",
+      "83"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Менделевий — элемент номер 101 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1898",
+    "sourceTitle": "Wikidata: менделевий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Md",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «менделевий»?",
+    "answerRu": "Md",
+    "acceptedRu": [
+      "Md"
+    ],
+    "distractorsRu": [
+      "Si",
+      "Dy",
+      "V"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «менделевий» — Md.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1898",
+    "sourceTitle": "Wikidata: менделевий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-102",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «нобелий»?",
+    "answerRu": "102",
+    "acceptedRu": [
+      "102"
+    ],
+    "distractorsRu": [
+      "110",
+      "95",
+      "89"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Нобелий — элемент номер 102 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1901",
+    "sourceTitle": "Wikidata: нобелий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-No",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «нобелий»?",
+    "answerRu": "No",
+    "acceptedRu": [
+      "No"
+    ],
+    "distractorsRu": [
+      "Am",
+      "Yb",
+      "Pu"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «нобелий» — No.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1901",
+    "sourceTitle": "Wikidata: нобелий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-103",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «лоуренсий»?",
+    "answerRu": "103",
+    "acceptedRu": [
+      "103"
+    ],
+    "distractorsRu": [
+      "62",
+      "53",
+      "75"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Лоуренсий — элемент номер 103 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1905",
+    "sourceTitle": "Wikidata: лоуренсий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Lr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «лоуренсий»?",
+    "answerRu": "Lr",
+    "acceptedRu": [
+      "Lr"
+    ],
+    "distractorsRu": [
+      "Rf",
+      "Nd",
+      "Dy"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «лоуренсий» — Lr.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1905",
+    "sourceTitle": "Wikidata: лоуренсий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-104",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «резерфордий»?",
+    "answerRu": "104",
+    "acceptedRu": [
+      "104"
+    ],
+    "distractorsRu": [
+      "82",
+      "19",
+      "25"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Резерфордий — элемент номер 104 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1226",
+    "sourceTitle": "Wikidata: резерфордий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Rf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «резерфордий»?",
+    "answerRu": "Rf",
+    "acceptedRu": [
+      "Rf"
+    ],
+    "distractorsRu": [
+      "Na",
+      "I",
+      "Dy"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «резерфордий» — Rf.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1226",
+    "sourceTitle": "Wikidata: резерфордий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-105",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «дубний»?",
+    "answerRu": "105",
+    "acceptedRu": [
+      "105"
+    ],
+    "distractorsRu": [
+      "72",
+      "65",
+      "59"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Дубний — элемент номер 105 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1232",
+    "sourceTitle": "Wikidata: дубний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Db",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «дубний»?",
+    "answerRu": "Db",
+    "acceptedRu": [
+      "Db"
+    ],
+    "distractorsRu": [
+      "Po",
+      "Cs",
+      "La"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «дубний» — Db.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1232",
+    "sourceTitle": "Wikidata: дубний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-106",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «сиборгий»?",
+    "answerRu": "106",
+    "acceptedRu": [
+      "106"
+    ],
+    "distractorsRu": [
+      "24",
+      "77",
+      "8"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Сиборгий — элемент номер 106 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1234",
+    "sourceTitle": "Wikidata: сиборгий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Sg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «сиборгий»?",
+    "answerRu": "Sg",
+    "acceptedRu": [
+      "Sg"
+    ],
+    "distractorsRu": [
+      "Hf",
+      "Ru",
+      "Tc"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «сиборгий» — Sg.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1234",
+    "sourceTitle": "Wikidata: сиборгий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-107",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «борий»?",
+    "answerRu": "107",
+    "acceptedRu": [
+      "107"
+    ],
+    "distractorsRu": [
+      "82",
+      "9",
+      "77"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Борий — элемент номер 107 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1249",
+    "sourceTitle": "Wikidata: борий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Bh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «борий»?",
+    "answerRu": "Bh",
+    "acceptedRu": [
+      "Bh"
+    ],
+    "distractorsRu": [
+      "Am",
+      "S",
+      "Pr"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «борий» — Bh.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1249",
+    "sourceTitle": "Wikidata: борий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-108",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «хассий»?",
+    "answerRu": "108",
+    "acceptedRu": [
+      "108"
+    ],
+    "distractorsRu": [
+      "60",
+      "28",
+      "9"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Хассий — элемент номер 108 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1252",
+    "sourceTitle": "Wikidata: хассий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Hs",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «хассий»?",
+    "answerRu": "Hs",
+    "acceptedRu": [
+      "Hs"
+    ],
+    "distractorsRu": [
+      "Sr",
+      "Al",
+      "Rh"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «хассий» — Hs.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1252",
+    "sourceTitle": "Wikidata: хассий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-109",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «мейтнерий»?",
+    "answerRu": "109",
+    "acceptedRu": [
+      "109"
+    ],
+    "distractorsRu": [
+      "12",
+      "85",
+      "36"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Мейтнерий — элемент номер 109 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1258",
+    "sourceTitle": "Wikidata: мейтнерий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Mt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «мейтнерий»?",
+    "answerRu": "Mt",
+    "acceptedRu": [
+      "Mt"
+    ],
+    "distractorsRu": [
+      "Nh",
+      "Tl",
+      "Sg"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «мейтнерий» — Mt.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1258",
+    "sourceTitle": "Wikidata: мейтнерий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-110",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «дармштадтий»?",
+    "answerRu": "110",
+    "acceptedRu": [
+      "110"
+    ],
+    "distractorsRu": [
+      "106",
+      "12",
+      "81"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Дармштадтий — элемент номер 110 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1266",
+    "sourceTitle": "Wikidata: дармштадтий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ds",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «дармштадтий»?",
+    "answerRu": "Ds",
+    "acceptedRu": [
+      "Ds"
+    ],
+    "distractorsRu": [
+      "Yb",
+      "Zr",
+      "Ti"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «дармштадтий» — Ds.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1266",
+    "sourceTitle": "Wikidata: дармштадтий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-111",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «рентгений»?",
+    "answerRu": "111",
+    "acceptedRu": [
+      "111"
+    ],
+    "distractorsRu": [
+      "49",
+      "106",
+      "63"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Рентгений — элемент номер 111 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1272",
+    "sourceTitle": "Wikidata: рентгений",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Rg",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «рентгений»?",
+    "answerRu": "Rg",
+    "acceptedRu": [
+      "Rg"
+    ],
+    "distractorsRu": [
+      "Bh",
+      "Nd",
+      "Os"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «рентгений» — Rg.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1272",
+    "sourceTitle": "Wikidata: рентгений",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-112",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «коперниций»?",
+    "answerRu": "112",
+    "acceptedRu": [
+      "112"
+    ],
+    "distractorsRu": [
+      "97",
+      "24",
+      "62"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Коперниций — элемент номер 112 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1278",
+    "sourceTitle": "Wikidata: коперниций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Cn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «коперниций»?",
+    "answerRu": "Cn",
+    "acceptedRu": [
+      "Cn"
+    ],
+    "distractorsRu": [
+      "Pr",
+      "Mt",
+      "F"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «коперниций» — Cn.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1278",
+    "sourceTitle": "Wikidata: коперниций",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-113",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «нихоний»?",
+    "answerRu": "113",
+    "acceptedRu": [
+      "113"
+    ],
+    "distractorsRu": [
+      "39",
+      "43",
+      "56"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Нихоний — элемент номер 113 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1301",
+    "sourceTitle": "Wikidata: нихоний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Nh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «нихоний»?",
+    "answerRu": "Nh",
+    "acceptedRu": [
+      "Nh"
+    ],
+    "distractorsRu": [
+      "Sb",
+      "Cn",
+      "Au"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «нихоний» — Nh.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1301",
+    "sourceTitle": "Wikidata: нихоний",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-114",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «флеровий»?",
+    "answerRu": "114",
+    "acceptedRu": [
+      "114"
+    ],
+    "distractorsRu": [
+      "20",
+      "78",
+      "54"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Флеровий — элемент номер 114 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1302",
+    "sourceTitle": "Wikidata: флеровий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Fl",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «флеровий»?",
+    "answerRu": "Fl",
+    "acceptedRu": [
+      "Fl"
+    ],
+    "distractorsRu": [
+      "Nb",
+      "Eu",
+      "Mo"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «флеровий» — Fl.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1302",
+    "sourceTitle": "Wikidata: флеровий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-115",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «московий»?",
+    "answerRu": "115",
+    "acceptedRu": [
+      "115"
+    ],
+    "distractorsRu": [
+      "69",
+      "27",
+      "42"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Московий — элемент номер 115 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1303",
+    "sourceTitle": "Wikidata: московий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Mc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «московий»?",
+    "answerRu": "Mc",
+    "acceptedRu": [
+      "Mc"
+    ],
+    "distractorsRu": [
+      "Cm",
+      "Br",
+      "V"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «московий» — Mc.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1303",
+    "sourceTitle": "Wikidata: московий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-116",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «ливерморий»?",
+    "answerRu": "116",
+    "acceptedRu": [
+      "116"
+    ],
+    "distractorsRu": [
+      "100",
+      "60",
+      "88"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ливерморий — элемент номер 116 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1304",
+    "sourceTitle": "Wikidata: ливерморий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Lv",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «ливерморий»?",
+    "answerRu": "Lv",
+    "acceptedRu": [
+      "Lv"
+    ],
+    "distractorsRu": [
+      "Nb",
+      "Zr",
+      "Cu"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «ливерморий» — Lv.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1304",
+    "sourceTitle": "Wikidata: ливерморий",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-117",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «теннессин»?",
+    "answerRu": "117",
+    "acceptedRu": [
+      "117"
+    ],
+    "distractorsRu": [
+      "59",
+      "60",
+      "12"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Теннессин — элемент номер 117 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1306",
+    "sourceTitle": "Wikidata: теннессин",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Ts",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «теннессин»?",
+    "answerRu": "Ts",
+    "acceptedRu": [
+      "Ts"
+    ],
+    "distractorsRu": [
+      "Be",
+      "Si",
+      "Na"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «теннессин» — Ts.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1306",
+    "sourceTitle": "Wikidata: теннессин",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-number-118",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой атомный номер у элемента «оганесон»?",
+    "answerRu": "118",
+    "acceptedRu": [
+      "118"
+    ],
+    "distractorsRu": [
+      "67",
+      "72",
+      "53"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Оганесон — элемент номер 118 в таблице Менделеева.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1307",
+    "sourceTitle": "Wikidata: оганесон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-element-name-symbol-Og",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Expert",
+    "promptRu": "Какой символ у химического элемента «оганесон»?",
+    "answerRu": "Og",
+    "acceptedRu": [
+      "Og"
+    ],
+    "distractorsRu": [
+      "Cd",
+      "Rf",
+      "P"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Химический символ элемента «оганесон» — Og.",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1307",
+    "sourceTitle": "Wikidata: оганесон",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "au-science-pqhu3t",
+    "editorialStatus": "blocked",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой из перечисленных химических элементов входит в состав цианид-иона?",
+    "answerRu": "Углерод",
+    "acceptedRu": [
+      "Углерод"
+    ],
+    "acceptedEn": [
+      "Carbon"
+    ],
+    "distractorsRu": [
+      "Кислород",
+      "Хлор",
+      "Сера"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/Cyanide-ion",
+    "sourceTitle": "PubChem — Цианид-ион",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "Цианид-ион имеет химическую формулу CN⁻ и состоит из двух элементов: углерода (C) и азота (N). Оба элемента соединены тройной химической связью.",
+    "reviewNote": "Заблокировано 2026-11-01: цианид-ион содержит и углерод, и азот; единственного ответа нет."
+  },
+  {
+    "id": "au-science-1xkm3ep",
+    "editorialStatus": "blocked",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой химический элемент входит в состав цианид-иона?",
+    "answerRu": "Азот",
+    "acceptedRu": [
+      "Азот",
+      "Углерод"
+    ],
+    "acceptedEn": [
+      "Carbon",
+      "Nitrogen"
+    ],
+    "distractorsRu": [
+      "Кислород",
+      "Хлор",
+      "Сера"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/Cyanide-ion",
+    "sourceTitle": "PubChem — Цианид-ион",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "Цианид-ион имеет химическую формулу CN⁻ и состоит из двух элементов: углерода (C) и азота (N). Оба элемента соединены тройной химической связью.",
+    "reviewNote": "Заблокировано 2026-11-01: цианид-ион содержит и азот, и углерод; единственного ответа нет."
   }
 ]

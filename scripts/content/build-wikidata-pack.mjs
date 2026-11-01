@@ -46,6 +46,30 @@ function distractors(id, answer, pool) {
   return out;
 }
 
+function levenshtein(a, b) {
+  const previous = Array.from({ length: b.length + 1 }, (_, index) => index);
+  for (let i = 1; i <= a.length; i += 1) {
+    const current = [i];
+    for (let j = 1; j <= b.length; j += 1) current[j] = Math.min(current[j - 1] + 1, previous[j] + 1, previous[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    for (let j = 0; j < previous.length; j += 1) previous[j] = current[j];
+  }
+  return previous[b.length];
+}
+
+/** Avoid one-character traps such as N/Nb and 100/103 in element-choice questions. */
+function safeElementDistractors(id, answer, pool) {
+  const candidates = [...new Set(pool.map(String))].filter((value) => value !== String(answer)).sort();
+  const out = [];
+  let h = hash(id);
+  while (out.length < 3 && candidates.length) {
+    const pick = candidates.splice(h % candidates.length, 1)[0];
+    if ([String(answer), ...out].every((value) => levenshtein(value.toLowerCase(), pick.toLowerCase()) > 1)) out.push(pick);
+    h = hash(`${h}`);
+  }
+  if (out.length < 3) throw new Error(`not enough safe element distractors for ${id}`);
+  return out;
+}
+
 const PARTICLES = new Set(['да', 'де', 'ди', 'ван', 'фон', 'дер', 'ла', 'ле', 'дю', 'дель', 'Ван', 'Да', 'Де']);
 /** Full label plus the surname-like tail, so «Толкин» or «Ван Гог» are accepted. */
 function personAliases(label) {
@@ -108,7 +132,20 @@ for (const [i, r] of books.entries()) {
     id, topic: 'literature', difficulty: rankTier(i, books.length),
     promptRu: `Кто автор произведения «${r.wRu}»?`, answerRu: r.aRu, acceptedRu: personAliases(r.aRu),
     distractorsRu: distractors(id, r.aRu, authorPool), explanationRu: `«${r.wRu}» написал ${r.aRu}.`,
-    sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`,
+    sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`, openAnswer: false,
+  });
+}
+
+// The reciprocal form gives the same sourced fact a different, unambiguous MC question.
+// Distractors are deliberately works by other authors, so only one listed option can be right.
+for (const [i, r] of books.entries()) {
+  const id = `wd-book-work-${r.w}`;
+  records.push({
+    id, topic: 'literature', difficulty: rankTier(i, books.length),
+    promptRu: `Какое из этих произведений написал ${r.aRu}?`, answerRu: r.wRu, acceptedRu: [r.wRu],
+    distractorsRu: distractors(id, r.wRu, books.filter((other) => other.a !== r.a).map((other) => other.wRu)),
+    explanationRu: `${r.aRu} — автор произведения «${r.wRu}».`,
+    sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`, openAnswer: false,
   });
 }
 
@@ -127,7 +164,18 @@ for (const [i, r] of paintings.entries()) {
     id, topic: 'art', difficulty: rankTier(i, paintings.length),
     promptRu: `Кто написал картину «${r.wRu}»?`, answerRu: r.aRu, acceptedRu: personAliases(r.aRu),
     distractorsRu: distractors(id, r.aRu, painterPool), explanationRu: `Автор картины «${r.wRu}» — ${r.aRu}.`,
-    sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`,
+    sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`, openAnswer: false,
+  });
+}
+
+for (const [i, r] of paintings.entries()) {
+  const id = `wd-painting-work-${r.w}`;
+  records.push({
+    id, topic: 'art', difficulty: rankTier(i, paintings.length),
+    promptRu: `Какую из этих картин написал ${r.aRu}?`, answerRu: r.wRu, acceptedRu: [r.wRu],
+    distractorsRu: distractors(id, r.wRu, paintings.filter((other) => other.a !== r.a).map((other) => other.wRu)),
+    explanationRu: `${r.aRu} — автор картины «${r.wRu}».`,
+    sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`, openAnswer: false,
   });
 }
 
@@ -146,7 +194,7 @@ for (const [i, r] of films.entries()) {
     id, topic: 'film', difficulty: rankTier(i, films.length),
     promptRu: `Кто режиссёр фильма «${r.wRu}»?`, answerRu: r.aRu, acceptedRu: personAliases(r.aRu),
     distractorsRu: distractors(id, r.aRu, directorPool), explanationRu: `Режиссёр фильма «${r.wRu}» — ${r.aRu}.`,
-    sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`,
+    sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`, openAnswer: false,
   });
 }
 
@@ -176,7 +224,7 @@ for (const [i, r] of music.entries()) {
     id, topic: 'music', difficulty: rankTier(i, music.length),
     promptRu: `Кто композитор произведения «${r.wRu}»?`, answerRu: r.aRu, acceptedRu: personAliases(r.aRu),
     distractorsRu: distractors(id, r.aRu, composerPool), explanationRu: `«${r.wRu}» написал ${r.aRu}.`,
-    sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`,
+    sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`, openAnswer: false,
   });
 }
 
@@ -209,6 +257,31 @@ for (const [difficulty, symbols] of Object.entries(ELEMENT_TIERS)) {
       sourceUrl: wd(e.el), sourceTitle: `Wikidata: ${e.ru}`,
     });
   }
+}
+
+// Symbols and atomic numbers are exact, stable properties of the element. They are choices,
+// not short text entry, so a typo or a look-alike Latin letter cannot decide the round.
+const elementNumbers = uniqueElements.map((e) => e.n);
+const elementSymbols = uniqueElements.map((e) => e.sym);
+for (const [i, e] of uniqueElements.entries()) {
+  const difficulty = rankTier(i, uniqueElements.length);
+  const name = e.ru.toLowerCase();
+  const numberId = `wd-element-number-${e.n}`;
+  records.push({
+    id: numberId, topic: 'science', difficulty,
+    promptRu: `Какой атомный номер у элемента «${name}»?`, answerRu: e.n, acceptedRu: [e.n],
+    distractorsRu: safeElementDistractors(numberId, e.n, elementNumbers),
+    explanationRu: `${name[0].toUpperCase()}${name.slice(1)} — элемент номер ${e.n} в таблице Менделеева.`,
+    sourceUrl: wd(e.el), sourceTitle: `Wikidata: ${e.ru}`, openAnswer: false,
+  });
+  const symbolId = `wd-element-name-symbol-${e.sym}`;
+  records.push({
+    id: symbolId, topic: 'science', difficulty,
+    promptRu: `Какой символ у химического элемента «${name}»?`, answerRu: e.sym, acceptedRu: [e.sym],
+    distractorsRu: safeElementDistractors(symbolId, e.sym, elementSymbols),
+    explanationRu: `Химический символ элемента «${name}» — ${e.sym}.`,
+    sourceUrl: wd(e.el), sourceTitle: `Wikidata: ${e.ru}`, openAnswer: false,
+  });
 }
 
 // Wide Last Stand set: every named element.

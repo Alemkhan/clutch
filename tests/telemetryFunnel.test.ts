@@ -199,6 +199,36 @@ describe('reports-pull', () => {
     db.close();
   });
 
+  it('imports child rows before the parent table and validates the completed foreign key', () => {
+    const directory = tempDirectory();
+    const sql = join(directory, 'child-before-parent.sql');
+    writeFileSync(sql, [
+      'CREATE TABLE solo_run_rounds (id INTEGER PRIMARY KEY, run_id TEXT NOT NULL REFERENCES match_runs(id));',
+      "INSERT INTO solo_run_rounds (id, run_id) VALUES (1, 'run-1');",
+      'CREATE TABLE match_runs (id TEXT PRIMARY KEY);',
+      "INSERT INTO match_runs (id) VALUES ('run-1');",
+    ].join('\n'));
+    const target = join(directory, 'child-before-parent.sqlite');
+
+    expect(buildSqliteFromSql(sql, target)).toEqual(expect.arrayContaining(['solo_run_rounds', 'match_runs']));
+    const db = new DatabaseSync(target, { readOnly: true });
+    expect(db.prepare('PRAGMA foreign_key_check').all()).toEqual([]);
+    db.close();
+  });
+
+  it('rejects an export containing foreign key violations', () => {
+    const directory = tempDirectory();
+    const sql = join(directory, 'orphan.sql');
+    writeFileSync(sql, [
+      'CREATE TABLE solo_run_rounds (id INTEGER PRIMARY KEY, run_id TEXT NOT NULL REFERENCES match_runs(id));',
+      "INSERT INTO solo_run_rounds (id, run_id) VALUES (1, 'missing-run');",
+      'CREATE TABLE match_runs (id TEXT PRIMARY KEY);',
+    ].join('\n'));
+
+    expect(() => buildSqliteFromSql(sql, join(directory, 'orphan.sqlite')))
+      .toThrow(/нарушения внешних ключей.*solo_run_rounds.*match_runs/);
+  });
+
   it('reads the database name from jsonc and explains a missing config', () => {
     expect(readDatabaseName('{ // comment\n "d1_databases": [{ "database_name": "clutch-prod" }] }')).toBe('clutch-prod');
     expect(() => pull({ configPath: join(tempDirectory(), 'none.jsonc') })).toThrow(/preflight:production:write-config/);

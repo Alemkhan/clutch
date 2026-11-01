@@ -1248,5 +1248,63 @@
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original"
+  },
+  {
+    "id": "au-history-15crjqv",
+    "editorialStatus": "blocked",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Какая современная столица расположена недалеко от древнего города Вавилона?",
+    "answerRu": "Багдад",
+    "acceptedRu": [
+      "Багдад",
+      "Город Багдад"
+    ],
+    "acceptedEn": [
+      "Baghdad",
+      "Bagdad"
+    ],
+    "distractorsRu": [
+      "Дамаск",
+      "Амман",
+      "Тегеран"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://whc.unesco.org/en/list/278/",
+    "sourceTitle": "ЮНЕСКО — Вавилон, объект Всемирного наследия",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "Древний Вавилон находился на территории современного Ирака, примерно в 85 километрах к югу от Багдада. Вавилон был столицей могущественного Вавилонского царства, а Багдад сегодня является столицей Ирака.",
+    "reviewNote": "Заблокировано 2026-11-01: «недалеко» — субъективная формулировка, не годится для единственного ответа."
+  },
+  {
+    "id": "au-history-k0jh6g",
+    "editorialStatus": "blocked",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Каким регионом традиционно управлял Далай-лама?",
+    "answerRu": "Тибет",
+    "acceptedRu": [
+      "Тибет",
+      "Тибетский регион"
+    ],
+    "acceptedEn": [
+      "Tibet",
+      "Tibetan region"
+    ],
+    "distractorsRu": [
+      "Непал",
+      "Бутан",
+      "Монголия"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://www.dalailama.com/the-dalai-lama/events-and-awards/chronology-of-events",
+    "sourceTitle": "Официальный сайт Далай-ламы — Хронология событий",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "Далай-ламы на протяжении нескольких столетий совмещали духовное и политическое руководство Тибетом. В 1959 году XIV Далай-лама покинул Тибет и отправился в изгнание в Индию. В 2011 году он официально передал свои оставшиеся политические полномочия избранному руководству тибетской администрации в изгнании.",
+    "reviewNote": "Заблокировано 2026-11-01: формулировка о политическом управлении Тибетом требует нейтральной исторической даты и точного источника."
   }
 ]

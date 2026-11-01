@@ -487,5 +487,40 @@
     "sourceTitle": "Анатомия человека — Википедия",
     "origin": "notebooklm",
     "license": "original"
+  },
+  {
+    "id": "au-body-1d86x18",
+    "editorialStatus": "blocked",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "В каком органе человека находятся палочки и колбочки?",
+    "answerRu": "Глаза",
+    "acceptedRu": [
+      "Глаза",
+      "Глаз",
+      "В глазах",
+      "Сетчатка",
+      "Сетчатка глаза",
+      "В сетчатке глаза"
+    ],
+    "acceptedEn": [
+      "Eye",
+      "Eyes",
+      "Retina",
+      "Retinas"
+    ],
+    "distractorsRu": [
+      "Уши",
+      "Нос",
+      "Язык"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://www.nei.nih.gov/about/our-impact/nei-research-initiatives/audacious-goals-initiative/about-goal",
+    "sourceTitle": "Национальный институт глаза США (NEI)",
+    "origin": "authored",
+    "license": "original",
+    "explanationRu": "Палочки и колбочки — светочувствительные клетки сетчатки глаза. Палочки помогают видеть при слабом освещении, а колбочки отвечают за цветовое зрение и различение мелких деталей.",
+    "reviewNote": "Заблокировано 2026-11-01: вопрос смешивает орган и ткань; правильнее спрашивать о сетчатке, а не о «глазах»."
   }
 ]

@@ -1339,5 +1339,557 @@
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Pieter_Bruegel_the_Elder_-_Hunters_in_the_Snow_(Winter)_-_Google_Art_Project.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Pieter_Bruegel_the_Elder_-_Hunters_in_the_Snow_(Winter)_-_Google_Art_Project.jpg"
     }
+  },
+  {
+    "id": "wd-painting-work-Q12418",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Какую из этих картин написал Леонардо да Винчи?",
+    "answerRu": "Мона Лиза",
+    "acceptedRu": [
+      "Мона Лиза"
+    ],
+    "distractorsRu": [
+      "Завтрак на траве",
+      "Свобода, ведущая народ",
+      "Портрет четы Арнольфини"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Леонардо да Винчи — автор картины «Мона Лиза».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q12418",
+    "sourceTitle": "Wikidata: Мона Лиза",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q45585",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Какую из этих картин написал Винсент Ван Гог?",
+    "answerRu": "Звёздная ночь",
+    "acceptedRu": [
+      "Звёздная ночь"
+    ],
+    "distractorsRu": [
+      "Странник над морем тумана",
+      "Впечатление. Восходящее солнце",
+      "Девушка с жемчужной серёжкой"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Винсент Ван Гог — автор картины «Звёздная ночь».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q45585",
+    "sourceTitle": "Wikidata: Звёздная ночь",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q185372",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Какую из этих картин написал Ян Вермеер?",
+    "answerRu": "Девушка с жемчужной серёжкой",
+    "acceptedRu": [
+      "Девушка с жемчужной серёжкой"
+    ],
+    "distractorsRu": [
+      "Поцелуй",
+      "Охотники на снегу",
+      "Маха обнажённая"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ян Вермеер — автор картины «Девушка с жемчужной серёжкой».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q185372",
+    "sourceTitle": "Wikidata: Девушка с жемчужной серёжкой",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q175036",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Какую из этих картин написал Пабло Пикассо?",
+    "answerRu": "Герника",
+    "acceptedRu": [
+      "Герника"
+    ],
+    "distractorsRu": [
+      "Дама с горностаем",
+      "Мона Лиза",
+      "Свобода, ведущая народ"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Пабло Пикассо — автор картины «Герника».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q175036",
+    "sourceTitle": "Wikidata: Герника",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q29530",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Какую из этих картин написал Эжен Делакруа?",
+    "answerRu": "Свобода, ведущая народ",
+    "acceptedRu": [
+      "Свобода, ведущая народ"
+    ],
+    "distractorsRu": [
+      "Плот «Медузы»",
+      "Девушка с жемчужной серёжкой",
+      "Венера Урбинская"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Эжен Делакруа — автор картины «Свобода, ведущая народ».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q29530",
+    "sourceTitle": "Wikidata: Свобода, ведущая народ",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q219831",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Какую из этих картин написал Рембрандт?",
+    "answerRu": "Ночной дозор",
+    "acceptedRu": [
+      "Ночной дозор"
+    ],
+    "distractorsRu": [
+      "Олимпия",
+      "Впечатление. Восходящее солнце",
+      "Плот «Медузы»"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Рембрандт — автор картины «Ночной дозор».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q219831",
+    "sourceTitle": "Wikidata: Ночной дозор",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q208758",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Какую из этих картин написал Диего Веласкес?",
+    "answerRu": "Менины (Фрейлины)",
+    "acceptedRu": [
+      "Менины (Фрейлины)"
+    ],
+    "distractorsRu": [
+      "Урок анатомии доктора Тульпа",
+      "Едоки картофеля",
+      "Завтрак на траве"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Диего Веласкес — автор картины «Менины (Фрейлины)».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q208758",
+    "sourceTitle": "Wikidata: Менины (Фрейлины)",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q151047",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Easy",
+    "promptRu": "Какую из этих картин написал Сандро Боттичелли?",
+    "answerRu": "Рождение Венеры",
+    "acceptedRu": [
+      "Рождение Венеры"
+    ],
+    "distractorsRu": [
+      "Бал в Мулен де ла Галетт",
+      "Молочница",
+      "Поцелуй"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Сандро Боттичелли — автор картины «Рождение Венеры».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q151047",
+    "sourceTitle": "Wikidata: Рождение Венеры",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q328523",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Какую из этих картин написал Клод Моне?",
+    "answerRu": "Впечатление. Восходящее солнце",
+    "acceptedRu": [
+      "Впечатление. Восходящее солнце"
+    ],
+    "distractorsRu": [
+      "Девушка с жемчужной серёжкой",
+      "Маха обнажённая",
+      "Урок анатомии доктора Тульпа"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Клод Моне — автор картины «Впечатление. Восходящее солнце».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q328523",
+    "sourceTitle": "Wikidata: Впечатление. Восходящее солнце",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q1752990",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Какую из этих картин написал Жак Луи Давид?",
+    "answerRu": "Смерть Сократа",
+    "acceptedRu": [
+      "Смерть Сократа"
+    ],
+    "distractorsRu": [
+      "Впечатление. Восходящее солнце",
+      "Поцелуй",
+      "Американская готика"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Жак Луи Давид — автор картины «Смерть Сократа».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q1752990",
+    "sourceTitle": "Wikidata: Смерть Сократа",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q698487",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Какую из этих картин написал Густав Климт?",
+    "answerRu": "Поцелуй",
+    "acceptedRu": [
+      "Поцелуй"
+    ],
+    "distractorsRu": [
+      "Завтрак на траве",
+      "Охотники на снегу",
+      "Девушка с жемчужной серёжкой"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Густав Климт — автор картины «Поцелуй».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q698487",
+    "sourceTitle": "Wikidata: Поцелуй",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q321303",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Какую из этих картин написал Иероним Босх?",
+    "answerRu": "Сад земных наслаждений",
+    "acceptedRu": [
+      "Сад земных наслаждений"
+    ],
+    "distractorsRu": [
+      "Звёздная ночь",
+      "Портрет четы Арнольфини",
+      "Плот «Медузы»"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Иероним Босх — автор картины «Сад земных наслаждений».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q321303",
+    "sourceTitle": "Wikidata: Сад земных наслаждений",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q25729",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Какую из этих картин написал Сальвадор Дали?",
+    "answerRu": "Постоянство памяти",
+    "acceptedRu": [
+      "Постоянство памяти"
+    ],
+    "distractorsRu": [
+      "Олимпия",
+      "Звёздная ночь",
+      "Венера Урбинская"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Сальвадор Дали — автор картины «Постоянство памяти».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q25729",
+    "sourceTitle": "Wikidata: Постоянство памяти",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q311243",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Какую из этих картин написал Каспар Давид Фридрих?",
+    "answerRu": "Странник над морем тумана",
+    "acceptedRu": [
+      "Странник над морем тумана"
+    ],
+    "distractorsRu": [
+      "Портрет четы Арнольфини",
+      "Рождение Венеры",
+      "Девушка с жемчужной серёжкой"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Каспар Давид Фридрих — автор картины «Странник над морем тумана».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q311243",
+    "sourceTitle": "Wikidata: Странник над морем тумана",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q212616",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Какую из этих картин написал Теодор Жерико?",
+    "answerRu": "Плот «Медузы»",
+    "acceptedRu": [
+      "Плот «Медузы»"
+    ],
+    "distractorsRu": [
+      "Девушка с жемчужной серёжкой",
+      "Дама с горностаем",
+      "Венера Урбинская"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Теодор Жерико — автор картины «Плот «Медузы»».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q212616",
+    "sourceTitle": "Wikidata: Плот «Медузы»",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q478271",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Какую из этих картин написал Илья Ефимович Репин?",
+    "answerRu": "Запорожцы",
+    "acceptedRu": [
+      "Запорожцы"
+    ],
+    "distractorsRu": [
+      "Молочница",
+      "Герника",
+      "Бал в Мулен де ла Галетт"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Илья Ефимович Репин — автор картины «Запорожцы».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q478271",
+    "sourceTitle": "Wikidata: Запорожцы",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q464782",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Какую из этих картин написал Грант Вуд?",
+    "answerRu": "Американская готика",
+    "acceptedRu": [
+      "Американская готика"
+    ],
+    "distractorsRu": [
+      "Звёздная ночь",
+      "Бал в Мулен де ла Галетт",
+      "Третье мая 1808 года в Мадриде"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Грант Вуд — автор картины «Американская готика».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q464782",
+    "sourceTitle": "Wikidata: Американская готика",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q152509",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Какую из этих картин написал Эдуард Мане?",
+    "answerRu": "Завтрак на траве",
+    "acceptedRu": [
+      "Завтрак на траве"
+    ],
+    "distractorsRu": [
+      "Менины (Фрейлины)",
+      "Впечатление. Восходящее солнце",
+      "Маха обнажённая"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Эдуард Мане — автор картины «Завтрак на траве».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q152509",
+    "sourceTitle": "Wikidata: Завтрак на траве",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q152867",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Какую из этих картин написал Франсиско Гойя?",
+    "answerRu": "Маха обнажённая",
+    "acceptedRu": [
+      "Маха обнажённая"
+    ],
+    "distractorsRu": [
+      "Весна",
+      "Постоянство памяти",
+      "Звёздная ночь"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Франсиско Гойя — автор картины «Маха обнажённая».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q152867",
+    "sourceTitle": "Wikidata: Маха обнажённая",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q683274",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Какую из этих картин написал Пьер Огюст Ренуар?",
+    "answerRu": "Бал в Мулен де ла Галетт",
+    "acceptedRu": [
+      "Бал в Мулен де ла Галетт"
+    ],
+    "distractorsRu": [
+      "Едоки картофеля",
+      "Свобода, ведущая народ",
+      "Звёздная ночь"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Пьер Огюст Ренуар — автор картины «Бал в Мулен де ла Галетт».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q683274",
+    "sourceTitle": "Wikidata: Бал в Мулен де ла Галетт",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q220859",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Какую из этих картин написал Ян ван Эйк?",
+    "answerRu": "Портрет четы Арнольфини",
+    "acceptedRu": [
+      "Портрет четы Арнольфини"
+    ],
+    "distractorsRu": [
+      "Урок анатомии доктора Тульпа",
+      "Едоки картофеля",
+      "Запорожцы"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Ян ван Эйк — автор картины «Портрет четы Арнольфини».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q220859",
+    "sourceTitle": "Wikidata: Портрет четы Арнольфини",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q727875",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Какую из этих картин написал Тициан?",
+    "answerRu": "Венера Урбинская",
+    "acceptedRu": [
+      "Венера Урбинская"
+    ],
+    "distractorsRu": [
+      "Менины (Фрейлины)",
+      "Запорожцы",
+      "Дама с горностаем"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Тициан — автор картины «Венера Урбинская».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q727875",
+    "sourceTitle": "Wikidata: Венера Урбинская",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "wd-painting-work-Q500985",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Expert",
+    "promptRu": "Какую из этих картин написал Питер Брейгель Старший?",
+    "answerRu": "Охотники на снегу",
+    "acceptedRu": [
+      "Охотники на снегу"
+    ],
+    "distractorsRu": [
+      "Портрет четы Арнольфини",
+      "Весна",
+      "Смерть Сократа"
+    ],
+    "openAnswer": false,
+    "explanationRu": "Питер Брейгель Старший — автор картины «Охотники на снегу».",
+    "sourceUrl": "https://www.wikidata.org/wiki/Q500985",
+    "sourceTitle": "Wikidata: Охотники на снегу",
+    "origin": "wikidata",
+    "license": "CC0",
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
   }
 ]

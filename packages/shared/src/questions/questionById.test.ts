@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { generateMatch, generateQuestionById, isKnownQuestionId, questionIdCategory } from '../index';
+import { historicFlags } from './historicFlags';
 
 describe('generateQuestionById', () => {
   it.each([
@@ -72,5 +73,22 @@ describe('generateQuestionById', () => {
     expect(questionIdCategory('hist_flag_gdr')).toBe('history');
     expect(questionIdCategory('lang_ka')).toBe('languages');
     expect(questionIdCategory('nope')).toBeNull();
+  });
+
+  it('includes only reviewed free municipal and state symbols from the new inventory', () => {
+    const added = historicFlags.filter((flag) => flag.id.startsWith('other-'));
+    expect(added.length).toBeGreaterThanOrEqual(90);
+    expect(added.every((flag) => flag.mediaUrl?.startsWith('https://thumb.wikimedia.org/') || flag.mediaUrl?.startsWith('https://upload.wikimedia.org/'))).toBe(true);
+    expect(added.some((flag) => /миссисипи/i.test(flag.labelRu))).toBe(false);
+    expect(added.some((flag) => /организац|юнеско|содружество|европейский союз/i.test(flag.labelRu))).toBe(false);
+    expect(new Set(added.map((flag) => flag.labelRu)).size).toBe(added.length);
+  });
+
+  it('asks neutrally about a coat of arms and reconstructs its remote media', () => {
+    const coat = historicFlags.find((flag) => flag.id.startsWith('other-') && flag.assetKind === 'coat_of_arms');
+    expect(coat).toBeDefined();
+    const question = generateQuestionById(`hist_flag_${coat!.id}`);
+    expect(question).toMatchObject({ prompt: 'Что это за символ?', mediaType: 'flag', mediaUrl: coat!.mediaUrl });
+    expect(question?.options.some((option) => option.text === `${coat!.labelRu} (${coat!.era})`)).toBe(true);
   });
 });
