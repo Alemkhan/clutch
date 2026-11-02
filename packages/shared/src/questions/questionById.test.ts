@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { generateMatch, generateQuestionById, isKnownQuestionId, questionIdCategory } from '../index';
-import { historicFlags } from './historicFlags';
+import { historicFlagPool, historicFlags } from './historicFlags';
 
 describe('generateQuestionById', () => {
   it.each([
@@ -90,5 +90,19 @@ describe('generateQuestionById', () => {
     const question = generateQuestionById(`hist_flag_${coat!.id}`);
     expect(question).toMatchObject({ prompt: 'Что это за символ?', mediaType: 'flag', mediaUrl: coat!.mediaUrl });
     expect(question?.options.some((option) => option.text === `${coat!.labelRu} (${coat!.era})`)).toBe(true);
+  });
+
+  it.each(['us_state', 'kz_city', 'historic'] as const)('keeps %s flag answers in their own pool', (pool) => {
+    const correct = historicFlags.find((flag) => historicFlagPool(flag) === pool);
+    expect(correct).toBeDefined();
+
+    const question = generateQuestionById(`hist_flag_${correct!.id}`)!;
+    const optionToFlag = new Map(historicFlags.map((flag) => [`${flag.labelRu} (${flag.era})`, flag]));
+    const distractors = question.options
+      .filter((option) => option.id !== question.correctOptionId)
+      .map((option) => optionToFlag.get(option.text));
+
+    expect(distractors).toHaveLength(3);
+    expect(distractors.every((flag) => flag && historicFlagPool(flag) === pool)).toBe(true);
   });
 });

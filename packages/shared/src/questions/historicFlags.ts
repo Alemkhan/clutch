@@ -1,5 +1,7 @@
 import { otherFlags } from './otherFlags';
 
+export type HistoricFlagPool = 'historic' | 'kz_city' | 'us_state';
+
 export interface HistoricFlag {
   id: string;
   labelRu: string;
@@ -12,6 +14,7 @@ export interface HistoricFlag {
   assetPageUrl?: string;
   assetLicense?: string;
   assetAuthor?: string | null;
+  pool?: HistoricFlagPool;
 }
 
 // Flags served from /flags-historic/ (downloaded from Wikimedia Commons).
@@ -64,6 +67,10 @@ const historicOnlyFlags: HistoricFlag[] = [
 ];
 
 export const historicFlags: HistoricFlag[] = [...historicOnlyFlags, ...otherFlags];
+
+export function historicFlagPool(flag: HistoricFlag): HistoricFlagPool {
+  return flag.pool ?? 'historic';
+}
 
 export function historicFlagUrl(flag: HistoricFlag): string {
   if (flag.mediaUrl) return flag.mediaUrl;

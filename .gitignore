@@ -22,6 +22,8 @@ screenshots/
 /design-review/
 # Выгрузки вопросов дня для вычитки: npm run content:day
 /content/review/
+# Рабочие копии Commons-символов для ручного блюра (генерируются из pending.json)
+/content/other-flags/assets/
 # Промо-ролик: запись забега и рендеры собираются заново (promo/capture.ts, npm run render)
 /promo/node_modules/
 /promo/capture/

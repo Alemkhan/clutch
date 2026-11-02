@@ -2,6 +2,7 @@
 // and state symbols for the live «Другие флаги» pool on 2026-11-01. Organisation marks
 // and explicitly blocked files remain inventory-only until their rights review is complete.
 import inventory from '../../../../content/other-flags/pending.json';
+import type { HistoricFlagPool } from './historicFlags';
 
 type InventoryItem = {
   id: string;
@@ -28,6 +29,7 @@ type OtherHistoricFlag = {
   assetPageUrl: string;
   assetLicense: string;
   assetAuthor: string | null;
+  pool: Exclude<HistoricFlagPool, 'historic'>;
 };
 
 const items = (inventory.items as InventoryItem[])
@@ -52,5 +54,6 @@ export const otherFlags: OtherHistoricFlag[] = unique.map((item) => {
     assetPageUrl: item.asset.pageUrl,
     assetLicense: item.asset.license,
     assetAuthor: item.asset.author,
+    pool: item.group === 'kazakhstan_city' ? 'kz_city' : 'us_state',
   };
 });

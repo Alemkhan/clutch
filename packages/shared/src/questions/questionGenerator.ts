@@ -1,7 +1,7 @@
 import type { CategoryId, GeneratedCategoryId, Question, Difficulty } from '../index';
 import { countries, flagUrl, outlineUrl, ISLAND_COUNTRIES, type Country } from './countries';
 import { FLAG_TRAITS } from './flagTraits';
-import { historicFlags, historicFlagUrl, type HistoricFlag } from './historicFlags';
+import { historicFlags, historicFlagPool, historicFlagUrl, type HistoricFlag } from './historicFlags';
 import { languages, type LanguageEntry } from './languages';
 
 export type { CategoryId };
@@ -317,8 +317,18 @@ export function generateFixedCapitalQuiz(countryCodes: string[]): Question[] {
 
 // ---------- Historical Flags (RU) ----------
 
+function pickHistoricFlagDistractors(correct: HistoricFlag, count = 3): HistoricFlag[] {
+  const samePool = historicFlags.filter((flag) => flag.id !== correct.id && historicFlagPool(flag) === historicFlagPool(correct));
+  if (samePool.length >= count) return shuffle(samePool).slice(0, count);
+
+  // Small future pools still create a complete question, but only after every
+  // relevant peer has been used. Today's city/state pools have ample capacity.
+  const fallback = historicFlags.filter((flag) => flag.id !== correct.id && !samePool.some((peer) => peer.id === flag.id));
+  return [...shuffle(samePool), ...shuffle(fallback)].slice(0, count);
+}
+
 export function generateHistoricFlag(correct: HistoricFlag = pickOne(historicFlags)): Question {
-  const distractors = pickDistractors(historicFlags, correct, 3);
+  const distractors = pickHistoricFlagDistractors(correct);
   const { options, correctOptionId } = buildOptions(
     correct,
     distractors,
