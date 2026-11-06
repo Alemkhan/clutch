@@ -16,11 +16,23 @@ function active(db: TestD1, playerId: string, at = DUE - 1000) {
 }
 beforeEach(() => vi.stubGlobal('fetch', vi.fn(async () => Response.json({ ok: true }))));
 afterEach(() => {
+  vi.useRealTimers();
   vi.unstubAllGlobals();
   for (const db of databases.splice(0)) db.sqlite.close();
 });
 
 describe('scheduled announcements', () => {
+  it('processes all 73 launch recipients in one paced cron pass', async () => {
+    const { db, env } = setup();
+    for (let id = 1; id <= 73; id += 1) active(db, `telegram:${id}`);
+    vi.useFakeTimers();
+    const delivery = sendScheduledAnnouncements(env, DUE);
+    await vi.runAllTimersAsync();
+    expect(await delivery).toMatchObject({ candidates: 73, sent: 73 });
+    expect(fetch).toHaveBeenCalledTimes(73);
+    expect(db.sqlite.prepare('SELECT COUNT(*) AS count FROM announcement_deliveries').get()).toEqual({ count: 73 });
+  });
+
   it('sends the approved message when due, independently of daily preferences, once per player', async () => {
     const { db, env } = setup();
     active(db, 'telegram:42');

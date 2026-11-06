@@ -3,7 +3,8 @@ import { miniAppLink, telegramChatId } from './outbid';
 import { sendTelegramMessage } from './telegram';
 
 const ACTIVE_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
-const DELIVERY_BATCH_SIZE = 20;
+const DELIVERY_BATCH_SIZE = 100;
+const DELIVERY_INTERVAL_MS = 100;
 
 interface Campaign { id: string; message: string; scheduled_at: number }
 interface Recipient { player_id: string }
@@ -41,7 +42,7 @@ export async function sendScheduledAnnouncements(env: Env, now = Date.now()): Pr
       .bind(campaign.scheduled_at - ACTIVE_WINDOW_MS, campaign.scheduled_at, campaign.id, DELIVERY_BATCH_SIZE)
       .all<Recipient>();
     summary.candidates += recipients.results.length;
-    // Sequential requests keep a batch comfortably within Telegram's broadcast rate limit.
+    // Pace the release audience at up to ten messages per second in one cron pass.
     for (const recipient of recipients.results) {
       const chatId = telegramChatId(recipient.player_id);
       const claim = await env.DB.prepare(`INSERT OR IGNORE INTO announcement_deliveries
@@ -55,6 +56,7 @@ export async function sendScheduledAnnouncements(env: Env, now = Date.now()): Pr
         WHERE campaign_id = ?1 AND player_id = ?2`)
         .bind(campaign.id, recipient.player_id, result.status, now).run();
       summary[result.status] += 1;
+      await new Promise<void>((resolve) => setTimeout(resolve, DELIVERY_INTERVAL_MS));
     }
   }
   return summary;
