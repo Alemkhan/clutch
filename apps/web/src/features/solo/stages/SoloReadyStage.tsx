@@ -104,7 +104,7 @@ function readyLine(state: SoloFlowState, target: number): string {
 }
 
 export function SoloReadyStage({ props, state, view }: ReadyStageProps) {
-  const title = state.friendDuel ? "Вызов друга" : state.mode ? MODE_TITLE[state.mode] : "Забег";
+  const title = state.groupChallenge ? "Вызов друзьям" : state.friendDuel ? "Вызов друга" : state.mode ? MODE_TITLE[state.mode] : "Забег";
   return (
     <MatchmakingFrame onBack={state.resumed ? props.onBackToCategories : props.onExit ?? props.onBackToCategories}>
       <h1 className="screen-title">{title}</h1>

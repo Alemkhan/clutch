@@ -1,4 +1,6 @@
+import { findChallenge, findEntry } from '../groupChallenges/repository';
 import {
+  GROUP_CHALLENGE_RULES_VERSION,
   DAILY_RULES_VERSION,
   DUEL_RULES_VERSION,
   FREE_RULES_VERSION,
@@ -47,6 +49,7 @@ interface StartRequest {
   mode: SoloMode;
   botLevel: unknown;
   rematchInviteId: string | undefined;
+  groupChallengeId: string | undefined;
 }
 
 /**
@@ -81,6 +84,8 @@ export async function handleStartSoloRun(c: AppContext): Promise<Response> {
   if (request instanceof Response) return request;
   const now = Date.now();
   const runId = crypto.randomUUID();
+
+  if (request.groupChallengeId) return startGroupRun(c, identity, request, runId, now);
 
   const mode = await resolveStartMode(c, identity, request, now);
   if (mode instanceof Response) return mode;
@@ -124,6 +129,7 @@ async function readStartRequest(c: AppContext): Promise<StartRequest | Response>
     mode,
     botLevel: (parsed.value as { botLevel?: unknown }).botLevel,
     rematchInviteId: parsed.value.rematchInviteId,
+    groupChallengeId: parsed.value.groupChallengeId,
   };
 }
 
@@ -298,4 +304,38 @@ function startResponse(
     miniGameId,
     bankExhausted,
   };
+}
+
+async function startGroupRun(c: AppContext, identity: RequestIdentity, request: StartRequest, runId: string, now: number): Promise<Response> {
+  if (request.botLevel !== undefined || request.rematchInviteId) return c.json({error:'Invalid group challenge options.'},400);
+  const challenge = await findChallenge(c.env.DB, request.groupChallengeId!);
+  if (!challenge) return c.json({error:'Challenge not found.'},404);
+  if (challenge.creator_player_id === identity.playerId) return c.json({error:'This is your own challenge.',reason:'own'},403);
+  const existing = await findEntry(c.env.DB,challenge.id,identity.playerId);
+  if (existing) {
+    if (existing.status === 'completed') return c.json({error:'Challenge already played.',reason:'already_played'},409);
+    return await resumeRun(c,identity,existing.run_id) ?? c.json({error:'Run cannot be resumed.'},409);
+  }
+  if (challenge.expires_at <= now) return c.json({error:'Challenge expired.',reason:'expired'},410);
+  const record = await findRecordRun(c.env.DB,challenge.creator_run_id,[DUEL_RULES_VERSION,FREE_RULES_VERSION]);
+  if (!record) return c.json({error:'Source record is unavailable.',reason:'source_unavailable'},410);
+  await createSoloRun(c.env.DB,{id:runId,playerId:identity.playerId,displayName:identity.displayName || request.displayName.trim(),
+    category:challenge.category,questionSetId:record.questionSetId,miniGameId:record.row.mini_game_id as MiniGameId,
+    questions:record.questions,paceRunId:record.row.id,pace:record.opponent,rulesVersion:GROUP_CHALLENGE_RULES_VERSION,now});
+  try {
+    const inserted=await c.env.DB.prepare(`INSERT OR IGNORE INTO group_challenge_entries(challenge_id,player_id,run_id,joined_at)
+      SELECT id,?2,?3,?4 FROM group_challenges c WHERE id=?1 AND expires_at>?4
+      AND (SELECT COUNT(*) FROM group_challenge_entries e WHERE e.challenge_id=c.id AND e.player_id!=c.creator_player_id)<c.max_players
+    `).bind(challenge.id,identity.playerId,runId,now).run();
+    if (inserted.meta.changes === 0) {
+      await c.env.DB.prepare('DELETE FROM match_runs WHERE id = ?1').bind(runId).run();
+      const winner=await findEntry(c.env.DB,challenge.id,identity.playerId);
+      if(winner?.status==='in_progress') return await resumeRun(c,identity,winner.run_id) ?? c.json({error:'Run cannot be resumed.'},409);
+      return c.json({error:'Challenge is full or already played.',reason:winner?'already_played':'full'},409);
+    }
+  } catch(error) {
+    await c.env.DB.prepare('DELETE FROM match_runs WHERE id = ?1').bind(runId).run();
+    throw error;
+  }
+  return c.json({ ...startResponse(runId,record.questions,record.opponent,GROUP_CHALLENGE_RULES_VERSION,record.row.mini_game_id as MiniGameId,false,record.opponent), groupChallenge: true },201);
 }

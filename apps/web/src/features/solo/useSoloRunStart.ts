@@ -6,7 +6,7 @@ import type { SoloRunContext } from './soloRunContext';
 import { saveActiveSoloRun } from './soloRunStore';
 
 /** Старт забега (в том числе реванш и тренировка) и повтор после ошибки. */
-export function useSoloRunStart(ctx: SoloRunContext, botLevel?: PracticeLevelId) {
+export function useSoloRunStart(ctx: SoloRunContext, botLevel?: PracticeLevelId, groupChallengeId?: string) {
   const { coordinatorRef, inviteRef, stateRef, setState, setSyncIssue, practice, mode } = ctx;
 
   const begin = useCallback((category: CategoryId, rematchInviteId?: string) => {
@@ -15,7 +15,7 @@ export function useSoloRunStart(ctx: SoloRunContext, botLevel?: PracticeLevelId)
     if (!request) return;
     setSyncIssue(null);
     setState(beginSoloLoading(category));
-    void startSoloRun(category, request.signal, rematchInviteId, botLevel, mode).then((raw) => {
+    void startSoloRun(category, request.signal, rematchInviteId, botLevel, mode, groupChallengeId).then((raw) => {
       if (!coordinatorRef.current.isCurrent(request.token)) return;
       let entered;
       try {
@@ -36,7 +36,7 @@ export function useSoloRunStart(ctx: SoloRunContext, botLevel?: PracticeLevelId)
       if (!coordinatorRef.current.settle(request.token)) return;
       setState((previous) => failSoloLoading(previous, soloStartErrorMessage(error)));
     });
-  }, [botLevel, practice, mode]);
+  }, [botLevel, practice, mode, groupChallengeId]);
 
   const retryStart = useCallback(() => begin(stateRef.current.category, inviteRef.current), [begin]);
 

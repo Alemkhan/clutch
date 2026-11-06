@@ -23,3 +23,10 @@ describe('launch intent', () => {
     expect(readLaunchIntent({ hash: '#tgWebAppData=x', search: '' })).toBeNull();
   });
 });
+
+it('recognises group challenge links and rejects malformed payloads', () => {
+  const challengeId = 'gc_AAAAAAAAAAAAAAAAAAAAAA';
+  expect(parseLaunchPayload(challengeId)).toEqual({ type: 'group-challenge', challengeId });
+  expect(readLaunchIntent({ hash: '', search: `?startapp=${challengeId}` })).toEqual({ type: 'group-challenge', challengeId });
+  for (const bad of ['gc_short', challengeId + 'x', 'gc_AAAAAAAAAAAAAAAAAAAAA!']) expect(parseLaunchPayload(bad)).toBeNull();
+});

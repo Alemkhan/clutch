@@ -39,6 +39,7 @@ export async function buildSoloSnapshot(c: AppContext, loaded: LoadedSoloRun): P
   const owner = await findRunOwner(c.env.DB, run.id);
   return {
     runId: run.id,
+    ...(loaded.groupChallenge ? { groupChallenge: true as const } : {}),
     category: (owner?.category ?? 'general') as SoloRunSnapshot['category'],
     questions: questions.map(toPublicQuestion),
     pace: parsePace(run.opponent_json),

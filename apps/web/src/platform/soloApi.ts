@@ -10,14 +10,16 @@ export function startSoloRun(
   rematchInviteId?: string,
   botLevel?: PracticeLevelId,
   mode?: StartSoloRunRequest['mode'],
+  groupChallengeId?: string,
 ): Promise<StartSoloRunResponse> {
   const telegram = getTelegramIdentity();
   const body: StartSoloRunRequest = {
     displayName: telegram?.displayName || getPlayerName(),
     category,
+    ...(groupChallengeId ? { groupChallengeId } : {}),
     ...(rematchInviteId ? { rematchInviteId } : {}),
     ...(botLevel ? { botLevel } : {}),
-    ...(mode && !botLevel && !rematchInviteId ? { mode } : {}),
+    ...(mode && !botLevel && !rematchInviteId && !groupChallengeId ? { mode } : {}),
   };
   return apiFetch('/api/solo-runs', { method: 'POST', body: JSON.stringify(body) }, signal);
 }
@@ -95,4 +97,11 @@ export function fetchMyRuns(
 /** Подтверждённая сервером статистика текущего зачётного solo-режима. */
 export function fetchSoloProfile(signal?: AbortSignal): Promise<SoloProfileResponse> {
   return apiFetch('/api/profile', { method: 'GET' }, signal);
+}
+
+export function createGroupChallenge(runId: string): Promise<import('@clutch/shared').CreateGroupChallengeResponse> {
+  return apiFetch(`/api/solo-runs/${encodeURIComponent(runId)}/group-challenge`, { method: 'POST', body: '{}' });
+}
+export function fetchGroupChallenge(id: string, signal?: AbortSignal): Promise<import('@clutch/shared').GroupChallengePreviewResponse> {
+  return apiFetch(`/api/group-challenges/${encodeURIComponent(id)}`, { method: 'GET' }, signal);
 }

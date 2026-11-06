@@ -5,6 +5,7 @@ import { useGameState } from './app/useGameState';
 import { HomeDashboard } from './features/home/HomeDashboard';
 import { Profile } from './features/profile/Profile';
 import { TrainingHub } from './features/training/TrainingHub';
+import { GroupChallengeEntry } from './features/solo/GroupChallengeEntry';
 import { RematchEntry } from './features/solo/RematchEntry';
 import { readLaunchIntent, type LaunchIntent } from './app/launchIntent';
 import { LastStand } from './features/lastStand/LastStand';
@@ -43,10 +44,11 @@ function WikiPathEntry({ onBack, onCompleted, onPageLoaded }: { onBack: () => vo
 export default function App() {
   const game = useGameState();
   const [launchIntent, setLaunchIntent] = useState<LaunchIntent | null>(readLaunchIntent);
-  const launchOverlay = launchIntent?.type === 'rematch'
+  const launchOverlay = launchIntent?.type === 'rematch' || launchIntent?.type === 'group-challenge'
     || launchIntent?.type === 'unsubscribe'
     || launchIntent?.type === 'daily-unsubscribe';
   const closeLaunchIntent = useCallback(() => setLaunchIntent(null), []);
+  const [groupChallenge, setGroupChallenge] = useState<{ challengeId: string; category: CategoryId } | null>(null);
   const [soloRematch, setSoloRematch] = useState<SoloRematch | null>(null);
   const [boardKind, setBoardKind] = useState<BoardKind>('daily');
   const openBoard = useCallback((kind: BoardKind = 'daily') => {
@@ -56,6 +58,7 @@ export default function App() {
   // Тренировка против бота: уровень, с которым открыт экран solo. null — обычный забег.
   const [practiceLevel, setPracticeLevel] = useState<PracticeLevel | null>(null);
   const startRematch = useCallback((inviteId: string, category: CategoryId) => {
+    setGroupChallenge(null);
     setLaunchIntent(null);
     setPracticeLevel(null);
     setSoloRematch({ inviteId, category });
@@ -72,6 +75,7 @@ export default function App() {
   const [soloMode, setSoloMode] = useState<SoloMode>('daily');
   const [soloKey, setSoloKey] = useState(0);
   const startSolo = useCallback((category: CategoryId = 'general', mode: SoloMode = 'daily') => {
+    setGroupChallenge(null);
     setSoloRematch(null);
     setPracticeLevel(null);
     setSoloCategory(category);
@@ -81,6 +85,7 @@ export default function App() {
   }, [game.goToSolo]);
   const playMode = useCallback((mode: SoloMode, category: CategoryId) => startSolo(category, mode), [startSolo]);
   const startPractice = useCallback((level: PracticeLevel) => {
+    setGroupChallenge(null);
     setSoloRematch(null);
     setPracticeLevel(level);
     game.goToSolo();
@@ -142,7 +147,9 @@ export default function App() {
       <AnimatePresence mode="wait">
         {game.phase === 'home' && launchIntent && launchOverlay && (
           <motion.div key="launch" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
-            <RematchEntry intent={launchIntent} onStartRematch={startRematch} onClose={closeLaunchIntent} />
+            {launchIntent.type === 'group-challenge' ? <GroupChallengeEntry challengeId={launchIntent.challengeId} onClose={closeLaunchIntent} onStart={(challengeId, category) => {
+              setGroupChallenge({ challengeId, category }); setSoloRematch(null); setPracticeLevel(null); setLaunchIntent(null); setSoloKey(key => key + 1); game.goToSolo();
+            }} /> : <RematchEntry intent={launchIntent} onStartRematch={startRematch} onClose={closeLaunchIntent} />}
           </motion.div>
         )}
 
@@ -191,6 +198,7 @@ export default function App() {
               practice={practiceLevel ?? undefined}
               onMyRuns={game.goToMyRuns}
               rematch={soloRematch}
+              groupChallenge={groupChallenge}
               defaultCategory={practiceLevel ? undefined : soloCategory}
               onStageChange={setSoloStage}
             />

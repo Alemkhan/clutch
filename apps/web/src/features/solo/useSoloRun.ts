@@ -35,7 +35,7 @@ const SAVING: SoloSaveState = { status: 'saving', response: null, canRetry: fals
  * забег не теряет: id забега лежит в localStorage, остальное хранит сервер.
  * botLevel: тренировка против бота. Остальное — как в обычном забеге.
  */
-export function useSoloRun(botLevel?: PracticeLevelId, mode: SoloMode = 'daily') {
+export function useSoloRun(botLevel?: PracticeLevelId, mode: SoloMode = 'daily', groupChallengeId?: string) {
   const [state, setState] = useState<SoloFlowState>(createSoloFlowState);
   const [syncIssue, setSyncIssue] = useState<SyncIssue | null>(null);
   const [abandoning, setAbandoning] = useState(false);
@@ -49,7 +49,7 @@ export function useSoloRun(botLevel?: PracticeLevelId, mode: SoloMode = 'daily')
     setState, setSyncIssue, coordinatorRef, inviteRef, stateRef, practice: botLevel !== undefined, mode,
   };
 
-  const { begin, retryStart } = useSoloRunStart(ctx, botLevel);
+  const { begin, retryStart } = useSoloRunStart(ctx, botLevel, groupChallengeId);
   const { restoreFromServer, resume, backToCategories } = useSoloRunRestore(ctx, begin);
 
   const start = useCallback(() => {

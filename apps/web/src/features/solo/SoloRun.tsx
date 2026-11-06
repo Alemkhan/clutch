@@ -65,6 +65,7 @@ interface SoloRunProps {
   onMyRuns: () => void;
   /** Реванш из приглашения: забег стартует сразу, без выбора категории. */
   rematch?: SoloRematch | null;
+  groupChallenge?: { challengeId: string; category: CategoryId } | null;
   /** Категория по умолчанию: без сохранённого забега «Играть» стартует в ней сразу. */
   defaultCategory?: CategoryId;
   /** Тренировка против бота выбранного уровня; без неё — обычный забег. */
@@ -83,6 +84,7 @@ export function SoloRun({
   onHome,
   onMyRuns,
   rematch,
+  groupChallenge,
   defaultCategory,
   practice,
   onStageChange,
@@ -90,7 +92,7 @@ export function SoloRun({
   onPlayMode,
   onPracticeMistakes,
 }: SoloRunProps) {
-  const run = useSoloRun(practice?.id, mode);
+  const run = useSoloRun(practice?.id, mode, groupChallenge?.challengeId);
   const { stage } = run.state;
   const { begin, resume } = run;
   const { submitReport, reportState } = useQuestionReport(run.state);
@@ -99,9 +101,10 @@ export function SoloRun({
   const { strike, onStrike } = useStrikePreview(run.state);
 
   useEffect(() => {
-    if (rematch) begin(rematch.category, rematch.inviteId);
+    if (groupChallenge) begin(groupChallenge.category);
+    else if (rematch) begin(rematch.category, rematch.inviteId);
     else resume(defaultCategory);
-  }, [rematch, defaultCategory, begin, resume]);
+  }, [rematch, groupChallenge, defaultCategory, begin, resume]);
 
   useEffect(() => {
     onStageChange(stage);

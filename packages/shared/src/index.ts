@@ -108,6 +108,7 @@ export interface StartAsyncMatchRequest {
   mode?: 'daily' | 'free' | 'duel';
   /** One-time rematch invite id (the part after "rm_" is random); checked against the caller on the server. */
   rematchInviteId?: string;
+  groupChallengeId?: string;
 }
 
 export interface GuestSessionResponse {
@@ -121,6 +122,7 @@ export interface StartSoloRunRequest {
   category: CategoryId;
   /** Одноразовое приглашение на соло-реванш; сервер сверяет его с игроком. */
   rematchInviteId?: string;
+  groupChallengeId?: string;
   /** Тренировка: уровень бота. Забег не идёт в соревнование; с реваншем не сочетается. */
   botLevel?: PracticeLevelId;
   /** Забег дня, свободная игра или дуэль; без поля — забег дня. */
@@ -129,6 +131,8 @@ export interface StartSoloRunRequest {
 
 export interface StartSoloRunResponse {
   runId: string;
+  /** A run against a shared group source record; outside ordinary matchmaking. */
+  groupChallenge?: true;
   /** Без ответов и пояснений: правильный ответ приходит только после сыгранного круга. */
   questions: PublicQuestion[];
   /** Только темп для отрисовки; забег он не завершает. null — записи нет. */
@@ -431,3 +435,19 @@ export * from './questions/generalSet';
 export * from './solo/freshQuestionSet';
 // Explicit: the facade shadows the generator-only versions that `export *` above also brings in.
 export { isKnownQuestionId, questionIdCategory, resolveQuestionById } from './questions/questionResolve';
+
+export const GROUP_CHALLENGE_RULES_VERSION = 'solo-group-challenge-v1';
+export interface CreateGroupChallengeResponse { challengeId: string; url: string; expiresAt: number; maxPlayers: number }
+export interface GroupChallengeBoardEntry {
+  rank: number; playerId: string; displayName: string; runId: string;
+  score: number; roundsPlayed: number; isCreator: boolean;
+}
+export interface GroupChallengePreviewResponse {
+  challengeId: string; creator: { playerId: string; displayName: string; runId: string };
+  category: CategoryId; miniGameId: MiniGameId; expiresAt: number; expired: boolean;
+  participantCount: number; maxPlayers: number;
+  viewerEntry: { runId: string; status: 'in_progress' | 'completed' } | null;
+  board: GroupChallengeBoardEntry[];
+}
+export type GroupChallengePreview = GroupChallengePreviewResponse;
+export type GroupChallengeBoardResponse = GroupChallengePreviewResponse;

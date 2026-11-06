@@ -1,3 +1,4 @@
+import { registerGroupChallengeRoutes } from './groupChallenges/routes';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import type { Env } from './env';
@@ -18,6 +19,7 @@ import { registerTelemetryRoutes } from './telemetry/telemetry';
 import { registerTiebreakerRoutes } from './tiebreaker/tiebreaker';
 import { registerWikiPathRoutes } from './wikiPath/wikiPath';
 import { registerDailyNotificationRoutes, sendDailyChallengeDigests } from './notifications/daily';
+import { sendScheduledAnnouncements } from './notifications/announcements';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -38,6 +40,7 @@ registerDailyNotificationRoutes(app);
 registerSoloRunRoutes(app);
 registerTrainingRoutes(app);
 registerFriendInviteRoutes(app);
+registerGroupChallengeRoutes(app);
 registerLastStandRoutes(app);
 
 export { validateTelegramInitData } from './auth/telegram';
@@ -45,10 +48,11 @@ export { validateTelegramInitData } from './auth/telegram';
 export default Object.assign(app, {
   async scheduled(controller: ScheduledController, env: Env): Promise<void> {
     const now = controller.scheduledTime || Date.now();
-    const [expiry, digest] = await Promise.all([
+    const [expiry, digest, announcements] = await Promise.all([
       releaseExpiredRematchInvites(env.DB, now),
       sendDailyChallengeDigests(env, now),
+      sendScheduledAnnouncements(env, now),
     ]);
-    console.log('scheduled maintenance', JSON.stringify({ expiry, digest }));
+    console.log('scheduled maintenance', JSON.stringify({ expiry, digest, announcements }));
   },
 });

@@ -14,6 +14,8 @@ import type { RunRow } from './types';
 
 export const categories = new Set(['general', 'geography', 'history', 'languages', 'kz_history']);
 
+export const GROUP_CHALLENGE_ID = /^gc_[A-Za-z0-9_-]{22}$/;
+
 export const REMATCH_INVITE_ID = /^rm_[A-Za-z0-9_-]{22}$/;
 
 export function isStartRequest(value: unknown): value is StartAsyncMatchRequest {
@@ -28,6 +30,9 @@ export function isStartRequest(value: unknown): value is StartAsyncMatchRequest 
     && categories.has(body.category)
     // «История Казахстана» закрыта, пока одобренных вопросов меньше KZ_MIN_LIVE.
     && isCategoryOpen(body.category as StartAsyncMatchRequest['category'])
+    && (body.groupChallengeId === undefined
+      || (typeof body.groupChallengeId === 'string' && GROUP_CHALLENGE_ID.test(body.groupChallengeId)))
+    && !(body.groupChallengeId && body.rematchInviteId)
     && (body.rematchInviteId === undefined
       || (typeof body.rematchInviteId === 'string' && REMATCH_INVITE_ID.test(body.rematchInviteId)));
 }

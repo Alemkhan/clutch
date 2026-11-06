@@ -6,6 +6,7 @@ import {
   type SoloMode,
   DAILY_SET_SIZES,
   FRIEND_RULES_VERSION,
+  GROUP_CHALLENGE_RULES_VERSION,
   PRACTICE_RULES_VERSION,
   SOLO_ROUND_CAP,
   SOLO_TARGET_PROGRESS,
@@ -96,6 +97,7 @@ export interface NormalizedSoloRun {
   bankExhausted: boolean;
   /** Забег по дружеской ссылке: вне соревнования, исход против записи автора считается. */
   friendDuel?: boolean;
+  groupChallenge?: boolean;
   /** Забег дня, свободная игра или дуэль; null — тренировка или дружеская дуэль. */
   mode?: SoloMode | null;
   /** Потолок кругов: у дуэли — круг, на котором соперник дошёл до цели. */
@@ -125,7 +127,8 @@ export function normalizeSoloRun(run: StartSoloRunResponse, practice = false): N
   }
   const friendDuel = !practice && run.rulesVersion === FRIEND_RULES_VERSION;
   const mode = practice ? null : soloModeOf(run.rulesVersion);
-  const knownRules = practice ? run.rulesVersion === PRACTICE_RULES_VERSION : friendDuel || mode !== null;
+  const groupChallenge = !practice && run.groupChallenge === true && run.rulesVersion === GROUP_CHALLENGE_RULES_VERSION;
+  const knownRules = practice ? run.rulesVersion === PRACTICE_RULES_VERSION : friendDuel || groupChallenge || mode !== null;
   if (!knownRules || run.target !== SOLO_TARGET_PROGRESS
     || !Number.isInteger(run.roundCap) || run.roundCap < 1 || run.roundCap > SOLO_ROUND_CAP) {
     throw new Error('Solo run conditions are not supported by this client.');
@@ -146,6 +149,7 @@ export function normalizeSoloRun(run: StartSoloRunResponse, practice = false): N
     miniGameId: run.miniGameId,
     bankExhausted: run.bankExhausted === true,
     friendDuel,
+    groupChallenge,
     mode,
     roundCap,
   };

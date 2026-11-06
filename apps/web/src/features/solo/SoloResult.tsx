@@ -1,3 +1,4 @@
+import { useGroupChallenge } from './useGroupChallenge';
 import { useEffect, useRef } from 'react';
 import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS, dailyKey } from '@clutch/shared';
 import type { CategoryId, CompleteSoloRunResponse, MiniGameId, Opponent, SkillResult, SoloMode } from '@clutch/shared';
@@ -15,6 +16,7 @@ import { buildRunPreviewUrl, previewBase, roundTiles } from '../../platform/shar
 
 interface SoloResultProps {
   view: SoloRunView;
+  groupChallenge?: boolean;
   saveStatus: SoloSaveStatus;
   response: CompleteSoloRunResponse | null;
   saveError?: string;
@@ -83,6 +85,7 @@ const NEXT_ACTION: Readonly<Record<SoloMode, { mode: SoloMode; label: string }>>
  */
 export function SoloResult({
   view,
+  groupChallenge,
   saveStatus,
   response,
   saveError,
@@ -116,6 +119,7 @@ export function SoloResult({
   const practiceWon = practice ? practice.outcome === 'player' : null;
   const invite = useFriendInvite(response?.runId, preview);
   const resultShare = useSoloShare();
+  const groupInvite = useGroupChallenge(response?.runId);
   // Место есть только у сохранённого забега дня, дошедшего до 100%.
   const ranked = saveStatus === 'saved' && response?.reachedTarget === true && mode === 'daily';
   const fetched = useRunStanding(category, ranked && !standing);
@@ -148,7 +152,7 @@ export function SoloResult({
   // Звать есть кого, только когда результат дошёл до цели и сохранён на сервере.
   // Забег по ссылке вне соревнования: звать с него друзей нельзя.
   // Забег дня не зовёт друга: тот узнал бы вопросы дня до своей попытки.
-  const canInvite = saveStatus === 'saved' && response?.reachedTarget === true && !friendDuel
+  const canInvite = saveStatus === 'saved' && response?.reachedTarget === true && !friendDuel && !groupChallenge
     && (mode === 'duel' || mode === 'free');
   const receipt = result.reachedTarget && !friendDuel;
   // «Ждёт соперника»: только дуэль, сыгранная без записи; её забег сам стал вызовом.
@@ -176,6 +180,7 @@ export function SoloResult({
 
   return (
     <div className={`result-screen solo-result ${result.reachedTarget ? 'reached' : 'not-reached'}`}>
+      {groupChallenge && <span className="chip">Вызов друзьям · вне зачёта</span>}
       <div className="solo-result-head">
         {friendDuel && <span className="chip">{FRIEND_DUEL_CHIP}</span>}
         {!friendDuel && (
@@ -221,6 +226,8 @@ export function SoloResult({
         </div>
       )}
 
+      {groupInvite.status === 'copied' && <p role="status">Ссылка на вызов скопирована.</p>}
+      {groupInvite.status === 'error' && <p role="alert">Не удалось отправить вызов. Попробуй ещё раз.</p>}
       {invite.status === 'copied' && <p className="result-insight" role="status">Ссылка скопирована.</p>}
       {invite.status === 'error' && <p className="result-insight" role="alert">Не удалось отправить. Нажми ещё раз.</p>}
       {resultShare.status === 'copied' && <p className="result-insight" role="status">Результат скопирован.</p>}
@@ -249,6 +256,10 @@ export function SoloResult({
         {mode === 'daily' && onPlayMode && (
           <button type="button" className="ghost-btn" disabled={saving} onClick={() => { onPlayMode('free'); }}>Свободная игра</button>
         )}
+        {canInvite && <>
+          <button type="button" className="ghost-btn" disabled={groupInvite.status === 'working'} onClick={() => void groupInvite.send()}>Вызвать друзей</button>
+          <p className="solo-result-summary">Один вызов для нескольких друзей. Ссылка действует 24 часа.</p>
+        </>}
         {/* A run that reached 100% is shared as a duel link; any other run as a result line. */}
         <div className="solo-result-secondary">
         {canInvite ? (

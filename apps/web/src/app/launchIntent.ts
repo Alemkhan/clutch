@@ -1,5 +1,6 @@
 export type LaunchIntent =
   | { type: 'rematch'; inviteId: string }
+  | { type: 'group-challenge'; challengeId: string }
   | { type: 'unsubscribe' }
   | { type: 'daily-unsubscribe' }
   | { type: 'daily-tiebreaker' }
@@ -14,6 +15,7 @@ export function parseLaunchPayload(payload: string | null | undefined): LaunchIn
   if (payload === 'daily_off') return { type: 'daily-unsubscribe' };
   if (payload === 'daily_guess') return { type: 'daily-tiebreaker' };
   if (payload === 'daily_wiki') return { type: 'daily-wiki-path' };
+  if (/^gc_[A-Za-z0-9_-]{22}$/.test(payload)) return { type: 'group-challenge', challengeId: payload };
   if (INVITE_ID.test(payload)) return { type: 'rematch', inviteId: payload };
   return null;
 }
@@ -24,7 +26,7 @@ export function parseLaunchPayload(payload: string | null | undefined): LaunchIn
  */
 export function readLaunchIntent(location: Pick<Location, 'hash' | 'search'> = window.location): LaunchIntent | null {
   for (const source of [location.hash.replace(/^#/, ''), location.search.replace(/^\?/, '')]) {
-    const value = new URLSearchParams(source).get('tgWebAppStartParam');
+    const value = new URLSearchParams(source).get('tgWebAppStartParam') ?? new URLSearchParams(source).get('startapp');
     const intent = parseLaunchPayload(value);
     if (intent) return intent;
   }

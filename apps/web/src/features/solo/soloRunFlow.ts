@@ -55,6 +55,7 @@ export interface SoloFlowState {
   bankExhausted: boolean;
   /** Забег по дружеской ссылке: вне соревнования. */
   friendDuel: boolean;
+  groupChallenge?: boolean;
   /** Забег дня, свободная игра или дуэль; null — тренировка, дружеская дуэль или ещё не начат. */
   mode: SoloMode | null;
   /** Забег продолжен после закрытой вкладки. */
@@ -130,6 +131,7 @@ export function applyLoadedSoloRun(state: SoloFlowState, run: NormalizedSoloRun)
     miniGameId: run.miniGameId,
     bankExhausted: run.bankExhausted,
     friendDuel: run.friendDuel === true,
+    groupChallenge: run.groupChallenge === true,
     mode: run.mode ?? null,
   };
 }
@@ -155,6 +157,7 @@ export function restoreSoloRun(snapshot: NormalizedSoloSnapshot): SoloFlowState 
     config: snapshot.config,
     miniGameId: snapshot.miniGameId,
     friendDuel: snapshot.friendDuel === true,
+    groupChallenge: snapshot.groupChallenge === true,
     mode: snapshot.mode ?? null,
     resumed: true,
     paceReleased: snapshot.paceReleased === true,
@@ -333,6 +336,8 @@ export function soloPaceOf(state: Readonly<SoloFlowState>): Opponent | null {
 }
 
 export function soloStartErrorMessage(error: unknown): string {
+  if (error instanceof ApiError && error.reason === 'full') return 'Все места в вызове заняты.';
+  if (error instanceof ApiError && error.reason === 'already_played') return 'Ты уже сыграл этот вызов. Открой ссылку снова, чтобы посмотреть таблицу.';
   if (error instanceof ApiError && error.reason === 'taken') return 'Ссылку уже занял другой игрок.';
   if (error instanceof ApiError && error.reason === 'expired') return 'Срок ссылки вышел.';
   if (error instanceof ApiError && error.reason === 'own') return 'Это твоя ссылка. Отправь её другу.';

@@ -16,6 +16,7 @@ export function SoloResultStage({ props, state, view }: {
   return (
     <SoloResult
       view={view}
+      groupChallenge={state.groupChallenge}
       saveStatus={save.status}
       response={save.response}
       saveError={save.error}

@@ -163,9 +163,11 @@ export async function finalizeSoloRun(
   const pace = run.opponent_run_id && !practice ? await findPaceResult(c.env.DB, run.opponent_run_id) : null;
   // Прикидка своей стороны: сутки набора этого забега. Читаем только когда есть с кем сравнивать.
   const ownTiebreak = !abandoned && pace ? await findTiebreakAnswer(c.env.DB, run.player_id, dailyKey(run.created_at)) : null;
+  const group = loaded.groupChallenge;
+  const comparisonPace = group && pace ? { ...pace, tiebreak: null } : pace;
   const decision = abandoned
-    ? { outcome: loaded.mode === 'duel' || loaded.friend ? 'opponent' as const : null, byTiebreak: false, tiebreak: undefined }
-    : decideOutcome(result, pace, ownTiebreak);
+    ? { outcome: loaded.mode === 'duel' || loaded.friend || loaded.groupChallenge ? 'opponent' as const : null, byTiebreak: false, tiebreak: undefined }
+    : decideOutcome(result, comparisonPace, group ? null : ownTiebreak);
   const { outcome } = decision;
   result.outcome = outcome;
   if (decision.tiebreak) result.tiebreak = decision.tiebreak;
@@ -202,7 +204,7 @@ export async function finalizeSoloRun(
   if (!didComplete) {
     return (await storedResult(c, loaded)) ?? c.json({ error: 'Run completion conflicted with another request.' }, 409);
   }
-  if (!practice && outcome && run.opponent_run_id) {
+  if (!practice && outcome && run.opponent_run_id && !loaded.groupChallenge) {
     notifyRecordOwner(
       c,
       run,

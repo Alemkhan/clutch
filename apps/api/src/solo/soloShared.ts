@@ -1,5 +1,6 @@
 import {
   FRIEND_RULES_VERSION,
+  GROUP_CHALLENGE_RULES_VERSION,
   PRACTICE_RULES_VERSION,
   duelRoundCap,
   isMiniGameId,
@@ -65,6 +66,7 @@ export interface LoadedSoloRun {
   questions: Question[];
   practice: boolean;
   friend: boolean;
+  groupChallenge: boolean;
   /** Забег дня, свободная игра или дуэль; null у тренировки и дружеской дуэли. */
   mode: SoloMode | null;
   /**
@@ -80,8 +82,9 @@ export async function openSoloRun(c: AppContext, identity: RequestIdentity, runI
   if (!run || run.player_id !== identity.playerId) return c.json({ error: 'Run not found.' }, 404);
   const practice = run.rules_version === PRACTICE_RULES_VERSION;
   const friend = run.rules_version === FRIEND_RULES_VERSION;
+  const groupChallenge = run.rules_version === GROUP_CHALLENGE_RULES_VERSION;
   const mode = soloModeOf(run.rules_version);
-  if ((!practice && !friend && !mode)
+  if ((!practice && !friend && !groupChallenge && !mode)
     || run.mini_game_config_json !== currentMiniGameConfigJson
     || !isMiniGameId(run.mini_game_id)) {
     return c.json({ error: 'This is not a solo run.' }, 409);
@@ -103,7 +106,7 @@ export async function openSoloRun(c: AppContext, identity: RequestIdentity, runI
   });
   // Тренировка против бота доигрывается до конца: бот не запись игрока, исход не считается.
   const roundCap = duelRoundCap(practice ? null : parsePace(run.opponent_json));
-  return { run, questions, practice, friend, mode, roundCap };
+  return { run, questions, practice, friend, groupChallenge, mode, roundCap };
 }
 
 /** Идентификатор забега из пути маршрута `/api/solo-runs/:id/...`. */
