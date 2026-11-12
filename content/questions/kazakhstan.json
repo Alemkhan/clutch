@@ -1,7 +1,7 @@
 [
   {
     "id": "kz-issyk",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -22,12 +22,13 @@
     "openAnswer": true,
     "explanationRu": "Курган Иссык под Алматы раскопала экспедиция Кемаля Акишева. «Золотой человек» стал одним из символов Казахстана.",
     "sourceHint": "Википедия: Иссыкский курган",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-tomyris",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -48,12 +49,13 @@
     "openAnswer": true,
     "explanationRu": "О победе Томирис над Киром рассказывает Геродот.",
     "sourceHint": "Википедия: Томирис",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-kangju",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -74,12 +76,13 @@
     "openAnswer": true,
     "explanationRu": "Кангюй упоминают китайские хроники; центр — в долине Сырдарьи.",
     "sourceHint": "Википедия: Кангюй",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-usun",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -98,12 +101,13 @@
     "openAnswer": false,
     "explanationRu": "Ставка усуней, Чигучэн («город Красной долины»), стояла у Иссык-Куля.",
     "sourceHint": "Википедия: Усуни",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-botai",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -120,12 +124,13 @@
     "openAnswer": false,
     "explanationRu": "Ботайская культура известна крупными поселениями, жилищами и многочисленными находками костей лошадей. Вывод о раннем одомашнивании лошади в Ботае оспаривается современной археогенетикой и археозоологией.",
     "sourceHint": "Википедия: Ботайская культура",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-andronovo",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -143,12 +148,13 @@
     "openAnswer": false,
     "explanationRu": "Андроновцы — скотоводы и металлурги II тысячелетия до н. э.",
     "sourceHint": "Википедия: Андроновская культура",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-tamgaly",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -166,12 +172,13 @@
     "openAnswer": false,
     "explanationRu": "В Тамгалы около пяти тысяч рисунков на скалах, от бронзового века до Средневековья.",
     "sourceHint": "Википедия: Тамгалы",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-turk-552",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -190,12 +197,13 @@
     "openAnswer": true,
     "explanationRu": "Каганат основал Бумын, разбив жужаней.",
     "sourceHint": "Википедия: Тюркский каганат",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-bumyn",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -214,12 +222,13 @@
     "openAnswer": false,
     "explanationRu": "Бумын-каган — из рода Ашина; его брат Истеми правил западной частью каганата.",
     "sourceHint": "Википедия: Бумын-каган",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-west-turk",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -236,12 +245,13 @@
     "openAnswer": false,
     "explanationRu": "Ставка западных тюрков стояла в Семиречье, у Суяба.",
     "sourceHint": "Википедия: Западно-тюркский каганат",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-ushlik",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Expert",
@@ -260,12 +270,13 @@
     "openAnswer": false,
     "explanationRu": "Тюргеши правили Семиречьем до 756 года.",
     "sourceHint": "Википедия: Тюргешский каганат",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-karluk",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -283,12 +294,13 @@
     "openAnswer": false,
     "explanationRu": "Карлукский каганат существовал до 940 года, затем его земли вошли в державу Караханидов.",
     "sourceHint": "Википедия: Карлукский каганат",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-talas-751",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -309,12 +321,13 @@
     "openAnswer": false,
     "explanationRu": "В битве была разгромлена армия Тан. Дальнейшее историческое значение сражения оценивают по-разному, а исламизация региона происходила постепенно.",
     "sourceHint": "Википедия: Таласская битва",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-yangikent",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -337,12 +350,13 @@
     "openAnswer": true,
     "explanationRu": "Янгикент («Новый город») — ставка огузского ябгу в X веке.",
     "sourceHint": "Википедия: Янгикент",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-karakhanid-960",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -361,12 +375,13 @@
     "openAnswer": false,
     "explanationRu": "Первым ислам принял караханидский правитель Сатук Богра-хан.",
     "sourceHint": "Википедия: Караханиды",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-farabi",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -391,12 +406,13 @@
     "explanationRu": "Аль-Фараби (870–950) комментировал Аристотеля и писал о музыке, логике, государстве.",
     "generalPool": true,
     "sourceHint": "Википедия: Аль-Фараби",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-kashgari",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -414,12 +430,13 @@
     "openAnswer": false,
     "explanationRu": "В словаре Кашгари — первая известная карта мира тюрков.",
     "sourceHint": "Википедия: Диван лугат ат-турк",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-balasaguni",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -437,12 +454,13 @@
     "openAnswer": false,
     "explanationRu": "Поэму о том, как править справедливо, Баласагуни поднёс караханидскому правителю.",
     "sourceHint": "Википедия: Кутадгу билиг",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-kipchak",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -466,12 +484,13 @@
     "explanationRu": "Кыпчаки кочевали от Иртыша до Дуная; на Западе их звали куманами.",
     "generalPool": true,
     "sourceHint": "Википедия: Кыпчаки",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-desht",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -490,12 +509,13 @@
     "openAnswer": false,
     "explanationRu": "«Кыпчакская степь» — по господствовавшим там кыпчакам.",
     "sourceHint": "Википедия: Дешт-и-Кипчак",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-otrar-1218",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -515,12 +535,13 @@
     "openAnswer": false,
     "explanationRu": "Расправа над караваном дала Чингисхану повод для похода на Хорезм.",
     "sourceHint": "Википедия: Отрарская катастрофа",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-batu",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -545,12 +566,13 @@
     "explanationRu": "Батый — сын Джучи; столицей Орды стал Сарай-Бату на Волге.",
     "generalPool": true,
     "sourceHint": "Википедия: Батый",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-ak-orda",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -573,12 +595,13 @@
     "openAnswer": true,
     "explanationRu": "Сыгнак стоял на Сырдарье; руины — в Кызылординской области.",
     "sourceHint": "Википедия: Белая Орда",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-mogul",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Expert",
@@ -597,12 +620,13 @@
     "openAnswer": false,
     "explanationRu": "Хана посадили эмиры из рода дулат; Могулистан занимал Семиречье и Восточный Туркестан.",
     "sourceHint": "Википедия: Могулистан",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-yasawi-city",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Easy",
@@ -625,12 +649,13 @@
     "explanationRu": "Мавзолей в списке Всемирного наследия ЮНЕСКО с 2003 года.",
     "generalPool": true,
     "sourceHint": "Википедия: Мавзолей Ходжи Ахмеда Ясави",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-yasawi-timur",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -655,12 +680,13 @@
     "openAnswer": true,
     "explanationRu": "Строительство начали в 1389 году и не закончили: после смерти Тимура в 1405-м работы встали.",
     "sourceHint": "Википедия: Мавзолей Ходжи Ахмеда Ясави",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-taraz-2000",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -681,12 +707,13 @@
     "openAnswer": true,
     "explanationRu": "Тараз упоминается с VI века; юбилей отсчитали по данным археологов.",
     "sourceHint": "Википедия: Тараз",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-dulati",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -705,12 +732,13 @@
     "openAnswer": false,
     "explanationRu": "Дулати писал на персидском в Кашмире в 1540-х.",
     "sourceHint": "Википедия: Тарих-и Рашиди",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-khanate-1465",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -729,12 +757,13 @@
     "openAnswer": true,
     "explanationRu": "В 2015 году Казахстан отметил 550-летие ханства.",
     "sourceHint": "Википедия: Казахское ханство",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-kerey-zhanibek",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Easy",
@@ -751,12 +780,13 @@
     "openAnswer": false,
     "explanationRu": "Султаны Керей и Жанибек — потомки Урус-хана из Ак Орды.",
     "sourceHint": "Википедия: Казахское ханство",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-migration",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -775,12 +805,13 @@
     "openAnswer": false,
     "explanationRu": "Хан Могулистана Есен-Буга дал им земли в долинах Чу и Козыбаши.",
     "sourceHint": "Википедия: Казахское ханство",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-kasym",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -803,12 +834,13 @@
     "openAnswer": true,
     "explanationRu": "При Касыме (1511–1521) население ханства, по Дулати, достигло миллиона человек.",
     "sourceHint": "Википедия: Касым-хан",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-tauke",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -830,12 +862,13 @@
     "openAnswer": true,
     "explanationRu": "Тауке правил в 1680–1715 годах.",
     "sourceHint": "Википедия: Жеті жарғы",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-zheti-zhargy",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -853,12 +886,13 @@
     "openAnswer": false,
     "explanationRu": "Свод определял суд биев, наказания, наследство и порядок кочевий.",
     "sourceHint": "Википедия: Жеті жарғы",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-orbulak",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -876,12 +910,13 @@
     "openAnswer": false,
     "explanationRu": "Жангир велел вырыть окопы в ущелье; на помощь подошло войско Жалантоса из Самарканда.",
     "sourceHint": "Википедия: Орбулакская битва",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-tole",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -903,12 +938,13 @@
     "openAnswer": true,
     "explanationRu": "Толе би, Казыбек би и Айтеке би — трое великих биев трёх жузов.",
     "sourceHint": "Википедия: Толе би",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-aiteke",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -927,12 +963,13 @@
     "openAnswer": false,
     "explanationRu": "Казыбек би представлял Средний жуз, Толе би — Старший.",
     "sourceHint": "Википедия: Айтеке би",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-kazybek",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -955,12 +992,13 @@
     "openAnswer": true,
     "explanationRu": "Казыбек би — из Среднего жуза; прозвище — за красноречие на переговорах с джунгарами.",
     "sourceHint": "Википедия: Казыбек би",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-aktaban",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -979,12 +1017,13 @@
     "openAnswer": true,
     "explanationRu": "Казахи бежали от Каратау к Сырдарье и дальше, теряя скот и людей.",
     "sourceHint": "Википедия: Годы великого бедствия",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-anyrakay",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1003,13 +1042,13 @@
     "openAnswer": false,
     "explanationRu": "Традиционная датировка Аныракайской битвы — 1729 год, но в источниках встречается и 1730 год. Название иногда переводят как «место стонов».",
     "sourceHint": "Википедия: Аныракайская битва",
-    "reviewNote": "Год битвы в источниках — 1729 или 1730; в ЕНТ принят 1729.",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ. Прежняя заметка: Год битвы в источниках — 1729 или 1730; в ЕНТ принят 1729.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-abulkhair",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1032,12 +1071,13 @@
     "openAnswer": true,
     "explanationRu": "Абулхаир искал защиты от джунгар и поддержки против соперников.",
     "sourceHint": "Википедия: Абулхаир-хан",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-year-1731",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1056,12 +1096,13 @@
     "openAnswer": true,
     "explanationRu": "В 1740 году российской власти присягнула часть знати Среднего жуза. Включение земель Казахстана в состав Российской империи происходило постепенно и растянулось на длительный период.",
     "sourceHint": "Википедия: Присоединение Казахстана к России",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-ablai",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Easy",
@@ -1084,12 +1125,13 @@
     "openAnswer": true,
     "explanationRu": "Церемония прошла в Туркестане, у мавзолея Яссауи.",
     "sourceHint": "Википедия: Абылай-хан",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-bukhar",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1108,12 +1150,13 @@
     "openAnswer": false,
     "explanationRu": "Бухару приписывают больше ста лет жизни (1668–1781).",
     "sourceHint": "Википедия: Бухар-жырау",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-bukey",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1132,12 +1175,13 @@
     "openAnswer": false,
     "explanationRu": "Султан Букей увёл туда около пяти тысяч семей Младшего жуза.",
     "sourceHint": "Википедия: Букеевская Орда",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-syrym",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1156,12 +1200,13 @@
     "openAnswer": false,
     "explanationRu": "Сырым боролся и с царской администрацией, и с ханом Нуралы.",
     "sourceHint": "Википедия: Сырым Датов",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-ustav-1822",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1178,12 +1223,13 @@
     "openAnswer": false,
     "explanationRu": "Вместо ханства ввели округа во главе со старшими султанами.",
     "sourceHint": "Википедия: Устав о сибирских киргизах",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-speransky",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Expert",
@@ -1201,12 +1247,13 @@
     "openAnswer": false,
     "explanationRu": "Проект был подготовлен по итогам сибирской ревизии и работы Сперанского по управлению Сибирью; в 1822 году его утвердил Александр I.",
     "sourceHint": "Википедия: Устав о сибирских киргизах",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-year-1824",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1225,12 +1272,13 @@
     "openAnswer": true,
     "explanationRu": "Это сделал «Устав об оренбургских киргизах».",
     "sourceHint": "Википедия: Младший жуз",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-zhangir",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1248,12 +1296,13 @@
     "openAnswer": false,
     "explanationRu": "Восстание шло во Внутренней (Букеевской) Орде из-за отнятых пастбищ.",
     "sourceHint": "Википедия: Восстание Исатая Тайманова",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-makhambet",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1272,12 +1321,13 @@
     "openAnswer": false,
     "explanationRu": "Стихи Махамбета — призывы к борьбе; их учат в школе.",
     "sourceHint": "Википедия: Махамбет Утемисов",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-kenesary-grand",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1297,12 +1347,13 @@
     "openAnswer": false,
     "explanationRu": "Отец Кенесары — Касым-султан, сын Абылая.",
     "sourceHint": "Википедия: Кенесары Касымов",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-kenesary-years",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1320,12 +1371,13 @@
     "openAnswer": false,
     "explanationRu": "Это было самое крупное восстание казахов XIX века; Кенесары провозгласили ханом.",
     "sourceHint": "Википедия: Восстание Кенесары Касымова",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-verny",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Easy",
@@ -1348,12 +1400,13 @@
     "explanationRu": "Укрепление заложили в 1854 году как Заилийское, вскоре переименовали в Верное; город Верный получил городской статус в 1867 году.",
     "generalPool": true,
     "sourceHint": "Википедия: История Алма-Аты",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-akmeshit",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1375,12 +1428,13 @@
     "openAnswer": true,
     "explanationRu": "Город успел побыть Перовском, потом Ак-Мечетью, а с 1925 года — Кзыл-Ордой.",
     "sourceHint": "Википедия: Кызылорда",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-valikhanov",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1399,12 +1453,13 @@
     "openAnswer": false,
     "explanationRu": "Валиханов шёл с караваном под видом купца и привёз первое научное описание Кашгарии.",
     "sourceHint": "Википедия: Чокан Валиханов",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-altynsarin",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1423,12 +1478,13 @@
     "openAnswer": false,
     "explanationRu": "Алтынсарин писал для своих учеников учебники и хрестоматию на казахском.",
     "sourceHint": "Википедия: Алтынсарин, Ибрай",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-abai",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1448,12 +1504,13 @@
     "explanationRu": "45 коротких философских текстов Абай написал в 1890–1898 годах.",
     "generalPool": true,
     "sourceHint": "Википедия: Слова назидания",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-kurmangazy",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1471,12 +1528,13 @@
     "openAnswer": false,
     "explanationRu": "Курмангазы — домбрист XIX века; его имя носит Казахская национальная консерватория.",
     "sourceHint": "Википедия: Курмангазы Сагырбайулы",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-decree-1916",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1494,12 +1552,13 @@
     "openAnswer": false,
     "explanationRu": "Указ от 25 июня 1916 года забирал мужчин 19–43 лет рыть окопы на фронте.",
     "sourceHint": "Википедия: Среднеазиатское восстание 1916 года",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-amangeldy",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1518,12 +1577,13 @@
     "openAnswer": false,
     "explanationRu": "Ханом восставших избрали Абдулгаппара Жанбосынова, сардарбеком — Амангельды.",
     "sourceHint": "Википедия: Иманов, Амангельды",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-bukeikhanov",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1542,12 +1602,13 @@
     "openAnswer": false,
     "explanationRu": "Автономию Алаш провозгласил Второй всеказахский съезд в декабре 1917 года.",
     "sourceHint": "Википедия: Алаш-Орда",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-baitursynov-qazaq",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1565,12 +1626,13 @@
     "openAnswer": false,
     "explanationRu": "Тираж «Қазақа» доходил до восьми тысяч — для степи огромный.",
     "sourceHint": "Википедия: Казах (газета)",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-baitursynov-abc",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1588,12 +1650,13 @@
     "openAnswer": false,
     "explanationRu": "Байтурсынова называют «Ұлт ұстазы» — учителем нации.",
     "sourceHint": "Википедия: Тёте жазу",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-dulatov",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1612,12 +1675,13 @@
     "openAnswer": false,
     "explanationRu": "Сборник запретили и изымали, а автора посадили в тюрьму.",
     "sourceHint": "Википедия: Дулатов, Миржакып",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-shokay",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1638,13 +1702,13 @@
     "openAnswer": false,
     "explanationRu": "Первым главой правительства автономии был Мухамеджан Тынышпаев; Мустафа Шокай сменил его в конце 1917 года. Автономию разгромили большевики в феврале 1918 года, после чего Шокай эмигрировал.",
     "sourceHint": "Википедия: Туркестанская автономия",
-    "reviewNote": "Первым председателем правительства был Мухамеджан Тынышпаев, Шокай сменил его в конце 1917 года.",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ. Прежняя заметка: Первым председателем правительства был Мухамеджан Тынышпаев, Шокай сменил его в конце 1917 года.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-orenburg",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1665,12 +1729,13 @@
     "openAnswer": true,
     "explanationRu": "Столица ушла в Кзыл-Орду в 1925 году, когда Оренбург отошёл РСФСР.",
     "sourceHint": "Википедия: Казахская АССР",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-kyzylorda-capital",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1692,12 +1757,13 @@
     "openAnswer": true,
     "explanationRu": "В 1929 году столицу перенесли в Алма-Ату, к строящемуся Турксибу.",
     "sourceHint": "Википедия: Кызылорда",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-kazssr-1936",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1716,12 +1782,13 @@
     "openAnswer": true,
     "explanationRu": "Это случилось 5 декабря 1936 года с принятием новой Конституции СССР.",
     "sourceHint": "Википедия: Казахская Советская Социалистическая Республика",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-turksib",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1744,12 +1811,13 @@
     "explanationRu": "Стройка 1927–1930 годов — одна из главных первых пятилеток.",
     "generalPool": true,
     "sourceHint": "Википедия: Туркестано-Сибирская железная дорога",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-goloshchekin",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1769,12 +1837,13 @@
     "openAnswer": false,
     "explanationRu": "Конфискация скота и насильственное оседание привели к голоду 1931–1933 годов.",
     "sourceHint": "Википедия: Голощёкин, Филипп Исаевич",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-asharshylyk",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1792,12 +1861,13 @@
     "openAnswer": false,
     "explanationRu": "От голода погибли, по разным оценкам, 1,5–2,3 миллиона человек.",
     "sourceHint": "Википедия: Голод в Казахстане (1930—1933)",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-alzhir",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1816,12 +1886,13 @@
     "openAnswer": false,
     "explanationRu": "Название — сокращение: Акмолинский лагерь жён изменников Родины. Сейчас там мемориал.",
     "sourceHint": "Википедия: АЛЖИР",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-panfilov",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Easy",
@@ -1844,12 +1915,13 @@
     "explanationRu": "316-ю стрелковую дивизию собрали летом 1941 года в Алма-Ате из жителей Казахстана и Киргизии.",
     "generalPool": true,
     "sourceHint": "Википедия: 8-я гвардейская стрелковая дивизия",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-momyshuly",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1868,12 +1940,13 @@
     "openAnswer": false,
     "explanationRu": "Звание Героя Советского Союза Момышулы присвоили только в 1990 году, посмертно.",
     "sourceHint": "Википедия: Момышулы, Бауыржан",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-mametova",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1892,12 +1965,13 @@
     "openAnswer": false,
     "explanationRu": "Маншук Маметова — первая казашка, получившая звание Героя Советского Союза.",
     "sourceHint": "Википедия: Маметова, Маншук Жиенгалиевна",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-koshkarbaev",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -1915,12 +1989,13 @@
     "openAnswer": false,
     "explanationRu": "Кошкарбаев и Григорий Булатов установили красный флаг на фасаде Рейхстага 30 апреля 1945 года. Это событие следует отличать от водружения Знамени Победы.",
     "sourceHint": "Википедия: Кошкарбаев, Рахимжан",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-karaganda",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1940,12 +2015,13 @@
     "explanationRu": "Первыми двумя были Донбасс и Кузбасс.",
     "generalPool": true,
     "sourceHint": "Википедия: Карагандинский угольный бассейн",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-tselina",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -1965,12 +2041,13 @@
     "explanationRu": "На целину приехали сотни тысяч человек со всего Союза.",
     "generalPool": true,
     "sourceHint": "Википедия: Освоение целины",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-tselinograd",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Easy",
@@ -1991,12 +2068,13 @@
     "explanationRu": "Акмолинск → Целиноград → Акмола → Астана → Нур-Султан → снова Астана (с 2022 года).",
     "generalPool": true,
     "sourceHint": "Википедия: История Астаны",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-baikonur",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Easy",
@@ -2018,12 +2096,13 @@
     "explanationRu": "С Байконура же в 1957 году запустили первый искусственный спутник Земли.",
     "generalPool": true,
     "sourceHint": "Википедия: Байконур (космодром)",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-aubakirov",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -2042,12 +2121,13 @@
     "openAnswer": false,
     "explanationRu": "Аубакиров слетал на станцию «Мир» в октябре 1991 года.",
     "sourceHint": "Википедия: Аубакиров, Токтар Онгарбаевич",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-polygon",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Easy",
@@ -2066,12 +2146,13 @@
     "explanationRu": "Первый взрыв на полигоне прогремел ровно за 42 года до закрытия — 29 августа 1949 года.",
     "generalPool": true,
     "sourceHint": "Википедия: Семипалатинский ядерный полигон",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-nevada",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -2089,12 +2170,13 @@
     "openAnswer": false,
     "explanationRu": "Движение сыграло важную роль в общественном протесте против ядерных испытаний. Семипалатинский полигон был закрыт указом президента Казахской ССР 29 августа 1991 года.",
     "sourceHint": "Википедия: Невада — Семипалатинск",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-kunaev",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -2112,12 +2194,13 @@
     "openAnswer": false,
     "explanationRu": "Кунаев трижды стал Героем Социалистического Труда.",
     "sourceHint": "Википедия: Кунаев, Динмухамед Ахмедович",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-zheltoksan",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -2137,12 +2220,13 @@
     "openAnswer": false,
     "explanationRu": "Колбин не был связан с Казахстаном; молодёжь вышла на площадь 17 декабря.",
     "sourceHint": "Википедия: Желтоксан",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-sovereignty",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -2160,12 +2244,13 @@
     "openAnswer": false,
     "explanationRu": "Сейчас 25 октября — День Республики.",
     "sourceHint": "Википедия: Декларация о государственном суверенитете Казахской ССР",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-independence",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -2184,12 +2269,13 @@
     "openAnswer": false,
     "explanationRu": "Теперь 16 декабря — День Независимости.",
     "sourceHint": "Википедия: Конституционный закон о государственной независимости Республики Казахстан",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-last-republic",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -2210,13 +2296,13 @@
     "explanationRu": "Казахстан принял закон о государственной независимости 16 декабря 1991 года. Формулировка относится к принятию закона союзной республикой: РСФСР независимость от СССР не провозглашала, а приняла декларацию о государственном суверенитете в 1990 году.",
     "generalPool": true,
     "sourceHint": "Википедия: Распад СССР",
-    "reviewNote": "Россия независимость формально не провозглашала: была Декларация о суверенитете 12 июня 1990 года.",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ. Прежняя заметка: Россия независимость формально не провозглашала: была Декларация о суверенитете 12 июня 1990 года.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-almaty-cis",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -2239,12 +2325,13 @@
     "explanationRu": "Алма-Атинская декларация закрепила: СССР прекращает существование.",
     "generalPool": true,
     "sourceHint": "Википедия: Алма-Атинская декларация",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-tenge",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -2263,12 +2350,13 @@
     "openAnswer": true,
     "explanationRu": "Тенге ввели 15 ноября 1993 года; теперь это День национальной валюты.",
     "sourceHint": "Википедия: Казахстанский тенге",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-constitution-1993",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -2287,12 +2375,13 @@
     "openAnswer": true,
     "explanationRu": "Её приняли 28 января 1993 года, а через два с половиной года заменили новой.",
     "sourceHint": "Википедия: Конституция Казахстана 1993 года",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-constitution-1995",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -2311,12 +2400,13 @@
     "openAnswer": false,
     "explanationRu": "30 августа отмечают как День Конституции.",
     "sourceHint": "Википедия: Конституция Казахстана",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-capital-1997",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -2336,12 +2426,13 @@
     "explanationRu": "Перенос состоялся 10 декабря 1997 года; Астаной город стал в мае 1998-го.",
     "generalPool": true,
     "sourceHint": "Википедия: Перенос столицы Казахстана",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-eaeu",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -2359,12 +2450,13 @@
     "explanationRu": "Армения и Киргизия присоединились в 2015 году.",
     "generalPool": true,
     "sourceHint": "Википедия: Евразийский экономический союз",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-expo",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Easy",
@@ -2383,12 +2475,13 @@
     "openAnswer": true,
     "explanationRu": "Тема выставки — «Энергия будущего»; её символ — шар «Нур Алем».",
     "sourceHint": "Википедия: Экспо-2017",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-guryev",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Medium",
@@ -2409,12 +2502,13 @@
     "openAnswer": true,
     "explanationRu": "Город основали в XVII веке купцы Гурьевы.",
     "sourceHint": "Википедия: Атырау",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-shevchenko",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -2434,12 +2528,13 @@
     "openAnswer": true,
     "explanationRu": "Город назвали в честь Тараса Шевченко, отбывавшего ссылку на Мангышлаке.",
     "sourceHint": "Википедия: Актау",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-auezov",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -2459,12 +2554,13 @@
     "explanationRu": "Эпопея в четырёх книгах писалась с 1942 по 1956 год.",
     "generalPool": true,
     "sourceHint": "Википедия: Путь Абая",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   },
   {
     "id": "kz-esenberlin",
-    "editorialStatus": "approved",
+    "editorialStatus": "blocked",
     "kind": "single",
     "topic": "kazakhstan",
     "difficulty": "Hard",
@@ -2482,6 +2578,7 @@
     "openAnswer": false,
     "explanationRu": "Трилогия рассказывает историю Казахского ханства от основания до Кенесары.",
     "sourceHint": "Википедия: Кочевники (трилогия)",
+    "reviewNote": "Снят 2026-11-12 по решению владельца: вопросы опирались на российские источники; переписать по казахстанским учебникам и материалам ЕНТ.",
     "origin": "authored",
     "license": "original"
   }

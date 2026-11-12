@@ -1,0 +1,401 @@
+[
+  {
+    "id": "tb-v5-sun-earths",
+    "prompt": "Представь, что Земли выкладывают в ряд вплотную, как бусины, прямо поперёк Солнца — от края до края через центр. Сколько Земель понадобится?",
+    "cardPrompt": "Сколько Земель в ряд уложатся поперёк Солнца?",
+    "unit": "Земель",
+    "answer": 109.2,
+    "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-11-19",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Средний радиус Солнца",
+          "value": 695700,
+          "unit": "км",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html",
+          "sourceTitle": "NASA — Sun Fact Sheet"
+        },
+        {
+          "label": "Средний радиус Земли",
+          "value": 6371,
+          "unit": "км",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+          "sourceTitle": "NASA — Earth Fact Sheet"
+        }
+      ],
+      "summary": "695 700 ÷ 6371 ≈ 109,2 Земли. А по объёму в Солнце влезло бы около 1,3 млн Земель."
+    }
+  },
+  {
+    "id": "tb-v5-kz-fields",
+    "prompt": "Сколько футбольных полей 105 × 68 м поместится по площади на территории Казахстана? Горы, озёра и города не мешают — считаем только площадь.",
+    "cardPrompt": "Сколько футбольных полей поместится в Казахстане?",
+    "unit": "полей",
+    "answer": 381638936,
+    "sourceUrl": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-11-20",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Площадь Казахстана",
+          "value": 2724902,
+          "unit": "км²",
+          "sourceUrl": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD",
+          "sourceTitle": "Википедия — Казахстан"
+        },
+        {
+          "label": "Площадь поля по условию",
+          "value": 7140,
+          "unit": "м²",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — перевод единиц"
+        }
+      ],
+      "summary": "2 724 902 км² = 2,72 трлн м²; ÷ 7140 ≈ 381,6 млн полей. Это примерно по 19 полей на каждого жителя страны."
+    }
+  },
+  {
+    "id": "tb-v5-count-billion",
+    "prompt": "Сколько лет уйдёт, чтобы досчитать до миллиарда, если называть одно число в секунду — без сна, еды и выходных?",
+    "cardPrompt": "Сколько лет считать до миллиарда?",
+    "unit": "лет",
+    "answer": 31.7,
+    "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-11-21",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Чисел по условию",
+          "value": 1000000000,
+          "unit": "",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Условие задачи"
+        },
+        {
+          "label": "Секунд в году (365,25 суток)",
+          "value": 31557600,
+          "unit": "с",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — day = 86 400 s"
+        }
+      ],
+      "summary": "1 000 000 000 ÷ 31 557 600 ≈ 31,7 года. На деле дольше: «семьсот сорок три миллиона…» за секунду не выговорить."
+    }
+  },
+  {
+    "id": "tb-v5-marathon-laps",
+    "prompt": "Сколько кругов по беговой дорожке стадиона длиной 400 м нужно пробежать, чтобы набрать полную марафонскую дистанцию?",
+    "cardPrompt": "Сколько кругов стадиона в одном марафоне?",
+    "unit": "кругов",
+    "answer": 105.5,
+    "sourceUrl": "https://worldathletics.org/about-iaaf/documents/book-of-rules",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-11-22",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Марафонская дистанция",
+          "value": 42195,
+          "unit": "м",
+          "sourceUrl": "https://worldathletics.org/about-iaaf/documents/book-of-rules",
+          "sourceTitle": "World Athletics — правила соревнований"
+        },
+        {
+          "label": "Круг стадиона по первой дорожке",
+          "value": 400,
+          "unit": "м",
+          "sourceUrl": "https://worldathletics.org/about-iaaf/documents/book-of-rules",
+          "sourceTitle": "World Athletics — правила соревнований"
+        }
+      ],
+      "summary": "42 195 ÷ 400 ≈ 105,5 круга. Лишние 195 м — наследие Олимпиады 1908 года: финиш поставили напротив королевской ложи."
+    }
+  },
+  {
+    "id": "tb-v5-walk-moon",
+    "prompt": "Если бы до Луны вела дорога, сколько дней пришлось бы идти по ней со скоростью 5 км/ч — без остановок на сон и еду? Расстояние бери среднее.",
+    "cardPrompt": "Сколько дней идти пешком до Луны?",
+    "unit": "дней",
+    "answer": 3203,
+    "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-11-23",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Среднее расстояние до Луны",
+          "value": 384400,
+          "unit": "км",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
+          "sourceTitle": "NASA — Moon Fact Sheet"
+        },
+        {
+          "label": "Скорость пешехода по условию",
+          "value": 5,
+          "unit": "км/ч",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Условие задачи"
+        }
+      ],
+      "summary": "384 400 ÷ 5 = 76 880 часов ≈ 3203 суток — почти 9 лет непрерывной ходьбы. Свет проходит этот путь за 1,3 секунды."
+    }
+  },
+  {
+    "id": "tb-v5-baiterek-everest",
+    "prompt": "Сколько монументов «Байтерек» высотой 105 м нужно поставить друг на друга, чтобы стопка от уровня моря сравнялась с вершиной Эвереста?",
+    "cardPrompt": "Сколько Байтереков в стопке достанут до вершины Эвереста?",
+    "unit": "Байтереков",
+    "answer": 84.3,
+    "sourceUrl": "https://govt.chinadaily.com.cn/s/202012/09/WS5fd09fc4498eaba5051bd741/qomolangma-remeasured-at-8-848-86-m.html",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-11-24",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Высота Эвереста (обмер Китая и Непала, 2020)",
+          "value": 8848.86,
+          "unit": "м",
+          "sourceUrl": "https://govt.chinadaily.com.cn/s/202012/09/WS5fd09fc4498eaba5051bd741/qomolangma-remeasured-at-8-848-86-m.html",
+          "sourceTitle": "China Daily — Qomolangma remeasured at 8,848.86 m"
+        },
+        {
+          "label": "Высота «Байтерека» с шаром",
+          "value": 105,
+          "unit": "м",
+          "sourceUrl": "https://www.inform.kz/ru/chto-my-znaem-o-monumente-astana-bayterek_a3277443",
+          "sourceTitle": "Казинформ — что мы знаем о монументе «Астана-Байтерек»"
+        }
+      ],
+      "summary": "8848,86 ÷ 105 ≈ 84,3 Байтерека. Шар верхнего оказался бы там, где воздух втрое реже, чем у земли."
+    }
+  },
+  {
+    "id": "tb-v5-billion-tenge",
+    "prompt": "Тебе дали миллиард тенге с одним условием: тратить ровно 100 000 тенге в день, каждый день. На сколько лет хватит денег? Проценты по вкладу не считаем.",
+    "cardPrompt": "Сколько лет тратить миллиард тенге по 100 тысяч в день?",
+    "unit": "лет",
+    "answer": 27.4,
+    "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-11-25",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Дней до конца денег",
+          "value": 10000,
+          "unit": "дней",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Расчёт по условию"
+        },
+        {
+          "label": "Суток в году",
+          "value": 365.25,
+          "unit": "сут",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — year (365.25 d)"
+        }
+      ],
+      "summary": "1 000 000 000 ÷ 100 000 = 10 000 дней ≈ 27,4 года. Миллион при таком темпе кончился бы за 10 дней."
+    }
+  },
+  {
+    "id": "tb-v5-lightning-day",
+    "prompt": "Сколько вспышек молний происходит на всей Земле за одни сутки? Считай в среднем за год, вместе с молниями внутри облаков.",
+    "cardPrompt": "Сколько молний сверкает на Земле за сутки?",
+    "unit": "вспышек",
+    "answer": 3801600,
+    "sourceUrl": "https://www.earthdata.nasa.gov/topics/atmosphere/lightning",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-11-26",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Средняя частота вспышек по спутникам NASA",
+          "value": 44,
+          "unit": "в секунду",
+          "sourceUrl": "https://www.earthdata.nasa.gov/topics/atmosphere/lightning",
+          "sourceTitle": "NASA Earthdata — Lightning: от 35 до 55 в секунду по сезонам"
+        },
+        {
+          "label": "Секунд в сутках",
+          "value": 86400,
+          "unit": "с",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — day = 86 400 s"
+        }
+      ],
+      "summary": "44 × 86 400 ≈ 3,8 млн вспышек в сутки. Летом в Северном полушарии их больше, зимой — около 3 млн."
+    }
+  },
+  {
+    "id": "tb-v5-germanies-kz",
+    "prompt": "Во сколько раз Казахстан больше Германии по площади? Иначе: сколько Германий поместится на его территории?",
+    "cardPrompt": "Сколько Германий поместится в Казахстане?",
+    "unit": "Германий",
+    "answer": 7.6,
+    "sourceUrl": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-11-27",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Площадь Казахстана",
+          "value": 2724902,
+          "unit": "км²",
+          "sourceUrl": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD",
+          "sourceTitle": "Википедия — Казахстан"
+        },
+        {
+          "label": "Площадь Германии",
+          "value": 357592,
+          "unit": "км²",
+          "sourceUrl": "https://ru.wikipedia.org/wiki/%D0%93%D0%B5%D1%80%D0%BC%D0%B0%D0%BD%D0%B8%D1%8F",
+          "sourceTitle": "Википедия — Германия"
+        }
+      ],
+      "summary": "2 724 902 ÷ 357 592 ≈ 7,6 Германии. Людей при этом в Германии в четыре с лишним раза больше."
+    }
+  },
+  {
+    "id": "tb-v5-chess-grains",
+    "prompt": "По легенде, изобретатель шахмат попросил у правителя награду: одно зерно на первую клетку доски, два — на вторую, четыре — на третью и так далее, удваивая. Сколько зёрен ляжет на последнюю, 64-ю клетку? Можно отвечать в виде 5e12.",
+    "cardPrompt": "Сколько зёрен окажется на последней клетке шахматной доски?",
+    "unit": "зёрен",
+    "answer": 9223372036854776000,
+    "sourceUrl": "https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B4%D0%B0%D1%87%D0%B0_%D0%BE_%D0%B7%D1%91%D1%80%D0%BD%D0%B0%D1%85_%D0%BD%D0%B0_%D1%88%D0%B0%D1%85%D0%BC%D0%B0%D1%82%D0%BD%D0%BE%D0%B9_%D0%B4%D0%BE%D1%81%D0%BA%D0%B5",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-11-28",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Удвоений от первой клетки до 64-й",
+          "value": 63,
+          "unit": "",
+          "sourceUrl": "https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B4%D0%B0%D1%87%D0%B0_%D0%BE_%D0%B7%D1%91%D1%80%D0%BD%D0%B0%D1%85_%D0%BD%D0%B0_%D1%88%D0%B0%D1%85%D0%BC%D0%B0%D1%82%D0%BD%D0%BE%D0%B9_%D0%B4%D0%BE%D1%81%D0%BA%D0%B5",
+          "sourceTitle": "Википедия — задача о зёрнах на шахматной доске"
+        }
+      ],
+      "summary": "2⁶³ ≈ 9,2 квинтиллиона зёрен — сотни миллиардов тонн, в сотни раз больше годового урожая риса всей планеты."
+    }
+  },
+  {
+    "id": "tb-v5-eiffel-phones",
+    "prompt": "Металлический каркас Эйфелевой башни весит 7300 тонн. Сколько смартфонов массой 170 г нужно, чтобы уравновесить его на гигантских весах?",
+    "cardPrompt": "Сколько смартфонов весят как Эйфелева башня?",
+    "unit": "смартфонов",
+    "answer": 42941176,
+    "sourceUrl": "https://www.toureiffel.paris/en/news/history-and-culture/15-essential-things-to-know-about-eiffel-tower",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-11-29",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Масса металлического каркаса башни",
+          "value": 7300,
+          "unit": "т",
+          "sourceUrl": "https://www.toureiffel.paris/en/news/history-and-culture/15-essential-things-to-know-about-eiffel-tower",
+          "sourceTitle": "Официальный сайт Эйфелевой башни"
+        },
+        {
+          "label": "Масса смартфона по условию",
+          "value": 0.17,
+          "unit": "кг",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Условие задачи"
+        }
+      ],
+      "summary": "7 300 000 кг ÷ 0,17 ≈ 42,9 млн смартфонов. А если переплавить весь её металл в плиту размером с основание башни, плита вышла бы толщиной всего около 6 см."
+    }
+  },
+  {
+    "id": "tb-v5-moons-earth",
+    "prompt": "Если бы Землю можно было наполнить, как мешок, сколько Лун поместилось бы внутри по объёму?",
+    "cardPrompt": "Сколько Лун поместится внутри Земли?",
+    "unit": "Лун",
+    "answer": 49.3,
+    "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-11-30",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Объём Земли",
+          "value": 1083210000000,
+          "unit": "км³",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+          "sourceTitle": "NASA — Earth Fact Sheet"
+        },
+        {
+          "label": "Объём Луны",
+          "value": 21968000000,
+          "unit": "км³",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
+          "sourceTitle": "NASA — Moon Fact Sheet"
+        }
+      ],
+      "summary": "108,321 ÷ 2,1968 ≈ 49,3 Луны. А по массе Земля тяжелее Луны в 81 раз: Луна заметно «рыхлее»."
+    }
+  },
+  {
+    "id": "tb-v5-heartbeats",
+    "prompt": "Сколько раз ударит сердце за 80 лет жизни, если оно бьётся ровно 70 раз в минуту — днём и ночью, без перерывов?",
+    "cardPrompt": "Сколько раз сердце ударит за 80 лет?",
+    "unit": "ударов",
+    "answer": 2945376000,
+    "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-12-01",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Ударов в сутки при 70 в минуту",
+          "value": 100800,
+          "unit": "",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Расчёт по условию"
+        },
+        {
+          "label": "Суток за 80 лет",
+          "value": 29220,
+          "unit": "сут",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — year (365.25 d)"
+        }
+      ],
+      "summary": "100 800 × 29 220 ≈ 2,95 млрд ударов. Каждые сутки сердце перекачивает несколько тонн крови."
+    }
+  },
+  {
+    "id": "tb-v5-sunlight-minutes",
+    "prompt": "Сколько минут летит свет от Солнца до Земли? То есть насколько «старое» Солнце мы видим, когда смотрим на небо.",
+    "cardPrompt": "Сколько минут летит до нас солнечный свет?",
+    "unit": "минут",
+    "answer": 8.32,
+    "sourceUrl": "https://www.iau.org/static/resolutions/IAU2012_English.pdf",
+    "asOfDate": "2026-11-12",
+    "activeDate": "2026-12-02",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Астрономическая единица",
+          "value": 149597870.7,
+          "unit": "км",
+          "sourceUrl": "https://www.iau.org/static/resolutions/IAU2012_English.pdf",
+          "sourceTitle": "МАС — резолюция B2 (2012)"
+        },
+        {
+          "label": "Скорость света",
+          "value": 299792.458,
+          "unit": "км/с",
+          "sourceUrl": "https://physics.nist.gov/cgi-bin/cuu/Value?c",
+          "sourceTitle": "NIST — speed of light in vacuum"
+        }
+      ],
+      "summary": "149 597 870,7 ÷ 299 792,458 ≈ 499 с ≈ 8,3 минуты. Погасни Солнце — мы бы узнали об этом только через 8 минут."
+    }
+  }
+]
