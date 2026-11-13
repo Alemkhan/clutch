@@ -108,3 +108,12 @@ export function shareViaTelegram(url: string, text: string): boolean {
   shareURL(url, text);
   return true;
 }
+
+/** Открыто ли приложение внутри Telegram (иначе — браузер или приложение из магазина). */
+export function isInsideTelegram(): boolean {
+  try {
+    return isTMA();
+  } catch {
+    return false;
+  }
+}

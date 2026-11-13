@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import type { Phase } from '../app/gameSession';
-import { whenTelegramCoreReady } from './telegram';
+import { browserHistoryAdapter, HistoryBackController } from './historyBack';
+import { isInsideTelegram, whenTelegramCoreReady } from './telegram';
 import {
   telegramBackAction,
   telegramBackButtonAdapter,
@@ -47,4 +48,25 @@ export function useTelegramBackButton(
   useEffect(() => {
     controllerRef.current?.setAction(action);
   }, [action]);
+
+  // Вне Telegram (браузер, приложение из магазина) роль системной «Назад» играет история браузера.
+  const blocking = phase === 'solo' && soloPlaying;
+  const historyRef = useRef<HistoryBackController | null>(null);
+  useEffect(() => {
+    if (isInsideTelegram()) return undefined;
+    const controller = new HistoryBackController(
+      browserHistoryAdapter,
+      (next: Exclude<TelegramBackAction, 'hidden'>) => callbacksRef.current[next](),
+    );
+    controller.mount();
+    historyRef.current = controller;
+    return () => {
+      controller.dispose();
+      historyRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    historyRef.current?.setState(action, blocking);
+  }, [action, blocking]);
 }
