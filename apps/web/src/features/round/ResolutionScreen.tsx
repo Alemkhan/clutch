@@ -40,6 +40,8 @@ interface ResolutionScreenProps {
   selectedAnswer?: string;
   /** Вторичное пояснение к уже явно названному правильному ответу. */
   explanation: string;
+  /** Изображение без замазанных подписей: в вопросе была маскированная копия. */
+  revealMediaUrl?: string;
   correct: boolean;
   /** Время вышло: ответа игрока нет, строка «Твой ответ» не нужна. */
   timedOut?: boolean;
@@ -56,6 +58,7 @@ export function ResolutionScreen({
   correctAnswer,
   selectedAnswer,
   explanation,
+  revealMediaUrl,
   correct,
   timedOut = false,
   onContinue,
@@ -108,6 +111,9 @@ export function ResolutionScreen({
         </div>
         <p className="resolution-message">{subtitle}</p>
       </div>
+      {revealMediaUrl && (
+        <img className="resolution-reveal" src={revealMediaUrl} alt="Символ без замазанных подписей" />
+      )}
       <div className="resolution-answers">
         {showMine && (
           <p className="resolution-answer selected">

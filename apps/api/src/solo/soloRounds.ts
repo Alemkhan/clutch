@@ -272,6 +272,7 @@ async function respondWithRound(
       ? { correctAnswers: question.correctAnswers ?? [] }
       : { correctOptionId: question.correctOptionId, selectedAnswer: row.selected_answer }),
     explanation: question.explanation,
+    ...(question.revealMediaUrl ? { revealMediaUrl: question.revealMediaUrl } : {}),
     awaitingHammer: !settled,
     skillResult: row.skill_result,
     progressAwarded: settled ? row.progress_awarded ?? 0 : 0,

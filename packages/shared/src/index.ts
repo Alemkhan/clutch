@@ -44,6 +44,11 @@ export interface Question {
   mediaType?: 'flag' | 'outline' | 'image' | null;
   mediaUrl?: string | null;
   mediaText?: string | null;
+  /**
+   * Изображение для разбора ответа, если в вопросе показана копия с замазанными подписями.
+   * Не уходит клиенту вместе с вопросом (его нет в PublicQuestion): только в вердикте.
+   */
+  revealMediaUrl?: string | null;
   status: 'draft' | 'approved';
   createdAt: string;
   lastVerifiedAt?: string;
@@ -236,6 +241,8 @@ export interface SoloRoundResponse {
   /** Только у открытого вопроса. */
   correctAnswers?: string[];
   explanation: string;
+  /** Открытое изображение для разбора: у вопроса, где в вопросе подписи были замазаны. */
+  revealMediaUrl?: string;
   awaitingHammer: boolean;
   skillResult: SkillResult | null;
   progressAwarded: number;
@@ -293,6 +300,7 @@ export interface TrainingCheckResponse {
   correctText?: string;
   correctAnswers?: string[];
   explanation: string;
+  revealMediaUrl?: string;
 }
 
 /** Исход партии глазами игрока: победа, поражение или ничья. */

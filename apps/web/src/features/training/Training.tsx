@@ -163,6 +163,7 @@ export function Training({ questions, check, onBack, exitLabel = 'На глав�
           correctAnswer={state.correctAnswer}
           selectedAnswer={state.lastCorrect ? undefined : selectedAnswer}
           explanation={state.explanation}
+          revealMediaUrl={state.revealMediaUrl}
           correct={state.lastCorrect}
           timedOut={state.selectedOption === '__timeout__'}
           variant="training"

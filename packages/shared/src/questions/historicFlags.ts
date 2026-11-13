@@ -8,6 +8,8 @@ export interface HistoricFlag {
   era: string;
   file?: string;
   mediaUrl?: string;
+  /** Unmasked image for the answer screen (the question shows a copy with captions masked). */
+  revealMediaUrl?: string;
   assetKind?: 'flag' | 'coat_of_arms';
   factRu: string;
   sourceUrl?: string;

@@ -96,12 +96,13 @@ export async function openSoloRun(c: AppContext, identity: RequestIdentity, runI
   const questions = storedQuestions.map((question) => {
     const canonical = resolveQuestionById(question.id);
     if (!canonical) return question;
-    const { mediaType: _oldMediaType, mediaUrl: _oldMediaUrl, mediaText: _oldMediaText, ...withoutMedia } = question;
+    const { mediaType: _oldMediaType, mediaUrl: _oldMediaUrl, mediaText: _oldMediaText, revealMediaUrl: _oldReveal, ...withoutMedia } = question;
     return {
       ...withoutMedia,
       ...(canonical.mediaType ? { mediaType: canonical.mediaType } : {}),
       ...(canonical.mediaUrl ? { mediaUrl: canonical.mediaUrl } : {}),
       ...(canonical.mediaText ? { mediaText: canonical.mediaText } : {}),
+      ...(canonical.revealMediaUrl ? { revealMediaUrl: canonical.revealMediaUrl } : {}),
     };
   });
   // Тренировка против бота доигрывается до конца: бот не запись игрока, исход не считается.

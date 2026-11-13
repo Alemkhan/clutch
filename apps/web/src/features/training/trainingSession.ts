@@ -17,6 +17,8 @@ export interface TrainingState {
   correctAnswer: string;
   /** Пояснение к сыгранному вопросу; приходит вместе с вердиктом сервера. */
   explanation: string;
+  /** Открытое изображение для разбора (в вопросе подписи были замазаны). */
+  revealMediaUrl?: string;
   /** Проверка не дошла до сервера: ответ сохранён, ждём повтора. */
   checkFailed: boolean;
 }
@@ -57,6 +59,7 @@ export function applyTrainingVerdict(state: TrainingState, verdict: TrainingChec
     lastCorrect: verdict.correct,
     correctAnswer: verdict.correctText ?? verdict.correctAnswers?.[0] ?? '',
     explanation: verdict.explanation,
+    revealMediaUrl: verdict.revealMediaUrl,
     correctCount: state.correctCount + (verdict.correct ? 1 : 0),
     checkFailed: false,
   };
@@ -83,5 +86,6 @@ export function continueTraining(state: TrainingState): TrainingState {
       selectedOption: '',
       correctAnswer: '',
       explanation: '',
+      revealMediaUrl: undefined,
     };
 }

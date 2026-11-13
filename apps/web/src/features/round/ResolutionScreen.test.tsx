@@ -211,3 +211,13 @@ describe('resolution layout and one-shot continue', () => {
     expect(findByClass(open, 'resolution-report-toggle')).toBeNull();
   });
 });
+
+describe('revealed symbol', () => {
+  it('shows the unmasked image only when the verdict carries one', () => {
+    const props = { correctAnswer: 'Герб Темиртау', explanation: 'x', correct: true, onContinue: () => {} };
+    expect(renderToStaticMarkup(<ResolutionScreen {...props} />)).not.toContain('resolution-reveal');
+    const html = renderToStaticMarkup(<ResolutionScreen {...props} revealMediaUrl="https://upload.wikimedia.org/a.png" />);
+    expect(html).toContain('class="resolution-reveal"');
+    expect(html).toContain('src="https://upload.wikimedia.org/a.png"');
+  });
+});

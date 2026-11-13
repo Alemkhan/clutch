@@ -102,11 +102,13 @@ export function registerTrainingRoutes(app: Hono<{ Bindings: Env }>): void {
         correct: isAnswerCorrect(body.answer, question.correctAnswers ?? []).correct,
         correctAnswers: question.correctAnswers ?? [],
         explanation: question.explanation,
+        ...(question.revealMediaUrl ? { revealMediaUrl: question.revealMediaUrl } : {}),
       }
       : {
         correct: body.answer === correctText(question),
         correctText: correctText(question),
         explanation: question.explanation,
+        ...(question.revealMediaUrl ? { revealMediaUrl: question.revealMediaUrl } : {}),
       };
     // Верный ответ гасит один долг в журнале; решённая ошибка уходит из доступных.
     if (response.correct) await payBackMistake(c.env.DB, identity.playerId, question.id, Date.now());

@@ -346,6 +346,7 @@ export function generateHistoricFlag(correct: HistoricFlag = pickOne(historicFla
     prompt: correct.assetKind === 'coat_of_arms' ? 'Что это за символ?' : 'Что это за флаг?',
     mediaType: 'flag',
     mediaUrl: historicFlagUrl(correct),
+    ...(correct.revealMediaUrl ? { revealMediaUrl: correct.revealMediaUrl } : {}),
     options,
     correctOptionId,
     explanation: `${correct.labelRu}, ${correct.era}. ${correct.factRu}`,

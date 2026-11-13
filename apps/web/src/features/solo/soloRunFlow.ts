@@ -68,6 +68,8 @@ export interface SoloFlowState {
   correctAnswer: string;
   /** Пояснение к текущему вопросу: приходит с вердиктом сервера, раньше его нет. */
   explanation: string;
+  /** Открытое изображение для разбора (в вопросе подписи были замазаны). */
+  revealMediaUrl?: string;
   correctCount: number;
   responseTimes: number[];
   skillResults: SkillResult[];
@@ -264,6 +266,7 @@ export function applySoloAnswerVerdict(state: Readonly<SoloFlowState>, response:
     lastCorrect: response.correct,
     correctAnswer,
     explanation: response.explanation,
+    revealMediaUrl: response.revealMediaUrl,
     correctCount: response.correct ? state.correctCount + 1 : state.correctCount,
     result: response.result ?? state.result,
   };

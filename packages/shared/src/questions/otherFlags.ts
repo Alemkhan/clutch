@@ -2,6 +2,8 @@
 // and state symbols for the live «Другие флаги» pool on 2026-11-01. Organisation marks
 // and explicitly blocked files remain inventory-only until their rights review is complete.
 import inventory from '../../../../content/other-flags/pending.json';
+// Masked copies served by the app (npm run content:other-flags:publish).
+import published from '../../../../content/other-flags/published.json';
 import type { HistoricFlagPool } from './historicFlags';
 
 type InventoryItem = {
@@ -23,6 +25,8 @@ type OtherHistoricFlag = {
   labelRu: string;
   era: string;
   mediaUrl: string;
+  /** Original Commons image for the answer screen; only when the question shows a masked copy. */
+  revealMediaUrl?: string;
   assetKind: 'flag' | 'coat_of_arms';
   factRu: string;
   sourceUrl: string;
@@ -43,11 +47,14 @@ const unique = [...new Map(items.map((item) => [`${item.group}:${item.labelRu}:$
 export const otherFlags: OtherHistoricFlag[] = unique.map((item) => {
   const kindRu = item.assetKind === 'coat_of_arms' ? 'Герб' : 'Флаг';
   const period = item.adoptedYear ? String(item.adoptedYear) : 'действует';
+  const local = (published as Record<string, { file: string; masked: boolean } | undefined>)[item.id];
   return {
     id: `other-${item.id.replace(/[^a-z0-9]+/gi, '-')}`.toLowerCase(),
     labelRu: `${kindRu} ${item.labelRu}`,
     era: period,
-    mediaUrl: item.asset.url,
+    // The question shows our copy with captions masked; the original is revealed after the answer.
+    mediaUrl: local ? `/flags-other/${local.file}` : item.asset.url,
+    ...(local?.masked ? { revealMediaUrl: item.asset.url } : {}),
     assetKind: item.assetKind,
     factRu: `${kindRu} ${item.labelRu}. Изображение: Wikimedia Commons (${item.asset.license}).`,
     sourceUrl: item.wikidataUrl,

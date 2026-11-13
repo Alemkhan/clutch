@@ -78,7 +78,8 @@ describe('generateQuestionById', () => {
   it('includes only reviewed free municipal and state symbols from the new inventory', () => {
     const added = historicFlags.filter((flag) => flag.id.startsWith('other-'));
     expect(added.length).toBeGreaterThanOrEqual(90);
-    expect(added.every((flag) => flag.mediaUrl?.startsWith('https://thumb.wikimedia.org/') || flag.mediaUrl?.startsWith('https://upload.wikimedia.org/'))).toBe(true);
+    // Своя копия с замазанными подписями (/flags-other/) или, если её ещё нет, исходник Commons.
+    expect(added.every((flag) => /^(\/flags-other\/|https:\/\/(thumb|upload)\.wikimedia\.org\/)/.test(flag.mediaUrl ?? ''))).toBe(true);
     expect(added.some((flag) => /миссисипи/i.test(flag.labelRu))).toBe(false);
     expect(added.some((flag) => /организац|юнеско|содружество|европейский союз/i.test(flag.labelRu))).toBe(false);
     expect(new Set(added.map((flag) => flag.labelRu)).size).toBe(added.length);

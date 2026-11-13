@@ -84,6 +84,7 @@ function RoundResolution({ props, state, view, question }: RoundStageProps) {
       correctAnswer={state.correctAnswer}
       selectedAnswer={state.lastCorrect ? undefined : selectedAnswer}
       explanation={state.explanation}
+      revealMediaUrl={state.revealMediaUrl}
       correct={state.lastCorrect}
       timedOut={state.selectedOption === "__timeout__"}
       final={soloRoundsLeft(view) <= 1}

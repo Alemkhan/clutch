@@ -22,6 +22,15 @@
   gap: 4px;
 }
 
+/* Открытая версия символа: в вопросе подписи были замазаны. Небольшая, чтобы не вытеснять ответ. */
+.resolution-reveal {
+  display: block;
+  align-self: center;
+  max-width: min(100%, 220px);
+  max-height: 180px;
+  object-fit: contain;
+}
+
 .resolution-status {
   font-family: var(--font-display);
   font-weight: 900;
