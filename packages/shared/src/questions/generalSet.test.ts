@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { clearDailyBankCache, dailyBankSize, dailyQuestionBank, dailyQuestionSet } from '../solo/dailyQuestionSet';
-import { buildGeneralSet, livePackRecords } from './generalSet';
+import {
+  BALANCED_TOPICS_FROM,
+  GENERAL_SET_TOPIC_CAP,
+  buildGeneralSet,
+  livePackRecords,
+  questionTopicKey,
+  spreadTopics,
+} from './generalSet';
 import { generalPackQuestions } from '../generalPack';
 import { generateMatch } from './questionGenerator';
 
@@ -65,5 +72,41 @@ describe('general daily set', () => {
   it('is not served by generateMatch', () => {
     expect(() => generateMatch(10, 0.3, 'general')).toThrow(RangeError);
     expect(generalPackQuestions.length).toBeGreaterThan(0);
+  });
+});
+
+describe('topic balance of the general set', () => {
+  const BALANCED_DAY = Date.UTC(2026, 10, 15, 10);
+
+  it('never puts two questions of one topic next to each other and caps a topic at 3 pack questions', () => {
+    for (let day = 0; day < 14; day++) {
+      clearDailyBankCache();
+      for (const { questions } of dailyQuestionBank('general', BALANCED_DAY + day * 86_400_000)) {
+        const keys = questions.map(questionTopicKey);
+        keys.slice(1).forEach((key, index) => expect(key).not.toBe(keys[index]));
+        const packTopics = new Map<string, number>();
+        for (const q of questions.filter((item) => item.id.startsWith('gp:'))) {
+          packTopics.set(questionTopicKey(q), (packTopics.get(questionTopicKey(q)) ?? 0) + 1);
+        }
+        expect(Math.max(...packTopics.values())).toBeLessThanOrEqual(GENERAL_SET_TOPIC_CAP);
+      }
+    }
+  });
+
+  it('keeps the sets of earlier days exactly as they were played', () => {
+    // 2026-11-14: до включения баланса. Порядок этого набора уже в таблице дня.
+    const before = buildGeneralSet('general:2026-11-14:0', '2026-11-14').map(questionTopicKey);
+    expect(before.slice(0, 4)).toEqual(['Наука', 'Наука', 'Наука', 'Наука']);
+    expect(BALANCED_TOPICS_FROM).toBe('2026-11-15');
+  });
+
+  it('spreads topics deterministically and leaves a single-topic list as is', () => {
+    const items = ['a1', 'a2', 'a3', 'b1', 'b2', 'c1'];
+    const key = (item: string) => item[0];
+    const spread = spreadTopics(items, key);
+    expect(spread).toEqual(spreadTopics(items, key));
+    expect([...spread].sort()).toEqual([...items].sort());
+    spread.slice(1).forEach((item, index) => expect(key(item)).not.toBe(key(spread[index])));
+    expect(spreadTopics(['x1', 'x2'], key)).toEqual(['x1', 'x2']);
   });
 });

@@ -25,6 +25,65 @@ export const GENERAL_SET_GENERATED: ReadonlyArray<{ category: 'geography' | 'his
 /** Доля открытых ответов внутри генераторной части, как у остальных наборов дня. */
 const GENERATED_OPEN_RATIO = 0.3;
 
+/**
+ * С этого дня набор общего режима ровнее по темам: в пакетной части не больше
+ * `GENERAL_SET_TOPIC_CAP` вопросов одной темы (наука — почти треть пула и давала по 6–7 за набор),
+ * и вопросы одной темы не идут подряд. Более ранние дни собираются по-старому: таблица дня
+ * сравнивает забеги одного набора, и уже сыгранные наборы меняться не должны.
+ */
+export const BALANCED_TOPICS_FROM = '2026-11-15';
+export const GENERAL_SET_TOPIC_CAP = 3;
+
+/** Тема вопроса для разведения: подкатегория (тема пакета или раздел генератора). */
+export function questionTopicKey(question: Pick<Question, 'category' | 'subcategory'>): string {
+  return question.subcategory ?? question.category;
+}
+
+/**
+ * Дневной порядок пула с потолком тем: каждые `chunk` позиций (ровно окно одного набора) берут
+ * не больше `cap` записей одной темы. Лишние уходят дальше по очереди, а не выпадают: это
+ * перестановка, окна наборов по-прежнему не пересекаются. Если подходящей записи нет (маленький
+ * пул), берётся первая — набор всё равно полный.
+ */
+function capTopicsPerChunk(order: readonly PackRecord[], chunk: number, cap: number): PackRecord[] {
+  const queue = [...order];
+  const out: PackRecord[] = [];
+  let counts = new Map<string, number>();
+  while (queue.length > 0) {
+    if (out.length % chunk === 0) counts = new Map();
+    let index = queue.findIndex((record) => (counts.get(record.topic) ?? 0) < cap);
+    if (index < 0) index = 0;
+    const [record] = queue.splice(index, 1);
+    counts.set(record.topic, (counts.get(record.topic) ?? 0) + 1);
+    out.push(record);
+  }
+  return out;
+}
+
+/**
+ * Разводит вопросы одной темы: каждый следующий — первый по порядку, чья тема не совпадает с двумя
+ * предыдущими, иначе хотя бы с предыдущим. Если тема занимает больше половины остатка, она идёт
+ * сейчас, чтобы в конце не остался хвост из одной темы. Детерминирован: зависит только от входа.
+ */
+export function spreadTopics<T>(items: readonly T[], keyOf: (item: T) => string): T[] {
+  const rest = [...items];
+  const out: T[] = [];
+  while (rest.length > 0) {
+    const last = out.length > 0 ? keyOf(out[out.length - 1]) : undefined;
+    const beforeLast = out.length > 1 ? keyOf(out[out.length - 2]) : undefined;
+    const counts = new Map<string, number>();
+    for (const item of rest) counts.set(keyOf(item), (counts.get(keyOf(item)) ?? 0) + 1);
+    const [dominant, dominantCount] = [...counts].reduce((best, entry) => (entry[1] > best[1] ? entry : best));
+    let index = dominantCount * 2 > rest.length && dominant !== last
+      ? rest.findIndex((item) => keyOf(item) === dominant)
+      : rest.findIndex((item) => keyOf(item) !== last && keyOf(item) !== beforeLast);
+    if (index < 0) index = rest.findIndex((item) => keyOf(item) !== last);
+    if (index < 0) index = 0;
+    out.push(rest.splice(index, 1)[0]);
+  }
+  return out;
+}
+
 function shuffled<T>(items: readonly T[], seed: string): T[] {
   const random = createSeededRandom(hashSeed(seed));
   const out = [...items];
@@ -70,7 +129,13 @@ export function isCategoryOpen(category: CategoryId, kzPool: readonly PackRecord
  * по `general:<dateKey>` пул; если одобренных записей не хватает на весь банк, список идёт по кругу,
  * и каждый следующий круг перемешивается своим сидом (`...:cycle<n>`). Запись в окне не повторяется.
  */
-function packWindow(pool: readonly PackRecord[], base: string, start: number, count: number): PackRecord[] {
+function packWindow(
+  pool: readonly PackRecord[],
+  base: string,
+  start: number,
+  count: number,
+  topicCap?: { chunk: number; cap: number },
+): PackRecord[] {
   if (pool.length === 0) return [];
   const cycles = new Map<number, PackRecord[]>();
   const at = (position: number): PackRecord => {
@@ -78,6 +143,7 @@ function packWindow(pool: readonly PackRecord[], base: string, start: number, co
     let order = cycles.get(cycle);
     if (!order) {
       order = shuffled(pool, cycle === 0 ? base : `${base}:cycle${cycle}`);
+      if (topicCap) order = capTopicsPerChunk(order, topicCap.chunk, topicCap.cap);
       cycles.set(cycle, order);
     }
     return order[position % pool.length];
@@ -143,7 +209,14 @@ export function buildGeneralSet(
   pool: readonly PackRecord[] = livePackRecords(),
 ): Question[] {
   const index = setIndexOf(questionSetId);
-  const records = packWindow(pool, `general:${dateKey}`, index * GENERAL_SET_PACK_COUNT, GENERAL_SET_PACK_COUNT);
+  const balanced = dateKey >= BALANCED_TOPICS_FROM;
+  const records = packWindow(
+    pool,
+    `general:${dateKey}`,
+    index * GENERAL_SET_PACK_COUNT,
+    GENERAL_SET_PACK_COUNT,
+    balanced ? { chunk: GENERAL_SET_PACK_COUNT, cap: GENERAL_SET_TOPIC_CAP } : undefined,
+  );
   const packQuestions = packRaceQuestions(records, questionSetId, GENERAL_SET_OPEN_COUNT);
 
   const generated = GENERAL_SET_GENERATED.flatMap(({ category, count }) =>
@@ -152,5 +225,6 @@ export function buildGeneralSet(
 
   // createdAt is wall-clock in the generators; pin it so the set is byte-identical for everyone.
   const createdAt = `${dateKey}T00:00:00.000Z`;
-  return shuffled([...packQuestions, ...generated], `${questionSetId}:order`).map((q) => ({ ...q, createdAt }));
+  const order = shuffled([...packQuestions, ...generated], `${questionSetId}:order`);
+  return (balanced ? spreadTopics(order, questionTopicKey) : order).map((q) => ({ ...q, createdAt }));
 }
