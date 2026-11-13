@@ -1,0 +1,19 @@
+{
+  "name": "@clutch/mobile",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Оболочка Clutch для Google Play и App Store (Capacitor). Своего кода игры нет: берёт сборку apps/web.",
+  "scripts": {
+    "build:web": "npm run build --workspace @clutch/web",
+    "sync": "cap sync",
+    "android": "cap open android",
+    "run:android": "cap run android"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.6.0",
+    "@capacitor/core": "8.6.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.6.0"
+  }
+}

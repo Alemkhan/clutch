@@ -25,7 +25,7 @@
     "reports:pull": "node scripts/reports-pull.mjs",
     "test:smoke:local": "node scripts/smoke-local.mjs",
     "smoke:remote": "node scripts/smoke-remote.mjs",
-    "typecheck": "npm run typecheck --workspaces",
+    "typecheck": "npm run typecheck --workspaces --if-present",
     "content:check": "vitest run packages/shared/src/generalPack scripts/content/question-builder.test.mjs",
     "content:import": "node scripts/content/import.mjs",
     "content:builder": "node scripts/content/question-builder.mjs",
@@ -38,7 +38,8 @@
     "content:paintings": "node scripts/content/painting-images.mjs",
     "content:review": "node scripts/content/review.mjs",
     "content:approve": "node scripts/content/approve.mjs",
-    "telegram:widget": "vite-node scripts/telegram/widget-try.ts"
+    "telegram:widget": "vite-node scripts/telegram/widget-try.ts",
+    "mobile:android": "npm run build --workspace @clutch/web && npm run sync --workspace @clutch/mobile"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Clutch</string>
+    <string name="title_activity_main">Clutch</string>
+    <string name="package_name">com.kettikteam.clutch</string>
+    <string name="custom_url_scheme">com.kettikteam.clutch</string>
+</resources>
