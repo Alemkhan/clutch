@@ -101,7 +101,7 @@ function opponentAnswering(name: string, answers: Record<number, { answer: strin
 describe('last stand: start', () => {
   it('returns the agreed shape with two bots and no roster', async () => {
     const db = database();
-    const run = await startRun(db, 'alem', 'Алем');
+    const run = await startRun(db, 'alem', 'Игрок a1e0');
     expect(Object.keys(run).sort()).toEqual(['authorization', 'dateKey', 'opponents', 'playerId', 'round', 'runId']);
     expect(run.dateKey).toBe(today);
     expect(run.runId).toMatch(/^[0-9a-f-]{36}$/);
@@ -361,23 +361,23 @@ describe('last stand: pool, leaderboard, ranking', () => {
 
   it('orders by survived, then earliest completion, one entry per player; only the first finished run counts', async () => {
     const db = database();
-    const a = await startRun(db, 'a', 'Алем');
+    const a = await startRun(db, 'a', 'Игрок a1e0');
     await finish(db, a, 3);
     vi.setSystemTime(new Date(`${today}T12:01:00.000Z`));
-    const b = await startRun(db, 'b', 'Борис');
+    const b = await startRun(db, 'b', 'Игрок b0b1');
     await finish(db, b, 5);
     vi.setSystemTime(new Date(`${today}T12:02:00.000Z`));
-    const c = await startRun(db, 'c', 'Вера');
+    const c = await startRun(db, 'c', 'Игрок be4a');
     await finish(db, c, 5);
     vi.setSystemTime(new Date(`${today}T12:03:00.000Z`));
-    const again = await startRun(db, 'a', 'Алем');
+    const again = await startRun(db, 'a', 'Игрок a1e0');
     await finish(db, again, 9);
 
     const response = await board(db, 'a');
     expect(response.status).toBe(200);
     const body = await response.json() as Json;
     expect(body.dateKey).toBe(today);
-    expect(body.entries.map((e: Json) => [e.displayName, e.survived])).toEqual([['Борис', 5], ['Вера', 5], ['Алем', 3]]);
+    expect(body.entries.map((e: Json) => [e.displayName, e.survived])).toEqual([['Игрок b0b1', 5], ['Игрок be4a', 5], ['Игрок a1e0', 3]]);
     expect(typeof body.entries[0].completedAt).toBe('number');
     const flags = db.sqlite.prepare('SELECT counts_for_board AS f FROM last_stand_runs WHERE id = ?').get(again.runId) as { f: number };
     expect(flags.f).toBe(0);
@@ -404,35 +404,35 @@ describe('last stand: pool, leaderboard, ranking', () => {
 
   it('serves a real record as an opponent, tops up with a bot, and never repeats the same record', async () => {
     const db = database();
-    const a = await startRun(db, 'a', 'Алем');
+    const a = await startRun(db, 'a', 'Игрок a1e0');
     await finish(db, a, 2);
     vi.setSystemTime(new Date(`${today}T12:05:00.000Z`));
-    const b = await startRun(db, 'b', 'Борис');
+    const b = await startRun(db, 'b', 'Игрок b0b1');
     expect(b.opponents).toHaveLength(2);
     expect(b.opponents.map((o: Json) => o.source).sort()).toEqual(['bot', 'player']);
-    expect(b.opponents.find((o: Json) => o.source === 'player').displayName).toBe('Алем');
+    expect(b.opponents.find((o: Json) => o.source === 'player').displayName).toBe('Игрок a1e0');
     const stored = JSON.parse((db.sqlite.prepare('SELECT opponents_json AS j FROM last_stand_runs WHERE id = ?').get(b.runId) as { j: string }).j) as LastStandOpponent[];
     const record = stored.find((o) => o.source === 'player')!;
     expect(record.runId).toBe(a.runId);
     expect(record.answers[0]).toEqual({ answer: members(0)[0], atMs: 2000 });
     expect(record.answers[5]).toBeNull();
     // Second run of b: the record was already faced; two bots.
-    const b2 = await startRun(db, 'b', 'Борис');
+    const b2 = await startRun(db, 'b', 'Игрок b0b1');
     expect(b2.opponents.every((o: Json) => o.source === 'bot')).toBe(true);
     // Own records are never served to the owner.
-    const a2 = await startRun(db, 'a', 'Алем');
-    expect(a2.opponents.some((o: Json) => o.displayName === 'Алем')).toBe(false);
+    const a2 = await startRun(db, 'a', 'Игрок a1e0');
+    expect(a2.opponents.some((o: Json) => o.displayName === 'Игрок a1e0')).toBe(false);
   });
 
   it('a record blocks regardless of who was faster', async () => {
     const db = database();
     const [first] = members(0);
-    const c = await startRun(db, 'c', 'Вера');
-    setOpponents(db, c.runId, [opponentAnswering('Алем', { 0: { answer: first, atMs: 2000 } }), emptyOpponent('Max')]);
+    const c = await startRun(db, 'c', 'Игрок be4a');
+    setOpponents(db, c.runId, [opponentAnswering('Игрок a1e0', { 0: { answer: first, atMs: 2000 } }), emptyOpponent('Max')]);
     expect(((await (await answer(db, c, memberNameRu(planForDate(today)[0], first), 2000)).json()) as Json).status).toBe('occupied');
     expect(((await (await answer(db, c, memberNameRu(planForDate(today)[0], first), 600)).json()) as Json).status).toBe('occupied');
     const d = await startRun(db, 'd', 'Дима');
-    setOpponents(db, d.runId, [opponentAnswering('Алем', { 0: { answer: first, atMs: 2000 } }), emptyOpponent('Max')]);
+    setOpponents(db, d.runId, [opponentAnswering('Игрок a1e0', { 0: { answer: first, atMs: 2000 } }), emptyOpponent('Max')]);
     expect(((await (await answer(db, d, memberNameRu(planForDate(today)[0], first), 2001)).json()) as Json).status).toBe('occupied');
   });
 });

@@ -1,6 +1,12 @@
 const TOKEN_VERSION = 1;
 const MIN_SECRET_LENGTH = 32;
 export const GUEST_SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+/**
+ * Сколько после истечения токен ещё можно обменять на новый с тем же игроком. Без этого гость,
+ * не заходивший неделю, терял прогресс; в приложении из магазина так быть не должно. Для обычных
+ * запросов истёкший токен по-прежнему недействителен.
+ */
+export const GUEST_RENEWAL_GRACE_MS = 365 * 24 * 60 * 60 * 1000;
 
 interface GuestTokenPayload {
   v: 1;
@@ -96,6 +102,7 @@ export async function verifyGuestToken(
   token: string,
   secret: string | undefined,
   nowMs = Date.now(),
+  { renewalGraceMs = 0 }: { renewalGraceMs?: number } = {},
 ): Promise<{ playerId: string; expiresAt: number } | null> {
   if (!validSecret(secret) || typeof token !== 'string' || token.length > 2048
     || !Number.isSafeInteger(nowMs) || nowMs <= 0) return null;
@@ -108,7 +115,8 @@ export async function verifyGuestToken(
   if (!equalBytes(expectedSignature, receivedSignature)) return null;
   const payload = parsePayload(payloadBytes);
   const nowSeconds = Math.floor(nowMs / 1000);
-  if (!payload || payload.iat > nowSeconds + 300 || payload.exp <= nowSeconds) return null;
+  if (!payload || payload.iat > nowSeconds + 300
+    || payload.exp + Math.floor(renewalGraceMs / 1000) <= nowSeconds) return null;
   return { playerId: `guest:${payload.sub}`, expiresAt: payload.exp * 1000 };
 }
 

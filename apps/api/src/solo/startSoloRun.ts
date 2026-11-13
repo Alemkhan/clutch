@@ -1,4 +1,5 @@
 import { findChallenge, findEntry } from '../groupChallenges/repository';
+import { playerDisplayName } from '../auth/displayName';
 import {
   GROUP_CHALLENGE_RULES_VERSION,
   DAILY_RULES_VERSION,
@@ -193,7 +194,7 @@ async function startPracticeRun(
   await createSoloRun(c.env.DB, {
     id: runId,
     playerId: identity.playerId,
-    displayName: identity.displayName || request.displayName.trim(),
+    displayName: playerDisplayName(identity, request.displayName),
     category: request.category,
     questionSetId,
     miniGameId,
@@ -265,7 +266,7 @@ async function startMatchedRun(
     await createSoloRun(c.env.DB, {
       id: runId,
       playerId: identity.playerId,
-      displayName: identity.displayName || request.displayName.trim(),
+      displayName: playerDisplayName(identity, request.displayName),
       category: mode.category,
       questionSetId,
       miniGameId,
@@ -319,7 +320,7 @@ async function startGroupRun(c: AppContext, identity: RequestIdentity, request: 
   if (challenge.expires_at <= now) return c.json({error:'Challenge expired.',reason:'expired'},410);
   const record = await findRecordRun(c.env.DB,challenge.creator_run_id,[DUEL_RULES_VERSION,FREE_RULES_VERSION]);
   if (!record) return c.json({error:'Source record is unavailable.',reason:'source_unavailable'},410);
-  await createSoloRun(c.env.DB,{id:runId,playerId:identity.playerId,displayName:identity.displayName || request.displayName.trim(),
+  await createSoloRun(c.env.DB,{id:runId,playerId:identity.playerId,displayName:playerDisplayName(identity, request.displayName),
     category:challenge.category,questionSetId:record.questionSetId,miniGameId:record.row.mini_game_id as MiniGameId,
     questions:record.questions,paceRunId:record.row.id,pace:record.opponent,rulesVersion:GROUP_CHALLENGE_RULES_VERSION,now});
   try {

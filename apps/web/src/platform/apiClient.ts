@@ -8,6 +8,8 @@ const DISPLAY_NAME_SEED_KEY = 'clutch_display_name_seed_v1';
 const PLAYER_NAME_KEY = 'clutch_player_name_v1';
 const GUEST_SESSION_KEY = 'clutch_guest_session_v1';
 const SESSION_REFRESH_WINDOW_MS = 5 * 60 * 1000;
+/** Как GUEST_RENEWAL_GRACE_MS на сервере: истёкший токен ещё год меняется на новый с тем же игроком. */
+const GUEST_RENEWAL_GRACE_MS = 365 * 24 * 60 * 60 * 1000;
 export const WIKI_PATH_REQUEST_TIMEOUT_MS = 15_000;
 const DEFAULT_REQUEST_TIMEOUT_MS = 5_000;
 
@@ -130,7 +132,7 @@ export function isGuestSessionShape(value: unknown): value is GuestSessionRespon
 }
 
 export function guestRenewalAuthorization(value: unknown, nowMs = Date.now()): string | null {
-  return isGuestSessionShape(value) && value.expiresAt > nowMs
+  return isGuestSessionShape(value) && value.expiresAt + GUEST_RENEWAL_GRACE_MS > nowMs
     ? `Bearer ${value.token}`
     : null;
 }
@@ -198,4 +200,15 @@ export async function apiFetch<T>(
     headers: { ...init.headers, Authorization: authorization },
     signal,
   }, timeoutMs);
+}
+
+/** После удаления аккаунта: следующий запрос получит нового гостя, а не воскресит удалённого. */
+export function forgetLocalPlayer(): void {
+  memoryGuestSession = null;
+  guestSessionRequest = null;
+  try {
+    for (const key of [GUEST_SESSION_KEY, PLAYER_NAME_KEY, DISPLAY_NAME_SEED_KEY]) localStorage.removeItem(key);
+  } catch {
+    // Storage may be unavailable; the in-memory session is already gone.
+  }
 }

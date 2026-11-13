@@ -109,6 +109,19 @@ export function createTestD1(current = true): TestD1 {
     prepare(query: string) {
       return new SQLiteD1Statement(sqlite, query) as unknown as D1PreparedStatement;
     },
-  } as D1Database;
+    /** Как в D1: все выражения в одной транзакции, при ошибке ничего не применяется. */
+    async batch(statements: D1PreparedStatement[]) {
+      sqlite.exec('BEGIN');
+      try {
+        const results = [];
+        for (const statement of statements) results.push(await statement.run());
+        sqlite.exec('COMMIT');
+        return results;
+      } catch (error) {
+        sqlite.exec('ROLLBACK');
+        throw error;
+      }
+    },
+  } as unknown as D1Database;
   return { binding, sqlite };
 }

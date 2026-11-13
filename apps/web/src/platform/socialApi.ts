@@ -1,5 +1,5 @@
 import type { CategoryId, CreateFriendInviteResponse, CreateRematchInviteResponse, DuelBoardResponse, PreparedShareResponse, SoloLeaderboardResponse } from '@clutch/shared';
-import { apiFetch } from './apiClient';
+import { apiFetch, forgetLocalPlayer } from './apiClient';
 
 // ---- Rematch and notifications ----
 
@@ -55,4 +55,12 @@ export function fetchDailyNotifications(signal?: AbortSignal): Promise<{ enabled
 
 export function setDailyNotifications(enabled: boolean): Promise<{ enabled: boolean }> {
   return apiFetch('/api/notifications/daily', { method: 'PUT', body: JSON.stringify({ enabled }) });
+}
+
+// ---- Account ----
+
+/** Удаляет аккаунт на сервере, затем забывает гостевую сессию и имя на этом устройстве. */
+export async function deleteAccount(): Promise<void> {
+  await apiFetch<{ deleted: true }>('/api/account', { method: 'DELETE', body: JSON.stringify({ confirm: 'delete' }) });
+  forgetLocalPlayer();
 }

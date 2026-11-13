@@ -128,11 +128,14 @@ async function openInvite(db: TestD1): Promise<void> {
   });
 }
 
+/** Гость не задаёт имя сам: сервер принимает только сгенерированное «Игрок xxxx». */
+const guestName = (label: string) => `Игрок ${Buffer.from(label).toString('hex').padEnd(4, '0').slice(0, 4)}`;
+
 async function playFriend(db: TestD1, label = 'bob') {
   insertRecord(db, 'ann-run', AUTHOR);
   await openInvite(db);
   const started = await call(db, label, '/api/solo-runs', {
-    displayName: label, category: 'geography', mode: 'duel', rematchInviteId: OPEN_INVITE,
+    displayName: guestName(label), category: 'geography', mode: 'duel', rematchInviteId: OPEN_INVITE,
   });
   expect(started.status).toBe(201);
   const run = await started.json() as StartSoloRunResponse;
@@ -244,7 +247,7 @@ describe('friend duel: the duel itself still counts', () => {
     const hosted = summaries.find((summary) => summary.runId === run.runId);
     expect(hosted).toMatchObject({ friendDuel: 'hosted' });
     expect(hosted?.outcome).toBe(invertOutcome(result.outcome!));
-    expect(hosted?.opponent?.displayName).toBe('bob');
+    expect(hosted?.opponent?.displayName).toBe(guestName('bob'));
     // Собственная запись автора остаётся обычной партией.
     expect(summaries.find((summary) => summary.runId === 'ann-run')?.friendDuel).toBeNull();
 

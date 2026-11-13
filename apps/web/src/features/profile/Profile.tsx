@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { SoloProfileResponse } from '@clutch/shared';
-import { fetchDailyNotifications, fetchSoloProfile, setDailyNotifications } from '../../platform/api';
+import { deleteAccount, fetchDailyNotifications, fetchSoloProfile, setDailyNotifications } from '../../platform/api';
 import { soloRoundsText } from '../myRuns/myRunsView';
 import { getTelegramIdentity } from '../../platform/telegram';
 import { SoundToggle } from '../../ui/SoundToggle';
@@ -60,6 +60,42 @@ export function DailyNotificationsToggle() {
   </>;
 }
 
+type DeleteState = 'idle' | 'confirm' | 'deleting' | 'error';
+
+/** Удаление аккаунта: требование App Store и Google Play. Два шага, чтобы не стереть случайным тапом. */
+export function DeleteAccountSection({ onDeleted = () => window.location.reload() }: { onDeleted?: () => void }) {
+  const [state, setState] = useState<DeleteState>('idle');
+  const remove = () => {
+    setState('deleting');
+    deleteAccount().then(onDeleted, () => setState('error'));
+  };
+
+  if (state === 'idle') {
+    return (
+      <button type="button" className="profile-delete-link" onClick={() => setState('confirm')}>
+        Удалить аккаунт
+      </button>
+    );
+  }
+  return (
+    <div className="profile-delete-box" role="group" aria-label="Удаление аккаунта">
+      <p className="profile-delete-text">
+        Удалим статистику, историю забегов, ошибки и настройки уведомлений. Твои забеги в чужих дуэлях
+        останутся у соперников, но без имени. Отменить это нельзя.
+      </p>
+      {state === 'error' && <p className="profile-setting-error" role="alert">Не получилось удалить. Проверь соединение и попробуй ещё раз.</p>}
+      <div className="profile-delete-actions">
+        <button type="button" className="profile-delete-confirm" disabled={state === 'deleting'} onClick={remove}>
+          {state === 'deleting' ? 'Удаляем…' : 'Удалить навсегда'}
+        </button>
+        <button type="button" className="profile-delete-cancel" disabled={state === 'deleting'} onClick={() => setState('idle')}>
+          Отмена
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function ProfileView({ playerName, state, onRetry, telegram = false }: ProfileViewProps) {
   const empty = state.status === 'ready' && state.profile.completedRuns === 0;
 
@@ -109,6 +145,7 @@ export function ProfileView({ playerName, state, onRetry, telegram = false }: Pr
       {telegram
         ? <DailyNotificationsToggle />
         : <p className="profile-tag">Ежедневные сообщения доступны внутри Telegram.</p>}
+      <DeleteAccountSection />
     </section>
   );
 }

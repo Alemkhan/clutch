@@ -21,10 +21,12 @@ describe('browser guest session validity', () => {
     expect(isGuestSessionUsable({ token: 'token', expiresAt: 'later' }, now)).toBe(false);
   });
 
-  it('renews with the prior bearer only while the cached session is unexpired', () => {
+  it('renews with the prior bearer for up to a year after it expired', () => {
     const session = { token: 'prior-token', expiresAt: now + 1 };
+    const year = 365 * 24 * 60 * 60 * 1000;
     expect(guestRenewalAuthorization(session, now)).toBe('Bearer prior-token');
-    expect(guestRenewalAuthorization({ ...session, expiresAt: now }, now)).toBeNull();
+    expect(guestRenewalAuthorization({ ...session, expiresAt: now - 30 * 24 * 60 * 60 * 1000 }, now)).toBe('Bearer prior-token');
+    expect(guestRenewalAuthorization({ ...session, expiresAt: now - year }, now)).toBeNull();
     expect(guestRenewalAuthorization({ token: '', expiresAt: now + 1 }, now)).toBeNull();
   });
 });

@@ -1,6 +1,6 @@
 import type { GuestSessionResponse } from '@clutch/shared';
 import type { Hono } from 'hono';
-import { hasValidSessionSecret, issueGuestSession, verifyGuestToken } from './guest';
+import { GUEST_RENEWAL_GRACE_MS, hasValidSessionSecret, issueGuestSession, verifyGuestToken } from './guest';
 import type { Env } from '../env';
 import {
   checkRateLimit,
@@ -30,7 +30,9 @@ export function registerAuthRoutes(app: Hono<{ Bindings: Env }>): void {
     if (authorization) {
       const bearer = /^bearer ([^\s]+)$/iu.exec(authorization);
       if (!bearer) return c.json({ error: 'Invalid guest session.' }, 401);
-      const current = await verifyGuestToken(bearer[1], c.env.SESSION_SIGNING_SECRET);
+      const current = await verifyGuestToken(bearer[1], c.env.SESSION_SIGNING_SECRET, Date.now(), {
+        renewalGraceMs: GUEST_RENEWAL_GRACE_MS,
+      });
       if (!current) return c.json({ error: 'Invalid guest session.' }, 401);
       subject = current.playerId.slice('guest:'.length);
     }

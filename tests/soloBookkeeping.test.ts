@@ -358,7 +358,7 @@ describe('матч — это пара', () => {
 
     const rival = guest('rival');
     const rivalStart = await request(db, '/api/solo-runs', rival.authorization, {
-      displayName: 'Друг', category: 'geography', mode: 'duel',
+      displayName: 'Игрок d0d0', category: 'geography', mode: 'duel',
     });
     const rivalRun = await rivalStart.json() as StartSoloRunResponse;
     expect(rivalRun.pace?.id).toBe(ownerRun.runId);
@@ -375,7 +375,7 @@ describe('матч — это пара', () => {
     const runs = (await mine.json() as { runs: Array<{ runId: string; opponent: { displayName: string } | null; outcome: string | null }> }).runs;
     const row = runs.find((entry) => entry.runId === ownerRun.runId)!;
     // Раньше здесь было «Победа» без имени: своя строка не знала, кто её сыграл.
-    expect(row.opponent?.displayName).toBe('Друг');
+    expect(row.opponent?.displayName).toBe('Игрок d0d0');
     expect(row.outcome).not.toBeNull();
   });
 });

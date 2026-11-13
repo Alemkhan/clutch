@@ -1,4 +1,5 @@
 // Заморожено 2026-10-16: входа из интерфейса нет, код и тесты поддерживаются, новых функций не добавлять.
+import { playerDisplayName } from '../auth/displayName';
 import {
   baseTimeMs,
   dailyKey,
@@ -86,7 +87,7 @@ export function registerLastStandRoutes(app: Hono<{ Bindings: Env }>): void {
         bodyName = value.displayName.trim().slice(0, MAX_DISPLAY_NAME);
       }
     }
-    const displayName = identity.displayName?.trim().slice(0, MAX_DISPLAY_NAME) || bodyName || 'Игрок';
+    const displayName = playerDisplayName(identity, bodyName).slice(0, MAX_DISPLAY_NAME);
 
     const now = Date.now();
     const dateKey = dailyKey(now);

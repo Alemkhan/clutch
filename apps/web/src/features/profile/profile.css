@@ -41,6 +41,57 @@
   font-size: 14px;
 }
 
+.profile-delete-link {
+  align-self: center;
+  padding: 8px 12px;
+  border: 0;
+  background: none;
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.profile-delete-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.profile-delete-text {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.profile-delete-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.profile-delete-confirm,
+.profile-delete-cancel {
+  flex: 1;
+  min-height: 44px;
+  border: 0;
+  border-radius: 14px;
+  font: inherit;
+  font-weight: 800;
+}
+
+.profile-delete-confirm {
+  background: var(--error);
+  color: white;
+}
+
+.profile-delete-cancel {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
 .profile-setting-error {
   margin-top: -16px;
   color: var(--error);

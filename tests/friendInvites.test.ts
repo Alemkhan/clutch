@@ -59,6 +59,9 @@ function guest(label: string): { authorization: string; playerId: string } {
   };
 }
 
+/** Гость не задаёт имя сам: сервер принимает только сгенерированное «Игрок xxxx». */
+const guestName = (label: string) => `Игрок ${Buffer.from(label).toString('hex').padEnd(4, '0').slice(0, 4)}`;
+
 function call(db: TestD1, label: string, method: 'GET' | 'POST', path: string, body?: unknown) {
   return app.request(path, {
     method,
@@ -75,7 +78,7 @@ function call(db: TestD1, label: string, method: 'GET' | 'POST', path: string, b
 }
 
 const startRun = (db: TestD1, label: string, extra: Record<string, unknown> = {}) =>
-  call(db, label, 'POST', '/api/solo-runs', { displayName: label, category: 'geography', mode: 'duel', ...extra });
+  call(db, label, 'POST', '/api/solo-runs', { displayName: guestName(label), category: 'geography', mode: 'duel', ...extra });
 
 /** Игрок проходит забег через API до цели (четыре точных удара). */
 async function finishedRun(db: TestD1, label: string): Promise<string> {
@@ -181,7 +184,7 @@ describe('friend invite: claiming and reservation', () => {
     const response = await call(db, 'bob', 'GET', `/api/rematch/${link.inviteId}`);
     expect(response.status).toBe(200);
     expect(await response.json()).toMatchObject({
-      inviteId: link.inviteId, friend: true, challengerName: 'ann', challengerProgress: 100,
+      inviteId: link.inviteId, friend: true, challengerName: guestName('ann'), challengerProgress: 100,
     });
     expect(db.sqlite.prepare('SELECT consumed_at, recipient_player_id FROM rematch_invites').get())
       .toEqual({ consumed_at: null, recipient_player_id: null });

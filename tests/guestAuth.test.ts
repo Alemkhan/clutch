@@ -2,6 +2,7 @@
 
 import { describe, expect, it } from 'vitest';
 import {
+  GUEST_RENEWAL_GRACE_MS,
   GUEST_SESSION_TTL_MS,
   issueGuestSession,
   verifyGuestToken,
@@ -32,6 +33,17 @@ describe('guest sessions', () => {
       'different-session-signing-secret-at-least-32-chars',
       now,
     )).resolves.toBeNull();
+  });
+
+  it('accepts an expired token only for renewal, and only within the grace period', async () => {
+    const session = (await issueGuestSession(secret, now, subject))!;
+    const monthLater = session.expiresAt + 30 * 24 * 60 * 60 * 1000;
+    await expect(verifyGuestToken(session.token, secret, monthLater)).resolves.toBeNull();
+    await expect(verifyGuestToken(session.token, secret, monthLater, { renewalGraceMs: GUEST_RENEWAL_GRACE_MS }))
+      .resolves.toMatchObject({ playerId: `guest:${subject}` });
+    await expect(verifyGuestToken(session.token, secret, session.expiresAt + GUEST_RENEWAL_GRACE_MS, {
+      renewalGraceMs: GUEST_RENEWAL_GRACE_MS,
+    })).resolves.toBeNull();
   });
 
   it('fails closed for missing and short secrets', async () => {

@@ -159,7 +159,7 @@ function insertDaily(db: TestD1, options: Parameters<typeof insertSolo>[1]) {
 }
 
 async function start(db: TestD1, authorization: string): Promise<StartSoloRunResponse> {
-  const response = await call(db, '/api/solo-runs', authorization, { displayName: 'Игрок', category: 'geography', mode: 'duel' });
+  const response = await call(db, '/api/solo-runs', authorization, { displayName: 'Игрок b0b0', category: 'geography', mode: 'duel' });
   expect(response.status).toBe(201);
   return await response.json() as StartSoloRunResponse;
 }
@@ -195,7 +195,7 @@ describe('the duel board of the day', () => {
 
     const board = await (await call(db, '/api/duel-board', bob)).json() as DuelBoardResponse;
     expect(board.entries).toEqual([
-      { rank: 1, displayName: 'Игрок', wins: 1, draws: 0, losses: 0 },
+      { rank: 1, displayName: 'Игрок b0b0', wins: 1, draws: 0, losses: 0 },
       { rank: 2, displayName: 'Алем', wins: 0, draws: 0, losses: 1 },
     ]);
     expect(board.you).toMatchObject({ wins: 1, losses: 0 });
@@ -219,7 +219,7 @@ describe('solo outcome against a pace', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const payload = sentPayload();
     expect(payload.chat_id).toBe('42');
-    expect(payload.text).toBe('Игрок обошёл вашу запись.');
+    expect(payload.text).toBe('Игрок b0b0 обошёл вашу запись.');
     // Исход — это известие. Приглашения completion не создаёт: звать может только нажатие соперника.
     expect(inviteRows(db)).toHaveLength(0);
     expect(payload.reply_markup.inline_keyboard).toHaveLength(1);
@@ -242,7 +242,7 @@ describe('solo outcome against a pace', () => {
     expect(result.outcome).toBe('opponent');
     expect(storedOutcome(db, run.runId)).toBe('opponent');
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(sentPayload().text).toBe('Ваша запись устояла: Игрок не смог её обойти.');
+    expect(sentPayload().text).toBe('Ваша запись устояла: Игрок b0b0 не смог её обойти.');
     // Победившей записи реванш не создаётся: раньше владелец видел у себя вызов, которого
     // соперник не отправлял.
     expect(inviteRows(db)).toHaveLength(0);

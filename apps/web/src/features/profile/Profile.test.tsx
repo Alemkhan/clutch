@@ -53,6 +53,11 @@ describe('server-backed profile', () => {
     expect(html).not.toContain('этом устройстве');
   });
 
+  it('always offers account deletion, even when statistics failed to load', () => {
+    expect(render({ status: 'error' })).toContain('Удалить аккаунт');
+    expect(render({ status: 'loading' })).toContain('Удалить аккаунт');
+  });
+
   it('offers the opt-in daily digest only to Telegram players', () => {
     const state: ProfileState = { status: 'ready', profile: { completedRuns: 1, reachedTargetRuns: 1, bestRounds: 4 } };
     const telegram = renderToStaticMarkup(
