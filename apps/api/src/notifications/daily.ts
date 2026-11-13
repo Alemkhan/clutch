@@ -6,8 +6,9 @@ import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import { findQuestionByDate } from '../tiebreaker/tiebreakerRepository';
 import { findChallenge } from '../wikiPath/wikiPathRepository';
+import { buildDailyWidgetHtml, dailyWidgetQuestion, WIDGET_MAX_HTML_BYTES } from './dailyWidget';
 import { miniAppLink, telegramChatId } from './outbid';
-import { sendTelegramMessage, type SendResult } from './telegram';
+import { sendTelegramMessage, sendTelegramWidget, type InlineUrlButton, type SendResult } from './telegram';
 
 type AppContext = Context<{ Bindings: Env }>;
 const ACTIVE_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
@@ -18,6 +19,9 @@ const SEND_AFTER_UTC_HOUR = 12;
 export const DAILY_TIEBREAKER_PAYLOAD = 'daily_guess';
 export const DAILY_WIKI_PATH_PAYLOAD = 'daily_wiki';
 export const DAILY_STOP_PAYLOAD = 'daily_off';
+/** «Играть дальше» из виджета: Mini App его не распознаёт и открывает главный экран; метка нужна для источника. */
+export const DAILY_WIDGET_PAYLOAD = 'daily_quiz';
+export const DAILY_WIDGET_CAPTION = 'Вопрос дня — ответь прямо здесь 👆';
 
 async function authenticate(c: AppContext): Promise<RequestIdentity | Response> {
   const identity = await resolveRequestIdentity(c.req.header('Authorization'), c.env);
@@ -116,36 +120,66 @@ export async function sendDailyChallengeDigests(env: Env, now = Date.now()): Pro
     findQuestionByDate(env.DB, dateKey),
     findChallenge(env.DB, dateKey),
   ]);
-  if (!question && !challenge) {
+  const widgetHtml = dailyWidgetHtml(env, dateKey);
+  if (!widgetHtml && !question && !challenge) {
     summary.skipped = true;
     return summary;
   }
 
+  const stopUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_STOP_PAYLOAD);
+  const stopRow: InlineUrlButton[][] = stopUrl ? [[{ text: 'Отключить ежедневные сообщения', url: stopUrl }]] : [];
   const recipients = await listRecipients(env.DB, dateKey, now);
   summary.candidates = recipients.length;
   await Promise.all(recipients.map(async ({ player_id: playerId }) => {
     if (!(await claimDelivery(env.DB, playerId, dateKey, now))) return;
     const chatId = telegramChatId(playerId);
     if (!chatId) return;
-    const lines = ['Новый день в Clutch'];
-    if (question) lines.push(`👁 «На глазок» #${question.number} уже вышел.`);
-    if (challenge) lines.push(`🔗 Вики-путь: ${challenge.start_title} → ${challenge.target_title}.`);
-    const gameButtons = [
-      ...(question ? [{ text: 'На глазок', url: miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_TIEBREAKER_PAYLOAD) }] : []),
-      ...(challenge ? [{ text: 'Вики-путь', url: miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_WIKI_PATH_PAYLOAD) }] : []),
-    ].filter((button): button is { text: string; url: string } => Boolean(button.url));
-    const stopUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_STOP_PAYLOAD);
-    const buttons = [
-      ...(gameButtons.length ? [gameButtons] : []),
-      ...(stopUrl ? [[{ text: 'Отключить ежедневные сообщения', url: stopUrl }]] : []),
-    ];
-    const result = await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId, lines.join('\n'), buttons);
+    let result: SendResult | null = null;
+    if (widgetHtml) {
+      result = await sendTelegramWidget(env.TELEGRAM_BOT_TOKEN, chatId, widgetHtml, DAILY_WIDGET_CAPTION, stopRow);
+      if (result.status === 'failed') logFailure('daily_widget', result);
+    }
+    // Виджет не ушёл (метод недоступен, сбой) — прежний текст про «На глазок» и Вики-путь.
+    if ((!result || result.status === 'failed') && (question || challenge)) {
+      result = await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId, ...digestText(env, question, challenge, stopRow));
+    }
+    if (!result) return;
     await markDelivery(env.DB, playerId, dateKey, result, now);
     summary[result.status] += 1;
-    if (result.status !== 'sent') console.error({
-      event: 'telegram_notification_delivery', kind: 'daily_digest', deliveryStatus: result.status,
-      reasonCode: result.reasonCode, httpStatus: result.httpStatus,
-    });
+    if (result.status !== 'sent') logFailure('daily_digest', result);
   }));
   return summary;
+}
+
+function logFailure(kind: string, result: SendResult): void {
+  if (result.status === 'sent') return;
+  console.error({
+    event: 'telegram_notification_delivery', kind, deliveryStatus: result.status,
+    reasonCode: result.reasonCode, httpStatus: result.httpStatus,
+  });
+}
+
+/** Виджет дня или null, если ссылки на Mini App нет, подходящих вопросов нет или HTML не влез в лимит. */
+export function dailyWidgetHtml(env: Pick<Env, 'TELEGRAM_MINI_APP_LINK'>, dateKey: string): string | null {
+  const playLink = miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_WIDGET_PAYLOAD);
+  const question = dailyWidgetQuestion(dateKey);
+  if (!playLink || !question) return null;
+  const html = buildDailyWidgetHtml(question, playLink);
+  return new TextEncoder().encode(html).length <= WIDGET_MAX_HTML_BYTES ? html : null;
+}
+
+function digestText(
+  env: Pick<Env, 'TELEGRAM_MINI_APP_LINK'>,
+  question: { number: number } | null,
+  challenge: { start_title: string; target_title: string } | null,
+  stopRow: InlineUrlButton[][],
+): [string, InlineUrlButton[][]] {
+  const lines = ['Новый день в Clutch'];
+  if (question) lines.push(`👁 «На глазок» #${question.number} уже вышел.`);
+  if (challenge) lines.push(`🔗 Вики-путь: ${challenge.start_title} → ${challenge.target_title}.`);
+  const gameButtons = [
+    ...(question ? [{ text: 'На глазок', url: miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_TIEBREAKER_PAYLOAD) }] : []),
+    ...(challenge ? [{ text: 'Вики-путь', url: miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_WIKI_PATH_PAYLOAD) }] : []),
+  ].filter((button): button is InlineUrlButton => Boolean(button.url));
+  return [lines.join('\n'), [...(gameButtons.length ? [gameButtons] : []), ...stopRow]];
 }

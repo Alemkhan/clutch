@@ -35,3 +35,4 @@ screenshots/
 /skills-lock.json
 # Снимок prod-базы для отчётов: npm run reports:pull
 /.prod-data/
+scripts/telegram/.preview-widget.html

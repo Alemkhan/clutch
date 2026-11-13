@@ -58,16 +58,36 @@ export async function sendTelegramMessage(
   text: string,
   buttons: InlineUrlButton[][],
 ): Promise<SendResult> {
+  return callTelegram(botToken, 'sendMessage', {
+    chat_id: chatId,
+    text,
+    disable_web_page_preview: true,
+    reply_markup: { inline_keyboard: buttons },
+  });
+}
+
+/** HTML-виджет в сообщении (Bot API 10.4). Подпись — обычный текст, без parse_mode. */
+export async function sendTelegramWidget(
+  botToken: string,
+  chatId: string,
+  html: string,
+  caption: string,
+  buttons: InlineUrlButton[][],
+): Promise<SendResult> {
+  return callTelegram(botToken, 'sendWidget', {
+    chat_id: chatId,
+    html,
+    caption,
+    reply_markup: { inline_keyboard: buttons },
+  });
+}
+
+async function callTelegram(botToken: string, method: string, payload: Record<string, unknown>): Promise<SendResult> {
   try {
-    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    const response = await fetch(`https://api.telegram.org/bot${botToken}/${method}`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text,
-        disable_web_page_preview: true,
-        reply_markup: { inline_keyboard: buttons },
-      }),
+      body: JSON.stringify(payload),
       signal: AbortSignal.timeout(5000),
     });
     if (response.ok) return { status: 'sent' };

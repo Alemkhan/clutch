@@ -4,7 +4,7 @@
 import { createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import app from '../apps/api/src/index';
-import { sendDailyChallengeDigests, setDailyDigestEnabled } from '../apps/api/src/notifications/daily';
+import { DAILY_WIDGET_CAPTION, sendDailyChallengeDigests, setDailyDigestEnabled } from '../apps/api/src/notifications/daily';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
 const databases: TestD1[] = [];
@@ -51,6 +51,7 @@ beforeEach(() => {
 afterEach(() => {
   vi.useRealTimers();
   vi.unstubAllGlobals();
+  vi.restoreAllMocks();
   for (const db of databases.splice(0)) db.sqlite.close();
 });
 
@@ -69,7 +70,7 @@ describe('daily challenge notifications', () => {
       .toEqual({ daily_enabled: 1 });
   });
 
-  it('sends one combined message after 17:00 Almaty and never duplicates the day', async () => {
+  it('sends the daily question widget after 17:00 Almaty and never duplicates the day', async () => {
     const db = database();
     await setDailyDigestEnabled(db.binding, 'telegram:42', true, NOW);
     const first = await sendDailyChallengeDigests(env(db), NOW);
@@ -77,7 +78,38 @@ describe('daily challenge notifications', () => {
 
     const fetchMock = vi.mocked(fetch);
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toBe('https://api.telegram.org/bottest/sendWidget');
+    const body = JSON.parse(String(init.body));
+    expect(body.chat_id).toBe('42');
+    expect(body.caption).toBe(DAILY_WIDGET_CAPTION);
+    expect(body.html).toContain('Вопрос дня · Clutch');
+    expect(body.html).toContain('Играть дальше');
+    expect(body.html).toContain('https://t.me/testbot?startapp=daily_quiz');
+    expect(body.reply_markup.inline_keyboard.flat().map((button: { url: string }) => button.url)).toEqual([
+      'https://t.me/testbot?startapp=daily_off',
+    ]);
+
+    const second = await sendDailyChallengeDigests(env(db), NOW + 15 * 60 * 1000);
+    expect(second).toMatchObject({ candidates: 0, sent: 0 });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(db.sqlite.prepare('SELECT status FROM daily_notification_deliveries').get()).toEqual({ status: 'sent' });
+  });
+
+  it('falls back to the text digest when Telegram rejects the widget', async () => {
+    const db = database();
+    await setDailyDigestEnabled(db.binding, 'telegram:42', true, NOW);
+    const fetchMock = vi.mocked(fetch);
+    fetchMock.mockImplementation(async (input) => String(input).endsWith('/sendWidget')
+      ? new Response(JSON.stringify({ ok: false, description: 'Not Found: method not found' }), { status: 404 })
+      : Response.json({ ok: true }));
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const summary = await sendDailyChallengeDigests(env(db), NOW);
+    expect(summary).toMatchObject({ sent: 1, failed: 0 });
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    const [url, init] = fetchMock.mock.calls[1] as [string, RequestInit];
+    expect(url).toBe('https://api.telegram.org/bottest/sendMessage');
     const body = JSON.parse(String(init.body));
     expect(body.text).toContain('«На глазок» #1');
     expect(body.text).toContain('Абай Кунанбаев → Альберт Эйнштейн');
@@ -86,11 +118,19 @@ describe('daily challenge notifications', () => {
       'https://t.me/testbot?startapp=daily_wiki',
       'https://t.me/testbot?startapp=daily_off',
     ]);
+  });
 
-    const second = await sendDailyChallengeDigests(env(db), NOW + 15 * 60 * 1000);
-    expect(second).toMatchObject({ candidates: 0, sent: 0 });
-    expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(db.sqlite.prepare('SELECT status FROM daily_notification_deliveries').get()).toEqual({ status: 'sent' });
+  it('does not fall back when the player blocked the bot', async () => {
+    const db = database();
+    await setDailyDigestEnabled(db.binding, 'telegram:42', true, NOW);
+    vi.mocked(fetch).mockImplementation(async () => new Response('{}', { status: 403 }));
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const summary = await sendDailyChallengeDigests(env(db), NOW);
+    expect(summary).toMatchObject({ sent: 0, blocked: 1 });
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(db.sqlite.prepare("SELECT daily_enabled FROM player_notification_prefs WHERE player_id = 'telegram:42'").get())
+      .toEqual({ daily_enabled: 0 });
   });
 
   it('does not send before the configured hour', async () => {

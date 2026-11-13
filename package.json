@@ -36,7 +36,8 @@
     "content:day": "vite-node scripts/content/export-day.ts",
     "content:paintings": "node scripts/content/painting-images.mjs",
     "content:review": "node scripts/content/review.mjs",
-    "content:approve": "node scripts/content/approve.mjs"
+    "content:approve": "node scripts/content/approve.mjs",
+    "telegram:widget": "vite-node scripts/telegram/widget-try.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",
