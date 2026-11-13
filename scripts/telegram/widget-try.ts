@@ -12,7 +12,7 @@ import { dailyKey } from '../../packages/shared/src/index';
 import { DAILY_STOP_PAYLOAD, DAILY_WIDGET_CAPTION, dailyWidgetHtml } from '../../apps/api/src/notifications/daily';
 import { dailyWidgetQuestion, WIDGET_MAX_ZLIB_BYTES } from '../../apps/api/src/notifications/dailyWidget';
 import { miniAppLink } from '../../apps/api/src/notifications/outbid';
-import { sendTelegramWidget } from '../../apps/api/src/notifications/telegram';
+import { widgetPayload } from '../../apps/api/src/notifications/telegram';
 
 const MINI_APP_LINK = 'https://t.me/playclutchbot?startapp';
 const args = process.argv.slice(2).filter((arg) => arg !== '--');
@@ -44,9 +44,16 @@ if (!token) {
   process.exit(1);
 }
 const stopUrl = miniAppLink(MINI_APP_LINK, DAILY_STOP_PAYLOAD)!;
-const result = await sendTelegramWidget(token, chatId, html, DAILY_WIDGET_CAPTION, [[{ text: 'Отключить ежедневные сообщения', url: stopUrl }]]);
-if (result.status === 'sent') console.log('Отправлено');
+// Тот же запрос, что шлёт cron, но ответ Telegram печатается целиком: в проде он не логируется.
+const payload = widgetPayload(chatId, html, DAILY_WIDGET_CAPTION, [[{ text: 'Отключить ежедневные сообщения', url: stopUrl }]]);
+const response = await fetch(`https://api.telegram.org/bot${token}/sendWidget`, {
+  method: 'POST',
+  headers: { 'content-type': 'application/json' },
+  body: JSON.stringify(payload),
+});
+const body = await response.json().catch(() => null) as { ok?: boolean; description?: string; result?: { message_id?: number } } | null;
+if (response.ok && body?.ok) console.log(`Отправлено, message_id ${body.result?.message_id ?? '?'}`);
 else {
-  console.error(`Telegram отказал: ${result.status} ${result.reasonCode} ${result.httpStatus ?? ''}`);
+  console.error(`Telegram отказал: HTTP ${response.status} — ${body?.description ?? 'без описания'}`);
   process.exit(1);
 }

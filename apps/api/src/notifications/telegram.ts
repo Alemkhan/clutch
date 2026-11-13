@@ -66,6 +66,16 @@ export async function sendTelegramMessage(
   });
 }
 
+/** Тело запроса sendWidget: одно на cron и пробный скрипт, чтобы проверялось ровно то, что уходит в проде. */
+export function widgetPayload(chatId: string, html: string, caption: string, buttons: InlineUrlButton[][]): Record<string, unknown> {
+  return {
+    chat_id: chatId,
+    html,
+    caption,
+    reply_markup: { inline_keyboard: buttons },
+  };
+}
+
 /** HTML-виджет в сообщении (Bot API 10.4). Подпись — обычный текст, без parse_mode. */
 export async function sendTelegramWidget(
   botToken: string,
@@ -74,12 +84,7 @@ export async function sendTelegramWidget(
   caption: string,
   buttons: InlineUrlButton[][],
 ): Promise<SendResult> {
-  return callTelegram(botToken, 'sendWidget', {
-    chat_id: chatId,
-    html,
-    caption,
-    reply_markup: { inline_keyboard: buttons },
-  });
+  return callTelegram(botToken, 'sendWidget', widgetPayload(chatId, html, caption, buttons));
 }
 
 async function callTelegram(botToken: string, method: string, payload: Record<string, unknown>): Promise<SendResult> {
