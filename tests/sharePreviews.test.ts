@@ -119,9 +119,10 @@ describe('preview images', () => {
   });
 });
 
+// Один рендерер на файл: resvg инициализируется один раз на процесс.
+const render = createSvgRenderer(async () => readFileSync(createRequire(import.meta.url).resolve('@resvg/resvg-wasm/index_bg.wasm')));
+
 describe('preview cards (real resvg)', () => {
-  const require = createRequire(import.meta.url);
-  const render = createSvgRenderer(async () => readFileSync(require.resolve('@resvg/resvg-wasm/index_bg.wasm')));
   const size = (png: Uint8Array) => {
     const view = new DataView(png.buffer, png.byteOffset);
     return [view.getUint32(16), view.getUint32(20)];
@@ -160,6 +161,7 @@ describe('POST /api/share/prepared', () => {
       previewUrl: `https://api.example/api/share/run?t=PPOPP&p=100&c=general&i=${INVITE}&n=Alex`,
       title: 'Alex зовёт на дуэль: 100% за 5 кругов',
       text: 'Alex зовёт на дуэль: 100% за 5 кругов\nОбгонишь эту запись?',
+      button: 'Играть в Clutch',
       target: `${LINK}=${INVITE}`,
     });
     const body = preparedInlineMessageBody('42', message!) as { user_id: number; result: Record<string, unknown> };
@@ -215,5 +217,141 @@ describe('public origin behind a tunnel', () => {
     for (const origin of ['http://127.0.0.1:8787', 'https://localhost:8787', 'http://example.com', 'https://192.168.1.5', 'https://10.0.0.2']) {
       expect(isReachableOrigin(origin)).toBe(false);
     }
+  });
+});
+
+describe('localized previews (l=ru|en|kk)', () => {
+  const plain = (svg: string) => svg.replace(/<[^>]+>/gu, '');
+
+  it.each([
+    ['en', '100% in 5 rounds · General knowledge', 'Open in Telegram'],
+    ['kk', '5 айналым ішінде 100% · Жалпы білім', 'Telegram-да ашу'],
+    ['ru', '100% за 5 кругов · Общие знания', 'Открыть в Telegram'],
+  ])('titles the run page in %s', async (locale, title, button) => {
+    const { body } = await get(`/api/share/run?t=PPOPP&p=100&c=general&d=2026-11-16&l=${locale}`);
+    expect(body).toContain(`<html lang="${locale}">`);
+    expect(body).toContain(`<title>${title}</title>`);
+    expect(body).toContain(button);
+    expect(body).toContain(`run.png?t=PPOPP&amp;p=100&amp;c=general&amp;d=2026-11-16&amp;l=${locale}"`);
+  });
+
+  it('falls back to Russian for an unknown language', async () => {
+    const { response, body } = await get('/api/share/run?t=P&p=25&c=general&l=de');
+    expect(response.status).toBe(200);
+    expect(body).toContain('<html lang="ru">');
+    expect(body).toContain('25% за 1 круг · Общие знания');
+  });
+
+  it('uses the plural forms of each language', async () => {
+    const title = async (tiles: string, locale: string) => {
+      const { body } = await get(`/api/share/run?t=${tiles}&p=50&c=geography&l=${locale}`);
+      return body.slice(body.indexOf('<title>') + 7, body.indexOf('</title>'));
+    };
+    expect(await title('PP', 'ru')).toBe('50% за 2 круга · География');
+    expect(await title('P'.repeat(11), 'ru')).toBe('50% за 11 кругов · География');
+    expect(await title('P', 'en')).toBe('50% in 1 round · Geography');
+    expect(await title('PP', 'en')).toBe('50% in 2 rounds · Geography');
+    expect(await title('PP', 'kk')).toBe('2 айналым ішінде 50% · География');
+  });
+
+  it('localizes the duel invite', async () => {
+    expect((await get(`/api/share/run?t=PGP&p=100&c=history&i=${INVITE}&n=Alex&l=en`)).body)
+      .toContain('<title>Alex challenges you to a duel: 100% in 3 rounds</title>');
+    expect((await get(`/api/share/run?t=PGP&p=100&c=history&i=${INVITE}&n=Alex&l=kk`)).body)
+      .toContain('<title>Alex дуэльге шақырады: 3 айналым ішінде 100%</title>');
+  });
+
+  it.each([
+    ['en', '?k=12&m=2.5', 'Guesstimate #12: miss ×2.5'],
+    ['en', '?k=12&m=1.3&pc=84', 'Guesstimate #12: closer than 84% of players'],
+    ['kk', '?k=12&m=2.5', 'Көзмөлшер #12: қателік ×2,5'],
+    ['kk', '?k=12&m=1&pc=best', 'Көзмөлшер #12: күннің ең үздік жауабы'],
+  ])('titles the guess page in %s for %s', async (locale, query, title) => {
+    expect((await get(`/api/share/guess${query}&l=${locale}`)).body).toContain(`<title>${title}</title>`);
+  });
+
+  it('styles the page with the game palette, not the old beige and red', async () => {
+    const { body } = await get('/api/share/run?t=P&p=25&c=general&l=en');
+    expect(body).toContain('#2b2270');
+    expect(body).toContain('background:#ffc94d');
+    expect(body).toContain('box-shadow:0 6px 0 #e39a26');
+    expect(body).not.toMatch(/#f3f0e8|#f04a3e|#171716/iu);
+  });
+
+  it('falls back to the localized site card when rendering fails', async () => {
+    renderMock.mockReset();
+    renderMock.mockRejectedValue(new Error('wasm failed'));
+    const location = async (query: string) => (await get(`/api/share/run.png${query}`, { PUBLIC_WEB_ORIGIN: 'https://clutch.example' })).response.headers.get('location');
+    expect(await location('?t=P&p=25&c=general&l=en')).toBe('https://clutch.example/og.en.png');
+    expect(await location('?t=P&p=25&c=general&l=kk')).toBe('https://clutch.example/og.kk.png');
+    expect(await location('?t=P&p=25&c=general&l=ru')).toBe('https://clutch.example/og.png');
+  });
+
+  it('draws the run card text in the requested language with the day number', () => {
+    const card = (locale: 'ru' | 'en' | 'kk', progress = 100) => plain(buildRunCardSvg({ tiles: ['P', 'G', 'X'], progress, category: 'kz_history', day: '2026-11-16', invite: null, locale }));
+    const ru = card('ru');
+    for (const value of ['Мой результат дня', 'за 3 круга', 'Clutch #29 · 16 ноя', 'История Казахстана', 'Сможешь быстрее?', 'Играть в Telegram', 'Круг — верный ответ и удар молотком']) {
+      expect(ru).toContain(value);
+    }
+    expect(card('ru', 60)).toContain('Дойдёшь до 100%?');
+    const en = card('en');
+    for (const value of ['My result today', 'in 3 rounds', 'Clutch #29 · Nov 16', 'History of Kazakhstan', 'Can you do it faster?', 'Play in Telegram']) {
+      expect(en).toContain(value);
+    }
+    expect(card('en', 60)).toContain('Can you reach 100%?');
+    const kk = card('kk');
+    for (const value of ['Менің бүгінгі нәтижем', '3 айналым ішінде', 'Clutch #29 · 16 қараша', 'Қазақстан тарихы', 'Жылдамырақ өте аласың ба?', 'Telegram-да ойна']) {
+      expect(kk).toContain(value);
+    }
+    expect(card('kk', 60)).toContain('100%-ға жете аласың ба?');
+  });
+
+  it('omits the day number before day 1 and without a day', () => {
+    const card = (day: string | null) => plain(buildRunCardSvg({ tiles: ['P'], progress: 25, category: 'general', day, invite: null }));
+    expect(card('2026-10-17')).not.toContain('Clutch #');
+    expect(card('2026-10-19')).toContain('Clutch #1 · 19 окт');
+    expect(card(null)).not.toContain('Clutch #');
+  });
+
+  it('paints round tiles in the mini-game zone colours on the dark background', () => {
+    const svg = buildRunCardSvg({ tiles: ['P', 'G', 'O', 'W', 'X'], progress: 60, category: 'general', day: null, invite: null });
+    expect(svg).toContain('stop-color="#2b2270"');
+    expect(svg).toContain('stop-color="#160f3e"');
+    for (const colour of ['#ffc94d', '#3ccf8e', '#7a5cf0', '#43378f', '#2a1b5c', '#e39a26', '#5f33dd']) expect(svg).toContain(colour);
+    expect(svg).toContain('stroke-opacity="0.18"');
+    expect(svg).not.toMatch(/#f3f0e8|#f04a3e|#171716/iu);
+  });
+
+  it('keeps Kazakh letters in the Cyrillic family', () => {
+    const svg = buildRunCardSvg({ tiles: ['P'], progress: 25, category: 'general', day: null, invite: null, locale: 'kk' });
+    expect(svg).toContain(`<tspan font-family="${CYRILLIC_FAMILY} Black">Менің</tspan>`);
+    expect(svg).toContain(`<tspan font-family="${CYRILLIC_FAMILY} Black">бүгінгі</tspan>`);
+  });
+
+  it('localizes the guess and brand cards', () => {
+    expect(plain(buildGuessCardSvg({ number: 12, multiplier: 2.5, percentile: null, locale: 'en' }))).toContain('miss ×2.5');
+    expect(plain(buildGuessCardSvg({ number: 12, multiplier: 2.5, percentile: 84, locale: 'kk' }))).toContain('Көзмөлшер #12');
+    expect(plain(buildBrandCardSvg('en'))).toContain('Hit the center.');
+    expect(plain(buildBrandCardSvg('kk'))).toContain('Ортаға дәл тигіз.');
+  });
+
+  it('writes the prepared Telegram message in the language of the link', async () => {
+    const { preparedMessageFor, preparedInlineMessageBody } = await import('../apps/api/src/share/prepared');
+    const en = preparedMessageFor('https://x.example/api/share/run?t=PP&p=40&c=general&l=en', 'https://api.example', env() as never);
+    expect(en).toMatchObject({
+      previewUrl: 'https://api.example/api/share/run?t=PP&p=40&c=general&l=en',
+      text: ['40% in 2 rounds · General knowledge', 'Can you reach 100%?'].join('\n'),
+      button: 'Play Clutch',
+    });
+    const kk = preparedMessageFor('https://x.example/api/share/guess?k=3&m=2&l=kk', 'https://api.example', env() as never);
+    expect(kk).toMatchObject({ text: ['Көзмөлшер #3: қателік ×2,0', 'Дәлірек табасың ба?'].join('\n'), button: 'Clutch ойнау' });
+    const body = preparedInlineMessageBody('7', kk!) as { result: { reply_markup: unknown } };
+    expect(body.result.reply_markup).toEqual({ inline_keyboard: [[{ text: 'Clutch ойнау', url: LINK }]] });
+  });
+
+  it.each(['ru', 'en', 'kk'] as const)('renders the %s run card with real resvg', async (locale) => {
+    const png = await render(buildRunCardSvg({ tiles: ['P', 'G', 'O', 'W', 'X'], progress: 100, category: 'kz_history', day: '2026-11-16', invite: { name: 'Әйгерім' }, locale }));
+    const view = new DataView(png.buffer, png.byteOffset);
+    expect([view.getUint32(16), view.getUint32(20)]).toEqual([1200, 630]);
   });
 });

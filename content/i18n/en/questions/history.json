@@ -1,0 +1,716 @@
+{
+  "au-history-1n7abyq": {
+    "prompt": "In which country are the Pyramids of Giza?",
+    "answer": "Egypt",
+    "accepted": [
+      "Egypt"
+    ],
+    "distractors": [
+      "Mexico",
+      "Peru",
+      "Sudan"
+    ]
+  },
+  "au-history-169lml3": {
+    "prompt": "In what year did World War II end?",
+    "answer": "1945",
+    "accepted": [
+      "1945"
+    ],
+    "distractors": [
+      "1944",
+      "1939",
+      "1941"
+    ]
+  },
+  "au-history-16fuh3w": {
+    "prompt": "In which city is the Colosseum?",
+    "answer": "Rome",
+    "accepted": [
+      "Rome",
+      "Roma"
+    ],
+    "distractors": [
+      "Athens",
+      "Florence",
+      "Naples"
+    ]
+  },
+  "au-history-17lssla": {
+    "prompt": "Who was the first President of the United States?",
+    "answer": "George Washington",
+    "accepted": [
+      "George Washington",
+      "Washington"
+    ],
+    "distractors": [
+      "Abraham Lincoln",
+      "Thomas Jefferson",
+      "Benjamin Franklin"
+    ]
+  },
+  "au-history-1fnvjvt": {
+    "prompt": "In what year did the Berlin Wall fall?",
+    "answer": "1989",
+    "accepted": [
+      "1989"
+    ],
+    "distractors": [
+      "1991",
+      "1985",
+      "1990"
+    ]
+  },
+  "au-history-1tbcslq": {
+    "prompt": "What was the name of the Macedonian king who built a vast empire?",
+    "answer": "Alexander the Great",
+    "accepted": [
+      "Alexander the Great",
+      "Alexander of Macedon",
+      "Alexander"
+    ],
+    "distractors": [
+      "Julius Caesar",
+      "Darius",
+      "Hannibal"
+    ]
+  },
+  "au-history-17cu51r": {
+    "prompt": "In what year did Columbus's expedition reach the Americas?",
+    "answer": "1492",
+    "accepted": [
+      "1492"
+    ],
+    "distractors": [
+      "1498",
+      "1453",
+      "1517"
+    ]
+  },
+  "au-history-50rvij": {
+    "prompt": "Which civilization built Chichen Itza?",
+    "answer": "The Maya",
+    "accepted": [
+      "The Maya",
+      "Maya",
+      "Mayans",
+      "Mayan"
+    ],
+    "distractors": [
+      "The Aztecs",
+      "The Inca",
+      "The Olmecs"
+    ]
+  },
+  "au-history-16zjtpm": {
+    "prompt": "In what year did the USSR collapse?",
+    "answer": "1991",
+    "accepted": [
+      "1991"
+    ],
+    "distractors": [
+      "1989",
+      "1993",
+      "1985"
+    ]
+  },
+  "au-history-qatax4": {
+    "prompt": "Who founded the Mongol Empire?",
+    "answer": "Genghis Khan",
+    "accepted": [
+      "Genghis Khan",
+      "Genghis",
+      "Chinggis Khan",
+      "Temujin"
+    ],
+    "distractors": [
+      "Kublai Khan",
+      "Batu",
+      "Tamerlane"
+    ]
+  },
+  "au-history-6cntke": {
+    "prompt": "What was the ancient trade route from China to the Mediterranean called?",
+    "answer": "The Silk Road",
+    "accepted": [
+      "The Silk Road",
+      "Silk Road",
+      "Great Silk Road",
+      "Silk Route"
+    ],
+    "distractors": [
+      "The Amber Road",
+      "The route from the Varangians to the Greeks",
+      "The Salt Road"
+    ]
+  },
+  "au-history-voi72j": {
+    "prompt": "What was the name of the first emperor to unify China?",
+    "answer": "Qin Shi Huang",
+    "accepted": [
+      "Qin Shi Huang",
+      "Qin Shi Huangdi",
+      "Shi Huangdi",
+      "Shihuangdi"
+    ],
+    "distractors": [
+      "Genghis Khan",
+      "Kublai Khan",
+      "Confucius"
+    ]
+  },
+  "au-history-1d17d7w": {
+    "prompt": "What was the capital of the Byzantine Empire?",
+    "answer": "Constantinople",
+    "accepted": [
+      "Constantinople",
+      "Tsargrad"
+    ],
+    "distractors": [
+      "Rome",
+      "Athens",
+      "Antioch"
+    ]
+  },
+  "au-history-11mjnyl": {
+    "prompt": "Who was the first emperor of the Russian Empire?",
+    "answer": "Peter the Great",
+    "accepted": [
+      "Peter the Great",
+      "Peter I",
+      "Peter the First",
+      "Peter 1"
+    ],
+    "distractors": [
+      "Ivan the Terrible",
+      "Catherine II",
+      "Alexander I"
+    ]
+  },
+  "au-history-1iihvzq": {
+    "prompt": "In what year did World War I begin?",
+    "answer": "1914",
+    "accepted": [
+      "1914"
+    ],
+    "distractors": [
+      "1918",
+      "1905",
+      "1912"
+    ]
+  },
+  "au-history-1d518ln": {
+    "prompt": "Which commander crossed the Alps with war elephants?",
+    "answer": "Hannibal",
+    "accepted": [
+      "Hannibal",
+      "Hannibal Barca"
+    ],
+    "distractors": [
+      "Alexander the Great",
+      "Julius Caesar",
+      "Napoleon"
+    ]
+  },
+  "au-history-1kusu7k": {
+    "prompt": "What was the name of the last queen of Hellenistic Egypt?",
+    "answer": "Cleopatra",
+    "accepted": [
+      "Cleopatra",
+      "Cleopatra VII"
+    ],
+    "distractors": [
+      "Nefertiti",
+      "Hatshepsut",
+      "Berenice"
+    ]
+  },
+  "au-history-1qbgnsx": {
+    "prompt": "What was the name of the ship of Magellan's expedition that first sailed around the world?",
+    "answer": "Victoria",
+    "accepted": [
+      "Victoria",
+      "The Victoria"
+    ],
+    "distractors": [
+      "Santa Maria",
+      "Trinidad",
+      "Mayflower"
+    ]
+  },
+  "au-history-jc3oub": {
+    "prompt": "In what year was Magna Carta signed?",
+    "answer": "1215",
+    "accepted": [
+      "1215"
+    ],
+    "distractors": [
+      "1066",
+      "1492",
+      "1314"
+    ]
+  },
+  "au-history-19m55d4": {
+    "prompt": "Which ruler built the Taj Mahal?",
+    "answer": "Shah Jahan",
+    "accepted": [
+      "Shah Jahan",
+      "Shah Jehan"
+    ],
+    "distractors": [
+      "Akbar",
+      "Babur",
+      "Aurangzeb"
+    ]
+  },
+  "au-history-1llm2vo": {
+    "prompt": "Under which ruler did Moscow become the capital of a unified Russian state and the Horde's yoke end?",
+    "answer": "Ivan III",
+    "accepted": [
+      "Ivan III",
+      "Ivan the Third",
+      "Ivan 3",
+      "Ivan the Great"
+    ],
+    "distractors": [
+      "Ivan the Terrible",
+      "Dmitry Donskoy",
+      "Vasily III"
+    ]
+  },
+  "q-history-1iw6l1b": {
+    "prompt": "During which US president's term did British troops burn the White House in 1814?",
+    "answer": "James Madison",
+    "accepted": [
+      "James Madison",
+      "Madison"
+    ],
+    "distractors": [
+      "Thomas Jefferson",
+      "John Adams",
+      "Andrew Jackson"
+    ],
+    "explanation": "During the War of 1812–1815, Washington was burned while James Madison was president."
+  },
+  "q-history-1de4xev": {
+    "prompt": "Which American politician became vice president and then president without being elected to either office?",
+    "answer": "Gerald Ford",
+    "accepted": [
+      "Gerald Ford",
+      "Ford"
+    ],
+    "distractors": [
+      "Richard Nixon",
+      "Lyndon Johnson",
+      "Harry Truman"
+    ],
+    "explanation": "Gerald Ford replaced Spiro Agnew, and then Richard Nixon after Watergate."
+  },
+  "q-history-unk65i": {
+    "prompt": "Who wrote the famous dystopia \"1984\"?",
+    "answer": "George Orwell",
+    "accepted": [
+      "George Orwell",
+      "Orwell"
+    ],
+    "distractors": [
+      "Aldous Huxley",
+      "Ray Bradbury",
+      "H. G. Wells"
+    ],
+    "explanation": "George Orwell published \"1984\" in 1949."
+  },
+  "q-history-146g4ms": {
+    "prompt": "What was the name of Christopher Columbus's flagship on his first transatlantic voyage in 1492?",
+    "answer": "Santa Maria",
+    "accepted": [
+      "Santa Maria",
+      "Santa María",
+      "The Santa Maria"
+    ],
+    "distractors": [
+      "Pinta",
+      "Niña",
+      "Victoria"
+    ],
+    "explanation": "The Santa Maria was the largest of the three ships of Columbus's expedition."
+  },
+  "q-history-1g5fmiy": {
+    "prompt": "In what year was the first artificial Earth satellite launched?",
+    "answer": "1957",
+    "accepted": [
+      "1957"
+    ],
+    "distractors": [
+      "1961",
+      "1945",
+      "1969"
+    ],
+    "explanation": "The USSR launched Sputnik 1 on 4 October 1957."
+  },
+  "q-history-1e815i8": {
+    "prompt": "During which US president's term was the decision made to use atomic weapons in 1945?",
+    "answer": "Harry Truman",
+    "accepted": [
+      "Harry Truman",
+      "Truman",
+      "Harry S. Truman"
+    ],
+    "distractors": [
+      "Franklin Roosevelt",
+      "Dwight Eisenhower",
+      "John Kennedy"
+    ],
+    "explanation": "Harry Truman ordered the atomic bombings of Hiroshima and Nagasaki."
+  },
+  "q-history-d1vko9": {
+    "prompt": "What was the name of Anne Frank's father, who preserved her famous diary after the war?",
+    "answer": "Otto Frank",
+    "accepted": [
+      "Otto Frank",
+      "Otto"
+    ],
+    "distractors": [
+      "Peter Frank",
+      "Margot Frank",
+      "Walter Frank"
+    ],
+    "explanation": "Otto Frank was the only member of the family to survive the concentration camps, and he published his daughter's diary."
+  },
+  "q-history-18vxe8p": {
+    "prompt": "In which century BC was the Great Silk Road officially opened?",
+    "answer": "2nd",
+    "accepted": [
+      "2nd",
+      "2",
+      "II",
+      "second",
+      "2nd century BC"
+    ],
+    "distractors": [
+      "5th",
+      "1st",
+      "10th"
+    ],
+    "explanation": "The Great Silk Road was established in the 2nd century BC under the Han dynasty."
+  },
+  "q-history-18idhj5": {
+    "prompt": "Which Chinese imperial dynasty first set up regular caravan links along the Silk Road?",
+    "answer": "Han",
+    "accepted": [
+      "Han",
+      "Han dynasty"
+    ],
+    "distractors": [
+      "Tang",
+      "Ming",
+      "Qin"
+    ],
+    "explanation": "The envoy Zhang Qian set out for the West under Emperor Wu of the Han dynasty."
+  },
+  "q-history-1fl22i9": {
+    "prompt": "In what year did World War II begin in Europe?",
+    "answer": "1939",
+    "accepted": [
+      "1939"
+    ],
+    "distractors": [
+      "1941",
+      "1938",
+      "1940"
+    ],
+    "explanation": "World War II began on 1 September 1939 with Germany's invasion of Poland."
+  },
+  "q-history-1rzytmm": {
+    "prompt": "An attack on which European country started World War II on 1 September 1939?",
+    "answer": "Poland",
+    "accepted": [
+      "Poland"
+    ],
+    "distractors": [
+      "France",
+      "Czechoslovakia",
+      "Belgium"
+    ],
+    "explanation": "Germany attacked Poland, which led Britain and France to declare war on Germany."
+  },
+  "q-history-1pyf7kl": {
+    "prompt": "In which Crimean city was the famous conference of the leaders of the USSR, USA and Britain held in February 1945?",
+    "answer": "Yalta",
+    "accepted": [
+      "Yalta"
+    ],
+    "distractors": [
+      "Sevastopol",
+      "Simferopol",
+      "Kerch"
+    ],
+    "explanation": "The Yalta (Crimea) Conference took place in the Livadia Palace."
+  },
+  "q-history-1u1w71s": {
+    "prompt": "Which of the Seven Wonders of the World was a bronze statue over 30 metres tall?",
+    "answer": "Colossus of Rhodes",
+    "accepted": [
+      "Colossus of Rhodes",
+      "The Colossus of Rhodes",
+      "Colossus"
+    ],
+    "distractors": [
+      "Statue of Zeus at Olympia",
+      "Lighthouse of Alexandria",
+      "Mausoleum at Halicarnassus"
+    ],
+    "explanation": "The Colossus of Rhodes stood for only about 50 years before an earthquake destroyed it."
+  },
+  "q-history-tmpy27": {
+    "prompt": "In which Mesopotamian city were the legendary Hanging Gardens of Semiramis?",
+    "answer": "Babylon",
+    "accepted": [
+      "Babylon"
+    ],
+    "distractors": [
+      "Ur",
+      "Nineveh",
+      "Uruk"
+    ],
+    "explanation": "The Hanging Gardens are associated with the Babylonian king Nebuchadnezzar II."
+  },
+  "q-history-p24l7z": {
+    "prompt": "Which ancient Greek sculptor created the chryselephantine statue of Zeus at Olympia?",
+    "answer": "Phidias",
+    "accepted": [
+      "Phidias",
+      "Pheidias"
+    ],
+    "distractors": [
+      "Praxiteles",
+      "Myron",
+      "Polykleitos"
+    ],
+    "explanation": "Phidias made the statue of Zeus from gold and ivory in the second half of the 5th century BC."
+  },
+  "q-history-1s9qup9": {
+    "prompt": "On which island off the coast of Egypt was the Lighthouse of Alexandria built?",
+    "answer": "Pharos",
+    "accepted": [
+      "Pharos",
+      "Pharos Island"
+    ],
+    "distractors": [
+      "Crete",
+      "Rhodes",
+      "Cyprus"
+    ],
+    "explanation": "Thanks to Pharos, the word for lighthouse in many European languages comes from its name."
+  },
+  "q-history-kq9d3q": {
+    "prompt": "In which modern country are the ruins of ancient Halicarnassus, site of the Mausoleum at Halicarnassus?",
+    "answer": "Turkey",
+    "accepted": [
+      "Turkey",
+      "Türkiye",
+      "Turkiye"
+    ],
+    "distractors": [
+      "Greece",
+      "Egypt",
+      "Italy"
+    ],
+    "explanation": "The ruins of Halicarnassus are in the modern Turkish city of Bodrum."
+  },
+  "q-history-5bqaoo": {
+    "prompt": "Who led the successful Haitian Revolution against the French colonizers in the late 18th century?",
+    "answer": "Toussaint Louverture",
+    "accepted": [
+      "Toussaint Louverture",
+      "Toussaint L'Ouverture",
+      "Louverture",
+      "Toussaint"
+    ],
+    "distractors": [
+      "Simón Bolívar",
+      "José de San Martín",
+      "Miguel Hidalgo"
+    ],
+    "explanation": "François-Dominique Toussaint Louverture became the leader of the slave revolt in Saint-Domingue."
+  },
+  "q-history-uwehqi": {
+    "prompt": "What was the name of the bloodless 1974 revolution in Portugal that toppled the Estado Novo regime?",
+    "answer": "Carnation Revolution",
+    "accepted": [
+      "Carnation Revolution",
+      "The Carnation Revolution"
+    ],
+    "distractors": [
+      "Velvet Revolution",
+      "Rose Revolution",
+      "Yellow Revolution"
+    ],
+    "explanation": "On 25 April 1974, civilians put carnations into the barrels of soldiers' rifles."
+  },
+  "q-history-10f3ouv": {
+    "prompt": "Which leader headed the Khmer Rouge dictatorship in Cambodia in 1975–1979?",
+    "answer": "Pol Pot",
+    "accepted": [
+      "Pol Pot"
+    ],
+    "distractors": [
+      "Ho Chi Minh",
+      "Sukarno",
+      "Norodom Sihanouk"
+    ],
+    "explanation": "Pol Pot carried out mass repression and forced agrarianization of the country."
+  },
+  "q-history-67lw0s": {
+    "prompt": "What colonial name did the island of Sri Lanka bear before becoming the Republic of Sri Lanka in 1972?",
+    "answer": "Ceylon",
+    "accepted": [
+      "Ceylon"
+    ],
+    "distractors": [
+      "Burma",
+      "Formosa",
+      "Siam"
+    ],
+    "explanation": "Until 1972 the state was officially called the Dominion of Ceylon."
+  },
+  "q-history-1k78qxw": {
+    "prompt": "In what year did Nazi Germany surrender, marking the end of the war in Europe?",
+    "answer": "1945",
+    "accepted": [
+      "1945"
+    ],
+    "distractors": [
+      "1944",
+      "1946",
+      "1943"
+    ],
+    "explanation": "Germany's Instrument of Unconditional Surrender came into force in May 1945."
+  },
+  "q-history-1oegbmi": {
+    "prompt": "Aboard which American battleship was the Japanese Instrument of Surrender signed on 2 September 1945?",
+    "answer": "Missouri",
+    "accepted": [
+      "Missouri",
+      "USS Missouri",
+      "The Missouri"
+    ],
+    "distractors": [
+      "Arizona",
+      "Iowa",
+      "Yamato"
+    ],
+    "explanation": "The signing ceremony took place in Tokyo Bay aboard the battleship Missouri."
+  },
+  "q-history-4z2uex": {
+    "prompt": "Queen Elizabeth II reigned over the United Kingdom for a record 70 years. In what year did she die?",
+    "answer": "2022",
+    "accepted": [
+      "2022"
+    ],
+    "distractors": [
+      "2020",
+      "2021",
+      "2023"
+    ],
+    "explanation": "Elizabeth II died on 8 September 2022 at Balmoral Castle."
+  },
+  "q-history-eo6xz1": {
+    "prompt": "What is the famous megalithic stone monument in Wiltshire, England?",
+    "answer": "Stonehenge",
+    "accepted": [
+      "Stonehenge"
+    ],
+    "distractors": [
+      "Carnac",
+      "Newgrange",
+      "Parthenon"
+    ],
+    "explanation": "Stonehenge is a UNESCO-listed archaeological monument."
+  },
+  "q-history-mhfb9j": {
+    "prompt": "Which grand ancient Roman amphitheatre for gladiator fights was built in the centre of Rome?",
+    "answer": "Colosseum",
+    "accepted": [
+      "Colosseum",
+      "Coliseum",
+      "Flavian Amphitheatre"
+    ],
+    "distractors": [
+      "Pantheon",
+      "Forum",
+      "Verona Arena"
+    ],
+    "explanation": "The Colosseum held more than 50,000 spectators."
+  },
+  "q-history-14cenmj": {
+    "prompt": "In which Tuscan city is the famous leaning bell tower on the Piazza dei Miracoli?",
+    "answer": "Pisa",
+    "accepted": [
+      "Pisa"
+    ],
+    "distractors": [
+      "Florence",
+      "Siena",
+      "Lucca"
+    ],
+    "explanation": "The Tower of Pisa became world-famous for its unintended tilt."
+  },
+  "q-history-1mla4ow": {
+    "prompt": "Which war of liberation led to the creation of the modern state of Bangladesh in 1971?",
+    "answer": "Bangladesh Liberation War",
+    "accepted": [
+      "Bangladesh Liberation War",
+      "Bangladesh War of Independence",
+      "Liberation War",
+      "War of Independence"
+    ],
+    "distractors": [
+      "Carnation Revolution",
+      "Indochina War",
+      "Civil War"
+    ],
+    "explanation": "In 1971 East Pakistan won independence and became Bangladesh."
+  },
+  "q-history-vdfgtj": {
+    "prompt": "Which island state in the Persian Gulf gained independence in 1971?",
+    "answer": "Bahrain",
+    "accepted": [
+      "Bahrain"
+    ],
+    "distractors": [
+      "Qatar",
+      "Kuwait",
+      "Oman"
+    ],
+    "explanation": "Bahrain was a British protectorate until 1971."
+  },
+  "au-history-15crjqv": {
+    "prompt": "Which modern capital lies near the ancient city of Babylon?",
+    "answer": "Baghdad",
+    "accepted": [
+      "Baghdad",
+      "Bagdad"
+    ],
+    "distractors": [
+      "Damascus",
+      "Amman",
+      "Tehran"
+    ],
+    "explanation": "Ancient Babylon was in modern Iraq, about 85 kilometres south of Baghdad. Babylon was the capital of the powerful Babylonian kingdom, while Baghdad is now the capital of Iraq."
+  },
+  "au-history-k0jh6g": {
+    "prompt": "Which region was traditionally governed by the Dalai Lama?",
+    "answer": "Tibet",
+    "accepted": [
+      "Tibet",
+      "Tibetan region"
+    ],
+    "distractors": [
+      "Nepal",
+      "Bhutan",
+      "Mongolia"
+    ],
+    "explanation": "For several centuries the Dalai Lamas combined spiritual and political leadership of Tibet. In 1959 the 14th Dalai Lama left Tibet for exile in India. In 2011 he formally handed his remaining political powers to the elected leadership of the Tibetan administration in exile."
+  }
+}

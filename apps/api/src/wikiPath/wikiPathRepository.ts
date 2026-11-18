@@ -1,3 +1,4 @@
+import type { Locale } from '@clutch/shared';
 import type { WikiLink, WikiPageSnapshot } from './wikiPages';
 
 export type StoredWikiPage = Omit<WikiPageSnapshot, 'html'>;
@@ -5,6 +6,8 @@ export type StoredWikiPage = Omit<WikiPageSnapshot, 'html'>;
 export interface WikiChallengeRow {
   id: string;
   date_key: string;
+  /** Wikipedia language the challenge is played in. */
+  lang: Locale;
   start_title: string;
   target_title: string;
 }
@@ -32,9 +35,16 @@ interface SnapshotRow {
   allowed_links_json: string;
 }
 
-export async function findChallenge(db: D1Database, dateKey: string): Promise<WikiChallengeRow | null> {
-  return db.prepare('SELECT id, date_key, start_title, target_title FROM wiki_path_challenges WHERE date_key = ?1')
-    .bind(dateKey).first<WikiChallengeRow>();
+const CHALLENGE_COLUMNS = 'id, date_key, lang, start_title, target_title';
+
+export async function findChallenge(db: D1Database, dateKey: string, lang: Locale = 'ru'): Promise<WikiChallengeRow | null> {
+  return db.prepare(`SELECT ${CHALLENGE_COLUMNS} FROM wiki_path_challenges WHERE date_key = ?1 AND lang = ?2`)
+    .bind(dateKey, lang).first<WikiChallengeRow>();
+}
+
+export async function findChallengeById(db: D1Database, id: string): Promise<WikiChallengeRow | null> {
+  return db.prepare(`SELECT ${CHALLENGE_COLUMNS} FROM wiki_path_challenges WHERE id = ?1`)
+    .bind(id).first<WikiChallengeRow>();
 }
 
 export async function findRun(db: D1Database, runId: string, playerId: string): Promise<WikiRunRow | null> {
@@ -55,8 +65,9 @@ export async function findPublicCompletedRun(db: D1Database, runId: string, date
 
 export async function pathTitles(db: D1Database, challengeId: string, path: readonly string[]): Promise<string[] | null> {
   if (path.length === 0 || !path.every((pageId) => /^\d+$/.test(pageId))) return null;
+  // Refs carry the challenge language, so the join stays inside one Wikipedia.
   const result = await db.prepare(`SELECT s.page_id, s.title FROM wiki_path_page_refs a
-    JOIN wiki_path_page_revisions s ON s.page_id = a.page_id AND s.revision_id = a.revision_id
+    JOIN wiki_path_page_revisions s ON s.lang = a.lang AND s.page_id = a.page_id AND s.revision_id = a.revision_id
     WHERE a.challenge_id = ?1
       AND s.page_id IN (SELECT CAST(value AS INTEGER) FROM json_each(?2))
     GROUP BY s.page_id, s.title`)
@@ -66,18 +77,20 @@ export async function pathTitles(db: D1Database, challengeId: string, path: read
   return resolved.every((title): title is string => typeof title === 'string') ? resolved : null;
 }
 
-export async function getSnapshot(db: D1Database, pageId: number, revisionId?: number): Promise<StoredWikiPage | null> {
-  const query = revisionId === undefined
-    ? 'SELECT * FROM wiki_path_page_revisions WHERE page_id = ?1 ORDER BY revision_id DESC LIMIT 1'
-    : 'SELECT * FROM wiki_path_page_revisions WHERE page_id = ?1 AND revision_id = ?2';
-  const statement = revisionId === undefined ? db.prepare(query).bind(pageId) : db.prepare(query).bind(pageId, revisionId);
+/** Page ids coincide across Wikipedias, so the language is part of every snapshot lookup. */
+export async function getSnapshot(db: D1Database, lang: Locale, pageId: number, revisionId?: number): Promise<StoredWikiPage | null> {
+  const statement = revisionId === undefined
+    ? db.prepare('SELECT * FROM wiki_path_page_revisions WHERE lang = ?1 AND page_id = ?2 ORDER BY revision_id DESC LIMIT 1')
+      .bind(lang, pageId)
+    : db.prepare('SELECT * FROM wiki_path_page_revisions WHERE lang = ?1 AND page_id = ?2 AND revision_id = ?3')
+      .bind(lang, pageId, revisionId);
   const row = await statement.first<SnapshotRow>();
   return row ? snapshotFromRow(row) : null;
 }
 
 export async function getSnapshotByTitle(db: D1Database, challengeId: string, title: string): Promise<StoredWikiPage | null> {
   const row = await db.prepare(`SELECT s.* FROM wiki_path_page_refs a JOIN wiki_path_page_revisions s
-    ON s.page_id = a.page_id AND s.revision_id = a.revision_id
+    ON s.lang = a.lang AND s.page_id = a.page_id AND s.revision_id = a.revision_id
     WHERE a.challenge_id = ?1 AND a.normalized_title = ?2`)
     .bind(challengeId, titleKey(title)).first<SnapshotRow>();
   return row ? snapshotFromRow(row) : null;
@@ -93,14 +106,16 @@ function snapshotFromRow(row: SnapshotRow): StoredWikiPage {
   return { pageId: row.page_id, revisionId: row.revision_id, title: row.title, allowedLinks };
 }
 
-export async function saveSnapshot(db: D1Database, challengeId: string, page: WikiPageSnapshot, now: number, requestedTitle = page.title): Promise<void> {
+export async function saveSnapshot(
+  db: D1Database, challengeId: string, lang: Locale, page: WikiPageSnapshot, now: number, requestedTitle = page.title,
+): Promise<void> {
   await db.prepare(`INSERT OR IGNORE INTO wiki_path_page_revisions
-    (page_id, revision_id, title, allowed_links_json, created_at) VALUES (?1, ?2, ?3, ?4, ?5)`)
-    .bind(page.pageId, page.revisionId, page.title, JSON.stringify(page.allowedLinks), now).run();
+    (lang, page_id, revision_id, title, allowed_links_json, created_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6)`)
+    .bind(lang, page.pageId, page.revisionId, page.title, JSON.stringify(page.allowedLinks), now).run();
   const alias = db.prepare(`INSERT OR IGNORE INTO wiki_path_page_refs
-    (challenge_id, normalized_title, page_id, revision_id) VALUES (?1, ?2, ?3, ?4)`);
-  await alias.bind(challengeId, titleKey(requestedTitle), page.pageId, page.revisionId).run();
-  await alias.bind(challengeId, titleKey(page.title), page.pageId, page.revisionId).run();
+    (challenge_id, normalized_title, lang, page_id, revision_id) VALUES (?1, ?2, ?3, ?4, ?5)`);
+  await alias.bind(challengeId, titleKey(requestedTitle), lang, page.pageId, page.revisionId).run();
+  await alias.bind(challengeId, titleKey(page.title), lang, page.pageId, page.revisionId).run();
 }
 
 export async function findChallengeTarget(db: D1Database, challengeId: string): Promise<{ pageId: number; canonicalTitle: string } | null> {
@@ -152,9 +167,14 @@ export function titleKey(title: string): string {
   return title.replaceAll('_', ' ').trim().replace(/\s+/g, ' ').normalize('NFC').toLocaleLowerCase('ru-RU');
 }
 
-export async function listBoard(db: D1Database, dateKey: string, limit = 50): Promise<Array<Pick<WikiRunRow, 'id' | 'player_id' | 'display_name' | 'clicks' | 'completed_at'>>> {
+/**
+ * Completed Telegram runs of one challenge: each language has its own daily board.
+ * The date_key predicate (derived from the challenge) keeps idx_wiki_path_board usable.
+ */
+export async function listBoard(db: D1Database, challengeId: string, limit = 50): Promise<Array<Pick<WikiRunRow, 'id' | 'player_id' | 'display_name' | 'clicks' | 'completed_at'>>> {
   const result = await db.prepare(`SELECT id, player_id, display_name, clicks, completed_at FROM wiki_path_runs
-    WHERE date_key = ?1 AND status = 'completed' AND player_id LIKE 'telegram:%'
-    ORDER BY clicks ASC, completed_at ASC, player_id ASC LIMIT ?2`).bind(dateKey, limit).all<Pick<WikiRunRow, 'id' | 'player_id' | 'display_name' | 'clicks' | 'completed_at'>>();
+    WHERE date_key = (SELECT date_key FROM wiki_path_challenges WHERE id = ?1)
+      AND challenge_id = ?1 AND status = 'completed' AND player_id LIKE 'telegram:%'
+    ORDER BY clicks ASC, completed_at ASC, player_id ASC LIMIT ?2`).bind(challengeId, limit).all<Pick<WikiRunRow, 'id' | 'player_id' | 'display_name' | 'clicks' | 'completed_at'>>();
   return result.results ?? [];
 }

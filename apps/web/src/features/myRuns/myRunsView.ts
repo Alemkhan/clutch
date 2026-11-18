@@ -1,5 +1,8 @@
 import type { MyRematchInvite, MyRunSummary } from '@clutch/shared';
-import { SOLO_TARGET_PROGRESS } from '@clutch/shared';
+import { SOLO_TARGET_PROGRESS, type Locale } from '@clutch/shared';
+import { messagesFor } from '../../i18n/messages';
+import { currentLocale } from '../../i18n/locale';
+import { m } from './messages';
 
 /** Тексты экрана «Мои партии». Чистые функции без React: время передаётся снаружи. */
 
@@ -10,33 +13,27 @@ export interface RunStatus {
   text: string;
 }
 
-const CATEGORY_NAMES: Record<MyRunSummary['category'], string> = {
-  general: 'Общие знания',
-  geography: 'География',
-  history: 'Другие флаги',
-  languages: 'Языки',
-  kz_history: 'История Казахстана',
-};
+const CATEGORY_KEYS = {
+  general: 'catGeneral',
+  geography: 'catGeography',
+  history: 'catHistory',
+  languages: 'catLanguages',
+  kz_history: 'catKzHistory',
+} as const satisfies Record<MyRunSummary['category'], keyof typeof m.ru>;
 
 export function categoryName(category: MyRunSummary['category']): string {
-  return CATEGORY_NAMES[category] ?? 'Категория';
-}
-
-function plural(count: number, one: string, few: string, many: string): string {
-  const lastTwo = count % 100;
-  const last = count % 10;
-  if (lastTwo >= 11 && lastTwo <= 14) return many;
-  if (last === 1) return one;
-  return last >= 2 && last <= 4 ? few : many;
+  const t = messagesFor(m);
+  const key = CATEGORY_KEYS[category];
+  return key ? t[key] : t.catFallback;
 }
 
 export function roundsText(run: Pick<MyRunSummary, 'roundsPlayed'>): string {
-  return `${run.roundsPlayed} ${plural(run.roundsPlayed, 'круг', 'круга', 'кругов')}`;
+  return messagesFor(m).rounds(run.roundsPlayed);
 }
 
 /** «7 кругов» — тем же числительным, что и в «Моих партиях», чтобы счёт читался одинаково. */
 export function soloRoundsText(count: number): string {
-  return `${count} ${plural(count, 'круг', 'круга', 'кругов')}`;
+  return messagesFor(m).rounds(count);
 }
 
 /**
@@ -46,31 +43,32 @@ export function soloRoundsText(count: number): string {
  * нечего: такой забег в пул не попадает, поэтому «ждём» ему не пишем.
  */
 export function runStatus(run: Pick<MyRunSummary, 'reachedTarget' | 'outcome' | 'opponent' | 'friendDuel'>): RunStatus {
-  if (!run.outcome && !run.reachedTarget && run.friendDuel !== 'hosted') return { kind: 'missed', text: 'Не дошёл до цели' };
+  const t = messagesFor(m);
+  if (!run.outcome && !run.reachedTarget && run.friendDuel !== 'hosted') return { kind: 'missed', text: t.statusMissed };
   switch (run.outcome) {
-    case 'player': return { kind: 'win', text: 'Победа' };
-    case 'opponent': return { kind: 'loss', text: 'Поражение' };
-    case 'tie': return { kind: 'tie', text: 'Ничья' };
+    case 'player': return { kind: 'win', text: t.statusWin };
+    case 'opponent': return { kind: 'loss', text: t.statusLoss };
+    case 'tie': return { kind: 'tie', text: t.statusTie };
     default:
       return run.opponent === null
-        ? { kind: 'waiting', text: 'Ждём соперника' }
-        : { kind: 'unknown', text: 'Исход не определён' };
+        ? { kind: 'waiting', text: t.statusWaiting }
+        : { kind: 'unknown', text: t.statusUnknown };
   }
 }
 
-const BADGE_TEXT: Record<RunStatusKind, string> = {
-  win: 'Победа',
-  loss: 'Поражение',
-  tie: 'Ничья',
-  waiting: 'Ждём',
-  missed: 'Не дошёл',
-  unknown: 'Без исхода',
-};
+const BADGE_KEYS = {
+  win: 'statusWin',
+  loss: 'statusLoss',
+  tie: 'statusTie',
+  waiting: 'badgeWaiting',
+  missed: 'badgeMissed',
+  unknown: 'badgeUnknown',
+} as const satisfies Record<RunStatusKind, keyof typeof m.ru>;
 
 /** Короткая плашка исхода для строки истории; kind тот же, что у runStatus. */
 export function runBadge(run: Parameters<typeof runStatus>[0]): RunStatus {
   const { kind } = runStatus(run);
-  return { kind, text: BADGE_TEXT[kind] };
+  return { kind, text: messagesFor(m)[BADGE_KEYS[kind]] };
 }
 
 /**
@@ -78,9 +76,10 @@ export function runBadge(run: Parameters<typeof runStatus>[0]): RunStatus {
  * тогда только свои. Чужой забег по моей записи — цифры друга, с его именем.
  */
 export function runRoundsLine(run: MyRunSummary): string {
+  const t = messagesFor(m);
   const own = roundsText(run);
-  if (run.friendDuel === 'hosted') return `${run.opponent?.displayName ?? 'Друг'}: ${own}`;
-  return typeof run.opponentRoundsPlayed === 'number' ? `${own} против ${run.opponentRoundsPlayed}` : own;
+  if (run.friendDuel === 'hosted') return `${run.opponent?.displayName ?? t.friend}: ${own}`;
+  return typeof run.opponentRoundsPlayed === 'number' ? t.versus(own, run.opponentRoundsPlayed) : own;
 }
 
 /** Части строки вызова: выделенное «N кругов» показывается жирным. Нет кругов с обеих сторон — null. */
@@ -89,18 +88,18 @@ export function inviteRoundsParts(
 ): { lead: string; strong: string; rest: string } | null {
   const { challengerRoundsPlayed: theirs, recipientRoundsPlayed: yours } = invite;
   if (typeof theirs !== 'number' || typeof yours !== 'number') return null;
-  return { lead: 'Соперник: ', strong: soloRoundsText(theirs), rest: ` против твоих ${yours}` };
+  const t = messagesFor(m);
+  return { lead: t.inviteLead, strong: soloRoundsText(theirs), rest: t.inviteRest(yours) };
 }
 
 /** «из 1 дошедшего», «из 3 дошедших», «из 21 дошедшего»: родительный падеж, ед. ч. только для …1 (кроме 11). */
 export function finishedText(total: number): string {
-  const lastTwo = total % 100;
-  return `из ${total} ${total % 10 === 1 && lastTwo !== 11 ? 'дошедшего' : 'дошедших'}`;
+  return messagesFor(m).finished(total);
 }
 
 /** Короткая запись кругов в списке таблицы: «7 кр.». */
 export function roundsShort(count: number): string {
-  return `${count} кр.`;
+  return messagesFor(m).roundsShort(count);
 }
 
 /**
@@ -109,28 +108,31 @@ export function roundsShort(count: number): string {
  */
 export function initials(name: string): string {
   const trimmed = name.trim();
-  const anonymous = /^Игрок\s+(\S+)$/u.exec(trimmed);
+  const anonymous = /^(?:Игрок|Player|Ойыншы)\s+(\S+)$/u.exec(trimmed);
   const chars = Array.from(anonymous ? anonymous[1].slice(-2) : trimmed).slice(0, 2);
   return (chars.join('') || '?').toLocaleUpperCase('ru-RU');
 }
 
 export function runSummary(run: MyRunSummary): string {
+  const t = messagesFor(m);
   const rounds = roundsText(run);
   // Чужой забег по моей записи: цифры друга, поэтому без «дошёл» от первого лица.
   if (run.friendDuel === 'hosted') {
-    const name = run.opponent?.displayName ?? 'Друг';
-    return run.reachedTarget ? `${name}: ${SOLO_TARGET_PROGRESS}% за ${rounds}` : `${name}: ${run.progress}% за ${rounds}`;
+    const name = run.opponent?.displayName ?? t.friend;
+    return `${name}: ${t.summaryProgress(run.reachedTarget ? SOLO_TARGET_PROGRESS : run.progress, rounds)}`;
   }
-  if (run.reachedTarget) return `Дошёл до ${SOLO_TARGET_PROGRESS}% за ${rounds}`;
-  return `${run.progress}% за ${rounds}`;
+  if (run.reachedTarget) return t.summaryReached(SOLO_TARGET_PROGRESS, rounds);
+  return t.summaryProgress(run.progress, rounds);
 }
 
 /** Пометка дружеской игры в «Моих партиях»; у обычной партии пусто. */
 export function friendDuelNote(run: Pick<MyRunSummary, 'friendDuel'>): string | null {
-  if (run.friendDuel === 'hosted') return 'Друг сыграл вашу запись · не в зачёт';
-  return run.friendDuel === 'played' ? 'Дружеская игра · не в зачёт' : null;
+  const t = messagesFor(m);
+  if (run.friendDuel === 'hosted') return t.friendHosted;
+  return run.friendDuel === 'played' ? t.friendPlayed : null;
 }
 
+const DATE_LOCALE: Record<Locale, string> = { ru: 'ru-RU', en: 'en-GB', kk: 'kk-KZ' };
 const TIME: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit' };
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -142,11 +144,13 @@ function startOfDay(ms: number): number {
 
 /** «Сегодня, 14:30», «Вчера, 09:05» или «3 октября, 18:20». */
 export function formatRunTime(timestamp: number, now: number = Date.now()): string {
-  const time = new Date(timestamp).toLocaleTimeString('ru-RU', TIME);
+  const t = messagesFor(m);
+  const tag = DATE_LOCALE[currentLocale()];
+  const time = new Date(timestamp).toLocaleTimeString(tag, TIME);
   const days = Math.round((startOfDay(now) - startOfDay(timestamp)) / DAY_MS);
-  if (days === 0) return `Сегодня, ${time}`;
-  if (days === 1) return `Вчера, ${time}`;
-  const date = new Date(timestamp).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+  if (days === 0) return t.today(time);
+  if (days === 1) return t.yesterday(time);
+  const date = new Date(timestamp).toLocaleDateString(tag, { day: 'numeric', month: 'long' });
   return `${date}, ${time}`;
 }
 
@@ -154,9 +158,10 @@ export function formatRunTime(timestamp: number, now: number = Date.now()): stri
 export function inviteDeadline(expiresAt: number, now: number = Date.now()): string | null {
   const left = expiresAt - now;
   if (left <= 0) return null;
+  const t = messagesFor(m);
   const days = Math.floor(left / DAY_MS);
-  if (days >= 1) return `Ещё ${days} дн.`;
+  if (days >= 1) return t.leftDays(days);
   const hours = Math.floor(left / (60 * 60 * 1000));
-  if (hours >= 1) return `Ещё ${hours} ч`;
-  return `Ещё ${Math.max(1, Math.floor(left / (60 * 1000)))} мин`;
+  if (hours >= 1) return t.leftHours(hours);
+  return t.leftMinutes(Math.max(1, Math.floor(left / (60 * 1000))));
 }

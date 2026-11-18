@@ -1,0 +1,2003 @@
+{
+  "au-science-10aackr": {
+    "prompt": "Which gas do plants absorb from the air for photosynthesis?",
+    "answer": "carbon dioxide",
+    "accepted": [
+      "carbon dioxide",
+      "CO2"
+    ],
+    "distractors": [
+      "oxygen",
+      "nitrogen",
+      "hydrogen"
+    ]
+  },
+  "au-science-1i6qjj": {
+    "prompt": "At what temperature does water boil at sea level, in degrees Celsius?",
+    "answer": "100",
+    "accepted": [
+      "100",
+      "one hundred",
+      "a hundred"
+    ],
+    "distractors": [
+      "90",
+      "120",
+      "80"
+    ]
+  },
+  "au-science-1ucndre": {
+    "prompt": "What is the instrument for measuring temperature called?",
+    "answer": "thermometer",
+    "accepted": [
+      "thermometer"
+    ],
+    "distractors": [
+      "barometer",
+      "manometer",
+      "hygrometer"
+    ]
+  },
+  "au-science-1llnkk2": {
+    "prompt": "What is the chemical formula of water?",
+    "answer": "H2O",
+    "accepted": [
+      "H2O",
+      "H₂O"
+    ],
+    "distractors": [
+      "CO2",
+      "O2",
+      "H2O2"
+    ]
+  },
+  "au-science-elli83": {
+    "prompt": "What is the negatively charged particle of an atom called?",
+    "answer": "electron",
+    "accepted": [
+      "electron"
+    ],
+    "distractors": [
+      "proton",
+      "neutron",
+      "photon"
+    ]
+  },
+  "au-science-imaol5": {
+    "prompt": "In what unit is electric current measured?",
+    "answer": "ampere",
+    "accepted": [
+      "ampere",
+      "amperes",
+      "amp",
+      "amps",
+      "A"
+    ],
+    "distractors": [
+      "volt",
+      "watt",
+      "ohm"
+    ]
+  },
+  "au-science-wd9zzc": {
+    "prompt": "What is the science of living organisms called?",
+    "answer": "biology",
+    "accepted": [
+      "biology"
+    ],
+    "distractors": [
+      "geology",
+      "chemistry",
+      "astronomy"
+    ]
+  },
+  "au-science-wnaoqu": {
+    "prompt": "Which scientist discovered the law of universal gravitation?",
+    "answer": "Isaac Newton",
+    "accepted": [
+      "Isaac Newton",
+      "Newton"
+    ],
+    "distractors": [
+      "Galileo Galilei",
+      "Albert Einstein",
+      "Nikola Tesla"
+    ]
+  },
+  "au-science-14z31xs": {
+    "prompt": "Who created the periodic table of chemical elements?",
+    "answer": "Dmitri Mendeleev",
+    "accepted": [
+      "Dmitri Mendeleev",
+      "Mendeleev",
+      "Dmitry Mendeleev",
+      "Mendeleyev"
+    ],
+    "distractors": [
+      "Mikhail Lomonosov",
+      "Niels Bohr",
+      "Antoine Lavoisier"
+    ]
+  },
+  "au-science-2d6ixn": {
+    "prompt": "What force keeps the planets in orbit around the Sun?",
+    "answer": "gravity",
+    "accepted": [
+      "gravity",
+      "gravitation",
+      "gravitational force"
+    ],
+    "distractors": [
+      "magnetism",
+      "friction",
+      "inertia"
+    ]
+  },
+  "au-science-1fpuwsv": {
+    "prompt": "Which gas makes up most of Earth's atmosphere?",
+    "answer": "nitrogen",
+    "accepted": [
+      "nitrogen"
+    ],
+    "distractors": [
+      "oxygen",
+      "carbon dioxide",
+      "argon"
+    ],
+    "explanation": "Air is about 78% nitrogen and about 21% oxygen."
+  },
+  "au-science-19dpw4m": {
+    "prompt": "In what unit is frequency measured?",
+    "answer": "hertz",
+    "accepted": [
+      "hertz",
+      "Hz"
+    ],
+    "distractors": [
+      "decibel",
+      "joule",
+      "pascal"
+    ]
+  },
+  "au-science-12ceqxi": {
+    "prompt": "What does the letter \"c\" stand for in E = mc²?",
+    "answer": "speed of light",
+    "accepted": [
+      "speed of light",
+      "the speed of light"
+    ],
+    "distractors": [
+      "acceleration due to gravity",
+      "heat capacity",
+      "electric charge"
+    ]
+  },
+  "au-science-1ji2q4": {
+    "prompt": "Which metal is the best conductor of electricity?",
+    "answer": "silver",
+    "accepted": [
+      "silver"
+    ],
+    "distractors": [
+      "copper",
+      "gold",
+      "aluminium"
+    ]
+  },
+  "au-science-1cclbo3": {
+    "prompt": "What is the transition of a substance directly from solid to gas called?",
+    "answer": "sublimation",
+    "accepted": [
+      "sublimation"
+    ],
+    "distractors": [
+      "condensation",
+      "evaporation",
+      "crystallization"
+    ]
+  },
+  "au-science-dnb0z8": {
+    "prompt": "Who discovered penicillin?",
+    "answer": "Alexander Fleming",
+    "accepted": [
+      "Alexander Fleming",
+      "Fleming"
+    ],
+    "distractors": [
+      "Louis Pasteur",
+      "Robert Koch",
+      "Edward Jenner"
+    ]
+  },
+  "au-science-fmivjb": {
+    "prompt": "What is the most abundant element in the Universe?",
+    "answer": "hydrogen",
+    "accepted": [
+      "hydrogen"
+    ],
+    "distractors": [
+      "helium",
+      "oxygen",
+      "carbon"
+    ]
+  },
+  "au-science-931ach": {
+    "prompt": "What is the SI unit of radioactivity?",
+    "answer": "becquerel",
+    "accepted": [
+      "becquerel",
+      "Bq"
+    ],
+    "distractors": [
+      "sievert",
+      "gray",
+      "curie"
+    ]
+  },
+  "au-science-wa50jg": {
+    "prompt": "What is absolute zero on the Celsius scale, rounded to a whole number?",
+    "answer": "−273",
+    "accepted": [
+      "−273",
+      "-273",
+      "minus 273",
+      "−273.15",
+      "-273.15"
+    ],
+    "distractors": [
+      "−100",
+      "−459",
+      "−373"
+    ],
+    "explanation": "Exactly −273.15 °C. −459 is absolute zero in Fahrenheit."
+  },
+  "au-science-6c8jcc": {
+    "prompt": "Which scientist proposed the theory of evolution by natural selection?",
+    "answer": "Charles Darwin",
+    "accepted": [
+      "Charles Darwin",
+      "Darwin"
+    ],
+    "distractors": [
+      "Jean-Baptiste Lamarck",
+      "Gregor Mendel",
+      "Alfred Nobel"
+    ]
+  },
+  "wd-element-H": {
+    "prompt": "Which chemical element has the symbol H?",
+    "answer": "hydrogen",
+    "accepted": [
+      "hydrogen"
+    ],
+    "distractors": [
+      "nitrogen",
+      "lanthanum",
+      "bismuth"
+    ],
+    "explanation": "H is hydrogen, element number 1 on the periodic table."
+  },
+  "wd-element-O": {
+    "prompt": "Which chemical element has the symbol O?",
+    "answer": "oxygen",
+    "accepted": [
+      "oxygen"
+    ],
+    "distractors": [
+      "potassium",
+      "gallium",
+      "arsenic"
+    ],
+    "explanation": "O is oxygen, element number 8 on the periodic table."
+  },
+  "wd-element-C": {
+    "prompt": "Which chemical element has the symbol C?",
+    "answer": "carbon",
+    "accepted": [
+      "carbon"
+    ],
+    "distractors": [
+      "boron",
+      "praseodymium",
+      "chromium"
+    ],
+    "explanation": "C is carbon, element number 6 on the periodic table."
+  },
+  "wd-element-Fe": {
+    "prompt": "Which chemical element has the symbol Fe?",
+    "answer": "iron",
+    "accepted": [
+      "iron"
+    ],
+    "distractors": [
+      "carbon",
+      "arsenic",
+      "copper"
+    ],
+    "explanation": "Fe is iron, element number 26 on the periodic table."
+  },
+  "wd-element-Au": {
+    "prompt": "Which chemical element has the symbol Au?",
+    "answer": "gold",
+    "accepted": [
+      "gold"
+    ],
+    "distractors": [
+      "sodium",
+      "carbon",
+      "samarium"
+    ],
+    "explanation": "Au is gold, element number 79 on the periodic table."
+  },
+  "wd-element-Ag": {
+    "prompt": "Which chemical element has the symbol Ag?",
+    "answer": "silver",
+    "accepted": [
+      "silver"
+    ],
+    "distractors": [
+      "xenon",
+      "iridium",
+      "erbium"
+    ],
+    "explanation": "Ag is silver, element number 47 on the periodic table."
+  },
+  "wd-element-N": {
+    "prompt": "Which chemical element has the symbol N?",
+    "answer": "nitrogen",
+    "accepted": [
+      "nitrogen"
+    ],
+    "distractors": [
+      "uranium",
+      "thulium",
+      "iridium"
+    ],
+    "explanation": "N is nitrogen, element number 7 on the periodic table."
+  },
+  "wd-element-He": {
+    "prompt": "Which chemical element has the symbol He?",
+    "answer": "helium",
+    "accepted": [
+      "helium"
+    ],
+    "distractors": [
+      "fluorine",
+      "calcium",
+      "germanium"
+    ],
+    "explanation": "He is helium, element number 2 on the periodic table."
+  },
+  "wd-element-Na": {
+    "prompt": "Which chemical element has the symbol Na?",
+    "answer": "sodium",
+    "accepted": [
+      "sodium"
+    ],
+    "distractors": [
+      "niobium",
+      "thallium",
+      "cadmium"
+    ],
+    "explanation": "Na is sodium, element number 11 on the periodic table."
+  },
+  "wd-element-Cu": {
+    "prompt": "Which chemical element has the symbol Cu?",
+    "answer": "copper",
+    "accepted": [
+      "copper"
+    ],
+    "distractors": [
+      "samarium",
+      "polonium",
+      "scandium"
+    ],
+    "explanation": "Cu is copper, element number 29 on the periodic table."
+  },
+  "wd-element-Ca": {
+    "prompt": "Which chemical element has the symbol Ca?",
+    "answer": "calcium",
+    "accepted": [
+      "calcium"
+    ],
+    "distractors": [
+      "francium",
+      "tin",
+      "copper"
+    ],
+    "explanation": "Ca is calcium, element number 20 on the periodic table."
+  },
+  "wd-element-K": {
+    "prompt": "Which chemical element has the symbol K?",
+    "answer": "potassium",
+    "accepted": [
+      "potassium"
+    ],
+    "distractors": [
+      "platinum",
+      "nickel",
+      "sulfur"
+    ],
+    "explanation": "K is potassium, element number 19 on the periodic table."
+  },
+  "wd-element-Cl": {
+    "prompt": "Which chemical element has the symbol Cl?",
+    "answer": "chlorine",
+    "accepted": [
+      "chlorine"
+    ],
+    "distractors": [
+      "polonium",
+      "iodine",
+      "scandium"
+    ],
+    "explanation": "Cl is chlorine, element number 17 on the periodic table."
+  },
+  "wd-element-Al": {
+    "prompt": "Which chemical element has the symbol Al?",
+    "answer": "aluminium",
+    "accepted": [
+      "aluminium",
+      "aluminum"
+    ],
+    "distractors": [
+      "arsenic",
+      "manganese",
+      "tungsten"
+    ],
+    "explanation": "Al is aluminium, element number 13 on the periodic table."
+  },
+  "wd-element-Zn": {
+    "prompt": "Which chemical element has the symbol Zn?",
+    "answer": "zinc",
+    "accepted": [
+      "zinc"
+    ],
+    "distractors": [
+      "promethium",
+      "scandium",
+      "niobium"
+    ],
+    "explanation": "Zn is zinc, element number 30 on the periodic table."
+  },
+  "wd-element-Hg": {
+    "prompt": "Which chemical element has the symbol Hg?",
+    "answer": "mercury",
+    "accepted": [
+      "mercury"
+    ],
+    "distractors": [
+      "argon",
+      "boron",
+      "vanadium"
+    ],
+    "explanation": "Hg is mercury, element number 80 on the periodic table."
+  },
+  "wd-element-Pb": {
+    "prompt": "Which chemical element has the symbol Pb?",
+    "answer": "lead",
+    "accepted": [
+      "lead"
+    ],
+    "distractors": [
+      "niobium",
+      "dysprosium",
+      "xenon"
+    ],
+    "explanation": "Pb is lead, element number 82 on the periodic table."
+  },
+  "wd-element-Sn": {
+    "prompt": "Which chemical element has the symbol Sn?",
+    "answer": "tin",
+    "accepted": [
+      "tin"
+    ],
+    "distractors": [
+      "antimony",
+      "sodium",
+      "aluminium"
+    ],
+    "explanation": "Sn is tin, element number 50 on the periodic table."
+  },
+  "wd-element-U": {
+    "prompt": "Which chemical element has the symbol U?",
+    "answer": "uranium",
+    "accepted": [
+      "uranium"
+    ],
+    "distractors": [
+      "silver",
+      "terbium",
+      "lanthanum"
+    ],
+    "explanation": "U is uranium, element number 92 on the periodic table."
+  },
+  "wd-element-Mg": {
+    "prompt": "Which chemical element has the symbol Mg?",
+    "answer": "magnesium",
+    "accepted": [
+      "magnesium"
+    ],
+    "distractors": [
+      "phosphorus",
+      "lithium",
+      "rhenium"
+    ],
+    "explanation": "Mg is magnesium, element number 12 on the periodic table."
+  },
+  "wd-element-Si": {
+    "prompt": "Which chemical element has the symbol Si?",
+    "answer": "silicon",
+    "accepted": [
+      "silicon"
+    ],
+    "distractors": [
+      "molybdenum",
+      "ruthenium",
+      "antimony"
+    ],
+    "explanation": "Si is silicon, element number 14 on the periodic table."
+  },
+  "wd-element-P": {
+    "prompt": "Which chemical element has the symbol P?",
+    "answer": "phosphorus",
+    "accepted": [
+      "phosphorus"
+    ],
+    "distractors": [
+      "osmium",
+      "copper",
+      "platinum"
+    ],
+    "explanation": "P is phosphorus, element number 15 on the periodic table."
+  },
+  "wd-element-S": {
+    "prompt": "Which chemical element has the symbol S?",
+    "answer": "sulfur",
+    "accepted": [
+      "sulfur",
+      "sulphur"
+    ],
+    "distractors": [
+      "bismuth",
+      "uranium",
+      "chlorine"
+    ],
+    "explanation": "S is sulfur, element number 16 on the periodic table."
+  },
+  "wd-element-I": {
+    "prompt": "Which chemical element has the symbol I?",
+    "answer": "iodine",
+    "accepted": [
+      "iodine"
+    ],
+    "distractors": [
+      "copper",
+      "lithium",
+      "bismuth"
+    ],
+    "explanation": "I is iodine, element number 53 on the periodic table."
+  },
+  "wd-element-Ni": {
+    "prompt": "Which chemical element has the symbol Ni?",
+    "answer": "nickel",
+    "accepted": [
+      "nickel"
+    ],
+    "distractors": [
+      "nitrogen",
+      "carbon",
+      "niobium"
+    ],
+    "explanation": "Ni is nickel, element number 28 on the periodic table."
+  },
+  "wd-element-Ti": {
+    "prompt": "Which chemical element has the symbol Ti?",
+    "answer": "titanium",
+    "accepted": [
+      "titanium"
+    ],
+    "distractors": [
+      "praseodymium",
+      "francium",
+      "ytterbium"
+    ],
+    "explanation": "Ti is titanium, element number 22 on the periodic table."
+  },
+  "wd-element-Ne": {
+    "prompt": "Which chemical element has the symbol Ne?",
+    "answer": "neon",
+    "accepted": [
+      "neon"
+    ],
+    "distractors": [
+      "strontium",
+      "erbium",
+      "terbium"
+    ],
+    "explanation": "Ne is neon, element number 10 on the periodic table."
+  },
+  "wd-element-Ar": {
+    "prompt": "Which chemical element has the symbol Ar?",
+    "answer": "argon",
+    "accepted": [
+      "argon"
+    ],
+    "distractors": [
+      "astatine",
+      "mercury",
+      "aluminium"
+    ],
+    "explanation": "Ar is argon, element number 18 on the periodic table."
+  },
+  "wd-element-Pt": {
+    "prompt": "Which chemical element has the symbol Pt?",
+    "answer": "platinum",
+    "accepted": [
+      "platinum"
+    ],
+    "distractors": [
+      "ruthenium",
+      "neon",
+      "strontium"
+    ],
+    "explanation": "Pt is platinum, element number 78 on the periodic table."
+  },
+  "wd-element-Li": {
+    "prompt": "Which chemical element has the symbol Li?",
+    "answer": "lithium",
+    "accepted": [
+      "lithium"
+    ],
+    "distractors": [
+      "hafnium",
+      "selenium",
+      "antimony"
+    ],
+    "explanation": "Li is lithium, element number 3 on the periodic table."
+  },
+  "wd-element-F": {
+    "prompt": "Which chemical element has the symbol F?",
+    "answer": "fluorine",
+    "accepted": [
+      "fluorine"
+    ],
+    "distractors": [
+      "lanthanum",
+      "arsenic",
+      "germanium"
+    ],
+    "explanation": "F is fluorine, element number 9 on the periodic table."
+  },
+  "wd-element-Cr": {
+    "prompt": "Which chemical element has the symbol Cr?",
+    "answer": "chromium",
+    "accepted": [
+      "chromium"
+    ],
+    "distractors": [
+      "neodymium",
+      "calcium",
+      "bromine"
+    ],
+    "explanation": "Cr is chromium, element number 24 on the periodic table."
+  },
+  "wd-element-Co": {
+    "prompt": "Which chemical element has the symbol Co?",
+    "answer": "cobalt",
+    "accepted": [
+      "cobalt"
+    ],
+    "distractors": [
+      "iodine",
+      "selenium",
+      "samarium"
+    ],
+    "explanation": "Co is cobalt, element number 27 on the periodic table."
+  },
+  "wd-element-Mn": {
+    "prompt": "Which chemical element has the symbol Mn?",
+    "answer": "manganese",
+    "accepted": [
+      "manganese"
+    ],
+    "distractors": [
+      "thorium",
+      "silicon",
+      "phosphorus"
+    ],
+    "explanation": "Mn is manganese, element number 25 on the periodic table."
+  },
+  "wd-element-W": {
+    "prompt": "Which chemical element has the symbol W?",
+    "answer": "tungsten",
+    "accepted": [
+      "tungsten",
+      "wolfram"
+    ],
+    "distractors": [
+      "carbon",
+      "thallium",
+      "zinc"
+    ],
+    "explanation": "W is tungsten, element number 74 on the periodic table."
+  },
+  "wd-element-Ra": {
+    "prompt": "Which chemical element has the symbol Ra?",
+    "answer": "radium",
+    "accepted": [
+      "radium"
+    ],
+    "distractors": [
+      "selenium",
+      "lutetium",
+      "titanium"
+    ],
+    "explanation": "Ra is radium, element number 88 on the periodic table."
+  },
+  "wd-element-Rn": {
+    "prompt": "Which chemical element has the symbol Rn?",
+    "answer": "radon",
+    "accepted": [
+      "radon"
+    ],
+    "distractors": [
+      "lanthanum",
+      "samarium",
+      "palladium"
+    ],
+    "explanation": "Rn is radon, element number 86 on the periodic table."
+  },
+  "wd-element-Ba": {
+    "prompt": "Which chemical element has the symbol Ba?",
+    "answer": "barium",
+    "accepted": [
+      "barium"
+    ],
+    "distractors": [
+      "thallium",
+      "terbium",
+      "bismuth"
+    ],
+    "explanation": "Ba is barium, element number 56 on the periodic table."
+  },
+  "wd-element-Sr": {
+    "prompt": "Which chemical element has the symbol Sr?",
+    "answer": "strontium",
+    "accepted": [
+      "strontium"
+    ],
+    "distractors": [
+      "neodymium",
+      "hafnium",
+      "osmium"
+    ],
+    "explanation": "Sr is strontium, element number 38 on the periodic table."
+  },
+  "wd-element-Br": {
+    "prompt": "Which chemical element has the symbol Br?",
+    "answer": "bromine",
+    "accepted": [
+      "bromine"
+    ],
+    "distractors": [
+      "holmium",
+      "carbon",
+      "arsenic"
+    ],
+    "explanation": "Br is bromine, element number 35 on the periodic table."
+  },
+  "wd-element-Kr": {
+    "prompt": "Which chemical element has the symbol Kr?",
+    "answer": "krypton",
+    "accepted": [
+      "krypton"
+    ],
+    "distractors": [
+      "potassium",
+      "aluminium",
+      "tungsten"
+    ],
+    "explanation": "Kr is krypton, element number 36 on the periodic table."
+  },
+  "wd-element-Xe": {
+    "prompt": "Which chemical element has the symbol Xe?",
+    "answer": "xenon",
+    "accepted": [
+      "xenon"
+    ],
+    "distractors": [
+      "zirconium",
+      "scandium",
+      "radon"
+    ],
+    "explanation": "Xe is xenon, element number 54 on the periodic table."
+  },
+  "wd-element-Pu": {
+    "prompt": "Which chemical element has the symbol Pu?",
+    "answer": "plutonium",
+    "accepted": [
+      "plutonium"
+    ],
+    "distractors": [
+      "lithium",
+      "sulfur",
+      "oxygen"
+    ],
+    "explanation": "Pu is plutonium, element number 94 on the periodic table."
+  },
+  "q-science-q33dx2": {
+    "prompt": "Which two main chemical elements make up the Sun?",
+    "answer": "hydrogen and helium",
+    "accepted": [
+      "hydrogen and helium",
+      "helium and hydrogen"
+    ],
+    "distractors": [
+      "oxygen and nitrogen",
+      "carbon and silicon",
+      "iron and nickel"
+    ],
+    "explanation": "The Sun is roughly 73% hydrogen and 25% helium."
+  },
+  "q-science-1ys8w78": {
+    "prompt": "What fourth state of matter follows gas when it is ionized at high temperature?",
+    "answer": "plasma",
+    "accepted": [
+      "plasma"
+    ],
+    "distractors": [
+      "Bose–Einstein condensate",
+      "liquid",
+      "solid"
+    ],
+    "explanation": "Plasma is a partially or fully ionized gas."
+  },
+  "q-science-elkaof": {
+    "prompt": "Which elementary particle (a boson) is responsible for giving other fundamental particles their mass?",
+    "answer": "Higgs boson",
+    "accepted": [
+      "Higgs boson",
+      "Higgs",
+      "the Higgs boson"
+    ],
+    "distractors": [
+      "photon",
+      "gluon",
+      "neutrino"
+    ],
+    "explanation": "The Higgs boson was discovered at the Large Hadron Collider in 2012."
+  },
+  "q-science-xco3gf": {
+    "prompt": "What is the SI unit of frequency of periodic processes called?",
+    "answer": "hertz",
+    "accepted": [
+      "hertz",
+      "Hz"
+    ],
+    "distractors": [
+      "pascal",
+      "joule",
+      "watt"
+    ],
+    "explanation": "One hertz equals one cycle per second."
+  },
+  "wd-element-number-1": {
+    "prompt": "What is the atomic number of hydrogen?",
+    "answer": "1",
+    "accepted": [
+      "1"
+    ],
+    "distractors": [
+      "113",
+      "38",
+      "75"
+    ],
+    "explanation": "Hydrogen is element number 1 on the periodic table."
+  },
+  "wd-element-name-symbol-H": {
+    "prompt": "What is the chemical symbol for hydrogen?",
+    "answer": "H",
+    "accepted": [
+      "H"
+    ],
+    "distractors": [
+      "Yb",
+      "Ir",
+      "Ga"
+    ],
+    "explanation": "The chemical symbol for hydrogen is H."
+  },
+  "wd-element-number-2": {
+    "prompt": "What is the atomic number of helium?",
+    "answer": "2",
+    "accepted": [
+      "2"
+    ],
+    "distractors": [
+      "75",
+      "86",
+      "101"
+    ],
+    "explanation": "Helium is element number 2 on the periodic table."
+  },
+  "wd-element-name-symbol-He": {
+    "prompt": "What is the chemical symbol for helium?",
+    "answer": "He",
+    "accepted": [
+      "He"
+    ],
+    "distractors": [
+      "Nh",
+      "O",
+      "Tc"
+    ],
+    "explanation": "The chemical symbol for helium is He."
+  },
+  "wd-element-number-3": {
+    "prompt": "What is the atomic number of lithium?",
+    "answer": "3",
+    "accepted": [
+      "3"
+    ],
+    "distractors": [
+      "16",
+      "60",
+      "28"
+    ],
+    "explanation": "Lithium is element number 3 on the periodic table."
+  },
+  "wd-element-name-symbol-Li": {
+    "prompt": "What is the chemical symbol for lithium?",
+    "answer": "Li",
+    "accepted": [
+      "Li"
+    ],
+    "distractors": [
+      "Dy",
+      "Ra",
+      "Be"
+    ],
+    "explanation": "The chemical symbol for lithium is Li."
+  },
+  "wd-element-number-4": {
+    "prompt": "What is the atomic number of beryllium?",
+    "answer": "4",
+    "accepted": [
+      "4"
+    ],
+    "distractors": [
+      "85",
+      "12",
+      "26"
+    ],
+    "explanation": "Beryllium is element number 4 on the periodic table."
+  },
+  "wd-element-name-symbol-Be": {
+    "prompt": "What is the chemical symbol for beryllium?",
+    "answer": "Be",
+    "accepted": [
+      "Be"
+    ],
+    "distractors": [
+      "Hs",
+      "Tl",
+      "C"
+    ],
+    "explanation": "The chemical symbol for beryllium is Be."
+  },
+  "wd-element-number-5": {
+    "prompt": "What is the atomic number of boron?",
+    "answer": "5",
+    "accepted": [
+      "5"
+    ],
+    "distractors": [
+      "26",
+      "94",
+      "108"
+    ],
+    "explanation": "Boron is element number 5 on the periodic table."
+  },
+  "wd-element-name-symbol-B": {
+    "prompt": "What is the chemical symbol for boron?",
+    "answer": "B",
+    "accepted": [
+      "B"
+    ],
+    "distractors": [
+      "Li",
+      "Pm",
+      "Ds"
+    ],
+    "explanation": "The chemical symbol for boron is B."
+  },
+  "wd-element-number-6": {
+    "prompt": "What is the atomic number of carbon?",
+    "answer": "6",
+    "accepted": [
+      "6"
+    ],
+    "distractors": [
+      "95",
+      "109",
+      "37"
+    ],
+    "explanation": "Carbon is element number 6 on the periodic table."
+  },
+  "wd-element-name-symbol-C": {
+    "prompt": "What is the chemical symbol for carbon?",
+    "answer": "C",
+    "accepted": [
+      "C"
+    ],
+    "distractors": [
+      "Zr",
+      "Pt",
+      "He"
+    ],
+    "explanation": "The chemical symbol for carbon is C."
+  },
+  "wd-element-number-7": {
+    "prompt": "What is the atomic number of nitrogen?",
+    "answer": "7",
+    "accepted": [
+      "7"
+    ],
+    "distractors": [
+      "36",
+      "102",
+      "93"
+    ],
+    "explanation": "Nitrogen is element number 7 on the periodic table."
+  },
+  "wd-element-name-symbol-N": {
+    "prompt": "What is the chemical symbol for nitrogen?",
+    "answer": "N",
+    "accepted": [
+      "N"
+    ],
+    "distractors": [
+      "Er",
+      "Tl",
+      "Bk"
+    ],
+    "explanation": "The chemical symbol for nitrogen is N."
+  },
+  "wd-element-number-8": {
+    "prompt": "What is the atomic number of oxygen?",
+    "answer": "8",
+    "accepted": [
+      "8"
+    ],
+    "distractors": [
+      "104",
+      "65",
+      "31"
+    ],
+    "explanation": "Oxygen is element number 8 on the periodic table."
+  },
+  "wd-element-name-symbol-O": {
+    "prompt": "What is the chemical symbol for oxygen?",
+    "answer": "O",
+    "accepted": [
+      "O"
+    ],
+    "distractors": [
+      "Se",
+      "Li",
+      "Dy"
+    ],
+    "explanation": "The chemical symbol for oxygen is O."
+  },
+  "wd-element-number-9": {
+    "prompt": "What is the atomic number of fluorine?",
+    "answer": "9",
+    "accepted": [
+      "9"
+    ],
+    "distractors": [
+      "46",
+      "109",
+      "73"
+    ],
+    "explanation": "Fluorine is element number 9 on the periodic table."
+  },
+  "wd-element-name-symbol-F": {
+    "prompt": "What is the chemical symbol for fluorine?",
+    "answer": "F",
+    "accepted": [
+      "F"
+    ],
+    "distractors": [
+      "Po",
+      "Sm",
+      "Bh"
+    ],
+    "explanation": "The chemical symbol for fluorine is F."
+  },
+  "wd-element-number-10": {
+    "prompt": "What is the atomic number of neon?",
+    "answer": "10",
+    "accepted": [
+      "10"
+    ],
+    "distractors": [
+      "52",
+      "29",
+      "35"
+    ],
+    "explanation": "Neon is element number 10 on the periodic table."
+  },
+  "wd-element-name-symbol-Ne": {
+    "prompt": "What is the chemical symbol for neon?",
+    "answer": "Ne",
+    "accepted": [
+      "Ne"
+    ],
+    "distractors": [
+      "Ba",
+      "Po",
+      "Ru"
+    ],
+    "explanation": "The chemical symbol for neon is Ne."
+  },
+  "wd-element-number-11": {
+    "prompt": "What is the atomic number of sodium?",
+    "answer": "11",
+    "accepted": [
+      "11"
+    ],
+    "distractors": [
+      "60",
+      "4",
+      "28"
+    ],
+    "explanation": "Sodium is element number 11 on the periodic table."
+  },
+  "wd-element-name-symbol-Na": {
+    "prompt": "What is the chemical symbol for sodium?",
+    "answer": "Na",
+    "accepted": [
+      "Na"
+    ],
+    "distractors": [
+      "Rg",
+      "Db",
+      "Am"
+    ],
+    "explanation": "The chemical symbol for sodium is Na."
+  },
+  "wd-element-number-12": {
+    "prompt": "What is the atomic number of magnesium?",
+    "answer": "12",
+    "accepted": [
+      "12"
+    ],
+    "distractors": [
+      "99",
+      "75",
+      "100"
+    ],
+    "explanation": "Magnesium is element number 12 on the periodic table."
+  },
+  "wd-element-name-symbol-Mg": {
+    "prompt": "What is the chemical symbol for magnesium?",
+    "answer": "Mg",
+    "accepted": [
+      "Mg"
+    ],
+    "distractors": [
+      "Hf",
+      "Zn",
+      "Cu"
+    ],
+    "explanation": "The chemical symbol for magnesium is Mg."
+  },
+  "wd-element-number-13": {
+    "prompt": "What is the atomic number of aluminium?",
+    "answer": "13",
+    "accepted": [
+      "13"
+    ],
+    "distractors": [
+      "50",
+      "96",
+      "114"
+    ],
+    "explanation": "Aluminium is element number 13 on the periodic table."
+  },
+  "wd-element-name-symbol-Al": {
+    "prompt": "What is the chemical symbol for aluminium?",
+    "answer": "Al",
+    "accepted": [
+      "Al"
+    ],
+    "distractors": [
+      "N",
+      "Ho",
+      "Ds"
+    ],
+    "explanation": "The chemical symbol for aluminium is Al."
+  },
+  "wd-element-number-14": {
+    "prompt": "What is the atomic number of silicon?",
+    "answer": "14",
+    "accepted": [
+      "14"
+    ],
+    "distractors": [
+      "22",
+      "61",
+      "96"
+    ],
+    "explanation": "Silicon is element number 14 on the periodic table."
+  },
+  "wd-element-name-symbol-Si": {
+    "prompt": "What is the chemical symbol for silicon?",
+    "answer": "Si",
+    "accepted": [
+      "Si"
+    ],
+    "distractors": [
+      "Pa",
+      "As",
+      "Ru"
+    ],
+    "explanation": "The chemical symbol for silicon is Si."
+  },
+  "wd-element-number-15": {
+    "prompt": "What is the atomic number of phosphorus?",
+    "answer": "15",
+    "accepted": [
+      "15"
+    ],
+    "distractors": [
+      "80",
+      "23",
+      "48"
+    ],
+    "explanation": "Phosphorus is element number 15 on the periodic table."
+  },
+  "wd-element-name-symbol-P": {
+    "prompt": "What is the chemical symbol for phosphorus?",
+    "answer": "P",
+    "accepted": [
+      "P"
+    ],
+    "distractors": [
+      "No",
+      "Ag",
+      "Os"
+    ],
+    "explanation": "The chemical symbol for phosphorus is P."
+  },
+  "wd-element-number-16": {
+    "prompt": "What is the atomic number of sulfur?",
+    "answer": "16",
+    "accepted": [
+      "16"
+    ],
+    "distractors": [
+      "118",
+      "81",
+      "2"
+    ],
+    "explanation": "Sulfur is element number 16 on the periodic table."
+  },
+  "wd-element-name-symbol-S": {
+    "prompt": "What is the chemical symbol for sulfur?",
+    "answer": "S",
+    "accepted": [
+      "S"
+    ],
+    "distractors": [
+      "Ce",
+      "Bh",
+      "Fl"
+    ],
+    "explanation": "The chemical symbol for sulfur is S."
+  },
+  "wd-element-number-17": {
+    "prompt": "What is the atomic number of chlorine?",
+    "answer": "17",
+    "accepted": [
+      "17"
+    ],
+    "distractors": [
+      "70",
+      "101",
+      "35"
+    ],
+    "explanation": "Chlorine is element number 17 on the periodic table."
+  },
+  "wd-element-name-symbol-Cl": {
+    "prompt": "What is the chemical symbol for chlorine?",
+    "answer": "Cl",
+    "accepted": [
+      "Cl"
+    ],
+    "distractors": [
+      "S",
+      "Nb",
+      "Mn"
+    ],
+    "explanation": "The chemical symbol for chlorine is Cl."
+  },
+  "wd-element-number-18": {
+    "prompt": "What is the atomic number of argon?",
+    "answer": "18",
+    "accepted": [
+      "18"
+    ],
+    "distractors": [
+      "42",
+      "103",
+      "33"
+    ],
+    "explanation": "Argon is element number 18 on the periodic table."
+  },
+  "wd-element-name-symbol-Ar": {
+    "prompt": "What is the chemical symbol for argon?",
+    "answer": "Ar",
+    "accepted": [
+      "Ar"
+    ],
+    "distractors": [
+      "V",
+      "Xe",
+      "Nh"
+    ],
+    "explanation": "The chemical symbol for argon is Ar."
+  },
+  "wd-element-number-19": {
+    "prompt": "What is the atomic number of potassium?",
+    "answer": "19",
+    "accepted": [
+      "19"
+    ],
+    "distractors": [
+      "74",
+      "107",
+      "42"
+    ],
+    "explanation": "Potassium is element number 19 on the periodic table."
+  },
+  "wd-element-name-symbol-K": {
+    "prompt": "What is the chemical symbol for potassium?",
+    "answer": "K",
+    "accepted": [
+      "K"
+    ],
+    "distractors": [
+      "Og",
+      "Cl",
+      "Mo"
+    ],
+    "explanation": "The chemical symbol for potassium is K."
+  },
+  "wd-element-number-20": {
+    "prompt": "What is the atomic number of calcium?",
+    "answer": "20",
+    "accepted": [
+      "20"
+    ],
+    "distractors": [
+      "43",
+      "62",
+      "95"
+    ],
+    "explanation": "Calcium is element number 20 on the periodic table."
+  },
+  "wd-element-name-symbol-Ca": {
+    "prompt": "What is the chemical symbol for calcium?",
+    "answer": "Ca",
+    "accepted": [
+      "Ca"
+    ],
+    "distractors": [
+      "Pm",
+      "Os",
+      "Er"
+    ],
+    "explanation": "The chemical symbol for calcium is Ca."
+  },
+  "wd-element-number-21": {
+    "prompt": "What is the atomic number of scandium?",
+    "answer": "21",
+    "accepted": [
+      "21"
+    ],
+    "distractors": [
+      "85",
+      "92",
+      "17"
+    ],
+    "explanation": "Scandium is element number 21 on the periodic table."
+  },
+  "wd-element-name-symbol-Sc": {
+    "prompt": "What is the chemical symbol for scandium?",
+    "answer": "Sc",
+    "accepted": [
+      "Sc"
+    ],
+    "distractors": [
+      "Cm",
+      "Os",
+      "Rf"
+    ],
+    "explanation": "The chemical symbol for scandium is Sc."
+  },
+  "wd-element-number-22": {
+    "prompt": "What is the atomic number of titanium?",
+    "answer": "22",
+    "accepted": [
+      "22"
+    ],
+    "distractors": [
+      "33",
+      "79",
+      "81"
+    ],
+    "explanation": "Titanium is element number 22 on the periodic table."
+  },
+  "wd-element-name-symbol-Ti": {
+    "prompt": "What is the chemical symbol for titanium?",
+    "answer": "Ti",
+    "accepted": [
+      "Ti"
+    ],
+    "distractors": [
+      "Fm",
+      "Pt",
+      "As"
+    ],
+    "explanation": "The chemical symbol for titanium is Ti."
+  },
+  "wd-element-number-23": {
+    "prompt": "What is the atomic number of vanadium?",
+    "answer": "23",
+    "accepted": [
+      "23"
+    ],
+    "distractors": [
+      "81",
+      "42",
+      "64"
+    ],
+    "explanation": "Vanadium is element number 23 on the periodic table."
+  },
+  "wd-element-name-symbol-V": {
+    "prompt": "What is the chemical symbol for vanadium?",
+    "answer": "V",
+    "accepted": [
+      "V"
+    ],
+    "distractors": [
+      "Tc",
+      "Si",
+      "Po"
+    ],
+    "explanation": "The chemical symbol for vanadium is V."
+  },
+  "wd-element-number-24": {
+    "prompt": "What is the atomic number of chromium?",
+    "answer": "24",
+    "accepted": [
+      "24"
+    ],
+    "distractors": [
+      "63",
+      "71",
+      "106"
+    ],
+    "explanation": "Chromium is element number 24 on the periodic table."
+  },
+  "wd-element-name-symbol-Cr": {
+    "prompt": "What is the chemical symbol for chromium?",
+    "answer": "Cr",
+    "accepted": [
+      "Cr"
+    ],
+    "distractors": [
+      "Hg",
+      "Bk",
+      "Np"
+    ],
+    "explanation": "The chemical symbol for chromium is Cr."
+  },
+  "wd-element-number-25": {
+    "prompt": "What is the atomic number of manganese?",
+    "answer": "25",
+    "accepted": [
+      "25"
+    ],
+    "distractors": [
+      "110",
+      "68",
+      "53"
+    ],
+    "explanation": "Manganese is element number 25 on the periodic table."
+  },
+  "wd-element-name-symbol-Mn": {
+    "prompt": "What is the chemical symbol for manganese?",
+    "answer": "Mn",
+    "accepted": [
+      "Mn"
+    ],
+    "distractors": [
+      "Fe",
+      "Er",
+      "H"
+    ],
+    "explanation": "The chemical symbol for manganese is Mn."
+  },
+  "wd-element-number-26": {
+    "prompt": "What is the atomic number of iron?",
+    "answer": "26",
+    "accepted": [
+      "26"
+    ],
+    "distractors": [
+      "53",
+      "7",
+      "88"
+    ],
+    "explanation": "Iron is element number 26 on the periodic table."
+  },
+  "wd-element-name-symbol-Fe": {
+    "prompt": "What is the chemical symbol for iron?",
+    "answer": "Fe",
+    "accepted": [
+      "Fe"
+    ],
+    "distractors": [
+      "Lv",
+      "Rn",
+      "Os"
+    ],
+    "explanation": "The chemical symbol for iron is Fe."
+  },
+  "wd-element-number-27": {
+    "prompt": "What is the atomic number of cobalt?",
+    "answer": "27",
+    "accepted": [
+      "27"
+    ],
+    "distractors": [
+      "100",
+      "82",
+      "68"
+    ],
+    "explanation": "Cobalt is element number 27 on the periodic table."
+  },
+  "wd-element-name-symbol-Co": {
+    "prompt": "What is the chemical symbol for cobalt?",
+    "answer": "Co",
+    "accepted": [
+      "Co"
+    ],
+    "distractors": [
+      "Sg",
+      "Hf",
+      "Tb"
+    ],
+    "explanation": "The chemical symbol for cobalt is Co."
+  },
+  "wd-element-number-28": {
+    "prompt": "What is the atomic number of nickel?",
+    "answer": "28",
+    "accepted": [
+      "28"
+    ],
+    "distractors": [
+      "109",
+      "67",
+      "11"
+    ],
+    "explanation": "Nickel is element number 28 on the periodic table."
+  },
+  "wd-element-name-symbol-Ni": {
+    "prompt": "What is the chemical symbol for nickel?",
+    "answer": "Ni",
+    "accepted": [
+      "Ni"
+    ],
+    "distractors": [
+      "Br",
+      "La",
+      "Og"
+    ],
+    "explanation": "The chemical symbol for nickel is Ni."
+  },
+  "wd-element-number-29": {
+    "prompt": "What is the atomic number of copper?",
+    "answer": "29",
+    "accepted": [
+      "29"
+    ],
+    "distractors": [
+      "51",
+      "76",
+      "90"
+    ],
+    "explanation": "Copper is element number 29 on the periodic table."
+  },
+  "wd-element-name-symbol-Cu": {
+    "prompt": "What is the chemical symbol for copper?",
+    "answer": "Cu",
+    "accepted": [
+      "Cu"
+    ],
+    "distractors": [
+      "Bi",
+      "Sm",
+      "Xe"
+    ],
+    "explanation": "The chemical symbol for copper is Cu."
+  },
+  "wd-element-number-30": {
+    "prompt": "What is the atomic number of zinc?",
+    "answer": "30",
+    "accepted": [
+      "30"
+    ],
+    "distractors": [
+      "14",
+      "116",
+      "23"
+    ],
+    "explanation": "Zinc is element number 30 on the periodic table."
+  },
+  "wd-element-name-symbol-Zn": {
+    "prompt": "What is the chemical symbol for zinc?",
+    "answer": "Zn",
+    "accepted": [
+      "Zn"
+    ],
+    "distractors": [
+      "Er",
+      "Pu",
+      "Ti"
+    ],
+    "explanation": "The chemical symbol for zinc is Zn."
+  },
+  "wd-element-number-31": {
+    "prompt": "What is the atomic number of gallium?",
+    "answer": "31",
+    "accepted": [
+      "31"
+    ],
+    "distractors": [
+      "73",
+      "18",
+      "102"
+    ],
+    "explanation": "Gallium is element number 31 on the periodic table."
+  },
+  "wd-element-name-symbol-Ga": {
+    "prompt": "What is the chemical symbol for gallium?",
+    "answer": "Ga",
+    "accepted": [
+      "Ga"
+    ],
+    "distractors": [
+      "C",
+      "Np",
+      "Rb"
+    ],
+    "explanation": "The chemical symbol for gallium is Ga."
+  },
+  "wd-element-number-32": {
+    "prompt": "What is the atomic number of germanium?",
+    "answer": "32",
+    "accepted": [
+      "32"
+    ],
+    "distractors": [
+      "24",
+      "102",
+      "99"
+    ],
+    "explanation": "Germanium is element number 32 on the periodic table."
+  },
+  "wd-element-name-symbol-Ge": {
+    "prompt": "What is the chemical symbol for germanium?",
+    "answer": "Ge",
+    "accepted": [
+      "Ge"
+    ],
+    "distractors": [
+      "V",
+      "Ho",
+      "Db"
+    ],
+    "explanation": "The chemical symbol for germanium is Ge."
+  },
+  "wd-element-number-33": {
+    "prompt": "What is the atomic number of arsenic?",
+    "answer": "33",
+    "accepted": [
+      "33"
+    ],
+    "distractors": [
+      "69",
+      "22",
+      "14"
+    ],
+    "explanation": "Arsenic is element number 33 on the periodic table."
+  },
+  "wd-element-name-symbol-As": {
+    "prompt": "What is the chemical symbol for arsenic?",
+    "answer": "As",
+    "accepted": [
+      "As"
+    ],
+    "distractors": [
+      "I",
+      "Fr",
+      "Bk"
+    ],
+    "explanation": "The chemical symbol for arsenic is As."
+  },
+  "wd-element-number-34": {
+    "prompt": "What is the atomic number of selenium?",
+    "answer": "34",
+    "accepted": [
+      "34"
+    ],
+    "distractors": [
+      "96",
+      "106",
+      "113"
+    ],
+    "explanation": "Selenium is element number 34 on the periodic table."
+  },
+  "wd-element-name-symbol-Se": {
+    "prompt": "What is the chemical symbol for selenium?",
+    "answer": "Se",
+    "accepted": [
+      "Se"
+    ],
+    "distractors": [
+      "Lr",
+      "N",
+      "Mo"
+    ],
+    "explanation": "The chemical symbol for selenium is Se."
+  },
+  "wd-element-number-35": {
+    "prompt": "What is the atomic number of bromine?",
+    "answer": "35",
+    "accepted": [
+      "35"
+    ],
+    "distractors": [
+      "93",
+      "103",
+      "41"
+    ],
+    "explanation": "Bromine is element number 35 on the periodic table."
+  },
+  "wd-element-name-symbol-Br": {
+    "prompt": "What is the chemical symbol for bromine?",
+    "answer": "Br",
+    "accepted": [
+      "Br"
+    ],
+    "distractors": [
+      "Mg",
+      "Eu",
+      "Cd"
+    ],
+    "explanation": "The chemical symbol for bromine is Br."
+  },
+  "wd-element-number-36": {
+    "prompt": "What is the atomic number of krypton?",
+    "answer": "36",
+    "accepted": [
+      "36"
+    ],
+    "distractors": [
+      "45",
+      "9",
+      "104"
+    ],
+    "explanation": "Krypton is element number 36 on the periodic table."
+  },
+  "wd-element-name-symbol-Kr": {
+    "prompt": "What is the chemical symbol for krypton?",
+    "answer": "Kr",
+    "accepted": [
+      "Kr"
+    ],
+    "distractors": [
+      "Po",
+      "C",
+      "Lv"
+    ],
+    "explanation": "The chemical symbol for krypton is Kr."
+  },
+  "wd-element-number-37": {
+    "prompt": "What is the atomic number of rubidium?",
+    "answer": "37",
+    "accepted": [
+      "37"
+    ],
+    "distractors": [
+      "102",
+      "51",
+      "64"
+    ],
+    "explanation": "Rubidium is element number 37 on the periodic table."
+  },
+  "wd-element-name-symbol-Rb": {
+    "prompt": "What is the chemical symbol for rubidium?",
+    "answer": "Rb",
+    "accepted": [
+      "Rb"
+    ],
+    "distractors": [
+      "He",
+      "Mn",
+      "Au"
+    ],
+    "explanation": "The chemical symbol for rubidium is Rb."
+  },
+  "wd-element-number-38": {
+    "prompt": "What is the atomic number of strontium?",
+    "answer": "38",
+    "accepted": [
+      "38"
+    ],
+    "distractors": [
+      "81",
+      "101",
+      "44"
+    ],
+    "explanation": "Strontium is element number 38 on the periodic table."
+  },
+  "wd-element-name-symbol-Sr": {
+    "prompt": "What is the chemical symbol for strontium?",
+    "answer": "Sr",
+    "accepted": [
+      "Sr"
+    ],
+    "distractors": [
+      "Lv",
+      "Cf",
+      "Ga"
+    ],
+    "explanation": "The chemical symbol for strontium is Sr."
+  },
+  "wd-element-number-39": {
+    "prompt": "What is the atomic number of yttrium?",
+    "answer": "39",
+    "accepted": [
+      "39"
+    ],
+    "distractors": [
+      "83",
+      "27",
+      "110"
+    ],
+    "explanation": "Yttrium is element number 39 on the periodic table."
+  },
+  "wd-element-name-symbol-Y": {
+    "prompt": "What is the chemical symbol for yttrium?",
+    "answer": "Y",
+    "accepted": [
+      "Y"
+    ],
+    "distractors": [
+      "Rn",
+      "Hg",
+      "Be"
+    ],
+    "explanation": "The chemical symbol for yttrium is Y."
+  },
+  "wd-element-number-40": {
+    "prompt": "What is the atomic number of zirconium?",
+    "answer": "40",
+    "accepted": [
+      "40"
+    ],
+    "distractors": [
+      "108",
+      "37",
+      "9"
+    ],
+    "explanation": "Zirconium is element number 40 on the periodic table."
+  },
+  "wd-element-name-symbol-Zr": {
+    "prompt": "What is the chemical symbol for zirconium?",
+    "answer": "Zr",
+    "accepted": [
+      "Zr"
+    ],
+    "distractors": [
+      "Pu",
+      "Ra",
+      "At"
+    ],
+    "explanation": "The chemical symbol for zirconium is Zr."
+  },
+  "wd-element-number-41": {
+    "prompt": "What is the atomic number of niobium?",
+    "answer": "41",
+    "accepted": [
+      "41"
+    ],
+    "distractors": [
+      "50",
+      "75",
+      "114"
+    ],
+    "explanation": "Niobium is element number 41 on the periodic table."
+  },
+  "wd-element-name-symbol-Nb": {
+    "prompt": "What is the chemical symbol for niobium?",
+    "answer": "Nb",
+    "accepted": [
+      "Nb"
+    ],
+    "distractors": [
+      "Fe",
+      "Lu",
+      "Zr"
+    ],
+    "explanation": "The chemical symbol for niobium is Nb."
+  },
+  "wd-element-number-42": {
+    "prompt": "What is the atomic number of molybdenum?",
+    "answer": "42",
+    "accepted": [
+      "42"
+    ],
+    "distractors": [
+      "118",
+      "96",
+      "69"
+    ],
+    "explanation": "Molybdenum is element number 42 on the periodic table."
+  },
+  "wd-element-name-symbol-Mo": {
+    "prompt": "What is the chemical symbol for molybdenum?",
+    "answer": "Mo",
+    "accepted": [
+      "Mo"
+    ],
+    "distractors": [
+      "Rg",
+      "Ta",
+      "Os"
+    ],
+    "explanation": "The chemical symbol for molybdenum is Mo."
+  },
+  "wd-element-number-43": {
+    "prompt": "What is the atomic number of technetium?",
+    "answer": "43",
+    "accepted": [
+      "43"
+    ],
+    "distractors": [
+      "60",
+      "22",
+      "31"
+    ],
+    "explanation": "Technetium is element number 43 on the periodic table."
+  },
+  "wd-element-name-symbol-Tc": {
+    "prompt": "What is the chemical symbol for technetium?",
+    "answer": "Tc",
+    "accepted": [
+      "Tc"
+    ],
+    "distractors": [
+      "Sm",
+      "Nb",
+      "Re"
+    ],
+    "explanation": "The chemical symbol for technetium is Tc."
+  }
+}

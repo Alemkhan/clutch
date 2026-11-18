@@ -1,9 +1,9 @@
 import {
-  CURRENT_HAMMER_MINI_GAME,
   MAX_DAILY_SET_SIZE,
   MAX_HAMMER_ELAPSED_MS,
   applySoloRound,
   evaluateSoloRun,
+  localizeQuestion,
   scoreHammerTap,
   type CompleteSoloRunResponse,
   type Question,
@@ -13,6 +13,7 @@ import {
 } from '@clutch/shared';
 import type { RequestIdentity } from '../auth/identity';
 import { readJsonBody } from '../http/jsonBody';
+import { requestLocale } from '../http/locale';
 import { recordMistake } from '../training/mistakesRepository';
 import { finalizeSoloRun } from './finalizeSoloRun';
 import { insertSoloAnswer, listSoloRounds, settleSoloHammer, type SoloRoundRow } from './soloRoundsRepository';
@@ -224,7 +225,7 @@ export async function settleHammerRow(
     ? scoreHammerTap(
       question.id,
       previousResults,
-      CURRENT_HAMMER_MINI_GAME.config,
+      loaded.miniGameConfig,
       settlement.activeElapsedMs,
     )
     : { distance: 1, result: 'miss' as const, progressAwarded: 0 };
@@ -255,6 +256,8 @@ async function respondWithRound(
   const { run, questions } = loaded;
   const row = rows[index];
   const question = questions[index];
+  // Разбор — на языке игрока: пояснение и правильные ответы из той же карточки вопроса.
+  const shown = localizeQuestion(question, requestLocale(c));
   const state = evaluateSoloRun(questionIds(questions), settledRounds(rows.slice(0, index + 1)), loaded.roundCap);
   let result: CompleteSoloRunResponse | null = null;
   if (state.status === 'completed' && index === rows.length - 1) {
@@ -269,9 +272,9 @@ async function respondWithRound(
     questionId: question.id,
     correct: row.correct === 1,
     ...(question.answerType === 'open_answer'
-      ? { correctAnswers: question.correctAnswers ?? [] }
+      ? { correctAnswers: shown.correctAnswers ?? [] }
       : { correctOptionId: question.correctOptionId, selectedAnswer: row.selected_answer }),
-    explanation: question.explanation,
+    explanation: shown.explanation,
     ...(question.revealMediaUrl ? { revealMediaUrl: question.revealMediaUrl } : {}),
     awaitingHammer: !settled,
     skillResult: row.skill_result,

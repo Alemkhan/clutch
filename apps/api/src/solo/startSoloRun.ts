@@ -14,7 +14,9 @@ import {
   type MiniGameId,
   isPracticeLevelId,
   practiceQuestionSet,
+  localizeQuestion,
   toPublicQuestion,
+  type Locale,
   type PracticeLevelId,
   type Question,
   type SoloMode,
@@ -23,6 +25,7 @@ import {
 } from '@clutch/shared';
 import type { RequestIdentity } from '../auth/identity';
 import { readJsonBody } from '../http/jsonBody';
+import { requestLocale } from '../http/locale';
 import {
   consumeInvite,
   findInvite,
@@ -205,7 +208,7 @@ async function startPracticeRun(
     now,
   });
   // Бот не запись игрока: тренировка доигрывается до общего потолка кругов.
-  return c.json(startResponse(runId, questions, bot, PRACTICE_RULES_VERSION, miniGameId, false, null), 201);
+  return c.json(startResponse(runId, questions, bot, PRACTICE_RULES_VERSION, miniGameId, false, null, requestLocale(c)), 201);
 }
 
 /**
@@ -282,7 +285,7 @@ async function startMatchedRun(
     throw error;
   }
   const pace = ghost?.opponent ?? null;
-  return c.json(startResponse(runId, questions, pace, rulesVersion, miniGameId, bankExhausted, pace), 201);
+  return c.json(startResponse(runId, questions, pace, rulesVersion, miniGameId, bankExhausted, pace, requestLocale(c)), 201);
 }
 
 function startResponse(
@@ -294,10 +297,11 @@ function startResponse(
   bankExhausted: boolean,
   /** Запись соперника, по которой считается потолок кругов; у тренировки нет. */
   record: StartSoloRunResponse['pace'],
+  locale: Locale = 'ru',
 ): StartSoloRunResponse {
   return {
     runId,
-    questions: questions.map(toPublicQuestion),
+    questions: questions.map((question) => toPublicQuestion(localizeQuestion(question, locale))),
     pace,
     target: SOLO_TARGET_PROGRESS,
     roundCap: duelRoundCap(record),
@@ -338,5 +342,5 @@ async function startGroupRun(c: AppContext, identity: RequestIdentity, request: 
     await c.env.DB.prepare('DELETE FROM match_runs WHERE id = ?1').bind(runId).run();
     throw error;
   }
-  return c.json({ ...startResponse(runId,record.questions,record.opponent,GROUP_CHALLENGE_RULES_VERSION,record.row.mini_game_id as MiniGameId,false,record.opponent), groupChallenge: true },201);
+  return c.json({ ...startResponse(runId,record.questions,record.opponent,GROUP_CHALLENGE_RULES_VERSION,record.row.mini_game_id as MiniGameId,false,record.opponent,requestLocale(c)), groupChallenge: true },201);
 }

@@ -32,3 +32,10 @@
 @import './features/tiebreaker/tiebreaker.css';
 @import './features/solo/result.v2.css';
 @import './features/wikiPath/wikiPath.css';
+@import './features/progress/progress.css';
+@import './features/whatsNew/whatsNew.css';
+@import './features/language/language.css';
+@import './features/clans/clans.css';
+/* Визуальный стиль приложения (светлые меню с фиолетовой шапкой, тёмные игровые экраны). Подключается последним. */
+@import './styles/theme/menus.css';
+@import './styles/theme/game.css';

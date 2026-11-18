@@ -22,6 +22,8 @@ type InventoryItem = {
 
 type OtherHistoricFlag = {
   id: string;
+  /** Id записи инвентаря: по нему ищутся переводы названия (content/i18n/<locale>/other-flags.json). */
+  inventoryId: string;
   labelRu: string;
   era: string;
   mediaUrl: string;
@@ -50,6 +52,7 @@ export const otherFlags: OtherHistoricFlag[] = unique.map((item) => {
   const local = (published as Record<string, { file: string; masked: boolean } | undefined>)[item.id];
   return {
     id: `other-${item.id.replace(/[^a-z0-9]+/gi, '-')}`.toLowerCase(),
+    inventoryId: item.id,
     labelRu: `${kindRu} ${item.labelRu}`,
     era: period,
     // The question shows our copy with captions masked; the original is revealed after the answer.

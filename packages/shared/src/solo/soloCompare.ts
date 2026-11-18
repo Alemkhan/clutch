@@ -85,6 +85,8 @@ export interface SoloLeaderboardEntry {
   setPar: number;
   roundsPlayed: number;
   completedAt: number;
+  /** Эмодзи клана игрока — его аватар; нет, если игрок ни в каком клане. */
+  clanEmoji?: string;
 }
 
 /**

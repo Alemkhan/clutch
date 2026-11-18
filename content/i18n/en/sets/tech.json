@@ -1,0 +1,53 @@
+{
+  "set-wright": {
+    "title": "Name one of the Wright brothers",
+    "mcPrompt": "Which of these is one of the Wright brothers?",
+    "members": {
+      "wilbur": {
+        "answer": "Wilbur",
+        "accepted": [
+          "Wilbur",
+          "Wilbur Wright"
+        ]
+      },
+      "orville": {
+        "answer": "Orville",
+        "accepted": [
+          "Orville",
+          "Orville Wright",
+          "Orvill"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Henry Ford",
+      "Igor Sikorsky",
+      "Louis Blériot"
+    ]
+  },
+  "set-tech-uharl3": {
+    "title": "Name a 19th-century computing pioneer",
+    "mcPrompt": "Which of these scientists laid the foundations of computing in the 19th century?",
+    "members": {
+      "babbage": {
+        "answer": "Charles Babbage",
+        "accepted": [
+          "Charles Babbage",
+          "Babbage"
+        ]
+      },
+      "lovelace": {
+        "answer": "Ada Lovelace",
+        "accepted": [
+          "Ada Lovelace",
+          "Lovelace"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Alan Turing",
+      "Blaise Pascal",
+      "Gottfried Leibniz"
+    ]
+  }
+}

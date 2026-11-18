@@ -1,3 +1,4 @@
+import type { PlayerSettingsResponse, Region } from '@clutch/shared';
 import type { CategoryId, CreateFriendInviteResponse, CreateRematchInviteResponse, DuelBoardResponse, PreparedShareResponse, SoloLeaderboardResponse } from '@clutch/shared';
 import { apiFetch, forgetLocalPlayer } from './apiClient';
 
@@ -55,6 +56,18 @@ export function fetchDailyNotifications(signal?: AbortSignal): Promise<{ enabled
 
 export function setDailyNotifications(enabled: boolean): Promise<{ enabled: boolean }> {
   return apiFetch('/api/notifications/daily', { method: 'PUT', body: JSON.stringify({ enabled }) });
+}
+
+// ---- Settings ----
+
+/** Язык и гео-зона на сервере. GET при запуске сообщает серверу язык (для сообщений бота). */
+export function fetchPlayerSettings(signal?: AbortSignal): Promise<PlayerSettingsResponse> {
+  return apiFetch('/api/settings', { method: 'GET' }, signal);
+}
+
+/** Зона из профиля: конкретная или 'auto' — по стране подключения. */
+export function setPlayerRegion(region: Region | 'auto'): Promise<PlayerSettingsResponse> {
+  return apiFetch('/api/settings', { method: 'PUT', body: JSON.stringify({ region }) });
 }
 
 // ---- Account ----

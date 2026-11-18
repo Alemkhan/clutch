@@ -4,6 +4,9 @@ import { cors } from 'hono/cors';
 import type { Env } from './env';
 import { releaseExpiredRematchInvites } from './notifications/expiry';
 import { registerAccountRoutes } from './account/deleteAccount';
+import { registerSettingsRoutes } from './settings/settings';
+import { registerClanRoutes } from './clans/clans';
+import { registerClanShareRoutes } from './clans/clanShare';
 import { registerAuthRoutes } from './auth/auth';
 import { registerLastStandRoutes } from './lastStand/lastStand';
 import { registerRematchRoutes } from './rematch/rematch';
@@ -24,14 +27,17 @@ import { sendScheduledAnnouncements } from './notifications/announcements';
 
 const app = new Hono<{ Bindings: Env }>();
 
-app.use('/api/*', cors({ allowHeaders: ['Content-Type', 'Authorization'] }));
+app.use('/api/*', cors({ allowHeaders: ['Content-Type', 'Authorization', 'X-Clutch-Locale'] }));
 
 registerSystemRoutes(app);
+registerClanShareRoutes(app);
 registerShareRoutes(app);
 registerPreviewRoutes(app);
 registerPreparedShareRoutes(app);
 registerAuthRoutes(app);
 registerAccountRoutes(app);
+registerSettingsRoutes(app);
+registerClanRoutes(app);
 registerRematchRoutes(app);
 registerMyRunsRoutes(app);
 registerProfileRoutes(app);

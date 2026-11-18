@@ -1,3 +1,5 @@
+import { messagesFor } from '../../i18n/messages';
+import { m } from './messages';
 import type {
   CategoryId,
   CompleteSoloRunResponse,
@@ -339,23 +341,24 @@ export function soloPaceOf(state: Readonly<SoloFlowState>): Opponent | null {
 }
 
 export function soloStartErrorMessage(error: unknown): string {
-  if (error instanceof ApiError && error.reason === 'full') return 'Все места в вызове заняты.';
-  if (error instanceof ApiError && error.reason === 'already_played') return 'Ты уже сыграл этот вызов. Открой ссылку снова, чтобы посмотреть таблицу.';
-  if (error instanceof ApiError && error.reason === 'taken') return 'Ссылку уже занял другой игрок.';
-  if (error instanceof ApiError && error.reason === 'expired') return 'Срок ссылки вышел.';
-  if (error instanceof ApiError && error.reason === 'own') return 'Это твоя ссылка. Отправь её другу.';
+  const t = messagesFor(m);
+  if (error instanceof ApiError && error.reason === 'full') return t.startFull;
+  if (error instanceof ApiError && error.reason === 'already_played') return t.startAlreadyPlayed;
+  if (error instanceof ApiError && error.reason === 'taken') return t.goneTaken;
+  if (error instanceof ApiError && error.reason === 'expired') return t.goneExpired;
+  if (error instanceof ApiError && error.reason === 'own') return t.goneOwn;
   if (error instanceof ApiError && error.reason === 'daily_played') {
-    return 'Забег дня уже сыгран: в таблицу идёт первая попытка. Сыграй свободную игру или дуэль.';
+    return t.startDailyPlayed;
   }
   if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
-    return 'Не удалось подтвердить сессию или доступ. Вернись в Telegram или обнови страницу.';
+    return t.startAuth;
   }
   if (error instanceof ApiError && error.status >= 400 && error.status < 500
     && error.status !== 408 && error.status !== 425 && error.status !== 429) {
-    return 'Сервер не смог начать забег. Попробуй ещё раз.';
+    return t.startServer;
   }
   if (error instanceof Error && !(error instanceof ApiError) && error.name !== 'TypeError') {
-    return 'Сервер вернул некорректный забег. Попробуй ещё раз.';
+    return t.startBadRun;
   }
-  return 'Не удалось начать забег. Проверь соединение и попробуй ещё раз.';
+  return t.startNetwork;
 }

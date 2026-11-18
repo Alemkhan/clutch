@@ -58,8 +58,7 @@ describe('the day board', () => {
     expect(html).toContain('Ann');
     expect(html).toContain('>7 кр.<');
     expect(html).toContain('>9 кр.<');
-    expect(html).toContain('>AN<');
-    expect(html).toContain('>БО<');
+    expect(html).toContain('class="creature"');
     // Сырой счёт игроку не показывается: 0.875 ни о чём не говорит.
     expect(html).not.toContain('0.875');
   });

@@ -1,3 +1,5 @@
+import { playerLocale } from '../settings/settings';
+import { NOTIFICATION_TEXT } from './messages';
 import type { Env } from '../env';
 import { miniAppLink, telegramChatId } from './outbid';
 import { sendTelegramMessage } from './telegram';
@@ -50,7 +52,7 @@ export async function sendScheduledAnnouncements(env: Env, now = Date.now()): Pr
         .bind(campaign.id, recipient.player_id, now).run();
       if (Number(claim.meta?.changes ?? 0) !== 1) continue;
       const result = chatId
-        ? await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId, campaign.message, [[{ text: 'Открыть Clutch', url }]])
+        ? await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId, campaign.message, [[{ text: NOTIFICATION_TEXT[await playerLocale(env.DB, recipient.player_id)].btnOpenApp, url }]])
         : { status: 'failed' as const };
       await env.DB.prepare(`UPDATE announcement_deliveries SET status = ?3, updated_at = ?4
         WHERE campaign_id = ?1 AND player_id = ?2`)

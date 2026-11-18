@@ -8,6 +8,8 @@ import { HammerIntro } from './HammerIntroCard';
 import { HammerLane } from './HammerLane';
 import { HammerResult, HammerResultStatus } from './HammerResult';
 import { HammerScene } from './HammerScene';
+import { m } from './messages';
+import { messagesFor } from '../../i18n/messages';
 
 export { HammerIntro } from './HammerIntroCard';
 export { HammerResult, HammerResultStatus, strikeLabelText } from './HammerResult';
@@ -35,7 +37,7 @@ export function hammerActionSemantics(struck: boolean, result: SkillResult | nul
   return {
     tabIndex: struck ? -1 : 0,
     'aria-disabled': struck,
-    'aria-label': result ? 'Удар завершён' : 'Нажми, чтобы ударить по гвоздю',
+    'aria-label': result ? messagesFor(m).strikeDone : messagesFor(m).strikeAction,
   } as const;
 }
 
@@ -51,6 +53,7 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
     attempt, config, questionId, previousSkillResults, introOpen, clock, onComplete, onStrike,
   });
 
+  const t = messagesFor(m);
   const baseNotes = strikeNotes(result, progressBefore, previousSkillResults);
   const gain = result && progressBefore !== undefined ? strikeGain(progressBefore, SKILL_REWARDS[result]) : null;
   // Строка макета: «Гвоздь вошёл на N% · до 100% — ещё M%». Глубина = реальный процент игрока после удара.
@@ -58,8 +61,8 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
     ? {
         ...baseNotes,
         remaining: gain.remaining > 0
-          ? `Гвоздь вошёл на ${gain.total}% · до ${SOLO_TARGET_PROGRESS}% — ещё ${gain.remaining}%`
-          : `Гвоздь вошёл на ${gain.total}% · цель ${SOLO_TARGET_PROGRESS}% достигнута`,
+          ? t.nailRemaining(gain.total, SOLO_TARGET_PROGRESS, gain.remaining)
+          : t.nailReached(gain.total, SOLO_TARGET_PROGRESS),
       }
     : baseNotes;
   const confirmIntro = () => {
@@ -83,8 +86,8 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
       >
         {!result && (
           <div className="hammer-headline">
-            <h2 className="hammer-headline-title">Молоток</h2>
-            <p className="hammer-headline-sub">Чем точнее удар, тем глубже гвоздь</p>
+            <h2 className="hammer-headline-title">{t.title}</h2>
+            <p className="hammer-headline-sub">{t.subtitle}</p>
           </div>
         )}
         <HammerScene
@@ -98,7 +101,7 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
         {result ? (
           <HammerResult result={result} {...notes} />
         ) : (
-          <p className="strike-instruction">Тапни, когда маркер в центре</p>
+          <p className="strike-instruction">{t.instruction}</p>
         )}
       </div>
       {result && <HammerResultStatus result={result} {...notes} />}

@@ -1,4 +1,4 @@
-import { dailyKey } from '@clutch/shared';
+import { dailyKey, type PlayerStreak } from '@clutch/shared';
 import type { Context, Hono } from 'hono';
 import { resolveRequestIdentity, type RequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
@@ -7,7 +7,11 @@ import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import { findQuestionByDate } from '../tiebreaker/tiebreakerRepository';
 import { findChallenge } from '../wikiPath/wikiPathRepository';
 import { buildDailyWidgetHtml, dailyWidgetQuestion, WIDGET_MAX_HTML_BYTES } from './dailyWidget';
+import { playerStreak } from '../profile/profileRepository';
 import { miniAppLink, telegramChatId } from './outbid';
+import type { Locale } from '@clutch/shared';
+import { playerLocale } from '../settings/settings';
+import { NOTIFICATION_TEXT } from './messages';
 import { sendTelegramMessage, sendTelegramWidget, type InlineUrlButton, type SendResult } from './telegram';
 
 type AppContext = Context<{ Bindings: Env }>;
@@ -127,13 +131,14 @@ export async function sendDailyChallengeDigests(env: Env, now = Date.now()): Pro
   }
 
   const stopUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_STOP_PAYLOAD);
-  const stopRow: InlineUrlButton[][] = stopUrl ? [[{ text: 'Отключить ежедневные сообщения', url: stopUrl }]] : [];
   const recipients = await listRecipients(env.DB, dateKey, now);
   summary.candidates = recipients.length;
   await Promise.all(recipients.map(async ({ player_id: playerId }) => {
     if (!(await claimDelivery(env.DB, playerId, dateKey, now))) return;
     const chatId = telegramChatId(playerId);
     if (!chatId) return;
+    const locale = await playerLocale(env.DB, playerId);
+    const stopRow: InlineUrlButton[][] = stopUrl ? [[{ text: NOTIFICATION_TEXT[locale].btnDailyStop, url: stopUrl }]] : [];
     let result: SendResult | null = null;
     if (widgetHtml) {
       result = await sendTelegramWidget(env.TELEGRAM_BOT_TOKEN, chatId, widgetHtml, DAILY_WIDGET_CAPTION, stopRow);
@@ -141,7 +146,8 @@ export async function sendDailyChallengeDigests(env: Env, now = Date.now()): Pro
     }
     // Виджет не ушёл (метод недоступен, сбой) — прежний текст про «На глазок» и Вики-путь.
     if ((!result || result.status === 'failed') && (question || challenge)) {
-      result = await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId, ...digestText(env, question, challenge, stopRow));
+      const streak = await playerStreak(env.DB, playerId, now).catch(() => null);
+      result = await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId, ...digestText(env, question, challenge, stopRow, streak, locale));
     }
     if (!result) return;
     await markDelivery(env.DB, playerId, dateKey, result, now);
@@ -173,13 +179,26 @@ function digestText(
   question: { number: number } | null,
   challenge: { start_title: string; target_title: string } | null,
   stopRow: InlineUrlButton[][],
+  streak: PlayerStreak | null = null,
+  locale: Locale = 'ru',
 ): [string, InlineUrlButton[][]] {
-  const lines = ['Новый день в Clutch'];
-  if (question) lines.push(`👁 «На глазок» #${question.number} уже вышел.`);
-  if (challenge) lines.push(`🔗 Вики-путь: ${challenge.start_title} → ${challenge.target_title}.`);
+  const t = NOTIFICATION_TEXT[locale];
+  const lines = [t.dailyHeader];
+  // Серия под угрозой: вчера играл, сегодня ещё нет. Это самая сильная причина открыть игру.
+  const keepStreak = Boolean(streak && !streak.playedToday && streak.current >= 2);
+  if (streak && keepStreak) lines.push(t.dailyStreak(t.streakDays(streak.current)));
+  if (question) lines.push(t.dailyTiebreaker(question.number));
+  if (challenge) lines.push(t.dailyWikiPath(challenge.start_title, challenge.target_title));
   const gameButtons = [
-    ...(question ? [{ text: 'На глазок', url: miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_TIEBREAKER_PAYLOAD) }] : []),
-    ...(challenge ? [{ text: 'Вики-путь', url: miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_WIKI_PATH_PAYLOAD) }] : []),
+    ...(question ? [{ text: t.btnTiebreaker, url: miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_TIEBREAKER_PAYLOAD) }] : []),
+    ...(challenge ? [{ text: t.btnWikiPath, url: miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_WIKI_PATH_PAYLOAD) }] : []),
   ].filter((button): button is InlineUrlButton => Boolean(button.url));
-  return [lines.join('\n'), [...(gameButtons.length ? [gameButtons] : []), ...stopRow]];
+  const playUrl = keepStreak ? miniAppLink(env.TELEGRAM_MINI_APP_LINK, DAILY_WIDGET_PAYLOAD) : null;
+  const playRow = playUrl ? [[{ text: t.btnDailyRun, url: playUrl }]] : [];
+  return [lines.join('\n'), [...playRow, ...(gameButtons.length ? [gameButtons] : []), ...stopRow]];
+}
+
+/** «2 дня», «5 дней», «21 день», «11 дней». */
+export function streakDays(count: number, locale: Locale = 'ru'): string {
+  return (NOTIFICATION_TEXT[locale] ?? NOTIFICATION_TEXT.ru).streakDays(count);
 }

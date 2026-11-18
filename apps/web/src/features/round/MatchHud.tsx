@@ -1,5 +1,12 @@
+import { m } from './messages';
+import { useMessages } from '../../i18n/messages';
 import { motion, useReducedMotion } from 'framer-motion';
 import { SoundToggle } from '../../ui/SoundToggle';
+import { Creature } from '../../ui/Creature';
+import { PlayerAvatar } from '../../ui/PlayerAvatar';
+import { myClanEmoji } from '../clans/clanStore';
+import { getPlayerName } from '../../platform/apiClient';
+import { displayPlayerName } from '../../i18n/playerName';
 
 interface MatchHudProps {
   player: number;
@@ -7,11 +14,6 @@ interface MatchHudProps {
   opponentName: string;
   round: number;
   totalRounds: number;
-}
-
-function initials(name: string): string {
-  const letters = name.trim().split(/\s+/).map((part) => part[0]).filter(Boolean);
-  return (letters.slice(0, 2).join('') || '?').toUpperCase();
 }
 
 export interface CompetitorProps {
@@ -23,6 +25,7 @@ export interface CompetitorProps {
 }
 
 export function Competitor({ name, value, side, gain = 0 }: CompetitorProps) {
+  const t = useMessages(m);
   const reduceMotion = useReducedMotion();
   const progress = Math.min(100, Math.max(0, value));
   const gainShown = Math.min(progress, Math.max(0, gain));
@@ -32,16 +35,16 @@ export function Competitor({ name, value, side, gain = 0 }: CompetitorProps) {
     <div className={`match-hud-competitor ${side}`}>
       <div className="match-hud-identity">
         <span className="match-hud-avatar" aria-hidden="true">
-          {side === 'player' ? 'ТЫ' : initials(name)}
+          {side === 'player' ? <PlayerAvatar seed={getPlayerName()} emoji={myClanEmoji()} /> : <Creature seed={name} />}
         </span>
-        <span className="match-hud-name" title={name}>{name}</span>
+        <span className="match-hud-name" title={displayPlayerName(name)}>{displayPlayerName(name)}</span>
         {gainShown > 0 && <span className="match-hud-gain-chip">+{gainShown}</span>}
         <strong className="match-hud-value">{value}%</strong>
       </div>
       <div
         className="match-hud-track"
         role="progressbar"
-        aria-label={`Прогресс: ${name}`}
+        aria-label={t.progressOf(name)}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={progress}
@@ -63,13 +66,14 @@ export function Competitor({ name, value, side, gain = 0 }: CompetitorProps) {
 }
 
 export function MatchHud({ player, opponent, opponentName, round, totalRounds }: MatchHudProps) {
+  const t = useMessages(m);
   return (
-    <section className="match-hud" aria-label="Прогресс матча">
+    <section className="match-hud" aria-label={t.matchProgress}>
       <div className="match-hud-grid">
-        <Competitor name="Ты" value={player} side="player" />
+        <Competitor name={t.you} value={player} side="player" />
         <div className="match-hud-center">
-          <div className="match-hud-round" aria-label={`Раунд ${round} из ${totalRounds}`}>
-            <span>Раунд</span>
+          <div className="match-hud-round" aria-label={t.roundOf(round, totalRounds)}>
+            <span>{t.round}</span>
             <strong>{round}<i>/</i>{totalRounds}</strong>
           </div>
           <SoundToggle variant="hud" />

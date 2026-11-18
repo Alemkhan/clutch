@@ -4,7 +4,8 @@ export type LaunchIntent =
   | { type: 'unsubscribe' }
   | { type: 'daily-unsubscribe' }
   | { type: 'daily-tiebreaker' }
-  | { type: 'daily-wiki-path' };
+  | { type: 'daily-wiki-path' }
+  | { type: 'clan-invite'; code: string };
 
 const INVITE_ID = /^rm_[A-Za-z0-9_-]{22}$/;
 
@@ -15,6 +16,7 @@ export function parseLaunchPayload(payload: string | null | undefined): LaunchIn
   if (payload === 'daily_off') return { type: 'daily-unsubscribe' };
   if (payload === 'daily_guess') return { type: 'daily-tiebreaker' };
   if (payload === 'daily_wiki') return { type: 'daily-wiki-path' };
+  if (/^cl_[A-Za-z0-9]{10}$/.test(payload)) return { type: 'clan-invite', code: payload };
   if (/^gc_[A-Za-z0-9_-]{22}$/.test(payload)) return { type: 'group-challenge', challengeId: payload };
   if (INVITE_ID.test(payload)) return { type: 'rematch', inviteId: payload };
   return null;

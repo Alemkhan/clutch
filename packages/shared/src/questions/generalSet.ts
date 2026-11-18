@@ -7,7 +7,9 @@ import {
   packQuestionToRaceQuestion,
   packSetToRaceQuestion,
   type PackRecord,
+  packRecordRegions,
 } from '../generalPack';
+import { isEverywhere } from '../i18n/locale';
 import { createSeededRandom, hashSeed } from './seededRandom';
 
 /**
@@ -114,6 +116,18 @@ export function livePackRecords(): PackRecord[] {
     .filter((record) => isPackRecordLive(record) && (!isKazakhstan(record) || (record.kind === 'single' && record.generalPool === true)));
 }
 
+/**
+ * С этого дня общий набор дня (одна таблица на все зоны) берёт только записи, доступные во всех
+ * гео-зонах: местные вопросы (советские мультфильмы, история Казахстана) не попадают игроку из
+ * другой зоны. Раньше — прежний пул, чтобы не менять уже сыгранные наборы.
+ */
+export const EVERYWHERE_POOL_FROM = '2026-11-19';
+
+/** Одобренные записи, доступные во всех зонах: пул общего набора дня. */
+export function liveEverywhereRecords(): PackRecord[] {
+  return livePackRecords().filter((record) => isEverywhere(packRecordRegions(record.id)));
+}
+
 /** Одобренные записи категории «История Казахстана», включая попавшие и в общий пул. */
 export function liveKzRecords(): PackRecord[] {
   return [...generalPackQuestions, ...generalPackSets].filter((record) => isPackRecordLive(record) && isKazakhstan(record));
@@ -206,7 +220,7 @@ export function buildGeneralSet(
   questionSetId: string,
   dateKey: string,
   usage?: TemplateUsage,
-  pool: readonly PackRecord[] = livePackRecords(),
+  pool: readonly PackRecord[] = dateKey >= EVERYWHERE_POOL_FROM ? liveEverywhereRecords() : livePackRecords(),
 ): Question[] {
   const index = setIndexOf(questionSetId);
   const balanced = dateKey >= BALANCED_TOPICS_FROM;

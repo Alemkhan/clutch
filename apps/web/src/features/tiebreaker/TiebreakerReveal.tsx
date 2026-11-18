@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { isBestAnswerOfDay, TIEBREAKER_MIN_ANSWERS_FOR_PERCENTILE, type TiebreakerAnsweredView, type TiebreakerExplanation, type TiebreakerQuestionView } from "@clutch/shared";
 import { openExternalLink } from "../../platform/telegram";
+import { useMessages } from "../../i18n/messages";
+import { m } from "./messages";
 import { formatCountdownClock } from "./tiebreakerClock";
 import { answersText, distributionAxisTicks, distributionBars, distributionSummary, formatAsOfDate, formatMultiplier, formatQuantity, formatQuantityBreakable, formatTiebreakerNumber, safeSourceUrl, sourceHost, standingText } from "./tiebreakerView";
 // ---- Вскрытие ----
@@ -28,11 +30,12 @@ function DistributionAxis() {
 }
 function DistributionChart({ answered }: { answered: TiebreakerAnsweredView }) {
   const bars = distributionBars(answered);
+  const t = useMessages(m);
   return (
     <section className="tb-block" aria-labelledby="tb-dist-title">
       <div className="tb-block-head">
         <h3 id="tb-dist-title" className="tb-block-title">
-          Как ответили все
+          {t.howEveryoneAnswered}
         </h3>
         <span className="tb-block-meta">
           {answersText(answered.totalAnswers)}
@@ -54,7 +57,7 @@ function DistributionChart({ answered }: { answered: TiebreakerAnsweredView }) {
                   height: `${Math.max(bar.count > 0 ? 4 : 0, Math.round(bar.height * 100))}%`,
                 }}
               />
-              {bar.mine && <span className="tb-bar-flag">ты</span>}
+              {bar.mine && <span className="tb-bar-flag">{t.you}</span>}
             </span>
           ))}
         </div>
@@ -62,11 +65,11 @@ function DistributionChart({ answered }: { answered: TiebreakerAnsweredView }) {
         <figcaption className="tb-legend" aria-hidden="true">
           <span>
             <i className="tb-swatch under" />
-            занизили
+            {t.under}
           </span>
           <span>
             <i className="tb-swatch over" />
-            завысили
+            {t.over}
           </span>
         </figcaption>
       </figure>
@@ -92,20 +95,6 @@ function SourceLink({ url, title }: { url: string; title: string }) {
   );
 }
 
-function stepsText(count: number): string {
-  const mod100 = count % 100;
-  const mod10 = count % 10;
-  const word =
-    mod100 >= 11 && mod100 <= 14
-      ? "шагов"
-      : mod10 === 1
-        ? "шаг"
-        : mod10 >= 2 && mod10 <= 4
-          ? "шага"
-          : "шагов";
-  return `${count} ${word}`;
-}
-
 /**
  * «Как прикинуть»: шаги с источниками и формула словами. Свёрнут по умолчанию — вскрытие начинается
  * с промаха, а не с разбора. Раскрывашка — обычная <button>, поэтому работает с клавиатуры.
@@ -118,6 +107,7 @@ export function TiebreakerExplanationBlock({
   defaultOpen?: boolean;
 }) {
   const [open, setOpen] = useState(defaultOpen);
+  const t = useMessages(m);
   return (
     <section className={open ? "tb-explain open" : "tb-explain"}>
       <button
@@ -128,9 +118,9 @@ export function TiebreakerExplanationBlock({
         onClick={() => setOpen((value) => !value)}
       >
         <span className="tb-explain-head">
-          <span className="tb-explain-title">Как прикинуть</span>
+          <span className="tb-explain-title">{t.howToEstimate}</span>
           <span className="tb-explain-sub">
-            {stepsText(explanation.steps.length)} · {explanation.summary}
+            {t.steps(explanation.steps.length)} · {explanation.summary}
           </span>
         </span>
         <svg
@@ -192,15 +182,16 @@ export function TiebreakerReveal({
   onShare,
   explanationOpen = false,
 }: RevealProps) {
+  const t = useMessages(m);
   const safeUrl = safeSourceUrl(answered.sourceUrl);
   const standing = standingText(answered.percentile);
   const best = isBestAnswerOfDay(answered.percentile);
   return (
     <div className="tb-reveal">
-      <section className="tb-result" aria-label="Твой результат">
+      <section className="tb-result" aria-label={t.yourResult}>
         <div className="tb-result-top">
           <div className="tb-result-miss">
-            <span className="tb-result-label">Твой промах</span>
+            <span className="tb-result-label">{t.yourMiss}</span>
             <span className={best ? "tb-miss best" : "tb-miss"}>
               {formatMultiplier(answered.multiplier)}
             </span>
@@ -209,18 +200,16 @@ export function TiebreakerReveal({
         </div>
         {answered.percentile === null && (
           <p className="tb-result-note">
-            Процент игроков покажем, когда ответят{" "}
-            {TIEBREAKER_MIN_ANSWERS_FOR_PERCENTILE}. Пока ответов:{" "}
-            {formatTiebreakerNumber(answered.totalAnswers)}.
+            {t.percentileLater(TIEBREAKER_MIN_ANSWERS_FOR_PERCENTILE, formatTiebreakerNumber(answered.totalAnswers))}
           </p>
         )}
         <dl className="tb-compare">
           <div className="tb-compare-row">
-            <dt>Твой ответ</dt>
+            <dt>{t.yourAnswer}</dt>
             <dd>{formatQuantityBreakable(answered.guess, question.unit)}</dd>
           </div>
           <div className="tb-compare-row">
-            <dt>Правильный</dt>
+            <dt>{t.correct}</dt>
             <dd>{formatQuantityBreakable(answered.answer, question.unit)}</dd>
           </div>
         </dl>
@@ -231,16 +220,16 @@ export function TiebreakerReveal({
             onShare?.();
           }}
         >
-          Поделиться результатом
+          {t.shareResult}
         </button>
         {shareStatus === "copied" && (
           <p className="tb-share-note" role="status">
-            Скопировано
+            {t.copied}
           </p>
         )}
         {shareStatus === "failed" && (
           <p className="tb-share-note" role="alert">
-            Не удалось поделиться
+            {t.shareFailed}
           </p>
         )}
       </section>
@@ -264,17 +253,17 @@ export function TiebreakerReveal({
                 if (openExternalLink(safeUrl)) event.preventDefault();
               }}
             >
-              Источник: {sourceHost(safeUrl)}
+              {t.source(sourceHost(safeUrl))}
             </a>
           ) : (
-            <span>Источник: {answered.sourceUrl}</span>
+            <span>{t.source(answered.sourceUrl)}</span>
           )}
-          {" · "}данные на {formatAsOfDate(answered.asOfDate)}
+          {" · "}{t.dataAsOf(formatAsOfDate(answered.asOfDate))}
         </p>
       </div>
 
       <div className="tb-next">
-        <span className="tb-next-label">Следующий вопрос</span>
+        <span className="tb-next-label">{t.nextQuestion}</span>
         <span className="tb-next-timer">{formatCountdownClock(msLeft)}</span>
       </div>
     </div>

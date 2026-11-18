@@ -1,0 +1,44 @@
+{
+  "set-platonic-solids": {
+    "title": "Name a Platonic solid",
+    "mcPrompt": "Which of these is a Platonic solid?",
+    "members": {
+      "tetrahedron": {
+        "answer": "tetrahedron",
+        "accepted": [
+          "tetrahedron"
+        ]
+      },
+      "cube": {
+        "answer": "cube",
+        "accepted": [
+          "cube",
+          "hexahedron"
+        ]
+      },
+      "octahedron": {
+        "answer": "octahedron",
+        "accepted": [
+          "octahedron"
+        ]
+      },
+      "dodecahedron": {
+        "answer": "dodecahedron",
+        "accepted": [
+          "dodecahedron"
+        ]
+      },
+      "icosahedron": {
+        "answer": "icosahedron",
+        "accepted": [
+          "icosahedron"
+        ]
+      }
+    },
+    "nonMembers": [
+      "pyramid",
+      "prism",
+      "cone"
+    ]
+  }
+}

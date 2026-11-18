@@ -1,0 +1,137 @@
+{
+  "set-lumiere": {
+    "title": "Name one of the Lumière brothers",
+    "mcPrompt": "Which of these is one of the Lumière brothers?",
+    "members": {
+      "auguste": {
+        "answer": "Auguste",
+        "accepted": [
+          "Auguste",
+          "Auguste Lumière",
+          "Auguste Lumiere"
+        ]
+      },
+      "louis": {
+        "answer": "Louis",
+        "accepted": [
+          "Louis",
+          "Louis Lumière",
+          "Louis Lumiere"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Georges Méliès",
+      "Thomas Edison",
+      "Charlie Chaplin"
+    ]
+  },
+  "set-avengers-2012": {
+    "title": "Name a hero from the original 2012 Avengers",
+    "mcPrompt": "Which of these was on the 2012 Avengers team?",
+    "members": {
+      "ironman": {
+        "answer": "Iron Man",
+        "accepted": [
+          "Iron Man",
+          "Tony Stark"
+        ]
+      },
+      "cap": {
+        "answer": "Captain America",
+        "accepted": [
+          "Captain America",
+          "Steve Rogers"
+        ]
+      },
+      "thor": {
+        "answer": "Thor",
+        "accepted": [
+          "Thor"
+        ]
+      },
+      "hulk": {
+        "answer": "Hulk",
+        "accepted": [
+          "Hulk",
+          "the Hulk",
+          "Bruce Banner"
+        ]
+      },
+      "widow": {
+        "answer": "Black Widow",
+        "accepted": [
+          "Black Widow",
+          "Natasha Romanoff"
+        ]
+      },
+      "hawkeye": {
+        "answer": "Hawkeye",
+        "accepted": [
+          "Hawkeye",
+          "Clint Barton"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Spider-Man",
+      "Batman",
+      "Deadpool"
+    ]
+  },
+  "set-film-5tpdup": {
+    "title": "Name a film that grossed over $2 billion worldwide",
+    "mcPrompt": "Which of these films passed $2 billion at the worldwide box office?",
+    "members": {
+      "avatar": {
+        "answer": "Avatar",
+        "accepted": [
+          "Avatar"
+        ]
+      },
+      "endgame": {
+        "answer": "Avengers: Endgame",
+        "accepted": [
+          "Avengers: Endgame",
+          "Avengers Endgame",
+          "Endgame"
+        ]
+      },
+      "avatar2": {
+        "answer": "Avatar: The Way of Water",
+        "accepted": [
+          "Avatar: The Way of Water",
+          "Avatar The Way of Water",
+          "The Way of Water"
+        ]
+      },
+      "titanic": {
+        "answer": "Titanic",
+        "accepted": [
+          "Titanic"
+        ]
+      },
+      "starwars7": {
+        "answer": "Star Wars: The Force Awakens",
+        "accepted": [
+          "Star Wars: The Force Awakens",
+          "Star Wars The Force Awakens",
+          "The Force Awakens"
+        ]
+      },
+      "infinity_war": {
+        "answer": "Avengers: Infinity War",
+        "accepted": [
+          "Avengers: Infinity War",
+          "Avengers Infinity War",
+          "Infinity War"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Shrek 2",
+      "Harry Potter and the Philosopher's Stone",
+      "The Dark Knight"
+    ]
+  }
+}

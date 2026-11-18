@@ -1,3 +1,5 @@
+import { messagesFor } from '../../i18n/messages';
+import { m } from './messages';
 /** Что показать игроку, когда круг не дошёл до сервера или сервер его не принял. */
 export interface SyncIssue {
   message: string;
@@ -6,13 +8,13 @@ export interface SyncIssue {
 }
 
 export const INVALID_RESPONSE_ISSUE: SyncIssue = {
-  message: 'Сервер вернул непонятный ответ. Круг не засчитан.',
+  get message() { return messagesFor(m).syncInvalid; },
   canRetry: false,
 };
 
 /** 409, а забег с сервера подтянуть не вышло. */
 export const CONFLICT_ISSUE: SyncIssue = {
-  message: 'Сервер не принял этот круг. Начни забег заново.',
+  get message() { return messagesFor(m).syncConflict; },
   canRetry: false,
 };
 
@@ -20,8 +22,8 @@ export const CONFLICT_ISSUE: SyncIssue = {
 export function deliveryFailureIssue(transient: boolean): { issue: SyncIssue; reason: 'offline' | 'rejected' } {
   return transient
     ? {
-      issue: { message: 'Нет связи с сервером. Прогресс не потерян: проверь соединение и повтори.', canRetry: true },
+      issue: { message: messagesFor(m).syncOffline, canRetry: true },
       reason: 'offline',
     }
-    : { issue: { message: 'Сервер не принял этот круг.', canRetry: false }, reason: 'rejected' };
+    : { issue: { message: messagesFor(m).syncRejected, canRetry: false }, reason: 'rejected' };
 }

@@ -1,0 +1,722 @@
+{
+  "au-music-1c4odpj": {
+    "prompt": "How many strings does a classical guitar have?",
+    "answer": "6",
+    "accepted": [
+      "6",
+      "six"
+    ],
+    "distractors": [
+      "4",
+      "7",
+      "12"
+    ]
+  },
+  "au-music-11i1ual": {
+    "prompt": "How many notes are in the scale \"do-re-mi-fa-sol-la-si\"?",
+    "answer": "7",
+    "accepted": [
+      "7",
+      "seven"
+    ],
+    "distractors": [
+      "5",
+      "8",
+      "12"
+    ]
+  },
+  "au-music-5qsji9": {
+    "prompt": "Which country is the band ABBA from?",
+    "answer": "Sweden",
+    "accepted": [
+      "Sweden"
+    ],
+    "distractors": [
+      "Norway",
+      "Denmark",
+      "Finland"
+    ]
+  },
+  "au-music-gwy8y4": {
+    "prompt": "Who was the lead singer of Queen?",
+    "answer": "Freddie Mercury",
+    "accepted": [
+      "Freddie Mercury",
+      "Mercury",
+      "Freddie"
+    ],
+    "distractors": [
+      "Brian May",
+      "Mick Jagger",
+      "Elton John"
+    ]
+  },
+  "au-music-10wjm18": {
+    "prompt": "How many lines are in a musical staff?",
+    "answer": "5",
+    "accepted": [
+      "5",
+      "five"
+    ],
+    "distractors": [
+      "4",
+      "6",
+      "7"
+    ]
+  },
+  "au-music-1scw7zr": {
+    "prompt": "Which composer kept writing music after going completely deaf?",
+    "answer": "Ludwig van Beethoven",
+    "accepted": [
+      "Ludwig van Beethoven",
+      "Beethoven"
+    ],
+    "distractors": [
+      "Wolfgang Amadeus Mozart",
+      "Johann Sebastian Bach",
+      "Frédéric Chopin"
+    ]
+  },
+  "au-music-nahhl7": {
+    "prompt": "Which singer is called the King of Rock and Roll?",
+    "answer": "Elvis Presley",
+    "accepted": [
+      "Elvis Presley",
+      "Presley",
+      "Elvis"
+    ],
+    "distractors": [
+      "Chuck Berry",
+      "Little Richard",
+      "Johnny Cash"
+    ]
+  },
+  "au-music-16sqjp9": {
+    "prompt": "Which instrument is called the king of instruments?",
+    "answer": "organ",
+    "accepted": [
+      "organ",
+      "pipe organ",
+      "the organ"
+    ],
+    "distractors": [
+      "grand piano",
+      "violin",
+      "harp"
+    ]
+  },
+  "au-music-yxj32r": {
+    "prompt": "How many keys does a standard piano have?",
+    "answer": "88",
+    "accepted": [
+      "88",
+      "eighty-eight",
+      "eighty eight"
+    ],
+    "distractors": [
+      "76",
+      "64",
+      "92"
+    ]
+  },
+  "au-music-o21a5s": {
+    "prompt": "Who wrote the opera Eugene Onegin?",
+    "answer": "Pyotr Tchaikovsky",
+    "accepted": [
+      "Pyotr Tchaikovsky",
+      "Tchaikovsky",
+      "Pyotr Ilyich Tchaikovsky"
+    ],
+    "distractors": [
+      "Modest Mussorgsky",
+      "Mikhail Glinka",
+      "Nikolai Rimsky-Korsakov"
+    ]
+  },
+  "au-music-1mt2kcj": {
+    "prompt": "Who wrote the opera Ruslan and Lyudmila?",
+    "answer": "Mikhail Glinka",
+    "accepted": [
+      "Mikhail Glinka",
+      "Glinka"
+    ],
+    "distractors": [
+      "Modest Mussorgsky",
+      "Alexander Borodin",
+      "Pyotr Tchaikovsky"
+    ]
+  },
+  "au-music-fsccbu": {
+    "prompt": "What is the lowest male singing voice called?",
+    "answer": "bass",
+    "accepted": [
+      "bass"
+    ],
+    "distractors": [
+      "baritone",
+      "tenor",
+      "alto"
+    ]
+  },
+  "au-music-1bf703m": {
+    "prompt": "Which instrument did Sherlock Holmes play?",
+    "answer": "violin",
+    "accepted": [
+      "violin",
+      "the violin"
+    ],
+    "distractors": [
+      "flute",
+      "cello",
+      "piano"
+    ]
+  },
+  "au-music-10derae": {
+    "prompt": "Who wrote Flight of the Bumblebee?",
+    "answer": "Nikolai Rimsky-Korsakov",
+    "accepted": [
+      "Nikolai Rimsky-Korsakov",
+      "Rimsky-Korsakov",
+      "Rimsky Korsakov"
+    ],
+    "distractors": [
+      "Sergei Rachmaninoff",
+      "Modest Mussorgsky",
+      "Pyotr Tchaikovsky"
+    ]
+  },
+  "au-music-1jwzpdg": {
+    "prompt": "How many symphonies did Beethoven write?",
+    "answer": "9",
+    "accepted": [
+      "9",
+      "nine"
+    ],
+    "distractors": [
+      "5",
+      "7",
+      "12"
+    ]
+  },
+  "au-music-19upfr1": {
+    "prompt": "Which country was the composer Frédéric Chopin from?",
+    "answer": "Poland",
+    "accepted": [
+      "Poland"
+    ],
+    "distractors": [
+      "France",
+      "Austria",
+      "Hungary"
+    ],
+    "explanation": "Chopin was born in Poland and spent his last years in France."
+  },
+  "au-music-j2b68b": {
+    "prompt": "Which band released the album The Dark Side of the Moon?",
+    "answer": "Pink Floyd",
+    "accepted": [
+      "Pink Floyd"
+    ],
+    "distractors": [
+      "Led Zeppelin",
+      "The Rolling Stones",
+      "The Doors"
+    ]
+  },
+  "wd-music-Q185968": {
+    "prompt": "Who composed Carmen?",
+    "answer": "Georges Bizet",
+    "accepted": [
+      "Georges Bizet",
+      "Bizet"
+    ],
+    "distractors": [
+      "Gioachino Rossini",
+      "Wolfgang Amadeus Mozart",
+      "Maurice Ravel"
+    ],
+    "explanation": "Carmen was composed by Georges Bizet."
+  },
+  "wd-music-Q5064": {
+    "prompt": "Who composed The Magic Flute?",
+    "answer": "Wolfgang Amadeus Mozart",
+    "accepted": [
+      "Wolfgang Amadeus Mozart",
+      "Mozart"
+    ],
+    "distractors": [
+      "Pyotr Ilyich Tchaikovsky",
+      "Giuseppe Verdi",
+      "Johann Sebastian Bach"
+    ],
+    "explanation": "The Magic Flute was composed by Wolfgang Amadeus Mozart."
+  },
+  "wd-music-Q199786": {
+    "prompt": "Who composed Swan Lake?",
+    "answer": "Pyotr Ilyich Tchaikovsky",
+    "accepted": [
+      "Pyotr Ilyich Tchaikovsky",
+      "Tchaikovsky",
+      "Pyotr Tchaikovsky"
+    ],
+    "distractors": [
+      "Carl Orff",
+      "Gioachino Rossini",
+      "Johann Sebastian Bach"
+    ],
+    "explanation": "Swan Lake was composed by Pyotr Ilyich Tchaikovsky."
+  },
+  "wd-music-Q186162": {
+    "prompt": "Who composed La traviata?",
+    "answer": "Giuseppe Verdi",
+    "accepted": [
+      "Giuseppe Verdi",
+      "Verdi"
+    ],
+    "distractors": [
+      "Richard Wagner",
+      "Johann Sebastian Bach",
+      "Igor Stravinsky"
+    ],
+    "explanation": "La traviata was composed by Giuseppe Verdi."
+  },
+  "wd-music-Q19005": {
+    "prompt": "Who composed Madama Butterfly?",
+    "answer": "Giacomo Puccini",
+    "accepted": [
+      "Giacomo Puccini",
+      "Puccini"
+    ],
+    "distractors": [
+      "Gioachino Rossini",
+      "George Frideric Handel",
+      "Georges Bizet"
+    ],
+    "explanation": "Madama Butterfly was composed by Giacomo Puccini."
+  },
+  "wd-music-Q171277": {
+    "prompt": "Who composed Aida?",
+    "answer": "Giuseppe Verdi",
+    "accepted": [
+      "Giuseppe Verdi",
+      "Verdi"
+    ],
+    "distractors": [
+      "Richard Wagner",
+      "Richard Strauss",
+      "Igor Stravinsky"
+    ],
+    "explanation": "Aida was composed by Giuseppe Verdi."
+  },
+  "wd-music-Q201873": {
+    "prompt": "Who composed The Marriage of Figaro?",
+    "answer": "Wolfgang Amadeus Mozart",
+    "accepted": [
+      "Wolfgang Amadeus Mozart",
+      "Mozart"
+    ],
+    "distractors": [
+      "Giuseppe Verdi",
+      "Ruggero Leoncavallo",
+      "Johann Strauss II"
+    ],
+    "explanation": "The Marriage of Figaro was composed by Wolfgang Amadeus Mozart."
+  },
+  "wd-music-Q192039": {
+    "prompt": "Who composed Don Giovanni?",
+    "answer": "Wolfgang Amadeus Mozart",
+    "accepted": [
+      "Wolfgang Amadeus Mozart",
+      "Mozart"
+    ],
+    "distractors": [
+      "Maurice Ravel",
+      "Pyotr Ilyich Tchaikovsky",
+      "Giacomo Puccini"
+    ],
+    "explanation": "Don Giovanni was composed by Wolfgang Amadeus Mozart."
+  },
+  "wd-music-Q192941": {
+    "prompt": "Who composed Tosca?",
+    "answer": "Giacomo Puccini",
+    "accepted": [
+      "Giacomo Puccini",
+      "Puccini"
+    ],
+    "distractors": [
+      "Johann Sebastian Bach",
+      "Maurice Ravel",
+      "Ludwig van Beethoven"
+    ],
+    "explanation": "Tosca was composed by Giacomo Puccini."
+  },
+  "wd-music-Q189234": {
+    "prompt": "Who composed Rigoletto?",
+    "answer": "Giuseppe Verdi",
+    "accepted": [
+      "Giuseppe Verdi",
+      "Verdi"
+    ],
+    "distractors": [
+      "Richard Strauss",
+      "Richard Wagner",
+      "Giacomo Puccini"
+    ],
+    "explanation": "Rigoletto was composed by Giuseppe Verdi."
+  },
+  "wd-music-Q190237": {
+    "prompt": "Who composed The Ring of the Nibelung?",
+    "answer": "Richard Wagner",
+    "accepted": [
+      "Richard Wagner",
+      "Wagner"
+    ],
+    "distractors": [
+      "Richard Strauss",
+      "Pyotr Ilyich Tchaikovsky",
+      "George Frideric Handel"
+    ],
+    "explanation": "The Ring of the Nibelung was composed by Richard Wagner."
+  },
+  "wd-music-Q11980": {
+    "prompt": "Who composed Für Elise?",
+    "answer": "Ludwig van Beethoven",
+    "accepted": [
+      "Ludwig van Beethoven",
+      "Beethoven"
+    ],
+    "distractors": [
+      "Wolfgang Amadeus Mozart",
+      "Ruggero Leoncavallo",
+      "Georges Bizet"
+    ],
+    "explanation": "Für Elise was composed by Ludwig van Beethoven."
+  },
+  "wd-music-Q193705": {
+    "prompt": "Who composed The Nutcracker?",
+    "answer": "Pyotr Ilyich Tchaikovsky",
+    "accepted": [
+      "Pyotr Ilyich Tchaikovsky",
+      "Tchaikovsky",
+      "Pyotr Tchaikovsky"
+    ],
+    "distractors": [
+      "Johann Sebastian Bach",
+      "Maurice Ravel",
+      "Georges Bizet"
+    ],
+    "explanation": "The Nutcracker was composed by Pyotr Ilyich Tchaikovsky."
+  },
+  "wd-music-Q207990": {
+    "prompt": "Who composed Turandot?",
+    "answer": "Giacomo Puccini",
+    "accepted": [
+      "Giacomo Puccini",
+      "Puccini"
+    ],
+    "distractors": [
+      "Giuseppe Verdi",
+      "Maurice Ravel",
+      "Pyotr Ilyich Tchaikovsky"
+    ],
+    "explanation": "Turandot was composed by Giacomo Puccini."
+  },
+  "wd-music-Q1324254": {
+    "prompt": "Who composed Tristan und Isolde?",
+    "answer": "Richard Wagner",
+    "accepted": [
+      "Richard Wagner",
+      "Wagner"
+    ],
+    "distractors": [
+      "Maurice Ravel",
+      "Ruggero Leoncavallo",
+      "Edvard Grieg"
+    ],
+    "explanation": "Tristan und Isolde was composed by Richard Wagner."
+  },
+  "wd-music-Q208659": {
+    "prompt": "Who composed The Barber of Seville?",
+    "answer": "Gioachino Rossini",
+    "accepted": [
+      "Gioachino Rossini",
+      "Rossini"
+    ],
+    "distractors": [
+      "Maurice Ravel",
+      "Johann Strauss II",
+      "Giuseppe Verdi"
+    ],
+    "explanation": "The Barber of Seville was composed by Gioachino Rossini."
+  },
+  "wd-music-Q221806": {
+    "prompt": "Who composed Cavalleria rusticana?",
+    "answer": "Pietro Mascagni",
+    "accepted": [
+      "Pietro Mascagni",
+      "Mascagni"
+    ],
+    "distractors": [
+      "Ruggero Leoncavallo",
+      "Johann Sebastian Bach",
+      "George Frideric Handel"
+    ],
+    "explanation": "Cavalleria rusticana was composed by Pietro Mascagni."
+  },
+  "wd-music-Q193778": {
+    "prompt": "Who composed Fidelio?",
+    "answer": "Ludwig van Beethoven",
+    "accepted": [
+      "Ludwig van Beethoven",
+      "Beethoven"
+    ],
+    "distractors": [
+      "Gioachino Rossini",
+      "Georges Bizet",
+      "Igor Stravinsky"
+    ],
+    "explanation": "Fidelio was composed by Ludwig van Beethoven."
+  },
+  "wd-music-Q253716": {
+    "prompt": "Who composed Carmina Burana?",
+    "answer": "Carl Orff",
+    "accepted": [
+      "Carl Orff",
+      "Orff"
+    ],
+    "distractors": [
+      "Giacomo Puccini",
+      "Ludwig van Beethoven",
+      "Johann Sebastian Bach"
+    ],
+    "explanation": "Carmina Burana was composed by Carl Orff."
+  },
+  "wd-music-Q208094": {
+    "prompt": "Who composed Peer Gynt?",
+    "answer": "Edvard Grieg",
+    "accepted": [
+      "Edvard Grieg",
+      "Grieg"
+    ],
+    "distractors": [
+      "Wolfgang Amadeus Mozart",
+      "Maurice Ravel",
+      "Johann Strauss II"
+    ],
+    "explanation": "Peer Gynt was composed by Edvard Grieg."
+  },
+  "wd-music-Q248644": {
+    "prompt": "Who composed Pagliacci?",
+    "answer": "Ruggero Leoncavallo",
+    "accepted": [
+      "Ruggero Leoncavallo",
+      "Leoncavallo"
+    ],
+    "distractors": [
+      "Ludwig van Beethoven",
+      "Igor Stravinsky",
+      "George Frideric Handel"
+    ],
+    "explanation": "Pagliacci was composed by Ruggero Leoncavallo."
+  },
+  "wd-music-Q206015": {
+    "prompt": "Who composed The Rite of Spring?",
+    "answer": "Igor Stravinsky",
+    "accepted": [
+      "Igor Stravinsky",
+      "Stravinsky"
+    ],
+    "distractors": [
+      "Georges Bizet",
+      "Giuseppe Verdi",
+      "Ludwig van Beethoven"
+    ],
+    "explanation": "The Rite of Spring was composed by Igor Stravinsky."
+  },
+  "wd-music-Q207732": {
+    "prompt": "Who composed Messiah?",
+    "answer": "George Frideric Handel",
+    "accepted": [
+      "George Frideric Handel",
+      "Handel"
+    ],
+    "distractors": [
+      "Giuseppe Verdi",
+      "Igor Stravinsky",
+      "Johann Strauss II"
+    ],
+    "explanation": "Messiah was composed by George Frideric Handel."
+  },
+  "wd-music-Q211971": {
+    "prompt": "Who composed The Well-Tempered Clavier?",
+    "answer": "Johann Sebastian Bach",
+    "accepted": [
+      "Johann Sebastian Bach",
+      "Bach"
+    ],
+    "distractors": [
+      "Pietro Mascagni",
+      "Gioachino Rossini",
+      "Igor Stravinsky"
+    ],
+    "explanation": "The Well-Tempered Clavier was composed by Johann Sebastian Bach."
+  },
+  "wd-music-Q220340": {
+    "prompt": "Who composed Parsifal?",
+    "answer": "Richard Wagner",
+    "accepted": [
+      "Richard Wagner",
+      "Wagner"
+    ],
+    "distractors": [
+      "Giuseppe Verdi",
+      "Wolfgang Amadeus Mozart",
+      "Ruggero Leoncavallo"
+    ],
+    "explanation": "Parsifal was composed by Richard Wagner."
+  },
+  "wd-music-Q212776": {
+    "prompt": "Who composed The 1812 Overture?",
+    "answer": "Pyotr Ilyich Tchaikovsky",
+    "accepted": [
+      "Pyotr Ilyich Tchaikovsky",
+      "Tchaikovsky",
+      "Pyotr Tchaikovsky"
+    ],
+    "distractors": [
+      "Maurice Ravel",
+      "Johann Sebastian Bach",
+      "Igor Stravinsky"
+    ],
+    "explanation": "The 1812 Overture was composed by Pyotr Ilyich Tchaikovsky."
+  },
+  "wd-music-Q482621": {
+    "prompt": "Who composed The Blue Danube?",
+    "answer": "Johann Strauss II",
+    "accepted": [
+      "Johann Strauss II",
+      "Strauss",
+      "Johann Strauss"
+    ],
+    "distractors": [
+      "Johann Sebastian Bach",
+      "Gioachino Rossini",
+      "Richard Strauss"
+    ],
+    "explanation": "The Blue Danube was composed by Johann Strauss II."
+  },
+  "wd-music-Q327331": {
+    "prompt": "Who composed Boléro?",
+    "answer": "Maurice Ravel",
+    "accepted": [
+      "Maurice Ravel",
+      "Ravel"
+    ],
+    "distractors": [
+      "Wolfgang Amadeus Mozart",
+      "George Frideric Handel",
+      "Giacomo Puccini"
+    ],
+    "explanation": "Boléro was composed by Maurice Ravel."
+  },
+  "wd-music-Q12008": {
+    "prompt": "Who composed Piano Sonata No. 14 (\"Moonlight\")?",
+    "answer": "Ludwig van Beethoven",
+    "accepted": [
+      "Ludwig van Beethoven",
+      "Beethoven"
+    ],
+    "distractors": [
+      "Maurice Ravel",
+      "Giacomo Puccini",
+      "Richard Strauss"
+    ],
+    "explanation": "Piano Sonata No. 14 (\"Moonlight\") was composed by Ludwig van Beethoven."
+  },
+  "wd-music-Q213728": {
+    "prompt": "Who composed Goldberg Variations?",
+    "answer": "Johann Sebastian Bach",
+    "accepted": [
+      "Johann Sebastian Bach",
+      "Bach"
+    ],
+    "distractors": [
+      "Igor Stravinsky",
+      "Carl Orff",
+      "Maurice Ravel"
+    ],
+    "explanation": "Goldberg Variations was composed by Johann Sebastian Bach."
+  },
+  "wd-music-Q208224": {
+    "prompt": "Who composed Brandenburg Concertos?",
+    "answer": "Johann Sebastian Bach",
+    "accepted": [
+      "Johann Sebastian Bach",
+      "Bach"
+    ],
+    "distractors": [
+      "Richard Strauss",
+      "Pyotr Ilyich Tchaikovsky",
+      "Edvard Grieg"
+    ],
+    "explanation": "Brandenburg Concertos was composed by Johann Sebastian Bach."
+  },
+  "wd-music-Q723407": {
+    "prompt": "Who composed Salome?",
+    "answer": "Richard Strauss",
+    "accepted": [
+      "Richard Strauss",
+      "Strauss"
+    ],
+    "distractors": [
+      "Giuseppe Verdi",
+      "Georges Bizet",
+      "Ludwig van Beethoven"
+    ],
+    "explanation": "Salome was composed by Richard Strauss."
+  },
+  "wd-music-Q464930": {
+    "prompt": "Who composed Die Fledermaus?",
+    "answer": "Johann Strauss II",
+    "accepted": [
+      "Johann Strauss II",
+      "Strauss",
+      "Johann Strauss"
+    ],
+    "distractors": [
+      "Giacomo Puccini",
+      "Georges Bizet",
+      "Maurice Ravel"
+    ],
+    "explanation": "Die Fledermaus was composed by Johann Strauss II."
+  },
+  "wd-music-Q12001": {
+    "prompt": "Who composed Radetzky March?",
+    "answer": "Johann Strauss II",
+    "accepted": [
+      "Johann Strauss II",
+      "Strauss",
+      "Johann Strauss"
+    ],
+    "distractors": [
+      "Richard Wagner",
+      "Maurice Ravel",
+      "Pietro Mascagni"
+    ],
+    "explanation": "Radetzky March was composed by Johann Strauss II."
+  },
+  "wd-music-Q471240": {
+    "prompt": "Who composed Der Rosenkavalier?",
+    "answer": "Richard Strauss",
+    "accepted": [
+      "Richard Strauss",
+      "Strauss"
+    ],
+    "distractors": [
+      "Giacomo Puccini",
+      "George Frideric Handel",
+      "Johann Sebastian Bach"
+    ],
+    "explanation": "Der Rosenkavalier was composed by Richard Strauss."
+  }
+}

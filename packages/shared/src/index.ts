@@ -1,4 +1,4 @@
-import { SKILL_DISTANCE_THRESHOLDS, type MiniGameConfig, type SkillResult } from './hammer/hammerRules';
+import { LEGACY_SKILL_DISTANCE_THRESHOLDS, SKILL_DISTANCE_THRESHOLDS, type MiniGameConfig, type SkillResult } from './hammer/hammerRules';
 import type { PracticeLevelId } from './solo/practice';
 
 /** Категория вопросов. Единственное объявление; questionGenerator его ре-экспортирует. */
@@ -18,6 +18,12 @@ export * from './solo/practice';
 export * from './solo/friendDuel';
 export * from './tiebreaker/tiebreaker';
 export * from './wikiPath/wikiPath';
+export * from './progress/progress';
+export * from './clans/clans';
+export * from './i18n/locale';
+export { acceptedAnswersAnyLanguage, localizeQuestion } from './i18n/localizeQuestion';
+export * from './questions/categoryStats';
+import type { PlayerAchievement, PlayerLevel, PlayerStreak } from './progress/progress';
 
 export type Difficulty = 'Easy' | 'Medium' | 'Hard' | 'Expert';
 
@@ -149,6 +155,8 @@ export interface StartSoloRunResponse {
   miniGameId: MiniGameId;
   /** true: все наборы дня в категории уже пройдены, выдан наименее давно сыгранный. */
   bankExhausted: boolean;
+  /** Конфиг мини-игры этого забега; нет — текущий. Забег, начатый по прежним правилам, доигрывается по ним. */
+  miniGameConfig?: MiniGameConfig;
   /**
    * true: незаконченный забег продолжен, а не создан. Тело — снимок (`SoloRunSnapshot`:
    * `rounds`, `status`, `category`...), клиент входит в него так же, как при восстановлении.
@@ -365,6 +373,10 @@ export interface SoloProfileResponse {
   reachedTargetRuns: number;
   /** Минимальное число кругов среди финишей до 100%; null, пока финишей нет. */
   bestRounds: number | null;
+  /** Серия дней с забегом дня. Нет у старого сервера: клиент обязан это пережить. */
+  streak?: PlayerStreak;
+  level?: PlayerLevel;
+  achievements?: PlayerAchievement[];
 }
 
 export interface Opponent {
@@ -401,20 +413,58 @@ export interface AsyncMatchConditions {
   };
 }
 
-/** Мини-игра молотка: её конфиг считает круг соло-забега, тренировки и дуэли. */
+/**
+ * Мини-игра (молоток и башня): её конфиг считает круг соло-забега, тренировки и дуэли.
+ * Версия 2 (2026-11-17): зоны уже, маркер быстрее, давление серии сжимает зоны сильнее.
+ */
 export const CURRENT_HAMMER_MINI_GAME: AsyncMatchConditions['miniGame'] = {
   id: 'hammer_nail',
   config: {
-    markerSpeedMin: 0.6,
-    markerSpeedMax: 1.6,
-    targetWidth: 0.85,
+    markerSpeedMin: 0.8,
+    markerSpeedMax: 2,
+    targetWidth: SKILL_DISTANCE_THRESHOLDS.weak,
     perfectWidth: SKILL_DISTANCE_THRESHOLDS.perfect,
+    distanceThresholds: { ...SKILL_DISTANCE_THRESHOLDS },
     pressure: {
-      stageMultipliers: [1, 0.9, 0.8, 0.7],
-      maxTargetOffsets: [0.06, 0.09, 0.12, 0.15],
+      stageMultipliers: [1, 0.85, 0.72, 0.6],
+      maxTargetOffsets: [0.08, 0.12, 0.16, 0.2],
     },
   },
 };
+
+/**
+ * Конфиг первой версии. Забеги, начатые до смены правил, доигрываются по нему: сервер хранит
+ * конфиг в строке забега и считает удары по нему, клиент получает его в снимке.
+ */
+export const LEGACY_HAMMER_MINI_GAME_CONFIG: MiniGameConfig = {
+  markerSpeedMin: 0.6,
+  markerSpeedMax: 1.6,
+  targetWidth: 0.85,
+  perfectWidth: LEGACY_SKILL_DISTANCE_THRESHOLDS.perfect,
+  pressure: {
+    stageMultipliers: [1, 0.9, 0.8, 0.7],
+    maxTargetOffsets: [0.06, 0.09, 0.12, 0.15],
+  },
+};
+
+export const SUPPORTED_MINI_GAME_CONFIGS: readonly MiniGameConfig[] = [
+  CURRENT_HAMMER_MINI_GAME.config,
+  LEGACY_HAMMER_MINI_GAME_CONFIG,
+];
+
+/** Конфиг из сохранённого JSON или присланного объекта, если это одна из поддерживаемых версий. */
+export function supportedMiniGameConfig(value: unknown): MiniGameConfig | null {
+  let parsed = value;
+  if (typeof value === 'string') {
+    try {
+      parsed = JSON.parse(value);
+    } catch {
+      return null;
+    }
+  }
+  const json = JSON.stringify(parsed);
+  return SUPPORTED_MINI_GAME_CONFIGS.find((config) => JSON.stringify(config) === json) ?? null;
+}
 
 /** A finished run needs at least this many played rounds to be offered as an opponent. */
 export const MIN_POOL_ROUNDS = 3;

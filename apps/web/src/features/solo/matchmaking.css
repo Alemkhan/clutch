@@ -42,7 +42,7 @@
   height: 78px;
   border: 0;
   border-radius: 24px;
-  background: var(--text);
+  background: var(--ink);
   box-shadow: none;
   color: white;
   font-family: var(--font-display);

@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react';
+import { useMessages } from '../i18n/messages';
+import { m } from './messages';
 
 interface ScreenHeaderProps {
   /** Без onBack кнопки нет: так выглядят корневые вкладки нижней панели. */
@@ -25,6 +27,7 @@ export function ScreenHeader({
   leading,
   className,
 }: ScreenHeaderProps) {
+  const t = useMessages(m);
   if (!onBack && leading === undefined) {
     return title !== undefined ? <Title className="screen-title">{title}</Title> : null;
   }
@@ -39,7 +42,7 @@ export function ScreenHeader({
             aria-label={backAriaLabel}
             onClick={() => { onBack(); }}
           >
-            {backLabel ?? (<><span aria-hidden="true">←</span> Назад</>)}
+            {backLabel ?? (<><span aria-hidden="true">←</span> {t.back}</>)}
           </button>
         )}
       </header>

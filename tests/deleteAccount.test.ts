@@ -82,9 +82,10 @@ describe('account deletion', () => {
     const db = database();
     // Новая таблица с player_id должна попасть в deletePlayerAccount — иначе удаление аккаунта неполное.
     const covered = new Set([
-      'player_mistakes', 'player_notification_prefs', 'question_reports', 'analytics_events', 'tiebreaker_answers',
+      'player_mistakes', 'player_settings', 'player_notification_prefs', 'question_reports', 'analytics_events', 'tiebreaker_answers',
       'top_ten_notices', 'daily_notification_deliveries', 'announcement_deliveries', 'wiki_path_runs',
       'match_runs', 'last_stand_runs', 'group_challenge_entries', 'group_challenges', 'rematch_invites',
+      'clans', 'clan_members',
     ]);
     const tables = (db.sqlite.prepare("SELECT name FROM sqlite_master WHERE type = 'table'").all() as Array<{ name: string }>)
       .filter(({ name }) => (db.sqlite.prepare(`PRAGMA table_info(${name})`).all() as Array<{ name: string }>)

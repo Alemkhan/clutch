@@ -11,3 +11,17 @@
   font-size: 20px;
 }
 
+
+/* Узкие категории свёрнуты под «Ещё категории»: на виду только «Общие знания». */
+.category-more > summary {
+  min-height: 44px;
+  padding: 12px 4px;
+  color: var(--text-dim);
+  font-weight: 700;
+  cursor: pointer;
+  list-style-position: inside;
+}
+
+.category-more[open] > summary {
+  margin-bottom: 8px;
+}

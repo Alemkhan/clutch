@@ -4,6 +4,8 @@ import { clickWikiPath, startWikiPath } from '../../platform/api';
 import { ScreenHeader } from '../../ui/ScreenHeader';
 import { approvedWikiLink, sanitizeWikiArticle, wikiLinkFromAnchor } from './wikiArticle';
 import type { WikiPathTodayState } from './useWikiPathToday';
+import { useMessages } from '../../i18n/messages';
+import { m } from './messages';
 
 type ScreenState =
   | { status: 'idle' }
@@ -42,18 +44,20 @@ export async function loadWikiPathTransition<T>(
 }
 
 function Completion({ run }: { run: WikiPathRunSummary }) {
+  const t = useMessages(m);
   return <section className="wp-completion" aria-live="polite">
     <span className="wp-completion-check" aria-hidden="true">✓</span>
-    <p className="wp-eyebrow">Маршрут завершён</p>
-    <h2>Цель достигнута</h2>
-    <p>Ты дошёл за <strong>{run.clicks}</strong> {run.clicks === 1 ? 'переход' : run.clicks >= 2 && run.clicks <= 4 ? 'перехода' : 'переходов'}.</p>
+    <p className="wp-eyebrow">{t.routeCompleted}</p>
+    <h2>{t.goalReached}</h2>
+    <p>{t.reachedIn} <strong>{run.clicks}</strong> {t.clicksWord(run.clicks)}.</p>
   </section>;
 }
 
 export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted, onPageLoaded }: WikiPathScreenProps) {
+  const t = useMessages(m);
   const [screen, setScreen] = useState<ScreenState>({ status: 'idle' });
   const [pendingTitle, setPendingTitle] = useState<string | null>(null);
-  const [navigationMessage, setNavigationMessage] = useState('Нажимай только на разрешённые ссылки в статье.');
+  const [navigationMessage, setNavigationMessage] = useState(t.allowedLinksOnly);
 
   useEffect(() => {
     if (today.status !== 'completed' || !today.today.challenge || !today.today.run) return;
@@ -71,7 +75,7 @@ export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted, onPag
         onCompleted();
       } else setScreen({ status: 'active', challenge: result.challenge, run: result.run, page: result.currentPage });
     } catch {
-      setScreen({ status: 'error', title: 'Не удалось загрузить статью.', retry: () => { void runAction(action, label); } });
+      setScreen({ status: 'error', title: t.loadArticleError, retry: () => { void runAction(action, label); } });
     }
   };
 
@@ -85,7 +89,7 @@ export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted, onPag
   const navigate = async (title: string) => {
     if (!run) return;
     setPendingTitle(title);
-    setNavigationMessage(`Открываю «${title}»…`);
+    setNavigationMessage(t.opening(title));
     try {
       const result = await loadWikiPathTransition(
         () => clickWikiPath(run.runId, { title }),
@@ -97,12 +101,12 @@ export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted, onPag
         onCompleted();
       } else {
         setScreen((current) => current.status === 'active' ? { ...current, run: result.run, page: result.currentPage } : current);
-        setNavigationMessage('Нажимай только на разрешённые ссылки в статье.');
+        setNavigationMessage(t.allowedLinksOnly);
       }
       setPendingTitle(null);
     } catch {
       setPendingTitle(title);
-      setNavigationMessage(`Не удалось открыть «${title}». Попробуй ещё раз.`);
+      setNavigationMessage(t.openError(title));
     }
   };
 
@@ -127,40 +131,40 @@ export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted, onPag
   return <section className="wp-screen">
     <ScreenHeader onBack={onBack} />
     <div className="wp-head">
-      <h1 className="wp-title">Вики-путь</h1>
-      <span className="wp-mode-label">Ежедневный режим</span>
+      <h1 className="wp-title">{t.mode}</h1>
+      <span className="wp-mode-label">{t.dailyMode}</span>
     </div>
-    {challenge && <section className="wp-mission" aria-label="Маршрут дня">
-      <div className="wp-mission-point"><span>Старт</span><strong>{challenge.startTitle}</strong></div>
-      <div className="wp-mission-score"><strong>{clicks}</strong><span>переходов</span></div>
-      <div className="wp-mission-point wp-target"><span>Цель</span><strong>{challenge.targetTitle}</strong></div>
+    {challenge && <section className="wp-mission" aria-label={t.routeOfDay}>
+      <div className="wp-mission-point"><span>{t.startLabel}</span><strong>{challenge.startTitle}</strong></div>
+      <div className="wp-mission-score"><strong>{clicks}</strong><span>{t.clicksLabel}</span></div>
+      <div className="wp-mission-point wp-target"><span>{t.goal}</span><strong>{challenge.targetTitle}</strong></div>
     </section>}
-    {screen.status === 'active' && <nav className="wp-breadcrumbs" aria-label="Пройденный путь">
-      <span>{challenge?.startTitle ?? 'Старт'}</span><span aria-hidden="true">→</span>
-      {path.length > 2 && <><span>{path.length - 2} перехода</span><span aria-hidden="true">→</span></>}
+    {screen.status === 'active' && <nav className="wp-breadcrumbs" aria-label={t.pathSoFar}>
+      <span>{challenge?.startTitle ?? t.startLabel}</span><span aria-hidden="true">→</span>
+      {path.length > 2 && <><span>{t.middleClicks(path.length - 2)}</span><span aria-hidden="true">→</span></>}
       <strong>{page?.title}</strong>
     </nav>}
     {screen.status === 'idle' && (today.status === 'available' || today.status === 'in_progress') && <section className="wp-start">
-      <p className="wp-start-progress">Дана стартовая статья и цель. Пройди путь с наименьшим числом переходов.</p>
-      {today.status === 'in_progress' && <p className="wp-start-progress">Ты уже прошёл {today.today.run?.clicks ?? 0} переходов. Продолжай с того же места.</p>}
-      <p>Переходи только по ссылкам внутри текущей статьи. Попытка одна в день — её можно продолжить позже.</p>
-      <button type="button" className="wp-primary" onClick={() => { void runAction(startWikiPath, today.status === 'in_progress' ? 'Продолжаю маршрут…' : 'Загружаю стартовую статью…'); }}>
-        {today.status === 'in_progress' ? 'Продолжить' : 'Начать маршрут'}
+      <p className="wp-start-progress">{t.intro}</p>
+      {today.status === 'in_progress' && <p className="wp-start-progress">{t.alreadyClicked(today.today.run?.clicks ?? 0)}</p>}
+      <p>{t.rules}</p>
+      <button type="button" className="wp-primary" onClick={() => { void runAction(startWikiPath, today.status === 'in_progress' ? t.continuingRoute : t.loadingStart); }}>
+        {today.status === 'in_progress' ? t.continue : t.startRoute}
       </button>
     </section>}
-    {screen.status === 'idle' && today.status === 'loading' && <p className="wp-status" aria-busy="true">Загружаю маршрут дня…</p>}
-    {screen.status === 'idle' && today.status === 'error' && <section className="wp-error"><p>Не удалось загрузить маршрут дня.</p><button className="wp-secondary" onClick={onRetryToday}>Повторить</button></section>}
-    {screen.status === 'idle' && today.status === 'absent' && <p className="wp-status">Сегодня маршрута нет.</p>}
+    {screen.status === 'idle' && today.status === 'loading' && <p className="wp-status" aria-busy="true">{t.loadingRoute}</p>}
+    {screen.status === 'idle' && today.status === 'error' && <section className="wp-error"><p>{t.loadRouteError}</p><button className="wp-secondary" onClick={onRetryToday}>{t.retry}</button></section>}
+    {screen.status === 'idle' && today.status === 'absent' && <p className="wp-status">{t.noRoute}</p>}
     {screen.status === 'loading' && <p className="wp-status" aria-busy="true">{screen.label}</p>}
-    {screen.status === 'error' && <section className="wp-error" role="alert"><p>{screen.title}</p><button type="button" className="wp-secondary" onClick={screen.retry}>Повторить</button></section>}
+    {screen.status === 'error' && <section className="wp-error" role="alert"><p>{screen.title}</p><button type="button" className="wp-secondary" onClick={screen.retry}>{t.retry}</button></section>}
     {screen.status === 'active' && sanitized && <>
       <p className="wp-status" role="status">{pendingTitle ? navigationMessage : navigationMessage}</p>
-      {pendingTitle && <button type="button" className="wp-secondary wp-retry-link" onClick={() => { void navigate(pendingTitle); }}>Повторить переход</button>}
+      {pendingTitle && <button type="button" className="wp-secondary wp-retry-link" onClick={() => { void navigate(pendingTitle); }}>{t.retryClick}</button>}
       <article className="wp-article" aria-label={sanitized.title} onClick={handleArticleClick} aria-busy={!!pendingTitle}>
         <h2>{sanitized.title}</h2><div dangerouslySetInnerHTML={{ __html: sanitized.html }} />
       </article>
     </>}
-    {screen.status === 'active' && !sanitized && <section className="wp-error" role="alert"><p>Не удалось безопасно подготовить статью.</p><button type="button" className="wp-secondary" onClick={() => { void runAction(startWikiPath, 'Повторно загружаю статью…'); }}>Повторить</button></section>}
+    {screen.status === 'active' && !sanitized && <section className="wp-error" role="alert"><p>{t.unsafeArticle}</p><button type="button" className="wp-secondary" onClick={() => { void runAction(startWikiPath, t.reloadingArticle); }}>{t.retry}</button></section>}
     {screen.status === 'completed' && <Completion run={screen.run} />}
   </section>;
 }

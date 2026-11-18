@@ -1,0 +1,2100 @@
+{
+  "au-literature-1csl5r1": {
+    "prompt": "What is the name of the boy wizard with a lightning-bolt scar?",
+    "answer": "Harry Potter",
+    "accepted": [
+      "Harry Potter",
+      "Harry"
+    ],
+    "distractors": [
+      "Ron Weasley",
+      "Neville Longbottom",
+      "Draco Malfoy"
+    ]
+  },
+  "au-literature-17c2hj7": {
+    "prompt": "What is the name of the wooden boy in Aleksey Tolstoy's fairy tale?",
+    "answer": "Buratino",
+    "accepted": [
+      "Buratino"
+    ],
+    "distractors": [
+      "Pinocchio",
+      "Cipollino",
+      "Neznaika"
+    ]
+  },
+  "au-literature-o17e8z": {
+    "prompt": "Who wrote \"The Tale of the Fisherman and the Fish\"?",
+    "answer": "Alexander Pushkin",
+    "accepted": [
+      "Alexander Pushkin",
+      "Pushkin",
+      "Aleksandr Pushkin"
+    ],
+    "distractors": [
+      "Leo Tolstoy",
+      "Korney Chukovsky",
+      "Ivan Krylov"
+    ]
+  },
+  "au-literature-17ky3y": {
+    "prompt": "Which Conan Doyle detective lived at 221B Baker Street?",
+    "answer": "Sherlock Holmes",
+    "accepted": [
+      "Sherlock Holmes",
+      "Holmes",
+      "Sherlock"
+    ],
+    "distractors": [
+      "Hercule Poirot",
+      "Miss Marple",
+      "Inspector Maigret"
+    ]
+  },
+  "au-literature-mibhrc": {
+    "prompt": "What was the name of Don Quixote's horse?",
+    "answer": "Rocinante",
+    "accepted": [
+      "Rocinante",
+      "Rosinante"
+    ],
+    "distractors": [
+      "Bucephalus",
+      "Sivka-Burka",
+      "Pegasus"
+    ]
+  },
+  "au-literature-cnk6zz": {
+    "prompt": "Who wrote the novel in verse \"Eugene Onegin\"?",
+    "answer": "Alexander Pushkin",
+    "accepted": [
+      "Alexander Pushkin",
+      "Pushkin",
+      "Aleksandr Pushkin"
+    ],
+    "distractors": [
+      "Mikhail Lermontov",
+      "Alexander Griboyedov",
+      "Nikolai Gogol"
+    ]
+  },
+  "au-literature-lqw0yj": {
+    "prompt": "Who wrote \"Dead Souls\"?",
+    "answer": "Nikolai Gogol",
+    "accepted": [
+      "Nikolai Gogol",
+      "Gogol"
+    ],
+    "distractors": [
+      "Ivan Turgenev",
+      "Fyodor Dostoevsky",
+      "Anton Chekhov"
+    ]
+  },
+  "au-literature-qvh31": {
+    "prompt": "What is the name of the captain of the submarine Nautilus?",
+    "answer": "Captain Nemo",
+    "accepted": [
+      "Captain Nemo",
+      "Nemo"
+    ],
+    "distractors": [
+      "Captain Flint",
+      "Captain Grant",
+      "Captain Hook"
+    ]
+  },
+  "au-literature-1yuh3y8": {
+    "prompt": "Who wrote the novel \"A Hero of Our Time\"?",
+    "answer": "Mikhail Lermontov",
+    "accepted": [
+      "Mikhail Lermontov",
+      "Lermontov"
+    ],
+    "distractors": [
+      "Alexander Pushkin",
+      "Ivan Turgenev",
+      "Ivan Goncharov"
+    ]
+  },
+  "au-literature-1go4wrf": {
+    "prompt": "Who wrote the story \"Mumu\"?",
+    "answer": "Ivan Turgenev",
+    "accepted": [
+      "Ivan Turgenev",
+      "Turgenev"
+    ],
+    "distractors": [
+      "Anton Chekhov",
+      "Leo Tolstoy",
+      "Alexander Kuprin"
+    ]
+  },
+  "au-literature-19lffzq": {
+    "prompt": "Which hobbit carries the One Ring to Mordor?",
+    "answer": "Frodo",
+    "accepted": [
+      "Frodo",
+      "Frodo Baggins"
+    ],
+    "distractors": [
+      "Bilbo Baggins",
+      "Merry",
+      "Pippin"
+    ]
+  },
+  "au-literature-1dovnt9": {
+    "prompt": "Who wrote the play \"The Cherry Orchard\"?",
+    "answer": "Anton Chekhov",
+    "accepted": [
+      "Anton Chekhov",
+      "Chekhov"
+    ],
+    "distractors": [
+      "Alexander Ostrovsky",
+      "Maxim Gorky",
+      "Mikhail Bulgakov"
+    ]
+  },
+  "au-literature-1nzs9iu": {
+    "prompt": "Who wrote the poem \"Mtsyri\"?",
+    "answer": "Mikhail Lermontov",
+    "accepted": [
+      "Mikhail Lermontov",
+      "Lermontov"
+    ],
+    "distractors": [
+      "Alexander Pushkin",
+      "Nikolai Nekrasov",
+      "Sergei Yesenin"
+    ]
+  },
+  "au-literature-7z7ufu": {
+    "prompt": "In which city is \"Romeo and Juliet\" set?",
+    "answer": "Verona",
+    "accepted": [
+      "Verona"
+    ],
+    "distractors": [
+      "Venice",
+      "Florence",
+      "Mantua"
+    ]
+  },
+  "au-literature-oeb2ku": {
+    "prompt": "What is the name of the main character of \"Crime and Punishment\"?",
+    "answer": "Rodion Raskolnikov",
+    "accepted": [
+      "Rodion Raskolnikov",
+      "Raskolnikov",
+      "Rodion"
+    ],
+    "distractors": [
+      "Pierre Bezukhov",
+      "Alyosha Karamazov",
+      "Prince Myshkin"
+    ]
+  },
+  "au-literature-1nme9iq": {
+    "prompt": "In \"Heart of a Dog\", what was the dog called before the operation?",
+    "answer": "Sharik",
+    "accepted": [
+      "Sharik"
+    ],
+    "distractors": [
+      "Tuzik",
+      "Polkan",
+      "Bobik"
+    ]
+  },
+  "au-literature-1rb5gwu": {
+    "prompt": "What was Mark Twain's real name?",
+    "answer": "Samuel Clemens",
+    "accepted": [
+      "Samuel Clemens",
+      "Clemens",
+      "Samuel Langhorne Clemens"
+    ],
+    "distractors": [
+      "Eric Blair",
+      "Charles Dodgson",
+      "William Porter"
+    ],
+    "explanation": "The others are the real names of Orwell, Lewis Carroll and O. Henry."
+  },
+  "au-literature-p6nrfq": {
+    "prompt": "How many volumes are in \"War and Peace\"?",
+    "answer": "4",
+    "accepted": [
+      "4",
+      "four"
+    ],
+    "distractors": [
+      "2",
+      "3",
+      "5"
+    ],
+    "explanation": "Four volumes plus an epilogue."
+  },
+  "au-literature-1ng3a32": {
+    "prompt": "What was the name of Pushkin's nanny, to whom he dedicated poems?",
+    "answer": "Arina Rodionovna",
+    "accepted": [
+      "Arina Rodionovna",
+      "Arina Rodionovna Yakovleva"
+    ],
+    "distractors": [
+      "Marya Ivanovna",
+      "Anna Petrovna",
+      "Natalya Nikolaevna"
+    ]
+  },
+  "wd-book-Q25338": {
+    "prompt": "Who wrote \"The Little Prince\"?",
+    "answer": "Antoine de Saint-Exupéry",
+    "accepted": [
+      "Antoine de Saint-Exupéry",
+      "Antoine de Saint-Exupery",
+      "Saint-Exupery"
+    ],
+    "distractors": [
+      "Hesiod",
+      "Charles Dickens",
+      "Murasaki Shikibu"
+    ],
+    "explanation": "\"The Little Prince\" was written by Antoine de Saint-Exupéry."
+  },
+  "wd-book-Q15228": {
+    "prompt": "Who wrote \"The Lord of the Rings\"?",
+    "answer": "J. R. R. Tolkien",
+    "accepted": [
+      "J. R. R. Tolkien",
+      "John Ronald Reuel Tolkien",
+      "Tolkien"
+    ],
+    "distractors": [
+      "Karl Marx",
+      "Cao Xueqin",
+      "J. K. Rowling"
+    ],
+    "explanation": "\"The Lord of the Rings\" was written by J. R. R. Tolkien."
+  },
+  "wd-book-Q480": {
+    "prompt": "Who wrote \"Don Quixote\"?",
+    "answer": "Miguel de Cervantes",
+    "accepted": [
+      "Miguel de Cervantes",
+      "Cervantes"
+    ],
+    "distractors": [
+      "Gustave Flaubert",
+      "Murasaki Shikibu",
+      "Jonathan Swift"
+    ],
+    "explanation": "\"Don Quixote\" was written by Miguel de Cervantes."
+  },
+  "wd-book-Q208460": {
+    "prompt": "Who wrote \"Nineteen Eighty-Four\"?",
+    "answer": "George Orwell",
+    "accepted": [
+      "George Orwell",
+      "Orwell"
+    ],
+    "distractors": [
+      "Mark Twain",
+      "Jules Verne",
+      "Laozi"
+    ],
+    "explanation": "\"Nineteen Eighty-Four\" was written by George Orwell."
+  },
+  "wd-book-Q37293": {
+    "prompt": "Who wrote \"Ramayana\"?",
+    "answer": "Valmiki",
+    "accepted": [
+      "Valmiki"
+    ],
+    "distractors": [
+      "Edgar Allan Poe",
+      "Murasaki Shikibu",
+      "Miguel de Cervantes"
+    ],
+    "explanation": "\"Ramayana\" was written by Valmiki."
+  },
+  "wd-book-Q40185": {
+    "prompt": "Who wrote \"The Divine Comedy\"?",
+    "answer": "Dante Alighieri",
+    "accepted": [
+      "Dante Alighieri",
+      "Dante",
+      "Alighieri"
+    ],
+    "distractors": [
+      "Wu Cheng'en",
+      "Ernest Hemingway",
+      "Mary Shelley"
+    ],
+    "explanation": "\"The Divine Comedy\" was written by Dante Alighieri."
+  },
+  "wd-book-Q92640": {
+    "prompt": "Who wrote \"Alice's Adventures in Wonderland\"?",
+    "answer": "Lewis Carroll",
+    "accepted": [
+      "Lewis Carroll",
+      "Carroll"
+    ],
+    "distractors": [
+      "Herman Melville",
+      "Samuel Beckett",
+      "Dan Brown"
+    ],
+    "explanation": "\"Alice's Adventures in Wonderland\" was written by Lewis Carroll."
+  },
+  "wd-book-Q1396889": {
+    "prompt": "Who wrote \"Animal Farm\"?",
+    "answer": "George Orwell",
+    "accepted": [
+      "George Orwell",
+      "Orwell"
+    ],
+    "distractors": [
+      "Paulo Coelho",
+      "Lewis Carroll",
+      "James Joyce"
+    ],
+    "explanation": "\"Animal Farm\" was written by George Orwell."
+  },
+  "wd-book-Q8265": {
+    "prompt": "Who wrote \"Dream of the Red Chamber\"?",
+    "answer": "Cao Xueqin",
+    "accepted": [
+      "Cao Xueqin",
+      "Xueqin"
+    ],
+    "distractors": [
+      "Luo Guanzhong",
+      "Emily Brontë",
+      "James Joyce"
+    ],
+    "explanation": "\"Dream of the Red Chamber\" was written by Cao Xueqin."
+  },
+  "wd-book-Q74287": {
+    "prompt": "Who wrote \"The Hobbit\"?",
+    "answer": "J. R. R. Tolkien",
+    "accepted": [
+      "J. R. R. Tolkien",
+      "John Ronald Reuel Tolkien",
+      "Tolkien"
+    ],
+    "distractors": [
+      "Murasaki Shikibu",
+      "F. Scott Fitzgerald",
+      "Alexandre Dumas"
+    ],
+    "explanation": "\"The Hobbit\" was written by J. R. R. Tolkien."
+  },
+  "wd-book-Q8269": {
+    "prompt": "Who wrote \"The Tale of Genji\"?",
+    "answer": "Murasaki Shikibu",
+    "accepted": [
+      "Murasaki Shikibu",
+      "Shikibu"
+    ],
+    "distractors": [
+      "Jane Austen",
+      "Aesop",
+      "Vladimir Nabokov"
+    ],
+    "explanation": "\"The Tale of Genji\" was written by Murasaki Shikibu."
+  },
+  "wd-book-Q60220": {
+    "prompt": "Who wrote \"Aeneid\"?",
+    "answer": "Virgil",
+    "accepted": [
+      "Virgil"
+    ],
+    "distractors": [
+      "Jules Verne",
+      "Fyodor Dostoevsky",
+      "Alexandre Dumas"
+    ],
+    "explanation": "\"Aeneid\" was written by Virgil."
+  },
+  "wd-book-Q165318": {
+    "prompt": "Who wrote \"Crime and Punishment\"?",
+    "answer": "Fyodor Dostoevsky",
+    "accepted": [
+      "Fyodor Dostoevsky",
+      "Dostoevsky"
+    ],
+    "distractors": [
+      "Dante Alighieri",
+      "Gabriel García Márquez",
+      "Albert Camus"
+    ],
+    "explanation": "\"Crime and Punishment\" was written by Fyodor Dostoevsky."
+  },
+  "wd-book-Q147787": {
+    "prompt": "Who wrote \"Anna Karenina\"?",
+    "answer": "Leo Tolstoy",
+    "accepted": [
+      "Leo Tolstoy",
+      "Tolstoy"
+    ],
+    "distractors": [
+      "Hesiod",
+      "Charles Dickens",
+      "Geoffrey Chaucer"
+    ],
+    "explanation": "\"Anna Karenina\" was written by Leo Tolstoy."
+  },
+  "wd-book-Q11859": {
+    "prompt": "Who wrote \"The Little Mermaid\"?",
+    "answer": "Hans Christian Andersen",
+    "accepted": [
+      "Hans Christian Andersen",
+      "Andersen"
+    ],
+    "distractors": [
+      "F. Scott Fitzgerald",
+      "Samuel Beckett",
+      "Vladimir Nabokov"
+    ],
+    "explanation": "\"The Little Mermaid\" was written by Hans Christian Andersen."
+  },
+  "wd-book-Q43361": {
+    "prompt": "Who wrote \"Harry Potter and the Philosopher's Stone\"?",
+    "answer": "J. K. Rowling",
+    "accepted": [
+      "J. K. Rowling",
+      "Rowling"
+    ],
+    "distractors": [
+      "Dante Alighieri",
+      "Gustave Flaubert",
+      "Friedrich Nietzsche"
+    ],
+    "explanation": "\"Harry Potter and the Philosopher's Stone\" was written by J. K. Rowling."
+  },
+  "wd-book-Q123397": {
+    "prompt": "Who wrote \"The Republic\"?",
+    "answer": "Plato",
+    "accepted": [
+      "Plato"
+    ],
+    "distractors": [
+      "J. D. Salinger",
+      "Daniel Defoe",
+      "Mary Shelley"
+    ],
+    "explanation": "\"The Republic\" was written by Plato."
+  },
+  "wd-book-Q131719": {
+    "prompt": "Who wrote \"The Prince\"?",
+    "answer": "Niccolò Machiavelli",
+    "accepted": [
+      "Niccolò Machiavelli",
+      "Niccolo Machiavelli",
+      "Machiavelli"
+    ],
+    "distractors": [
+      "Valmiki",
+      "Laozi",
+      "Bram Stoker"
+    ],
+    "explanation": "\"The Prince\" was written by Niccolò Machiavelli."
+  },
+  "wd-book-Q178869": {
+    "prompt": "Who wrote \"One Hundred Years of Solitude\"?",
+    "answer": "Gabriel García Márquez",
+    "accepted": [
+      "Gabriel García Márquez",
+      "Gabriel Garcia Marquez",
+      "Garcia Marquez",
+      "Marquez"
+    ],
+    "distractors": [
+      "Dan Brown",
+      "Jonathan Swift",
+      "Anne Frank"
+    ],
+    "explanation": "\"One Hundred Years of Solitude\" was written by Gabriel García Márquez."
+  },
+  "wd-book-Q170583": {
+    "prompt": "Who wrote \"Pride and Prejudice\"?",
+    "answer": "Jane Austen",
+    "accepted": [
+      "Jane Austen",
+      "Austen"
+    ],
+    "distractors": [
+      "J. K. Rowling",
+      "Karl Marx",
+      "Gustave Flaubert"
+    ],
+    "explanation": "\"Pride and Prejudice\" was written by Jane Austen."
+  },
+  "wd-book-Q483034": {
+    "prompt": "Who wrote \"Robinson Crusoe\"?",
+    "answer": "Daniel Defoe",
+    "accepted": [
+      "Daniel Defoe",
+      "Defoe"
+    ],
+    "distractors": [
+      "J. K. Rowling",
+      "Luo Guanzhong",
+      "Ovid"
+    ],
+    "explanation": "\"Robinson Crusoe\" was written by Daniel Defoe."
+  },
+  "wd-book-Q180736": {
+    "prompt": "Who wrote \"Les Misérables\"?",
+    "answer": "Victor Hugo",
+    "accepted": [
+      "Victor Hugo",
+      "Hugo"
+    ],
+    "distractors": [
+      "Vladimir Nabokov",
+      "Antoine de Saint-Exupéry",
+      "Jonathan Swift"
+    ],
+    "explanation": "\"Les Misérables\" was written by Victor Hugo."
+  },
+  "wd-book-Q47209": {
+    "prompt": "Who wrote \"Harry Potter and the Chamber of Secrets\"?",
+    "answer": "J. K. Rowling",
+    "accepted": [
+      "J. K. Rowling",
+      "Rowling"
+    ],
+    "distractors": [
+      "Mark Twain",
+      "Albert Camus",
+      "Gabriel García Márquez"
+    ],
+    "explanation": "\"Harry Potter and the Chamber of Secrets\" was written by J. K. Rowling."
+  },
+  "wd-book-Q161531": {
+    "prompt": "Who wrote \"War and Peace\"?",
+    "answer": "Leo Tolstoy",
+    "accepted": [
+      "Leo Tolstoy",
+      "Tolstoy"
+    ],
+    "distractors": [
+      "Hesiod",
+      "Dante Alighieri",
+      "Geoffrey Chaucer"
+    ],
+    "explanation": "\"War and Peace\" was written by Leo Tolstoy."
+  },
+  "wd-book-Q134425": {
+    "prompt": "Who wrote \"Tao Te Ching\"?",
+    "answer": "Laozi",
+    "accepted": [
+      "Laozi",
+      "Lao Tzu"
+    ],
+    "distractors": [
+      "Johann Wolfgang von Goethe",
+      "Jules Verne",
+      "Ernest Hemingway"
+    ],
+    "explanation": "\"Tao Te Ching\" was written by Laozi."
+  },
+  "wd-book-Q26505": {
+    "prompt": "Who wrote \"The Old Man and the Sea\"?",
+    "answer": "Ernest Hemingway",
+    "accepted": [
+      "Ernest Hemingway",
+      "Hemingway"
+    ],
+    "distractors": [
+      "Friedrich Nietzsche",
+      "Alexandre Dumas",
+      "Franz Kafka"
+    ],
+    "explanation": "\"The Old Man and the Sea\" was written by Ernest Hemingway."
+  },
+  "wd-book-Q183157": {
+    "prompt": "Who wrote \"The Brothers Karamazov\"?",
+    "answer": "Fyodor Dostoevsky",
+    "accepted": [
+      "Fyodor Dostoevsky",
+      "Dostoevsky"
+    ],
+    "distractors": [
+      "F. Scott Fitzgerald",
+      "Valmiki",
+      "Edgar Allan Poe"
+    ],
+    "explanation": "\"The Brothers Karamazov\" was written by Fyodor Dostoevsky."
+  },
+  "wd-book-Q179021": {
+    "prompt": "Who wrote \"The Alchemist\"?",
+    "answer": "Paulo Coelho",
+    "accepted": [
+      "Paulo Coelho",
+      "Coelho"
+    ],
+    "distractors": [
+      "Miguel de Cervantes",
+      "Gabriel García Márquez",
+      "George Orwell"
+    ],
+    "explanation": "\"The Alchemist\" was written by Paulo Coelho."
+  },
+  "wd-book-Q58784": {
+    "prompt": "Who wrote \"Das Kapital\"?",
+    "answer": "Karl Marx",
+    "accepted": [
+      "Karl Marx",
+      "Marx"
+    ],
+    "distractors": [
+      "F. Scott Fitzgerald",
+      "Mikhail Bulgakov",
+      "Aldous Huxley"
+    ],
+    "explanation": "\"Das Kapital\" was written by Karl Marx."
+  },
+  "wd-book-Q174596": {
+    "prompt": "Who wrote \"Moby-Dick\"?",
+    "answer": "Herman Melville",
+    "accepted": [
+      "Herman Melville",
+      "Melville"
+    ],
+    "distractors": [
+      "Ernest Hemingway",
+      "Emily Brontë",
+      "Johann Wolfgang von Goethe"
+    ],
+    "explanation": "\"Moby-Dick\" was written by Herman Melville."
+  },
+  "wd-book-Q140527": {
+    "prompt": "Who wrote \"The Three Musketeers\"?",
+    "answer": "Alexandre Dumas",
+    "accepted": [
+      "Alexandre Dumas",
+      "Dumas"
+    ],
+    "distractors": [
+      "F. Scott Fitzgerald",
+      "James Joyce",
+      "Miguel de Cervantes"
+    ],
+    "explanation": "\"The Three Musketeers\" was written by Alexandre Dumas."
+  },
+  "wd-book-Q150827": {
+    "prompt": "Who wrote \"Frankenstein; or, The Modern Prometheus\"?",
+    "answer": "Mary Shelley",
+    "accepted": [
+      "Mary Shelley",
+      "Shelley"
+    ],
+    "distractors": [
+      "Ovid",
+      "Aesop",
+      "Daniel Defoe"
+    ],
+    "explanation": "\"Frankenstein; or, The Modern Prometheus\" was written by Mary Shelley."
+  },
+  "wd-book-Q29478": {
+    "prompt": "Who wrote \"Faust\"?",
+    "answer": "Johann Wolfgang von Goethe",
+    "accepted": [
+      "Johann Wolfgang von Goethe",
+      "Goethe"
+    ],
+    "distractors": [
+      "James Joyce",
+      "Dan Brown",
+      "Gustave Flaubert"
+    ],
+    "explanation": "\"Faust\" was written by Johann Wolfgang von Goethe."
+  },
+  "wd-book-Q81689": {
+    "prompt": "Who wrote \"The Da Vinci Code\"?",
+    "answer": "Dan Brown",
+    "accepted": [
+      "Dan Brown",
+      "Brown"
+    ],
+    "distractors": [
+      "Aesop",
+      "Gabriel García Márquez",
+      "J. D. Salinger"
+    ],
+    "explanation": "\"The Da Vinci Code\" was written by Dan Brown."
+  },
+  "wd-book-Q183883": {
+    "prompt": "Who wrote \"The Catcher in the Rye\"?",
+    "answer": "J. D. Salinger",
+    "accepted": [
+      "J. D. Salinger",
+      "Jerome David Salinger",
+      "Salinger"
+    ],
+    "distractors": [
+      "Herman Melville",
+      "F. Scott Fitzgerald",
+      "Carlo Collodi"
+    ],
+    "explanation": "\"The Catcher in the Rye\" was written by J. D. Salinger."
+  },
+  "wd-book-Q185118": {
+    "prompt": "Who wrote \"Treasure Island\"?",
+    "answer": "Robert Louis Stevenson",
+    "accepted": [
+      "Robert Louis Stevenson",
+      "Stevenson"
+    ],
+    "distractors": [
+      "Jane Austen",
+      "Carlo Collodi",
+      "Harriet Beecher Stowe"
+    ],
+    "explanation": "\"Treasure Island\" was written by Robert Louis Stevenson."
+  },
+  "wd-book-Q181488": {
+    "prompt": "Who wrote \"Gulliver's Travels\"?",
+    "answer": "Jonathan Swift",
+    "accepted": [
+      "Jonathan Swift",
+      "Swift"
+    ],
+    "distractors": [
+      "Aldous Huxley",
+      "George Orwell",
+      "Ovid"
+    ],
+    "explanation": "\"Gulliver's Travels\" was written by Jonathan Swift."
+  },
+  "wd-book-Q163297": {
+    "prompt": "Who wrote \"The Stranger\"?",
+    "answer": "Albert Camus",
+    "accepted": [
+      "Albert Camus",
+      "Camus"
+    ],
+    "distractors": [
+      "Leo Tolstoy",
+      "Carlo Collodi",
+      "Alexandre Dumas"
+    ],
+    "explanation": "\"The Stranger\" was written by Albert Camus."
+  },
+  "wd-book-Q6511": {
+    "prompt": "Who wrote \"Ulysses\"?",
+    "answer": "James Joyce",
+    "accepted": [
+      "James Joyce",
+      "Joyce"
+    ],
+    "distractors": [
+      "Edgar Allan Poe",
+      "Jules Verne",
+      "Virgil"
+    ],
+    "explanation": "\"Ulysses\" was written by James Joyce."
+  },
+  "wd-book-Q184222": {
+    "prompt": "Who wrote \"The Metamorphosis\"?",
+    "answer": "Franz Kafka",
+    "accepted": [
+      "Franz Kafka",
+      "Kafka"
+    ],
+    "distractors": [
+      "Aldous Huxley",
+      "Harriet Beecher Stowe",
+      "Niccolò Machiavelli"
+    ],
+    "explanation": "\"The Metamorphosis\" was written by Franz Kafka."
+  },
+  "wd-book-Q214371": {
+    "prompt": "Who wrote \"The Great Gatsby\"?",
+    "answer": "F. Scott Fitzgerald",
+    "accepted": [
+      "F. Scott Fitzgerald",
+      "Francis Scott Fitzgerald",
+      "Fitzgerald"
+    ],
+    "distractors": [
+      "Daniel Defoe",
+      "Hans Christian Andersen",
+      "J. R. R. Tolkien"
+    ],
+    "explanation": "\"The Great Gatsby\" was written by F. Scott Fitzgerald."
+  },
+  "wd-book-Q8065468": {
+    "prompt": "Who wrote \"The Adventures of Pinocchio\"?",
+    "answer": "Carlo Collodi",
+    "accepted": [
+      "Carlo Collodi",
+      "Collodi"
+    ],
+    "distractors": [
+      "Laozi",
+      "Emily Brontë",
+      "Fyodor Dostoevsky"
+    ],
+    "explanation": "\"The Adventures of Pinocchio\" was written by Carlo Collodi."
+  },
+  "wd-book-Q45735": {
+    "prompt": "Who wrote \"Charlotte's Web\"?",
+    "answer": "E. B. White",
+    "accepted": [
+      "E. B. White",
+      "Elwyn Brooks White",
+      "White"
+    ],
+    "distractors": [
+      "Hans Christian Andersen",
+      "Herman Melville",
+      "Mary Shelley"
+    ],
+    "explanation": "\"Charlotte's Web\" was written by E. B. White."
+  },
+  "wd-book-Q164974": {
+    "prompt": "Who wrote \"Oliver Twist\"?",
+    "answer": "Charles Dickens",
+    "accepted": [
+      "Charles Dickens",
+      "Dickens"
+    ],
+    "distractors": [
+      "Giovanni Boccaccio",
+      "J. D. Salinger",
+      "Antoine de Saint-Exupéry"
+    ],
+    "explanation": "\"Oliver Twist\" was written by Charles Dickens."
+  },
+  "wd-book-Q82464": {
+    "prompt": "Who wrote \"The Picture of Dorian Gray\"?",
+    "answer": "Oscar Wilde",
+    "accepted": [
+      "Oscar Wilde",
+      "Wilde"
+    ],
+    "distractors": [
+      "Franz Kafka",
+      "Carlo Collodi",
+      "Valmiki"
+    ],
+    "explanation": "\"The Picture of Dorian Gray\" was written by Oscar Wilde."
+  },
+  "wd-book-Q6911": {
+    "prompt": "Who wrote \"The Diary of a Young Girl\"?",
+    "answer": "Anne Frank",
+    "accepted": [
+      "Anne Frank",
+      "Frank"
+    ],
+    "distractors": [
+      "Gabriel García Márquez",
+      "J. D. Salinger",
+      "Hesiod"
+    ],
+    "explanation": "\"The Diary of a Young Girl\" was written by Anne Frank."
+  },
+  "wd-book-Q199774": {
+    "prompt": "Who wrote \"Thus Spoke Zarathustra\"?",
+    "answer": "Friedrich Nietzsche",
+    "accepted": [
+      "Friedrich Nietzsche",
+      "Nietzsche"
+    ],
+    "distractors": [
+      "Plato",
+      "Anne Frank",
+      "E. B. White"
+    ],
+    "explanation": "\"Thus Spoke Zarathustra\" was written by Friedrich Nietzsche."
+  },
+  "wd-book-Q202975": {
+    "prompt": "Who wrote \"Wuthering Heights\"?",
+    "answer": "Emily Brontë",
+    "accepted": [
+      "Emily Brontë",
+      "Emily Bronte",
+      "Bronte"
+    ],
+    "distractors": [
+      "Cao Xueqin",
+      "Daniel Defoe",
+      "J. K. Rowling"
+    ],
+    "explanation": "\"Wuthering Heights\" was written by Emily Brontë."
+  },
+  "wd-book-Q70784": {
+    "prompt": "Who wrote \"Journey to the West\"?",
+    "answer": "Wu Cheng'en",
+    "accepted": [
+      "Wu Cheng'en"
+    ],
+    "distractors": [
+      "Aldous Huxley",
+      "Vladimir Nabokov",
+      "Bram Stoker"
+    ],
+    "explanation": "\"Journey to the West\" was written by Wu Cheng'en."
+  },
+  "wd-book-Q188538": {
+    "prompt": "Who wrote \"The Master and Margarita\"?",
+    "answer": "Mikhail Bulgakov",
+    "accepted": [
+      "Mikhail Bulgakov",
+      "Bulgakov"
+    ],
+    "distractors": [
+      "Ovid",
+      "Oscar Wilde",
+      "E. B. White"
+    ],
+    "explanation": "\"The Master and Margarita\" was written by Mikhail Bulgakov."
+  },
+  "wd-book-Q191838": {
+    "prompt": "Who wrote \"The Count of Monte Cristo\"?",
+    "answer": "Alexandre Dumas",
+    "accepted": [
+      "Alexandre Dumas",
+      "Dumas"
+    ],
+    "distractors": [
+      "Fyodor Dostoevsky",
+      "Gabriel García Márquez",
+      "Aesop"
+    ],
+    "explanation": "\"The Count of Monte Cristo\" was written by Alexandre Dumas."
+  },
+  "wd-book-Q19871": {
+    "prompt": "Who wrote \"Waiting for Godot\"?",
+    "answer": "Samuel Beckett",
+    "accepted": [
+      "Samuel Beckett",
+      "Beckett"
+    ],
+    "distractors": [
+      "J. D. Salinger",
+      "Fyodor Dostoevsky",
+      "Leo Tolstoy"
+    ],
+    "explanation": "\"Waiting for Godot\" was written by Samuel Beckett."
+  },
+  "wd-book-Q1219561": {
+    "prompt": "Who wrote \"Around the World in Eighty Days\"?",
+    "answer": "Jules Verne",
+    "accepted": [
+      "Jules Verne",
+      "Verne"
+    ],
+    "distractors": [
+      "Oscar Wilde",
+      "Fyodor Dostoevsky",
+      "Hesiod"
+    ],
+    "explanation": "\"Around the World in Eighty Days\" was written by Jules Verne."
+  },
+  "wd-book-Q183565": {
+    "prompt": "Who wrote \"Twenty Thousand Leagues Under the Seas\"?",
+    "answer": "Jules Verne",
+    "accepted": [
+      "Jules Verne",
+      "Verne"
+    ],
+    "distractors": [
+      "Valmiki",
+      "Ovid",
+      "J. R. R. Tolkien"
+    ],
+    "explanation": "\"Twenty Thousand Leagues Under the Seas\" was written by Jules Verne."
+  },
+  "wd-book-Q184742": {
+    "prompt": "Who wrote \"Metamorphoses\"?",
+    "answer": "Ovid",
+    "accepted": [
+      "Ovid"
+    ],
+    "distractors": [
+      "Victor Hugo",
+      "Herman Melville",
+      "George Orwell"
+    ],
+    "explanation": "\"Metamorphoses\" was written by Ovid."
+  },
+  "wd-book-Q190192": {
+    "prompt": "Who wrote \"Dune\"?",
+    "answer": "Frank Herbert",
+    "accepted": [
+      "Frank Herbert",
+      "Herbert"
+    ],
+    "distractors": [
+      "Miguel de Cervantes",
+      "Samuel Beckett",
+      "Jonathan Swift"
+    ],
+    "explanation": "\"Dune\" was written by Frank Herbert."
+  },
+  "wd-book-Q191380": {
+    "prompt": "Who wrote \"The Hunchback of Notre-Dame\"?",
+    "answer": "Victor Hugo",
+    "accepted": [
+      "Victor Hugo",
+      "Hugo"
+    ],
+    "distractors": [
+      "Virgil",
+      "J. K. Rowling",
+      "Alexandre Dumas"
+    ],
+    "explanation": "\"The Hunchback of Notre-Dame\" was written by Victor Hugo."
+  },
+  "wd-book-Q326914": {
+    "prompt": "Who wrote \"The Adventures of Tom Sawyer\"?",
+    "answer": "Mark Twain",
+    "accepted": [
+      "Mark Twain",
+      "Twain"
+    ],
+    "distractors": [
+      "Hesiod",
+      "Valmiki",
+      "Fyodor Dostoevsky"
+    ],
+    "explanation": "\"The Adventures of Tom Sawyer\" was written by Mark Twain."
+  },
+  "wd-book-Q127149": {
+    "prompt": "Who wrote \"Lolita\"?",
+    "answer": "Vladimir Nabokov",
+    "accepted": [
+      "Vladimir Nabokov",
+      "Nabokov"
+    ],
+    "distractors": [
+      "Hans Christian Andersen",
+      "Plato",
+      "J. K. Rowling"
+    ],
+    "explanation": "\"Lolita\" was written by Vladimir Nabokov."
+  },
+  "wd-book-Q16438": {
+    "prompt": "Who wrote \"The Decameron\"?",
+    "answer": "Giovanni Boccaccio",
+    "accepted": [
+      "Giovanni Boccaccio",
+      "Boccaccio"
+    ],
+    "distractors": [
+      "Jane Austen",
+      "George Orwell",
+      "Harriet Beecher Stowe"
+    ],
+    "explanation": "\"The Decameron\" was written by Giovanni Boccaccio."
+  },
+  "wd-book-Q62879": {
+    "prompt": "Who wrote \"A Christmas Carol\"?",
+    "answer": "Charles Dickens",
+    "accepted": [
+      "Charles Dickens",
+      "Dickens"
+    ],
+    "distractors": [
+      "Geoffrey Chaucer",
+      "Cao Xueqin",
+      "Mark Twain"
+    ],
+    "explanation": "\"A Christmas Carol\" was written by Charles Dickens."
+  },
+  "wd-book-Q41542": {
+    "prompt": "Who wrote \"Dracula\"?",
+    "answer": "Bram Stoker",
+    "accepted": [
+      "Bram Stoker",
+      "Stoker"
+    ],
+    "distractors": [
+      "Luo Guanzhong",
+      "George Orwell",
+      "Alexandre Dumas"
+    ],
+    "explanation": "\"Dracula\" was written by Bram Stoker."
+  },
+  "wd-book-Q28754": {
+    "prompt": "Who wrote \"Paradise Lost\"?",
+    "answer": "John Milton",
+    "accepted": [
+      "John Milton",
+      "Milton"
+    ],
+    "distractors": [
+      "George Orwell",
+      "Gabriel García Márquez",
+      "Friedrich Nietzsche"
+    ],
+    "explanation": "\"Paradise Lost\" was written by John Milton."
+  },
+  "wd-book-Q193417": {
+    "prompt": "Who wrote \"Madame Bovary\"?",
+    "answer": "Gustave Flaubert",
+    "accepted": [
+      "Gustave Flaubert",
+      "Flaubert"
+    ],
+    "distractors": [
+      "Jonathan Swift",
+      "Dan Brown",
+      "E. B. White"
+    ],
+    "explanation": "\"Madame Bovary\" was written by Gustave Flaubert."
+  },
+  "wd-book-Q191949": {
+    "prompt": "Who wrote \"Brave New World\"?",
+    "answer": "Aldous Huxley",
+    "accepted": [
+      "Aldous Huxley",
+      "Huxley"
+    ],
+    "distractors": [
+      "Fyodor Dostoevsky",
+      "Robert Louis Stevenson",
+      "Plato"
+    ],
+    "explanation": "\"Brave New World\" was written by Aldous Huxley."
+  },
+  "wd-book-Q156498": {
+    "prompt": "Who wrote \"Theogony\"?",
+    "answer": "Hesiod",
+    "accepted": [
+      "Hesiod"
+    ],
+    "distractors": [
+      "John Milton",
+      "Jonathan Swift",
+      "Carlo Collodi"
+    ],
+    "explanation": "\"Theogony\" was written by Hesiod."
+  },
+  "wd-book-Q70806": {
+    "prompt": "Who wrote \"Romance of the Three Kingdoms\"?",
+    "answer": "Luo Guanzhong",
+    "accepted": [
+      "Luo Guanzhong",
+      "Guanzhong"
+    ],
+    "distractors": [
+      "James Joyce",
+      "Valmiki",
+      "Jonathan Swift"
+    ],
+    "explanation": "\"Romance of the Three Kingdoms\" was written by Luo Guanzhong."
+  },
+  "wd-book-Q36097": {
+    "prompt": "Who wrote \"The Trial\"?",
+    "answer": "Franz Kafka",
+    "accepted": [
+      "Franz Kafka",
+      "Kafka"
+    ],
+    "distractors": [
+      "Daniel Defoe",
+      "Virgil",
+      "Mary Shelley"
+    ],
+    "explanation": "\"The Trial\" was written by Franz Kafka."
+  },
+  "wd-book-Q22726": {
+    "prompt": "Who wrote \"The Raven\"?",
+    "answer": "Edgar Allan Poe",
+    "accepted": [
+      "Edgar Allan Poe",
+      "Poe"
+    ],
+    "distractors": [
+      "Gabriel García Márquez",
+      "Emily Brontë",
+      "Harriet Beecher Stowe"
+    ],
+    "explanation": "\"The Raven\" was written by Edgar Allan Poe."
+  },
+  "wd-book-Q215410": {
+    "prompt": "Who wrote \"Adventures of Huckleberry Finn\"?",
+    "answer": "Mark Twain",
+    "accepted": [
+      "Mark Twain",
+      "Twain"
+    ],
+    "distractors": [
+      "Alexandre Dumas",
+      "Gustave Flaubert",
+      "Emily Brontë"
+    ],
+    "explanation": "\"Adventures of Huckleberry Finn\" was written by Mark Twain."
+  },
+  "wd-book-Q865902": {
+    "prompt": "Who wrote \"Aesop's Fables\"?",
+    "answer": "Aesop",
+    "accepted": [
+      "Aesop"
+    ],
+    "distractors": [
+      "Oscar Wilde",
+      "Victor Hugo",
+      "F. Scott Fitzgerald"
+    ],
+    "explanation": "\"Aesop's Fables\" was written by Aesop."
+  },
+  "wd-book-Q2222": {
+    "prompt": "Who wrote \"Uncle Tom's Cabin\"?",
+    "answer": "Harriet Beecher Stowe",
+    "accepted": [
+      "Harriet Beecher Stowe",
+      "Beecher Stowe"
+    ],
+    "distractors": [
+      "Emily Brontë",
+      "Jules Verne",
+      "Gabriel García Márquez"
+    ],
+    "explanation": "\"Uncle Tom's Cabin\" was written by Harriet Beecher Stowe."
+  },
+  "wd-book-Q191663": {
+    "prompt": "Who wrote \"The Canterbury Tales\"?",
+    "answer": "Geoffrey Chaucer",
+    "accepted": [
+      "Geoffrey Chaucer",
+      "Chaucer"
+    ],
+    "distractors": [
+      "F. Scott Fitzgerald",
+      "J. R. R. Tolkien",
+      "Jules Verne"
+    ],
+    "explanation": "\"The Canterbury Tales\" was written by Geoffrey Chaucer."
+  },
+  "wd-book-work-Q25338": {
+    "prompt": "Which of these works was written by Antoine de Saint-Exupéry?",
+    "answer": "The Little Prince",
+    "accepted": [
+      "The Little Prince"
+    ],
+    "distractors": [
+      "Uncle Tom's Cabin",
+      "Ulysses",
+      "Around the World in Eighty Days"
+    ],
+    "explanation": "Antoine de Saint-Exupéry is the author of \"The Little Prince\"."
+  },
+  "wd-book-work-Q15228": {
+    "prompt": "Which of these works was written by J. R. R. Tolkien?",
+    "answer": "The Lord of the Rings",
+    "accepted": [
+      "The Lord of the Rings"
+    ],
+    "distractors": [
+      "Oliver Twist",
+      "The Alchemist",
+      "Aeneid"
+    ],
+    "explanation": "J. R. R. Tolkien is the author of \"The Lord of the Rings\"."
+  },
+  "wd-book-work-Q480": {
+    "prompt": "Which of these works was written by Miguel de Cervantes?",
+    "answer": "Don Quixote",
+    "accepted": [
+      "Don Quixote"
+    ],
+    "distractors": [
+      "Das Kapital",
+      "Dune",
+      "Les Misérables"
+    ],
+    "explanation": "Miguel de Cervantes is the author of \"Don Quixote\"."
+  },
+  "wd-book-work-Q208460": {
+    "prompt": "Which of these works was written by George Orwell?",
+    "answer": "Nineteen Eighty-Four",
+    "accepted": [
+      "Nineteen Eighty-Four",
+      "1984"
+    ],
+    "distractors": [
+      "Frankenstein; or, The Modern Prometheus",
+      "The Tale of Genji",
+      "Harry Potter and the Philosopher's Stone"
+    ],
+    "explanation": "George Orwell is the author of \"Nineteen Eighty-Four\"."
+  },
+  "wd-book-work-Q37293": {
+    "prompt": "Which of these works was written by Valmiki?",
+    "answer": "Ramayana",
+    "accepted": [
+      "Ramayana"
+    ],
+    "distractors": [
+      "The Little Mermaid",
+      "The Da Vinci Code",
+      "Moby-Dick"
+    ],
+    "explanation": "Valmiki is the author of \"Ramayana\"."
+  },
+  "wd-book-work-Q40185": {
+    "prompt": "Which of these works was written by Dante Alighieri?",
+    "answer": "The Divine Comedy",
+    "accepted": [
+      "The Divine Comedy"
+    ],
+    "distractors": [
+      "Don Quixote",
+      "The Trial",
+      "The Catcher in the Rye"
+    ],
+    "explanation": "Dante Alighieri is the author of \"The Divine Comedy\"."
+  },
+  "wd-book-work-Q92640": {
+    "prompt": "Which of these works was written by Lewis Carroll?",
+    "answer": "Alice's Adventures in Wonderland",
+    "accepted": [
+      "Alice's Adventures in Wonderland",
+      "Alice in Wonderland"
+    ],
+    "distractors": [
+      "Moby-Dick",
+      "The Prince",
+      "Gulliver's Travels"
+    ],
+    "explanation": "Lewis Carroll is the author of \"Alice's Adventures in Wonderland\"."
+  },
+  "wd-book-work-Q8265": {
+    "prompt": "Which of these works was written by Cao Xueqin?",
+    "answer": "Dream of the Red Chamber",
+    "accepted": [
+      "Dream of the Red Chamber"
+    ],
+    "distractors": [
+      "The Da Vinci Code",
+      "Oliver Twist",
+      "The Adventures of Pinocchio"
+    ],
+    "explanation": "Cao Xueqin is the author of \"Dream of the Red Chamber\"."
+  },
+  "wd-book-work-Q8269": {
+    "prompt": "Which of these works was written by Murasaki Shikibu?",
+    "answer": "The Tale of Genji",
+    "accepted": [
+      "The Tale of Genji"
+    ],
+    "distractors": [
+      "The Stranger",
+      "Dune",
+      "The Brothers Karamazov"
+    ],
+    "explanation": "Murasaki Shikibu is the author of \"The Tale of Genji\"."
+  },
+  "wd-book-work-Q60220": {
+    "prompt": "Which of these works was written by Virgil?",
+    "answer": "Aeneid",
+    "accepted": [
+      "Aeneid",
+      "The Aeneid"
+    ],
+    "distractors": [
+      "Twenty Thousand Leagues Under the Seas",
+      "Alice's Adventures in Wonderland",
+      "Das Kapital"
+    ],
+    "explanation": "Virgil is the author of \"Aeneid\"."
+  },
+  "wd-book-work-Q165318": {
+    "prompt": "Which of these works was written by Fyodor Dostoevsky?",
+    "answer": "Crime and Punishment",
+    "accepted": [
+      "Crime and Punishment"
+    ],
+    "distractors": [
+      "The Alchemist",
+      "Romance of the Three Kingdoms",
+      "Treasure Island"
+    ],
+    "explanation": "Fyodor Dostoevsky is the author of \"Crime and Punishment\"."
+  },
+  "wd-book-work-Q147787": {
+    "prompt": "Which of these works was written by Leo Tolstoy?",
+    "answer": "Anna Karenina",
+    "accepted": [
+      "Anna Karenina"
+    ],
+    "distractors": [
+      "Les Misérables",
+      "The Republic",
+      "The Little Prince"
+    ],
+    "explanation": "Leo Tolstoy is the author of \"Anna Karenina\"."
+  },
+  "wd-book-work-Q11859": {
+    "prompt": "Which of these works was written by Hans Christian Andersen?",
+    "answer": "The Little Mermaid",
+    "accepted": [
+      "The Little Mermaid"
+    ],
+    "distractors": [
+      "Wuthering Heights",
+      "The Hobbit",
+      "Adventures of Huckleberry Finn"
+    ],
+    "explanation": "Hans Christian Andersen is the author of \"The Little Mermaid\"."
+  },
+  "wd-book-work-Q43361": {
+    "prompt": "Which of these works was written by J. K. Rowling?",
+    "answer": "Harry Potter and the Philosopher's Stone",
+    "accepted": [
+      "Harry Potter and the Philosopher's Stone",
+      "Harry Potter and the Sorcerer's Stone"
+    ],
+    "distractors": [
+      "Anna Karenina",
+      "Aesop's Fables",
+      "The Brothers Karamazov"
+    ],
+    "explanation": "J. K. Rowling is the author of \"Harry Potter and the Philosopher's Stone\"."
+  },
+  "wd-book-work-Q123397": {
+    "prompt": "Which of these works was written by Plato?",
+    "answer": "The Republic",
+    "accepted": [
+      "The Republic",
+      "Republic"
+    ],
+    "distractors": [
+      "The Canterbury Tales",
+      "A Christmas Carol",
+      "War and Peace"
+    ],
+    "explanation": "Plato is the author of \"The Republic\"."
+  },
+  "wd-book-work-Q131719": {
+    "prompt": "Which of these works was written by Niccolò Machiavelli?",
+    "answer": "The Prince",
+    "accepted": [
+      "The Prince"
+    ],
+    "distractors": [
+      "The Alchemist",
+      "Robinson Crusoe",
+      "Harry Potter and the Philosopher's Stone"
+    ],
+    "explanation": "Niccolò Machiavelli is the author of \"The Prince\"."
+  },
+  "wd-book-work-Q178869": {
+    "prompt": "Which of these works was written by Gabriel García Márquez?",
+    "answer": "One Hundred Years of Solitude",
+    "accepted": [
+      "One Hundred Years of Solitude"
+    ],
+    "distractors": [
+      "Tao Te Ching",
+      "The Republic",
+      "The Little Mermaid"
+    ],
+    "explanation": "Gabriel García Márquez is the author of \"One Hundred Years of Solitude\"."
+  },
+  "wd-book-work-Q170583": {
+    "prompt": "Which of these works was written by Jane Austen?",
+    "answer": "Pride and Prejudice",
+    "accepted": [
+      "Pride and Prejudice"
+    ],
+    "distractors": [
+      "Harry Potter and the Philosopher's Stone",
+      "The Prince",
+      "The Hobbit"
+    ],
+    "explanation": "Jane Austen is the author of \"Pride and Prejudice\"."
+  },
+  "wd-book-work-Q483034": {
+    "prompt": "Which of these works was written by Daniel Defoe?",
+    "answer": "Robinson Crusoe",
+    "accepted": [
+      "Robinson Crusoe"
+    ],
+    "distractors": [
+      "The Great Gatsby",
+      "The Picture of Dorian Gray",
+      "Pride and Prejudice"
+    ],
+    "explanation": "Daniel Defoe is the author of \"Robinson Crusoe\"."
+  },
+  "wd-book-work-Q180736": {
+    "prompt": "Which of these works was written by Victor Hugo?",
+    "answer": "Les Misérables",
+    "accepted": [
+      "Les Misérables",
+      "Les Miserables"
+    ],
+    "distractors": [
+      "The Little Mermaid",
+      "Robinson Crusoe",
+      "The Trial"
+    ],
+    "explanation": "Victor Hugo is the author of \"Les Misérables\"."
+  },
+  "wd-book-work-Q134425": {
+    "prompt": "Which of these works was written by Laozi?",
+    "answer": "Tao Te Ching",
+    "accepted": [
+      "Tao Te Ching",
+      "Dao De Jing"
+    ],
+    "distractors": [
+      "The Republic",
+      "Ulysses",
+      "Romance of the Three Kingdoms"
+    ],
+    "explanation": "Laozi is the author of \"Tao Te Ching\"."
+  },
+  "wd-book-work-Q26505": {
+    "prompt": "Which of these works was written by Ernest Hemingway?",
+    "answer": "The Old Man and the Sea",
+    "accepted": [
+      "The Old Man and the Sea"
+    ],
+    "distractors": [
+      "Adventures of Huckleberry Finn",
+      "The Catcher in the Rye",
+      "Twenty Thousand Leagues Under the Seas"
+    ],
+    "explanation": "Ernest Hemingway is the author of \"The Old Man and the Sea\"."
+  },
+  "wd-book-work-Q179021": {
+    "prompt": "Which of these works was written by Paulo Coelho?",
+    "answer": "The Alchemist",
+    "accepted": [
+      "The Alchemist"
+    ],
+    "distractors": [
+      "The Divine Comedy",
+      "Anna Karenina",
+      "The Brothers Karamazov"
+    ],
+    "explanation": "Paulo Coelho is the author of \"The Alchemist\"."
+  },
+  "wd-book-work-Q58784": {
+    "prompt": "Which of these works was written by Karl Marx?",
+    "answer": "Das Kapital",
+    "accepted": [
+      "Das Kapital",
+      "Capital"
+    ],
+    "distractors": [
+      "The Alchemist",
+      "The Little Mermaid",
+      "The Three Musketeers"
+    ],
+    "explanation": "Karl Marx is the author of \"Das Kapital\"."
+  },
+  "wd-book-work-Q174596": {
+    "prompt": "Which of these works was written by Herman Melville?",
+    "answer": "Moby-Dick",
+    "accepted": [
+      "Moby-Dick",
+      "Moby Dick"
+    ],
+    "distractors": [
+      "Wuthering Heights",
+      "The Metamorphosis",
+      "Dune"
+    ],
+    "explanation": "Herman Melville is the author of \"Moby-Dick\"."
+  },
+  "wd-book-work-Q140527": {
+    "prompt": "Which of these works was written by Alexandre Dumas?",
+    "answer": "The Three Musketeers",
+    "accepted": [
+      "The Three Musketeers"
+    ],
+    "distractors": [
+      "Anna Karenina",
+      "Tao Te Ching",
+      "Around the World in Eighty Days"
+    ],
+    "explanation": "Alexandre Dumas is the author of \"The Three Musketeers\"."
+  },
+  "wd-book-work-Q150827": {
+    "prompt": "Which of these works was written by Mary Shelley?",
+    "answer": "Frankenstein; or, The Modern Prometheus",
+    "accepted": [
+      "Frankenstein; or, The Modern Prometheus",
+      "Frankenstein"
+    ],
+    "distractors": [
+      "The Divine Comedy",
+      "Charlotte's Web",
+      "The Count of Monte Cristo"
+    ],
+    "explanation": "Mary Shelley is the author of \"Frankenstein; or, The Modern Prometheus\"."
+  },
+  "wd-book-work-Q29478": {
+    "prompt": "Which of these works was written by Johann Wolfgang von Goethe?",
+    "answer": "Faust",
+    "accepted": [
+      "Faust"
+    ],
+    "distractors": [
+      "The Trial",
+      "Treasure Island",
+      "The Tale of Genji"
+    ],
+    "explanation": "Johann Wolfgang von Goethe is the author of \"Faust\"."
+  },
+  "wd-book-work-Q81689": {
+    "prompt": "Which of these works was written by Dan Brown?",
+    "answer": "The Da Vinci Code",
+    "accepted": [
+      "The Da Vinci Code"
+    ],
+    "distractors": [
+      "Frankenstein; or, The Modern Prometheus",
+      "Adventures of Huckleberry Finn",
+      "The Canterbury Tales"
+    ],
+    "explanation": "Dan Brown is the author of \"The Da Vinci Code\"."
+  },
+  "wd-book-work-Q183883": {
+    "prompt": "Which of these works was written by J. D. Salinger?",
+    "answer": "The Catcher in the Rye",
+    "accepted": [
+      "The Catcher in the Rye"
+    ],
+    "distractors": [
+      "Theogony",
+      "The Republic",
+      "Aeneid"
+    ],
+    "explanation": "J. D. Salinger is the author of \"The Catcher in the Rye\"."
+  },
+  "wd-book-work-Q185118": {
+    "prompt": "Which of these works was written by Robert Louis Stevenson?",
+    "answer": "Treasure Island",
+    "accepted": [
+      "Treasure Island"
+    ],
+    "distractors": [
+      "The Hobbit",
+      "The Master and Margarita",
+      "Les Misérables"
+    ],
+    "explanation": "Robert Louis Stevenson is the author of \"Treasure Island\"."
+  },
+  "wd-book-work-Q181488": {
+    "prompt": "Which of these works was written by Jonathan Swift?",
+    "answer": "Gulliver's Travels",
+    "accepted": [
+      "Gulliver's Travels"
+    ],
+    "distractors": [
+      "The Trial",
+      "Crime and Punishment",
+      "Alice's Adventures in Wonderland"
+    ],
+    "explanation": "Jonathan Swift is the author of \"Gulliver's Travels\"."
+  },
+  "wd-book-work-Q163297": {
+    "prompt": "Which of these works was written by Albert Camus?",
+    "answer": "The Stranger",
+    "accepted": [
+      "The Stranger",
+      "The Outsider"
+    ],
+    "distractors": [
+      "The Master and Margarita",
+      "Metamorphoses",
+      "Waiting for Godot"
+    ],
+    "explanation": "Albert Camus is the author of \"The Stranger\"."
+  },
+  "wd-book-work-Q6511": {
+    "prompt": "Which of these works was written by James Joyce?",
+    "answer": "Ulysses",
+    "accepted": [
+      "Ulysses"
+    ],
+    "distractors": [
+      "Crime and Punishment",
+      "The Prince",
+      "Dracula"
+    ],
+    "explanation": "James Joyce is the author of \"Ulysses\"."
+  },
+  "wd-book-work-Q184222": {
+    "prompt": "Which of these works was written by Franz Kafka?",
+    "answer": "The Metamorphosis",
+    "accepted": [
+      "The Metamorphosis"
+    ],
+    "distractors": [
+      "Harry Potter and the Philosopher's Stone",
+      "The Adventures of Tom Sawyer",
+      "The Alchemist"
+    ],
+    "explanation": "Franz Kafka is the author of \"The Metamorphosis\"."
+  },
+  "wd-book-work-Q214371": {
+    "prompt": "Which of these works was written by F. Scott Fitzgerald?",
+    "answer": "The Great Gatsby",
+    "accepted": [
+      "The Great Gatsby"
+    ],
+    "distractors": [
+      "Harry Potter and the Chamber of Secrets",
+      "The Adventures of Pinocchio",
+      "Aesop's Fables"
+    ],
+    "explanation": "F. Scott Fitzgerald is the author of \"The Great Gatsby\"."
+  },
+  "wd-book-work-Q8065468": {
+    "prompt": "Which of these works was written by Carlo Collodi?",
+    "answer": "The Adventures of Pinocchio",
+    "accepted": [
+      "The Adventures of Pinocchio",
+      "Pinocchio"
+    ],
+    "distractors": [
+      "One Hundred Years of Solitude",
+      "The Hunchback of Notre-Dame",
+      "Oliver Twist"
+    ],
+    "explanation": "Carlo Collodi is the author of \"The Adventures of Pinocchio\"."
+  },
+  "wd-book-work-Q45735": {
+    "prompt": "Which of these works was written by E. B. White?",
+    "answer": "Charlotte's Web",
+    "accepted": [
+      "Charlotte's Web"
+    ],
+    "distractors": [
+      "Nineteen Eighty-Four",
+      "Adventures of Huckleberry Finn",
+      "Moby-Dick"
+    ],
+    "explanation": "E. B. White is the author of \"Charlotte's Web\"."
+  },
+  "wd-book-work-Q164974": {
+    "prompt": "Which of these works was written by Charles Dickens?",
+    "answer": "Oliver Twist",
+    "accepted": [
+      "Oliver Twist"
+    ],
+    "distractors": [
+      "Paradise Lost",
+      "The Old Man and the Sea",
+      "Madame Bovary"
+    ],
+    "explanation": "Charles Dickens is the author of \"Oliver Twist\"."
+  },
+  "wd-book-work-Q82464": {
+    "prompt": "Which of these works was written by Oscar Wilde?",
+    "answer": "The Picture of Dorian Gray",
+    "accepted": [
+      "The Picture of Dorian Gray"
+    ],
+    "distractors": [
+      "The Raven",
+      "The Adventures of Tom Sawyer",
+      "Brave New World"
+    ],
+    "explanation": "Oscar Wilde is the author of \"The Picture of Dorian Gray\"."
+  },
+  "wd-book-work-Q6911": {
+    "prompt": "Which of these works was written by Anne Frank?",
+    "answer": "The Diary of a Young Girl",
+    "accepted": [
+      "The Diary of a Young Girl",
+      "The Diary of Anne Frank"
+    ],
+    "distractors": [
+      "Moby-Dick",
+      "The Da Vinci Code",
+      "The Three Musketeers"
+    ],
+    "explanation": "Anne Frank is the author of \"The Diary of a Young Girl\"."
+  },
+  "wd-book-work-Q199774": {
+    "prompt": "Which of these works was written by Friedrich Nietzsche?",
+    "answer": "Thus Spoke Zarathustra",
+    "accepted": [
+      "Thus Spoke Zarathustra"
+    ],
+    "distractors": [
+      "Tao Te Ching",
+      "Waiting for Godot",
+      "The Picture of Dorian Gray"
+    ],
+    "explanation": "Friedrich Nietzsche is the author of \"Thus Spoke Zarathustra\"."
+  },
+  "wd-book-work-Q202975": {
+    "prompt": "Which of these works was written by Emily Brontë?",
+    "answer": "Wuthering Heights",
+    "accepted": [
+      "Wuthering Heights"
+    ],
+    "distractors": [
+      "Around the World in Eighty Days",
+      "Romance of the Three Kingdoms",
+      "Charlotte's Web"
+    ],
+    "explanation": "Emily Brontë is the author of \"Wuthering Heights\"."
+  },
+  "wd-book-work-Q70784": {
+    "prompt": "Which of these works was written by Wu Cheng'en?",
+    "answer": "Journey to the West",
+    "accepted": [
+      "Journey to the West"
+    ],
+    "distractors": [
+      "The Trial",
+      "Metamorphoses",
+      "A Christmas Carol"
+    ],
+    "explanation": "Wu Cheng'en is the author of \"Journey to the West\"."
+  },
+  "wd-book-work-Q188538": {
+    "prompt": "Which of these works was written by Mikhail Bulgakov?",
+    "answer": "The Master and Margarita",
+    "accepted": [
+      "The Master and Margarita"
+    ],
+    "distractors": [
+      "Romance of the Three Kingdoms",
+      "Madame Bovary",
+      "The Adventures of Tom Sawyer"
+    ],
+    "explanation": "Mikhail Bulgakov is the author of \"The Master and Margarita\"."
+  },
+  "wd-book-work-Q19871": {
+    "prompt": "Which of these works was written by Samuel Beckett?",
+    "answer": "Waiting for Godot",
+    "accepted": [
+      "Waiting for Godot"
+    ],
+    "distractors": [
+      "The Hunchback of Notre-Dame",
+      "Brave New World",
+      "Metamorphoses"
+    ],
+    "explanation": "Samuel Beckett is the author of \"Waiting for Godot\"."
+  },
+  "wd-book-work-Q1219561": {
+    "prompt": "Which of these works was written by Jules Verne?",
+    "answer": "Around the World in Eighty Days",
+    "accepted": [
+      "Around the World in Eighty Days"
+    ],
+    "distractors": [
+      "The Adventures of Tom Sawyer",
+      "The Decameron",
+      "The Picture of Dorian Gray"
+    ],
+    "explanation": "Jules Verne is the author of \"Around the World in Eighty Days\"."
+  },
+  "wd-book-work-Q184742": {
+    "prompt": "Which of these works was written by Ovid?",
+    "answer": "Metamorphoses",
+    "accepted": [
+      "Metamorphoses"
+    ],
+    "distractors": [
+      "Dracula",
+      "The Old Man and the Sea",
+      "The Alchemist"
+    ],
+    "explanation": "Ovid is the author of \"Metamorphoses\"."
+  },
+  "wd-book-work-Q190192": {
+    "prompt": "Which of these works was written by Frank Herbert?",
+    "answer": "Dune",
+    "accepted": [
+      "Dune"
+    ],
+    "distractors": [
+      "Harry Potter and the Philosopher's Stone",
+      "Theogony",
+      "Thus Spoke Zarathustra"
+    ],
+    "explanation": "Frank Herbert is the author of \"Dune\"."
+  },
+  "wd-book-work-Q326914": {
+    "prompt": "Which of these works was written by Mark Twain?",
+    "answer": "The Adventures of Tom Sawyer",
+    "accepted": [
+      "The Adventures of Tom Sawyer"
+    ],
+    "distractors": [
+      "The Three Musketeers",
+      "The Catcher in the Rye",
+      "The Republic"
+    ],
+    "explanation": "Mark Twain is the author of \"The Adventures of Tom Sawyer\"."
+  },
+  "wd-book-work-Q127149": {
+    "prompt": "Which of these works was written by Vladimir Nabokov?",
+    "answer": "Lolita",
+    "accepted": [
+      "Lolita"
+    ],
+    "distractors": [
+      "The Little Prince",
+      "Romance of the Three Kingdoms",
+      "Robinson Crusoe"
+    ],
+    "explanation": "Vladimir Nabokov is the author of \"Lolita\"."
+  },
+  "wd-book-work-Q16438": {
+    "prompt": "Which of these works was written by Giovanni Boccaccio?",
+    "answer": "The Decameron",
+    "accepted": [
+      "The Decameron",
+      "Decameron"
+    ],
+    "distractors": [
+      "The Adventures of Tom Sawyer",
+      "Waiting for Godot",
+      "The Da Vinci Code"
+    ],
+    "explanation": "Giovanni Boccaccio is the author of \"The Decameron\"."
+  },
+  "wd-book-work-Q41542": {
+    "prompt": "Which of these works was written by Bram Stoker?",
+    "answer": "Dracula",
+    "accepted": [
+      "Dracula"
+    ],
+    "distractors": [
+      "Das Kapital",
+      "Waiting for Godot",
+      "The Diary of a Young Girl"
+    ],
+    "explanation": "Bram Stoker is the author of \"Dracula\"."
+  },
+  "wd-book-work-Q28754": {
+    "prompt": "Which of these works was written by John Milton?",
+    "answer": "Paradise Lost",
+    "accepted": [
+      "Paradise Lost"
+    ],
+    "distractors": [
+      "Twenty Thousand Leagues Under the Seas",
+      "The Divine Comedy",
+      "Harry Potter and the Chamber of Secrets"
+    ],
+    "explanation": "John Milton is the author of \"Paradise Lost\"."
+  },
+  "wd-book-work-Q193417": {
+    "prompt": "Which of these works was written by Gustave Flaubert?",
+    "answer": "Madame Bovary",
+    "accepted": [
+      "Madame Bovary"
+    ],
+    "distractors": [
+      "Gulliver's Travels",
+      "The Lord of the Rings",
+      "Aesop's Fables"
+    ],
+    "explanation": "Gustave Flaubert is the author of \"Madame Bovary\"."
+  },
+  "wd-book-work-Q191949": {
+    "prompt": "Which of these works was written by Aldous Huxley?",
+    "answer": "Brave New World",
+    "accepted": [
+      "Brave New World"
+    ],
+    "distractors": [
+      "Dream of the Red Chamber",
+      "Alice's Adventures in Wonderland",
+      "The Little Prince"
+    ],
+    "explanation": "Aldous Huxley is the author of \"Brave New World\"."
+  },
+  "wd-book-work-Q156498": {
+    "prompt": "Which of these works was written by Hesiod?",
+    "answer": "Theogony",
+    "accepted": [
+      "Theogony"
+    ],
+    "distractors": [
+      "Oliver Twist",
+      "Twenty Thousand Leagues Under the Seas",
+      "Aeneid"
+    ],
+    "explanation": "Hesiod is the author of \"Theogony\"."
+  },
+  "wd-book-work-Q70806": {
+    "prompt": "Which of these works was written by Luo Guanzhong?",
+    "answer": "Romance of the Three Kingdoms",
+    "accepted": [
+      "Romance of the Three Kingdoms",
+      "Three Kingdoms"
+    ],
+    "distractors": [
+      "The Picture of Dorian Gray",
+      "The Stranger",
+      "Aeneid"
+    ],
+    "explanation": "Luo Guanzhong is the author of \"Romance of the Three Kingdoms\"."
+  },
+  "wd-book-work-Q22726": {
+    "prompt": "Which of these works was written by Edgar Allan Poe?",
+    "answer": "The Raven",
+    "accepted": [
+      "The Raven"
+    ],
+    "distractors": [
+      "Twenty Thousand Leagues Under the Seas",
+      "Thus Spoke Zarathustra",
+      "Aeneid"
+    ],
+    "explanation": "Edgar Allan Poe is the author of \"The Raven\"."
+  },
+  "wd-book-work-Q865902": {
+    "prompt": "Which of these works was written by Aesop?",
+    "answer": "Aesop's Fables",
+    "accepted": [
+      "Aesop's Fables"
+    ],
+    "distractors": [
+      "Metamorphoses",
+      "Waiting for Godot",
+      "The Little Prince"
+    ],
+    "explanation": "Aesop is the author of \"Aesop's Fables\"."
+  },
+  "wd-book-work-Q2222": {
+    "prompt": "Which of these works was written by Harriet Beecher Stowe?",
+    "answer": "Uncle Tom's Cabin",
+    "accepted": [
+      "Uncle Tom's Cabin"
+    ],
+    "distractors": [
+      "The Diary of a Young Girl",
+      "Brave New World",
+      "Das Kapital"
+    ],
+    "explanation": "Harriet Beecher Stowe is the author of \"Uncle Tom's Cabin\"."
+  },
+  "wd-book-work-Q191663": {
+    "prompt": "Which of these works was written by Geoffrey Chaucer?",
+    "answer": "The Canterbury Tales",
+    "accepted": [
+      "The Canterbury Tales"
+    ],
+    "distractors": [
+      "War and Peace",
+      "The Divine Comedy",
+      "The Raven"
+    ],
+    "explanation": "Geoffrey Chaucer is the author of \"The Canterbury Tales\"."
+  }
+}

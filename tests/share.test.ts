@@ -43,7 +43,7 @@ describe('GET /api/share', () => {
     expect(body).toContain(
       '<meta property="og:description" content="Ответь верно — получи попытку. Забей точнее — выиграй матч. Сегодня у всех один набор вопросов.">',
     );
-    expect(body).toContain(`<meta property="og:image" content="https://web.example/api/share/card.png?o=${outcome}&amp;p=100&amp;q=73&amp;n=Rakhat">`);
+    expect(body).toContain(`<meta property="og:image" content="https://web.example/api/share/card.png?o=${outcome}&amp;p=100&amp;q=73&amp;n=Rakhat&amp;l=ru">`);
     expect(body).toContain('<meta property="og:image:width" content="1200">');
     expect(body).toContain('<meta property="og:image:height" content="630">');
     expect(body).toContain('<meta name="twitter:card" content="summary_large_image">');
@@ -69,7 +69,7 @@ describe('GET /api/share', () => {
 
   it('uses PUBLIC_WEB_ORIGIN for the image when configured', async () => {
     const { body } = await get('?o=win&p=1&q=0', { PUBLIC_WEB_ORIGIN: 'https://cdn.example/' });
-    expect(body).toContain('content="https://cdn.example/api/share/card.png?o=win&amp;p=1&amp;q=0"');
+    expect(body).toContain('content="https://cdn.example/api/share/card.png?o=win&amp;p=1&amp;q=0&amp;l=ru"');
   });
 
   it('redirects only to the configured link, never to a query value', async () => {
@@ -116,7 +116,7 @@ describe('GET /api/share/card.png', () => {
     expect(response.headers.get('content-type')).toBe('image/png');
     expect(response.headers.get('cache-control')).toBe('public, max-age=31536000, immutable');
     expect(new Uint8Array(await response.arrayBuffer())).toEqual(PNG);
-    expect(renderMock).toHaveBeenCalledWith({ outcome, p: 100, q: 73, name: 'Alex' });
+    expect(renderMock).toHaveBeenCalledWith({ outcome, p: 100, q: 73, name: 'Alex', locale: 'ru' });
   });
 
   it('passes a null name when n is absent or blank', async () => {
@@ -157,5 +157,38 @@ describe('GET /api/share/card.png', () => {
     renderMock.mockRejectedValue(new Error('wasm failed'));
     const response = await card('?o=tie&p=5&q=5', { PUBLIC_WEB_ORIGIN: 'https://cdn.example/' });
     expect(response.headers.get('location')).toBe('https://cdn.example/share/tie.png');
+  });
+});
+
+describe('localized /api/share (l=ru|en|kk)', () => {
+  it.each([
+    ['en', 'win', 'Beat Rakhat: 100% vs 73%', 'Open in Telegram'],
+    ['en', 'tie', 'Tie with Rakhat: 100:73', 'Open in Telegram'],
+    ['kk', 'win', 'Rakhat ойыншысын ұттым: 100% қарсы 73%', 'Telegram-да ашу'],
+    ['kk', 'loss', 'Rakhat ойыншысына жеңілдім: 100% қарсы 73%', 'Telegram-да ашу'],
+  ])('renders the %s page for %s', async (locale, outcome, title, button) => {
+    const { body } = await get(`?o=${outcome}&p=100&q=73&n=Rakhat&l=${locale}`);
+    expect(body).toContain(`<html lang="${locale}">`);
+    expect(body).toContain(`<title>${title}</title>`);
+    expect(body).toContain(button);
+    expect(body).toContain(`card.png?o=${outcome}&amp;p=100&amp;q=73&amp;n=Rakhat&amp;l=${locale}"`);
+  });
+
+  it('uses the dark palette and the yellow 3D button', async () => {
+    const { body } = await get('?o=win&p=1&q=0&l=kk');
+    expect(body).toContain('#2b2270');
+    expect(body).toContain('background:#ffc94d');
+    expect(body).not.toMatch(/#f3f0e8|#f04a3e|#f5c518|background:#111/iu);
+  });
+
+  it('passes the language to the card and falls back to the localized static image', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    renderMock.mockReset();
+    renderMock.mockRejectedValue(new Error('font failed'));
+    const response = await app.request('https://web.example/api/share/card.png?o=win&p=9&q=1&l=kk', {}, env());
+    expect(renderMock).toHaveBeenCalledWith({ outcome: 'win', p: 9, q: 1, name: null, locale: 'kk' });
+    expect(response.headers.get('location')).toBe('https://web.example/share/win.kk.png');
+    const en = await app.request('https://web.example/api/share/card.png?o=tie&p=5&q=5&l=en', {}, env());
+    expect(en.headers.get('location')).toBe('https://web.example/share/tie.en.png');
   });
 });

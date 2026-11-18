@@ -4,6 +4,8 @@ export type HistoricFlagPool = 'historic' | 'kz_city' | 'us_state';
 
 export interface HistoricFlag {
   id: string;
+  /** Только у «Других флагов» из инвентаря: ключ переводов названия. */
+  inventoryId?: string;
   labelRu: string;
   era: string;
   file?: string;

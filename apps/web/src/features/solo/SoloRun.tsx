@@ -1,3 +1,5 @@
+import { useMessages } from "../../i18n/messages";
+import { m } from "./messages";
 import { useEffect, useState } from "react";
 import type { CategoryId, PracticeLevel, SoloMode } from "@clutch/shared";
 import { CategorySelect } from "./CategorySelect";
@@ -28,7 +30,8 @@ export function toSoloCategory(id: string): CategoryId {
 export function SoloRunScreen(props: SoloRunScreenProps) {
   const { state } = props;
   const view = soloFlowView(state);
-  const eyebrow = props.practice ? "Тренировка" : "Соло-забег";
+  const t = useMessages(m);
+  const eyebrow = props.practice ? t.training : t.soloRun;
   const onBack = props.onExit ?? props.onBackToCategories;
 
   if (state.stage === "categories") {
@@ -78,6 +81,8 @@ interface SoloRunProps {
   onPlayMode?: (mode: SoloMode, category: CategoryId) => void;
   /** Разобрать ошибки забега в тренировке. */
   onPracticeMistakes?: () => void;
+  /** Открыть клан с экрана итога. */
+  onClan?: () => void;
 }
 
 export function SoloRun({
@@ -91,6 +96,7 @@ export function SoloRun({
   mode = "daily",
   onPlayMode,
   onPracticeMistakes,
+  onClan,
 }: SoloRunProps) {
   const run = useSoloRun(practice?.id, mode, groupChallenge?.challengeId);
   const { stage } = run.state;
@@ -157,6 +163,7 @@ export function SoloRun({
       reportState={reportState}
       onPlayMode={onPlayMode}
       onPracticeMistakes={onPracticeMistakes}
+      onClan={onClan}
     />
   );
 }

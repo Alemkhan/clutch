@@ -1,0 +1,676 @@
+{
+  "au-world-1wn35e0": {
+    "prompt": "What is the highest mountain in the world?",
+    "answer": "Everest",
+    "accepted": [
+      "Everest",
+      "Mount Everest",
+      "Chomolungma",
+      "Qomolangma"
+    ],
+    "distractors": [
+      "K2",
+      "Kilimanjaro",
+      "Elbrus"
+    ]
+  },
+  "au-world-1qmizat": {
+    "prompt": "Which ocean is the largest?",
+    "answer": "Pacific",
+    "accepted": [
+      "Pacific",
+      "Pacific Ocean"
+    ],
+    "distractors": [
+      "Atlantic",
+      "Indian",
+      "Arctic"
+    ]
+  },
+  "au-world-1q4ryk6": {
+    "prompt": "Which country is the largest by area?",
+    "answer": "Russia",
+    "accepted": [
+      "Russia"
+    ],
+    "distractors": [
+      "Canada",
+      "China",
+      "USA"
+    ]
+  },
+  "au-world-1yl8ufh": {
+    "prompt": "Which lake is the deepest in the world?",
+    "answer": "Baikal",
+    "accepted": [
+      "Baikal",
+      "Lake Baikal",
+      "Baykal"
+    ],
+    "distractors": [
+      "Tanganyika",
+      "Caspian Sea",
+      "Victoria"
+    ]
+  },
+  "au-world-1c7gzfh": {
+    "prompt": "Which island is the largest in the world?",
+    "answer": "Greenland",
+    "accepted": [
+      "Greenland"
+    ],
+    "distractors": [
+      "Madagascar",
+      "New Guinea",
+      "Borneo"
+    ],
+    "explanation": "Australia is considered a continent."
+  },
+  "au-world-ohmxox": {
+    "prompt": "What is the largest hot desert in the world?",
+    "answer": "Sahara",
+    "accepted": [
+      "Sahara",
+      "Sahara Desert"
+    ],
+    "distractors": [
+      "Gobi",
+      "Arabian",
+      "Kalahari"
+    ],
+    "explanation": "Counting cold deserts, the largest is Antarctica."
+  },
+  "au-world-g1xbqc": {
+    "prompt": "What is the name of the highest waterfall in the world?",
+    "answer": "Angel Falls",
+    "accepted": [
+      "Angel Falls",
+      "Angel",
+      "Kerepakupai Merú"
+    ],
+    "distractors": [
+      "Victoria",
+      "Niagara",
+      "Iguazu"
+    ]
+  },
+  "au-world-b8oy8z": {
+    "prompt": "What is the name of the tallest building in the world?",
+    "answer": "Burj Khalifa",
+    "accepted": [
+      "Burj Khalifa",
+      "Burj Dubai"
+    ],
+    "distractors": [
+      "Shanghai Tower",
+      "Abraj Al-Bait",
+      "Lakhta Center"
+    ]
+  },
+  "au-world-1b97dlg": {
+    "prompt": "Which sea is actually the world's largest lake?",
+    "answer": "Caspian",
+    "accepted": [
+      "Caspian",
+      "Caspian Sea"
+    ],
+    "distractors": [
+      "Aral",
+      "Dead",
+      "Black"
+    ]
+  },
+  "au-world-141swwl": {
+    "prompt": "Which village in Yakutia is considered the Pole of Cold of the Northern Hemisphere?",
+    "answer": "Oymyakon",
+    "accepted": [
+      "Oymyakon",
+      "Oimyakon"
+    ],
+    "distractors": [
+      "Verkhoyansk",
+      "Norilsk",
+      "Yakutsk"
+    ]
+  },
+  "au-world-1gihzoc": {
+    "prompt": "What is the longest mountain range on land?",
+    "answer": "Andes",
+    "accepted": [
+      "Andes",
+      "The Andes",
+      "Andes Mountains"
+    ],
+    "distractors": [
+      "Himalayas",
+      "Rocky Mountains",
+      "Ural Mountains"
+    ]
+  },
+  "q-world-1mcd8ua": {
+    "prompt": "Which country is the immediate northern neighbour of the USA?",
+    "answer": "Canada",
+    "accepted": [
+      "Canada"
+    ],
+    "distractors": [
+      "Mexico",
+      "Greenland",
+      "Bahamas"
+    ],
+    "explanation": "Canada borders the USA to the north."
+  },
+  "q-world-gwfmzm": {
+    "prompt": "In which European capital is the Eiffel Tower?",
+    "answer": "Paris",
+    "accepted": [
+      "Paris"
+    ],
+    "distractors": [
+      "London",
+      "Berlin",
+      "Rome"
+    ],
+    "explanation": "The Eiffel Tower is in Paris, France."
+  },
+  "q-world-rosr88": {
+    "prompt": "Which city is the capital of the United Kingdom?",
+    "answer": "London",
+    "accepted": [
+      "London"
+    ],
+    "distractors": [
+      "Dublin",
+      "Edinburgh",
+      "Cardiff"
+    ],
+    "explanation": "London is the capital of the United Kingdom."
+  },
+  "q-world-17j62g": {
+    "prompt": "Denver is the capital of which US state?",
+    "answer": "Colorado",
+    "accepted": [
+      "Colorado"
+    ],
+    "distractors": [
+      "Texas",
+      "Utah",
+      "Arizona"
+    ],
+    "explanation": "Denver is the capital of the state of Colorado."
+  },
+  "q-world-ye06rt": {
+    "prompt": "Which state is recognized as the smallest in the world by area?",
+    "answer": "Vatican City",
+    "accepted": [
+      "Vatican City",
+      "Vatican",
+      "Holy See"
+    ],
+    "distractors": [
+      "Monaco",
+      "San Marino",
+      "Liechtenstein"
+    ],
+    "explanation": "Vatican City is a microstate enclave within Rome."
+  },
+  "q-world-12cmchx": {
+    "prompt": "Which ocean washes the east coast of the USA?",
+    "answer": "Atlantic",
+    "accepted": [
+      "Atlantic",
+      "Atlantic Ocean"
+    ],
+    "distractors": [
+      "Pacific",
+      "Indian",
+      "Arctic"
+    ],
+    "explanation": "The eastern US states face the Atlantic Ocean."
+  },
+  "q-world-19beql4": {
+    "prompt": "On which continent is Germany?",
+    "answer": "Europe",
+    "accepted": [
+      "Europe"
+    ],
+    "distractors": [
+      "Asia",
+      "America",
+      "Africa"
+    ],
+    "explanation": "Germany is in Central Europe."
+  },
+  "q-world-3if8je": {
+    "prompt": "Which mountain system is considered the longest continental range in the world?",
+    "answer": "Andes",
+    "accepted": [
+      "Andes",
+      "The Andes",
+      "Andean Cordillera"
+    ],
+    "distractors": [
+      "Himalayas",
+      "Cordillera",
+      "Alps"
+    ],
+    "explanation": "The Andes stretch along the west coast of South America."
+  },
+  "q-world-1ix2mhh": {
+    "prompt": "Dutch, French and German are the official languages of which European country?",
+    "answer": "Belgium",
+    "accepted": [
+      "Belgium"
+    ],
+    "distractors": [
+      "Switzerland",
+      "Luxembourg",
+      "Netherlands"
+    ],
+    "explanation": "Belgium is divided into three language communities."
+  },
+  "q-world-15uug46": {
+    "prompt": "Which Asian country has the largest wild tiger population?",
+    "answer": "India",
+    "accepted": [
+      "India"
+    ],
+    "distractors": [
+      "China",
+      "Thailand",
+      "Indonesia"
+    ],
+    "explanation": "India is home to the largest number of tigers in the world."
+  },
+  "q-world-16qvck": {
+    "prompt": "Which major city is the largest in the western US state of California?",
+    "answer": "Los Angeles",
+    "accepted": [
+      "Los Angeles",
+      "LA",
+      "L.A."
+    ],
+    "distractors": [
+      "San Francisco",
+      "San Diego",
+      "Sacramento"
+    ],
+    "explanation": "Los Angeles is the largest city in California."
+  },
+  "q-world-1ot7eab": {
+    "prompt": "In which country is the densely populated island of Zealand, home to its capital?",
+    "answer": "Denmark",
+    "accepted": [
+      "Denmark"
+    ],
+    "distractors": [
+      "Sweden",
+      "Norway",
+      "Netherlands"
+    ],
+    "explanation": "Copenhagen is on the Danish island of Zealand."
+  },
+  "q-world-1sznspn": {
+    "prompt": "Which Asian city is home to the largest number of Gujarati speakers?",
+    "answer": "Ahmedabad",
+    "accepted": [
+      "Ahmedabad",
+      "Ahmadabad",
+      "Amdavad"
+    ],
+    "distractors": [
+      "Mumbai",
+      "Delhi",
+      "Karachi"
+    ],
+    "explanation": "Ahmedabad is the largest city in the state of Gujarat."
+  },
+  "q-world-4f6ghr": {
+    "prompt": "Which African island nation is the world's leading producer of vanilla?",
+    "answer": "Madagascar",
+    "accepted": [
+      "Madagascar"
+    ],
+    "distractors": [
+      "Mauritius",
+      "Seychelles",
+      "Comoros"
+    ],
+    "explanation": "Madagascar produces most of the world's Bourbon vanilla."
+  },
+  "q-world-1etyn1k": {
+    "prompt": "Which ancient Chinese city is home to the famous Terracotta Army?",
+    "answer": "Xi'an",
+    "accepted": [
+      "Xi'an",
+      "Xian",
+      "Xi an"
+    ],
+    "distractors": [
+      "Beijing",
+      "Nanjing",
+      "Luoyang"
+    ],
+    "explanation": "The Terracotta Army of Qin Shi Huang's tomb is in Xi'an."
+  },
+  "q-world-1xlu7le": {
+    "prompt": "Which African country was officially called Zaire until 1997?",
+    "answer": "DR Congo",
+    "accepted": [
+      "DR Congo",
+      "Democratic Republic of the Congo",
+      "DRC",
+      "Congo"
+    ],
+    "distractors": [
+      "Republic of the Congo",
+      "Angola",
+      "Zambia"
+    ],
+    "explanation": "The Democratic Republic of the Congo was called Zaire from 1971 to 1997."
+  },
+  "q-world-dukbhu": {
+    "prompt": "Which US state is the only one with a non-rectangular flag?",
+    "answer": "Ohio",
+    "accepted": [
+      "Ohio"
+    ],
+    "distractors": [
+      "Nebraska",
+      "Alabama",
+      "Texas"
+    ],
+    "explanation": "Ohio's flag is a swallowtail-shaped burgee."
+  },
+  "q-world-1i2i5qo": {
+    "prompt": "Which Italian city's name goes back to the Greek word Neapolis, meaning \"new city\"?",
+    "answer": "Naples",
+    "accepted": [
+      "Naples",
+      "Napoli"
+    ],
+    "distractors": [
+      "Milan",
+      "Turin",
+      "Palermo"
+    ],
+    "explanation": "Naples was founded by Greek settlers as Neapolis."
+  },
+  "q-world-126dd7b": {
+    "prompt": "On which island is the Canadian city of Montreal located?",
+    "answer": "Island of Montreal",
+    "accepted": [
+      "Island of Montreal",
+      "Montreal",
+      "Montreal Island",
+      "Montréal"
+    ],
+    "distractors": [
+      "Vancouver Island",
+      "Newfoundland",
+      "Victoria Island"
+    ],
+    "explanation": "Montreal sits on the island of the same name at the confluence of the St. Lawrence and Ottawa rivers."
+  },
+  "q-world-adabw3": {
+    "prompt": "Which island is the most populous in Bangladesh?",
+    "answer": "Bhola",
+    "accepted": [
+      "Bhola",
+      "Bola"
+    ],
+    "distractors": [
+      "St. Martin's Island",
+      "Hatiya",
+      "Sandwip"
+    ],
+    "explanation": "Bhola Island lies in the Ganges delta and is the country's most populous island region."
+  },
+  "q-world-1mt71ok": {
+    "prompt": "Which country was officially called East Pakistan before gaining independence in 1971?",
+    "answer": "Bangladesh",
+    "accepted": [
+      "Bangladesh"
+    ],
+    "distractors": [
+      "Myanmar",
+      "Sri Lanka",
+      "Nepal"
+    ],
+    "explanation": "After the 1971 war of independence, East Pakistan became the state of Bangladesh."
+  },
+  "q-world-z8ncdh": {
+    "prompt": "On which island, home to the capital Nassau, do most Bahamians live?",
+    "answer": "New Providence",
+    "accepted": [
+      "New Providence"
+    ],
+    "distractors": [
+      "Grand Bahama",
+      "Andros",
+      "Eleuthera"
+    ],
+    "explanation": "New Providence is the main island of the Bahamas, with the capital Nassau."
+  },
+  "q-world-g98a4t": {
+    "prompt": "Which natural zone is the northern coniferous boreal forest?",
+    "answer": "taiga",
+    "accepted": [
+      "taiga",
+      "boreal forest"
+    ],
+    "distractors": [
+      "tundra",
+      "steppe",
+      "savanna"
+    ],
+    "explanation": "The taiga is a biome of coniferous forests in the temperate and subpolar belts."
+  },
+  "q-world-4a8xvp": {
+    "prompt": "Which Italian island lies directly south of the French island of Corsica?",
+    "answer": "Sardinia",
+    "accepted": [
+      "Sardinia",
+      "Sardegna"
+    ],
+    "distractors": [
+      "Sicily",
+      "Malta",
+      "Elba"
+    ],
+    "explanation": "The Strait of Bonifacio separates Corsica from Sardinia."
+  },
+  "q-world-knljgn": {
+    "prompt": "What is the name of the vast semi-arid region in southern South America, spanning Paraguay, Bolivia and Argentina?",
+    "answer": "Gran Chaco",
+    "accepted": [
+      "Gran Chaco",
+      "Chaco"
+    ],
+    "distractors": [
+      "Pantanal",
+      "Patagonia",
+      "Pampas"
+    ],
+    "explanation": "The Gran Chaco is a tropical, sparsely populated region of South America."
+  },
+  "q-world-1osdpf": {
+    "prompt": "Which is the only US state with a unicameral (single-chamber) legislature?",
+    "answer": "Nebraska",
+    "accepted": [
+      "Nebraska"
+    ],
+    "distractors": [
+      "Wyoming",
+      "Idaho",
+      "Vermont"
+    ],
+    "explanation": "The Nebraska Legislature is the only unicameral state legislature in the USA."
+  },
+  "q-world-p3h56b": {
+    "prompt": "Excluding overseas territories, which is the southernmost country on Earth?",
+    "answer": "Chile",
+    "accepted": [
+      "Chile"
+    ],
+    "distractors": [
+      "Argentina",
+      "New Zealand",
+      "South Africa"
+    ],
+    "explanation": "Cape Horn and Chile's southernmost islands make it the southernmost continental country."
+  },
+  "q-world-px8q19": {
+    "prompt": "On which Italian island is the active volcano Etna?",
+    "answer": "Sicily",
+    "accepted": [
+      "Sicily",
+      "Sicilia"
+    ],
+    "distractors": [
+      "Sardinia",
+      "Corsica",
+      "Capri"
+    ],
+    "explanation": "Etna, in eastern Sicily, is one of the most active volcanoes in the world."
+  },
+  "q-world-utbur8": {
+    "prompt": "Mexico is the homeland of which popular fruit with buttery flesh?",
+    "answer": "avocado",
+    "accepted": [
+      "avocado"
+    ],
+    "distractors": [
+      "pineapple",
+      "banana",
+      "mango"
+    ],
+    "explanation": "Avocados originate from Central America and Mexico."
+  },
+  "q-world-y9s9f4": {
+    "prompt": "Into which gulf does the Rio Grande, the border river between the USA and Mexico, flow?",
+    "answer": "Gulf of Mexico",
+    "accepted": [
+      "Gulf of Mexico",
+      "Mexican Gulf"
+    ],
+    "distractors": [
+      "Persian Gulf",
+      "Gulf of California",
+      "Hudson Bay"
+    ],
+    "explanation": "The Rio Grande flows into the Gulf of Mexico."
+  },
+  "q-world-wjimq0": {
+    "prompt": "Which landlocked South American country borders Argentina, Brazil and Bolivia?",
+    "answer": "Paraguay",
+    "accepted": [
+      "Paraguay"
+    ],
+    "distractors": [
+      "Uruguay",
+      "Colombia",
+      "Ecuador"
+    ],
+    "explanation": "Paraguay is one of the two landlocked countries of South America."
+  },
+  "q-world-1mc0lal": {
+    "prompt": "Which Pacific island nation is recognized as the most linguistically diverse in the world?",
+    "answer": "Papua New Guinea",
+    "accepted": [
+      "Papua New Guinea",
+      "PNG"
+    ],
+    "distractors": [
+      "Vanuatu",
+      "Solomon Islands",
+      "Fiji"
+    ],
+    "explanation": "Papua New Guinea has more than 800 living languages."
+  },
+  "q-world-17m42z7": {
+    "prompt": "Which South American language is official in Paraguay alongside Spanish?",
+    "answer": "Guarani",
+    "accepted": [
+      "Guarani",
+      "Guaraní"
+    ],
+    "distractors": [
+      "Quechua",
+      "Aymara",
+      "Nahuatl"
+    ],
+    "explanation": "Guarani is an Indigenous language and a state language of Paraguay."
+  },
+  "q-world-qzzdm6": {
+    "prompt": "Nelson Mandela was a leader from which African country, at the time of Portugal's 1974 Carnation Revolution?",
+    "answer": "South Africa",
+    "accepted": [
+      "South Africa",
+      "Republic of South Africa",
+      "RSA"
+    ],
+    "distractors": [
+      "Namibia",
+      "Zimbabwe",
+      "Angola"
+    ],
+    "explanation": "Nelson Mandela fought apartheid and became South Africa's first Black president."
+  },
+  "q-world-1yb31mc": {
+    "prompt": "Which European capital on the Danube was formed by merging the cities of Buda and Pest?",
+    "answer": "Budapest",
+    "accepted": [
+      "Budapest"
+    ],
+    "distractors": [
+      "Vienna",
+      "Bratislava",
+      "Belgrade"
+    ],
+    "explanation": "In 1873 Buda, Óbuda and Pest merged to form Budapest."
+  },
+  "au-world-1p6s818": {
+    "prompt": "Which language is most commonly spoken in Dubai?",
+    "answer": "English",
+    "accepted": [
+      "English",
+      "English language"
+    ],
+    "distractors": [
+      "Arabic",
+      "Hindi",
+      "Urdu"
+    ],
+    "explanation": "Although Arabic is the official language of the UAE, English is the main common language among Dubai's many nationalities."
+  },
+  "au-world-1hw79pa": {
+    "prompt": "In which country is Bavaria?",
+    "answer": "Germany",
+    "accepted": [
+      "Germany",
+      "Federal Republic of Germany",
+      "FRG"
+    ],
+    "distractors": [
+      "Austria",
+      "Belgium",
+      "Switzerland"
+    ],
+    "explanation": "Bavaria is a federal state in south-eastern Germany. Its capital is Munich. The region is famous for Oktoberfest, the Alps and Neuschwanstein Castle."
+  },
+  "au-world-pjdn2o": {
+    "prompt": "In which country is the island of Java?",
+    "answer": "Indonesia",
+    "accepted": [
+      "Indonesia",
+      "Republic of Indonesia"
+    ],
+    "distractors": [
+      "Malaysia",
+      "Philippines",
+      "Thailand"
+    ],
+    "explanation": "Java is an Indonesian island and one of the most densely populated islands in the world. It is home to Jakarta, the country's largest city."
+  }
+}

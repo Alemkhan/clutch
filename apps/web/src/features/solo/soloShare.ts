@@ -1,3 +1,5 @@
+import { messagesFor } from '../../i18n/messages';
+import { m } from './messages';
 import { useCallback, useEffect, useState } from 'react';
 import { logAnalyticsEvent } from '../../platform/api';
 import { chooseShareStrategy, executeShare } from '../../platform/share';
@@ -12,6 +14,18 @@ export interface SoloShareInput {
   roundsPlayed: number;
   perfectHits: number;
   categoryLabel: string;
+  /** Прогресс каждого круга по порядку: из него сетка 🟩🟥, как у Wordle. */
+  roundAwards?: readonly number[];
+  /** Номер игрового дня («Clutch #28»): только у забега дня, у которого набор общий на всех. */
+  dayNumber?: number;
+}
+
+/** Сетка кругов: 🟩 — круг дал прогресс, 🟥 — нет (неверный ответ или промах). По 10 в строке. */
+export function roundGrid(awards: readonly number[]): string {
+  const cells = awards.map((award) => (award > 0 ? '🟩' : '🟥'));
+  const rows: string[] = [];
+  for (let index = 0; index < cells.length; index += 10) rows.push(cells.slice(index, index + 10).join(''));
+  return rows.join('\n');
 }
 
 /**
@@ -20,12 +34,15 @@ export interface SoloShareInput {
  * the set is the same for everyone today.
  */
 export function buildSoloShareText(input: SoloShareInput): string {
-  const head = `Clutch · ${input.categoryLabel}`;
-  if (input.reachedTarget) {
-    const perfect = input.perfectHits > 0 ? ` · идеально: ${input.perfectHits}` : '';
-    return `${head} · 100% за ${circles(input.roundsPlayed)}${perfect}. Сможешь быстрее?`;
-  }
-  return `${head} · ${Math.round(input.progress)}% за ${circles(input.roundsPlayed)}. Дойдёшь до 100%?`;
+  const t = messagesFor(m);
+  const perfect = input.reachedTarget && input.perfectHits > 0 ? t.sharePerfect(input.perfectHits) : '';
+  const outcome = input.reachedTarget
+    ? t.shareReached(circles(input.roundsPlayed), perfect)
+    : t.shareNotReached(Math.round(input.progress), circles(input.roundsPlayed));
+  if (!input.roundAwards?.length) return `Clutch · ${input.categoryLabel} · ${outcome}`;
+  // Карточка в несколько строк: заголовок с номером дня, сетка кругов, итог.
+  const head = input.dayNumber ? `Clutch #${input.dayNumber} · ${input.categoryLabel}` : `Clutch · ${input.categoryLabel}`;
+  return [head, roundGrid(input.roundAwards), outcome].join('\n');
 }
 
 export type SoloShareStatus = 'idle' | 'copied' | 'failed';

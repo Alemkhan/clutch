@@ -2,7 +2,8 @@ import { motion, useReducedMotion } from 'framer-motion';
 import type { SkillResult } from '@clutch/shared';
 import { BLOCK_WIDTH_PERCENT, blockLeftPercent, type TowerLanding } from './towerGeometry';
 
-const PALETTE = ['#d9c7a7', '#f0a64f', '#4d75e8', '#f04a3e', '#6fbf8a'];
+// Основание и этажи в цветах игры: фиолетовый, зелёный, золото, розовый, голубой.
+const PALETTE = ['#d9c7a7', '#8b6cf6', '#3ccf8e', '#ffc94d', '#ff5c7a', '#3dd2f5'];
 export const GROUND_PX = 28;
 export const FLOOR_PX = 36;
 export const VISIBLE_FLOORS = 4;

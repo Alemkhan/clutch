@@ -1,0 +1,251 @@
+{
+  "au-food-1tq921o": {
+    "prompt": "Which grain is popcorn made from?",
+    "answer": "corn",
+    "accepted": [
+      "corn",
+      "maize"
+    ],
+    "distractors": [
+      "rice",
+      "wheat",
+      "oats"
+    ]
+  },
+  "au-food-f6qks7": {
+    "prompt": "Which vegetable gives borscht its red color?",
+    "answer": "beetroot",
+    "accepted": [
+      "beetroot",
+      "beet",
+      "beets"
+    ],
+    "distractors": [
+      "carrot",
+      "cabbage",
+      "tomato"
+    ]
+  },
+  "au-food-2reoep": {
+    "prompt": "Which country does sushi come from?",
+    "answer": "Japan",
+    "accepted": [
+      "Japan"
+    ],
+    "distractors": [
+      "China",
+      "Korea",
+      "Thailand"
+    ]
+  },
+  "au-food-cj502v": {
+    "prompt": "Which fruit is dried to make raisins?",
+    "answer": "grapes",
+    "accepted": [
+      "grapes",
+      "grape"
+    ],
+    "distractors": [
+      "plum",
+      "apricot",
+      "fig"
+    ]
+  },
+  "au-food-kkykdg": {
+    "prompt": "Which nut is used in Nutella spread?",
+    "answer": "hazelnut",
+    "accepted": [
+      "hazelnut",
+      "hazelnuts",
+      "filbert"
+    ],
+    "distractors": [
+      "almond",
+      "peanut",
+      "walnut"
+    ]
+  },
+  "au-food-j2re51": {
+    "prompt": "Which beans is chocolate made from?",
+    "answer": "cocoa beans",
+    "accepted": [
+      "cocoa beans",
+      "cocoa",
+      "cacao",
+      "cacao beans",
+      "cocoa bean"
+    ],
+    "distractors": [
+      "coffee beans",
+      "soybeans",
+      "vanilla pods"
+    ]
+  },
+  "au-food-79gxrz": {
+    "prompt": "What is the Kazakh national dish of boiled meat and thin dough called?",
+    "answer": "beshbarmak",
+    "accepted": [
+      "beshbarmak",
+      "besbarmak",
+      "et"
+    ],
+    "distractors": [
+      "plov",
+      "manti",
+      "lagman"
+    ]
+  },
+  "au-food-txx89z": {
+    "prompt": "Which country does paella come from?",
+    "answer": "Spain",
+    "accepted": [
+      "Spain"
+    ],
+    "distractors": [
+      "Italy",
+      "Mexico",
+      "Portugal"
+    ]
+  },
+  "au-food-19h4ita": {
+    "prompt": "Which cheese goes into a classic Greek salad?",
+    "answer": "feta",
+    "accepted": [
+      "feta",
+      "feta cheese"
+    ],
+    "distractors": [
+      "mozzarella",
+      "parmesan",
+      "ricotta"
+    ]
+  },
+  "au-food-7mjo60": {
+    "prompt": "What is a truffle in nature?",
+    "answer": "fungus",
+    "accepted": [
+      "fungus",
+      "mushroom"
+    ],
+    "distractors": [
+      "nut",
+      "root",
+      "berry"
+    ]
+  },
+  "au-food-1pzae2n": {
+    "prompt": "What is the Japanese alcoholic drink made from rice called?",
+    "answer": "sake",
+    "accepted": [
+      "sake",
+      "saké",
+      "saki"
+    ],
+    "distractors": [
+      "soju",
+      "mezcal",
+      "baijiu"
+    ]
+  },
+  "au-food-18am6ao": {
+    "prompt": "What is the spicy Korean fermented cabbage with chili called?",
+    "answer": "kimchi",
+    "accepted": [
+      "kimchi",
+      "kimchee"
+    ],
+    "distractors": [
+      "tofu",
+      "miso",
+      "bibimbap"
+    ]
+  },
+  "au-food-ason2w": {
+    "prompt": "Which spice gives curry its yellow color?",
+    "answer": "turmeric",
+    "accepted": [
+      "turmeric"
+    ],
+    "distractors": [
+      "saffron",
+      "paprika",
+      "ginger"
+    ]
+  },
+  "au-food-2w6h9o": {
+    "prompt": "Which drink is made from the leaves of the Camellia sinensis plant?",
+    "answer": "tea",
+    "accepted": [
+      "tea"
+    ],
+    "distractors": [
+      "coffee",
+      "mate",
+      "hibiscus tea"
+    ]
+  },
+  "au-food-ajvtbo": {
+    "prompt": "What is the cold Spanish tomato soup called?",
+    "answer": "gazpacho",
+    "accepted": [
+      "gazpacho"
+    ],
+    "distractors": [
+      "minestrone",
+      "tom yum",
+      "borscht"
+    ]
+  },
+  "au-food-t1wadx": {
+    "prompt": "Roughly how many kilocalories are in one gram of fat?",
+    "answer": "9",
+    "accepted": [
+      "9",
+      "nine"
+    ],
+    "distractors": [
+      "4",
+      "7",
+      "2"
+    ],
+    "explanation": "A gram of protein or carbohydrate has about 4 kcal."
+  },
+  "au-food-8hs1qj": {
+    "prompt": "What flour is Japanese soba noodles made from?",
+    "answer": "buckwheat",
+    "accepted": [
+      "buckwheat",
+      "buckwheat flour"
+    ],
+    "distractors": [
+      "rice",
+      "corn",
+      "rye"
+    ]
+  },
+  "au-food-ohi316": {
+    "prompt": "Which country produces the most coffee?",
+    "answer": "Brazil",
+    "accepted": [
+      "Brazil"
+    ],
+    "distractors": [
+      "Colombia",
+      "Ethiopia",
+      "Vietnam"
+    ]
+  },
+  "q-food-r0luh0": {
+    "prompt": "What is the Japanese dish of grilled eel, often served with rice at sushi restaurants, called?",
+    "answer": "unagi",
+    "accepted": [
+      "unagi"
+    ],
+    "distractors": [
+      "sashimi",
+      "tempura",
+      "wasabi"
+    ],
+    "explanation": "Unagi is the Japanese word for freshwater eel."
+  }
+}

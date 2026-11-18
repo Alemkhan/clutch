@@ -3,6 +3,7 @@ import { resolveRequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
 import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
+import { clanDeletionStatements } from '../clans/clans';
 
 /**
  * Удаление аккаунта (требование App Store 5.1.1(v) и Google Play).
@@ -18,6 +19,7 @@ export const DELETED_PLAYER_PREFIX = 'deleted:';
 
 const DELETED_TABLES = [
   'player_mistakes',
+  'player_settings',
   'player_notification_prefs',
   'question_reports',
   'analytics_events',
@@ -66,7 +68,8 @@ export async function deletePlayerAccount(db: D1Database, playerId: string): Pro
     db.prepare('UPDATE rematch_invites SET recipient_player_id = ?2 WHERE recipient_player_id = ?1').bind(playerId, tombstone),
   ];
   // batch в D1 — одна транзакция: либо всё, либо ничего.
-  const results = await db.batch([...snapshots, ...deletes, ...anonymize]);
+  // Клан — последним: смещения выше считают удалённые и обезличенные строки.
+  const results = await db.batch([...snapshots, ...deletes, ...anonymize, ...clanDeletionStatements(db, playerId, tombstone)]);
   const changes = (index: number) => Number(results[index]?.meta?.changes ?? 0);
   const offset = snapshots.length;
   return {

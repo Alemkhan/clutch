@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { playSound } from '../platform/sounds';
+import { useMessages } from '../i18n/messages';
+import { m } from './messages';
 import { nextCountdownTick, remainingQuestionMs } from '../features/round/questionTiming';
 
 interface TimerBarProps {
@@ -10,6 +12,7 @@ interface TimerBarProps {
 }
 
 export function TimerBar({ durationMs, deadlineMs, onExpire, paused }: TimerBarProps) {
+  const t = useMessages(m);
   const [remainingMs, setRemainingMs] = useState(() => remainingQuestionMs(deadlineMs, Date.now()));
   const timerStateRef = useRef({
     deadlineMs,
@@ -77,7 +80,7 @@ export function TimerBar({ durationMs, deadlineMs, onExpire, paused }: TimerBarP
     <div
       className={`timer-ring ${isDanger ? 'danger' : ''}`}
       role="timer"
-      aria-label={`Осталось ${remainingSeconds} сек.`}
+      aria-label={t.timerAria(remainingSeconds)}
       aria-live="off"
     >
       <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">

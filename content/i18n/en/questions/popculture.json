@@ -1,0 +1,209 @@
+{
+  "au-popculture-1bi4kns": {
+    "prompt": "Which superhero carries a shield with a star on it?",
+    "answer": "Captain America",
+    "accepted": [
+      "Captain America"
+    ],
+    "distractors": [
+      "Iron Man",
+      "Thor",
+      "Batman"
+    ]
+  },
+  "au-popculture-1jmq2q9": {
+    "prompt": "What is the name of the yellow sponge from the animated series?",
+    "answer": "SpongeBob",
+    "accepted": [
+      "SpongeBob",
+      "SpongeBob SquarePants",
+      "Sponge Bob"
+    ],
+    "distractors": [
+      "Patrick",
+      "Squidward",
+      "Mr. Krabs"
+    ]
+  },
+  "au-popculture-1hd6vuz": {
+    "prompt": "What is the name of the wizard who is Frodo's mentor?",
+    "answer": "Gandalf",
+    "accepted": [
+      "Gandalf"
+    ],
+    "distractors": [
+      "Saruman",
+      "Dumbledore",
+      "Merlin"
+    ]
+  },
+  "au-popculture-1jmbdf7": {
+    "prompt": "Who is the headmaster of Hogwarts in the early Harry Potter books?",
+    "answer": "Albus Dumbledore",
+    "accepted": [
+      "Albus Dumbledore",
+      "Dumbledore"
+    ],
+    "distractors": [
+      "Severus Snape",
+      "Minerva McGonagall",
+      "Rubeus Hagrid"
+    ]
+  },
+  "au-popculture-y4n5dt": {
+    "prompt": "What is the name of the city Batman protects?",
+    "answer": "Gotham",
+    "accepted": [
+      "Gotham",
+      "Gotham City"
+    ],
+    "distractors": [
+      "Metropolis",
+      "Star City",
+      "Central City"
+    ]
+  },
+  "au-popculture-13dp2in": {
+    "prompt": "What is Spider-Man's real name?",
+    "answer": "Peter Parker",
+    "accepted": [
+      "Peter Parker",
+      "Parker"
+    ],
+    "distractors": [
+      "Bruce Wayne",
+      "Clark Kent",
+      "Tony Stark"
+    ]
+  },
+  "au-popculture-1i780hh": {
+    "prompt": "Which game is the best-selling video game of all time?",
+    "answer": "Minecraft",
+    "accepted": [
+      "Minecraft"
+    ],
+    "distractors": [
+      "Tetris",
+      "GTA V",
+      "Fortnite"
+    ]
+  },
+  "au-popculture-11u2qgw": {
+    "prompt": "Which planet did Superman come from?",
+    "answer": "Krypton",
+    "accepted": [
+      "Krypton"
+    ],
+    "distractors": [
+      "Tatooine",
+      "Vulcan",
+      "Asgard"
+    ]
+  },
+  "au-popculture-1t0xr14": {
+    "prompt": "What is the name of the Italian plumber who stars in Nintendo games?",
+    "answer": "Mario",
+    "accepted": [
+      "Mario",
+      "Super Mario"
+    ],
+    "distractors": [
+      "Luigi",
+      "Yoshi",
+      "Sonic"
+    ]
+  },
+  "au-popculture-tum3ix": {
+    "prompt": "What is the name of the hedgehog who stars in Sega games?",
+    "answer": "Sonic",
+    "accepted": [
+      "Sonic",
+      "Sonic the Hedgehog"
+    ],
+    "distractors": [
+      "Knuckles",
+      "Tails",
+      "Mario"
+    ]
+  },
+  "au-popculture-29tc83": {
+    "prompt": "What is the name of the villain who wiped out half of all life in the universe with a snap of his fingers in the Marvel films?",
+    "answer": "Thanos",
+    "accepted": [
+      "Thanos"
+    ],
+    "distractors": [
+      "Ultron",
+      "Loki",
+      "Red Skull"
+    ]
+  },
+  "au-popculture-1r6e20q": {
+    "prompt": "Which country invented Tetris?",
+    "answer": "USSR",
+    "accepted": [
+      "USSR",
+      "Soviet Union",
+      "the Soviet Union",
+      "U.S.S.R."
+    ],
+    "distractors": [
+      "Japan",
+      "USA",
+      "Hungary"
+    ],
+    "explanation": "Tetris was created by Alexey Pajitnov in Moscow in 1984."
+  },
+  "au-popculture-1ivc52z": {
+    "prompt": "What is the name of the fictional continent in Game of Thrones where King's Landing stands?",
+    "answer": "Westeros",
+    "accepted": [
+      "Westeros"
+    ],
+    "distractors": [
+      "Essos",
+      "Middle-earth",
+      "Narnia"
+    ]
+  },
+  "q-popculture-n24bbp": {
+    "prompt": "How many signs are in the classical Western zodiac?",
+    "answer": "12",
+    "accepted": [
+      "12",
+      "twelve"
+    ],
+    "distractors": [
+      "10",
+      "13",
+      "8"
+    ],
+    "explanation": "The zodiac belt is divided into 12 equal 30-degree sectors."
+  },
+  "q-popculture-jhcxwf": {
+    "prompt": "Which zodiac sign opens the zodiac cycle at the spring equinox?",
+    "answer": "Aries",
+    "accepted": [
+      "Aries"
+    ],
+    "distractors": [
+      "Taurus",
+      "Gemini",
+      "Pisces"
+    ],
+    "explanation": "Aries is traditionally the first sign of the zodiac."
+  },
+  "q-popculture-1v4pudt": {
+    "prompt": "Which zodiac sign is the last, 12th sign of the zodiac?",
+    "answer": "Pisces",
+    "accepted": [
+      "Pisces"
+    ],
+    "distractors": [
+      "Aquarius",
+      "Capricorn",
+      "Scorpio"
+    ],
+    "explanation": "Pisces closes the 12-sector zodiac circle."
+  }
+}

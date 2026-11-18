@@ -11,6 +11,8 @@ import type { Env } from '../env';
 import { categoriesWithBoardRun, notifyBumpedFromTopTen, snapshotTopTen, type TopTenSnapshot } from '../notifications/outOfTop';
 import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
+import { requestLocale } from '../http/locale';
+import { localizeTiebreakerQuestion } from './tiebreakerLocale';
 import {
   buildAnsweredView,
   countQuestionAnswers,
@@ -67,7 +69,8 @@ export function registerTiebreakerRoutes(app: Hono<{ Bindings: Env }>): void {
     const identity = await authenticate(c, 'tiebreaker');
     if (identity instanceof Response) return identity;
     const dateKey = dailyKey(Date.now());
-    const question = await findQuestionByDate(c.env.DB, dateKey);
+    const stored = await findQuestionByDate(c.env.DB, dateKey);
+    const question = stored && localizeTiebreakerQuestion(stored, requestLocale(c));
     if (!question) return c.json({ dateKey, question: null, answered: null, answersCount: 0 } satisfies TiebreakerTodayResponse);
     return c.json(await todayState(c.env.DB, identity.playerId, dateKey, question));
   });
@@ -94,7 +97,8 @@ export function registerTiebreakerRoutes(app: Hono<{ Bindings: Env }>): void {
 
     const now = Date.now();
     const dateKey = dailyKey(now);
-    const question = await findQuestionByDate(c.env.DB, dateKey);
+    const stored = await findQuestionByDate(c.env.DB, dateKey);
+    const question = stored && localizeTiebreakerQuestion(stored, requestLocale(c));
     // 409, а не 400: тело корректно, но вопрос уже не (или ещё не) текущий — клиенту нужно перечитать
     // карточку. Вчерашний вопрос не принимается: ответ действует на сутки своего вопроса.
     if (!question || question.id !== body.questionId) {

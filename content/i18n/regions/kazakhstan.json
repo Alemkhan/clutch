@@ -1,0 +1,320 @@
+{
+  "kz-issyk": [
+    "kz"
+  ],
+  "kz-tomyris": [
+    "kz"
+  ],
+  "kz-kangju": [
+    "kz"
+  ],
+  "kz-usun": [
+    "kz"
+  ],
+  "kz-botai": [
+    "kz"
+  ],
+  "kz-andronovo": [
+    "kz"
+  ],
+  "kz-tamgaly": [
+    "kz"
+  ],
+  "kz-turk-552": [
+    "kz"
+  ],
+  "kz-bumyn": [
+    "kz"
+  ],
+  "kz-west-turk": [
+    "kz"
+  ],
+  "kz-ushlik": [
+    "kz"
+  ],
+  "kz-karluk": [
+    "kz"
+  ],
+  "kz-talas-751": [
+    "kz"
+  ],
+  "kz-yangikent": [
+    "kz"
+  ],
+  "kz-karakhanid-960": [
+    "kz"
+  ],
+  "kz-farabi": [
+    "kz",
+    "cis"
+  ],
+  "kz-kashgari": [
+    "kz"
+  ],
+  "kz-balasaguni": [
+    "kz"
+  ],
+  "kz-kipchak": [
+    "kz",
+    "cis"
+  ],
+  "kz-desht": [
+    "kz"
+  ],
+  "kz-otrar-1218": [
+    "kz"
+  ],
+  "kz-batu": [
+    "kz",
+    "cis"
+  ],
+  "kz-ak-orda": [
+    "kz"
+  ],
+  "kz-mogul": [
+    "kz"
+  ],
+  "kz-yasawi-city": [
+    "kz",
+    "cis"
+  ],
+  "kz-yasawi-timur": [
+    "kz"
+  ],
+  "kz-taraz-2000": [
+    "kz"
+  ],
+  "kz-dulati": [
+    "kz"
+  ],
+  "kz-khanate-1465": [
+    "kz"
+  ],
+  "kz-kerey-zhanibek": [
+    "kz"
+  ],
+  "kz-migration": [
+    "kz"
+  ],
+  "kz-kasym": [
+    "kz"
+  ],
+  "kz-tauke": [
+    "kz"
+  ],
+  "kz-zheti-zhargy": [
+    "kz"
+  ],
+  "kz-orbulak": [
+    "kz"
+  ],
+  "kz-tole": [
+    "kz"
+  ],
+  "kz-aiteke": [
+    "kz"
+  ],
+  "kz-kazybek": [
+    "kz"
+  ],
+  "kz-aktaban": [
+    "kz"
+  ],
+  "kz-anyrakay": [
+    "kz"
+  ],
+  "kz-abulkhair": [
+    "kz"
+  ],
+  "kz-year-1731": [
+    "kz"
+  ],
+  "kz-ablai": [
+    "kz"
+  ],
+  "kz-bukhar": [
+    "kz"
+  ],
+  "kz-bukey": [
+    "kz"
+  ],
+  "kz-syrym": [
+    "kz"
+  ],
+  "kz-ustav-1822": [
+    "kz"
+  ],
+  "kz-speransky": [
+    "kz"
+  ],
+  "kz-year-1824": [
+    "kz"
+  ],
+  "kz-zhangir": [
+    "kz"
+  ],
+  "kz-makhambet": [
+    "kz"
+  ],
+  "kz-kenesary-grand": [
+    "kz"
+  ],
+  "kz-kenesary-years": [
+    "kz"
+  ],
+  "kz-verny": [
+    "kz",
+    "cis"
+  ],
+  "kz-akmeshit": [
+    "kz"
+  ],
+  "kz-valikhanov": [
+    "kz"
+  ],
+  "kz-altynsarin": [
+    "kz"
+  ],
+  "kz-abai": [
+    "kz",
+    "cis"
+  ],
+  "kz-kurmangazy": [
+    "kz"
+  ],
+  "kz-decree-1916": [
+    "kz"
+  ],
+  "kz-amangeldy": [
+    "kz"
+  ],
+  "kz-bukeikhanov": [
+    "kz"
+  ],
+  "kz-baitursynov-qazaq": [
+    "kz"
+  ],
+  "kz-baitursynov-abc": [
+    "kz"
+  ],
+  "kz-dulatov": [
+    "kz"
+  ],
+  "kz-shokay": [
+    "kz"
+  ],
+  "kz-orenburg": [
+    "kz"
+  ],
+  "kz-kyzylorda-capital": [
+    "kz"
+  ],
+  "kz-kazssr-1936": [
+    "kz"
+  ],
+  "kz-turksib": [
+    "kz",
+    "cis"
+  ],
+  "kz-goloshchekin": [
+    "kz"
+  ],
+  "kz-asharshylyk": [
+    "kz"
+  ],
+  "kz-alzhir": [
+    "kz"
+  ],
+  "kz-panfilov": [
+    "kz",
+    "cis"
+  ],
+  "kz-momyshuly": [
+    "kz"
+  ],
+  "kz-mametova": [
+    "kz"
+  ],
+  "kz-koshkarbaev": [
+    "kz"
+  ],
+  "kz-karaganda": [
+    "kz",
+    "cis"
+  ],
+  "kz-tselina": [
+    "kz",
+    "cis"
+  ],
+  "kz-tselinograd": [
+    "kz",
+    "cis"
+  ],
+  "kz-baikonur": [
+    "kz",
+    "cis"
+  ],
+  "kz-aubakirov": [
+    "kz"
+  ],
+  "kz-polygon": [
+    "kz",
+    "cis"
+  ],
+  "kz-nevada": [
+    "kz"
+  ],
+  "kz-kunaev": [
+    "kz"
+  ],
+  "kz-zheltoksan": [
+    "kz"
+  ],
+  "kz-sovereignty": [
+    "kz"
+  ],
+  "kz-independence": [
+    "kz"
+  ],
+  "kz-last-republic": [
+    "kz",
+    "cis"
+  ],
+  "kz-almaty-cis": [
+    "kz",
+    "cis"
+  ],
+  "kz-tenge": [
+    "kz"
+  ],
+  "kz-constitution-1993": [
+    "kz"
+  ],
+  "kz-constitution-1995": [
+    "kz"
+  ],
+  "kz-capital-1997": [
+    "kz",
+    "cis"
+  ],
+  "kz-eaeu": [
+    "kz",
+    "cis"
+  ],
+  "kz-expo": [
+    "kz"
+  ],
+  "kz-guryev": [
+    "kz"
+  ],
+  "kz-shevchenko": [
+    "kz"
+  ],
+  "kz-auezov": [
+    "kz",
+    "cis"
+  ],
+  "kz-esenberlin": [
+    "kz"
+  ]
+}

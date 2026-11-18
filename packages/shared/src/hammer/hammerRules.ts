@@ -6,6 +6,11 @@ export interface MiniGameConfig {
   markerSpeedMax: number;
   targetWidth: number;
   perfectWidth: number;
+  /**
+   * Границы зон на стадии 0 (доля полудорожки от центра цели). Нет у конфига первой версии:
+   * его забеги считаются по `LEGACY_SKILL_DISTANCE_THRESHOLDS`.
+   */
+  distanceThresholds?: HammerThresholds;
   pressure: {
     stageMultipliers: readonly [number, number, number, number];
     maxTargetOffsets: readonly [number, number, number, number];
@@ -20,12 +25,27 @@ export const SKILL_REWARDS: Record<SkillResult, number> = {
   miss: 0,
 };
 
-/** Maximum normalized distance from the target centre for each non-miss tier. */
-export const SKILL_DISTANCE_THRESHOLDS = {
+/**
+ * Зоны первой версии (до 2026-11-17). В проде они почти не различали игроков: 41% ударов
+ * «идеально», 53% «отлично», хуже — 6%. Остались только для доигрывания начатых забегов.
+ */
+export const LEGACY_SKILL_DISTANCE_THRESHOLDS = {
   perfect: 0.06,
   great: 0.28,
   good: 0.65,
   weak: 0.85,
+} as const;
+
+/**
+ * Текущие зоны: «отлично» уже в 2,3 раза, и точность снова решает. По распределению прод-ударов
+ * (при прежней скорости) это примерно 30% «идеально», 35% «отлично», 25% «хорошо», остальное
+ * слабые и промахи; быстрый маркер и давление серии сдвигают долю ещё ниже.
+ */
+export const SKILL_DISTANCE_THRESHOLDS = {
+  perfect: 0.04,
+  great: 0.12,
+  good: 0.3,
+  weak: 0.55,
 } as const;
 
 export type PressureStage = 0 | 1 | 2 | 3;
@@ -53,11 +73,12 @@ export function hammerThresholdsForStage(
   config: MiniGameConfig,
 ): HammerThresholds {
   const multiplier = config.pressure.stageMultipliers[stage];
+  const base = config.distanceThresholds ?? LEGACY_SKILL_DISTANCE_THRESHOLDS;
   return {
-    perfect: SKILL_DISTANCE_THRESHOLDS.perfect * multiplier,
-    great: SKILL_DISTANCE_THRESHOLDS.great * multiplier,
-    good: SKILL_DISTANCE_THRESHOLDS.good * multiplier,
-    weak: SKILL_DISTANCE_THRESHOLDS.weak * multiplier,
+    perfect: base.perfect * multiplier,
+    great: base.great * multiplier,
+    good: base.good * multiplier,
+    weak: base.weak * multiplier,
   };
 }
 

@@ -1,0 +1,270 @@
+{
+  "au-sport-m9n934": {
+    "prompt": "How many rings are on the Olympic flag?",
+    "answer": "5",
+    "accepted": [
+      "5",
+      "five"
+    ],
+    "distractors": [
+      "4",
+      "6",
+      "7"
+    ]
+  },
+  "au-sport-8ve7ki": {
+    "prompt": "How many players per team are on the court in basketball?",
+    "answer": "5",
+    "accepted": [
+      "5",
+      "five"
+    ],
+    "distractors": [
+      "6",
+      "7",
+      "11"
+    ]
+  },
+  "au-sport-6e612i": {
+    "prompt": "In which game are there check and checkmate?",
+    "answer": "chess",
+    "accepted": [
+      "chess"
+    ],
+    "distractors": [
+      "checkers",
+      "Go",
+      "backgammon"
+    ]
+  },
+  "au-sport-gelogu": {
+    "prompt": "Which game is played with a racket and a shuttlecock?",
+    "answer": "badminton",
+    "accepted": [
+      "badminton"
+    ],
+    "distractors": [
+      "tennis",
+      "squash",
+      "table tennis"
+    ]
+  },
+  "au-sport-1a5i25f": {
+    "prompt": "How often, in years, are the Summer Olympics held?",
+    "answer": "4",
+    "accepted": [
+      "4",
+      "four",
+      "every 4 years",
+      "every four years"
+    ],
+    "distractors": [
+      "2",
+      "3",
+      "5"
+    ]
+  },
+  "au-sport-1djvqe1": {
+    "prompt": "How many minutes does regular time in a football match last?",
+    "answer": "90",
+    "accepted": [
+      "90",
+      "ninety"
+    ],
+    "distractors": [
+      "60",
+      "80",
+      "120"
+    ]
+  },
+  "au-sport-1yb67t7": {
+    "prompt": "Which national team has won the most FIFA World Cups?",
+    "answer": "Brazil",
+    "accepted": [
+      "Brazil"
+    ],
+    "distractors": [
+      "Germany",
+      "Italy",
+      "Argentina"
+    ]
+  },
+  "au-sport-1pmvzk5": {
+    "prompt": "Which sport is called the queen of sports?",
+    "answer": "athletics",
+    "accepted": [
+      "athletics",
+      "track and field",
+      "track & field"
+    ],
+    "distractors": [
+      "swimming",
+      "gymnastics",
+      "football"
+    ]
+  },
+  "au-sport-1o4qm3q": {
+    "prompt": "Which city hosted the 1980 Summer Olympics?",
+    "answer": "Moscow",
+    "accepted": [
+      "Moscow"
+    ],
+    "distractors": [
+      "Los Angeles",
+      "Montreal",
+      "Munich"
+    ]
+  },
+  "au-sport-ss1zeq": {
+    "prompt": "Who set the 100-meter world record of 9.58 seconds?",
+    "answer": "Usain Bolt",
+    "accepted": [
+      "Usain Bolt",
+      "Bolt"
+    ],
+    "distractors": [
+      "Carl Lewis",
+      "Tyson Gay",
+      "Yohan Blake"
+    ]
+  },
+  "au-sport-1e9lafc": {
+    "prompt": "Which trophy do teams compete for in the National Hockey League?",
+    "answer": "Stanley Cup",
+    "accepted": [
+      "Stanley Cup",
+      "the Stanley Cup",
+      "Stanley"
+    ],
+    "distractors": [
+      "Gagarin Cup",
+      "Davis Cup",
+      "Ryder Cup"
+    ]
+  },
+  "au-sport-3sfvu6": {
+    "prompt": "How many players per team are on the court in volleyball?",
+    "answer": "6",
+    "accepted": [
+      "6",
+      "six"
+    ],
+    "distractors": [
+      "5",
+      "7",
+      "9"
+    ]
+  },
+  "au-sport-1y6nhe6": {
+    "prompt": "Who became world chess champion in 1985 at the age of 22?",
+    "answer": "Garry Kasparov",
+    "accepted": [
+      "Garry Kasparov",
+      "Kasparov",
+      "Gary Kasparov"
+    ],
+    "distractors": [
+      "Anatoly Karpov",
+      "Magnus Carlsen",
+      "Bobby Fischer"
+    ]
+  },
+  "au-sport-1s64hfr": {
+    "prompt": "How long is an Olympic swimming pool, in meters?",
+    "answer": "50",
+    "accepted": [
+      "50",
+      "fifty",
+      "50 meters",
+      "50 m"
+    ],
+    "distractors": [
+      "25",
+      "100",
+      "75"
+    ]
+  },
+  "au-sport-afoq59": {
+    "prompt": "In what year were the first modern Olympic Games held?",
+    "answer": "1896",
+    "accepted": [
+      "1896"
+    ],
+    "distractors": [
+      "1900",
+      "1888",
+      "1912"
+    ]
+  },
+  "au-sport-1upvhy5": {
+    "prompt": "Which city hosted the first modern Olympic Games?",
+    "answer": "Athens",
+    "accepted": [
+      "Athens"
+    ],
+    "distractors": [
+      "Paris",
+      "London",
+      "Olympia"
+    ]
+  },
+  "au-sport-14zjih7": {
+    "prompt": "What is the round ring that sumo wrestlers compete on called?",
+    "answer": "dohyō",
+    "accepted": [
+      "dohyō",
+      "dohyo"
+    ],
+    "distractors": [
+      "tatami",
+      "ring",
+      "octagon"
+    ]
+  },
+  "au-sport-10nzs1n": {
+    "prompt": "How many rounds is a championship bout in professional boxing?",
+    "answer": "12",
+    "accepted": [
+      "12",
+      "twelve"
+    ],
+    "distractors": [
+      "10",
+      "15",
+      "8"
+    ],
+    "explanation": "Until the 1980s, championship bouts were 15 rounds."
+  },
+  "au-sport-p4kqt2": {
+    "prompt": "Which sport is considered the national sport of the Dominican Republic?",
+    "answer": "baseball",
+    "accepted": [
+      "baseball"
+    ],
+    "distractors": [
+      "football",
+      "basketball",
+      "volleyball"
+    ],
+    "explanation": "Baseball is considered the national sport of the Dominican Republic and holds a special place in its culture. Dominican players are known worldwide, and many play in Major League Baseball (MLB)."
+  },
+  "au-sport-scp7uv": {
+    "prompt": "Which country has won the most Olympic medals in athletics of all time?",
+    "answer": "USA",
+    "accepted": [
+      "USA",
+      "US",
+      "United States",
+      "United States of America",
+      "America",
+      "U.S.",
+      "U.S.A."
+    ],
+    "distractors": [
+      "Great Britain",
+      "Jamaica",
+      "Kenya"
+    ],
+    "explanation": "The USA is the all-time leader in Olympic athletics medals. According to Olympedia, American athletes have won 864 medals: 358 gold, 281 silver and 225 bronze."
+  }
+}

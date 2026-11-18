@@ -1,6 +1,8 @@
 import { isBestAnswerOfDay, type TiebreakerAnsweredView } from '@clutch/shared';
 import { chooseShareStrategy, executeShare, type ShareEffects, type ShareResult } from '../../platform/share';
 import { formatMultiplier } from './tiebreakerView';
+import { messagesFor } from '../../i18n/messages';
+import { m } from './messages';
 
 /**
  * Текст «Поделиться результатом» в духе Wordle: номер вопроса, промах и, если есть, место среди
@@ -11,9 +13,10 @@ export function buildTiebreakerShareText(
   number: number,
   answered: Pick<TiebreakerAnsweredView, 'multiplier' | 'percentile'>,
 ): string {
-  const parts = [`На глазок #${number}`, `промах ${formatMultiplier(answered.multiplier)}`];
-  if (isBestAnswerOfDay(answered.percentile)) parts.push('лучший ответ дня');
-  else if (answered.percentile !== null) parts.push(`точнее ${answered.percentile}%`);
+  const t = messagesFor(m);
+  const parts = [`${t.mode} #${number}`, t.shareMiss(formatMultiplier(answered.multiplier))];
+  if (isBestAnswerOfDay(answered.percentile)) parts.push(t.shareBest);
+  else if (answered.percentile !== null) parts.push(t.shareMoreAccurate(answered.percentile));
   return parts.join(' · ');
 }
 

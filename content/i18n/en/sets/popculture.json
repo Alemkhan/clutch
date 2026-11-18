@@ -1,0 +1,106 @@
+{
+  "set-hogwarts": {
+    "title": "Name a Hogwarts house",
+    "mcPrompt": "Which of these is a Hogwarts house?",
+    "members": {
+      "gryffindor": {
+        "answer": "Gryffindor",
+        "accepted": [
+          "Gryffindor"
+        ]
+      },
+      "slytherin": {
+        "answer": "Slytherin",
+        "accepted": [
+          "Slytherin"
+        ]
+      },
+      "ravenclaw": {
+        "answer": "Ravenclaw",
+        "accepted": [
+          "Ravenclaw"
+        ]
+      },
+      "hufflepuff": {
+        "answer": "Hufflepuff",
+        "accepted": [
+          "Hufflepuff"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Beauxbatons",
+      "Durmstrang",
+      "Azkaban"
+    ]
+  },
+  "set-tmnt": {
+    "title": "Name a Teenage Mutant Ninja Turtle",
+    "mcPrompt": "Which of these is a Ninja Turtle?",
+    "members": {
+      "leonardo": {
+        "answer": "Leonardo",
+        "accepted": [
+          "Leonardo",
+          "Leo"
+        ]
+      },
+      "raphael": {
+        "answer": "Raphael",
+        "accepted": [
+          "Raphael",
+          "Raph"
+        ]
+      },
+      "donatello": {
+        "answer": "Donatello",
+        "accepted": [
+          "Donatello",
+          "Donnie",
+          "Donny"
+        ]
+      },
+      "michelangelo": {
+        "answer": "Michelangelo",
+        "accepted": [
+          "Michelangelo",
+          "Mikey"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Splinter",
+      "Shredder",
+      "Titian"
+    ]
+  },
+  "set-popculture-h8fbmh": {
+    "title": "Name a Fire sign of the zodiac",
+    "mcPrompt": "Which of these zodiac signs belongs to the Fire triplicity?",
+    "members": {
+      "aries": {
+        "answer": "Aries",
+        "accepted": [
+          "Aries"
+        ]
+      },
+      "leo": {
+        "answer": "Leo",
+        "accepted": [
+          "Leo"
+        ]
+      },
+      "sagittarius": {
+        "answer": "Sagittarius",
+        "accepted": [
+          "Sagittarius"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Taurus",
+      "Cancer",
+      "Scorpio"
+    ]
+  }
+}

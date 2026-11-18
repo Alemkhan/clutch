@@ -1,0 +1,920 @@
+{
+  "au-film-1y1nn9o": {
+    "prompt": "What is the name of the mouse who is Disney's mascot?",
+    "answer": "Mickey Mouse",
+    "accepted": [
+      "Mickey Mouse",
+      "Mickey"
+    ],
+    "distractors": [
+      "Jerry",
+      "Speedy Gonzales",
+      "Stuart Little"
+    ]
+  },
+  "au-film-1p7gt5g": {
+    "prompt": "What is the name of the green ogre from the DreamWorks animated film?",
+    "answer": "Shrek",
+    "accepted": [
+      "Shrek"
+    ],
+    "distractors": [
+      "Hulk",
+      "the Grinch",
+      "Yoda"
+    ]
+  },
+  "au-film-1miniqr": {
+    "prompt": "What is the name of the snowman in Frozen?",
+    "answer": "Olaf",
+    "accepted": [
+      "Olaf"
+    ],
+    "distractors": [
+      "Sven",
+      "Kristoff",
+      "Hans"
+    ]
+  },
+  "au-film-tdg5b6": {
+    "prompt": "In the Soviet cartoon Nu, Pogodi! (\"Just You Wait!\"), who is the Wolf always chasing?",
+    "answer": "the Hare",
+    "accepted": [
+      "the Hare",
+      "Hare",
+      "the Rabbit",
+      "Rabbit",
+      "Zayats"
+    ],
+    "distractors": [
+      "the Kolobok",
+      "the Hedgehog",
+      "the Squirrel"
+    ]
+  },
+  "au-film-1q1568o": {
+    "prompt": "What is the name of the cat in the Soviet cartoon Prostokvashino?",
+    "answer": "Matroskin",
+    "accepted": [
+      "Matroskin",
+      "Cat Matroskin"
+    ],
+    "distractors": [
+      "Leopold",
+      "Sharik",
+      "Kotofey"
+    ]
+  },
+  "au-film-m1wvsw": {
+    "prompt": "In which animated film does the lion cub Simba live?",
+    "answer": "The Lion King",
+    "accepted": [
+      "The Lion King",
+      "Lion King"
+    ],
+    "distractors": [
+      "Madagascar",
+      "The Jungle Book",
+      "Tarzan"
+    ]
+  },
+  "au-film-kiwyjc": {
+    "prompt": "What is the name of the boy in the Soviet cartoon Prostokvashino?",
+    "answer": "Uncle Fyodor",
+    "accepted": [
+      "Uncle Fyodor",
+      "Uncle Fedor",
+      "Fyodor",
+      "Fedor",
+      "Dyadya Fyodor"
+    ],
+    "distractors": [
+      "Pechkin",
+      "Malysh",
+      "Denis"
+    ]
+  },
+  "au-film-dzzm2p": {
+    "prompt": "What is the name of the villain in the black helmet in Star Wars?",
+    "answer": "Darth Vader",
+    "accepted": [
+      "Darth Vader",
+      "Vader",
+      "Anakin Skywalker"
+    ],
+    "distractors": [
+      "Darth Maul",
+      "Palpatine",
+      "Boba Fett"
+    ]
+  },
+  "au-film-1rpg1h4": {
+    "prompt": "Who played Jack in the film Titanic?",
+    "answer": "Leonardo DiCaprio",
+    "accepted": [
+      "Leonardo DiCaprio",
+      "DiCaprio",
+      "Leonardo Di Caprio",
+      "Di Caprio"
+    ],
+    "distractors": [
+      "Brad Pitt",
+      "Matt Damon",
+      "Johnny Depp"
+    ]
+  },
+  "au-film-1nbagf": {
+    "prompt": "Which studio made Toy Story?",
+    "answer": "Pixar",
+    "accepted": [
+      "Pixar"
+    ],
+    "distractors": [
+      "DreamWorks",
+      "Blue Sky",
+      "Illumination"
+    ]
+  },
+  "au-film-1pw4usb": {
+    "prompt": "What is the name of the pirate Johnny Depp plays in Pirates of the Caribbean?",
+    "answer": "Jack Sparrow",
+    "accepted": [
+      "Jack Sparrow",
+      "Sparrow",
+      "Captain Jack Sparrow"
+    ],
+    "distractors": [
+      "Hector Barbossa",
+      "Will Turner",
+      "Davy Jones"
+    ]
+  },
+  "au-film-1k6fif6": {
+    "prompt": "Who directed The Irony of Fate, or Enjoy Your Bath!?",
+    "answer": "Eldar Ryazanov",
+    "accepted": [
+      "Eldar Ryazanov",
+      "Ryazanov"
+    ],
+    "distractors": [
+      "Leonid Gaidai",
+      "Georgiy Daneliya",
+      "Nikita Mikhalkov"
+    ]
+  },
+  "au-film-95lm7o": {
+    "prompt": "What is the name of the trash-compacting robot in Pixar's 2008 animated film?",
+    "answer": "WALL-E",
+    "accepted": [
+      "WALL-E",
+      "Wall-E",
+      "Walle",
+      "Wall E"
+    ],
+    "distractors": [
+      "EVE",
+      "R2-D2",
+      "Baymax"
+    ]
+  },
+  "au-film-10s2r15": {
+    "prompt": "Who directed the comedy Operation Y and Shurik's Other Adventures?",
+    "answer": "Leonid Gaidai",
+    "accepted": [
+      "Leonid Gaidai",
+      "Gaidai",
+      "Gaiday"
+    ],
+    "distractors": [
+      "Eldar Ryazanov",
+      "Georgiy Daneliya",
+      "Vladimir Menshov"
+    ]
+  },
+  "au-film-1halp2p": {
+    "prompt": "Which 1959 film won 11 Oscars?",
+    "answer": "Ben-Hur",
+    "accepted": [
+      "Ben-Hur",
+      "Ben Hur"
+    ],
+    "distractors": [
+      "Gone with the Wind",
+      "Casablanca",
+      "Lawrence of Arabia"
+    ]
+  },
+  "au-film-14wkikl": {
+    "prompt": "Which Hayao Miyazaki film won an Oscar in 2003?",
+    "answer": "Spirited Away",
+    "accepted": [
+      "Spirited Away"
+    ],
+    "distractors": [
+      "My Neighbor Totoro",
+      "Princess Mononoke",
+      "Howl's Moving Castle"
+    ]
+  },
+  "au-film-h9xgj1": {
+    "prompt": "Which film was the first not in English to win the Oscar for Best Picture?",
+    "answer": "Parasite",
+    "accepted": [
+      "Parasite"
+    ],
+    "distractors": [
+      "Amélie",
+      "Roma",
+      "Life Is Beautiful"
+    ]
+  },
+  "wd-film-Q44578": {
+    "prompt": "Who directed Titanic?",
+    "answer": "James Cameron",
+    "accepted": [
+      "James Cameron",
+      "Cameron"
+    ],
+    "distractors": [
+      "Billy Wilder",
+      "Gore Verbinski",
+      "Jonathan Demme"
+    ],
+    "explanation": "Titanic was directed by James Cameron."
+  },
+  "wd-film-Q134773": {
+    "prompt": "Who directed Forrest Gump?",
+    "answer": "Robert Zemeckis",
+    "accepted": [
+      "Robert Zemeckis",
+      "Zemeckis"
+    ],
+    "distractors": [
+      "Joss Whedon",
+      "Sergio Leone",
+      "Zack Snyder"
+    ],
+    "explanation": "Forrest Gump was directed by Robert Zemeckis."
+  },
+  "wd-film-Q47703": {
+    "prompt": "Who directed The Godfather?",
+    "answer": "Francis Ford Coppola",
+    "accepted": [
+      "Francis Ford Coppola",
+      "Coppola"
+    ],
+    "distractors": [
+      "James McTeigue",
+      "Ron Howard",
+      "Ang Lee"
+    ],
+    "explanation": "The Godfather was directed by Francis Ford Coppola."
+  },
+  "wd-film-Q24871": {
+    "prompt": "Who directed Avatar?",
+    "answer": "James Cameron",
+    "accepted": [
+      "James Cameron",
+      "Cameron"
+    ],
+    "distractors": [
+      "Steven Spielberg",
+      "Mel Gibson",
+      "David Fincher"
+    ],
+    "explanation": "Avatar was directed by James Cameron."
+  },
+  "wd-film-Q128518": {
+    "prompt": "Who directed Gladiator?",
+    "answer": "Ridley Scott",
+    "accepted": [
+      "Ridley Scott",
+      "Scott"
+    ],
+    "distractors": [
+      "Joss Whedon",
+      "Ang Lee",
+      "Irvin Kershner"
+    ],
+    "explanation": "Gladiator was directed by Ridley Scott."
+  },
+  "wd-film-Q132689": {
+    "prompt": "Who directed Casablanca?",
+    "answer": "Michael Curtiz",
+    "accepted": [
+      "Michael Curtiz",
+      "Curtiz"
+    ],
+    "distractors": [
+      "Charlie Chaplin",
+      "Christopher Nolan",
+      "Sergio Leone"
+    ],
+    "explanation": "Casablanca was directed by Michael Curtiz."
+  },
+  "wd-film-Q104123": {
+    "prompt": "Who directed Pulp Fiction?",
+    "answer": "Quentin Tarantino",
+    "accepted": [
+      "Quentin Tarantino",
+      "Tarantino"
+    ],
+    "distractors": [
+      "James McTeigue",
+      "Stanley Kubrick",
+      "Peter Jackson"
+    ],
+    "explanation": "Pulp Fiction was directed by Quentin Tarantino."
+  },
+  "wd-film-Q172241": {
+    "prompt": "Who directed The Shawshank Redemption?",
+    "answer": "Frank Darabont",
+    "accepted": [
+      "Frank Darabont",
+      "Darabont"
+    ],
+    "distractors": [
+      "Charlie Chaplin",
+      "Steven Spielberg",
+      "Richard Marquand"
+    ],
+    "explanation": "The Shawshank Redemption was directed by Frank Darabont."
+  },
+  "wd-film-Q163872": {
+    "prompt": "Who directed The Dark Knight?",
+    "answer": "Christopher Nolan",
+    "accepted": [
+      "Christopher Nolan",
+      "Nolan"
+    ],
+    "distractors": [
+      "Peter Weir",
+      "Alfonso Cuarón",
+      "Ang Lee"
+    ],
+    "explanation": "The Dark Knight was directed by Christopher Nolan."
+  },
+  "wd-film-Q91540": {
+    "prompt": "Who directed Back to the Future?",
+    "answer": "Robert Zemeckis",
+    "accepted": [
+      "Robert Zemeckis",
+      "Zemeckis"
+    ],
+    "distractors": [
+      "Frank Darabont",
+      "Ridley Scott",
+      "James McTeigue"
+    ],
+    "explanation": "Back to the Future was directed by Robert Zemeckis."
+  },
+  "wd-film-Q190050": {
+    "prompt": "Who directed Fight Club?",
+    "answer": "David Fincher",
+    "accepted": [
+      "David Fincher",
+      "Fincher"
+    ],
+    "distractors": [
+      "Michael Curtiz",
+      "Frank Darabont",
+      "Mike Newell"
+    ],
+    "explanation": "Fight Club was directed by David Fincher."
+  },
+  "wd-film-Q483941": {
+    "prompt": "Who directed Schindler's List?",
+    "answer": "Steven Spielberg",
+    "accepted": [
+      "Steven Spielberg",
+      "Spielberg"
+    ],
+    "distractors": [
+      "Peter Jackson",
+      "Zack Snyder",
+      "Billy Wilder"
+    ],
+    "explanation": "Schindler's List was directed by Steven Spielberg."
+  },
+  "wd-film-Q133654": {
+    "prompt": "Who directed The Silence of the Lambs?",
+    "answer": "Jonathan Demme",
+    "accepted": [
+      "Jonathan Demme",
+      "Demme"
+    ],
+    "distractors": [
+      "Peter Jackson",
+      "David Yates",
+      "Robert Zemeckis"
+    ],
+    "explanation": "The Silence of the Lambs was directed by Jonathan Demme."
+  },
+  "wd-film-Q102438": {
+    "prompt": "Who directed Harry Potter and the Philosopher's Stone?",
+    "answer": "Chris Columbus",
+    "accepted": [
+      "Chris Columbus",
+      "Columbus"
+    ],
+    "distractors": [
+      "Mike Newell",
+      "Sergio Leone",
+      "James McTeigue"
+    ],
+    "explanation": "Harry Potter and the Philosopher's Stone was directed by Chris Columbus."
+  },
+  "wd-film-Q167726": {
+    "prompt": "Who directed Jurassic Park?",
+    "answer": "Steven Spielberg",
+    "accepted": [
+      "Steven Spielberg",
+      "Spielberg"
+    ],
+    "distractors": [
+      "Gore Verbinski",
+      "Jonathan Demme",
+      "Sergio Leone"
+    ],
+    "explanation": "Jurassic Park was directed by Steven Spielberg."
+  },
+  "wd-film-Q5890": {
+    "prompt": "Who directed V for Vendetta?",
+    "answer": "James McTeigue",
+    "accepted": [
+      "James McTeigue",
+      "McTeigue"
+    ],
+    "distractors": [
+      "Billy Wilder",
+      "Ang Lee",
+      "Mel Gibson"
+    ],
+    "explanation": "V for Vendetta was directed by James McTeigue."
+  },
+  "wd-film-Q13417189": {
+    "prompt": "Who directed Interstellar?",
+    "answer": "Christopher Nolan",
+    "accepted": [
+      "Christopher Nolan",
+      "Nolan"
+    ],
+    "distractors": [
+      "James Cameron",
+      "Michael Curtiz",
+      "Peter Jackson"
+    ],
+    "explanation": "Interstellar was directed by Christopher Nolan."
+  },
+  "wd-film-Q127367": {
+    "prompt": "Who directed The Lord of the Rings: The Fellowship of the Ring?",
+    "answer": "Peter Jackson",
+    "accepted": [
+      "Peter Jackson",
+      "Jackson"
+    ],
+    "distractors": [
+      "Ang Lee",
+      "Jonathan Demme",
+      "Peter Weir"
+    ],
+    "explanation": "The Lord of the Rings: The Fellowship of the Ring was directed by Peter Jackson."
+  },
+  "wd-film-Q182218": {
+    "prompt": "Who directed The Avengers?",
+    "answer": "Joss Whedon",
+    "accepted": [
+      "Joss Whedon",
+      "Whedon"
+    ],
+    "distractors": [
+      "Mel Gibson",
+      "Richard Marquand",
+      "Frank Darabont"
+    ],
+    "explanation": "The Avengers was directed by Joss Whedon."
+  },
+  "wd-film-Q17738": {
+    "prompt": "Who directed Star Wars: Episode IV – A New Hope?",
+    "answer": "George Lucas",
+    "accepted": [
+      "George Lucas",
+      "Lucas"
+    ],
+    "distractors": [
+      "Billy Wilder",
+      "Ron Howard",
+      "Quentin Tarantino"
+    ],
+    "explanation": "Star Wars: Episode IV – A New Hope was directed by George Lucas."
+  },
+  "wd-film-Q41483": {
+    "prompt": "Who directed The Good, the Bad and the Ugly?",
+    "answer": "Sergio Leone",
+    "accepted": [
+      "Sergio Leone",
+      "Leone"
+    ],
+    "distractors": [
+      "Sam Raimi",
+      "George Lucas",
+      "Mel Gibson"
+    ],
+    "explanation": "The Good, the Bad and the Ugly was directed by Sergio Leone."
+  },
+  "wd-film-Q102244": {
+    "prompt": "Who directed Harry Potter and the Chamber of Secrets?",
+    "answer": "Chris Columbus",
+    "accepted": [
+      "Chris Columbus",
+      "Columbus"
+    ],
+    "distractors": [
+      "Sergio Leone",
+      "Bong Joon-ho",
+      "Charlie Chaplin"
+    ],
+    "explanation": "Harry Potter and the Chamber of Secrets was directed by Chris Columbus."
+  },
+  "wd-film-Q131074": {
+    "prompt": "Who directed The Lord of the Rings: The Return of the King?",
+    "answer": "Peter Jackson",
+    "accepted": [
+      "Peter Jackson",
+      "Jackson"
+    ],
+    "distractors": [
+      "Michael Curtiz",
+      "James Cameron",
+      "Stanley Kubrick"
+    ],
+    "explanation": "The Lord of the Rings: The Return of the King was directed by Peter Jackson."
+  },
+  "wd-film-Q162729": {
+    "prompt": "Who directed Braveheart?",
+    "answer": "Mel Gibson",
+    "accepted": [
+      "Mel Gibson",
+      "Gibson"
+    ],
+    "distractors": [
+      "Charlie Chaplin",
+      "Orson Welles",
+      "James McTeigue"
+    ],
+    "explanation": "Braveheart was directed by Mel Gibson."
+  },
+  "wd-film-Q165713": {
+    "prompt": "Who directed Star Wars: Episode I – The Phantom Menace?",
+    "answer": "George Lucas",
+    "accepted": [
+      "George Lucas",
+      "Lucas"
+    ],
+    "distractors": [
+      "Jonathan Demme",
+      "Michael Curtiz",
+      "Chris Columbus"
+    ],
+    "explanation": "Star Wars: Episode I – The Phantom Menace was directed by George Lucas."
+  },
+  "wd-film-Q102225": {
+    "prompt": "Who directed Harry Potter and the Goblet of Fire?",
+    "answer": "Mike Newell",
+    "accepted": [
+      "Mike Newell",
+      "Newell"
+    ],
+    "distractors": [
+      "Ang Lee",
+      "Richard Marquand",
+      "Ridley Scott"
+    ],
+    "explanation": "Harry Potter and the Goblet of Fire was directed by Mike Newell."
+  },
+  "wd-film-Q46717": {
+    "prompt": "Who directed Pirates of the Caribbean: The Curse of the Black Pearl?",
+    "answer": "Gore Verbinski",
+    "accepted": [
+      "Gore Verbinski",
+      "Verbinski"
+    ],
+    "distractors": [
+      "Quentin Tarantino",
+      "Peter Jackson",
+      "Jon Favreau"
+    ],
+    "explanation": "Pirates of the Caribbean: The Curse of the Black Pearl was directed by Gore Verbinski."
+  },
+  "wd-film-Q103474": {
+    "prompt": "Who directed 2001: A Space Odyssey?",
+    "answer": "Stanley Kubrick",
+    "accepted": [
+      "Stanley Kubrick",
+      "Kubrick"
+    ],
+    "distractors": [
+      "Ron Howard",
+      "Irvin Kershner",
+      "Peter Weir"
+    ],
+    "explanation": "2001: A Space Odyssey was directed by Stanley Kubrick."
+  },
+  "wd-film-Q102448": {
+    "prompt": "Who directed Harry Potter and the Prisoner of Azkaban?",
+    "answer": "Alfonso Cuarón",
+    "accepted": [
+      "Alfonso Cuarón",
+      "Cuaron",
+      "Alfonso Cuaron",
+      "Cuarón"
+    ],
+    "distractors": [
+      "David Yates",
+      "Michael Curtiz",
+      "Sam Raimi"
+    ],
+    "explanation": "Harry Potter and the Prisoner of Azkaban was directed by Alfonso Cuarón."
+  },
+  "wd-film-Q161687": {
+    "prompt": "Who directed Harry Potter and the Half-Blood Prince?",
+    "answer": "David Yates",
+    "accepted": [
+      "David Yates",
+      "Yates"
+    ],
+    "distractors": [
+      "Zack Snyder",
+      "Ridley Scott",
+      "Chris Columbus"
+    ],
+    "explanation": "Harry Potter and the Half-Blood Prince was directed by David Yates."
+  },
+  "wd-film-Q102235": {
+    "prompt": "Who directed Harry Potter and the Order of the Phoenix?",
+    "answer": "David Yates",
+    "accepted": [
+      "David Yates",
+      "Yates"
+    ],
+    "distractors": [
+      "Stanley Kubrick",
+      "Gore Verbinski",
+      "Irvin Kershner"
+    ],
+    "explanation": "Harry Potter and the Order of the Phoenix was directed by David Yates."
+  },
+  "wd-film-Q184768": {
+    "prompt": "Who directed The Godfather Part II?",
+    "answer": "Francis Ford Coppola",
+    "accepted": [
+      "Francis Ford Coppola",
+      "Coppola"
+    ],
+    "distractors": [
+      "David Yates",
+      "Peter Jackson",
+      "Zack Snyder"
+    ],
+    "explanation": "The Godfather Part II was directed by Francis Ford Coppola."
+  },
+  "wd-film-Q106316": {
+    "prompt": "Who directed Dead Poets Society?",
+    "answer": "Peter Weir",
+    "accepted": [
+      "Peter Weir",
+      "Weir"
+    ],
+    "distractors": [
+      "Mel Gibson",
+      "Alfonso Cuarón",
+      "Gore Verbinski"
+    ],
+    "explanation": "Dead Poets Society was directed by Peter Weir."
+  },
+  "wd-film-Q164103": {
+    "prompt": "Who directed A Beautiful Mind?",
+    "answer": "Ron Howard",
+    "accepted": [
+      "Ron Howard",
+      "Howard"
+    ],
+    "distractors": [
+      "Chris Columbus",
+      "Stanley Kubrick",
+      "Richard Marquand"
+    ],
+    "explanation": "A Beautiful Mind was directed by Ron Howard."
+  },
+  "wd-film-Q54274": {
+    "prompt": "Who directed Pirates of the Caribbean: At World's End?",
+    "answer": "Gore Verbinski",
+    "accepted": [
+      "Gore Verbinski",
+      "Verbinski"
+    ],
+    "distractors": [
+      "Richard Marquand",
+      "George Lucas",
+      "Mike Newell"
+    ],
+    "explanation": "Pirates of the Caribbean: At World's End was directed by Gore Verbinski."
+  },
+  "wd-film-Q160618": {
+    "prompt": "Who directed Brokeback Mountain?",
+    "answer": "Ang Lee",
+    "accepted": [
+      "Ang Lee",
+      "Lee"
+    ],
+    "distractors": [
+      "Billy Wilder",
+      "Stanley Kubrick",
+      "Sam Raimi"
+    ],
+    "explanation": "Brokeback Mountain was directed by Ang Lee."
+  },
+  "wd-film-Q24815": {
+    "prompt": "Who directed Citizen Kane?",
+    "answer": "Orson Welles",
+    "accepted": [
+      "Orson Welles",
+      "Welles"
+    ],
+    "distractors": [
+      "Michael Curtiz",
+      "Frank Darabont",
+      "Ron Howard"
+    ],
+    "explanation": "Citizen Kane was directed by Orson Welles."
+  },
+  "wd-film-Q192724": {
+    "prompt": "Who directed Iron Man?",
+    "answer": "Jon Favreau",
+    "accepted": [
+      "Jon Favreau",
+      "Favreau"
+    ],
+    "distractors": [
+      "Alfonso Cuarón",
+      "Sam Raimi",
+      "Sergio Leone"
+    ],
+    "explanation": "Iron Man was directed by Jon Favreau."
+  },
+  "wd-film-Q181795": {
+    "prompt": "Who directed Star Wars: Episode V – The Empire Strikes Back?",
+    "answer": "Irvin Kershner",
+    "accepted": [
+      "Irvin Kershner",
+      "Kershner"
+    ],
+    "distractors": [
+      "Orson Welles",
+      "Francis Ford Coppola",
+      "Peter Jackson"
+    ],
+    "explanation": "Star Wars: Episode V – The Empire Strikes Back was directed by Irvin Kershner."
+  },
+  "wd-film-Q484442": {
+    "prompt": "Who directed Spider-Man?",
+    "answer": "Sam Raimi",
+    "accepted": [
+      "Sam Raimi",
+      "Raimi"
+    ],
+    "distractors": [
+      "Ang Lee",
+      "Chris Columbus",
+      "Billy Wilder"
+    ],
+    "explanation": "Spider-Man was directed by Sam Raimi."
+  },
+  "wd-film-Q184843": {
+    "prompt": "Who directed Blade Runner?",
+    "answer": "Ridley Scott",
+    "accepted": [
+      "Ridley Scott",
+      "Scott"
+    ],
+    "distractors": [
+      "Steven Spielberg",
+      "Mel Gibson",
+      "Ang Lee"
+    ],
+    "explanation": "Blade Runner was directed by Ridley Scott."
+  },
+  "wd-film-Q181803": {
+    "prompt": "Who directed Star Wars: Episode VI – Return of the Jedi?",
+    "answer": "Richard Marquand",
+    "accepted": [
+      "Richard Marquand",
+      "Marquand"
+    ],
+    "distractors": [
+      "Sergio Leone",
+      "Michael Curtiz",
+      "Billy Wilder"
+    ],
+    "explanation": "Star Wars: Episode VI – Return of the Jedi was directed by Richard Marquand."
+  },
+  "wd-film-Q131390": {
+    "prompt": "Who directed 300?",
+    "answer": "Zack Snyder",
+    "accepted": [
+      "Zack Snyder",
+      "Snyder"
+    ],
+    "distractors": [
+      "Jonathan Demme",
+      "Ang Lee",
+      "Steven Spielberg"
+    ],
+    "explanation": "300 was directed by Zack Snyder."
+  },
+  "wd-film-Q14171368": {
+    "prompt": "Who directed Avengers: Age of Ultron?",
+    "answer": "Joss Whedon",
+    "accepted": [
+      "Joss Whedon",
+      "Whedon"
+    ],
+    "distractors": [
+      "Orson Welles",
+      "Sam Raimi",
+      "James Cameron"
+    ],
+    "explanation": "Avengers: Age of Ultron was directed by Joss Whedon."
+  },
+  "wd-film-Q190086": {
+    "prompt": "Who directed Some Like It Hot?",
+    "answer": "Billy Wilder",
+    "accepted": [
+      "Billy Wilder",
+      "Wilder"
+    ],
+    "distractors": [
+      "Ang Lee",
+      "Sergio Leone",
+      "Ron Howard"
+    ],
+    "explanation": "Some Like It Hot was directed by Billy Wilder."
+  },
+  "wd-film-Q109116": {
+    "prompt": "Who directed The Great Dictator?",
+    "answer": "Charlie Chaplin",
+    "accepted": [
+      "Charlie Chaplin",
+      "Chaplin"
+    ],
+    "distractors": [
+      "James Cameron",
+      "Stanley Kubrick",
+      "Chris Columbus"
+    ],
+    "explanation": "The Great Dictator was directed by Charlie Chaplin."
+  },
+  "wd-film-Q61448040": {
+    "prompt": "Who directed Parasite?",
+    "answer": "Bong Joon-ho",
+    "accepted": [
+      "Bong Joon-ho",
+      "Bong Joon Ho",
+      "Bong"
+    ],
+    "distractors": [
+      "David Fincher",
+      "Sergio Leone",
+      "Quentin Tarantino"
+    ],
+    "explanation": "Parasite was directed by Bong Joon-ho."
+  },
+  "q-film-mm200o": {
+    "prompt": "Which 1997 James Cameron film was the first in history to pass $1 billion at the box office?",
+    "answer": "Titanic",
+    "accepted": [
+      "Titanic"
+    ],
+    "distractors": [
+      "Avatar",
+      "Jurassic Park",
+      "Terminator 2"
+    ],
+    "explanation": "Titanic held the box-office record for more than 10 years."
+  },
+  "q-film-15lc29g": {
+    "prompt": "Which 2019 Marvel superhero film ranks second in worldwide box office of all time?",
+    "answer": "Avengers: Endgame",
+    "accepted": [
+      "Avengers: Endgame",
+      "Avengers Endgame",
+      "Endgame"
+    ],
+    "distractors": [
+      "Avengers: Infinity War",
+      "Spider-Man: No Way Home",
+      "Black Panther"
+    ],
+    "explanation": "Avengers: Endgame grossed over $2.79 billion."
+  }
+}

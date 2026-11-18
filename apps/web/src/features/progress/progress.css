@@ -1,0 +1,343 @@
+/* === ПРОГРЕСС: серия, уровень, достижения, предложение напоминаний ========= */
+
+.home-header-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.home-header-chips:active {
+  transform: scale(0.97);
+}
+
+.level-chip-arrow {
+  opacity: 0.7;
+}
+
+.streak-badge,
+.level-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Серия ещё не продлена сегодня: огонёк тусклее, чтобы хотелось его «зажечь». */
+.streak-badge.at-risk {
+  opacity: 0.75;
+}
+
+.streak-hint {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--tint-tie);
+  color: var(--on-tie);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* --- Уровень --------------------------------------------------------------- */
+
+.level-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.level-bar-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.level-bar-head strong {
+  font-family: var(--font-display);
+  font-size: 18px;
+}
+
+.level-bar-head span {
+  color: var(--text-dim);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.level-bar-track {
+  overflow: hidden;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+
+.level-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary), var(--success));
+}
+
+.level-bar-note {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* --- Достижения ------------------------------------------------------------ */
+
+.achievements {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.achievements-count {
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.achievements-grid > li {
+  display: flex;
+}
+
+.achievement {
+  flex: 1;
+  border: 2px solid transparent;
+  color: var(--text);
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 12px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.achievement-icon {
+  font-size: 28px;
+  line-height: 1;
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+
+.achievement.unlocked .achievement-icon {
+  filter: none;
+  opacity: 1;
+}
+
+.achievement-title {
+  font-size: 12px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.achievement-meta {
+  color: var(--text-dim);
+  font-size: 11px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.achievement.unlocked .achievement-meta {
+  color: var(--success);
+  font-weight: 800;
+}
+
+
+.achievement.selected {
+  border-color: var(--primary);
+}
+
+.achievement-hint {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 13px;
+  text-align: center;
+}
+
+.achievement-detail {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.achievement-detail-icon {
+  font-size: 36px;
+  line-height: 1;
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+
+.achievement-detail.unlocked .achievement-detail-icon {
+  filter: none;
+  opacity: 1;
+}
+
+.achievement-detail-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.achievement-detail-text p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.achievement-detail-status {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.achievement-detail.unlocked .achievement-detail-status {
+  color: var(--success);
+}
+
+/* --- Предложение напоминаний ------------------------------------------------ */
+
+.reminder-offer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.reminder-offer-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.reminder-offer.done {
+  margin: 0;
+  color: var(--on-win);
+  background: var(--tint-win);
+  font-weight: 700;
+}
+
+.reminder-offer-btn {
+  justify-content: center;
+}
+
+/* --- Плашка для захода из браузера ---------------------------------------- */
+
+.telegram-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: #1a7fc1;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 4px 0 #115f93;
+}
+
+.telegram-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.telegram-banner-text strong {
+  font-size: 16px;
+}
+
+/* Описание достижения — панель снизу поверх экрана. */
+.achievement-sheet-backdrop {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 16px 16px calc(var(--nav-h) + var(--safe-bottom) + 12px);
+  background: rgba(10, 6, 36, 0.5);
+  animation: achievement-sheet-fade 0.15s ease;
+}
+
+.achievement-sheet {
+  position: relative;
+  width: 100%;
+  max-width: 448px;
+  padding-right: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  animation: achievement-sheet-up 0.18s ease;
+}
+
+.achievement-sheet-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 22px;
+  line-height: 1;
+}
+
+@keyframes achievement-sheet-up {
+  from { transform: translateY(16px); opacity: 0; }
+}
+
+@keyframes achievement-sheet-fade {
+  from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .achievement-sheet,
+  .achievement-sheet-backdrop {
+    animation: none;
+  }
+}

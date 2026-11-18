@@ -12,6 +12,7 @@ export function useGameState() {
   const goToBoard = useCallback(() => setPhase('board'), []);
   const goToTiebreaker = useCallback(() => setPhase('tiebreaker'), []);
   const goToWikiPath = useCallback(() => setPhase('wikiPath'), []);
+  const goToClan = useCallback(() => setPhase('clan'), []);
   const goHome = useCallback(() => setPhase('home'), []);
 
   return {
@@ -23,6 +24,7 @@ export function useGameState() {
     goToBoard,
     goToTiebreaker,
     goToWikiPath,
+    goToClan,
     goHome,
   };
 }

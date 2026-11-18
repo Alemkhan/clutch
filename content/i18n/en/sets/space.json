@@ -1,0 +1,259 @@
+{
+  "set-terrestrial-planets": {
+    "title": "Name a terrestrial planet",
+    "mcPrompt": "Which of these is a terrestrial planet?",
+    "members": {
+      "mercury": {
+        "answer": "Mercury",
+        "accepted": [
+          "Mercury"
+        ]
+      },
+      "venus": {
+        "answer": "Venus",
+        "accepted": [
+          "Venus"
+        ]
+      },
+      "earth": {
+        "answer": "Earth",
+        "accepted": [
+          "Earth"
+        ]
+      },
+      "mars": {
+        "answer": "Mars",
+        "accepted": [
+          "Mars"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Jupiter",
+      "the Moon",
+      "Pluto",
+      "Saturn"
+    ]
+  },
+  "set-giant-planets": {
+    "title": "Name a giant planet",
+    "mcPrompt": "Which of these is a giant planet?",
+    "members": {
+      "jupiter": {
+        "answer": "Jupiter",
+        "accepted": [
+          "Jupiter"
+        ]
+      },
+      "saturn": {
+        "answer": "Saturn",
+        "accepted": [
+          "Saturn"
+        ]
+      },
+      "uranus": {
+        "answer": "Uranus",
+        "accepted": [
+          "Uranus"
+        ]
+      },
+      "neptune": {
+        "answer": "Neptune",
+        "accepted": [
+          "Neptune"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Mars",
+      "Venus",
+      "Pluto",
+      "Earth"
+    ]
+  },
+  "set-dwarf-planets": {
+    "title": "Name a dwarf planet",
+    "mcPrompt": "Which of these is a dwarf planet?",
+    "members": {
+      "pluto": {
+        "answer": "Pluto",
+        "accepted": [
+          "Pluto"
+        ]
+      },
+      "ceres": {
+        "answer": "Ceres",
+        "accepted": [
+          "Ceres"
+        ]
+      },
+      "eris": {
+        "answer": "Eris",
+        "accepted": [
+          "Eris"
+        ]
+      },
+      "makemake": {
+        "answer": "Makemake",
+        "accepted": [
+          "Makemake"
+        ]
+      },
+      "haumea": {
+        "answer": "Haumea",
+        "accepted": [
+          "Haumea"
+        ]
+      }
+    },
+    "nonMembers": [
+      "the Moon",
+      "Mars",
+      "Titan",
+      "Ganymede"
+    ]
+  },
+  "set-solar-planets": {
+    "title": "Name a planet of the Solar System",
+    "mcPrompt": "Which of these is a planet of the Solar System?",
+    "members": {
+      "mercury": {
+        "answer": "Mercury",
+        "accepted": [
+          "Mercury"
+        ]
+      },
+      "venus": {
+        "answer": "Venus",
+        "accepted": [
+          "Venus"
+        ]
+      },
+      "earth": {
+        "answer": "Earth",
+        "accepted": [
+          "Earth"
+        ]
+      },
+      "mars": {
+        "answer": "Mars",
+        "accepted": [
+          "Mars"
+        ]
+      },
+      "jupiter": {
+        "answer": "Jupiter",
+        "accepted": [
+          "Jupiter"
+        ]
+      },
+      "saturn": {
+        "answer": "Saturn",
+        "accepted": [
+          "Saturn"
+        ]
+      },
+      "uranus": {
+        "answer": "Uranus",
+        "accepted": [
+          "Uranus"
+        ]
+      },
+      "neptune": {
+        "answer": "Neptune",
+        "accepted": [
+          "Neptune"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Pluto",
+      "the Moon",
+      "the Sun",
+      "Ceres"
+    ]
+  },
+  "set-zodiac": {
+    "title": "Name a zodiac sign",
+    "mcPrompt": "Which of these is a sign of the zodiac?",
+    "members": {
+      "aries": {
+        "answer": "Aries",
+        "accepted": [
+          "Aries"
+        ]
+      },
+      "taurus": {
+        "answer": "Taurus",
+        "accepted": [
+          "Taurus"
+        ]
+      },
+      "gemini": {
+        "answer": "Gemini",
+        "accepted": [
+          "Gemini"
+        ]
+      },
+      "cancer": {
+        "answer": "Cancer",
+        "accepted": [
+          "Cancer"
+        ]
+      },
+      "leo": {
+        "answer": "Leo",
+        "accepted": [
+          "Leo"
+        ]
+      },
+      "virgo": {
+        "answer": "Virgo",
+        "accepted": [
+          "Virgo"
+        ]
+      },
+      "libra": {
+        "answer": "Libra",
+        "accepted": [
+          "Libra"
+        ]
+      },
+      "scorpio": {
+        "answer": "Scorpio",
+        "accepted": [
+          "Scorpio"
+        ]
+      },
+      "sagittarius": {
+        "answer": "Sagittarius",
+        "accepted": [
+          "Sagittarius"
+        ]
+      },
+      "capricorn": {
+        "answer": "Capricorn",
+        "accepted": [
+          "Capricorn"
+        ]
+      },
+      "aquarius": {
+        "answer": "Aquarius",
+        "accepted": [
+          "Aquarius"
+        ]
+      },
+      "pisces": {
+        "answer": "Pisces",
+        "accepted": [
+          "Pisces"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Ophiuchus",
+      "Draco",
+      "Cetus"
+    ]
+  }
+}

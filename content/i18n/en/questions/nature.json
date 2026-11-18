@@ -1,0 +1,464 @@
+{
+  "au-nature-snmr1t": {
+    "prompt": "What is the largest animal on Earth?",
+    "answer": "blue whale",
+    "accepted": [
+      "blue whale"
+    ],
+    "distractors": [
+      "African elephant",
+      "sperm whale",
+      "whale shark"
+    ]
+  },
+  "au-nature-inrxh": {
+    "prompt": "How many legs does a spider have?",
+    "answer": "8",
+    "accepted": [
+      "8",
+      "eight"
+    ],
+    "distractors": [
+      "6",
+      "10",
+      "12"
+    ]
+  },
+  "au-nature-pspxo5": {
+    "prompt": "Which animal is called the king of beasts?",
+    "answer": "lion",
+    "accepted": [
+      "lion"
+    ],
+    "distractors": [
+      "tiger",
+      "bear",
+      "elephant"
+    ]
+  },
+  "au-nature-1xx4qij": {
+    "prompt": "What is a baby horse called?",
+    "answer": "foal",
+    "accepted": [
+      "foal",
+      "colt",
+      "filly"
+    ],
+    "distractors": [
+      "calf",
+      "lamb",
+      "kid"
+    ]
+  },
+  "au-nature-1gu4bf5": {
+    "prompt": "Which flightless bird lives in Antarctica?",
+    "answer": "penguin",
+    "accepted": [
+      "penguin"
+    ],
+    "distractors": [
+      "ostrich",
+      "albatross",
+      "seagull"
+    ]
+  },
+  "au-nature-tjc9yv": {
+    "prompt": "Which animal carries its baby in a pouch and hops on its hind legs?",
+    "answer": "kangaroo",
+    "accepted": [
+      "kangaroo"
+    ],
+    "distractors": [
+      "koala",
+      "raccoon",
+      "hare"
+    ]
+  },
+  "au-nature-at5bj7": {
+    "prompt": "What is the tallest animal in the world?",
+    "answer": "giraffe",
+    "accepted": [
+      "giraffe"
+    ],
+    "distractors": [
+      "elephant",
+      "ostrich",
+      "camel"
+    ]
+  },
+  "au-nature-xiat8i": {
+    "prompt": "Which mammal is capable of true flight?",
+    "answer": "bat",
+    "accepted": [
+      "bat",
+      "bats"
+    ],
+    "distractors": [
+      "flying squirrel",
+      "hummingbird",
+      "chinchilla"
+    ]
+  },
+  "au-nature-105tcwh": {
+    "prompt": "Which tree produces acorns?",
+    "answer": "oak",
+    "accepted": [
+      "oak",
+      "oak tree"
+    ],
+    "distractors": [
+      "maple",
+      "beech",
+      "chestnut"
+    ]
+  },
+  "au-nature-1hix3wf": {
+    "prompt": "What are animals that eat only plants called?",
+    "answer": "herbivores",
+    "accepted": [
+      "herbivores",
+      "herbivore",
+      "herbivorous"
+    ],
+    "distractors": [
+      "carnivores",
+      "omnivores",
+      "scavengers"
+    ]
+  },
+  "au-nature-sec4l0": {
+    "prompt": "What do fish breathe with?",
+    "answer": "gills",
+    "accepted": [
+      "gills",
+      "gill"
+    ],
+    "distractors": [
+      "lungs",
+      "skin",
+      "fins"
+    ]
+  },
+  "au-nature-1m3klo0": {
+    "prompt": "Which bird can fly backwards?",
+    "answer": "hummingbird",
+    "accepted": [
+      "hummingbird",
+      "hummingbirds"
+    ],
+    "distractors": [
+      "swift",
+      "swallow",
+      "falcon"
+    ]
+  },
+  "au-nature-2l6jd": {
+    "prompt": "Which animal is the fastest in a diving flight?",
+    "answer": "peregrine falcon",
+    "accepted": [
+      "peregrine falcon",
+      "peregrine"
+    ],
+    "distractors": [
+      "golden eagle",
+      "cheetah",
+      "swift"
+    ]
+  },
+  "au-nature-181k0f": {
+    "prompt": "What is the largest fish in the world?",
+    "answer": "whale shark",
+    "accepted": [
+      "whale shark"
+    ],
+    "distractors": [
+      "blue whale",
+      "great white shark",
+      "ocean sunfish"
+    ],
+    "explanation": "The blue whale is a mammal, not a fish."
+  },
+  "au-nature-8wkn91": {
+    "prompt": "Which land animal has the longest pregnancy?",
+    "answer": "elephant",
+    "accepted": [
+      "elephant",
+      "African elephant"
+    ],
+    "distractors": [
+      "giraffe",
+      "rhinoceros",
+      "hippopotamus"
+    ],
+    "explanation": "About 22 months."
+  },
+  "au-nature-j6zxkg": {
+    "prompt": "How many eyes does a honeybee have?",
+    "answer": "5",
+    "accepted": [
+      "5",
+      "five"
+    ],
+    "distractors": [
+      "2",
+      "4",
+      "8"
+    ],
+    "explanation": "Two compound eyes and three simple ones."
+  },
+  "au-nature-1djwk9x": {
+    "prompt": "What is the tallest tree in the world?",
+    "answer": "sequoia",
+    "accepted": [
+      "sequoia",
+      "redwood",
+      "coast redwood",
+      "Sequoia sempervirens"
+    ],
+    "distractors": [
+      "eucalyptus",
+      "baobab",
+      "cedar"
+    ]
+  },
+  "au-nature-1xx1hxt": {
+    "prompt": "Which mammal lays eggs and has a duck-like bill?",
+    "answer": "platypus",
+    "accepted": [
+      "platypus",
+      "duck-billed platypus"
+    ],
+    "distractors": [
+      "sloth",
+      "armadillo",
+      "anteater"
+    ]
+  },
+  "au-nature-qkuwih": {
+    "prompt": "What is the study of insects called?",
+    "answer": "entomology",
+    "accepted": [
+      "entomology"
+    ],
+    "distractors": [
+      "herpetology",
+      "ornithology",
+      "ichthyology"
+    ]
+  },
+  "q-nature-1pv92du": {
+    "prompt": "What is the largest mammal in the world that lives in the ocean?",
+    "answer": "blue whale",
+    "accepted": [
+      "blue whale"
+    ],
+    "distractors": [
+      "sperm whale",
+      "orca",
+      "whale shark"
+    ],
+    "explanation": "The blue whale is the largest animal on Earth."
+  },
+  "q-nature-wgp417": {
+    "prompt": "What is the only mammal capable of true powered, flapping flight?",
+    "answer": "bat",
+    "accepted": [
+      "bat",
+      "bats"
+    ],
+    "distractors": [
+      "flying squirrel",
+      "colugo",
+      "sugar glider"
+    ],
+    "explanation": "Bats are the only mammals capable of flapping flight."
+  },
+  "q-nature-1ydqa37": {
+    "prompt": "Which semi-aquatic Australian mammal has a duck-like bill and lays eggs?",
+    "answer": "platypus",
+    "accepted": [
+      "platypus",
+      "duck-billed platypus"
+    ],
+    "distractors": [
+      "echidna",
+      "wombat",
+      "koala"
+    ],
+    "explanation": "The platypus belongs to the monotremes, the egg-laying mammals."
+  },
+  "q-nature-5z7drd": {
+    "prompt": "What is the official name for a baby kangaroo?",
+    "answer": "joey",
+    "accepted": [
+      "joey"
+    ],
+    "distractors": [
+      "calf",
+      "pup",
+      "cub"
+    ],
+    "explanation": "The young of all marsupials are called joeys in English and internationally."
+  },
+  "q-nature-578ait": {
+    "prompt": "Which of the world's longest rivers flows through South America?",
+    "answer": "Amazon",
+    "accepted": [
+      "Amazon",
+      "Amazon River",
+      "the Amazon"
+    ],
+    "distractors": [
+      "Nile",
+      "Mississippi",
+      "Yangtze"
+    ],
+    "explanation": "The Amazon is the largest river on Earth by discharge and one of the longest."
+  },
+  "q-nature-a5d8jm": {
+    "prompt": "Which wild cat is the fastest land mammal?",
+    "answer": "cheetah",
+    "accepted": [
+      "cheetah"
+    ],
+    "distractors": [
+      "lion",
+      "tiger",
+      "leopard"
+    ],
+    "explanation": "The cheetah can reach speeds of 100-120 km/h."
+  },
+  "q-nature-19gazwc": {
+    "prompt": "Which family of carnivorous mammals includes lions, tigers, jaguars and house cats?",
+    "answer": "felids",
+    "accepted": [
+      "felids",
+      "Felidae",
+      "cats",
+      "cat family",
+      "felines"
+    ],
+    "distractors": [
+      "canids",
+      "mustelids",
+      "bears"
+    ],
+    "explanation": "Felidae is a family of the order Carnivora."
+  },
+  "q-nature-1ku6ulh": {
+    "prompt": "Which wild cat is the largest member of the cat family by weight and size?",
+    "answer": "tiger",
+    "accepted": [
+      "tiger"
+    ],
+    "distractors": [
+      "lion",
+      "jaguar",
+      "cougar"
+    ],
+    "explanation": "The tiger is the largest species of the cat family."
+  },
+  "q-nature-n9iqug": {
+    "prompt": "Which river is considered the longest in Africa?",
+    "answer": "Nile",
+    "accepted": [
+      "Nile",
+      "Nile River",
+      "the Nile"
+    ],
+    "distractors": [
+      "Congo",
+      "Niger",
+      "Zambezi"
+    ],
+    "explanation": "The Nile is the main river artery of North and East Africa."
+  },
+  "q-nature-1ybfyd7": {
+    "prompt": "Which river is the longest in Eurasia and in China?",
+    "answer": "Yangtze",
+    "accepted": [
+      "Yangtze",
+      "Yangtze River",
+      "Chang Jiang"
+    ],
+    "distractors": [
+      "Yellow River",
+      "Mekong",
+      "Amur"
+    ],
+    "explanation": "The Yangtze is the longest river on the Eurasian continent."
+  },
+  "q-nature-qva8so": {
+    "prompt": "What shape are the pupils of even-toed hoofed animals such as sheep and goats?",
+    "answer": "rectangular",
+    "accepted": [
+      "rectangular",
+      "rectangle",
+      "horizontal"
+    ],
+    "distractors": [
+      "round",
+      "vertical",
+      "triangular"
+    ],
+    "explanation": "Horizontal rectangular pupils give sheep a wide field of view to watch for predators."
+  },
+  "q-nature-7wmpmh": {
+    "prompt": "Which big cat of the New World is the only member of the genus Panthera in the Americas?",
+    "answer": "jaguar",
+    "accepted": [
+      "jaguar"
+    ],
+    "distractors": [
+      "cougar",
+      "ocelot",
+      "jaguarundi"
+    ],
+    "explanation": "The jaguar is the only member of the genus Panthera in the Americas."
+  },
+  "q-nature-1i7c9hr": {
+    "prompt": "What is the large mountain cat of Central Asia, also known as the irbis, called?",
+    "answer": "snow leopard",
+    "accepted": [
+      "snow leopard",
+      "irbis",
+      "ounce"
+    ],
+    "distractors": [
+      "clouded leopard",
+      "cougar",
+      "cheetah"
+    ],
+    "explanation": "The snow leopard (irbis) lives in the mountain ranges of Central Asia."
+  },
+  "q-nature-1j56ls0": {
+    "prompt": "Which US river system, together with its tributary the Missouri, ranks fourth in the world by length?",
+    "answer": "Mississippi",
+    "accepted": [
+      "Mississippi",
+      "Mississippi River",
+      "Mississippi-Missouri"
+    ],
+    "distractors": [
+      "Colorado",
+      "Columbia",
+      "Yukon"
+    ],
+    "explanation": "The Mississippi together with the Missouri forms North America's largest river system."
+  },
+  "au-nature-10ffykx": {
+    "prompt": "Name a country where orangutans still live in the wild.",
+    "answer": "Indonesia",
+    "accepted": [
+      "Indonesia",
+      "Republic of Indonesia",
+      "Malaysia"
+    ],
+    "distractors": [
+      "Thailand",
+      "Vietnam",
+      "Philippines"
+    ],
+    "explanation": "Wild orangutans live only on the islands of Borneo and Sumatra. Sumatra belongs to Indonesia, while Borneo is shared by Indonesia, Malaysia and Brunei. Natural orangutan populations are found only in the Indonesian and Malaysian parts of Borneo."
+  }
+}

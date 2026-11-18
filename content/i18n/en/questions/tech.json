@@ -1,0 +1,254 @@
+{
+  "au-tech-1r98xxy": {
+    "prompt": "Which company makes the iPhone?",
+    "answer": "Apple",
+    "accepted": [
+      "Apple"
+    ],
+    "distractors": [
+      "Samsung",
+      "Google",
+      "Nokia"
+    ]
+  },
+  "au-tech-1yr4ap8": {
+    "prompt": "What is the @ sign nicknamed in Russian internet slang?",
+    "answer": "dog",
+    "accepted": [
+      "dog",
+      "doggy",
+      "doggie",
+      "little dog",
+      "sobaka"
+    ],
+    "distractors": [
+      "hash",
+      "cat",
+      "worm"
+    ]
+  },
+  "au-tech-9jhq5b": {
+    "prompt": "How many bits are in one byte?",
+    "answer": "8",
+    "accepted": [
+      "8",
+      "eight"
+    ],
+    "distractors": [
+      "4",
+      "16",
+      "10"
+    ]
+  },
+  "au-tech-dqkq8d": {
+    "prompt": "Who founded Microsoft together with Paul Allen?",
+    "answer": "Bill Gates",
+    "accepted": [
+      "Bill Gates",
+      "Gates"
+    ],
+    "distractors": [
+      "Steve Jobs",
+      "Mark Zuckerberg",
+      "Elon Musk"
+    ]
+  },
+  "au-tech-6clxgb": {
+    "prompt": "Who created Facebook?",
+    "answer": "Mark Zuckerberg",
+    "accepted": [
+      "Mark Zuckerberg",
+      "Zuckerberg"
+    ],
+    "distractors": [
+      "Jack Dorsey",
+      "Larry Page",
+      "Elon Musk"
+    ]
+  },
+  "au-tech-ks8kpi": {
+    "prompt": "Which company owns YouTube?",
+    "answer": "Google",
+    "accepted": [
+      "Google",
+      "Alphabet"
+    ],
+    "distractors": [
+      "Meta",
+      "Microsoft",
+      "Amazon"
+    ]
+  },
+  "au-tech-1l3jc5c": {
+    "prompt": "What does WWW stand for?",
+    "answer": "World Wide Web",
+    "accepted": [
+      "World Wide Web"
+    ],
+    "distractors": [
+      "World Web Window",
+      "Wide World Web",
+      "Web World Wide"
+    ]
+  },
+  "au-tech-dh9uot": {
+    "prompt": "What is the main computer chip that performs calculations called?",
+    "answer": "processor",
+    "accepted": [
+      "processor",
+      "CPU",
+      "central processing unit",
+      "microprocessor"
+    ],
+    "distractors": [
+      "graphics card",
+      "RAM",
+      "hard drive"
+    ]
+  },
+  "au-tech-ju6343": {
+    "prompt": "What is the surname of the brothers who created Telegram?",
+    "answer": "Durov",
+    "accepted": [
+      "Durov",
+      "Durovs",
+      "the Durovs"
+    ],
+    "distractors": [
+      "Kaspersky",
+      "Volozh",
+      "Brin"
+    ]
+  },
+  "au-tech-x92qpw": {
+    "prompt": "In what year was the first iPhone released?",
+    "answer": "2007",
+    "accepted": [
+      "2007"
+    ],
+    "distractors": [
+      "2005",
+      "2008",
+      "2010"
+    ]
+  },
+  "au-tech-14py7qz": {
+    "prompt": "What do you call malware that encrypts files and demands a ransom?",
+    "answer": "ransomware",
+    "accepted": [
+      "ransomware",
+      "crypto-ransomware"
+    ],
+    "distractors": [
+      "trojan",
+      "worm",
+      "spyware"
+    ]
+  },
+  "au-tech-db7ob9": {
+    "prompt": "How many kilobytes are in a megabyte in the binary system?",
+    "answer": "1024",
+    "accepted": [
+      "1024",
+      "1,024"
+    ],
+    "distractors": [
+      "1000",
+      "512",
+      "2048"
+    ]
+  },
+  "au-tech-1scsj42": {
+    "prompt": "Who is considered the first programmer in history?",
+    "answer": "Ada Lovelace",
+    "accepted": [
+      "Ada Lovelace",
+      "Lovelace"
+    ],
+    "distractors": [
+      "Alan Turing",
+      "Charles Babbage",
+      "Grace Hopper"
+    ]
+  },
+  "au-tech-lwok58": {
+    "prompt": "Which programming language is named after a British comedy group?",
+    "answer": "Python",
+    "accepted": [
+      "Python"
+    ],
+    "distractors": [
+      "Java",
+      "Ruby",
+      "Perl"
+    ]
+  },
+  "au-tech-q4i3xh": {
+    "prompt": "What does the \"S\" in HTTPS stand for?",
+    "answer": "secure",
+    "accepted": [
+      "secure"
+    ],
+    "distractors": [
+      "server",
+      "system",
+      "speed"
+    ]
+  },
+  "q-tech-13flmii": {
+    "prompt": "Who designed the Analytical Engine, the first mechanical digital computer?",
+    "answer": "Charles Babbage",
+    "accepted": [
+      "Charles Babbage",
+      "Babbage"
+    ],
+    "distractors": [
+      "Alan Turing",
+      "John von Neumann",
+      "Konrad Zuse"
+    ],
+    "explanation": "Charles Babbage described the Analytical Engine in 1835."
+  },
+  "q-tech-1u9i0gc": {
+    "prompt": "Who is considered the first programmer in history for writing a program for Babbage's Analytical Engine?",
+    "answer": "Ada Lovelace",
+    "accepted": [
+      "Ada Lovelace",
+      "Lovelace"
+    ],
+    "distractors": [
+      "Grace Hopper",
+      "Margaret Hamilton",
+      "Joan Clarke"
+    ],
+    "explanation": "Countess Ada Lovelace wrote the first algorithm, for computing Bernoulli numbers."
+  },
+  "q-tech-42b6gj": {
+    "prompt": "What was the first Soviet computer, built in Kyiv under S. A. Lebedev, called?",
+    "answer": "MESM",
+    "accepted": [
+      "MESM",
+      "Small Electronic Calculating Machine"
+    ],
+    "distractors": [
+      "BESM",
+      "Ural",
+      "Strela"
+    ],
+    "explanation": "The Small Electronic Calculating Machine (MESM) began working in 1950."
+  },
+  "q-tech-e9w22r": {
+    "prompt": "What was the German rotor cipher machine broken at Bletchley Park during the war called?",
+    "answer": "Enigma",
+    "accepted": [
+      "Enigma",
+      "Enigma machine"
+    ],
+    "distractors": [
+      "Lorenz",
+      "Colossus",
+      "Logika"
+    ],
+    "explanation": "Breaking the Enigma ciphers played a key role in Allied intelligence."
+  }
+}

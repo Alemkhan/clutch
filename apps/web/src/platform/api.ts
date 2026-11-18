@@ -7,6 +7,7 @@ export {
 } from './apiClient';
 export * from './soloApi';
 export * from './socialApi';
+export * from './clanApi';
 export * from './tiebreakerApi';
 export * from './wikiPathApi';
 export * from './telemetryApi';

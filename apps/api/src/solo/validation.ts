@@ -2,6 +2,7 @@ import {
   MAX_HAMMER_ELAPSED_MS,
   MIN_POOL_ROUNDS,
   SKILL_REWARDS,
+  acceptedAnswersAnyLanguage,
   isAnswerCorrect,
   isCategoryOpen,
   type AsyncMatchRound,
@@ -58,7 +59,8 @@ export function isRoundInput(value: unknown): value is AsyncMatchRoundInput {
 
 export function correctFor(question: Question, selectedAnswer: string): boolean {
   if (question.answerType === 'open_answer') {
-    return isAnswerCorrect(selectedAnswer, question.correctAnswers ?? []).correct;
+    // Открытый ответ засчитывается на любом из трёх языков игры.
+    return isAnswerCorrect(selectedAnswer, acceptedAnswersAnyLanguage(question)).correct;
   }
   return selectedAnswer === question.correctOptionId;
 }

@@ -1,6 +1,8 @@
 import {
   resolveQuestionById,
+  acceptedAnswersAnyLanguage,
   isAnswerCorrect,
+  localizeQuestion,
   toPublicQuestion,
   type PublicQuestion,
   type Question,
@@ -11,6 +13,7 @@ import {
 } from '@clutch/shared';
 import type { Context, Hono } from 'hono';
 import { resolveRequestIdentity, type RequestIdentity } from '../auth/identity';
+import { requestLocale } from '../http/locale';
 import type { Env } from '../env';
 import { readJsonBody } from '../http/jsonBody';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
@@ -77,7 +80,7 @@ export function registerTrainingRoutes(app: Hono<{ Bindings: Env }>): void {
       const question = allowed.has(id) ? resolveQuestionById(id) : null;
       // Любой недоступный id отклоняет весь запрос одинаково: клиент берёт id из /api/training/mistakes.
       if (!question) return notAvailable(c);
-      questions.push(toPublicQuestion(question));
+      questions.push(toPublicQuestion(localizeQuestion(question, requestLocale(c))));
     }
     const response: TrainingQuestionsResponse = { questions };
     return c.json(response);
@@ -97,17 +100,19 @@ export function registerTrainingRoutes(app: Hono<{ Bindings: Env }>): void {
     const allowed = await listTrainableMistakes(c.env.DB, identity.playerId);
     const question = allowed.includes(body.questionId) ? resolveQuestionById(body.questionId) : null;
     if (!question) return notAvailable(c);
+    const shown = localizeQuestion(question, requestLocale(c));
     const response: TrainingCheckResponse = question.answerType === 'open_answer'
       ? {
-        correct: isAnswerCorrect(body.answer, question.correctAnswers ?? []).correct,
-        correctAnswers: question.correctAnswers ?? [],
-        explanation: question.explanation,
+        correct: isAnswerCorrect(body.answer, acceptedAnswersAnyLanguage(question)).correct,
+        correctAnswers: shown.correctAnswers ?? [],
+        explanation: shown.explanation,
         ...(question.revealMediaUrl ? { revealMediaUrl: question.revealMediaUrl } : {}),
       }
       : {
-        correct: body.answer === correctText(question),
-        correctText: correctText(question),
-        explanation: question.explanation,
+        // Варианты собираются заново и на языке игрока: сверяем текст с правильным на любом языке.
+        correct: (['ru', 'en', 'kk'] as const).some((locale) => body.answer === correctText(localizeQuestion(question, locale))),
+        correctText: correctText(shown),
+        explanation: shown.explanation,
         ...(question.revealMediaUrl ? { revealMediaUrl: question.revealMediaUrl } : {}),
       };
     // Верный ответ гасит один долг в журнале; решённая ошибка уходит из доступных.

@@ -5,6 +5,9 @@ import {
   markInviteNotified,
   setOutbidEnabled,
 } from './repository';
+import type { Locale } from '@clutch/shared';
+import { playerLocale } from '../settings/settings';
+import { NOTIFICATION_TEXT } from './messages';
 import { sendTelegramMessage, type SendResult } from './telegram';
 
 /**
@@ -33,15 +36,15 @@ export function telegramChatId(playerId: string): string | null {
   return match ? match[1] : null;
 }
 
-export function cleanName(name: string): string {
+export function cleanName(name: string, locale: Locale = 'ru'): string {
   const collapsed = name.replace(/\s+/gu, ' ').trim();
-  if (!collapsed) return 'Соперник';
+  if (!collapsed) return NOTIFICATION_TEXT[locale].opponentFallback;
   return collapsed.length > MAX_NAME ? `${collapsed.slice(0, MAX_NAME - 1)}…` : collapsed;
 }
 
 /** Приглашение зовёт играть: его текст появляется только когда соперник сам нажал «Позвать на реванш». */
-export function rematchOfferText(challengerName: string): string {
-  return `${cleanName(challengerName)} зовёт на реванш: вопросы будут новые.`;
+export function rematchOfferText(challengerName: string, locale: Locale = 'ru'): string {
+  return NOTIFICATION_TEXT[locale].rematchOffer(cleanName(challengerName, locale));
 }
 
 export function newInviteId(): string {
@@ -102,18 +105,19 @@ async function sendNews(
   env: Env,
   event: OutbidEvent,
   kind: Exclude<NotificationKind, 'rematch_offer'>,
-  text: string,
+  text: (locale: Locale) => string,
 ): Promise<void> {
   try {
     const chatId = telegramChatId(event.recipientRun.playerId);
     if (!chatId || !env.TELEGRAM_BOT_TOKEN) return;
     if (!(await isOutbidEnabled(env.DB, event.recipientRun.playerId))) return;
     const stopUrl = miniAppLink(env.TELEGRAM_MINI_APP_LINK, STOP_PAYLOAD);
+    const locale = await playerLocale(env.DB, event.recipientRun.playerId);
     const result = await sendTelegramMessage(
       env.TELEGRAM_BOT_TOKEN,
       chatId,
-      text,
-      stopUrl ? [[{ text: 'Не присылать такие сообщения', url: stopUrl }]] : [],
+      text(locale),
+      stopUrl ? [[{ text: NOTIFICATION_TEXT[locale].btnStop, url: stopUrl }]] : [],
     );
     if (result.status !== 'sent') {
       logDeliveryFailure(kind, result, {
@@ -161,13 +165,15 @@ export async function sendRematchOffer(env: Env, offer: {
       );
       return false;
     }
+    const locale = await playerLocale(env.DB, offer.recipientPlayerId);
+    const t = NOTIFICATION_TEXT[locale];
     const result = await sendTelegramMessage(
       env.TELEGRAM_BOT_TOKEN,
       chatId,
-      rematchOfferText(offer.challengerName),
+      rematchOfferText(offer.challengerName, locale),
       [
-        [{ text: 'Сыграть реванш', url: rematchUrl }],
-        [{ text: 'Не присылать такие сообщения', url: stopUrl }],
+        [{ text: t.btnRematch, url: rematchUrl }],
+        [{ text: t.btnStop, url: stopUrl }],
       ],
     );
     await markInviteNotified(env.DB, offer.inviteId, result.status === 'sent');
@@ -194,24 +200,20 @@ export async function sendRematchOffer(env: Env, offer: {
 /** Исход соло-забега глазами владельца записи: его запись победила, проиграла или сравнялась. */
 export type SoloRecipientOutcome = 'record_won' | 'record_lost' | 'tie';
 
-/** Множитель с запятой и одним знаком: ×1,4. */
-function formatMultiplier(value: number): string {
-  return `×${value.toFixed(1).replace('.', ',')}`;
-}
-
 /**
  * Исход решила прикидка: счёт и круги равны. Числа показываем, только когда ответили оба: тому, кто
  * сам не отвечал, множитель соперника не сообщаем, чтобы не подсказывать число на завтра.
  */
-function tiebreakText(name: string, outcome: Exclude<SoloRecipientOutcome, 'tie'>, tiebreak: NonNullable<OutbidEvent['tiebreak']>): string {
+function tiebreakText(name: string, outcome: Exclude<SoloRecipientOutcome, 'tie'>, tiebreak: NonNullable<OutbidEvent['tiebreak']>, locale: Locale): string {
+  const t = NOTIFICATION_TEXT[locale];
   const won = outcome === 'record_won';
-  const verdict = won ? 'победа ваша' : `${name} оказался ближе`;
+  const verdict = won ? t.tbVerdictWon : t.tbVerdictLost(name);
   const { recipientMultiplier: own, challengerMultiplier: other } = tiebreak;
   if (own !== null && other !== null) {
-    return `Ничья по забегу, но «На глазок» ${formatMultiplier(own)} против ${formatMultiplier(other)}: ${verdict}.`;
+    return t.tbBoth(t.formatMultiplier(own), t.formatMultiplier(other), verdict);
   }
-  if (own !== null) return `Ничья по забегу, но «На глазок» ответили только вы: ${verdict}.`;
-  return `Ничья по забегу, но «На глазок» ответил только ${name}: ${verdict}.`;
+  if (own !== null) return t.tbOnlyYou(verdict);
+  return t.tbOnlyThem(name, verdict);
 }
 
 /**
@@ -222,12 +224,14 @@ export function soloResultText(
   challengerName: string,
   outcome: SoloRecipientOutcome,
   tiebreak?: OutbidEvent['tiebreak'],
+  locale: Locale = 'ru',
 ): string {
-  const name = cleanName(challengerName);
-  if (tiebreak && outcome !== 'tie') return tiebreakText(name, outcome, tiebreak);
-  if (outcome === 'record_won') return `Ваша запись устояла: ${name} не смог её обойти.`;
-  if (outcome === 'record_lost') return `${name} обошёл вашу запись.`;
-  return `Ничья с ${name}: результаты сравнялись.`;
+  const t = NOTIFICATION_TEXT[locale];
+  const name = cleanName(challengerName, locale);
+  if (tiebreak && outcome !== 'tie') return tiebreakText(name, outcome, tiebreak, locale);
+  if (outcome === 'record_won') return t.soloWon(name);
+  if (outcome === 'record_lost') return t.soloLost(name);
+  return t.soloTie(name);
 }
 
 /**
@@ -239,19 +243,21 @@ export async function notifySoloResult(
   env: Env,
   event: OutbidEvent & { outcome: SoloRecipientOutcome },
 ): Promise<void> {
-  await sendNews(env, event, 'solo_result', soloResultText(event.challengerName, event.outcome, event.tiebreak));
+  await sendNews(env, event, 'solo_result', (locale) => soloResultText(event.challengerName, event.outcome, event.tiebreak, locale));
 }
 
 export function duelResultText(
   friendName: string,
   outcome: SoloRecipientOutcome,
   tiebreak?: OutbidEvent['tiebreak'],
+  locale: Locale = 'ru',
 ): string {
-  const name = cleanName(friendName);
-  if (tiebreak && outcome !== 'tie') return `${tiebreakText(name, outcome, tiebreak)} Дружеская игра, не в зачёт.`;
-  if (outcome === 'record_won') return `${name} сыграл вашу запись по ссылке и не смог её обойти. Дружеская игра, не в зачёт.`;
-  if (outcome === 'record_lost') return `${name} обошёл вашу запись по ссылке. Дружеская игра, не в зачёт.`;
-  return `Ничья с ${name} на вашей записи. Дружеская игра, не в зачёт.`;
+  const t = NOTIFICATION_TEXT[locale];
+  const name = cleanName(friendName, locale);
+  const body = tiebreak && outcome !== 'tie'
+    ? tiebreakText(name, outcome, tiebreak, locale)
+    : outcome === 'record_won' ? t.duelWon(name) : outcome === 'record_lost' ? t.duelLost(name) : t.duelTie(name);
+  return `${body} ${t.friendlySuffix}`;
 }
 
 /**
@@ -263,5 +269,5 @@ export async function notifyDuelResult(
   env: Env,
   event: OutbidEvent & { outcome: SoloRecipientOutcome },
 ): Promise<void> {
-  await sendNews(env, event, 'duel_result', duelResultText(event.challengerName, event.outcome, event.tiebreak));
+  await sendNews(env, event, 'duel_result', (locale) => duelResultText(event.challengerName, event.outcome, event.tiebreak, locale));
 }

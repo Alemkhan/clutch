@@ -1,5 +1,7 @@
 import { Component, type ReactNode } from 'react';
 import { reportClientError } from '../platform/clientErrors';
+import { messagesFor } from '../i18n/messages';
+import { m } from './messages';
 
 interface State {
   failed: boolean;
@@ -19,12 +21,13 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, State> {
 
   render(): ReactNode {
     if (!this.state.failed) return this.props.children;
+    const t = messagesFor(m);
     return (
       <main className="app-shell error-boundary-screen" role="alert">
         <div className="error-boundary-card">
-          <h1 className="error-boundary-title">Что-то сломалось</h1>
-          <p className="error-boundary-text">Мы уже знаем о проблеме. Перезагрузи игру: сохранённые забеги не пропадут.</p>
-          <button type="button" className="cta-btn" onClick={() => window.location.reload()}>Перезагрузить</button>
+          <h1 className="error-boundary-title">{t.errorTitle}</h1>
+          <p className="error-boundary-text">{t.errorText}</p>
+          <button type="button" className="cta-btn" onClick={() => window.location.reload()}>{t.reload}</button>
         </div>
       </main>
     );

@@ -2,6 +2,8 @@ import { useEffect, useReducer, useRef, useState } from "react";
 import type { TiebreakerQuestionView } from "@clutch/shared";
 import { formatQuantity } from "./tiebreakerView";
 import { parseTiebreakerInput, tiebreakerInputHint } from "./tiebreakerInput";
+import { useMessages } from "../../i18n/messages";
+import { m } from "./messages";
 import { calculatorReducer, calculatorValue, initialCalculatorState, type CalculatorOperator } from "./tiebreakerCalculator";
 export type TiebreakerSubmitStatus =
   "idle" | "sending" | "network" | "rejected" | "stale";
@@ -22,6 +24,7 @@ interface AnswerFormProps {
 function TiebreakerCalculator({ onInsert }: { onInsert: (value: number) => void }) {
   const [state, dispatch] = useReducer(calculatorReducer, initialCalculatorState);
   const value = calculatorValue(state);
+  const t = useMessages(m);
   const keys: Array<{ label: string; action: { type: "digit"; value: string } | { type: "decimal" } | { type: "operator"; value: CalculatorOperator } | { type: "equals" } | { type: "clear" } | { type: "backspace" }; className?: string; ariaLabel?: string }> = [
     { label: "7", action: { type: "digit", value: "7" } },
     { label: "8", action: { type: "digit", value: "8" } },
@@ -36,23 +39,23 @@ function TiebreakerCalculator({ onInsert }: { onInsert: (value: number) => void 
     { label: "3", action: { type: "digit", value: "3" } },
     { label: "−", action: { type: "operator", value: "−" }, className: "operator" },
     { label: "0", action: { type: "digit", value: "0" } },
-    { label: ",", action: { type: "decimal" }, ariaLabel: "Десятичная запятая" },
-    { label: "=", action: { type: "equals" }, className: "operator", ariaLabel: "Вычислить" },
+    { label: ",", action: { type: "decimal" }, ariaLabel: t.decimalComma },
+    { label: "=", action: { type: "equals" }, className: "operator", ariaLabel: t.evaluate },
     { label: "+", action: { type: "operator", value: "+" }, className: "operator" },
   ];
 
   return (
     <details className="tb-calculator">
-      <summary>Калькулятор</summary>
+      <summary>{t.calculator}</summary>
       <div className="tb-calculator-body">
-        <div className="tb-calculator-display" aria-label="Текущее число" aria-live="polite">
+        <div className="tb-calculator-display" aria-label={t.currentNumber} aria-live="polite">
           {state.display}
         </div>
         <div className="tb-calculator-utility">
-          <button type="button" onClick={() => dispatch({ type: "clear" })}>Очистить</button>
-          <button type="button" aria-label="Удалить последний символ" onClick={() => dispatch({ type: "backspace" })}>⌫</button>
+          <button type="button" onClick={() => dispatch({ type: "clear" })}>{t.clear}</button>
+          <button type="button" aria-label={t.backspace} onClick={() => dispatch({ type: "backspace" })}>⌫</button>
         </div>
-        <div className="tb-calculator-keys" role="group" aria-label="Клавиши калькулятора">
+        <div className="tb-calculator-keys" role="group" aria-label={t.calculatorKeys}>
           {keys.map((key, index) => (
             <button
               key={`${key.label}-${index}`}
@@ -68,7 +71,7 @@ function TiebreakerCalculator({ onInsert }: { onInsert: (value: number) => void 
         {state.error && <p className="tb-calculator-error" role="alert">{state.error}</p>}
         {state.operator === null && state.replaceDisplay && value !== null && (
           <button type="button" className="tb-calculator-insert" onClick={() => onInsert(value)}>
-            Вставить в ответ
+            {t.insertIntoAnswer}
           </button>
         )}
       </div>
@@ -84,6 +87,7 @@ export function TiebreakerAnswerForm({
   initialText = "",
   initialConfirm = false,
 }: AnswerFormProps) {
+  const t = useMessages(m);
   const [text, setText] = useState(initialText);
   const [confirming, setConfirming] = useState(initialConfirm);
   const [touched, setTouched] = useState(initialText !== "");
@@ -120,7 +124,7 @@ export function TiebreakerAnswerForm({
   return (
     <div className="tb-form" ref={formRef}>
       <label className="tb-label" htmlFor="tb-guess">
-        Твоя прикидка{question.unit ? `, ${question.unit}` : ""}
+        {t.yourGuess}{question.unit ? `, ${question.unit}` : ""}
       </label>
       <input
         id="tb-guess"
@@ -132,7 +136,7 @@ export function TiebreakerAnswerForm({
         autoCorrect="off"
         autoCapitalize="off"
         spellCheck={false}
-        placeholder="Например, 1 500 000"
+        placeholder={t.placeholder}
         value={text}
         disabled={sending || confirming}
         aria-invalid={hint ? true : undefined}
@@ -168,8 +172,7 @@ export function TiebreakerAnswerForm({
       />
       {guest && (
         <p className="tb-guest" role="note">
-          В развязке ничьих считается только ответ из Telegram. Здесь можно
-          ответить и посмотреть результат, но на ничьи он не повлияет.
+          {t.guestNote}
         </p>
       )}
 
@@ -177,12 +180,12 @@ export function TiebreakerAnswerForm({
         <div
           className="tb-confirm"
           role="group"
-          aria-label="Подтверждение ответа"
+          aria-label={t.confirmLabel}
         >
           <p className="tb-confirm-text">
-            Отправить{" "}
-            <strong>{formatQuantity(parsed.value, question.unit)}</strong>?
-            Ответ нельзя изменить.
+            {t.confirmSend}{" "}
+            <strong>{formatQuantity(parsed.value, question.unit)}</strong>?{" "}
+            {t.confirmFinal}
           </p>
           <button
             type="button"
@@ -192,7 +195,7 @@ export function TiebreakerAnswerForm({
               onSubmit(parsed.value);
             }}
           >
-            {sending ? "Отправляем…" : "Отправить ответ"}
+            {sending ? t.sending : t.sendAnswer}
           </button>
           <button
             type="button"
@@ -200,7 +203,7 @@ export function TiebreakerAnswerForm({
             disabled={sending}
             onClick={() => setConfirming(false)}
           >
-            Исправить
+            {t.fix}
           </button>
         </div>
       ) : (
@@ -210,23 +213,23 @@ export function TiebreakerAnswerForm({
           disabled={!parsed.ok}
           onClick={proceed}
         >
-          Ответить
+          {t.answer}
         </button>
       )}
 
       {status === "network" && (
         <p className="tb-hint" role="alert">
-          Не удалось отправить: нет связи. Ответ не потерян — нажми ещё раз.
+          {t.errorNetwork}
         </p>
       )}
       {status === "rejected" && (
         <p className="tb-hint" role="alert">
-          Сервер не принял ответ. Проверь число и попробуй ещё раз.
+          {t.errorRejected}
         </p>
       )}
       {status === "stale" && (
         <p className="tb-hint" role="status">
-          Вопрос дня сменился. Вот новый.
+          {t.staleQuestion}
         </p>
       )}
     </div>

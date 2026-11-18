@@ -1,3 +1,5 @@
+import { m } from "./messages";
+import { messagesFor } from "../../i18n/messages";
 import { useEffect, useRef, useState } from "react";
 import type { QuestionReportKind } from "@clutch/shared";
 import { playSound } from "../../platform/sounds";
@@ -19,10 +21,10 @@ export interface ResolutionReport {
 }
 
 /** Что показывается рядом с каждым kind репорта; порядок фиксирует UI. */
-const REPORT_KINDS: readonly { kind: QuestionReportKind; label: string }[] = [
-  { kind: "wrong_answer", label: "Неверный правильный ответ" },
-  { kind: "answer_not_accepted", label: "Мой ответ не засчитали" },
-  { kind: "other", label: "Другое" },
+const REPORT_KINDS: readonly { kind: QuestionReportKind; label: "reportWrongAnswer" | "reportNotAccepted" | "reportOther" }[] = [
+  { kind: "wrong_answer", label: "reportWrongAnswer" },
+  { kind: "answer_not_accepted", label: "reportNotAccepted" },
+  { kind: "other", label: "reportOther" },
 ];
 
 /**
@@ -66,6 +68,7 @@ export function ResolutionScreen({
   variant = "match",
   report,
 }: ResolutionScreenProps) {
+  const t = messagesFor(m);
   const continuedRef = useRef(false);
   // Панель открыта с самого старта, если статус уже не idle (например, повтор после ошибки).
   const [panel, setPanel] = useState<ReportPanelState>(() =>
@@ -88,14 +91,14 @@ export function ResolutionScreen({
   const training = variant === "training";
   // «Следующий вопрос» там, где мини-игры нет: тренировка, отработка и любой неверный ответ.
   const toHammer = !training && correct;
-  const actionLabel = toHammer ? "К мини-игре" : final ? "К итогу" : "Следующий вопрос";
+  const actionLabel = toHammer ? t.toMiniGame : final ? t.toSummary : t.nextQuestion;
   const subtitle = timedOut
-    ? "Время вышло"
+    ? t.timeUp
     : correct
       ? training
-        ? "Верный ответ"
-        : "Попытка заработана"
-      : selectedAnswer === "" ? "Пропущено" : "Неверный ответ";
+        ? t.correctAnswer
+        : t.attemptEarned
+      : selectedAnswer === "" ? t.skipped : t.wrongAnswer;
   const showMine = !correct && !timedOut && Boolean(selectedAnswer);
 
   const sendReport = () => {
@@ -107,22 +110,22 @@ export function ResolutionScreen({
     <div className="resolution-screen" onClick={continueOnce}>
       <div className="resolution-head">
         <div className={`resolution-status ${correct ? "correct" : "incorrect"}`}>
-          {correct ? "Верно!" : "Мимо"}
+          {correct ? t.correct : t.miss}
         </div>
         <p className="resolution-message">{subtitle}</p>
       </div>
       {revealMediaUrl && (
-        <img className="resolution-reveal" src={revealMediaUrl} alt="Символ без замазанных подписей" />
+        <img className="resolution-reveal" src={revealMediaUrl} alt={t.revealAlt} />
       )}
       <div className="resolution-answers">
         {showMine && (
           <p className="resolution-answer selected">
-            <span>Твой ответ</span>
+            <span>{t.yourAnswer}</span>
             <strong>{selectedAnswer}</strong>
           </p>
         )}
         <p className="resolution-answer correct">
-          <span>Правильный</span>
+          <span>{t.rightOne}</span>
           <strong>{correctAnswer}</strong>
         </p>
       </div>
@@ -135,7 +138,7 @@ export function ResolutionScreen({
         >
           {report.state === "sent" ? (
             <p className="resolution-report-status" role="status">
-              Отправлено, спасибо
+              {t.reportSent}
             </p>
           ) : !panel.open ? (
             <button
@@ -143,11 +146,11 @@ export function ResolutionScreen({
               className="resolution-report-toggle"
               onClick={() => setPanel(openReportPanel)}
             >
-              Сообщить о проблеме
+              {t.reportProblem}
             </button>
           ) : (
             <div className="resolution-report-panel">
-              <div className="resolution-report-options" role="group" aria-label="Что не так?">
+              <div className="resolution-report-options" role="group" aria-label={t.whatsWrong}>
                 {REPORT_KINDS.map(({ kind, label }) => (
                   <button
                     key={kind}
@@ -156,14 +159,14 @@ export function ResolutionScreen({
                     aria-pressed={panel.kind === kind}
                     onClick={() => setPanel((state) => selectReportKind(state, kind))}
                   >
-                    {label}
+                    {t[label]}
                   </button>
                 ))}
               </div>
               <textarea
                 className="resolution-report-comment"
-                aria-label="Комментарий (необязательно)"
-                placeholder="Комментарий (необязательно)"
+                aria-label={t.commentOptional}
+                placeholder={t.commentOptional}
                 maxLength={500}
                 value={panel.comment}
                 onChange={(event) =>
@@ -172,12 +175,12 @@ export function ResolutionScreen({
               />
               {report.state === "sending" && (
                 <p className="resolution-report-status" role="status">
-                  Отправляем…
+                  {t.sending}
                 </p>
               )}
               {report.state === "error" && (
                 <p className="resolution-report-error" role="alert">
-                  Не удалось отправить. Попробуй ещё раз.
+                  {t.sendFailed}
                 </p>
               )}
               <button
@@ -186,7 +189,7 @@ export function ResolutionScreen({
                 disabled={!canSendReport(panel, report.state)}
                 onClick={sendReport}
               >
-                {report.state === "error" ? "Повторить" : "Отправить"}
+                {report.state === "error" ? t.retry : t.submit}
               </button>
             </div>
           )}
@@ -194,7 +197,7 @@ export function ResolutionScreen({
       )}
       {/* Подпись прокручивается с разбором: закреплена только кнопка, иначе подпись висит поверх текста. */}
       {!toHammer && !training && (
-        <p className="resolution-footnote">В этом раунде без мини-игры</p>
+        <p className="resolution-footnote">{t.noMiniGame}</p>
       )}
       <div className="resolution-footer">
         <button

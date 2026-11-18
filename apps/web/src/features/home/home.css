@@ -18,11 +18,13 @@
   min-height: 44px;
 }
 
+/* Под главной карточкой: сколько до нового набора. */
 .home-new-set {
+  margin: 0;
   color: var(--text-dim);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  text-align: right;
+  text-align: center;
 }
 
 .chip {

@@ -3,6 +3,9 @@ import type { Env } from '../env';
 import { soloBoardTop, type BoardPlace } from '../solo/soloRepository';
 import { cleanName, miniAppLink, STOP_PAYLOAD, telegramChatId } from './outbid';
 import { isOutbidEnabled, setOutbidEnabled } from './repository';
+import type { Locale } from '@clutch/shared';
+import { playerLocale } from '../settings/settings';
+import { NOTIFICATION_TEXT } from './messages';
 import { sendTelegramMessage } from './telegram';
 
 /**
@@ -13,13 +16,6 @@ import { sendTelegramMessage } from './telegram';
 
 export const TOP_TEN = 10;
 const DAY_MS = 24 * 60 * 60 * 1000;
-const DISPLAY_NAMES: Record<string, string> = {
-  general: 'Общие знания',
-  geography: 'География',
-  history: 'Другие флаги',
-  languages: 'Языки',
-  kz_history: 'История Казахстана',
-};
 /** Payload без отдельного экрана: клиент его не знает и просто открывает Mini App. */
 export const PLAY_PAYLOAD = 'play';
 
@@ -51,10 +47,11 @@ export async function categoriesWithBoardRun(db: D1Database, playerId: string, d
 }
 
 /** Текст известия. `byGuess` — вытеснили при равных кругах, решила прикидка. */
-export function outOfTopTenText(triggerName: string, category: string, byGuess: boolean): string {
-  const board = DISPLAY_NAMES[category] ?? 'Категория';
-  const reason = byGuess ? ': при равных кругах прикидка «На глазок» точнее' : '';
-  return `${cleanName(triggerName)} выбил вас из первой десятки таблицы дня «${board}»${reason}. Сыграйте ещё набор, чтобы вернуться.`;
+export function outOfTopTenText(triggerName: string, category: string, byGuess: boolean, locale: Locale = 'ru'): string {
+  const t = NOTIFICATION_TEXT[locale];
+  const board = t.categoryNames[category] ?? t.categoryFallback;
+  const reason = byGuess ? t.outOfTopReasonGuess : '';
+  return t.outOfTop(cleanName(triggerName, locale), board, reason);
 }
 
 /** Кого вытеснили: были в десятке до, нет в ней после. Сам инициатор вытесненным быть не может. */
@@ -111,13 +108,15 @@ async function sendOne(
     ON CONFLICT (player_id, date_key) DO NOTHING
   `).bind(bumped.playerId, dateKey, Date.now()).run();
   if ((claimed.meta.changes ?? 0) !== 1) return;
+  const locale = await playerLocale(env.DB, bumped.playerId);
+  const t = NOTIFICATION_TEXT[locale];
   const result = await sendTelegramMessage(
     env.TELEGRAM_BOT_TOKEN as string,
     chatId,
-    outOfTopTenText(triggerName, category, byGuess),
+    outOfTopTenText(triggerName, category, byGuess, locale),
     [
-      [{ text: 'Сыграть ещё набор', url: playUrl }],
-      [{ text: 'Не присылать такие сообщения', url: stopUrl }],
+      [{ text: t.btnPlayMore, url: playUrl }],
+      [{ text: t.btnStop, url: stopUrl }],
     ],
   );
   if (result.status !== 'sent') {

@@ -10,16 +10,19 @@ import {
   type WikiPathChallenge,
   type WikiPathPage,
   type WikiPathRunSummary,
+  type Locale,
 } from '@clutch/shared';
 import { resolveRequestIdentity, type RequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
 import { readJsonBody } from '../http/jsonBody';
+import { requestLocale } from '../http/locale';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import { fetchWikiPage, fetchWikiRevision, WikiPageError, type WikiPageSnapshot } from './wikiPages';
 import {
   appendClick,
   createRun,
   findChallenge,
+  findChallengeById,
   findChallengeTarget,
   findPlayerRun,
   findPublicCompletedRun,
@@ -41,7 +44,24 @@ type AppContext = Context<{ Bindings: Env }>;
 const CLICK_BODY_MAX_BYTES = 1024;
 
 function challengeView(row: WikiChallengeRow): WikiPathChallenge {
-  return { id: row.id, date: row.date_key, startTitle: row.start_title, targetTitle: row.target_title };
+  return { id: row.id, date: row.date_key, startTitle: row.start_title, targetTitle: row.target_title, lang: row.lang };
+}
+
+/** The day's challenge in the player's language; Russian (the original content) when there is none. */
+async function localizedChallenge(db: D1Database, dateKey: string, lang: Locale): Promise<WikiChallengeRow | null> {
+  const challenge = await findChallenge(db, dateKey, lang);
+  if (challenge || lang === 'ru') return challenge;
+  return findChallenge(db, dateKey, 'ru');
+}
+
+/**
+ * The challenge a player plays on a day: a player has at most one run per day, so once started
+ * they keep that run's challenge even if they later switch language; otherwise the request language.
+ */
+async function playerChallenge(c: AppContext, playerId: string, dateKey: string): Promise<{ challenge: WikiChallengeRow | null; run: WikiRunRow | null }> {
+  const run = await findPlayerRun(c.env.DB, playerId, dateKey);
+  const own = run ? await findChallengeById(c.env.DB, run.challenge_id) : null;
+  return { challenge: own ?? await localizedChallenge(c.env.DB, dateKey, requestLocale(c)), run };
 }
 
 function parsePath(run: WikiRunRow): string[] | null {
@@ -63,14 +83,14 @@ function pageView(page: WikiPageSnapshot): WikiPathPage {
   };
 }
 
-async function hydrateStoredPage(page: StoredWikiPage): Promise<WikiPageSnapshot> {
-  const revision = await fetchWikiRevision(page.revisionId);
+async function hydrateStoredPage(lang: Locale, page: StoredWikiPage): Promise<WikiPageSnapshot> {
+  const revision = await fetchWikiRevision(lang, page.revisionId);
   if (revision.pageId !== page.pageId) throw new WikiPageError('wiki_unavailable');
   return { ...page, html: revision.html };
 }
 
 async function runView(db: D1Database, run: WikiRunRow, includePage: boolean, loadedPage?: WikiPageSnapshot) {
-  const challenge = await findChallenge(db, run.date_key);
+  const challenge = await findChallengeById(db, run.challenge_id);
   const path = parsePath(run);
   if (!challenge || !path || path.length !== run.clicks + 1) return null;
   let currentPage: WikiPageSnapshot | null = null;
@@ -78,9 +98,9 @@ async function runView(db: D1Database, run: WikiRunRow, includePage: boolean, lo
     if (loadedPage?.pageId === run.current_page_id && loadedPage.revisionId === run.current_revision_id) {
       currentPage = loadedPage;
     } else {
-      const stored = await getSnapshot(db, run.current_page_id, run.current_revision_id);
+      const stored = await getSnapshot(db, challenge.lang, run.current_page_id, run.current_revision_id);
       if (!stored) return null;
-      currentPage = await hydrateStoredPage(stored);
+      currentPage = await hydrateStoredPage(challenge.lang, stored);
     }
   }
   return {
@@ -110,17 +130,17 @@ async function authenticate(c: AppContext, scope: string): Promise<RequestIdenti
   return identity;
 }
 
-async function loadOrFetch(db: D1Database, challengeId: string, title: string, now: number): Promise<WikiPageSnapshot> {
-  const cached = await getSnapshotByTitle(db, challengeId, title);
-  if (cached) return hydrateStoredPage(cached);
-  const page = await fetchWikiPage(title);
-  await saveSnapshot(db, challengeId, page, now, title);
+async function loadOrFetch(db: D1Database, challenge: WikiChallengeRow, title: string, now: number): Promise<WikiPageSnapshot> {
+  const cached = await getSnapshotByTitle(db, challenge.id, title);
+  if (cached) return hydrateStoredPage(challenge.lang, cached);
+  const page = await fetchWikiPage(challenge.lang, title);
+  await saveSnapshot(db, challenge.id, challenge.lang, page, now, title);
   // A concurrent request may have fixed a different revision first for this challenge.
-  const stored = await getSnapshotByTitle(db, challengeId, title);
+  const stored = await getSnapshotByTitle(db, challenge.id, title);
   if (!stored) return page;
   return stored.pageId === page.pageId && stored.revisionId === page.revisionId
     ? page
-    : hydrateStoredPage(stored);
+    : hydrateStoredPage(challenge.lang, stored);
 }
 
 function wikiFailure(c: AppContext, error: unknown): Response {
@@ -134,7 +154,7 @@ function wikiFailure(c: AppContext, error: unknown): Response {
 async function targetForChallenge(db: D1Database, challenge: WikiChallengeRow, now: number) {
   const saved = await findChallengeTarget(db, challenge.id);
   if (saved) return saved;
-  const page = await loadOrFetch(db, challenge.id, challenge.target_title, now);
+  const page = await loadOrFetch(db, challenge, challenge.target_title, now);
   await saveChallengeTarget(db, challenge.id, page);
   return await findChallengeTarget(db, challenge.id) ?? { pageId: page.pageId, canonicalTitle: page.title };
 }
@@ -144,9 +164,8 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
     const identity = await authenticate(c, 'wiki-path-today');
     if (identity instanceof Response) return identity;
     const dateKey = dailyKey(Date.now());
-    const challenge = await findChallenge(c.env.DB, dateKey);
+    const { challenge, run } = await playerChallenge(c, identity.playerId, dateKey);
     if (!challenge) return c.json({ challenge: null, run: null });
-    const run = await findPlayerRun(c.env.DB, identity.playerId, dateKey);
     const state = run ? await runView(c.env.DB, run, false) : null;
     return c.json({ challenge: challengeView(challenge), run: state?.run ?? null });
   });
@@ -156,17 +175,18 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
     if (identity instanceof Response) return identity;
     const now = Date.now();
     const dateKey = dailyKey(now);
-    const challenge = await findChallenge(c.env.DB, dateKey);
+    const resolved = await playerChallenge(c, identity.playerId, dateKey);
+    const challenge = resolved.challenge;
     if (!challenge) return c.json({ error: 'There is no Wiki Path challenge today.', reason: 'no_challenge_today' }, 404);
     try {
-      let run = await findPlayerRun(c.env.DB, identity.playerId, dateKey);
+      let run = resolved.run;
       let loadedPage: WikiPageSnapshot | undefined;
       const alreadyStarted = Boolean(run);
       if (!run) {
         // Fetch both immutable pages together: sequential Wikimedia requests can exceed the
         // browser's request budget even when each page is individually fast.
         const [page] = await Promise.all([
-          loadOrFetch(c.env.DB, challenge.id, challenge.start_title, now),
+          loadOrFetch(c.env.DB, challenge, challenge.start_title, now),
           targetForChallenge(c.env.DB, challenge, now),
         ]);
         loadedPage = page;
@@ -222,17 +242,19 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
         return state ? c.json({ run: state.run, currentPage: state.currentPage }) : c.json({ error: 'Stored Wiki Path run is invalid.' }, 409);
       } catch (error) { return wikiFailure(c, error); }
     }
+    const challenge = await findChallengeById(c.env.DB, run.challenge_id);
+    if (!challenge) return c.json({ error: 'Challenge not found.' }, 409);
     const path = parsePath(run);
     const currentPageId = path?.length ? Number(path[path.length - 1]) : NaN;
-    const snapshot = Number.isSafeInteger(currentPageId) ? await getSnapshot(c.env.DB, currentPageId, run.current_revision_id) : null;
+    const snapshot = Number.isSafeInteger(currentPageId)
+      ? await getSnapshot(c.env.DB, challenge.lang, currentPageId, run.current_revision_id)
+      : null;
     if (!snapshot) return c.json({ error: 'Stored Wiki Path page is invalid.' }, 409);
     const target = snapshot.allowedLinks.find((link) => titleKey(link.title) === titleKey(body.title as string));
     if (!target) return c.json({ error: 'That page is not linked from the current article.', reason: 'invalid_edge' }, 400);
 
     try {
-      const page = await loadOrFetch(c.env.DB, run.challenge_id, target.title, Date.now());
-      const challenge = await findChallenge(c.env.DB, run.date_key);
-      if (!challenge) return c.json({ error: 'Challenge not found.' }, 409);
+      const page = await loadOrFetch(c.env.DB, challenge, target.title, Date.now());
       const goal = await targetForChallenge(c.env.DB, challenge, Date.now());
       const complete = page.pageId === goal.pageId || titleKey(page.title) === titleKey(goal.canonicalTitle);
       const updated = await appendClick(c.env.DB, run, page, complete, Date.now());
@@ -257,9 +279,10 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(dateKey) || Number.isNaN(Date.parse(`${dateKey}T00:00:00Z`))) {
       return c.json({ error: 'Invalid date.' }, 400);
     }
-    const challenge = await findChallenge(c.env.DB, dateKey);
+    // Each language has its own board: the viewer sees the board of the route they play that day.
+    const { challenge } = await playerChallenge(c, identity.playerId, dateKey);
     if (!challenge) return c.json({ error: 'Challenge not found.', reason: 'no_challenge_today' }, 404);
-    const rows = await listBoard(c.env.DB, dateKey, 1000);
+    const rows = await listBoard(c.env.DB, challenge.id, 1000);
     const ranked = rankWikiPathEntries(rows.map((row) => ({
       runId: row.id, playerId: row.player_id, displayName: row.display_name, clicks: row.clicks, completedAt: row.completed_at!,
     })));
@@ -277,7 +300,8 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
       return c.json({ error: 'Complete today\'s Wiki Path before viewing routes.', reason: 'complete_your_route' }, 403);
     }
     const run = await findPublicCompletedRun(c.env.DB, c.req.param('runId'), dateKey);
-    if (!run) return c.json({ error: 'Completed board route not found.' }, 404);
+    // Routes are revealed only within the viewer's own board (same challenge and language).
+    if (!run || run.challenge_id !== viewerRun.challenge_id) return c.json({ error: 'Completed board route not found.' }, 404);
     const path = parsePath(run);
     if (!path || path.length !== run.clicks + 1) return c.json({ error: 'Stored Wiki Path run is invalid.' }, 409);
     const titles = await pathTitles(c.env.DB, run.challenge_id, path);

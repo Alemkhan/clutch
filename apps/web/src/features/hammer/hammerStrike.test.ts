@@ -50,8 +50,11 @@ describe('hammerZoneLabels', () => {
     const tight = hammerZoneLabels(hammerAttemptRules('q-zones', hit, config));
     expect(wide.length).toBeGreaterThan(tight.length);
     expect(tight.filter((l) => l.result === 'perfect')).toHaveLength(1);
-    expect(tight.some((l) => l.result === 'great')).toBe(false);
-    expect(wide.some((l) => l.result === 'great')).toBe(true);
+    // Зоны v2 узкие: подпись «отлично» не помещается рядом с центром уже на стадии 0,
+    // а на высшем давлении пропадает и «хорошо».
+    expect(wide.some((l) => l.result === 'great')).toBe(false);
+    expect(wide.some((l) => l.result === 'good')).toBe(true);
+    expect(tight.some((l) => l.result === 'good')).toBe(false);
   });
 
   it('rings narrow as the pressure stage rises', () => {

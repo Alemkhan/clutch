@@ -1,5 +1,6 @@
 import type { GuestSessionResponse } from '@clutch/shared';
 import { getTelegramIdentity } from './telegram';
+import { currentLocale } from '../i18n/locale';
 
 // Dev and tunnel traffic must reach the local Worker through Vite's /api proxy. Otherwise a
 // production VITE_API_URL left in apps/web/.env validates Telegram initData with another bot.
@@ -92,7 +93,8 @@ async function rawApiFetch<T>(path: string, init: RequestInit, timeoutMs = DEFAU
   try {
     const response = await fetch(`${API_BASE}${path}`, {
       ...init,
-      headers: { 'Content-Type': 'application/json', ...TUNNEL_HEADERS, ...init.headers },
+      // Язык игрока: вопросы, пояснения и правильные ответы приходят на нём.
+      headers: { 'Content-Type': 'application/json', 'X-Clutch-Locale': currentLocale(), ...TUNNEL_HEADERS, ...init.headers },
       signal: controller.signal,
     });
     if (!response.ok) {

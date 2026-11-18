@@ -11,6 +11,9 @@ import {
   runRoundsLine,
 } from './myRunsView';
 import { ScreenHeader } from '../../ui/ScreenHeader';
+import { useMessages } from '../../i18n/messages';
+import { m } from './messages';
+import { displayPlayerName } from '../../i18n/playerName';
 
 const PAGE_SIZE = 20;
 
@@ -49,6 +52,7 @@ interface MyRunsViewProps {
 }
 
 function Invite({ invite, now, onOpen }: { invite: MyRematchInvite; now: number; onOpen: (inviteId: string) => void }) {
+  const t = useMessages(m);
   const deadline = inviteDeadline(invite.expiresAt, now);
   if (!deadline) return null;
   const rounds = inviteRoundsParts(invite);
@@ -58,23 +62,24 @@ function Invite({ invite, now, onOpen }: { invite: MyRematchInvite; now: number;
         <div className="my-run-top">
           {/* Адресное приглашение теперь рождается только от нажатия соперника, поэтому «зовёт»
               здесь — правда. Раньше строку создавало уведомление, и вызов приходил от системы. */}
-          <span className="my-run-title">{invite.challengerName} зовёт на реванш</span>
+          <span className="my-run-title">{t.callsRematch(invite.challengerName)}</span>
           <span className="my-run-deadline">{deadline}</span>
         </div>
         <span className="my-run-invite-info">
           {rounds
             ? <>{rounds.lead}<strong>{rounds.strong}</strong>{rounds.rest} · {categoryName(invite.category)}</>
-            : <>{categoryName(invite.category)} · {invite.challengerProgress}% против {invite.yourProgress}%</>}
+            : <>{categoryName(invite.category)} · {t.progressVs(invite.challengerProgress, invite.yourProgress)}</>}
         </span>
       </div>
       <button type="button" className="cta-btn my-run-accept" onClick={() => { onOpen(invite.inviteId); }}>
-        Принять реванш
+        {t.acceptRematch}
       </button>
     </li>
   );
 }
 
 function Run({ run, now, offer }: { run: MyRunSummary; now: number; offer: RematchOffer }) {
+  const t = useMessages(m);
   const status = runBadge(run);
   const state = offer.stateOf(run);
   return (
@@ -83,7 +88,7 @@ function Run({ run, now, offer }: { run: MyRunSummary; now: number; offer: Remat
         <span className="my-run-line">{runRoundsLine(run)}</span>
         <span className="my-run-meta">
           {categoryName(run.category)} · {formatRunTime(run.completedAt, now)}
-          {run.opponent ? ` · ${run.opponent.displayName}` : ''}
+          {run.opponent ? ` · ${displayPlayerName(run.opponent.displayName)}` : ''}
         </span>
         {friendDuelNote(run) && <span className="my-run-meta">{friendDuelNote(run)}</span>}
         {/* Реванш зовёт игрок: кнопка есть у забега против записи человека при любом исходе. */}
@@ -93,15 +98,15 @@ function Run({ run, now, offer }: { run: MyRunSummary; now: number; offer: Remat
             className="ghost-btn my-run-rematch"
             onClick={() => { offer.send(run.runId); }}
           >
-            Позвать на реванш
+            {t.offerRematch}
           </button>
         )}
-        {state === 'working' && <span className="my-run-meta" role="status">Зовём…</span>}
-        {state === 'sent' && <span className="my-run-meta">Позвали на реванш — ждём ответа.</span>}
+        {state === 'working' && <span className="my-run-meta" role="status">{t.offerWorking}</span>}
+        {state === 'sent' && <span className="my-run-meta">{t.offerSent}</span>}
         {state === 'error' && (
           <span className="my-run-meta" role="alert">
-            Не удалось позвать.{' '}
-            <button type="button" className="result-save-retry" onClick={() => { offer.send(run.runId); }}>Ещё раз</button>
+            {t.offerError}{' '}
+            <button type="button" className="result-save-retry" onClick={() => { offer.send(run.runId); }}>{t.offerAgain}</button>
           </span>
         )}
       </div>
@@ -122,22 +127,23 @@ export function MyRunsView({
   onPlay,
   offer = SERVER_REMATCH_OFFER,
 }: MyRunsViewProps) {
+  const t = useMessages(m);
   const invites = state.status === 'ready'
     ? state.invites.filter((invite) => inviteDeadline(invite.expiresAt, now) !== null)
     : [];
 
   return (
     <section className="my-runs root-tab">
-      <ScreenHeader title="Партии" />
+      <ScreenHeader title={t.title} />
 
       {state.status === 'loading' && (
-        <div className="matchmaking-loading" role="status"><span /> Загружаем партии</div>
+        <div className="matchmaking-loading" role="status"><span /> {t.loading}</div>
       )}
 
       {state.status === 'error' && (
         <div className="my-runs-message">
-          <p className="matchmaking-error" role="alert">Не удалось загрузить партии. Проверь соединение и попробуй ещё раз.</p>
-          <button type="button" className="cta-btn" onClick={onRetry}>Повторить</button>
+          <p className="matchmaking-error" role="alert">{t.loadError}</p>
+          <button type="button" className="cta-btn" onClick={onRetry}>{t.retry}</button>
         </div>
       )}
 
@@ -145,7 +151,7 @@ export function MyRunsView({
         <>
           {invites.length > 0 && (
             <div className="my-runs-group">
-              <h2 className="my-runs-heading">Вызовы</h2>
+              <h2 className="my-runs-heading">{t.invitesHeading}</h2>
               <ul className="my-runs-invites">
                 {invites.map((invite) => (
                   <Invite key={invite.inviteId} invite={invite} now={now} onOpen={onOpenInvite} />
@@ -156,23 +162,23 @@ export function MyRunsView({
 
           {state.runs.length === 0 && (
             <div className="my-runs-message">
-              <p className="matchmaking-error">Пока нет сыгранных партий.</p>
-              <button type="button" className="cta-btn" onClick={onPlay}>Играть</button>
+              <p className="matchmaking-error">{t.empty}</p>
+              <button type="button" className="cta-btn" onClick={onPlay}>{t.play}</button>
             </div>
           )}
 
           {state.runs.length > 0 && (
             <div className="my-runs-group">
-              <h2 className="my-runs-heading">История</h2>
+              <h2 className="my-runs-heading">{t.historyHeading}</h2>
               <ul className="my-runs-card">
                 {state.runs.map((run) => <Run key={run.runId} run={run} now={now} offer={offer} />)}
               </ul>
               {moreFailed && (
-                <p className="matchmaking-error" role="alert">Не удалось загрузить остальное.</p>
+                <p className="matchmaking-error" role="alert">{t.moreError}</p>
               )}
               {state.nextCursor && (
                 <button type="button" className="ghost-btn my-runs-more" disabled={loadingMore} onClick={onLoadMore}>
-                  {loadingMore ? 'Загружаем…' : 'Показать ещё'}
+                  {loadingMore ? t.loadingMore : t.showMore}
                 </button>
               )}
             </div>

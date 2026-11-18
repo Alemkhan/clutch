@@ -1,0 +1,969 @@
+{
+  "au-art-15tqnn6": {
+    "prompt": "What colour do you get when you mix blue and yellow paint?",
+    "answer": "green",
+    "accepted": [
+      "green"
+    ],
+    "distractors": [
+      "purple",
+      "orange",
+      "brown"
+    ]
+  },
+  "au-art-zhda7s": {
+    "prompt": "In which city is the Louvre?",
+    "answer": "Paris",
+    "accepted": [
+      "Paris"
+    ],
+    "distractors": [
+      "London",
+      "Rome",
+      "Madrid"
+    ]
+  },
+  "au-art-capnqf": {
+    "prompt": "What is a painting of flowers, fruit and tableware called?",
+    "answer": "still life",
+    "accepted": [
+      "still life",
+      "still-life"
+    ],
+    "distractors": [
+      "landscape",
+      "portrait",
+      "seascape"
+    ]
+  },
+  "au-art-djfxz": {
+    "prompt": "Which artist cut off part of his own ear?",
+    "answer": "Vincent van Gogh",
+    "accepted": [
+      "Vincent van Gogh",
+      "Van Gogh"
+    ],
+    "distractors": [
+      "Paul Gauguin",
+      "Claude Monet",
+      "Salvador Dalí"
+    ]
+  },
+  "au-art-z5gx3z": {
+    "prompt": "Which artist is famous for a painting of \"melting\" clocks?",
+    "answer": "Salvador Dalí",
+    "accepted": [
+      "Salvador Dalí",
+      "Dali",
+      "Salvador Dali",
+      "Dalí"
+    ],
+    "distractors": [
+      "René Magritte",
+      "Pablo Picasso",
+      "Joan Miró"
+    ]
+  },
+  "au-art-1t1uouj": {
+    "prompt": "In which city is the Hermitage Museum?",
+    "answer": "Saint Petersburg",
+    "accepted": [
+      "Saint Petersburg",
+      "St. Petersburg",
+      "St Petersburg",
+      "Petersburg"
+    ],
+    "distractors": [
+      "Moscow",
+      "Kazan",
+      "Veliky Novgorod"
+    ]
+  },
+  "au-art-n19o9i": {
+    "prompt": "Who created the marble statue of David in Florence in 1504?",
+    "answer": "Michelangelo",
+    "accepted": [
+      "Michelangelo",
+      "Michelangelo Buonarroti"
+    ],
+    "distractors": [
+      "Bernini",
+      "Rodin",
+      "Canova"
+    ]
+  },
+  "au-art-1vqlft3": {
+    "prompt": "Which art movement did Monet and Renoir start?",
+    "answer": "Impressionism",
+    "accepted": [
+      "Impressionism"
+    ],
+    "distractors": [
+      "Cubism",
+      "Surrealism",
+      "Baroque"
+    ]
+  },
+  "au-art-l7f1v3": {
+    "prompt": "Who painted the Black Square?",
+    "answer": "Kazimir Malevich",
+    "accepted": [
+      "Kazimir Malevich",
+      "Malevich"
+    ],
+    "distractors": [
+      "Wassily Kandinsky",
+      "Marc Chagall",
+      "Ilya Repin"
+    ]
+  },
+  "au-art-1q05i8": {
+    "prompt": "What is painting on wet plaster called?",
+    "answer": "fresco",
+    "accepted": [
+      "fresco"
+    ],
+    "distractors": [
+      "mosaic",
+      "stained glass",
+      "engraving"
+    ]
+  },
+  "au-art-br4do7": {
+    "prompt": "Who painted The Ninth Wave?",
+    "answer": "Ivan Aivazovsky",
+    "accepted": [
+      "Ivan Aivazovsky",
+      "Aivazovsky",
+      "Ayvazovsky"
+    ],
+    "distractors": [
+      "Ivan Shishkin",
+      "Isaac Levitan",
+      "Viktor Vasnetsov"
+    ]
+  },
+  "au-art-xjj4im": {
+    "prompt": "Who painted the ceiling of the Sistine Chapel?",
+    "answer": "Michelangelo",
+    "accepted": [
+      "Michelangelo",
+      "Michelangelo Buonarroti"
+    ],
+    "distractors": [
+      "Raphael",
+      "Leonardo da Vinci",
+      "Sandro Botticelli"
+    ]
+  },
+  "au-art-1ozffqt": {
+    "prompt": "Which female artist is known for self-portraits with a unibrow?",
+    "answer": "Frida Kahlo",
+    "accepted": [
+      "Frida Kahlo",
+      "Kahlo",
+      "Frida"
+    ],
+    "distractors": [
+      "Tamara de Lempicka",
+      "Georgia O'Keeffe",
+      "Yayoi Kusama"
+    ]
+  },
+  "au-art-1o48liu": {
+    "prompt": "Who painted Boyarynya Morozova?",
+    "answer": "Vasily Surikov",
+    "accepted": [
+      "Vasily Surikov",
+      "Surikov",
+      "Vasily Ivanovich Surikov"
+    ],
+    "distractors": [
+      "Ilya Repin",
+      "Vasily Perov",
+      "Vasily Vereshchagin"
+    ]
+  },
+  "au-art-ozk375": {
+    "prompt": "In which city does the statue of Christ the Redeemer stand with outstretched arms?",
+    "answer": "Rio de Janeiro",
+    "accepted": [
+      "Rio de Janeiro",
+      "Rio"
+    ],
+    "distractors": [
+      "São Paulo",
+      "Lisbon",
+      "Buenos Aires"
+    ]
+  },
+  "wd-painting-Q12418": {
+    "prompt": "Who painted Mona Lisa?",
+    "answer": "Leonardo da Vinci",
+    "accepted": [
+      "Leonardo da Vinci",
+      "da Vinci",
+      "Leonardo"
+    ],
+    "distractors": [
+      "Jan van Eyck",
+      "Salvador Dalí",
+      "Pierre-Auguste Renoir"
+    ],
+    "explanation": "Mona Lisa was painted by Leonardo da Vinci."
+  },
+  "wd-painting-Q45585": {
+    "prompt": "Who painted The Starry Night?",
+    "answer": "Vincent van Gogh",
+    "accepted": [
+      "Vincent van Gogh",
+      "Van Gogh"
+    ],
+    "distractors": [
+      "Johannes Vermeer",
+      "Grant Wood",
+      "Francisco Goya"
+    ],
+    "explanation": "The Starry Night was painted by Vincent van Gogh."
+  },
+  "wd-painting-Q185372": {
+    "prompt": "Who painted Girl with a Pearl Earring?",
+    "answer": "Johannes Vermeer",
+    "accepted": [
+      "Johannes Vermeer",
+      "Vermeer",
+      "Jan Vermeer"
+    ],
+    "distractors": [
+      "Rembrandt",
+      "Salvador Dalí",
+      "Théodore Géricault"
+    ],
+    "explanation": "Girl with a Pearl Earring was painted by Johannes Vermeer."
+  },
+  "wd-painting-Q175036": {
+    "prompt": "Who painted Guernica?",
+    "answer": "Pablo Picasso",
+    "accepted": [
+      "Pablo Picasso",
+      "Picasso"
+    ],
+    "distractors": [
+      "Jan van Eyck",
+      "Pierre-Auguste Renoir",
+      "Sandro Botticelli"
+    ],
+    "explanation": "Guernica was painted by Pablo Picasso."
+  },
+  "wd-painting-Q29530": {
+    "prompt": "Who painted Liberty Leading the People?",
+    "answer": "Eugène Delacroix",
+    "accepted": [
+      "Eugène Delacroix",
+      "Delacroix",
+      "Eugene Delacroix"
+    ],
+    "distractors": [
+      "Pierre-Auguste Renoir",
+      "Grant Wood",
+      "Diego Velázquez"
+    ],
+    "explanation": "Liberty Leading the People was painted by Eugène Delacroix."
+  },
+  "wd-painting-Q219831": {
+    "prompt": "Who painted The Night Watch?",
+    "answer": "Rembrandt",
+    "accepted": [
+      "Rembrandt"
+    ],
+    "distractors": [
+      "Francisco Goya",
+      "Claude Monet",
+      "Diego Velázquez"
+    ],
+    "explanation": "The Night Watch was painted by Rembrandt."
+  },
+  "wd-painting-Q208758": {
+    "prompt": "Who painted Las Meninas?",
+    "answer": "Diego Velázquez",
+    "accepted": [
+      "Diego Velázquez",
+      "Velazquez",
+      "Diego Velazquez",
+      "Velázquez"
+    ],
+    "distractors": [
+      "Claude Monet",
+      "Pieter Bruegel the Elder",
+      "Hieronymus Bosch"
+    ],
+    "explanation": "Las Meninas was painted by Diego Velázquez."
+  },
+  "wd-painting-Q151047": {
+    "prompt": "Who painted The Birth of Venus?",
+    "answer": "Sandro Botticelli",
+    "accepted": [
+      "Sandro Botticelli",
+      "Botticelli"
+    ],
+    "distractors": [
+      "Diego Velázquez",
+      "Leonardo da Vinci",
+      "Édouard Manet"
+    ],
+    "explanation": "The Birth of Venus was painted by Sandro Botticelli."
+  },
+  "wd-painting-Q154469": {
+    "prompt": "Who painted The Potato Eaters?",
+    "answer": "Vincent van Gogh",
+    "accepted": [
+      "Vincent van Gogh",
+      "Van Gogh"
+    ],
+    "distractors": [
+      "Rembrandt",
+      "Titian",
+      "Leonardo da Vinci"
+    ],
+    "explanation": "The Potato Eaters was painted by Vincent van Gogh."
+  },
+  "wd-painting-Q328523": {
+    "prompt": "Who painted Impression, Sunrise?",
+    "answer": "Claude Monet",
+    "accepted": [
+      "Claude Monet",
+      "Monet"
+    ],
+    "distractors": [
+      "Ilya Repin",
+      "Caspar David Friedrich",
+      "Gustav Klimt"
+    ],
+    "explanation": "Impression, Sunrise was painted by Claude Monet."
+  },
+  "wd-painting-Q1752990": {
+    "prompt": "Who painted The Death of Socrates?",
+    "answer": "Jacques-Louis David",
+    "accepted": [
+      "Jacques-Louis David",
+      "David",
+      "Jacques Louis David"
+    ],
+    "distractors": [
+      "Édouard Manet",
+      "Gustav Klimt",
+      "Hieronymus Bosch"
+    ],
+    "explanation": "The Death of Socrates was painted by Jacques-Louis David."
+  },
+  "wd-painting-Q698487": {
+    "prompt": "Who painted The Kiss?",
+    "answer": "Gustav Klimt",
+    "accepted": [
+      "Gustav Klimt",
+      "Klimt"
+    ],
+    "distractors": [
+      "Eugène Delacroix",
+      "Claude Monet",
+      "Caspar David Friedrich"
+    ],
+    "explanation": "The Kiss was painted by Gustav Klimt."
+  },
+  "wd-painting-Q474338": {
+    "prompt": "Who painted Lady with an Ermine?",
+    "answer": "Leonardo da Vinci",
+    "accepted": [
+      "Leonardo da Vinci",
+      "da Vinci",
+      "Leonardo"
+    ],
+    "distractors": [
+      "Édouard Manet",
+      "Francisco Goya",
+      "Théodore Géricault"
+    ],
+    "explanation": "Lady with an Ermine was painted by Leonardo da Vinci."
+  },
+  "wd-painting-Q321303": {
+    "prompt": "Who painted The Garden of Earthly Delights?",
+    "answer": "Hieronymus Bosch",
+    "accepted": [
+      "Hieronymus Bosch",
+      "Bosch"
+    ],
+    "distractors": [
+      "Théodore Géricault",
+      "Jacques-Louis David",
+      "Eugène Delacroix"
+    ],
+    "explanation": "The Garden of Earthly Delights was painted by Hieronymus Bosch."
+  },
+  "wd-painting-Q25729": {
+    "prompt": "Who painted The Persistence of Memory?",
+    "answer": "Salvador Dalí",
+    "accepted": [
+      "Salvador Dalí",
+      "Dali",
+      "Salvador Dali",
+      "Dalí"
+    ],
+    "distractors": [
+      "Sandro Botticelli",
+      "Théodore Géricault",
+      "Grant Wood"
+    ],
+    "explanation": "The Persistence of Memory was painted by Salvador Dalí."
+  },
+  "wd-painting-Q311243": {
+    "prompt": "Who painted Wanderer above the Sea of Fog?",
+    "answer": "Caspar David Friedrich",
+    "accepted": [
+      "Caspar David Friedrich",
+      "Friedrich"
+    ],
+    "distractors": [
+      "Théodore Géricault",
+      "Salvador Dalí",
+      "Ilya Repin"
+    ],
+    "explanation": "Wanderer above the Sea of Fog was painted by Caspar David Friedrich."
+  },
+  "wd-painting-Q212616": {
+    "prompt": "Who painted The Raft of the Medusa?",
+    "answer": "Théodore Géricault",
+    "accepted": [
+      "Théodore Géricault",
+      "Gericault",
+      "Theodore Gericault",
+      "Géricault"
+    ],
+    "distractors": [
+      "Jan van Eyck",
+      "Pablo Picasso",
+      "Diego Velázquez"
+    ],
+    "explanation": "The Raft of the Medusa was painted by Théodore Géricault."
+  },
+  "wd-painting-Q478271": {
+    "prompt": "Who painted Reply of the Zaporozhian Cossacks?",
+    "answer": "Ilya Repin",
+    "accepted": [
+      "Ilya Repin",
+      "Repin"
+    ],
+    "distractors": [
+      "Édouard Manet",
+      "Gustav Klimt",
+      "Eugène Delacroix"
+    ],
+    "explanation": "Reply of the Zaporozhian Cossacks was painted by Ilya Repin."
+  },
+  "wd-painting-Q464782": {
+    "prompt": "Who painted American Gothic?",
+    "answer": "Grant Wood",
+    "accepted": [
+      "Grant Wood",
+      "Wood"
+    ],
+    "distractors": [
+      "Sandro Botticelli",
+      "Rembrandt",
+      "Vincent van Gogh"
+    ],
+    "explanation": "American Gothic was painted by Grant Wood."
+  },
+  "wd-painting-Q152509": {
+    "prompt": "Who painted Luncheon on the Grass?",
+    "answer": "Édouard Manet",
+    "accepted": [
+      "Édouard Manet",
+      "Manet",
+      "Edouard Manet"
+    ],
+    "distractors": [
+      "Diego Velázquez",
+      "Titian",
+      "Johannes Vermeer"
+    ],
+    "explanation": "Luncheon on the Grass was painted by Édouard Manet."
+  },
+  "wd-painting-Q152867": {
+    "prompt": "Who painted The Nude Maja?",
+    "answer": "Francisco Goya",
+    "accepted": [
+      "Francisco Goya",
+      "Goya"
+    ],
+    "distractors": [
+      "Théodore Géricault",
+      "Titian",
+      "Leonardo da Vinci"
+    ],
+    "explanation": "The Nude Maja was painted by Francisco Goya."
+  },
+  "wd-painting-Q1091086": {
+    "prompt": "Who painted The Third of May 1808?",
+    "answer": "Francisco Goya",
+    "accepted": [
+      "Francisco Goya",
+      "Goya"
+    ],
+    "distractors": [
+      "Johannes Vermeer",
+      "Pierre-Auguste Renoir",
+      "Leonardo da Vinci"
+    ],
+    "explanation": "The Third of May 1808 was painted by Francisco Goya."
+  },
+  "wd-painting-Q661378": {
+    "prompt": "Who painted The Anatomy Lesson of Dr. Tulp?",
+    "answer": "Rembrandt",
+    "accepted": [
+      "Rembrandt"
+    ],
+    "distractors": [
+      "Gustav Klimt",
+      "Ilya Repin",
+      "Caspar David Friedrich"
+    ],
+    "explanation": "The Anatomy Lesson of Dr. Tulp was painted by Rembrandt."
+  },
+  "wd-painting-Q167605": {
+    "prompt": "Who painted The Milkmaid?",
+    "answer": "Johannes Vermeer",
+    "accepted": [
+      "Johannes Vermeer",
+      "Vermeer",
+      "Jan Vermeer"
+    ],
+    "distractors": [
+      "Gustav Klimt",
+      "Pieter Bruegel the Elder",
+      "Théodore Géricault"
+    ],
+    "explanation": "The Milkmaid was painted by Johannes Vermeer."
+  },
+  "wd-painting-Q683274": {
+    "prompt": "Who painted Bal du moulin de la Galette?",
+    "answer": "Pierre-Auguste Renoir",
+    "accepted": [
+      "Pierre-Auguste Renoir",
+      "Renoir"
+    ],
+    "distractors": [
+      "Leonardo da Vinci",
+      "Caspar David Friedrich",
+      "Eugène Delacroix"
+    ],
+    "explanation": "Bal du moulin de la Galette was painted by Pierre-Auguste Renoir."
+  },
+  "wd-painting-Q220859": {
+    "prompt": "Who painted The Arnolfini Portrait?",
+    "answer": "Jan van Eyck",
+    "accepted": [
+      "Jan van Eyck",
+      "van Eyck"
+    ],
+    "distractors": [
+      "Sandro Botticelli",
+      "Jacques-Louis David",
+      "Grant Wood"
+    ],
+    "explanation": "The Arnolfini Portrait was painted by Jan van Eyck."
+  },
+  "wd-painting-Q737062": {
+    "prompt": "Who painted Olympia?",
+    "answer": "Édouard Manet",
+    "accepted": [
+      "Édouard Manet",
+      "Manet",
+      "Edouard Manet"
+    ],
+    "distractors": [
+      "Claude Monet",
+      "Caspar David Friedrich",
+      "Sandro Botticelli"
+    ],
+    "explanation": "Olympia was painted by Édouard Manet."
+  },
+  "wd-painting-Q476458": {
+    "prompt": "Who painted Oath of the Horatii?",
+    "answer": "Jacques-Louis David",
+    "accepted": [
+      "Jacques-Louis David",
+      "David",
+      "Jacques Louis David"
+    ],
+    "distractors": [
+      "Francisco Goya",
+      "Diego Velázquez",
+      "Titian"
+    ],
+    "explanation": "Oath of the Horatii was painted by Jacques-Louis David."
+  },
+  "wd-painting-Q549847": {
+    "prompt": "Who painted Primavera?",
+    "answer": "Sandro Botticelli",
+    "accepted": [
+      "Sandro Botticelli",
+      "Botticelli"
+    ],
+    "distractors": [
+      "Vincent van Gogh",
+      "Jan van Eyck",
+      "Édouard Manet"
+    ],
+    "explanation": "Primavera was painted by Sandro Botticelli."
+  },
+  "wd-painting-Q727875": {
+    "prompt": "Who painted Venus of Urbino?",
+    "answer": "Titian",
+    "accepted": [
+      "Titian"
+    ],
+    "distractors": [
+      "Jan van Eyck",
+      "Grant Wood",
+      "Vincent van Gogh"
+    ],
+    "explanation": "Venus of Urbino was painted by Titian."
+  },
+  "wd-painting-Q500985": {
+    "prompt": "Who painted The Hunters in the Snow?",
+    "answer": "Pieter Bruegel the Elder",
+    "accepted": [
+      "Pieter Bruegel the Elder",
+      "Bruegel the Elder",
+      "Bruegel",
+      "Brueghel"
+    ],
+    "distractors": [
+      "Jacques-Louis David",
+      "Jan van Eyck",
+      "Gustav Klimt"
+    ],
+    "explanation": "The Hunters in the Snow was painted by Pieter Bruegel the Elder."
+  },
+  "wd-painting-work-Q12418": {
+    "prompt": "Which of these paintings is by Leonardo da Vinci?",
+    "answer": "Mona Lisa",
+    "accepted": [
+      "Mona Lisa",
+      "The Mona Lisa"
+    ],
+    "distractors": [
+      "Luncheon on the Grass",
+      "Liberty Leading the People",
+      "The Arnolfini Portrait"
+    ],
+    "explanation": "Leonardo da Vinci painted Mona Lisa."
+  },
+  "wd-painting-work-Q45585": {
+    "prompt": "Which of these paintings is by Vincent van Gogh?",
+    "answer": "The Starry Night",
+    "accepted": [
+      "The Starry Night",
+      "Starry Night"
+    ],
+    "distractors": [
+      "Wanderer above the Sea of Fog",
+      "Impression, Sunrise",
+      "Girl with a Pearl Earring"
+    ],
+    "explanation": "Vincent van Gogh painted The Starry Night."
+  },
+  "wd-painting-work-Q185372": {
+    "prompt": "Which of these paintings is by Johannes Vermeer?",
+    "answer": "Girl with a Pearl Earring",
+    "accepted": [
+      "Girl with a Pearl Earring"
+    ],
+    "distractors": [
+      "The Kiss",
+      "The Hunters in the Snow",
+      "The Nude Maja"
+    ],
+    "explanation": "Johannes Vermeer painted Girl with a Pearl Earring."
+  },
+  "wd-painting-work-Q175036": {
+    "prompt": "Which of these paintings is by Pablo Picasso?",
+    "answer": "Guernica",
+    "accepted": [
+      "Guernica"
+    ],
+    "distractors": [
+      "Lady with an Ermine",
+      "Mona Lisa",
+      "Liberty Leading the People"
+    ],
+    "explanation": "Pablo Picasso painted Guernica."
+  },
+  "wd-painting-work-Q29530": {
+    "prompt": "Which of these paintings is by Eugène Delacroix?",
+    "answer": "Liberty Leading the People",
+    "accepted": [
+      "Liberty Leading the People"
+    ],
+    "distractors": [
+      "The Raft of the Medusa",
+      "Girl with a Pearl Earring",
+      "Venus of Urbino"
+    ],
+    "explanation": "Eugène Delacroix painted Liberty Leading the People."
+  },
+  "wd-painting-work-Q219831": {
+    "prompt": "Which of these paintings is by Rembrandt?",
+    "answer": "The Night Watch",
+    "accepted": [
+      "The Night Watch",
+      "Night Watch"
+    ],
+    "distractors": [
+      "Olympia",
+      "Impression, Sunrise",
+      "The Raft of the Medusa"
+    ],
+    "explanation": "Rembrandt painted The Night Watch."
+  },
+  "wd-painting-work-Q208758": {
+    "prompt": "Which of these paintings is by Diego Velázquez?",
+    "answer": "Las Meninas",
+    "accepted": [
+      "Las Meninas",
+      "Meninas"
+    ],
+    "distractors": [
+      "The Anatomy Lesson of Dr. Tulp",
+      "The Potato Eaters",
+      "Luncheon on the Grass"
+    ],
+    "explanation": "Diego Velázquez painted Las Meninas."
+  },
+  "wd-painting-work-Q151047": {
+    "prompt": "Which of these paintings is by Sandro Botticelli?",
+    "answer": "The Birth of Venus",
+    "accepted": [
+      "The Birth of Venus",
+      "Birth of Venus"
+    ],
+    "distractors": [
+      "Bal du moulin de la Galette",
+      "The Milkmaid",
+      "The Kiss"
+    ],
+    "explanation": "Sandro Botticelli painted The Birth of Venus."
+  },
+  "wd-painting-work-Q328523": {
+    "prompt": "Which of these paintings is by Claude Monet?",
+    "answer": "Impression, Sunrise",
+    "accepted": [
+      "Impression, Sunrise",
+      "Impression Sunrise"
+    ],
+    "distractors": [
+      "Girl with a Pearl Earring",
+      "The Nude Maja",
+      "The Anatomy Lesson of Dr. Tulp"
+    ],
+    "explanation": "Claude Monet painted Impression, Sunrise."
+  },
+  "wd-painting-work-Q1752990": {
+    "prompt": "Which of these paintings is by Jacques-Louis David?",
+    "answer": "The Death of Socrates",
+    "accepted": [
+      "The Death of Socrates",
+      "Death of Socrates"
+    ],
+    "distractors": [
+      "Impression, Sunrise",
+      "The Kiss",
+      "American Gothic"
+    ],
+    "explanation": "Jacques-Louis David painted The Death of Socrates."
+  },
+  "wd-painting-work-Q698487": {
+    "prompt": "Which of these paintings is by Gustav Klimt?",
+    "answer": "The Kiss",
+    "accepted": [
+      "The Kiss",
+      "Kiss"
+    ],
+    "distractors": [
+      "Luncheon on the Grass",
+      "The Hunters in the Snow",
+      "Girl with a Pearl Earring"
+    ],
+    "explanation": "Gustav Klimt painted The Kiss."
+  },
+  "wd-painting-work-Q321303": {
+    "prompt": "Which of these paintings is by Hieronymus Bosch?",
+    "answer": "The Garden of Earthly Delights",
+    "accepted": [
+      "The Garden of Earthly Delights",
+      "Garden of Earthly Delights"
+    ],
+    "distractors": [
+      "The Starry Night",
+      "The Arnolfini Portrait",
+      "The Raft of the Medusa"
+    ],
+    "explanation": "Hieronymus Bosch painted The Garden of Earthly Delights."
+  },
+  "wd-painting-work-Q25729": {
+    "prompt": "Which of these paintings is by Salvador Dalí?",
+    "answer": "The Persistence of Memory",
+    "accepted": [
+      "The Persistence of Memory",
+      "Persistence of Memory"
+    ],
+    "distractors": [
+      "Olympia",
+      "The Starry Night",
+      "Venus of Urbino"
+    ],
+    "explanation": "Salvador Dalí painted The Persistence of Memory."
+  },
+  "wd-painting-work-Q311243": {
+    "prompt": "Which of these paintings is by Caspar David Friedrich?",
+    "answer": "Wanderer above the Sea of Fog",
+    "accepted": [
+      "Wanderer above the Sea of Fog",
+      "Wanderer Above the Sea of Fog"
+    ],
+    "distractors": [
+      "The Arnolfini Portrait",
+      "The Birth of Venus",
+      "Girl with a Pearl Earring"
+    ],
+    "explanation": "Caspar David Friedrich painted Wanderer above the Sea of Fog."
+  },
+  "wd-painting-work-Q212616": {
+    "prompt": "Which of these paintings is by Théodore Géricault?",
+    "answer": "The Raft of the Medusa",
+    "accepted": [
+      "The Raft of the Medusa",
+      "Raft of the Medusa"
+    ],
+    "distractors": [
+      "Girl with a Pearl Earring",
+      "Lady with an Ermine",
+      "Venus of Urbino"
+    ],
+    "explanation": "Théodore Géricault painted The Raft of the Medusa."
+  },
+  "wd-painting-work-Q478271": {
+    "prompt": "Which of these paintings is by Ilya Repin?",
+    "answer": "Reply of the Zaporozhian Cossacks",
+    "accepted": [
+      "Reply of the Zaporozhian Cossacks",
+      "The Zaporozhian Cossacks",
+      "Zaporozhian Cossacks"
+    ],
+    "distractors": [
+      "The Milkmaid",
+      "Guernica",
+      "Bal du moulin de la Galette"
+    ],
+    "explanation": "Ilya Repin painted Reply of the Zaporozhian Cossacks."
+  },
+  "wd-painting-work-Q464782": {
+    "prompt": "Which of these paintings is by Grant Wood?",
+    "answer": "American Gothic",
+    "accepted": [
+      "American Gothic"
+    ],
+    "distractors": [
+      "The Starry Night",
+      "Bal du moulin de la Galette",
+      "The Third of May 1808"
+    ],
+    "explanation": "Grant Wood painted American Gothic."
+  },
+  "wd-painting-work-Q152509": {
+    "prompt": "Which of these paintings is by Édouard Manet?",
+    "answer": "Luncheon on the Grass",
+    "accepted": [
+      "Luncheon on the Grass",
+      "The Luncheon on the Grass",
+      "Le Déjeuner sur l’herbe",
+      "Le Dejeuner sur l'herbe"
+    ],
+    "distractors": [
+      "Las Meninas",
+      "Impression, Sunrise",
+      "The Nude Maja"
+    ],
+    "explanation": "Édouard Manet painted Luncheon on the Grass."
+  },
+  "wd-painting-work-Q152867": {
+    "prompt": "Which of these paintings is by Francisco Goya?",
+    "answer": "The Nude Maja",
+    "accepted": [
+      "The Nude Maja",
+      "Nude Maja",
+      "La maja desnuda"
+    ],
+    "distractors": [
+      "Primavera",
+      "The Persistence of Memory",
+      "The Starry Night"
+    ],
+    "explanation": "Francisco Goya painted The Nude Maja."
+  },
+  "wd-painting-work-Q683274": {
+    "prompt": "Which of these paintings is by Pierre-Auguste Renoir?",
+    "answer": "Bal du moulin de la Galette",
+    "accepted": [
+      "Bal du moulin de la Galette",
+      "Dance at Le Moulin de la Galette"
+    ],
+    "distractors": [
+      "The Potato Eaters",
+      "Liberty Leading the People",
+      "The Starry Night"
+    ],
+    "explanation": "Pierre-Auguste Renoir painted Bal du moulin de la Galette."
+  },
+  "wd-painting-work-Q220859": {
+    "prompt": "Which of these paintings is by Jan van Eyck?",
+    "answer": "The Arnolfini Portrait",
+    "accepted": [
+      "The Arnolfini Portrait",
+      "Arnolfini Portrait"
+    ],
+    "distractors": [
+      "The Anatomy Lesson of Dr. Tulp",
+      "The Potato Eaters",
+      "Reply of the Zaporozhian Cossacks"
+    ],
+    "explanation": "Jan van Eyck painted The Arnolfini Portrait."
+  },
+  "wd-painting-work-Q727875": {
+    "prompt": "Which of these paintings is by Titian?",
+    "answer": "Venus of Urbino",
+    "accepted": [
+      "Venus of Urbino"
+    ],
+    "distractors": [
+      "Las Meninas",
+      "Reply of the Zaporozhian Cossacks",
+      "Lady with an Ermine"
+    ],
+    "explanation": "Titian painted Venus of Urbino."
+  },
+  "wd-painting-work-Q500985": {
+    "prompt": "Which of these paintings is by Pieter Bruegel the Elder?",
+    "answer": "The Hunters in the Snow",
+    "accepted": [
+      "The Hunters in the Snow",
+      "Hunters in the Snow"
+    ],
+    "distractors": [
+      "The Arnolfini Portrait",
+      "Primavera",
+      "The Death of Socrates"
+    ],
+    "explanation": "Pieter Bruegel the Elder painted The Hunters in the Snow."
+  }
+}

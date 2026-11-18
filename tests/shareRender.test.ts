@@ -48,3 +48,36 @@ describe('share card renderer (real resvg)', () => {
     expect(displayName('😀')).toBe('Соперник');
   });
 });
+
+describe('localized match card', () => {
+  const plain = (svg: string) => svg.replace(/<[^>]+>/gu, '');
+
+  it('draws the headline, labels and button in the requested language', () => {
+    expect(plain(buildShareCardSvg({ outcome: 'win', p: 1, q: 2, name: null }))).toContain('Я вытащил клатч!');
+    const en = plain(buildShareCardSvg({ outcome: 'loss', p: 1, q: 2, name: null, locale: 'en' }));
+    expect(en).toContain('So close!');
+    expect(en).toContain('Opponent');
+    expect(en).toContain('Play in Telegram');
+    const kk = plain(buildShareCardSvg({ outcome: 'tie', p: 1, q: 1, name: null, locale: 'kk' }));
+    expect(kk).toContain('Тең түстік');
+    expect(kk).toContain('Қарсылас');
+    expect(kk).toContain('Telegram-да ойна');
+  });
+
+  it('uses the new palette', () => {
+    const svg = buildShareCardSvg({ outcome: 'win', p: 100, q: 50, name: 'A' });
+    expect(svg).toContain('#2fd283');
+    expect(svg).toContain('#ffc94d');
+    expect(svg).not.toMatch(/#171410|#f7f1e4|#ee3a30/iu);
+  });
+
+  it('localizes the fallback name', () => {
+    expect(displayName(null, 'en')).toBe('Opponent');
+    expect(displayName(null, 'kk')).toBe('Қарсылас');
+  });
+
+  it.each(['en', 'kk'] as const)('renders the %s card', async (locale) => {
+    const png = await render({ outcome: 'win', p: 100, q: 73, name: 'Әйгерім', locale });
+    expect(size(png)).toEqual({ width: 1200, height: 630 });
+  });
+});

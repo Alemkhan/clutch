@@ -54,8 +54,8 @@
   min-width: 0;
   padding: 20px;
   border-radius: 20px;
-  background: var(--text);
-  color: var(--surface);
+  background: var(--ink);
+  color: #fff;
 }
 
 .my-run-invite-body {
@@ -259,9 +259,9 @@
 }
 
 .solo-board-tab.active {
-  border-color: var(--text);
-  background: var(--text);
-  color: var(--surface);
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
   font-weight: 700;
 }
 

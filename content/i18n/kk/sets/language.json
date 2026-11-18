@@ -1,0 +1,160 @@
+{
+  "set-greek-letters": {
+    "title": "Грек әліпбиінің әрпін ата",
+    "mcPrompt": "Мыналардың қайсысы — грек әліпбиінің әрпі?",
+    "members": {
+      "alpha": {
+        "answer": "альфа",
+        "accepted": [
+          "альфа"
+        ]
+      },
+      "beta": {
+        "answer": "бета",
+        "accepted": [
+          "бета"
+        ]
+      },
+      "gamma": {
+        "answer": "гамма",
+        "accepted": [
+          "гамма"
+        ]
+      },
+      "delta": {
+        "answer": "дельта",
+        "accepted": [
+          "дельта"
+        ]
+      },
+      "epsilon": {
+        "answer": "эпсилон",
+        "accepted": [
+          "эпсилон"
+        ]
+      },
+      "zeta": {
+        "answer": "дзета",
+        "accepted": [
+          "дзета",
+          "зета"
+        ]
+      },
+      "eta": {
+        "answer": "эта",
+        "accepted": [
+          "эта"
+        ]
+      },
+      "theta": {
+        "answer": "тета",
+        "accepted": [
+          "тета"
+        ]
+      },
+      "iota": {
+        "answer": "йота",
+        "accepted": [
+          "йота"
+        ]
+      },
+      "kappa": {
+        "answer": "каппа",
+        "accepted": [
+          "каппа"
+        ]
+      },
+      "lambda": {
+        "answer": "лямбда",
+        "accepted": [
+          "лямбда"
+        ]
+      },
+      "mu": {
+        "answer": "мю",
+        "accepted": [
+          "мю",
+          "ми"
+        ]
+      },
+      "nu": {
+        "answer": "ню",
+        "accepted": [
+          "ню",
+          "ни"
+        ]
+      },
+      "xi": {
+        "answer": "кси",
+        "accepted": [
+          "кси"
+        ]
+      },
+      "omicron": {
+        "answer": "омикрон",
+        "accepted": [
+          "омикрон"
+        ]
+      },
+      "pi": {
+        "answer": "пи",
+        "accepted": [
+          "пи"
+        ]
+      },
+      "rho": {
+        "answer": "ро",
+        "accepted": [
+          "ро"
+        ]
+      },
+      "sigma": {
+        "answer": "сигма",
+        "accepted": [
+          "сигма"
+        ]
+      },
+      "tau": {
+        "answer": "тау",
+        "accepted": [
+          "тау"
+        ]
+      },
+      "upsilon": {
+        "answer": "ипсилон",
+        "accepted": [
+          "ипсилон"
+        ]
+      },
+      "phi": {
+        "answer": "фи",
+        "accepted": [
+          "фи"
+        ]
+      },
+      "chi": {
+        "answer": "хи",
+        "accepted": [
+          "хи"
+        ]
+      },
+      "psi": {
+        "answer": "пси",
+        "accepted": [
+          "пси"
+        ]
+      },
+      "omega": {
+        "answer": "омега",
+        "accepted": [
+          "омега"
+        ]
+      }
+    },
+    "nonMembers": [
+      "алеф",
+      "руна",
+      "шва"
+    ]
+  }
+}

@@ -1,3 +1,5 @@
+import { m } from './messages';
+import { useMessages } from '../../i18n/messages';
 import { useEffect, useRef, useState } from 'react';
 import type { PublicQuestion } from '@clutch/shared';
 import { OpenAnswerInput } from './OpenAnswerInput';
@@ -22,6 +24,7 @@ interface QuestionScreenProps {
 }
 
 export function QuestionScreen({ question, onAnswer }: QuestionScreenProps) {
+  const t = useMessages(m);
   const [selected, setSelected] = useState<string | null>(null);
   const [readiness, setReadiness] = useState(() => (
     createQuestionReadiness(Boolean(question.mediaUrl), Date.now(), QUESTION_TIME_MS)
@@ -108,7 +111,7 @@ export function QuestionScreen({ question, onAnswer }: QuestionScreenProps) {
           <img
             key={readiness.requestKey}
             src={question.mediaUrl}
-            alt={question.mediaType === 'outline' ? 'Контур страны' : question.mediaType === 'image' ? 'Иллюстрация к вопросу' : 'Флаг'}
+            alt={question.mediaType === 'outline' ? t.altOutline : question.mediaType === 'image' ? t.altImage : t.altFlag}
             className={`question-media ${question.mediaType === 'outline' ? 'outline' : question.mediaType === 'image' ? 'artwork' : ''}`}
             loading="eager"
             onLoad={handleMediaLoad}
@@ -116,14 +119,14 @@ export function QuestionScreen({ question, onAnswer }: QuestionScreenProps) {
           />
           {readiness.status === 'pending' && (
             <div className="question-media-status" role="status">
-              Загружаем изображение вопроса…
+              {t.mediaLoading}
             </div>
           )}
           {readiness.status === 'error' && (
             <div className="question-media-status error" role="alert">
-              <span>Не удалось загрузить изображение вопроса.</span>
+              <span>{t.mediaError}</span>
               <button type="button" className="question-media-retry" onClick={handleMediaRetry}>
-                Повторить загрузку
+                {t.mediaRetry}
               </button>
             </div>
           )}
@@ -137,7 +140,7 @@ export function QuestionScreen({ question, onAnswer }: QuestionScreenProps) {
       {ready && <h2 className="question-prompt">{question.prompt}</h2>}
 
       {ready && (timedOut ? (
-        <div className="timeout-message" role="alert">Время вышло!</div>
+        <div className="timeout-message" role="alert">{t.timeUpBang}</div>
       ) : isOpen ? (
         <OpenAnswerInput onSubmit={handleOpenSubmit} onSkip={() => handleOpenSubmit('')} disabled={selected !== null} />
       ) : (

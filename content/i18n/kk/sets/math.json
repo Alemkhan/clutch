@@ -1,0 +1,44 @@
+{
+  "set-platonic-solids": {
+    "title": "Дұрыс көпжақты ата",
+    "mcPrompt": "Мыналардың қайсысы дұрыс көпжақ?",
+    "members": {
+      "tetrahedron": {
+        "answer": "тетраэдр",
+        "accepted": [
+          "тетраэдр"
+        ]
+      },
+      "cube": {
+        "answer": "куб",
+        "accepted": [
+          "куб",
+          "гексаэдр"
+        ]
+      },
+      "octahedron": {
+        "answer": "октаэдр",
+        "accepted": [
+          "октаэдр"
+        ]
+      },
+      "dodecahedron": {
+        "answer": "додекаэдр",
+        "accepted": [
+          "додекаэдр"
+        ]
+      },
+      "icosahedron": {
+        "answer": "икосаэдр",
+        "accepted": [
+          "икосаэдр"
+        ]
+      }
+    },
+    "nonMembers": [
+      "пирамида",
+      "призма",
+      "конус"
+    ]
+  }
+}

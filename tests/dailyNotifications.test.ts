@@ -4,7 +4,7 @@
 import { createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import app from '../apps/api/src/index';
-import { DAILY_WIDGET_CAPTION, sendDailyChallengeDigests, setDailyDigestEnabled } from '../apps/api/src/notifications/daily';
+import { DAILY_WIDGET_CAPTION, sendDailyChallengeDigests, setDailyDigestEnabled, streakDays } from '../apps/api/src/notifications/daily';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
 const databases: TestD1[] = [];
@@ -117,6 +117,32 @@ describe('daily challenge notifications', () => {
       'https://t.me/testbot?startapp=daily_guess',
       'https://t.me/testbot?startapp=daily_wiki',
       'https://t.me/testbot?startapp=daily_off',
+    ]);
+  });
+
+  it('reminds about a streak at risk with its own play button', async () => {
+    const db = database();
+    await setDailyDigestEnabled(db.binding, 'telegram:42', true, NOW);
+    for (const day of ['2026-10-19', '2026-10-20']) {
+      db.sqlite.prepare(`INSERT INTO match_runs (id, player_id, display_name, category, questions_json, created_at, rules_version, question_set_id)
+        VALUES (?, 'telegram:42', 'Игрок', 'general', '[]', 1, 'solo-daily-v1', ?)`).run(`run-${day}`, `general:${day}:0`);
+    }
+    const fetchMock = vi.mocked(fetch);
+    fetchMock.mockImplementation(async (input) => String(input).endsWith('/sendWidget')
+      ? new Response(JSON.stringify({ ok: false }), { status: 400 })
+      : Response.json({ ok: true }));
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    await sendDailyChallengeDigests(env(db), NOW);
+    const [, init] = fetchMock.mock.calls[1] as [string, RequestInit];
+    const body = JSON.parse(String(init.body));
+    expect(body.text).toContain('🔥 Серия 2 дня подряд');
+    expect(body.reply_markup.inline_keyboard[0]).toEqual([{ text: '🔥 Забег дня', url: 'https://t.me/testbot?startapp=daily_quiz' }]);
+  });
+
+  it('declines streak days in Russian', () => {
+    expect([1, 2, 5, 11, 21, 22, 25, 111].map(streakDays)).toEqual([
+      '1 день', '2 дня', '5 дней', '11 дней', '21 день', '22 дня', '25 дней', '111 дней',
     ]);
   });
 

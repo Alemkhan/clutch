@@ -53,20 +53,21 @@ export function dailyWidgetQuestion(dateKey: string, pool: readonly PackRecord[]
   };
 }
 
-const STYLE = `:root{--bg:var(--tg-theme-bg-color,#fff);--tx:var(--tg-theme-text-color,#111);--hint:var(--tg-theme-hint-color,#888);--btn:var(--tg-theme-secondary-bg-color,#f1f1f4);--acc:var(--tg-theme-button-color,#2a8af6);--acct:var(--tg-theme-button-text-color,#fff)}
-body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.35 -apple-system,system-ui,sans-serif}
+// Палитра игры (тёмно-фиолетовая, «объёмные» кнопки), а не тема Telegram: виджет — витрина Clutch.
+const STYLE = `:root{--bg:#1f1850;--tx:#fff;--hint:#b4aedb;--btn:#fff;--btnt:#1f1a3d;--edge:#d8d4ec;--acc:#ffc94d;--acct:#2a1b5c;--acce:#e39a26}
+body{margin:0;background:linear-gradient(180deg,#2b2270,#160f3e);color:var(--tx);font:15px/1.35 -apple-system,system-ui,sans-serif}
 #w{padding:12px 12px calc(12px + env(safe-area-inset-bottom))}
-#h{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--hint);margin-bottom:6px}
-#q{font-weight:700;font-size:16px;margin:0 0 10px}
-#o{display:grid;gap:6px}
-.b{display:block;width:100%;padding:10px 12px;border:0;border-radius:10px;background:var(--btn);color:var(--tx);font:inherit;text-align:left;transition:background .2s,transform .1s}
-.b:active{transform:scale(.98)}
-.b.ok{background:#2fb35a;color:#fff}
-.b.no{background:#e5484d;color:#fff}
+#h{font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--hint);margin-bottom:6px}
+#q{font-weight:800;font-size:17px;margin:0 0 10px}
+#o{display:grid;gap:8px}
+.b{display:block;width:100%;padding:10px 12px;border:0;border-radius:12px;background:var(--btn);color:var(--btnt);box-shadow:0 3px 0 var(--edge);font:inherit;font-weight:700;text-align:left;transition:background .2s,transform .1s}
+.b:active{transform:translateY(2px)}
+.b.ok{background:#2fd283;color:#fff;box-shadow:0 3px 0 #1f9e5f}
+.b.no{background:#ff5c7a;color:#fff;box-shadow:0 3px 0 #c93a55}
 .b.dim{opacity:.55}
-#r{margin-top:10px;font-weight:700}
+#r{margin-top:10px;font-weight:800}
 #e{margin:4px 0 0;color:var(--hint);font-size:13px}
-#c{margin-top:10px;width:100%;padding:11px;border:0;border-radius:10px;background:var(--acc);color:var(--acct);font:inherit;font-weight:700}`;
+#c{margin-top:12px;width:100%;padding:12px;border:0;border-radius:12px;background:var(--acc);color:var(--acct);box-shadow:0 4px 0 var(--acce);font:inherit;font-weight:800}`;
 
 // Выбор хранится в localStorage сообщения: открыл заново — видит свой ответ.
 const SCRIPT = `const W=window.TelegramWidget;let pick=null;

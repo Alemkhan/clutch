@@ -102,7 +102,7 @@
 .question-media-retry {
   padding: 9px 13px;
   border-radius: 10px;
-  background: var(--text);
+  background: var(--ink);
   color: white;
   font-size: 13px;
   font-weight: 800;

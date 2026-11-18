@@ -2,12 +2,14 @@ import {
   CURRENT_SOLO_RUN_CONDITIONS,
   SOLO_TARGET_PROGRESS,
   evaluateSoloRun,
+  localizeQuestion,
   toPublicQuestion,
   type CompleteSoloRunResponse,
   type MiniGameId,
   type SoloPlayedRound,
   type SoloRunSnapshot,
 } from '@clutch/shared';
+import { requestLocale } from '../http/locale';
 import { finalizeSoloRun } from './finalizeSoloRun';
 import { findRunOwner } from './repository';
 import { listSoloRounds } from './soloRoundsRepository';
@@ -41,7 +43,7 @@ export async function buildSoloSnapshot(c: AppContext, loaded: LoadedSoloRun): P
     runId: run.id,
     ...(loaded.groupChallenge ? { groupChallenge: true as const } : {}),
     category: (owner?.category ?? 'general') as SoloRunSnapshot['category'],
-    questions: questions.map(toPublicQuestion),
+    questions: questions.map((question) => toPublicQuestion(localizeQuestion(question, requestLocale(c)))),
     pace: parsePace(run.opponent_json),
     // Соперника отпустили, пока игрока не было: экран должен сказать об этом прямо.
     ...(run.pace_released === 1 ? { paceReleased: true } : {}),
@@ -50,6 +52,7 @@ export async function buildSoloSnapshot(c: AppContext, loaded: LoadedSoloRun): P
     roundCap: loaded.roundCap,
     rulesVersion: run.rules_version ?? CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
     miniGameId: run.mini_game_id as MiniGameId,
+    miniGameConfig: loaded.miniGameConfig,
     bankExhausted: false,
     rounds: rows.filter((row) => row.settled_at !== null).map((row): SoloPlayedRound => ({
       questionId: row.question_id,

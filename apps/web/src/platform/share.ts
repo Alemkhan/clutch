@@ -1,5 +1,8 @@
-import type { CategoryId, SkillResult } from '@clutch/shared';
+import type { CategoryId, Locale, SkillResult } from '@clutch/shared';
 import type { MatchSource } from '../features/solo/matchmaking';
+import { currentLocale } from '../i18n/locale';
+import { messagesFor } from '../i18n/messages';
+import { m } from './messages';
 
 export type ShareOutcome = 'win' | 'loss' | 'tie';
 export type ShareStrategy = 'telegram' | 'native' | 'copy';
@@ -38,11 +41,17 @@ export function shareOutcome(playerProgress: number, opponentProgress: number): 
 
 const MAX_SHARE_NAME_LENGTH = 32;
 
+/** Язык карточки и страницы превью (ru|en|kk): получатель видит их на языке отправителя. */
+function withLocale(params: URLSearchParams, locale: Locale): void {
+  params.set('l', locale);
+}
+
 /**
  * Ссылка на страницу-превью `/api/share` (OG-карточка). Имя соперника передаётся
  * только для соперника-игрока, чтобы не выдавать бота или практику за человека.
+ * l — язык игрока: на нём сервер рисует карточку и подписи превью (см. withLocale).
  */
-export function buildShareUrl(input: ShareInput, apiBase: string | undefined, origin: string): string {
+export function buildShareUrl(input: ShareInput, apiBase: string | undefined, origin: string, locale: Locale = currentLocale()): string {
   const base = (apiBase?.trim() || origin).replace(/\/+$/, '');
   const params = new URLSearchParams({
     o: shareOutcome(input.playerProgress, input.opponentProgress),
@@ -53,6 +62,7 @@ export function buildShareUrl(input: ShareInput, apiBase: string | undefined, or
     const name = Array.from(input.opponentName.trim()).slice(0, MAX_SHARE_NAME_LENGTH).join('').trim();
     if (name) params.set('n', name);
   }
+  withLocale(params, locale);
   return `${base}/api/share?${params.toString()}`;
 }
 
@@ -89,7 +99,7 @@ export interface RunPreview {
 }
 
 /** Страница-превью результата забега (/api/share/run): своя картинка, затем Mini App. */
-export function buildRunPreviewUrl(base: string, preview: RunPreview): string {
+export function buildRunPreviewUrl(base: string, preview: RunPreview, locale: Locale = currentLocale()): string {
   const params = new URLSearchParams({
     t: preview.tiles,
     p: String(Math.round(Math.min(100, Math.max(0, preview.progress)))),
@@ -101,6 +111,7 @@ export function buildRunPreviewUrl(base: string, preview: RunPreview): string {
     const name = Array.from(preview.name?.trim() ?? '').slice(0, MAX_SHARE_NAME_LENGTH).join('').trim();
     if (name) params.set('n', name);
   }
+  withLocale(params, locale);
   return `${base}/api/share/run?${params.toString()}`;
 }
 
@@ -111,28 +122,31 @@ export function buildGuessPreviewUrl(
   multiplier: number,
   percentile: number | null,
   best: boolean,
+  locale: Locale = currentLocale(),
 ): string {
   const miss = Math.min(999_999_999, Math.max(1, Math.round(multiplier * 10) / 10));
   const params = new URLSearchParams({ k: String(number), m: Number.isInteger(miss) ? String(miss) : miss.toFixed(1) });
   if (best) params.set('pc', 'best');
   else if (percentile !== null) params.set('pc', String(Math.round(percentile)));
+  withLocale(params, locale);
   return `${base}/api/share/guess?${params.toString()}`;
 }
 
 export function buildShareText(input: ShareInput): string {
   const { playerProgress: p, opponentProgress: o, matchSource } = input;
   const name = input.opponentName.trim();
+  const t = messagesFor(m);
 
   // Локальная практика не сохраняется: не подаём её как матч с соперником.
   if (matchSource === 'local') {
-    return `Потренировался в Clutch: ${p}% против ${o}%. Это тренировка, результат не сохранён. Сыграем?`;
+    return t.shareLocal(p, o);
   }
 
-  const rival = name ? `«${name}»` : 'соперником';
+  const rival = name ? `«${name}»` : null;
   const outcome = shareOutcome(p, o);
-  if (outcome === 'win') return `Клатч! Обыграл ${rival} в Clutch: ${p}% против ${o}%. Попробуешь лучше?`;
-  if (outcome === 'tie') return `Ничья с ${rival} в Clutch: ${p}% на ${o}%. Кто возьмёт перевес?`;
-  return `Почти! Уступил ${rival} в Clutch: ${p}% против ${o}%. Попробуешь лучше?`;
+  if (outcome === 'win') return t.shareWin(rival, p, o);
+  if (outcome === 'tie') return t.shareTie(rival, p, o);
+  return t.shareLoss(rival, p, o);
 }
 
 export function buildSharePayload(input: ShareInput, url: string): SharePayload {
@@ -141,7 +155,7 @@ export function buildSharePayload(input: ShareInput, url: string): SharePayload 
 
 /** «Позвать друга»: ссылка ведёт прямо в приглашение, поэтому свой счёт в текст не входит. */
 export function buildFriendInvitePayload(url: string): SharePayload {
-  return { text: 'Обгони мой результат в Clutch', url };
+  return { text: messagesFor(m).friendInvite, url };
 }
 
 export function chooseShareStrategy({ telegramShare, nativeShare }: ShareCapabilities): ShareStrategy {

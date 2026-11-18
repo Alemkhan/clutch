@@ -1,5 +1,7 @@
 import { useState } from "react";
-import type { SoloLeaderboardStanding, SoloMode } from "@clutch/shared";
+import type { PlayerLevel, PlayerStreak, SoloLeaderboardStanding, SoloMode } from "@clutch/shared";
+import { StreakBadge, StreakHint, TelegramBanner, usePlayerProgress } from "../progress/Progress";
+import { useWhatsNew, WhatsNewDialog } from "../whatsNew/WhatsNew";
 import { homeStandingLines } from "./homeStanding";
 import { newSetLabel } from "../tiebreaker/tiebreakerClock";
 import { useDayCountdown } from "../tiebreaker/useDayCountdown";
@@ -8,6 +10,9 @@ import { useTiebreakerToday, type TiebreakerTodayState } from "../tiebreaker/use
 import { TiebreakerCardView } from "../tiebreaker/TiebreakerCard";
 import { WikiPathCard } from "../wikiPath/WikiPathCard";
 import { useWikiPathToday, type WikiPathTodayState } from "../wikiPath/useWikiPathToday";
+import { ClanHomeCard } from "../clans/ClanHomeCard";
+import { useMessages } from "../../i18n/messages";
+import { m } from "./messages";
 
 interface HomeDashboardProps {
   /** Забег дня, дуэль или свободная игра в «Общих знаниях». */
@@ -15,6 +20,10 @@ interface HomeDashboardProps {
   onBoard: () => void;
   onTiebreaker: () => void;
   onWikiPath: () => void;
+  /** Серия и уровень в шапке ведут в профиль: там полоса опыта и достижения. */
+  onProfile?: () => void;
+  /** Клан: свой или выбор эмодзи. Без обработчика карточки клана нет. */
+  onClan?: () => void;
 }
 
 export interface HomeDashboardViewProps extends HomeDashboardProps {
@@ -27,6 +36,9 @@ export interface HomeDashboardViewProps extends HomeDashboardProps {
   standing: SoloLeaderboardStanding | null;
   /** Попытка забега дня: сыгранный забег дня второй раз не предлагаем. */
   dailyAttempt?: DailyAttempt;
+  /** Серия дней и уровень игрока; нет, пока профиль не загрузился. */
+  streak?: PlayerStreak | null;
+  level?: PlayerLevel | null;
 }
 
 /** Петля игры тремя значками: верный ответ, удар в мини-игре, прогресс. Без текста-инструкции. */
@@ -68,9 +80,9 @@ function LoopIcon({ kind }: { kind: "answer" | "strike" | "progress" }) {
 }
 
 const LOOP_STEPS = [
-  { kind: "answer", label: "Верный ответ" },
-  { kind: "strike", label: "Удар" },
-  { kind: "progress", label: "Прогресс" },
+  { kind: "answer", label: "stepAnswer" },
+  { kind: "strike", label: "stepStrike" },
+  { kind: "progress", label: "stepProgress" },
 ] as const;
 
 export function HomeDashboardView({
@@ -84,7 +96,12 @@ export function HomeDashboardView({
   onWikiPath,
   wikiPath,
   onRetryWikiPath,
+  streak = null,
+  level = null,
+  onProfile,
+  onClan,
 }: HomeDashboardViewProps) {
+  const t = useMessages(m);
   const lines = standing ? homeStandingLines(standing) : null;
   // Забег дня сыгран (в таблицу идёт первая попытка): главная зовёт в дуэль.
   const dailyDone = dailyAttempt === "completed";
@@ -95,17 +112,29 @@ export function HomeDashboardView({
           <span className="home-brand-mark">C</span>
           <span>CLUTCH</span>
         </div>
-        <span className="home-new-set">{newSetLabel(msLeft)}</span>
+        {(streak?.current || level) && (
+          <button
+            type="button"
+            className="home-header-chips"
+            aria-label={t.profileChipAria(level?.level ?? 1)}
+            onClick={() => { onProfile?.(); }}
+          >
+            {streak && <StreakBadge streak={streak} />}
+            {level && <span className="level-chip" aria-hidden="true">{t.levelChip(level.level)} <span className="level-chip-arrow">›</span></span>}
+          </button>
+        )}
       </header>
+
+      <TelegramBanner botLink={import.meta.env.VITE_TELEGRAM_BOT_LINK as string | undefined} />
 
       <section className="home-hero-card">
         <div className="home-hero-head">
-          <span className="home-kicker">Забег дня · Общие знания</span>
+          <span className="home-kicker">{t.kicker}</span>
           {dailyDone && !standing ? (
             <h1 className="home-title home-title-done">
-              Забег дня сыгран.
+              {t.dailyDone}
               <br />
-              <em>Новый набор — завтра.</em>
+              <em>{t.newSetTomorrow}</em>
             </h1>
           ) : standing && lines ? (
             <h1 className="home-title home-title-done">
@@ -121,31 +150,31 @@ export function HomeDashboardView({
             </h1>
           ) : (
             <h1 className="home-title">
-              Ответь верно.
+              {t.heroTitle}
               <br />
-              <em>Дойди до 100%.</em>
+              <em>{t.heroSubtitle}</em>
             </h1>
           )}
         </div>
         {standing && lines ? (
           <dl className="home-stats">
             <div className="home-stat">
-              <dt>кругов</dt>
+              <dt>{t.statRounds}</dt>
               <dd>{standing.entry.roundsPlayed}</dd>
             </div>
             <div className="home-stat">
-              <dt>место</dt>
+              <dt>{t.statPlace}</dt>
               <dd>{standing.rank} / {standing.total}</dd>
             </div>
           </dl>
         ) : (
-          <ol className="home-loop" aria-label="Как идёт забег">
+          <ol className="home-loop" aria-label={t.loopAria}>
             {LOOP_STEPS.map((step) => (
               <li key={step.kind} className="home-loop-step">
                 <span className="home-loop-icon">
                   <LoopIcon kind={step.kind} />
                 </span>
-                <span className="home-loop-label">{step.label}</span>
+                <span className="home-loop-label">{t[step.label]}</span>
               </li>
             ))}
           </ol>
@@ -157,25 +186,30 @@ export function HomeDashboardView({
               onSolo(dailyDone ? "duel" : "daily");
             }}
           >
-            {dailyDone ? "Дуэль" : dailyAttempt === "in_progress" ? "Продолжить забег дня" : "Забег дня"}{" "}
+            {dailyDone ? t.duel : dailyAttempt === "in_progress" ? t.continueDaily : t.daily}{" "}
             <span aria-hidden="true">→</span>
           </button>
           <div className="home-mode-row">
             {!dailyDone && (
               <button type="button" className="home-mode-btn" onClick={() => { onSolo("duel"); }}>
-                Дуэль
+                {t.duel}
               </button>
             )}
             <button type="button" className="home-mode-btn" onClick={() => { onSolo("free"); }}>
-              Свободная игра
+              {t.free}
             </button>
           </div>
           {/* Вход в таблицу дня: нижняя панель не меняется, место для него — на главной карточке. */}
           <button type="button" className="home-board-link" onClick={() => { onBoard(); }}>
-            Таблица дня
+            {t.board}
           </button>
         </div>
       </section>
+
+      {streak && !dailyDone && <StreakHint streak={streak} />}
+      <p className="home-new-set">{newSetLabel(msLeft)}</p>
+
+      {onClan && <ClanHomeCard onOpen={onClan} />}
 
       <TiebreakerCardView state={tiebreaker} msLeft={msLeft} onOpen={onTiebreaker} />
       <WikiPathCard state={wikiPath} onOpen={onWikiPath} onRetry={onRetryWikiPath} />
@@ -194,5 +228,11 @@ export function HomeDashboard(props: HomeDashboardProps) {
     setDayEpoch((value) => value + 1);
   });
   const { standing, dailyAttempt } = useHomeStanding(dayEpoch);
-  return <HomeDashboardView {...props} tiebreaker={state} wikiPath={wikiPath} onRetryWikiPath={reloadWikiPath} msLeft={msLeft} standing={standing} dailyAttempt={dailyAttempt} />;
+  const progress = usePlayerProgress(dayEpoch);
+  // Вернувшемуся игроку один раз показываем, что изменилось; новичку — нет.
+  const whatsNew = useWhatsNew(progress ? progress.completedRuns > 0 : null);
+  return <>
+    {whatsNew.release && <WhatsNewDialog release={whatsNew.release} onClose={whatsNew.close} onClan={props.onClan} />}
+    <HomeDashboardView {...props} tiebreaker={state} wikiPath={wikiPath} onRetryWikiPath={reloadWikiPath} msLeft={msLeft} standing={standing} dailyAttempt={dailyAttempt} streak={progress?.streak ?? null} level={progress?.level ?? null} />
+  </>;
 }

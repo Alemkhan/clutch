@@ -49,23 +49,32 @@ function env(db: TestD1, limiter: RateLimit = allowRateLimiter) {
   return { DB: db.binding, API_RATE_LIMITER: limiter, TELEGRAM_BOT_TOKEN: 'test', SESSION_SIGNING_SECRET: sessionSecret, ENVIRONMENT: 'test' };
 }
 
-function addChallenge(db: TestD1, start = 'Start', target = 'Goal') {
-  db.sqlite.prepare('INSERT INTO wiki_path_challenges (id, date_key, start_title, target_title, created_at) VALUES (?, ?, ?, ?, ?)')
-    .run(`fixture-${TODAY}`, TODAY, start, target, 1);
+function addChallenge(db: TestD1, start = 'Start', target = 'Goal', lang: 'ru' | 'en' | 'kk' = 'ru') {
+  const id = challengeId(lang);
+  db.sqlite.prepare('INSERT INTO wiki_path_challenges (id, date_key, lang, start_title, target_title, created_at) VALUES (?, ?, ?, ?, ?, ?)')
+    .run(id, TODAY, lang, start, target, 1);
+  return id;
+}
+
+function challengeId(lang: 'ru' | 'en' | 'kk' = 'ru') {
+  return lang === 'ru' ? `fixture-${TODAY}` : `fixture-${TODAY}-${lang}`;
 }
 
 interface MockPage { pageid: number; revid: number; title: string; text?: string; links?: Array<{ ns: number; title: string }> }
-function mockWiki(pages: Record<string, MockPage>) {
+/** Serves `pages` from any Wikipedia, or `perLang[lang]` for the matching {lang}.wikipedia.org host. */
+function mockWiki(pages: Record<string, MockPage>, perLang?: Record<string, Record<string, MockPage>>) {
   const requests: Request[] = [];
   vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
     const request = new Request(input, init);
     requests.push(request);
-    const query = new URL(request.url).searchParams;
+    const url = new URL(request.url);
+    const query = url.searchParams;
+    const source = perLang ? perLang[url.hostname.split('.')[0]!] ?? {} : pages;
     const requested = query.get('page') ?? '';
     const oldId = Number(query.get('oldid'));
     const page = requested
-      ? pages[requested]
-      : Object.values(pages).find((candidate) => candidate.revid === oldId);
+      ? source[requested]
+      : Object.values(source).find((candidate) => candidate.revid === oldId);
     if (!page) return Response.json({ error: { code: 'missingtitle' } }, { status: 200 });
     return Response.json({ parse: { pageid: page.pageid, revid: page.revid, title: page.title, text: page.text ?? `<p>${page.title}</p>`, links: page.links ?? [] } });
   }));
@@ -104,6 +113,7 @@ describe('Wiki Path daily API', () => {
     expect(started.currentPage.allowedLinks).toEqual([{ title: 'Middle' }]);
     expect(requests).toHaveLength(2);
     for (const request of requests) {
+      expect(new URL(request.url).origin).toBe('https://ru.wikipedia.org');
       expect(request.headers.get('User-Agent')).toContain('ClutchWikiPath/1.0');
       expect(request.headers.get('Api-User-Agent')).toContain('ClutchWikiPath/1.0');
     }
@@ -265,5 +275,128 @@ describe('Wiki Path daily API', () => {
     vi.stubGlobal('fetch', vi.fn(async () => { throw new DOMException('timed out', 'TimeoutError'); }));
     const timeout = await app.request('/api/wiki-path/start', { method: 'POST', headers: { authorization: player.authorization } }, env(db));
     expect(timeout.status).toBe(504);
+  });
+});
+
+describe('Wiki Path languages', () => {
+  // Page ids coincide across Wikipedias on purpose: snapshots must be keyed by language.
+  const ruPages: Record<string, MockPage> = {
+    'Старт': { pageid: 1, revid: 11, title: 'Старт', links: [{ ns: 0, title: 'Цель' }] },
+    'Цель': { pageid: 3, revid: 33, title: 'Цель' },
+  };
+  const enPages: Record<string, MockPage> = {
+    Start: { pageid: 1, revid: 501, title: 'Start', links: [{ ns: 0, title: 'Middle' }, { ns: 14, title: 'Category:Things' }] },
+    Middle: { pageid: 2, revid: 502, title: 'Middle', links: [{ ns: 0, title: 'Goal' }] },
+    Goal: { pageid: 3, revid: 503, title: 'Goal' },
+  };
+  const hosts = (requests: Request[]) => [...new Set(requests.map((request) => new URL(request.url).hostname))];
+  const withLocale = (authorization: string, locale?: string) => ({ authorization, ...(locale ? { 'X-Clutch-Locale': locale } : {}) });
+
+  function completedRun(db: TestD1, playerId: string, challenge: string, clicks: number) {
+    db.sqlite.prepare(`INSERT INTO wiki_path_runs
+      (id, player_id, display_name, challenge_id, date_key, status, clicks, current_page_id, current_revision_id, current_title, path_json, completed_at, created_at)
+      VALUES (?, ?, ?, ?, ?, 'completed', ?, 3, 33, 'Goal', '["1","3"]', 10, 1)`)
+      .run(`run-${playerId}`, playerId, playerId, challenge, TODAY, clicks);
+  }
+
+  it('serves the English challenge from en.wikipedia to an English request', async () => {
+    vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
+    const db = database();
+    addChallenge(db, 'Старт', 'Цель', 'ru');
+    const enId = addChallenge(db, 'Start', 'Goal', 'en');
+    const requests = mockWiki({}, { ru: ruPages, en: enPages });
+    const player = guest('english');
+
+    const today = await json(await app.request('/api/wiki-path/today', { headers: withLocale(player.authorization, 'en') }, env(db)));
+    expect(today).toEqual({ challenge: { id: enId, date: TODAY, startTitle: 'Start', targetTitle: 'Goal', lang: 'en' }, run: null });
+
+    const startResponse = await app.request('/api/wiki-path/start', { method: 'POST', headers: withLocale(player.authorization, 'en') }, env(db));
+    expect(startResponse.status).toBe(201);
+    const started = await json(startResponse);
+    expect(started.challenge).toMatchObject({ id: enId, lang: 'en' });
+    expect(started.currentPage).toMatchObject({ pageId: '1', revisionId: '501', title: 'Start', allowedLinks: [{ title: 'Middle' }] });
+
+    const click = await app.request(`/api/wiki-path/runs/${started.run.runId}/click`, {
+      method: 'POST', headers: { ...withLocale(player.authorization, 'en'), 'content-type': 'application/json' }, body: JSON.stringify({ title: 'Middle' }),
+    }, env(db));
+    expect(await json(click)).toMatchObject({ run: { clicks: 1, path: ['1', '2'] }, currentPage: { revisionId: '502', title: 'Middle' } });
+    const resume = await app.request(`/api/wiki-path/runs/${started.run.runId}`, { headers: withLocale(player.authorization, 'en') }, env(db));
+    expect(await json(resume)).toMatchObject({ challenge: { lang: 'en' }, currentPage: { revisionId: '502', title: 'Middle' } });
+    expect(hosts(requests)).toEqual(['en.wikipedia.org']);
+
+    // A Russian player on the same day plays the Russian route; page id 1 exists in both Wikipedias.
+    const ruPlayer = guest('russian');
+    const ruStart = await json(await app.request('/api/wiki-path/start', { method: 'POST', headers: { authorization: ruPlayer.authorization } }, env(db)));
+    expect(ruStart.challenge).toMatchObject({ id: challengeId('ru'), lang: 'ru' });
+    expect(ruStart.currentPage).toMatchObject({ pageId: '1', revisionId: '11', title: 'Старт' });
+    expect(hosts(requests.slice(-2))).toEqual(['ru.wikipedia.org']);
+    expect(db.sqlite.prepare('SELECT lang, page_id, revision_id FROM wiki_path_page_revisions WHERE page_id = 1 ORDER BY lang').all())
+      .toEqual([{ lang: 'en', page_id: 1, revision_id: 501 }, { lang: 'ru', page_id: 1, revision_id: 11 }]);
+    expect(db.sqlite.prepare('SELECT DISTINCT lang FROM wiki_path_page_refs WHERE challenge_id = ?').all(enId)).toEqual([{ lang: 'en' }]);
+  });
+
+  it('falls back to the Russian challenge when there is none in the requested language', async () => {
+    vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
+    const db = database(); addChallenge(db, 'Старт', 'Цель', 'ru');
+    const requests = mockWiki({}, { ru: ruPages, en: enPages });
+    const player = guest('fallback');
+    const today = await json(await app.request('/api/wiki-path/today', { headers: withLocale(player.authorization, 'en') }, env(db)));
+    expect(today.challenge).toMatchObject({ id: challengeId('ru'), lang: 'ru', startTitle: 'Старт' });
+    const started = await app.request('/api/wiki-path/start', { method: 'POST', headers: withLocale(player.authorization, 'kk') }, env(db));
+    expect(started.status).toBe(201);
+    expect(await json(started)).toMatchObject({ challenge: { lang: 'ru' }, currentPage: { title: 'Старт', revisionId: '11' } });
+    expect(hosts(requests)).toEqual(['ru.wikipedia.org']);
+  });
+
+  it('keeps a separate daily board per challenge language', async () => {
+    vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
+    const db = database();
+    const ruId = addChallenge(db, 'Старт', 'Цель', 'ru');
+    const enId = addChallenge(db, 'Start', 'Goal', 'en');
+    const ruA = await telegram(3001);
+    const ruB = await telegram(3002);
+    const enA = await telegram(3003);
+    completedRun(db, ruA.playerId, ruId, 3);
+    completedRun(db, ruB.playerId, ruId, 5);
+    completedRun(db, enA.playerId, enId, 4);
+
+    const viewer = guest('board-viewer');
+    const enBoard = await json(await app.request(`/api/wiki-path/board?date=${TODAY}`, { headers: withLocale(viewer.authorization, 'en') }, env(db)));
+    expect(enBoard).toMatchObject({ challengeId: enId, ownRank: null });
+    expect(enBoard.entries.map((entry: { playerId: string }) => entry.playerId)).toEqual([enA.playerId]);
+    const ruBoard = await json(await app.request(`/api/wiki-path/board?date=${TODAY}`, { headers: withLocale(viewer.authorization) }, env(db)));
+    expect(ruBoard).toMatchObject({ challengeId: ruId });
+    expect(ruBoard.entries.map((entry: { playerId: string }) => entry.playerId)).toEqual([ruA.playerId, ruB.playerId]);
+
+    // The board follows the viewer's own run, not the language of the request.
+    const ownRu = await json(await app.request(`/api/wiki-path/board?date=${TODAY}`, { headers: withLocale(ruB.authorization, 'en') }, env(db)));
+    expect(ownRu).toMatchObject({ challengeId: ruId, ownRank: 2 });
+
+    // Routes are only revealed within the viewer's own board.
+    const crossLanguage = await app.request(`/api/wiki-path/board/runs/run-${ruA.playerId}`, { headers: withLocale(enA.authorization, 'en') }, env(db));
+    expect(crossLanguage.status).toBe(404);
+  });
+
+  it('keeps a Russian run for a player who later switches to English', async () => {
+    vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
+    const db = database();
+    const ruId = addChallenge(db, 'Старт', 'Цель', 'ru');
+    addChallenge(db, 'Start', 'Goal', 'en');
+    const requests = mockWiki({}, { ru: ruPages, en: enPages });
+    const player = guest('switcher');
+    const started = await json(await app.request('/api/wiki-path/start', { method: 'POST', headers: withLocale(player.authorization, 'ru') }, env(db)));
+    expect(started.challenge).toMatchObject({ id: ruId, lang: 'ru' });
+
+    const today = await json(await app.request('/api/wiki-path/today', { headers: withLocale(player.authorization, 'en') }, env(db)));
+    expect(today).toMatchObject({ challenge: { id: ruId, lang: 'ru' }, run: { runId: started.run.runId, challengeId: ruId } });
+    const again = await app.request('/api/wiki-path/start', { method: 'POST', headers: withLocale(player.authorization, 'en') }, env(db));
+    expect(again.status).toBe(200);
+    expect(await json(again)).toMatchObject({ challenge: { id: ruId }, run: { runId: started.run.runId }, currentPage: { title: 'Старт' } });
+    const click = await app.request(`/api/wiki-path/runs/${started.run.runId}/click`, {
+      method: 'POST', headers: { ...withLocale(player.authorization, 'en'), 'content-type': 'application/json' }, body: JSON.stringify({ title: 'Цель' }),
+    }, env(db));
+    expect(await json(click)).toMatchObject({ run: { status: 'completed', clicks: 1 }, currentPage: { title: 'Цель' } });
+    expect(hosts(requests)).toEqual(['ru.wikipedia.org']);
+    expect(db.sqlite.prepare('SELECT COUNT(*) AS count FROM wiki_path_runs').get()).toEqual({ count: 1 });
   });
 });

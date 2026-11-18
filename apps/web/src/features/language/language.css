@@ -1,0 +1,117 @@
+/* === ЯЗЫК: первый вход и настройка в профиле ================================= */
+
+.language-screen {
+  justify-content: center;
+}
+
+.language-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  padding: 32px 20px;
+  text-align: center;
+}
+
+.language-logo {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  background: #fff;
+  color: #5f33dd;
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 900;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
+}
+
+.language-title {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 28px;
+}
+
+.language-title span {
+  color: var(--text-dim);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.language-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.language-option {
+  min-height: 56px;
+  border: 0;
+  border-radius: 16px;
+  background: #fff;
+  color: #1f1a3d;
+  box-shadow: 0 4px 0 var(--white-edge);
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.language-option.suggested {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 5px 0 var(--accent-edge);
+}
+
+.language-option:active {
+  transform: translateY(3px);
+}
+
+.language-setting {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.language-segments {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.language-segment {
+  min-height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.language-segment.active {
+  background: var(--violet);
+  color: #fff;
+  box-shadow: 0 3px 0 var(--violet-edge);
+}
+
+.region-segments {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.region-segments .language-segment {
+  padding: 0 4px;
+  font-size: 13px;
+  line-height: 1.15;
+}

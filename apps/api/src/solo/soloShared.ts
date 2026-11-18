@@ -6,6 +6,8 @@ import {
   isMiniGameId,
   resolveQuestionById,
   soloModeOf,
+  supportedMiniGameConfig,
+  type MiniGameConfig,
   type Opponent,
   type Question,
   type SoloMode,
@@ -14,7 +16,7 @@ import type { Context } from 'hono';
 import { resolveRequestIdentity, type RequestIdentity } from '../auth/identity';
 import type { Env } from '../env';
 import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
-import { currentMiniGameConfigJson, findRun } from './repository';
+import { findRun } from './repository';
 import type { SoloRoundRow } from './soloRoundsRepository';
 import type { RunRow } from './types';
 import { parseQuestions } from './validation';
@@ -74,6 +76,8 @@ export interface LoadedSoloRun {
    * дошла до цели: дальше игрок уже проиграл. Темп снят (запись ушла другому) — общий потолок.
    */
   roundCap: number;
+  /** Конфиг мини-игры, с которым забег начат: по нему же считаются его удары. */
+  miniGameConfig: MiniGameConfig;
 }
 
 /** Забег должен принадлежать игроку, быть соло (обычным, тренировкой или дружеским) и текущей версии игры. */
@@ -84,8 +88,10 @@ export async function openSoloRun(c: AppContext, identity: RequestIdentity, runI
   const friend = run.rules_version === FRIEND_RULES_VERSION;
   const groupChallenge = run.rules_version === GROUP_CHALLENGE_RULES_VERSION;
   const mode = soloModeOf(run.rules_version);
+  // Забег по прежней версии мини-игры доигрывается по ней, а не обрывается после смены правил.
+  const miniGameConfig = supportedMiniGameConfig(run.mini_game_config_json);
   if ((!practice && !friend && !groupChallenge && !mode)
-    || run.mini_game_config_json !== currentMiniGameConfigJson
+    || !miniGameConfig
     || !isMiniGameId(run.mini_game_id)) {
     return c.json({ error: 'This is not a solo run.' }, 409);
   }
@@ -107,7 +113,7 @@ export async function openSoloRun(c: AppContext, identity: RequestIdentity, runI
   });
   // Тренировка против бота доигрывается до конца: бот не запись игрока, исход не считается.
   const roundCap = duelRoundCap(practice ? null : parsePace(run.opponent_json));
-  return { run, questions, practice, friend, groupChallenge, mode, roundCap };
+  return { run, questions, practice, friend, groupChallenge, mode, roundCap, miniGameConfig };
 }
 
 /** Идентификатор забега из пути маршрута `/api/solo-runs/:id/...`. */

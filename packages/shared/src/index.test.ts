@@ -12,14 +12,14 @@ import { historicFlags } from './questions/historicFlags';
 describe('resultFromDistance', () => {
   it.each([
     [0, 'perfect'],
-    [0.06, 'perfect'],
-    [0.07, 'great'],
-    [0.28, 'great'],
-    [0.29, 'good'],
-    [0.65, 'good'],
-    [0.66, 'weak'],
-    [0.85, 'weak'],
-    [0.86, 'miss'],
+    [0.04, 'perfect'],
+    [0.05, 'great'],
+    [0.12, 'great'],
+    [0.13, 'good'],
+    [0.3, 'good'],
+    [0.31, 'weak'],
+    [0.55, 'weak'],
+    [0.56, 'miss'],
     [1, 'miss'],
   ] as const)('maps %s to %s', (distance, expected) => {
     expect(resultFromDistance(distance)).toBe(expected);

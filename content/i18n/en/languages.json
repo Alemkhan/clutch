@@ -1,0 +1,150 @@
+{
+  "ka": {
+    "name": "Georgian",
+    "fact": "Georgian script is unrelated to any other alphabet in the world."
+  },
+  "hy": {
+    "name": "Armenian",
+    "fact": "The alphabet was created by Mesrop Mashtots in 405 — it is over 1,600 years old."
+  },
+  "el": {
+    "name": "Greek",
+    "fact": "The first alphabet in history with letters for vowels."
+  },
+  "he": {
+    "name": "Hebrew",
+    "fact": "Dead for almost 2,000 years — and revived as a spoken language in the 20th century."
+  },
+  "ar": {
+    "name": "Arabic",
+    "fact": "Written right to left; vowels are barely shown in writing."
+  },
+  "fa": {
+    "name": "Persian (Farsi)",
+    "fact": "An Indo-European language, yet written in Arabic script."
+  },
+  "ur": {
+    "name": "Urdu",
+    "fact": "A close relative of Hindi — but written in Persian script."
+  },
+  "hi": {
+    "name": "Hindi",
+    "fact": "Devanagari script: the letters hang from a shared line on top."
+  },
+  "bn": {
+    "name": "Bengali",
+    "fact": "Spoken by over 270 million people — top 6 in the world."
+  },
+  "ta": {
+    "name": "Tamil",
+    "fact": "Alive for over 2,000 years almost unchanged — a classical language of India."
+  },
+  "si": {
+    "name": "Sinhala",
+    "fact": "The language of Sri Lanka, with almost round letters."
+  },
+  "th": {
+    "name": "Thai",
+    "fact": "Five tones and no spaces between words."
+  },
+  "lo": {
+    "name": "Lao",
+    "fact": "Similar to Thai, but the letters are noticeably rounder."
+  },
+  "km": {
+    "name": "Khmer",
+    "fact": "The Khmer alphabet has 74 letters — the longest in the world."
+  },
+  "my": {
+    "name": "Burmese",
+    "fact": "Circle letters: drawn on palm leaves so as not to tear the fibres."
+  },
+  "vi": {
+    "name": "Vietnamese",
+    "fact": "Latin script with diacritics, devised by French missionaries."
+  },
+  "ko": {
+    "name": "Korean",
+    "fact": "Hangul was invented by scholars in 1443 — it is called the most logical alphabet."
+  },
+  "ja": {
+    "name": "Japanese",
+    "fact": "The only language that uses three writing systems at once."
+  },
+  "zh": {
+    "name": "Chinese",
+    "fact": "One character = one syllable and one meaning. Learning to read takes years."
+  },
+  "mn": {
+    "name": "Mongolian",
+    "fact": "Cyrillic with two extra letters — but the traditional script is written top to bottom."
+  },
+  "am": {
+    "name": "Amharic",
+    "fact": "The official language of Ethiopia, with its own Ge'ez script."
+  },
+  "fi": {
+    "name": "Finnish",
+    "fact": "15 grammatical cases and record-breaking long words."
+  },
+  "et": {
+    "name": "Estonian",
+    "fact": "14 cases — and that is not the record among its neighbours."
+  },
+  "hu": {
+    "name": "Hungarian",
+    "fact": "Not Indo-European: its closest relatives are Khanty and Mansi."
+  },
+  "cs": {
+    "name": "Czech",
+    "fact": "The letter ř exists only in Czech — foreigners can't pronounce it."
+  },
+  "pl": {
+    "name": "Polish",
+    "fact": "Words like «szczęście» — a championship of consonants in a row."
+  },
+  "ro": {
+    "name": "Romanian",
+    "fact": "A Romance language surrounded on all sides by Slavic ones."
+  },
+  "tr": {
+    "name": "Turkish",
+    "fact": "The letter ğ («soft g») is not pronounced at all."
+  },
+  "az": {
+    "name": "Azerbaijani",
+    "fact": "The letter ə is the «schwa» sound, a rare guest in alphabets."
+  },
+  "is": {
+    "name": "Icelandic",
+    "fact": "The letter þ is a direct heir of the runes. The Vikings' language has barely changed."
+  },
+  "cy": {
+    "name": "Welsh",
+    "fact": "The combination ll is a sound found almost nowhere else."
+  },
+  "ga": {
+    "name": "Irish",
+    "fact": "An official EU language spoken daily by fewer than 100,000 people."
+  },
+  "mt": {
+    "name": "Maltese",
+    "fact": "The only Semitic language in the EU — and the only one written in Latin script."
+  },
+  "eu": {
+    "name": "Basque",
+    "fact": "A language isolate: it has no proven relatives at all."
+  },
+  "la": {
+    "name": "Latin",
+    "fact": "A dead language — yet officially alive in the Vatican."
+  },
+  "eo": {
+    "name": "Esperanto",
+    "fact": "Zamenhof's constructed language (1887) — the most successful ever invented."
+  },
+  "sw": {
+    "name": "Swahili",
+    "fact": "The lingua franca of East Africa, spoken in 10+ countries."
+  }
+}

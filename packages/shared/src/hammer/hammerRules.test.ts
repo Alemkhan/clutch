@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import {
   CURRENT_HAMMER_MINI_GAME,
+  LEGACY_HAMMER_MINI_GAME_CONFIG,
+  supportedMiniGameConfig,
   SKILL_DISTANCE_THRESHOLDS,
   dailyQuestionBank,
   hammerAttemptRules,
@@ -60,9 +62,9 @@ describe('hammer pressure rules', () => {
     }
   });
 
-  it('preserves the .28 inclusive boundary without widening tiers perceptibly', () => {
+  it('preserves the .12 inclusive boundary without widening tiers perceptibly', () => {
     const center = 0.45;
-    const boundary = 0.28;
+    const boundary = 0.12;
     const mirroredDistances = [center - boundary / 2, center + boundary / 2]
       .map((position) => normalizedHammerDistance(position, center));
     expect(mirroredDistances.map((distance) => scoreHammerDistance(distance, 0, config).result))
@@ -77,7 +79,7 @@ describe('hammer pressure rules', () => {
   it('applies the exact stage multipliers', () => {
     expect(([0, 1, 2, 3] as PressureStage[]).map(
       (stage) => hammerThresholdsForStage(stage, config).weak,
-    )).toEqual([0.85, 0.85 * 0.9, 0.85 * 0.8, 0.85 * 0.7]);
+    )).toEqual([0.55, 0.55 * 0.85, 0.55 * 0.72, 0.55 * 0.6]);
   });
 
   it('derives a stable, varied target and keeps the widest zone on the track', () => {
@@ -135,11 +137,12 @@ describe('hammer marker speed', () => {
     expect(speeds.length).toBeGreaterThan(1000);
     expect(Math.min(...speeds)).toBeGreaterThanOrEqual(config.markerSpeedMin);
     expect(Math.max(...speeds)).toBeLessThanOrEqual(config.markerSpeedMax);
-    expect(Math.min(...speeds)).toBeLessThan(0.7);
-    expect(Math.max(...speeds)).toBeGreaterThan(1.5);
+    const span = config.markerSpeedMax - config.markerSpeedMin;
+    expect(Math.min(...speeds)).toBeLessThan(config.markerSpeedMin + span * 0.1);
+    expect(Math.max(...speeds)).toBeGreaterThan(config.markerSpeedMax - span * 0.1);
     const buckets = new Array(5).fill(0);
     for (const speed of speeds) {
-      buckets[Math.min(4, Math.floor(((speed - 0.6) / 1.0) * 5))] += 1;
+      buckets[Math.min(4, Math.floor(((speed - config.markerSpeedMin) / span) * 5))] += 1;
     }
     for (const count of buckets) expect(count / speeds.length).toBeGreaterThan(0.12);
   });
@@ -199,5 +202,19 @@ describe('scoring a hammer tap from its moment', () => {
     expect(() => scoreHammerTap(questionId, [], config, Number.NaN)).toThrow(RangeError);
     expect(() => scoreHammerTap(questionId, [], config, Number.POSITIVE_INFINITY)).toThrow(RangeError);
     expect(() => scoreHammerTap(questionId, [], config, -1)).toThrow(RangeError);
+  });
+});
+
+describe('mini-game config versions', () => {
+  it('scores a legacy run with the legacy zones and a new run with the narrow ones', () => {
+    expect(scoreHammerDistance(0.2, 0, LEGACY_HAMMER_MINI_GAME_CONFIG).result).toBe('great');
+    expect(scoreHammerDistance(0.2, 0, config).result).toBe('good');
+  });
+
+  it('accepts only known configs, from an object or stored JSON', () => {
+    expect(supportedMiniGameConfig(JSON.stringify(config))).toBe(config);
+    expect(supportedMiniGameConfig(JSON.parse(JSON.stringify(LEGACY_HAMMER_MINI_GAME_CONFIG)))).toBe(LEGACY_HAMMER_MINI_GAME_CONFIG);
+    expect(supportedMiniGameConfig({ ...config, markerSpeedMax: 3 })).toBeNull();
+    expect(supportedMiniGameConfig('not json')).toBeNull();
   });
 });

@@ -1,0 +1,182 @@
+{
+  "set-blood-groups": {
+    "title": "Name a blood type in the ABO system",
+    "mcPrompt": "Which of these is a blood type in the ABO system?",
+    "members": {
+      "o": {
+        "answer": "O",
+        "accepted": [
+          "O",
+          "0",
+          "type O",
+          "first",
+          "I"
+        ]
+      },
+      "a": {
+        "answer": "A",
+        "accepted": [
+          "A",
+          "type A",
+          "second",
+          "II"
+        ]
+      },
+      "b": {
+        "answer": "B",
+        "accepted": [
+          "B",
+          "type B",
+          "third",
+          "III"
+        ]
+      },
+      "ab": {
+        "answer": "AB",
+        "accepted": [
+          "AB",
+          "type AB",
+          "fourth",
+          "IV"
+        ]
+      }
+    },
+    "nonMembers": [
+      "type V",
+      "C",
+      "D"
+    ]
+  },
+  "set-fingers": {
+    "title": "Name a finger of the hand",
+    "mcPrompt": "Which of these is the name of a finger?",
+    "members": {
+      "thumb": {
+        "answer": "thumb",
+        "accepted": [
+          "thumb"
+        ]
+      },
+      "index": {
+        "answer": "index finger",
+        "accepted": [
+          "index finger",
+          "index",
+          "forefinger",
+          "pointer finger"
+        ]
+      },
+      "middle": {
+        "answer": "middle finger",
+        "accepted": [
+          "middle finger",
+          "middle"
+        ]
+      },
+      "ring": {
+        "answer": "ring finger",
+        "accepted": [
+          "ring finger",
+          "ring"
+        ]
+      },
+      "pinky": {
+        "answer": "pinky",
+        "accepted": [
+          "pinky",
+          "little finger",
+          "pinkie"
+        ]
+      }
+    },
+    "nonMembers": [
+      "elbow",
+      "wrist",
+      "nail"
+    ]
+  },
+  "set-basic-tastes": {
+    "title": "Name a basic taste",
+    "mcPrompt": "Which of these is one of the five basic tastes?",
+    "members": {
+      "sweet": {
+        "answer": "sweet",
+        "accepted": [
+          "sweet"
+        ]
+      },
+      "salty": {
+        "answer": "salty",
+        "accepted": [
+          "salty"
+        ]
+      },
+      "sour": {
+        "answer": "sour",
+        "accepted": [
+          "sour"
+        ]
+      },
+      "bitter": {
+        "answer": "bitter",
+        "accepted": [
+          "bitter"
+        ]
+      },
+      "umami": {
+        "answer": "umami",
+        "accepted": [
+          "umami",
+          "savory"
+        ]
+      }
+    },
+    "nonMembers": [
+      "spicy",
+      "minty",
+      "pungent"
+    ]
+  },
+  "set-body-1lvkl04": {
+    "title": "Name a branch of systematic human anatomy",
+    "mcPrompt": "Which of these disciplines is an official branch of descriptive human anatomy?",
+    "members": {
+      "osteology": {
+        "answer": "osteology",
+        "accepted": [
+          "osteology"
+        ]
+      },
+      "myology": {
+        "answer": "myology",
+        "accepted": [
+          "myology"
+        ]
+      },
+      "arthrology": {
+        "answer": "arthrology",
+        "accepted": [
+          "arthrology",
+          "syndesmology"
+        ]
+      },
+      "splanchnology": {
+        "answer": "splanchnology",
+        "accepted": [
+          "splanchnology"
+        ]
+      },
+      "angiology": {
+        "answer": "angiology",
+        "accepted": [
+          "angiology"
+        ]
+      }
+    },
+    "nonMembers": [
+      "astronomy",
+      "geology",
+      "ornithology"
+    ]
+  }
+}

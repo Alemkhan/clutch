@@ -1,8 +1,11 @@
 import { SKILL_REWARDS, type SkillResult } from '@clutch/shared';
+import { m } from './messages';
+import { messagesFor } from '../../i18n/messages';
 
 /** Подпись удара одной строкой: «ОТЛИЧНО +18%»; промах (0%) — только «МИМО», без «+0%». */
 export function strikeLabelText(result: SkillResult): string {
-  const name = { perfect: 'ИДЕАЛЬНО', great: 'ОТЛИЧНО', good: 'ХОРОШО', weak: 'СЛАБО', miss: 'МИМО' }[result];
+  const t = messagesFor(m);
+  const name = { perfect: t.labelPerfect, great: t.labelGreat, good: t.labelGood, weak: t.labelWeak, miss: t.labelMiss }[result];
   const points = SKILL_REWARDS[result];
   return points > 0 ? `${name} +${points}%` : name;
 }
@@ -28,12 +31,11 @@ export function HammerResultStatus({ result, remaining, series }: {
   remaining?: string;
   series?: string | null;
 }) {
-  const label = {
-    perfect: 'Идеально', great: 'Отлично', good: 'Хорошо', weak: 'Слабо', miss: 'Мимо',
-  }[result];
+  const t = messagesFor(m);
+  const label = { perfect: t.perfect, great: t.great, good: t.good, weak: t.weak, miss: t.miss }[result];
   return (
     <span className="visually-hidden" role="status">
-      Результат удара: {label}, +{SKILL_REWARDS[result]}% прогресса.
+      {t.status(label, SKILL_REWARDS[result])}
       {remaining ? ` ${remaining}.` : ''}
       {series ? ` ${series}.` : ''}
     </span>

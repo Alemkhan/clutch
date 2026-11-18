@@ -1,0 +1,871 @@
+{
+  "set-elements-classical": {
+    "title": "Name one of the four classical elements",
+    "mcPrompt": "Which of these is one of the four classical elements?",
+    "members": {
+      "fire": {
+        "answer": "fire",
+        "accepted": [
+          "fire"
+        ]
+      },
+      "water": {
+        "answer": "water",
+        "accepted": [
+          "water"
+        ]
+      },
+      "earth": {
+        "answer": "earth",
+        "accepted": [
+          "earth"
+        ]
+      },
+      "air": {
+        "answer": "air",
+        "accepted": [
+          "air"
+        ]
+      }
+    },
+    "nonMembers": [
+      "metal",
+      "wood",
+      "ice"
+    ]
+  },
+  "set-noble-gases": {
+    "title": "Name a noble gas",
+    "mcPrompt": "Which of these is a noble gas?",
+    "members": {
+      "he": {
+        "answer": "helium",
+        "accepted": [
+          "helium"
+        ]
+      },
+      "ne": {
+        "answer": "neon",
+        "accepted": [
+          "neon"
+        ]
+      },
+      "ar": {
+        "answer": "argon",
+        "accepted": [
+          "argon"
+        ]
+      },
+      "kr": {
+        "answer": "krypton",
+        "accepted": [
+          "krypton"
+        ]
+      },
+      "xe": {
+        "answer": "xenon",
+        "accepted": [
+          "xenon"
+        ]
+      },
+      "rn": {
+        "answer": "radon",
+        "accepted": [
+          "radon"
+        ]
+      }
+    },
+    "nonMembers": [
+      "hydrogen",
+      "nitrogen",
+      "oxygen",
+      "chlorine"
+    ]
+  },
+  "set-rainbow": {
+    "title": "Name a color of the rainbow",
+    "mcPrompt": "Which of these colors is in the rainbow?",
+    "members": {
+      "red": {
+        "answer": "red",
+        "accepted": [
+          "red"
+        ]
+      },
+      "orange": {
+        "answer": "orange",
+        "accepted": [
+          "orange"
+        ]
+      },
+      "yellow": {
+        "answer": "yellow",
+        "accepted": [
+          "yellow"
+        ]
+      },
+      "green": {
+        "answer": "green",
+        "accepted": [
+          "green"
+        ]
+      },
+      "cyan": {
+        "answer": "light blue",
+        "accepted": [
+          "light blue",
+          "sky blue",
+          "cyan"
+        ]
+      },
+      "blue": {
+        "answer": "blue",
+        "accepted": [
+          "blue",
+          "indigo"
+        ]
+      },
+      "violet": {
+        "answer": "violet",
+        "accepted": [
+          "violet",
+          "purple"
+        ]
+      }
+    },
+    "nonMembers": [
+      "pink",
+      "brown",
+      "white",
+      "black"
+    ]
+  },
+  "set-chemical-elements": {
+    "title": "Name a chemical element",
+    "mcPrompt": "Which of these is a chemical element?",
+    "members": {
+      "H": {
+        "answer": "hydrogen",
+        "accepted": [
+          "hydrogen"
+        ]
+      },
+      "He": {
+        "answer": "helium",
+        "accepted": [
+          "helium"
+        ]
+      },
+      "Li": {
+        "answer": "lithium",
+        "accepted": [
+          "lithium"
+        ]
+      },
+      "Be": {
+        "answer": "beryllium",
+        "accepted": [
+          "beryllium"
+        ]
+      },
+      "B": {
+        "answer": "boron",
+        "accepted": [
+          "boron"
+        ]
+      },
+      "C": {
+        "answer": "carbon",
+        "accepted": [
+          "carbon"
+        ]
+      },
+      "N": {
+        "answer": "nitrogen",
+        "accepted": [
+          "nitrogen"
+        ]
+      },
+      "O": {
+        "answer": "oxygen",
+        "accepted": [
+          "oxygen"
+        ]
+      },
+      "F": {
+        "answer": "fluorine",
+        "accepted": [
+          "fluorine"
+        ]
+      },
+      "Ne": {
+        "answer": "neon",
+        "accepted": [
+          "neon"
+        ]
+      },
+      "Na": {
+        "answer": "sodium",
+        "accepted": [
+          "sodium"
+        ]
+      },
+      "Mg": {
+        "answer": "magnesium",
+        "accepted": [
+          "magnesium"
+        ]
+      },
+      "Al": {
+        "answer": "aluminium",
+        "accepted": [
+          "aluminium",
+          "aluminum"
+        ]
+      },
+      "Si": {
+        "answer": "silicon",
+        "accepted": [
+          "silicon"
+        ]
+      },
+      "P": {
+        "answer": "phosphorus",
+        "accepted": [
+          "phosphorus"
+        ]
+      },
+      "S": {
+        "answer": "sulfur",
+        "accepted": [
+          "sulfur",
+          "sulphur"
+        ]
+      },
+      "Cl": {
+        "answer": "chlorine",
+        "accepted": [
+          "chlorine"
+        ]
+      },
+      "Ar": {
+        "answer": "argon",
+        "accepted": [
+          "argon"
+        ]
+      },
+      "K": {
+        "answer": "potassium",
+        "accepted": [
+          "potassium"
+        ]
+      },
+      "Ca": {
+        "answer": "calcium",
+        "accepted": [
+          "calcium"
+        ]
+      },
+      "Sc": {
+        "answer": "scandium",
+        "accepted": [
+          "scandium"
+        ]
+      },
+      "Ti": {
+        "answer": "titanium",
+        "accepted": [
+          "titanium"
+        ]
+      },
+      "V": {
+        "answer": "vanadium",
+        "accepted": [
+          "vanadium"
+        ]
+      },
+      "Cr": {
+        "answer": "chromium",
+        "accepted": [
+          "chromium"
+        ]
+      },
+      "Mn": {
+        "answer": "manganese",
+        "accepted": [
+          "manganese"
+        ]
+      },
+      "Fe": {
+        "answer": "iron",
+        "accepted": [
+          "iron"
+        ]
+      },
+      "Co": {
+        "answer": "cobalt",
+        "accepted": [
+          "cobalt"
+        ]
+      },
+      "Ni": {
+        "answer": "nickel",
+        "accepted": [
+          "nickel"
+        ]
+      },
+      "Cu": {
+        "answer": "copper",
+        "accepted": [
+          "copper"
+        ]
+      },
+      "Zn": {
+        "answer": "zinc",
+        "accepted": [
+          "zinc"
+        ]
+      },
+      "Ga": {
+        "answer": "gallium",
+        "accepted": [
+          "gallium"
+        ]
+      },
+      "Ge": {
+        "answer": "germanium",
+        "accepted": [
+          "germanium"
+        ]
+      },
+      "As": {
+        "answer": "arsenic",
+        "accepted": [
+          "arsenic"
+        ]
+      },
+      "Se": {
+        "answer": "selenium",
+        "accepted": [
+          "selenium"
+        ]
+      },
+      "Br": {
+        "answer": "bromine",
+        "accepted": [
+          "bromine"
+        ]
+      },
+      "Kr": {
+        "answer": "krypton",
+        "accepted": [
+          "krypton"
+        ]
+      },
+      "Rb": {
+        "answer": "rubidium",
+        "accepted": [
+          "rubidium"
+        ]
+      },
+      "Sr": {
+        "answer": "strontium",
+        "accepted": [
+          "strontium"
+        ]
+      },
+      "Y": {
+        "answer": "yttrium",
+        "accepted": [
+          "yttrium"
+        ]
+      },
+      "Zr": {
+        "answer": "zirconium",
+        "accepted": [
+          "zirconium"
+        ]
+      },
+      "Nb": {
+        "answer": "niobium",
+        "accepted": [
+          "niobium"
+        ]
+      },
+      "Mo": {
+        "answer": "molybdenum",
+        "accepted": [
+          "molybdenum"
+        ]
+      },
+      "Tc": {
+        "answer": "technetium",
+        "accepted": [
+          "technetium"
+        ]
+      },
+      "Ru": {
+        "answer": "ruthenium",
+        "accepted": [
+          "ruthenium"
+        ]
+      },
+      "Rh": {
+        "answer": "rhodium",
+        "accepted": [
+          "rhodium"
+        ]
+      },
+      "Pd": {
+        "answer": "palladium",
+        "accepted": [
+          "palladium"
+        ]
+      },
+      "Ag": {
+        "answer": "silver",
+        "accepted": [
+          "silver"
+        ]
+      },
+      "Cd": {
+        "answer": "cadmium",
+        "accepted": [
+          "cadmium"
+        ]
+      },
+      "In": {
+        "answer": "indium",
+        "accepted": [
+          "indium"
+        ]
+      },
+      "Sn": {
+        "answer": "tin",
+        "accepted": [
+          "tin"
+        ]
+      },
+      "Sb": {
+        "answer": "antimony",
+        "accepted": [
+          "antimony"
+        ]
+      },
+      "Te": {
+        "answer": "tellurium",
+        "accepted": [
+          "tellurium"
+        ]
+      },
+      "I": {
+        "answer": "iodine",
+        "accepted": [
+          "iodine"
+        ]
+      },
+      "Xe": {
+        "answer": "xenon",
+        "accepted": [
+          "xenon"
+        ]
+      },
+      "Cs": {
+        "answer": "caesium",
+        "accepted": [
+          "caesium",
+          "cesium"
+        ]
+      },
+      "Ba": {
+        "answer": "barium",
+        "accepted": [
+          "barium"
+        ]
+      },
+      "La": {
+        "answer": "lanthanum",
+        "accepted": [
+          "lanthanum"
+        ]
+      },
+      "Ce": {
+        "answer": "cerium",
+        "accepted": [
+          "cerium"
+        ]
+      },
+      "Pr": {
+        "answer": "praseodymium",
+        "accepted": [
+          "praseodymium"
+        ]
+      },
+      "Nd": {
+        "answer": "neodymium",
+        "accepted": [
+          "neodymium"
+        ]
+      },
+      "Pm": {
+        "answer": "promethium",
+        "accepted": [
+          "promethium"
+        ]
+      },
+      "Sm": {
+        "answer": "samarium",
+        "accepted": [
+          "samarium"
+        ]
+      },
+      "Eu": {
+        "answer": "europium",
+        "accepted": [
+          "europium"
+        ]
+      },
+      "Gd": {
+        "answer": "gadolinium",
+        "accepted": [
+          "gadolinium"
+        ]
+      },
+      "Tb": {
+        "answer": "terbium",
+        "accepted": [
+          "terbium"
+        ]
+      },
+      "Dy": {
+        "answer": "dysprosium",
+        "accepted": [
+          "dysprosium"
+        ]
+      },
+      "Ho": {
+        "answer": "holmium",
+        "accepted": [
+          "holmium"
+        ]
+      },
+      "Er": {
+        "answer": "erbium",
+        "accepted": [
+          "erbium"
+        ]
+      },
+      "Tm": {
+        "answer": "thulium",
+        "accepted": [
+          "thulium"
+        ]
+      },
+      "Yb": {
+        "answer": "ytterbium",
+        "accepted": [
+          "ytterbium"
+        ]
+      },
+      "Lu": {
+        "answer": "lutetium",
+        "accepted": [
+          "lutetium"
+        ]
+      },
+      "Hf": {
+        "answer": "hafnium",
+        "accepted": [
+          "hafnium"
+        ]
+      },
+      "Ta": {
+        "answer": "tantalum",
+        "accepted": [
+          "tantalum"
+        ]
+      },
+      "W": {
+        "answer": "tungsten",
+        "accepted": [
+          "tungsten",
+          "wolfram"
+        ]
+      },
+      "Re": {
+        "answer": "rhenium",
+        "accepted": [
+          "rhenium"
+        ]
+      },
+      "Os": {
+        "answer": "osmium",
+        "accepted": [
+          "osmium"
+        ]
+      },
+      "Ir": {
+        "answer": "iridium",
+        "accepted": [
+          "iridium"
+        ]
+      },
+      "Pt": {
+        "answer": "platinum",
+        "accepted": [
+          "platinum"
+        ]
+      },
+      "Au": {
+        "answer": "gold",
+        "accepted": [
+          "gold"
+        ]
+      },
+      "Hg": {
+        "answer": "mercury",
+        "accepted": [
+          "mercury"
+        ]
+      },
+      "Tl": {
+        "answer": "thallium",
+        "accepted": [
+          "thallium"
+        ]
+      },
+      "Pb": {
+        "answer": "lead",
+        "accepted": [
+          "lead"
+        ]
+      },
+      "Bi": {
+        "answer": "bismuth",
+        "accepted": [
+          "bismuth"
+        ]
+      },
+      "Po": {
+        "answer": "polonium",
+        "accepted": [
+          "polonium"
+        ]
+      },
+      "At": {
+        "answer": "astatine",
+        "accepted": [
+          "astatine"
+        ]
+      },
+      "Rn": {
+        "answer": "radon",
+        "accepted": [
+          "radon"
+        ]
+      },
+      "Fr": {
+        "answer": "francium",
+        "accepted": [
+          "francium"
+        ]
+      },
+      "Ra": {
+        "answer": "radium",
+        "accepted": [
+          "radium"
+        ]
+      },
+      "Ac": {
+        "answer": "actinium",
+        "accepted": [
+          "actinium"
+        ]
+      },
+      "Th": {
+        "answer": "thorium",
+        "accepted": [
+          "thorium"
+        ]
+      },
+      "Pa": {
+        "answer": "protactinium",
+        "accepted": [
+          "protactinium"
+        ]
+      },
+      "U": {
+        "answer": "uranium",
+        "accepted": [
+          "uranium"
+        ]
+      },
+      "Np": {
+        "answer": "neptunium",
+        "accepted": [
+          "neptunium"
+        ]
+      },
+      "Pu": {
+        "answer": "plutonium",
+        "accepted": [
+          "plutonium"
+        ]
+      },
+      "Am": {
+        "answer": "americium",
+        "accepted": [
+          "americium"
+        ]
+      },
+      "Cm": {
+        "answer": "curium",
+        "accepted": [
+          "curium"
+        ]
+      },
+      "Bk": {
+        "answer": "berkelium",
+        "accepted": [
+          "berkelium"
+        ]
+      },
+      "Cf": {
+        "answer": "californium",
+        "accepted": [
+          "californium"
+        ]
+      },
+      "Es": {
+        "answer": "einsteinium",
+        "accepted": [
+          "einsteinium"
+        ]
+      },
+      "Fm": {
+        "answer": "fermium",
+        "accepted": [
+          "fermium"
+        ]
+      },
+      "Md": {
+        "answer": "mendelevium",
+        "accepted": [
+          "mendelevium"
+        ]
+      },
+      "No": {
+        "answer": "nobelium",
+        "accepted": [
+          "nobelium"
+        ]
+      },
+      "Lr": {
+        "answer": "lawrencium",
+        "accepted": [
+          "lawrencium"
+        ]
+      },
+      "Rf": {
+        "answer": "rutherfordium",
+        "accepted": [
+          "rutherfordium"
+        ]
+      },
+      "Db": {
+        "answer": "dubnium",
+        "accepted": [
+          "dubnium"
+        ]
+      },
+      "Sg": {
+        "answer": "seaborgium",
+        "accepted": [
+          "seaborgium"
+        ]
+      },
+      "Bh": {
+        "answer": "bohrium",
+        "accepted": [
+          "bohrium"
+        ]
+      },
+      "Hs": {
+        "answer": "hassium",
+        "accepted": [
+          "hassium"
+        ]
+      },
+      "Mt": {
+        "answer": "meitnerium",
+        "accepted": [
+          "meitnerium"
+        ]
+      },
+      "Ds": {
+        "answer": "darmstadtium",
+        "accepted": [
+          "darmstadtium"
+        ]
+      },
+      "Rg": {
+        "answer": "roentgenium",
+        "accepted": [
+          "roentgenium"
+        ]
+      },
+      "Cn": {
+        "answer": "copernicium",
+        "accepted": [
+          "copernicium"
+        ]
+      },
+      "Nh": {
+        "answer": "nihonium",
+        "accepted": [
+          "nihonium"
+        ]
+      },
+      "Fl": {
+        "answer": "flerovium",
+        "accepted": [
+          "flerovium"
+        ]
+      },
+      "Mc": {
+        "answer": "moscovium",
+        "accepted": [
+          "moscovium"
+        ]
+      },
+      "Lv": {
+        "answer": "livermorium",
+        "accepted": [
+          "livermorium"
+        ]
+      },
+      "Ts": {
+        "answer": "tennessine",
+        "accepted": [
+          "tennessine"
+        ]
+      },
+      "Og": {
+        "answer": "oganesson",
+        "accepted": [
+          "oganesson"
+        ]
+      }
+    },
+    "nonMembers": [
+      "glass",
+      "bronze",
+      "steel",
+      "water",
+      "granite",
+      "brass",
+      "quartz",
+      "diamond"
+    ]
+  }
+}

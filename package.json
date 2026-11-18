@@ -33,6 +33,7 @@
     "content:other-flags": "node scripts/content/build-other-flags-inventory.mjs --write",
     "content:other-flags:assets": "node scripts/content/prepare-other-flags-assets.mjs --write",
     "content:other-flags:publish": "node scripts/content/publish-other-flags-assets.mjs",
+    "content:i18n": "node scripts/content/build-i18n.mjs",
     "tiebreaker:load": "node scripts/tiebreaker-load.mjs",
     "content:day": "vite-node scripts/content/export-day.ts",
     "content:paintings": "node scripts/content/painting-images.mjs",

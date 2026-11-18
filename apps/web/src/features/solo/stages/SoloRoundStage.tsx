@@ -14,6 +14,8 @@ import {
 import type { SoloRunView } from "../soloRunSession";
 import type { SoloRunScreenProps } from "../soloScreenTypes";
 import { SoloHud } from "../SoloHud";
+import { useMessages } from "../../../i18n/messages";
+import { m } from "./messages";
 
 type Question = NonNullable<ReturnType<typeof currentSoloQuestion>>;
 
@@ -49,11 +51,12 @@ function RoundHud({ props, state, view }: Omit<RoundStageProps, "question">) {
 
 /** Круг ждёт сервер: ожидание, а после обрыва связи — «Повторить» или «Выйти». */
 function SyncStatus({ props, state }: Pick<RoundStageProps, "props" | "state">) {
+  const t = useMessages(m);
   if (!props.syncError) {
     return (
       <div className="matchmaking-loading solo-sync" role="status">
         <span />{" "}
-        {state.stage === "checking" ? "Проверяем ответ" : "Засчитываем удар"}
+        {state.stage === "checking" ? t.checkingAnswer : t.countingStrike}
       </div>
     );
   }
@@ -64,11 +67,11 @@ function SyncStatus({ props, state }: Pick<RoundStageProps, "props" | "state">) 
       </p>
       {props.canRetrySync ? (
         <button type="button" className="cta-btn" onClick={props.onRetrySync}>
-          Повторить
+          {t.retry}
         </button>
       ) : (
         <button type="button" className="cta-btn" onClick={props.onHome}>
-          Выйти
+          {t.exit}
         </button>
       )}
     </div>
@@ -115,6 +118,7 @@ function MiniGame({ props, state, view, question }: RoundStageProps) {
 }
 
 export function SoloRoundStage({ props, state, view, question }: RoundStageProps) {
+  const t = useMessages(m);
   const [confirmExit, setConfirmExit] = useState(false);
   const [exitBusy, setExitBusy] = useState(false);
   const [exitError, setExitError] = useState<string | null>(null);
@@ -124,7 +128,7 @@ export function SoloRoundStage({ props, state, view, question }: RoundStageProps
     setExitError(null);
     try {
       if (await props.onAbandon()) props.onHome();
-      else setExitError(props.abandonError ?? "Не удалось закрыть забег. Попробуй ещё раз.");
+      else setExitError(props.abandonError ?? t.abandonFailed);
     } finally {
       setExitBusy(false);
     }
@@ -152,18 +156,16 @@ export function SoloRoundStage({ props, state, view, question }: RoundStageProps
         <div className="solo-exit">
           {!confirmExit ? (
             <button type="button" className="ghost-btn solo-exit__trigger" onClick={() => setConfirmExit(true)}>
-              Выйти
+              {t.exit}
             </button>
           ) : (
-            <div className="solo-exit__confirm" role="group" aria-label="Подтверждение выхода">
-              <p>{state.mode === "duel"
-                ? "Выйти из дуэли? Это засчитается поражением."
-                : "Выйти и закрыть текущий забег?"}</p>
+            <div className="solo-exit__confirm" role="group" aria-label={t.exitConfirmLabel}>
+              <p>{state.mode === "duel" ? t.exitDuel : t.exitRun}</p>
               <button type="button" className="ghost-btn" disabled={exitBusy} onClick={() => setConfirmExit(false)}>
-                Продолжить
+                {t.resume}
               </button>
               <button type="button" className="ghost-btn" disabled={exitBusy} onClick={() => void abandon()}>
-                {exitBusy ? "Закрываем…" : "Подтвердить выход"}
+                {exitBusy ? t.closing : t.confirmExit}
               </button>
               {(exitError || props.abandonError) && <p className="matchmaking-error" role="alert">{exitError ?? props.abandonError}</p>}
             </div>

@@ -1,3 +1,9 @@
+import { DEFAULT_LOCALE, type Locale } from '@clutch/shared';
+import { CARD_HEIGHT, CARD_WIDTH, CYRILLIC_FAMILY, PALETTE, escapeXml, fitSize, footer, header, open, surface, text } from './cardKit';
+import { shareText } from './shareText';
+
+export { CARD_HEIGHT, CARD_WIDTH, CYRILLIC_FAMILY, escapeXml };
+
 export type ShareOutcome = 'win' | 'loss' | 'tie';
 
 export interface ShareCardData {
@@ -5,28 +11,11 @@ export interface ShareCardData {
   p: number;
   q: number;
   name: string | null;
+  /** Язык текста на карточке; без него — русский. */
+  locale?: Locale;
 }
 
-/** Семейство кириллических подмножеств Inter после переименования в renderCard.ts. */
-export const CYRILLIC_FAMILY = 'InteC';
-
-export const CARD_WIDTH = 1200;
-export const CARD_HEIGHT = 630;
-
-const HEADLINES: Record<ShareOutcome, string> = {
-  win: 'Я вытащил клатч!',
-  loss: 'Почти получилось!',
-  tie: 'Ничья',
-};
-
-const ACCENTS: Record<ShareOutcome, string> = {
-  win: '#ee3a30',
-  loss: '#7a7266',
-  tie: '#2f6fed',
-};
-
 const MAX_DRAWN_NAME = 14;
-const FALLBACK_NAME = 'Соперник';
 
 /** Убирает то, чего нет в шрифте (эмодзи, CJK и т.п.), чтобы не рисовать «квадраты». */
 function sanitizeName(name: string): string {
@@ -38,41 +27,41 @@ function sanitizeName(name: string): string {
 }
 
 /** Имя для рисования: обрезается по символам, чтобы длинное имя не ломало вёрстку. */
-export function displayName(name: string | null): string {
+export function displayName(name: string | null, locale: Locale = DEFAULT_LOCALE): string {
   const chars = Array.from(sanitizeName(name ?? ''));
-  if (chars.length === 0) return FALLBACK_NAME;
+  if (chars.length === 0) return shareText(locale).opponentFallback;
   if (chars.length <= MAX_DRAWN_NAME) return chars.join('');
   return `${chars.slice(0, MAX_DRAWN_NAME - 1).join('').trimEnd()}…`;
 }
 
-export function escapeXml(value: string): string {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
-}
+const HEADLINE_FILL: Record<ShareOutcome, string> = {
+  win: PALETTE.gold,
+  loss: PALETTE.text,
+  tie: PALETTE.text,
+};
 
-// В Inter Black (fontsource) семейство называется «Inter Black», а не «Inter» с весом 900.
-const FONT = 'font-family="Inter"';
+const SCORE_FILL: Record<ShareOutcome, string> = {
+  win: PALETTE.success,
+  loss: PALETTE.error,
+  tie: PALETTE.text,
+};
 
-/** SVG карточки 1200x630 с явными координатами (satori не нужен: тексты короткие). */
-export function buildShareCardSvg({ outcome, p, q, name }: ShareCardData): string {
-  const label = escapeXml(displayName(name));
+/** Карточка матча 1200x630: исход, мой процент против процента соперника, кнопка в игру. */
+export function buildShareCardSvg({ outcome, p, q, name, locale = DEFAULT_LOCALE }: ShareCardData): string {
+  const t = shareText(locale);
+  const headline = t.outcome.headline[outcome];
+  const label = displayName(name, locale);
   return [
-    '<svg xmlns="http://www.w3.org/2000/svg" width="' + CARD_WIDTH + '" height="' + CARD_HEIGHT + '" viewBox="0 0 ' + CARD_WIDTH + ' ' + CARD_HEIGHT + '">',
-    '<rect width="' + CARD_WIDTH + '" height="' + CARD_HEIGHT + '" fill="#171410"/>',
-    '<g fill="#f7f1e4" ' + FONT + '>',
-    '<text x="80" y="112" font-size="32" font-family="Inter Black" font-weight="900" letter-spacing="5.76" fill-opacity="0.65">CLUTCH</text>',
-    '<text x="80" y="256" font-size="98" font-family="Inter Black" font-weight="900" letter-spacing="-3.4">' + escapeXml(HEADLINES[outcome]) + '</text>',
-    '<text x="80" y="326" font-size="30" font-weight="700" fill-opacity="0.55">Я</text>',
-    '<text x="80" y="446" font-size="132" font-family="Inter Black" font-weight="900" letter-spacing="-4">' + p + '%</text>',
-    '<text x="545" y="446" font-size="132" font-family="Inter Black" font-weight="900" text-anchor="middle" fill-opacity="0.45">·</text>',
-    '<text x="640" y="326" font-size="30" font-weight="700" fill-opacity="0.55">' + label + '</text>',
-    '<text x="640" y="446" font-size="132" font-family="Inter Black" font-weight="900" letter-spacing="-4">' + q + '%</text>',
-    '</g>',
-    '<rect x="80" y="516" width="200" height="34" rx="17" fill="' + ACCENTS[outcome] + '"/>',
+    open(),
+    header(null),
+    text(`x="72" y="250" font-size="${fitSize(headline, 1056, 88, 'black')}" letter-spacing="-2" fill="${HEADLINE_FILL[outcome]}"`, headline, 'black'),
+    surface(72, 292, 1056, 186),
+    `<rect x="599" y="320" width="2" height="130" fill="#ffffff" fill-opacity="0.12"/>`,
+    text(`x="112" y="344" font-size="28" fill="${PALETTE.dim}"`, t.outcome.me, 'bold'),
+    text(`x="112" y="446" font-size="104" letter-spacing="-3" fill="${SCORE_FILL[outcome]}"`, `${p}%`, 'black'),
+    text(`x="640" y="344" font-size="28" fill="${PALETTE.dim}"`, label, 'bold'),
+    text(`x="640" y="446" font-size="104" letter-spacing="-3" fill="${PALETTE.text}" fill-opacity="0.85"`, `${q}%`, 'black'),
+    footer(t.outcome.call, t.playInTelegram),
     '</svg>',
   ].join('');
 }

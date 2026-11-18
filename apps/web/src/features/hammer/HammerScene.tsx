@@ -151,7 +151,7 @@ export function HammerScene({ struck, result, progressBefore, gain = 0, onNailSe
         </g>
 
         {/* Шкала прогресса 0-100% */}
-        <g fontFamily="Inter, sans-serif" fontSize="12" fontWeight="700" fill="#5f4a38">
+        <g fontFamily="Nunito, sans-serif" fontSize="12" fontWeight="700" fill="#5f4a38">
           <path d={`M${SCALE_X} ${scaleY(0)} V${scaleY(100)}`} stroke="#5f4a38" strokeWidth="2" />
           {tickPercents.map((p) => (
             <g key={p}>

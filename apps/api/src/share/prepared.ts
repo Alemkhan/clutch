@@ -6,17 +6,21 @@ import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 import { telegramChatId } from '../notifications/outbid';
 import { guessShareTitle, isReachableOrigin, parseGuessShare, parseRunShare, publicOrigin, runShareTitle, shareTarget } from './previews';
 import { runCallLine } from './runCard';
+import { shareLocale, shareText } from './shareText';
+import { clanPreparedMessage, clanShareInfo } from '../clans/clanShare';
+import { clansOpen } from '../clans/clans';
 
 /**
  * Подготовленное сообщение для Telegram shareMessage (Bot API 8.0, нужен inline-режим бота):
  * в выбранный чат уходит сообщение с крупным превью карточки результата и кнопкой «Играть».
  * Клиент присылает свою ссылку-превью; из неё берутся только путь и проверенные параметры,
  * сама страница строится на origin этого Worker, кнопка ведёт только на ссылку из конфигурации.
+ * Текст сообщения и кнопки — на языке из параметра l ссылки (тот же, что на карточке).
  */
 
 const KINDS = {
-  '/api/share/run': ['t', 'p', 'c', 'd', 'i', 'n'],
-  '/api/share/guess': ['k', 'm', 'pc'],
+  '/api/share/run': ['t', 'p', 'c', 'd', 'i', 'n', 'l'],
+  '/api/share/guess': ['k', 'm', 'pc', 'l'],
 } as const;
 type PreviewPath = keyof typeof KINDS;
 
@@ -24,6 +28,8 @@ export interface PreparedMessage {
   previewUrl: string;
   title: string;
   text: string;
+  /** Подпись кнопки под сообщением, на языке карточки. */
+  button: string;
   target: string;
 }
 
@@ -44,19 +50,40 @@ export function preparedMessageFor(rawUrl: unknown, origin: string, env: Env): P
     if (value !== null) query[key] = value;
   }
   const preview = `${origin}${path}?${new URLSearchParams(query).toString()}`;
+  const t = shareText(shareLocale(query.l));
 
   if (path === '/api/share/run') {
     const parsed = parseRunShare(query);
     const target = parsed.ok ? shareTarget(env, parsed.data.inviteId) : null;
     if (!parsed.ok || !target) return null;
     const title = runShareTitle(parsed.data);
-    return { previewUrl: preview, title, text: `${title}\n${runCallLine(parsed.data.card)}`, target };
+    return { previewUrl: preview, title, text: `${title}\n${runCallLine(parsed.data.card)}`, button: t.playClutch, target };
   }
   const parsed = parseGuessShare(query);
   const target = shareTarget(env, null);
   if (!parsed.ok || !target) return null;
   const title = guessShareTitle(parsed.data);
-  return { previewUrl: preview, title, text: `${title}\nУгадаешь точнее?`, target };
+  return { previewUrl: preview, title, text: `${title}\n${t.guess.call}`, button: t.playClutch, target };
+}
+
+/** Приглашение в клан: данные берутся из базы по коду, поэтому отдельно и асинхронно. */
+export async function preparedClanMessageFor(rawUrl: unknown, origin: string, env: Env): Promise<PreparedMessage | null> {
+  if (typeof rawUrl !== 'string' || rawUrl.length > 1024) return null;
+  let url: URL;
+  try {
+    url = new URL(rawUrl);
+  } catch {
+    return null;
+  }
+  if (url.pathname !== '/api/share/clan' || !clansOpen(env)) return null;
+  const query: Record<string, string> = {};
+  for (const key of ['c', 'v', 'l']) {
+    const value = url.searchParams.get(key);
+    if (value !== null) query[key] = value;
+  }
+  const info = await clanShareInfo(env.DB, query);
+  if (!info) return null;
+  return clanPreparedMessage(info, `${origin}/api/share/clan?${new URLSearchParams(query).toString()}`, env);
 }
 
 /** Тело savePreparedInlineMessage: статья с текстом (без разметки: имя чужое), большим превью сверху и кнопкой. */
@@ -71,7 +98,7 @@ export function preparedInlineMessageBody(userId: string, message: PreparedMessa
         message_text: message.text,
         link_preview_options: { url: message.previewUrl, prefer_large_media: true, show_above_text: true },
       },
-      reply_markup: { inline_keyboard: [[{ text: 'Играть в Clutch', url: message.target }]] },
+      reply_markup: { inline_keyboard: [[{ text: message.button, url: message.target }]] },
     },
     allow_user_chats: true,
     allow_group_chats: true,
@@ -101,7 +128,7 @@ export function registerPreparedShareRoutes(app: Hono<{ Bindings: Env }>): void 
       return c.json({ error: 'The preview is not reachable from Telegram.', reason: 'preview_unreachable' }, 409);
     }
     const body = await c.req.json<{ url?: unknown }>().catch(() => null);
-    const message = preparedMessageFor(body?.url, origin, c.env);
+    const message = preparedMessageFor(body?.url, origin, c.env) ?? await preparedClanMessageFor(body?.url, origin, c.env);
     if (!message) return c.json({ error: 'Invalid share link.' }, 400);
 
     try {

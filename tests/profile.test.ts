@@ -3,7 +3,14 @@
 
 import { createHash, createHmac } from 'node:crypto';
 import { afterEach, describe, expect, it } from 'vitest';
-import { CURRENT_SOLO_RUN_CONDITIONS, FRIEND_RULES_VERSION, PRACTICE_RULES_VERSION, type SoloProfileResponse } from '@clutch/shared';
+import {
+  CURRENT_SOLO_RUN_CONDITIONS,
+  DAILY_RULES_VERSION,
+  dailyKey,
+  FRIEND_RULES_VERSION,
+  PRACTICE_RULES_VERSION,
+  type SoloProfileResponse,
+} from '@clutch/shared';
 import app from '../apps/api/src/index';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 
@@ -84,7 +91,11 @@ describe('solo profile route', () => {
     const player = guest('empty');
     const response = await request(db, player.authorization);
     expect(response.status).toBe(200);
-    expect(await response.json()).toEqual({ completedRuns: 0, reachedTargetRuns: 0, bestRounds: null });
+    const body = await response.json() as SoloProfileResponse;
+    expect(body).toMatchObject({ completedRuns: 0, reachedTargetRuns: 0, bestRounds: null });
+    expect(body.streak).toEqual({ current: 0, best: 0, playedToday: false });
+    expect(body.level).toMatchObject({ level: 1, xpIntoLevel: 0, totalXp: 0 });
+    expect(body.achievements?.every((achievement) => !achievement.unlocked)).toBe(true);
   });
 
   it('aggregates only completed current-rule ranked solo runs owned by the player', async () => {
@@ -101,10 +112,32 @@ describe('solo profile route', () => {
 
     const response = await request(db, player.authorization);
     expect(response.status).toBe(200);
-    expect(await response.json() as SoloProfileResponse).toEqual({
+    const body = await response.json() as SoloProfileResponse;
+    expect(body).toMatchObject({
       completedRuns: 3,
       reachedTargetRuns: 2,
       bestRounds: 4,
     });
+    const unlocked = body.achievements?.filter((achievement) => achievement.unlocked).map((achievement) => achievement.id);
+    expect(unlocked).toEqual(expect.arrayContaining(['first_run', 'first_finish', 'fast_finish']));
+    expect(unlocked).not.toContain('runs_10');
+  });
+
+  it('counts the daily streak by game day, keeping the streak from yesterday alive until midnight', async () => {
+    const db = database();
+    const player = guest('streak');
+    const today = dailyKey(Date.now());
+    const day = (offset: number) => {
+      const date = new Date(`${today}T00:00:00Z`);
+      date.setUTCDate(date.getUTCDate() - offset);
+      return date.toISOString().slice(0, 10);
+    };
+    for (const offset of [1, 2, 3, 6, 7]) {
+      insertRun(db, { id: `d${offset}`, playerId: player.playerId, rulesVersion: DAILY_RULES_VERSION, rounds: 10, reachedTarget: true });
+      db.sqlite.prepare('UPDATE match_runs SET question_set_id = ? WHERE id = ?').run(`general:${day(offset)}:0`, `d${offset}`);
+    }
+    const body = await (await request(db, player.authorization)).json() as SoloProfileResponse;
+    expect(body.streak).toEqual({ current: 3, best: 3, playedToday: false });
+    expect(body.achievements?.find((achievement) => achievement.id === 'streak_3')?.unlocked).toBe(true);
   });
 });

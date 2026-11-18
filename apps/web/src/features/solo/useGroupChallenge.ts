@@ -1,3 +1,5 @@
+import { messagesFor } from '../../i18n/messages';
+import { m } from './messages';
 import { useRef, useState } from 'react';
 import { createGroupChallenge } from '../../platform/api';
 import { chooseShareStrategy, executeShare } from '../../platform/share';
@@ -14,7 +16,7 @@ export function useGroupChallenge(runId?: string) {
       url.current ??= (await createGroupChallenge(runId)).url;
       const native = typeof navigator.share === 'function';
       const result = await executeShare(chooseShareStrategy({ telegramShare: canShareViaTelegram(), nativeShare: native }),
-        { url: url.current, text: 'Мой вызов друзьям: один набор для всех! Присоединяйся в течение 24 часов.' },
+        { url: url.current, text: messagesFor(m).groupShareText },
         { telegramShare: shareViaTelegram, nativeShare: native ? data => navigator.share(data) : undefined, copy: text => navigator.clipboard.writeText(text) });
       setStatus(result === 'failed' ? 'error' : result);
     } catch { setStatus('error'); }

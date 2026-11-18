@@ -1,3 +1,5 @@
+import { messagesFor, useMessages } from '../../i18n/messages';
+import { m } from './messages';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { PRACTICE_LEVELS, type PracticeLevel, type PublicQuestion } from '@clutch/shared';
 import { checkTrainingAnswer, fetchTrainingMistakes, fetchTrainingQuestions, logAnalyticsEvent, submitQuestionReport } from '../../platform/api';
@@ -16,12 +18,13 @@ type View = 'menu' | 'bots' | 'mistakes';
 
 /** Выбор уровня бота: название и одна строка о силе. */
 export function PracticeLevelList({ onStartBot }: { onStartBot: (level: PracticeLevel) => void }) {
+  const t = messagesFor(m);
   return (
     <>
       {PRACTICE_LEVELS.map((level) => (
         <button key={level.id} type="button" className="training-entry" onClick={() => { onStartBot(level); }}>
-          <span className="training-entry-title">{level.name}</span>
-          <span className="training-entry-meta">{level.caption}</span>
+          <span className="training-entry-title">{t.levelName(level.id)}</span>
+          <span className="training-entry-meta">{t.levelCaption(Number(level.caption.match(/\d+(?= круг)/)?.[0] ?? 0))}</span>
         </button>
       ))}
     </>
@@ -45,6 +48,7 @@ const reportTrainingProblem = (input: TrainingReportInput) =>
 
 /** Загрузка вопросов отработки с сервера (без ответов) и сама отработка. Журнал ошибок ведёт сервер: id приходят оттуда же, чужие сервер отклоняет. */
 export function MistakePractice({ ids, onBack, exitLabel }: MistakePracticeProps) {
+  const t = useMessages(m);
   const [load, setLoad] = useState<MistakeLoad>(ids.length === 0 ? { status: 'ready', questions: [] } : { status: 'loading' });
   const [attempt, setAttempt] = useState(0);
 
@@ -74,17 +78,17 @@ export function MistakePractice({ ids, onBack, exitLabel }: MistakePracticeProps
   if (load.status === 'loading') {
     return (
       <section className="training-screen">
-        <ScreenHeader onBack={onBack} title="Отработка ошибок" />
-        <div className="matchmaking-loading" role="status"><span /> Загружаем вопросы</div>
+        <ScreenHeader onBack={onBack} title={t.mistakesTitle} />
+        <div className="matchmaking-loading" role="status"><span /> {t.loadingQuestions}</div>
       </section>
     );
   }
   if (load.status === 'error') {
     return (
       <section className="training-screen">
-        <ScreenHeader onBack={onBack} title="Отработка ошибок" />
-        <p className="matchmaking-error" role="alert">Не удалось загрузить вопросы. Проверь соединение и повтори.</p>
-        <button type="button" className="cta-btn" onClick={retry}>Повторить</button>
+        <ScreenHeader onBack={onBack} title={t.mistakesTitle} />
+        <p className="matchmaking-error" role="alert">{t.questionsError}</p>
+        <button type="button" className="cta-btn" onClick={retry}>{t.retry}</button>
       </section>
     );
   }
@@ -107,9 +111,10 @@ export type MistakeSummary =
   | { status: 'ready'; count: number; ids: string[] };
 
 export function mistakeMeta(summary: MistakeSummary): string {
-  if (summary.status === 'loading') return 'Загружаем…';
-  if (summary.status === 'error') return 'Не удалось загрузить ошибки';
-  return summary.count > 0 ? `Ошибок накоплено: ${summary.count}` : 'Пока нет ошибок';
+  const t = messagesFor(m);
+  if (summary.status === 'loading') return t.metaLoading;
+  if (summary.status === 'error') return t.metaError;
+  return summary.count > 0 ? t.metaCount(summary.count) : t.metaNone;
 }
 
 /** Меню «Тренировки»: два входа. Выделено, чтобы состояния журнала проверялись без сети. */
@@ -118,16 +123,17 @@ export function TrainingMenu({ summary, onBots, onMistakes }: {
   onBots: () => void;
   onMistakes: () => void;
 }) {
+  const t = useMessages(m);
   return (
     <section className="training-screen root-tab">
-      <ScreenHeader title="Тренировка" />
-      <p className="training-note">Не идёт в зачёт</p>
+      <ScreenHeader title={t.title} />
+      <p className="training-note">{t.unranked}</p>
       <button type="button" className="training-entry" onClick={onBots}>
-        <span className="training-entry-title">Игра против ботов</span>
-        <span className="training-entry-meta">Четыре уровня сложности</span>
+        <span className="training-entry-title">{t.botsTitle}</span>
+        <span className="training-entry-meta">{t.botsMeta}</span>
       </button>
       <button type="button" className="training-entry" onClick={onMistakes} disabled={summary.status === 'loading'}>
-        <span className="training-entry-title">Отработка ошибок</span>
+        <span className="training-entry-title">{t.mistakesTitle}</span>
         <span className="training-entry-meta">{mistakeMeta(summary)}</span>
       </button>
     </section>
@@ -135,6 +141,7 @@ export function TrainingMenu({ summary, onBots, onMistakes }: {
 }
 
 export function TrainingHub({ onStartBot, onPlayingChange, openMistakes = false }: TrainingHubProps) {
+  const t = useMessages(m);
   const [view, setView] = useState<View>('menu');
   const [summary, setSummary] = useState<MistakeSummary>({ status: 'loading' });
   // С экрана итога — сразу в отработку, как только список ошибок пришёл; дальше обычное меню.
@@ -168,7 +175,7 @@ export function TrainingHub({ onStartBot, onPlayingChange, openMistakes = false 
       <MistakePractice
         ids={summary.status === 'ready' ? summary.ids : []}
         onBack={() => setView('menu')}
-        exitLabel="К тренировке"
+        exitLabel={t.toTraining}
       />
     );
   }
@@ -176,7 +183,7 @@ export function TrainingHub({ onStartBot, onPlayingChange, openMistakes = false 
   if (view === 'bots') {
     return (
       <section className="training-screen">
-        <ScreenHeader onBack={() => setView('menu')} title="Против бота" />
+        <ScreenHeader onBack={() => setView('menu')} title={t.vsBot} />
         <PracticeLevelList onStartBot={onStartBot} />
       </section>
     );

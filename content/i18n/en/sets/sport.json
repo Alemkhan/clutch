@@ -1,0 +1,93 @@
+{
+  "set-olympic-rings": {
+    "title": "Name a color of the Olympic rings",
+    "mcPrompt": "Which of these colors is among the Olympic rings?",
+    "members": {
+      "blue": {
+        "answer": "blue",
+        "accepted": [
+          "blue"
+        ]
+      },
+      "yellow": {
+        "answer": "yellow",
+        "accepted": [
+          "yellow"
+        ]
+      },
+      "black": {
+        "answer": "black",
+        "accepted": [
+          "black"
+        ]
+      },
+      "green": {
+        "answer": "green",
+        "accepted": [
+          "green"
+        ]
+      },
+      "red": {
+        "answer": "red",
+        "accepted": [
+          "red"
+        ]
+      }
+    },
+    "nonMembers": [
+      "white",
+      "purple",
+      "orange"
+    ]
+  },
+  "set-chess-pieces": {
+    "title": "Name a chess piece",
+    "mcPrompt": "Which of these is a chess piece?",
+    "members": {
+      "king": {
+        "answer": "king",
+        "accepted": [
+          "king"
+        ]
+      },
+      "queen": {
+        "answer": "queen",
+        "accepted": [
+          "queen"
+        ]
+      },
+      "rook": {
+        "answer": "rook",
+        "accepted": [
+          "rook",
+          "castle"
+        ]
+      },
+      "bishop": {
+        "answer": "bishop",
+        "accepted": [
+          "bishop"
+        ]
+      },
+      "knight": {
+        "answer": "knight",
+        "accepted": [
+          "knight",
+          "horse"
+        ]
+      },
+      "pawn": {
+        "answer": "pawn",
+        "accepted": [
+          "pawn"
+        ]
+      }
+    },
+    "nonMembers": [
+      "checker",
+      "crowned king",
+      "ace",
+      "joker"
+    ]
+  }
+}

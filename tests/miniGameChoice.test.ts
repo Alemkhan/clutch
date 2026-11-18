@@ -4,6 +4,7 @@
 import { createHash, createHmac } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  LEGACY_HAMMER_MINI_GAME_CONFIG,
   CURRENT_HAMMER_MINI_GAME,
   CURRENT_SOLO_RUN_CONDITIONS,
   PRACTICE_RULES_VERSION,
@@ -204,6 +205,25 @@ describe('mini-game of a new run', () => {
     expect(again.miniGameId).toBe('tower_stack');
     const snapshot = await (await call(db, 'bob', `/api/solo-runs/${first.runId}`)).json() as SoloRunSnapshot;
     expect(snapshot.miniGameId).toBe('tower_stack');
+  });
+
+  it('lets a run started under the previous mini-game rules finish under them', async () => {
+    const db = database();
+    const run = await start(db, 'bob');
+    db.sqlite.prepare('UPDATE match_runs SET mini_game_config_json = ? WHERE id = ?')
+      .run(JSON.stringify(LEGACY_HAMMER_MINI_GAME_CONFIG), run.runId);
+    const response = await call(db, 'bob', `/api/solo-runs/${run.runId}`);
+    expect(response.status).toBe(200);
+    const snapshot = await response.json() as SoloRunSnapshot;
+    expect(snapshot.miniGameConfig).toEqual(LEGACY_HAMMER_MINI_GAME_CONFIG);
+  });
+
+  it('refuses a run with an unknown mini-game config', async () => {
+    const db = database();
+    const run = await start(db, 'bob');
+    db.sqlite.prepare('UPDATE match_runs SET mini_game_config_json = ? WHERE id = ?')
+      .run(JSON.stringify({ ...LEGACY_HAMMER_MINI_GAME_CONFIG, markerSpeedMax: 9 }), run.runId);
+    expect((await call(db, 'bob', `/api/solo-runs/${run.runId}`)).status).toBe(409);
   });
 
   it('refuses a run with an unknown mini-game id', async () => {

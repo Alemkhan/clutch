@@ -1,0 +1,146 @@
+{
+  "set-beatles": {
+    "title": "Name a member of the classic Beatles line-up",
+    "mcPrompt": "Which of these was in the classic Beatles line-up?",
+    "members": {
+      "lennon": {
+        "answer": "John Lennon",
+        "accepted": [
+          "John Lennon",
+          "Lennon"
+        ]
+      },
+      "mccartney": {
+        "answer": "Paul McCartney",
+        "accepted": [
+          "Paul McCartney",
+          "McCartney"
+        ]
+      },
+      "harrison": {
+        "answer": "George Harrison",
+        "accepted": [
+          "George Harrison",
+          "Harrison"
+        ]
+      },
+      "starr": {
+        "answer": "Ringo Starr",
+        "accepted": [
+          "Ringo Starr",
+          "Starr",
+          "Ringo"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Mick Jagger",
+      "Freddie Mercury",
+      "Elton John"
+    ]
+  },
+  "set-abba": {
+    "title": "Name a member of ABBA",
+    "mcPrompt": "Which of these is a member of ABBA?",
+    "members": {
+      "agnetha": {
+        "answer": "Agnetha Fältskog",
+        "accepted": [
+          "Agnetha Fältskog",
+          "Agnetha Faltskog",
+          "Agnetha"
+        ]
+      },
+      "bjorn": {
+        "answer": "Björn Ulvaeus",
+        "accepted": [
+          "Björn Ulvaeus",
+          "Bjorn Ulvaeus",
+          "Björn",
+          "Bjorn"
+        ]
+      },
+      "benny": {
+        "answer": "Benny Andersson",
+        "accepted": [
+          "Benny Andersson",
+          "Benny"
+        ]
+      },
+      "frida": {
+        "answer": "Anni-Frid Lyngstad",
+        "accepted": [
+          "Anni-Frid Lyngstad",
+          "Frida",
+          "Anni-Frid"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Madonna",
+      "Elvis Presley",
+      "Cher"
+    ]
+  },
+  "set-notes": {
+    "title": "Name a note of the solfège scale",
+    "mcPrompt": "Which of these is a note (solfège syllable)?",
+    "members": {
+      "do": {
+        "answer": "do",
+        "accepted": [
+          "do",
+          "doh"
+        ]
+      },
+      "re": {
+        "answer": "re",
+        "accepted": [
+          "re",
+          "ray"
+        ]
+      },
+      "mi": {
+        "answer": "mi",
+        "accepted": [
+          "mi",
+          "me"
+        ]
+      },
+      "fa": {
+        "answer": "fa",
+        "accepted": [
+          "fa",
+          "fah"
+        ]
+      },
+      "sol": {
+        "answer": "sol",
+        "accepted": [
+          "sol",
+          "so",
+          "soh"
+        ]
+      },
+      "la": {
+        "answer": "la",
+        "accepted": [
+          "la",
+          "lah"
+        ]
+      },
+      "si": {
+        "answer": "si",
+        "accepted": [
+          "si",
+          "ti"
+        ]
+      }
+    },
+    "nonMembers": [
+      "pa",
+      "ba",
+      "ko"
+    ]
+  }
+}

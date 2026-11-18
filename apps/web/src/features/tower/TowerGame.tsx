@@ -10,6 +10,8 @@ import { TowerIntro } from './TowerIntroCard';
 import { TowerScene } from './TowerScene';
 import { hasSeenTowerIntro, markTowerIntroSeen } from './towerIntro';
 import { towerFloorCount, towerLanding, towerThresholdLabels } from './towerGeometry';
+import { m } from './messages';
+import { messagesFor } from '../../i18n/messages';
 
 interface TowerGameProps {
   config: MiniGameConfig;
@@ -25,7 +27,7 @@ export function towerActionSemantics(struck: boolean, result: SkillResult | null
   return {
     tabIndex: struck ? -1 : 0,
     'aria-disabled': struck,
-    'aria-label': result ? 'Блок упал' : 'Нажми, чтобы уронить блок',
+    'aria-label': result ? messagesFor(m).dropped : messagesFor(m).dropAction,
   } as const;
 }
 
@@ -57,6 +59,7 @@ export function TowerGame({ config, questionId, previousSkillResults, onComplete
     setIntroOpen(false);
   };
 
+  const t = messagesFor(m);
   return (
     <>
       {introOpen && <TowerIntro onConfirm={confirmIntro} />}
@@ -73,8 +76,8 @@ export function TowerGame({ config, questionId, previousSkillResults, onComplete
       >
         <div className="tower-stage">
           <div className="tower-caption" aria-hidden="true">
-            <h2 className="tower-title">Башня</h2>
-            {landing && <p className="tower-match">Совпало {landing.overlapPercent}% с нижним блоком</p>}
+            <h2 className="tower-title">{t.title}</h2>
+            {landing && <p className="tower-match">{t.match(landing.overlapPercent)}</p>}
           </div>
           <TowerScene
             floors={towerFloorCount(previousSkillResults)}
@@ -88,14 +91,14 @@ export function TowerGame({ config, questionId, previousSkillResults, onComplete
         <ul className="tower-thresholds" aria-hidden="true">
           {labels.map((label) => (
             <li key={label.result} className={`tower-threshold${label.result === result ? ' is-hit' : ''}`}>
-              {label.minOverlap === null ? 'мимо' : `≥${label.minOverlap}%`} +{label.points}
+              {label.minOverlap === null ? t.miss : `≥${label.minOverlap}%`} +{label.points}
             </li>
           ))}
         </ul>
         {result ? (
           <HammerResult result={result} {...notes} />
         ) : (
-          <p className="strike-instruction">Тапни, чтобы уронить блок</p>
+          <p className="strike-instruction">{t.instruction}</p>
         )}
       </div>
       {result && <HammerResultStatus result={result} {...notes} />}

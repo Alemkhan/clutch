@@ -1,3 +1,5 @@
+import { messagesFor, useMessages } from '../../i18n/messages';
+import { m } from './messages';
 import { useEffect, useState } from 'react';
 import type { CategoryId } from '@clutch/shared';
 import {
@@ -27,10 +29,11 @@ export function rematchErrorKind(error: unknown): 'gone' | 'error' {
 
 /** Почему приглашение не открылось; сервер называет причину у ссылок «Позвать друга». */
 export function rematchGoneText(reason: string | undefined): string {
-  if (reason === 'own') return 'Это твоя ссылка. Отправь её другу.';
-  if (reason === 'taken') return 'Ссылку уже занял другой игрок.';
-  if (reason === 'expired') return 'Срок ссылки вышел.';
-  return 'Приглашение уже использовано, устарело или адресовано другому игроку.';
+  const t = messagesFor(m);
+  if (reason === 'own') return t.goneOwn;
+  if (reason === 'taken') return t.goneTaken;
+  if (reason === 'expired') return t.goneExpired;
+  return t.goneOther;
 }
 
 function RematchInvite({ inviteId, onStartRematch, onClose }: {
@@ -38,6 +41,7 @@ function RematchInvite({ inviteId, onStartRematch, onClose }: {
   onStartRematch: RematchEntryProps['onStartRematch'];
   onClose: () => void;
 }) {
+  const t = useMessages(m);
   const [state, setState] = useState<PreviewState>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
   const friend = (state.status === 'ready' && state.preview.friend === true)
@@ -60,26 +64,26 @@ function RematchInvite({ inviteId, onStartRematch, onClose }: {
   return (
     <section className="matchmaking">
       <div className="matchmaking-body">
-        <span className="matchmaking-eyebrow">{friend ? 'Вызов' : 'Реванш'}</span>
+        <span className="matchmaking-eyebrow">{friend ? t.challenge : t.rematch}</span>
         {state.status === 'loading' && (
           <>
-            <h1 className="screen-title">Открываем приглашение</h1>
-            <div className="matchmaking-loading" role="status"><span /> Загружаем</div>
+            <h1 className="screen-title">{t.openingInvite}</h1>
+            <div className="matchmaking-loading" role="status"><span /> {t.loading}</div>
           </>
         )}
         {state.status === 'ready' && (
           <>
             {state.preview.friend ? (
               <>
-                <h1 className="screen-title">Обгони {state.preview.challengerName}</h1>
-                <p className="matchmaking-status">Его результат: {state.preview.challengerProgress}%.</p>
+                <h1 className="screen-title">{t.beat(state.preview.challengerName)}</h1>
+                <p className="matchmaking-status">{t.hisResult(state.preview.challengerProgress)}</p>
               </>
             ) : (
               <>
-                <h1 className="screen-title">Реванш с {state.preview.challengerName}</h1>
+                <h1 className="screen-title">{t.rematchWith(state.preview.challengerName)}</h1>
                 <p className="matchmaking-status">
-                  {state.preview.challengerName}: {state.preview.challengerProgress}% против твоих {state.preview.yourProgress}%.
-                  Это будет новый забег по другому набору: твой результат сравнят с его.
+                  {t.rematchVs(state.preview.challengerName, state.preview.challengerProgress, state.preview.yourProgress)}
+                  {' '}{t.rematchExplain}
                 </p>
               </>
             )}
@@ -87,24 +91,24 @@ function RematchInvite({ inviteId, onStartRematch, onClose }: {
               className="cta-btn"
               onClick={() => onStartRematch(state.preview.inviteId, state.preview.category)}
             >
-              {state.preview.friend ? 'Играть' : 'Начать реванш'}
+              {state.preview.friend ? t.play : t.startRematch}
             </button>
-            <button className="ghost-btn" onClick={onClose}>Не сейчас</button>
+            <button className="ghost-btn" onClick={onClose}>{t.notNow}</button>
           </>
         )}
         {state.status === 'gone' && (
           <>
-            <h1 className="screen-title">{state.reason ? 'Ссылка недоступна' : 'Реванш недоступен'}</h1>
+            <h1 className="screen-title">{state.reason ? t.linkUnavailable : t.rematchUnavailable}</h1>
             <p className="matchmaking-error" role="alert">{rematchGoneText(state.reason)}</p>
-            <button className="cta-btn" onClick={onClose}>На главную</button>
+            <button className="cta-btn" onClick={onClose}>{t.home}</button>
           </>
         )}
         {state.status === 'error' && (
           <>
-            <h1 className="screen-title">Не удалось открыть приглашение</h1>
-            <p className="matchmaking-error" role="alert">Проверь соединение и попробуй ещё раз.</p>
-            <button className="cta-btn" onClick={() => setAttempt((value) => value + 1)}>Повторить</button>
-            <button className="ghost-btn" onClick={onClose}>На главную</button>
+            <h1 className="screen-title">{t.inviteOpenFailed}</h1>
+            <p className="matchmaking-error" role="alert">{t.checkConnection}</p>
+            <button className="cta-btn" onClick={() => setAttempt((value) => value + 1)}>{t.retry}</button>
+            <button className="ghost-btn" onClick={onClose}>{t.home}</button>
           </>
         )}
       </div>
@@ -115,6 +119,7 @@ function RematchInvite({ inviteId, onStartRematch, onClose }: {
 type UnsubscribeState = 'working' | 'off' | 'on' | 'error';
 
 function Unsubscribe({ onClose, daily = false }: { onClose: () => void; daily?: boolean }) {
+  const t = useMessages(m);
   const [state, setState] = useState<UnsubscribeState>('working');
 
   const change = (enabled: boolean) => {
@@ -130,35 +135,35 @@ function Unsubscribe({ onClose, daily = false }: { onClose: () => void; daily?: 
   return (
     <section className="matchmaking">
       <div className="matchmaking-body">
-        <span className="matchmaking-eyebrow">Уведомления</span>
+        <span className="matchmaking-eyebrow">{t.notifications}</span>
         {state === 'working' && (
-          <div className="matchmaking-loading" role="status"><span /> Сохраняем</div>
+          <div className="matchmaking-loading" role="status"><span /> {t.saving}</div>
         )}
         {state === 'off' && (
           <>
-            <h1 className="screen-title">Сообщения отключены</h1>
+            <h1 className="screen-title">{t.messagesOff}</h1>
             <p className="matchmaking-status">{daily
-              ? 'Мы больше не присылаем ежедневные задания.'
-              : 'Мы больше не пишем, когда вашу запись обходят.'}</p>
-            <button className="cta-btn" onClick={onClose}>На главную</button>
-            <button className="ghost-btn" onClick={() => change(true)}>Включить обратно</button>
+              ? t.dailyOff
+              : t.outbidOff}</p>
+            <button className="cta-btn" onClick={onClose}>{t.home}</button>
+            <button className="ghost-btn" onClick={() => change(true)}>{t.turnBackOn}</button>
           </>
         )}
         {state === 'on' && (
           <>
-            <h1 className="screen-title">Сообщения включены</h1>
+            <h1 className="screen-title">{t.messagesOn}</h1>
             <p className="matchmaking-status">{daily
-              ? 'Будем присылать новые ежедневные задания.'
-              : 'Напишем, когда вашу запись обойдут.'}</p>
-            <button className="cta-btn" onClick={onClose}>На главную</button>
+              ? t.dailyOn
+              : t.outbidOn}</p>
+            <button className="cta-btn" onClick={onClose}>{t.home}</button>
           </>
         )}
         {state === 'error' && (
           <>
-            <h1 className="screen-title">Не удалось сохранить</h1>
-            <p className="matchmaking-error" role="alert">Настройка не изменена. Попробуй ещё раз.</p>
-            <button className="cta-btn" onClick={() => change(false)}>Повторить</button>
-            <button className="ghost-btn" onClick={onClose}>На главную</button>
+            <h1 className="screen-title">{t.saveFailed}</h1>
+            <p className="matchmaking-error" role="alert">{t.settingUnchanged}</p>
+            <button className="cta-btn" onClick={() => change(false)}>{t.retry}</button>
+            <button className="ghost-btn" onClick={onClose}>{t.home}</button>
           </>
         )}
       </div>

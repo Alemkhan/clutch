@@ -1,5 +1,5 @@
 import {
-  CURRENT_HAMMER_MINI_GAME,
+  supportedMiniGameConfig,
   CURRENT_SOLO_RUN_CONDITIONS,
   duelRoundCap,
   soloModeOf,
@@ -51,27 +51,12 @@ function validatePublicQuestions(questions: readonly PublicQuestion[]): void {
   }
 }
 
+/** Конфиг мини-игры забега: текущий или прежней версии (забег, начатый до смены правил). */
 export function validateMiniGameConfig(value: unknown): MiniGameConfig {
   if (!value || typeof value !== 'object') throw new Error('Mini-game config is missing.');
-  const config = value as Record<string, unknown>;
-  const current = CURRENT_HAMMER_MINI_GAME.config;
-  const pressure = config.pressure as Record<string, unknown> | undefined;
-  if (Object.keys(config).length !== 5
-    || config.markerSpeedMin !== current.markerSpeedMin
-    || config.markerSpeedMax !== current.markerSpeedMax
-    || config.targetWidth !== current.targetWidth
-    || config.perfectWidth !== current.perfectWidth
-    || !pressure
-    || Object.keys(pressure).length !== 2
-    || !Array.isArray(pressure.stageMultipliers)
-    || !Array.isArray(pressure.maxTargetOffsets)
-    || pressure.stageMultipliers.length !== current.pressure.stageMultipliers.length
-    || pressure.maxTargetOffsets.length !== current.pressure.maxTargetOffsets.length
-    || pressure.stageMultipliers.some((item, index) => item !== current.pressure.stageMultipliers[index])
-    || pressure.maxTargetOffsets.some((item, index) => item !== current.pressure.maxTargetOffsets[index])) {
-    throw new Error('Mini-game config is not supported.');
-  }
-  return current;
+  const config = supportedMiniGameConfig(value);
+  if (!config) throw new Error('Mini-game config is not supported.');
+  return config;
 }
 
 function validateRound(round: OpponentRound): void {
@@ -145,7 +130,7 @@ export function normalizeSoloRun(run: StartSoloRunResponse, practice = false): N
     runId: run.runId,
     questions: run.questions,
     pace,
-    config: validateMiniGameConfig(CURRENT_SOLO_RUN_CONDITIONS.miniGame.config),
+    config: validateMiniGameConfig(run.miniGameConfig ?? CURRENT_SOLO_RUN_CONDITIONS.miniGame.config),
     miniGameId: run.miniGameId,
     bankExhausted: run.bankExhausted === true,
     friendDuel,

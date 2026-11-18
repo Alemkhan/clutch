@@ -1,0 +1,161 @@
+{
+  "set-greek-letters": {
+    "title": "Name a letter of the Greek alphabet",
+    "mcPrompt": "Which of these is a letter of the Greek alphabet?",
+    "members": {
+      "alpha": {
+        "answer": "alpha",
+        "accepted": [
+          "alpha"
+        ]
+      },
+      "beta": {
+        "answer": "beta",
+        "accepted": [
+          "beta"
+        ]
+      },
+      "gamma": {
+        "answer": "gamma",
+        "accepted": [
+          "gamma"
+        ]
+      },
+      "delta": {
+        "answer": "delta",
+        "accepted": [
+          "delta"
+        ]
+      },
+      "epsilon": {
+        "answer": "epsilon",
+        "accepted": [
+          "epsilon"
+        ]
+      },
+      "zeta": {
+        "answer": "zeta",
+        "accepted": [
+          "zeta"
+        ]
+      },
+      "eta": {
+        "answer": "eta",
+        "accepted": [
+          "eta"
+        ]
+      },
+      "theta": {
+        "answer": "theta",
+        "accepted": [
+          "theta"
+        ]
+      },
+      "iota": {
+        "answer": "iota",
+        "accepted": [
+          "iota"
+        ]
+      },
+      "kappa": {
+        "answer": "kappa",
+        "accepted": [
+          "kappa"
+        ]
+      },
+      "lambda": {
+        "answer": "lambda",
+        "accepted": [
+          "lambda"
+        ]
+      },
+      "mu": {
+        "answer": "mu",
+        "accepted": [
+          "mu",
+          "mi"
+        ]
+      },
+      "nu": {
+        "answer": "nu",
+        "accepted": [
+          "nu",
+          "ni"
+        ]
+      },
+      "xi": {
+        "answer": "xi",
+        "accepted": [
+          "xi",
+          "ksi"
+        ]
+      },
+      "omicron": {
+        "answer": "omicron",
+        "accepted": [
+          "omicron"
+        ]
+      },
+      "pi": {
+        "answer": "pi",
+        "accepted": [
+          "pi"
+        ]
+      },
+      "rho": {
+        "answer": "rho",
+        "accepted": [
+          "rho"
+        ]
+      },
+      "sigma": {
+        "answer": "sigma",
+        "accepted": [
+          "sigma"
+        ]
+      },
+      "tau": {
+        "answer": "tau",
+        "accepted": [
+          "tau"
+        ]
+      },
+      "upsilon": {
+        "answer": "upsilon",
+        "accepted": [
+          "upsilon",
+          "ypsilon"
+        ]
+      },
+      "phi": {
+        "answer": "phi",
+        "accepted": [
+          "phi"
+        ]
+      },
+      "chi": {
+        "answer": "chi",
+        "accepted": [
+          "chi"
+        ]
+      },
+      "psi": {
+        "answer": "psi",
+        "accepted": [
+          "psi"
+        ]
+      },
+      "omega": {
+        "answer": "omega",
+        "accepted": [
+          "omega"
+        ]
+      }
+    },
+    "nonMembers": [
+      "aleph",
+      "rune",
+      "schwa"
+    ]
+  }
+}

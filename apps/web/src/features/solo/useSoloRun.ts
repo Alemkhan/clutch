@@ -1,3 +1,5 @@
+import { messagesFor } from '../../i18n/messages';
+import { m } from './messages';
 import { useCallback, useRef, useState } from 'react';
 import type { CompleteSoloRunResponse, PracticeLevelId, SoloMode } from '@clutch/shared';
 import { MatchRequestCoordinator } from './matchmaking';
@@ -78,7 +80,7 @@ export function useSoloRun(botLevel?: PracticeLevelId, mode: SoloMode = 'daily',
       clearActiveSoloRun();
       return true;
     } catch (error) {
-      setAbandonError(error instanceof Error ? error.message : 'Не удалось закрыть забег. Попробуй ещё раз.');
+      setAbandonError(error instanceof Error ? error.message : messagesFor(m).abandonFailed);
       return false;
     } finally {
       abandonBusyRef.current = false;

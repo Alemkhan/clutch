@@ -1,4 +1,6 @@
 import { TIEBREAKER_MAX_GUESS } from '@clutch/shared';
+import { messagesFor } from '../../i18n/messages';
+import { m } from './messages';
 
 /**
  * Разбор числа из поля «На глазок». Запятая и точка — десятичный разделитель; пробелы (в том числе
@@ -47,11 +49,12 @@ export function parseTiebreakerInput(text: string): TiebreakerInputResult {
 
 /** Подсказка под полем; для пустого ввода подсказки нет, кнопка просто неактивна. */
 export function tiebreakerInputHint(error: TiebreakerInputError): string | null {
+  const t = messagesFor(m);
   switch (error) {
     case 'empty': return null;
-    case 'negative': return 'Нужно положительное число.';
-    case 'not_positive': return 'Число должно быть больше нуля.';
-    case 'too_big': return 'Слишком большое число: максимум 10³⁰.';
-    case 'invalid': return 'Введи число, например 1 500 или 1,5 млн.';
+    case 'negative': return t.hintNegative;
+    case 'not_positive': return t.hintNotPositive;
+    case 'too_big': return t.hintTooBig;
+    case 'invalid': return t.hintInvalid;
   }
 }

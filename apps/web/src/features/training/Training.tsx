@@ -1,3 +1,5 @@
+import { useMessages } from '../../i18n/messages';
+import { m } from './messages';
 import { useEffect, useReducer, useRef, useState } from 'react';
 import type { PublicQuestion, QuestionReportKind, TrainingCheckResponse } from '@clutch/shared';
 import { QuestionScreen } from '../round/QuestionScreen';
@@ -36,8 +38,8 @@ interface TrainingProps {
   onReport?: (input: TrainingReportInput) => Promise<unknown>;
 }
 
-export const TRAINING_NOT_SAVED_NOTE =
-  'Результат тренировки не сохраняется: он не попадает ни в пул соперников, ни в таблицу, ни в статистику.';
+/** Русский текст пометки; на экране — перевод из messages.ts. */
+export const TRAINING_NOT_SAVED_NOTE = m.ru.notSaved;
 
 type Action =
   | { type: 'answer'; answer: string }
@@ -56,7 +58,9 @@ function reducer(state: TrainingState, action: Action): TrainingState {
   }
 }
 
-export function Training({ questions, check, onBack, exitLabel = 'На главный', onReport }: TrainingProps) {
+export function Training({ questions, check, onBack, exitLabel: exitLabelProp, onReport }: TrainingProps) {
+  const t = useMessages(m);
+  const exitLabel = exitLabelProp ?? t.toHome;
   const [state, dispatch] = useReducer(reducer, questions, createTrainingState);
   const question = state.questions[state.index];
   const selectedAnswer = question?.answerType === 'multiple_choice'
@@ -105,11 +109,11 @@ export function Training({ questions, check, onBack, exitLabel = 'На глав�
   if (questions.length === 0) {
     return (
       <section className="training-screen root-tab">
-        <h2 className="screen-title">Тренировка по ошибкам</h2>
+        <h2 className="screen-title">{t.emptyTitle}</h2>
         <p className="training-text">
-          Пока здесь пусто: тренировка наполняется вопросами, в которых ты ошибся или не успел ответить в забегах.
+          {t.emptyText}
         </p>
-        <p className="training-note">{TRAINING_NOT_SAVED_NOTE}</p>
+        <p className="training-note">{t.notSaved}</p>
         <button type="button" className="cta-btn" onClick={() => { onBack(); }}>
           {exitLabel}
         </button>
@@ -120,11 +124,11 @@ export function Training({ questions, check, onBack, exitLabel = 'На глав�
   if (state.step === 'done') {
     return (
       <section className="training-screen root-tab">
-        <h2 className="screen-title">Тренировка завершена</h2>
+        <h2 className="screen-title">{t.doneTitle}</h2>
         <p className="training-text">
-          Верно: {state.correctCount} из {state.questions.length}. Верный ответ уменьшает счётчик ошибок по вопросу.
+          {t.doneText(state.correctCount, state.questions.length)}
         </p>
-        <p className="training-note">{TRAINING_NOT_SAVED_NOTE}</p>
+        <p className="training-note">{t.notSaved}</p>
         <button type="button" className="cta-btn" onClick={() => { onBack(); }}>
           {exitLabel}
         </button>
@@ -136,11 +140,11 @@ export function Training({ questions, check, onBack, exitLabel = 'На глав�
     <section className="training-screen">
       <ScreenHeader
         className="training-header"
-        leading={<span className="chip">Тренировка · {state.index + 1} из {state.questions.length}</span>}
-        backLabel="Выйти"
+        leading={<span className="chip">{t.chip(state.index + 1, state.questions.length)}</span>}
+        backLabel={t.exit}
         onBack={onBack}
       />
-      <p className="training-note">{TRAINING_NOT_SAVED_NOTE}</p>
+      <p className="training-note">{t.notSaved}</p>
       {state.step === 'question' && question && (
         <QuestionScreen
           key={`${state.index}:${question.id}`}
@@ -151,11 +155,11 @@ export function Training({ questions, check, onBack, exitLabel = 'На глав�
       {state.step === 'checking' && (
         state.checkFailed ? (
           <div className="training-check">
-            <p className="matchmaking-error" role="alert">Не удалось проверить ответ. Проверь соединение и повтори.</p>
-            <button type="button" className="cta-btn" onClick={() => dispatch({ type: 'retry' })}>Повторить</button>
+            <p className="matchmaking-error" role="alert">{t.checkError}</p>
+            <button type="button" className="cta-btn" onClick={() => dispatch({ type: 'retry' })}>{t.retry}</button>
           </div>
         ) : (
-          <div className="matchmaking-loading training-check" role="status"><span /> Проверяем ответ</div>
+          <div className="matchmaking-loading training-check" role="status"><span /> {t.checking}</div>
         )
       )}
       {state.step === 'resolution' && question && (

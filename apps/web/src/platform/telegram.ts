@@ -7,8 +7,12 @@ import {
   isTMA,
   miniAppReady,
   openLink,
+  requestWriteAccess,
   mountMiniAppSync,
   mountViewport,
+  setMiniAppBackgroundColor,
+  setMiniAppBottomBarColor,
+  setMiniAppHeaderColor,
   restoreInitData,
   retrieveRawInitData,
   shareMessage,
@@ -18,12 +22,28 @@ import {
 interface TelegramIdentity {
   initData: string;
   displayName: string;
+  /** Язык интерфейса Telegram у игрока (`ru`, `kk`, `en-US`…): подсказка при выборе языка игры. */
+  languageCode?: string;
 }
 
 let identity: TelegramIdentity | null = null;
 let initializationPromise: Promise<void> | null = null;
 let coreInitializationPromise: Promise<void> | null = null;
 let viewportInitializationPromise = Promise.resolve();
+
+/**
+ * Шапка, фон и нижняя полоса Telegram — в цветах игры. Иначе у игрока со светлой темой Telegram
+ * над тёмной игрой висела бы белая полоса. Старые клиенты без этих методов просто пропускаются.
+ */
+function applyTelegramColors(): void {
+  try {
+    if (setMiniAppHeaderColor.isAvailable()) setMiniAppHeaderColor('#2b2270');
+    if (setMiniAppBackgroundColor.isAvailable()) setMiniAppBackgroundColor('#160f3e');
+    if (setMiniAppBottomBarColor.isAvailable()) setMiniAppBottomBarColor('#181140');
+  } catch {
+    // Цвета — украшение: без них игра работает как раньше.
+  }
+}
 
 function runTelegramInitialization(): void {
   if (!isTMA()) return;
@@ -36,10 +56,12 @@ function runTelegramInitialization(): void {
     identity = {
       initData: raw,
       displayName: [user.first_name, user.last_name].filter(Boolean).join(' '),
+      languageCode: user.language_code,
     };
   }
 
   if (mountMiniAppSync.isAvailable()) mountMiniAppSync();
+  applyTelegramColors();
   if (bindMiniAppCssVars.isAvailable()) bindMiniAppCssVars();
   if (miniAppReady.isAvailable()) miniAppReady();
 
@@ -115,5 +137,20 @@ export function isInsideTelegram(): boolean {
     return isTMA();
   } catch {
     return false;
+  }
+}
+
+/**
+ * Может ли бот писать игроку в личку. Если игрок не открывал чат с ботом, Telegram покажет своё окно
+ * «Разрешить боту писать вам?». false — отказал; вне Telegram или в старом клиенте — true (пусть пробует сервер).
+ */
+export async function ensureBotCanWrite(): Promise<boolean> {
+  if (!isInsideTelegram()) return true;
+  try {
+    if (initDataUser()?.allows_write_to_pm) return true;
+    if (!requestWriteAccess.isAvailable()) return true;
+    return (await requestWriteAccess()) === 'allowed';
+  } catch {
+    return true;
   }
 }

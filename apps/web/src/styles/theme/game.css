@@ -1,0 +1,402 @@
+/* === СТИЛЬ: ИГРА ===========================================================
+   Игровые экраны: забег (кроме выбора категории), мини-игры, «Последний бой», «На глазок».
+   Палитра общая с меню; здесь — фон сцены, табло, вопрос и ответы. */
+
+:root main.app-shell:is(
+  .phase-solo:not(.stage-categories):not(.stage-error),
+  .phase-hammer,
+  .phase-lastStand,
+  .phase-tiebreaker
+) {
+  /* Палитра общая (tokens.css); в игре — только свой цвет игрока на табло. */
+  --me: #3dd2f5;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% -10%, rgba(139, 108, 246, 0.35), transparent 50%),
+    linear-gradient(180deg, #2b2270 0%, #1f1850 45%, #160f3e 100%);
+}
+
+/* --- Табло: аватары с кольцом, счёт цветом стороны ----------------------- */
+
+:root .match-hud {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+:root .match-hud-avatar {
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #2c2468;
+  box-shadow: 0 0 0 2.5px var(--me, var(--primary));
+}
+
+:root .match-hud-competitor.opponent .match-hud-avatar {
+  box-shadow: 0 0 0 2.5px var(--opponent);
+}
+
+:root .match-hud-value {
+  color: var(--me, var(--primary));
+}
+
+:root .match-hud-competitor.opponent .match-hud-value {
+  color: var(--opponent);
+}
+
+:root .match-hud-track {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+:root .match-hud-fill {
+  background: var(--me, var(--primary));
+}
+
+:root .match-hud-competitor.opponent .match-hud-fill {
+  background: var(--opponent);
+}
+
+:root .match-hud-round {
+  border: 3px solid var(--accent);
+  border-radius: 999px;
+  background: #160f3e;
+  color: #fff;
+}
+
+:root .sound-toggle-hud {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+:root .timer-ring-bg {
+  stroke: rgba(255, 255, 255, 0.14);
+}
+
+:root .timer-ring-fill {
+  stroke: var(--accent);
+}
+
+:root .timer-ring.danger .timer-ring-fill {
+  stroke: var(--error);
+}
+
+:root .timer-ring-text {
+  color: #fff;
+}
+
+/* --- Вопрос: крупный белый текст, ответы — белые «объёмные» плашки ------ */
+
+:root .category-chip {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+:root .question-prompt {
+  padding: 6px 4px;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  color: #fff;
+  font-size: clamp(21px, 6vw, 26px);
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: center;
+}
+
+:root .option-btn {
+  border: 0;
+  border-radius: 14px;
+  background: #fff;
+  color: #1f1a3d;
+  box-shadow: 0 4px 0 var(--white-edge);
+  font-weight: 800;
+}
+
+:root .option-btn:not(:disabled):active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--white-edge);
+}
+
+:root .option-letter {
+  border: 0;
+  border-radius: 50%;
+  background: #f0ebff;
+  color: #7a4cf2;
+}
+
+:root .option-btn.selected {
+  background: var(--violet);
+  color: #fff;
+  box-shadow: 0 4px 0 var(--violet-edge);
+}
+
+:root .option-btn.selected .option-letter {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+:root .option-btn:disabled:not(.selected) {
+  opacity: 0.55;
+}
+
+/* --- Карточки на тёмном -------------------------------------------------- */
+
+:root main.app-shell:is(.phase-solo:not(.stage-categories):not(.stage-error), .phase-hammer, .phase-lastStand, .phase-tiebreaker) :is(
+  .tb-card,
+  .matchmaking-card,
+  .minigame-card,
+  .solo-board-list
+) {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(10, 6, 36, 0.38);
+  box-shadow: none;
+  color: var(--text);
+}
+
+/* --- Разбор ответа ------------------------------------------------------- */
+
+:root .resolution-answers {
+  border: 0;
+  border-radius: 16px;
+  background: rgba(10, 6, 36, 0.38);
+}
+
+:root .resolution-answer.correct {
+  background: rgba(31, 184, 113, 0.14);
+}
+
+:root .resolution-explanation {
+  color: var(--text-dim);
+}
+
+:root .resolution-action {
+  border-radius: 16px;
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 5px 0 var(--accent-edge);
+  font-weight: 800;
+}
+
+:root .resolution-action.to-hammer {
+  background: var(--violet);
+  color: #fff;
+  box-shadow: 0 5px 0 var(--violet-edge);
+}
+
+:root .resolution-action:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--accent-edge);
+}
+
+:root .resolution-action.to-hammer:active {
+  box-shadow: 0 2px 0 var(--violet-edge);
+}
+
+/* Вторичные кнопки: белые «объёмные» (на светлом — с серой кромкой). */
+:root .ghost-btn:not(.solo-exit__trigger):not(.my-runs-more) {
+  border: 0;
+  background: #fff;
+  color: #1f1a3d;
+  box-shadow: 0 4px 0 var(--white-edge);
+  font-weight: 800;
+}
+
+:root .ghost-btn:not(.solo-exit__trigger):not(.my-runs-more):active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--white-edge);
+}
+
+/* --- Светлые вставки на тёмном фоне: свой тёмный текст ------------------- */
+
+:root :is(.open-answer-input, .tb-input, .resolution-report-comment, .question-media-text) {
+  background: #fff;
+  color: #1f1a3d;
+}
+
+:root :is(.open-answer-input, .tb-input, .resolution-report-comment)::placeholder {
+  color: #a19dbb;
+}
+
+:root .ls-board-row,
+:root .result-comparison {
+  background: rgba(10, 6, 36, 0.38);
+  color: var(--text);
+}
+
+/* Неактивная главная кнопка на тёмном. */
+:root main.app-shell:is(
+  .phase-solo:not(.stage-categories):not(.stage-error),
+  .phase-hammer,
+  .phase-lastStand,
+  .phase-tiebreaker
+) .cta-btn:disabled {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* --- Итог забега: цветное свечение сверху, плитки с цветной рамкой ------- */
+
+:root main.app-shell.stage-result:has(.solo-result.reached) {
+  background:
+    linear-gradient(180deg, rgba(31, 184, 113, 0.75) 0%, rgba(31, 184, 113, 0) 340px),
+    linear-gradient(180deg, #2b2270 0%, #1f1850 45%, #160f3e 100%);
+}
+
+:root main.app-shell.stage-result:has(.solo-result.not-reached) {
+  background:
+    linear-gradient(180deg, rgba(214, 51, 132, 0.7) 0%, rgba(214, 51, 132, 0) 340px),
+    linear-gradient(180deg, #2b2270 0%, #1f1850 45%, #160f3e 100%);
+}
+
+:root .solo-result-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 5px 0 var(--accent-edge);
+}
+
+:root .solo-result-stats {
+  gap: 8px;
+  border: 0;
+  background: none;
+}
+
+:root .solo-result-stat {
+  align-items: center;
+  border: 1.5px solid;
+  border-radius: 14px;
+  text-align: center;
+}
+
+:root .solo-result-stat + .solo-result-stat {
+  border-left: 1.5px solid;
+}
+
+:root .solo-result-stat:nth-child(3n + 1) {
+  border-color: rgba(255, 159, 28, 0.6);
+  background: rgba(255, 159, 28, 0.12);
+}
+
+:root .solo-result-stat:nth-child(3n + 2) {
+  border-color: rgba(165, 139, 255, 0.6);
+  background: rgba(165, 139, 255, 0.12);
+}
+
+:root .solo-result-stat:nth-child(3n) {
+  border-color: rgba(61, 210, 245, 0.6);
+  background: rgba(61, 210, 245, 0.12);
+}
+
+:root .solo-result-receipt {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(10, 6, 36, 0.38);
+}
+
+:root .solo-result-pill {
+  background: rgba(255, 201, 77, 0.16);
+}
+
+:root .open-answer-submit:not(:disabled) {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 5px 0 var(--accent-edge);
+  font-weight: 800;
+}
+
+:root .open-answer-submit:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* --- Картинка вопроса: флаг яркий (это содержимое), рамка вокруг — тёмное стекло ---- */
+
+:root .question-media:not(.artwork) {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 22px rgba(6, 3, 26, 0.35);
+}
+
+/* --- Вердикт: «Верно!» зелёным, «Мимо» красным, оба крупно ---------------- */
+
+:root .resolution-status {
+  font-size: 40px;
+}
+
+:root .resolution-status.correct {
+  color: var(--success);
+  text-shadow: 0 0 24px rgba(47, 210, 131, 0.35);
+}
+
+:root .resolution-status.incorrect {
+  color: var(--error);
+  text-shadow: 0 0 24px rgba(255, 92, 122, 0.35);
+}
+
+/* --- Мини-игры в палитре ------------------------------------------------------ */
+
+/* Сцена молотка: светлая «сцена»-иллюстрация, но лавандовая, а не бежевая. */
+:root .hammer-scene {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, #d8cfff 0%, #eeeaff 100%);
+  box-shadow: 0 12px 30px rgba(6, 3, 26, 0.4);
+}
+
+/* Шкала: тёмная дорожка, зоны — фиолетовый → зелёный → золото (токены --zone-*). */
+:root .hammer-track {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  background: #241c5c;
+  box-shadow: inset 0 2px 8px rgba(6, 3, 26, 0.5);
+}
+
+:root .marker {
+  width: 6px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 0 0 2px #1c1547, 0 0 12px rgba(255, 255, 255, 0.7);
+}
+
+:root .hammer-zone-label {
+  color: var(--text-dim);
+}
+
+:root .hammer-zone-label-perfect {
+  color: var(--accent);
+}
+
+/* Башня: подпись лежит на светлом небе сцены — тёмный текст. */
+:root .tower-title {
+  color: #1f1a3d;
+}
+
+:root .tower-match {
+  color: #4a4470;
+}
+
+/* Пороги башни лежат на тёмной плашке под сценой. */
+:root .tower-threshold {
+  color: var(--text-dim);
+}
+
+:root .tower-threshold.is-hit {
+  color: var(--success);
+}
+
+/* Вспышка удара и небо башни — в палитре игры (раньше оранжево-красные и голубое). */
+:root .hammer-impact {
+  stroke: var(--accent);
+}
+
+:root .hammer-impact.perfect {
+  stroke: #ffffff;
+}
+
+:root .tower-scene {
+  background: linear-gradient(180deg, #d8cfff 0%, #eeeaff 100%);
+}

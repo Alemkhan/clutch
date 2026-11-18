@@ -1,3 +1,5 @@
+import { messagesFor } from '../../i18n/messages';
+import { m } from './messages';
 import { compareSoloRuns, evaluateSoloRun, type MyRunOutcome, type SoloRunResult } from '@clutch/shared';
 import { circles } from './soloResultModel';
 import { soloRunView, type SoloRunSession } from './soloRunSession';
@@ -12,14 +14,13 @@ export interface PracticeSummary {
 
 /** Имя бота на экране: прямо сказано, что это бот, а не запись игрока. */
 export function practiceBotLabel(name: string): string {
-  return `Бот ${name}`;
+  return messagesFor(m).bot(name);
 }
 
-const HEADLINES: Record<MyRunOutcome, string> = {
-  player: 'Ты обошёл бота',
-  opponent: 'Бот оказался сильнее',
-  tie: 'Ничья с ботом',
-};
+function headlineOf(outcome: MyRunOutcome): string {
+  const t = messagesFor(m);
+  return outcome === 'player' ? t.beatBot : outcome === 'opponent' ? t.botStronger : t.tieBot;
+}
 
 /**
  * Сравнивает забег игрока с полным прохождением бота теми же правилами, что и обычный забег.
@@ -46,7 +47,7 @@ export function buildPracticeSummary(session: SoloRunSession): PracticeSummary |
   const outcome = compareSoloRuns(result(own), result(bot));
   return {
     outcome,
-    headline: HEADLINES[outcome],
-    line: `Ты — ${own.progress}% за ${circles(own.roundsPlayed)}. ${practiceBotLabel(pace.displayName)} — ${bot.progress}% за ${circles(bot.roundsPlayed)}.`,
+    headline: headlineOf(outcome),
+    line: messagesFor(m).duelLine(own.progress, circles(own.roundsPlayed), practiceBotLabel(pace.displayName), bot.progress, circles(bot.roundsPlayed)),
   };
 }

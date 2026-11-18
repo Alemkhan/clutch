@@ -6,6 +6,8 @@ import {
   tiebreakerBucketIndex,
   type TiebreakerAnsweredView,
 } from '@clutch/shared';
+import { messagesFor } from '../../i18n/messages';
+import { m } from './messages';
 
 const SUPERSCRIPT: Record<string, string> = {
   '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '-': '⁻',
@@ -114,7 +116,7 @@ export function distributionAxisTicks(): AxisTick[] {
   for (let log = Math.ceil(TIEBREAKER_BUCKET_LOG_MIN); log <= TIEBREAKER_BUCKET_LOG_MAX; log += 1) {
     const factor = 10 ** Math.abs(log);
     ticks.push({
-      label: log === 0 ? 'точно' : log < 0 ? `÷${factor}` : `×${factor}`,
+      label: log === 0 ? messagesFor(m).exact : log < 0 ? `÷${factor}` : `×${factor}`,
       position: (log - TIEBREAKER_BUCKET_LOG_MIN) / (TIEBREAKER_BUCKET_LOG_MAX - TIEBREAKER_BUCKET_LOG_MIN),
       exact: log === 0,
     });
@@ -122,24 +124,17 @@ export function distributionAxisTicks(): AxisTick[] {
   return ticks;
 }
 
-const MONTHS_GENITIVE = [
-  'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
-  'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря',
-];
-
 /** «2026-10-16» → «16 октября»; не дата — как есть. */
 export function formatDayMonth(dateKey: string): string {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateKey);
-  const month = match ? MONTHS_GENITIVE[Number(match[2]) - 1] : undefined;
-  return match && month ? `${Number(match[3])} ${month}` : dateKey;
+  const t = messagesFor(m);
+  const month = match ? t.months.split('|')[Number(match[2]) - 1] : undefined;
+  return match && month ? t.dayMonth(Number(match[3]), month) : dateKey;
 }
 
 /** «214 ответов», «1 ответ», «3 ответа». */
 export function answersText(count: number): string {
-  const mod100 = count % 100;
-  const mod10 = count % 10;
-  const word = mod100 >= 11 && mod100 <= 14 ? 'ответов' : mod10 === 1 ? 'ответ' : mod10 >= 2 && mod10 <= 4 ? 'ответа' : 'ответов';
-  return `${formatTiebreakerNumber(count)} ${word}`;
+  return messagesFor(m).answers(count, formatTiebreakerNumber(count));
 }
 
 /**
@@ -147,16 +142,18 @@ export function answersText(count: number): string {
  * нет, пока ответов меньше порога, и тогда ничего не обещаем.
  */
 export function standingText(percentile: number | null): string | null {
-  if (isBestAnswerOfDay(percentile)) return 'Лучший ответ дня';
-  return percentile === null ? null : `Точнее ${percentile}%`;
+  const t = messagesFor(m);
+  if (isBestAnswerOfDay(percentile)) return t.bestOfDay;
+  return percentile === null ? null : t.moreAccurate(percentile);
 }
 
 /** Короткий текст для скринридера вместо графика из столбиков. */
 export function distributionSummary(answered: TiebreakerAnsweredView): string {
   const bars = distributionBars(answered);
   const mine = bars.find((bar) => bar.mine);
+  const t = messagesFor(m);
   const side = answered.guess === answered.answer
-    ? 'совпал с правильным'
-    : mine && mine.index < TIEBREAKER_BUCKET_COUNT / 2 ? 'ниже правильного' : 'выше правильного';
-  return `Распределение ответов: всего ${answered.totalAnswers}. Твой ответ ${side}.`;
+    ? t.sideEqual
+    : mine && mine.index < TIEBREAKER_BUCKET_COUNT / 2 ? t.sideLower : t.sideHigher;
+  return t.distributionSummary(answered.totalAnswers, side);
 }

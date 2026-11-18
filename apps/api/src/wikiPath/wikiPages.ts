@@ -1,9 +1,9 @@
+import { WIKI_PATH_ALLOWED_LINKS_MAX_COUNT, WIKI_PATH_TITLE_MAX_LENGTH, type Locale } from '@clutch/shared';
+
 export interface WikiLink {
   title: string;
   label: string;
 }
-
-import { WIKI_PATH_ALLOWED_LINKS_MAX_COUNT, WIKI_PATH_TITLE_MAX_LENGTH } from '@clutch/shared';
 
 export interface WikiPageSnapshot {
   pageId: number;
@@ -26,7 +26,10 @@ interface ParseResponse {
 
 export type WikiFetchError = 'wiki_timeout' | 'wiki_unavailable';
 
-const API_URL = 'https://ru.wikipedia.org/w/api.php';
+/** Each challenge language plays inside its own Wikipedia (ru/en/kk). */
+export function wikiApiUrl(lang: Locale): string {
+  return `https://${lang}.wikipedia.org/w/api.php`;
+}
 const USER_AGENT = 'ClutchWikiPath/1.0 (https://clutch-app-ct8.pages.dev)';
 const MAX_RESPONSE_BYTES = 5 * 1024 * 1024;
 const FETCH_TIMEOUT_MS = 8_000;
@@ -35,10 +38,10 @@ export class WikiPageError extends Error {
   constructor(readonly reason: WikiFetchError) { super(reason); }
 }
 
-async function requestParsedPage(query: URLSearchParams, immutableRevision = false): Promise<NonNullable<ParseResponse['parse']>> {
+async function requestParsedPage(lang: Locale, query: URLSearchParams, immutableRevision = false): Promise<NonNullable<ParseResponse['parse']>> {
   let response: Response;
   try {
-    response = await fetch(`${API_URL}?${query}`, {
+    response = await fetch(`${wikiApiUrl(lang)}?${query}`, {
       headers: { 'User-Agent': USER_AGENT, 'Api-User-Agent': USER_AGENT, Accept: 'application/json' },
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
       ...(immutableRevision ? { cf: { cacheEverything: true, cacheTtl: 7 * 24 * 60 * 60 } } : {}),
@@ -91,12 +94,12 @@ async function readBounded(response: Response): Promise<string> {
   return new TextDecoder().decode(bytes);
 }
 
-export async function fetchWikiPage(title: string): Promise<WikiPageSnapshot> {
+export async function fetchWikiPage(lang: Locale, title: string): Promise<WikiPageSnapshot> {
   const query = new URLSearchParams({
     action: 'parse', page: title, prop: 'text|links|revid', redirects: '1',
     format: 'json', formatversion: '2', origin: '*', disableeditsection: '1', disabletoc: '1', mobileformat: '1',
   });
-  const page = await requestParsedPage(query);
+  const page = await requestParsedPage(lang, query);
   if (!page || !Number.isSafeInteger(page.pageid) || !Number.isSafeInteger(page.revid)
     || typeof page.title !== 'string' || typeof page.text !== 'string' || !Array.isArray(page.links)) {
     throw new WikiPageError('wiki_unavailable');
@@ -106,6 +109,8 @@ export async function fetchWikiPage(title: string): Promise<WikiPageSnapshot> {
   }
   const links = new Map<string, WikiLink>();
   for (const link of page.links) {
+    // Only main-namespace articles (ns 0) are playable. MediaWiki reports the namespace number,
+    // so category/file/help/template pages are excluded in every language without title prefixes.
     if (link.ns === 0 && typeof link.title === 'string' && link.title.length <= WIKI_PATH_TITLE_MAX_LENGTH) {
       const key = link.title.normalize('NFC').toLocaleLowerCase('ru-RU');
       links.set(key, { title: link.title, label: link.title.replaceAll('_', ' ') });
@@ -116,12 +121,12 @@ export async function fetchWikiPage(title: string): Promise<WikiPageSnapshot> {
 }
 
 /** Reload presentational HTML for the exact revision stored in D1; Cloudflare may edge-cache it. */
-export async function fetchWikiRevision(revisionId: number): Promise<Omit<WikiPageSnapshot, 'allowedLinks'>> {
+export async function fetchWikiRevision(lang: Locale, revisionId: number): Promise<Omit<WikiPageSnapshot, 'allowedLinks'>> {
   const query = new URLSearchParams({
     action: 'parse', oldid: String(revisionId), prop: 'text|revid',
     format: 'json', formatversion: '2', origin: '*', disableeditsection: '1', disabletoc: '1', mobileformat: '1',
   });
-  const page = await requestParsedPage(query, true);
+  const page = await requestParsedPage(lang, query, true);
   if (!Number.isSafeInteger(page.pageid) || page.revid !== revisionId
     || typeof page.title !== 'string' || typeof page.text !== 'string'
     || page.title.length > WIKI_PATH_TITLE_MAX_LENGTH) {

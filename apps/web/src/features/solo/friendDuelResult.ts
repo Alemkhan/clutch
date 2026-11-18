@@ -1,3 +1,5 @@
+import { messagesFor } from '../../i18n/messages';
+import { m } from './messages';
 import { evaluateSoloRun, type CompleteSoloRunResponse, type MyRunOutcome } from '@clutch/shared';
 import { circles } from './soloResultModel';
 import { formatMultiplier } from '../tiebreaker/tiebreakerView';
@@ -14,23 +16,30 @@ export interface FriendDuelSummary {
   tiebreakLine: string;
 }
 
-export const FRIEND_DUEL_CHIP = 'Дружеская игра · не в зачёт';
+/** Подпись-чип дружеской дуэли на текущем языке. */
+export function friendDuelChip(): string {
+  return messagesFor(m).friendChip;
+}
+
+/** Русская подпись (для совместимости); на экране — friendDuelChip(). */
+export const FRIEND_DUEL_CHIP = m.ru.friendChip;
 
 /** Имя в заголовке: запись друга без имени называем нейтрально. */
 function nameOf(pace: SoloRunSession['pace']): string {
-  return pace?.displayName.trim() || 'Друг';
+  return pace?.displayName.trim() || messagesFor(m).friend;
 }
 
 /** Прикидка показывается только там, где виден исход: здесь, в дружеской дуэли. Числа — только те, что отдал сервер. */
 export function tiebreakLine(tiebreak: CompleteSoloRunResponse['tiebreak']): string {
   if (!tiebreak) return '';
   const { ownMultiplier, opponentMultiplier } = tiebreak;
-  const head = 'Ничья по забегу — решила «На глазок»';
+  const t = messagesFor(m);
+  const head = t.tiebreakHead;
   if (ownMultiplier !== null && opponentMultiplier !== null) {
-    return `${head}: ${formatMultiplier(ownMultiplier)} против ${formatMultiplier(opponentMultiplier)}.`;
+    return t.tiebreakBoth(head, formatMultiplier(ownMultiplier), formatMultiplier(opponentMultiplier));
   }
-  if (ownMultiplier !== null) return `${head}: ты ответил, а друг нет.`;
-  if (opponentMultiplier !== null) return `${head}: друг ответил, а ты нет.`;
+  if (ownMultiplier !== null) return t.tiebreakOwn(head);
+  if (opponentMultiplier !== null) return t.tiebreakOther(head);
   return '';
 }
 
@@ -38,6 +47,7 @@ export function buildFriendDuelSummary(
   session: SoloRunSession,
   response: Pick<CompleteSoloRunResponse, 'outcome' | 'tiebreak'> | null,
 ): FriendDuelSummary {
+  const t = messagesFor(m);
   const name = nameOf(session.pace);
   const outcome = response?.outcome ?? null;
   const own = soloRunView(session);
@@ -45,17 +55,17 @@ export function buildFriendDuelSummary(
   if (session.pace) {
     try {
       const other = evaluateSoloRun(session.questions.map((question) => question.id), session.pace.rounds);
-      line = `Ты — ${own.progress}% за ${circles(own.roundsPlayed)}. ${name} — ${other.progress}% за ${circles(other.roundsPlayed)}.`;
+      line = t.duelLine(own.progress, circles(own.roundsPlayed), name, other.progress, circles(other.roundsPlayed));
     } catch {
       line = '';
     }
   }
   const headline = outcome === 'player'
-    ? 'Ты обошёл друга'
+    ? t.beatFriend
     : outcome === 'opponent'
-      ? 'Друг оказался сильнее'
+      ? t.friendStronger
       : outcome === 'tie'
-        ? 'Ничья с другом'
-        : 'Дуэль сыграна';
+        ? t.tieFriend
+        : t.duelPlayed;
   return { outcome, headline, line, tiebreakLine: tiebreakLine(response?.tiebreak) };
 }

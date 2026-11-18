@@ -1,0 +1,269 @@
+/* === СТИЛЬ: МЕНЮ ===========================================================
+   Всё приложение тёмное, как игровые экраны: светлые меню рядом с тёмной игрой слепили
+   («световая граната») и выглядели как два разных приложения. На главной, в профиле и в таблице
+   дня — фиолетовая шапка-акцент, она уезжает вместе с содержимым (background-attachment: local).
+   Префикс :root поднимает специфичность над стилями фич, подключёнными раньше. */
+
+:root body {
+  background: #140e38;
+}
+
+:root main.app-shell {
+  background:
+    radial-gradient(circle at 50% -10%, rgba(139, 108, 246, 0.28), transparent 45%),
+    linear-gradient(180deg, #221a58 0%, var(--bg) 40%, #150f3c 100%);
+  background-attachment: local;
+}
+
+/* Фиолетовая шапка: главная, профиль, таблица дня. */
+:root main.app-shell:is(.phase-home, .phase-board, .phase-profile) {
+  --band-h: 196px;
+  background:
+    radial-gradient(circle at 96% 24px, rgba(255, 255, 255, 0.1) 0 58px, transparent 59px),
+    radial-gradient(circle at 6% 150px, rgba(255, 255, 255, 0.06) 0 26px, transparent 27px),
+    linear-gradient(180deg, #6c45e8 0, #4f2fc4 var(--band-h), var(--bg) var(--band-h), #150f3c 100%);
+  background-attachment: local;
+}
+
+:root main.app-shell.phase-profile {
+  --band-h: 104px;
+  background:
+    radial-gradient(circle at 96% 24px, rgba(255, 255, 255, 0.1) 0 58px, transparent 59px),
+    linear-gradient(180deg, #6c45e8 0, #4f2fc4 var(--band-h), var(--bg) var(--band-h), #150f3c 100%);
+  background-attachment: local;
+}
+
+:root main.app-shell.phase-board {
+  --band-h: 128px;
+}
+
+:root .phase-board .solo-board-reset {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+:root main.app-shell::before {
+  display: none;
+}
+
+:root h1,
+:root h2,
+:root h3,
+:root .screen-title {
+  letter-spacing: -0.015em;
+}
+
+:root .home-brand,
+:root .screen-title,
+:root .back-btn {
+  color: #fff;
+}
+
+:root .home-brand-mark {
+  border-radius: 12px;
+  background: #fff;
+  color: #5f33dd;
+  transform: none;
+}
+
+/* --- Кнопки ------------------------------------------------------------- */
+
+:root .cta-btn {
+  border: 0;
+  border-radius: 16px;
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 5px 0 var(--accent-edge);
+  font-weight: 800;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+:root .cta-btn:not(:disabled):active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--accent-edge);
+}
+
+:root .cta-btn:disabled {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+:root .home-mode-btn,
+:root .tb-card-btn,
+:root .wp-card-action {
+  border: 0;
+  border-radius: 14px;
+  background: var(--violet);
+  color: #fff;
+  box-shadow: 0 4px 0 var(--violet-edge);
+  font-weight: 800;
+}
+
+:root .home-mode-btn:active,
+:root .tb-card-btn:active,
+:root .wp-card-action:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--violet-edge);
+}
+
+/* --- Главная ------------------------------------------------------------ */
+
+:root .home-hero-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  background: linear-gradient(180deg, #33297a 0%, #2a2266 100%);
+  color: var(--text);
+  box-shadow: 0 16px 36px rgba(6, 3, 26, 0.45);
+}
+
+:root .home-hero-card::before,
+:root .home-hero-card::after {
+  display: none;
+}
+
+:root .home-kicker {
+  border: 0;
+  background: rgba(157, 125, 255, 0.18);
+  color: #c9b8ff;
+}
+
+:root .home-title {
+  color: #fff;
+}
+
+:root .home-title em {
+  color: var(--accent);
+}
+
+:root .home-loop-icon {
+  border: 0;
+  border-radius: 50%;
+  background: rgba(157, 125, 255, 0.18);
+  color: #c9b8ff;
+}
+
+:root .home-loop-label {
+  color: var(--text-dim);
+}
+
+:root .home-board-link {
+  color: #c9b8ff;
+  font-weight: 800;
+}
+
+/* --- Карточки ----------------------------------------------------------- */
+/* Списки (партии, таблица) — один контейнер, строки внутри разделены линией, без своих рамок. */
+
+:root .tb-card,
+:root .wp-card,
+:root .wp-screen .wp-start,
+:root .wp-completion,
+:root .wp-error,
+:root .home-stats-card,
+:root .category-card,
+:root .solo-board-list,
+:root .my-runs-card,
+:root .profile-card,
+:root .training-entry {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Аватары ------------------------------------------------------------ */
+
+.creature {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+:root .solo-board-avatar {
+  overflow: hidden;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+:root .solo-board-row.mine .solo-board-avatar {
+  background: #fff;
+  color: #5f33dd;
+}
+
+:root .profile-avatar {
+  overflow: hidden;
+  border: 4px solid #2a2266;
+  border-radius: 50%;
+  background: var(--surface-2);
+  box-shadow: 0 10px 26px rgba(6, 3, 26, 0.5);
+}
+
+/* --- Нижняя панель ------------------------------------------------------ */
+
+:root .bottom-nav {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 22px 22px 0 0;
+  background: rgba(24, 17, 64, 0.97);
+  box-shadow: 0 -10px 30px rgba(6, 3, 26, 0.5);
+}
+
+:root .bottom-nav-item {
+  color: #8f88bd;
+}
+
+:root .bottom-nav-item.active {
+  color: #fff;
+  font-weight: 900;
+}
+
+:root .bottom-nav-item.active svg {
+  color: var(--accent);
+}
+
+/* --- Переключатели: тёмная подложка, активный — фиолетовая «пилюля» ------ */
+
+:root .board-kind {
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+:root .board-kind-btn {
+  border-radius: 12px;
+  color: var(--text-dim);
+}
+
+:root .board-kind-btn.active {
+  background: var(--violet);
+  color: #fff;
+  box-shadow: 0 3px 0 var(--violet-edge);
+}
+
+:root .solo-board-tab {
+  border: 0;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  font-weight: 700;
+}
+
+:root .solo-board-tab.active {
+  background: var(--violet);
+  color: #fff;
+}
+
+:root .solo-board-row.mine {
+  background: var(--violet);
+}
+
+:root .solo-board-row.mine,
+:root .solo-board-row.mine :is(.solo-board-place, .solo-board-name, .solo-board-score) {
+  color: #fff;
+}

@@ -137,8 +137,8 @@
 
 .share-card {
   width: 100%;
-  background: var(--text);
-  color: var(--bg);
+  background: var(--ink);
+  color: #fff;
   border-radius: var(--radius);
   padding: 24px;
   text-align: center;

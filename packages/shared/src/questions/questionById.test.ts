@@ -77,7 +77,11 @@ describe('generateQuestionById', () => {
 
   it('includes only reviewed free municipal and state symbols from the new inventory', () => {
     const added = historicFlags.filter((flag) => flag.id.startsWith('other-'));
-    expect(added.length).toBeGreaterThanOrEqual(90);
+    expect(added.length).toBeGreaterThanOrEqual(85);
+    // Сняты владельцем 2026-11-17: название прямо на символе; у Астаны оставлен только флаг.
+    expect(added.filter((flag) => /Астана/.test(flag.labelRu)).map((flag) => flag.labelRu)).toEqual(['Флаг Астана']);
+    expect(added.some((flag) => /Кокшетау|Кызылорда|Талдыкорган|Конаев|Алтай/.test(flag.labelRu))).toBe(false);
+    expect(added.some((flag) => flag.labelRu === 'Флаг Аксу')).toBe(false);
     // Своя копия с замазанными подписями (/flags-other/) или, если её ещё нет, исходник Commons.
     expect(added.every((flag) => /^(\/flags-other\/|https:\/\/(thumb|upload)\.wikimedia\.org\/)/.test(flag.mediaUrl ?? ''))).toBe(true);
     expect(added.some((flag) => /миссисипи/i.test(flag.labelRu))).toBe(false);

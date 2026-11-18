@@ -1,0 +1,1145 @@
+{
+  "tb-v2-pyramid-containers": {
+    "prompt": "How many standard 20-foot shipping containers would fit by volume inside the Great Pyramid of Giza, if it were hollow, at its original height, with no gaps between containers?",
+    "cardPrompt": "How many shipping containers fit inside the Great Pyramid?",
+    "unit": "containers",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Pyramid base side",
+          "value": 230.3,
+          "unit": "m",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+          "sourceTitle": "Great Pyramid of Giza — Wikipedia"
+        },
+        {
+          "label": "Original height, before it lost its casing",
+          "value": 146.6,
+          "unit": "m",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+          "sourceTitle": "Great Pyramid of Giza — Wikipedia"
+        },
+        {
+          "label": "Volume: ⅓ × base² × height",
+          "value": 2590000,
+          "unit": "m³",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+          "sourceTitle": "Calculated from the dimensions above"
+        },
+        {
+          "label": "Interior volume of a 20-foot container",
+          "value": 33.2,
+          "unit": "m³",
+          "sourceUrl": "https://www.hapag-lloyd.com/en/services-information/cargo-fleet/container/20-standard.html",
+          "sourceTitle": "Hapag-Lloyd — 20′ standard container"
+        }
+      ],
+      "summary": "2.59 million m³ ÷ 33.2 m³ ≈ 78,000 containers"
+    }
+  },
+  "tb-v2-air-over-pitch": {
+    "prompt": "How many tonnes does the whole column of air above a 105 × 68 m football pitch weigh — from the grass to the edge of the atmosphere?",
+    "cardPrompt": "How many tonnes does the air above a football pitch weigh?",
+    "unit": "t",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Atmospheric pressure at sea level",
+          "value": 101325,
+          "unit": "Pa",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+          "sourceTitle": "NASA — Earth Fact Sheet"
+        },
+        {
+          "label": "So each square metre carries this much air (pressure ÷ 9.81 m/s²)",
+          "value": 10.3,
+          "unit": "t",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+          "sourceTitle": "NASA — Earth Fact Sheet"
+        },
+        {
+          "label": "Pitch area 105 × 68 m",
+          "value": 7140,
+          "unit": "m²",
+          "sourceUrl": "https://www.theifab.com/laws/latest/the-field-of-play/",
+          "sourceTitle": "IFAB — Laws of the Game, Law 1"
+        }
+      ],
+      "summary": "≈ 10.3 t per m² × 7,140 m² ≈ 74,000 t"
+    }
+  },
+  "tb-v2-euro-pitch": {
+    "prompt": "How many euros would it take to cover a 105 × 68 m football pitch with a single layer of €50 notes, no overlaps or gaps?",
+    "cardPrompt": "How many euros cover a football pitch in €50 notes?",
+    "unit": "€",
+    "explanation": {
+      "steps": [
+        {
+          "label": "€50 note (Europa series) 140 × 77 mm, its area",
+          "value": 0.01078,
+          "unit": "m²",
+          "sourceUrl": "https://www.ecb.europa.eu/euro/banknotes/images/html/ecb.faq_reproduction_rules_euro_banknotes.en.html",
+          "sourceTitle": "ECB — banknote dimensions"
+        },
+        {
+          "label": "Pitch area 105 × 68 m",
+          "value": 7140,
+          "unit": "m²",
+          "sourceUrl": "https://www.theifab.com/laws/latest/the-field-of-play/",
+          "sourceTitle": "IFAB — Laws of the Game, Law 1"
+        },
+        {
+          "label": "Notes on the pitch (7,140 ÷ 0.01078)",
+          "value": 662000,
+          "unit": "pcs",
+          "sourceUrl": "https://www.theifab.com/laws/latest/the-field-of-play/",
+          "sourceTitle": "IFAB — Laws of the Game, Law 1"
+        }
+      ],
+      "summary": "≈ 662,000 notes × €50 ≈ €33 million"
+    }
+  },
+  "tb-v2-fiber-ny-london": {
+    "prompt": "How many milliseconds would light take to travel from New York to London through optical fibre, if the cable followed the shortest arc exactly?",
+    "cardPrompt": "How many milliseconds does light take by fibre from New York to London?",
+    "unit": "ms",
+    "explanation": {
+      "steps": [
+        {
+          "label": "New York — London great-circle distance (from coordinates, Earth radius 6,371 km)",
+          "value": 5570,
+          "unit": "km",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+          "sourceTitle": "NASA — Earth Fact Sheet"
+        },
+        {
+          "label": "Speed of light in a vacuum",
+          "value": 299792,
+          "unit": "km/s",
+          "sourceUrl": "https://www.bipm.org/en/measurement-units/si-base-units/metre",
+          "sourceTitle": "BIPM — definition of the metre"
+        },
+        {
+          "label": "Refractive index of standard fibre: how many times slower light is inside it",
+          "value": 1.4682,
+          "unit": "",
+          "sourceUrl": "https://www.corning.com/media/worldwide/coc/documents/Fiber/product-information-sheets/PI-1424-AEN.pdf",
+          "sourceTitle": "Corning SMF-28 Ultra, PI-1424"
+        },
+        {
+          "label": "Speed of light in fibre (299,792 ÷ 1.4682)",
+          "value": 204190,
+          "unit": "km/s",
+          "sourceUrl": "https://www.corning.com/media/worldwide/coc/documents/Fiber/product-information-sheets/PI-1424-AEN.pdf",
+          "sourceTitle": "Corning SMF-28 Ultra, PI-1424"
+        }
+      ],
+      "summary": "5,570 km ÷ 204,190 km/s ≈ 27 ms (in a vacuum it would be 18.6 ms)"
+    }
+  },
+  "tb-v2-tennis-pool": {
+    "prompt": "How many tennis balls, poured in at random, would fill a 50 × 25 × 2 m pool?",
+    "cardPrompt": "How many tennis balls fit in a 50 × 25 × 2 m pool?",
+    "unit": "balls",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Pool volume 50 × 25 × 2 m",
+          "value": 2500,
+          "unit": "m³",
+          "sourceUrl": "https://resources.fina.org/fina/document/2022/02/08/77c3058d-b549-4543-8524-ad51a857864e/210805-Facilities-Rules_clean.pdf",
+          "sourceTitle": "World Aquatics — Facilities Rules"
+        },
+        {
+          "label": "Volume of a 6.7 cm ball",
+          "value": 157.5,
+          "unit": "cm³",
+          "sourceUrl": "https://www.itftennis.com/media/14104/2025-technical-booklet.pdf",
+          "sourceTitle": "ITF Technical Booklet 2025"
+        },
+        {
+          "label": "Share of volume filled by randomly packed spheres",
+          "value": 0.64,
+          "unit": "",
+          "sourceUrl": "https://arxiv.org/pdf/cond-mat/0003416",
+          "sourceTitle": "Torquato et al., Phys. Rev. Lett. 84, 2064 (2000)"
+        }
+      ],
+      "summary": "2,500 m³ × 0.64 ÷ 157.5 cm³ ≈ 10 million balls"
+    }
+  },
+  "tb-v2-moby-genome": {
+    "prompt": "How many times would the text file of the novel \"Moby-Dick\" fit into a record of one human genome (a single set of chromosomes), using 2 bits per DNA letter?",
+    "cardPrompt": "How many \"Moby-Dicks\" fit in a human genome?",
+    "unit": "times",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Letters (base pairs) in a single human genome",
+          "value": 3055000000,
+          "unit": "",
+          "sourceUrl": "https://www.science.org/doi/10.1126/science.abj6987",
+          "sourceTitle": "Nurk et al., Science 376 (2022)"
+        },
+        {
+          "label": "At 2 bits per letter (× 2 ÷ 8 bytes)",
+          "value": 764,
+          "unit": "MB",
+          "sourceUrl": "https://www.science.org/doi/10.1126/science.abj6987",
+          "sourceTitle": "Nurk et al., Science 376 (2022)"
+        },
+        {
+          "label": "Text file of \"Moby-Dick\"",
+          "value": 1.28,
+          "unit": "MB",
+          "sourceUrl": "https://www.gutenberg.org/ebooks/2701",
+          "sourceTitle": "Project Gutenberg — Moby Dick"
+        }
+      ],
+      "summary": "764 MB ÷ 1.28 MB ≈ 600 novels"
+    }
+  },
+  "tb-v2-iphone-burj": {
+    "prompt": "How many iPhone 15s, stacked flat, would it take to reach the top of the Burj Khalifa?",
+    "cardPrompt": "How many stacked iPhones reach the top of the Burj Khalifa?",
+    "unit": "phones",
+    "explanation": {
+      "steps": [
+        {
+          "label": "iPhone 15 thickness",
+          "value": 7.8,
+          "unit": "mm",
+          "sourceUrl": "https://support.apple.com/en-us/111831",
+          "sourceTitle": "Apple — iPhone 15 Tech Specs"
+        },
+        {
+          "label": "Architectural height of the Burj Khalifa",
+          "value": 828,
+          "unit": "m",
+          "sourceUrl": "https://www.skyscrapercenter.com/building/burj-khalifa/3/",
+          "sourceTitle": "CTBUH — The Skyscraper Center"
+        }
+      ],
+      "summary": "828 m ÷ 7.8 mm ≈ 106,000 phones"
+    }
+  },
+  "tb-v2-cola-pool-sugar": {
+    "prompt": "How many tonnes of sugar would be in a 50 × 25 × 2 m pool filled with Coca-Cola (regular, UK recipe)?",
+    "cardPrompt": "How many tonnes of sugar in a pool full of Coca-Cola?",
+    "unit": "t",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Pool volume 50 × 25 × 2 m",
+          "value": 2500000,
+          "unit": "L",
+          "sourceUrl": "https://resources.fina.org/fina/document/2022/02/08/77c3058d-b549-4543-8524-ad51a857864e/210805-Facilities-Rules_clean.pdf",
+          "sourceTitle": "World Aquatics — Facilities Rules"
+        },
+        {
+          "label": "Sugar per litre of Coca-Cola (10.6 g per 100 ml)",
+          "value": 106,
+          "unit": "g",
+          "sourceUrl": "https://www.coca-cola.com/gb/en/brands/coca-cola-original-taste",
+          "sourceTitle": "Coca-Cola GB — Original Taste"
+        }
+      ],
+      "summary": "2.5 million L × 106 g ≈ 265 t — about 66 million sugar cubes"
+    }
+  },
+  "tb-v2-saturn-karman": {
+    "prompt": "How many Saturn V rockets (the ones that carried Apollo to the Moon), stacked on top of each other, would reach the edge of space — the Kármán line?",
+    "cardPrompt": "How many stacked Saturn Vs reach the edge of space?",
+    "unit": "rockets",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Height of Saturn V with the Apollo spacecraft",
+          "value": 110.6,
+          "unit": "m",
+          "sourceUrl": "https://solarsystem.nasa.gov/news/234//what-was-the-saturn-v/",
+          "sourceTitle": "NASA — What Was the Saturn V?"
+        },
+        {
+          "label": "Kármán line",
+          "value": 100,
+          "unit": "km",
+          "sourceUrl": "https://www.fai.org/page/icare-boundary",
+          "sourceTitle": "FAI — the 100 km boundary"
+        }
+      ],
+      "summary": "100,000 m ÷ 110.6 m ≈ 900 rockets"
+    }
+  },
+  "tb-v2-balls-equator": {
+    "prompt": "How many footballs (size 5), lined up touching, would wrap around the Earth at the equator?",
+    "cardPrompt": "How many footballs in a row circle the Earth at the equator?",
+    "unit": "balls",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Ball diameter (circumference 68–70 cm ÷ π)",
+          "value": 22,
+          "unit": "cm",
+          "sourceUrl": "https://www.theifab.com/laws/latest/the-ball/",
+          "sourceTitle": "IFAB — Laws of the Game, Law 2"
+        },
+        {
+          "label": "Length of the equator (2π × 6,378 km)",
+          "value": 40075,
+          "unit": "km",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+          "sourceTitle": "NASA — Earth Fact Sheet"
+        }
+      ],
+      "summary": "40,075 km ÷ 22 cm ≈ 180 million balls"
+    }
+  },
+  "tb-v3-cent-court": {
+    "prompt": "How many 1-euro-cent coins fit on a 28 × 15 m basketball court in a single layer of tight hexagonal packing?",
+    "cardPrompt": "How many euro cents fit on a basketball court?",
+    "unit": "coins",
+    "explanation": {
+      "steps": [
+        {
+          "label": "FIBA court: 28 × 15 m",
+          "value": 420,
+          "unit": "m²",
+          "sourceUrl": "https://www.venueguide.fiba.basketball/vanue-design",
+          "sourceTitle": "FIBA Venue Guide — court flooring"
+        },
+        {
+          "label": "Diameter of a 1 euro cent coin",
+          "value": 16.25,
+          "unit": "mm",
+          "sourceUrl": "https://www.ecb.europa.eu/euro/coins/common/html/index.en.html",
+          "sourceTitle": "ECB — common sides of euro coins"
+        },
+        {
+          "label": "Area share of circles in tight hexagonal packing",
+          "value": 0.9069,
+          "unit": "",
+          "sourceUrl": "https://mathworld.wolfram.com/CirclePacking.html",
+          "sourceTitle": "Wolfram MathWorld — Circle Packing"
+        }
+      ],
+      "summary": "420 m² × 0.9069 ÷ coin area ≈ 1.8 million coins"
+    }
+  },
+  "tb-v3-euro-iss-mass": {
+    "prompt": "How many 1-euro coins would it take to match the mass of the International Space Station?",
+    "cardPrompt": "How many €1 coins weigh as much as the ISS?",
+    "unit": "coins",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Mass of the fully assembled ISS",
+          "value": 419725,
+          "unit": "kg",
+          "sourceUrl": "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/",
+          "sourceTitle": "NASA — Space Station Facts and Figures"
+        },
+        {
+          "label": "Mass of one €1 coin",
+          "value": 7.5,
+          "unit": "g",
+          "sourceUrl": "https://www.ecb.europa.eu/euro/coins/common/html/index.en.html",
+          "sourceTitle": "ECB — common sides of euro coins"
+        }
+      ],
+      "summary": "419,725 kg ÷ 7.5 g ≈ 56 million coins"
+    }
+  },
+  "tb-v3-tennis-iss-altitude": {
+    "prompt": "How many standard tennis balls, stacked one straight on top of another, would reach from the Earth's surface to the ISS orbit — about 400 km up?",
+    "cardPrompt": "How many stacked tennis balls reach the ISS orbit?",
+    "unit": "balls",
+    "explanation": {
+      "steps": [
+        {
+          "label": "ISS orbital altitude (rounded)",
+          "value": 400,
+          "unit": "km",
+          "sourceUrl": "https://science.nasa.gov/earth/earth-observatory/human-spaceflight-factsheet/",
+          "sourceTitle": "NASA — Human Spaceflight Factsheet"
+        },
+        {
+          "label": "Standard tennis ball diameter (middle of the ITF tolerance)",
+          "value": 6.7,
+          "unit": "cm",
+          "sourceUrl": "https://www.itftennis.com/media/15639/2026-technical-booklet.pdf",
+          "sourceTitle": "ITF Technical Booklet 2026"
+        }
+      ],
+      "summary": "400 km ÷ 6.7 cm ≈ 6 million balls"
+    }
+  },
+  "tb-v3-a4-karman-line": {
+    "prompt": "How many sheets of A4 paper, placed short edge to short edge, make a line as long as the 100 km to the edge of space?",
+    "cardPrompt": "How many A4 sheets make a 100 km line?",
+    "unit": "sheets",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Kármán line altitude by FAI convention",
+          "value": 100,
+          "unit": "km",
+          "sourceUrl": "https://www.fai.org/page/icare-boundary",
+          "sourceTitle": "FAI — 100 km Altitude Boundary for Astronautics"
+        },
+        {
+          "label": "Short side of an A4 sheet",
+          "value": 210,
+          "unit": "mm",
+          "sourceUrl": "https://www.iso.org/standard/36631.html",
+          "sourceTitle": "ISO 216 — Writing paper and certain classes of printed matter"
+        }
+      ],
+      "summary": "100 km ÷ 210 mm ≈ 480,000 sheets"
+    }
+  },
+  "tb-v3-water-bottles-pool": {
+    "prompt": "How many 1.5 L bottles would it take to fill a 50 × 25 × 2 m pool with water?",
+    "cardPrompt": "How many water bottles fill a pool?",
+    "unit": "bottles",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Pool volume from the dimensions in the question",
+          "value": 2500,
+          "unit": "m³",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Calculated from the dimensions in the question"
+        },
+        {
+          "label": "Volume of one bottle (given in the question)",
+          "value": 1.5,
+          "unit": "L",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — SI conversion factors"
+        }
+      ],
+      "summary": "2,500,000 L ÷ 1.5 L ≈ 1.7 million bottles"
+    }
+  },
+  "tb-v3-courts-hectare": {
+    "prompt": "How many 28 × 15 m FIBA basketball courts fit by area into one hectare?",
+    "cardPrompt": "How many FIBA courts fit in a hectare?",
+    "unit": "courts",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Area of a FIBA basketball court: 28 × 15 m",
+          "value": 420,
+          "unit": "m²",
+          "sourceUrl": "https://www.venueguide.fiba.basketball/vanue-design",
+          "sourceTitle": "FIBA Venue Guide — court flooring"
+        },
+        {
+          "label": "Area of a hectare",
+          "value": 10000,
+          "unit": "m²",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — SI conversion factors"
+        }
+      ],
+      "summary": "10,000 m² ÷ 420 m² ≈ 24 courts"
+    }
+  },
+  "tb-v3-euro-coins-karman": {
+    "prompt": "How many 2-euro coins in a neat stack make a 100 km tower — up to the Kármán line?",
+    "cardPrompt": "How many €2 coins stack up to the Kármán line?",
+    "unit": "coins",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Kármán line altitude by FAI convention",
+          "value": 100,
+          "unit": "km",
+          "sourceUrl": "https://www.fai.org/page/icare-boundary",
+          "sourceTitle": "FAI — 100 km Altitude Boundary for Astronautics"
+        },
+        {
+          "label": "Thickness of a €2 coin",
+          "value": 2.2,
+          "unit": "mm",
+          "sourceUrl": "https://www.ecb.europa.eu/euro/coins/common/html/index.en.html",
+          "sourceTitle": "ECB — common sides of euro coins"
+        }
+      ],
+      "summary": "100 km ÷ 2.2 mm ≈ 45 million coins"
+    }
+  },
+  "tb-v4-a4-field": {
+    "prompt": "How many 210 × 297 mm A4 sheets would it take, by area, to cover a 105 × 68 m football pitch? No overlaps and no trimming waste.",
+    "cardPrompt": "How many A4 sheets cover a football pitch?",
+    "unit": "sheets",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Pitch area from the given dimensions",
+          "value": 7140,
+          "unit": "m²",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — unit conversion; dimensions given in the question"
+        },
+        {
+          "label": "Sheet area from the given dimensions",
+          "value": 0.06237,
+          "unit": "m²",
+          "sourceUrl": "https://www.iso.org/standard/36631.html",
+          "sourceTitle": "ISO 216 — paper sizes; dimensions given in the question"
+        }
+      ],
+      "summary": "7140 ÷ (0.210 × 0.297) ≈ 114,478 sheets. We compare areas, not solve a tiling puzzle."
+    }
+  },
+  "tb-v4-bricks-container": {
+    "prompt": "How many 25 × 12 × 6 cm bricks fit by total volume into a cargo container with interior dimensions of 6 × 2.4 × 2.4 m? Ignore gaps and the weight limit.",
+    "cardPrompt": "How many bricks fit in a container by volume?",
+    "unit": "bricks",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Container volume from the question",
+          "value": 34.56,
+          "unit": "m³",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — unit conversion; dimensions given in the question"
+        },
+        {
+          "label": "Brick volume from the question",
+          "value": 0.0018,
+          "unit": "m³",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Calculated from the given dimensions"
+        }
+      ],
+      "summary": "34.56 ÷ (0.25 × 0.12 × 0.06) = 19,200 bricks by volume."
+    }
+  },
+  "tb-v4-tennis-classroom": {
+    "prompt": "How many 6.7 cm tennis balls fit into an empty 8 × 6 × 3 m classroom, if the balls fill 64% of the volume and the rest is gaps between them?",
+    "cardPrompt": "How many tennis balls fit in a classroom?",
+    "unit": "balls",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Classroom volume from the question",
+          "value": 144,
+          "unit": "m³",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Calculated from the given dimensions"
+        },
+        {
+          "label": "Share of volume filled by balls, given in the question",
+          "value": 0.64,
+          "unit": "",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Puzzle assumption"
+        },
+        {
+          "label": "Ball diameter, given in the question",
+          "value": 0.067,
+          "unit": "m",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — centimetres to metres"
+        }
+      ],
+      "summary": "144 × 0.64 ÷ [4π/3 × (0.067/2)³] ≈ 585 thousand balls. Edge effects ignored."
+    }
+  },
+  "tb-v4-million-seconds": {
+    "prompt": "How many days is a million seconds? A fractional answer is fine.",
+    "cardPrompt": "A million seconds is how many days?",
+    "unit": "days",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Length of a day",
+          "value": 86400,
+          "unit": "s",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — day = 86 400 s"
+        }
+      ],
+      "summary": "1,000,000 ÷ 86,400 ≈ 11.57 days. That's 11 days 13 hours 46 minutes 40 seconds."
+    }
+  },
+  "tb-v4-coffee-pool": {
+    "prompt": "How many 250 ml cups of coffee would it take to fill a 50 × 25 m pool with a uniform depth of 2 m?",
+    "cardPrompt": "How many cups of coffee fill a pool?",
+    "unit": "cups",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Pool volume from the question",
+          "value": 2500000,
+          "unit": "L",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — 1 m³ = 1000 L; dimensions given in the question"
+        },
+        {
+          "label": "Cup volume from the question",
+          "value": 0.25,
+          "unit": "L",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — millilitres to litres"
+        }
+      ],
+      "summary": "50 × 25 × 2 × 1000 ÷ 0.25 = 10 million cups."
+    }
+  },
+  "tb-v4-phone-km": {
+    "prompt": "How many 15 cm smartphones laid end to end does it take to make a row at least a kilometre long?",
+    "cardPrompt": "How many smartphones make a one-kilometre row?",
+    "unit": "smartphones",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Row length",
+          "value": 100000,
+          "unit": "cm",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — kilometres to centimetres"
+        },
+        {
+          "label": "Smartphone length, given in the question",
+          "value": 15,
+          "unit": "cm",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Puzzle assumption"
+        }
+      ],
+      "summary": "100,000 ÷ 15 = 6666⅔. Round up to 6667 whole smartphones."
+    }
+  },
+  "tb-v4-rice-person": {
+    "prompt": "How many dry grains of rice weigh as much as a 70 kg person, if for this estimate one grain weighs 25 mg?",
+    "cardPrompt": "How many grains of rice weigh as much as a person?",
+    "unit": "grains",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Person's mass, given in the question",
+          "value": 70000000,
+          "unit": "mg",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — kilograms to milligrams"
+        },
+        {
+          "label": "Assumed grain mass, not universal for all varieties",
+          "value": 25,
+          "unit": "mg",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Puzzle assumption"
+        }
+      ],
+      "summary": "70,000,000 ÷ 25 = 2.8 million grains."
+    }
+  },
+  "tb-v4-water-car": {
+    "prompt": "How many one-litre bottles of water weigh as much as a 1.5-tonne car? Assume a litre of water weighs 1 kg and the bottles themselves weigh nothing.",
+    "cardPrompt": "How many water bottles weigh as much as a car?",
+    "unit": "bottles",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Car mass from the question",
+          "value": 1500,
+          "unit": "kg",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — tonne = 1000 kg"
+        },
+        {
+          "label": "Water mass in one bottle, assumed in the question",
+          "value": 1,
+          "unit": "kg",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Puzzle assumption"
+        }
+      ],
+      "summary": "1.5 × 1000 ÷ 1 = 1500 bottles."
+    }
+  },
+  "tb-v4-astana-almaty-steps": {
+    "prompt": "Picture a straight path between Astana and Almaty, 970 km long. How many 70 cm steps would it take to walk it? Use 970 km as a given for this estimate.",
+    "cardPrompt": "How many steps from Astana to Almaty in a straight line?",
+    "unit": "steps",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Path length, given in the question",
+          "value": 970000,
+          "unit": "m",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — kilometres to metres; the distance is an assumption"
+        },
+        {
+          "label": "Step length, given in the question",
+          "value": 0.7,
+          "unit": "m",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — centimetres to metres"
+        }
+      ],
+      "summary": "970,000 ÷ 0.7 ≈ 1.386 million steps. This models a straight path, not a real walking route."
+    }
+  },
+  "tb-v4-paper-tower": {
+    "prompt": "How many 0.1 mm sheets of paper must be stacked to reach 828 m — the height of the Burj Khalifa? Ignore paper compression.",
+    "cardPrompt": "How many sheets make a stack as tall as the Burj Khalifa?",
+    "unit": "sheets",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Tower height, given in the question",
+          "value": 828,
+          "unit": "m",
+          "sourceUrl": "https://www.burjkhalifa.ae/the-tower/",
+          "sourceTitle": "Burj Khalifa — official website"
+        },
+        {
+          "label": "Sheet thickness from the question",
+          "value": 0.0001,
+          "unit": "m",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — millimetres to metres"
+        }
+      ],
+      "summary": "828 ÷ 0.0001 = 8,280,000 sheets."
+    }
+  },
+  "tb-v4-basketballs-container": {
+    "prompt": "How many 24 cm basketballs fit into a 33 m³ container, if the balls fill 64% of the volume? All parameters of this model are given in the question.",
+    "cardPrompt": "How many basketballs fit in a container?",
+    "unit": "balls",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Container volume, given in the question",
+          "value": 33,
+          "unit": "m³",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Puzzle assumption"
+        },
+        {
+          "label": "Share of volume filled by balls, given in the question",
+          "value": 0.64,
+          "unit": "",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Puzzle assumption"
+        },
+        {
+          "label": "Ball radius from the diameter in the question",
+          "value": 0.12,
+          "unit": "m",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — centimetres to metres"
+        }
+      ],
+      "summary": "33 × 0.64 ÷ (4π/3 × 0.12³) ≈ 2918 balls. Edge effects ignored."
+    }
+  },
+  "tb-v4-million-clips": {
+    "prompt": "How many days would it take to watch a million 30-second clips, nonstop, around the clock?",
+    "cardPrompt": "How many days to watch a million short clips?",
+    "unit": "days",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Total duration from the question",
+          "value": 30000000,
+          "unit": "s",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Calculation — a million 30-second clips"
+        },
+        {
+          "label": "Length of a day",
+          "value": 86400,
+          "unit": "s",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — day = 86 400 s"
+        }
+      ],
+      "summary": "1,000,000 × 30 ÷ 86,400 ≈ 347.22 days."
+    }
+  },
+  "tb-v4-coins-car": {
+    "prompt": "How many 100-tenge coins add up to a total mass of 1.5 tonnes? For this puzzle, take one coin as 6.45 g.",
+    "cardPrompt": "How many 100-tenge coins weigh as much as a car?",
+    "unit": "coins",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Total mass, given in the question",
+          "value": 1500000,
+          "unit": "g",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — tonnes to grams"
+        },
+        {
+          "label": "Coin mass, assumed in the question",
+          "value": 6.45,
+          "unit": "g",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Puzzle assumption, not a spec for every coin issue"
+        }
+      ],
+      "summary": "1,500,000 ÷ 6.45 ≈ 232,558 coins."
+    }
+  },
+  "tb-v4-sugar-bath": {
+    "prompt": "How many sugar cubes with a 1.5 cm edge fit by total volume into a 150 L bathtub? Ignore gaps between cubes and the sugar dissolving.",
+    "cardPrompt": "How many sugar cubes fill a bathtub?",
+    "unit": "cubes",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Bathtub volume, given in the question",
+          "value": 150000,
+          "unit": "cm³",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — 1 L = 1000 cm³"
+        },
+        {
+          "label": "Cube volume from the given dimensions",
+          "value": 3.375,
+          "unit": "cm³",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Calculation — 1.5 × 1.5 × 1.5"
+        }
+      ],
+      "summary": "150,000 ÷ 3.375 ≈ 44,444 cubes by volume."
+    }
+  },
+  "tb-v5-sun-earths": {
+    "prompt": "Imagine lining up Earths touching, like beads, straight across the Sun — edge to edge through the centre. How many Earths would you need?",
+    "cardPrompt": "How many Earths in a row span the Sun?",
+    "unit": "Earths",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Mean radius of the Sun",
+          "value": 695700,
+          "unit": "km",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html",
+          "sourceTitle": "NASA — Sun Fact Sheet"
+        },
+        {
+          "label": "Mean radius of the Earth",
+          "value": 6371,
+          "unit": "km",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+          "sourceTitle": "NASA — Earth Fact Sheet"
+        }
+      ],
+      "summary": "695,700 ÷ 6371 ≈ 109.2 Earths. By volume, about 1.3 million Earths would fit inside the Sun."
+    }
+  },
+  "tb-v5-kz-fields": {
+    "prompt": "How many 105 × 68 m football pitches fit by area into Kazakhstan? Mountains, lakes and cities don't get in the way — area only.",
+    "cardPrompt": "How many football pitches fit in Kazakhstan?",
+    "unit": "pitches",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Area of Kazakhstan",
+          "value": 2724902,
+          "unit": "km²",
+          "sourceUrl": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD",
+          "sourceTitle": "Wikipedia — Kazakhstan"
+        },
+        {
+          "label": "Pitch area from the question",
+          "value": 7140,
+          "unit": "m²",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — unit conversion"
+        }
+      ],
+      "summary": "2,724,902 km² = 2.72 trillion m²; ÷ 7140 ≈ 381.6 million pitches. That's about 19 pitches for every person in the country."
+    }
+  },
+  "tb-v5-count-billion": {
+    "prompt": "How many years would it take to count to a billion, saying one number per second — no sleep, food or days off?",
+    "cardPrompt": "How many years to count to a billion?",
+    "unit": "years",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Numbers to count, from the question",
+          "value": 1000000000,
+          "unit": "",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Given in the question"
+        },
+        {
+          "label": "Seconds in a year (365.25 days)",
+          "value": 31557600,
+          "unit": "s",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — day = 86 400 s"
+        }
+      ],
+      "summary": "1,000,000,000 ÷ 31,557,600 ≈ 31.7 years. In reality longer: you can't say \"seven hundred forty-three million…\" in one second."
+    }
+  },
+  "tb-v5-marathon-laps": {
+    "prompt": "How many laps of a 400 m stadium track do you need to run to cover a full marathon?",
+    "cardPrompt": "How many stadium laps in one marathon?",
+    "unit": "laps",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Marathon distance",
+          "value": 42195,
+          "unit": "m",
+          "sourceUrl": "https://worldathletics.org/about-iaaf/documents/book-of-rules",
+          "sourceTitle": "World Athletics — Book of Rules"
+        },
+        {
+          "label": "Stadium lap in lane one",
+          "value": 400,
+          "unit": "m",
+          "sourceUrl": "https://worldathletics.org/about-iaaf/documents/book-of-rules",
+          "sourceTitle": "World Athletics — Book of Rules"
+        }
+      ],
+      "summary": "42,195 ÷ 400 ≈ 105.5 laps. The extra 195 m are a legacy of the 1908 Olympics: the finish was placed in front of the royal box."
+    }
+  },
+  "tb-v5-walk-moon": {
+    "prompt": "If there were a road to the Moon, how many days would it take to walk it at 5 km/h — no stops to sleep or eat? Use the average distance.",
+    "cardPrompt": "How many days to walk to the Moon?",
+    "unit": "days",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Average distance to the Moon",
+          "value": 384400,
+          "unit": "km",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
+          "sourceTitle": "NASA — Moon Fact Sheet"
+        },
+        {
+          "label": "Walking speed from the question",
+          "value": 5,
+          "unit": "km/h",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Given in the question"
+        }
+      ],
+      "summary": "384,400 ÷ 5 = 76,880 hours ≈ 3203 days — almost 9 years of nonstop walking. Light covers it in 1.3 seconds."
+    }
+  },
+  "tb-v5-baiterek-everest": {
+    "prompt": "How many 105 m Baiterek monuments, stacked on top of each other from sea level, would match the summit of Everest?",
+    "cardPrompt": "How many stacked Baitereks reach the top of Everest?",
+    "unit": "Baitereks",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Height of Everest (China–Nepal survey, 2020)",
+          "value": 8848.86,
+          "unit": "m",
+          "sourceUrl": "https://govt.chinadaily.com.cn/s/202012/09/WS5fd09fc4498eaba5051bd741/qomolangma-remeasured-at-8-848-86-m.html",
+          "sourceTitle": "China Daily — Qomolangma remeasured at 8,848.86 m"
+        },
+        {
+          "label": "Height of Baiterek including the sphere",
+          "value": 105,
+          "unit": "m",
+          "sourceUrl": "https://www.inform.kz/ru/chto-my-znaem-o-monumente-astana-bayterek_a3277443",
+          "sourceTitle": "Kazinform — what we know about the Astana-Baiterek monument"
+        }
+      ],
+      "summary": "8848.86 ÷ 105 ≈ 84.3 Baitereks. The top one's sphere would sit where the air is three times thinner than at ground level."
+    }
+  },
+  "tb-v5-billion-tenge": {
+    "prompt": "You're given a billion tenge on one condition: spend exactly 100,000 tenge a day, every day. How many years will the money last? No interest on deposits.",
+    "cardPrompt": "How many years to spend a billion tenge at 100k a day?",
+    "unit": "years",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Days until the money runs out",
+          "value": 10000,
+          "unit": "days",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Calculated from the question"
+        },
+        {
+          "label": "Days in a year",
+          "value": 365.25,
+          "unit": "days",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — year (365.25 d)"
+        }
+      ],
+      "summary": "1,000,000,000 ÷ 100,000 = 10,000 days ≈ 27.4 years. At that pace, a million would be gone in 10 days."
+    }
+  },
+  "tb-v5-lightning-day": {
+    "prompt": "How many lightning flashes happen across the whole Earth in one day? Use the yearly average, including lightning inside clouds.",
+    "cardPrompt": "How many lightning flashes strike Earth in a day?",
+    "unit": "flashes",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Average flash rate from NASA satellites",
+          "value": 44,
+          "unit": "per second",
+          "sourceUrl": "https://www.earthdata.nasa.gov/topics/atmosphere/lightning",
+          "sourceTitle": "NASA Earthdata — Lightning: 35 to 55 per second depending on season"
+        },
+        {
+          "label": "Seconds in a day",
+          "value": 86400,
+          "unit": "s",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — day = 86 400 s"
+        }
+      ],
+      "summary": "44 × 86,400 ≈ 3.8 million flashes a day. There are more during the Northern Hemisphere summer, about 3 million in winter."
+    }
+  },
+  "tb-v5-germanies-kz": {
+    "prompt": "How many times bigger is Kazakhstan than Germany by area? In other words, how many Germanys fit inside it?",
+    "cardPrompt": "How many Germanys fit in Kazakhstan?",
+    "unit": "Germanys",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Area of Kazakhstan",
+          "value": 2724902,
+          "unit": "km²",
+          "sourceUrl": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD",
+          "sourceTitle": "Wikipedia — Kazakhstan"
+        },
+        {
+          "label": "Area of Germany",
+          "value": 357592,
+          "unit": "km²",
+          "sourceUrl": "https://ru.wikipedia.org/wiki/%D0%93%D0%B5%D1%80%D0%BC%D0%B0%D0%BD%D0%B8%D1%8F",
+          "sourceTitle": "Wikipedia — Germany"
+        }
+      ],
+      "summary": "2,724,902 ÷ 357,592 ≈ 7.6 Germanys. Yet Germany has more than four times as many people."
+    }
+  },
+  "tb-v5-chess-grains": {
+    "prompt": "Legend has it the inventor of chess asked the ruler for a reward: one grain on the first square, two on the second, four on the third, and so on, doubling each time. How many grains land on the last, 64th square? You can answer like 5e12.",
+    "cardPrompt": "How many grains end up on the last square of the chessboard?",
+    "unit": "grains",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Doublings from the first square to the 64th",
+          "value": 63,
+          "unit": "",
+          "sourceUrl": "https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B4%D0%B0%D1%87%D0%B0_%D0%BE_%D0%B7%D1%91%D1%80%D0%BD%D0%B0%D1%85_%D0%BD%D0%B0_%D1%88%D0%B0%D1%85%D0%BC%D0%B0%D1%82%D0%BD%D0%BE%D0%B9_%D0%B4%D0%BE%D1%81%D0%BA%D0%B5",
+          "sourceTitle": "Wikipedia — wheat and chessboard problem"
+        }
+      ],
+      "summary": "2⁶³ ≈ 9.2 quintillion grains — hundreds of billions of tonnes, hundreds of times the whole planet's yearly rice harvest."
+    }
+  },
+  "tb-v5-eiffel-phones": {
+    "prompt": "The Eiffel Tower's metal frame weighs 7300 tonnes. How many 170 g smartphones would balance it on giant scales?",
+    "cardPrompt": "How many smartphones weigh as much as the Eiffel Tower?",
+    "unit": "smartphones",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Mass of the tower's metal frame",
+          "value": 7300,
+          "unit": "t",
+          "sourceUrl": "https://www.toureiffel.paris/en/news/history-and-culture/15-essential-things-to-know-about-eiffel-tower",
+          "sourceTitle": "Official Eiffel Tower website"
+        },
+        {
+          "label": "Smartphone mass from the question",
+          "value": 0.17,
+          "unit": "kg",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Given in the question"
+        }
+      ],
+      "summary": "7,300,000 kg ÷ 0.17 ≈ 42.9 million smartphones. And if you melted all its metal into a slab the size of the tower's base, it would be only about 6 cm thick."
+    }
+  },
+  "tb-v5-moons-earth": {
+    "prompt": "If you could fill the Earth like a sack, how many Moons would fit inside by volume?",
+    "cardPrompt": "How many Moons fit inside the Earth?",
+    "unit": "Moons",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Volume of the Earth",
+          "value": 1083210000000,
+          "unit": "km³",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+          "sourceTitle": "NASA — Earth Fact Sheet"
+        },
+        {
+          "label": "Volume of the Moon",
+          "value": 21968000000,
+          "unit": "km³",
+          "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
+          "sourceTitle": "NASA — Moon Fact Sheet"
+        }
+      ],
+      "summary": "108.321 ÷ 2.1968 ≈ 49.3 Moons. But by mass the Earth is 81 times heavier than the Moon: the Moon is noticeably \"fluffier\"."
+    }
+  },
+  "tb-v5-heartbeats": {
+    "prompt": "How many times will a heart beat over 80 years of life, if it beats exactly 70 times a minute — day and night, without a break?",
+    "cardPrompt": "How many times does a heart beat in 80 years?",
+    "unit": "beats",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Beats per day at 70 per minute",
+          "value": 100800,
+          "unit": "",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "Calculated from the question"
+        },
+        {
+          "label": "Days in 80 years",
+          "value": 29220,
+          "unit": "days",
+          "sourceUrl": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "sourceTitle": "NIST — year (365.25 d)"
+        }
+      ],
+      "summary": "100,800 × 29,220 ≈ 2.95 billion beats. Every day the heart pumps several tonnes of blood."
+    }
+  },
+  "tb-v5-sunlight-minutes": {
+    "prompt": "How many minutes does light take to travel from the Sun to the Earth? In other words, how \"old\" is the Sun we see in the sky?",
+    "cardPrompt": "How many minutes does sunlight take to reach us?",
+    "unit": "minutes",
+    "explanation": {
+      "steps": [
+        {
+          "label": "Astronomical unit",
+          "value": 149597870.7,
+          "unit": "km",
+          "sourceUrl": "https://www.iau.org/static/resolutions/IAU2012_English.pdf",
+          "sourceTitle": "IAU — Resolution B2 (2012)"
+        },
+        {
+          "label": "Speed of light",
+          "value": 299792.458,
+          "unit": "km/s",
+          "sourceUrl": "https://physics.nist.gov/cgi-bin/cuu/Value?c",
+          "sourceTitle": "NIST — speed of light in vacuum"
+        }
+      ],
+      "summary": "149,597,870.7 ÷ 299,792.458 ≈ 499 s ≈ 8.3 minutes. If the Sun went out, we'd only find out 8 minutes later."
+    }
+  }
+}

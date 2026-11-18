@@ -1,0 +1,313 @@
+{
+  "au-language-1et867p": {
+    "prompt": "How many letters are in the Russian alphabet?",
+    "answer": "33",
+    "accepted": [
+      "33",
+      "thirty-three",
+      "thirty three"
+    ],
+    "distractors": [
+      "32",
+      "26",
+      "34"
+    ]
+  },
+  "au-language-ml3o2d": {
+    "prompt": "How many letters are in the English alphabet?",
+    "answer": "26",
+    "accepted": [
+      "26",
+      "twenty-six",
+      "twenty six"
+    ],
+    "distractors": [
+      "24",
+      "28",
+      "33"
+    ]
+  },
+  "au-language-1c3g5ml": {
+    "prompt": "How do you say the Russian «спасибо» in English?",
+    "answer": "thank you",
+    "accepted": [
+      "thank you",
+      "thanks"
+    ],
+    "distractors": [
+      "please",
+      "sorry",
+      "hello"
+    ]
+  },
+  "au-language-1yasiky": {
+    "prompt": "What language is spoken in Brazil?",
+    "answer": "Portuguese",
+    "accepted": [
+      "Portuguese"
+    ],
+    "distractors": [
+      "Spanish",
+      "Brazilian",
+      "French"
+    ]
+  },
+  "au-language-g0u77r": {
+    "prompt": "What do you call a word opposite in meaning to another word?",
+    "answer": "antonym",
+    "accepted": [
+      "antonym",
+      "antonyms"
+    ],
+    "distractors": [
+      "synonym",
+      "homonym",
+      "paronym"
+    ]
+  },
+  "au-language-1bltfuu": {
+    "prompt": "How many grammatical cases does Russian have, as taught in school?",
+    "answer": "6",
+    "accepted": [
+      "6",
+      "six"
+    ],
+    "distractors": [
+      "5",
+      "7",
+      "8"
+    ]
+  },
+  "au-language-1f3jcqm": {
+    "prompt": "Which language is the native tongue of the most people in the world?",
+    "answer": "Chinese",
+    "accepted": [
+      "Chinese",
+      "Mandarin",
+      "Mandarin Chinese",
+      "Putonghua"
+    ],
+    "distractors": [
+      "English",
+      "Spanish",
+      "Hindi"
+    ]
+  },
+  "au-language-w3sg2s": {
+    "prompt": "What are words called that sound and are spelled the same but mean different things?",
+    "answer": "homonyms",
+    "accepted": [
+      "homonyms",
+      "homonym"
+    ],
+    "distractors": [
+      "synonyms",
+      "antonyms",
+      "paronyms"
+    ]
+  },
+  "au-language-1t1tjjx": {
+    "prompt": "In Russian, which letter is the most frequent in text?",
+    "answer": "о (o)",
+    "accepted": [
+      "о",
+      "o",
+      "the letter o"
+    ],
+    "distractors": [
+      "а (a)",
+      "е (ye)",
+      "и (i)"
+    ]
+  },
+  "au-language-1uxvh29": {
+    "prompt": "How many vowel letters are in the Russian alphabet?",
+    "answer": "10",
+    "accepted": [
+      "10",
+      "ten"
+    ],
+    "distractors": [
+      "6",
+      "9",
+      "12"
+    ]
+  },
+  "au-language-1eaul7j": {
+    "prompt": "What is the official language of Iran?",
+    "answer": "Persian",
+    "accepted": [
+      "Persian",
+      "Farsi"
+    ],
+    "distractors": [
+      "Arabic",
+      "Turkish",
+      "Kurdish"
+    ]
+  },
+  "au-language-k0euik": {
+    "prompt": "How do you say \"thank you\" in Japanese?",
+    "answer": "arigato",
+    "accepted": [
+      "arigato",
+      "arigatou",
+      "arigato gozaimasu"
+    ],
+    "distractors": [
+      "konnichiwa",
+      "sayonara",
+      "kawaii"
+    ]
+  },
+  "au-language-iatk0z": {
+    "prompt": "What is the study of the origin of words called?",
+    "answer": "etymology",
+    "accepted": [
+      "etymology"
+    ],
+    "distractors": [
+      "lexicology",
+      "morphology",
+      "phonetics"
+    ]
+  },
+  "au-language-v18nsi": {
+    "prompt": "What is the official language of Andorra?",
+    "answer": "Catalan",
+    "accepted": [
+      "Catalan"
+    ],
+    "distractors": [
+      "Spanish",
+      "French",
+      "Portuguese"
+    ]
+  },
+  "au-language-1hxxw0p": {
+    "prompt": "In Russian, which word is spelled with three «е» letters in a row (it means \"long-necked\")?",
+    "answer": "длинношеее",
+    "accepted": [
+      "длинношеее",
+      "dlinnosheee"
+    ],
+    "distractors": [
+      "змееед",
+      "длинношейный",
+      "зееед"
+    ]
+  },
+  "au-language-wjml6i": {
+    "prompt": "From which language did the word \"chocolate\" come into Russian (and English)?",
+    "answer": "Nahuatl",
+    "accepted": [
+      "Nahuatl",
+      "Aztec"
+    ],
+    "distractors": [
+      "Spanish",
+      "French",
+      "Dutch"
+    ]
+  },
+  "q-language-d7oq2m": {
+    "prompt": "Which alphabet gave rise to both the Cyrillic and Latin scripts?",
+    "answer": "Greek",
+    "accepted": [
+      "Greek",
+      "the Greek alphabet"
+    ],
+    "distractors": [
+      "Phoenician",
+      "Aramaic",
+      "Cuneiform"
+    ],
+    "explanation": "The Greek alphabet developed from Phoenician script in the 8th century BC."
+  },
+  "q-language-ut9uq3": {
+    "prompt": "Which Greek letter is traditionally used for the mathematical constant 3.14159...?",
+    "answer": "pi",
+    "accepted": [
+      "pi",
+      "π"
+    ],
+    "distractors": [
+      "sigma",
+      "delta",
+      "phi"
+    ],
+    "explanation": "The letter pi (Π, π) denotes the ratio of a circle's circumference to its diameter."
+  },
+  "q-language-16xmw8a": {
+    "prompt": "Which official language of Ethiopia is written in the Ethiopic (Ge'ez) syllabic script?",
+    "answer": "Amharic",
+    "accepted": [
+      "Amharic"
+    ],
+    "distractors": [
+      "Arabic",
+      "Swahili",
+      "Somali"
+    ],
+    "explanation": "Amharic uses the Ethiopic (Ge'ez) script."
+  },
+  "q-language-1uekw9u": {
+    "prompt": "Which language family does Arabic belong to?",
+    "answer": "Afroasiatic",
+    "accepted": [
+      "Afroasiatic",
+      "Afro-Asiatic",
+      "Semitic",
+      "Semito-Hamitic"
+    ],
+    "distractors": [
+      "Indo-European",
+      "Altaic",
+      "Kartvelian"
+    ],
+    "explanation": "Arabic belongs to the Semitic branch of the Afroasiatic family."
+  },
+  "q-language-21zxki": {
+    "prompt": "What is the language isolate spoken by the Basques in northern Spain and southwestern France?",
+    "answer": "Basque",
+    "accepted": [
+      "Basque",
+      "Euskara"
+    ],
+    "distractors": [
+      "Catalan",
+      "Galician",
+      "Breton"
+    ],
+    "explanation": "Basque does not belong to any known language family."
+  },
+  "au-language-153sbpg": {
+    "prompt": "Which Greek letter is shaped like a triangle?",
+    "answer": "Delta",
+    "accepted": [
+      "Delta",
+      "the letter delta",
+      "Δ"
+    ],
+    "distractors": [
+      "Alpha",
+      "Sigma",
+      "Lambda"
+    ],
+    "explanation": "The capital Greek letter delta (Δ) looks like a triangle. It is the fourth letter of the Greek alphabet. In maths and physics, Δ often denotes a change or difference in a quantity."
+  },
+  "au-language-rsxwyi": {
+    "prompt": "Name one of the official languages of the African country Chad.",
+    "answer": "French",
+    "accepted": [
+      "French",
+      "Arabic"
+    ],
+    "distractors": [
+      "English",
+      "Spanish",
+      "Portuguese"
+    ],
+    "explanation": "Chad has two official languages: French and Arabic. French became official due to the country's colonial past. Many local languages and dialects are also spoken in Chad."
+  }
+}

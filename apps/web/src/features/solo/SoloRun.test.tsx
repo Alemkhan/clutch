@@ -159,7 +159,7 @@ describe('solo run HUD while playing', () => {
   it('draws the rival with avatar, name and bar: avatar, name and bar, without any explanation', () => {
     const html = render(playing(pace([25, 25]), 'question', [5, 5]));
     expect(html).toContain('match-hud-competitor opponent');
-    expect(html).toContain('>A<');
+    expect(html.match(/class="creature"/g)).toHaveLength(2);
     expect(html).toContain('>Alex<');
     expect(html).toContain('50%');
     expect(html).toContain('aria-valuenow="10"');

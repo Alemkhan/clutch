@@ -1,0 +1,307 @@
+{
+  "au-body-eh8onz": {
+    "prompt": "Which organ pumps blood around the body?",
+    "answer": "heart",
+    "accepted": [
+      "heart",
+      "the heart"
+    ],
+    "distractors": [
+      "liver",
+      "lungs",
+      "kidneys"
+    ]
+  },
+  "au-body-1sc4k0r": {
+    "prompt": "Which organ does the skull protect?",
+    "answer": "brain",
+    "accepted": [
+      "brain",
+      "the brain"
+    ],
+    "distractors": [
+      "heart",
+      "liver",
+      "lungs"
+    ]
+  },
+  "au-body-1mcmw9r": {
+    "prompt": "What is the largest organ of the human body?",
+    "answer": "skin",
+    "accepted": [
+      "skin",
+      "the skin"
+    ],
+    "distractors": [
+      "liver",
+      "brain",
+      "lungs"
+    ]
+  },
+  "au-body-1mipivi": {
+    "prompt": "How many chambers does the human heart have?",
+    "answer": "4",
+    "accepted": [
+      "4",
+      "four"
+    ],
+    "distractors": [
+      "2",
+      "3",
+      "5"
+    ]
+  },
+  "au-body-1kholgk": {
+    "prompt": "Which vitamin is produced in the skin in sunlight?",
+    "answer": "D",
+    "accepted": [
+      "D",
+      "vitamin D"
+    ],
+    "distractors": [
+      "C",
+      "A",
+      "B12"
+    ]
+  },
+  "au-body-1heidvr": {
+    "prompt": "What is the longest bone in the human body?",
+    "answer": "femur",
+    "accepted": [
+      "femur",
+      "thigh bone",
+      "thighbone"
+    ],
+    "distractors": [
+      "tibia",
+      "humerus",
+      "spine"
+    ]
+  },
+  "au-body-16bm77o": {
+    "prompt": "How many wisdom teeth does a person usually have?",
+    "answer": "4",
+    "accepted": [
+      "4",
+      "four"
+    ],
+    "distractors": [
+      "2",
+      "6",
+      "8"
+    ]
+  },
+  "au-body-18mclpq": {
+    "prompt": "Where in the human body is the smallest bone?",
+    "answer": "in the ear",
+    "accepted": [
+      "in the ear",
+      "ear",
+      "middle ear",
+      "stapes",
+      "stirrup"
+    ],
+    "distractors": [
+      "in the toe",
+      "in the nose",
+      "in the wrist"
+    ]
+  },
+  "au-body-1dox92s": {
+    "prompt": "Which organ produces bile?",
+    "answer": "liver",
+    "accepted": [
+      "liver",
+      "the liver"
+    ],
+    "distractors": [
+      "gallbladder",
+      "pancreas",
+      "spleen"
+    ],
+    "explanation": "The gallbladder only stores bile."
+  },
+  "au-body-y94ih1": {
+    "prompt": "Roughly how many liters of blood does an adult have?",
+    "answer": "5",
+    "accepted": [
+      "5",
+      "five",
+      "5 liters",
+      "5 litres"
+    ],
+    "distractors": [
+      "2",
+      "10",
+      "15"
+    ],
+    "explanation": "Usually 4.5–5.5 liters."
+  },
+  "au-body-1be42pj": {
+    "prompt": "Which hormone lowers blood sugar?",
+    "answer": "insulin",
+    "accepted": [
+      "insulin"
+    ],
+    "distractors": [
+      "adrenaline",
+      "testosterone",
+      "melatonin"
+    ]
+  },
+  "au-body-1ehmylt": {
+    "prompt": "How many baby teeth does a child have?",
+    "answer": "20",
+    "accepted": [
+      "20",
+      "twenty"
+    ],
+    "distractors": [
+      "32",
+      "24",
+      "16"
+    ]
+  },
+  "au-body-6gshvc": {
+    "prompt": "What is the pigment that gives skin its color called?",
+    "answer": "melanin",
+    "accepted": [
+      "melanin"
+    ],
+    "distractors": [
+      "hemoglobin",
+      "carotene",
+      "chlorophyll"
+    ]
+  },
+  "au-body-1g12c8z": {
+    "prompt": "Which blood type can be given to almost anyone?",
+    "answer": "O negative",
+    "accepted": [
+      "O negative",
+      "O-",
+      "0 negative",
+      "O neg"
+    ],
+    "distractors": [
+      "AB positive",
+      "A positive",
+      "B negative"
+    ]
+  },
+  "au-body-1tjvxyw": {
+    "prompt": "What is the largest muscle in the human body?",
+    "answer": "gluteus maximus",
+    "accepted": [
+      "gluteus maximus",
+      "glute",
+      "gluteal muscle",
+      "glutes"
+    ],
+    "distractors": [
+      "biceps",
+      "calf muscle",
+      "latissimus dorsi"
+    ]
+  },
+  "q-body-55xn39": {
+    "prompt": "Which bone, called the patella in Latin, protects the human knee joint?",
+    "answer": "kneecap",
+    "accepted": [
+      "kneecap",
+      "patella",
+      "knee cap"
+    ],
+    "distractors": [
+      "femur",
+      "tibia",
+      "collarbone"
+    ],
+    "explanation": "The kneecap (patella) is the largest sesamoid bone in the human skeleton."
+  },
+  "q-body-yp4k8t": {
+    "prompt": "Which organ of the human body filters blood and produces urine?",
+    "answer": "kidney",
+    "accepted": [
+      "kidney",
+      "kidneys"
+    ],
+    "distractors": [
+      "liver",
+      "spleen",
+      "lungs"
+    ],
+    "explanation": "The kidneys form urine and help maintain homeostasis."
+  },
+  "q-body-oojy64": {
+    "prompt": "What is the branch of human anatomy that studies the muscular system called?",
+    "answer": "myology",
+    "accepted": [
+      "myology"
+    ],
+    "distractors": [
+      "osteology",
+      "angiology",
+      "neurology"
+    ],
+    "explanation": "Myology is the study of the structure and function of muscles."
+  },
+  "q-body-4qi5kf": {
+    "prompt": "What is the study of the human vascular system (arteries, veins and lymphatic vessels) called?",
+    "answer": "angiology",
+    "accepted": [
+      "angiology"
+    ],
+    "distractors": [
+      "cardiology",
+      "myology",
+      "neurology"
+    ],
+    "explanation": "Angiology studies the blood and lymphatic vessels."
+  },
+  "q-body-ylyz5l": {
+    "prompt": "What is the largest unpaired organ of the human digestive system, which neutralizes toxins?",
+    "answer": "liver",
+    "accepted": [
+      "liver",
+      "the liver"
+    ],
+    "distractors": [
+      "pancreas",
+      "spleen",
+      "stomach"
+    ],
+    "explanation": "The liver is the largest exocrine gland in the human body."
+  },
+  "q-body-vhsyru": {
+    "prompt": "What is the branch of anatomy that studies the internal organs of the human body called?",
+    "answer": "splanchnology",
+    "accepted": [
+      "splanchnology"
+    ],
+    "distractors": [
+      "histology",
+      "cytology",
+      "endocrinology"
+    ],
+    "explanation": "Splanchnology is the study of the internal organs (viscera)."
+  },
+  "au-body-1d86x18": {
+    "prompt": "Which human organ contains rods and cones?",
+    "answer": "eye",
+    "accepted": [
+      "eye",
+      "eyes",
+      "the eye",
+      "retina",
+      "retinas",
+      "the retina"
+    ],
+    "distractors": [
+      "ears",
+      "nose",
+      "tongue"
+    ],
+    "explanation": "Rods and cones are light-sensitive cells in the retina. Rods help us see in dim light, while cones handle color vision and fine detail."
+  }
+}

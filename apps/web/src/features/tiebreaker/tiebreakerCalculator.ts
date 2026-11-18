@@ -1,4 +1,6 @@
 import Big from "big.js";
+import { messagesFor } from "../../i18n/messages";
+import { m } from "./messages";
 
 export type CalculatorOperator = "+" | "−" | "×" | "÷";
 
@@ -74,10 +76,10 @@ export function calculatorReducer(state: CalculatorState, action: CalculatorActi
     if (state.operator && state.accumulator !== null && !state.replaceDisplay) {
       const accumulator = new Big(state.accumulator);
       if (state.operator === "÷" && current.eq(0)) {
-        return { ...initialCalculatorState, error: "На ноль делить нельзя" };
+        return { ...initialCalculatorState, error: messagesFor(m).divideByZero };
       }
       const result = calculate(accumulator, current, state.operator);
-      if (!finiteNumber(result)) return { ...initialCalculatorState, error: "Слишком большое число" };
+      if (!finiteNumber(result)) return { ...initialCalculatorState, error: messagesFor(m).numberTooBig };
       const resultText = result.toString();
       return { display: displayNumber(result), accumulator: resultText, operator: action.value, replaceDisplay: true, error: null };
     }
@@ -86,10 +88,10 @@ export function calculatorReducer(state: CalculatorState, action: CalculatorActi
 
   if (!state.operator || state.accumulator === null) return state;
   if (state.operator === "÷" && current.eq(0)) {
-    return { ...initialCalculatorState, error: "На ноль делить нельзя" };
+    return { ...initialCalculatorState, error: messagesFor(m).divideByZero };
   }
   const result = calculate(new Big(state.accumulator), current, state.operator);
-  if (!finiteNumber(result)) return { ...initialCalculatorState, error: "Слишком большое число" };
+  if (!finiteNumber(result)) return { ...initialCalculatorState, error: messagesFor(m).numberTooBig };
   return { ...initialCalculatorState, display: displayNumber(result), replaceDisplay: true };
 }
 

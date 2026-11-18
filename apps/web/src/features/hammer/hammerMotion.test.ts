@@ -77,7 +77,8 @@ describe('hammer motion', () => {
       'great',
       'perfect',
     ]);
-    [68, 52, 22.4, 4.8].forEach((width, index) => {
+    // Стадия 2 (два удачных удара): зоны v2 × 0,72.
+    [39.6, 21.6, 8.64, 2.88].forEach((width, index) => {
       expect(zones[index].widthPercent).toBeCloseTo(width);
     });
     for (const zone of zones) {

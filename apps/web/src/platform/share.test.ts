@@ -127,15 +127,24 @@ describe('preview links', () => {
   it('builds the run preview, with the invite and name only for a duel', () => {
     const preview = { tiles: 'PPOPP', progress: 100, category: 'general' as const, day: '2026-10-17' };
     expect(buildRunPreviewUrl('https://api.example', preview))
-      .toBe('https://api.example/api/share/run?t=PPOPP&p=100&c=general&d=2026-10-17');
+      .toBe('https://api.example/api/share/run?t=PPOPP&p=100&c=general&d=2026-10-17&l=ru');
     expect(buildRunPreviewUrl('https://api.example', { ...preview, inviteId: 'rm_x', name: ` ${'Я'.repeat(40)} ` }))
-      .toBe(`https://api.example/api/share/run?t=PPOPP&p=100&c=general&d=2026-10-17&i=rm_x&n=${encodeURIComponent('Я'.repeat(32))}`);
+      .toBe(`https://api.example/api/share/run?t=PPOPP&p=100&c=general&d=2026-10-17&i=rm_x&n=${encodeURIComponent('Я'.repeat(32))}&l=ru`);
   });
 
   it('builds the guess preview without the guess itself', () => {
-    expect(buildGuessPreviewUrl('https://api.example', 12, 1.26, 84.4, false)).toBe('https://api.example/api/share/guess?k=12&m=1.3&pc=84');
-    expect(buildGuessPreviewUrl('https://api.example', 12, 1, 100, true)).toBe('https://api.example/api/share/guess?k=12&m=1&pc=best');
-    expect(buildGuessPreviewUrl('https://api.example', 12, 3e12, null, false)).toBe('https://api.example/api/share/guess?k=12&m=999999999');
+    expect(buildGuessPreviewUrl('https://api.example', 12, 1.26, 84.4, false)).toBe('https://api.example/api/share/guess?k=12&m=1.3&pc=84&l=ru');
+    expect(buildGuessPreviewUrl('https://api.example', 12, 1, 100, true)).toBe('https://api.example/api/share/guess?k=12&m=1&pc=best&l=ru');
+    expect(buildGuessPreviewUrl('https://api.example', 12, 3e12, null, false)).toBe('https://api.example/api/share/guess?k=12&m=999999999&l=ru');
+  });
+
+  it('adds the player language to every preview link', () => {
+    const preview = { tiles: 'P', progress: 25, category: 'general' as const, day: '2026-11-16' };
+    expect(new URL(buildRunPreviewUrl('https://api.example', preview, 'en')).searchParams.get('l')).toBe('en');
+    expect(new URL(buildRunPreviewUrl('https://api.example', { ...preview, inviteId: 'rm_x' }, 'kk')).searchParams.get('l')).toBe('kk');
+    expect(new URL(buildGuessPreviewUrl('https://api.example', 3, 2, null, false, 'kk')).searchParams.get('l')).toBe('kk');
+    expect(new URL(buildShareUrl(base, '', 'https://app.example', 'en')).searchParams.get('l')).toBe('en');
+    expect(new URL(buildShareUrl(base, '', 'https://app.example')).searchParams.get('l')).toBe('ru');
   });
 
   it('uses the API origin when configured, the page origin otherwise', () => {

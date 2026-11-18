@@ -1,0 +1,1507 @@
+{
+  "kz-issyk": {
+    "prompt": "The \"Golden Man\", a Saka warrior dressed in gold plaques, was found in 1969 in the burial mound of…",
+    "answer": "Issyk",
+    "accepted": [
+      "Issyk",
+      "Esik",
+      "Yesik"
+    ],
+    "distractors": [
+      "Berel",
+      "Besshatyr",
+      "Shilikty"
+    ],
+    "explanation": "The Issyk mound near Almaty was excavated by Kemal Akishev's expedition. The \"Golden Man\" became one of Kazakhstan's symbols."
+  },
+  "kz-tomyris": {
+    "prompt": "The queen of the Massagetae who defeated the army of Persian king Cyrus II (6th century BC) was…",
+    "answer": "Tomyris",
+    "accepted": [
+      "Tomyris",
+      "Tumar"
+    ],
+    "distractors": [
+      "Zarina",
+      "Aisha Bibi",
+      "Domalak Ana"
+    ],
+    "explanation": "Herodotus tells of Tomyris's victory over Cyrus."
+  },
+  "kz-kangju": {
+    "prompt": "Which ancient state lay along the middle Syr Darya?",
+    "answer": "Kangju",
+    "accepted": [
+      "Kangju",
+      "Kangyui",
+      "Kangar"
+    ],
+    "distractors": [
+      "Wusun",
+      "Xiongnu",
+      "Turgesh Khaganate"
+    ],
+    "explanation": "Kangju is mentioned in Chinese chronicles; its centre was in the Syr Darya valley."
+  },
+  "kz-usun": {
+    "prompt": "Where did the Wusun, an ancient tribal union, live?",
+    "answer": "Zhetysu (Semirechye)",
+    "accepted": [
+      "Zhetysu (Semirechye)",
+      "Zhetysu",
+      "Semirechye",
+      "Jetisu",
+      "Seven Rivers"
+    ],
+    "distractors": [
+      "Aral Sea region",
+      "Saryarka",
+      "Mangyshlak"
+    ],
+    "explanation": "The Wusun capital, Chigu (\"City of the Red Valley\"), stood near Issyk-Kul."
+  },
+  "kz-botai": {
+    "prompt": "What is the name of the Eneolithic settlement in Northern Kazakhstan known for large dwellings and finds of horse bones?",
+    "answer": "Botai",
+    "accepted": [
+      "Botai",
+      "Botay"
+    ],
+    "distractors": [
+      "Tamgaly",
+      "Besshatyr",
+      "Otrar"
+    ],
+    "explanation": "The Botai culture is known for large settlements, dwellings and numerous horse bones. The claim of early horse domestication at Botai is disputed by modern archaeogenetics and zooarchaeology."
+  },
+  "kz-andronovo": {
+    "prompt": "What Bronze Age archaeological culture was widespread across Kazakhstan?",
+    "answer": "Andronovo",
+    "accepted": [
+      "Andronovo",
+      "Andronovo culture"
+    ],
+    "distractors": [
+      "Trypillia",
+      "Maykop",
+      "Dyakovo"
+    ],
+    "explanation": "The Andronovo people were herders and metalworkers of the 2nd millennium BC."
+  },
+  "kz-tamgaly": {
+    "prompt": "Petroglyphs of which site in Almaty Region were added to the UNESCO World Heritage List in 2004?",
+    "answer": "Tamgaly",
+    "accepted": [
+      "Tamgaly",
+      "Tanbaly"
+    ],
+    "distractors": [
+      "Botai",
+      "Berel",
+      "Issyk"
+    ],
+    "explanation": "Tamgaly has about five thousand rock carvings, from the Bronze Age to the Middle Ages."
+  },
+  "kz-turk-552": {
+    "prompt": "In what year was the Turkic Khaganate founded?",
+    "answer": "552",
+    "accepted": [
+      "552",
+      "552 AD"
+    ],
+    "distractors": [
+      "603",
+      "704",
+      "840"
+    ],
+    "explanation": "The khaganate was founded by Bumin after he defeated the Rouran."
+  },
+  "kz-bumyn": {
+    "prompt": "Who founded the Turkic Khaganate in 552?",
+    "answer": "Bumin",
+    "accepted": [
+      "Bumin",
+      "Bumin Khagan",
+      "Bumyn",
+      "Bumin Qaghan"
+    ],
+    "distractors": [
+      "Istemi",
+      "Ushlik",
+      "Satuq Bughra Khan"
+    ],
+    "explanation": "Bumin Khagan came from the Ashina clan; his brother Istemi ruled the western part of the khaganate."
+  },
+  "kz-west-turk": {
+    "prompt": "In 603 the Turkic Khaganate split in two. Which part held the lands of Kazakhstan?",
+    "answer": "Western Turkic Khaganate",
+    "accepted": [
+      "Western Turkic Khaganate",
+      "Western Turkic"
+    ],
+    "distractors": [
+      "Eastern Turkic Khaganate",
+      "Uyghur Khaganate",
+      "Kimek Khaganate"
+    ],
+    "explanation": "The Western Turks' headquarters stood in Zhetysu, near Suyab."
+  },
+  "kz-ushlik": {
+    "prompt": "Who founded the Turgesh Khaganate in 704?",
+    "answer": "Ushlik",
+    "accepted": [
+      "Ushlik",
+      "Uch-elig",
+      "Ushlik Khagan"
+    ],
+    "distractors": [
+      "Suluk",
+      "Bumin",
+      "Istemi"
+    ],
+    "explanation": "The Turgesh ruled Zhetysu until 756."
+  },
+  "kz-karluk": {
+    "prompt": "Which state replaced the Turgesh Khaganate in Zhetysu in 756?",
+    "answer": "Karluk Khaganate",
+    "accepted": [
+      "Karluk Khaganate",
+      "Karluk state",
+      "Karluks",
+      "Qarluq Khaganate"
+    ],
+    "distractors": [
+      "Oghuz state",
+      "Kimek Khaganate",
+      "Karakhanid state"
+    ],
+    "explanation": "The Karluk Khaganate lasted until 940, when its lands passed to the Karakhanids."
+  },
+  "kz-talas-751": {
+    "prompt": "Whose army did the Arab-Karluk forces defeat at the Battle of Atlakh (Talas) in 751?",
+    "answer": "Tang Empire",
+    "accepted": [
+      "Tang Empire",
+      "Tang",
+      "Tang China",
+      "China"
+    ],
+    "distractors": [
+      "Byzantium",
+      "Sasanian Iran",
+      "Turgesh Khaganate"
+    ],
+    "explanation": "The Tang army was routed. Historians differ on the battle's long-term significance, and the region's Islamization was gradual."
+  },
+  "kz-yangikent": {
+    "prompt": "The capital of the Oghuz state on the Syr Darya was…",
+    "answer": "Yangikent",
+    "accepted": [
+      "Yangikent",
+      "Zhanakent",
+      "Jankent",
+      "Zhankent"
+    ],
+    "distractors": [
+      "Balasagun",
+      "Otrar",
+      "Taraz"
+    ],
+    "explanation": "Yangikent (\"New Town\") was the seat of the Oghuz yabgu in the 10th century."
+  },
+  "kz-karakhanid-960": {
+    "prompt": "In which state did Islam become the state religion in 960?",
+    "answer": "Karakhanid state",
+    "accepted": [
+      "Karakhanid state",
+      "Karakhanids",
+      "Karakhanid Khaganate",
+      "Qarakhanids"
+    ],
+    "distractors": [
+      "Oghuz state",
+      "Kimek Khaganate",
+      "Karluk Khaganate"
+    ],
+    "explanation": "The first to adopt Islam was the Karakhanid ruler Satuq Bughra Khan."
+  },
+  "kz-farabi": {
+    "prompt": "Which scholar from Otrar was called the \"Second Teacher\", after Aristotle?",
+    "answer": "Al-Farabi",
+    "accepted": [
+      "Al-Farabi",
+      "Farabi",
+      "Abu Nasr al-Farabi",
+      "Alfarabi"
+    ],
+    "distractors": [
+      "Ibn Sina",
+      "Al-Biruni",
+      "Mahmud al-Kashgari"
+    ],
+    "explanation": "Al-Farabi (870–950) commented on Aristotle and wrote on music, logic and the state."
+  },
+  "kz-kashgari": {
+    "prompt": "Who wrote the \"Diwan Lughat al-Turk\" (\"Compendium of the Languages of the Turks\", 11th century)?",
+    "answer": "Mahmud al-Kashgari",
+    "accepted": [
+      "Mahmud al-Kashgari",
+      "Mahmud Kashgari",
+      "Kashgari",
+      "al-Kashgari"
+    ],
+    "distractors": [
+      "Yusuf Balasaguni",
+      "Khoja Ahmed Yasawi",
+      "Al-Farabi"
+    ],
+    "explanation": "Kashgari's dictionary contains the first known map of the Turkic world."
+  },
+  "kz-balasaguni": {
+    "prompt": "Who wrote the poem \"Kutadgu Bilig\" (\"Wisdom of Royal Glory\", 11th century)?",
+    "answer": "Yusuf Balasaguni",
+    "accepted": [
+      "Yusuf Balasaguni",
+      "Balasaguni",
+      "Yusuf Khass Hajib"
+    ],
+    "distractors": [
+      "Mahmud al-Kashgari",
+      "Khoja Ahmed Yasawi",
+      "Muhammad Haidar Dulati"
+    ],
+    "explanation": "Balasaguni presented the poem on just rule to a Karakhanid ruler."
+  },
+  "kz-kipchak": {
+    "prompt": "What did the chronicles of Rus' call the Kipchaks?",
+    "answer": "Polovtsians",
+    "accepted": [
+      "Polovtsians",
+      "Polovtsy",
+      "Polovtsi",
+      "Cumans"
+    ],
+    "distractors": [
+      "Pechenegs",
+      "Khazars",
+      "Bulgars"
+    ],
+    "explanation": "The Kipchaks roamed from the Irtysh to the Danube; in the West they were called Cumans."
+  },
+  "kz-desht": {
+    "prompt": "From the 11th century, what did Persian authors call the steppe from the Irtysh to the Danube?",
+    "answer": "Desht-i-Kipchak",
+    "accepted": [
+      "Desht-i-Kipchak",
+      "Dasht-i-Kipchak",
+      "Dasht-i Qipchaq",
+      "Desht-i-Qipchaq"
+    ],
+    "distractors": [
+      "Desht-i-Oghuz",
+      "Desht-i-Khazar",
+      "Desht-i-Turan"
+    ],
+    "explanation": "\"Kipchak Steppe\", after the Kipchaks who dominated it."
+  },
+  "kz-otrar-1218": {
+    "prompt": "The governor of Otrar who in 1218 ordered the massacre of Genghis Khan's trade caravan was…",
+    "answer": "Kayir Khan",
+    "accepted": [
+      "Kayir Khan",
+      "Gayir Khan",
+      "Kayyr Khan",
+      "Inalchuq",
+      "Inalchuk"
+    ],
+    "distractors": [
+      "Zhanibek",
+      "Tokhtamysh",
+      "Barak Khan"
+    ],
+    "explanation": "The massacre of the caravan gave Genghis Khan a pretext to invade Khwarezm."
+  },
+  "kz-batu": {
+    "prompt": "Which grandson of Genghis Khan founded the Golden Horde (Ulus of Jochi)?",
+    "answer": "Batu",
+    "accepted": [
+      "Batu",
+      "Batu Khan",
+      "Batyi"
+    ],
+    "distractors": [
+      "Kublai",
+      "Hulagu",
+      "Möngke"
+    ],
+    "explanation": "Batu was the son of Jochi; the Horde's capital was Sarai-Batu on the Volga."
+  },
+  "kz-ak-orda": {
+    "prompt": "Which city was the capital of the White Horde (Ak Orda)?",
+    "answer": "Sygnak",
+    "accepted": [
+      "Sygnak",
+      "Sighnaq",
+      "Syganak",
+      "Signak"
+    ],
+    "distractors": [
+      "Sarai-Batu",
+      "Otrar",
+      "Turkestan"
+    ],
+    "explanation": "Sygnak stood on the Syr Darya; its ruins are in Kyzylorda Region."
+  },
+  "kz-mogul": {
+    "prompt": "Who became the first khan of Moghulistan (1348)?",
+    "answer": "Tughlugh Timur",
+    "accepted": [
+      "Tughlugh Timur",
+      "Tughluk Timur",
+      "Tugluk-Timur",
+      "Toglyk Temir"
+    ],
+    "distractors": [
+      "Urus Khan",
+      "Abulkhair",
+      "Esen Buqa"
+    ],
+    "explanation": "The khan was installed by emirs of the Dulat clan; Moghulistan covered Zhetysu and East Turkestan."
+  },
+  "kz-yasawi-city": {
+    "prompt": "In which city stands the Mausoleum of Khoja Ahmed Yasawi?",
+    "answer": "Turkestan",
+    "accepted": [
+      "Turkestan",
+      "Turkistan"
+    ],
+    "distractors": [
+      "Taraz",
+      "Otrar",
+      "Sairam"
+    ],
+    "explanation": "The mausoleum has been on the UNESCO World Heritage List since 2003."
+  },
+  "kz-yasawi-timur": {
+    "prompt": "On whose orders was the Mausoleum of Khoja Ahmed Yasawi built in the late 14th century?",
+    "answer": "Timur",
+    "accepted": [
+      "Timur",
+      "Tamerlane",
+      "Amir Timur",
+      "Amir Temur"
+    ],
+    "distractors": [
+      "Genghis Khan",
+      "Ulugh Beg",
+      "Ablai Khan"
+    ],
+    "explanation": "Construction began in 1389 and was never finished: work stopped after Timur's death in 1405."
+  },
+  "kz-taraz-2000": {
+    "prompt": "Which Great Silk Road city celebrated its 2,000th anniversary in 2002?",
+    "answer": "Taraz",
+    "accepted": [
+      "Taraz"
+    ],
+    "distractors": [
+      "Turkestan",
+      "Shymkent",
+      "Otrar"
+    ],
+    "explanation": "Taraz is mentioned from the 6th century; the anniversary was dated using archaeological evidence."
+  },
+  "kz-dulati": {
+    "prompt": "Who wrote \"Tarikh-i-Rashidi\", the book describing the formation of the Kazakh Khanate?",
+    "answer": "Muhammad Haidar Dulati",
+    "accepted": [
+      "Muhammad Haidar Dulati",
+      "Dulati",
+      "Haidar Dulati",
+      "Mirza Haidar Dughlat"
+    ],
+    "distractors": [
+      "Kadyrgali Zhalairi",
+      "Mahmud al-Kashgari",
+      "Fazlallah Ruzbihan"
+    ],
+    "explanation": "Dulati wrote in Persian in Kashmir in the 1540s."
+  },
+  "kz-khanate-1465": {
+    "prompt": "By the traditional dating, in what year was the Kazakh Khanate formed?",
+    "answer": "1465",
+    "accepted": [
+      "1465"
+    ],
+    "distractors": [
+      "1428",
+      "1511",
+      "1598"
+    ],
+    "explanation": "In 2015 Kazakhstan celebrated the khanate's 550th anniversary."
+  },
+  "kz-kerey-zhanibek": {
+    "prompt": "Who founded the Kazakh Khanate?",
+    "answer": "Kerey and Zhanibek",
+    "accepted": [
+      "Kerey and Zhanibek",
+      "Kerei and Janibek",
+      "Zhanibek and Kerey"
+    ],
+    "distractors": [
+      "Kasym and Khaknazar",
+      "Esim and Tauke",
+      "Ablai and Abulkhair"
+    ],
+    "explanation": "Sultans Kerey and Zhanibek were descendants of Urus Khan of the White Horde."
+  },
+  "kz-migration": {
+    "prompt": "Where did Kerey and Zhanibek migrate to, leaving Khan Abulkhair?",
+    "answer": "Moghulistan",
+    "accepted": [
+      "Moghulistan",
+      "To Moghulistan",
+      "Mogulistan"
+    ],
+    "distractors": [
+      "To the Nogai Horde",
+      "To the Khanate of Sibir",
+      "To Bukhara"
+    ],
+    "explanation": "Esen Buqa, khan of Moghulistan, gave them land in the Chu and Kozybasy valleys."
+  },
+  "kz-kasym": {
+    "prompt": "Under which khan did the law code \"Kasym Khan's Bright Road\" (\"Qasym hannyń qasqa joly\") appear?",
+    "answer": "Kasym Khan",
+    "accepted": [
+      "Kasym Khan",
+      "Kasym",
+      "Qasym Khan",
+      "Qasim Khan"
+    ],
+    "distractors": [
+      "Tauke Khan",
+      "Esim Khan",
+      "Khaknazar Khan"
+    ],
+    "explanation": "Under Kasym (1511–1521), according to Dulati, the khanate's population reached a million."
+  },
+  "kz-tauke": {
+    "prompt": "Under which khan was the law code \"Zheti Zhargy\" adopted?",
+    "answer": "Tauke Khan",
+    "accepted": [
+      "Tauke Khan",
+      "Tauke",
+      "Tawke Khan"
+    ],
+    "distractors": [
+      "Kasym Khan",
+      "Esim Khan",
+      "Ablai Khan"
+    ],
+    "explanation": "Tauke ruled from 1680 to 1715."
+  },
+  "kz-zheti-zhargy": {
+    "prompt": "What does the name of the law code \"Zheti Zhargy\" mean?",
+    "answer": "\"Seven Charters\"",
+    "accepted": [
+      "Seven Charters",
+      "Seven Codes",
+      "Seven Statutes",
+      "Seven Laws"
+    ],
+    "distractors": [
+      "\"Seven Biys\"",
+      "\"Seven Clans\"",
+      "\"Seven Rivers\""
+    ],
+    "explanation": "The code covered biy courts, punishments, inheritance and the order of nomadic migrations."
+  },
+  "kz-orbulak": {
+    "prompt": "In 1643 Khan Zhangir with a small force stopped a Dzungar army at…",
+    "answer": "Orbulak",
+    "accepted": [
+      "Orbulak",
+      "Orbulaq"
+    ],
+    "distractors": [
+      "Anyrakay",
+      "Bulanty",
+      "Otrar"
+    ],
+    "explanation": "Zhangir had trenches dug in the gorge; Zhalantos's army arrived from Samarkand to help."
+  },
+  "kz-tole": {
+    "prompt": "Who was the biy of the Senior Zhuz under Tauke Khan?",
+    "answer": "Tole Bi",
+    "accepted": [
+      "Tole Bi",
+      "Tole",
+      "Tole Biy"
+    ],
+    "distractors": [
+      "Kazybek Bi",
+      "Aiteke Bi",
+      "Bukhar Zhyrau"
+    ],
+    "explanation": "Tole Bi, Kazybek Bi and Aiteke Bi were the three great biys of the three zhuzes."
+  },
+  "kz-aiteke": {
+    "prompt": "Which zhuz did Aiteke Bi represent?",
+    "answer": "Junior Zhuz",
+    "accepted": [
+      "Junior Zhuz",
+      "Junior",
+      "Kishi Zhuz",
+      "Younger Zhuz"
+    ],
+    "distractors": [
+      "Senior Zhuz",
+      "Middle Zhuz",
+      "Bukey Horde"
+    ],
+    "explanation": "Kazybek Bi represented the Middle Zhuz, Tole Bi the Senior."
+  },
+  "kz-kazybek": {
+    "prompt": "Which biy was nicknamed \"Kaz dauysty\", \"with the voice of a goose\"?",
+    "answer": "Kazybek Bi",
+    "accepted": [
+      "Kazybek Bi",
+      "Kazybek",
+      "Qazybek Bi"
+    ],
+    "distractors": [
+      "Tole Bi",
+      "Aiteke Bi",
+      "Bukhar Zhyrau"
+    ],
+    "explanation": "Kazybek Bi was from the Middle Zhuz; he earned the nickname for his eloquence in talks with the Dzungars."
+  },
+  "kz-aktaban": {
+    "prompt": "In what year did the Dzungar invasion begin the \"Years of Great Disaster\" (Aktaban Shubyryndy)?",
+    "answer": "1723",
+    "accepted": [
+      "1723"
+    ],
+    "distractors": [
+      "1710",
+      "1729",
+      "1756"
+    ],
+    "explanation": "The Kazakhs fled from Karatau to the Syr Darya and beyond, losing livestock and people."
+  },
+  "kz-anyrakay": {
+    "prompt": "What is the name of the site of the Kazakh militia's decisive victory over the Dzungars, traditionally dated to 1729?",
+    "answer": "Anyrakay",
+    "accepted": [
+      "Anyrakay",
+      "Anyrakai",
+      "Anrakay"
+    ],
+    "distractors": [
+      "Bulanty",
+      "Orbulak",
+      "Otrar"
+    ],
+    "explanation": "The Battle of Anyrakay is traditionally dated to 1729, though some sources give 1730. The name is sometimes translated as \"place of groans\"."
+  },
+  "kz-abulkhair": {
+    "prompt": "Which khan of the Junior Zhuz accepted Russian suzerainty in 1731?",
+    "answer": "Abulkhair",
+    "accepted": [
+      "Abulkhair",
+      "Abulkhair Khan",
+      "Abul Khair",
+      "Abilkayir"
+    ],
+    "distractors": [
+      "Ablai",
+      "Tauke",
+      "Kenesary"
+    ],
+    "explanation": "Abulkhair sought protection from the Dzungars and support against rivals."
+  },
+  "kz-year-1731": {
+    "prompt": "In what year did the Junior Zhuz accept Russian suzerainty?",
+    "answer": "1731",
+    "accepted": [
+      "1731"
+    ],
+    "distractors": [
+      "1740",
+      "1717",
+      "1822"
+    ],
+    "explanation": "In 1740 part of the Middle Zhuz nobility swore allegiance to Russia. The incorporation of Kazakh lands into the Russian Empire was gradual and took a long time."
+  },
+  "kz-ablai": {
+    "prompt": "Who was proclaimed khan of all three zhuzes in 1771?",
+    "answer": "Ablai Khan",
+    "accepted": [
+      "Ablai Khan",
+      "Ablai",
+      "Abylai",
+      "Abylai Khan",
+      "Abylay"
+    ],
+    "distractors": [
+      "Abulkhair",
+      "Tauke",
+      "Kenesary"
+    ],
+    "explanation": "The ceremony took place in Turkestan, at the Yasawi Mausoleum."
+  },
+  "kz-bukhar": {
+    "prompt": "The zhyrau poet who advised Ablai Khan was…",
+    "answer": "Bukhar Zhyrau",
+    "accepted": [
+      "Bukhar Zhyrau",
+      "Bukhar",
+      "Buqar Zhyrau"
+    ],
+    "distractors": [
+      "Makhambet Utemisov",
+      "Dospambet Zhyrau",
+      "Shalkiiz Zhyrau"
+    ],
+    "explanation": "Bukhar is credited with living over a hundred years (1668–1781)."
+  },
+  "kz-bukey": {
+    "prompt": "Which khanate was formed in 1801 between the Ural and the Volga?",
+    "answer": "Bukey Horde",
+    "accepted": [
+      "Bukey Horde",
+      "Inner Horde",
+      "Bukei Horde",
+      "Bukey (Inner) Horde",
+      "Bukeyev Horde"
+    ],
+    "distractors": [
+      "Nogai Horde",
+      "White Horde",
+      "Khanate of Kokand"
+    ],
+    "explanation": "Sultan Bukey led about five thousand Junior Zhuz families there."
+  },
+  "kz-syrym": {
+    "prompt": "Who led the uprising in the Junior Zhuz in 1783–1797?",
+    "answer": "Syrym Datov",
+    "accepted": [
+      "Syrym Datov",
+      "Syrym",
+      "Syrym Datuly"
+    ],
+    "distractors": [
+      "Isatai Taimanov",
+      "Kenesary Kasymov",
+      "Zhankozha Nurmukhamedov"
+    ],
+    "explanation": "Syrym fought both the tsarist administration and Khan Nurali."
+  },
+  "kz-ustav-1822": {
+    "prompt": "Which 1822 document abolished the khan's power in the Middle Zhuz?",
+    "answer": "\"Charter on the Siberian Kirghiz\"",
+    "accepted": [
+      "Charter on the Siberian Kirghiz",
+      "Statute on the Siberian Kirghiz",
+      "Regulations on the Siberian Kirghiz"
+    ],
+    "distractors": [
+      "\"Charter on the Orenburg Kirghiz\"",
+      "\"Provisional Regulations\" of 1868",
+      "\"Steppe Regulations\" of 1891"
+    ],
+    "explanation": "The khanate was replaced by districts headed by senior sultans."
+  },
+  "kz-speransky": {
+    "prompt": "Who wrote the 1822 \"Charter on the Siberian Kirghiz\"?",
+    "answer": "Mikhail Speransky",
+    "accepted": [
+      "Mikhail Speransky",
+      "Speransky"
+    ],
+    "distractors": [
+      "Alexei Yermolov",
+      "Vasily Perovsky",
+      "Gerasim Kolpakovsky"
+    ],
+    "explanation": "The draft grew out of the Siberian inspection and Speransky's work on governing Siberia; Alexander I approved it in 1822."
+  },
+  "kz-year-1824": {
+    "prompt": "In what year was the khan's power abolished in the Junior Zhuz?",
+    "answer": "1824",
+    "accepted": [
+      "1824"
+    ],
+    "distractors": [
+      "1822",
+      "1731",
+      "1845"
+    ],
+    "explanation": "This was done by the \"Charter on the Orenburg Kirghiz\"."
+  },
+  "kz-zhangir": {
+    "prompt": "Against which khan did Isatai Taimanov and Makhambet Utemisov rise up in 1836–1838?",
+    "answer": "Zhangir Khan",
+    "accepted": [
+      "Zhangir Khan",
+      "Zhangir",
+      "Jangir Khan",
+      "Jangir"
+    ],
+    "distractors": [
+      "Bukey",
+      "Kenesary",
+      "Abulkhair"
+    ],
+    "explanation": "The uprising took place in the Inner (Bukey) Horde over seized pastures."
+  },
+  "kz-makhambet": {
+    "prompt": "The poet and comrade-in-arms of Isatai Taimanov was…",
+    "answer": "Makhambet Utemisov",
+    "accepted": [
+      "Makhambet Utemisov",
+      "Makhambet",
+      "Makhambet Utemisuly"
+    ],
+    "distractors": [
+      "Bukhar Zhyrau",
+      "Abai Kunanbayev",
+      "Shortanbai"
+    ],
+    "explanation": "Makhambet's poems are calls to struggle; they are studied at school."
+  },
+  "kz-kenesary-grand": {
+    "prompt": "Whose grandson was Kenesary Kasymov?",
+    "answer": "Ablai Khan",
+    "accepted": [
+      "Ablai Khan",
+      "Ablai",
+      "Abylai",
+      "Abylai Khan"
+    ],
+    "distractors": [
+      "Abulkhair",
+      "Tauke",
+      "Bukey"
+    ],
+    "explanation": "Kenesary's father was Sultan Kasym, son of Ablai."
+  },
+  "kz-kenesary-years": {
+    "prompt": "In which years did Kenesary Kasymov's uprising take place?",
+    "answer": "1837–1847",
+    "accepted": [
+      "1837–1847",
+      "1837-1847"
+    ],
+    "distractors": [
+      "1783–1797",
+      "1836–1838",
+      "1868–1869"
+    ],
+    "explanation": "It was the largest Kazakh uprising of the 19th century; Kenesary was proclaimed khan."
+  },
+  "kz-verny": {
+    "prompt": "What was the name of the fort from which modern Almaty grew?",
+    "answer": "Verny",
+    "accepted": [
+      "Verny",
+      "Vernoye",
+      "Vernyi"
+    ],
+    "distractors": [
+      "Akmolinsk",
+      "Aulie-Ata",
+      "Perovsk"
+    ],
+    "explanation": "The fort was founded in 1854 as Zailiyskoye and soon renamed Vernoye; the town of Verny received city status in 1867."
+  },
+  "kz-akmeshit": {
+    "prompt": "The Kokand fortress of Ak-Mechet, taken by Russian troops in 1853, is today the city of…",
+    "answer": "Kyzylorda",
+    "accepted": [
+      "Kyzylorda",
+      "Kzyl-Orda",
+      "Qyzylorda",
+      "Kyzyl-Orda"
+    ],
+    "distractors": [
+      "Shymkent",
+      "Turkestan",
+      "Taraz"
+    ],
+    "explanation": "The city was Perovsk, then Ak-Mechet, and from 1925 Kzyl-Orda."
+  },
+  "kz-valikhanov": {
+    "prompt": "Which scholar and traveller secretly visited Kashgar in 1858–1859?",
+    "answer": "Shokan Valikhanov",
+    "accepted": [
+      "Shokan Valikhanov",
+      "Chokan Valikhanov",
+      "Valikhanov",
+      "Shokan Ualikhanov"
+    ],
+    "distractors": [
+      "Ibrai Altynsarin",
+      "Pyotr Semyonov-Tyan-Shansky",
+      "Nikolai Przhevalsky"
+    ],
+    "explanation": "Valikhanov travelled with a caravan disguised as a merchant and brought back the first scientific description of Kashgaria."
+  },
+  "kz-altynsarin": {
+    "prompt": "Which educator opened a school for Kazakh children in Turgai in 1864?",
+    "answer": "Ibrai Altynsarin",
+    "accepted": [
+      "Ibrai Altynsarin",
+      "Altynsarin",
+      "Ybyrai Altynsarin",
+      "Ibray Altynsarin"
+    ],
+    "distractors": [
+      "Shokan Valikhanov",
+      "Abai Kunanbayev",
+      "Akhmet Baitursynov"
+    ],
+    "explanation": "Altynsarin wrote textbooks and a reader in Kazakh for his students."
+  },
+  "kz-abai": {
+    "prompt": "Who wrote the \"Words of Edification\" (\"Kara Sozder\")?",
+    "answer": "Abai Kunanbayev",
+    "accepted": [
+      "Abai Kunanbayev",
+      "Abai",
+      "Abay Kunanbayev",
+      "Abai Kunanbaiuly",
+      "Abay"
+    ],
+    "distractors": [
+      "Shakarim Kudaiberdiev",
+      "Mukhtar Auezov",
+      "Makhambet Utemisov"
+    ],
+    "explanation": "Abai wrote the 45 short philosophical texts in 1890–1898."
+  },
+  "kz-kurmangazy": {
+    "prompt": "Who composed the famous kui \"Saryarka\"?",
+    "answer": "Kurmangazy",
+    "accepted": [
+      "Kurmangazy",
+      "Kurmangazy Sagyrbayuly",
+      "Kurmangazy Sagyrbaiuly"
+    ],
+    "distractors": [
+      "Dina Nurpeisova",
+      "Tattimbet",
+      "Dauletkerei"
+    ],
+    "explanation": "Kurmangazy was a 19th-century dombra player; the Kazakh National Conservatory bears his name."
+  },
+  "kz-decree-1916": {
+    "prompt": "The 1916 uprising was triggered by a tsarist decree on…",
+    "answer": "conscription for rear-area labour",
+    "accepted": [
+      "conscription for rear-area labour",
+      "mobilization for rear-area work",
+      "conscription for labour behind the front",
+      "labour conscription"
+    ],
+    "distractors": [
+      "resettling peasants in the steppe",
+      "a new livestock tax",
+      "closing mosques"
+    ],
+    "explanation": "The decree of 25 June 1916 took men aged 19–43 to dig trenches at the front."
+  },
+  "kz-amangeldy": {
+    "prompt": "Who led the 1916 uprising in Turgai Region?",
+    "answer": "Amangeldy Imanov",
+    "accepted": [
+      "Amangeldy Imanov",
+      "Amangeldy",
+      "Amangeldi Imanov",
+      "Amangeldi"
+    ],
+    "distractors": [
+      "Bekbolat Ashekeev",
+      "Alikhan Bukeikhanov",
+      "Kenesary Kasymov"
+    ],
+    "explanation": "Abdulgappar Zhanbosynov was elected khan of the rebels, and Amangeldy their sardarbek."
+  },
+  "kz-bukeikhanov": {
+    "prompt": "Who headed the Alash Orda government in 1917?",
+    "answer": "Alikhan Bukeikhanov",
+    "accepted": [
+      "Alikhan Bukeikhanov",
+      "Bukeikhanov",
+      "Alikhan Bokeikhan",
+      "Bokeikhan"
+    ],
+    "distractors": [
+      "Akhmet Baitursynov",
+      "Mustafa Shokay",
+      "Mirzhakyp Dulatov"
+    ],
+    "explanation": "Alash autonomy was proclaimed by the Second All-Kazakh Congress in December 1917."
+  },
+  "kz-baitursynov-qazaq": {
+    "prompt": "Who edited the newspaper \"Qazaq\" (1913–1918)?",
+    "answer": "Akhmet Baitursynov",
+    "accepted": [
+      "Akhmet Baitursynov",
+      "Baitursynov",
+      "Akhmet Baitursynuly",
+      "Ahmet Baitursynov"
+    ],
+    "distractors": [
+      "Mirzhakyp Dulatov",
+      "Alikhan Bukeikhanov",
+      "Magzhan Zhumabayev"
+    ],
+    "explanation": "\"Qazaq\" reached a circulation of eight thousand, huge for the steppe."
+  },
+  "kz-baitursynov-abc": {
+    "prompt": "Who created the Arabic-based Kazakh alphabet \"tote zhazu\"?",
+    "answer": "Akhmet Baitursynov",
+    "accepted": [
+      "Akhmet Baitursynov",
+      "Baitursynov",
+      "Akhmet Baitursynuly",
+      "Ahmet Baitursynov"
+    ],
+    "distractors": [
+      "Mirzhakyp Dulatov",
+      "Ibrai Altynsarin",
+      "Mukhtar Auezov"
+    ],
+    "explanation": "Baitursynov is called \"Ult Ustazy\", the teacher of the nation."
+  },
+  "kz-dulatov": {
+    "prompt": "Who wrote the poetry collection \"Oyan, Qazaq!\" (\"Wake Up, Kazakh!\", 1909)?",
+    "answer": "Mirzhakyp Dulatov",
+    "accepted": [
+      "Mirzhakyp Dulatov",
+      "Dulatov",
+      "Mirzhakyp Dulatuly",
+      "Mirjaqip Dulatov"
+    ],
+    "distractors": [
+      "Akhmet Baitursynov",
+      "Magzhan Zhumabayev",
+      "Abai Kunanbayev"
+    ],
+    "explanation": "The collection was banned and confiscated, and the author was jailed."
+  },
+  "kz-shokay": {
+    "prompt": "Which autonomy did Mustafa Shokay head in 1917–1918?",
+    "answer": "Turkestan (Kokand) Autonomy",
+    "accepted": [
+      "Turkestan (Kokand) Autonomy",
+      "Turkestan Autonomy",
+      "Kokand Autonomy",
+      "Turkestan",
+      "Kokand"
+    ],
+    "distractors": [
+      "Alash Orda",
+      "Bukey Horde",
+      "Bukharan Republic"
+    ],
+    "explanation": "The autonomy's first head of government was Mukhamedzhan Tynyshpayev; Mustafa Shokay replaced him at the end of 1917. The Bolsheviks crushed the autonomy in February 1918, after which Shokay emigrated."
+  },
+  "kz-orenburg": {
+    "prompt": "Which city became the first capital of the Kirghiz (Kazakh) ASSR in 1920?",
+    "answer": "Orenburg",
+    "accepted": [
+      "Orenburg"
+    ],
+    "distractors": [
+      "Kyzylorda",
+      "Alma-Ata",
+      "Semipalatinsk"
+    ],
+    "explanation": "The capital moved to Kzyl-Orda in 1925, when Orenburg was transferred to the RSFSR."
+  },
+  "kz-kyzylorda-capital": {
+    "prompt": "Which city was the capital of the Kazakh ASSR from 1925 to 1929?",
+    "answer": "Kyzylorda",
+    "accepted": [
+      "Kyzylorda",
+      "Kzyl-Orda",
+      "Kyzyl-Orda",
+      "Qyzylorda"
+    ],
+    "distractors": [
+      "Orenburg",
+      "Alma-Ata",
+      "Akmolinsk"
+    ],
+    "explanation": "In 1929 the capital moved to Alma-Ata, near the Turksib railway then under construction."
+  },
+  "kz-kazssr-1936": {
+    "prompt": "In what year did Kazakhstan become a union republic, the Kazakh SSR?",
+    "answer": "1936",
+    "accepted": [
+      "1936"
+    ],
+    "distractors": [
+      "1920",
+      "1925",
+      "1924"
+    ],
+    "explanation": "It happened on 5 December 1936 with the adoption of the new USSR Constitution."
+  },
+  "kz-turksib": {
+    "prompt": "What railway, completed in 1930, linked Siberia and Central Asia through Kazakhstan?",
+    "answer": "Turksib",
+    "accepted": [
+      "Turksib",
+      "Turkestan-Siberia Railway",
+      "Turkestan–Siberian Railway"
+    ],
+    "distractors": [
+      "BAM",
+      "Trans-Siberian",
+      "Trans-Aral"
+    ],
+    "explanation": "Built in 1927–1930, it was one of the key projects of the first five-year plans."
+  },
+  "kz-goloshchekin": {
+    "prompt": "Who led Kazakhstan during the \"Little October\" and collectivization (1925–1933)?",
+    "answer": "Filipp Goloshchyokin",
+    "accepted": [
+      "Filipp Goloshchyokin",
+      "Filipp Goloshchekin",
+      "Goloshchyokin",
+      "Goloshchekin",
+      "Philip Goloshchekin"
+    ],
+    "distractors": [
+      "Dinmukhamed Kunayev",
+      "Leonid Brezhnev",
+      "Gennady Kolbin"
+    ],
+    "explanation": "Livestock confiscation and forced sedentarization led to the famine of 1931–1933."
+  },
+  "kz-asharshylyk": {
+    "prompt": "What is the famine of 1931–1933 called in Kazakhstan?",
+    "answer": "Asharshylyk",
+    "accepted": [
+      "Asharshylyk",
+      "Asharshylyq"
+    ],
+    "distractors": [
+      "Aktaban Shubyryndy",
+      "Zheltoksan",
+      "Zhut"
+    ],
+    "explanation": "Estimates of famine deaths range from 1.5 to 2.3 million people."
+  },
+  "kz-alzhir": {
+    "prompt": "Near which city was the ALZhIR camp for the wives of \"traitors to the Motherland\"?",
+    "answer": "Akmolinsk",
+    "accepted": [
+      "Akmolinsk",
+      "Akmola"
+    ],
+    "distractors": [
+      "Karaganda",
+      "Semipalatinsk",
+      "Petropavlovsk"
+    ],
+    "explanation": "The name is an acronym for the Akmolinsk Camp for Wives of Traitors to the Motherland. A memorial now stands there."
+  },
+  "kz-panfilov": {
+    "prompt": "In which city was General Panfilov's division, which defended Moscow in 1941, formed?",
+    "answer": "Alma-Ata",
+    "accepted": [
+      "Alma-Ata",
+      "Almaty",
+      "Alma Ata"
+    ],
+    "distractors": [
+      "Karaganda",
+      "Semipalatinsk",
+      "Tashkent"
+    ],
+    "explanation": "The 316th Rifle Division was assembled in Alma-Ata in summer 1941 from residents of Kazakhstan and Kyrgyzstan."
+  },
+  "kz-momyshuly": {
+    "prompt": "Which Panfilov commander wrote the book \"Moscow Is Behind Us\"?",
+    "answer": "Bauyrzhan Momyshuly",
+    "accepted": [
+      "Bauyrzhan Momyshuly",
+      "Momyshuly",
+      "Baurzhan Momyshuly",
+      "Baurdzhan Momysh-uly"
+    ],
+    "distractors": [
+      "Talgat Begeldinov",
+      "Rakhimzhan Koshkarbayev",
+      "Nurken Abdirov"
+    ],
+    "explanation": "Momyshuly was awarded Hero of the Soviet Union only in 1990, posthumously."
+  },
+  "kz-mametova": {
+    "prompt": "Which machine gunner and Hero of the Soviet Union was killed in 1943 in the battles for Nevel?",
+    "answer": "Manshuk Mametova",
+    "accepted": [
+      "Manshuk Mametova",
+      "Mametova",
+      "Manshuk"
+    ],
+    "distractors": [
+      "Aliya Moldagulova",
+      "Khiuaz Dospanova",
+      "Zoya Kosmodemyanskaya"
+    ],
+    "explanation": "Manshuk Mametova was the first Kazakh woman to be named Hero of the Soviet Union."
+  },
+  "kz-koshkarbaev": {
+    "prompt": "Who, together with Grigory Bulatov, raised a red flag on the facade of the Reichstag on 30 April 1945?",
+    "answer": "Rakhimzhan Koshkarbayev",
+    "accepted": [
+      "Rakhimzhan Koshkarbayev",
+      "Koshkarbayev",
+      "Rakhimzhan Koshkarbaev",
+      "Koshkarbaev"
+    ],
+    "distractors": [
+      "Bauyrzhan Momyshuly",
+      "Talgat Begeldinov",
+      "Nurken Abdirov"
+    ],
+    "explanation": "Koshkarbayev and Grigory Bulatov raised a red flag on the Reichstag facade on 30 April 1945. This should not be confused with the raising of the Victory Banner."
+  },
+  "kz-karaganda": {
+    "prompt": "Which coal basin was called the \"third all-Union stokehold\"?",
+    "answer": "Karaganda",
+    "accepted": [
+      "Karaganda",
+      "Karaganda coal basin",
+      "Karaganda basin",
+      "Karagandy"
+    ],
+    "distractors": [
+      "Ekibastuz",
+      "Pechora",
+      "Kuznetsk"
+    ],
+    "explanation": "The first two were the Donbas and the Kuzbass."
+  },
+  "kz-tselina": {
+    "prompt": "In what year did the development of the Virgin Lands begin?",
+    "answer": "1954",
+    "accepted": [
+      "1954"
+    ],
+    "distractors": [
+      "1949",
+      "1961",
+      "1946"
+    ],
+    "explanation": "Hundreds of thousands of people came to the Virgin Lands from all over the Soviet Union."
+  },
+  "kz-tselinograd": {
+    "prompt": "What was today's Astana called in 1961–1992?",
+    "answer": "Tselinograd",
+    "accepted": [
+      "Tselinograd"
+    ],
+    "distractors": [
+      "Akmolinsk",
+      "Akmola",
+      "Nur-Sultan"
+    ],
+    "explanation": "Akmolinsk → Tselinograd → Akmola → Astana → Nur-Sultan → Astana again (since 2022)."
+  },
+  "kz-baikonur": {
+    "prompt": "From which cosmodrome did Yuri Gagarin launch on 12 April 1961?",
+    "answer": "Baikonur",
+    "accepted": [
+      "Baikonur",
+      "Baykonur",
+      "Baiqonyr"
+    ],
+    "distractors": [
+      "Plesetsk",
+      "Kapustin Yar",
+      "Vostochny"
+    ],
+    "explanation": "The first artificial Earth satellite was also launched from Baikonur, in 1957."
+  },
+  "kz-aubakirov": {
+    "prompt": "Who became the first Kazakh in space (1991)?",
+    "answer": "Toktar Aubakirov",
+    "accepted": [
+      "Toktar Aubakirov",
+      "Aubakirov",
+      "Tokhtar Aubakirov"
+    ],
+    "distractors": [
+      "Talgat Musabayev",
+      "Aidyn Aimbetov",
+      "Mukhtar Aimakhanov"
+    ],
+    "explanation": "Aubakirov flew to the Mir station in October 1991."
+  },
+  "kz-polygon": {
+    "prompt": "By a decree of 29 August 1991, Kazakhstan closed…",
+    "answer": "the Semipalatinsk nuclear test site",
+    "accepted": [
+      "the Semipalatinsk nuclear test site",
+      "Semipalatinsk test site",
+      "Semipalatinsk nuclear test site",
+      "Semipalatinsk Polygon"
+    ],
+    "distractors": [
+      "the Baikonur Cosmodrome",
+      "the Sary-Shagan test site",
+      "the Azgir test site"
+    ],
+    "explanation": "The first explosion at the site took place exactly 42 years before its closure, on 29 August 1949."
+  },
+  "kz-nevada": {
+    "prompt": "Who led the Nevada–Semipalatinsk anti-nuclear movement in 1989?",
+    "answer": "Olzhas Suleimenov",
+    "accepted": [
+      "Olzhas Suleimenov",
+      "Suleimenov",
+      "Olzhas Suleymenov"
+    ],
+    "distractors": [
+      "Mukhtar Shakhanov",
+      "Abdizhamil Nurpeisov",
+      "Mukhtar Auezov"
+    ],
+    "explanation": "The movement played an important role in public protest against nuclear testing. The Semipalatinsk test site was closed by decree of the President of the Kazakh SSR on 29 August 1991."
+  },
+  "kz-kunaev": {
+    "prompt": "Who led the Communist Party of Kazakhstan in 1964–1986?",
+    "answer": "Dinmukhamed Kunayev",
+    "accepted": [
+      "Dinmukhamed Kunayev",
+      "Kunayev",
+      "Dinmukhamed Kunaev",
+      "Kunaev"
+    ],
+    "distractors": [
+      "Gennady Kolbin",
+      "Nursultan Nazarbayev",
+      "Filipp Goloshchyokin"
+    ],
+    "explanation": "Kunayev was three times a Hero of Socialist Labour."
+  },
+  "kz-zheltoksan": {
+    "prompt": "The December 1986 events in Alma-Ata began after the appointment as first secretary of…",
+    "answer": "Gennady Kolbin",
+    "accepted": [
+      "Gennady Kolbin",
+      "Kolbin"
+    ],
+    "distractors": [
+      "Nursultan Nazarbayev",
+      "Dinmukhamed Kunayev",
+      "Filipp Goloshchyokin"
+    ],
+    "explanation": "Kolbin had no ties to Kazakhstan; young people came out onto the square on 17 December."
+  },
+  "kz-sovereignty": {
+    "prompt": "When was the Declaration of State Sovereignty of the Kazakh SSR adopted?",
+    "answer": "25 October 1990",
+    "accepted": [
+      "25 October 1990",
+      "October 25, 1990",
+      "25 Oct 1990"
+    ],
+    "distractors": [
+      "16 December 1991",
+      "30 August 1995",
+      "28 January 1993"
+    ],
+    "explanation": "25 October is now Republic Day."
+  },
+  "kz-independence": {
+    "prompt": "On what day did Kazakhstan declare independence?",
+    "answer": "16 December 1991",
+    "accepted": [
+      "16 December 1991",
+      "December 16, 1991",
+      "16 December",
+      "December 16"
+    ],
+    "distractors": [
+      "25 October 1990",
+      "29 August 1991",
+      "30 August 1995"
+    ],
+    "explanation": "16 December is now Independence Day."
+  },
+  "kz-last-republic": {
+    "prompt": "Which union republic was the last to pass a law on state independence in 1991?",
+    "answer": "Kazakhstan",
+    "accepted": [
+      "Kazakhstan"
+    ],
+    "distractors": [
+      "Russia",
+      "Turkmenistan",
+      "Belarus"
+    ],
+    "explanation": "Kazakhstan passed its law on state independence on 16 December 1991. The wording refers to a union republic passing such a law: the RSFSR never declared independence from the USSR, adopting a declaration of state sovereignty in 1990 instead."
+  },
+  "kz-almaty-cis": {
+    "prompt": "In which city was the declaration expanding the CIS to 11 states signed on 21 December 1991?",
+    "answer": "Alma-Ata",
+    "accepted": [
+      "Alma-Ata",
+      "Almaty",
+      "Alma Ata"
+    ],
+    "distractors": [
+      "Minsk",
+      "Moscow",
+      "Tashkent"
+    ],
+    "explanation": "The Alma-Ata Declaration confirmed that the USSR ceased to exist."
+  },
+  "kz-tenge": {
+    "prompt": "In what year was the national currency, the tenge, introduced?",
+    "answer": "1993",
+    "accepted": [
+      "1993"
+    ],
+    "distractors": [
+      "1991",
+      "1992",
+      "1995"
+    ],
+    "explanation": "The tenge was introduced on 15 November 1993; that date is now National Currency Day."
+  },
+  "kz-constitution-1993": {
+    "prompt": "In what year was the first Constitution of independent Kazakhstan adopted?",
+    "answer": "1993",
+    "accepted": [
+      "1993"
+    ],
+    "distractors": [
+      "1991",
+      "1995",
+      "1998"
+    ],
+    "explanation": "It was adopted on 28 January 1993 and replaced two and a half years later."
+  },
+  "kz-constitution-1995": {
+    "prompt": "On what day was Kazakhstan's 1995 Constitution adopted by national referendum?",
+    "answer": "30 August",
+    "accepted": [
+      "30 August",
+      "August 30",
+      "30 August 1995",
+      "August 30, 1995"
+    ],
+    "distractors": [
+      "16 December",
+      "25 October",
+      "28 January"
+    ],
+    "explanation": "30 August is celebrated as Constitution Day."
+  },
+  "kz-capital-1997": {
+    "prompt": "In what year was Kazakhstan's capital officially moved from Almaty to Akmola?",
+    "answer": "1997",
+    "accepted": [
+      "1997"
+    ],
+    "distractors": [
+      "1994",
+      "1998",
+      "2001"
+    ],
+    "explanation": "The move took place on 10 December 1997; the city became Astana in May 1998."
+  },
+  "kz-eaeu": {
+    "prompt": "Which two states signed the Eurasian Economic Union treaty with Kazakhstan in Astana in 2014?",
+    "answer": "Russia and Belarus",
+    "accepted": [
+      "Russia and Belarus",
+      "Belarus and Russia"
+    ],
+    "distractors": [
+      "Russia and Armenia",
+      "Russia and Kyrgyzstan",
+      "Belarus and Uzbekistan"
+    ],
+    "explanation": "Armenia and Kyrgyzstan joined in 2015."
+  },
+  "kz-expo": {
+    "prompt": "In what year did Astana host the international EXPO exhibition?",
+    "answer": "2017",
+    "accepted": [
+      "2017"
+    ],
+    "distractors": [
+      "2015",
+      "2019",
+      "2011"
+    ],
+    "explanation": "The theme was \"Future Energy\"; its symbol was the Nur Alem sphere."
+  },
+  "kz-guryev": {
+    "prompt": "What was Atyrau called until 4 October 1991?",
+    "answer": "Guryev",
+    "accepted": [
+      "Guryev",
+      "Guriev"
+    ],
+    "distractors": [
+      "Uralsk",
+      "Novy Uzen",
+      "Krasnovodsk"
+    ],
+    "explanation": "The town was founded in the 17th century by the Guryev merchant family."
+  },
+  "kz-shevchenko": {
+    "prompt": "What was Aktau called in 1964–1991?",
+    "answer": "Shevchenko",
+    "accepted": [
+      "Shevchenko"
+    ],
+    "distractors": [
+      "Guryev",
+      "Novy Uzen",
+      "Krasnovodsk"
+    ],
+    "explanation": "The city was named after Taras Shevchenko, who served his exile on Mangyshlak."
+  },
+  "kz-auezov": {
+    "prompt": "Who wrote the epic novel \"The Path of Abai\"?",
+    "answer": "Mukhtar Auezov",
+    "accepted": [
+      "Mukhtar Auezov",
+      "Auezov",
+      "Mukhtar Auyezov"
+    ],
+    "distractors": [
+      "Gabit Musrepov",
+      "Sabit Mukanov",
+      "Ilyas Esenberlin"
+    ],
+    "explanation": "The four-book epic was written from 1942 to 1956."
+  },
+  "kz-esenberlin": {
+    "prompt": "Who wrote the historical trilogy \"The Nomads\"?",
+    "answer": "Ilyas Esenberlin",
+    "accepted": [
+      "Ilyas Esenberlin",
+      "Esenberlin",
+      "Ilyas Yesenberlin"
+    ],
+    "distractors": [
+      "Mukhtar Auezov",
+      "Abdizhamil Nurpeisov",
+      "Gabit Musrepov"
+    ],
+    "explanation": "The trilogy tells the story of the Kazakh Khanate from its founding to Kenesary."
+  }
+}

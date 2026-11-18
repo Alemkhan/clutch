@@ -19,6 +19,9 @@ import { BottomNav, navTabForPhase, type NavTab } from './ui/BottomNav';
 import { isSoloPlaying, type SoloStage } from './features/solo/soloRunFlow';
 import { useTelegramBackButton } from './platform/useTelegramBackButton';
 import { setClientErrorScreen } from './platform/clientErrors';
+import { ClanScreen } from './features/clans/ClanScreen';
+import { ClanInviteEntry } from './features/clans/ClanInviteEntry';
+import { clansEnabled } from './features/clans/clansEnabled';
 
 const screenTransition = {
   initial: { opacity: 0, y: 8 },
@@ -43,10 +46,16 @@ function WikiPathEntry({ onBack, onCompleted, onPageLoaded }: { onBack: () => vo
 
 export default function App() {
   const game = useGameState();
-  const [launchIntent, setLaunchIntent] = useState<LaunchIntent | null>(readLaunchIntent);
+  // Ссылка-приглашение в клан до запуска кланов просто открывает игру.
+  const [launchIntent, setLaunchIntent] = useState<LaunchIntent | null>(() => {
+    const intent = readLaunchIntent();
+    return intent?.type === 'clan-invite' && !clansEnabled() ? null : intent;
+  });
+  const openClan = clansEnabled() ? game.goToClan : undefined;
   const launchOverlay = launchIntent?.type === 'rematch' || launchIntent?.type === 'group-challenge'
     || launchIntent?.type === 'unsubscribe'
-    || launchIntent?.type === 'daily-unsubscribe';
+    || launchIntent?.type === 'daily-unsubscribe'
+    || launchIntent?.type === 'clan-invite';
   const closeLaunchIntent = useCallback(() => setLaunchIntent(null), []);
   const [groupChallenge, setGroupChallenge] = useState<{ challengeId: string; category: CategoryId } | null>(null);
   const [soloRematch, setSoloRematch] = useState<SoloRematch | null>(null);
@@ -143,11 +152,12 @@ export default function App() {
 
   return (
     <>
-    <main ref={shellRef} className={`app-shell phase-${shellPhase}${showNav ? ' has-nav' : ''}`}>
+    <main ref={shellRef} className={`app-shell phase-${shellPhase}${game.phase === 'solo' ? ` stage-${soloStage}` : ''}${showNav ? ' has-nav' : ''}`}>
       <AnimatePresence mode="wait">
         {game.phase === 'home' && launchIntent && launchOverlay && (
           <motion.div key="launch" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
-            {launchIntent.type === 'group-challenge' ? <GroupChallengeEntry challengeId={launchIntent.challengeId} onClose={closeLaunchIntent} onStart={(challengeId, category) => {
+            {launchIntent.type === 'clan-invite' ? <ClanInviteEntry code={launchIntent.code} onPlay={closeLaunchIntent} onClan={() => { setLaunchIntent(null); game.goToClan(); }} />
+              : launchIntent.type === 'group-challenge' ? <GroupChallengeEntry challengeId={launchIntent.challengeId} onClose={closeLaunchIntent} onStart={(challengeId, category) => {
               setGroupChallenge({ challengeId, category }); setSoloRematch(null); setPracticeLevel(null); setLaunchIntent(null); setSoloKey(key => key + 1); game.goToSolo();
             }} /> : <RematchEntry intent={launchIntent} onStartRematch={startRematch} onClose={closeLaunchIntent} />}
           </motion.div>
@@ -160,13 +170,15 @@ export default function App() {
               onBoard={() => openBoard('daily')}
               onTiebreaker={game.goToTiebreaker}
               onWikiPath={game.goToWikiPath}
+              onProfile={game.goToProfile}
+              onClan={openClan}
             />
           </motion.div>
         )}
 
         {game.phase === 'profile' && (
           <motion.div key="profile" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
-            <Profile />
+            <Profile onClan={openClan} />
           </motion.div>
         )}
 
@@ -194,6 +206,7 @@ export default function App() {
               mode={soloMode}
               onPlayMode={playMode}
               onPracticeMistakes={goToMistakes}
+              onClan={openClan}
               onHome={practiceLevel ? game.goToTraining : game.goHome}
               practice={practiceLevel ?? undefined}
               onMyRuns={game.goToMyRuns}
@@ -225,6 +238,12 @@ export default function App() {
         {game.phase === 'wikiPath' && (
           <motion.div key="wikiPath" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
             <WikiPathEntry onBack={game.goHome} onCompleted={() => openBoard('wikiPath')} onPageLoaded={scrollShellToTop} />
+          </motion.div>
+        )}
+
+        {game.phase === 'clan' && (
+          <motion.div key="clan" {...screenTransition} style={screenWrapperStyle} transition={{ duration: screenDuration }}>
+            <ClanScreen onBack={game.goHome} onPlay={() => startSolo()} />
           </motion.div>
         )}
 

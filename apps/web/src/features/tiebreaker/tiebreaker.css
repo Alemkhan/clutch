@@ -70,8 +70,8 @@
 .tb-card-btn {
   width: 100%;
   min-height: 48px;
-  background: var(--text);
-  color: var(--surface);
+  background: var(--ink);
+  color: #fff;
   font-size: 16px;
 }
 
@@ -114,8 +114,8 @@
   min-height: 44px;
   padding: 0 14px;
   border-radius: 12px;
-  background: var(--text);
-  color: var(--surface);
+  background: var(--ink);
+  color: #fff;
   font-size: 14px;
 }
 
@@ -337,8 +337,8 @@
   gap: 20px;
   padding: 24px 20px 20px;
   border-radius: 20px;
-  background: var(--text);
-  color: var(--surface);
+  background: var(--ink);
+  color: #fff;
 }
 
 .tb-result-top {

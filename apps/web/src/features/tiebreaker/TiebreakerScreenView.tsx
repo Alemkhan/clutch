@@ -1,6 +1,8 @@
 import type { TiebreakerQuestionView } from "@clutch/shared";
 import { ScreenHeader } from "../../ui/ScreenHeader";
 import { formatDayMonth } from "./tiebreakerView";
+import { useMessages } from "../../i18n/messages";
+import { m } from "./messages";
 import { TiebreakerAnswerForm, type TiebreakerSubmitStatus } from "./TiebreakerAnswerForm";
 import { TiebreakerReveal, type TiebreakerShareStatus } from "./TiebreakerReveal";
 import type { TiebreakerTodayState } from "./useTiebreakerToday";
@@ -31,6 +33,7 @@ export function TiebreakerScreenView({
   onShare,
   explanationOpen = false,
 }: ScreenViewProps) {
+  const t = useMessages(m);
   const question = state.status === "ready" ? state.today.question : null;
   const answered = state.status === "ready" ? state.today.answered : null;
 
@@ -40,7 +43,7 @@ export function TiebreakerScreenView({
 
       <div className="tb-head">
         <h1 className="tb-title">
-          На глазок
+          {t.mode}
           {question && (
             <>
               {" "}
@@ -55,17 +58,17 @@ export function TiebreakerScreenView({
 
       {state.status === "loading" && (
         <div className="matchmaking-loading" role="status">
-          <span /> Загружаем вопрос
+          <span /> {t.loadingQuestion}
         </div>
       )}
 
       {state.status === "error" && (
         <div className="my-runs-message">
           <p className="matchmaking-error" role="alert">
-            Не удалось загрузить вопрос. Проверь соединение и попробуй ещё раз.
+            {t.loadError}
           </p>
           <button type="button" className="cta-btn" onClick={onRetry}>
-            Повторить
+            {t.retry}
           </button>
         </div>
       )}
@@ -73,10 +76,10 @@ export function TiebreakerScreenView({
       {state.status === "ready" && !question && (
         <div className="my-runs-message">
           <p className="matchmaking-error">
-            Сегодня вопроса нет. Загляни завтра.
+            {t.noQuestion}
           </p>
           <button type="button" className="ghost-btn" onClick={onBack}>
-            Назад
+            {t.back}
           </button>
         </div>
       )}

@@ -1,0 +1,283 @@
+{
+  "au-space-16bjiuv": {
+    "prompt": "Which planet is closest to the Sun?",
+    "answer": "Mercury",
+    "accepted": [
+      "Mercury"
+    ],
+    "distractors": [
+      "Venus",
+      "Mars",
+      "Earth"
+    ]
+  },
+  "au-space-1c8m3t9": {
+    "prompt": "What is the largest planet in the Solar System?",
+    "answer": "Jupiter",
+    "accepted": [
+      "Jupiter"
+    ],
+    "distractors": [
+      "Saturn",
+      "Neptune",
+      "Uranus"
+    ]
+  },
+  "au-space-rxp3p8": {
+    "prompt": "What is Earth's natural satellite called?",
+    "answer": "the Moon",
+    "accepted": [
+      "the Moon",
+      "Moon",
+      "Luna"
+    ],
+    "distractors": [
+      "Phobos",
+      "Europa",
+      "Titan"
+    ]
+  },
+  "au-space-zgi3n5": {
+    "prompt": "Which planet is famous for its bright, wide rings?",
+    "answer": "Saturn",
+    "accepted": [
+      "Saturn"
+    ],
+    "distractors": [
+      "Jupiter",
+      "Mars",
+      "Neptune"
+    ]
+  },
+  "au-space-rwn0cl": {
+    "prompt": "Who was the first person to walk in open space?",
+    "answer": "Alexei Leonov",
+    "accepted": [
+      "Alexei Leonov",
+      "Leonov",
+      "Alexey Leonov"
+    ],
+    "distractors": [
+      "Yuri Gagarin",
+      "Neil Armstrong",
+      "Gherman Titov"
+    ]
+  },
+  "au-space-1o2v68c": {
+    "prompt": "Who was the first person to set foot on the Moon?",
+    "answer": "Neil Armstrong",
+    "accepted": [
+      "Neil Armstrong",
+      "Armstrong"
+    ],
+    "distractors": [
+      "Buzz Aldrin",
+      "Yuri Gagarin",
+      "Michael Collins"
+    ]
+  },
+  "au-space-idjvyn": {
+    "prompt": "Who was the first woman in space?",
+    "answer": "Valentina Tereshkova",
+    "accepted": [
+      "Valentina Tereshkova",
+      "Tereshkova"
+    ],
+    "distractors": [
+      "Svetlana Savitskaya",
+      "Sally Ride",
+      "Elena Kondakova"
+    ]
+  },
+  "au-space-193e4tx": {
+    "prompt": "How many planets are in the Solar System?",
+    "answer": "8",
+    "accepted": [
+      "8",
+      "eight"
+    ],
+    "distractors": [
+      "9",
+      "7",
+      "10"
+    ],
+    "explanation": "Since 2006 Pluto has been classed as a dwarf planet."
+  },
+  "au-space-1msd8ui": {
+    "prompt": "In what year did humans first land on the Moon?",
+    "answer": "1969",
+    "accepted": [
+      "1969"
+    ],
+    "distractors": [
+      "1961",
+      "1972",
+      "1965"
+    ]
+  },
+  "au-space-zbmoxv": {
+    "prompt": "What is our galaxy called?",
+    "answer": "Milky Way",
+    "accepted": [
+      "Milky Way",
+      "the Milky Way"
+    ],
+    "distractors": [
+      "Andromeda",
+      "Triangulum",
+      "Sombrero"
+    ]
+  },
+  "au-space-4nb6tj": {
+    "prompt": "Which star is closest to the Solar System?",
+    "answer": "Proxima Centauri",
+    "accepted": [
+      "Proxima Centauri",
+      "Proxima"
+    ],
+    "distractors": [
+      "Sirius",
+      "Betelgeuse",
+      "Polaris"
+    ]
+  },
+  "au-space-ybwxvi": {
+    "prompt": "Which planet rotates as if lying on its side?",
+    "answer": "Uranus",
+    "accepted": [
+      "Uranus"
+    ],
+    "distractors": [
+      "Neptune",
+      "Saturn",
+      "Venus"
+    ]
+  },
+  "au-space-mveqsa": {
+    "prompt": "What is the boundary of a black hole beyond which not even light can escape?",
+    "answer": "event horizon",
+    "accepted": [
+      "event horizon",
+      "the event horizon"
+    ],
+    "distractors": [
+      "singularity",
+      "accretion disk",
+      "photosphere"
+    ]
+  },
+  "au-space-11a0f04": {
+    "prompt": "What was the name of Earth's first artificial satellite?",
+    "answer": "Sputnik 1",
+    "accepted": [
+      "Sputnik 1",
+      "Sputnik-1",
+      "Sputnik",
+      "PS-1"
+    ],
+    "distractors": [
+      "Vostok 1",
+      "Explorer 1",
+      "Luna 1"
+    ]
+  },
+  "au-space-1ncds3i": {
+    "prompt": "What is Saturn's largest moon?",
+    "answer": "Titan",
+    "accepted": [
+      "Titan"
+    ],
+    "distractors": [
+      "Ganymede",
+      "Enceladus",
+      "Europa"
+    ]
+  },
+  "au-space-1vm387o": {
+    "prompt": "Roughly how many minutes does sunlight take to reach Earth?",
+    "answer": "8",
+    "accepted": [
+      "8",
+      "eight",
+      "8 minutes"
+    ],
+    "distractors": [
+      "1",
+      "30",
+      "60"
+    ],
+    "explanation": "About 8 minutes 20 seconds."
+  },
+  "au-space-1cbdp36": {
+    "prompt": "What is the tallest volcano in the Solar System?",
+    "answer": "Olympus Mons",
+    "accepted": [
+      "Olympus Mons",
+      "Olympus"
+    ],
+    "distractors": [
+      "Mauna Kea",
+      "Everest",
+      "Kilimanjaro"
+    ],
+    "explanation": "Olympus Mons is on Mars."
+  },
+  "au-space-1fci0uy": {
+    "prompt": "Which planet in the Solar System is the hottest?",
+    "answer": "Venus",
+    "accepted": [
+      "Venus"
+    ],
+    "distractors": [
+      "Mercury",
+      "Mars",
+      "Jupiter"
+    ],
+    "explanation": "Mercury is closer to the Sun, but Venus's thick atmosphere traps heat."
+  },
+  "q-space-1jx4mfh": {
+    "prompt": "Who became the first person in history to fly into outer space, in 1961?",
+    "answer": "Yuri Gagarin",
+    "accepted": [
+      "Yuri Gagarin",
+      "Gagarin"
+    ],
+    "distractors": [
+      "Gherman Titov",
+      "Neil Armstrong",
+      "Alexei Leonov"
+    ],
+    "explanation": "On April 12, 1961, Yuri Gagarin flew aboard Vostok 1."
+  },
+  "q-space-tsql90": {
+    "prompt": "Which astronaut was the first to step onto the Moon during the Apollo 11 mission in 1969?",
+    "answer": "Neil Armstrong",
+    "accepted": [
+      "Neil Armstrong",
+      "Armstrong"
+    ],
+    "distractors": [
+      "Buzz Aldrin",
+      "Michael Collins",
+      "Yuri Gagarin"
+    ],
+    "explanation": "On July 20, 1969, Neil Armstrong spoke his famous words as he stepped onto the Moon."
+  },
+  "au-space-sc1q4o": {
+    "prompt": "What is the astronomical event when day and night are roughly equal in length?",
+    "answer": "equinox",
+    "accepted": [
+      "equinox",
+      "spring equinox",
+      "autumn equinox",
+      "fall equinox",
+      "vernal equinox"
+    ],
+    "distractors": [
+      "full moon",
+      "solar eclipse",
+      "solstice"
+    ],
+    "explanation": "An equinox happens twice a year, around March and September, when the Sun crosses the celestial equator. Day and night then last close to 12 hours across most of Earth, though not always equal to the minute."
+  }
+}

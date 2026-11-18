@@ -1,3 +1,5 @@
+import { m } from './messages';
+import { useMessages } from '../../i18n/messages';
 import { useEffect, useRef, useState } from 'react';
 
 interface OpenAnswerInputProps {
@@ -11,6 +13,7 @@ interface OpenAnswerInputProps {
 }
 
 export function OpenAnswerInput({ onSubmit, disabled, onSkip }: OpenAnswerInputProps) {
+  const t = useMessages(m);
   const [value, setValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -52,7 +55,7 @@ export function OpenAnswerInput({ onSubmit, disabled, onSkip }: OpenAnswerInputP
           e.preventDefault();
           handleSubmit();
         }}
-        placeholder="Напиши ответ..."
+        placeholder={t.answerPlaceholder}
         autoFocus
         disabled={disabled}
         autoComplete="off"
@@ -65,11 +68,11 @@ export function OpenAnswerInput({ onSubmit, disabled, onSkip }: OpenAnswerInputP
         onClick={handleSubmit}
         disabled={disabled || !value.trim()}
       >
-        Отправить
+        {t.submit}
       </button>
       {onSkip && (
         <button type="button" className="open-answer-skip" onClick={onSkip} disabled={disabled}>
-          Пропустить
+          {t.skip}
         </button>
       )}
     </div>

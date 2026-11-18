@@ -1,8 +1,12 @@
+import { messagesFor, useMessages } from '../../i18n/messages';
+import { m } from './messages';
 import type { ReactNode } from 'react';
 import { isCategoryOpen, type CategoryId, type SoloLeaderboardResponse, type SoloLeaderboardStanding, type SoloMode } from '@clutch/shared';
-import { categoryName, finishedText, initials, roundsShort, soloRoundsText } from '../myRuns/myRunsView';
+import { categoryName, finishedText, roundsShort, soloRoundsText } from '../myRuns/myRunsView';
 import { ScreenHeader } from '../../ui/ScreenHeader';
 import { resetLabel } from '../tiebreaker/tiebreakerClock';
+import { PlayerAvatar } from '../../ui/PlayerAvatar';
+import { displayPlayerName } from '../../i18n/playerName';
 export type SoloBoardState =
   | { status: 'loading' }
   | { status: 'error' }
@@ -21,28 +25,30 @@ interface SoloBoardViewProps {
   kindSwitch?: ReactNode;
 }
 export function standingHint(standing: SoloLeaderboardStanding): string {
-  if (standing.roundsToNext === null) return 'Ты первый сегодня';
+  const t = messagesFor(m);
+  if (standing.roundsToNext === null) return t.first;
   if (standing.outrankedByGuess) {
-    if (standing.tiebreak === 'guest') return 'Равных разводит «На глазок» — только с Telegram';
-    if (standing.tiebreak === 'answered') return 'Выше с теми же кругами — по «На глазок»';
-    return 'Ответь «На глазок» — поднимет над равными';
+    if (standing.tiebreak === 'guest') return t.tieGuest;
+    if (standing.tiebreak === 'answered') return t.tieAnswered;
+    return t.tieAnswer;
   }
-  const gap = standing.roundsToNext === 1 ? 'один круг' : soloRoundsText(standing.roundsToNext);
-  return `До ${standing.placeAbove ?? standing.rank - 1}-го места — ${gap}`;
+  const gap = standing.roundsToNext === 1 ? t.oneRound : soloRoundsText(standing.roundsToNext);
+  return t.toPlace(standing.placeAbove ?? standing.rank - 1, gap);
 }
 export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onRetry, onPlay, kindSwitch }: SoloBoardViewProps) {
+  const t = useMessages(m);
   // Попытка забега дня одна: сыгравшего таблица зовёт в дуэль, а не во второй забег дня.
   const played = state.status === 'ready' && (state.board.you !== null || state.board.dailyAttempt === 'completed');
   const playButton = played
-    ? { label: 'Дуэль', mode: 'duel' as const }
-    : { label: 'Забег дня', mode: 'daily' as const };
+    ? { label: t.duel, mode: 'duel' as const }
+    : { label: t.daily, mode: 'daily' as const };
   return (
     <section className="solo-board">
-      <ScreenHeader onBack={onBack} title="Таблица дня" />
+      <ScreenHeader onBack={onBack} title={t.title} />
       <p className="solo-board-reset">{resetLabel(msLeft)}</p>
       {kindSwitch}
 
-      <div className="solo-board-tabs" role="tablist" aria-label="Категория">
+      <div className="solo-board-tabs" role="tablist" aria-label={t.categoryLabel}>
         {CATEGORIES.map((id) => (
           <button
             key={id}
@@ -58,13 +64,13 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
       </div>
 
       {state.status === 'loading' && (
-        <div className="matchmaking-loading" role="status"><span /> Загружаем таблицу</div>
+        <div className="matchmaking-loading" role="status"><span /> {t.loading}</div>
       )}
 
       {state.status === 'error' && (
         <div className="my-runs-message">
-          <p className="matchmaking-error" role="alert">Не удалось загрузить таблицу. Проверь соединение и попробуй ещё раз.</p>
-          <button type="button" className="cta-btn" onClick={onRetry}>Повторить</button>
+          <p className="matchmaking-error" role="alert">{t.loadError}</p>
+          <button type="button" className="cta-btn" onClick={onRetry}>{t.retry}</button>
         </div>
       )}
 
@@ -74,13 +80,13 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
           {state.board.you && (
             <div className="solo-board-you">
               <div className="solo-board-you-row">
-                <span className="solo-board-you-rank">{state.board.you.rank}<span className="visually-hidden">-е место</span></span>
+                <span className="solo-board-you-rank">{state.board.you.rank}<span className="visually-hidden">{t.placeSuffix}</span></span>
                 <div className="solo-board-you-info">
                   <span className="solo-board-you-hint">{standingHint(state.board.you)}</span>
                   {/* Пар набора игроку не показывается: он откалиброван на старом молотке и занижен
                       на 12–22% (см. SKILL_SHARE). Круги — честное число, их и показываем. */}
                   <span className="solo-board-you-meta">
-                    Ты: {soloRoundsText(state.board.you.entry.roundsPlayed)} · {finishedText(state.board.you.total)}
+                    {t.youMeta(soloRoundsText(state.board.you.entry.roundsPlayed), finishedText(state.board.you.total))}
                   </span>
                 </div>
               </div>
@@ -91,7 +97,7 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
           {!state.board.you && state.board.entries.length > 0 && (
             <div className="solo-board-you">
               <p className="solo-board-you-text">
-                Твоего забега дня здесь нет: в таблицу идёт первая попытка, если она дошла до 100%.
+                {t.notOnBoard}
               </p>
               <button type="button" className="cta-btn solo-board-play" onClick={() => onPlay(category, playButton.mode)}>{playButton.label}</button>
             </div>
@@ -99,7 +105,7 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
 
           {state.board.entries.length === 0 && (
             <div className="my-runs-message">
-              <p className="matchmaking-error">Сегодня в этой категории ещё никто не дошёл до цели.</p>
+              <p className="matchmaking-error">{t.emptyDaily}</p>
               <button type="button" className="cta-btn" onClick={() => onPlay(category, playButton.mode)}>{playButton.label}</button>
             </div>
           )}
@@ -119,15 +125,15 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
                       className={mine ? 'solo-board-row mine' : 'solo-board-row'}
                     >
                       <span className="solo-board-place">{entry.rank}</span>
-                      <span className="solo-board-avatar" aria-hidden="true">{mine ? 'ТЫ' : initials(entry.displayName)}</span>
-                      <span className="solo-board-name" title={entry.displayName}>{mine ? 'Ты' : entry.displayName}</span>
+                      <span className="solo-board-avatar" aria-hidden="true">{mine && !entry.clanEmoji ? t.youAvatar : <PlayerAvatar seed={entry.displayName} emoji={entry.clanEmoji} />}</span>
+                      <span className="solo-board-name" title={displayPlayerName(entry.displayName)}>{mine ? t.you : displayPlayerName(entry.displayName)}</span>
                       <span className="solo-board-score">{roundsShort(entry.roundsPlayed)}</span>
                     </li>
                   );
                 })}
               </ol>
               {/* Правда для текущей таблицы: равных разводит прикидка дня (R25), длительность не участвует. */}
-              <p className="solo-board-note">При равных кругах выше тот, чья прикидка «На глазок» точнее</p>
+              <p className="solo-board-note">{t.dailyNote}</p>
             </>
           )}
         </>

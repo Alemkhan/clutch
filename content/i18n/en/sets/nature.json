@@ -1,0 +1,94 @@
+{
+  "set-nature-d0njp2": {
+    "title": "Name a species of the genus Panthera",
+    "mcPrompt": "Which of these animals belongs to the genus Panthera?",
+    "members": {
+      "lion": {
+        "answer": "lion",
+        "accepted": [
+          "lion"
+        ]
+      },
+      "tiger": {
+        "answer": "tiger",
+        "accepted": [
+          "tiger"
+        ]
+      },
+      "jaguar": {
+        "answer": "jaguar",
+        "accepted": [
+          "jaguar"
+        ]
+      },
+      "leopard": {
+        "answer": "leopard",
+        "accepted": [
+          "leopard"
+        ]
+      },
+      "snow_leopard": {
+        "answer": "snow leopard",
+        "accepted": [
+          "snow leopard",
+          "irbis",
+          "ounce"
+        ]
+      }
+    },
+    "nonMembers": [
+      "cheetah",
+      "cougar",
+      "lynx"
+    ]
+  },
+  "set-nature-yj3j44": {
+    "title": "Name one of the 5 longest rivers in the world",
+    "mcPrompt": "Which of these rivers is among the 5 longest on Earth?",
+    "members": {
+      "amazon": {
+        "answer": "Amazon",
+        "accepted": [
+          "Amazon",
+          "Amazon River"
+        ]
+      },
+      "nile": {
+        "answer": "Nile",
+        "accepted": [
+          "Nile",
+          "Nile River"
+        ]
+      },
+      "yangtze": {
+        "answer": "Yangtze",
+        "accepted": [
+          "Yangtze",
+          "Yangtze River",
+          "Chang Jiang"
+        ]
+      },
+      "mississippi": {
+        "answer": "Mississippi",
+        "accepted": [
+          "Mississippi",
+          "Mississippi-Missouri",
+          "Mississippi River"
+        ]
+      },
+      "yenisei": {
+        "answer": "Yenisei",
+        "accepted": [
+          "Yenisei",
+          "Yenisey",
+          "Yenisei-Angara"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Danube",
+      "Rhine",
+      "Thames"
+    ]
+  }
+}

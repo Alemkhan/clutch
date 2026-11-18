@@ -1,5 +1,7 @@
 /** Shared client/server contracts for the daily Wikipedia navigation challenge. */
 
+import type { Locale } from '../i18n/locale';
+
 export const WIKI_PATH_TITLE_MAX_LENGTH = 300;
 // Maximum HTML characters returned to the client. HTML is not persisted in D1;
 // the Worker applies a separate byte limit to the complete MediaWiki response.
@@ -13,6 +15,8 @@ export interface WikiPathChallenge {
   date: string;
   startTitle: string;
   targetTitle: string;
+  /** Wikipedia language of the route (ru/en/kk); each language has its own daily route and board. */
+  lang?: Locale;
 }
 
 export type WikiPathRunStatus = 'in_progress' | 'completed';

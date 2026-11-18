@@ -1,6 +1,10 @@
+import { messagesFor, useMessages } from '../../i18n/messages';
+import { m } from './messages';
 import { useGroupChallenge } from './useGroupChallenge';
 import { useEffect, useRef } from 'react';
-import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS, dailyKey } from '@clutch/shared';
+import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS, dailyKey, gameDayNumber } from '@clutch/shared';
+import { DailyReminderOffer } from '../progress/Progress';
+import { ClanResultNudge } from '../clans/ClanResultNudge';
 import type { CategoryId, CompleteSoloRunResponse, MiniGameId, Opponent, SkillResult, SoloMode } from '@clutch/shared';
 import { playSound } from '../../platform/sounds';
 import { buildReceiptStats, buildSoloResult, circles, countPerfectStrikes, type RunStandingState, type SoloSaveStatus } from './soloResultModel';
@@ -9,7 +13,7 @@ import { categoryName } from '../myRuns/myRunsView';
 import { useRunStanding } from './useRunStanding';
 import type { SoloRunView } from './soloRunSession';
 import type { PracticeSummary } from './practiceResult';
-import { FRIEND_DUEL_CHIP, type FriendDuelSummary } from './friendDuelResult';
+import { friendDuelChip, type FriendDuelSummary } from './friendDuelResult';
 import { useFriendInvite } from './useFriendInvite';
 import { getTelegramIdentity } from '../../platform/telegram';
 import { buildRunPreviewUrl, previewBase, roundTiles } from '../../platform/share';
@@ -49,11 +53,14 @@ interface SoloResultProps {
   onPlayMode?: (mode: SoloMode) => void;
   /** Разобрать ошибки забега: неверные ответы сервер уже записал в журнал тренировки. */
   onPracticeMistakes?: () => void;
+  /** Открыть клан (или выбор эмодзи) из подсказки клана под забегом дня. */
+  onClan?: () => void;
 }
 
 /** Партию кончил финиш соперника: заголовок говорит это словами мини-игры. */
 export function opponentFinishedHeadline(miniGameId: MiniGameId | undefined): string {
-  return miniGameId === 'tower_stack' ? 'Соперник достроил башню первым' : 'Соперник забил гвоздь первым';
+  const t = messagesFor(m);
+  return miniGameId === 'tower_stack' ? t.towerFirst : t.hammerFirst;
 }
 
 /** Заголовок итога дуэли: победа, поражение (словами мини-игры, если партию кончил финиш соперника) или ничья. */
@@ -63,21 +70,22 @@ export function duelHeadline(
   opponentFinished: boolean,
   miniGameId: MiniGameId | undefined,
 ): { text: string; tone: 'win' | 'loss' | 'tie' } | null {
+  const t = messagesFor(m);
   // Имя не склоняем («над Дамир»): оно стоит в именительном падеже.
-  if (outcome === 'player') return { text: `Победа: ${rival} позади`, tone: 'win' };
+  if (outcome === 'player') return { text: t.victory(rival), tone: 'win' };
   if (outcome === 'opponent') {
-    return { text: opponentFinished ? opponentFinishedHeadline(miniGameId) : `${rival} оказался быстрее`, tone: 'loss' };
+    return { text: opponentFinished ? opponentFinishedHeadline(miniGameId) : t.rivalFaster(rival), tone: 'loss' };
   }
-  if (outcome === 'tie') return { text: 'Ничья', tone: 'tie' };
+  if (outcome === 'tie') return { text: t.tie, tone: 'tie' };
   return null;
 }
 
 /** Главная кнопка итога по режиму: после забега дня — дуэль, после свободной игры и дуэли — ещё одна. */
-const NEXT_ACTION: Readonly<Record<SoloMode, { mode: SoloMode; label: string }>> = {
-  daily: { mode: 'duel', label: 'Дуэль' },
-  free: { mode: 'free', label: 'Ещё набор' },
-  duel: { mode: 'duel', label: 'Ещё дуэль' },
-};
+const nextAction = (t: (typeof m)['ru']): Readonly<Record<SoloMode, { mode: SoloMode; label: string }>> => ({
+  daily: { mode: 'duel', label: t.nextDuel },
+  free: { mode: 'free', label: t.nextFree },
+  duel: { mode: 'duel', label: t.nextAnotherDuel },
+});
 
 /**
  * Два разных итога: дошёл до 100% либо упёрся в потолок. Второй не выдаётся за победу.
@@ -107,7 +115,9 @@ export function SoloResult({
   miniGameId,
   onPlayMode,
   onPracticeMistakes,
+  onClan,
 }: SoloResultProps) {
+  const t = useMessages(m);
   const result = buildSoloResult({ view, save: saveStatus, response });
   // Дуэль кончилась на круге финиша соперника, а игрок до 100% не дошёл: он проиграл раньше конца набора.
   const opponentFinished = pace !== null && !practice && !result.reachedTarget
@@ -135,12 +145,12 @@ export function SoloResult({
     const practiceTone = practice.outcome === 'player' ? 'win' : practice.outcome === 'tie' ? 'tie' : 'loss';
     return (
       <div className="result-screen solo-result practice">
-        <span className="chip">Тренировка · не засчитывается</span>
+        <span className="chip">{t.practiceChip}</span>
         <h1 className={`result-headline ${practiceTone}`}>{practice.headline}</h1>
         <p className="solo-result-summary">{practice.line}</p>
         <div className="result-actions solo-result-actions">
-          <button type="button" className="cta-btn" onClick={() => { onReplay(); }}>Ещё раз</button>
-          <button type="button" className="ghost-btn" onClick={() => { onExitPractice?.(); }}>Другой уровень</button>
+          <button type="button" className="cta-btn" onClick={() => { onReplay(); }}>{t.again}</button>
+          <button type="button" className="ghost-btn" onClick={() => { onExitPractice?.(); }}>{t.otherLevel}</button>
         </div>
       </div>
     );
@@ -164,7 +174,7 @@ export function SoloResult({
     standing: ranked ? (standing ?? fetched) : null,
   });
   const finishLine = opponentFinished
-    ? `Он дошёл до ${SOLO_TARGET_PROGRESS}% за ${circles(roundCap)}. У тебя ${result.progress}%.`
+    ? t.opponentReached(SOLO_TARGET_PROGRESS, circles(roundCap), result.progress)
     : '';
   const summaryText = friendDuel
     ? [finishLine, friendDuel.line].filter(Boolean).join(' ') || result.summary
@@ -173,16 +183,16 @@ export function SoloResult({
   const duel = mode === 'duel' && pace !== null && !friendDuel ? duelHeadline(response?.outcome ?? null, pace.displayName, opponentFinished, miniGameId) : null;
   const headline = duel?.text ?? (opponentFinished && !friendDuel ? opponentFinishedHeadline(miniGameId) : result.headline);
   const headTone = duel?.tone ?? (opponentFinished ? 'loss' : tone);
-  const next = mode ? NEXT_ACTION[mode] : null;
+  const next = mode ? nextAction(t)[mode] : null;
   const mistakes = Math.max(0, result.roundsPlayed - (response?.correctCount ?? correctCount));
   const viaTelegram = getTelegramIdentity() !== null;
   const duelTone = friendDuel?.outcome === 'player' ? 'win' : friendDuel?.outcome === 'opponent' ? 'loss' : 'tie';
 
   return (
     <div className={`result-screen solo-result ${result.reachedTarget ? 'reached' : 'not-reached'}`}>
-      {groupChallenge && <span className="chip">Вызов друзьям · вне зачёта</span>}
+      {groupChallenge && <span className="chip">{t.groupChip}</span>}
       <div className="solo-result-head">
-        {friendDuel && <span className="chip">{FRIEND_DUEL_CHIP}</span>}
+        {friendDuel && <span className="chip">{friendDuelChip()}</span>}
         {!friendDuel && (
           <div className={`solo-result-icon ${tone}`} aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
@@ -192,10 +202,10 @@ export function SoloResult({
         )}
         <div className="solo-result-title">
           <h1 className={`result-headline ${friendDuel ? duelTone : headTone}`}>{friendDuel ? friendDuel.headline : headline}</h1>
-          <p className="solo-result-meta">за {circles(result.roundsPlayed)} · {categoryName(category)}</p>
+          <p className="solo-result-meta">{t.resultMeta(circles(result.roundsPlayed), categoryName(category))}</p>
         </div>
       </div>
-      <div className="solo-result-stats" data-cols={stats.length} aria-label="Итоги забега">
+      <div className="solo-result-stats" data-cols={stats.length} aria-label={t.runTotals}>
         {stats.map((stat) => (
           <div key={stat.key} className="solo-result-stat" data-stat={stat.key}>
             <strong>{stat.value}</strong>
@@ -211,14 +221,14 @@ export function SoloResult({
           className={`result-save-status ${saveStatus === 'error' ? 'error' : 'pending'}`}
           role={saveStatus === 'error' ? 'alert' : 'status'}
         >
-          {saveStatus === 'saving' && 'Сохраняем результат…'}
+          {saveStatus === 'saving' && t.savingResult}
           {saveStatus === 'error' && (
             <>
-              <span>{saveError || 'Не удалось сохранить результат.'}</span>
+              <span>{saveError || t.saveResultFailed}</span>
               {canRetrySave && (
                 <>
                   {' '}
-                  <button type="button" className="result-save-retry" onClick={onRetrySave}>Повторить</button>
+                  <button type="button" className="result-save-retry" onClick={onRetrySave}>{t.retry}</button>
                 </>
               )}
             </>
@@ -226,39 +236,43 @@ export function SoloResult({
         </div>
       )}
 
-      {groupInvite.status === 'copied' && <p role="status">Ссылка на вызов скопирована.</p>}
-      {groupInvite.status === 'error' && <p role="alert">Не удалось отправить вызов. Попробуй ещё раз.</p>}
-      {invite.status === 'copied' && <p className="result-insight" role="status">Ссылка скопирована.</p>}
-      {invite.status === 'error' && <p className="result-insight" role="alert">Не удалось отправить. Нажми ещё раз.</p>}
-      {resultShare.status === 'copied' && <p className="result-insight" role="status">Результат скопирован.</p>}
-      {resultShare.status === 'failed' && <p className="result-insight" role="alert">Не удалось поделиться. Нажми ещё раз.</p>}
+      {groupInvite.status === 'copied' && <p role="status">{t.challengeLinkCopied}</p>}
+      {groupInvite.status === 'error' && <p role="alert">{t.challengeSendFailed}</p>}
+      {invite.status === 'copied' && <p className="result-insight" role="status">{t.linkCopied}</p>}
+      {invite.status === 'error' && <p className="result-insight" role="alert">{t.sendFailed}</p>}
+      {resultShare.status === 'copied' && <p className="result-insight" role="status">{t.resultCopied}</p>}
+      {resultShare.status === 'failed' && <p className="result-insight" role="alert">{t.shareFailed}</p>}
 
       {waitingDuel && saveStatus === 'saved' && (
-        <section className="solo-result-receipt" aria-label="Твоя запись">
+        <section className="solo-result-receipt" aria-label={t.yourRecord}>
           <div className="solo-result-receipt-row">
-            <h2>Твоя запись</h2>
-            <span className="solo-result-pill">ждёт соперника</span>
+            <h2>{t.yourRecord}</h2>
+            <span className="solo-result-pill">{t.waitingRival}</span>
           </div>
-          <p className="solo-result-receipt-line">{SOLO_TARGET_PROGRESS}% за {circles(result.roundsPlayed)}</p>
+          <p className="solo-result-receipt-line">{t.receiptLine(SOLO_TARGET_PROGRESS, circles(result.roundsPlayed))}</p>
           <p>
-            Против неё сыграет следующий, кто выйдет на дуэль. Исход придёт в «Партии»
-            {viaTelegram ? ' и в Telegram.' : '.'}
+            {t.receiptNext}
+            {viaTelegram ? t.receiptTelegram : t.receiptEnd}
           </p>
         </section>
       )}
+
+      <DailyReminderOffer />
+      {/* Очки клана дают только забеги дня. */}
+      {mode === 'daily' && <ClanResultNudge onClan={onClan} />}
 
       <div className="result-actions solo-result-actions">
         {next && onPlayMode ? (
           <button type="button" className="cta-btn" disabled={saving} onClick={() => { onPlayMode(next.mode); }}>{next.label}</button>
         ) : (
-          <button type="button" className="cta-btn" disabled={saving} onClick={() => { onReplay(); }}>Сыграть ещё</button>
+          <button type="button" className="cta-btn" disabled={saving} onClick={() => { onReplay(); }}>{t.playMore}</button>
         )}
         {mode === 'daily' && onPlayMode && (
-          <button type="button" className="ghost-btn" disabled={saving} onClick={() => { onPlayMode('free'); }}>Свободная игра</button>
+          <button type="button" className="ghost-btn" disabled={saving} onClick={() => { onPlayMode('free'); }}>{t.freePlay}</button>
         )}
         {canInvite && <>
-          <button type="button" className="ghost-btn" disabled={groupInvite.status === 'working'} onClick={() => void groupInvite.send()}>Вызвать друзей</button>
-          <p className="solo-result-summary">Один вызов для нескольких друзей. Ссылка действует 24 часа.</p>
+          <button type="button" className="ghost-btn" disabled={groupInvite.status === 'working'} onClick={() => void groupInvite.send()}>{t.challengeFriends}</button>
+          <p className="solo-result-summary">{t.groupHint}</p>
         </>}
         {/* A run that reached 100% is shared as a duel link; any other run as a result line. */}
         <div className="solo-result-secondary">
@@ -269,7 +283,7 @@ export function SoloResult({
             disabled={invite.status === 'working'}
             onClick={() => { void invite.send(); }}
           >
-            Позвать друга
+            {t.inviteFriend}
           </button>
         ) : (
           <button
@@ -283,20 +297,22 @@ export function SoloResult({
                 roundsPlayed: result.roundsPlayed,
                 perfectHits: countPerfectStrikes(skillResults),
                 categoryLabel: categoryName(category),
+                roundAwards,
+                dayNumber: mode === 'daily' ? gameDayNumber(dailyKey(Date.now())) : undefined,
               }), result.reachedTarget, preview
                 ? buildRunPreviewUrl(previewBase(import.meta.env.VITE_API_URL as string | undefined, window.location.origin), preview)
                 : undefined);
             }}
           >
-            Поделиться
+            {t.share}
           </button>
         )}
-        <button type="button" className="ghost-btn" disabled={saving} onClick={() => { onMyRuns(); }}>Мои партии</button>
+        <button type="button" className="ghost-btn" disabled={saving} onClick={() => { onMyRuns(); }}>{t.myRuns}</button>
         </div>
         {/* Ошибки забега уже в журнале тренировки; без ссылки туда почти никто не доходил. */}
         {onPracticeMistakes && mistakes > 0 && (
           <button type="button" className="solo-result-mistakes" disabled={saving} onClick={() => { onPracticeMistakes(); }}>
-            Разобрать ошибки: {mistakes} →
+            {t.reviewMistakes(mistakes)}
           </button>
         )}
       </div>

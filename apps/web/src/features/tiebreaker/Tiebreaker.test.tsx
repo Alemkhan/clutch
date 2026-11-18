@@ -312,7 +312,7 @@ describe('reveal helpers and layout rules', () => {
 
   it('keeps the two histogram side colours as tokens next to the palette', () => {
     const css = readFileSync(new URL('../../styles/tokens.css', import.meta.url), 'utf8');
-    expect(css).toMatch(/:root {[^}]*--tb-under: #8fa6ee;[^}]*--tb-over: #e8be5a;/);
+    expect(css).toMatch(/:root {[^}]*--tb-under: #7aa2ff;[^}]*--tb-over: #ffc94d;/);
   });
 });
 

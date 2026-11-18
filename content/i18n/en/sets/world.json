@@ -1,0 +1,704 @@
+{
+  "set-traffic-light": {
+    "title": "Name a traffic light colour",
+    "mcPrompt": "Which of these colours is on a standard traffic light?",
+    "members": {
+      "red": {
+        "answer": "red",
+        "accepted": [
+          "red"
+        ]
+      },
+      "yellow": {
+        "answer": "yellow",
+        "accepted": [
+          "yellow",
+          "amber"
+        ]
+      },
+      "green": {
+        "answer": "green",
+        "accepted": [
+          "green"
+        ]
+      }
+    },
+    "nonMembers": [
+      "blue",
+      "white",
+      "purple"
+    ]
+  },
+  "set-seasons": {
+    "title": "Name a season",
+    "mcPrompt": "Which of these is a season?",
+    "members": {
+      "winter": {
+        "answer": "winter",
+        "accepted": [
+          "winter"
+        ]
+      },
+      "spring": {
+        "answer": "spring",
+        "accepted": [
+          "spring"
+        ]
+      },
+      "summer": {
+        "answer": "summer",
+        "accepted": [
+          "summer"
+        ]
+      },
+      "autumn": {
+        "answer": "autumn",
+        "accepted": [
+          "autumn",
+          "fall"
+        ]
+      }
+    },
+    "nonMembers": [
+      "noon",
+      "evening",
+      "rainy season"
+    ]
+  },
+  "set-cardinal": {
+    "title": "Name a cardinal direction",
+    "mcPrompt": "Which of these is a cardinal direction?",
+    "members": {
+      "north": {
+        "answer": "north",
+        "accepted": [
+          "north"
+        ]
+      },
+      "south": {
+        "answer": "south",
+        "accepted": [
+          "south"
+        ]
+      },
+      "east": {
+        "answer": "east",
+        "accepted": [
+          "east"
+        ]
+      },
+      "west": {
+        "answer": "west",
+        "accepted": [
+          "west"
+        ]
+      }
+    },
+    "nonMembers": [
+      "up",
+      "centre",
+      "equator"
+    ]
+  },
+  "set-card-suits": {
+    "title": "Name a playing card suit",
+    "mcPrompt": "Which of these is a playing card suit?",
+    "members": {
+      "hearts": {
+        "answer": "hearts",
+        "accepted": [
+          "hearts",
+          "heart"
+        ]
+      },
+      "spades": {
+        "answer": "spades",
+        "accepted": [
+          "spades",
+          "spade"
+        ]
+      },
+      "clubs": {
+        "answer": "clubs",
+        "accepted": [
+          "clubs",
+          "club"
+        ]
+      },
+      "diamonds": {
+        "answer": "diamonds",
+        "accepted": [
+          "diamonds",
+          "diamond"
+        ]
+      }
+    },
+    "nonMembers": [
+      "stars",
+      "moons",
+      "leaves"
+    ]
+  },
+  "set-great-lakes": {
+    "title": "Name one of the Great Lakes of North America",
+    "mcPrompt": "Which of these is one of the Great Lakes?",
+    "members": {
+      "superior": {
+        "answer": "Superior",
+        "accepted": [
+          "Superior",
+          "Lake Superior"
+        ]
+      },
+      "michigan": {
+        "answer": "Michigan",
+        "accepted": [
+          "Michigan",
+          "Lake Michigan"
+        ]
+      },
+      "huron": {
+        "answer": "Huron",
+        "accepted": [
+          "Huron",
+          "Lake Huron"
+        ]
+      },
+      "erie": {
+        "answer": "Erie",
+        "accepted": [
+          "Erie",
+          "Lake Erie"
+        ]
+      },
+      "ontario": {
+        "answer": "Ontario",
+        "accepted": [
+          "Ontario",
+          "Lake Ontario"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Baikal",
+      "Victoria",
+      "Titicaca"
+    ]
+  },
+  "set-weekdays": {
+    "title": "Name a day of the week",
+    "mcPrompt": "Which of these is a day of the week?",
+    "members": {
+      "mon": {
+        "answer": "Monday",
+        "accepted": [
+          "Monday"
+        ]
+      },
+      "tue": {
+        "answer": "Tuesday",
+        "accepted": [
+          "Tuesday"
+        ]
+      },
+      "wed": {
+        "answer": "Wednesday",
+        "accepted": [
+          "Wednesday"
+        ]
+      },
+      "thu": {
+        "answer": "Thursday",
+        "accepted": [
+          "Thursday"
+        ]
+      },
+      "fri": {
+        "answer": "Friday",
+        "accepted": [
+          "Friday"
+        ]
+      },
+      "sat": {
+        "answer": "Saturday",
+        "accepted": [
+          "Saturday"
+        ]
+      },
+      "sun": {
+        "answer": "Sunday",
+        "accepted": [
+          "Sunday"
+        ]
+      }
+    },
+    "nonMembers": [
+      "January",
+      "noon",
+      "weekend"
+    ]
+  },
+  "set-oceans": {
+    "title": "Name an ocean",
+    "mcPrompt": "Which of these is an ocean?",
+    "members": {
+      "pacific": {
+        "answer": "Pacific",
+        "accepted": [
+          "Pacific",
+          "Pacific Ocean"
+        ]
+      },
+      "atlantic": {
+        "answer": "Atlantic",
+        "accepted": [
+          "Atlantic",
+          "Atlantic Ocean"
+        ]
+      },
+      "indian": {
+        "answer": "Indian",
+        "accepted": [
+          "Indian",
+          "Indian Ocean"
+        ]
+      },
+      "arctic": {
+        "answer": "Arctic",
+        "accepted": [
+          "Arctic",
+          "Arctic Ocean"
+        ]
+      },
+      "southern": {
+        "answer": "Southern",
+        "accepted": [
+          "Southern",
+          "Southern Ocean",
+          "Antarctic Ocean"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Mediterranean",
+      "Caribbean",
+      "Sargasso",
+      "Baltic"
+    ]
+  },
+  "set-months": {
+    "title": "Name a month",
+    "mcPrompt": "Which of these is a month?",
+    "members": {
+      "jan": {
+        "answer": "January",
+        "accepted": [
+          "January"
+        ]
+      },
+      "feb": {
+        "answer": "February",
+        "accepted": [
+          "February"
+        ]
+      },
+      "mar": {
+        "answer": "March",
+        "accepted": [
+          "March"
+        ]
+      },
+      "apr": {
+        "answer": "April",
+        "accepted": [
+          "April"
+        ]
+      },
+      "may": {
+        "answer": "May",
+        "accepted": [
+          "May"
+        ]
+      },
+      "jun": {
+        "answer": "June",
+        "accepted": [
+          "June"
+        ]
+      },
+      "jul": {
+        "answer": "July",
+        "accepted": [
+          "July"
+        ]
+      },
+      "aug": {
+        "answer": "August",
+        "accepted": [
+          "August"
+        ]
+      },
+      "sep": {
+        "answer": "September",
+        "accepted": [
+          "September"
+        ]
+      },
+      "oct": {
+        "answer": "October",
+        "accepted": [
+          "October"
+        ]
+      },
+      "nov": {
+        "answer": "November",
+        "accepted": [
+          "November"
+        ]
+      },
+      "dec": {
+        "answer": "December",
+        "accepted": [
+          "December"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Monday",
+      "spring",
+      "noon"
+    ]
+  },
+  "set-chinese-zodiac": {
+    "title": "Name a Chinese zodiac animal",
+    "mcPrompt": "Which of these is a Chinese zodiac animal?",
+    "members": {
+      "rat": {
+        "answer": "Rat",
+        "accepted": [
+          "Rat",
+          "Mouse"
+        ]
+      },
+      "ox": {
+        "answer": "Ox",
+        "accepted": [
+          "Ox",
+          "Bull",
+          "Cow"
+        ]
+      },
+      "tiger": {
+        "answer": "Tiger",
+        "accepted": [
+          "Tiger"
+        ]
+      },
+      "rabbit": {
+        "answer": "Rabbit",
+        "accepted": [
+          "Rabbit",
+          "Hare",
+          "Cat"
+        ]
+      },
+      "dragon": {
+        "answer": "Dragon",
+        "accepted": [
+          "Dragon"
+        ]
+      },
+      "snake": {
+        "answer": "Snake",
+        "accepted": [
+          "Snake"
+        ]
+      },
+      "horse": {
+        "answer": "Horse",
+        "accepted": [
+          "Horse"
+        ]
+      },
+      "goat": {
+        "answer": "Goat",
+        "accepted": [
+          "Goat",
+          "Sheep",
+          "Ram"
+        ]
+      },
+      "monkey": {
+        "answer": "Monkey",
+        "accepted": [
+          "Monkey"
+        ]
+      },
+      "rooster": {
+        "answer": "Rooster",
+        "accepted": [
+          "Rooster",
+          "Chicken",
+          "Hen",
+          "Cock"
+        ]
+      },
+      "dog": {
+        "answer": "Dog",
+        "accepted": [
+          "Dog"
+        ]
+      },
+      "pig": {
+        "answer": "Pig",
+        "accepted": [
+          "Pig",
+          "Boar"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Wolf",
+      "Fox",
+      "Bear"
+    ]
+  },
+  "set-g7": {
+    "title": "Name a G7 country",
+    "mcPrompt": "Which of these countries is in the G7?",
+    "members": {
+      "us": {
+        "answer": "USA",
+        "accepted": [
+          "USA",
+          "United States",
+          "US",
+          "America"
+        ]
+      },
+      "gb": {
+        "answer": "United Kingdom",
+        "accepted": [
+          "United Kingdom",
+          "UK",
+          "Great Britain",
+          "Britain",
+          "England"
+        ]
+      },
+      "fr": {
+        "answer": "France",
+        "accepted": [
+          "France"
+        ]
+      },
+      "de": {
+        "answer": "Germany",
+        "accepted": [
+          "Germany"
+        ]
+      },
+      "it": {
+        "answer": "Italy",
+        "accepted": [
+          "Italy"
+        ]
+      },
+      "ca": {
+        "answer": "Canada",
+        "accepted": [
+          "Canada"
+        ]
+      },
+      "jp": {
+        "answer": "Japan",
+        "accepted": [
+          "Japan"
+        ]
+      }
+    },
+    "nonMembers": [
+      "China",
+      "India",
+      "Australia",
+      "Spain"
+    ]
+  },
+  "set-world-r60rgy": {
+    "title": "Name a land neighbour of Canada or the USA",
+    "mcPrompt": "Which of these countries has a direct land border in North America?",
+    "members": {
+      "usa": {
+        "answer": "USA",
+        "accepted": [
+          "USA",
+          "United States",
+          "United States of America",
+          "US",
+          "America"
+        ]
+      },
+      "canada": {
+        "answer": "Canada",
+        "accepted": [
+          "Canada"
+        ]
+      },
+      "mexico": {
+        "answer": "Mexico",
+        "accepted": [
+          "Mexico"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Brazil",
+      "Cuba",
+      "Jamaica"
+    ]
+  },
+  "set-world-k7rmcm": {
+    "title": "Name one of Belgium's three official languages",
+    "mcPrompt": "Which of these languages has official status in Belgium?",
+    "members": {
+      "dutch": {
+        "answer": "Dutch",
+        "accepted": [
+          "Dutch",
+          "Flemish"
+        ]
+      },
+      "french": {
+        "answer": "French",
+        "accepted": [
+          "French"
+        ]
+      },
+      "german": {
+        "answer": "German",
+        "accepted": [
+          "German"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Italian",
+      "Spanish",
+      "Danish"
+    ]
+  },
+  "set-world-edfjqd": {
+    "title": "Name a landlocked South American country",
+    "mcPrompt": "Which of these South American countries is landlocked?",
+    "members": {
+      "paraguay": {
+        "answer": "Paraguay",
+        "accepted": [
+          "Paraguay"
+        ]
+      },
+      "bolivia": {
+        "answer": "Bolivia",
+        "accepted": [
+          "Bolivia"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Chile",
+      "Argentina",
+      "Peru"
+    ]
+  },
+  "set-world-34bnh4": {
+    "title": "Name one of the ancient wonders of the world",
+    "mcPrompt": "Which of these is one of the Seven Wonders of the Ancient World?",
+    "members": {
+      "khufu": {
+        "answer": "Great Pyramid of Giza",
+        "accepted": [
+          "Great Pyramid of Giza",
+          "Pyramid of Khufu",
+          "Pyramid of Cheops"
+        ]
+      },
+      "babylon": {
+        "answer": "Hanging Gardens of Babylon",
+        "accepted": [
+          "Hanging Gardens of Babylon",
+          "Hanging Gardens of Semiramis"
+        ]
+      },
+      "artemis": {
+        "answer": "Temple of Artemis at Ephesus",
+        "accepted": [
+          "Temple of Artemis at Ephesus",
+          "Temple of Artemis"
+        ]
+      },
+      "zeus": {
+        "answer": "Statue of Zeus at Olympia",
+        "accepted": [
+          "Statue of Zeus at Olympia",
+          "Statue of Zeus"
+        ]
+      },
+      "mausoleum": {
+        "answer": "Mausoleum at Halicarnassus",
+        "accepted": [
+          "Mausoleum at Halicarnassus",
+          "Mausoleum of Halicarnassus"
+        ]
+      },
+      "rhodes": {
+        "answer": "Colossus of Rhodes",
+        "accepted": [
+          "Colossus of Rhodes"
+        ]
+      },
+      "lighthouse": {
+        "answer": "Lighthouse of Alexandria",
+        "accepted": [
+          "Lighthouse of Alexandria",
+          "Pharos of Alexandria"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Taj Mahal",
+      "Colosseum",
+      "Petra"
+    ]
+  },
+  "set-world-q49tts": {
+    "title": "Name one of the world's three tallest buildings",
+    "mcPrompt": "Which of these buildings is among the three tallest in the world?",
+    "members": {
+      "burj": {
+        "answer": "Burj Khalifa",
+        "accepted": [
+          "Burj Khalifa"
+        ]
+      },
+      "shanghai": {
+        "answer": "Shanghai Tower",
+        "accepted": [
+          "Shanghai Tower"
+        ]
+      },
+      "abraj": {
+        "answer": "Abraj Al-Bait",
+        "accepted": [
+          "Abraj Al-Bait",
+          "Makkah Royal Clock Tower",
+          "Royal Clock Tower"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Empire State Building",
+      "Taipei 101",
+      "Lakhta Center"
+    ]
+  }
+}

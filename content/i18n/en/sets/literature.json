@@ -1,0 +1,107 @@
+{
+  "set-musketeers": {
+    "title": "Name a musketeer from Dumas's novel",
+    "mcPrompt": "Which of these is a musketeer from \"The Three Musketeers\"?",
+    "members": {
+      "athos": {
+        "answer": "Athos",
+        "accepted": [
+          "Athos"
+        ]
+      },
+      "porthos": {
+        "answer": "Porthos",
+        "accepted": [
+          "Porthos"
+        ]
+      },
+      "aramis": {
+        "answer": "Aramis",
+        "accepted": [
+          "Aramis"
+        ]
+      },
+      "dartagnan": {
+        "answer": "d'Artagnan",
+        "accepted": [
+          "d'Artagnan",
+          "d’Artagnan",
+          "Dartagnan"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Richelieu",
+      "Rochefort",
+      "Buckingham"
+    ]
+  },
+  "set-winnie": {
+    "title": "Name a character from the Winnie-the-Pooh books",
+    "mcPrompt": "Which of these is a character from Milne's Winnie-the-Pooh books?",
+    "members": {
+      "pooh": {
+        "answer": "Winnie-the-Pooh",
+        "accepted": [
+          "Winnie-the-Pooh",
+          "Winnie the Pooh",
+          "Pooh"
+        ]
+      },
+      "piglet": {
+        "answer": "Piglet",
+        "accepted": [
+          "Piglet"
+        ]
+      },
+      "eeyore": {
+        "answer": "Eeyore",
+        "accepted": [
+          "Eeyore"
+        ]
+      },
+      "rabbit": {
+        "answer": "Rabbit",
+        "accepted": [
+          "Rabbit"
+        ]
+      },
+      "owl": {
+        "answer": "Owl",
+        "accepted": [
+          "Owl"
+        ]
+      },
+      "tigger": {
+        "answer": "Tigger",
+        "accepted": [
+          "Tigger"
+        ]
+      },
+      "kanga": {
+        "answer": "Kanga",
+        "accepted": [
+          "Kanga"
+        ]
+      },
+      "roo": {
+        "answer": "Roo",
+        "accepted": [
+          "Roo",
+          "Baby Roo"
+        ]
+      },
+      "robin": {
+        "answer": "Christopher Robin",
+        "accepted": [
+          "Christopher Robin"
+        ]
+      }
+    },
+    "nonMembers": [
+      "Cheburashka",
+      "Karlsson",
+      "Buratino"
+    ]
+  }
+}

@@ -1,0 +1,1982 @@
+{
+  "wd-element-number-44": {
+    "prompt": "What is the atomic number of ruthenium?",
+    "answer": "44",
+    "accepted": [
+      "44"
+    ],
+    "distractors": [
+      "21",
+      "50",
+      "75"
+    ],
+    "explanation": "Ruthenium is element number 44 on the periodic table."
+  },
+  "wd-element-name-symbol-Ru": {
+    "prompt": "What is the chemical symbol for ruthenium?",
+    "answer": "Ru",
+    "accepted": [
+      "Ru"
+    ],
+    "distractors": [
+      "Dy",
+      "S",
+      "Lv"
+    ],
+    "explanation": "The chemical symbol for ruthenium is Ru."
+  },
+  "wd-element-number-45": {
+    "prompt": "What is the atomic number of rhodium?",
+    "answer": "45",
+    "accepted": [
+      "45"
+    ],
+    "distractors": [
+      "70",
+      "16",
+      "31"
+    ],
+    "explanation": "Rhodium is element number 45 on the periodic table."
+  },
+  "wd-element-name-symbol-Rh": {
+    "prompt": "What is the chemical symbol for rhodium?",
+    "answer": "Rh",
+    "accepted": [
+      "Rh"
+    ],
+    "distractors": [
+      "P",
+      "Dy",
+      "Xe"
+    ],
+    "explanation": "The chemical symbol for rhodium is Rh."
+  },
+  "wd-element-number-46": {
+    "prompt": "What is the atomic number of palladium?",
+    "answer": "46",
+    "accepted": [
+      "46"
+    ],
+    "distractors": [
+      "31",
+      "5",
+      "62"
+    ],
+    "explanation": "Palladium is element number 46 on the periodic table."
+  },
+  "wd-element-name-symbol-Pd": {
+    "prompt": "What is the chemical symbol for palladium?",
+    "answer": "Pd",
+    "accepted": [
+      "Pd"
+    ],
+    "distractors": [
+      "Bk",
+      "Mt",
+      "O"
+    ],
+    "explanation": "The chemical symbol for palladium is Pd."
+  },
+  "wd-element-number-47": {
+    "prompt": "What is the atomic number of silver?",
+    "answer": "47",
+    "accepted": [
+      "47"
+    ],
+    "distractors": [
+      "80",
+      "13",
+      "31"
+    ],
+    "explanation": "Silver is element number 47 on the periodic table."
+  },
+  "wd-element-name-symbol-Ag": {
+    "prompt": "What is the chemical symbol for silver?",
+    "answer": "Ag",
+    "accepted": [
+      "Ag"
+    ],
+    "distractors": [
+      "Lr",
+      "Pt",
+      "Ne"
+    ],
+    "explanation": "The chemical symbol for silver is Ag."
+  },
+  "wd-element-number-48": {
+    "prompt": "What is the atomic number of cadmium?",
+    "answer": "48",
+    "accepted": [
+      "48"
+    ],
+    "distractors": [
+      "67",
+      "83",
+      "32"
+    ],
+    "explanation": "Cadmium is element number 48 on the periodic table."
+  },
+  "wd-element-name-symbol-Cd": {
+    "prompt": "What is the chemical symbol for cadmium?",
+    "answer": "Cd",
+    "accepted": [
+      "Cd"
+    ],
+    "distractors": [
+      "In",
+      "B",
+      "Pt"
+    ],
+    "explanation": "The chemical symbol for cadmium is Cd."
+  },
+  "wd-element-number-49": {
+    "prompt": "What is the atomic number of indium?",
+    "answer": "49",
+    "accepted": [
+      "49"
+    ],
+    "distractors": [
+      "90",
+      "38",
+      "67"
+    ],
+    "explanation": "Indium is element number 49 on the periodic table."
+  },
+  "wd-element-name-symbol-In": {
+    "prompt": "What is the chemical symbol for indium?",
+    "answer": "In",
+    "accepted": [
+      "In"
+    ],
+    "distractors": [
+      "Pr",
+      "La",
+      "Tm"
+    ],
+    "explanation": "The chemical symbol for indium is In."
+  },
+  "wd-element-number-50": {
+    "prompt": "What is the atomic number of tin?",
+    "answer": "50",
+    "accepted": [
+      "50"
+    ],
+    "distractors": [
+      "49",
+      "113",
+      "27"
+    ],
+    "explanation": "Tin is element number 50 on the periodic table."
+  },
+  "wd-element-name-symbol-Sn": {
+    "prompt": "What is the chemical symbol for tin?",
+    "answer": "Sn",
+    "accepted": [
+      "Sn"
+    ],
+    "distractors": [
+      "Fe",
+      "Al",
+      "Cd"
+    ],
+    "explanation": "The chemical symbol for tin is Sn."
+  },
+  "wd-element-number-51": {
+    "prompt": "What is the atomic number of antimony?",
+    "answer": "51",
+    "accepted": [
+      "51"
+    ],
+    "distractors": [
+      "107",
+      "77",
+      "22"
+    ],
+    "explanation": "Antimony is element number 51 on the periodic table."
+  },
+  "wd-element-name-symbol-Sb": {
+    "prompt": "What is the chemical symbol for antimony?",
+    "answer": "Sb",
+    "accepted": [
+      "Sb"
+    ],
+    "distractors": [
+      "Ba",
+      "Lu",
+      "Y"
+    ],
+    "explanation": "The chemical symbol for antimony is Sb."
+  },
+  "wd-element-number-52": {
+    "prompt": "What is the atomic number of tellurium?",
+    "answer": "52",
+    "accepted": [
+      "52"
+    ],
+    "distractors": [
+      "39",
+      "104",
+      "43"
+    ],
+    "explanation": "Tellurium is element number 52 on the periodic table."
+  },
+  "wd-element-name-symbol-Te": {
+    "prompt": "What is the chemical symbol for tellurium?",
+    "answer": "Te",
+    "accepted": [
+      "Te"
+    ],
+    "distractors": [
+      "Rf",
+      "Kr",
+      "Ds"
+    ],
+    "explanation": "The chemical symbol for tellurium is Te."
+  },
+  "wd-element-number-53": {
+    "prompt": "What is the atomic number of iodine?",
+    "answer": "53",
+    "accepted": [
+      "53"
+    ],
+    "distractors": [
+      "98",
+      "17",
+      "25"
+    ],
+    "explanation": "Iodine is element number 53 on the periodic table."
+  },
+  "wd-element-name-symbol-I": {
+    "prompt": "What is the chemical symbol for iodine?",
+    "answer": "I",
+    "accepted": [
+      "I"
+    ],
+    "distractors": [
+      "Mt",
+      "Tl",
+      "Bh"
+    ],
+    "explanation": "The chemical symbol for iodine is I."
+  },
+  "wd-element-number-54": {
+    "prompt": "What is the atomic number of xenon?",
+    "answer": "54",
+    "accepted": [
+      "54"
+    ],
+    "distractors": [
+      "29",
+      "85",
+      "3"
+    ],
+    "explanation": "Xenon is element number 54 on the periodic table."
+  },
+  "wd-element-name-symbol-Xe": {
+    "prompt": "What is the chemical symbol for xenon?",
+    "answer": "Xe",
+    "accepted": [
+      "Xe"
+    ],
+    "distractors": [
+      "Y",
+      "Mn",
+      "Ho"
+    ],
+    "explanation": "The chemical symbol for xenon is Xe."
+  },
+  "wd-element-number-55": {
+    "prompt": "What is the atomic number of caesium?",
+    "answer": "55",
+    "accepted": [
+      "55"
+    ],
+    "distractors": [
+      "88",
+      "66",
+      "20"
+    ],
+    "explanation": "Caesium is element number 55 on the periodic table."
+  },
+  "wd-element-name-symbol-Cs": {
+    "prompt": "What is the chemical symbol for caesium?",
+    "answer": "Cs",
+    "accepted": [
+      "Cs"
+    ],
+    "distractors": [
+      "Si",
+      "Ga",
+      "Lv"
+    ],
+    "explanation": "The chemical symbol for caesium is Cs."
+  },
+  "wd-element-number-56": {
+    "prompt": "What is the atomic number of barium?",
+    "answer": "56",
+    "accepted": [
+      "56"
+    ],
+    "distractors": [
+      "19",
+      "116",
+      "87"
+    ],
+    "explanation": "Barium is element number 56 on the periodic table."
+  },
+  "wd-element-name-symbol-Ba": {
+    "prompt": "What is the chemical symbol for barium?",
+    "answer": "Ba",
+    "accepted": [
+      "Ba"
+    ],
+    "distractors": [
+      "Cr",
+      "Po",
+      "Ag"
+    ],
+    "explanation": "The chemical symbol for barium is Ba."
+  },
+  "wd-element-number-57": {
+    "prompt": "What is the atomic number of lanthanum?",
+    "answer": "57",
+    "accepted": [
+      "57"
+    ],
+    "distractors": [
+      "78",
+      "116",
+      "13"
+    ],
+    "explanation": "Lanthanum is element number 57 on the periodic table."
+  },
+  "wd-element-name-symbol-La": {
+    "prompt": "What is the chemical symbol for lanthanum?",
+    "answer": "La",
+    "accepted": [
+      "La"
+    ],
+    "distractors": [
+      "Os",
+      "Fm",
+      "Be"
+    ],
+    "explanation": "The chemical symbol for lanthanum is La."
+  },
+  "wd-element-number-58": {
+    "prompt": "What is the atomic number of cerium?",
+    "answer": "58",
+    "accepted": [
+      "58"
+    ],
+    "distractors": [
+      "115",
+      "76",
+      "101"
+    ],
+    "explanation": "Cerium is element number 58 on the periodic table."
+  },
+  "wd-element-name-symbol-Ce": {
+    "prompt": "What is the chemical symbol for cerium?",
+    "answer": "Ce",
+    "accepted": [
+      "Ce"
+    ],
+    "distractors": [
+      "Ta",
+      "Sm",
+      "Rb"
+    ],
+    "explanation": "The chemical symbol for cerium is Ce."
+  },
+  "wd-element-number-59": {
+    "prompt": "What is the atomic number of praseodymium?",
+    "answer": "59",
+    "accepted": [
+      "59"
+    ],
+    "distractors": [
+      "68",
+      "44",
+      "26"
+    ],
+    "explanation": "Praseodymium is element number 59 on the periodic table."
+  },
+  "wd-element-name-symbol-Pr": {
+    "prompt": "What is the chemical symbol for praseodymium?",
+    "answer": "Pr",
+    "accepted": [
+      "Pr"
+    ],
+    "distractors": [
+      "Nh",
+      "Cl",
+      "Rf"
+    ],
+    "explanation": "The chemical symbol for praseodymium is Pr."
+  },
+  "wd-element-number-60": {
+    "prompt": "What is the atomic number of neodymium?",
+    "answer": "60",
+    "accepted": [
+      "60"
+    ],
+    "distractors": [
+      "16",
+      "27",
+      "78"
+    ],
+    "explanation": "Neodymium is element number 60 on the periodic table."
+  },
+  "wd-element-name-symbol-Nd": {
+    "prompt": "What is the chemical symbol for neodymium?",
+    "answer": "Nd",
+    "accepted": [
+      "Nd"
+    ],
+    "distractors": [
+      "Ag",
+      "Tb",
+      "Os"
+    ],
+    "explanation": "The chemical symbol for neodymium is Nd."
+  },
+  "wd-element-number-61": {
+    "prompt": "What is the atomic number of promethium?",
+    "answer": "61",
+    "accepted": [
+      "61"
+    ],
+    "distractors": [
+      "34",
+      "20",
+      "85"
+    ],
+    "explanation": "Promethium is element number 61 on the periodic table."
+  },
+  "wd-element-name-symbol-Pm": {
+    "prompt": "What is the chemical symbol for promethium?",
+    "answer": "Pm",
+    "accepted": [
+      "Pm"
+    ],
+    "distractors": [
+      "F",
+      "Mc",
+      "Xe"
+    ],
+    "explanation": "The chemical symbol for promethium is Pm."
+  },
+  "wd-element-number-62": {
+    "prompt": "What is the atomic number of samarium?",
+    "answer": "62",
+    "accepted": [
+      "62"
+    ],
+    "distractors": [
+      "112",
+      "86",
+      "23"
+    ],
+    "explanation": "Samarium is element number 62 on the periodic table."
+  },
+  "wd-element-name-symbol-Sm": {
+    "prompt": "What is the chemical symbol for samarium?",
+    "answer": "Sm",
+    "accepted": [
+      "Sm"
+    ],
+    "distractors": [
+      "Rh",
+      "Yb",
+      "Pd"
+    ],
+    "explanation": "The chemical symbol for samarium is Sm."
+  },
+  "wd-element-number-63": {
+    "prompt": "What is the atomic number of europium?",
+    "answer": "63",
+    "accepted": [
+      "63"
+    ],
+    "distractors": [
+      "54",
+      "92",
+      "7"
+    ],
+    "explanation": "Europium is element number 63 on the periodic table."
+  },
+  "wd-element-name-symbol-Eu": {
+    "prompt": "What is the chemical symbol for europium?",
+    "answer": "Eu",
+    "accepted": [
+      "Eu"
+    ],
+    "distractors": [
+      "Na",
+      "Ce",
+      "Hf"
+    ],
+    "explanation": "The chemical symbol for europium is Eu."
+  },
+  "wd-element-number-64": {
+    "prompt": "What is the atomic number of gadolinium?",
+    "answer": "64",
+    "accepted": [
+      "64"
+    ],
+    "distractors": [
+      "102",
+      "13",
+      "95"
+    ],
+    "explanation": "Gadolinium is element number 64 on the periodic table."
+  },
+  "wd-element-name-symbol-Gd": {
+    "prompt": "What is the chemical symbol for gadolinium?",
+    "answer": "Gd",
+    "accepted": [
+      "Gd"
+    ],
+    "distractors": [
+      "Sm",
+      "Ba",
+      "Eu"
+    ],
+    "explanation": "The chemical symbol for gadolinium is Gd."
+  },
+  "wd-element-number-65": {
+    "prompt": "What is the atomic number of terbium?",
+    "answer": "65",
+    "accepted": [
+      "65"
+    ],
+    "distractors": [
+      "44",
+      "83",
+      "2"
+    ],
+    "explanation": "Terbium is element number 65 on the periodic table."
+  },
+  "wd-element-name-symbol-Tb": {
+    "prompt": "What is the chemical symbol for terbium?",
+    "answer": "Tb",
+    "accepted": [
+      "Tb"
+    ],
+    "distractors": [
+      "Fe",
+      "La",
+      "Mn"
+    ],
+    "explanation": "The chemical symbol for terbium is Tb."
+  },
+  "wd-element-number-66": {
+    "prompt": "What is the atomic number of dysprosium?",
+    "answer": "66",
+    "accepted": [
+      "66"
+    ],
+    "distractors": [
+      "93",
+      "48",
+      "112"
+    ],
+    "explanation": "Dysprosium is element number 66 on the periodic table."
+  },
+  "wd-element-name-symbol-Dy": {
+    "prompt": "What is the chemical symbol for dysprosium?",
+    "answer": "Dy",
+    "accepted": [
+      "Dy"
+    ],
+    "distractors": [
+      "Li",
+      "Sc",
+      "Bk"
+    ],
+    "explanation": "The chemical symbol for dysprosium is Dy."
+  },
+  "wd-element-number-67": {
+    "prompt": "What is the atomic number of holmium?",
+    "answer": "67",
+    "accepted": [
+      "67"
+    ],
+    "distractors": [
+      "34",
+      "112",
+      "25"
+    ],
+    "explanation": "Holmium is element number 67 on the periodic table."
+  },
+  "wd-element-name-symbol-Ho": {
+    "prompt": "What is the chemical symbol for holmium?",
+    "answer": "Ho",
+    "accepted": [
+      "Ho"
+    ],
+    "distractors": [
+      "Ta",
+      "Br",
+      "Nb"
+    ],
+    "explanation": "The chemical symbol for holmium is Ho."
+  },
+  "wd-element-number-68": {
+    "prompt": "What is the atomic number of erbium?",
+    "answer": "68",
+    "accepted": [
+      "68"
+    ],
+    "distractors": [
+      "56",
+      "111",
+      "70"
+    ],
+    "explanation": "Erbium is element number 68 on the periodic table."
+  },
+  "wd-element-name-symbol-Er": {
+    "prompt": "What is the chemical symbol for erbium?",
+    "answer": "Er",
+    "accepted": [
+      "Er"
+    ],
+    "distractors": [
+      "Po",
+      "Tb",
+      "Ne"
+    ],
+    "explanation": "The chemical symbol for erbium is Er."
+  },
+  "wd-element-number-69": {
+    "prompt": "What is the atomic number of thulium?",
+    "answer": "69",
+    "accepted": [
+      "69"
+    ],
+    "distractors": [
+      "104",
+      "118",
+      "97"
+    ],
+    "explanation": "Thulium is element number 69 on the periodic table."
+  },
+  "wd-element-name-symbol-Tm": {
+    "prompt": "What is the chemical symbol for thulium?",
+    "answer": "Tm",
+    "accepted": [
+      "Tm"
+    ],
+    "distractors": [
+      "Br",
+      "Se",
+      "Gd"
+    ],
+    "explanation": "The chemical symbol for thulium is Tm."
+  },
+  "wd-element-number-70": {
+    "prompt": "What is the atomic number of ytterbium?",
+    "answer": "70",
+    "accepted": [
+      "70"
+    ],
+    "distractors": [
+      "116",
+      "102",
+      "47"
+    ],
+    "explanation": "Ytterbium is element number 70 on the periodic table."
+  },
+  "wd-element-name-symbol-Yb": {
+    "prompt": "What is the chemical symbol for ytterbium?",
+    "answer": "Yb",
+    "accepted": [
+      "Yb"
+    ],
+    "distractors": [
+      "Tc",
+      "Cs",
+      "Ba"
+    ],
+    "explanation": "The chemical symbol for ytterbium is Yb."
+  },
+  "wd-element-number-71": {
+    "prompt": "What is the atomic number of lutetium?",
+    "answer": "71",
+    "accepted": [
+      "71"
+    ],
+    "distractors": [
+      "68",
+      "92",
+      "112"
+    ],
+    "explanation": "Lutetium is element number 71 on the periodic table."
+  },
+  "wd-element-name-symbol-Lu": {
+    "prompt": "What is the chemical symbol for lutetium?",
+    "answer": "Lu",
+    "accepted": [
+      "Lu"
+    ],
+    "distractors": [
+      "Cn",
+      "Th",
+      "Ga"
+    ],
+    "explanation": "The chemical symbol for lutetium is Lu."
+  },
+  "wd-element-number-72": {
+    "prompt": "What is the atomic number of hafnium?",
+    "answer": "72",
+    "accepted": [
+      "72"
+    ],
+    "distractors": [
+      "97",
+      "5",
+      "113"
+    ],
+    "explanation": "Hafnium is element number 72 on the periodic table."
+  },
+  "wd-element-name-symbol-Hf": {
+    "prompt": "What is the chemical symbol for hafnium?",
+    "answer": "Hf",
+    "accepted": [
+      "Hf"
+    ],
+    "distractors": [
+      "U",
+      "Bh",
+      "Pb"
+    ],
+    "explanation": "The chemical symbol for hafnium is Hf."
+  },
+  "wd-element-number-73": {
+    "prompt": "What is the atomic number of tantalum?",
+    "answer": "73",
+    "accepted": [
+      "73"
+    ],
+    "distractors": [
+      "1",
+      "50",
+      "107"
+    ],
+    "explanation": "Tantalum is element number 73 on the periodic table."
+  },
+  "wd-element-name-symbol-Ta": {
+    "prompt": "What is the chemical symbol for tantalum?",
+    "answer": "Ta",
+    "accepted": [
+      "Ta"
+    ],
+    "distractors": [
+      "U",
+      "Ar",
+      "Rf"
+    ],
+    "explanation": "The chemical symbol for tantalum is Ta."
+  },
+  "wd-element-number-74": {
+    "prompt": "What is the atomic number of tungsten?",
+    "answer": "74",
+    "accepted": [
+      "74"
+    ],
+    "distractors": [
+      "97",
+      "107",
+      "86"
+    ],
+    "explanation": "Tungsten is element number 74 on the periodic table."
+  },
+  "wd-element-name-symbol-W": {
+    "prompt": "What is the chemical symbol for tungsten?",
+    "answer": "W",
+    "accepted": [
+      "W"
+    ],
+    "distractors": [
+      "Ge",
+      "Si",
+      "Pr"
+    ],
+    "explanation": "The chemical symbol for tungsten is W."
+  },
+  "wd-element-number-75": {
+    "prompt": "What is the atomic number of rhenium?",
+    "answer": "75",
+    "accepted": [
+      "75"
+    ],
+    "distractors": [
+      "48",
+      "108",
+      "24"
+    ],
+    "explanation": "Rhenium is element number 75 on the periodic table."
+  },
+  "wd-element-name-symbol-Re": {
+    "prompt": "What is the chemical symbol for rhenium?",
+    "answer": "Re",
+    "accepted": [
+      "Re"
+    ],
+    "distractors": [
+      "Ac",
+      "V",
+      "Mo"
+    ],
+    "explanation": "The chemical symbol for rhenium is Re."
+  },
+  "wd-element-number-76": {
+    "prompt": "What is the atomic number of osmium?",
+    "answer": "76",
+    "accepted": [
+      "76"
+    ],
+    "distractors": [
+      "106",
+      "24",
+      "30"
+    ],
+    "explanation": "Osmium is element number 76 on the periodic table."
+  },
+  "wd-element-name-symbol-Os": {
+    "prompt": "What is the chemical symbol for osmium?",
+    "answer": "Os",
+    "accepted": [
+      "Os"
+    ],
+    "distractors": [
+      "Be",
+      "Ac",
+      "Tb"
+    ],
+    "explanation": "The chemical symbol for osmium is Os."
+  },
+  "wd-element-number-77": {
+    "prompt": "What is the atomic number of iridium?",
+    "answer": "77",
+    "accepted": [
+      "77"
+    ],
+    "distractors": [
+      "58",
+      "66",
+      "93"
+    ],
+    "explanation": "Iridium is element number 77 on the periodic table."
+  },
+  "wd-element-name-symbol-Ir": {
+    "prompt": "What is the chemical symbol for iridium?",
+    "answer": "Ir",
+    "accepted": [
+      "Ir"
+    ],
+    "distractors": [
+      "Rg",
+      "Na",
+      "Bh"
+    ],
+    "explanation": "The chemical symbol for iridium is Ir."
+  },
+  "wd-element-number-78": {
+    "prompt": "What is the atomic number of platinum?",
+    "answer": "78",
+    "accepted": [
+      "78"
+    ],
+    "distractors": [
+      "5",
+      "106",
+      "14"
+    ],
+    "explanation": "Platinum is element number 78 on the periodic table."
+  },
+  "wd-element-name-symbol-Pt": {
+    "prompt": "What is the chemical symbol for platinum?",
+    "answer": "Pt",
+    "accepted": [
+      "Pt"
+    ],
+    "distractors": [
+      "Tb",
+      "U",
+      "Ag"
+    ],
+    "explanation": "The chemical symbol for platinum is Pt."
+  },
+  "wd-element-number-79": {
+    "prompt": "What is the atomic number of gold?",
+    "answer": "79",
+    "accepted": [
+      "79"
+    ],
+    "distractors": [
+      "108",
+      "54",
+      "36"
+    ],
+    "explanation": "Gold is element number 79 on the periodic table."
+  },
+  "wd-element-name-symbol-Au": {
+    "prompt": "What is the chemical symbol for gold?",
+    "answer": "Au",
+    "accepted": [
+      "Au"
+    ],
+    "distractors": [
+      "Br",
+      "Md",
+      "Cs"
+    ],
+    "explanation": "The chemical symbol for gold is Au."
+  },
+  "wd-element-number-80": {
+    "prompt": "What is the atomic number of mercury?",
+    "answer": "80",
+    "accepted": [
+      "80"
+    ],
+    "distractors": [
+      "29",
+      "73",
+      "118"
+    ],
+    "explanation": "Mercury is element number 80 on the periodic table."
+  },
+  "wd-element-name-symbol-Hg": {
+    "prompt": "What is the chemical symbol for mercury?",
+    "answer": "Hg",
+    "accepted": [
+      "Hg"
+    ],
+    "distractors": [
+      "Mc",
+      "At",
+      "Bh"
+    ],
+    "explanation": "The chemical symbol for mercury is Hg."
+  },
+  "wd-element-number-81": {
+    "prompt": "What is the atomic number of thallium?",
+    "answer": "81",
+    "accepted": [
+      "81"
+    ],
+    "distractors": [
+      "77",
+      "35",
+      "52"
+    ],
+    "explanation": "Thallium is element number 81 on the periodic table."
+  },
+  "wd-element-name-symbol-Tl": {
+    "prompt": "What is the chemical symbol for thallium?",
+    "answer": "Tl",
+    "accepted": [
+      "Tl"
+    ],
+    "distractors": [
+      "Ne",
+      "Es",
+      "Po"
+    ],
+    "explanation": "The chemical symbol for thallium is Tl."
+  },
+  "wd-element-number-82": {
+    "prompt": "What is the atomic number of lead?",
+    "answer": "82",
+    "accepted": [
+      "82"
+    ],
+    "distractors": [
+      "39",
+      "6",
+      "100"
+    ],
+    "explanation": "Lead is element number 82 on the periodic table."
+  },
+  "wd-element-name-symbol-Pb": {
+    "prompt": "What is the chemical symbol for lead?",
+    "answer": "Pb",
+    "accepted": [
+      "Pb"
+    ],
+    "distractors": [
+      "Sm",
+      "Cl",
+      "Hg"
+    ],
+    "explanation": "The chemical symbol for lead is Pb."
+  },
+  "wd-element-number-83": {
+    "prompt": "What is the atomic number of bismuth?",
+    "answer": "83",
+    "accepted": [
+      "83"
+    ],
+    "distractors": [
+      "72",
+      "96",
+      "105"
+    ],
+    "explanation": "Bismuth is element number 83 on the periodic table."
+  },
+  "wd-element-name-symbol-Bi": {
+    "prompt": "What is the chemical symbol for bismuth?",
+    "answer": "Bi",
+    "accepted": [
+      "Bi"
+    ],
+    "distractors": [
+      "Nh",
+      "He",
+      "Fl"
+    ],
+    "explanation": "The chemical symbol for bismuth is Bi."
+  },
+  "wd-element-number-84": {
+    "prompt": "What is the atomic number of polonium?",
+    "answer": "84",
+    "accepted": [
+      "84"
+    ],
+    "distractors": [
+      "115",
+      "41",
+      "30"
+    ],
+    "explanation": "Polonium is element number 84 on the periodic table."
+  },
+  "wd-element-name-symbol-Po": {
+    "prompt": "What is the chemical symbol for polonium?",
+    "answer": "Po",
+    "accepted": [
+      "Po"
+    ],
+    "distractors": [
+      "Cn",
+      "Sb",
+      "Eu"
+    ],
+    "explanation": "The chemical symbol for polonium is Po."
+  },
+  "wd-element-number-85": {
+    "prompt": "What is the atomic number of astatine?",
+    "answer": "85",
+    "accepted": [
+      "85"
+    ],
+    "distractors": [
+      "57",
+      "23",
+      "12"
+    ],
+    "explanation": "Astatine is element number 85 on the periodic table."
+  },
+  "wd-element-name-symbol-At": {
+    "prompt": "What is the chemical symbol for astatine?",
+    "answer": "At",
+    "accepted": [
+      "At"
+    ],
+    "distractors": [
+      "Pd",
+      "Xe",
+      "Db"
+    ],
+    "explanation": "The chemical symbol for astatine is At."
+  },
+  "wd-element-number-86": {
+    "prompt": "What is the atomic number of radon?",
+    "answer": "86",
+    "accepted": [
+      "86"
+    ],
+    "distractors": [
+      "19",
+      "94",
+      "55"
+    ],
+    "explanation": "Radon is element number 86 on the periodic table."
+  },
+  "wd-element-name-symbol-Rn": {
+    "prompt": "What is the chemical symbol for radon?",
+    "answer": "Rn",
+    "accepted": [
+      "Rn"
+    ],
+    "distractors": [
+      "Ts",
+      "I",
+      "Ga"
+    ],
+    "explanation": "The chemical symbol for radon is Rn."
+  },
+  "wd-element-number-87": {
+    "prompt": "What is the atomic number of francium?",
+    "answer": "87",
+    "accepted": [
+      "87"
+    ],
+    "distractors": [
+      "60",
+      "4",
+      "35"
+    ],
+    "explanation": "Francium is element number 87 on the periodic table."
+  },
+  "wd-element-name-symbol-Fr": {
+    "prompt": "What is the chemical symbol for francium?",
+    "answer": "Fr",
+    "accepted": [
+      "Fr"
+    ],
+    "distractors": [
+      "Xe",
+      "Gd",
+      "K"
+    ],
+    "explanation": "The chemical symbol for francium is Fr."
+  },
+  "wd-element-number-88": {
+    "prompt": "What is the atomic number of radium?",
+    "answer": "88",
+    "accepted": [
+      "88"
+    ],
+    "distractors": [
+      "96",
+      "12",
+      "30"
+    ],
+    "explanation": "Radium is element number 88 on the periodic table."
+  },
+  "wd-element-name-symbol-Ra": {
+    "prompt": "What is the chemical symbol for radium?",
+    "answer": "Ra",
+    "accepted": [
+      "Ra"
+    ],
+    "distractors": [
+      "Sg",
+      "Y",
+      "Cd"
+    ],
+    "explanation": "The chemical symbol for radium is Ra."
+  },
+  "wd-element-number-89": {
+    "prompt": "What is the atomic number of actinium?",
+    "answer": "89",
+    "accepted": [
+      "89"
+    ],
+    "distractors": [
+      "37",
+      "78",
+      "23"
+    ],
+    "explanation": "Actinium is element number 89 on the periodic table."
+  },
+  "wd-element-name-symbol-Ac": {
+    "prompt": "What is the chemical symbol for actinium?",
+    "answer": "Ac",
+    "accepted": [
+      "Ac"
+    ],
+    "distractors": [
+      "Pa",
+      "Hg",
+      "Md"
+    ],
+    "explanation": "The chemical symbol for actinium is Ac."
+  },
+  "wd-element-number-90": {
+    "prompt": "What is the atomic number of thorium?",
+    "answer": "90",
+    "accepted": [
+      "90"
+    ],
+    "distractors": [
+      "22",
+      "35",
+      "114"
+    ],
+    "explanation": "Thorium is element number 90 on the periodic table."
+  },
+  "wd-element-name-symbol-Th": {
+    "prompt": "What is the chemical symbol for thorium?",
+    "answer": "Th",
+    "accepted": [
+      "Th"
+    ],
+    "distractors": [
+      "Sg",
+      "Hs",
+      "Zr"
+    ],
+    "explanation": "The chemical symbol for thorium is Th."
+  },
+  "wd-element-number-91": {
+    "prompt": "What is the atomic number of protactinium?",
+    "answer": "91",
+    "accepted": [
+      "91"
+    ],
+    "distractors": [
+      "80",
+      "17",
+      "66"
+    ],
+    "explanation": "Protactinium is element number 91 on the periodic table."
+  },
+  "wd-element-name-symbol-Pa": {
+    "prompt": "What is the chemical symbol for protactinium?",
+    "answer": "Pa",
+    "accepted": [
+      "Pa"
+    ],
+    "distractors": [
+      "Lu",
+      "I",
+      "Am"
+    ],
+    "explanation": "The chemical symbol for protactinium is Pa."
+  },
+  "wd-element-number-92": {
+    "prompt": "What is the atomic number of uranium?",
+    "answer": "92",
+    "accepted": [
+      "92"
+    ],
+    "distractors": [
+      "54",
+      "25",
+      "86"
+    ],
+    "explanation": "Uranium is element number 92 on the periodic table."
+  },
+  "wd-element-name-symbol-U": {
+    "prompt": "What is the chemical symbol for uranium?",
+    "answer": "U",
+    "accepted": [
+      "U"
+    ],
+    "distractors": [
+      "Gd",
+      "Rh",
+      "Hg"
+    ],
+    "explanation": "The chemical symbol for uranium is U."
+  },
+  "wd-element-number-93": {
+    "prompt": "What is the atomic number of neptunium?",
+    "answer": "93",
+    "accepted": [
+      "93"
+    ],
+    "distractors": [
+      "70",
+      "47",
+      "85"
+    ],
+    "explanation": "Neptunium is element number 93 on the periodic table."
+  },
+  "wd-element-name-symbol-Np": {
+    "prompt": "What is the chemical symbol for neptunium?",
+    "answer": "Np",
+    "accepted": [
+      "Np"
+    ],
+    "distractors": [
+      "La",
+      "Pm",
+      "O"
+    ],
+    "explanation": "The chemical symbol for neptunium is Np."
+  },
+  "wd-element-number-94": {
+    "prompt": "What is the atomic number of plutonium?",
+    "answer": "94",
+    "accepted": [
+      "94"
+    ],
+    "distractors": [
+      "42",
+      "104",
+      "111"
+    ],
+    "explanation": "Plutonium is element number 94 on the periodic table."
+  },
+  "wd-element-name-symbol-Pu": {
+    "prompt": "What is the chemical symbol for plutonium?",
+    "answer": "Pu",
+    "accepted": [
+      "Pu"
+    ],
+    "distractors": [
+      "In",
+      "Na",
+      "Er"
+    ],
+    "explanation": "The chemical symbol for plutonium is Pu."
+  },
+  "wd-element-number-95": {
+    "prompt": "What is the atomic number of americium?",
+    "answer": "95",
+    "accepted": [
+      "95"
+    ],
+    "distractors": [
+      "100",
+      "38",
+      "46"
+    ],
+    "explanation": "Americium is element number 95 on the periodic table."
+  },
+  "wd-element-name-symbol-Am": {
+    "prompt": "What is the chemical symbol for americium?",
+    "answer": "Am",
+    "accepted": [
+      "Am"
+    ],
+    "distractors": [
+      "Zn",
+      "Pt",
+      "Ra"
+    ],
+    "explanation": "The chemical symbol for americium is Am."
+  },
+  "wd-element-number-96": {
+    "prompt": "What is the atomic number of curium?",
+    "answer": "96",
+    "accepted": [
+      "96"
+    ],
+    "distractors": [
+      "32",
+      "49",
+      "1"
+    ],
+    "explanation": "Curium is element number 96 on the periodic table."
+  },
+  "wd-element-name-symbol-Cm": {
+    "prompt": "What is the chemical symbol for curium?",
+    "answer": "Cm",
+    "accepted": [
+      "Cm"
+    ],
+    "distractors": [
+      "Ds",
+      "Se",
+      "Ga"
+    ],
+    "explanation": "The chemical symbol for curium is Cm."
+  },
+  "wd-element-number-97": {
+    "prompt": "What is the atomic number of berkelium?",
+    "answer": "97",
+    "accepted": [
+      "97"
+    ],
+    "distractors": [
+      "45",
+      "117",
+      "56"
+    ],
+    "explanation": "Berkelium is element number 97 on the periodic table."
+  },
+  "wd-element-name-symbol-Bk": {
+    "prompt": "What is the chemical symbol for berkelium?",
+    "answer": "Bk",
+    "accepted": [
+      "Bk"
+    ],
+    "distractors": [
+      "Pm",
+      "Lu",
+      "Fe"
+    ],
+    "explanation": "The chemical symbol for berkelium is Bk."
+  },
+  "wd-element-number-98": {
+    "prompt": "What is the atomic number of californium?",
+    "answer": "98",
+    "accepted": [
+      "98"
+    ],
+    "distractors": [
+      "89",
+      "2",
+      "109"
+    ],
+    "explanation": "Californium is element number 98 on the periodic table."
+  },
+  "wd-element-name-symbol-Cf": {
+    "prompt": "What is the chemical symbol for californium?",
+    "answer": "Cf",
+    "accepted": [
+      "Cf"
+    ],
+    "distractors": [
+      "Fr",
+      "V",
+      "Al"
+    ],
+    "explanation": "The chemical symbol for californium is Cf."
+  },
+  "wd-element-number-99": {
+    "prompt": "What is the atomic number of einsteinium?",
+    "answer": "99",
+    "accepted": [
+      "99"
+    ],
+    "distractors": [
+      "40",
+      "52",
+      "6"
+    ],
+    "explanation": "Einsteinium is element number 99 on the periodic table."
+  },
+  "wd-element-name-symbol-Es": {
+    "prompt": "What is the chemical symbol for einsteinium?",
+    "answer": "Es",
+    "accepted": [
+      "Es"
+    ],
+    "distractors": [
+      "C",
+      "Tb",
+      "Fm"
+    ],
+    "explanation": "The chemical symbol for einsteinium is Es."
+  },
+  "wd-element-number-100": {
+    "prompt": "What is the atomic number of fermium?",
+    "answer": "100",
+    "accepted": [
+      "100"
+    ],
+    "distractors": [
+      "8",
+      "92",
+      "61"
+    ],
+    "explanation": "Fermium is element number 100 on the periodic table."
+  },
+  "wd-element-name-symbol-Fm": {
+    "prompt": "What is the chemical symbol for fermium?",
+    "answer": "Fm",
+    "accepted": [
+      "Fm"
+    ],
+    "distractors": [
+      "Bh",
+      "Al",
+      "Tb"
+    ],
+    "explanation": "The chemical symbol for fermium is Fm."
+  },
+  "wd-element-number-101": {
+    "prompt": "What is the atomic number of mendelevium?",
+    "answer": "101",
+    "accepted": [
+      "101"
+    ],
+    "distractors": [
+      "52",
+      "30",
+      "83"
+    ],
+    "explanation": "Mendelevium is element number 101 on the periodic table."
+  },
+  "wd-element-name-symbol-Md": {
+    "prompt": "What is the chemical symbol for mendelevium?",
+    "answer": "Md",
+    "accepted": [
+      "Md"
+    ],
+    "distractors": [
+      "Si",
+      "Dy",
+      "V"
+    ],
+    "explanation": "The chemical symbol for mendelevium is Md."
+  },
+  "wd-element-number-102": {
+    "prompt": "What is the atomic number of nobelium?",
+    "answer": "102",
+    "accepted": [
+      "102"
+    ],
+    "distractors": [
+      "110",
+      "95",
+      "89"
+    ],
+    "explanation": "Nobelium is element number 102 on the periodic table."
+  },
+  "wd-element-name-symbol-No": {
+    "prompt": "What is the chemical symbol for nobelium?",
+    "answer": "No",
+    "accepted": [
+      "No"
+    ],
+    "distractors": [
+      "Am",
+      "Yb",
+      "Pu"
+    ],
+    "explanation": "The chemical symbol for nobelium is No."
+  },
+  "wd-element-number-103": {
+    "prompt": "What is the atomic number of lawrencium?",
+    "answer": "103",
+    "accepted": [
+      "103"
+    ],
+    "distractors": [
+      "62",
+      "53",
+      "75"
+    ],
+    "explanation": "Lawrencium is element number 103 on the periodic table."
+  },
+  "wd-element-name-symbol-Lr": {
+    "prompt": "What is the chemical symbol for lawrencium?",
+    "answer": "Lr",
+    "accepted": [
+      "Lr"
+    ],
+    "distractors": [
+      "Rf",
+      "Nd",
+      "Dy"
+    ],
+    "explanation": "The chemical symbol for lawrencium is Lr."
+  },
+  "wd-element-number-104": {
+    "prompt": "What is the atomic number of rutherfordium?",
+    "answer": "104",
+    "accepted": [
+      "104"
+    ],
+    "distractors": [
+      "82",
+      "19",
+      "25"
+    ],
+    "explanation": "Rutherfordium is element number 104 on the periodic table."
+  },
+  "wd-element-name-symbol-Rf": {
+    "prompt": "What is the chemical symbol for rutherfordium?",
+    "answer": "Rf",
+    "accepted": [
+      "Rf"
+    ],
+    "distractors": [
+      "Na",
+      "I",
+      "Dy"
+    ],
+    "explanation": "The chemical symbol for rutherfordium is Rf."
+  },
+  "wd-element-number-105": {
+    "prompt": "What is the atomic number of dubnium?",
+    "answer": "105",
+    "accepted": [
+      "105"
+    ],
+    "distractors": [
+      "72",
+      "65",
+      "59"
+    ],
+    "explanation": "Dubnium is element number 105 on the periodic table."
+  },
+  "wd-element-name-symbol-Db": {
+    "prompt": "What is the chemical symbol for dubnium?",
+    "answer": "Db",
+    "accepted": [
+      "Db"
+    ],
+    "distractors": [
+      "Po",
+      "Cs",
+      "La"
+    ],
+    "explanation": "The chemical symbol for dubnium is Db."
+  },
+  "wd-element-number-106": {
+    "prompt": "What is the atomic number of seaborgium?",
+    "answer": "106",
+    "accepted": [
+      "106"
+    ],
+    "distractors": [
+      "24",
+      "77",
+      "8"
+    ],
+    "explanation": "Seaborgium is element number 106 on the periodic table."
+  },
+  "wd-element-name-symbol-Sg": {
+    "prompt": "What is the chemical symbol for seaborgium?",
+    "answer": "Sg",
+    "accepted": [
+      "Sg"
+    ],
+    "distractors": [
+      "Hf",
+      "Ru",
+      "Tc"
+    ],
+    "explanation": "The chemical symbol for seaborgium is Sg."
+  },
+  "wd-element-number-107": {
+    "prompt": "What is the atomic number of bohrium?",
+    "answer": "107",
+    "accepted": [
+      "107"
+    ],
+    "distractors": [
+      "82",
+      "9",
+      "77"
+    ],
+    "explanation": "Bohrium is element number 107 on the periodic table."
+  },
+  "wd-element-name-symbol-Bh": {
+    "prompt": "What is the chemical symbol for bohrium?",
+    "answer": "Bh",
+    "accepted": [
+      "Bh"
+    ],
+    "distractors": [
+      "Am",
+      "S",
+      "Pr"
+    ],
+    "explanation": "The chemical symbol for bohrium is Bh."
+  },
+  "wd-element-number-108": {
+    "prompt": "What is the atomic number of hassium?",
+    "answer": "108",
+    "accepted": [
+      "108"
+    ],
+    "distractors": [
+      "60",
+      "28",
+      "9"
+    ],
+    "explanation": "Hassium is element number 108 on the periodic table."
+  },
+  "wd-element-name-symbol-Hs": {
+    "prompt": "What is the chemical symbol for hassium?",
+    "answer": "Hs",
+    "accepted": [
+      "Hs"
+    ],
+    "distractors": [
+      "Sr",
+      "Al",
+      "Rh"
+    ],
+    "explanation": "The chemical symbol for hassium is Hs."
+  },
+  "wd-element-number-109": {
+    "prompt": "What is the atomic number of meitnerium?",
+    "answer": "109",
+    "accepted": [
+      "109"
+    ],
+    "distractors": [
+      "12",
+      "85",
+      "36"
+    ],
+    "explanation": "Meitnerium is element number 109 on the periodic table."
+  },
+  "wd-element-name-symbol-Mt": {
+    "prompt": "What is the chemical symbol for meitnerium?",
+    "answer": "Mt",
+    "accepted": [
+      "Mt"
+    ],
+    "distractors": [
+      "Nh",
+      "Tl",
+      "Sg"
+    ],
+    "explanation": "The chemical symbol for meitnerium is Mt."
+  },
+  "wd-element-number-110": {
+    "prompt": "What is the atomic number of darmstadtium?",
+    "answer": "110",
+    "accepted": [
+      "110"
+    ],
+    "distractors": [
+      "106",
+      "12",
+      "81"
+    ],
+    "explanation": "Darmstadtium is element number 110 on the periodic table."
+  },
+  "wd-element-name-symbol-Ds": {
+    "prompt": "What is the chemical symbol for darmstadtium?",
+    "answer": "Ds",
+    "accepted": [
+      "Ds"
+    ],
+    "distractors": [
+      "Yb",
+      "Zr",
+      "Ti"
+    ],
+    "explanation": "The chemical symbol for darmstadtium is Ds."
+  },
+  "wd-element-number-111": {
+    "prompt": "What is the atomic number of roentgenium?",
+    "answer": "111",
+    "accepted": [
+      "111"
+    ],
+    "distractors": [
+      "49",
+      "106",
+      "63"
+    ],
+    "explanation": "Roentgenium is element number 111 on the periodic table."
+  },
+  "wd-element-name-symbol-Rg": {
+    "prompt": "What is the chemical symbol for roentgenium?",
+    "answer": "Rg",
+    "accepted": [
+      "Rg"
+    ],
+    "distractors": [
+      "Bh",
+      "Nd",
+      "Os"
+    ],
+    "explanation": "The chemical symbol for roentgenium is Rg."
+  },
+  "wd-element-number-112": {
+    "prompt": "What is the atomic number of copernicium?",
+    "answer": "112",
+    "accepted": [
+      "112"
+    ],
+    "distractors": [
+      "97",
+      "24",
+      "62"
+    ],
+    "explanation": "Copernicium is element number 112 on the periodic table."
+  },
+  "wd-element-name-symbol-Cn": {
+    "prompt": "What is the chemical symbol for copernicium?",
+    "answer": "Cn",
+    "accepted": [
+      "Cn"
+    ],
+    "distractors": [
+      "Pr",
+      "Mt",
+      "F"
+    ],
+    "explanation": "The chemical symbol for copernicium is Cn."
+  },
+  "wd-element-number-113": {
+    "prompt": "What is the atomic number of nihonium?",
+    "answer": "113",
+    "accepted": [
+      "113"
+    ],
+    "distractors": [
+      "39",
+      "43",
+      "56"
+    ],
+    "explanation": "Nihonium is element number 113 on the periodic table."
+  },
+  "wd-element-name-symbol-Nh": {
+    "prompt": "What is the chemical symbol for nihonium?",
+    "answer": "Nh",
+    "accepted": [
+      "Nh"
+    ],
+    "distractors": [
+      "Sb",
+      "Cn",
+      "Au"
+    ],
+    "explanation": "The chemical symbol for nihonium is Nh."
+  },
+  "wd-element-number-114": {
+    "prompt": "What is the atomic number of flerovium?",
+    "answer": "114",
+    "accepted": [
+      "114"
+    ],
+    "distractors": [
+      "20",
+      "78",
+      "54"
+    ],
+    "explanation": "Flerovium is element number 114 on the periodic table."
+  },
+  "wd-element-name-symbol-Fl": {
+    "prompt": "What is the chemical symbol for flerovium?",
+    "answer": "Fl",
+    "accepted": [
+      "Fl"
+    ],
+    "distractors": [
+      "Nb",
+      "Eu",
+      "Mo"
+    ],
+    "explanation": "The chemical symbol for flerovium is Fl."
+  },
+  "wd-element-number-115": {
+    "prompt": "What is the atomic number of moscovium?",
+    "answer": "115",
+    "accepted": [
+      "115"
+    ],
+    "distractors": [
+      "69",
+      "27",
+      "42"
+    ],
+    "explanation": "Moscovium is element number 115 on the periodic table."
+  },
+  "wd-element-name-symbol-Mc": {
+    "prompt": "What is the chemical symbol for moscovium?",
+    "answer": "Mc",
+    "accepted": [
+      "Mc"
+    ],
+    "distractors": [
+      "Cm",
+      "Br",
+      "V"
+    ],
+    "explanation": "The chemical symbol for moscovium is Mc."
+  },
+  "wd-element-number-116": {
+    "prompt": "What is the atomic number of livermorium?",
+    "answer": "116",
+    "accepted": [
+      "116"
+    ],
+    "distractors": [
+      "100",
+      "60",
+      "88"
+    ],
+    "explanation": "Livermorium is element number 116 on the periodic table."
+  },
+  "wd-element-name-symbol-Lv": {
+    "prompt": "What is the chemical symbol for livermorium?",
+    "answer": "Lv",
+    "accepted": [
+      "Lv"
+    ],
+    "distractors": [
+      "Nb",
+      "Zr",
+      "Cu"
+    ],
+    "explanation": "The chemical symbol for livermorium is Lv."
+  },
+  "wd-element-number-117": {
+    "prompt": "What is the atomic number of tennessine?",
+    "answer": "117",
+    "accepted": [
+      "117"
+    ],
+    "distractors": [
+      "59",
+      "60",
+      "12"
+    ],
+    "explanation": "Tennessine is element number 117 on the periodic table."
+  },
+  "wd-element-name-symbol-Ts": {
+    "prompt": "What is the chemical symbol for tennessine?",
+    "answer": "Ts",
+    "accepted": [
+      "Ts"
+    ],
+    "distractors": [
+      "Be",
+      "Si",
+      "Na"
+    ],
+    "explanation": "The chemical symbol for tennessine is Ts."
+  },
+  "wd-element-number-118": {
+    "prompt": "What is the atomic number of oganesson?",
+    "answer": "118",
+    "accepted": [
+      "118"
+    ],
+    "distractors": [
+      "67",
+      "72",
+      "53"
+    ],
+    "explanation": "Oganesson is element number 118 on the periodic table."
+  },
+  "wd-element-name-symbol-Og": {
+    "prompt": "What is the chemical symbol for oganesson?",
+    "answer": "Og",
+    "accepted": [
+      "Og"
+    ],
+    "distractors": [
+      "Cd",
+      "Rf",
+      "P"
+    ],
+    "explanation": "The chemical symbol for oganesson is Og."
+  },
+  "au-science-pqhu3t": {
+    "prompt": "Which of these chemical elements is part of the cyanide ion?",
+    "answer": "Carbon",
+    "accepted": [
+      "Carbon",
+      "C"
+    ],
+    "distractors": [
+      "Oxygen",
+      "Chlorine",
+      "Sulfur"
+    ],
+    "explanation": "The cyanide ion has the formula CN⁻ and consists of two elements: carbon (C) and nitrogen (N), joined by a triple bond."
+  },
+  "au-science-1xkm3ep": {
+    "prompt": "Which chemical element is part of the cyanide ion?",
+    "answer": "Nitrogen",
+    "accepted": [
+      "Nitrogen",
+      "N",
+      "Carbon",
+      "C"
+    ],
+    "distractors": [
+      "Oxygen",
+      "Chlorine",
+      "Sulfur"
+    ],
+    "explanation": "The cyanide ion has the formula CN⁻ and consists of two elements: carbon (C) and nitrogen (N), joined by a triple bond."
+  }
+}

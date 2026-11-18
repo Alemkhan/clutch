@@ -1,4 +1,6 @@
 import { dailyKey, dayStartMs } from '@clutch/shared';
+import { messagesFor } from '../../i18n/messages';
+import { m } from './messages';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -25,12 +27,13 @@ export function formatCountdownShort(ms: number): string {
 /** Шапка главной: «Новый набор через 5 ч»; последний час — «меньше чем через час». Часы округляются вниз. */
 export function newSetLabel(ms: number): string {
   const hours = Math.floor(Math.max(0, ms) / 3_600_000);
-  return hours < 1 ? 'Новый набор меньше чем через час' : `Новый набор через ${hours} ч`;
+  const t = messagesFor(m);
+  return hours < 1 ? t.newSetSoon : t.newSetIn(hours);
 }
 
 /** Под заголовком таблицы дня: «Обнулится через 5 ч · полночь по Алматы». Часы округляются вниз. */
 export function resetLabel(ms: number): string {
   const hours = Math.floor(Math.max(0, ms) / 3_600_000);
-  const when = hours < 1 ? 'меньше чем через час' : `через ${hours} ч`;
-  return `Обнулится ${when} · полночь по Алматы`;
+  const t = messagesFor(m);
+  return t.resetLabel(hours < 1 ? t.resetSoon : t.resetIn(hours));
 }

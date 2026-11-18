@@ -5,6 +5,8 @@ import {
   type HammerAttemptRules,
   type SkillResult,
 } from '@clutch/shared';
+import { m } from './messages';
+import { messagesFor } from '../../i18n/messages';
 
 type Tier = Exclude<SkillResult, 'miss'>;
 
@@ -73,7 +75,8 @@ export function strikeGain(before: number, reward: number, target = SOLO_TARGET_
 
 /** «До 100% — ещё N%»; на цели — честное сообщение о завершении, без «ещё 0%». */
 export function remainingText(remaining: number, target = SOLO_TARGET_PROGRESS): string {
-  return remaining > 0 ? `До ${target}% — ещё ${remaining}%` : `Цель ${target}% достигнута`;
+  const t = messagesFor(m);
+  return remaining > 0 ? t.remaining(target, remaining) : t.targetReached(target);
 }
 
 /**
@@ -85,7 +88,7 @@ export function seriesNote(previous: readonly SkillResult[], result: SkillResult
   const after = pressureStageFromResults([...previous, result]);
   if (after <= before) return null;
   const streak = [...previous, result].filter((item) => item !== 'miss').length;
-  return `Серия ${streak} · зоны стали уже`;
+  return messagesFor(m).series(streak);
 }
 
 export interface StrikeNotes {

@@ -268,13 +268,16 @@ export async function soloLeaderboard(
   dateKey: string,
 ): Promise<SoloLeaderboardEntry[]> {
   const result = await db.prepare(`${BOARD_CTE}
-    SELECT place AS rank, display_name AS displayName, solo_score AS soloScore, set_par AS setPar,
-           rounds_played AS roundsPlayed, completed_at AS completedAt
-    FROM placed
-    ORDER BY place ASC, completed_at ASC, id ASC
+    SELECT p.place AS rank, p.display_name AS displayName, p.solo_score AS soloScore, p.set_par AS setPar,
+           p.rounds_played AS roundsPlayed, p.completed_at AS completedAt, cl.emoji AS clanEmoji
+    FROM placed p
+    LEFT JOIN clan_members cm ON cm.player_id = p.player_id
+    LEFT JOIN clans cl ON cl.emoji_key = cm.emoji_key
+    ORDER BY p.place ASC, p.completed_at ASC, p.id ASC
     LIMIT ?6
-  `).bind(category, rulesVersion, from, to, dateKey, SOLO_BOARD_LIMIT).all<SoloLeaderboardEntry>();
-  return result.results;
+  `).bind(category, rulesVersion, from, to, dateKey, SOLO_BOARD_LIMIT).all<SoloLeaderboardEntry & { clanEmoji: string | null }>();
+  // Эмодзи клана — аватар игрока в таблице; без клана поле не отдаётся.
+  return result.results.map(({ clanEmoji, ...entry }) => (clanEmoji ? { ...entry, clanEmoji } : entry));
 }
 
 /** Строка верха таблицы для сравнения «до/после» в известии «выбили из десятки». */

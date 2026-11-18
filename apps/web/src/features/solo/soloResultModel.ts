@@ -1,3 +1,5 @@
+import { messagesFor } from '../../i18n/messages';
+import { m } from './messages';
 import type { CompleteSoloRunResponse, SkillResult, SoloLeaderboardStanding, SoloRoundResponse } from '@clutch/shared';
 import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS } from '@clutch/shared';
 import type { SoloRunView } from './soloRunSession';
@@ -31,10 +33,7 @@ export function soloEnd(view: Pick<SoloRunView, 'reachedTarget' | 'roundsPlayed'
 }
 
 export function circles(count: number): string {
-  const lastTwo = count % 100;
-  const last = count % 10;
-  const word = lastTwo >= 11 && lastTwo <= 14 ? 'кругов' : last === 1 ? 'круг' : last >= 2 && last <= 4 ? 'круга' : 'кругов';
-  return `${count} ${word}`;
+  return messagesFor(m).circles(count);
 }
 
 /**
@@ -43,6 +42,7 @@ export function circles(count: number): string {
  */
 export function buildSoloResult({ view, save, response }: SoloResultInput): SoloResultView {
   const server = save === 'saved' ? response : null;
+  const t = messagesFor(m);
   const progress = server ? server.progress : view.progress;
   const roundsPlayed = server ? server.roundsPlayed : view.roundsPlayed;
   const reachedTarget = server ? server.reachedTarget : view.reachedTarget;
@@ -52,7 +52,7 @@ export function buildSoloResult({ view, save, response }: SoloResultInput): Solo
     return {
       end,
       reachedTarget,
-      headline: 'Дошёл до 100%',
+      headline: t.reached,
       progress,
       roundsPlayed,
       // Заголовок и мета уже говорят «100% за N кругов», а про запись рассказывает её карточка.
@@ -61,15 +61,15 @@ export function buildSoloResult({ view, save, response }: SoloResultInput): Solo
   }
 
   const why = end === 'cap'
-    ? `Лимит забега — ${circles(SOLO_ROUND_CAP)}, и он закончился.`
-    : 'Вопросы этого набора закончились.';
+    ? t.capWhy(circles(SOLO_ROUND_CAP))
+    : t.exhaustedWhy;
   return {
     end,
     reachedTarget,
-    headline: 'До 100% не дошёл',
+    headline: t.notReached,
     progress,
     roundsPlayed,
-    summary: `${why} Ты набрал ${progress}% из ${SOLO_TARGET_PROGRESS}%.`,
+    summary: t.notReachedSummary(why, progress, SOLO_TARGET_PROGRESS),
   };
 }
 
@@ -147,13 +147,14 @@ export function buildReceiptStats(input: {
   /** null — места у забега нет и блок не показывается. */
   standing: RunStandingState | null;
 }): RunReceiptStat[] {
+  const t = messagesFor(m);
   const stats: RunReceiptStat[] = [
-    { key: 'correct', value: input.roundsPlayed ? `${input.correctCount}/${input.roundsPlayed}` : String(input.correctCount), label: 'верных' },
-    { key: 'perfect', value: String(countPerfectStrikes(input.skillResults)), label: 'идеально' },
+    { key: 'correct', value: input.roundsPlayed ? `${input.correctCount}/${input.roundsPlayed}` : String(input.correctCount), label: t.statCorrect },
+    { key: 'perfect', value: String(countPerfectStrikes(input.skillResults)), label: t.statPerfect },
   ];
   if (input.standing) {
     const you = input.standing.status === 'ready' ? input.standing.standing : null;
-    stats.push({ key: 'place', value: you ? `${you.rank}-й` : '—', label: 'в таблице' });
+    stats.push({ key: 'place', value: you ? t.rank(you.rank) : '—', label: t.statPlace });
   }
   return stats;
 }

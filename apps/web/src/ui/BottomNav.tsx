@@ -1,4 +1,6 @@
 import type { Phase } from '../app/gameSession';
+import { useMessages } from '../i18n/messages';
+import { m } from './messages';
 
 export type NavTab = 'home' | 'myRuns' | 'training' | 'profile';
 
@@ -7,11 +9,11 @@ interface BottomNavProps {
   onSelect: (tab: NavTab) => void;
 }
 
-const TABS: ReadonlyArray<{ id: NavTab; label: string }> = [
-  { id: 'home', label: 'Главная' },
-  { id: 'myRuns', label: 'Партии' },
-  { id: 'training', label: 'Тренировка' },
-  { id: 'profile', label: 'Профиль' },
+const TABS: ReadonlyArray<{ id: NavTab; label: 'tabHome' | 'tabMyRuns' | 'tabTraining' | 'tabProfile' }> = [
+  { id: 'home', label: 'tabHome' },
+  { id: 'myRuns', label: 'tabMyRuns' },
+  { id: 'training', label: 'tabTraining' },
+  { id: 'profile', label: 'tabProfile' },
 ];
 
 /** Экраны верхнего уровня, на которых панель видна. Во время игры её нет. */
@@ -35,8 +37,9 @@ function TabIcon({ id }: { id: NavTab }) {
 }
 
 export function BottomNav({ active, onSelect }: BottomNavProps) {
+  const t = useMessages(m);
   return (
-    <nav className="bottom-nav" aria-label="Основная навигация">
+    <nav className="bottom-nav" aria-label={t.navAria}>
       {TABS.map((tab) => (
         <button
           key={tab.id}
@@ -46,7 +49,7 @@ export function BottomNav({ active, onSelect }: BottomNavProps) {
           onClick={() => { if (tab.id !== active) onSelect(tab.id); }}
         >
           <TabIcon id={tab.id} />
-          <span>{tab.label}</span>
+          <span>{t[tab.label]}</span>
         </button>
       ))}
     </nav>
