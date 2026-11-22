@@ -18,7 +18,7 @@ import { clansOpen, clanStanding } from './clans';
 
 type AppContext = Context<{ Bindings: Env }>;
 
-const TWEMOJI_BASE = 'https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/';
+const TWEMOJI_BASE = 'https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/';
 const CLAN_CARD_CACHE = 'public, max-age=3600';
 
 function ruPlural(count: number, forms: readonly [string, string, string]): string {
