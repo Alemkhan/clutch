@@ -23,7 +23,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Микки Маус",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-film-1p7gt5g",
@@ -47,7 +48,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Шрек (персонаж)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-film-1miniqr",
@@ -71,7 +73,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Холодное сердце (мультфильм)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-film-tdg5b6",
@@ -95,7 +98,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Ну, погоди!",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-film-1q1568o",
@@ -116,7 +120,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Кот Матроскин",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-film-m1wvsw",
@@ -142,7 +147,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Король Лев",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-film-kiwyjc",
@@ -166,7 +172,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Дядя Фёдор",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-film-dzzm2p",
@@ -194,7 +201,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Дарт Вейдер",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-film-1rpg1h4",
@@ -222,7 +230,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Титаник (фильм, 1997)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-film-1nbagf",
@@ -244,7 +253,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: История игрушек",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-film-1pw4usb",
@@ -272,7 +282,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Джек Воробей",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-film-1k6fif6",
@@ -294,7 +305,8 @@
     "openAnswer": false,
     "sourceHint": "Википедия: Ирония судьбы, или С лёгким паром!",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-film-95lm7o",
@@ -317,7 +329,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: ВАЛЛ-И",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-film-10s2r15",
@@ -339,7 +352,8 @@
     "openAnswer": false,
     "sourceHint": "Википедия: Операция «Ы» и другие приключения Шурика",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-film-1halp2p",
@@ -364,7 +378,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Бен-Гур (фильм, 1959)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-film-14wkikl",
@@ -391,7 +406,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Унесённые призраками",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-film-h9xgj1",
@@ -413,7 +429,8 @@
     "openAnswer": false,
     "sourceHint": "Википедия: Паразиты (фильм)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "wd-film-Q44578",
@@ -441,7 +458,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q44578",
     "sourceTitle": "Wikidata: Титаник",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-film-Q134773",
@@ -469,7 +487,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q134773",
     "sourceTitle": "Wikidata: Форрест Гамп",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q47703",
@@ -497,7 +516,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q47703",
     "sourceTitle": "Wikidata: Крёстный отец",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q24871",
@@ -525,7 +545,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q24871",
     "sourceTitle": "Wikidata: Аватар",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-film-Q128518",
@@ -553,7 +574,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q128518",
     "sourceTitle": "Wikidata: Гладиатор",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q132689",
@@ -581,7 +603,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q132689",
     "sourceTitle": "Wikidata: Касабланка",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q104123",
@@ -609,7 +632,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q104123",
     "sourceTitle": "Wikidata: Криминальное чтиво",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-film-Q172241",
@@ -637,7 +661,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q172241",
     "sourceTitle": "Wikidata: Побег из Шоушенка",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q163872",
@@ -665,7 +690,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q163872",
     "sourceTitle": "Wikidata: Тёмный рыцарь",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-film-Q91540",
@@ -693,7 +719,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q91540",
     "sourceTitle": "Wikidata: Назад в будущее",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q190050",
@@ -721,7 +748,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q190050",
     "sourceTitle": "Wikidata: Бойцовский клуб",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q483941",
@@ -749,7 +777,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q483941",
     "sourceTitle": "Wikidata: Список Шиндлера",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-film-Q133654",
@@ -777,7 +806,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q133654",
     "sourceTitle": "Wikidata: Молчание ягнят",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q102438",
@@ -805,7 +835,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q102438",
     "sourceTitle": "Wikidata: Гарри Поттер и философский камень",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q167726",
@@ -833,7 +864,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q167726",
     "sourceTitle": "Wikidata: Парк юрского периода",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-film-Q5890",
@@ -861,7 +893,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q5890",
     "sourceTitle": "Wikidata: V — значит вендетта",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q13417189",
@@ -889,7 +922,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q13417189",
     "sourceTitle": "Wikidata: Интерстеллар",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-film-Q127367",
@@ -917,7 +951,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q127367",
     "sourceTitle": "Wikidata: Властелин колец: Братство Кольца",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-film-Q182218",
@@ -945,7 +980,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q182218",
     "sourceTitle": "Wikidata: Мстители",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q17738",
@@ -973,7 +1009,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q17738",
     "sourceTitle": "Wikidata: Звёздные войны. Эпизод IV: Новая надежда",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-film-Q41483",
@@ -1001,7 +1038,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q41483",
     "sourceTitle": "Wikidata: Хороший, плохой, злой",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q102244",
@@ -1029,7 +1067,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q102244",
     "sourceTitle": "Wikidata: Гарри Поттер и тайная комната",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q131074",
@@ -1057,7 +1096,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q131074",
     "sourceTitle": "Wikidata: Властелин колец: Возвращение короля",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q162729",
@@ -1085,7 +1125,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q162729",
     "sourceTitle": "Wikidata: Храброе сердце",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q165713",
@@ -1113,7 +1154,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q165713",
     "sourceTitle": "Wikidata: Звёздные войны. Эпизод I: Скрытая угроза",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q102225",
@@ -1141,7 +1183,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q102225",
     "sourceTitle": "Wikidata: Гарри Поттер и Кубок огня",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q46717",
@@ -1169,7 +1212,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q46717",
     "sourceTitle": "Wikidata: Пираты Карибского моря: Проклятие Чёрной жемчужины",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q103474",
@@ -1197,7 +1241,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q103474",
     "sourceTitle": "Wikidata: Космическая одиссея 2001 года",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q102448",
@@ -1225,7 +1270,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q102448",
     "sourceTitle": "Wikidata: Гарри Поттер и узник Азкабана",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q161687",
@@ -1253,7 +1299,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q161687",
     "sourceTitle": "Wikidata: Гарри Поттер и Принц-полукровка",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q102235",
@@ -1281,7 +1328,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q102235",
     "sourceTitle": "Wikidata: Гарри Поттер и Орден Феникса",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q184768",
@@ -1309,7 +1357,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q184768",
     "sourceTitle": "Wikidata: Крёстный отец 2",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q106316",
@@ -1337,7 +1386,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q106316",
     "sourceTitle": "Wikidata: Общество мёртвых поэтов",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q164103",
@@ -1365,7 +1415,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q164103",
     "sourceTitle": "Wikidata: Игры разума",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q54274",
@@ -1393,7 +1444,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q54274",
     "sourceTitle": "Wikidata: Пираты Карибского моря: На краю света",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q160618",
@@ -1421,7 +1473,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q160618",
     "sourceTitle": "Wikidata: Горбатая гора",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q24815",
@@ -1449,7 +1502,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q24815",
     "sourceTitle": "Wikidata: Гражданин Кейн",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q192724",
@@ -1477,7 +1531,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q192724",
     "sourceTitle": "Wikidata: Железный человек",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q181795",
@@ -1505,7 +1560,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q181795",
     "sourceTitle": "Wikidata: Звёздные войны. Эпизод V: Империя наносит ответный удар",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q484442",
@@ -1533,7 +1589,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q484442",
     "sourceTitle": "Wikidata: Человек-паук",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q184843",
@@ -1561,7 +1618,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q184843",
     "sourceTitle": "Wikidata: Бегущий по лезвию",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q181803",
@@ -1589,7 +1647,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q181803",
     "sourceTitle": "Wikidata: Звёздные войны. Эпизод VI: Возвращение джедая",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q131390",
@@ -1617,7 +1676,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q131390",
     "sourceTitle": "Wikidata: 300 спартанцев",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q14171368",
@@ -1645,7 +1705,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q14171368",
     "sourceTitle": "Wikidata: Мстители: Эра Альтрона",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q190086",
@@ -1673,7 +1734,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q190086",
     "sourceTitle": "Wikidata: В джазе только девушки",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q109116",
@@ -1701,7 +1763,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q109116",
     "sourceTitle": "Wikidata: Великий диктатор",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-film-Q61448040",
@@ -1729,7 +1792,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q61448040",
     "sourceTitle": "Wikidata: Паразиты",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "q-film-mm200o",
@@ -1752,7 +1816,8 @@
     "explanationRu": "«Титаник» удерживал рекорд самых кассовых сборов более 10 лет.",
     "sourceTitle": "Список самых кассовых фильмов — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-film-15lc29g",
@@ -1776,7 +1841,8 @@
     "explanationRu": "Фильм «Мстители: Финал» собрал свыше 2,79 млрд долларов.",
     "sourceTitle": "Список самых кассовых фильмов — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "er-film-1xiuosm",
@@ -1802,7 +1868,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-film-671ukl",
@@ -1830,7 +1897,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-film-12xtpn6",
@@ -1856,7 +1924,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-film-1s2l9ec",
@@ -1884,6 +1953,92 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24",
+    "daily": true
+  },
+  {
+    "id": "ot-film-i71fdx",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Какой мультфильм стал первым полнометражным компьютерным мультфильмом?",
+    "answerRu": "«История игрушек»",
+    "acceptedRu": [
+      "«История игрушек»",
+      "История игрушек",
+      "Toy Story"
+    ],
+    "distractorsRu": [
+      "«Шрек»",
+      "«Корпорация монстров»",
+      "«Король Лев»"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-film-re43jy",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Какой полнометражный мультфильм Disney был самым первым?",
+    "answerRu": "«Белоснежка и семь гномов»",
+    "acceptedRu": [
+      "«Белоснежка и семь гномов»",
+      "Белоснежка и семь гномов",
+      "Белоснежка"
+    ],
+    "acceptedEn": [
+      "Snow White and the Seven Dwarfs",
+      "Snow White"
+    ],
+    "distractorsRu": [
+      "«Пиноккио»",
+      "«Дамбо»",
+      "«Золушка»"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-film-1choc1i",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Какого супергероя в кино играли Майкл Китон, Джордж Клуни и Кристиан Бейл?",
+    "answerRu": "Бэтмена",
+    "acceptedRu": [
+      "Бэтмен",
+      "Бэтмена",
+      "Batman"
+    ],
+    "distractorsRu": [
+      "Супермена",
+      "Человека-паука",
+      "Железного человека"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
     "liveFrom": "2026-11-24"
   }
 ]

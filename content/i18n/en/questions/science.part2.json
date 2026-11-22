@@ -2018,5 +2018,150 @@
       "Rosalind Franklin",
       "Lise Meitner"
     ]
+  },
+  "ot-science-nizteu": {
+    "prompt": "Which plant did Gregor Mendel use to discover the laws of heredity?",
+    "answer": "peas",
+    "accepted": [
+      "peas",
+      "pea"
+    ],
+    "distractors": [
+      "beans",
+      "wheat",
+      "corn"
+    ]
+  },
+  "ot-science-pnuhj3": {
+    "prompt": "What is the unit of electrical resistance?",
+    "answer": "ohm",
+    "accepted": [
+      "ohm",
+      "ohms"
+    ],
+    "distractors": [
+      "volt",
+      "ampere",
+      "watt"
+    ]
+  },
+  "ot-science-rom54h": {
+    "prompt": "Diamonds are made of which chemical element?",
+    "answer": "carbon",
+    "accepted": [
+      "carbon"
+    ],
+    "distractors": [
+      "silicon",
+      "nitrogen",
+      "oxygen"
+    ]
+  },
+  "ot-science-n9slg8": {
+    "prompt": "Which animal features in Schrödinger’s famous thought experiment?",
+    "answer": "a cat",
+    "accepted": [
+      "cat",
+      "a cat"
+    ],
+    "distractors": [
+      "a dog",
+      "a mouse",
+      "a parrot"
+    ]
+  },
+  "ot-science-1ciwjvb": {
+    "prompt": "Which substance makes plant leaves green?",
+    "answer": "chlorophyll",
+    "accepted": [
+      "chlorophyll"
+    ],
+    "distractors": [
+      "carotene",
+      "melanin",
+      "haemoglobin"
+    ]
+  },
+  "ot-science-imbokm": {
+    "prompt": "Which organelle is called the “powerhouse of the cell”?",
+    "answer": "the mitochondrion",
+    "accepted": [
+      "mitochondria",
+      "mitochondrion",
+      "the mitochondrion"
+    ],
+    "distractors": [
+      "the ribosome",
+      "the nucleus",
+      "the lysosome"
+    ]
+  },
+  "ot-science-pfok11": {
+    "prompt": "What is the SI unit of temperature?",
+    "answer": "the kelvin",
+    "accepted": [
+      "kelvin",
+      "the kelvin",
+      "K"
+    ],
+    "distractors": [
+      "degree Celsius",
+      "degree Fahrenheit",
+      "joule"
+    ]
+  },
+  "ot-science-4p4hl0": {
+    "prompt": "What is the bias in which people with low ability overestimate their competence?",
+    "answer": "the Dunning–Kruger effect",
+    "accepted": [
+      "Dunning-Kruger effect",
+      "Dunning–Kruger effect",
+      "Dunning-Kruger",
+      "the Dunning–Kruger effect"
+    ],
+    "distractors": [
+      "the placebo effect",
+      "the Pygmalion effect",
+      "the Zeigarnik effect"
+    ]
+  },
+  "ot-science-1cvmzag": {
+    "prompt": "Roughly how old is the Earth?",
+    "answer": "about 4.5 billion years",
+    "accepted": [
+      "about 4.5 billion years",
+      "4.5 billion",
+      "4.5 billion years"
+    ],
+    "distractors": [
+      "about 6,000 years",
+      "about 500 million years",
+      "about 13.8 billion years"
+    ]
+  },
+  "ot-science-1eftiuq": {
+    "prompt": "What is the lowest layer of the Earth’s atmosphere called?",
+    "answer": "the troposphere",
+    "accepted": [
+      "troposphere",
+      "the troposphere"
+    ],
+    "distractors": [
+      "the stratosphere",
+      "the mesosphere",
+      "the ionosphere"
+    ]
+  },
+  "ot-science-1lrruyd": {
+    "prompt": "Which method is Sigmund Freud best known for?",
+    "answer": "psychoanalysis",
+    "accepted": [
+      "psychoanalysis"
+    ],
+    "distractors": [
+      "behaviourism",
+      "Gestalt therapy",
+      "cognitive therapy"
+    ]
   }
 }

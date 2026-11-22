@@ -187,6 +187,7 @@
     "sourceHint": "Википедия: Греческий алфавит",
     "reviewNote": "Много коротких названий (ро, пи, фи): нужен точный матч.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   }
 ]

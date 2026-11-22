@@ -9,11 +9,12 @@ import {
   spreadTopics,
   DAILY_CURATED_FROM,
   dailyPackPool,
+  dailyRulesAllow,
   isDailyEligible,
   liveDailyRecords,
   liveEverywhereRecords,
 } from './generalSet';
-import { generalPackQuestions } from '../generalPack';
+import { generalPackQuestions, generalPackSets } from '../generalPack';
 import { generateMatch } from './questionGenerator';
 
 const DAY = Date.UTC(2026, 9, 12);
@@ -123,22 +124,23 @@ describe('daily run pool (from DAILY_CURATED_FROM)', () => {
   }) as unknown as Parameters<typeof isDailyEligible>[0];
 
   it('keeps everyday erudition and drops cramming', () => {
-    expect(isDailyEligible(single('Какой газ составляет большую часть атмосферы Земли?'))).toBe(true);
-    expect(isDailyEligible(single('Какой атомный номер у элемента «водород»?'))).toBe(true);
-    expect(isDailyEligible(single('Какой атомный номер у элемента «астат»?'))).toBe(false);
-    expect(isDailyEligible(single('Какой символ у химического элемента «железо»?'))).toBe(false);
-    expect(isDailyEligible(single('Какой химический элемент обозначается символом Fe?'))).toBe(true);
-    expect(isDailyEligible(single('Какой химический элемент обозначается символом Cf?'))).toBe(false);
-    expect(isDailyEligible(single('Что-то очень узкое?', { difficulty: 'Expert' }))).toBe(false);
+    expect(dailyRulesAllow(single('Какой газ составляет большую часть атмосферы Земли?'))).toBe(true);
+    expect(dailyRulesAllow(single('Какой атомный номер у элемента «водород»?'))).toBe(true);
+    expect(dailyRulesAllow(single('Какой атомный номер у элемента «астат»?'))).toBe(false);
+    expect(dailyRulesAllow(single('Какой символ у химического элемента «железо»?'))).toBe(false);
+    expect(dailyRulesAllow(single('Какой химический элемент обозначается символом Fe?'))).toBe(true);
+    expect(dailyRulesAllow(single('Какой химический элемент обозначается символом Cf?'))).toBe(false);
+    expect(dailyRulesAllow(single('Что-то очень узкое?', { difficulty: 'Expert' }))).toBe(false);
     expect(isDailyEligible(single('Нормальный вопрос?', { daily: false }))).toBe(false);
+    expect(isDailyEligible(single('Какой атомный номер у элемента «астат»?', { daily: true }))).toBe(true);
   });
 
   it('keeps only famous works from the Wikidata templates', () => {
-    expect(isDailyEligible(single('Кто написал картину «Мона Лиза»?', { origin: 'wikidata' }))).toBe(true);
-    expect(isDailyEligible(single('Кто композитор произведения «Сельская честь»?', { origin: 'wikidata' }))).toBe(false);
-    expect(isDailyEligible(single('Кто автор произведения «Сон в красном тереме»?', { origin: 'wikidata' }))).toBe(false);
-    expect(isDailyEligible(single('Какую из этих картин написал Питер Брейгель Старший?', { origin: 'wikidata' }))).toBe(false);
-    expect(isDailyEligible(single('Какое из этих произведений написал Жюль Верн?', { origin: 'wikidata' }))).toBe(true);
+    expect(dailyRulesAllow(single('Кто написал картину «Мона Лиза»?', { origin: 'wikidata' }))).toBe(true);
+    expect(dailyRulesAllow(single('Кто композитор произведения «Сельская честь»?', { origin: 'wikidata' }))).toBe(false);
+    expect(dailyRulesAllow(single('Кто автор произведения «Сон в красном тереме»?', { origin: 'wikidata' }))).toBe(false);
+    expect(dailyRulesAllow(single('Какую из этих картин написал Питер Брейгель Старший?', { origin: 'wikidata' }))).toBe(false);
+    expect(dailyRulesAllow(single('Какое из этих произведений написал Жюль Верн?', { origin: 'wikidata' }))).toBe(true);
   });
 
   it('is a subset of the everywhere pool and leaves earlier days alone', () => {
@@ -155,5 +157,13 @@ describe('daily run pool (from DAILY_CURATED_FROM)', () => {
     expect(curated.filter((question) => question.category === 'Languages')).toHaveLength(2);
     const before = dailyQuestionSet('general', dayStartMs('2026-11-23') + 60_000, 0).questions;
     expect(before.filter((question) => question.category === 'Historical Flags')).toHaveLength(2);
+  });
+});
+
+describe('daily flag on content', () => {
+  it('is set explicitly on every record, so nothing lands in the daily run by default', () => {
+    const records = [...generalPackQuestions, ...generalPackSets] as Array<{ id: string; daily?: unknown; topic: string }>;
+    expect(records.filter((record) => typeof record.daily !== 'boolean').map((record) => record.id)).toEqual([]);
+    expect(records.filter((record) => record.topic === 'kazakhstan' && record.daily === true).map((record) => record.id)).toEqual([]);
   });
 });

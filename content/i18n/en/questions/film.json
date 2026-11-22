@@ -966,5 +966,42 @@
       "Pixar",
       "DreamWorks"
     ]
+  },
+  "ot-film-i71fdx": {
+    "prompt": "What was the first feature-length computer-animated film?",
+    "answer": "Toy Story",
+    "accepted": [
+      "Toy Story"
+    ],
+    "distractors": [
+      "Shrek",
+      "Monsters, Inc.",
+      "The Lion King"
+    ]
+  },
+  "ot-film-re43jy": {
+    "prompt": "What was Disney’s very first feature-length animated film?",
+    "answer": "Snow White and the Seven Dwarfs",
+    "accepted": [
+      "Snow White and the Seven Dwarfs",
+      "Snow White"
+    ],
+    "distractors": [
+      "Pinocchio",
+      "Dumbo",
+      "Cinderella"
+    ]
+  },
+  "ot-film-1choc1i": {
+    "prompt": "Which superhero have Michael Keaton, George Clooney and Christian Bale played on film?",
+    "answer": "Batman",
+    "accepted": [
+      "Batman"
+    ],
+    "distractors": [
+      "Superman",
+      "Spider-Man",
+      "Iron Man"
+    ]
   }
 }

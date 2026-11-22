@@ -45,7 +45,8 @@
     ],
     "sourceHint": "Википедия: Три мушкетёра",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-winnie",
@@ -129,6 +130,7 @@
     ],
     "sourceHint": "Википедия: Винни-Пух",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   }
 ]

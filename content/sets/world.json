@@ -38,7 +38,8 @@
     ],
     "sourceHint": "Венская конвенция о дорожных знаках и сигналах",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "set-seasons",
@@ -84,7 +85,8 @@
     ],
     "sourceHint": "Словарь",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "set-cardinal",
@@ -130,7 +132,8 @@
     ],
     "sourceHint": "Словарь",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "set-card-suits",
@@ -182,7 +185,8 @@
     ],
     "sourceHint": "Википедия: Масть (карты)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "set-great-lakes",
@@ -235,7 +239,8 @@
     ],
     "sourceHint": "Википедия: Великие озёра",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-weekdays",
@@ -302,7 +307,8 @@
     ],
     "sourceHint": "Словарь",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "set-oceans",
@@ -362,7 +368,8 @@
     "sourceHint": "Международная гидрографическая организация",
     "reviewNote": "Южный океан признают не все источники: решить, оставлять ли набор в узких раундах.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "set-months",
@@ -464,7 +471,8 @@
     ],
     "sourceHint": "Словарь",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "set-chinese-zodiac",
@@ -576,7 +584,8 @@
     "sourceHint": "Википедия: Китайский календарь",
     "reviewNote": "Кот — вьетнамский вариант Кролика: решить, принимать ли.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-g7",
@@ -649,7 +658,8 @@
     "sourceHint": "Официальный сайт G7",
     "reviewNote": "«Англия» как алиас Великобритании — решить редактору.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-world-r60rgy",
@@ -692,7 +702,8 @@
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "reviewNote": "Североамериканские страны с самой протяжённой общей границей.",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "set-world-k7rmcm",
@@ -733,7 +744,8 @@
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "reviewNote": "Три государственных языка Бельгии.",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-world-edfjqd",
@@ -766,7 +778,8 @@
     "sourceTitle": "My Smartest Players vs. Impossible Quiz",
     "reviewNote": "Единственные две страны Южной Америки без выхода к морю.",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-world-34bnh4",
@@ -838,7 +851,8 @@
     "sourceTitle": "Семь чудес света — Википедия",
     "reviewNote": "Полный классический список семи чудес света.",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-world-q49tts",
@@ -880,6 +894,7 @@
     "sourceTitle": "Список самых высоких зданий мира — Википедия",
     "reviewNote": "Топ-3 высочайших зданий согласно Википедии.",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   }
 ]

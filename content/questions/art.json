@@ -19,7 +19,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Цветовой круг",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-art-zhda7s",
@@ -43,7 +44,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Лувр",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-art-capnqf",
@@ -64,7 +66,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Натюрморт",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-art-djfxz",
@@ -90,7 +93,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Ван Гог, Винсент",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-art-z5gx3z",
@@ -116,7 +120,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Постоянство памяти",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-art-1t1uouj",
@@ -145,7 +150,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Эрмитаж",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-art-n19o9i",
@@ -171,7 +177,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Давид (Микеланджело)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-art-1vqlft3",
@@ -195,7 +202,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Импрессионизм",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-art-l7f1v3",
@@ -221,7 +229,8 @@
     "openAnswer": false,
     "sourceHint": "Википедия: Чёрный квадрат",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-art-1q05i8",
@@ -242,7 +251,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Фреска",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-art-br4do7",
@@ -272,7 +282,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Hovhannes_Aivazovsky_-_The_Ninth_Wave_-_Google_Art_Project.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Hovhannes_Aivazovsky_-_The_Ninth_Wave_-_Google_Art_Project.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "au-art-xjj4im",
@@ -298,7 +309,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Сикстинская капелла",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-art-1ozffqt",
@@ -326,7 +338,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Кало, Фрида",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-art-1o48liu",
@@ -356,7 +369,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Vasily_Surikov_-_%D0%91%D0%BE%D1%8F%D1%80%D1%8B%D0%BD%D1%8F_%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2%D0%B0_-_Google_Art_Project.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Vasily_Surikov_-_%D0%91%D0%BE%D1%8F%D1%80%D1%8B%D0%BD%D1%8F_%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2%D0%B0_-_Google_Art_Project.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "au-art-ozk375",
@@ -383,7 +397,8 @@
     "sourceHint": "Википедия: Статуя Христа-Искупителя",
     "reviewNote": "В Лиссабоне есть похожая статуя Кришту-Рей — проверить, не путает ли это.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "wd-painting-Q12418",
@@ -415,7 +430,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg"
-    }
+    },
+    "daily": true
   },
   {
     "id": "wd-painting-Q45585",
@@ -447,7 +463,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
-    }
+    },
+    "daily": true
   },
   {
     "id": "wd-painting-Q185372",
@@ -479,7 +496,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/1665_Girl_with_a_Pearl_Earring.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:1665_Girl_with_a_Pearl_Earring.jpg"
-    }
+    },
+    "daily": true
   },
   {
     "id": "wd-painting-Q175036",
@@ -507,7 +525,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q175036",
     "sourceTitle": "Wikidata: Герника",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-painting-Q29530",
@@ -539,7 +558,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/La_Libert%C3%A9_guidant_le_peuple_-_Eug%C3%A8ne_Delacroix_-_Mus%C3%A9e_du_Louvre_Peintures_RF_129_-_apr%C3%A8s_restauration_2024.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:La_Libert%C3%A9_guidant_le_peuple_-_Eug%C3%A8ne_Delacroix_-_Mus%C3%A9e_du_Louvre_Peintures_RF_129_-_apr%C3%A8s_restauration_2024.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q219831",
@@ -569,7 +589,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/La_ronda_de_noche%2C_por_Rembrandt_van_Rijn.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:La_ronda_de_noche%2C_por_Rembrandt_van_Rijn.jpg"
-    }
+    },
+    "daily": true
   },
   {
     "id": "wd-painting-Q208758",
@@ -601,7 +622,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Las_Meninas%2C_by_Diego_Vel%C3%A1zquez%2C_from_Prado_in_Google_Earth.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Las_Meninas%2C_by_Diego_Vel%C3%A1zquez%2C_from_Prado_in_Google_Earth.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q151047",
@@ -629,7 +651,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q151047",
     "sourceTitle": "Wikidata: Рождение Венеры",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-painting-Q154469",
@@ -661,7 +684,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Van-willem-vincent-gogh-die-kartoffelesser-03850.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Van-willem-vincent-gogh-die-kartoffelesser-03850.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q328523",
@@ -693,7 +717,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Monet_-_Impression%2C_Sunrise.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Monet_-_Impression%2C_Sunrise.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q1752990",
@@ -725,7 +750,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Death_of_Socrates_MET_DP-13139-001.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:The_Death_of_Socrates_MET_DP-13139-001.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q698487",
@@ -757,7 +783,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg"
-    }
+    },
+    "daily": true
   },
   {
     "id": "wd-painting-Q474338",
@@ -789,7 +816,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lady_with_an_Ermine_-_Leonardo_da_Vinci_-_Google_Art_Project.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Lady_with_an_Ermine_-_Leonardo_da_Vinci_-_Google_Art_Project.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q321303",
@@ -817,7 +845,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q321303",
     "sourceTitle": "Wikidata: Сад земных наслаждений",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-painting-Q25729",
@@ -845,7 +874,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q25729",
     "sourceTitle": "Wikidata: Постоянство памяти",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-painting-Q311243",
@@ -877,7 +907,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Friedrich%2C_Caspar_David_-_Wanderer_%C3%BCber_dem_Nebelmeer.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Friedrich%2C_Caspar_David_-_Wanderer_%C3%BCber_dem_Nebelmeer.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q212616",
@@ -909,7 +940,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/JEAN_LOUIS_TH%C3%89ODORE_G%C3%89RICAULT_-_La_Balsa_de_la_Medusa_(Museo_del_Louvre%2C_1818-19).jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:JEAN_LOUIS_TH%C3%89ODORE_G%C3%89RICAULT_-_La_Balsa_de_la_Medusa_(Museo_del_Louvre%2C_1818-19).jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q478271",
@@ -941,7 +973,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Ilja_Jefimowitsch_Repin_-_Reply_of_the_Zaporozhian_Cossacks_-_Yorck.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Ilja_Jefimowitsch_Repin_-_Reply_of_the_Zaporozhian_Cossacks_-_Yorck.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q464782",
@@ -973,7 +1006,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Grant_Wood_-_American_Gothic_(1930).jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Grant_Wood_-_American_Gothic_(1930).jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q152509",
@@ -1001,7 +1035,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q152509",
     "sourceTitle": "Wikidata: Завтрак на траве",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-painting-Q152867",
@@ -1029,7 +1064,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q152867",
     "sourceTitle": "Wikidata: Маха обнажённая",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-painting-Q1091086",
@@ -1061,7 +1097,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/El_Tres_de_Mayo%2C_by_Francisco_de_Goya%2C_from_Prado_in_Google_Earth.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:El_Tres_de_Mayo%2C_by_Francisco_de_Goya%2C_from_Prado_in_Google_Earth.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q661378",
@@ -1091,7 +1128,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Rembrandt_-_The_Anatomy_Lesson_of_Dr_Nicolaes_Tulp.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Rembrandt_-_The_Anatomy_Lesson_of_Dr_Nicolaes_Tulp.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q167605",
@@ -1123,7 +1161,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Johannes_Vermeer_-_Het_melkmeisje_-_Google_Art_Project.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Johannes_Vermeer_-_Het_melkmeisje_-_Google_Art_Project.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q683274",
@@ -1155,7 +1194,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Renoir%2C_Pierre-Auguste_-_Dance_at_Le_Moulin_de_la_Galette%2C_1876.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Renoir%2C_Pierre-Auguste_-_Dance_at_Le_Moulin_de_la_Galette%2C_1876.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q220859",
@@ -1187,7 +1227,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Van_Eyck_-_Arnolfini_Portrait.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Van_Eyck_-_Arnolfini_Portrait.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q737062",
@@ -1215,7 +1256,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q737062",
     "sourceTitle": "Wikidata: Олимпия",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-painting-Q476458",
@@ -1247,7 +1289,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Le_Serment_des_Horaces_-_Jacques-Louis_David_-_Mus%C3%A9e_du_Louvre_Peintures_INV_3692_%3B_MR_1432.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Le_Serment_des_Horaces_-_Jacques-Louis_David_-_Mus%C3%A9e_du_Louvre_Peintures_INV_3692_%3B_MR_1432.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q549847",
@@ -1279,7 +1322,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Sandro_Botticelli_-_La_Primavera_-_Google_Art_Project.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Sandro_Botticelli_-_La_Primavera_-_Google_Art_Project.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-Q727875",
@@ -1305,7 +1349,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q727875",
     "sourceTitle": "Wikidata: Венера Урбинская",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-painting-Q500985",
@@ -1338,7 +1383,8 @@
     "image": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Pieter_Bruegel_the_Elder_-_Hunters_in_the_Snow_(Winter)_-_Google_Art_Project.jpg?width=640",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Pieter_Bruegel_the_Elder_-_Hunters_in_the_Snow_(Winter)_-_Google_Art_Project.jpg"
-    }
+    },
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q12418",
@@ -1362,7 +1408,8 @@
     "sourceTitle": "Wikidata: Мона Лиза",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
   },
   {
     "id": "wd-painting-work-Q45585",
@@ -1386,7 +1433,8 @@
     "sourceTitle": "Wikidata: Звёздная ночь",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
   },
   {
     "id": "wd-painting-work-Q185372",
@@ -1410,7 +1458,8 @@
     "sourceTitle": "Wikidata: Девушка с жемчужной серёжкой",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q175036",
@@ -1434,7 +1483,8 @@
     "sourceTitle": "Wikidata: Герника",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
   },
   {
     "id": "wd-painting-work-Q29530",
@@ -1458,7 +1508,8 @@
     "sourceTitle": "Wikidata: Свобода, ведущая народ",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q219831",
@@ -1482,7 +1533,8 @@
     "sourceTitle": "Wikidata: Ночной дозор",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
   },
   {
     "id": "wd-painting-work-Q208758",
@@ -1506,7 +1558,8 @@
     "sourceTitle": "Wikidata: Менины (Фрейлины)",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q151047",
@@ -1530,7 +1583,8 @@
     "sourceTitle": "Wikidata: Рождение Венеры",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
   },
   {
     "id": "wd-painting-work-Q328523",
@@ -1554,7 +1608,8 @@
     "sourceTitle": "Wikidata: Впечатление. Восходящее солнце",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
   },
   {
     "id": "wd-painting-work-Q1752990",
@@ -1578,7 +1633,8 @@
     "sourceTitle": "Wikidata: Смерть Сократа",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q698487",
@@ -1602,7 +1658,8 @@
     "sourceTitle": "Wikidata: Поцелуй",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
   },
   {
     "id": "wd-painting-work-Q321303",
@@ -1626,7 +1683,8 @@
     "sourceTitle": "Wikidata: Сад земных наслаждений",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q25729",
@@ -1650,7 +1708,8 @@
     "sourceTitle": "Wikidata: Постоянство памяти",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
   },
   {
     "id": "wd-painting-work-Q311243",
@@ -1674,7 +1733,8 @@
     "sourceTitle": "Wikidata: Странник над морем тумана",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q212616",
@@ -1698,7 +1758,8 @@
     "sourceTitle": "Wikidata: Плот «Медузы»",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q478271",
@@ -1722,7 +1783,8 @@
     "sourceTitle": "Wikidata: Запорожцы",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q464782",
@@ -1746,7 +1808,8 @@
     "sourceTitle": "Wikidata: Американская готика",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q152509",
@@ -1770,7 +1833,8 @@
     "sourceTitle": "Wikidata: Завтрак на траве",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q152867",
@@ -1794,7 +1858,8 @@
     "sourceTitle": "Wikidata: Маха обнажённая",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q683274",
@@ -1818,7 +1883,8 @@
     "sourceTitle": "Wikidata: Бал в Мулен де ла Галетт",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q220859",
@@ -1842,7 +1908,8 @@
     "sourceTitle": "Wikidata: Портрет четы Арнольфини",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q727875",
@@ -1866,7 +1933,8 @@
     "sourceTitle": "Wikidata: Венера Урбинская",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-painting-work-Q500985",
@@ -1890,7 +1958,8 @@
     "sourceTitle": "Wikidata: Охотники на снегу",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "er-art-1b7j31a",
@@ -1917,7 +1986,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-art-12b3p96",
@@ -1945,7 +2015,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-art-plkni1",
@@ -1973,7 +2044,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-art-86teib",
@@ -2001,7 +2073,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": false
   },
   {
     "id": "er-art-1d49w86",
@@ -2030,6 +2103,7 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": false
   }
 ]

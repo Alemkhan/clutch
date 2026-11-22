@@ -804,5 +804,186 @@
       "1969",
       "1965"
     ]
+  },
+  "ot-history-93arjt": {
+    "prompt": "What were the military rulers who governed Japan from the 12th to the 19th century called?",
+    "answer": "shoguns",
+    "accepted": [
+      "shoguns",
+      "shogun"
+    ],
+    "distractors": [
+      "samurai",
+      "ninja",
+      "daimyo"
+    ]
+  },
+  "ot-history-l8y626": {
+    "prompt": "The body of the Egyptian Sphinx is that of which animal?",
+    "answer": "a lion",
+    "accepted": [
+      "lion",
+      "a lion"
+    ],
+    "distractors": [
+      "a bull",
+      "a jackal",
+      "a falcon"
+    ]
+  },
+  "ot-history-1woksbj": {
+    "prompt": "In which modern country are the ruins of Pompeii?",
+    "answer": "Italy",
+    "accepted": [
+      "Italy"
+    ],
+    "distractors": [
+      "Greece",
+      "Turkey",
+      "Spain"
+    ]
+  },
+  "ot-history-1p2rpwr": {
+    "prompt": "In which country is the ancient city of Petra?",
+    "answer": "Jordan",
+    "accepted": [
+      "Jordan"
+    ],
+    "distractors": [
+      "Egypt",
+      "Syria",
+      "Lebanon"
+    ]
+  },
+  "ot-history-10o7nnx": {
+    "prompt": "How was Socrates executed?",
+    "answer": "by drinking poison (hemlock)",
+    "accepted": [
+      "by drinking poison (hemlock)",
+      "poison",
+      "hemlock",
+      "by poison"
+    ],
+    "distractors": [
+      "beheaded",
+      "burned",
+      "crucified"
+    ]
+  },
+  "ot-history-1ifqrvb": {
+    "prompt": "The Vedas are sacred texts of which religion?",
+    "answer": "Hinduism",
+    "accepted": [
+      "Hinduism"
+    ],
+    "distractors": [
+      "Buddhism",
+      "Jainism",
+      "Sikhism"
+    ]
+  },
+  "ot-history-1yjwqs4": {
+    "prompt": "What was Germany’s currency before the euro?",
+    "answer": "the mark",
+    "accepted": [
+      "mark",
+      "the mark",
+      "Deutsche Mark"
+    ],
+    "distractors": [
+      "the franc",
+      "the guilder",
+      "the krone"
+    ]
+  },
+  "ot-history-1kxa3vx": {
+    "prompt": "Who is famously (and probably wrongly) credited with “Let them eat cake”?",
+    "answer": "Marie Antoinette",
+    "accepted": [
+      "Marie Antoinette"
+    ],
+    "distractors": [
+      "Catherine de’ Medici",
+      "Elizabeth I",
+      "Joséphine de Beauharnais"
+    ]
+  },
+  "ot-history-1cl486i": {
+    "prompt": "After defeat in which war was the Ottoman Empire dissolved?",
+    "answer": "World War I",
+    "accepted": [
+      "World War I",
+      "First World War",
+      "WWI"
+    ],
+    "distractors": [
+      "the Crimean War",
+      "World War II",
+      "the Balkan War"
+    ]
+  },
+  "ot-history-1xpnd7i": {
+    "prompt": "In what year did the Chernobyl nuclear disaster happen?",
+    "answer": "1986",
+    "accepted": [
+      "1986"
+    ],
+    "distractors": [
+      "1991",
+      "1979",
+      "1983"
+    ]
+  },
+  "ot-history-1rk3qcv": {
+    "prompt": "Which civilisation is widely considered the oldest known?",
+    "answer": "Sumer",
+    "accepted": [
+      "Sumer",
+      "Sumerian",
+      "the Sumerians"
+    ],
+    "distractors": [
+      "Babylon",
+      "Assyria",
+      "Phoenicia"
+    ]
+  },
+  "ot-history-8ngwsa": {
+    "prompt": "On which date — the Ides of March — was Julius Caesar assassinated?",
+    "answer": "15 March",
+    "accepted": [
+      "15 March",
+      "March 15"
+    ],
+    "distractors": [
+      "1 April",
+      "7 January",
+      "25 December"
+    ]
+  },
+  "ot-history-1qgewzo": {
+    "prompt": "In what year was Napoleon crowned Emperor of the French?",
+    "answer": "1804",
+    "accepted": [
+      "1804"
+    ],
+    "distractors": [
+      "1799",
+      "1812",
+      "1815"
+    ]
+  },
+  "ot-history-106sshp": {
+    "prompt": "What was Genghis Khan’s birth name?",
+    "answer": "Temüjin",
+    "accepted": [
+      "Temujin",
+      "Temüjin"
+    ],
+    "distractors": [
+      "Ögedei",
+      "Kublai",
+      "Batu"
+    ]
   }
 }

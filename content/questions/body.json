@@ -18,7 +18,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Сердце",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-body-1sc4k0r",
@@ -40,7 +41,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Череп",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-body-1mcmw9r",
@@ -61,7 +63,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Кожа",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-body-1mipivi",
@@ -83,7 +86,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Сердце",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-body-1kholgk",
@@ -110,7 +114,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Витамин D",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-body-1heidvr",
@@ -136,7 +141,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Бедренная кость",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-body-16bm77o",
@@ -158,7 +164,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Зуб мудрости",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-body-18mclpq",
@@ -182,7 +189,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Стремечко",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-body-1dox92s",
@@ -204,7 +212,8 @@
     "explanationRu": "Желчный пузырь только хранит желчь.",
     "sourceHint": "Википедия: Желчь",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-body-y94ih1",
@@ -228,7 +237,8 @@
     "explanationRu": "Обычно 4,5–5,5 литра.",
     "sourceHint": "Википедия: Кровь",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-body-1be42pj",
@@ -252,7 +262,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Инсулин",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-body-1ehmylt",
@@ -274,7 +285,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Молочные зубы",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-body-6gshvc",
@@ -298,7 +310,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Меланин",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-body-1g12c8z",
@@ -321,7 +334,8 @@
     "openAnswer": false,
     "sourceHint": "Википедия: Группа крови",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-body-1tjvxyw",
@@ -347,7 +361,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Большая ягодичная мышца",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-body-55xn39",
@@ -375,7 +390,8 @@
     "sourceTitle": "Анатомия человека — Википедия",
     "origin": "notebooklm",
     "license": "original",
-    "reviewNote": "Заблокировано 2026-10-17: вопрос сам называет ответ («пателла») и просит латинское название, а ответ русский."
+    "reviewNote": "Заблокировано 2026-10-17: вопрос сам называет ответ («пателла») и просит латинское название, а ответ русский.",
+    "daily": true
   },
   {
     "id": "q-body-yp4k8t",
@@ -398,7 +414,8 @@
     "explanationRu": "Почки выполняют функции мочеобразования и поддержания гомеостаза.",
     "sourceTitle": "Анатомия человека — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-body-oojy64",
@@ -420,7 +437,8 @@
     "explanationRu": "Миология — учение о строении и функциях мышц.",
     "sourceTitle": "Анатомия человека — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-body-4qi5kf",
@@ -442,7 +460,8 @@
     "explanationRu": "Ангиология изучает кровеносные и лимфатические сосуды.",
     "sourceTitle": "Анатомия человека — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-body-ylyz5l",
@@ -464,7 +483,8 @@
     "explanationRu": "Печень — крупнейшая железа внешней секреции человека.",
     "sourceTitle": "Анатомия человека — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-body-vhsyru",
@@ -486,7 +506,8 @@
     "explanationRu": "Спланхнология — учение о внутренних органах (внутренностях).",
     "sourceTitle": "Анатомия человека — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-body-1d86x18",
@@ -521,7 +542,8 @@
     "origin": "authored",
     "license": "original",
     "explanationRu": "Палочки и колбочки — светочувствительные клетки сетчатки глаза. Палочки помогают видеть при слабом освещении, а колбочки отвечают за цветовое зрение и различение мелких деталей.",
-    "reviewNote": "Заблокировано 2026-11-01: вопрос смешивает орган и ткань; правильнее спрашивать о сетчатке, а не о «глазах»."
+    "reviewNote": "Заблокировано 2026-11-01: вопрос смешивает орган и ткань; правильнее спрашивать о сетчатке, а не о «глазах».",
+    "daily": true
   },
   {
     "id": "er-body-12k3t6k",
@@ -551,7 +573,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-body-1kgcxzf",
@@ -574,6 +597,158 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24",
+    "daily": true
+  },
+  {
+    "id": "ot-body-1cdjzee",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Примерно на сколько часов рассчитан циркадный ритм человека?",
+    "answerRu": "24",
+    "acceptedRu": [
+      "24",
+      "сутки",
+      "24 часа"
+    ],
+    "acceptedEn": [
+      "24 hours"
+    ],
+    "distractorsRu": [
+      "8",
+      "12",
+      "48"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-body-15fk6nr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Какой сустав образуют плечевая, лучевая и локтевая кости?",
+    "answerRu": "локтевой",
+    "acceptedRu": [
+      "локтевой",
+      "локоть",
+      "локтевой сустав"
+    ],
+    "acceptedEn": [
+      "elbow",
+      "the elbow"
+    ],
+    "distractorsRu": [
+      "коленный",
+      "плечевой",
+      "лучезапястный"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-body-11lw7hz",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Какой орган человека вырабатывает инсулин?",
+    "answerRu": "поджелудочная железа",
+    "acceptedRu": [
+      "поджелудочная железа",
+      "поджелудочная"
+    ],
+    "acceptedEn": [
+      "pancreas",
+      "the pancreas"
+    ],
+    "distractorsRu": [
+      "печень",
+      "почки",
+      "щитовидная железа"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-body-af3c5h",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Какой орган поражает глаукома?",
+    "answerRu": "глаза",
+    "acceptedRu": [
+      "глаза",
+      "глаз"
+    ],
+    "acceptedEn": [
+      "eyes",
+      "the eyes",
+      "eye"
+    ],
+    "distractorsRu": [
+      "уши",
+      "лёгкие",
+      "сердце"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-body-bftfjs",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Сколько зубов у взрослого человека вместе с зубами мудрости?",
+    "answerRu": "32",
+    "acceptedRu": [
+      "32",
+      "тридцать два"
+    ],
+    "acceptedEn": [
+      "thirty-two"
+    ],
+    "distractorsRu": [
+      "28",
+      "30",
+      "36"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
     "liveFrom": "2026-11-24"
   }
 ]

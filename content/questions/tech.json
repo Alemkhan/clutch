@@ -19,7 +19,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: iPhone",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-tech-1yr4ap8",
@@ -41,7 +42,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: @",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-tech-9jhq5b",
@@ -63,7 +65,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Байт",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-tech-dqkq8d",
@@ -89,7 +92,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Microsoft",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-tech-6clxgb",
@@ -116,7 +120,8 @@
     "sourceHint": "Википедия: Facebook",
     "reviewNote": "Сооснователей несколько — уточнить «главный создатель» или оставить только выбор.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-tech-ks8kpi",
@@ -139,7 +144,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: YouTube",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-tech-1l3jc5c",
@@ -161,7 +167,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Всемирная паутина",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-tech-dh9uot",
@@ -187,7 +194,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Центральный процессор",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-tech-ju6343",
@@ -213,7 +221,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Telegram",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-tech-x92qpw",
@@ -234,7 +243,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: iPhone (первое поколение)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-tech-14py7qz",
@@ -260,7 +270,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Программа-вымогатель",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-tech-db7ob9",
@@ -281,7 +292,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Мегабайт",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-tech-1scsj42",
@@ -307,7 +319,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Лавлейс, Ада",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-tech-lwok58",
@@ -330,7 +343,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Python",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-tech-q4i3xh",
@@ -354,7 +368,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: HTTPS",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-tech-13flmii",
@@ -381,7 +396,8 @@
     "explanationRu": "Чарльз Бэббидж описал устройство Аналитической машины в 1835 году.",
     "sourceTitle": "История вычислительной техники — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-tech-1u9i0gc",
@@ -408,7 +424,8 @@
     "explanationRu": "Графиня Ада Лавлейс написала первую алгоритмическую программу для вычисления чисел Бернулли.",
     "sourceTitle": "История вычислительной техники — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-tech-42b6gj",
@@ -430,7 +447,8 @@
     "explanationRu": "Малая электронно-счётная машина (МЭСМ) заработала в 1950 году.",
     "sourceTitle": "История вычислительной техники — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-tech-e9w22r",
@@ -453,7 +471,8 @@
     "explanationRu": "Взлом шифров «Энигмы» сыграл ключевую роль в разведке союзников.",
     "sourceTitle": "История вычислительной техники — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "er-tech-1ux91uo",
@@ -481,7 +500,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-tech-1y0gor4",
@@ -505,6 +525,33 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24",
+    "daily": true
+  },
+  {
+    "id": "ot-tech-zrmbr3",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Какая компания начиналась как интернет-магазин книг под названием Cadabra?",
+    "answerRu": "Amazon",
+    "acceptedRu": [
+      "Amazon",
+      "Амазон"
+    ],
+    "distractorsRu": [
+      "eBay",
+      "Alibaba",
+      "Google"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
     "liveFrom": "2026-11-24"
   }
 ]

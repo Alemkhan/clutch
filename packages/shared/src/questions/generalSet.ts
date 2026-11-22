@@ -11,6 +11,7 @@ import {
 } from '../generalPack';
 import { isEverywhere } from '../i18n/locale';
 import { createSeededRandom, hashSeed } from './seededRandom';
+import { LEGACY_POOL_ORDER } from './legacyPoolOrder';
 
 /**
  * Набор дня общего режима: смешанный, 70% записей пакета + 30% вопросов генераторов
@@ -184,9 +185,18 @@ const DAILY_FAMOUS_CREATORS = new Set([
   'Сандро Боттичелли', 'Рембрандт',
 ]);
 
-/** Годится ли запись пакета для забега дня (без учёта зон). */
+/**
+ * Годится ли запись пакета для забега дня (без учёта зон). У каждой записи контента стоит явный
+ * флаг `daily` — он и решает. Правила ниже — то, по чему флаг проставляется новым вопросам.
+ */
 export function isDailyEligible(record: PackRecord): boolean {
-  if ((record as { daily?: boolean }).daily === false) return false;
+  const flag = (record as { daily?: boolean }).daily;
+  if (typeof flag === 'boolean') return flag;
+  return dailyRulesAllow(record);
+}
+
+/** Правила забега дня: не экспертный, без зубрёжки, только общеизвестные произведения. */
+export function dailyRulesAllow(record: PackRecord): boolean {
   if (record.kind !== 'single') return true;
   if (record.difficulty === 'Expert') return false;
   const prompt = record.promptRu;
@@ -214,15 +224,31 @@ export const DAILY_SET_GENERATED: ReadonlyArray<{ category: 'geography' | 'histo
   { category: 'languages', count: 2 },
 ];
 
-/** Пул пакетной части забега дня для этого дня: записи с `liveFrom` позже этого дня не входят. */
+const LEGACY_POSITION = new Map(LEGACY_POOL_ORDER.map((entry, index) => {
+  const split = entry.lastIndexOf(':');
+  return [entry.slice(0, split), { index, topic: entry.slice(split + 1) as PackRecord['topic'] }];
+}));
+
+/**
+ * Пул пакетной части забега дня для этого дня: записи с `liveFrom` позже этого дня не входят.
+ *
+ * Перемешивание зависит от порядка записей. С DAILY_CURATED_FROM пул упорядочен по id — раскладка
+ * по файлам и темам больше не влияет на наборы. Более ранние дни собираются в замороженном порядке
+ * и с прежними темами (LEGACY_POOL_ORDER), чтобы уже сыгранные наборы не менялись.
+ */
 export function dailyPackPool(dateKey: string): PackRecord[] {
-  const pool = dateKey >= DAILY_CURATED_FROM
-    ? liveDailyRecords()
-    : dateKey >= EVERYWHERE_POOL_FROM ? liveEverywhereRecords() : livePackRecords();
-  return pool.filter((record) => {
+  const live = (record: PackRecord): boolean => {
     const from = (record as { liveFrom?: string }).liveFrom;
     return !from || from <= dateKey;
-  });
+  };
+  if (dateKey >= DAILY_CURATED_FROM) {
+    return liveDailyRecords().filter(live).sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  }
+  const pool = dateKey >= EVERYWHERE_POOL_FROM ? liveEverywhereRecords() : livePackRecords();
+  return pool
+    .filter((record) => live(record) && LEGACY_POSITION.has(record.id))
+    .map((record) => ({ ...record, topic: LEGACY_POSITION.get(record.id)!.topic }) as PackRecord)
+    .sort((a, b) => LEGACY_POSITION.get(a.id)!.index - LEGACY_POSITION.get(b.id)!.index);
 }
 
 /** Одобренные записи категории «История Казахстана», включая попавшие и в общий пул. */

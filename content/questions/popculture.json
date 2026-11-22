@@ -21,7 +21,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Капитан Америка",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-popculture-1jmq2q9",
@@ -48,7 +49,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Губка Боб Квадратные Штаны",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-popculture-1hd6vuz",
@@ -72,7 +74,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Гэндальф",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-popculture-1jmbdf7",
@@ -98,7 +101,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Альбус Дамблдор",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-popculture-y4n5dt",
@@ -124,7 +128,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Готэм-сити",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-popculture-13dp2in",
@@ -150,7 +155,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Человек-паук",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-popculture-1i780hh",
@@ -173,7 +179,8 @@
     "sourceHint": "Википедия: Minecraft",
     "reviewNote": "Позиция в рейтинге продаж меняется — проверить перед релизом.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-popculture-11u2qgw",
@@ -197,7 +204,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Криптон (DC Comics)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-popculture-1t0xr14",
@@ -223,7 +231,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Марио",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-popculture-tum3ix",
@@ -245,7 +254,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Ёж Соник",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-popculture-29tc83",
@@ -269,7 +279,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Танос",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-popculture-1r6e20q",
@@ -296,7 +307,8 @@
     "explanationRu": "Тетрис создал Алексей Пажитнов в Москве в 1984 году.",
     "sourceHint": "Википедия: Тетрис",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-popculture-1ivc52z",
@@ -320,7 +332,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Вестерос",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-popculture-n24bbp",
@@ -343,7 +356,8 @@
     "explanationRu": "Зодиакальный пояс делится на 12 равных 30-градусных секторов.",
     "sourceTitle": "Знаки зодиака — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-popculture-jhcxwf",
@@ -369,7 +383,8 @@
     "explanationRu": "Первым знаком зодиака традиционно является Овен.",
     "sourceTitle": "Знаки зодиака — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-popculture-1v4pudt",
@@ -395,7 +410,8 @@
     "explanationRu": "Рыбы замыкают 12-секторный зодиакальный круг.",
     "sourceTitle": "Знаки зодиака — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "er-popculture-hsrk77",
@@ -422,6 +438,35 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24",
+    "daily": true
+  },
+  {
+    "id": "ot-popculture-1iz6m01",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Medium",
+    "promptRu": "Сколько карт в стандартной колоде без джокеров?",
+    "answerRu": "52",
+    "acceptedRu": [
+      "52"
+    ],
+    "acceptedEn": [
+      "fifty-two"
+    ],
+    "distractorsRu": [
+      "36",
+      "32",
+      "54"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
     "liveFrom": "2026-11-24"
   }
 ]

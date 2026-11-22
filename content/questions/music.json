@@ -19,7 +19,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Классическая гитара",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-music-11i1ual",
@@ -41,7 +42,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Гамма",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-music-5qsji9",
@@ -65,7 +67,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: ABBA",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-music-gwy8y4",
@@ -93,7 +96,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Меркьюри, Фредди",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-music-10wjm18",
@@ -115,7 +119,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Нотный стан",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-music-1scw7zr",
@@ -141,7 +146,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Бетховен, Людвиг ван",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-music-nahhl7",
@@ -169,7 +175,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Пресли, Элвис",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-music-16sqjp9",
@@ -191,7 +198,8 @@
     "sourceHint": "Википедия: Орган (музыкальный инструмент)",
     "reviewNote": "Устойчивое выражение, но некоторые называют так рояль — решить, оставлять ли.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-music-yxj32r",
@@ -213,7 +221,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Фортепиано",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-music-o21a5s",
@@ -240,7 +249,8 @@
     "openAnswer": false,
     "sourceHint": "Википедия: Евгений Онегин (опера)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-music-1mt2kcj",
@@ -266,7 +276,8 @@
     "openAnswer": false,
     "sourceHint": "Википедия: Руслан и Людмила (опера)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-music-fsccbu",
@@ -287,7 +298,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Бас (голос)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-music-1bf703m",
@@ -308,7 +320,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Шерлок Холмс",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-music-10derae",
@@ -334,7 +347,8 @@
     "openAnswer": false,
     "sourceHint": "Википедия: Полёт шмеля",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-music-1jwzpdg",
@@ -356,7 +370,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Бетховен, Людвиг ван",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-music-19upfr1",
@@ -381,7 +396,8 @@
     "explanationRu": "Шопен родился в Польше и последние годы жил во Франции.",
     "sourceHint": "Википедия: Шопен, Фредерик",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-music-j2b68b",
@@ -403,7 +419,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: The Dark Side of the Moon",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "wd-music-Q185968",
@@ -431,7 +448,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q185968",
     "sourceTitle": "Wikidata: Кармен",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-music-Q5064",
@@ -459,7 +477,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q5064",
     "sourceTitle": "Wikidata: Волшебная флейта",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-music-Q199786",
@@ -487,7 +506,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q199786",
     "sourceTitle": "Wikidata: Лебединое озеро",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-music-Q186162",
@@ -515,7 +535,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q186162",
     "sourceTitle": "Wikidata: Травиата",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q19005",
@@ -543,7 +564,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q19005",
     "sourceTitle": "Wikidata: Мадам Баттерфляй",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q171277",
@@ -571,7 +593,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q171277",
     "sourceTitle": "Wikidata: Аида",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q201873",
@@ -599,7 +622,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q201873",
     "sourceTitle": "Wikidata: Свадьба Фигаро",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q192039",
@@ -627,7 +651,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q192039",
     "sourceTitle": "Wikidata: Дон Жуан",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q192941",
@@ -655,7 +680,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q192941",
     "sourceTitle": "Wikidata: Тоска",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q189234",
@@ -683,7 +709,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q189234",
     "sourceTitle": "Wikidata: Риголетто",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q190237",
@@ -711,7 +738,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q190237",
     "sourceTitle": "Wikidata: Кольцо нибелунга",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q11980",
@@ -739,7 +767,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q11980",
     "sourceTitle": "Wikidata: К Элизе",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-music-Q193705",
@@ -767,7 +796,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q193705",
     "sourceTitle": "Wikidata: Щелкунчик",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-music-Q207990",
@@ -795,7 +825,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q207990",
     "sourceTitle": "Wikidata: Турандот",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q1324254",
@@ -823,7 +854,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q1324254",
     "sourceTitle": "Wikidata: Тристан и Изольда",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q208659",
@@ -851,7 +883,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q208659",
     "sourceTitle": "Wikidata: Севильский цирюльник",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q221806",
@@ -879,7 +912,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q221806",
     "sourceTitle": "Wikidata: Сельская честь",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q193778",
@@ -907,7 +941,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q193778",
     "sourceTitle": "Wikidata: Фиделио",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q253716",
@@ -935,7 +970,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q253716",
     "sourceTitle": "Wikidata: Carmina Burana",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q208094",
@@ -963,7 +999,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q208094",
     "sourceTitle": "Wikidata: Пер Гюнт",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q248644",
@@ -991,7 +1028,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q248644",
     "sourceTitle": "Wikidata: Паяцы",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q206015",
@@ -1019,7 +1057,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q206015",
     "sourceTitle": "Wikidata: Весна священная",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q207732",
@@ -1047,7 +1086,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q207732",
     "sourceTitle": "Wikidata: Мессия",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q211971",
@@ -1075,7 +1115,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q211971",
     "sourceTitle": "Wikidata: Хорошо темперированный клавир",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q220340",
@@ -1103,7 +1144,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q220340",
     "sourceTitle": "Wikidata: Парсифаль",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q212776",
@@ -1131,7 +1173,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q212776",
     "sourceTitle": "Wikidata: 1812 год",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q482621",
@@ -1159,7 +1202,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q482621",
     "sourceTitle": "Wikidata: На прекрасном голубом Дунае",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q327331",
@@ -1187,7 +1231,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q327331",
     "sourceTitle": "Wikidata: Болеро",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q12008",
@@ -1215,7 +1260,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q12008",
     "sourceTitle": "Wikidata: Соната для фортепиано № 14",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q213728",
@@ -1243,7 +1289,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q213728",
     "sourceTitle": "Wikidata: Вариации Гольдберга",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q208224",
@@ -1271,7 +1318,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q208224",
     "sourceTitle": "Wikidata: Бранденбургские концерты",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q723407",
@@ -1299,7 +1347,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q723407",
     "sourceTitle": "Wikidata: Саломея",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q464930",
@@ -1327,7 +1376,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q464930",
     "sourceTitle": "Wikidata: Летучая мышь",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q12001",
@@ -1355,7 +1405,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q12001",
     "sourceTitle": "Wikidata: Марш Радецкого",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-music-Q471240",
@@ -1383,7 +1434,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q471240",
     "sourceTitle": "Wikidata: Кавалер розы",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "er-music-1quaj8b",
@@ -1411,7 +1463,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-music-7d1o27",
@@ -1437,7 +1490,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-music-13vsjk2",
@@ -1465,6 +1519,122 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24",
+    "daily": true
+  },
+  {
+    "id": "ot-music-1mwb13n",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Из какой страны песня «Gangnam Style»?",
+    "answerRu": "Южная Корея",
+    "acceptedRu": [
+      "Южная Корея",
+      "Корея"
+    ],
+    "acceptedEn": [
+      "South Korea",
+      "Korea"
+    ],
+    "distractorsRu": [
+      "Япония",
+      "Китай",
+      "Таиланд"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-music-1dbxpqz",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Какой медный духовой инструмент звучит ниже всех в оркестре?",
+    "answerRu": "туба",
+    "acceptedRu": [
+      "туба"
+    ],
+    "acceptedEn": [
+      "tuba",
+      "the tuba"
+    ],
+    "distractorsRu": [
+      "труба",
+      "тромбон",
+      "валторна"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-music-1kls7hc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "В какой группе играл гитарист Брайан Мэй?",
+    "answerRu": "Queen",
+    "acceptedRu": [
+      "Queen",
+      "Квин"
+    ],
+    "distractorsRu": [
+      "The Rolling Stones",
+      "Pink Floyd",
+      "Led Zeppelin"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-music-17hrnlj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Кто солист группы Coldplay?",
+    "answerRu": "Крис Мартин",
+    "acceptedRu": [
+      "Крис Мартин",
+      "Мартин"
+    ],
+    "acceptedEn": [
+      "Chris Martin",
+      "Martin"
+    ],
+    "distractorsRu": [
+      "Мэттью Беллами",
+      "Том Йорк",
+      "Боно"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
     "liveFrom": "2026-11-24"
   }
 ]

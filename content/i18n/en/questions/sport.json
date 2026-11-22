@@ -345,5 +345,81 @@
       "50",
       "35"
     ]
+  },
+  "ot-sport-112iur0": {
+    "prompt": "Which country produced footballers Pelé, Cafu and Roberto Carlos?",
+    "answer": "Brazil",
+    "accepted": [
+      "Brazil"
+    ],
+    "distractors": [
+      "Argentina",
+      "Portugal",
+      "Uruguay"
+    ]
+  },
+  "ot-sport-1hn6d08": {
+    "prompt": "Which driver was the first to win seven Formula 1 world titles?",
+    "answer": "Michael Schumacher",
+    "accepted": [
+      "Michael Schumacher",
+      "Schumacher"
+    ],
+    "distractors": [
+      "Ayrton Senna",
+      "Fernando Alonso",
+      "Sebastian Vettel"
+    ]
+  },
+  "ot-sport-1nxkb8": {
+    "prompt": "What was the score when Germany beat Brazil in the 2014 World Cup semi-final?",
+    "answer": "7–1",
+    "accepted": [
+      "7-1",
+      "7–1",
+      "7:1"
+    ],
+    "distractors": [
+      "3–0",
+      "4–2",
+      "5–1"
+    ]
+  },
+  "ot-sport-8qturb": {
+    "prompt": "Which country hosted the 2022 FIFA World Cup?",
+    "answer": "Qatar",
+    "accepted": [
+      "Qatar"
+    ],
+    "distractors": [
+      "UAE",
+      "Saudi Arabia",
+      "Japan"
+    ]
+  },
+  "ot-sport-fydx5a": {
+    "prompt": "Which national team won the 2018 FIFA World Cup?",
+    "answer": "France",
+    "accepted": [
+      "France"
+    ],
+    "distractors": [
+      "Croatia",
+      "Belgium",
+      "Germany"
+    ]
+  },
+  "ot-sport-oe8wv5": {
+    "prompt": "What is the highest belt in taekwondo?",
+    "answer": "black",
+    "accepted": [
+      "black",
+      "black belt"
+    ],
+    "distractors": [
+      "red",
+      "blue",
+      "brown"
+    ]
   }
 }

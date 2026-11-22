@@ -52,7 +52,8 @@
     "sourceTitle": "Кошачьи — Википедия",
     "reviewNote": "Современный биологический состав рода Panthera.",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-nature-yj3j44",
@@ -108,6 +109,7 @@
     "sourceTitle": "Список рек по длине — Википедия",
     "reviewNote": "Первая пятёрка мировых рек по протяжённости.",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   }
 ]

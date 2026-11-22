@@ -155,6 +155,12 @@ const NO_EN: Readonly<Record<string, string>> = {
   'er-history-1ea7p7y': 'число (1961): одинаково на всех языках',
   'er-math-5fgjgj': 'число (64): одинаково на всех языках',
   'er-math-2jkpvc': 'число (3,14 / 3.14): обе записи уже в acceptedRu',
+  'ot-film-1choc1i': 'латиница уже в acceptedRu (Batman)',
+  'ot-history-1qgewzo': 'число (1804): одинаково на всех языках',
+  'ot-history-1xpnd7i': 'число (1986): одинаково на всех языках',
+  'ot-music-1kls7hc': 'латиница уже в acceptedRu (Queen)',
+  'ot-tech-zrmbr3': 'латиница уже в acceptedRu (Amazon)',
+  'ot-sport-1nxkb8': 'счёт (7:1): одинаково на всех языках',
 };
 
 const openApproved = generalPackQuestions.filter((q) => q.editorialStatus === 'approved' && q.openAnswer);

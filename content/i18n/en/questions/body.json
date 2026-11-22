@@ -330,5 +330,71 @@
       "256",
       "306"
     ]
+  },
+  "ot-body-1cdjzee": {
+    "prompt": "Roughly how many hours long is the human circadian rhythm?",
+    "answer": "24",
+    "accepted": [
+      "24",
+      "24 hours"
+    ],
+    "distractors": [
+      "8",
+      "12",
+      "48"
+    ]
+  },
+  "ot-body-15fk6nr": {
+    "prompt": "Which joint do the humerus, radius and ulna form?",
+    "answer": "the elbow",
+    "accepted": [
+      "elbow",
+      "the elbow"
+    ],
+    "distractors": [
+      "the knee",
+      "the shoulder",
+      "the wrist"
+    ]
+  },
+  "ot-body-11lw7hz": {
+    "prompt": "Which organ produces insulin?",
+    "answer": "the pancreas",
+    "accepted": [
+      "pancreas",
+      "the pancreas"
+    ],
+    "distractors": [
+      "the liver",
+      "the kidneys",
+      "the thyroid"
+    ]
+  },
+  "ot-body-af3c5h": {
+    "prompt": "Which part of the body does glaucoma affect?",
+    "answer": "the eyes",
+    "accepted": [
+      "eyes",
+      "the eyes",
+      "eye"
+    ],
+    "distractors": [
+      "the ears",
+      "the lungs",
+      "the heart"
+    ]
+  },
+  "ot-body-bftfjs": {
+    "prompt": "How many teeth does an adult have, including wisdom teeth?",
+    "answer": "32",
+    "accepted": [
+      "32",
+      "thirty-two"
+    ],
+    "distractors": [
+      "28",
+      "30",
+      "36"
+    ]
   }
 }

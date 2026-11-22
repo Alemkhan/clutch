@@ -21,7 +21,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Пирамиды Гизы",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-169lml3",
@@ -42,7 +43,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Вторая мировая война",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-16fuh3w",
@@ -66,7 +68,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Колизей",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-17lssla",
@@ -92,7 +95,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Вашингтон, Джордж",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-1fnvjvt",
@@ -113,7 +117,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Берлинская стена",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-1tbcslq",
@@ -140,7 +145,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Александр Македонский",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-17cu51r",
@@ -161,7 +167,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Христофор Колумб",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-50rvij",
@@ -186,7 +193,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Чичен-Ица",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-16zjtpm",
@@ -207,7 +215,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Распад СССР",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-qatax4",
@@ -235,7 +244,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Чингисхан",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-6cntke",
@@ -263,7 +273,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Великий шёлковый путь",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-voi72j",
@@ -290,7 +301,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Цинь Шихуанди",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-1d17d7w",
@@ -315,7 +327,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Византийская империя",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-11mjnyl",
@@ -347,7 +360,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Пётр I",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-1iihvzq",
@@ -368,7 +382,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Первая мировая война",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-1d518ln",
@@ -392,7 +407,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Ганнибал",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-1kusu7k",
@@ -417,7 +433,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Клеопатра",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-history-1qbgnsx",
@@ -442,7 +459,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Кругосветное плавание Магеллана",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-history-jc3oub",
@@ -463,7 +481,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Великая хартия вольностей",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-history-19m55d4",
@@ -488,7 +507,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Тадж-Махал",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-history-1llm2vo",
@@ -512,7 +532,8 @@
     "sourceHint": "Википедия: Иван III",
     "reviewNote": "Формулировка длинная — сократить или оставить только выбор из вариантов.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-1iw6l1b",
@@ -539,7 +560,8 @@
     "explanationRu": "Во время англо-американской войны 1812–1815 годов при Джеймсе Мэдисоне был сожжён Вашингтон.",
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-1de4xev",
@@ -566,34 +588,8 @@
     "explanationRu": "Джеральд Форд сменил Спиро Агню, а затем Ричарда Никсона после Уотергейта.",
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
-  },
-  {
-    "id": "q-history-unk65i",
-    "editorialStatus": "approved",
-    "kind": "single",
-    "topic": "history",
-    "difficulty": "Hard",
-    "promptRu": "Кто написал знаменитую антиутопию «1984»?",
-    "answerRu": "Джордж Оруэлл",
-    "acceptedRu": [
-      "Джордж Оруэлл",
-      "Оруэлл"
-    ],
-    "acceptedEn": [
-      "George Orwell",
-      "Orwell"
-    ],
-    "distractorsRu": [
-      "Олдос Хаксли",
-      "Рэй Брэдбери",
-      "Герберт Уэллс"
-    ],
-    "openAnswer": false,
-    "explanationRu": "Роман «1984» был опубликован Джорджем Оруэллом в 1949 году.",
-    "sourceTitle": "Geniuses vs. Impossible Quiz",
-    "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-146g4ms",
@@ -619,7 +615,8 @@
     "explanationRu": "«Санта-Мария» была крупнейшим судом из трёх кораблей экспедиции Колумба.",
     "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-history-1g5fmiy",
@@ -642,7 +639,8 @@
     "explanationRu": "СССР запустил «Спутник-1» 4 октября 1957 года.",
     "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-history-1e815i8",
@@ -669,7 +667,8 @@
     "explanationRu": "Гарри Трумэн отдавал приказ об атомных бомбардировках Хиросимы и Нагасаки.",
     "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-history-d1vko9",
@@ -696,7 +695,8 @@
     "explanationRu": "Отто Франк единственный из семьи выжил в узлах концлагерей и опубликовал дневник дочери.",
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-18vxe8p",
@@ -721,7 +721,8 @@
     "explanationRu": "Великий шёлковый путь был проложен во II веке до н. э. во время династии Хань.",
     "sourceTitle": "Великий шёлковый путь — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-18idhj5",
@@ -748,7 +749,8 @@
     "explanationRu": "Посланник Чжан Цянь отправился на Запад при императоре У-ди династии Хань.",
     "sourceTitle": "Великий шёлковый путь — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-1fl22i9",
@@ -771,7 +773,8 @@
     "explanationRu": "Вторая мировая война началась 1 сентября 1939 года с вторжения Германии в Польшу.",
     "sourceTitle": "Хронология Второй мировой войны — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-history-1rzytmm",
@@ -796,7 +799,8 @@
     "explanationRu": "Германия атаковала Польшу, что заставило Великобританию и Францию объявить войну Германии.",
     "sourceTitle": "Хронология Второй мировой войны — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-history-1pyf7kl",
@@ -821,7 +825,8 @@
     "explanationRu": "Ялтинская (Крымская) конференция проходила в Ливадийском дворце.",
     "sourceTitle": "Хронология Второй мировой войны — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-1u1w71s",
@@ -846,7 +851,8 @@
     "explanationRu": "Колосс Родосский простоял всего около 50 лет и был разрушен землетрясением.",
     "sourceTitle": "Семь чудес света — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-history-tmpy27",
@@ -871,7 +877,8 @@
     "explanationRu": "Висячие сады Семирамиды связывают с вавилонским царём Навуходоносором II.",
     "sourceTitle": "Семь чудес света — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-history-p24l7z",
@@ -896,7 +903,8 @@
     "explanationRu": "Фидий создал статую Зевса из золота и слоновой кости во II половине V века до н. э.",
     "sourceTitle": "Семь чудес света — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-1s9qup9",
@@ -922,7 +930,8 @@
     "explanationRu": "Благодаря острову Фарос маяки во многих европейских языках называют фарами.",
     "sourceTitle": "Семь чудес света — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-kq9d3q",
@@ -947,7 +956,8 @@
     "explanationRu": "Руины Галикарнаса находятся в современном турецком городе Бодрум.",
     "sourceTitle": "Семь чудес света — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-5bqaoo",
@@ -973,7 +983,8 @@
     "explanationRu": "Франсуа Доминик Туссен-Лувертюр стал лидером восстания рабов на Сан-Доминго.",
     "sourceTitle": "Name the 10 Countries @jakelyonsgeo @soluna16",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-uwehqi",
@@ -999,7 +1010,8 @@
     "explanationRu": "25 апреля 1974 года гражданские лица вставляли гвоздики в стволы винтовок солдат.",
     "sourceTitle": "Name the 10 Countries @jakelyonsgeo @soluna16",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-10f3ouv",
@@ -1024,7 +1036,8 @@
     "explanationRu": "Пол Пот провел масштабные репрессии и насильственную аграризацию страны.",
     "sourceTitle": "Name the 10 Countries @jakelyonsgeo @soluna16",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-67lw0s",
@@ -1049,7 +1062,8 @@
     "explanationRu": "До 1972 года государство официально именовалось Доминион Цейлон.",
     "sourceTitle": "My Smartest Players vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-1k78qxw",
@@ -1072,7 +1086,8 @@
     "explanationRu": "Акт о безоговорочной капитуляции Германии вступил в силу в мае 1945 года.",
     "sourceTitle": "Хронология Второй мировой войны — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-1oegbmi",
@@ -1099,7 +1114,8 @@
     "explanationRu": "Церемония подписания проходила в Токийском заливе на линкоре «Миссури».",
     "sourceTitle": "Хронология Второй мировой войны — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-4z2uex",
@@ -1122,7 +1138,8 @@
     "explanationRu": "Елизавета II скончалась 8 сентября 2022 года в замке Балморал.",
     "sourceTitle": "Last Person Standing Wins $500 (Ages 8-45 Quiz)",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-history-eo6xz1",
@@ -1147,7 +1164,8 @@
     "explanationRu": "Стоунхендж — внесённый в список ЮНЕСКО археологический памятник.",
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-history-mhfb9j",
@@ -1174,7 +1192,8 @@
     "explanationRu": "Колизей вмещал более 50 тысяч зрителей.",
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-history-14cenmj",
@@ -1199,7 +1218,8 @@
     "explanationRu": "Пизанская башня получила всемирную известность благодаря непреднамеренному наклону.",
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-history-1mla4ow",
@@ -1207,7 +1227,7 @@
     "kind": "single",
     "topic": "history",
     "difficulty": "Hard",
-    "promptRu": "Какая европейская революционная организация и война освобождения привели к созданию современного государства Бангладеш в 1971 году?",
+    "promptRu": "В результате какой войны в 1971 году появилось государство Бангладеш?",
     "answerRu": "Война за независимость Бангладеш",
     "acceptedRu": [
       "Война за независимость Бангладеш",
@@ -1222,7 +1242,9 @@
     "explanationRu": "В 1971 году Восточный Пакистан добился независимости и стал Бангладеш.",
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false,
+    "reviewNote": "Текст исправлен 2026-11-23: в прежней формулировке была фактическая ошибка."
   },
   {
     "id": "q-history-vdfgtj",
@@ -1230,7 +1252,7 @@
     "kind": "single",
     "topic": "history",
     "difficulty": "Hard",
-    "promptRu": "Какое название носил островный штат Индийского океана до того, как в 1971 году получил независимость?",
+    "promptRu": "Какое островное государство Персидского залива получило независимость от Великобритании в 1971 году?",
     "answerRu": "Бахрейн",
     "acceptedRu": [
       "Бахрейн"
@@ -1247,7 +1269,9 @@
     "explanationRu": "Бахрейн являлся британским протекторатом до 1971 года.",
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false,
+    "reviewNote": "Текст исправлен 2026-11-23: в прежней формулировке была фактическая ошибка."
   },
   {
     "id": "au-history-15crjqv",
@@ -1276,7 +1300,8 @@
     "origin": "authored",
     "license": "original",
     "explanationRu": "Древний Вавилон находился на территории современного Ирака, примерно в 85 километрах к югу от Багдада. Вавилон был столицей могущественного Вавилонского царства, а Багдад сегодня является столицей Ирака.",
-    "reviewNote": "Заблокировано 2026-11-01: «недалеко» — субъективная формулировка, не годится для единственного ответа."
+    "reviewNote": "Заблокировано 2026-11-01: «недалеко» — субъективная формулировка, не годится для единственного ответа.",
+    "daily": true
   },
   {
     "id": "au-history-k0jh6g",
@@ -1305,7 +1330,8 @@
     "origin": "authored",
     "license": "original",
     "explanationRu": "Далай-ламы на протяжении нескольких столетий совмещали духовное и политическое руководство Тибетом. В 1959 году XIV Далай-лама покинул Тибет и отправился в изгнание в Индию. В 2011 году он официально передал свои оставшиеся политические полномочия избранному руководству тибетской администрации в изгнании.",
-    "reviewNote": "Заблокировано 2026-11-01: формулировка о политическом управлении Тибетом требует нейтральной исторической даты и точного источника."
+    "reviewNote": "Заблокировано 2026-11-01: формулировка о политическом управлении Тибетом требует нейтральной исторической даты и точного источника.",
+    "daily": true
   },
   {
     "id": "er-history-q4ee6j",
@@ -1333,7 +1359,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-history-1ncpfb9",
@@ -1363,7 +1390,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": false
   },
   {
     "id": "er-history-1vo1vxx",
@@ -1392,7 +1420,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-history-8ykl08",
@@ -1418,7 +1447,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-history-1lb8lxj",
@@ -1446,7 +1476,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": false
   },
   {
     "id": "er-history-ho26bp",
@@ -1474,7 +1505,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-history-1ea7p7y",
@@ -1497,6 +1529,424 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24",
+    "daily": true
+  },
+  {
+    "id": "ot-history-93arjt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Как назывались военные правители Японии, фактически правившие страной с XII по XIX век?",
+    "answerRu": "сёгуны",
+    "acceptedRu": [
+      "сёгуны",
+      "сёгун",
+      "шогун",
+      "шогуны"
+    ],
+    "acceptedEn": [
+      "shoguns",
+      "shogun"
+    ],
+    "distractorsRu": [
+      "самураи",
+      "ниндзя",
+      "даймё"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-l8y626",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Тело какого животного у египетского Сфинкса?",
+    "answerRu": "льва",
+    "acceptedRu": [
+      "лев",
+      "льва"
+    ],
+    "acceptedEn": [
+      "lion",
+      "a lion"
+    ],
+    "distractorsRu": [
+      "быка",
+      "шакала",
+      "сокола"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-1woksbj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "В какой современной стране находятся руины Помпей?",
+    "answerRu": "Италия",
+    "acceptedRu": [
+      "Италия"
+    ],
+    "acceptedEn": [
+      "Italy"
+    ],
+    "distractorsRu": [
+      "Греция",
+      "Турция",
+      "Испания"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-1p2rpwr",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "В какой стране находится древний город Петра?",
+    "answerRu": "Иордания",
+    "acceptedRu": [
+      "Иордания"
+    ],
+    "acceptedEn": [
+      "Jordan"
+    ],
+    "distractorsRu": [
+      "Египет",
+      "Сирия",
+      "Ливан"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-10o7nnx",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Как был казнён Сократ?",
+    "answerRu": "выпил яд (цикуту)",
+    "acceptedRu": [
+      "выпил яд (цикуту)",
+      "яд",
+      "цикута",
+      "отравлен",
+      "выпил яд"
+    ],
+    "acceptedEn": [
+      "poison",
+      "hemlock",
+      "by poison"
+    ],
+    "distractorsRu": [
+      "обезглавлен",
+      "сожжён",
+      "распят"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-1ifqrvb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Священными текстами какой религии являются Веды?",
+    "answerRu": "индуизма",
+    "acceptedRu": [
+      "индуизм",
+      "индуизма"
+    ],
+    "acceptedEn": [
+      "Hinduism"
+    ],
+    "distractorsRu": [
+      "буддизма",
+      "джайнизма",
+      "сикхизма"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-1yjwqs4",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Как называлась валюта Германии до перехода на евро?",
+    "answerRu": "марка",
+    "acceptedRu": [
+      "марка",
+      "немецкая марка",
+      "дойчмарка"
+    ],
+    "acceptedEn": [
+      "mark",
+      "the mark",
+      "Deutsche Mark"
+    ],
+    "distractorsRu": [
+      "франк",
+      "гульден",
+      "крона"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-1kxa3vx",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Кому приписывают фразу «Если у них нет хлеба, пусть едят пирожные»?",
+    "answerRu": "Марии-Антуанетте",
+    "acceptedRu": [
+      "Мария-Антуанетта",
+      "Марии-Антуанетте"
+    ],
+    "acceptedEn": [
+      "Marie Antoinette"
+    ],
+    "distractorsRu": [
+      "Екатерине Медичи",
+      "Елизавете I",
+      "Жозефине Богарне"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-1cl486i",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "После поражения в какой войне распалась Османская империя?",
+    "answerRu": "Первой мировой",
+    "acceptedRu": [
+      "Первая мировая",
+      "Первой мировой",
+      "Первая мировая война"
+    ],
+    "acceptedEn": [
+      "World War I",
+      "First World War",
+      "WWI"
+    ],
+    "distractorsRu": [
+      "Крымской",
+      "Второй мировой",
+      "Балканской"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-1xpnd7i",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "В каком году произошла авария на Чернобыльской АЭС?",
+    "answerRu": "1986",
+    "acceptedRu": [
+      "1986"
+    ],
+    "distractorsRu": [
+      "1991",
+      "1979",
+      "1983"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-1rk3qcv",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Какую цивилизацию считают древнейшей из известных?",
+    "answerRu": "шумерскую",
+    "acceptedRu": [
+      "шумерская",
+      "шумерскую",
+      "Шумер",
+      "шумеры"
+    ],
+    "acceptedEn": [
+      "Sumer",
+      "Sumerian",
+      "the Sumerians"
+    ],
+    "distractorsRu": [
+      "вавилонскую",
+      "ассирийскую",
+      "финикийскую"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-8ngwsa",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "В какой день, по римскому календарю «мартовские иды», был убит Юлий Цезарь?",
+    "answerRu": "15 марта",
+    "acceptedRu": [
+      "15 марта"
+    ],
+    "acceptedEn": [
+      "15 March",
+      "March 15"
+    ],
+    "distractorsRu": [
+      "1 апреля",
+      "7 января",
+      "25 декабря"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-1qgewzo",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "В каком году Наполеон Бонапарт стал императором французов?",
+    "answerRu": "1804",
+    "acceptedRu": [
+      "1804"
+    ],
+    "distractorsRu": [
+      "1799",
+      "1812",
+      "1815"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-history-106sshp",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Какое имя Чингисхан носил от рождения?",
+    "answerRu": "Темучин",
+    "acceptedRu": [
+      "Темучин",
+      "Тэмуджин",
+      "Темуджин"
+    ],
+    "acceptedEn": [
+      "Temujin",
+      "Temüjin"
+    ],
+    "distractorsRu": [
+      "Угэдэй",
+      "Хубилай",
+      "Бату"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
     "liveFrom": "2026-11-24"
   }
 ]

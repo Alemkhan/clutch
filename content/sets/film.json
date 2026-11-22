@@ -31,7 +31,8 @@
     ],
     "sourceHint": "Википедия: Братья Люмьер",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-avengers-2012",
@@ -97,7 +98,8 @@
     ],
     "sourceHint": "Википедия: Мстители (фильм, 2012)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-film-5tpdup",
@@ -165,6 +167,7 @@
     "sourceTitle": "Список самых кассовых фильмов — Википедия",
     "reviewNote": "Фильмы-двухмиллиардники по кассовым сборам.",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   }
 ]

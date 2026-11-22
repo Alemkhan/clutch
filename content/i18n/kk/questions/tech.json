@@ -282,5 +282,18 @@
       "World Web Window",
       "Web Wireless Way"
     ]
+  },
+  "ot-tech-zrmbr3": {
+    "prompt": "Қай компания Cadabra атты интернет кітап дүкені ретінде басталды?",
+    "answer": "Amazon",
+    "accepted": [
+      "Amazon",
+      "Амазон"
+    ],
+    "distractors": [
+      "eBay",
+      "Alibaba",
+      "Google"
+    ]
   }
 }

@@ -53,8 +53,8 @@ const SET_FILES: Record<PackTopic, unknown> = {
 
 const DIFFICULTIES = ['Easy', 'Medium', 'Hard', 'Expert'];
 const STATUSES = ['pending', 'approved', 'blocked'];
-const ORIGINS = ['authored', 'wikidata', 'notebooklm'];
-const LICENSES = ['CC0', 'original'];
+const ORIGINS = ['authored', 'wikidata', 'notebooklm', 'opentdb'];
+const LICENSES = ['CC0', 'original', 'CC-BY-SA-4.0'];
 
 type Json = Record<string, unknown>;
 
@@ -130,6 +130,7 @@ function setsOf(topic: PackTopic, raw: unknown): PackSet[] {
     common(r, topic, where);
     text(r, 'titleRu', where);
     text(r, 'mcPromptRu', where);
+    if (r.daily !== undefined && typeof r.daily !== 'boolean') fail(where, '«daily» must be true or false');
     texts(r, 'nonMembersRu', where, 3);
     if (!Array.isArray(r.members) || r.members.length < 2) fail(where, '«members» must list at least 2 answers');
     (r.members as Json[]).forEach((m, j) => {

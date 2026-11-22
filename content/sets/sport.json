@@ -54,7 +54,8 @@
     ],
     "sourceHint": "Олимпийская хартия, олимпийский символ",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-chess-pieces",
@@ -119,6 +120,7 @@
     ],
     "sourceHint": "Правила шахмат ФИДЕ",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   }
 ]

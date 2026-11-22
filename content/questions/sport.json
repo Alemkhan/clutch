@@ -19,7 +19,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Олимпийские кольца",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-8ve7ki",
@@ -41,7 +42,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Баскетбол",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-6e612i",
@@ -62,7 +64,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Шахматы",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-gelogu",
@@ -83,7 +86,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Бадминтон",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-1a5i25f",
@@ -105,7 +109,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Летние Олимпийские игры",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-1djvqe1",
@@ -127,7 +132,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Футбол",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-1yb67t7",
@@ -152,7 +158,8 @@
     "sourceHint": "Википедия: Чемпионат мира по футболу",
     "reviewNote": "Проверить итог ЧМ-2026: при новом чемпионе счёт может сравняться.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-1pmvzk5",
@@ -175,7 +182,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Лёгкая атлетика",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-1o4qm3q",
@@ -199,7 +207,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Летние Олимпийские игры 1980",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-ss1zeq",
@@ -226,7 +235,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Болт, Усэйн",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-1e9lafc",
@@ -252,7 +262,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Кубок Стэнли",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-3sfvu6",
@@ -274,7 +285,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Волейбол",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-1y6nhe6",
@@ -300,7 +312,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Каспаров, Гарри Кимович",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-1s64hfr",
@@ -322,7 +335,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Плавательный бассейн",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-sport-afoq59",
@@ -343,7 +357,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Летние Олимпийские игры 1896",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-sport-1upvhy5",
@@ -367,7 +382,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Летние Олимпийские игры 1896",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-sport-14zjih7",
@@ -389,7 +405,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Сумо",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-sport-10nzs1n",
@@ -412,7 +429,8 @@
     "explanationRu": "До 1980-х чемпионские бои шли 15 раундов.",
     "sourceHint": "Википедия: Бокс",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-sport-p4kqt2",
@@ -440,7 +458,8 @@
     "origin": "authored",
     "license": "original",
     "explanationRu": "Бейсбол считается национальным видом спорта Доминиканской Республики и занимает особое место в культуре страны. Доминиканские бейсболисты известны во всём мире, а многие выступают в американской Главной лиге бейсбола (MLB).",
-    "reviewNote": "Заблокировано 2026-11-01: источник подтверждает популярность спорта, но не официальный статус «национального»."
+    "reviewNote": "Заблокировано 2026-11-01: источник подтверждает популярность спорта, но не официальный статус «национального».",
+    "daily": true
   },
   {
     "id": "au-sport-scp7uv",
@@ -475,7 +494,8 @@
     "origin": "authored",
     "license": "original",
     "explanationRu": "США — абсолютный лидер по количеству олимпийских медалей в лёгкой атлетике. По данным Olympedia, американские спортсмены завоевали 864 медали: 358 золотых, 281 серебряную и 225 бронзовых.",
-    "reviewNote": "Заблокировано 2026-11-01: «больше всего олимпийских медалей» зависит от метода подсчёта и обновляемой статистики."
+    "reviewNote": "Заблокировано 2026-11-01: «больше всего олимпийских медалей» зависит от метода подсчёта и обновляемой статистики.",
+    "daily": true
   },
   {
     "id": "er-sport-1ncepit",
@@ -502,7 +522,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-sport-jhrus9",
@@ -530,7 +551,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-sport-1n1q0om",
@@ -558,7 +580,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-sport-rekg8i",
@@ -585,7 +608,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-sport-1tb0qpa",
@@ -612,7 +636,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": false
   },
   {
     "id": "er-sport-1w8sovx",
@@ -641,6 +666,178 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24",
+    "daily": true
+  },
+  {
+    "id": "ot-sport-112iur0",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Какая страна воспитала футболистов Пеле, Кафу и Роберто Карлоса?",
+    "answerRu": "Бразилия",
+    "acceptedRu": [
+      "Бразилия"
+    ],
+    "acceptedEn": [
+      "Brazil"
+    ],
+    "distractorsRu": [
+      "Аргентина",
+      "Португалия",
+      "Уругвай"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-sport-1hn6d08",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Какой гонщик семь раз становился чемпионом «Формулы-1» и первым достиг этого рекорда?",
+    "answerRu": "Михаэль Шумахер",
+    "acceptedRu": [
+      "Михаэль Шумахер",
+      "Шумахер"
+    ],
+    "acceptedEn": [
+      "Michael Schumacher",
+      "Schumacher"
+    ],
+    "distractorsRu": [
+      "Айртон Сенна",
+      "Фернандо Алонсо",
+      "Себастьян Феттель"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-sport-1nxkb8",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "С каким счётом Германия обыграла Бразилию в полуфинале чемпионата мира 2014 года?",
+    "answerRu": "7:1",
+    "acceptedRu": [
+      "7:1",
+      "7-1",
+      "7 1"
+    ],
+    "distractorsRu": [
+      "3:0",
+      "4:2",
+      "5:1"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-sport-8qturb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Какая страна принимала чемпионат мира по футболу 2022 года?",
+    "answerRu": "Катар",
+    "acceptedRu": [
+      "Катар"
+    ],
+    "acceptedEn": [
+      "Qatar"
+    ],
+    "distractorsRu": [
+      "ОАЭ",
+      "Саудовская Аравия",
+      "Япония"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-sport-fydx5a",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Какая сборная выиграла чемпионат мира по футболу 2018 года?",
+    "answerRu": "Франция",
+    "acceptedRu": [
+      "Франция"
+    ],
+    "acceptedEn": [
+      "France"
+    ],
+    "distractorsRu": [
+      "Хорватия",
+      "Бельгия",
+      "Германия"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-sport-oe8wv5",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Какой пояс в тхэквондо — высший?",
+    "answerRu": "чёрный",
+    "acceptedRu": [
+      "чёрный",
+      "черный"
+    ],
+    "acceptedEn": [
+      "black",
+      "black belt"
+    ],
+    "distractorsRu": [
+      "красный",
+      "синий",
+      "коричневый"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
     "liveFrom": "2026-11-24"
   }
 ]

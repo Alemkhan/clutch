@@ -218,5 +218,18 @@
       "the Flintstones",
       "the Belchers"
     ]
+  },
+  "ot-popculture-1iz6m01": {
+    "prompt": "How many cards are in a standard deck without jokers?",
+    "answer": "52",
+    "accepted": [
+      "52",
+      "fifty-two"
+    ],
+    "distractors": [
+      "36",
+      "32",
+      "54"
+    ]
   }
 }

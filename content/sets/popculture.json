@@ -45,7 +45,8 @@
     ],
     "sourceHint": "Википедия: Хогвартс",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-tmnt",
@@ -95,7 +96,8 @@
     ],
     "sourceHint": "Википедия: Черепашки-ниндзя",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-popculture-h8fbmh",
@@ -138,6 +140,7 @@
     "sourceTitle": "Знаки зодиака — Википедия",
     "reviewNote": "Три знака зодиака огненной стихии.",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   }
 ]

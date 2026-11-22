@@ -756,5 +756,56 @@
       "cello",
       "guitar"
     ]
+  },
+  "ot-music-1mwb13n": {
+    "prompt": "Which country does the song “Gangnam Style” come from?",
+    "answer": "South Korea",
+    "accepted": [
+      "South Korea",
+      "Korea"
+    ],
+    "distractors": [
+      "Japan",
+      "China",
+      "Thailand"
+    ]
+  },
+  "ot-music-1dbxpqz": {
+    "prompt": "Which brass instrument has the lowest pitch in an orchestra?",
+    "answer": "tuba",
+    "accepted": [
+      "tuba",
+      "the tuba"
+    ],
+    "distractors": [
+      "trumpet",
+      "trombone",
+      "French horn"
+    ]
+  },
+  "ot-music-1kls7hc": {
+    "prompt": "Which band was Brian May the guitarist of?",
+    "answer": "Queen",
+    "accepted": [
+      "Queen"
+    ],
+    "distractors": [
+      "The Rolling Stones",
+      "Pink Floyd",
+      "Led Zeppelin"
+    ]
+  },
+  "ot-music-17hrnlj": {
+    "prompt": "Who is the lead singer of Coldplay?",
+    "answer": "Chris Martin",
+    "accepted": [
+      "Chris Martin",
+      "Martin"
+    ],
+    "distractors": [
+      "Matt Bellamy",
+      "Thom Yorke",
+      "Bono"
+    ]
   }
 }

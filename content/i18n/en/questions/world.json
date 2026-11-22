@@ -311,7 +311,7 @@
     "explanation": "Copenhagen is on the Danish island of Zealand."
   },
   "q-world-1sznspn": {
-    "prompt": "Which Asian city is home to the largest number of Gujarati speakers?",
+    "prompt": "Which Indian city is home to the largest number of Gujarati speakers?",
     "answer": "Ahmedabad",
     "accepted": [
       "Ahmedabad",
@@ -603,7 +603,7 @@
     "explanation": "Guarani is an Indigenous language and a state language of Paraguay."
   },
   "q-world-qzzdm6": {
-    "prompt": "Nelson Mandela was a leader from which African country, at the time of Portugal's 1974 Carnation Revolution?",
+    "prompt": "Nelson Mandela became president of which African country?",
     "answer": "South Africa",
     "accepted": [
       "South Africa",
@@ -796,6 +796,244 @@
       "Madrid",
       "Rome",
       "Lisbon"
+    ]
+  },
+  "ot-world-qjrc0f": {
+    "prompt": "In which country was the Hyundai Motor Company founded?",
+    "answer": "South Korea",
+    "accepted": [
+      "South Korea",
+      "Korea"
+    ],
+    "distractors": [
+      "Japan",
+      "China",
+      "Taiwan"
+    ]
+  },
+  "ot-world-3a7cgc": {
+    "prompt": "Outside Japan itself, which country has the most people of Japanese descent?",
+    "answer": "Brazil",
+    "accepted": [
+      "Brazil"
+    ],
+    "distractors": [
+      "China",
+      "South Korea",
+      "Peru"
+    ]
+  },
+  "ot-world-16u4qge": {
+    "prompt": "How many stars are on the flag of the European Union?",
+    "answer": "12",
+    "accepted": [
+      "12",
+      "twelve"
+    ],
+    "distractors": [
+      "10",
+      "15",
+      "27"
+    ]
+  },
+  "ot-world-ab8exr": {
+    "prompt": "Which canal connects the Mediterranean and the Red Sea?",
+    "answer": "Suez Canal",
+    "accepted": [
+      "Suez Canal",
+      "Suez"
+    ],
+    "distractors": [
+      "Panama Canal",
+      "Kiel Canal",
+      "Corinth Canal"
+    ]
+  },
+  "ot-world-11owf6": {
+    "prompt": "In which country do the Petronas Twin Towers stand?",
+    "answer": "Malaysia",
+    "accepted": [
+      "Malaysia"
+    ],
+    "distractors": [
+      "Singapore",
+      "UAE",
+      "Indonesia"
+    ]
+  },
+  "ot-world-b9tvdi": {
+    "prompt": "About what share of the Earth’s surface is covered by water?",
+    "answer": "70%",
+    "accepted": [
+      "70%",
+      "70",
+      "about 70%"
+    ],
+    "distractors": [
+      "30%",
+      "50%",
+      "90%"
+    ]
+  },
+  "ot-world-1wlemvi": {
+    "prompt": "Greenland is part of which kingdom?",
+    "answer": "Denmark",
+    "accepted": [
+      "Denmark",
+      "Kingdom of Denmark"
+    ],
+    "distractors": [
+      "Norway",
+      "Sweden",
+      "Iceland"
+    ]
+  },
+  "ot-world-1c7wmc1": {
+    "prompt": "How many countries does Mexico border?",
+    "answer": "three",
+    "accepted": [
+      "three",
+      "3"
+    ],
+    "distractors": [
+      "two",
+      "four",
+      "one"
+    ]
+  },
+  "ot-world-15jj6rr": {
+    "prompt": "Which European city is known as the “City of Light”?",
+    "answer": "Paris",
+    "accepted": [
+      "Paris"
+    ],
+    "distractors": [
+      "Rome",
+      "Vienna",
+      "Prague"
+    ]
+  },
+  "ot-world-1f9slu7": {
+    "prompt": "In which Indian city is the Taj Mahal?",
+    "answer": "Agra",
+    "accepted": [
+      "Agra"
+    ],
+    "distractors": [
+      "Delhi",
+      "Mumbai",
+      "Jaipur"
+    ]
+  },
+  "ot-world-6z18bv": {
+    "prompt": "Which small country lies between France and Spain?",
+    "answer": "Andorra",
+    "accepted": [
+      "Andorra"
+    ],
+    "distractors": [
+      "Monaco",
+      "San Marino",
+      "Liechtenstein"
+    ]
+  },
+  "ot-world-1wvjw4u": {
+    "prompt": "What is the peninsula that makes up most of Turkey called?",
+    "answer": "Anatolia",
+    "accepted": [
+      "Anatolia",
+      "Asia Minor"
+    ],
+    "distractors": [
+      "the Balkans",
+      "Arabia",
+      "the Apennines"
+    ]
+  },
+  "ot-world-5xy4x9": {
+    "prompt": "Which country has the largest Muslim population?",
+    "answer": "Indonesia",
+    "accepted": [
+      "Indonesia"
+    ],
+    "distractors": [
+      "Pakistan",
+      "Saudi Arabia",
+      "Egypt"
+    ]
+  },
+  "ot-world-1nvlvey": {
+    "prompt": "The Pyrenees form the border between which two countries?",
+    "answer": "France and Spain",
+    "accepted": [
+      "France and Spain"
+    ],
+    "distractors": [
+      "Italy and Switzerland",
+      "Spain and Portugal",
+      "France and Italy"
+    ]
+  },
+  "ot-world-23bt4e": {
+    "prompt": "In which country is the World Health Organization headquartered?",
+    "answer": "Switzerland",
+    "accepted": [
+      "Switzerland",
+      "Geneva"
+    ],
+    "distractors": [
+      "France",
+      "Belgium",
+      "the Netherlands"
+    ]
+  },
+  "ot-world-1hropt1": {
+    "prompt": "Which country has the world’s only non-rectangular flag?",
+    "answer": "Nepal",
+    "accepted": [
+      "Nepal"
+    ],
+    "distractors": [
+      "Bhutan",
+      "Switzerland",
+      "Vatican City"
+    ]
+  },
+  "ot-world-yfw9pg": {
+    "prompt": "What is the largest lake in Africa?",
+    "answer": "Lake Victoria",
+    "accepted": [
+      "Victoria",
+      "Lake Victoria"
+    ],
+    "distractors": [
+      "Lake Tanganyika",
+      "Lake Malawi",
+      "Lake Chad"
+    ]
+  },
+  "ot-world-1pfq62l": {
+    "prompt": "Lake Titicaca lies between which two countries?",
+    "answer": "Peru and Bolivia",
+    "accepted": [
+      "Peru and Bolivia"
+    ],
+    "distractors": [
+      "Chile and Argentina",
+      "Colombia and Ecuador",
+      "Brazil and Paraguay"
+    ]
+  },
+  "ot-world-befu3e": {
+    "prompt": "What is the capital of Turkey?",
+    "answer": "Ankara",
+    "accepted": [
+      "Ankara"
+    ],
+    "distractors": [
+      "Istanbul",
+      "Izmir",
+      "Antalya"
     ]
   }
 }

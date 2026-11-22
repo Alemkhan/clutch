@@ -279,5 +279,57 @@
       "solstice"
     ],
     "explanation": "An equinox happens twice a year, around March and September, when the Sun crosses the celestial equator. Day and night then last close to 12 hours across most of Earth, though not always equal to the minute."
+  },
+  "ot-space-16hnlht": {
+    "prompt": "Which mission was the first to land people on the Moon?",
+    "answer": "Apollo 11",
+    "accepted": [
+      "Apollo 11"
+    ],
+    "distractors": [
+      "Vostok 1",
+      "Mercury 7",
+      "Gemini 7"
+    ]
+  },
+  "ot-space-1ma3kom": {
+    "prompt": "What lies at the centre of our galaxy?",
+    "answer": "a supermassive black hole",
+    "accepted": [
+      "black hole",
+      "a black hole",
+      "a supermassive black hole"
+    ],
+    "distractors": [
+      "a white dwarf",
+      "a quasar",
+      "a wormhole"
+    ]
+  },
+  "ot-space-knyszn": {
+    "prompt": "Between which planets is the main asteroid belt?",
+    "answer": "Mars and Jupiter",
+    "accepted": [
+      "Mars and Jupiter",
+      "between Mars and Jupiter"
+    ],
+    "distractors": [
+      "Earth and Mars",
+      "Jupiter and Saturn",
+      "Venus and Earth"
+    ]
+  },
+  "ot-space-14frqyy": {
+    "prompt": "How many crewed Moon landings have there been?",
+    "answer": "six",
+    "accepted": [
+      "six",
+      "6"
+    ],
+    "distractors": [
+      "one",
+      "three",
+      "ten"
+    ]
   }
 }

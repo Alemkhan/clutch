@@ -28,6 +28,7 @@ export const m = defineMessages({
     telegramOnly: 'Ежедневные сообщения доступны внутри Telegram.',
     player: 'Игрок',
     emojiCredit: 'Графика эмодзи на карточках-приглашениях — Twemoji, CC-BY 4.0',
+    triviaCredit: 'Часть вопросов — Open Trivia Database (CC BY-SA 4.0), в переводе и адаптации',
   },
   en: {
     dailyAria: (on: boolean) => `Daily challenges ${on ? 'on' : 'off'}`,
@@ -56,6 +57,7 @@ export const m = defineMessages({
     telegramOnly: 'Daily messages are available inside Telegram.',
     player: 'Player',
     emojiCredit: 'Emoji graphics on invite cards: Twemoji, CC-BY 4.0',
+    triviaCredit: 'Some questions: Open Trivia Database (CC BY-SA 4.0), translated and adapted',
   },
   kk: {
     dailyAria: (on: boolean) => `Күнделікті тапсырмалар ${on ? 'қосулы' : 'өшірулі'}`,
@@ -84,5 +86,6 @@ export const m = defineMessages({
     telegramOnly: 'Күнделікті хабарламалар Telegram ішінде қолжетімді.',
     player: 'Ойыншы',
     emojiCredit: 'Шақыру карточкаларындағы эмодзи графикасы — Twemoji, CC-BY 4.0',
+    triviaCredit: 'Сұрақтардың бір бөлігі — Open Trivia Database (CC BY-SA 4.0), аударылып, бейімделген',
   },
 });

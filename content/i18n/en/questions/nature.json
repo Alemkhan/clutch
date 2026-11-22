@@ -500,5 +500,30 @@
       "pine",
       "balsa"
     ]
+  },
+  "ot-nature-4x5qwu": {
+    "prompt": "What was the name of the first mammal cloned from an adult cell?",
+    "answer": "Dolly the sheep",
+    "accepted": [
+      "Dolly",
+      "Dolly the sheep"
+    ],
+    "distractors": [
+      "Laika the dog",
+      "Sam the monkey",
+      "Betty the cat"
+    ]
+  },
+  "ot-nature-wi8rnt": {
+    "prompt": "What does entomology study?",
+    "answer": "insects",
+    "accepted": [
+      "insects"
+    ],
+    "distractors": [
+      "fish",
+      "birds",
+      "fungi"
+    ]
   }
 }

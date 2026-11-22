@@ -44,7 +44,8 @@
     ],
     "sourceHint": "Википедия: Планета земной группы",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-giant-planets",
@@ -91,7 +92,8 @@
     ],
     "sourceHint": "Википедия: Планета-гигант",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-dwarf-planets",
@@ -145,7 +147,8 @@
     ],
     "sourceHint": "Международный астрономический союз: список карликовых планет",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-solar-planets",
@@ -220,7 +223,8 @@
     ],
     "sourceHint": "Международный астрономический союз, резолюция 2006 года",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "set-zodiac",
@@ -323,6 +327,7 @@
     "sourceHint": "Википедия: Знаки зодиака",
     "reviewNote": "Змееносец — созвездие на эклиптике, но не знак: возможна путаница.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   }
 ]

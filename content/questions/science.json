@@ -23,7 +23,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Фотосинтез",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-1i6qjj",
@@ -45,7 +46,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Вода",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-1ucndre",
@@ -67,7 +69,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Термометр",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-1llnkk2",
@@ -89,7 +92,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Вода",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-elli83",
@@ -113,7 +117,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Электрон",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-imaol5",
@@ -141,7 +146,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Ампер",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-wd9zzc",
@@ -165,7 +171,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Биология",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-wnaoqu",
@@ -191,7 +198,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Закон всемирного тяготения",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-14z31xs",
@@ -217,7 +225,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Периодическая система химических элементов",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-2d6ixn",
@@ -244,7 +253,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Гравитация",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-1fpuwsv",
@@ -269,7 +279,8 @@
     "explanationRu": "Азота в воздухе около 78 %, кислорода около 21 %.",
     "sourceHint": "Википедия: Атмосфера Земли",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-19dpw4m",
@@ -296,7 +307,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Герц",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-12ceqxi",
@@ -320,7 +332,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Эквивалентность массы и энергии",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-1ji2q4",
@@ -344,7 +357,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Серебро",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-1cclbo3",
@@ -369,7 +383,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Сублимация (физика)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-dnb0z8",
@@ -395,7 +410,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Пенициллин",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-science-fmivjb",
@@ -419,7 +435,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Распространённость химических элементов",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-science-931ach",
@@ -445,7 +462,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Беккерель",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-science-wa50jg",
@@ -471,7 +489,8 @@
     "explanationRu": "Точно −273,15 °C. −459 — это абсолютный ноль по Фаренгейту.",
     "sourceHint": "Википедия: Абсолютный ноль температуры",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-science-6c8jcc",
@@ -498,7 +517,8 @@
     "sourceHint": "Википедия: Естественный отбор",
     "reviewNote": "Уоллес пришёл к идее одновременно — проверить, не нужен ли он в допустимых ответах.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "wd-element-H",
@@ -524,7 +544,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q556",
     "sourceTitle": "Wikidata: водород",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-O",
@@ -550,7 +571,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q629",
     "sourceTitle": "Wikidata: кислород",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-C",
@@ -576,7 +598,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q623",
     "sourceTitle": "Wikidata: углерод",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Fe",
@@ -602,7 +625,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q677",
     "sourceTitle": "Wikidata: железо",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Au",
@@ -628,7 +652,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q897",
     "sourceTitle": "Wikidata: золото",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Ag",
@@ -654,7 +679,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q1090",
     "sourceTitle": "Wikidata: серебро",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-N",
@@ -680,7 +706,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q627",
     "sourceTitle": "Wikidata: азот",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-He",
@@ -706,7 +733,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q560",
     "sourceTitle": "Wikidata: гелий",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Na",
@@ -732,7 +760,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q658",
     "sourceTitle": "Wikidata: натрий",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Cu",
@@ -758,7 +787,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q753",
     "sourceTitle": "Wikidata: медь",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Ca",
@@ -784,7 +814,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q706",
     "sourceTitle": "Wikidata: кальций",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-K",
@@ -810,7 +841,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q703",
     "sourceTitle": "Wikidata: калий",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Cl",
@@ -836,7 +868,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q688",
     "sourceTitle": "Wikidata: хлор",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Al",
@@ -863,7 +896,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q663",
     "sourceTitle": "Wikidata: алюминий",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Zn",
@@ -889,7 +923,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q758",
     "sourceTitle": "Wikidata: цинк",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Hg",
@@ -915,7 +950,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q925",
     "sourceTitle": "Wikidata: ртуть",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Pb",
@@ -941,7 +977,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q708",
     "sourceTitle": "Wikidata: свинец",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Sn",
@@ -967,7 +1004,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q1096",
     "sourceTitle": "Wikidata: олово",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-U",
@@ -993,7 +1031,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q1098",
     "sourceTitle": "Wikidata: уран",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Mg",
@@ -1019,7 +1058,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q660",
     "sourceTitle": "Wikidata: магний",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Si",
@@ -1045,7 +1085,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q670",
     "sourceTitle": "Wikidata: кремний",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-P",
@@ -1071,7 +1112,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q674",
     "sourceTitle": "Wikidata: фосфор",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-S",
@@ -1098,7 +1140,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q682",
     "sourceTitle": "Wikidata: сера",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-I",
@@ -1124,7 +1167,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q1103",
     "sourceTitle": "Wikidata: иод",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Ni",
@@ -1150,7 +1194,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q744",
     "sourceTitle": "Wikidata: никель",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Ti",
@@ -1176,7 +1221,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q716",
     "sourceTitle": "Wikidata: титан",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Ne",
@@ -1202,7 +1248,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q654",
     "sourceTitle": "Wikidata: неон",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Ar",
@@ -1228,7 +1275,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q696",
     "sourceTitle": "Wikidata: аргон",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Pt",
@@ -1254,7 +1302,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q880",
     "sourceTitle": "Wikidata: платина",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": true
   },
   {
     "id": "wd-element-Li",
@@ -1280,7 +1329,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q568",
     "sourceTitle": "Wikidata: литий",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-F",
@@ -1306,7 +1356,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q650",
     "sourceTitle": "Wikidata: фтор",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Cr",
@@ -1332,7 +1383,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q725",
     "sourceTitle": "Wikidata: хром",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Co",
@@ -1358,7 +1410,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q740",
     "sourceTitle": "Wikidata: кобальт",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Mn",
@@ -1384,7 +1437,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q731",
     "sourceTitle": "Wikidata: марганец",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-W",
@@ -1411,7 +1465,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q743",
     "sourceTitle": "Wikidata: вольфрам",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Ra",
@@ -1437,7 +1492,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q1128",
     "sourceTitle": "Wikidata: радий",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Rn",
@@ -1463,7 +1519,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q1133",
     "sourceTitle": "Wikidata: радон",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Ba",
@@ -1489,7 +1546,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q1112",
     "sourceTitle": "Wikidata: барий",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Sr",
@@ -1515,7 +1573,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q938",
     "sourceTitle": "Wikidata: стронций",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Br",
@@ -1541,7 +1600,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q879",
     "sourceTitle": "Wikidata: бром",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Kr",
@@ -1567,7 +1627,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q888",
     "sourceTitle": "Wikidata: криптон",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Xe",
@@ -1593,7 +1654,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q1106",
     "sourceTitle": "Wikidata: ксенон",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "wd-element-Pu",
@@ -1619,7 +1681,8 @@
     "sourceUrl": "https://www.wikidata.org/wiki/Q1102",
     "sourceTitle": "Wikidata: плутоний",
     "origin": "wikidata",
-    "license": "CC0"
+    "license": "CC0",
+    "daily": false
   },
   {
     "id": "q-science-q33dx2",
@@ -1642,7 +1705,8 @@
     "explanationRu": "Солнце состоит примерно на 73% из водорода и на 25% из гелия.",
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-science-1ys8w78",
@@ -1667,7 +1731,8 @@
     "explanationRu": "Плазма — частично или полностью ионизованный газ.",
     "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-science-elkaof",
@@ -1694,7 +1759,8 @@
     "explanationRu": "Бозон Хиггса был открыт на Большом адронном коллайдере в 2012 году.",
     "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-science-xco3gf",
@@ -1721,7 +1787,8 @@
     "explanationRu": "Один герц равен одному исполнению цикла в секунду.",
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "wd-element-number-1",
@@ -1745,7 +1812,8 @@
     "sourceTitle": "Wikidata: водород",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
   },
   {
     "id": "wd-element-name-symbol-H",
@@ -1769,7 +1837,8 @@
     "sourceTitle": "Wikidata: водород",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-2",
@@ -1793,7 +1862,8 @@
     "sourceTitle": "Wikidata: гелий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
   },
   {
     "id": "wd-element-name-symbol-He",
@@ -1817,7 +1887,8 @@
     "sourceTitle": "Wikidata: гелий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-3",
@@ -1841,7 +1912,8 @@
     "sourceTitle": "Wikidata: литий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Li",
@@ -1865,7 +1937,8 @@
     "sourceTitle": "Wikidata: литий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-4",
@@ -1889,7 +1962,8 @@
     "sourceTitle": "Wikidata: бериллий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Be",
@@ -1913,7 +1987,8 @@
     "sourceTitle": "Wikidata: бериллий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-5",
@@ -1937,7 +2012,8 @@
     "sourceTitle": "Wikidata: бор",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-B",
@@ -1961,7 +2037,8 @@
     "sourceTitle": "Wikidata: бор",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-6",
@@ -1985,7 +2062,8 @@
     "sourceTitle": "Wikidata: углерод",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
   },
   {
     "id": "wd-element-name-symbol-C",
@@ -2009,7 +2087,8 @@
     "sourceTitle": "Wikidata: углерод",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-7",
@@ -2033,7 +2112,8 @@
     "sourceTitle": "Wikidata: азот",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-N",
@@ -2057,7 +2137,8 @@
     "sourceTitle": "Wikidata: азот",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-8",
@@ -2081,7 +2162,8 @@
     "sourceTitle": "Wikidata: кислород",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
   },
   {
     "id": "wd-element-name-symbol-O",
@@ -2105,7 +2187,8 @@
     "sourceTitle": "Wikidata: кислород",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-9",
@@ -2129,7 +2212,8 @@
     "sourceTitle": "Wikidata: фтор",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-F",
@@ -2153,7 +2237,8 @@
     "sourceTitle": "Wikidata: фтор",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-10",
@@ -2177,7 +2262,8 @@
     "sourceTitle": "Wikidata: неон",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ne",
@@ -2201,7 +2287,8 @@
     "sourceTitle": "Wikidata: неон",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-11",
@@ -2225,7 +2312,8 @@
     "sourceTitle": "Wikidata: натрий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Na",
@@ -2249,7 +2337,8 @@
     "sourceTitle": "Wikidata: натрий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-12",
@@ -2273,7 +2362,8 @@
     "sourceTitle": "Wikidata: магний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Mg",
@@ -2297,7 +2387,8 @@
     "sourceTitle": "Wikidata: магний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-13",
@@ -2321,7 +2412,8 @@
     "sourceTitle": "Wikidata: алюминий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Al",
@@ -2345,7 +2437,8 @@
     "sourceTitle": "Wikidata: алюминий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-14",
@@ -2369,7 +2462,8 @@
     "sourceTitle": "Wikidata: кремний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Si",
@@ -2393,7 +2487,8 @@
     "sourceTitle": "Wikidata: кремний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-15",
@@ -2417,7 +2512,8 @@
     "sourceTitle": "Wikidata: фосфор",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-P",
@@ -2441,7 +2537,8 @@
     "sourceTitle": "Wikidata: фосфор",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-16",
@@ -2465,7 +2562,8 @@
     "sourceTitle": "Wikidata: сера",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-S",
@@ -2489,7 +2587,8 @@
     "sourceTitle": "Wikidata: сера",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-17",
@@ -2513,7 +2612,8 @@
     "sourceTitle": "Wikidata: хлор",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Cl",
@@ -2537,7 +2637,8 @@
     "sourceTitle": "Wikidata: хлор",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-18",
@@ -2561,7 +2662,8 @@
     "sourceTitle": "Wikidata: аргон",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ar",
@@ -2585,7 +2687,8 @@
     "sourceTitle": "Wikidata: аргон",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-19",
@@ -2609,7 +2712,8 @@
     "sourceTitle": "Wikidata: калий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-K",
@@ -2633,7 +2737,8 @@
     "sourceTitle": "Wikidata: калий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-20",
@@ -2657,7 +2762,8 @@
     "sourceTitle": "Wikidata: кальций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ca",
@@ -2681,7 +2787,8 @@
     "sourceTitle": "Wikidata: кальций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-21",
@@ -2705,7 +2812,8 @@
     "sourceTitle": "Wikidata: скандий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Sc",
@@ -2729,7 +2837,8 @@
     "sourceTitle": "Wikidata: скандий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-22",
@@ -2753,7 +2862,8 @@
     "sourceTitle": "Wikidata: титан",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ti",
@@ -2777,7 +2887,8 @@
     "sourceTitle": "Wikidata: титан",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-23",
@@ -2801,7 +2912,8 @@
     "sourceTitle": "Wikidata: ванадий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-V",
@@ -2825,7 +2937,8 @@
     "sourceTitle": "Wikidata: ванадий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-24",
@@ -2849,7 +2962,8 @@
     "sourceTitle": "Wikidata: хром",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Cr",
@@ -2873,7 +2987,8 @@
     "sourceTitle": "Wikidata: хром",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-25",
@@ -2897,7 +3012,8 @@
     "sourceTitle": "Wikidata: марганец",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Mn",
@@ -2921,7 +3037,8 @@
     "sourceTitle": "Wikidata: марганец",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-26",
@@ -2945,7 +3062,8 @@
     "sourceTitle": "Wikidata: железо",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Fe",
@@ -2969,7 +3087,8 @@
     "sourceTitle": "Wikidata: железо",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-27",
@@ -2993,7 +3112,8 @@
     "sourceTitle": "Wikidata: кобальт",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Co",
@@ -3017,7 +3137,8 @@
     "sourceTitle": "Wikidata: кобальт",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-28",
@@ -3041,7 +3162,8 @@
     "sourceTitle": "Wikidata: никель",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ni",
@@ -3065,7 +3187,8 @@
     "sourceTitle": "Wikidata: никель",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-29",
@@ -3089,7 +3212,8 @@
     "sourceTitle": "Wikidata: медь",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Cu",
@@ -3113,7 +3237,8 @@
     "sourceTitle": "Wikidata: медь",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-30",
@@ -3137,7 +3262,8 @@
     "sourceTitle": "Wikidata: цинк",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Zn",
@@ -3161,7 +3287,8 @@
     "sourceTitle": "Wikidata: цинк",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-31",
@@ -3185,7 +3312,8 @@
     "sourceTitle": "Wikidata: галлий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ga",
@@ -3209,7 +3337,8 @@
     "sourceTitle": "Wikidata: галлий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-32",
@@ -3233,7 +3362,8 @@
     "sourceTitle": "Wikidata: германий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ge",
@@ -3257,7 +3387,8 @@
     "sourceTitle": "Wikidata: германий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-33",
@@ -3281,7 +3412,8 @@
     "sourceTitle": "Wikidata: мышьяк",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-As",
@@ -3305,7 +3437,8 @@
     "sourceTitle": "Wikidata: мышьяк",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-34",
@@ -3329,7 +3462,8 @@
     "sourceTitle": "Wikidata: селен",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Se",
@@ -3353,7 +3487,8 @@
     "sourceTitle": "Wikidata: селен",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-35",
@@ -3377,7 +3512,8 @@
     "sourceTitle": "Wikidata: бром",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Br",
@@ -3401,7 +3537,8 @@
     "sourceTitle": "Wikidata: бром",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-36",
@@ -3425,7 +3562,8 @@
     "sourceTitle": "Wikidata: криптон",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Kr",
@@ -3449,7 +3587,8 @@
     "sourceTitle": "Wikidata: криптон",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-37",
@@ -3473,7 +3612,8 @@
     "sourceTitle": "Wikidata: рубидий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Rb",
@@ -3497,7 +3637,8 @@
     "sourceTitle": "Wikidata: рубидий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-38",
@@ -3521,7 +3662,8 @@
     "sourceTitle": "Wikidata: стронций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Sr",
@@ -3545,7 +3687,8 @@
     "sourceTitle": "Wikidata: стронций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-39",
@@ -3569,7 +3712,8 @@
     "sourceTitle": "Wikidata: иттрий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Y",
@@ -3593,7 +3737,8 @@
     "sourceTitle": "Wikidata: иттрий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-40",
@@ -3617,7 +3762,8 @@
     "sourceTitle": "Wikidata: цирконий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Zr",
@@ -3641,7 +3787,8 @@
     "sourceTitle": "Wikidata: цирконий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-41",
@@ -3665,7 +3812,8 @@
     "sourceTitle": "Wikidata: ниобий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Nb",
@@ -3689,7 +3837,8 @@
     "sourceTitle": "Wikidata: ниобий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-42",
@@ -3713,7 +3862,8 @@
     "sourceTitle": "Wikidata: молибден",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Mo",
@@ -3737,7 +3887,8 @@
     "sourceTitle": "Wikidata: молибден",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-43",
@@ -3761,7 +3912,8 @@
     "sourceTitle": "Wikidata: технеций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Tc",
@@ -3785,7 +3937,8 @@
     "sourceTitle": "Wikidata: технеций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-44",
@@ -3809,7 +3962,8 @@
     "sourceTitle": "Wikidata: рутений",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ru",
@@ -3833,7 +3987,8 @@
     "sourceTitle": "Wikidata: рутений",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-45",
@@ -3857,7 +4012,8 @@
     "sourceTitle": "Wikidata: родий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Rh",
@@ -3881,7 +4037,8 @@
     "sourceTitle": "Wikidata: родий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-46",
@@ -3905,7 +4062,8 @@
     "sourceTitle": "Wikidata: палладий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Pd",
@@ -3929,7 +4087,8 @@
     "sourceTitle": "Wikidata: палладий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-47",
@@ -3953,7 +4112,8 @@
     "sourceTitle": "Wikidata: серебро",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ag",
@@ -3977,7 +4137,8 @@
     "sourceTitle": "Wikidata: серебро",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-48",
@@ -4001,7 +4162,8 @@
     "sourceTitle": "Wikidata: кадмий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Cd",
@@ -4025,7 +4187,8 @@
     "sourceTitle": "Wikidata: кадмий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-49",
@@ -4049,7 +4212,8 @@
     "sourceTitle": "Wikidata: индий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-In",
@@ -4073,7 +4237,8 @@
     "sourceTitle": "Wikidata: индий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-50",
@@ -4097,7 +4262,8 @@
     "sourceTitle": "Wikidata: олово",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Sn",
@@ -4121,7 +4287,8 @@
     "sourceTitle": "Wikidata: олово",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-51",
@@ -4145,7 +4312,8 @@
     "sourceTitle": "Wikidata: сурьма",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Sb",
@@ -4169,7 +4337,8 @@
     "sourceTitle": "Wikidata: сурьма",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-52",
@@ -4193,7 +4362,8 @@
     "sourceTitle": "Wikidata: теллур",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Te",
@@ -4217,7 +4387,8 @@
     "sourceTitle": "Wikidata: теллур",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-53",
@@ -4241,7 +4412,8 @@
     "sourceTitle": "Wikidata: иод",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-I",
@@ -4265,7 +4437,8 @@
     "sourceTitle": "Wikidata: иод",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-54",
@@ -4289,7 +4462,8 @@
     "sourceTitle": "Wikidata: ксенон",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Xe",
@@ -4313,7 +4487,8 @@
     "sourceTitle": "Wikidata: ксенон",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-55",
@@ -4337,7 +4512,8 @@
     "sourceTitle": "Wikidata: цезий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Cs",
@@ -4361,7 +4537,8 @@
     "sourceTitle": "Wikidata: цезий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-56",
@@ -4385,7 +4562,8 @@
     "sourceTitle": "Wikidata: барий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ba",
@@ -4409,7 +4587,8 @@
     "sourceTitle": "Wikidata: барий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-57",
@@ -4433,7 +4612,8 @@
     "sourceTitle": "Wikidata: лантан",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-La",
@@ -4457,7 +4637,8 @@
     "sourceTitle": "Wikidata: лантан",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-58",
@@ -4481,7 +4662,8 @@
     "sourceTitle": "Wikidata: церий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ce",
@@ -4505,7 +4687,8 @@
     "sourceTitle": "Wikidata: церий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-59",
@@ -4529,7 +4712,8 @@
     "sourceTitle": "Wikidata: празеодим",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Pr",
@@ -4553,7 +4737,8 @@
     "sourceTitle": "Wikidata: празеодим",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-60",
@@ -4577,7 +4762,8 @@
     "sourceTitle": "Wikidata: неодим",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Nd",
@@ -4601,7 +4787,8 @@
     "sourceTitle": "Wikidata: неодим",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-61",
@@ -4625,7 +4812,8 @@
     "sourceTitle": "Wikidata: прометий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Pm",
@@ -4649,7 +4837,8 @@
     "sourceTitle": "Wikidata: прометий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-62",
@@ -4673,7 +4862,8 @@
     "sourceTitle": "Wikidata: самарий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Sm",
@@ -4697,7 +4887,8 @@
     "sourceTitle": "Wikidata: самарий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-63",
@@ -4721,7 +4912,8 @@
     "sourceTitle": "Wikidata: европий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Eu",
@@ -4745,7 +4937,8 @@
     "sourceTitle": "Wikidata: европий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-64",
@@ -4769,7 +4962,8 @@
     "sourceTitle": "Wikidata: гадолиний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Gd",
@@ -4793,7 +4987,8 @@
     "sourceTitle": "Wikidata: гадолиний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-65",
@@ -4817,7 +5012,8 @@
     "sourceTitle": "Wikidata: тербий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Tb",
@@ -4841,7 +5037,8 @@
     "sourceTitle": "Wikidata: тербий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-66",
@@ -4865,7 +5062,8 @@
     "sourceTitle": "Wikidata: диспрозий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Dy",
@@ -4889,7 +5087,8 @@
     "sourceTitle": "Wikidata: диспрозий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-67",
@@ -4913,7 +5112,8 @@
     "sourceTitle": "Wikidata: гольмий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ho",
@@ -4937,7 +5137,8 @@
     "sourceTitle": "Wikidata: гольмий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-68",
@@ -4961,7 +5162,8 @@
     "sourceTitle": "Wikidata: эрбий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Er",
@@ -4985,7 +5187,8 @@
     "sourceTitle": "Wikidata: эрбий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-69",
@@ -5009,7 +5212,8 @@
     "sourceTitle": "Wikidata: тулий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Tm",
@@ -5033,7 +5237,8 @@
     "sourceTitle": "Wikidata: тулий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-70",
@@ -5057,7 +5262,8 @@
     "sourceTitle": "Wikidata: иттербий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Yb",
@@ -5081,7 +5287,8 @@
     "sourceTitle": "Wikidata: иттербий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-71",
@@ -5105,7 +5312,8 @@
     "sourceTitle": "Wikidata: лютеций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Lu",
@@ -5129,7 +5337,8 @@
     "sourceTitle": "Wikidata: лютеций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-72",
@@ -5153,7 +5362,8 @@
     "sourceTitle": "Wikidata: гафний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Hf",
@@ -5177,7 +5387,8 @@
     "sourceTitle": "Wikidata: гафний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-73",
@@ -5201,7 +5412,8 @@
     "sourceTitle": "Wikidata: тантал",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ta",
@@ -5225,7 +5437,8 @@
     "sourceTitle": "Wikidata: тантал",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-74",
@@ -5249,7 +5462,8 @@
     "sourceTitle": "Wikidata: вольфрам",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-W",
@@ -5273,7 +5487,8 @@
     "sourceTitle": "Wikidata: вольфрам",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-75",
@@ -5297,7 +5512,8 @@
     "sourceTitle": "Wikidata: рений",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Re",
@@ -5321,7 +5537,8 @@
     "sourceTitle": "Wikidata: рений",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-76",
@@ -5345,7 +5562,8 @@
     "sourceTitle": "Wikidata: осмий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Os",
@@ -5369,7 +5587,8 @@
     "sourceTitle": "Wikidata: осмий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-77",
@@ -5393,7 +5612,8 @@
     "sourceTitle": "Wikidata: иридий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ir",
@@ -5417,7 +5637,8 @@
     "sourceTitle": "Wikidata: иридий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-78",
@@ -5441,7 +5662,8 @@
     "sourceTitle": "Wikidata: платина",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Pt",
@@ -5465,7 +5687,8 @@
     "sourceTitle": "Wikidata: платина",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-79",
@@ -5489,7 +5712,8 @@
     "sourceTitle": "Wikidata: золото",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Au",
@@ -5513,7 +5737,8 @@
     "sourceTitle": "Wikidata: золото",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-80",
@@ -5537,7 +5762,8 @@
     "sourceTitle": "Wikidata: ртуть",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Hg",
@@ -5561,7 +5787,8 @@
     "sourceTitle": "Wikidata: ртуть",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-81",
@@ -5585,7 +5812,8 @@
     "sourceTitle": "Wikidata: таллий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Tl",
@@ -5609,7 +5837,8 @@
     "sourceTitle": "Wikidata: таллий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-82",
@@ -5633,7 +5862,8 @@
     "sourceTitle": "Wikidata: свинец",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Pb",
@@ -5657,7 +5887,8 @@
     "sourceTitle": "Wikidata: свинец",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-83",
@@ -5681,7 +5912,8 @@
     "sourceTitle": "Wikidata: висмут",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Bi",
@@ -5705,7 +5937,8 @@
     "sourceTitle": "Wikidata: висмут",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-84",
@@ -5729,7 +5962,8 @@
     "sourceTitle": "Wikidata: полоний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Po",
@@ -5753,7 +5987,8 @@
     "sourceTitle": "Wikidata: полоний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-85",
@@ -5777,7 +6012,8 @@
     "sourceTitle": "Wikidata: астат",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-At",
@@ -5801,7 +6037,8 @@
     "sourceTitle": "Wikidata: астат",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-86",
@@ -5825,7 +6062,8 @@
     "sourceTitle": "Wikidata: радон",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Rn",
@@ -5849,7 +6087,8 @@
     "sourceTitle": "Wikidata: радон",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-87",
@@ -5873,7 +6112,8 @@
     "sourceTitle": "Wikidata: франций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Fr",
@@ -5897,7 +6137,8 @@
     "sourceTitle": "Wikidata: франций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-88",
@@ -5921,7 +6162,8 @@
     "sourceTitle": "Wikidata: радий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ra",
@@ -5945,7 +6187,8 @@
     "sourceTitle": "Wikidata: радий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-89",
@@ -5969,7 +6212,8 @@
     "sourceTitle": "Wikidata: актиний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ac",
@@ -5993,7 +6237,8 @@
     "sourceTitle": "Wikidata: актиний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-90",
@@ -6017,7 +6262,8 @@
     "sourceTitle": "Wikidata: торий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Th",
@@ -6041,7 +6287,8 @@
     "sourceTitle": "Wikidata: торий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-91",
@@ -6065,7 +6312,8 @@
     "sourceTitle": "Wikidata: протактиний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Pa",
@@ -6089,7 +6337,8 @@
     "sourceTitle": "Wikidata: протактиний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-92",
@@ -6113,7 +6362,8 @@
     "sourceTitle": "Wikidata: уран",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-U",
@@ -6137,7 +6387,8 @@
     "sourceTitle": "Wikidata: уран",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-93",
@@ -6161,7 +6412,8 @@
     "sourceTitle": "Wikidata: нептуний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Np",
@@ -6185,7 +6437,8 @@
     "sourceTitle": "Wikidata: нептуний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-94",
@@ -6209,7 +6462,8 @@
     "sourceTitle": "Wikidata: плутоний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Pu",
@@ -6233,7 +6487,8 @@
     "sourceTitle": "Wikidata: плутоний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-95",
@@ -6257,7 +6512,8 @@
     "sourceTitle": "Wikidata: америций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Am",
@@ -6281,7 +6537,8 @@
     "sourceTitle": "Wikidata: америций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-96",
@@ -6305,7 +6562,8 @@
     "sourceTitle": "Wikidata: кюрий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Cm",
@@ -6329,7 +6587,8 @@
     "sourceTitle": "Wikidata: кюрий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-97",
@@ -6353,7 +6612,8 @@
     "sourceTitle": "Wikidata: берклий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Bk",
@@ -6377,7 +6637,8 @@
     "sourceTitle": "Wikidata: берклий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-98",
@@ -6401,7 +6662,8 @@
     "sourceTitle": "Wikidata: калифорний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Cf",
@@ -6425,7 +6687,8 @@
     "sourceTitle": "Wikidata: калифорний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-99",
@@ -6449,7 +6712,8 @@
     "sourceTitle": "Wikidata: эйнштейний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Es",
@@ -6473,7 +6737,8 @@
     "sourceTitle": "Wikidata: эйнштейний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-100",
@@ -6497,7 +6762,8 @@
     "sourceTitle": "Wikidata: фермий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Fm",
@@ -6521,7 +6787,8 @@
     "sourceTitle": "Wikidata: фермий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-101",
@@ -6545,7 +6812,8 @@
     "sourceTitle": "Wikidata: менделевий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Md",
@@ -6569,7 +6837,8 @@
     "sourceTitle": "Wikidata: менделевий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-102",
@@ -6593,7 +6862,8 @@
     "sourceTitle": "Wikidata: нобелий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-No",
@@ -6617,7 +6887,8 @@
     "sourceTitle": "Wikidata: нобелий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-103",
@@ -6641,7 +6912,8 @@
     "sourceTitle": "Wikidata: лоуренсий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Lr",
@@ -6665,7 +6937,8 @@
     "sourceTitle": "Wikidata: лоуренсий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-104",
@@ -6689,7 +6962,8 @@
     "sourceTitle": "Wikidata: резерфордий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Rf",
@@ -6713,7 +6987,8 @@
     "sourceTitle": "Wikidata: резерфордий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-105",
@@ -6737,7 +7012,8 @@
     "sourceTitle": "Wikidata: дубний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Db",
@@ -6761,7 +7037,8 @@
     "sourceTitle": "Wikidata: дубний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-106",
@@ -6785,7 +7062,8 @@
     "sourceTitle": "Wikidata: сиборгий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Sg",
@@ -6809,7 +7087,8 @@
     "sourceTitle": "Wikidata: сиборгий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-107",
@@ -6833,7 +7112,8 @@
     "sourceTitle": "Wikidata: борий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Bh",
@@ -6857,7 +7137,8 @@
     "sourceTitle": "Wikidata: борий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-108",
@@ -6881,7 +7162,8 @@
     "sourceTitle": "Wikidata: хассий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Hs",
@@ -6905,7 +7187,8 @@
     "sourceTitle": "Wikidata: хассий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-109",
@@ -6929,7 +7212,8 @@
     "sourceTitle": "Wikidata: мейтнерий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Mt",
@@ -6953,7 +7237,8 @@
     "sourceTitle": "Wikidata: мейтнерий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-110",
@@ -6977,7 +7262,8 @@
     "sourceTitle": "Wikidata: дармштадтий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ds",
@@ -7001,7 +7287,8 @@
     "sourceTitle": "Wikidata: дармштадтий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-111",
@@ -7025,7 +7312,8 @@
     "sourceTitle": "Wikidata: рентгений",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Rg",
@@ -7049,7 +7337,8 @@
     "sourceTitle": "Wikidata: рентгений",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-112",
@@ -7073,7 +7362,8 @@
     "sourceTitle": "Wikidata: коперниций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Cn",
@@ -7097,7 +7387,8 @@
     "sourceTitle": "Wikidata: коперниций",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-113",
@@ -7121,7 +7412,8 @@
     "sourceTitle": "Wikidata: нихоний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Nh",
@@ -7145,7 +7437,8 @@
     "sourceTitle": "Wikidata: нихоний",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-114",
@@ -7169,7 +7462,8 @@
     "sourceTitle": "Wikidata: флеровий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Fl",
@@ -7193,7 +7487,8 @@
     "sourceTitle": "Wikidata: флеровий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-115",
@@ -7217,7 +7512,8 @@
     "sourceTitle": "Wikidata: московий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Mc",
@@ -7241,7 +7537,8 @@
     "sourceTitle": "Wikidata: московий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-116",
@@ -7265,7 +7562,8 @@
     "sourceTitle": "Wikidata: ливерморий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Lv",
@@ -7289,7 +7587,8 @@
     "sourceTitle": "Wikidata: ливерморий",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-117",
@@ -7313,7 +7612,8 @@
     "sourceTitle": "Wikidata: теннессин",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Ts",
@@ -7337,7 +7637,8 @@
     "sourceTitle": "Wikidata: теннессин",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-number-118",
@@ -7361,7 +7662,8 @@
     "sourceTitle": "Wikidata: оганесон",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "wd-element-name-symbol-Og",
@@ -7385,7 +7687,8 @@
     "sourceTitle": "Wikidata: оганесон",
     "origin": "wikidata",
     "license": "CC0",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": false
   },
   {
     "id": "au-science-pqhu3t",
@@ -7412,7 +7715,8 @@
     "origin": "authored",
     "license": "original",
     "explanationRu": "Цианид-ион имеет химическую формулу CN⁻ и состоит из двух элементов: углерода (C) и азота (N). Оба элемента соединены тройной химической связью.",
-    "reviewNote": "Заблокировано 2026-11-01: цианид-ион содержит и углерод, и азот; единственного ответа нет."
+    "reviewNote": "Заблокировано 2026-11-01: цианид-ион содержит и углерод, и азот; единственного ответа нет.",
+    "daily": true
   },
   {
     "id": "au-science-1xkm3ep",
@@ -7441,7 +7745,8 @@
     "origin": "authored",
     "license": "original",
     "explanationRu": "Цианид-ион имеет химическую формулу CN⁻ и состоит из двух элементов: углерода (C) и азота (N). Оба элемента соединены тройной химической связью.",
-    "reviewNote": "Заблокировано 2026-11-01: цианид-ион содержит и азот, и углерод; единственного ответа нет."
+    "reviewNote": "Заблокировано 2026-11-01: цианид-ион содержит и азот, и углерод; единственного ответа нет.",
+    "daily": true
   },
   {
     "id": "er-science-tvuszd",
@@ -7471,7 +7776,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": false
   },
   {
     "id": "er-science-5tsoet",
@@ -7499,7 +7805,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": false
   },
   {
     "id": "er-science-1dbl8t5",
@@ -7528,6 +7835,338 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24",
+    "daily": true
+  },
+  {
+    "id": "ot-science-nizteu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "На каком растении Грегор Мендель открыл законы наследственности?",
+    "answerRu": "горох",
+    "acceptedRu": [
+      "горох",
+      "на горохе"
+    ],
+    "acceptedEn": [
+      "peas",
+      "pea"
+    ],
+    "distractorsRu": [
+      "фасоль",
+      "пшеница",
+      "кукуруза"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-science-pnuhj3",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "В чём измеряют электрическое сопротивление?",
+    "answerRu": "в омах",
+    "acceptedRu": [
+      "ом",
+      "омах",
+      "в омах"
+    ],
+    "acceptedEn": [
+      "ohm",
+      "ohms"
+    ],
+    "distractorsRu": [
+      "в вольтах",
+      "в амперах",
+      "в ваттах"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-science-rom54h",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Из какого химического элемента состоят алмазы?",
+    "answerRu": "углерод",
+    "acceptedRu": [
+      "углерод",
+      "из углерода"
+    ],
+    "acceptedEn": [
+      "carbon"
+    ],
+    "distractorsRu": [
+      "кремний",
+      "азот",
+      "кислород"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-science-n9slg8",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какое животное участвует в знаменитом мысленном эксперименте Шрёдингера?",
+    "answerRu": "кот",
+    "acceptedRu": [
+      "кот",
+      "кошка"
+    ],
+    "acceptedEn": [
+      "cat",
+      "a cat"
+    ],
+    "distractorsRu": [
+      "собака",
+      "мышь",
+      "попугай"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-science-1ciwjvb",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какое вещество придаёт листьям растений зелёный цвет?",
+    "answerRu": "хлорофилл",
+    "acceptedRu": [
+      "хлорофилл"
+    ],
+    "acceptedEn": [
+      "chlorophyll"
+    ],
+    "distractorsRu": [
+      "каротин",
+      "меланин",
+      "гемоглобин"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-science-imbokm",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Какой органоид называют «энергетической станцией» клетки?",
+    "answerRu": "митохондрия",
+    "acceptedRu": [
+      "митохондрия",
+      "митохондрии"
+    ],
+    "acceptedEn": [
+      "mitochondria",
+      "mitochondrion",
+      "the mitochondrion"
+    ],
+    "distractorsRu": [
+      "рибосома",
+      "ядро",
+      "лизосома"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-science-pfok11",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Как называется единица температуры в системе СИ?",
+    "answerRu": "кельвин",
+    "acceptedRu": [
+      "кельвин",
+      "К"
+    ],
+    "acceptedEn": [
+      "kelvin",
+      "the kelvin",
+      "K"
+    ],
+    "distractorsRu": [
+      "градус Цельсия",
+      "градус Фаренгейта",
+      "джоуль"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-science-4p4hl0",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Как называется эффект, при котором люди с низкой квалификацией переоценивают свои способности?",
+    "answerRu": "эффект Даннинга — Крюгера",
+    "acceptedRu": [
+      "эффект Даннинга — Крюгера",
+      "Даннинга-Крюгера",
+      "Даннинг-Крюгер",
+      "эффект Даннинга-Крюгера"
+    ],
+    "acceptedEn": [
+      "Dunning-Kruger effect",
+      "Dunning-Kruger"
+    ],
+    "distractorsRu": [
+      "эффект плацебо",
+      "эффект Пигмалиона",
+      "эффект Зейгарник"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-science-1cvmzag",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Сколько примерно лет Земле?",
+    "answerRu": "около 4,5 миллиарда",
+    "acceptedRu": [
+      "около 4,5 миллиарда",
+      "4,5 миллиарда",
+      "4.5 миллиарда"
+    ],
+    "acceptedEn": [
+      "about 4.5 billion years",
+      "4.5 billion",
+      "4.5 billion years"
+    ],
+    "distractorsRu": [
+      "около 6 тысяч",
+      "около 500 миллионов",
+      "около 13,8 миллиарда"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-science-1eftiuq",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Как называется самый нижний слой атмосферы Земли?",
+    "answerRu": "тропосфера",
+    "acceptedRu": [
+      "тропосфера"
+    ],
+    "acceptedEn": [
+      "troposphere",
+      "the troposphere"
+    ],
+    "distractorsRu": [
+      "стратосфера",
+      "мезосфера",
+      "ионосфера"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-science-1lrruyd",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "С каким методом в психологии прежде всего связано имя Зигмунда Фрейда?",
+    "answerRu": "психоанализ",
+    "acceptedRu": [
+      "психоанализ"
+    ],
+    "acceptedEn": [
+      "psychoanalysis"
+    ],
+    "distractorsRu": [
+      "бихевиоризм",
+      "гештальт-терапия",
+      "когнитивная терапия"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
     "liveFrom": "2026-11-24"
   }
 ]

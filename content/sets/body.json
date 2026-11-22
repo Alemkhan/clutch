@@ -57,7 +57,8 @@
     "sourceHint": "Википедия: Система AB0",
     "reviewNote": "Короткие обозначения (I, A, 0) требуют точного совпадения, без нечёткого сравнения.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-fingers",
@@ -110,7 +111,8 @@
     ],
     "sourceHint": "Словарь",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "set-basic-tastes",
@@ -165,7 +167,8 @@
     "sourceHint": "Википедия: Вкус",
     "reviewNote": "Острота — болевое ощущение, не вкус: проверить, примут ли игроки.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-body-1lvkl04",
@@ -220,6 +223,7 @@
     "sourceTitle": "Анатомия человека — Википедия",
     "reviewNote": "Основные учения анатомии человека по органам.",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   }
 ]

@@ -275,5 +275,17 @@
       "World Web Window",
       "Web Wireless Way"
     ]
+  },
+  "ot-tech-zrmbr3": {
+    "prompt": "Which company started life as an online bookstore called Cadabra?",
+    "answer": "Amazon",
+    "accepted": [
+      "Amazon"
+    ],
+    "distractors": [
+      "eBay",
+      "Alibaba",
+      "Google"
+    ]
   }
 }

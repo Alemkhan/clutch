@@ -19,7 +19,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Русский алфавит",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-language-ml3o2d",
@@ -41,7 +42,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Английский алфавит",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-language-1c3g5ml",
@@ -63,7 +65,8 @@
     "openAnswer": true,
     "sourceHint": "Словарь",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-language-1yasiky",
@@ -87,7 +90,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Бразилия",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-language-g0u77r",
@@ -111,7 +115,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Антонимы",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-language-1bltfuu",
@@ -133,7 +138,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Падеж",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-language-1f3jcqm",
@@ -161,7 +167,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Список языков по числу носителей",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-language-w3sg2s",
@@ -187,7 +194,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Омонимы",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-language-1t1tjjx",
@@ -209,7 +217,8 @@
     "openAnswer": false,
     "sourceHint": "Википедия: Частотность",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-language-1uxvh29",
@@ -231,7 +240,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Русский алфавит",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-language-1eaul7j",
@@ -257,7 +267,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Иран",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-language-k0euik",
@@ -283,7 +294,8 @@
     "openAnswer": true,
     "sourceHint": "Словарь",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-language-iatk0z",
@@ -305,7 +317,8 @@
     "sourceHint": "Википедия: Этимология",
     "reviewNote": "Дистрактор «энтомология» заменён на «лексикологию»: нечёткое сравнение засчитывало его как ответ.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-language-v18nsi",
@@ -329,7 +342,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Андорра",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-language-1hxxw0p",
@@ -351,7 +365,8 @@
     "sourceHint": "Словарь",
     "reviewNote": "Вопрос о написании: нечёткое сравнение засчитало бы опечатку, поэтому только выбор. Проверить «короткошеее».",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-language-wjml6i",
@@ -375,7 +390,8 @@
     "sourceHint": "Этимологический словарь",
     "reviewNote": "Заблокировано 2026-10-17: в русский «шоколад» пришёл через французский/голландский, «науатль» — исходный язык; вариант «испанский» тоже спорный.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-language-d7oq2m",
@@ -401,7 +417,8 @@
     "explanationRu": "Греческий алфавит возник на основе финикийского письма в VIII веке до н. э.",
     "sourceTitle": "Греческий алфавит — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-language-ut9uq3",
@@ -428,7 +445,8 @@
     "explanationRu": "Буква пи (П, π) обозначает отношение длины окружности к её диаметру.",
     "sourceTitle": "Греческий алфавит — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-language-16xmw8a",
@@ -455,7 +473,8 @@
     "sourceTitle": "Languages Quiz @isaacm.1063 @Peskovii",
     "origin": "notebooklm",
     "license": "original",
-    "reviewNote": "Заблокировано 2026-10-17: формулировка с ошибкой («слоговей письменности»), вопрос не читается."
+    "reviewNote": "Заблокировано 2026-10-17: формулировка с ошибкой («слоговей письменности»), вопрос не читается.",
+    "daily": true
   },
   {
     "id": "q-language-1uekw9u",
@@ -484,7 +503,8 @@
     "explanationRu": "Арабский язык относится к семитской ветви афроазиатской семьи.",
     "sourceTitle": "Languages Quiz @isaacm.1063 @Peskovii",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-language-21zxki",
@@ -511,7 +531,8 @@
     "explanationRu": "Баскский язык не входит ни в одну известную языковую семью.",
     "sourceTitle": "Languages Quiz @isaacm.1063 @Peskovii",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-language-153sbpg",
@@ -540,7 +561,8 @@
     "origin": "authored",
     "license": "original",
     "explanationRu": "Заглавная греческая буква дельта (Δ) напоминает треугольник. Это четвёртая буква греческого алфавита. В математике и физике символ Δ часто обозначает изменение или разность величин.",
-    "reviewNote": "Заблокировано 2026-11-01: вопрос неоднозначен — заглавная лямбда Λ также имеет треугольную форму."
+    "reviewNote": "Заблокировано 2026-11-01: вопрос неоднозначен — заглавная лямбда Λ также имеет треугольную форму.",
+    "daily": true
   },
   {
     "id": "au-language-rsxwyi",
@@ -573,6 +595,7 @@
     "origin": "authored",
     "license": "original",
     "explanationRu": "В Чаде два официальных языка: французский и арабский. Французский получил официальный статус благодаря колониальному прошлому страны. Помимо этих двух языков, в Чаде распространено множество местных языков и диалектов.",
-    "reviewNote": "Заблокировано 2026-11-01: у Чада два официальных языка; один правильный ответ не задан."
+    "reviewNote": "Заблокировано 2026-11-01: у Чада два официальных языка; один правильный ответ не задан.",
+    "daily": true
   }
 ]

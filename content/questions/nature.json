@@ -19,7 +19,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Синий кит",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-inrxh",
@@ -41,7 +42,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Пауки",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-pspxo5",
@@ -62,7 +64,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Лев",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-1xx4qij",
@@ -84,7 +87,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Лошадь",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-1gu4bf5",
@@ -105,7 +109,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Пингвиновые",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-tjc9yv",
@@ -126,7 +131,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Кенгуру",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-at5bj7",
@@ -147,7 +153,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Жираф",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-xiat8i",
@@ -170,7 +177,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Рукокрылые",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-105tcwh",
@@ -191,7 +199,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Дуб",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-1hix3wf",
@@ -214,7 +223,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Травоядные",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-sec4l0",
@@ -236,7 +246,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Жабры",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-1m3klo0",
@@ -257,7 +268,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Колибри",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-2l6jd",
@@ -278,7 +290,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Сапсан",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-181k0f",
@@ -300,7 +313,8 @@
     "explanationRu": "Синий кит — млекопитающее, а не рыба.",
     "sourceHint": "Википедия: Китовая акула",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-8wkn91",
@@ -323,7 +337,8 @@
     "explanationRu": "Около 22 месяцев.",
     "sourceHint": "Википедия: Африканский слон",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-nature-j6zxkg",
@@ -346,7 +361,8 @@
     "explanationRu": "Два сложных глаза и три простых.",
     "sourceHint": "Википедия: Медоносная пчела",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-nature-1djwk9x",
@@ -374,7 +390,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Секвойя",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-nature-1xx1hxt",
@@ -395,7 +412,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Утконос",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-nature-qkuwih",
@@ -417,7 +435,8 @@
     "sourceHint": "Википедия: Энтомология",
     "reviewNote": "Дистрактор «этимология» заменён на «герпетологию»: нечёткое сравнение засчитывало его как ответ.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-nature-1pv92du",
@@ -440,7 +459,8 @@
     "explanationRu": "Синий кит является самым крупным животным на Земле.",
     "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-nature-wgp417",
@@ -464,7 +484,8 @@
     "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
-    "reviewNote": "Неверные варианты заменены 2026-10-17: были страус (не млекопитающее) и «летяга» дважды."
+    "reviewNote": "Неверные варианты заменены 2026-10-17: были страус (не млекопитающее) и «летяга» дважды.",
+    "daily": true
   },
   {
     "id": "q-nature-1ydqa37",
@@ -487,7 +508,8 @@
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
-    "reviewNote": "Заблокировано 2026-10-17: повтор au-nature-1xx1hxt (утконос), оба попадали в один день."
+    "reviewNote": "Заблокировано 2026-10-17: повтор au-nature-1xx1hxt (утконос), оба попадали в один день.",
+    "daily": true
   },
   {
     "id": "q-nature-5z7drd",
@@ -511,34 +533,8 @@
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
-    "reviewNote": "Заблокировано 2026-10-17: по-русски детёныш — «кенгурёнок», «джои» — английское слово; неверные варианты «теля, панда, щенок» бессмысленны."
-  },
-  {
-    "id": "q-nature-578ait",
-    "editorialStatus": "approved",
-    "kind": "single",
-    "topic": "nature",
-    "difficulty": "Easy",
-    "promptRu": "Какая самая длинная река в мире протекает по территории Южной Америки?",
-    "answerRu": "Амазонка",
-    "acceptedRu": [
-      "Амазонка",
-      "река Амазонка"
-    ],
-    "acceptedEn": [
-      "Amazon",
-      "Amazon River"
-    ],
-    "distractorsRu": [
-      "Нил",
-      "Миссисипи",
-      "Янцзы"
-    ],
-    "openAnswer": true,
-    "explanationRu": "Амазонка — самая полноводная и длинная река на Земле.",
-    "sourceTitle": "Список рек по длине — Википедия",
-    "origin": "notebooklm",
-    "license": "original"
+    "reviewNote": "Заблокировано 2026-10-17: по-русски детёныш — «кенгурёнок», «джои» — английское слово; неверные варианты «теля, панда, щенок» бессмысленны.",
+    "daily": true
   },
   {
     "id": "q-nature-a5d8jm",
@@ -560,7 +556,8 @@
     "explanationRu": "Гепард способно развивать скорость до 100-120 км/ч.",
     "sourceTitle": "Кошачьи — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-nature-19gazwc",
@@ -584,7 +581,8 @@
     "explanationRu": "Кошачьи — семейство отряда хищных млекопитающих.",
     "sourceTitle": "Кошачьи — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-nature-1ku6ulh",
@@ -606,59 +604,8 @@
     "explanationRu": "Тигр — самый крупный вид семейства кошачьих.",
     "sourceTitle": "Кошачьи — Википедия",
     "origin": "notebooklm",
-    "license": "original"
-  },
-  {
-    "id": "q-nature-n9iqug",
-    "editorialStatus": "approved",
-    "kind": "single",
-    "topic": "nature",
-    "difficulty": "Medium",
-    "promptRu": "Какая река считается самой длинной в Африке?",
-    "answerRu": "Нил",
-    "acceptedRu": [
-      "Нил",
-      "река Нил"
-    ],
-    "acceptedEn": [
-      "Nile",
-      "Nile River"
-    ],
-    "distractorsRu": [
-      "Конго",
-      "Нигер",
-      "Замбези"
-    ],
-    "openAnswer": true,
-    "explanationRu": "Нил — главная речная артерия Северной и Восточной Африки.",
-    "sourceTitle": "Список рек по длине — Википедия",
-    "origin": "notebooklm",
-    "license": "original"
-  },
-  {
-    "id": "q-nature-1ybfyd7",
-    "editorialStatus": "approved",
-    "kind": "single",
-    "topic": "nature",
-    "difficulty": "Medium",
-    "promptRu": "Какая река является самой длинной в Евразии и Китае?",
-    "answerRu": "Янцзы",
-    "acceptedRu": [
-      "Янцзы"
-    ],
-    "acceptedEn": [
-      "Yangtze"
-    ],
-    "distractorsRu": [
-      "Хуанхэ",
-      "Меконг",
-      "Амур"
-    ],
-    "openAnswer": true,
-    "explanationRu": "Янцзы — длиннейшая река Евразийского континента.",
-    "sourceTitle": "Список рек по длине — Википедия",
-    "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-nature-qva8so",
@@ -682,7 +629,8 @@
     "explanationRu": "Прямоугольные горизонтальные зрачки дают овцам широкий обзор для защиты от хищников.",
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-nature-7wmpmh",
@@ -704,7 +652,8 @@
     "explanationRu": "Ягуар — единственный представитель рода Panthera на американских континентах.",
     "sourceTitle": "Кошачьи — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-nature-1i7c9hr",
@@ -728,7 +677,8 @@
     "explanationRu": "Снежный барс (ирбис) обитает в горных массивах Центральной Азии.",
     "sourceTitle": "Кошачьи — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-nature-1j56ls0",
@@ -754,7 +704,8 @@
     "explanationRu": "Миссисипи с Миссури образует крупнейшую речную систему Северной Америки.",
     "sourceTitle": "Список рек по длине — Википедия",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-nature-10ffykx",
@@ -785,7 +736,8 @@
     "origin": "authored",
     "license": "original",
     "explanationRu": "В дикой природе орангутаны обитают только на островах Борнео и Суматра. Суматра принадлежит Индонезии, а Борнео разделён между Индонезией, Малайзией и Брунеем. При этом естественные популяции орангутанов встречаются только в индонезийской и малайзийской частях Борнео.",
-    "reviewNote": "Заблокировано 2026-11-01: орангутаны также живут в Малайзии; вопрос допускает несколько правильных ответов."
+    "reviewNote": "Заблокировано 2026-11-01: орангутаны также живут в Малайзии; вопрос допускает несколько правильных ответов.",
+    "daily": true
   },
   {
     "id": "er-nature-cbrd4q",
@@ -812,7 +764,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-nature-1o0vlg7",
@@ -840,7 +793,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-nature-1g304qs",
@@ -870,6 +824,67 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24",
+    "daily": false
+  },
+  {
+    "id": "ot-nature-4x5qwu",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Как звали первое млекопитающее, клонированное из взрослой клетки?",
+    "answerRu": "овечка Долли",
+    "acceptedRu": [
+      "Долли",
+      "овечка Долли",
+      "овца Долли"
+    ],
+    "acceptedEn": [
+      "Dolly",
+      "Dolly the sheep"
+    ],
+    "distractorsRu": [
+      "собака Белка",
+      "обезьяна Сэм",
+      "кошка Бетти"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-nature-wi8rnt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Что изучает энтомология?",
+    "answerRu": "насекомых",
+    "acceptedRu": [
+      "насекомых",
+      "насекомые"
+    ],
+    "acceptedEn": [
+      "insects"
+    ],
+    "distractorsRu": [
+      "рыб",
+      "птиц",
+      "грибы"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
     "liveFrom": "2026-11-24"
   }
 ]

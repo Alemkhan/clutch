@@ -749,5 +749,56 @@
       "виолончель",
       "гитара"
     ]
+  },
+  "ot-music-1mwb13n": {
+    "prompt": "«Gangnam Style» әні қай елден шыққан?",
+    "answer": "Оңтүстік Корея",
+    "accepted": [
+      "Оңтүстік Корея",
+      "Корея"
+    ],
+    "distractors": [
+      "Жапония",
+      "Қытай",
+      "Тайланд"
+    ]
+  },
+  "ot-music-1dbxpqz": {
+    "prompt": "Оркестрдегі қай мыс үрмелі аспап ең төмен дыбыстайды?",
+    "answer": "туба",
+    "accepted": [
+      "туба"
+    ],
+    "distractors": [
+      "керней",
+      "тромбон",
+      "валторна"
+    ]
+  },
+  "ot-music-1kls7hc": {
+    "prompt": "Гитарист Брайан Мэй қай топта ойнады?",
+    "answer": "Queen",
+    "accepted": [
+      "Queen",
+      "Квин"
+    ],
+    "distractors": [
+      "The Rolling Stones",
+      "Pink Floyd",
+      "Led Zeppelin"
+    ]
+  },
+  "ot-music-17hrnlj": {
+    "prompt": "Coldplay тобының әншісі кім?",
+    "answer": "Крис Мартин",
+    "accepted": [
+      "Крис Мартин",
+      "Мартин"
+    ],
+    "distractors": [
+      "Мэттью Беллами",
+      "Том Йорк",
+      "Боно"
+    ]
   }
 }

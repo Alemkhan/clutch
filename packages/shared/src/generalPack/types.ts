@@ -28,8 +28,10 @@ export type PackTopic =
 export type EditorialStatus = 'pending' | 'approved' | 'blocked';
 
 /** `original` — written for Clutch, facts still need a source before approval. */
-export type PackOrigin = 'wikidata' | 'authored' | 'notebooklm';
-export type PackLicense = 'CC0' | 'original';
+/** `opentdb` — Open Trivia Database (opentdb.com), переведено и адаптировано. */
+export type PackOrigin = 'wikidata' | 'authored' | 'notebooklm' | 'opentdb';
+/** CC-BY-SA-4.0 — нужна атрибуция (строка в профиле) и та же лицензия у переработки. */
+export type PackLicense = 'CC0' | 'original' | 'CC-BY-SA-4.0';
 
 interface PackRecordBase {
   id: string;

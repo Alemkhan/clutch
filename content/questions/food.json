@@ -20,7 +20,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Попкорн",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-f6qks7",
@@ -42,7 +43,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Борщ",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-2reoep",
@@ -66,7 +68,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Суси",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-cj502v",
@@ -87,7 +90,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Изюм",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-kkykdg",
@@ -110,7 +114,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Nutella",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-j2re51",
@@ -133,7 +138,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Какао-бобы",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-79gxrz",
@@ -156,7 +162,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Бешбармак",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-food-txx89z",
@@ -180,7 +187,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Паэлья",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-19h4ita",
@@ -201,7 +209,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Греческий салат",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-7mjo60",
@@ -222,7 +231,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Трюфель",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-1pzae2n",
@@ -244,7 +254,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Сакэ",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-18am6ao",
@@ -266,7 +277,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Кимчхи",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-ason2w",
@@ -287,7 +299,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Куркума",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-2w6h9o",
@@ -308,7 +321,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Чай",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-ajvtbo",
@@ -329,7 +343,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Гаспачо",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-food-t1wadx",
@@ -352,7 +367,8 @@
     "explanationRu": "В грамме белка и углеводов — около 4 ккал.",
     "sourceHint": "Википедия: Пищевая ценность",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-food-8hs1qj",
@@ -375,7 +391,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Соба",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-food-ohi316",
@@ -400,7 +417,8 @@
     "sourceHint": "Википедия: Кофе",
     "reviewNote": "Рейтинг по годам: проверить по свежей статистике FAO или ICO.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-food-r0luh0",
@@ -423,7 +441,8 @@
     "explanationRu": "Унаги — японское слово для обозначения пресноводного угря.",
     "sourceTitle": "Hammer Challenge",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "er-food-ll0ns7",
@@ -449,7 +468,8 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
-    "liveFrom": "2026-11-24"
+    "liveFrom": "2026-11-24",
+    "daily": true
   },
   {
     "id": "er-food-1mu5282",
@@ -475,6 +495,155 @@
     "origin": "authored",
     "license": "original",
     "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24",
+    "daily": true
+  },
+  {
+    "id": "ot-food-13agj9h",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Medium",
+    "promptRu": "Из каких орехов делают марципан?",
+    "answerRu": "миндаль",
+    "acceptedRu": [
+      "миндаль",
+      "из миндаля",
+      "миндальные"
+    ],
+    "acceptedEn": [
+      "almonds",
+      "almond"
+    ],
+    "distractorsRu": [
+      "арахис",
+      "грецкие орехи",
+      "фисташки"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-food-1hox5ed",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Medium",
+    "promptRu": "Какой крепкий напиток делают из сахарной патоки?",
+    "answerRu": "ром",
+    "acceptedRu": [
+      "ром"
+    ],
+    "acceptedEn": [
+      "rum"
+    ],
+    "distractorsRu": [
+      "джин",
+      "водка",
+      "виски"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-food-56rvs9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Medium",
+    "promptRu": "Какая ягода — обязательный ингредиент торта «Шварцвальд» («Чёрный лес»)?",
+    "answerRu": "вишня",
+    "acceptedRu": [
+      "вишня",
+      "вишни",
+      "черешня"
+    ],
+    "acceptedEn": [
+      "cherries",
+      "cherry"
+    ],
+    "distractorsRu": [
+      "абрикос",
+      "изюм",
+      "яблоко"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-food-1xefjnq",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Medium",
+    "promptRu": "Из какого органа утки или гуся делают фуа-гра?",
+    "answerRu": "печень",
+    "acceptedRu": [
+      "печень",
+      "из печени"
+    ],
+    "acceptedEn": [
+      "liver",
+      "the liver"
+    ],
+    "distractorsRu": [
+      "сердце",
+      "желудок",
+      "лёгкие"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-food-1mpisxh",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Medium",
+    "promptRu": "Как называют индийские блюда, приготовленные в глиняной печи на углях?",
+    "answerRu": "тандури",
+    "acceptedRu": [
+      "тандури"
+    ],
+    "acceptedEn": [
+      "tandoori"
+    ],
+    "distractorsRu": [
+      "бирьяни",
+      "масала",
+      "карри"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
     "liveFrom": "2026-11-24"
   }
 ]

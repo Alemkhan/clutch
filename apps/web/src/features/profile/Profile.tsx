@@ -191,6 +191,10 @@ export function ProfileView({ playerName, state, onRetry, telegram = false, clan
         : <p className="profile-tag">{t.telegramOnly}</p>}
       <DeleteAccountSection />
       {/* Карточку-приглашение в клан рисует сервер картинками Twemoji: лицензия просит указать авторство. */}
+      {/* Часть вопросов из Open Trivia Database: CC BY-SA 4.0 требует указать источник. */}
+      <p className="profile-credit">
+        <a href="https://opentdb.com/" target="_blank" rel="noreferrer">{t.triviaCredit}</a>
+      </p>
       {clansEnabled() && (
         <p className="profile-credit">
           <a href="https://github.com/jdecked/twemoji" target="_blank" rel="noreferrer">{t.emojiCredit}</a>

@@ -32,7 +32,8 @@
     ],
     "sourceHint": "Википедия: Братья Райт",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-tech-uharl3",
@@ -67,6 +68,7 @@
     "sourceTitle": "История вычислительной техники — Википедия",
     "reviewNote": "Именно основоположники XIX века.",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   }
 ]

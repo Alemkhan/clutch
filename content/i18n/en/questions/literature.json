@@ -2241,5 +2241,31 @@
       "Elizabeth Bennet",
       "Jane Eyre"
     ]
+  },
+  "ot-literature-17adohk": {
+    "prompt": "Who wrote the fairy tale “The Little Match Girl”?",
+    "answer": "Hans Christian Andersen",
+    "accepted": [
+      "Hans Christian Andersen",
+      "Andersen"
+    ],
+    "distractors": [
+      "Charles Perrault",
+      "the Brothers Grimm",
+      "Oscar Wilde"
+    ]
+  },
+  "ot-literature-1xzpak4": {
+    "prompt": "What kind of snake is Kaa in Kipling’s “The Jungle Book”?",
+    "answer": "a python",
+    "accepted": [
+      "python",
+      "a python"
+    ],
+    "distractors": [
+      "a cobra",
+      "an anaconda",
+      "a viper"
+    ]
   }
 }

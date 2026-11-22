@@ -21,7 +21,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Меркурий",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-1c8m3t9",
@@ -45,7 +46,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Юпитер",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-rxp3p8",
@@ -69,7 +71,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Луна",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-zgi3n5",
@@ -93,7 +96,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Кольца Сатурна",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-rwn0cl",
@@ -119,7 +123,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Леонов, Алексей Архипович",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-1o2v68c",
@@ -145,7 +150,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Аполлон-11",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-idjvyn",
@@ -171,7 +177,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Терешкова, Валентина Владимировна",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-193e4tx",
@@ -194,7 +201,8 @@
     "explanationRu": "С 2006 года Плутон считается карликовой планетой.",
     "sourceHint": "Википедия: Солнечная система",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-1msd8ui",
@@ -215,7 +223,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Аполлон-11",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-zbmoxv",
@@ -240,7 +249,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Млечный Путь",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-4nb6tj",
@@ -266,7 +276,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Проксима Центавра",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-ybwxvi",
@@ -290,7 +301,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Уран (планета)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-mveqsa",
@@ -314,7 +326,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Горизонт событий",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-11a0f04",
@@ -342,7 +355,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Спутник-1",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-1ncds3i",
@@ -366,7 +380,8 @@
     "openAnswer": true,
     "sourceHint": "Википедия: Титан (спутник)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-space-1vm387o",
@@ -390,7 +405,8 @@
     "explanationRu": "Около 8 минут 20 секунд.",
     "sourceHint": "Википедия: Солнце",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-space-1cbdp36",
@@ -417,7 +433,8 @@
     "explanationRu": "Олимп находится на Марсе.",
     "sourceHint": "Википедия: Олимп (Марс)",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "au-space-1fci0uy",
@@ -442,7 +459,8 @@
     "explanationRu": "Меркурий ближе к Солнцу, но плотная атмосфера Венеры держит тепло.",
     "sourceHint": "Википедия: Венера",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": false
   },
   {
     "id": "q-space-1jx4mfh",
@@ -469,7 +487,8 @@
     "explanationRu": "12 апреля 1961 года Юрий Гагарин совершил полёт на корабле «Восток-1».",
     "sourceTitle": "Last Person Standing Wins $500 (Ages 8-45 Quiz)",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "q-space-tsql90",
@@ -496,7 +515,8 @@
     "explanationRu": "20 июля 1969 года Нил Армстронг произнёс знаменитые слова ступив на Луну.",
     "sourceTitle": "Last Person Standing Wins $500 (Ages 8-45 Quiz)",
     "origin": "notebooklm",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "au-space-sc1q4o",
@@ -529,6 +549,127 @@
     "origin": "authored",
     "license": "original",
     "explanationRu": "Равноденствие происходит дважды в год — примерно в марте и сентябре, когда Солнце пересекает небесный экватор. В это время продолжительность дня и ночи на большей части Земли близка к 12 часам, хотя не обязательно одинакова до минуты.",
-    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+    "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
+    "daily": true
+  },
+  {
+    "id": "ot-space-16hnlht",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Medium",
+    "promptRu": "Какая миссия первой высадила людей на Луну?",
+    "answerRu": "«Аполлон-11»",
+    "acceptedRu": [
+      "«Аполлон-11»",
+      "Аполлон-11",
+      "Аполлон 11"
+    ],
+    "acceptedEn": [
+      "Apollo 11"
+    ],
+    "distractorsRu": [
+      "«Восток-1»",
+      "«Меркурий-7»",
+      "«Джемини-7»"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-space-1ma3kom",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Medium",
+    "promptRu": "Что находится в центре нашей галактики?",
+    "answerRu": "сверхмассивная чёрная дыра",
+    "acceptedRu": [
+      "чёрная дыра",
+      "сверхмассивная чёрная дыра"
+    ],
+    "acceptedEn": [
+      "black hole",
+      "a black hole",
+      "a supermassive black hole"
+    ],
+    "distractorsRu": [
+      "белый карлик",
+      "квазар",
+      "кротовая нора"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-space-knyszn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Medium",
+    "promptRu": "Между какими планетами находится главный пояс астероидов?",
+    "answerRu": "между Марсом и Юпитером",
+    "acceptedRu": [
+      "между Марсом и Юпитером",
+      "Марс и Юпитер"
+    ],
+    "acceptedEn": [
+      "Mars and Jupiter",
+      "between Mars and Jupiter"
+    ],
+    "distractorsRu": [
+      "между Землёй и Марсом",
+      "между Юпитером и Сатурном",
+      "между Венерой и Землёй"
+    ],
+    "openAnswer": false,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "ot-space-14frqyy",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "space",
+    "difficulty": "Hard",
+    "promptRu": "Сколько раз люди высаживались на Луну?",
+    "answerRu": "шесть",
+    "acceptedRu": [
+      "шесть",
+      "6"
+    ],
+    "acceptedEn": [
+      "six"
+    ],
+    "distractorsRu": [
+      "одна",
+      "три",
+      "десять"
+    ],
+    "openAnswer": true,
+    "sourceUrl": "https://opentdb.com/",
+    "sourceTitle": "Open Trivia Database",
+    "origin": "opentdb",
+    "license": "CC-BY-SA-4.0",
+    "reviewNote": "Open Trivia Database (CC BY-SA 4.0), переведено и адаптировано для СНГ 2026-11-23",
+    "daily": true,
+    "liveFrom": "2026-11-24"
   }
 ]

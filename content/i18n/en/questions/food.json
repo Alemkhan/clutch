@@ -271,5 +271,68 @@
       "cardamom",
       "cinnamon"
     ]
+  },
+  "ot-food-13agj9h": {
+    "prompt": "Which nuts are used to make marzipan?",
+    "answer": "almonds",
+    "accepted": [
+      "almonds",
+      "almond"
+    ],
+    "distractors": [
+      "peanuts",
+      "walnuts",
+      "pistachios"
+    ]
+  },
+  "ot-food-1hox5ed": {
+    "prompt": "Which spirit is made from molasses?",
+    "answer": "rum",
+    "accepted": [
+      "rum"
+    ],
+    "distractors": [
+      "gin",
+      "vodka",
+      "whisky"
+    ]
+  },
+  "ot-food-56rvs9": {
+    "prompt": "Which fruit is a traditional ingredient of Black Forest gateau?",
+    "answer": "cherries",
+    "accepted": [
+      "cherries",
+      "cherry"
+    ],
+    "distractors": [
+      "apricots",
+      "raisins",
+      "apples"
+    ]
+  },
+  "ot-food-1xefjnq": {
+    "prompt": "Foie gras is made from which organ of a duck or goose?",
+    "answer": "liver",
+    "accepted": [
+      "liver",
+      "the liver"
+    ],
+    "distractors": [
+      "heart",
+      "stomach",
+      "lungs"
+    ]
+  },
+  "ot-food-1mpisxh": {
+    "prompt": "What is Indian food cooked over charcoal in a clay oven called?",
+    "answer": "tandoori",
+    "accepted": [
+      "tandoori"
+    ],
+    "distractors": [
+      "biryani",
+      "masala",
+      "curry"
+    ]
   }
 }

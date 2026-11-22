@@ -48,7 +48,8 @@
     ],
     "sourceHint": "Википедия: The Beatles",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-abba",
@@ -99,7 +100,8 @@
     ],
     "sourceHint": "Википедия: ABBA",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   },
   {
     "id": "set-notes",
@@ -167,6 +169,7 @@
     "sourceHint": "Википедия: Сольмизация",
     "reviewNote": "Короткие ответы: только точное совпадение.",
     "origin": "authored",
-    "license": "original"
+    "license": "original",
+    "daily": true
   }
 ]
