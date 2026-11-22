@@ -2096,5 +2096,150 @@
       "The Raven"
     ],
     "explanation": "Geoffrey Chaucer is the author of \"The Canterbury Tales\"."
+  },
+  "er-literature-9e0sxf": {
+    "prompt": "What is the name of Agatha Christie’s moustached Belgian detective?",
+    "answer": "Hercule Poirot",
+    "accepted": [
+      "Hercule Poirot",
+      "Poirot"
+    ],
+    "distractors": [
+      "Miss Marple",
+      "Sherlock Holmes",
+      "Inspector Maigret"
+    ]
+  },
+  "er-literature-16930e4": {
+    "prompt": "In which book does the Cheshire Cat appear?",
+    "answer": "Alice’s Adventures in Wonderland",
+    "accepted": [
+      "Alice in Wonderland",
+      "Alice’s Adventures in Wonderland",
+      "Alice"
+    ],
+    "distractors": [
+      "Peter Pan",
+      "Winnie-the-Pooh",
+      "The Wizard of Oz"
+    ]
+  },
+  "er-literature-1tnez56": {
+    "prompt": "What is the name of the white whale in Herman Melville’s novel?",
+    "answer": "Moby Dick",
+    "accepted": [
+      "Moby Dick",
+      "Moby-Dick"
+    ],
+    "distractors": [
+      "Nautilus",
+      "Leviathan",
+      "White Fang"
+    ]
+  },
+  "er-literature-1hphir9": {
+    "prompt": "What is the name of Sherlock Holmes’s friend and assistant?",
+    "answer": "Dr Watson",
+    "accepted": [
+      "Watson",
+      "Dr Watson",
+      "John Watson"
+    ],
+    "distractors": [
+      "Inspector Lestrade",
+      "Professor Moriarty",
+      "Mycroft Holmes"
+    ]
+  },
+  "er-literature-1dokou7": {
+    "prompt": "What is the land of tiny people in Gulliver’s Travels called?",
+    "answer": "Lilliput",
+    "accepted": [
+      "Lilliput"
+    ],
+    "distractors": [
+      "Narnia",
+      "Neverland",
+      "Utopia"
+    ]
+  },
+  "er-literature-1kzzyk": {
+    "prompt": "What is the name of the one-legged pirate with a parrot in Treasure Island?",
+    "answer": "Long John Silver",
+    "accepted": [
+      "Long John Silver",
+      "John Silver",
+      "Silver"
+    ],
+    "distractors": [
+      "Captain Flint",
+      "Billy Bones",
+      "Captain Hook"
+    ]
+  },
+  "er-literature-1m9j8be": {
+    "prompt": "Who tells the stories in One Thousand and One Nights?",
+    "answer": "Scheherazade",
+    "accepted": [
+      "Scheherazade",
+      "Shahrazad"
+    ],
+    "distractors": [
+      "Jasmine",
+      "Budur",
+      "Zuleikha"
+    ]
+  },
+  "er-literature-l8xk1v": {
+    "prompt": "Which Shakespeare play has the line “To be, or not to be”?",
+    "answer": "Hamlet",
+    "accepted": [
+      "Hamlet"
+    ],
+    "distractors": [
+      "Macbeth",
+      "Othello",
+      "King Lear"
+    ]
+  },
+  "er-literature-1u6vec7": {
+    "prompt": "Who wrote the epic Shahnameh?",
+    "answer": "Ferdowsi",
+    "accepted": [
+      "Ferdowsi",
+      "Firdausi"
+    ],
+    "distractors": [
+      "Nizami",
+      "Omar Khayyam",
+      "Rumi"
+    ]
+  },
+  "er-literature-1m5hprn": {
+    "prompt": "Which Persian poet and mathematician is famous for his rubaiyat?",
+    "answer": "Omar Khayyam",
+    "accepted": [
+      "Omar Khayyam",
+      "Khayyam"
+    ],
+    "distractors": [
+      "Ferdowsi",
+      "Hafez",
+      "Saadi"
+    ]
+  },
+  "er-literature-p63utl": {
+    "prompt": "What is the name of the heroine of Gone with the Wind?",
+    "answer": "Scarlett O’Hara",
+    "accepted": [
+      "Scarlett O’Hara",
+      "Scarlett",
+      "Scarlett OHara"
+    ],
+    "distractors": [
+      "Melanie Wilkes",
+      "Elizabeth Bennet",
+      "Jane Eyre"
+    ]
   }
 }

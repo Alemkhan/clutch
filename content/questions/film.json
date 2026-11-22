@@ -1777,5 +1777,113 @@
     "sourceTitle": "Список самых кассовых фильмов — Википедия",
     "origin": "notebooklm",
     "license": "original"
+  },
+  {
+    "id": "er-film-1xiuosm",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Как зовут снежную королеву из мультфильма «Холодное сердце»?",
+    "answerRu": "Эльза",
+    "acceptedRu": [
+      "Эльза"
+    ],
+    "acceptedEn": [
+      "Elsa"
+    ],
+    "distractorsRu": [
+      "Анна",
+      "Рапунцель",
+      "Моана"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Холодное сердце",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-film-671ukl",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "В каком фильме звучит знаменитая фраза «Я вернусь»?",
+    "answerRu": "«Терминатор»",
+    "acceptedRu": [
+      "«Терминатор»",
+      "Терминатор"
+    ],
+    "acceptedEn": [
+      "The Terminator",
+      "Terminator"
+    ],
+    "distractorsRu": [
+      "«Рэмбо»",
+      "«Хищник»",
+      "«Крепкий орешек»"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Терминатор",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-film-12xtpn6",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Как зовут львёнка — главного героя «Короля Льва»?",
+    "answerRu": "Симба",
+    "acceptedRu": [
+      "Симба"
+    ],
+    "acceptedEn": [
+      "Simba"
+    ],
+    "distractorsRu": [
+      "Муфаса",
+      "Шрам",
+      "Нала"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Король Лев",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-film-1s2l9ec",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "film",
+    "difficulty": "Medium",
+    "promptRu": "Какая студия создала Микки Мауса?",
+    "answerRu": "Disney",
+    "acceptedRu": [
+      "Disney",
+      "Дисней",
+      "Уолт Дисней"
+    ],
+    "acceptedEn": [
+      "Walt Disney"
+    ],
+    "distractorsRu": [
+      "Warner Bros.",
+      "Pixar",
+      "DreamWorks"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Микки Маус",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

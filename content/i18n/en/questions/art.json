@@ -965,5 +965,71 @@
       "The Death of Socrates"
     ],
     "explanation": "Pieter Bruegel the Elder painted The Hunters in the Snow."
+  },
+  "er-art-1b7j31a": {
+    "prompt": "In which museum is the Mona Lisa kept?",
+    "answer": "the Louvre",
+    "accepted": [
+      "Louvre",
+      "the Louvre"
+    ],
+    "distractors": [
+      "the Prado",
+      "the Hermitage",
+      "the Uffizi"
+    ]
+  },
+  "er-art-12b3p96": {
+    "prompt": "Which artist painted the Sunflowers series?",
+    "answer": "Vincent van Gogh",
+    "accepted": [
+      "Vincent van Gogh",
+      "Van Gogh"
+    ],
+    "distractors": [
+      "Claude Monet",
+      "Paul Gauguin",
+      "Paul Cézanne"
+    ]
+  },
+  "er-art-plkni1": {
+    "prompt": "What is Leonardo da Vinci’s mural of Jesus and the twelve apostles called?",
+    "answer": "The Last Supper",
+    "accepted": [
+      "The Last Supper",
+      "Last Supper"
+    ],
+    "distractors": [
+      "The Creation of Adam",
+      "The School of Athens",
+      "The Last Judgment"
+    ]
+  },
+  "er-art-86teib": {
+    "prompt": "Who painted The Scream?",
+    "answer": "Edvard Munch",
+    "accepted": [
+      "Edvard Munch",
+      "Munch"
+    ],
+    "distractors": [
+      "Vincent van Gogh",
+      "Gustav Klimt",
+      "Egon Schiele"
+    ]
+  },
+  "er-art-1d49w86": {
+    "prompt": "Which architect designed the Sagrada Família?",
+    "answer": "Antoni Gaudí",
+    "accepted": [
+      "Antoni Gaudí",
+      "Gaudí",
+      "Gaudi"
+    ],
+    "distractors": [
+      "Le Corbusier",
+      "Zaha Hadid",
+      "Salvador Dalí"
+    ]
   }
 }

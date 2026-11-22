@@ -215,4 +215,13 @@ export const CONFUSABLE_DISTRACTOR_PAIRS: readonly string[] = [
   'q-popculture-n24bbp | ответ «12» ≈ «13» | d=1',
   'q-tech-42b6gj | ответ «МЭСМ» ≈ «БЭСМ» | d=1',
   'wd-element-Cr | ответ «хром» ≈ «бром» | d=1',
+  'er-body-1kgcxzf | дистракторы «156» ≈ «256» | d=1',
+  'er-body-1kgcxzf | ответ «206» ≈ «256» | d=1',
+  'er-body-1kgcxzf | ответ «206» ≈ «306» | d=1',
+  'er-history-1ea7p7y | дистракторы «1969» ≈ «1965» | d=1',
+  'er-history-1ea7p7y | ответ «1961» ≈ «1965» | d=1',
+  'er-history-1ea7p7y | ответ «1961» ≈ «1969» | d=1',
+  'er-sport-1ncepit | дистракторы «10» ≈ «12» | d=1',
+  'er-sport-1ncepit | ответ «11» ≈ «10» | d=1',
+  'er-sport-1ncepit | ответ «11» ≈ «12» | d=1',
 ];

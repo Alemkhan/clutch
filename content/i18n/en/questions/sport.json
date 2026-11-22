@@ -266,5 +266,84 @@
       "Kenya"
     ],
     "explanation": "The USA is the all-time leader in Olympic athletics medals. According to Olympedia, American athletes have won 864 medals: 358 gold, 281 silver and 225 bronze."
+  },
+  "er-sport-1ncepit": {
+    "prompt": "How many players from one team are on the pitch at once in football?",
+    "answer": "11",
+    "accepted": [
+      "11",
+      "eleven"
+    ],
+    "distractors": [
+      "10",
+      "9",
+      "12"
+    ]
+  },
+  "er-sport-jhrus9": {
+    "prompt": "In which country did the Olympic Games originate?",
+    "answer": "Greece",
+    "accepted": [
+      "Greece",
+      "Ancient Greece"
+    ],
+    "distractors": [
+      "Italy",
+      "Egypt",
+      "France"
+    ]
+  },
+  "er-sport-1n1q0om": {
+    "prompt": "How often is the FIFA World Cup held?",
+    "answer": "every four years",
+    "accepted": [
+      "every four years",
+      "every 4 years"
+    ],
+    "distractors": [
+      "every two years",
+      "every year",
+      "every five years"
+    ]
+  },
+  "er-sport-rekg8i": {
+    "prompt": "How many points is a shot from beyond the arc worth in basketball?",
+    "answer": "three",
+    "accepted": [
+      "three",
+      "3"
+    ],
+    "distractors": [
+      "two",
+      "four",
+      "one"
+    ]
+  },
+  "er-sport-1tb0qpa": {
+    "prompt": "In tennis, what is a serve the opponent doesn’t even touch called?",
+    "answer": "an ace",
+    "accepted": [
+      "ace",
+      "an ace"
+    ],
+    "distractors": [
+      "a break",
+      "a tie-break",
+      "a smash"
+    ]
+  },
+  "er-sport-1w8sovx": {
+    "prompt": "How many kilometres is a marathon, rounded down?",
+    "answer": "42",
+    "accepted": [
+      "42",
+      "42.195",
+      "42 km"
+    ],
+    "distractors": [
+      "21",
+      "50",
+      "35"
+    ]
   }
 }

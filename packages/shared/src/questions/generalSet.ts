@@ -128,6 +128,103 @@ export function liveEverywhereRecords(): PackRecord[] {
   return livePackRecords().filter((record) => isEverywhere(packRecordRegions(record.id)));
 }
 
+/**
+ * С этого дня забег дня собирается только из вопросов «для всех»: общие для всех зон, не
+ * экспертные, без зубрёжки (атомные номера и символы редких элементов) и не помеченные
+ * `daily: false`. Генераторная часть — флаги стран, столицы и языки, без «Исторических флагов»
+ * (там штаты США и гербы городов). Дуэли и свободная игра берут пул шире.
+ */
+export const DAILY_CURATED_FROM = '2026-11-24';
+
+/** Атомный номер в забеге дня — только у самых известных элементов. */
+const DAILY_ATOMIC_NUMBER_ELEMENTS = new Set(['водород', 'гелий', 'углерод', 'кислород']);
+const ATOMIC_NUMBER = /^Какой атомный номер у элемента «(.+)»\?$/u;
+const ELEMENT_SYMBOL = /^Какой символ у химического элемента «(.+)»\?$/u;
+const SYMBOL_TO_ELEMENT = /обозначается символом (\S+)\?$/u;
+/** Символы тех же бытовых элементов: для обратного вопроса «какой элемент обозначается X». */
+const DAILY_SYMBOLS = new Set([
+  'H', 'He', 'C', 'N', 'O', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'K', 'Ca', 'Fe', 'Cu', 'Zn',
+  'Ag', 'Sn', 'I', 'Pt', 'Au', 'Hg', 'Pb', 'U',
+]);
+
+/**
+ * Шаблонные вопросы из Wikidata («Кто автор „…“», «Кто режиссёр „…“») смешивают знаменитое с
+ * нишевым («Сон в красном тереме», «Сельская честь»). В забег дня — только то, что знает почти
+ * каждый; остальное живёт в дуэлях и свободной игре.
+ */
+const DAILY_FAMOUS_WORKS: Readonly<Record<string, ReadonlySet<string>>> = {
+  'автор произведения': new Set([
+    'Маленький принц', 'Властелин колец', 'Дон Кихот', '1984', 'Алиса в Стране чудес', 'Преступление и наказание',
+    'Анна Каренина', 'Русалочка', 'Гарри Поттер и философский камень', 'Гордость и предубеждение',
+    'Жизнь и удивительные приключения Робинзона Крузо', 'Отверженные', 'Война и мир', 'Старик и море',
+    'Три мушкетёра', 'Франкенштейн, или Современный Прометей', 'Код да Винчи', 'Остров сокровищ',
+    'Путешествия Гулливера', 'Приключения Пиноккио. История деревянной куклы', 'Приключения Оливера Твиста',
+    'Портрет Дориана Грея', 'Мастер и Маргарита', 'Граф Монте-Кристо', 'Вокруг света за восемьдесят дней',
+    'Двадцать тысяч льё под водой', 'Алхимик', 'Хоббит, или Туда и обратно',
+  ]),
+  'режиссёр фильма': new Set([
+    'Титаник', 'Аватар', 'Криминальное чтиво', 'Тёмный рыцарь', 'Интерстеллар', 'Список Шиндлера',
+    'Парк юрского периода', 'Властелин колец: Братство Кольца', 'Звёздные войны. Эпизод IV: Новая надежда',
+  ]),
+  'композитор произведения': new Set(['Лебединое озеро', 'Щелкунчик', 'К Элизе', 'Волшебная флейта', 'Кармен']),
+  'написал картину': new Set([
+    'Мона Лиза', 'Звёздная ночь', 'Девушка с жемчужной серёжкой', 'Герника', 'Рождение Венеры', 'Поцелуй',
+    'Постоянство памяти', 'Ночной дозор',
+  ]),
+};
+const WIKIDATA_WORK = /^Кто (автор произведения|режиссёр фильма|композитор произведения|написал картину) «(.+)»\?$/u;
+const WIKIDATA_BY_CREATOR = /^Как(?:ое|ую) из этих (?:произведений|картин) написал (.+)\?$/u;
+const DAILY_FAMOUS_CREATORS = new Set([
+  'Антуан де Сент-Экзюпери', 'Джон Рональд Руэл Толкин', 'Мигель де Сервантес', 'Джордж Оруэлл', 'Льюис Кэрролл',
+  'Фёдор Михайлович Достоевский', 'Лев Николаевич Толстой', 'Ханс Кристиан Андерсен', 'Джоан Роулинг',
+  'Джейн Остин', 'Даниель Дефо', 'Виктор Гюго', 'Эрнест Хемингуэй', 'Пауло Коэльо', 'Александр Дюма', 'Мэри Шелли',
+  'Дэн Браун', 'Роберт Льюис Стивенсон', 'Джонатан Свифт', 'Чарльз Диккенс', 'Оскар Уайльд',
+  'Михаил Афанасьевич Булгаков', 'Жюль Верн',
+  'Леонардо да Винчи', 'Винсент Ван Гог', 'Пабло Пикассо', 'Сальвадор Дали', 'Клод Моне', 'Густав Климт',
+  'Сандро Боттичелли', 'Рембрандт',
+]);
+
+/** Годится ли запись пакета для забега дня (без учёта зон). */
+export function isDailyEligible(record: PackRecord): boolean {
+  if ((record as { daily?: boolean }).daily === false) return false;
+  if (record.kind !== 'single') return true;
+  if (record.difficulty === 'Expert') return false;
+  const prompt = record.promptRu;
+  const atomic = ATOMIC_NUMBER.exec(prompt);
+  if (atomic) return DAILY_ATOMIC_NUMBER_ELEMENTS.has(atomic[1].toLowerCase());
+  // Элементы — одним видом вопроса («какой элемент обозначается Fe»), иначе их в наборе по два-три.
+  if (ELEMENT_SYMBOL.test(prompt)) return false;
+  const reverse = SYMBOL_TO_ELEMENT.exec(prompt);
+  if (reverse) return DAILY_SYMBOLS.has(reverse[1]);
+  const work = WIKIDATA_WORK.exec(prompt);
+  if (work) return DAILY_FAMOUS_WORKS[work[1]]?.has(work[2]) ?? false;
+  const creator = WIKIDATA_BY_CREATOR.exec(prompt);
+  if (creator && record.origin === 'wikidata') return DAILY_FAMOUS_CREATORS.has(creator[1]);
+  return true;
+}
+
+/** Пул забега дня: общие для всех зон и годные для забега дня записи. */
+export function liveDailyRecords(): PackRecord[] {
+  return liveEverywhereRecords().filter(isDailyEligible);
+}
+
+/** Генераторная часть забега дня с DAILY_CURATED_FROM: флаги стран, столицы и языки. */
+export const DAILY_SET_GENERATED: ReadonlyArray<{ category: 'geography' | 'history' | 'languages'; count: number }> = [
+  { category: 'geography', count: 4 },
+  { category: 'languages', count: 2 },
+];
+
+/** Пул пакетной части забега дня для этого дня: записи с `liveFrom` позже этого дня не входят. */
+export function dailyPackPool(dateKey: string): PackRecord[] {
+  const pool = dateKey >= DAILY_CURATED_FROM
+    ? liveDailyRecords()
+    : dateKey >= EVERYWHERE_POOL_FROM ? liveEverywhereRecords() : livePackRecords();
+  return pool.filter((record) => {
+    const from = (record as { liveFrom?: string }).liveFrom;
+    return !from || from <= dateKey;
+  });
+}
+
 /** Одобренные записи категории «История Казахстана», включая попавшие и в общий пул. */
 export function liveKzRecords(): PackRecord[] {
   return [...generalPackQuestions, ...generalPackSets].filter((record) => isPackRecordLive(record) && isKazakhstan(record));
@@ -220,7 +317,7 @@ export function buildGeneralSet(
   questionSetId: string,
   dateKey: string,
   usage?: TemplateUsage,
-  pool: readonly PackRecord[] = dateKey >= EVERYWHERE_POOL_FROM ? liveEverywhereRecords() : livePackRecords(),
+  pool: readonly PackRecord[] = dailyPackPool(dateKey),
 ): Question[] {
   const index = setIndexOf(questionSetId);
   const balanced = dateKey >= BALANCED_TOPICS_FROM;
@@ -233,7 +330,8 @@ export function buildGeneralSet(
   );
   const packQuestions = packRaceQuestions(records, questionSetId, GENERAL_SET_OPEN_COUNT);
 
-  const generated = GENERAL_SET_GENERATED.flatMap(({ category, count }) =>
+  const mix = dateKey >= DAILY_CURATED_FROM ? DAILY_SET_GENERATED : GENERAL_SET_GENERATED;
+  const generated = mix.flatMap(({ category, count }) =>
     generateMatch(count, GENERATED_OPEN_RATIO, category, createSeededRandom(hashSeed(`${questionSetId}:${category}`)), usage),
   );
 

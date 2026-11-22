@@ -256,5 +256,31 @@
       "Логика"
     ],
     "explanation": "«Энигма» шифрларын бұзу одақтастар барлауында шешуші рөл атқарды."
+  },
+  "er-tech-1ux91uo": {
+    "prompt": "Apple компаниясын Стив Возняқпен бірге кім құрды?",
+    "answer": "Стив Джобс",
+    "accepted": [
+      "Стив Джобс",
+      "Джобс"
+    ],
+    "distractors": [
+      "Билл Гейтс",
+      "Илон Маск",
+      "Джефф Безос"
+    ]
+  },
+  "er-tech-1y0gor4": {
+    "prompt": "Сайт мекенжайларындағы «www» нені білдіреді?",
+    "answer": "World Wide Web",
+    "accepted": [
+      "World Wide Web",
+      "бүкіләлемдік өрмек"
+    ],
+    "distractors": [
+      "Wide Web World",
+      "World Web Window",
+      "Web Wireless Way"
+    ]
   }
 }

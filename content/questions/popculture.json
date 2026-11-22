@@ -396,5 +396,32 @@
     "sourceTitle": "Знаки зодиака — Википедия",
     "origin": "notebooklm",
     "license": "original"
+  },
+  {
+    "id": "er-popculture-hsrk77",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "popculture",
+    "difficulty": "Medium",
+    "promptRu": "Как называется жёлтая семья из Спрингфилда в мультсериале?",
+    "answerRu": "Симпсоны",
+    "acceptedRu": [
+      "Симпсоны"
+    ],
+    "acceptedEn": [
+      "Simpsons",
+      "the Simpsons"
+    ],
+    "distractorsRu": [
+      "Гриффины",
+      "Флинстоуны",
+      "Белчеры"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Симпсоны",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

@@ -250,5 +250,30 @@
       "Logika"
     ],
     "explanation": "Breaking the Enigma ciphers played a key role in Allied intelligence."
+  },
+  "er-tech-1ux91uo": {
+    "prompt": "Who founded Apple together with Steve Wozniak?",
+    "answer": "Steve Jobs",
+    "accepted": [
+      "Steve Jobs",
+      "Jobs"
+    ],
+    "distractors": [
+      "Bill Gates",
+      "Elon Musk",
+      "Jeff Bezos"
+    ]
+  },
+  "er-tech-1y0gor4": {
+    "prompt": "What does “www” stand for in website addresses?",
+    "answer": "World Wide Web",
+    "accepted": [
+      "World Wide Web"
+    ],
+    "distractors": [
+      "Wide Web World",
+      "World Web Window",
+      "Web Wireless Way"
+    ]
   }
 }

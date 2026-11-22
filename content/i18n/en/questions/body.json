@@ -303,5 +303,32 @@
       "tongue"
     ],
     "explanation": "Rods and cones are light-sensitive cells in the retina. Rods help us see in dim light, while cones handle color vision and fine detail."
+  },
+  "er-body-12k3t6k": {
+    "prompt": "Which blood type is known as the “universal donor”?",
+    "answer": "O negative (O−)",
+    "accepted": [
+      "O negative (O−)",
+      "O negative",
+      "O-",
+      "O−"
+    ],
+    "distractors": [
+      "AB positive (AB+)",
+      "A positive (A+)",
+      "B negative (B−)"
+    ]
+  },
+  "er-body-1kgcxzf": {
+    "prompt": "How many bones are in an adult human skeleton?",
+    "answer": "206",
+    "accepted": [
+      "206"
+    ],
+    "distractors": [
+      "156",
+      "256",
+      "306"
+    ]
   }
 }

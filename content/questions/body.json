@@ -522,5 +522,58 @@
     "license": "original",
     "explanationRu": "Палочки и колбочки — светочувствительные клетки сетчатки глаза. Палочки помогают видеть при слабом освещении, а колбочки отвечают за цветовое зрение и различение мелких деталей.",
     "reviewNote": "Заблокировано 2026-11-01: вопрос смешивает орган и ткань; правильнее спрашивать о сетчатке, а не о «глазах»."
+  },
+  {
+    "id": "er-body-12k3t6k",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Hard",
+    "promptRu": "Кровь какой группы считается «универсальным донором»?",
+    "answerRu": "первая отрицательная (O−)",
+    "acceptedRu": [
+      "первая отрицательная (O−)",
+      "первая отрицательная",
+      "O−",
+      "O-",
+      "0−"
+    ],
+    "acceptedEn": [
+      "O negative"
+    ],
+    "distractorsRu": [
+      "четвёртая положительная (AB+)",
+      "вторая положительная (A+)",
+      "третья отрицательная (B−)"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Универсальный донор",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-body-1kgcxzf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "body",
+    "difficulty": "Medium",
+    "promptRu": "Сколько костей в скелете взрослого человека?",
+    "answerRu": "206",
+    "acceptedRu": [
+      "206"
+    ],
+    "distractorsRu": [
+      "156",
+      "256",
+      "306"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Скелет человека",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

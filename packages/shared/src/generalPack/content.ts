@@ -106,6 +106,8 @@ function questionsOf(topic: PackTopic, raw: unknown): PackQuestion[] {
     if (r.generalPool !== undefined && (r.generalPool !== true || topic !== 'kazakhstan')) {
       fail(where, '«generalPool» is only «true» and only in kazakhstan.json');
     }
+    if (r.daily !== undefined && typeof r.daily !== 'boolean') fail(where, '«daily» must be true or false');
+    if (r.liveFrom !== undefined && (typeof r.liveFrom !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(r.liveFrom))) fail(where, '«liveFrom» must be YYYY-MM-DD');
     if (r.image !== undefined) {
       const image = r.image as Json;
       // Только Commons: там лежат лишь свободные файлы, и превью отдаётся нужной ширины.

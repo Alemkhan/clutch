@@ -718,5 +718,43 @@
       "Johann Sebastian Bach"
     ],
     "explanation": "Der Rosenkavalier was composed by Richard Strauss."
+  },
+  "er-music-1quaj8b": {
+    "prompt": "Who is known as the “King of Pop”?",
+    "answer": "Michael Jackson",
+    "accepted": [
+      "Michael Jackson",
+      "Jackson"
+    ],
+    "distractors": [
+      "Elvis Presley",
+      "Freddie Mercury",
+      "Prince"
+    ]
+  },
+  "er-music-7d1o27": {
+    "prompt": "Which city are the Beatles from?",
+    "answer": "Liverpool",
+    "accepted": [
+      "Liverpool"
+    ],
+    "distractors": [
+      "London",
+      "Manchester",
+      "Birmingham"
+    ]
+  },
+  "er-music-13vsjk2": {
+    "prompt": "Which instrument made the virtuoso Niccolò Paganini famous?",
+    "answer": "the violin",
+    "accepted": [
+      "violin",
+      "the violin"
+    ],
+    "distractors": [
+      "piano",
+      "cello",
+      "guitar"
+    ]
   }
 }

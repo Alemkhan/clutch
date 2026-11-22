@@ -413,5 +413,52 @@
     "sourceHint": "Последовательность простых чисел",
     "origin": "authored",
     "license": "original"
+  },
+  {
+    "id": "er-math-5fgjgj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Medium",
+    "promptRu": "Сколько клеток на шахматной доске?",
+    "answerRu": "64",
+    "acceptedRu": [
+      "64"
+    ],
+    "distractorsRu": [
+      "48",
+      "81",
+      "100"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Шахматная доска",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-math-2jkpvc",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "math",
+    "difficulty": "Medium",
+    "promptRu": "Чему примерно равно число π с точностью до сотых?",
+    "answerRu": "3,14",
+    "acceptedRu": [
+      "3,14",
+      "3.14"
+    ],
+    "distractorsRu": [
+      "2,72",
+      "1,62",
+      "3,41"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Число пи",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

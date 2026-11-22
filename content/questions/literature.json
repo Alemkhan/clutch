@@ -4004,5 +4004,318 @@
     "origin": "wikidata",
     "license": "CC0",
     "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "er-literature-9e0sxf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Как зовут бельгийского сыщика с усами из романов Агаты Кристи?",
+    "answerRu": "Эркюль Пуаро",
+    "acceptedRu": [
+      "Эркюль Пуаро",
+      "Пуаро"
+    ],
+    "acceptedEn": [
+      "Hercule Poirot",
+      "Poirot"
+    ],
+    "distractorsRu": [
+      "мисс Марпл",
+      "Шерлок Холмс",
+      "комиссар Мегрэ"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Эркюль Пуаро",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-literature-16930e4",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "В какой книге появляется Чеширский Кот?",
+    "answerRu": "«Алиса в Стране чудес»",
+    "acceptedRu": [
+      "«Алиса в Стране чудес»",
+      "Алиса в Стране чудес",
+      "Алиса"
+    ],
+    "acceptedEn": [
+      "Alice in Wonderland",
+      "Alice’s Adventures in Wonderland",
+      "Alice"
+    ],
+    "distractorsRu": [
+      "«Питер Пэн»",
+      "«Винни-Пух»",
+      "«Волшебник страны Оз»"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Чеширский Кот",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-literature-1tnez56",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Как зовут белого кита из романа Германа Мелвилла?",
+    "answerRu": "Моби Дик",
+    "acceptedRu": [
+      "Моби Дик"
+    ],
+    "acceptedEn": [
+      "Moby Dick",
+      "Moby-Dick"
+    ],
+    "distractorsRu": [
+      "Наутилус",
+      "Левиафан",
+      "Белый Клык"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Моби Дик",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-literature-1hphir9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Как зовут друга и помощника Шерлока Холмса?",
+    "answerRu": "доктор Ватсон",
+    "acceptedRu": [
+      "доктор Ватсон",
+      "Ватсон",
+      "Джон Ватсон",
+      "Уотсон"
+    ],
+    "acceptedEn": [
+      "Watson",
+      "Dr Watson",
+      "John Watson"
+    ],
+    "distractorsRu": [
+      "инспектор Лестрейд",
+      "профессор Мориарти",
+      "Майкрофт Холмс"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Доктор Ватсон",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-literature-1dokou7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Как называется страна крошечных людей в «Путешествиях Гулливера»?",
+    "answerRu": "Лилипутия",
+    "acceptedRu": [
+      "Лилипутия"
+    ],
+    "acceptedEn": [
+      "Lilliput"
+    ],
+    "distractorsRu": [
+      "Нарния",
+      "Неверленд",
+      "Утопия"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Лилипутия",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-literature-1kzzyk",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Как зовут одноногого пирата с попугаем из «Острова сокровищ»?",
+    "answerRu": "Джон Сильвер",
+    "acceptedRu": [
+      "Джон Сильвер",
+      "Сильвер",
+      "Долговязый Джон Сильвер"
+    ],
+    "acceptedEn": [
+      "Long John Silver",
+      "John Silver",
+      "Silver"
+    ],
+    "distractorsRu": [
+      "капитан Флинт",
+      "Билли Бонс",
+      "капитан Крюк"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Джон Сильвер",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-literature-1m9j8be",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Как зовут рассказчицу сказок «Тысячи и одной ночи»?",
+    "answerRu": "Шахерезада",
+    "acceptedRu": [
+      "Шахерезада",
+      "Шехерезада"
+    ],
+    "acceptedEn": [
+      "Scheherazade",
+      "Shahrazad"
+    ],
+    "distractorsRu": [
+      "Жасмин",
+      "Будур",
+      "Зулейха"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Шахерезада",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-literature-l8xk1v",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Из какой пьесы Шекспира слова «Быть или не быть»?",
+    "answerRu": "«Гамлет»",
+    "acceptedRu": [
+      "«Гамлет»",
+      "Гамлет"
+    ],
+    "acceptedEn": [
+      "Hamlet"
+    ],
+    "distractorsRu": [
+      "«Макбет»",
+      "«Отелло»",
+      "«Король Лир»"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Гамлет",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-literature-1u6vec7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Кто написал поэму «Шахнаме»?",
+    "answerRu": "Фирдоуси",
+    "acceptedRu": [
+      "Фирдоуси",
+      "Фердоуси"
+    ],
+    "acceptedEn": [
+      "Ferdowsi",
+      "Firdausi"
+    ],
+    "distractorsRu": [
+      "Низами",
+      "Омар Хайям",
+      "Руми"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Фирдоуси",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-literature-1m5hprn",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Medium",
+    "promptRu": "Какой персидский поэт и математик прославился своими рубаи?",
+    "answerRu": "Омар Хайям",
+    "acceptedRu": [
+      "Омар Хайям",
+      "Хайям"
+    ],
+    "acceptedEn": [
+      "Omar Khayyam",
+      "Khayyam"
+    ],
+    "distractorsRu": [
+      "Фирдоуси",
+      "Хафиз",
+      "Саади"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Омар Хайям",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-literature-p63utl",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "literature",
+    "difficulty": "Hard",
+    "promptRu": "Как зовут главную героиню романа «Унесённые ветром»?",
+    "answerRu": "Скарлетт О’Хара",
+    "acceptedRu": [
+      "Скарлетт О’Хара",
+      "Скарлетт",
+      "Скарлетт О Хара"
+    ],
+    "acceptedEn": [
+      "Scarlett O’Hara",
+      "Scarlett",
+      "Scarlett OHara"
+    ],
+    "distractorsRu": [
+      "Мелани Уилкс",
+      "Элизабет Беннет",
+      "Джейн Эйр"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Скарлетт О’Хара",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

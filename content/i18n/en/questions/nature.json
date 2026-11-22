@@ -460,5 +460,45 @@
       "Philippines"
     ],
     "explanation": "Wild orangutans live only on the islands of Borneo and Sumatra. Sumatra belongs to Indonesia, while Borneo is shared by Indonesia, Malaysia and Brunei. Natural orangutan populations are found only in the Indonesian and Malaysian parts of Borneo."
+  },
+  "er-nature-cbrd4q": {
+    "prompt": "How many hearts does an octopus have?",
+    "answer": "three",
+    "accepted": [
+      "three",
+      "3"
+    ],
+    "distractors": [
+      "one",
+      "two",
+      "eight"
+    ]
+  },
+  "er-nature-1o0vlg7": {
+    "prompt": "What is the largest bird in the world?",
+    "answer": "the ostrich",
+    "accepted": [
+      "ostrich",
+      "the ostrich"
+    ],
+    "distractors": [
+      "emu",
+      "condor",
+      "albatross"
+    ]
+  },
+  "er-nature-1g304qs": {
+    "prompt": "The bark of which tree is used for wine corks?",
+    "answer": "the cork oak",
+    "accepted": [
+      "cork oak",
+      "the cork oak",
+      "oak"
+    ],
+    "distractors": [
+      "birch",
+      "pine",
+      "balsa"
+    ]
   }
 }

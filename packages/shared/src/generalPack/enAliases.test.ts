@@ -151,6 +151,10 @@ const NO_EN: Readonly<Record<string, string>> = {
   'q-tech-e9w22r': 'латиница уже в acceptedRu (Энигма)',
   'q-world-adabw3': 'без общеупотребительной английской формы (Бхола)',
   'q-world-utbur8': 'без общеупотребительной английской формы (авокадо)',
+  'er-body-1kgcxzf': 'число (206): одинаково на всех языках',
+  'er-history-1ea7p7y': 'число (1961): одинаково на всех языках',
+  'er-math-5fgjgj': 'число (64): одинаково на всех языках',
+  'er-math-2jkpvc': 'число (3,14 / 3.14): обе записи уже в acceptedRu',
 };
 
 const openApproved = generalPackQuestions.filter((q) => q.editorialStatus === 'approved' && q.openAnswer);

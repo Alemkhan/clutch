@@ -916,5 +916,55 @@
       "Black Panther"
     ],
     "explanation": "Avengers: Endgame grossed over $2.79 billion."
+  },
+  "er-film-1xiuosm": {
+    "prompt": "What is the name of the snow queen in Frozen?",
+    "answer": "Elsa",
+    "accepted": [
+      "Elsa"
+    ],
+    "distractors": [
+      "Anna",
+      "Rapunzel",
+      "Moana"
+    ]
+  },
+  "er-film-671ukl": {
+    "prompt": "Which film features the famous line “I’ll be back”?",
+    "answer": "The Terminator",
+    "accepted": [
+      "The Terminator",
+      "Terminator"
+    ],
+    "distractors": [
+      "Rambo",
+      "Predator",
+      "Die Hard"
+    ]
+  },
+  "er-film-12xtpn6": {
+    "prompt": "What is the name of the lion cub hero of The Lion King?",
+    "answer": "Simba",
+    "accepted": [
+      "Simba"
+    ],
+    "distractors": [
+      "Mufasa",
+      "Scar",
+      "Nala"
+    ]
+  },
+  "er-film-1s2l9ec": {
+    "prompt": "Which studio created Mickey Mouse?",
+    "answer": "Disney",
+    "accepted": [
+      "Disney",
+      "Walt Disney"
+    ],
+    "distractors": [
+      "Warner Bros.",
+      "Pixar",
+      "DreamWorks"
+    ]
   }
 }

@@ -476,5 +476,171 @@
     "license": "original",
     "explanationRu": "США — абсолютный лидер по количеству олимпийских медалей в лёгкой атлетике. По данным Olympedia, американские спортсмены завоевали 864 медали: 358 золотых, 281 серебряную и 225 бронзовых.",
     "reviewNote": "Заблокировано 2026-11-01: «больше всего олимпийских медалей» зависит от метода подсчёта и обновляемой статистики."
+  },
+  {
+    "id": "er-sport-1ncepit",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Сколько игроков одной команды одновременно на поле в футболе?",
+    "answerRu": "11",
+    "acceptedRu": [
+      "11",
+      "одиннадцать"
+    ],
+    "acceptedEn": [
+      "eleven"
+    ],
+    "distractorsRu": [
+      "10",
+      "9",
+      "12"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Футбол",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-sport-jhrus9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "В какой стране зародились Олимпийские игры?",
+    "answerRu": "Греция",
+    "acceptedRu": [
+      "Греция",
+      "Древняя Греция"
+    ],
+    "acceptedEn": [
+      "Greece",
+      "Ancient Greece"
+    ],
+    "distractorsRu": [
+      "Италия",
+      "Египет",
+      "Франция"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Олимпийские игры",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-sport-1n1q0om",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Как часто проводят чемпионат мира по футболу?",
+    "answerRu": "раз в четыре года",
+    "acceptedRu": [
+      "раз в четыре года",
+      "каждые 4 года"
+    ],
+    "acceptedEn": [
+      "every four years",
+      "every 4 years"
+    ],
+    "distractorsRu": [
+      "раз в два года",
+      "каждый год",
+      "раз в пять лет"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Чемпионат мира по футболу",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-sport-rekg8i",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Сколько очков даёт бросок из-за дуги в баскетболе?",
+    "answerRu": "три",
+    "acceptedRu": [
+      "три",
+      "3"
+    ],
+    "acceptedEn": [
+      "three"
+    ],
+    "distractorsRu": [
+      "два",
+      "четыре",
+      "один"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Трёхочковый бросок",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-sport-1tb0qpa",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Hard",
+    "promptRu": "Как в теннисе называют подачу, которой соперник даже не коснулся?",
+    "answerRu": "эйс",
+    "acceptedRu": [
+      "эйс",
+      "ace"
+    ],
+    "acceptedEn": [
+      "an ace"
+    ],
+    "distractorsRu": [
+      "брейк",
+      "тай-брейк",
+      "смэш"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Эйс",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-sport-1w8sovx",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "sport",
+    "difficulty": "Medium",
+    "promptRu": "Сколько километров в марафонской дистанции (округлённо)?",
+    "answerRu": "42",
+    "acceptedRu": [
+      "42",
+      "42,195",
+      "42.195",
+      "42 км"
+    ],
+    "acceptedEn": [
+      "42 km"
+    ],
+    "distractorsRu": [
+      "21",
+      "50",
+      "35"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Марафон",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

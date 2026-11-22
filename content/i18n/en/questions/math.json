@@ -243,5 +243,30 @@
       "15",
       "17"
     ]
+  },
+  "er-math-5fgjgj": {
+    "prompt": "How many squares are on a chessboard?",
+    "answer": "64",
+    "accepted": [
+      "64"
+    ],
+    "distractors": [
+      "48",
+      "81",
+      "100"
+    ]
+  },
+  "er-math-2jkpvc": {
+    "prompt": "What is π to two decimal places?",
+    "answer": "3.14",
+    "accepted": [
+      "3.14",
+      "3,14"
+    ],
+    "distractors": [
+      "2.72",
+      "1.62",
+      "3.41"
+    ]
   }
 }

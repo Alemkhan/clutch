@@ -1891,5 +1891,145 @@
     "origin": "wikidata",
     "license": "CC0",
     "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "er-art-1b7j31a",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "В каком музее хранится «Мона Лиза»?",
+    "answerRu": "Лувр",
+    "acceptedRu": [
+      "Лувр"
+    ],
+    "acceptedEn": [
+      "Louvre",
+      "the Louvre"
+    ],
+    "distractorsRu": [
+      "Прадо",
+      "Эрмитаж",
+      "Уффици"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Лувр",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-art-12b3p96",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Какой художник написал серию картин «Подсолнухи»?",
+    "answerRu": "Винсент Ван Гог",
+    "acceptedRu": [
+      "Винсент Ван Гог",
+      "Ван Гог"
+    ],
+    "acceptedEn": [
+      "Vincent van Gogh",
+      "Van Gogh"
+    ],
+    "distractorsRu": [
+      "Клод Моне",
+      "Поль Гоген",
+      "Поль Сезанн"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Подсолнухи",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-art-plkni1",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Как называется фреска Леонардо да Винчи с Иисусом и двенадцатью апостолами?",
+    "answerRu": "«Тайная вечеря»",
+    "acceptedRu": [
+      "«Тайная вечеря»",
+      "Тайная вечеря"
+    ],
+    "acceptedEn": [
+      "The Last Supper",
+      "Last Supper"
+    ],
+    "distractorsRu": [
+      "«Сотворение Адама»",
+      "«Афинская школа»",
+      "«Страшный суд»"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Тайная вечеря",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-art-86teib",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Medium",
+    "promptRu": "Кто написал картину «Крик»?",
+    "answerRu": "Эдвард Мунк",
+    "acceptedRu": [
+      "Эдвард Мунк",
+      "Мунк"
+    ],
+    "acceptedEn": [
+      "Edvard Munch",
+      "Munch"
+    ],
+    "distractorsRu": [
+      "Винсент Ван Гог",
+      "Густав Климт",
+      "Эгон Шиле"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Крик (Мунк)",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-art-1d49w86",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "art",
+    "difficulty": "Hard",
+    "promptRu": "Какой архитектор спроектировал собор Саграда Фамилия?",
+    "answerRu": "Антонио Гауди",
+    "acceptedRu": [
+      "Антонио Гауди",
+      "Гауди"
+    ],
+    "acceptedEn": [
+      "Antoni Gaudí",
+      "Gaudí",
+      "Gaudi"
+    ],
+    "distractorsRu": [
+      "Ле Корбюзье",
+      "Захи Хадид",
+      "Сальвадор Дали"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Антонио Гауди",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

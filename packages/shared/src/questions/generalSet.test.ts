@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { clearDailyBankCache, dailyBankSize, dailyQuestionBank, dailyQuestionSet } from '../solo/dailyQuestionSet';
+import { clearDailyBankCache, dailyBankSize, dailyQuestionBank, dailyQuestionSet, dayStartMs } from '../solo/dailyQuestionSet';
 import {
   BALANCED_TOPICS_FROM,
   GENERAL_SET_TOPIC_CAP,
@@ -7,6 +7,11 @@ import {
   livePackRecords,
   questionTopicKey,
   spreadTopics,
+  DAILY_CURATED_FROM,
+  dailyPackPool,
+  isDailyEligible,
+  liveDailyRecords,
+  liveEverywhereRecords,
 } from './generalSet';
 import { generalPackQuestions } from '../generalPack';
 import { generateMatch } from './questionGenerator';
@@ -108,5 +113,47 @@ describe('topic balance of the general set', () => {
     expect([...spread].sort()).toEqual([...items].sort());
     spread.slice(1).forEach((item, index) => expect(key(item)).not.toBe(key(spread[index])));
     expect(spreadTopics(['x1', 'x2'], key)).toEqual(['x1', 'x2']);
+  });
+});
+
+describe('daily run pool (from DAILY_CURATED_FROM)', () => {
+  const single = (promptRu: string, extra: Record<string, unknown> = {}) => ({
+    id: 'x', kind: 'single', topic: 'science', difficulty: 'Medium', promptRu, answerRu: 'a', acceptedRu: ['a'],
+    distractorsRu: ['b', 'c', 'd'], openAnswer: false, origin: 'authored', license: 'original', editorialStatus: 'approved', ...extra,
+  }) as unknown as Parameters<typeof isDailyEligible>[0];
+
+  it('keeps everyday erudition and drops cramming', () => {
+    expect(isDailyEligible(single('Какой газ составляет большую часть атмосферы Земли?'))).toBe(true);
+    expect(isDailyEligible(single('Какой атомный номер у элемента «водород»?'))).toBe(true);
+    expect(isDailyEligible(single('Какой атомный номер у элемента «астат»?'))).toBe(false);
+    expect(isDailyEligible(single('Какой символ у химического элемента «железо»?'))).toBe(false);
+    expect(isDailyEligible(single('Какой химический элемент обозначается символом Fe?'))).toBe(true);
+    expect(isDailyEligible(single('Какой химический элемент обозначается символом Cf?'))).toBe(false);
+    expect(isDailyEligible(single('Что-то очень узкое?', { difficulty: 'Expert' }))).toBe(false);
+    expect(isDailyEligible(single('Нормальный вопрос?', { daily: false }))).toBe(false);
+  });
+
+  it('keeps only famous works from the Wikidata templates', () => {
+    expect(isDailyEligible(single('Кто написал картину «Мона Лиза»?', { origin: 'wikidata' }))).toBe(true);
+    expect(isDailyEligible(single('Кто композитор произведения «Сельская честь»?', { origin: 'wikidata' }))).toBe(false);
+    expect(isDailyEligible(single('Кто автор произведения «Сон в красном тереме»?', { origin: 'wikidata' }))).toBe(false);
+    expect(isDailyEligible(single('Какую из этих картин написал Питер Брейгель Старший?', { origin: 'wikidata' }))).toBe(false);
+    expect(isDailyEligible(single('Какое из этих произведений написал Жюль Верн?', { origin: 'wikidata' }))).toBe(true);
+  });
+
+  it('is a subset of the everywhere pool and leaves earlier days alone', () => {
+    const everywhere = new Set(liveEverywhereRecords().map((record) => record.id));
+    expect(liveDailyRecords().every((record) => everywhere.has(record.id))).toBe(true);
+    expect(dailyPackPool('2026-11-23').some((record) => record.id.startsWith('er-'))).toBe(false);
+    expect(dailyPackPool(DAILY_CURATED_FROM).length).toBe(liveDailyRecords().length);
+  });
+
+  it('swaps historic and US state flags for country flags, capitals and languages', () => {
+    clearDailyBankCache();
+    const curated = dailyQuestionSet('general', dayStartMs(DAILY_CURATED_FROM) + 60_000, 0).questions;
+    expect(curated.some((question) => question.category === 'Historical Flags')).toBe(false);
+    expect(curated.filter((question) => question.category === 'Languages')).toHaveLength(2);
+    const before = dailyQuestionSet('general', dayStartMs('2026-11-23') + 60_000, 0).questions;
+    expect(before.filter((question) => question.category === 'Historical Flags')).toHaveLength(2);
   });
 });

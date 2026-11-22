@@ -1306,5 +1306,197 @@
     "license": "original",
     "explanationRu": "Далай-ламы на протяжении нескольких столетий совмещали духовное и политическое руководство Тибетом. В 1959 году XIV Далай-лама покинул Тибет и отправился в изгнание в Индию. В 2011 году он официально передал свои оставшиеся политические полномочия избранному руководству тибетской администрации в изгнании.",
     "reviewNote": "Заблокировано 2026-11-01: формулировка о политическом управлении Тибетом требует нейтральной исторической даты и точного источника."
+  },
+  {
+    "id": "er-history-q4ee6j",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Какая цивилизация построила город Мачу-Пикчу?",
+    "answerRu": "инки",
+    "acceptedRu": [
+      "инки"
+    ],
+    "acceptedEn": [
+      "Inca",
+      "the Inca",
+      "Incas"
+    ],
+    "distractorsRu": [
+      "майя",
+      "ацтеки",
+      "ольмеки"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Инки",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-history-1ncpfb9",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Кто был первым императором Древнего Рима?",
+    "answerRu": "Октавиан Август",
+    "acceptedRu": [
+      "Октавиан Август",
+      "Август",
+      "Октавиан"
+    ],
+    "acceptedEn": [
+      "Augustus",
+      "Octavian",
+      "Caesar Augustus"
+    ],
+    "distractorsRu": [
+      "Юлий Цезарь",
+      "Нерон",
+      "Калигула"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Октавиан Август",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-history-1vo1vxx",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "У какой империи была самая большая сплошная территория в истории?",
+    "answerRu": "Монгольская",
+    "acceptedRu": [
+      "Монгольская",
+      "Монгольская империя"
+    ],
+    "acceptedEn": [
+      "Mongol Empire",
+      "the Mongol Empire",
+      "Mongol"
+    ],
+    "distractorsRu": [
+      "Римская",
+      "Османская",
+      "Персидская"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Монгольская империя",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-history-8ykl08",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Какой древнегреческий город-государство славился суровым воспитанием воинов?",
+    "answerRu": "Спарта",
+    "acceptedRu": [
+      "Спарта"
+    ],
+    "acceptedEn": [
+      "Sparta"
+    ],
+    "distractorsRu": [
+      "Афины",
+      "Коринф",
+      "Фивы"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Спарта",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-history-1lb8lxj",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Hard",
+    "promptRu": "Кто первым в Европе стал печатать книги подвижными литерами?",
+    "answerRu": "Иоганн Гутенберг",
+    "acceptedRu": [
+      "Иоганн Гутенберг",
+      "Гутенберг"
+    ],
+    "acceptedEn": [
+      "Johannes Gutenberg",
+      "Gutenberg"
+    ],
+    "distractorsRu": [
+      "Леонардо да Винчи",
+      "Галилео Галилей",
+      "Эразм Роттердамский"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Иоганн Гутенберг",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-history-ho26bp",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "Как называется письменность древних египтян?",
+    "answerRu": "иероглифы",
+    "acceptedRu": [
+      "иероглифы",
+      "иероглифика"
+    ],
+    "acceptedEn": [
+      "hieroglyphs",
+      "hieroglyphics"
+    ],
+    "distractorsRu": [
+      "клинопись",
+      "руны",
+      "глаголица"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Египетские иероглифы",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-history-1ea7p7y",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "history",
+    "difficulty": "Medium",
+    "promptRu": "В каком году человек впервые полетел в космос?",
+    "answerRu": "1961",
+    "acceptedRu": [
+      "1961"
+    ],
+    "distractorsRu": [
+      "1957",
+      "1969",
+      "1965"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Первый полёт человека в космос",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

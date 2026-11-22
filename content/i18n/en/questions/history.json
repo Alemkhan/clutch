@@ -712,5 +712,97 @@
       "Mongolia"
     ],
     "explanation": "For several centuries the Dalai Lamas combined spiritual and political leadership of Tibet. In 1959 the 14th Dalai Lama left Tibet for exile in India. In 2011 he formally handed his remaining political powers to the elected leadership of the Tibetan administration in exile."
+  },
+  "er-history-q4ee6j": {
+    "prompt": "Which civilisation built Machu Picchu?",
+    "answer": "the Inca",
+    "accepted": [
+      "Inca",
+      "the Inca",
+      "Incas"
+    ],
+    "distractors": [
+      "the Maya",
+      "the Aztecs",
+      "the Olmecs"
+    ]
+  },
+  "er-history-1ncpfb9": {
+    "prompt": "Who was the first emperor of ancient Rome?",
+    "answer": "Augustus",
+    "accepted": [
+      "Augustus",
+      "Octavian",
+      "Caesar Augustus"
+    ],
+    "distractors": [
+      "Julius Caesar",
+      "Nero",
+      "Caligula"
+    ]
+  },
+  "er-history-1vo1vxx": {
+    "prompt": "Which empire had the largest contiguous territory in history?",
+    "answer": "the Mongol Empire",
+    "accepted": [
+      "Mongol Empire",
+      "the Mongol Empire",
+      "Mongol"
+    ],
+    "distractors": [
+      "the Roman Empire",
+      "the Ottoman Empire",
+      "the Persian Empire"
+    ]
+  },
+  "er-history-8ykl08": {
+    "prompt": "Which ancient Greek city-state was famous for its harsh military upbringing?",
+    "answer": "Sparta",
+    "accepted": [
+      "Sparta"
+    ],
+    "distractors": [
+      "Athens",
+      "Corinth",
+      "Thebes"
+    ]
+  },
+  "er-history-1lb8lxj": {
+    "prompt": "Who first printed books with movable type in Europe?",
+    "answer": "Johannes Gutenberg",
+    "accepted": [
+      "Johannes Gutenberg",
+      "Gutenberg"
+    ],
+    "distractors": [
+      "Leonardo da Vinci",
+      "Galileo Galilei",
+      "Erasmus"
+    ]
+  },
+  "er-history-ho26bp": {
+    "prompt": "What is the writing system of ancient Egypt called?",
+    "answer": "hieroglyphs",
+    "accepted": [
+      "hieroglyphs",
+      "hieroglyphics"
+    ],
+    "distractors": [
+      "cuneiform",
+      "runes",
+      "Glagolitic"
+    ]
+  },
+  "er-history-1ea7p7y": {
+    "prompt": "In what year did a human first fly into space?",
+    "answer": "1961",
+    "accepted": [
+      "1961"
+    ],
+    "distractors": [
+      "1957",
+      "1969",
+      "1965"
+    ]
   }
 }

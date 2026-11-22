@@ -247,5 +247,29 @@
       "wasabi"
     ],
     "explanation": "Unagi is the Japanese word for freshwater eel."
+  },
+  "er-food-ll0ns7": {
+    "prompt": "Which fruit is guacamole made from?",
+    "answer": "avocado",
+    "accepted": [
+      "avocado"
+    ],
+    "distractors": [
+      "mango",
+      "lime",
+      "tomato"
+    ]
+  },
+  "er-food-1mu5282": {
+    "prompt": "Which spice is considered the most expensive in the world?",
+    "answer": "saffron",
+    "accepted": [
+      "saffron"
+    ],
+    "distractors": [
+      "vanilla",
+      "cardamom",
+      "cinnamon"
+    ]
   }
 }

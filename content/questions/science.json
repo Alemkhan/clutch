@@ -7442,5 +7442,92 @@
     "license": "original",
     "explanationRu": "Цианид-ион имеет химическую формулу CN⁻ и состоит из двух элементов: углерода (C) и азота (N). Оба элемента соединены тройной химической связью.",
     "reviewNote": "Заблокировано 2026-11-01: цианид-ион содержит и азот, и углерод; единственного ответа нет."
+  },
+  {
+    "id": "er-science-tvuszd",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Что измеряют по шкале Бофорта?",
+    "answerRu": "силу ветра",
+    "acceptedRu": [
+      "силу ветра",
+      "сила ветра",
+      "ветер"
+    ],
+    "acceptedEn": [
+      "wind force",
+      "wind speed",
+      "wind"
+    ],
+    "distractorsRu": [
+      "силу землетрясения",
+      "кислотность",
+      "твёрдость минералов"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Шкала Бофорта",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-science-5tsoet",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Hard",
+    "promptRu": "Что измеряют по шкале Мооса?",
+    "answerRu": "твёрдость минералов",
+    "acceptedRu": [
+      "твёрдость минералов",
+      "твёрдость"
+    ],
+    "acceptedEn": [
+      "mineral hardness",
+      "hardness"
+    ],
+    "distractorsRu": [
+      "силу ветра",
+      "яркость звёзд",
+      "кислотность"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Шкала Мооса",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-science-1dbl8t5",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "science",
+    "difficulty": "Medium",
+    "promptRu": "Кто первой из женщин получил Нобелевскую премию?",
+    "answerRu": "Мария Кюри",
+    "acceptedRu": [
+      "Мария Кюри",
+      "Мари Кюри",
+      "Кюри"
+    ],
+    "acceptedEn": [
+      "Marie Curie",
+      "Curie"
+    ],
+    "distractorsRu": [
+      "Ада Лавлейс",
+      "Розалинд Франклин",
+      "Лиза Мейтнер"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Мария Кюри",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

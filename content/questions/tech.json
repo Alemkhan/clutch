@@ -454,5 +454,57 @@
     "sourceTitle": "История вычислительной техники — Википедия",
     "origin": "notebooklm",
     "license": "original"
+  },
+  {
+    "id": "er-tech-1ux91uo",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Кто основал Apple вместе со Стивом Возняком?",
+    "answerRu": "Стив Джобс",
+    "acceptedRu": [
+      "Стив Джобс",
+      "Джобс"
+    ],
+    "acceptedEn": [
+      "Steve Jobs",
+      "Jobs"
+    ],
+    "distractorsRu": [
+      "Билл Гейтс",
+      "Илон Маск",
+      "Джефф Безос"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Стив Джобс",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-tech-1y0gor4",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "tech",
+    "difficulty": "Medium",
+    "promptRu": "Что означает «www» в адресах сайтов?",
+    "answerRu": "World Wide Web",
+    "acceptedRu": [
+      "World Wide Web",
+      "всемирная паутина"
+    ],
+    "distractorsRu": [
+      "Wide Web World",
+      "World Web Window",
+      "Web Wireless Way"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: World Wide Web",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

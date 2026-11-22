@@ -1384,5 +1384,87 @@
     "sourceTitle": "Wikidata: Кавалер розы",
     "origin": "wikidata",
     "license": "CC0"
+  },
+  {
+    "id": "er-music-1quaj8b",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Кого называют «королём поп-музыки»?",
+    "answerRu": "Майкл Джексон",
+    "acceptedRu": [
+      "Майкл Джексон",
+      "Джексон"
+    ],
+    "acceptedEn": [
+      "Michael Jackson",
+      "Jackson"
+    ],
+    "distractorsRu": [
+      "Элвис Пресли",
+      "Фредди Меркьюри",
+      "Принс"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Майкл Джексон",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-music-7d1o27",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "Из какого города группа The Beatles?",
+    "answerRu": "Ливерпуль",
+    "acceptedRu": [
+      "Ливерпуль"
+    ],
+    "acceptedEn": [
+      "Liverpool"
+    ],
+    "distractorsRu": [
+      "Лондон",
+      "Манчестер",
+      "Бирмингем"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Ливерпуль",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-music-13vsjk2",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "music",
+    "difficulty": "Medium",
+    "promptRu": "На каком инструменте прославился виртуоз Никколо Паганини?",
+    "answerRu": "скрипка",
+    "acceptedRu": [
+      "скрипка",
+      "на скрипке"
+    ],
+    "acceptedEn": [
+      "violin",
+      "the violin"
+    ],
+    "distractorsRu": [
+      "фортепиано",
+      "виолончель",
+      "гитара"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Никколо Паганини",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

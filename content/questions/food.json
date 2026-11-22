@@ -424,5 +424,57 @@
     "sourceTitle": "Hammer Challenge",
     "origin": "notebooklm",
     "license": "original"
+  },
+  {
+    "id": "er-food-ll0ns7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Medium",
+    "promptRu": "Из какого плода делают гуакамоле?",
+    "answerRu": "авокадо",
+    "acceptedRu": [
+      "авокадо"
+    ],
+    "acceptedEn": [
+      "avocado"
+    ],
+    "distractorsRu": [
+      "манго",
+      "лайм",
+      "томат"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Гуакамоле",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-food-1mu5282",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "food",
+    "difficulty": "Hard",
+    "promptRu": "Какая пряность считается самой дорогой в мире?",
+    "answerRu": "шафран",
+    "acceptedRu": [
+      "шафран"
+    ],
+    "acceptedEn": [
+      "saffron"
+    ],
+    "distractorsRu": [
+      "ваниль",
+      "кардамон",
+      "корица"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Шафран",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

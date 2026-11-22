@@ -1267,5 +1267,273 @@
     "license": "original",
     "explanationRu": "Ява — остров Индонезии, один из самых густонаселённых островов мира. На нём расположена Джакарта, крупнейший город страны.",
     "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику."
+  },
+  {
+    "id": "er-world-15dns18",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "В какой стране больше всего пирамид?",
+    "answerRu": "Судан",
+    "acceptedRu": [
+      "Судан"
+    ],
+    "acceptedEn": [
+      "Sudan"
+    ],
+    "distractorsRu": [
+      "Египет",
+      "Мексика",
+      "Перу"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Пирамиды Судана",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-world-xqbdr8",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какая река самая длинная в Европе?",
+    "answerRu": "Волга",
+    "acceptedRu": [
+      "Волга"
+    ],
+    "acceptedEn": [
+      "Volga",
+      "Volga River"
+    ],
+    "distractorsRu": [
+      "Дунай",
+      "Днепр",
+      "Рейн"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Волга",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-world-1oyzcm8",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Какая страна самая большая по площади в Африке?",
+    "answerRu": "Алжир",
+    "acceptedRu": [
+      "Алжир"
+    ],
+    "acceptedEn": [
+      "Algeria"
+    ],
+    "distractorsRu": [
+      "ДР Конго",
+      "Судан",
+      "Ливия"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Алжир",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-world-ddj4o8",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какой крупный город стоит сразу на двух континентах — в Европе и в Азии?",
+    "answerRu": "Стамбул",
+    "acceptedRu": [
+      "Стамбул"
+    ],
+    "acceptedEn": [
+      "Istanbul"
+    ],
+    "distractorsRu": [
+      "Каир",
+      "Афины",
+      "Баку"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Стамбул",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-world-1ibrco4",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Какое море не омывает ни одного берега?",
+    "answerRu": "Саргассово",
+    "acceptedRu": [
+      "Саргассово",
+      "Саргассово море"
+    ],
+    "acceptedEn": [
+      "Sargasso Sea",
+      "Sargasso"
+    ],
+    "distractorsRu": [
+      "Красное",
+      "Мёртвое",
+      "Баренцево"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Саргассово море",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-world-7h3f4h",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какая гора самая высокая в Африке?",
+    "answerRu": "Килиманджаро",
+    "acceptedRu": [
+      "Килиманджаро"
+    ],
+    "acceptedEn": [
+      "Kilimanjaro",
+      "Mount Kilimanjaro"
+    ],
+    "distractorsRu": [
+      "Кения",
+      "Рувензори",
+      "Атлас"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Килиманджаро",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-world-3v5evt",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Сколько официальных часовых поясов в Китае?",
+    "answerRu": "один",
+    "acceptedRu": [
+      "один",
+      "1",
+      "одна"
+    ],
+    "acceptedEn": [
+      "one"
+    ],
+    "distractorsRu": [
+      "три",
+      "пять",
+      "четыре"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Время в Китае",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-world-110feuf",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "Какой пролив отделяет Европу от Африки?",
+    "answerRu": "Гибралтарский",
+    "acceptedRu": [
+      "Гибралтарский",
+      "Гибралтарский пролив"
+    ],
+    "acceptedEn": [
+      "Strait of Gibraltar",
+      "Gibraltar"
+    ],
+    "distractorsRu": [
+      "Босфор",
+      "Ла-Манш",
+      "Баб-эль-Мандебский"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Гибралтарский пролив",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-world-2stk6m",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Hard",
+    "promptRu": "Какая страна — крупнейший архипелаг мира, в ней больше 17 тысяч островов?",
+    "answerRu": "Индонезия",
+    "acceptedRu": [
+      "Индонезия"
+    ],
+    "acceptedEn": [
+      "Indonesia"
+    ],
+    "distractorsRu": [
+      "Филиппины",
+      "Япония",
+      "Мальдивы"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Индонезия",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-world-vu395f",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "world",
+    "difficulty": "Medium",
+    "promptRu": "В каком городе строят собор Саграда Фамилия?",
+    "answerRu": "Барселона",
+    "acceptedRu": [
+      "Барселона"
+    ],
+    "acceptedEn": [
+      "Barcelona"
+    ],
+    "distractorsRu": [
+      "Мадрид",
+      "Рим",
+      "Лиссабон"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Саграда Фамилия",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

@@ -205,5 +205,18 @@
       "Scorpio"
     ],
     "explanation": "Pisces closes the 12-sector zodiac circle."
+  },
+  "er-popculture-hsrk77": {
+    "prompt": "What is the yellow family from Springfield in the animated series called?",
+    "answer": "the Simpsons",
+    "accepted": [
+      "Simpsons",
+      "the Simpsons"
+    ],
+    "distractors": [
+      "the Griffins",
+      "the Flintstones",
+      "the Belchers"
+    ]
   }
 }

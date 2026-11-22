@@ -786,5 +786,90 @@
     "license": "original",
     "explanationRu": "В дикой природе орангутаны обитают только на островах Борнео и Суматра. Суматра принадлежит Индонезии, а Борнео разделён между Индонезией, Малайзией и Брунеем. При этом естественные популяции орангутанов встречаются только в индонезийской и малайзийской частях Борнео.",
     "reviewNote": "Заблокировано 2026-11-01: орангутаны также живут в Малайзии; вопрос допускает несколько правильных ответов."
+  },
+  {
+    "id": "er-nature-cbrd4q",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Hard",
+    "promptRu": "Сколько сердец у осьминога?",
+    "answerRu": "три",
+    "acceptedRu": [
+      "три",
+      "3"
+    ],
+    "acceptedEn": [
+      "three"
+    ],
+    "distractorsRu": [
+      "одно",
+      "два",
+      "восемь"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Осьминог",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-nature-1o0vlg7",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Medium",
+    "promptRu": "Какая птица самая большая в мире?",
+    "answerRu": "страус",
+    "acceptedRu": [
+      "страус",
+      "африканский страус"
+    ],
+    "acceptedEn": [
+      "ostrich",
+      "the ostrich"
+    ],
+    "distractorsRu": [
+      "эму",
+      "кондор",
+      "альбатрос"
+    ],
+    "openAnswer": true,
+    "sourceHint": "Википедия: Страус",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
+  },
+  {
+    "id": "er-nature-1g304qs",
+    "editorialStatus": "approved",
+    "kind": "single",
+    "topic": "nature",
+    "difficulty": "Hard",
+    "promptRu": "Кору какого дерева используют для винных пробок?",
+    "answerRu": "пробкового дуба",
+    "acceptedRu": [
+      "пробковый дуб",
+      "пробкового дуба",
+      "дуб"
+    ],
+    "acceptedEn": [
+      "cork oak",
+      "the cork oak",
+      "oak"
+    ],
+    "distractorsRu": [
+      "берёзы",
+      "сосны",
+      "бальсы"
+    ],
+    "openAnswer": false,
+    "sourceHint": "Википедия: Пробковый дуб",
+    "origin": "authored",
+    "license": "original",
+    "reviewNote": "Эрудиция для забега дня (средний и сложный уровень), 2026-11-23",
+    "liveFrom": "2026-11-24"
   }
 ]

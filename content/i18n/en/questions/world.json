@@ -672,5 +672,130 @@
       "Thailand"
     ],
     "explanation": "Java is an Indonesian island and one of the most densely populated islands in the world. It is home to Jakarta, the country's largest city."
+  },
+  "er-world-15dns18": {
+    "prompt": "Which country has the most pyramids?",
+    "answer": "Sudan",
+    "accepted": [
+      "Sudan"
+    ],
+    "distractors": [
+      "Egypt",
+      "Mexico",
+      "Peru"
+    ]
+  },
+  "er-world-xqbdr8": {
+    "prompt": "What is the longest river in Europe?",
+    "answer": "Volga",
+    "accepted": [
+      "Volga",
+      "Volga River"
+    ],
+    "distractors": [
+      "Danube",
+      "Dnieper",
+      "Rhine"
+    ]
+  },
+  "er-world-1oyzcm8": {
+    "prompt": "What is the largest country in Africa by area?",
+    "answer": "Algeria",
+    "accepted": [
+      "Algeria"
+    ],
+    "distractors": [
+      "DR Congo",
+      "Sudan",
+      "Libya"
+    ]
+  },
+  "er-world-ddj4o8": {
+    "prompt": "Which major city lies on two continents, Europe and Asia?",
+    "answer": "Istanbul",
+    "accepted": [
+      "Istanbul"
+    ],
+    "distractors": [
+      "Cairo",
+      "Athens",
+      "Baku"
+    ]
+  },
+  "er-world-1ibrco4": {
+    "prompt": "Which sea has no coastline at all?",
+    "answer": "Sargasso Sea",
+    "accepted": [
+      "Sargasso Sea",
+      "Sargasso"
+    ],
+    "distractors": [
+      "Red Sea",
+      "Dead Sea",
+      "Barents Sea"
+    ]
+  },
+  "er-world-7h3f4h": {
+    "prompt": "What is the highest mountain in Africa?",
+    "answer": "Kilimanjaro",
+    "accepted": [
+      "Kilimanjaro",
+      "Mount Kilimanjaro"
+    ],
+    "distractors": [
+      "Mount Kenya",
+      "Rwenzori",
+      "Atlas"
+    ]
+  },
+  "er-world-3v5evt": {
+    "prompt": "How many official time zones does China have?",
+    "answer": "one",
+    "accepted": [
+      "one",
+      "1"
+    ],
+    "distractors": [
+      "three",
+      "five",
+      "four"
+    ]
+  },
+  "er-world-110feuf": {
+    "prompt": "Which strait separates Europe from Africa?",
+    "answer": "Strait of Gibraltar",
+    "accepted": [
+      "Strait of Gibraltar",
+      "Gibraltar"
+    ],
+    "distractors": [
+      "Bosphorus",
+      "English Channel",
+      "Bab-el-Mandeb"
+    ]
+  },
+  "er-world-2stk6m": {
+    "prompt": "Which country is the world’s largest archipelago, with over 17,000 islands?",
+    "answer": "Indonesia",
+    "accepted": [
+      "Indonesia"
+    ],
+    "distractors": [
+      "Philippines",
+      "Japan",
+      "Maldives"
+    ]
+  },
+  "er-world-vu395f": {
+    "prompt": "In which city is the Sagrada Família being built?",
+    "answer": "Barcelona",
+    "accepted": [
+      "Barcelona"
+    ],
+    "distractors": [
+      "Madrid",
+      "Rome",
+      "Lisbon"
+    ]
   }
 }
