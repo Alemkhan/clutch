@@ -83,6 +83,8 @@ export interface PackQuestion extends PackRecordBase {
    * менять уже сыгранные наборы: окно пакета считается по всему пулу. В дуэлях и свободной игре — сразу.
    */
   liveFrom?: string;
+  /** Последний день (YYYY-MM-DD), когда запись ещё идёт в забег дня; дальше — только дуэли и свободная игра. */
+  dailyUntil?: string;
 }
 
 export interface PackImage {

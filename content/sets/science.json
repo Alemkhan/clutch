@@ -108,7 +108,8 @@
     "reviewNote": "Оганесон формально тоже в 18-й группе — решить, принимать ли его как ответ.",
     "origin": "authored",
     "license": "original",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "set-rainbow",
@@ -1030,6 +1031,7 @@
     "sourceTitle": "Wikidata: химический элемент",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   }
 ]

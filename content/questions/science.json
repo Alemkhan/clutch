@@ -545,7 +545,8 @@
     "sourceTitle": "Wikidata: водород",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-O",
@@ -572,7 +573,8 @@
     "sourceTitle": "Wikidata: кислород",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-C",
@@ -599,7 +601,8 @@
     "sourceTitle": "Wikidata: углерод",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Fe",
@@ -626,7 +629,8 @@
     "sourceTitle": "Wikidata: железо",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Au",
@@ -653,7 +657,8 @@
     "sourceTitle": "Wikidata: золото",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Ag",
@@ -680,7 +685,8 @@
     "sourceTitle": "Wikidata: серебро",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-N",
@@ -707,7 +713,8 @@
     "sourceTitle": "Wikidata: азот",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-He",
@@ -734,7 +741,8 @@
     "sourceTitle": "Wikidata: гелий",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Na",
@@ -761,7 +769,8 @@
     "sourceTitle": "Wikidata: натрий",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Cu",
@@ -788,7 +797,8 @@
     "sourceTitle": "Wikidata: медь",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Ca",
@@ -815,7 +825,8 @@
     "sourceTitle": "Wikidata: кальций",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-K",
@@ -842,7 +853,8 @@
     "sourceTitle": "Wikidata: калий",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Cl",
@@ -869,7 +881,8 @@
     "sourceTitle": "Wikidata: хлор",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Al",
@@ -897,7 +910,8 @@
     "sourceTitle": "Wikidata: алюминий",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Zn",
@@ -924,7 +938,8 @@
     "sourceTitle": "Wikidata: цинк",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Hg",
@@ -951,7 +966,8 @@
     "sourceTitle": "Wikidata: ртуть",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Pb",
@@ -978,7 +994,8 @@
     "sourceTitle": "Wikidata: свинец",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Sn",
@@ -1005,7 +1022,8 @@
     "sourceTitle": "Wikidata: олово",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-U",
@@ -1032,7 +1050,8 @@
     "sourceTitle": "Wikidata: уран",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Mg",
@@ -1059,7 +1078,8 @@
     "sourceTitle": "Wikidata: магний",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Si",
@@ -1086,7 +1106,8 @@
     "sourceTitle": "Wikidata: кремний",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-P",
@@ -1113,7 +1134,8 @@
     "sourceTitle": "Wikidata: фосфор",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-S",
@@ -1141,7 +1163,8 @@
     "sourceTitle": "Wikidata: сера",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-I",
@@ -1168,7 +1191,8 @@
     "sourceTitle": "Wikidata: иод",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Ni",
@@ -1249,7 +1273,8 @@
     "sourceTitle": "Wikidata: неон",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Ar",
@@ -1303,7 +1328,8 @@
     "sourceTitle": "Wikidata: платина",
     "origin": "wikidata",
     "license": "CC0",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-Li",
@@ -1813,7 +1839,8 @@
     "origin": "wikidata",
     "license": "CC0",
     "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-name-symbol-H",
@@ -1863,7 +1890,8 @@
     "origin": "wikidata",
     "license": "CC0",
     "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-name-symbol-He",
@@ -2063,7 +2091,8 @@
     "origin": "wikidata",
     "license": "CC0",
     "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-name-symbol-C",
@@ -2163,7 +2192,8 @@
     "origin": "wikidata",
     "license": "CC0",
     "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
-    "daily": true
+    "daily": true,
+    "dailyUntil": "2026-11-24"
   },
   {
     "id": "wd-element-name-symbol-O",

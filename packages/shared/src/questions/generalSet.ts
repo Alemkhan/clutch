@@ -242,7 +242,13 @@ export function dailyPackPool(dateKey: string): PackRecord[] {
     return !from || from <= dateKey;
   };
   if (dateKey >= DAILY_CURATED_FROM) {
-    return liveDailyRecords().filter(live).sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+    // `dailyUntil` — последний день записи в забеге дня: убрать вопрос, не меняя уже идущий день.
+    const stillDaily = (record: PackRecord): boolean => {
+      const until = (record as { dailyUntil?: string }).dailyUntil;
+      return !until || dateKey <= until;
+    };
+    return liveDailyRecords().filter((record) => live(record) && stillDaily(record))
+      .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
   }
   const pool = dateKey >= EVERYWHERE_POOL_FROM ? liveEverywhereRecords() : livePackRecords();
   return pool

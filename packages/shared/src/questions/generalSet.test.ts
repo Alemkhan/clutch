@@ -167,3 +167,12 @@ describe('daily flag on content', () => {
     expect(records.filter((record) => record.topic === 'kazakhstan' && record.daily === true).map((record) => record.id)).toEqual([]);
   });
 });
+
+describe('chemical elements leave the daily run', () => {
+  it('keeps them on 2026-11-24 (already being played) and drops them from 2026-11-25', () => {
+    const element = /атомный номер|химический элемент обозначается|символ у химического элемента/;
+    const isElement = (record: { promptRu?: string; mcPromptRu?: string }) => element.test(record.promptRu ?? record.mcPromptRu ?? '');
+    expect(dailyPackPool('2026-11-24').some(isElement)).toBe(true);
+    expect(dailyPackPool('2026-11-25').some(isElement)).toBe(false);
+  });
+});
