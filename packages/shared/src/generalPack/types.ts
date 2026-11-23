@@ -85,6 +85,8 @@ export interface PackQuestion extends PackRecordBase {
   liveFrom?: string;
   /** Последний день (YYYY-MM-DD), когда запись ещё идёт в забег дня; дальше — только дуэли и свободная игра. */
   dailyUntil?: string;
+  /** Первый день (YYYY-MM-DD) в забеге дня для записи, которая уже есть в дуэлях; прошлые дни не меняет. */
+  dailyFrom?: string;
 }
 
 export interface PackImage {

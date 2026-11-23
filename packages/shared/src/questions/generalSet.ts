@@ -48,20 +48,41 @@ export function questionTopicKey(question: Pick<Question, 'category' | 'subcateg
  * перестановка, окна наборов по-прежнему не пересекаются. Если подходящей записи нет (маленький
  * пул), берётся первая — набор всё равно полный.
  */
-function capTopicsPerChunk(order: readonly PackRecord[], chunk: number, cap: number): PackRecord[] {
+function capTopicsPerChunk(order: readonly PackRecord[], chunk: number, cap: number, extra?: ExtraCap): PackRecord[] {
   const queue = [...order];
   const out: PackRecord[] = [];
   let counts = new Map<string, number>();
+  let extraCount = 0;
+  const fits = (record: PackRecord): boolean =>
+    (counts.get(record.topic) ?? 0) < cap && (!extra || !extra.matches(record) || extraCount < extra.cap);
   while (queue.length > 0) {
-    if (out.length % chunk === 0) counts = new Map();
-    let index = queue.findIndex((record) => (counts.get(record.topic) ?? 0) < cap);
+    if (out.length % chunk === 0) {
+      counts = new Map();
+      extraCount = 0;
+    }
+    let index = queue.findIndex(fits);
     if (index < 0) index = 0;
     const [record] = queue.splice(index, 1);
     counts.set(record.topic, (counts.get(record.topic) ?? 0) + 1);
+    if (extra?.matches(record)) extraCount += 1;
     out.push(record);
   }
   return out;
 }
+
+/** Дополнительный потолок поверх тем: не больше `cap` записей узкой группы на набор. */
+interface ExtraCap {
+  matches: (record: PackRecord) => boolean;
+  cap: number;
+}
+
+/** С этого дня в наборе дня не больше одного вопроса про химические элементы. */
+export const ELEMENT_LIMIT_FROM = '2026-11-25';
+const ELEMENT_QUESTION = /атомный номер|химический элемент обозначается|символ у химического элемента/;
+const ONE_ELEMENT_PER_SET: ExtraCap = {
+  matches: (record) => record.kind === 'single' && ELEMENT_QUESTION.test(record.promptRu),
+  cap: 1,
+};
 
 /**
  * Разводит вопросы одной темы: каждый следующий — первый по порядку, чья тема не совпадает с двумя
@@ -243,9 +264,11 @@ export function dailyPackPool(dateKey: string): PackRecord[] {
   };
   if (dateKey >= DAILY_CURATED_FROM) {
     // `dailyUntil` — последний день записи в забеге дня: убрать вопрос, не меняя уже идущий день.
+    // `dailyFrom` — первый день в забеге дня для вопроса, который уже живёт в дуэлях (в отличие от
+    // liveFrom он не трогает пул прошлых дней).
     const stillDaily = (record: PackRecord): boolean => {
-      const until = (record as { dailyUntil?: string }).dailyUntil;
-      return !until || dateKey <= until;
+      const { dailyUntil: until, dailyFrom: from } = record as { dailyUntil?: string; dailyFrom?: string };
+      return (!until || dateKey <= until) && (!from || dateKey >= from);
     };
     return liveDailyRecords().filter((record) => live(record) && stillDaily(record))
       .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
@@ -277,7 +300,7 @@ function packWindow(
   base: string,
   start: number,
   count: number,
-  topicCap?: { chunk: number; cap: number },
+  topicCap?: { chunk: number; cap: number; extra?: ExtraCap },
 ): PackRecord[] {
   if (pool.length === 0) return [];
   const cycles = new Map<number, PackRecord[]>();
@@ -286,7 +309,7 @@ function packWindow(
     let order = cycles.get(cycle);
     if (!order) {
       order = shuffled(pool, cycle === 0 ? base : `${base}:cycle${cycle}`);
-      if (topicCap) order = capTopicsPerChunk(order, topicCap.chunk, topicCap.cap);
+      if (topicCap) order = capTopicsPerChunk(order, topicCap.chunk, topicCap.cap, topicCap.extra);
       cycles.set(cycle, order);
     }
     return order[position % pool.length];
@@ -358,7 +381,9 @@ export function buildGeneralSet(
     `general:${dateKey}`,
     index * GENERAL_SET_PACK_COUNT,
     GENERAL_SET_PACK_COUNT,
-    balanced ? { chunk: GENERAL_SET_PACK_COUNT, cap: GENERAL_SET_TOPIC_CAP } : undefined,
+    balanced
+      ? { chunk: GENERAL_SET_PACK_COUNT, cap: GENERAL_SET_TOPIC_CAP, ...(dateKey >= ELEMENT_LIMIT_FROM ? { extra: ONE_ELEMENT_PER_SET } : {}) }
+      : undefined,
   );
   const packQuestions = packRaceQuestions(records, questionSetId, GENERAL_SET_OPEN_COUNT);
 

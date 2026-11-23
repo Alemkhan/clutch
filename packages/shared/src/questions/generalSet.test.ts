@@ -147,7 +147,8 @@ describe('daily run pool (from DAILY_CURATED_FROM)', () => {
     const everywhere = new Set(liveEverywhereRecords().map((record) => record.id));
     expect(liveDailyRecords().every((record) => everywhere.has(record.id))).toBe(true);
     expect(dailyPackPool('2026-11-23').some((record) => record.id.startsWith('er-'))).toBe(false);
-    expect(dailyPackPool(DAILY_CURATED_FROM).length).toBe(liveDailyRecords().length);
+    const daily = new Set(liveDailyRecords().map((record) => record.id));
+    expect(dailyPackPool(DAILY_CURATED_FROM).every((record) => daily.has(record.id))).toBe(true);
   });
 
   it('swaps historic and US state flags for country flags, capitals and languages', () => {
@@ -168,11 +169,27 @@ describe('daily flag on content', () => {
   });
 });
 
-describe('chemical elements leave the daily run', () => {
-  it('keeps them on 2026-11-24 (already being played) and drops them from 2026-11-25', () => {
-    const element = /атомный номер|химический элемент обозначается|символ у химического элемента/;
-    const isElement = (record: { promptRu?: string; mcPromptRu?: string }) => element.test(record.promptRu ?? record.mcPromptRu ?? '');
-    expect(dailyPackPool('2026-11-24').some(isElement)).toBe(true);
-    expect(dailyPackPool('2026-11-25').some(isElement)).toBe(false);
+describe('chemical elements in the daily run', () => {
+  const element = /атомный номер|химический элемент обозначается|символ у химического элемента/;
+  const prompt = (record: { promptRu?: string; mcPromptRu?: string }) => record.promptRu ?? record.mcPromptRu ?? '';
+
+  it('from 2026-11-25 keeps only basic symbols, a couple of hard ones and two atomic numbers', () => {
+    const pool = dailyPackPool('2026-11-25').filter((record) => element.test(prompt(record))).map(prompt);
+    expect(pool).toContain('Какой атомный номер у элемента «водород»?');
+    expect(pool).toContain('Какой атомный номер у элемента «кислород»?');
+    expect(pool).not.toContain('Какой атомный номер у элемента «углерод»?');
+    expect(pool).toContain('Какой химический элемент обозначается символом Hg?');
+    expect(pool).toContain('Какой символ у химического элемента «калифорний»?');
+    expect(pool).toContain('Какой химический элемент обозначается символом W?');
+    expect(pool.filter((text) => text.startsWith('Какой символ у химического элемента'))).toEqual(['Какой символ у химического элемента «калифорний»?']);
+    expect(dailyPackPool('2026-11-24').some((record) => prompt(record) === 'Какой символ у химического элемента «калифорний»?')).toBe(false);
+  });
+
+  it('puts at most one element question into a daily set from 2026-11-25', () => {
+    clearDailyBankCache();
+    for (let index = 0; index < dailyBankSize('general'); index += 1) {
+      const questions = dailyQuestionSet('general', dayStartMs('2026-11-25') + 60_000, index).questions;
+      expect(questions.filter((question) => element.test(String(question.prompt))).length).toBeLessThanOrEqual(1);
+    }
   });
 });
