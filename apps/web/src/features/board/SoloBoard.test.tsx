@@ -63,14 +63,23 @@ describe('the day board', () => {
     expect(html).not.toContain('0.875');
   });
 
-  it('shows my own place even when I am far outside the listed top', () => {
-    const html = render(ready({ entries: [entry('Ann', 7)], you: standing() }));
-    expect(html).toMatch(/solo-board-you-rank">37</);
+  it('shows my own result softly when my place is hidden from others', () => {
+    const html = render(ready({ entries: [entry('Ann', 7)], total: 140, you: standing() }));
+    // 37-е из 140 — ниже общей половины: номер не показываем, только долю обойдённых.
+    expect(html).not.toMatch(/solo-board-you-rank">37</);
+    expect(html).toContain('Лучше 74% игроков<');
+    expect(html).toContain('Это место видишь только ты');
     // Попытка дня сыграна: таблица зовёт в дуэль, а не во второй забег дня.
     expect(html).toMatch(/cta-btn solo-board-play">Дуэль</);
     expect(html).toContain('Ты: 11 кругов · из 140 дошедших');
+    expect(html).toContain('и ещё 139 — их места видят только они сами');
+  });
+
+  it('shows my place and the gap to the next one inside the public part', () => {
+    const html = render(ready({ entries: [entry('Ann', 7)], you: standing({ rank: 6, total: 140, placeAbove: 5 }) }));
+    expect(html).toMatch(/solo-board-you-rank">6</);
     // Цель достижимая, а не «попади в топ-50».
-    expect(html).toContain('До 36-го места — один круг<');
+    expect(html).toContain('До 5-го места — один круг<');
   });
 
   it('says plainly when my run is not in today\'s board at all', () => {

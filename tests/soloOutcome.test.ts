@@ -429,7 +429,9 @@ describe('my own place in the day board', () => {
     insertDaily(db, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 2, rounds: 16 });
 
     const body = await (await board(db)).json() as SoloLeaderboardResponse;
-    expect(body.entries).toHaveLength(50);
+    // Всем видна только лучшая половина, но не больше десяти мест.
+    expect(body.entries).toHaveLength(10);
+    expect(body.total).toBe(61);
     expect(body.entries.map((entry) => entry.displayName)).not.toContain('Я');
     // Место считается по всей таблице, а не по отданной странице.
     expect(body.you).toMatchObject({ rank: 61, total: 61 });

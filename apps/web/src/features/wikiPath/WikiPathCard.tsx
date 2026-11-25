@@ -26,7 +26,7 @@ export function WikiPathCard({ state, onOpen, onRetry }: WikiPathCardProps) {
   const { challenge, run } = state.today;
   if (!challenge) return null;
   const status = state.status === 'completed'
-    ? t.completedClicks(run?.clicks ?? 0)
+    ? (run?.gaveUp ? t.gaveUpCard : t.completedClicks(run?.clicks ?? 0))
     : state.status === 'in_progress'
       ? t.inProgressClicks(run?.clicks ?? 0)
       : t.dailyRoute;

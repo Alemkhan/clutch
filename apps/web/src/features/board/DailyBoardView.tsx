@@ -1,7 +1,7 @@
 import { messagesFor, useMessages } from '../../i18n/messages';
 import { m } from './messages';
 import type { ReactNode } from 'react';
-import { isCategoryOpen, type CategoryId, type SoloLeaderboardResponse, type SoloLeaderboardStanding, type SoloMode } from '@clutch/shared';
+import { betterThanPercent, isCategoryOpen, isPublicPlace, type CategoryId, type SoloLeaderboardResponse, type SoloLeaderboardStanding, type SoloMode } from '@clutch/shared';
 import { categoryName, finishedText, roundsShort, soloRoundsText } from '../myRuns/myRunsView';
 import { ScreenHeader } from '../../ui/ScreenHeader';
 import { resetLabel } from '../tiebreaker/tiebreakerClock';
@@ -35,6 +35,17 @@ export function standingHint(standing: SoloLeaderboardStanding): string {
   const gap = standing.roundsToNext === 1 ? t.oneRound : soloRoundsText(standing.roundsToNext);
   return t.toPlace(standing.placeAbove ?? standing.rank - 1, gap);
 }
+/** Место ниже общей половины таблицы: другие его не видят, и показываем мы его мягче. */
+function isPrivateStanding(standing: SoloLeaderboardStanding): boolean {
+  return !isPublicPlace(standing.rank, standing.total);
+}
+
+function privateStandingHint(standing: SoloLeaderboardStanding): string {
+  const t = messagesFor(m);
+  const percent = betterThanPercent(standing.rank, standing.total);
+  return percent ? t.betterThan(percent) : t.finishCounted;
+}
+
 export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onRetry, onPlay, kindSwitch }: SoloBoardViewProps) {
   const t = useMessages(m);
   // Попытка забега дня одна: сыгравшего таблица зовёт в дуэль, а не во второй забег дня.
@@ -80,9 +91,12 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
           {state.board.you && (
             <div className="solo-board-you">
               <div className="solo-board-you-row">
-                <span className="solo-board-you-rank">{state.board.you.rank}<span className="visually-hidden">{t.placeSuffix}</span></span>
+                {isPrivateStanding(state.board.you)
+                  ? <span className="solo-board-you-rank" aria-hidden="true">✓</span>
+                  : <span className="solo-board-you-rank">{state.board.you.rank}<span className="visually-hidden">{t.placeSuffix}</span></span>}
                 <div className="solo-board-you-info">
-                  <span className="solo-board-you-hint">{standingHint(state.board.you)}</span>
+                  <span className="solo-board-you-hint">{isPrivateStanding(state.board.you) ? privateStandingHint(state.board.you) : standingHint(state.board.you)}</span>
+                  {isPrivateStanding(state.board.you) && <span className="solo-board-you-meta">{t.privatePlace}</span>}
                   {/* Пар набора игроку не показывается: он откалиброван на старом молотке и занижен
                       на 12–22% (см. SKILL_SHARE). Круги — честное число, их и показываем. */}
                   <span className="solo-board-you-meta">
@@ -132,6 +146,9 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
                   );
                 })}
               </ol>
+              {(state.board.total ?? 0) > state.board.entries.length && (
+                <p className="solo-board-note">{t.hiddenRest((state.board.total ?? 0) - state.board.entries.length)}</p>
+              )}
               {/* Правда для текущей таблицы: равных разводит прикидка дня (R25), длительность не участвует. */}
               <p className="solo-board-note">{t.dailyNote}</p>
             </>

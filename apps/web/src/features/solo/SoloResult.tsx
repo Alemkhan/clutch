@@ -2,7 +2,7 @@ import { messagesFor, useMessages } from '../../i18n/messages';
 import { m } from './messages';
 import { useGroupChallenge } from './useGroupChallenge';
 import { useEffect, useRef } from 'react';
-import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS, dailyKey, gameDayNumber } from '@clutch/shared';
+import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS, clanRunPoints, dailyKey, gameDayNumber } from '@clutch/shared';
 import { DailyReminderOffer } from '../progress/Progress';
 import { ClanResultNudge } from '../clans/ClanResultNudge';
 import type { CategoryId, CompleteSoloRunResponse, MiniGameId, Opponent, SkillResult, SoloMode } from '@clutch/shared';
@@ -259,7 +259,12 @@ export function SoloResult({
 
       <DailyReminderOffer />
       {/* Очки клана дают только забеги дня. */}
-      {mode === 'daily' && <ClanResultNudge onClan={onClan} />}
+      {mode === 'daily' && <ClanResultNudge
+        onClan={onClan}
+        runPoints={saveStatus === 'saved' && response
+          ? clanRunPoints({ progress: response.progress, reachedTarget: response.reachedTarget, soloScore: response.reachedTarget ? response.score : null })
+          : undefined}
+      />}
 
       <div className="result-actions solo-result-actions">
         {next && onPlayMode ? (

@@ -56,6 +56,8 @@ export interface PlayerStats {
   duelWins: number;
   tiebreakerAnswers: number;
   wikiPathsCompleted: number;
+  /** Вики-пути, где игрок честно сдался (а не просто закрыл приложение). */
+  wikiPathsGivenUp?: number;
   /** Созданные вызовы друзьям (групповые и личные). */
   friendChallenges: number;
   bestStreak: number;
@@ -67,13 +69,16 @@ export const XP_RULES = {
   perFinish: 25,
   perTiebreaker: 15,
   perWikiPath: 20,
+  /** Сдаться лучше, чем бросить: попытка тоже чего-то стоит (решение владельца 2026-11-25). */
+  perWikiGiveUp: 5,
 } as const;
 
 export function experienceOf(stats: PlayerStats): number {
   return stats.correctAnswers * XP_RULES.perCorrectAnswer
     + stats.reachedTargetRuns * XP_RULES.perFinish
     + stats.tiebreakerAnswers * XP_RULES.perTiebreaker
-    + stats.wikiPathsCompleted * XP_RULES.perWikiPath;
+    + stats.wikiPathsCompleted * XP_RULES.perWikiPath
+    + (stats.wikiPathsGivenUp ?? 0) * XP_RULES.perWikiGiveUp;
 }
 
 export interface PlayerLevel {

@@ -118,11 +118,36 @@ export interface SoloLeaderboardStanding {
   tiebreak: 'answered' | 'not_answered' | 'guest';
 }
 
+/**
+ * Сколько мест таблицы дня видят все: лучшая половина, но не меньше 3 и не больше 10. Остальные
+ * места видит только сам игрок (решение владельца 2026-11-25): люди бросали забег, лишь бы не
+ * оказаться последними у всех на виду.
+ */
+export const PUBLIC_BOARD_MAX = 10;
+export const PUBLIC_BOARD_MIN = 3;
+export function publicBoardPlaces(total: number): number {
+  return Math.min(PUBLIC_BOARD_MAX, Math.max(PUBLIC_BOARD_MIN, Math.ceil(total / 2)));
+}
+
+/** Виден ли результат с этим местом всем остальным. */
+export function isPublicPlace(rank: number, total: number): boolean {
+  return rank <= publicBoardPlaces(total);
+}
+
+/** Какую долю остальных игроков игрок обошёл, 0–100: «лучше 40% игроков». null — он один. */
+export function betterThanPercent(rank: number, total: number): number | null {
+  if (total <= 1) return null;
+  return Math.max(0, Math.min(100, Math.round((100 * (total - rank)) / (total - 1))));
+}
+
 export interface SoloLeaderboardResponse {
   category: CategoryId;
   /** Сутки игры, YYYY-MM-DD; граница сдвинута от UTC на `DAY_BOUNDARY_OFFSET_MINUTES`. */
   dateKey: string;
+  /** Только места, которые видят все (`publicBoardPlaces`); своё место — в `you`. */
   entries: SoloLeaderboardEntry[];
+  /** Сколько всего игроков в таблице дня, включая скрытые места. Старый сервер поля не шлёт. */
+  total?: number;
   /** Своё место. null — в этот день игрок не закрыл ни одного забега в этой категории. */
   you: SoloLeaderboardStanding | null;
   /**

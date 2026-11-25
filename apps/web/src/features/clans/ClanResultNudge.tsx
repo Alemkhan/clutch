@@ -11,17 +11,19 @@ import { m } from './messages';
  * меньше десяти человек, зовём заразить друга: пустые места в зачёте недели — нули. Без клана
  * (после первого забега это уже можно) — занять своё эмодзи.
  */
-export function ClanResultNudge({ onClan }: { onClan?: () => void }) {
+/** `runPoints` — очки клану за только что сохранённый забег дня (clanRunPoints). */
+export function ClanResultNudge({ onClan, runPoints }: { onClan?: () => void; runPoints?: number }) {
   const clan = useMyClan();
   const invite = useClanInvite('result');
   // Забег только что сохранился: вклад и «можно занять» изменились.
   useEffect(() => { void loadMyClan(true); }, []);
   if (clan.status !== 'ready' || !clansEnabled()) return null;
-  return <ClanResultNudgeView me={clan.me} onClan={onClan} onInvite={() => clan.me.clan && invite.share(clan.me.clan)} inviteStatus={invite.status} />;
+  return <ClanResultNudgeView me={clan.me} onClan={onClan} runPoints={runPoints} onInvite={() => clan.me.clan && invite.share(clan.me.clan)} inviteStatus={invite.status} />;
 }
 
-export function ClanResultNudgeView({ me, onClan, onInvite, inviteStatus = 'idle' }: {
+export function ClanResultNudgeView({ me, onClan, onInvite, inviteStatus = 'idle', runPoints }: {
   me: ClanMeResponse;
+  runPoints?: number;
   onClan?: () => void;
   onInvite: () => void;
   inviteStatus?: InviteStatus;
@@ -47,6 +49,7 @@ export function ClanResultNudgeView({ me, onClan, onInvite, inviteStatus = 'idle
       <span className="clan-nudge-emoji" aria-hidden="true">{clan.emoji}</span>
       <div className="clan-nudge-body">
         <strong>{short ? t.nudgeNeed(clan.emoji, CLAN_TOP_MEMBERS, clan.members) : t.nudgeContribution(clan.emoji)}</strong>
+        {runPoints !== undefined && runPoints > 0 && <span>{t.nudgeRun(t.points(runPoints))}</span>}
         <span>{t.nudgePoints(t.points(clan.youWeekPoints))}</span>
         {inviteStatus === 'copied' && <span role="status">{t.inviteCopied}</span>}
         {inviteStatus === 'failed' && <span role="status">{t.inviteFailed}</span>}

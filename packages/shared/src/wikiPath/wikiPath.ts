@@ -47,6 +47,8 @@ export interface WikiPathRunSummary {
   path: string[];
   startedAt: number;
   completedAt: number | null;
+  /** Игрок сдался: маршрут закрыт без результата и в таблицу не попадает. */
+  gaveUp?: boolean;
 }
 
 /** GET /api/wiki-path/today. Both are null when no challenge exists today. */
@@ -59,7 +61,14 @@ export interface WikiPathTodayResponse {
 export interface StartWikiPathResponse {
   challenge: WikiPathChallenge;
   run: WikiPathRunSummary;
-  currentPage: WikiPathPage;
+  /** null — маршрут закрыт (игрок сдался), статью грузить незачем. */
+  currentPage: WikiPathPage | null;
+}
+
+/** POST /api/wiki-path/runs/:runId/give-up. */
+export interface GiveUpWikiPathResponse {
+  challenge: WikiPathChallenge;
+  run: WikiPathRunSummary;
 }
 
 /** POST /api/wiki-path/click body. A title is checked against currentPage.allowedLinks by the server. */
@@ -84,8 +93,15 @@ export interface WikiPathBoardEntry {
 
 export interface WikiPathBoardResponse {
   challengeId: string;
+  /** Только места, которые видят все (`publicBoardPlaces`). */
   entries: WikiPathBoardEntry[];
   ownRank: number | null;
+  /** Свои клики, если маршрут пройден: своё место может быть скрыто от других. */
+  ownClicks?: number | null;
+  /** Сколько всего прошли маршрут, включая скрытые места. */
+  total?: number;
+  /** Игрок сегодня сдался: маршруты других ему открыты, в таблице его нет. */
+  ownGaveUp?: boolean;
 }
 
 /** Public article chain for one completed entry in today's Wiki Path board. */

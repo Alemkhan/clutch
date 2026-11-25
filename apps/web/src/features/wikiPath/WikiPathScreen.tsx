@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { StartWikiPathResponse, WikiPathPage, WikiPathRunSummary, WikiPathTodayResponse } from '@clutch/shared';
-import { clickWikiPath, startWikiPath } from '../../platform/api';
+import { clickWikiPath, giveUpWikiPath, startWikiPath } from '../../platform/api';
 import { ScreenHeader } from '../../ui/ScreenHeader';
 import { approvedWikiLink, sanitizeWikiArticle, wikiLinkFromAnchor } from './wikiArticle';
 import type { WikiPathTodayState } from './useWikiPathToday';
@@ -45,6 +45,12 @@ export async function loadWikiPathTransition<T>(
 
 function Completion({ run }: { run: WikiPathRunSummary }) {
   const t = useMessages(m);
+  if (run.gaveUp) {
+    return <section className="wp-completion wp-gave-up" aria-live="polite">
+      <p className="wp-eyebrow">{t.gaveUpTitle}</p>
+      <p>{t.gaveUpText}</p>
+    </section>;
+  }
   return <section className="wp-completion" aria-live="polite">
     <span className="wp-completion-check" aria-hidden="true">✓</span>
     <p className="wp-eyebrow">{t.routeCompleted}</p>
@@ -58,6 +64,7 @@ export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted, onPag
   const [screen, setScreen] = useState<ScreenState>({ status: 'idle' });
   const [pendingTitle, setPendingTitle] = useState<string | null>(null);
   const [navigationMessage, setNavigationMessage] = useState(t.allowedLinksOnly);
+  const [giveUp, setGiveUp] = useState<'idle' | 'confirm' | 'working' | 'error'>('idle');
 
   useEffect(() => {
     if (today.status !== 'completed' || !today.today.challenge || !today.today.run) return;
@@ -70,7 +77,7 @@ export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted, onPag
     setScreen({ status: 'loading', label });
     try {
       const result = await action();
-      if (result.run.status === 'completed') {
+      if (result.run.status === 'completed' || result.run.gaveUp || !result.currentPage) {
         setScreen({ status: 'completed', challenge: result.challenge, run: result.run });
         onCompleted();
       } else setScreen({ status: 'active', challenge: result.challenge, run: result.run, page: result.currentPage });
@@ -110,6 +117,20 @@ export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted, onPag
     }
   };
 
+  // Сдаться честнее, чем закрыть приложение: опыт за попытку и пути других как подсказка.
+  const confirmGiveUp = async () => {
+    if (!run || screen.status !== 'active') return;
+    setGiveUp('working');
+    try {
+      const result = await giveUpWikiPath(run.runId);
+      setGiveUp('idle');
+      setScreen({ status: 'completed', challenge: result.challenge, run: result.run });
+      onCompleted();
+    } catch {
+      setGiveUp('error');
+    }
+  };
+
   const handleArticleClick = (event: React.MouseEvent<HTMLElement>) => {
     const target = event.target;
     if (!(target instanceof Element)) return;
@@ -144,6 +165,16 @@ export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted, onPag
       {path.length > 2 && <><span>{t.middleClicks(path.length - 2)}</span><span aria-hidden="true">→</span></>}
       <strong>{page?.title}</strong>
     </nav>}
+    {screen.status === 'active' && <section className="wp-give-up">
+      {giveUp === 'idle' && <button type="button" className="wp-secondary wp-give-up-btn" disabled={!!pendingTitle} onClick={() => setGiveUp('confirm')}>{t.giveUp}</button>}
+      {(giveUp === 'confirm' || giveUp === 'working' || giveUp === 'error') && <div className="wp-give-up-confirm" role="alertdialog" aria-label={t.giveUp}>
+        <p>{giveUp === 'error' ? t.giveUpError : t.giveUpConfirm}</p>
+        <div className="wp-give-up-actions">
+          <button type="button" className="wp-secondary" disabled={giveUp === 'working'} onClick={() => setGiveUp('idle')}>{t.giveUpCancel}</button>
+          <button type="button" className="wp-primary" disabled={giveUp === 'working'} onClick={() => { void confirmGiveUp(); }}>{giveUp === 'working' ? t.givingUp : t.giveUpConfirmYes}</button>
+        </div>
+      </div>}
+    </section>}
     {screen.status === 'idle' && (today.status === 'available' || today.status === 'in_progress') && <section className="wp-start">
       <p className="wp-start-progress">{t.intro}</p>
       {today.status === 'in_progress' && <p className="wp-start-progress">{t.alreadyClicked(today.today.run?.clicks ?? 0)}</p>}

@@ -12,7 +12,8 @@ export type WikiPathTodayState =
 
 function toState(today: WikiPathTodayResponse): WikiPathTodayState {
   if (!today.challenge) return { status: 'absent' };
-  if (today.run?.status === 'completed') return { status: 'completed', today };
+  // Сдавшийся на сегодня закончил так же, как дошедший: второй попытки нет.
+  if (today.run?.status === 'completed' || today.run?.gaveUp) return { status: 'completed', today };
   if (today.run?.status === 'in_progress') return { status: 'in_progress', today };
   return { status: 'available', today };
 }

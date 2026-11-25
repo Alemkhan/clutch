@@ -24,6 +24,7 @@ interface CountersRow {
   duel_wins: number;
   tiebreaker_answers: number;
   wiki_paths: number;
+  wiki_given_up: number;
   group_challenges: number;
   friend_invites: number;
 }
@@ -73,6 +74,7 @@ export async function getSoloProfile(
           WHERE player_id = ?1 AND rules_version = ?3 AND solo_outcome = 'player') AS duel_wins,
         (SELECT COUNT(*) FROM tiebreaker_answers WHERE player_id = ?1) AS tiebreaker_answers,
         (SELECT COUNT(*) FROM wiki_path_runs WHERE player_id = ?1 AND status = 'completed') AS wiki_paths,
+        (SELECT COUNT(*) FROM wiki_path_runs WHERE player_id = ?1 AND gave_up_at IS NOT NULL) AS wiki_given_up,
         (SELECT COUNT(*) FROM group_challenges WHERE creator_player_id = ?1) AS group_challenges,
         (SELECT COUNT(*) FROM rematch_invites i JOIN match_runs r ON r.id = i.challenger_run_id
           WHERE r.player_id = ?1) AS friend_invites
@@ -89,6 +91,7 @@ export async function getSoloProfile(
     duelWins: counters?.duel_wins ?? 0,
     tiebreakerAnswers: counters?.tiebreaker_answers ?? 0,
     wikiPathsCompleted: counters?.wiki_paths ?? 0,
+    wikiPathsGivenUp: counters?.wiki_given_up ?? 0,
     friendChallenges: (counters?.group_challenges ?? 0) + (counters?.friend_invites ?? 0),
     bestStreak: streak.best,
   };

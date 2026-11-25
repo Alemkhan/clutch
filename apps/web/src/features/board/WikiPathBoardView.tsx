@@ -1,7 +1,7 @@
 import { messagesFor, useMessages } from '../../i18n/messages';
 import { m } from './messages';
 import type { ReactNode } from 'react';
-import type { WikiPathBoardResponse, WikiPathBoardRouteResponse } from '@clutch/shared';
+import { betterThanPercent, isPublicPlace, type WikiPathBoardResponse, type WikiPathBoardRouteResponse } from '@clutch/shared';
 import { useEffect, useState } from 'react';
 import { fetchWikiPathBoardRoute } from '../../platform/api';
 import { ScreenHeader } from '../../ui/ScreenHeader';
@@ -12,6 +12,43 @@ export type WikiPathBoardState = { status: 'loading' } | { status: 'error' } | {
 type WikiPathRouteState = { status: 'idle' } | { status: 'loading' } | { status: 'error' } | { status: 'ready'; route: WikiPathBoardRouteResponse };
 export function wikiPathClicksText(clicks: number): string {
   return messagesFor(m).clicks(clicks);
+}
+
+function hiddenCount(board: WikiPathBoardResponse): number {
+  return board.total === undefined ? 0 : Math.max(0, board.total - board.entries.length);
+}
+
+/**
+ * Своя строка над таблицей. Место ниже общей половины видит только сам игрок, поэтому ему
+ * показываем долю обойдённых, а не номер «последнего».
+ */
+function WikiPathYou({ board, onPlay }: { board: WikiPathBoardResponse; onPlay: () => void }) {
+  const t = useMessages(m);
+  if (board.ownGaveUp) {
+    return <div className="solo-board-you">
+      <p className="solo-board-you-text">{t.wikiGaveUp}</p>
+      {board.entries.length > 0 && <p className="solo-board-you-text">{t.wikiGaveUpRoutes}</p>}
+    </div>;
+  }
+  if (board.ownRank === null) {
+    return <div className="solo-board-you">
+      <p className="solo-board-you-text">{t.wikiNotDone}</p>
+      <button type="button" className="cta-btn solo-board-play" onClick={onPlay}>{t.wikiPath}</button>
+      {board.entries.length > 0 && <p className="solo-board-you-text">{t.wikiFinishToSee}</p>}
+    </div>;
+  }
+  const total = board.total ?? board.entries.length;
+  if (isPublicPlace(board.ownRank, total)) {
+    return <div className="solo-board-you"><p className="solo-board-you-text">{t.wikiYourPlace(board.ownRank)}</p></div>;
+  }
+  const percent = betterThanPercent(board.ownRank, total);
+  return <div className="solo-board-you">
+    <p className="solo-board-you-text">
+      {board.ownClicks != null ? t.wikiYourResult(wikiPathClicksText(board.ownClicks)) : t.finishCounted}
+      {' · '}{percent ? t.betterThan(percent) : t.finishCounted}
+    </p>
+    <p className="solo-board-you-text">{t.privatePlace}</p>
+  </div>;
 }
 
 export function WikiPathBoardView({ state, msLeft, onBack, onRetry, onPlay, kindSwitch }: {
@@ -55,18 +92,8 @@ export function WikiPathBoardView({ state, msLeft, onBack, onRetry, onPlay, kind
           <button type="button" className="cta-btn" onClick={onRetry}>{t.retry}</button>
         </div>
       )}
+      {state.status === 'ready' && <WikiPathYou board={state.board} onPlay={onPlay} />}
       {state.status === 'ready' && <>
-        <div className="solo-board-you">
-          <p className="solo-board-you-text">{state.board.ownRank === null
-            ? t.wikiNotDone
-            : t.wikiYourPlace(state.board.ownRank)}</p>
-          {state.board.ownRank === null && (
-            <button type="button" className="cta-btn solo-board-play" onClick={onPlay}>{t.wikiPath}</button>
-          )}
-          {state.board.ownRank === null && state.board.entries.length > 0 && (
-            <p className="solo-board-you-text">{t.wikiFinishToSee}</p>
-          )}
-        </div>
 
         {state.board.entries.length === 0 ? (
           <div className="my-runs-message">
@@ -76,7 +103,7 @@ export function WikiPathBoardView({ state, msLeft, onBack, onRetry, onPlay, kind
           <ol className="solo-board-list">
             {state.board.entries.map((entry) => (
               <li key={entry.runId} className="wiki-path-board-item">
-                {state.board.ownRank === null ? (
+                {state.board.ownRank === null && !state.board.ownGaveUp ? (
                   <div className="solo-board-row">
                     <span className="solo-board-place">{entry.rank}</span>
                     <span className="solo-board-avatar" aria-hidden="true"><Creature seed={entry.displayName} /></span>
@@ -114,6 +141,7 @@ export function WikiPathBoardView({ state, msLeft, onBack, onRetry, onPlay, kind
               </li>
             ))}
           </ol>
+          {hiddenCount(state.board) > 0 && <p className="solo-board-note">{t.hiddenRest(hiddenCount(state.board))}</p>}
           <p className="solo-board-note">{t.wikiNote}</p>
         </>}
       </>}

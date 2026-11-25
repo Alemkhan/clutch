@@ -265,6 +265,59 @@ describe('Wiki Path daily API', () => {
     expect(await json(route)).toEqual({ runId: started.run.runId, displayName: 'Player 2001', clicks: 2, titles: ['Start', 'Middle', 'Goal'] });
   });
 
+  it('lets a player give up: no board entry, no more clicks, other routes open, 5 XP', async () => {
+    vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
+    const db = database(); addChallenge(db);
+    mockWiki({
+      Start: { pageid: 1, revid: 11, title: 'Start', links: [{ ns: 0, title: 'Middle' }] },
+      Middle: { pageid: 2, revid: 22, title: 'Middle', links: [{ ns: 0, title: 'Goal' }] },
+      Goal: { pageid: 3, revid: 33, title: 'Goal' },
+    });
+    const finisher = await telegram(3001);
+    const quitter = await telegram(3002);
+    const headers = (authorization: string) => ({ authorization, 'content-type': 'application/json' });
+    const done = await json(await app.request('/api/wiki-path/start', { method: 'POST', headers: { authorization: finisher.authorization } }, env(db)));
+    for (const title of ['Middle', 'Goal']) {
+      await app.request(`/api/wiki-path/runs/${done.run.runId}/click`, { method: 'POST', headers: headers(finisher.authorization), body: JSON.stringify({ title }) }, env(db));
+    }
+    const started = await json(await app.request('/api/wiki-path/start', { method: 'POST', headers: { authorization: quitter.authorization } }, env(db)));
+    const gaveUp = await app.request(`/api/wiki-path/runs/${started.run.runId}/give-up`, { method: 'POST', headers: headers(quitter.authorization), body: '{}' }, env(db));
+    expect(gaveUp.status).toBe(200);
+    expect(await json(gaveUp)).toMatchObject({ run: { status: 'in_progress', gaveUp: true } });
+
+    const click = await app.request(`/api/wiki-path/runs/${started.run.runId}/click`, { method: 'POST', headers: headers(quitter.authorization), body: JSON.stringify({ title: 'Middle' }) }, env(db));
+    expect(click.status).toBe(409);
+    expect(await json(click)).toMatchObject({ reason: 'gave_up' });
+    const today = await json(await app.request('/api/wiki-path/today', { headers: { authorization: quitter.authorization } }, env(db)));
+    expect(today.run).toMatchObject({ gaveUp: true });
+    const resumed = await json(await app.request('/api/wiki-path/start', { method: 'POST', headers: { authorization: quitter.authorization } }, env(db)));
+    expect(resumed).toMatchObject({ run: { gaveUp: true }, currentPage: null });
+
+    const board = await json(await app.request(`/api/wiki-path/board?date=${TODAY}`, { headers: { authorization: quitter.authorization } }, env(db)));
+    expect(board).toMatchObject({ ownRank: null, ownGaveUp: true, total: 1 });
+    const route = await app.request(`/api/wiki-path/board/runs/${done.run.runId}`, { headers: { authorization: quitter.authorization } }, env(db));
+    expect(route.status).toBe(200);
+
+    const profile = await json(await app.request('/api/profile', { headers: { authorization: quitter.authorization } }, env(db)));
+    expect(profile.level.totalXp).toBe(5);
+  });
+
+  it('shows everyone only the better half of the board, and the player their own result', async () => {
+    vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
+    const db = database(); addChallenge(db);
+    const players = await Promise.all([4001, 4002, 4003, 4004, 4005].map((id) => telegram(id)));
+    players.forEach((player, index) => {
+      db.sqlite.prepare(`INSERT INTO wiki_path_runs
+        (id, player_id, display_name, challenge_id, date_key, status, clicks, current_page_id, current_revision_id, current_title, path_json, completed_at, created_at)
+        VALUES (?, ?, ?, ?, ?, 'completed', ?, 3, 33, 'Goal', '["1","3"]', 10, 1)`)
+        .run(`run-${index}`, player.playerId, player.playerId, `fixture-${TODAY}`, TODAY, 3 + index * 5);
+    });
+    const last = players[4]!;
+    const board = await json(await app.request(`/api/wiki-path/board?date=${TODAY}`, { headers: { authorization: last.authorization } }, env(db)));
+    expect(board.entries.map((entry: { playerId: string }) => entry.playerId)).toEqual(players.slice(0, 3).map((player) => player.playerId));
+    expect(board).toMatchObject({ ownRank: 5, ownClicks: 23, total: 5, ownGaveUp: false });
+  });
+
   it('maps Wikimedia failures to gateway and timeout statuses', async () => {
     vi.useFakeTimers({ now: NOON, toFake: ['Date'] });
     const db = database(); addChallenge(db);

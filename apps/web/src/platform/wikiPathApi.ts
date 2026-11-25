@@ -1,4 +1,4 @@
-import type { WikiPathBoardResponse, WikiPathBoardRouteResponse, WikiPathClickRequest, WikiPathClickResponse, WikiPathTodayResponse, StartWikiPathResponse } from '@clutch/shared';
+import type { GiveUpWikiPathResponse, WikiPathBoardResponse, WikiPathBoardRouteResponse, WikiPathClickRequest, WikiPathClickResponse, WikiPathTodayResponse, StartWikiPathResponse } from '@clutch/shared';
 import { apiFetch, WIKI_PATH_REQUEST_TIMEOUT_MS } from './apiClient';
 
 // ---- «Вики-путь» ----
@@ -21,6 +21,11 @@ export function clickWikiPath(
   return apiFetch(`/api/wiki-path/runs/${encodeURIComponent(runId)}/click`, {
     method: 'POST', body: JSON.stringify(body),
   }, signal, WIKI_PATH_REQUEST_TIMEOUT_MS);
+}
+
+/** Сдаться: маршрут закрывается без результата, зато открываются пути других. */
+export function giveUpWikiPath(runId: string, signal?: AbortSignal): Promise<GiveUpWikiPathResponse> {
+  return apiFetch(`/api/wiki-path/runs/${encodeURIComponent(runId)}/give-up`, { method: 'POST', body: '{}' }, signal);
 }
 
 /** Таблица завершивших сегодняшний маршрут. */

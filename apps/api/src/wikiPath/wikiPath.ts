@@ -1,6 +1,7 @@
 import type { Context, Hono } from 'hono';
 import {
   dailyKey,
+  publicBoardPlaces,
   rankWikiPathEntries,
   WIKI_PATH_ALLOWED_LINKS_MAX_COUNT,
   WIKI_PATH_HTML_MAX_LENGTH,
@@ -29,6 +30,7 @@ import {
   findRun,
   getSnapshot,
   getSnapshotByTitle,
+  giveUpRun,
   isReplayedTarget,
   listBoard,
   pathTitles,
@@ -113,6 +115,7 @@ async function runView(db: D1Database, run: WikiRunRow, includePage: boolean, lo
       path,
       startedAt: run.created_at,
       completedAt: run.completed_at,
+      ...(run.gave_up_at ? { gaveUp: true } : {}),
     } satisfies WikiPathRunSummary,
     currentPage: currentPage ? pageView(currentPage) : null,
   };
@@ -197,6 +200,10 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
         run = await findPlayerRun(c.env.DB, identity.playerId, dateKey);
       }
       if (!run) return c.json({ error: 'Could not create a Wiki Path run.' }, 503);
+      if (run.gave_up_at) {
+        const closed = await runView(c.env.DB, run, false);
+        return closed ? c.json({ challenge: closed.challenge, run: closed.run, currentPage: null }) : c.json({ error: 'Stored Wiki Path run is invalid.' }, 409);
+      }
       const state = await runView(c.env.DB, run, true, loadedPage);
       if (!state) return c.json({ error: 'Stored Wiki Path run is invalid.' }, 409);
       return c.json({ challenge: state.challenge, run: state.run, currentPage: state.currentPage }, alreadyStarted ? 200 : 201);
@@ -230,6 +237,7 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
     const runId = c.req.param('runId');
     let run = await findRun(c.env.DB, runId, identity.playerId);
     if (!run) return c.json({ error: 'Run not found.' }, 404);
+    if (run.gave_up_at) return c.json({ error: 'This route was given up.', reason: 'gave_up' }, 409);
     if (run.status === 'completed') {
       try {
         const state = await runView(c.env.DB, run, true);
@@ -272,6 +280,17 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
     } catch (error) { return wikiFailure(c, error); }
   });
 
+  app.post('/api/wiki-path/runs/:runId/give-up', async (c) => {
+    const identity = await authenticate(c, 'wiki-path-give-up');
+    if (identity instanceof Response) return identity;
+    const run = await findRun(c.env.DB, c.req.param('runId'), identity.playerId);
+    if (!run) return c.json({ error: 'Run not found.' }, 404);
+    if (run.status !== 'completed') await giveUpRun(c.env.DB, run, Date.now());
+    const updated = await findRun(c.env.DB, run.id, identity.playerId) ?? run;
+    const state = await runView(c.env.DB, updated, false);
+    return state ? c.json({ challenge: state.challenge, run: state.run }) : c.json({ error: 'Stored Wiki Path run is invalid.' }, 409);
+  });
+
   app.get('/api/wiki-path/board', async (c) => {
     const identity = await authenticate(c, 'wiki-path-board');
     if (identity instanceof Response) return identity;
@@ -280,15 +299,24 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
       return c.json({ error: 'Invalid date.' }, 400);
     }
     // Each language has its own board: the viewer sees the board of the route they play that day.
-    const { challenge } = await playerChallenge(c, identity.playerId, dateKey);
+    const { challenge, run: ownRun } = await playerChallenge(c, identity.playerId, dateKey);
     if (!challenge) return c.json({ error: 'Challenge not found.', reason: 'no_challenge_today' }, 404);
     const rows = await listBoard(c.env.DB, challenge.id, 1000);
     const ranked = rankWikiPathEntries(rows.map((row) => ({
       runId: row.id, playerId: row.player_id, displayName: row.display_name, clicks: row.clicks, completedAt: row.completed_at!,
     })));
-    const entries: WikiPathBoardEntry[] = ranked.slice(0, 50);
+    // Все видят только лучшую половину (от 3 до 10 мест); своё место игрок видит всегда.
+    const visible = publicBoardPlaces(ranked.length);
+    const entries: WikiPathBoardEntry[] = ranked.filter((entry) => entry.rank <= visible);
     const own = identity.kind === 'telegram' ? ranked.find((entry) => entry.playerId === identity.playerId) : undefined;
-    return c.json({ challengeId: challenge.id, entries, ownRank: own?.rank ?? null });
+    return c.json({
+      challengeId: challenge.id,
+      entries,
+      ownRank: own?.rank ?? null,
+      ownClicks: own?.clicks ?? null,
+      total: ranked.length,
+      ownGaveUp: Boolean(ownRun?.gave_up_at),
+    });
   });
 
   app.get('/api/wiki-path/board/runs/:runId', async (c) => {
@@ -296,7 +324,8 @@ export function registerWikiPathRoutes(app: Hono<{ Bindings: Env }>): void {
     if (identity instanceof Response) return identity;
     const dateKey = dailyKey(Date.now());
     const viewerRun = await findPlayerRun(c.env.DB, identity.playerId, dateKey);
-    if (identity.kind !== 'telegram' || viewerRun?.status !== 'completed') {
+    // Маршруты открыты тому, кто прошёл или сдался: сдавшемуся это подсказка, как можно было дойти.
+    if (identity.kind !== 'telegram' || !viewerRun || (viewerRun.status !== 'completed' && !viewerRun.gave_up_at)) {
       return c.json({ error: 'Complete today\'s Wiki Path before viewing routes.', reason: 'complete_your_route' }, 403);
     }
     const run = await findPublicCompletedRun(c.env.DB, c.req.param('runId'), dateKey);

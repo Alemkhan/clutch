@@ -178,9 +178,23 @@ describe('day board order: equal rounds are split by the guess', () => {
     answered(db, 'telegram:2', 1.5);
     answered(db, 'telegram:3', 1.5);
     answered(db, 'telegram:4', 1.01);
+    // Четверо медленнее всех: всем видна лучшая половина, и с ними четвёртое место ещё в ней.
+    for (let index = 0; index < 4; index += 1) insertRun(db, { id: `slow-${index}`, playerId: `telegram:${10 + index}`, rounds: 6 });
     const body = await board(db);
     expect(order(body)).toEqual(['fast', 'twin-a', 'twin-b', 'slowest']);
     expect(places(body)).toEqual([1, 2, 2, 4]);
+    expect(body.total).toBe(8);
+  });
+
+  it('shows everyone only the better half of the board (3 to 10 places)', async () => {
+    const db = database();
+    insertRun(db, { id: 'a', playerId: 'telegram:1', rounds: 3 });
+    insertRun(db, { id: 'b', playerId: 'telegram:2', rounds: 4 });
+    insertRun(db, { id: 'c', playerId: 'telegram:3', rounds: 5 });
+    insertRun(db, { id: 'last', playerId: 'telegram:4', rounds: 6 });
+    const body = await board(db);
+    expect(order(body)).toEqual(['a', 'b', 'c']);
+    expect(body.total).toBe(4);
   });
 
   it('a guess made after the run reorders the board at request time', async () => {

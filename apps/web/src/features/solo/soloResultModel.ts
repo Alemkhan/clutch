@@ -1,7 +1,7 @@
 import { messagesFor } from '../../i18n/messages';
 import { m } from './messages';
 import type { CompleteSoloRunResponse, SkillResult, SoloLeaderboardStanding, SoloRoundResponse } from '@clutch/shared';
-import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS } from '@clutch/shared';
+import { SOLO_ROUND_CAP, SOLO_TARGET_PROGRESS, betterThanPercent, isPublicPlace } from '@clutch/shared';
 import type { SoloRunView } from './soloRunSession';
 
 /** Что показывает экран результата соло-забега. Чистая функция: тексты проверяются тестами. */
@@ -154,7 +154,15 @@ export function buildReceiptStats(input: {
   ];
   if (input.standing) {
     const you = input.standing.status === 'ready' ? input.standing.standing : null;
-    stats.push({ key: 'place', value: you ? t.rank(you.rank) : '—', label: t.statPlace });
+    // Место ниже общей половины таблицы другие не видят: вместо номера — доля обойдённых.
+    if (you && !isPublicPlace(you.rank, you.total)) {
+      const percent = betterThanPercent(you.rank, you.total);
+      stats.push(percent
+        ? { key: 'place', value: `${percent}%`, label: t.statBetterThan }
+        : { key: 'place', value: '✓', label: t.statFinishCounted });
+    } else {
+      stats.push({ key: 'place', value: you ? t.rank(you.rank) : '—', label: t.statPlace });
+    }
   }
   return stats;
 }

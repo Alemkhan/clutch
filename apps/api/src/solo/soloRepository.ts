@@ -5,6 +5,7 @@ import {
   seenQuestionKey,
   dailyKey,
   PRACTICE_RULES_VERSION,
+  publicBoardPlaces,
   type AsyncMatchRound,
   type MiniGameId,
   type MyRunOutcome,
@@ -258,7 +259,11 @@ const BOARD_CTE = `
     FROM best
   )`;
 
-/** Лучший забег каждого игрока за сутки [from, to) по категории: только дошедшие до цели. */
+/**
+ * Лучший забег каждого игрока за сутки [from, to) по категории: только дошедшие до цели и только
+ * места, которые видят все (`publicBoardPlaces`: лучшая половина, от 3 до 10). `total` — все
+ * игроки таблицы, включая скрытые места.
+ */
 export async function soloLeaderboard(
   db: D1Database,
   category: string,
@@ -266,18 +271,23 @@ export async function soloLeaderboard(
   from: number,
   to: number,
   dateKey: string,
-): Promise<SoloLeaderboardEntry[]> {
+): Promise<{ entries: SoloLeaderboardEntry[]; total: number }> {
   const result = await db.prepare(`${BOARD_CTE}
     SELECT p.place AS rank, p.display_name AS displayName, p.solo_score AS soloScore, p.set_par AS setPar,
-           p.rounds_played AS roundsPlayed, p.completed_at AS completedAt, cl.emoji AS clanEmoji
+           p.rounds_played AS roundsPlayed, p.completed_at AS completedAt, cl.emoji AS clanEmoji, p.total AS total
     FROM placed p
     LEFT JOIN clan_members cm ON cm.player_id = p.player_id
     LEFT JOIN clans cl ON cl.emoji_key = cm.emoji_key
     ORDER BY p.place ASC, p.completed_at ASC, p.id ASC
     LIMIT ?6
-  `).bind(category, rulesVersion, from, to, dateKey, SOLO_BOARD_LIMIT).all<SoloLeaderboardEntry & { clanEmoji: string | null }>();
+  `).bind(category, rulesVersion, from, to, dateKey, SOLO_BOARD_LIMIT).all<SoloLeaderboardEntry & { clanEmoji: string | null; total: number }>();
+  const total = result.results[0]?.total ?? 0;
+  const visible = publicBoardPlaces(total);
   // Эмодзи клана — аватар игрока в таблице; без клана поле не отдаётся.
-  return result.results.map(({ clanEmoji, ...entry }) => (clanEmoji ? { ...entry, clanEmoji } : entry));
+  const entries = result.results
+    .filter((row) => row.rank <= visible)
+    .map(({ clanEmoji, total: _total, ...entry }) => (clanEmoji ? { ...entry, clanEmoji } : entry));
+  return { entries, total };
 }
 
 /** Строка верха таблицы для сравнения «до/после» в известии «выбили из десятки». */

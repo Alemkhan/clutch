@@ -26,6 +26,8 @@ export interface WikiRunRow {
   path_json: string;
   completed_at: number | null;
   created_at: number;
+  /** Игрок сдался (миграция 0019); у старых строк поля может не быть. */
+  gave_up_at?: number | null;
 }
 
 interface SnapshotRow {
@@ -152,10 +154,17 @@ export async function appendClick(db: D1Database, run: WikiRunRow, page: WikiPag
   const result = await db.prepare(`UPDATE wiki_path_runs SET
     status = ?1, clicks = clicks + 1, current_page_id = ?2, current_revision_id = ?3, current_title = ?4, path_json = ?5,
     completed_at = ?6
-    WHERE id = ?7 AND player_id = ?8 AND status = 'in_progress' AND clicks = ?9 AND current_title = ?10`)
+    WHERE id = ?7 AND player_id = ?8 AND status = 'in_progress' AND gave_up_at IS NULL AND clicks = ?9 AND current_title = ?10`)
     .bind(complete ? 'completed' : 'in_progress', page.pageId, page.revisionId, page.title, JSON.stringify(path), complete ? now : null,
       run.id, run.player_id, run.clicks, run.current_title).run();
   return Number(result.meta?.changes ?? 0) > 0;
+}
+
+/** Сдаться: только незаконченный маршрут; повтор безвреден. */
+export async function giveUpRun(db: D1Database, run: WikiRunRow, now: number): Promise<void> {
+  await db.prepare(`UPDATE wiki_path_runs SET gave_up_at = ?1
+    WHERE id = ?2 AND player_id = ?3 AND status = 'in_progress' AND gave_up_at IS NULL`)
+    .bind(now, run.id, run.player_id).run();
 }
 
 export async function isReplayedTarget(db: D1Database, run: WikiRunRow, targetTitle: string): Promise<boolean> {

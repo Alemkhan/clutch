@@ -29,7 +29,7 @@ export async function handleSoloLeaderboard(c: AppContext): Promise<Response> {
   // иначе не попавший в список игрок не видел бы о себе ничего.
   // Попытка дня самого игрока: главная по ней решает, звать в забег дня или в свободную игру.
   const today = dateKey === dailyKey(Date.now());
-  const [entries, you, attempt] = await Promise.all([
+  const [board, you, attempt] = await Promise.all([
     soloLeaderboard(
       c.env.DB,
       category,
@@ -54,7 +54,8 @@ export async function handleSoloLeaderboard(c: AppContext): Promise<Response> {
   const response: SoloLeaderboardResponse = {
     category: category as SoloLeaderboardResponse['category'],
     dateKey,
-    entries,
+    entries: board.entries,
+    total: board.total,
     you,
     dailyAttempt: attempt ? attempt.status : 'none',
   };
