@@ -13,6 +13,7 @@ import {
   isDailyEligible,
   liveDailyRecords,
   liveEverywhereRecords,
+  NO_REPEAT_FROM,
 } from './generalSet';
 import { generalPackQuestions, generalPackSets } from '../generalPack';
 import { generateMatch } from './questionGenerator';
@@ -166,6 +167,59 @@ describe('daily flag on content', () => {
     const records = [...generalPackQuestions, ...generalPackSets] as Array<{ id: string; daily?: unknown; topic: string }>;
     expect(records.filter((record) => typeof record.daily !== 'boolean').map((record) => record.id)).toEqual([]);
     expect(records.filter((record) => record.topic === 'kazakhstan' && record.daily === true).map((record) => record.id)).toEqual([]);
+  });
+});
+
+describe('daily run without repeats (from NO_REPEAT_FROM)', () => {
+  const dateOf = (offset: number) => new Date(Date.parse(`${NO_REPEAT_FROM}T00:00:00Z`) + offset * 86_400_000).toISOString().slice(0, 10);
+  const runOf = (dateKey: string) => dailyQuestionSet('general', dayStartMs(dateKey) + 60_000, 0).questions;
+  const packIds = (dateKey: string) => runOf(dateKey).filter((q) => q.id.startsWith('gp:')).map((q) => q.id.split(':')[1]);
+  const entity = (id: string) => id.replace(/^(open_flag_country|open_capital|flag_capital|flag_country|capital|lang)_/, '');
+
+  it('brings a pack question back only after the whole pool (over 30 days), counting the days before the switch', () => {
+    clearDailyBankCache();
+    const seen = new Map<string, number>();
+    const repeats: string[] = [];
+    for (let offset = -14; offset < 90; offset++) {
+      const ids = packIds(dateOf(offset));
+      expect(ids).toHaveLength(14);
+      for (const id of ids) {
+        const previous = seen.get(id);
+        if (offset >= 0 && previous !== undefined && offset - previous <= 30) repeats.push(`${id}: ${dateOf(previous)} → ${dateOf(offset)}`);
+        seen.set(id, offset);
+      }
+    }
+    expect(repeats).toEqual([]);
+  });
+
+  it('keeps languages out for 14 days and countries for 30', () => {
+    clearDailyBankCache();
+    const last = new Map<string, number>();
+    for (let offset = 0; offset < 60; offset++) {
+      for (const q of runOf(dateOf(offset)).filter((item) => !item.id.startsWith('gp:'))) {
+        const isLanguage = q.id.startsWith('lang_');
+        const key = `${isLanguage ? 'lang' : 'country'}:${entity(q.id)}`;
+        const previous = last.get(key);
+        if (previous !== undefined) expect(offset - previous, key).toBeGreaterThan(isLanguage ? 14 : 30);
+        last.set(key, offset);
+      }
+    }
+  });
+
+  it('keeps topic and element caps and leaves the other sets of the bank and earlier days alone', () => {
+    clearDailyBankCache();
+    const element = /атомный номер|химический элемент обозначается|символ у химического элемента/;
+    for (let offset = 0; offset < 20; offset++) {
+      const questions = runOf(dateOf(offset));
+      expect(questions).toHaveLength(20);
+      expect(questions.filter((q) => element.test(String(q.prompt))).length).toBeLessThanOrEqual(1);
+      const topics = new Map<string, number>();
+      for (const q of questions.filter((item) => item.id.startsWith('gp:'))) topics.set(questionTopicKey(q), (topics.get(questionTopicKey(q)) ?? 0) + 1);
+      expect(Math.max(...topics.values())).toBeLessThanOrEqual(GENERAL_SET_TOPIC_CAP);
+    }
+    expect(runOf(dateOf(3))).toEqual(runOf(dateOf(3)));
+    const day = dateOf(-1);
+    expect(buildGeneralSet(`general:${day}:0`, day, undefined, dailyPackPool(day))).toEqual(buildGeneralSet(`general:${day}:0`, day));
   });
 });
 

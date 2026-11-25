@@ -257,6 +257,12 @@ const LEGACY_POSITION = new Map(LEGACY_POOL_ORDER.map((entry, index) => {
  * по файлам и темам больше не влияет на наборы. Более ранние дни собираются в замороженном порядке
  * и с прежними темами (LEGACY_POOL_ORDER), чтобы уже сыгранные наборы не менялись.
  */
+// Контент статичен: пул забега дня по id считается один раз, дальше только фильтр по дате.
+let curatedBase: readonly PackRecord[] | null = null;
+function curatedDailyBase(): readonly PackRecord[] {
+  return (curatedBase ??= liveDailyRecords().sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)));
+}
+
 export function dailyPackPool(dateKey: string): PackRecord[] {
   const live = (record: PackRecord): boolean => {
     const from = (record as { liveFrom?: string }).liveFrom;
@@ -270,8 +276,7 @@ export function dailyPackPool(dateKey: string): PackRecord[] {
       const { dailyUntil: until, dailyFrom: from } = record as { dailyUntil?: string; dailyFrom?: string };
       return (!until || dateKey <= until) && (!from || dateKey >= from);
     };
-    return liveDailyRecords().filter((record) => live(record) && stillDaily(record))
-      .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+    return curatedDailyBase().filter((record) => live(record) && stillDaily(record));
   }
   const pool = dateKey >= EVERYWHERE_POOL_FROM ? liveEverywhereRecords() : livePackRecords();
   return pool
@@ -364,32 +369,169 @@ export function buildKzSet(questionSetId: string, dateKey: string, pool: readonl
 }
 
 /**
+ * С этого дня набор забега дня (нулевой в банке — его играют все) собирается без повторов.
+ * Раньше пул каждый день перемешивался заново, и за неделю 1–4 вопроса из 20 попадались снова
+ * (жалоба игроков 2026-11-25). Теперь берутся записи, которые дольше всех не были в забеге дня:
+ * повтор возможен только после того, как прошёл весь пул (~510 записей по 14 в день, около
+ * пяти недель). Генераторы тоже не берут недавние сущности: язык — 14 дней, страну — 30.
+ * Дни до NO_REPEAT_FROM не меняются; их вопросы (за NO_REPEAT_HISTORY_DAYS дней) считаются
+ * недавними, чтобы первые дни ротации не повторили прошлую неделю.
+ */
+export const NO_REPEAT_FROM = '2026-11-26';
+const NO_REPEAT_HISTORY_DAYS = 14;
+
+type GeneratedCategory = 'geography' | 'history' | 'languages';
+const ENTITY_WINDOW_DAYS: Readonly<Record<GeneratedCategory, number>> = { geography: 30, history: 14, languages: 14 };
+
+interface DailyRunPick {
+  records: PackRecord[];
+  /** Сущности генераторов, взятые в этот день. */
+  entities: Partial<Record<GeneratedCategory, string[]>>;
+  /** Что генераторам нельзя было брать: нужно, чтобы собрать набор ровно так же. */
+  exclude: Partial<Record<GeneratedCategory, ReadonlySet<string>>>;
+}
+
+interface RotationState {
+  day: string;
+  packUsed: Map<string, number>;
+  entityUsed: Map<GeneratedCategory, Map<string, number>>;
+}
+
+const dayNumber = (dateKey: string): number => Math.round(Date.parse(`${dateKey}T00:00:00Z`) / 86_400_000);
+function addDays(dateKey: string, days: number): string {
+  const date = new Date(`${dateKey}T00:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
+
+function setCaps(dateKey: string): { chunk: number; cap: number; extra?: ExtraCap } | undefined {
+  if (dateKey < BALANCED_TOPICS_FROM) return undefined;
+  return { chunk: GENERAL_SET_PACK_COUNT, cap: GENERAL_SET_TOPIC_CAP, ...(dateKey >= ELEMENT_LIMIT_FROM ? { extra: ONE_ELEMENT_PER_SET } : {}) };
+}
+
+function generatedEntities(
+  questionSetId: string,
+  mix: ReadonlyArray<{ category: GeneratedCategory; count: number }>,
+  exclude: DailyRunPick['exclude'] = {},
+): DailyRunPick['entities'] {
+  const entities: DailyRunPick['entities'] = {};
+  for (const { category, count } of mix) {
+    const usage: TemplateUsage = new Map();
+    generateMatch(count, GENERATED_OPEN_RATIO, category, createSeededRandom(hashSeed(`${questionSetId}:${category}`)), usage, exclude[category]);
+    entities[category] = [...usage.keys()];
+  }
+  return entities;
+}
+
+/** Забег дня, как он собирался до NO_REPEAT_FROM: только чтобы знать, что было недавно. */
+function legacyDailyRunPick(dateKey: string): DailyRunPick {
+  const records = packWindow(dailyPackPool(dateKey), `general:${dateKey}`, 0, GENERAL_SET_PACK_COUNT, setCaps(dateKey));
+  const mix = dateKey >= DAILY_CURATED_FROM ? DAILY_SET_GENERATED : GENERAL_SET_GENERATED;
+  return { records, entities: generatedEntities(`general:${dateKey}:0`, mix), exclude: {} };
+}
+
+/** Первые `count` записей порядка с потолком тем и узкой группы; не хватает — добирает по порядку. */
+function takeCapped(order: readonly PackRecord[], count: number, caps: { cap: number; extra?: ExtraCap } | undefined): PackRecord[] {
+  const out: PackRecord[] = [];
+  const counts = new Map<string, number>();
+  let extraCount = 0;
+  for (const record of order) {
+    if (out.length === count) break;
+    if (caps) {
+      if ((counts.get(record.topic) ?? 0) >= caps.cap) continue;
+      if (caps.extra?.matches(record) && extraCount >= caps.extra.cap) continue;
+    }
+    counts.set(record.topic, (counts.get(record.topic) ?? 0) + 1);
+    if (caps?.extra?.matches(record)) extraCount += 1;
+    out.push(record);
+  }
+  if (out.length < count) {
+    const taken = new Set(out.map((record) => record.id));
+    out.push(...order.filter((record) => !taken.has(record.id)).slice(0, count - out.length));
+  }
+  return out;
+}
+
+function pickWithoutRepeats(dateKey: string, state: RotationState): DailyRunPick {
+  const today = dayNumber(dateKey);
+  const lastUsed = (record: PackRecord): number => state.packUsed.get(record.id) ?? -1;
+  const pool = dailyPackPool(dateKey);
+  const ties = new Map(pool.map((record) => [record.id, hashSeed(`norepeat:${dateKey}:${record.id}`)]));
+  const order = pool.sort((a, b) =>
+    lastUsed(a) - lastUsed(b) || ties.get(a.id)! - ties.get(b.id)! || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
+  );
+  const records = takeCapped(order, GENERAL_SET_PACK_COUNT, setCaps(dateKey));
+  const exclude: DailyRunPick['exclude'] = {};
+  for (const { category } of DAILY_SET_GENERATED) {
+    const used = state.entityUsed.get(category) ?? new Map<string, number>();
+    exclude[category] = new Set([...used].filter(([, day]) => today - day <= ENTITY_WINDOW_DAYS[category]).map(([id]) => id));
+  }
+  return { records, entities: generatedEntities(`general:${dateKey}:0`, DAILY_SET_GENERATED, exclude), exclude };
+}
+
+function remember(state: RotationState, dateKey: string, pick: DailyRunPick): void {
+  const day = dayNumber(dateKey);
+  for (const record of pick.records) state.packUsed.set(record.id, day);
+  for (const [category, ids] of Object.entries(pick.entities) as [GeneratedCategory, string[]][]) {
+    let used = state.entityUsed.get(category);
+    if (!used) state.entityUsed.set(category, (used = new Map()));
+    for (const id of ids) used.set(id, day);
+  }
+}
+
+// Ротация последовательна: день зависит от всех предыдущих. Считается один раз на изолят.
+const rotationPicks = new Map<string, DailyRunPick>();
+let rotationState: RotationState | null = null;
+
+function dailyRunPick(dateKey: string): DailyRunPick {
+  const cached = rotationPicks.get(dateKey);
+  if (cached) return cached;
+  if (!rotationState) {
+    const state: RotationState = { day: addDays(NO_REPEAT_FROM, -1), packUsed: new Map(), entityUsed: new Map() };
+    for (let back = NO_REPEAT_HISTORY_DAYS; back >= 1; back--) {
+      const day = addDays(NO_REPEAT_FROM, -back);
+      remember(state, day, legacyDailyRunPick(day));
+    }
+    rotationState = state;
+  }
+  while (rotationState.day < dateKey) {
+    const day = addDays(rotationState.day, 1);
+    const pick = pickWithoutRepeats(day, rotationState);
+    remember(rotationState, day, pick);
+    rotationPicks.set(day, pick);
+    rotationState.day = day;
+  }
+  return rotationPicks.get(dateKey)!;
+}
+
+/**
  * Один набор общего режима. Детерминирован: одинаковые `questionSetId` и день всегда дают
  * байт-идентичный набор. `usage` — общий ledger шаблонов всего банка дня, как у других категорий.
- * `pool` нужен только тестам (нехватка одобренных записей).
+ * `pool` нужен только тестам (нехватка одобренных записей); с ним ротация забега дня не включается.
  */
 export function buildGeneralSet(
   questionSetId: string,
   dateKey: string,
   usage?: TemplateUsage,
-  pool: readonly PackRecord[] = dailyPackPool(dateKey),
+  pool?: readonly PackRecord[],
 ): Question[] {
   const index = setIndexOf(questionSetId);
   const balanced = dateKey >= BALANCED_TOPICS_FROM;
-  const records = packWindow(
-    pool,
+  const rotation = pool === undefined && dateKey >= NO_REPEAT_FROM && questionSetId === `general:${dateKey}:0`
+    ? dailyRunPick(dateKey)
+    : undefined;
+  const records = rotation?.records ?? packWindow(
+    pool ?? dailyPackPool(dateKey),
     `general:${dateKey}`,
     index * GENERAL_SET_PACK_COUNT,
     GENERAL_SET_PACK_COUNT,
-    balanced
-      ? { chunk: GENERAL_SET_PACK_COUNT, cap: GENERAL_SET_TOPIC_CAP, ...(dateKey >= ELEMENT_LIMIT_FROM ? { extra: ONE_ELEMENT_PER_SET } : {}) }
-      : undefined,
+    setCaps(dateKey),
   );
   const packQuestions = packRaceQuestions(records, questionSetId, GENERAL_SET_OPEN_COUNT);
 
   const mix = dateKey >= DAILY_CURATED_FROM ? DAILY_SET_GENERATED : GENERAL_SET_GENERATED;
   const generated = mix.flatMap(({ category, count }) =>
-    generateMatch(count, GENERATED_OPEN_RATIO, category, createSeededRandom(hashSeed(`${questionSetId}:${category}`)), usage),
+    generateMatch(count, GENERATED_OPEN_RATIO, category, createSeededRandom(hashSeed(`${questionSetId}:${category}`)), usage, rotation?.exclude[category]),
   );
 
   // createdAt is wall-clock in the generators; pin it so the set is byte-identical for everyone.

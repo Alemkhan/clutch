@@ -417,11 +417,12 @@ export function generateMatch(
   category: CategoryId = 'geography',
   rng: () => number = Math.random,
   templateUsage?: TemplateUsage,
+  exclude?: ReadonlySet<string>,
 ): Question[] {
   const previousRandom = random;
   random = rng;
   try {
-    return generateMatchWithRandom(numQuestions, openRatio, category, templateUsage);
+    return generateMatchWithRandom(numQuestions, openRatio, category, templateUsage, exclude);
   } finally {
     random = previousRandom;
   }
@@ -432,6 +433,7 @@ function generateMatchWithRandom(
   openRatio: number,
   category: CategoryId,
   usage?: TemplateUsage,
+  exclude?: ReadonlySet<string>,
 ): Question[] {
   if (!Number.isInteger(numQuestions) || numQuestions < 0) {
     throw new RangeError('numQuestions must be a nonnegative integer.');
@@ -459,8 +461,16 @@ function generateMatchWithRandom(
     return [];
   }
 
+  // `exclude` — сущности, которые нельзя брать (недавние в забеге дня). Если без них не хватает
+  // на набор, исключение не применяется. Без `exclude` выбор байт-в-байт прежний.
+  const allowed = <T>(pool: T[], idOf: (item: T) => string): T[] => {
+    if (!exclude || exclude.size === 0) return pool;
+    const rest = pool.filter((item) => !exclude.has(idOf(item)));
+    return rest.length >= numQuestions ? rest : pool;
+  };
+
   if (category === 'history') {
-    const questions = shuffle(historicFlags)
+    const questions = shuffle(allowed(historicFlags, (flag) => flag.id))
       .slice(0, numQuestions)
       .map((flag) => {
         // Single template per entity: nothing to choose, only record the use.
@@ -470,7 +480,7 @@ function generateMatchWithRandom(
     return shuffle(questions);
   }
   if (category === 'languages') {
-    const questions = shuffle(languages)
+    const questions = shuffle(allowed(languages, (language) => language.id))
       .slice(0, numQuestions)
       .map((language) => {
         pickLeastUsed([{ name: 'lang' }], language.id, usage);
@@ -480,7 +490,7 @@ function generateMatchWithRandom(
   }
 
   const numOpen = Math.round(numQuestions * openRatio);
-  const selectedCountries = shuffle(countries).slice(0, numQuestions);
+  const selectedCountries = shuffle(allowed(countries, (country) => country.code)).slice(0, numQuestions);
   const questions = selectedCountries.map((country, index) => {
     if (index < numQuestions - numOpen) {
       const generators = [
