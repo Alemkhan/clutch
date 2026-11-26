@@ -61,7 +61,7 @@ export interface WikiPathTodayResponse {
 export interface StartWikiPathResponse {
   challenge: WikiPathChallenge;
   run: WikiPathRunSummary;
-  /** null — маршрут закрыт (игрок сдался), статью грузить незачем. */
+  /** null - маршрут закрыт (игрок сдался), статью грузить незачем. */
   currentPage: WikiPathPage | null;
 }
 

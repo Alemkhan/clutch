@@ -11,7 +11,7 @@ interface TiebreakerCardViewProps {
   onOpen: () => void;
 }
 
-/** «Точнее 80% · следующий через 5:12»; без перцентиля — «Следующий через 5:12». */
+/** «Точнее 80% · следующий через 5:12»; без перцентиля - «Следующий через 5:12». */
 export function answeredCardSubtitle(percentile: number | null, msLeft: number): string {
   const parts = [standingText(percentile), messagesFor(m).nextIn(formatCountdownShort(msLeft))].filter(Boolean) as string[];
   const text = parts.join(' · ');
@@ -19,8 +19,8 @@ export function answeredCardSubtitle(percentile: number | null, msLeft: number):
 }
 
 /**
- * Карточка «На глазок» на главной. Нет вопроса или ошибка сети — карточки нет совсем: главную
- * она ломать не должна, а повторять запрос тут некому и незачем. Таймер — обычный текст без
+ * Карточка «На глазок» на главной. Нет вопроса или ошибка сети - карточки нет совсем: главную
+ * она ломать не должна, а повторять запрос тут некому и незачем. Таймер - обычный текст без
  * aria-live: скринридер не должен читать его каждую секунду.
  */
 export function TiebreakerCardView({ state, msLeft, onOpen }: TiebreakerCardViewProps) {

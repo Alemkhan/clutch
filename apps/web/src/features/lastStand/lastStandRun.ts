@@ -380,7 +380,7 @@ export function roundLabel(index: number): string {
 /**
  * Почему забег кончился. У загаданного ответа это объяснение правила, а не повтор ответа:
  * сам ответ экран показывает отдельно и крупно. Игрок, выбывший на мине, иначе не понимает,
- * за что его выбило — так и случилось на живой игре.
+ * за что его выбило - так и случилось на живой игре.
  */
 export function eliminationText(reason: LastStandEliminationReason | null, mineRu: string | null = null): string {
   if (reason === 'mined') {

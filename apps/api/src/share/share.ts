@@ -18,7 +18,7 @@ function parseProgress(raw: string | undefined): number | null {
   return value <= 100 ? value : null;
 }
 
-/** Заголовок превью матча на языке отправителя (l); без языка — русский. */
+/** Заголовок превью матча на языке отправителя (l); без языка - русский. */
 export function shareTitle(outcome: Outcome, p: number, q: number, name: string | null, locale: Locale = DEFAULT_LOCALE): string {
   return shareText(locale).outcome.title(outcome, p, q, name);
 }
@@ -38,7 +38,7 @@ function text(message: string, status: number): Response {
 
 type ParsedShare = { ok: true; data: ShareCardData } | { ok: false; response: Response };
 
-/** Общий разбор и проверка параметров для страницы шаринга и картинки; l — язык (ru|en|kk). */
+/** Общий разбор и проверка параметров для страницы шаринга и картинки; l - язык (ru|en|kk). */
 function parseShareQuery(query: Record<string, string>): ParsedShare {
   const outcome = OUTCOMES.find((item) => item === query.o);
   const p = parseProgress(query.p);
@@ -77,7 +77,7 @@ function storeInCache(c: AppContext, cache: Cache | undefined, response: Respons
     const store = cache?.put(c.req.url, response.clone());
     if (store) c.executionCtx.waitUntil(store.catch(() => undefined));
   } catch {
-    // нет executionCtx или кеша — ответ всё равно отдаём
+    // нет executionCtx или кеша - ответ всё равно отдаём
   }
 }
 
@@ -92,7 +92,7 @@ async function handleShareCard(c: AppContext): Promise<Response> {
     const hit = await cache?.match(c.req.url);
     if (hit) return hit;
   } catch {
-    // кеш недоступен — рисуем заново
+    // кеш недоступен - рисуем заново
   }
 
   try {

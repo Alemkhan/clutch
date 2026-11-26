@@ -64,7 +64,7 @@ describe('clans launch', () => {
 
 describe('clanWeek', () => {
   it('runs Monday to Sunday by the game day', () => {
-    // 2026-11-16 — понедельник.
+    // 2026-11-16 - понедельник.
     const monday = clanWeek(dayStartMs('2026-11-16') + 1000);
     expect(monday.weekKey).toBe('2026-11-16');
     expect(monday.lastDayKey).toBe('2026-11-22');

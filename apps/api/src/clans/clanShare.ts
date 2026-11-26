@@ -8,9 +8,9 @@ import { shareLocale } from '../share/shareText';
 import { clansOpen, clanStanding } from './clans';
 
 /**
- * Карточка-приглашение в клан: `/api/share/clan?c=<код>&v=<число участников>&l=<язык>` — страница
- * с превью, которая уводит в Mini App по ссылке «заражения»; `.png` — сама картинка. Данные клана
- * берутся с сервера по коду, `v` нужен только как ключ кеша (клан растёт — картинка новая).
+ * Карточка-приглашение в клан: `/api/share/clan?c=<код>&v=<число участников>&l=<язык>` - страница
+ * с превью, которая уводит в Mini App по ссылке «заражения»; `.png` - сама картинка. Данные клана
+ * берутся с сервера по коду, `v` нужен только как ключ кеша (клан растёт - картинка новая).
  *
  * Эмодзи в шрифте карточки нет, поэтому оно рисуется картинкой Twemoji (графика © Twitter/X и
  * участники проекта, CC-BY 4.0: https://github.com/jdecked/twemoji).
@@ -41,8 +41,8 @@ export const CLAN_SHARE_TEXT = {
     call: 'Вступай в клан',
     action: 'Вступить',
     messageTitle: (emoji: string) => `Тебя заражают ${emoji}!`,
-    messageText: (emoji: string, members: string) => `Вступай в клан ${emoji} в Clutch — в нём уже ${members}. Один клан навсегда.`,
-    description: 'Каждое эмодзи — один клан. Вступай и сражайся в недельной войне кланов.',
+    messageText: (emoji: string, members: string) => `Вступай в клан ${emoji} в Clutch: в нём уже ${members}. Один клан навсегда.`,
+    description: 'У каждого эмодзи свой клан. Вступай и сражайся в недельной войне кланов.',
   },
   en: {
     caption: 'Emoji clans',
@@ -54,7 +54,7 @@ export const CLAN_SHARE_TEXT = {
     call: 'Join the clan',
     action: 'Join',
     messageTitle: (emoji: string) => `You're being infected with ${emoji}!`,
-    messageText: (emoji: string, members: string) => `Join the ${emoji} clan in Clutch — it already has ${members}. One clan forever.`,
+    messageText: (emoji: string, members: string) => `Join the ${emoji} clan in Clutch. It already has ${members}. One clan forever.`,
     description: 'Every emoji is one clan. Join and fight in the weekly clan war.',
   },
   kk: {
@@ -67,8 +67,8 @@ export const CLAN_SHARE_TEXT = {
     call: 'Кланға қосыл',
     action: 'Қосылу',
     messageTitle: (emoji: string) => `Сені ${emoji} кланына шақырады!`,
-    messageText: (emoji: string, members: string) => `Clutch-тағы ${emoji} кланына қосыл — онда ${members} бар. Бір клан мәңгілікке.`,
-    description: 'Әр эмодзи — бір клан. Қосыл да, апталық кландар соғысында шайқас.',
+    messageText: (emoji: string, members: string) => `Clutch-тағы ${emoji} кланына қосыл: онда ${members} бар. Бір клан мәңгілікке.`,
+    description: 'Әр эмодзидің өз кланы бар. Қосыл да, апталық кландар соғысында шайқас.',
   },
 } satisfies Record<Locale, unknown>;
 
@@ -85,7 +85,7 @@ function base64(textValue: string): string {
   return btoa(binary);
 }
 
-/** SVG эмодзи как data URI; null — CDN недоступен, тогда карточка рисуется без картинки. */
+/** SVG эмодзи как data URI; null - CDN недоступен, тогда карточка рисуется без картинки. */
 export async function emojiDataUri(emoji: string, fetcher: typeof fetch = fetch): Promise<string | null> {
   try {
     const response = await fetcher(`${TWEMOJI_BASE}${twemojiName(emoji)}.svg`, { signal: AbortSignal.timeout(3000) });
@@ -140,7 +140,7 @@ export interface ClanShareInfo {
   locale: Locale;
 }
 
-/** Код из ссылки → данные клана; null — код кривой или такого участника нет. */
+/** Код из ссылки → данные клана; null - код кривой или такого участника нет. */
 export async function clanShareInfo(db: D1Database, query: Record<string, string>): Promise<ClanShareInfo | null> {
   const code = (query.c ?? '').replace(CLAN_INVITE_PREFIX, '');
   if (!CLAN_INVITE_CODE.test(code)) return null;

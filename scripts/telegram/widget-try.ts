@@ -1,4 +1,4 @@
-// Пробная отправка ежедневного виджета «Вопрос дня» — того же, что шлёт cron (apps/api/src/notifications).
+// Пробная отправка ежедневного виджета «Вопрос дня» - того же, что шлёт cron (apps/api/src/notifications).
 //
 //   npx vite-node scripts/telegram/widget-try.ts -- --dry-run [YYYY-MM-DD]   → собрать и проверить лимиты
 //   npx vite-node scripts/telegram/widget-try.ts -- <chat_id> [YYYY-MM-DD]   → отправить (нужен TELEGRAM_BOT_TOKEN)
@@ -28,7 +28,7 @@ if (!html || !question) {
   process.exit(1);
 }
 const packed = zlib.deflateSync(Buffer.from(html, 'utf8'), { level: 9 }).length;
-console.log(`${dateKey}: ${question.questionId} — ${question.prompt}`);
+console.log(`${dateKey}: ${question.questionId} - ${question.prompt}`);
 console.log(`HTML: ${Buffer.byteLength(html)} байт, после zlib: ${packed} из ${WIDGET_MAX_ZLIB_BYTES}`);
 
 if (dryRun || !chatId) {
@@ -54,6 +54,6 @@ const response = await fetch(`https://api.telegram.org/bot${token}/sendWidget`, 
 const body = await response.json().catch(() => null) as { ok?: boolean; description?: string; result?: { message_id?: number } } | null;
 if (response.ok && body?.ok) console.log(`Отправлено, message_id ${body.result?.message_id ?? '?'}`);
 else {
-  console.error(`Telegram отказал: HTTP ${response.status} — ${body?.description ?? 'без описания'}`);
+  console.error(`Telegram отказал: HTTP ${response.status} - ${body?.description ?? 'без описания'}`);
   process.exit(1);
 }

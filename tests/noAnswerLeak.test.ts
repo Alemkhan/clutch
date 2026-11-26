@@ -68,7 +68,7 @@ const countryNames = new Set(countries.flatMap((country) => [country.name, count
 /**
  * Ответы открытого вопроса, найденные в его собственной выдаче. Исключение одно: ответ, который
  * сам является названием страны из данных и стоит в prompt как условие («столица страны Панама» →
- * «Панама»), — это не утечка. Тогда ищем его в выдаче без prompt: в подписи, адресе картинки и
+ * «Панама»), - это не утечка. Тогда ищем его в выдаче без prompt: в подписи, адресе картинки и
  * прочих полях он по-прежнему недопустим.
  */
 export function findOpenAnswerLeaks(question: PublicQuestion, correctAnswers: readonly string[]): string[] {
@@ -86,7 +86,7 @@ export function findOpenAnswerLeaks(question: PublicQuestion, correctAnswers: re
 }
 
 /**
- * Отсутствия полей мало: ответ мог бы уехать в любом другом поле того же вопроса — в подписи,
+ * Отсутствия полей мало: ответ мог бы уехать в любом другом поле того же вопроса - в подписи,
  * в адресе картинки, в подкатегории. У вопроса с открытым вводом вариантов на экране нет,
  * поэтому в его собственной выдаче правильного ответа быть не должно нигде.
  *
@@ -155,14 +155,14 @@ describe('no route hands out answers to unanswered questions', () => {
     expect(base.correctAnswers).toContain('Панама');
     const publicQuestion = toPublicQuestion(base);
     expect(findOpenAnswerLeaks(publicQuestion, base.correctAnswers!)).toEqual([]);
-    // Тот же ответ в другом поле — настоящая утечка.
+    // Тот же ответ в другом поле - настоящая утечка.
     expect(findOpenAnswerLeaks({ ...publicQuestion, mediaText: 'Панама' }, ['Панама'])).toEqual(['Панама']);
-    // Ответ, не являющийся названием страны, но стоящий в prompt, — утечка.
-    expect(findOpenAnswerLeaks({ ...publicQuestion, prompt: 'Столица — Лиссабон?' }, ['Лиссабон'])).toEqual(['Лиссабон']);
+    // Ответ, не являющийся названием страны, но стоящий в prompt, - утечка.
+    expect(findOpenAnswerLeaks({ ...publicQuestion, prompt: 'Столица - Лиссабон?' }, ['Лиссабон'])).toEqual(['Лиссабон']);
   });
 
   it('the day with a capital-equals-country question in the bank has no leaks', () => {
-    // Ищем первые сутки, где в банке есть вопрос «столица совпадает со страной», — не список под сегодня.
+    // Ищем первые сутки, где в банке есть вопрос «столица совпадает со страной», - не список под сегодня.
     let found = 0;
     for (let day = 0; day < 365 && found === 0; day += 1) {
       const timestamp = FIXED_NOW + day * 86_400_000;

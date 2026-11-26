@@ -21,10 +21,10 @@ describe('general pack data', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  // Происхождение обязательно, проверяемость — нет, и это разные вещи. `sourceUrl` ведёт на
+  // Происхождение обязательно, проверяемость - нет, и это разные вещи. `sourceUrl` ведёт на
   // страницу, где факт можно сверить; `sourceHint` говорит, где искать; `sourceTitle` в одиночку
   // называет только, откуда запись взялась (например ролик), и факт за ней никто не проверял.
-  // Записи NotebookLM живут именно так — см. docs/CONTENT_REVIEW.md.
+  // Записи NotebookLM живут именно так - см. docs/CONTENT_REVIEW.md.
   it('gives every live record its provenance; pending and blocked ones never go live', () => {
     for (const r of allRecords) {
       expect(['pending', 'approved', 'blocked'], r.id).toContain(r.editorialStatus);

@@ -20,7 +20,7 @@ export interface SoloShareInput {
   dayNumber?: number;
 }
 
-/** Сетка кругов: 🟩 — круг дал прогресс, 🟥 — нет (неверный ответ или промах). По 10 в строке. */
+/** Сетка кругов: 🟩 - круг дал прогресс, 🟥 - нет (неверный ответ или промах). По 10 в строке. */
 export function roundGrid(awards: readonly number[]): string {
   const cells = awards.map((award) => (award > 0 ? '🟩' : '🟥'));
   const rows: string[] = [];
@@ -30,7 +30,7 @@ export function roundGrid(awards: readonly number[]): string {
 
 /**
  * Wordle-style line for any finished run, including one that stopped short of 100%: that is the
- * screen most first-time players see, and it had nothing to share. No questions or answers in it —
+ * screen most first-time players see, and it had nothing to share. No questions or answers in it -
  * the set is the same for everyone today.
  */
 export function buildSoloShareText(input: SoloShareInput): string {
@@ -59,7 +59,7 @@ export function useSoloShare(): { status: SoloShareStatus; share: (text: string,
 
   const share = useCallback((text: string, reached = false, previewUrl?: string) => {
     const hasNative = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
-    // Превью со своей карточкой результата; без него — прямо в бота.
+    // Превью со своей карточкой результата; без него - прямо в бота.
     const url = previewUrl ?? resolveGameLink(import.meta.env.VITE_TELEGRAM_BOT_LINK as string | undefined, window.location.origin);
     void executeShare(
       chooseShareStrategy({ telegramShare: canShareViaTelegram(), nativeShare: hasNative }),

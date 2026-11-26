@@ -7,10 +7,10 @@ export interface SoloRunResult {
   /** Достигнутый прогресс; важен, только если цели не достиг никто. */
   progress: number;
   roundsPlayed: number;
-  /** rounds / setPar: меньше — лучше. Нормирует разные по трудности наборы. */
+  /** rounds / setPar: меньше - лучше. Нормирует разные по трудности наборы. */
   soloScore: number;
   /**
-   * Прикидка «На глазок» этой стороны за сутки её набора; null — не отвечала или не засчитывается.
+   * Прикидка «На глазок» этой стороны за сутки её набора; null - не отвечала или не засчитывается.
    * Приходит параметром: функция чистая, базу не читает.
    */
   tiebreak: TiebreakAnswer | null;
@@ -22,7 +22,7 @@ function assertFinite(result: SoloRunResult): void {
   }
 }
 
-/** Меньшее значение выигрывает; равенство — null (решает следующий критерий). */
+/** Меньшее значение выигрывает; равенство - null (решает следующий критерий). */
 function lower(own: number, other: number): MyRunOutcome | null {
   if (own < other) return 'player';
   if (own > other) return 'opponent';
@@ -32,16 +32,16 @@ function lower(own: number, other: number): MyRunOutcome | null {
 /** Исход сравнения и то, решила ли его прикидка «На глазок» (а не счёт, круги или прогресс). */
 export interface SoloComparison {
   outcome: MyRunOutcome;
-  /** true — счёт/круги/прогресс сравнялись, и победителя назвала прикидка. Ничья по прикидке — false. */
+  /** true - счёт/круги/прогресс сравнялись, и победителя назвала прикидка. Ничья по прикидке - false. */
   byTiebreak: boolean;
 }
 
 /**
  * Исход соло-забега `own` против `other` глазами `own`:
- * 'player' — победа, 'opponent' — поражение, 'tie' — ничья.
+ * 'player' - победа, 'opponent' - поражение, 'tie' - ничья.
  * Дошедший до цели бьёт не дошедшего. Оба дошли: меньший soloScore, затем меньше кругов.
- * Не дошёл никто: больший прогресс, затем меньше кругов. Если и это равно — «На глазок»
- * (`resolveTiebreak`), и только если прикидки не развели стороны — ничья.
+ * Не дошёл никто: больший прогресс, затем меньше кругов. Если и это равно - «На глазок»
+ * (`resolveTiebreak`), и только если прикидки не развели стороны - ничья.
  *
  * Длительность забега исход не решает (решение владельца 2026-10-15). Правило действует
  * с забегов, завершённых после этой даты: исход уже сыгранных хранится в базе и задним числом
@@ -85,13 +85,13 @@ export interface SoloLeaderboardEntry {
   setPar: number;
   roundsPlayed: number;
   completedAt: number;
-  /** Эмодзи клана игрока — его аватар; нет, если игрок ни в каком клане. */
+  /** Эмодзи клана игрока - его аватар; нет, если игрок ни в каком клане. */
   clanEmoji?: string;
 }
 
 /**
  * Место самого игрока. Без него таблица топ-50 ничего не говорит тому, кто в неё не попал:
- * цель «обойти стоящего выше на один круг» достижима, а «попасть в топ-50» — нет.
+ * цель «обойти стоящего выше на один круг» достижима, а «попасть в топ-50» - нет.
  */
 export interface SoloLeaderboardStanding {
   /** Место в таблице дня, начиная с 1; общее у ничьих (1, 2, 2, 4). */
@@ -101,10 +101,10 @@ export interface SoloLeaderboardStanding {
   entry: SoloLeaderboardEntry;
   /**
    * На сколько кругов нужно улучшиться, чтобы обойти стоящего выше. Считается по пару своего
-   * набора, поэтому это настоящее число кругов, а не разница счётов. null — игрок первый.
+   * набора, поэтому это настоящее число кругов, а не разница счётов. null - игрок первый.
    */
   roundsToNext: number | null;
-  /** Место ближайшего стоящего строго выше (при ничьих это не `rank - 1`). null — игрок первый. */
+  /** Место ближайшего стоящего строго выше (при ничьих это не `rank - 1`). null - игрок первый. */
   placeAbove: number | null;
   /**
    * Ближайший стоящий выше имеет те же круги: обошёл он только прикидкой «На глазок», так что
@@ -112,8 +112,8 @@ export interface SoloLeaderboardStanding {
    */
   outrankedByGuess: boolean;
   /**
-   * Прикидка дня для этого игрока: `answered` — засчитана, `not_answered` — Telegram-игрок ещё не
-   * ответил, `guest` — гостю прикидка не засчитывается никогда.
+   * Прикидка дня для этого игрока: `answered` - засчитана, `not_answered` - Telegram-игрок ещё не
+   * ответил, `guest` - гостю прикидка не засчитывается никогда.
    */
   tiebreak: 'answered' | 'not_answered' | 'guest';
 }
@@ -134,7 +134,7 @@ export function isPublicPlace(rank: number, total: number): boolean {
   return rank <= publicBoardPlaces(total);
 }
 
-/** Какую долю остальных игроков игрок обошёл, 0–100: «лучше 40% игроков». null — он один. */
+/** Какую долю остальных игроков игрок обошёл, 0–100: «лучше 40% игроков». null - он один. */
 export function betterThanPercent(rank: number, total: number): number | null {
   if (total <= 1) return null;
   return Math.max(0, Math.min(100, Math.round((100 * (total - rank)) / (total - 1))));
@@ -144,15 +144,15 @@ export interface SoloLeaderboardResponse {
   category: CategoryId;
   /** Сутки игры, YYYY-MM-DD; граница сдвинута от UTC на `DAY_BOUNDARY_OFFSET_MINUTES`. */
   dateKey: string;
-  /** Только места, которые видят все (`publicBoardPlaces`); своё место — в `you`. */
+  /** Только места, которые видят все (`publicBoardPlaces`); своё место - в `you`. */
   entries: SoloLeaderboardEntry[];
   /** Сколько всего игроков в таблице дня, включая скрытые места. Старый сервер поля не шлёт. */
   total?: number;
-  /** Своё место. null — в этот день игрок не закрыл ни одного забега в этой категории. */
+  /** Своё место. null - в этот день игрок не закрыл ни одного забега в этой категории. */
   you: SoloLeaderboardStanding | null;
   /**
-   * Попытка забега дня самого игрока (только за сегодня): 'none' — не начинал, 'in_progress' —
-   * начат и не закончен, 'completed' — сыгран, второй раз не выдаётся. Старый сервер поля не шлёт.
+   * Попытка забега дня самого игрока (только за сегодня): 'none' - не начинал, 'in_progress' -
+   * начат и не закончен, 'completed' - сыгран, второй раз не выдаётся. Старый сервер поля не шлёт.
    */
   dailyAttempt?: 'none' | 'in_progress' | 'completed';
 }
@@ -170,6 +170,6 @@ export interface DuelBoardEntry {
 export interface DuelBoardResponse {
   dateKey: string;
   entries: DuelBoardEntry[];
-  /** Своя строка; null — сегодня ни одной закончившейся дуэли. */
+  /** Своя строка; null - сегодня ни одной закончившейся дуэли. */
   you: DuelBoardEntry | null;
 }

@@ -49,7 +49,7 @@ function RoundHud({ props, state, view }: Omit<RoundStageProps, "question">) {
   );
 }
 
-/** Круг ждёт сервер: ожидание, а после обрыва связи — «Повторить» или «Выйти». */
+/** Круг ждёт сервер: ожидание, а после обрыва связи - «Повторить» или «Выйти». */
 function SyncStatus({ props, state }: Pick<RoundStageProps, "props" | "state">) {
   const t = useMessages(m);
   if (!props.syncError) {

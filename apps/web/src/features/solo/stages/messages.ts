@@ -35,7 +35,7 @@ export const m = defineMessages({
     modeDuel: 'Дуэль',
     readyVsRecord: (name: string, target: number, finish: number) =>
       `${name}: ${target}% за ${ruRounds(finish)}. Успей быстрее.`,
-    readyDaily: (target: number, cap: number) => `Общий набор дня, в таблицу — первая попытка. До ${target}% за ${cap} кругов.`,
+    readyDaily: (target: number, cap: number) => `Общий набор дня, в таблицу идёт первая попытка. До ${target}% за ${cap} кругов.`,
     readyFree: (target: number, cap: number) => `Новые вопросы, вне таблицы. До ${target}% за ${cap} кругов.`,
     readyDuel: (target: number, cap: number) => `Соперника пока нет: твой забег станет вызовом. До ${target}% за ${cap} кругов.`,
     readyDefault: (target: number, cap: number) => `До ${target}% за ${cap} кругов.`,

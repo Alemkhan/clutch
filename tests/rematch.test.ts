@@ -244,7 +244,7 @@ describe('a rematch is called by the player who played against a human record', 
     expect(await off.json()).toEqual({ enabled: false });
 
     expect((await callRematch(db)).status).toBe(201);
-    // Приглашение есть: отписка глушит сообщение бота, а не сам вызов — он виден в «Моих партиях».
+    // Приглашение есть: отписка глушит сообщение бота, а не сам вызов - он виден в «Моих партиях».
     expect(inviteRows(db)).toHaveLength(1);
     expect(fetchMock).not.toHaveBeenCalled();
 

@@ -38,7 +38,7 @@ interface TrainingProps {
   onReport?: (input: TrainingReportInput) => Promise<unknown>;
 }
 
-/** Русский текст пометки; на экране — перевод из messages.ts. */
+/** Русский текст пометки; на экране - перевод из messages.ts. */
 export const TRAINING_NOT_SAVED_NOTE = m.ru.notSaved;
 
 type Action =

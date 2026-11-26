@@ -90,7 +90,7 @@ export function packQuestionToRaceQuestion(q: PackQuestion, answerType: AnswerTy
   return multipleChoice(base, q.answerRu, q.distractorsRu, seed);
 }
 
-/** «Что из этого — …?»: one member against three non-members, both picked by `seed`. */
+/** «Что из этого - …?»: one member against three non-members, both picked by `seed`. */
 export function packSetToRaceQuestion(set: PackSet, seed = set.id, memberId?: string): Question {
   const random = createSeededRandom(hashSeed(`${set.id}:${seed}`));
   // memberId restores a question from its stored id; without it the seed picks the member.
@@ -106,7 +106,7 @@ export function packSetToRaceQuestion(set: PackSet, seed = set.id, memberId?: st
       difficulty: 'Medium',
       prompt: set.mcPromptRu,
       correctAnswers: member.acceptedRu,
-      explanation: `${member.answerRu} — правильный ответ. ${set.titleRu}: ${set.members.map((x) => x.answerRu).join(', ')}.`,
+      explanation: `Правильный ответ: ${member.answerRu}. ${set.titleRu}: ${set.members.map((x) => x.answerRu).join(', ')}.`,
       sourceUrl: set.sourceUrl,
       sourceTitle: set.sourceTitle,
       status: set.editorialStatus === 'approved' ? 'approved' : 'draft',

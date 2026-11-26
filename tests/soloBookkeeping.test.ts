@@ -188,7 +188,7 @@ describe('приглашение на реванш', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const payload = JSON.parse((fetchMock.mock.calls[0] as [string, RequestInit])[1].body as string);
     expect(payload.text).toContain('устояла');
-    // Кнопка только одна — отписка; звать на реванш победителя не за чем.
+    // Кнопка только одна - отписка; звать на реванш победителя не за чем.
     expect(payload.reply_markup.inline_keyboard).toHaveLength(1);
   });
 
@@ -295,7 +295,7 @@ describe('повторный старт не теряет соперника', (
   });
 });
 
-describe('матч — это пара', () => {
+describe('матч - это пара', () => {
   it('запись достаётся одному: второй игрок остаётся без соперника', async () => {
     const db = database();
     insertRecord(db, 'record-run', 'guest:11111111-1111-4111-8111-111111111111', 'Алем');

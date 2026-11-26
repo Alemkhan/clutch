@@ -82,7 +82,7 @@ describe('question reports route', () => {
     kind: 'wrong_answer',
     verdict: false,
     playerAnswer: 'Берн',
-    comment: 'Правильный ответ — Вадуц.',
+    comment: 'Правильный ответ - Вадуц.',
   };
 
   it('stores a report with the verified identity and answers 201', async () => {
@@ -100,7 +100,7 @@ describe('question reports route', () => {
       kind: 'wrong_answer',
       verdict: 0,
       player_answer: 'Берн',
-      comment: 'Правильный ответ — Вадуц.',
+      comment: 'Правильный ответ - Вадуц.',
     });
   });
 

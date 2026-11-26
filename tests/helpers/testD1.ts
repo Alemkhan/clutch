@@ -64,7 +64,7 @@ export interface TestD1 {
 
 /**
  * Схема до снимка условий матча: в `match_runs` нет rules_version, mini_game_id,
- * mini_game_config_json, opponent_json и ghost_eligible. Нужна ровно одному тесту — проверке
+ * mini_game_config_json, opponent_json и ghost_eligible. Нужна ровно одному тесту - проверке
  * `/api/ready`, который обязан увидеть устаревшую схему и ответить 503. Это тестовая заготовка,
  * а не миграция: после сжатия истории файла с таким состоянием в репозитории больше нет.
  */

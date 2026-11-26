@@ -4,7 +4,7 @@ import type { ShareOutcome } from './cardLayout';
 /**
  * Тексты карточек и страниц шаринга на языке игрока. Язык приходит параметром `l` ссылки
  * (ru|en|kk): его ставит клиент, а ссылку открывает уже получатель, поэтому заголовок
- * X-Clutch-Locale здесь не годится. Неизвестный или пустой `l` — русский.
+ * X-Clutch-Locale здесь не годится. Неизвестный или пустой `l` - русский.
  */
 export function shareLocale(raw: string | undefined | null): Locale {
   const value = raw?.trim().toLowerCase();
@@ -12,7 +12,7 @@ export function shareLocale(raw: string | undefined | null): Locale {
 }
 
 /**
- * Статичная картинка на языке: русская — исходный файл, остальные — рядом с суффиксом языка
+ * Статичная картинка на языке: русская - исходный файл, остальные - рядом с суффиксом языка
  * (`/og.png` → `/og.en.png`, `/share/win.png` → `/share/win.kk.png`). Файлы собираются из
  * scripts/share-cards.
  */
@@ -114,10 +114,10 @@ const ru: ShareDictionary = {
   callFaster: 'Сможешь быстрее?',
   callReach: 'Дойдёшь до 100%?',
   callInvite: 'Обгонишь эту запись?',
-  tilesCaption: 'Круг — верный ответ и удар молотком',
+  tilesCaption: 'Круг: верный ответ и удар молотком',
   runTitle: (result, category) => `${result} · ${category}`,
   inviteTitle: (name, result) => (name ? `${name} зовёт на дуэль: ${result}` : `Дуэль в Clutch: обгони ${result}`),
-  runDescription: 'Ответь верно — получи удар молотком. Точнее удар — быстрее до 100%. Сегодня у всех один набор вопросов.',
+  runDescription: 'Ответь верно и получи удар молотком. Чем точнее удар, тем быстрее до 100%. Сегодня у всех один набор вопросов.',
   guess: {
     mode: 'На глазок',
     kickerBest: 'Ближе всех за день',
@@ -141,8 +141,8 @@ const ru: ShareDictionary = {
     caption: 'Викторина на каждый день',
     line1: 'Ответь верно.',
     line2: 'Попади в центр.',
-    side1: 'Точнее удар —',
-    side2: 'быстрее до 100%',
+    side1: 'Чем точнее удар,',
+    side2: 'тем быстрее до 100%',
     call: 'Одни вопросы для всех',
   },
   outcome: {
@@ -150,7 +150,7 @@ const ru: ShareDictionary = {
     me: 'Я',
     hint: 'у всех один набор вопросов',
     call: 'Сыграешь лучше?',
-    description: 'Ответь верно — получи попытку. Забей точнее — выиграй матч. Сегодня у всех один набор вопросов.',
+    description: 'Ответь верно и получи попытку. Забей точнее и выиграй матч. Сегодня у всех один набор вопросов.',
     title: (outcome, p, q, name) => {
       if (name) {
         if (outcome === 'win') return `Обыграл ${name}: ${p}% против ${q}%`;
@@ -212,8 +212,8 @@ const en: ShareDictionary = {
     caption: 'A quiz for every day',
     line1: 'Answer right.',
     line2: 'Hit the center.',
-    side1: 'Sharper hit —',
-    side2: 'faster to 100%',
+    side1: 'Hit sharper,',
+    side2: 'reach 100% faster',
     call: 'Same questions for all',
   },
   outcome: {
@@ -257,10 +257,10 @@ const kk: ShareDictionary = {
   callFaster: 'Жылдамырақ өте аласың ба?',
   callReach: '100%-ға жете аласың ба?',
   callInvite: 'Бұл нәтижені оза аласың ба?',
-  tilesCaption: 'Айналым — дұрыс жауап пен балға соққысы',
+  tilesCaption: 'Айналым: дұрыс жауап пен балға соққысы',
   runTitle: (result, category) => `${result} · ${category}`,
   inviteTitle: (name, result) => (name ? `${name} дуэльге шақырады: ${result}` : `Clutch дуэлі: ${result} нәтижесін оз`),
-  runDescription: 'Дұрыс жауап бер — балға соққысын ал. Соққы дәл болса, 100%-ға тезірек жетесің. Бүгін барлығына бір сұрақтар жинағы.',
+  runDescription: 'Дұрыс жауап бер де, балға соққысын ал. Соққы дәл болса, 100%-ға тезірек жетесің. Бүгін барлығына бір сұрақтар жинағы.',
   guess: {
     mode: 'Көзмөлшер',
     kickerBest: 'Күннің ең жақын жауабы',
@@ -284,7 +284,7 @@ const kk: ShareDictionary = {
     caption: 'Күн сайынғы викторина',
     line1: 'Дұрыс жауап бер.',
     line2: 'Ортаға дәл тигіз.',
-    side1: 'Соққы дәл болса —',
+    side1: 'Соққы дәл болса,',
     side2: '100%-ға тезірек',
     call: 'Барлығына бір сұрақтар',
   },
@@ -293,7 +293,7 @@ const kk: ShareDictionary = {
     me: 'Мен',
     hint: 'барлығына бір сұрақтар жинағы',
     call: 'Жақсырақ ойнай аласың ба?',
-    description: 'Дұрыс жауап бер — соққы ал. Дәлірек соқ — матчты ұт. Бүгін барлығына бір сұрақтар жинағы.',
+    description: 'Дұрыс жауап бер де, соққы ал. Дәлірек соқ та, матчты ұт. Бүгін барлығына бір сұрақтар жинағы.',
     title: (outcome, p, q, name) => {
       if (name) {
         if (outcome === 'win') return `${name} ойыншысын ұттым: ${p}% қарсы ${q}%`;

@@ -11,7 +11,7 @@ const sessionSecret = 'test-session-signing-secret-at-least-32-characters';
 const allowRateLimiter: RateLimit = { limit: async () => ({ success: true }) };
 const databases: TestD1[] = [];
 
-// 12:00 UTC 15 октября: сутки dailyKey (+5 ч) — 2026-10-15.
+// 12:00 UTC 15 октября: сутки dailyKey (+5 ч) - 2026-10-15.
 const NOON = new Date('2026-10-15T12:00:00Z');
 const TODAY = '2026-10-15';
 
@@ -116,7 +116,7 @@ describe('GET /api/tiebreaker/today', () => {
     addAnswers(db, 'q1', 12, 123456);
     const response = await get(db, guest('a').authorization);
     const text = await response.text();
-    // До своего ответа: номер вопроса и число ответивших — и больше никакой статистики.
+    // До своего ответа: номер вопроса и число ответивших - и больше никакой статистики.
     expect(JSON.parse(text)).toEqual({
       dateKey: TODAY,
       question: { id: 'q1', number: 1, prompt: 'Сколько q1?', cardPrompt: null, unit: 'шт.' },
@@ -326,7 +326,7 @@ describe('tiebreaker statistics', () => {
     expect(ninth.answered.totalAnswers).toBe(9);
     expect(ninth.answered.percentile).toBeNull();
 
-    // Множитель 2 (guess 500): 10-й ответ. Строго хуже: 3..8 (шесть) и 4.5 — 7 из 9 чужих.
+    // Множитель 2 (guess 500): 10-й ответ. Строго хуже: 3..8 (шесть) и 4.5-7 из 9 чужих.
     const tenth = await (await answer(db, guest('b').authorization, { questionId: 'q1', guess: 500 })).json() as Record<string, any>;
     expect(tenth.answered.totalAnswers).toBe(10);
     expect(tenth.answered.percentile).toBe(Math.floor((7 / 9) * 100));
@@ -363,7 +363,7 @@ describe('day boundary', () => {
     expect(after.dateKey).toBe('2026-10-16');
     expect(after.question.id).toBe('day16');
 
-    // Вчерашний вопрос после границы не принимается, сегодняшний — принимается.
+    // Вчерашний вопрос после границы не принимается, сегодняшний - принимается.
     expect((await answer(db, authorization, { questionId: 'day15', guess: 5 })).status).toBe(409);
     const ok = await answer(db, authorization, { questionId: 'day16', guess: 5 });
     expect(ok.status).toBe(201);

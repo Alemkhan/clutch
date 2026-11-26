@@ -46,7 +46,7 @@ export async function categoriesWithBoardRun(db: D1Database, playerId: string, d
   return rows.results.map((row) => row.category);
 }
 
-/** Текст известия. `byGuess` — вытеснили при равных кругах, решила прикидка. */
+/** Текст известия. `byGuess` - вытеснили при равных кругах, решила прикидка. */
 export function outOfTopTenText(triggerName: string, category: string, byGuess: boolean, locale: Locale = 'ru'): string {
   const t = NOTIFICATION_TEXT[locale];
   const board = t.categoryNames[category] ?? t.categoryFallback;

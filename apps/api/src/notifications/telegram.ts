@@ -76,7 +76,7 @@ export function widgetPayload(chatId: string, html: string, caption: string, but
   };
 }
 
-/** HTML-виджет в сообщении (Bot API 10.4). Подпись — обычный текст, без parse_mode. */
+/** HTML-виджет в сообщении (Bot API 10.4). Подпись - обычный текст, без parse_mode. */
 export async function sendTelegramWidget(
   botToken: string,
   chatId: string,

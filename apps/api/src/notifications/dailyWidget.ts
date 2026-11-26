@@ -53,7 +53,7 @@ export function dailyWidgetQuestion(dateKey: string, pool: readonly PackRecord[]
   };
 }
 
-// Палитра игры (тёмно-фиолетовая, «объёмные» кнопки), а не тема Telegram: виджет — витрина Clutch.
+// Палитра игры (тёмно-фиолетовая, «объёмные» кнопки), а не тема Telegram: виджет - витрина Clutch.
 const STYLE = `:root{--bg:#1f1850;--tx:#fff;--hint:#b4aedb;--btn:#fff;--btnt:#1f1a3d;--edge:#d8d4ec;--acc:#ffc94d;--acct:#2a1b5c;--acce:#e39a26}
 body{margin:0;background:linear-gradient(180deg,#2b2270,#160f3e);color:var(--tx);font:15px/1.35 -apple-system,system-ui,sans-serif}
 #w{padding:12px 12px calc(12px + env(safe-area-inset-bottom))}
@@ -69,7 +69,7 @@ body{margin:0;background:linear-gradient(180deg,#2b2270,#160f3e);color:var(--tx)
 #e{margin:4px 0 0;color:var(--hint);font-size:13px}
 #c{margin-top:12px;width:100%;padding:12px;border:0;border-radius:12px;background:var(--acc);color:var(--acct);box-shadow:0 4px 0 var(--acce);font:inherit;font-weight:800}`;
 
-// Выбор хранится в localStorage сообщения: открыл заново — видит свой ответ.
+// Выбор хранится в localStorage сообщения: открыл заново - видит свой ответ.
 const SCRIPT = `const W=window.TelegramWidget;let pick=null;
 try{const v=localStorage.getItem('pick');if(v!==null)pick=Number(v)}catch(e){}
 const $=(id)=>document.getElementById(id);

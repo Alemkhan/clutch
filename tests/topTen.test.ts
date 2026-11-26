@@ -106,7 +106,7 @@ function guest(label: string): { authorization: string; playerId: string } {
 }
 
 let finishOrder = 0;
-/** Завершённый зачётный забег на наборе 0: `rounds` кругов, счёт rounds/пар. Порядок финиша — по вызову. */
+/** Завершённый зачётный забег на наборе 0: `rounds` кругов, счёт rounds/пар. Порядок финиша - по вызову. */
 function insertRun(db: TestD1, options: { id: string; playerId: string; rounds?: number; name?: string; category?: string }) {
   const roundsCount = options.rounds ?? 4;
   const rounds: AsyncMatchRound[] = Array.from({ length: roundsCount }, (_, index) => ({
@@ -264,7 +264,7 @@ const bodies = (): Array<{ chat_id: string; text: string; reply_markup?: unknown
 const sentTexts = (): string[] => bodies().map((body) => body.text);
 const sentTo = (): string[] => bodies().map((body) => String(body.chat_id));
 
-/** Десять Telegram-игроков с равными кругами и прикидками 1,1…2,0: последний — на десятом месте. */
+/** Десять Telegram-игроков с равными кругами и прикидками 1,1…2,0: последний - на десятом месте. */
 function fillTopTen(db: TestD1) {
   for (let index = 1; index <= 10; index += 1) {
     insertRun(db, { id: `f${index}`, playerId: `telegram:${100 + index}`, name: `Филлер ${index}` });

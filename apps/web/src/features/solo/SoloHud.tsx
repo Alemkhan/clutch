@@ -6,7 +6,7 @@ import { SoundToggle } from '../../ui/SoundToggle';
 
 interface SoloHudProps {
   progress: number;
-  /** Прогресс записи соперника на её полосе. null — соперника нет, ничего не рисуем. */
+  /** Прогресс записи соперника на её полосе. null - соперника нет, ничего не рисуем. */
   paceProgress: number | null;
   paceName: string | null;
   round: number;

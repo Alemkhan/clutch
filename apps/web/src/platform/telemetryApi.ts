@@ -13,7 +13,7 @@ export function submitQuestionReport(
 }
 /**
  * Минимальная продуктовая аналитика: строго fire-and-forget. Без await, очереди и ретраев;
- * любая ошибка глотается, событие никогда не ломает UI. Имена — общий allowlist с сервером.
+ * любая ошибка глотается, событие никогда не ломает UI. Имена - общий allowlist с сервером.
  */
 export function logAnalyticsEvent(event: AnalyticsEventName, payload?: AnalyticsEventPayload): void {
   if (!ANALYTIC_EVENT_NAMES.includes(event)) return;

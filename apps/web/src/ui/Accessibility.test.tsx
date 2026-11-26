@@ -11,7 +11,7 @@ const question: Question = {
   id: 'question-1', type: 'multiple_choice', answerType: 'multiple_choice',
   category: 'geography', difficulty: 'Easy', prompt: 'Столица Казахстана?',
   options: [{ id: 'a', text: 'Астана' }, { id: 'b', text: 'Алматы' }],
-  correctOptionId: 'a', explanation: 'Астана — столица Казахстана.', status: 'approved',
+  correctOptionId: 'a', explanation: 'Астана - столица Казахстана.', status: 'approved',
   createdAt: '2026-10-01',
 };
 
@@ -31,7 +31,7 @@ describe('accessible gameplay semantics', () => {
       />,
     );
 
-    // Действие — одна настоящая кнопка с понятным именем; стрелка скрыта от экранных дикторов.
+    // Действие - одна настоящая кнопка с понятным именем; стрелка скрыта от экранных дикторов.
     expect(html).toContain('<button type="button" class="resolution-action to-hammer">К мини-игре <span aria-hidden="true">→</span></button>');
     expect(html).not.toContain('role="button"');
     expect(shouldActivateAction(false)).toBe(true);
@@ -46,7 +46,7 @@ describe('accessible gameplay semantics', () => {
       <ResolutionScreen
         correctAnswer="Астана"
         selectedAnswer="Алматы"
-        explanation="Астана — столица Казахстана."
+        explanation="Астана - столица Казахстана."
         correct={false}
         variant="training"
         onContinue={vi.fn()}

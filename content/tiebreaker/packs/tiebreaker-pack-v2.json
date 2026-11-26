@@ -10,17 +10,17 @@
     "activeDate": "2026-10-16",
     "explanation": {
       "steps": [
-        { "label": "Сторона основания пирамиды", "value": 230.3, "unit": "м", "sourceUrl": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza", "sourceTitle": "Great Pyramid of Giza — Wikipedia" },
-        { "label": "Первоначальная высота, до потери облицовки", "value": 146.6, "unit": "м", "sourceUrl": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza", "sourceTitle": "Great Pyramid of Giza — Wikipedia" },
+        { "label": "Сторона основания пирамиды", "value": 230.3, "unit": "м", "sourceUrl": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza", "sourceTitle": "Great Pyramid of Giza - Wikipedia" },
+        { "label": "Первоначальная высота, до потери облицовки", "value": 146.6, "unit": "м", "sourceUrl": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza", "sourceTitle": "Great Pyramid of Giza - Wikipedia" },
         { "label": "Объём: ⅓ × основание² × высота", "value": 2590000, "unit": "м³", "sourceUrl": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza", "sourceTitle": "Расчёт по размерам выше" },
-        { "label": "Внутренний объём 20-футового контейнера", "value": 33.2, "unit": "м³", "sourceUrl": "https://www.hapag-lloyd.com/en/services-information/cargo-fleet/container/20-standard.html", "sourceTitle": "Hapag-Lloyd — 20-футовый стандартный контейнер" }
+        { "label": "Внутренний объём 20-футового контейнера", "value": 33.2, "unit": "м³", "sourceUrl": "https://www.hapag-lloyd.com/en/services-information/cargo-fleet/container/20-standard.html", "sourceTitle": "Hapag-Lloyd - 20-футовый стандартный контейнер" }
       ],
       "summary": "2,59 млн м³ ÷ 33,2 м³ ≈ 78 000 контейнеров"
     }
   },
   {
     "id": "tb-v2-air-over-pitch",
-    "prompt": "Сколько тонн весит весь столб воздуха над футбольным полем 105 × 68 м — от травы до самого края атмосферы?",
+    "prompt": "Сколько тонн весит весь столб воздуха над футбольным полем 105 × 68 м - от травы до самого края атмосферы?",
     "cardPrompt": "Сколько тонн весит воздух над футбольным полем?",
     "unit": "т",
     "answer": 74000,
@@ -29,9 +29,9 @@
     "activeDate": "2026-10-17",
     "explanation": {
       "steps": [
-        { "label": "Атмосферное давление у уровня моря", "value": 101325, "unit": "Па", "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html", "sourceTitle": "NASA — Earth Fact Sheet" },
-        { "label": "Значит, на каждый квадратный метр давит воздух массой (давление ÷ 9,81 м/с²)", "value": 10.3, "unit": "т", "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html", "sourceTitle": "NASA — Earth Fact Sheet" },
-        { "label": "Площадь поля 105 × 68 м", "value": 7140, "unit": "м²", "sourceUrl": "https://www.theifab.com/laws/latest/the-field-of-play/", "sourceTitle": "IFAB — Laws of the Game, Law 1" }
+        { "label": "Атмосферное давление у уровня моря", "value": 101325, "unit": "Па", "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html", "sourceTitle": "NASA - Earth Fact Sheet" },
+        { "label": "Значит, на каждый квадратный метр давит воздух массой (давление ÷ 9,81 м/с²)", "value": 10.3, "unit": "т", "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html", "sourceTitle": "NASA - Earth Fact Sheet" },
+        { "label": "Площадь поля 105 × 68 м", "value": 7140, "unit": "м²", "sourceUrl": "https://www.theifab.com/laws/latest/the-field-of-play/", "sourceTitle": "IFAB - Laws of the Game, Law 1" }
       ],
       "summary": "≈ 10,3 т на м² × 7 140 м² ≈ 74 000 т"
     }
@@ -47,9 +47,9 @@
     "activeDate": "2026-10-18",
     "explanation": {
       "steps": [
-        { "label": "Купюра 50 € (серия «Европа») 140 × 77 мм, её площадь", "value": 0.01078, "unit": "м²", "sourceUrl": "https://www.ecb.europa.eu/euro/banknotes/images/html/ecb.faq_reproduction_rules_euro_banknotes.en.html", "sourceTitle": "ЕЦБ — размеры банкнот" },
-        { "label": "Площадь поля 105 × 68 м", "value": 7140, "unit": "м²", "sourceUrl": "https://www.theifab.com/laws/latest/the-field-of-play/", "sourceTitle": "IFAB — Laws of the Game, Law 1" },
-        { "label": "Купюр на поле (7 140 ÷ 0,01078)", "value": 662000, "unit": "шт.", "sourceUrl": "https://www.theifab.com/laws/latest/the-field-of-play/", "sourceTitle": "IFAB — Laws of the Game, Law 1" }
+        { "label": "Купюра 50 € (серия «Европа») 140 × 77 мм, её площадь", "value": 0.01078, "unit": "м²", "sourceUrl": "https://www.ecb.europa.eu/euro/banknotes/images/html/ecb.faq_reproduction_rules_euro_banknotes.en.html", "sourceTitle": "ЕЦБ - размеры банкнот" },
+        { "label": "Площадь поля 105 × 68 м", "value": 7140, "unit": "м²", "sourceUrl": "https://www.theifab.com/laws/latest/the-field-of-play/", "sourceTitle": "IFAB - Laws of the Game, Law 1" },
+        { "label": "Купюр на поле (7 140 ÷ 0,01078)", "value": 662000, "unit": "шт.", "sourceUrl": "https://www.theifab.com/laws/latest/the-field-of-play/", "sourceTitle": "IFAB - Laws of the Game, Law 1" }
       ],
       "summary": "≈ 662 000 купюр × 50 € ≈ 33 млн €"
     }
@@ -65,8 +65,8 @@
     "activeDate": "2026-10-19",
     "explanation": {
       "steps": [
-        { "label": "Расстояние Нью-Йорк — Лондон по дуге большого круга (по координатам, радиус Земли 6 371 км)", "value": 5570, "unit": "км", "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html", "sourceTitle": "NASA — Earth Fact Sheet" },
-        { "label": "Скорость света в вакууме", "value": 299792, "unit": "км/с", "sourceUrl": "https://www.bipm.org/en/measurement-units/si-base-units/metre", "sourceTitle": "BIPM — определение метра" },
+        { "label": "Расстояние Нью-Йорк - Лондон по дуге большого круга (по координатам, радиус Земли 6 371 км)", "value": 5570, "unit": "км", "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html", "sourceTitle": "NASA - Earth Fact Sheet" },
+        { "label": "Скорость света в вакууме", "value": 299792, "unit": "км/с", "sourceUrl": "https://www.bipm.org/en/measurement-units/si-base-units/metre", "sourceTitle": "BIPM - определение метра" },
         { "label": "Показатель преломления стандартного волокна: свет в нём во столько раз медленнее", "value": 1.4682, "unit": "", "sourceUrl": "https://www.corning.com/media/worldwide/coc/documents/Fiber/product-information-sheets/PI-1424-AEN.pdf", "sourceTitle": "Corning SMF-28 Ultra, PI-1424" },
         { "label": "Скорость света в волокне (299 792 ÷ 1,4682)", "value": 204190, "unit": "км/с", "sourceUrl": "https://www.corning.com/media/worldwide/coc/documents/Fiber/product-information-sheets/PI-1424-AEN.pdf", "sourceTitle": "Corning SMF-28 Ultra, PI-1424" }
       ],
@@ -84,7 +84,7 @@
     "activeDate": "2026-10-20",
     "explanation": {
       "steps": [
-        { "label": "Объём бассейна 50 × 25 × 2 м", "value": 2500, "unit": "м³", "sourceUrl": "https://resources.fina.org/fina/document/2022/02/08/77c3058d-b549-4543-8524-ad51a857864e/210805-Facilities-Rules_clean.pdf", "sourceTitle": "World Aquatics — Facilities Rules" },
+        { "label": "Объём бассейна 50 × 25 × 2 м", "value": 2500, "unit": "м³", "sourceUrl": "https://resources.fina.org/fina/document/2022/02/08/77c3058d-b549-4543-8524-ad51a857864e/210805-Facilities-Rules_clean.pdf", "sourceTitle": "World Aquatics - Facilities Rules" },
         { "label": "Объём мяча диаметром 6,7 см", "value": 157.5, "unit": "см³", "sourceUrl": "https://www.itftennis.com/media/14104/2025-technical-booklet.pdf", "sourceTitle": "ITF Technical Booklet 2025" },
         { "label": "Доля объёма, которую занимают шары при беспорядочной засыпке", "value": 0.64, "unit": "", "sourceUrl": "https://arxiv.org/pdf/cond-mat/0003416", "sourceTitle": "Torquato et al., Phys. Rev. Lett. 84, 2064 (2000)" }
       ],
@@ -104,7 +104,7 @@
       "steps": [
         { "label": "Букв (пар оснований) в одинарном геноме человека", "value": 3055000000, "unit": "", "sourceUrl": "https://www.science.org/doi/10.1126/science.abj6987", "sourceTitle": "Nurk et al., Science 376 (2022)" },
         { "label": "При 2 битах на букву (× 2 ÷ 8 байт)", "value": 764, "unit": "МБ", "sourceUrl": "https://www.science.org/doi/10.1126/science.abj6987", "sourceTitle": "Nurk et al., Science 376 (2022)" },
-        { "label": "Текстовый файл «Моби Дика»", "value": 1.28, "unit": "МБ", "sourceUrl": "https://www.gutenberg.org/ebooks/2701", "sourceTitle": "Project Gutenberg — Moby Dick" }
+        { "label": "Текстовый файл «Моби Дика»", "value": 1.28, "unit": "МБ", "sourceUrl": "https://www.gutenberg.org/ebooks/2701", "sourceTitle": "Project Gutenberg - Moby Dick" }
       ],
       "summary": "764 МБ ÷ 1,28 МБ ≈ 600 романов"
     }
@@ -120,8 +120,8 @@
     "activeDate": "2026-10-22",
     "explanation": {
       "steps": [
-        { "label": "Толщина iPhone 15", "value": 7.8, "unit": "мм", "sourceUrl": "https://support.apple.com/en-us/111831", "sourceTitle": "Apple — iPhone 15 Tech Specs" },
-        { "label": "Архитектурная высота Бурдж-Халифы", "value": 828, "unit": "м", "sourceUrl": "https://www.skyscrapercenter.com/building/burj-khalifa/3/", "sourceTitle": "CTBUH — The Skyscraper Center" }
+        { "label": "Толщина iPhone 15", "value": 7.8, "unit": "мм", "sourceUrl": "https://support.apple.com/en-us/111831", "sourceTitle": "Apple - iPhone 15 Tech Specs" },
+        { "label": "Архитектурная высота Бурдж-Халифы", "value": 828, "unit": "м", "sourceUrl": "https://www.skyscrapercenter.com/building/burj-khalifa/3/", "sourceTitle": "CTBUH - The Skyscraper Center" }
       ],
       "summary": "828 м ÷ 7,8 мм ≈ 106 000 телефонов"
     }
@@ -137,15 +137,15 @@
     "activeDate": "2026-10-23",
     "explanation": {
       "steps": [
-        { "label": "Объём бассейна 50 × 25 × 2 м", "value": 2500000, "unit": "л", "sourceUrl": "https://resources.fina.org/fina/document/2022/02/08/77c3058d-b549-4543-8524-ad51a857864e/210805-Facilities-Rules_clean.pdf", "sourceTitle": "World Aquatics — Facilities Rules" },
-        { "label": "Сахара в литре «Кока-колы» (10,6 г на 100 мл)", "value": 106, "unit": "г", "sourceUrl": "https://www.coca-cola.com/gb/en/brands/coca-cola-original-taste", "sourceTitle": "Coca-Cola GB — Original Taste" }
+        { "label": "Объём бассейна 50 × 25 × 2 м", "value": 2500000, "unit": "л", "sourceUrl": "https://resources.fina.org/fina/document/2022/02/08/77c3058d-b549-4543-8524-ad51a857864e/210805-Facilities-Rules_clean.pdf", "sourceTitle": "World Aquatics - Facilities Rules" },
+        { "label": "Сахара в литре «Кока-колы» (10,6 г на 100 мл)", "value": 106, "unit": "г", "sourceUrl": "https://www.coca-cola.com/gb/en/brands/coca-cola-original-taste", "sourceTitle": "Coca-Cola GB - Original Taste" }
       ],
-      "summary": "2,5 млн л × 106 г ≈ 265 т — около 66 млн кубиков сахара"
+      "summary": "2,5 млн л × 106 г ≈ 265 т - около 66 млн кубиков сахара"
     }
   },
   {
     "id": "tb-v2-saturn-karman",
-    "prompt": "Сколько ракет Saturn V (той, что везла «Аполлоны» к Луне), поставленных друг на друга, нужно, чтобы дотянуться до границы космоса — линии Кармана?",
+    "prompt": "Сколько ракет Saturn V (той, что везла «Аполлоны» к Луне), поставленных друг на друга, нужно, чтобы дотянуться до границы космоса - линии Кармана?",
     "cardPrompt": "Сколько ракет Saturn V в стопке дотянутся до границы космоса?",
     "unit": "ракет",
     "answer": 900,
@@ -154,8 +154,8 @@
     "activeDate": "2026-10-24",
     "explanation": {
       "steps": [
-        { "label": "Высота Saturn V с кораблём «Аполлон»", "value": 110.6, "unit": "м", "sourceUrl": "https://solarsystem.nasa.gov/news/234//what-was-the-saturn-v/", "sourceTitle": "NASA — What Was the Saturn V?" },
-        { "label": "Линия Кармана", "value": 100, "unit": "км", "sourceUrl": "https://www.fai.org/page/icare-boundary", "sourceTitle": "FAI — граница в 100 км" }
+        { "label": "Высота Saturn V с кораблём «Аполлон»", "value": 110.6, "unit": "м", "sourceUrl": "https://solarsystem.nasa.gov/news/234//what-was-the-saturn-v/", "sourceTitle": "NASA - What Was the Saturn V?" },
+        { "label": "Линия Кармана", "value": 100, "unit": "км", "sourceUrl": "https://www.fai.org/page/icare-boundary", "sourceTitle": "FAI - граница в 100 км" }
       ],
       "summary": "100 000 м ÷ 110,6 м ≈ 900 ракет"
     }
@@ -171,8 +171,8 @@
     "activeDate": "2026-10-25",
     "explanation": {
       "steps": [
-        { "label": "Диаметр мяча (окружность 68–70 см ÷ π)", "value": 22, "unit": "см", "sourceUrl": "https://www.theifab.com/laws/latest/the-ball/", "sourceTitle": "IFAB — Laws of the Game, Law 2" },
-        { "label": "Длина экватора (2π × 6 378 км)", "value": 40075, "unit": "км", "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html", "sourceTitle": "NASA — Earth Fact Sheet" }
+        { "label": "Диаметр мяча (окружность 68–70 см ÷ π)", "value": 22, "unit": "см", "sourceUrl": "https://www.theifab.com/laws/latest/the-ball/", "sourceTitle": "IFAB - Laws of the Game, Law 2" },
+        { "label": "Длина экватора (2π × 6 378 км)", "value": 40075, "unit": "км", "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html", "sourceTitle": "NASA - Earth Fact Sheet" }
       ],
       "summary": "40 075 км ÷ 22 см ≈ 180 млн мячей"
     }

@@ -71,11 +71,11 @@ interface SoloRunProps {
   groupChallenge?: { challengeId: string; category: CategoryId } | null;
   /** Категория по умолчанию: без сохранённого забега «Играть» стартует в ней сразу. */
   defaultCategory?: CategoryId;
-  /** Тренировка против бота выбранного уровня; без неё — обычный забег. */
+  /** Тренировка против бота выбранного уровня; без неё - обычный забег. */
   practice?: PracticeLevel;
   /** Нужен приложению: системная «Назад» скрыта во время игры, а молоток получает свой фон. */
   onStageChange: (stage: SoloStage) => void;
-  /** Режим забега: забег дня, свободная игра или дуэль; по умолчанию — забег дня. */
+  /** Режим забега: забег дня, свободная игра или дуэль; по умолчанию - забег дня. */
   mode?: SoloMode;
   /** Сыграть в другом режиме с экрана результата. */
   onPlayMode?: (mode: SoloMode, category: CategoryId) => void;
@@ -102,7 +102,7 @@ export function SoloRun({
   const { stage } = run.state;
   const { begin, resume } = run;
   const { submitReport, reportState } = useQuestionReport(run.state);
-  // «На глазок» открывается поверх экрана готовности и не трогает забег: назад — в тот же забег.
+  // «На глазок» открывается поверх экрана готовности и не трогает забег: назад - в тот же забег.
   const [tiebreakerOpen, setTiebreakerOpen] = useState(false);
   const { strike, onStrike } = useStrikePreview(run.state);
 

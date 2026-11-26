@@ -2,28 +2,28 @@
 "set-traffic-light": {"title":"Бағдаршам түсін ата","mcPrompt":"Мына түстердің қайсысы кәдімгі бағдаршамда бар?","members":{
 "red":{"answer":"қызыл","accepted":["қызыл"]},"yellow":{"answer":"сары","accepted":["сары"]},"green":{"answer":"жасыл","accepted":["жасыл"]}},
 "nonMembers":["көк","ақ","күлгін"]},
-"set-seasons": {"title":"Жыл мезгілін ата","mcPrompt":"Мыналардың қайсысы — жыл мезгілі?","members":{
+"set-seasons": {"title":"Жыл мезгілін ата","mcPrompt":"Мыналардың қайсысы - жыл мезгілі?","members":{
 "winter":{"answer":"қыс","accepted":["қыс"]},"spring":{"answer":"көктем","accepted":["көктем"]},"summer":{"answer":"жаз","accepted":["жаз"]},"autumn":{"answer":"күз","accepted":["күз"]}},
 "nonMembers":["түс","кеш","жаңбыр маусымы"]},
-"set-cardinal": {"title":"Дүние тарабын ата","mcPrompt":"Мыналардың қайсысы — дүние тарабы?","members":{
+"set-cardinal": {"title":"Дүние тарабын ата","mcPrompt":"Мыналардың қайсысы - дүние тарабы?","members":{
 "north":{"answer":"солтүстік","accepted":["солтүстік"]},"south":{"answer":"оңтүстік","accepted":["оңтүстік"]},"east":{"answer":"шығыс","accepted":["шығыс"]},"west":{"answer":"батыс","accepted":["батыс"]}},
 "nonMembers":["жоғары","орталық","экватор"]},
-"set-card-suits": {"title":"Ойын картасының түрін ата","mcPrompt":"Мыналардың қайсысы — ойын картасының түрі?","members":{
+"set-card-suits": {"title":"Ойын картасының түрін ата","mcPrompt":"Мыналардың қайсысы - ойын картасының түрі?","members":{
 "hearts":{"answer":"шыбын","accepted":["шыбын","черви"]},"spades":{"answer":"қарға","accepted":["қарға","пика","пики"]},"clubs":{"answer":"шырын","accepted":["шырын","трефа","трефы","крести"]},"diamonds":{"answer":"қиық","accepted":["қиық","бубна","бубны"]}},
 "nonMembers":["жұлдыз","ай","жапырақ"]},
-"set-great-lakes": {"title":"Солтүстік Американың Ұлы көлдерінің бірін ата","mcPrompt":"Мыналардың қайсысы — Ұлы көлдердің бірі?","members":{
+"set-great-lakes": {"title":"Солтүстік Американың Ұлы көлдерінің бірін ата","mcPrompt":"Мыналардың қайсысы - Ұлы көлдердің бірі?","members":{
 "superior":{"answer":"Жоғарғы","accepted":["Жоғарғы","Жоғарғы көл","Верхнее"]},"michigan":{"answer":"Мичиган","accepted":["Мичиган"]},"huron":{"answer":"Гурон","accepted":["Гурон"]},"erie":{"answer":"Эри","accepted":["Эри"]},"ontario":{"answer":"Онтарио","accepted":["Онтарио"]}},
 "nonMembers":["Байкал","Виктория","Титикака"]},
-"set-weekdays": {"title":"Апта күнін ата","mcPrompt":"Мыналардың қайсысы — апта күні?","members":{
+"set-weekdays": {"title":"Апта күнін ата","mcPrompt":"Мыналардың қайсысы - апта күні?","members":{
 "mon":{"answer":"дүйсенбі","accepted":["дүйсенбі"]},"tue":{"answer":"сейсенбі","accepted":["сейсенбі"]},"wed":{"answer":"сәрсенбі","accepted":["сәрсенбі"]},"thu":{"answer":"бейсенбі","accepted":["бейсенбі"]},"fri":{"answer":"жұма","accepted":["жұма"]},"sat":{"answer":"сенбі","accepted":["сенбі"]},"sun":{"answer":"жексенбі","accepted":["жексенбі"]}},
 "nonMembers":["қаңтар","түс","демалыс"]},
-"set-oceans": {"title":"Мұхитты ата","mcPrompt":"Мыналардың қайсысы — мұхит?","members":{
+"set-oceans": {"title":"Мұхитты ата","mcPrompt":"Мыналардың қайсысы - мұхит?","members":{
 "pacific":{"answer":"Тынық","accepted":["Тынық","Тынық мұхиты"]},"atlantic":{"answer":"Атлант","accepted":["Атлант","Атлант мұхиты"]},"indian":{"answer":"Үнді","accepted":["Үнді","Үнді мұхиты"]},"arctic":{"answer":"Солтүстік Мұзды","accepted":["Солтүстік Мұзды","Солтүстік Мұзды мұхит"]},"southern":{"answer":"Оңтүстік","accepted":["Оңтүстік","Оңтүстік мұхит"]}},
 "nonMembers":["Жерорта","Кариб","Саргасс","Балтық"]},
-"set-months": {"title":"Айды ата","mcPrompt":"Мыналардың қайсысы — ай атауы?","members":{
+"set-months": {"title":"Айды ата","mcPrompt":"Мыналардың қайсысы - ай атауы?","members":{
 "jan":{"answer":"қаңтар","accepted":["қаңтар"]},"feb":{"answer":"ақпан","accepted":["ақпан"]},"mar":{"answer":"наурыз","accepted":["наурыз"]},"apr":{"answer":"сәуір","accepted":["сәуір"]},"may":{"answer":"мамыр","accepted":["мамыр"]},"jun":{"answer":"маусым","accepted":["маусым"]},"jul":{"answer":"шілде","accepted":["шілде"]},"aug":{"answer":"тамыз","accepted":["тамыз"]},"sep":{"answer":"қыркүйек","accepted":["қыркүйек"]},"oct":{"answer":"қазан","accepted":["қазан"]},"nov":{"answer":"қараша","accepted":["қараша"]},"dec":{"answer":"желтоқсан","accepted":["желтоқсан"]}},
 "nonMembers":["дүйсенбі","көктем","түс"]},
-"set-chinese-zodiac": {"title":"Шығыс күнтізбесінің жануарын ата","mcPrompt":"Мыналардың қайсысы — қытай күнтізбесінің жануары?","members":{
+"set-chinese-zodiac": {"title":"Шығыс күнтізбесінің жануарын ата","mcPrompt":"Мыналардың қайсысы - қытай күнтізбесінің жануары?","members":{
 "rat":{"answer":"Тышқан","accepted":["Тышқан","Егеуқұйрық"]},"ox":{"answer":"Сиыр","accepted":["Сиыр","Өгіз"]},"tiger":{"answer":"Барыс","accepted":["Барыс","Жолбарыс"]},"rabbit":{"answer":"Қоян","accepted":["Қоян","Мысық"]},"dragon":{"answer":"Ұлу","accepted":["Ұлу","Айдаһар"]},"snake":{"answer":"Жылан","accepted":["Жылан"]},"horse":{"answer":"Жылқы","accepted":["Жылқы","Ат"]},"goat":{"answer":"Қой","accepted":["Қой","Ешкі"]},"monkey":{"answer":"Мешін","accepted":["Мешін","Маймыл"]},"rooster":{"answer":"Тауық","accepted":["Тауық","Әтеш"]},"dog":{"answer":"Ит","accepted":["Ит"]},"pig":{"answer":"Доңыз","accepted":["Доңыз","Шошқа"]}},
 "nonMembers":["Қасқыр","Түлкі","Аю"]},
 "set-g7": {"title":"«Үлкен жетілік» елін ата","mcPrompt":"Мына елдердің қайсысы «Үлкен жетілікке» кіреді?","members":{

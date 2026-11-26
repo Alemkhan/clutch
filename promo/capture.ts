@@ -11,7 +11,7 @@ import { dailyQuestionBank } from '../packages/shared/src/solo/dailyQuestionSet'
 import type { Question } from '../packages/shared/src/index';
 
 // CLUTCH_TAKE names the take (promo/public/<take>.mp4); CLUTCH_STRIKES lists strikes in order,
-// e.g. "miss,perfect" — anything after the list is perfect.
+// e.g. "miss,perfect" - anything after the list is perfect.
 const TAKE = process.env.CLUTCH_TAKE ?? 'run';
 const STRIKES = (process.env.CLUTCH_STRIKES ?? '').split(',').filter(Boolean);
 const OUT = path.resolve('promo/capture', TAKE);

@@ -1,6 +1,6 @@
 // Тексты статичных карточек на языке из ?l= (ru|en|kk, по умолчанию ru).
 // Совпадают с apps/api/src/share/shareText.ts (outcome.headline, hint, call, playInTelegram):
-// статичная карточка — запасная картинка той же карточки матча, что рисует Worker.
+// статичная карточка - запасная картинка той же карточки матча, что рисует Worker.
 (function () {
   var TEXT = {
     ru: {

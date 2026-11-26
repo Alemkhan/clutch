@@ -3,7 +3,7 @@ import { m } from './messages';
 /** Что показать игроку, когда круг не дошёл до сервера или сервер его не принял. */
 export interface SyncIssue {
   message: string;
-  /** true — связь пропала, тот же круг можно отправить снова; false — сервер круг не принимает. */
+  /** true - связь пропала, тот же круг можно отправить снова; false - сервер круг не принимает. */
   canRetry: boolean;
 }
 
@@ -18,7 +18,7 @@ export const CONFLICT_ISSUE: SyncIssue = {
   canRetry: false,
 };
 
-/** Повторы исчерпаны: по сети можно попробовать ещё раз, отказ сервера — нет. */
+/** Повторы исчерпаны: по сети можно попробовать ещё раз, отказ сервера - нет. */
 export function deliveryFailureIssue(transient: boolean): { issue: SyncIssue; reason: 'offline' | 'rejected' } {
   return transient
     ? {

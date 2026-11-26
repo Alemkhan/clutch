@@ -57,7 +57,7 @@
     "kind": "set",
     "topic": "music",
     "titleRu": "Назови участника группы ABBA",
-    "mcPromptRu": "Кто из них — участник ABBA?",
+    "mcPromptRu": "Кто из них - участник ABBA?",
     "members": [
       {
         "id": "agnetha",
@@ -109,7 +109,7 @@
     "kind": "set",
     "topic": "music",
     "titleRu": "Назови ноту",
-    "mcPromptRu": "Что из этого — нота?",
+    "mcPromptRu": "Что из этого - нота?",
     "members": [
       {
         "id": "do",

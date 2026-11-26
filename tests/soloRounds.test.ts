@@ -409,7 +409,7 @@ describe('the hammer award is derived by the server from the tap moment', () => 
     const elapsed = perfectTapElapsedMs(right.questionId);
     await hammer(db, 'ann', run.runId, 0, right.questionId, elapsed);
     const row = roundRow(db, run.runId, 0);
-    // Сырой ввод остаётся для поиска выбросов, расстояние рядом с ним — уже вывод сервера.
+    // Сырой ввод остаётся для поиска выбросов, расстояние рядом с ним - уже вывод сервера.
     expect(row.active_elapsed_ms).toBeCloseTo(elapsed, 6);
     expect(row.skill_distance).toBeCloseTo(0, 6);
     expect(row.skill_result).toBe('perfect');

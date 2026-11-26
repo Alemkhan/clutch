@@ -19,8 +19,8 @@ interface HammerGameProps {
   questionId: string;
   previousSkillResults: readonly SkillResult[];
   /**
-   * Третий аргумент — активное время удара, а не его качество: именно он уходит на сервер,
-   * который сам выводит из него расстояние до цели и награду. Результат и награда здесь —
+   * Третий аргумент - активное время удара, а не его качество: именно он уходит на сервер,
+   * который сам выводит из него расстояние до цели и награду. Результат и награда здесь -
    * только для немедленной анимации и звука; зачётными их делает ответ сервера.
    */
   onComplete: (result: SkillResult, progressAwarded: number, activeElapsedMs: number) => void;
@@ -29,7 +29,7 @@ interface HammerGameProps {
    * Это превью по той же scoreHammerTap, что и на сервере; засчитывает всё равно ответ сервера.
    */
   onStrike?: (result: SkillResult, progressAwarded: number) => void;
-  /** Процент игрока до этого удара: глубина гвоздя и строка «Гвоздь вошёл на N% · до 100% — ещё M%». Без него гвоздь в начальном положении, строки нет. */
+  /** Процент игрока до этого удара: глубина гвоздя и строка «Гвоздь вошёл на N% · до 100% - ещё M%». Без него гвоздь в начальном положении, строки нет. */
   progressBefore?: number;
 }
 
@@ -46,7 +46,7 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
     () => hammerAttemptRules(questionId, previousSkillResults, config),
     [config, previousSkillResults, questionId],
   );
-  // Объяснение — шаг ДО попытки: пока оно открыто, часы маркера и аналитика не стартуют.
+  // Объяснение - шаг ДО попытки: пока оно открыто, часы маркера и аналитика не стартуют.
   const [introOpen, setIntroOpen] = useState(() => !hasSeenHammerIntro());
   const clock = useMarkerClock(attempt, introOpen);
   const { struck, result, handleTap, onNailSettled, onKeyDown } = useHammerStrike({
@@ -56,7 +56,7 @@ export function HammerGame({ config, questionId, previousSkillResults, onComplet
   const t = messagesFor(m);
   const baseNotes = strikeNotes(result, progressBefore, previousSkillResults);
   const gain = result && progressBefore !== undefined ? strikeGain(progressBefore, SKILL_REWARDS[result]) : null;
-  // Строка макета: «Гвоздь вошёл на N% · до 100% — ещё M%». Глубина = реальный процент игрока после удара.
+  // Строка макета: «Гвоздь вошёл на N% · до 100% - ещё M%». Глубина = реальный процент игрока после удара.
   const notes = gain
     ? {
         ...baseNotes,

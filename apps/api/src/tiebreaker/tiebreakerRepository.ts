@@ -13,7 +13,7 @@ export interface TiebreakerQuestionRow {
   /** Порядковый номер: число вопросов с active_date не позже этого. */
   number: number;
   prompt: string;
-  /** Короткая формулировка для карточки; null — не задана. */
+  /** Короткая формулировка для карточки; null - не задана. */
   cardPrompt: string | null;
   unit: string;
   answer: number;
@@ -40,7 +40,7 @@ interface QuestionDbRow {
   explanation_json: string;
 }
 
-/** Вопрос суток по ключу dailyKey(); null — на этот день вопроса нет. */
+/** Вопрос суток по ключу dailyKey(); null - на этот день вопроса нет. */
 export async function findQuestionByDate(db: D1Database, dateKey: string): Promise<TiebreakerQuestionRow | null> {
   const row = await db.prepare(
     `SELECT id, prompt, card_prompt, unit, answer, source_url, as_of_date, explanation_json,
@@ -79,7 +79,7 @@ export async function findPlayerAnswer(
 }
 
 /**
- * Прикидка игрока за сутки для резолюции ничьей; null — не отвечал или не засчитывается.
+ * Прикидка игрока за сутки для резолюции ничьей; null - не отвечал или не засчитывается.
  * Засчитываются только Telegram-аккаунты: гость бесплатен, и вторым аккаунтом можно подсмотреть
  * число. Ответ гостя хранится и показывается ему самому (маршруты /api/tiebreaker/* читают
  * `findPlayerAnswer`), но в резолюции он считается «не ответил». Правило живёт только здесь.
@@ -96,7 +96,7 @@ export async function findTiebreakAnswer(
   return row ? { questionId: row.question_id, multiplier: row.multiplier } : null;
 }
 
-/** Вставка без перезаписи: false — игрок уже отвечал (конфликт по PK), сохранённое не тронуто. */
+/** Вставка без перезаписи: false - игрок уже отвечал (конфликт по PK), сохранённое не тронуто. */
 export async function insertPlayerAnswer(
   db: D1Database,
   input: { playerId: string; questionId: string; dateKey: string; guess: number; multiplier: number; now: number },

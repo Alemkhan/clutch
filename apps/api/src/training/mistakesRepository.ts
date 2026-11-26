@@ -43,7 +43,7 @@ export async function payBackMistake(db: D1Database, playerId: string, questionI
 
 /**
  * Вопросы незавершённых забегов игрока, на которые он ещё не ответил. Ответ на уже сыгранный круг сервер
- * игроку показал, а эти — нет: отдать их в тренировку значит выдать ответ до игры. Брошенный забег
+ * игроку показал, а эти - нет: отдать их в тренировку значит выдать ответ до игры. Брошенный забег
  * остаётся in_progress навсегда, поэтому его сыгранные круги не блокируются, иначе отработка опустела бы.
  */
 async function activeRunQuestionIds(db: D1Database, playerId: string): Promise<Set<string>> {
@@ -73,7 +73,7 @@ async function activeRunQuestionIds(db: D1Database, playerId: string): Promise<S
 
 /**
  * Ошибки, которые можно отработать: открытые, вопрос ещё собирается и он не лежит в непройденной части
- * активного забега. Порядок сессии: больше долг — раньше, при равенстве свежая ошибка раньше.
+ * активного забега. Порядок сессии: больше долг - раньше, при равенстве свежая ошибка раньше.
  */
 export async function listTrainableMistakes(db: D1Database, playerId: string): Promise<string[]> {
   const result = await db.prepare(`

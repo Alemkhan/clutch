@@ -18,7 +18,7 @@ export interface MarkerClock {
 /**
  * Бег маркера по rAF. Пока открыто intro, попытка не стартует: ни маркера, ни часов кадра, ни аналитики.
  * Маркер движется всегда, в том числе при prefers-reduced-motion: это сама механика, а не украшение.
- * Раньше он там замирал на цели, и каждый удар выходил идеальным — то есть включённое «уменьшение
+ * Раньше он там замирал на цели, и каждый удар выходил идеальным - то есть включённое «уменьшение
  * движения» давало гарантированные 25 очков. Под reduce motion гасится декор: замах, тряска пня, вспышки.
  */
 export function useMarkerClock(attempt: HammerAttemptRules, introOpen: boolean): MarkerClock {
@@ -93,7 +93,7 @@ interface StrikeInput {
   onStrike?: (result: SkillResult, progressAwarded: number) => void;
 }
 
-/** Удар: остановка маркера, предпросмотр результата, звук; onComplete — когда гвоздь осел. */
+/** Удар: остановка маркера, предпросмотр результата, звук; onComplete - когда гвоздь осел. */
 export function useHammerStrike(input: StrikeInput) {
   const { attempt, config, questionId, previousSkillResults, introOpen, clock, onComplete, onStrike } = input;
   const { stoppedRef, stopAt } = clock;
@@ -117,7 +117,7 @@ export function useHammerStrike(input: StrikeInput) {
     setStruck(true);
     playSound('hammerTap');
 
-    // Момент удара — это то, что уйдёт на сервер; он же даёт предпросмотр через ту самую
+    // Момент удара - это то, что уйдёт на сервер; он же даёт предпросмотр через ту самую
     // функцию, которой сервер посчитает награду, поэтому разойтись в оценке они не могут.
     tapElapsedRef.current = activeElapsedMs;
     const { result: skillResult, progressAwarded: progress } = scoreHammerTap(

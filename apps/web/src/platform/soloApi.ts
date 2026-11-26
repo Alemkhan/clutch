@@ -72,7 +72,7 @@ export function fetchTrainingQuestions(ids: string[], signal?: AbortSignal): Pro
   return apiFetch('/api/training/questions', { method: 'POST', body: JSON.stringify(body) }, signal);
 }
 
-/** Проверка ответа в отработке. Для вопроса с вариантами answer — текст выбранного варианта. */
+/** Проверка ответа в отработке. Для вопроса с вариантами answer - текст выбранного варианта. */
 export function checkTrainingAnswer(
   questionId: string,
   answer: string,
@@ -82,7 +82,7 @@ export function checkTrainingAnswer(
   return apiFetch('/api/training/check', { method: 'POST', body: JSON.stringify(body) }, signal);
 }
 
-/** before — nextCursor предыдущей страницы; приглашения приходят только с первой. */
+/** before - nextCursor предыдущей страницы; приглашения приходят только с первой. */
 export function fetchMyRuns(
   options: { limit?: number; before?: string } = {},
   signal?: AbortSignal,

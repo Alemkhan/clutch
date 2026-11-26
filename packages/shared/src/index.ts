@@ -3,7 +3,7 @@ import type { PracticeLevelId } from './solo/practice';
 
 /** Категория вопросов. Единственное объявление; questionGenerator его ре-экспортирует. */
 export type CategoryId = 'general' | 'geography' | 'history' | 'languages' | 'kz_history';
-/** Категории, чьи вопросы собирают генераторы (questionGenerator.ts); general и kz_history — из пакета. */
+/** Категории, чьи вопросы собирают генераторы (questionGenerator.ts); general и kz_history - из пакета. */
 export type GeneratedCategoryId = Exclude<CategoryId, 'general' | 'kz_history'>;
 
 export type AnswerType = 'multiple_choice' | 'open_answer';
@@ -46,7 +46,7 @@ export interface Question {
   explanation: string;
   sourceUrl?: string;
   sourceTitle?: string;
-  /** image — иллюстрация (картина в вопросе о живописи), см. PackImage. */
+  /** image - иллюстрация (картина в вопросе о живописи), см. PackImage. */
   mediaType?: 'flag' | 'outline' | 'image' | null;
   mediaUrl?: string | null;
   mediaText?: string | null;
@@ -115,7 +115,7 @@ export interface AsyncMatchRound {
 export interface StartAsyncMatchRequest {
   displayName: string;
   category: CategoryId;
-  /** Режим забега; без него — забег дня. Реванш и ссылка друга задают режим сами. */
+  /** Режим забега; без него - забег дня. Реванш и ссылка друга задают режим сами. */
   mode?: 'daily' | 'free' | 'duel';
   /** One-time rematch invite id (the part after "rm_" is random); checked against the caller on the server. */
   rematchInviteId?: string;
@@ -136,7 +136,7 @@ export interface StartSoloRunRequest {
   groupChallengeId?: string;
   /** Тренировка: уровень бота. Забег не идёт в соревнование; с реваншем не сочетается. */
   botLevel?: PracticeLevelId;
-  /** Забег дня, свободная игра или дуэль; без поля — забег дня. */
+  /** Забег дня, свободная игра или дуэль; без поля - забег дня. */
   mode?: 'daily' | 'free' | 'duel';
 }
 
@@ -146,7 +146,7 @@ export interface StartSoloRunResponse {
   groupChallenge?: true;
   /** Без ответов и пояснений: правильный ответ приходит только после сыгранного круга. */
   questions: PublicQuestion[];
-  /** Только темп для отрисовки; забег он не завершает. null — записи нет. */
+  /** Только темп для отрисовки; забег он не завершает. null - записи нет. */
   pace: Opponent | null;
   target: number;
   roundCap: number;
@@ -155,10 +155,10 @@ export interface StartSoloRunResponse {
   miniGameId: MiniGameId;
   /** true: все наборы дня в категории уже пройдены, выдан наименее давно сыгранный. */
   bankExhausted: boolean;
-  /** Конфиг мини-игры этого забега; нет — текущий. Забег, начатый по прежним правилам, доигрывается по ним. */
+  /** Конфиг мини-игры этого забега; нет - текущий. Забег, начатый по прежним правилам, доигрывается по ним. */
   miniGameConfig?: MiniGameConfig;
   /**
-   * true: незаконченный забег продолжен, а не создан. Тело — снимок (`SoloRunSnapshot`:
+   * true: незаконченный забег продолжен, а не создан. Тело - снимок (`SoloRunSnapshot`:
    * `rounds`, `status`, `category`...), клиент входит в него так же, как при восстановлении.
    */
   resumed?: true;
@@ -195,11 +195,11 @@ export interface CompleteSoloRunResponse {
   reachedTarget: boolean;
   par: number;
   score: number;
-  /** Исход против темпа глазами игрока. null — темпа не было, забег ждёт соперника (это не ничья). */
+  /** Исход против темпа глазами игрока. null - темпа не было, забег ждёт соперника (это не ничья). */
   outcome: MyRunOutcome | null;
   /**
    * Есть, только когда исход решила прикидка «На глазок» (счёт/круги/прогресс равны). Множитель
-   * соперника — только если игрок сам ответил: число не подсказывают тем, кто ещё не отвечал.
+   * соперника - только если игрок сам ответил: число не подсказывают тем, кто ещё не отвечал.
    * Повтор completion и снимок забега поля не несут: восстановить его нечем без новых колонок.
    */
   tiebreak?: { ownMultiplier: number | null; opponentMultiplier: number | null };
@@ -221,7 +221,7 @@ export interface SoloAnswerRequest {
 }
 
 /**
- * Удар молотка по верному ответу. Устройство сообщает только **момент** удара — активное время
+ * Удар молотка по верному ответу. Устройство сообщает только **момент** удара - активное время
  * от старта маркера; расстояние до цели и награду считает сервер (`scoreHammerTap`).
  */
 export interface SoloHammerRequest {
@@ -231,7 +231,7 @@ export interface SoloHammerRequest {
 }
 
 /**
- * Итог круга от сервера: верность, награда, прогресс и правильный ответ — уже после проверки.
+ * Итог круга от сервера: верность, награда, прогресс и правильный ответ - уже после проверки.
  * awaitingHammer: ответ верен, ждём удар; круг ещё не закрыт и прогресс не изменился.
  */
 export interface SoloRoundResponse {
@@ -254,7 +254,7 @@ export interface SoloRoundResponse {
   awaitingHammer: boolean;
   skillResult: SkillResult | null;
   progressAwarded: number;
-  /** Прогресс забега после этого круга (пока ждём удар — до него). */
+  /** Прогресс забега после этого круга (пока ждём удар - до него). */
   progress: number;
   roundsPlayed: number;
   status: 'in_progress' | 'completed';
@@ -297,7 +297,7 @@ export interface TrainingQuestionsResponse {
   questions: PublicQuestion[];
 }
 
-/** Для вопроса с вариантами answer — ТЕКСТ выбранного варианта: варианты каждый раз собираются заново. */
+/** Для вопроса с вариантами answer - ТЕКСТ выбранного варианта: варианты каждый раз собираются заново. */
 export interface TrainingCheckRequest {
   questionId: string;
   answer: string;
@@ -328,20 +328,20 @@ export interface MyRunSummary {
   completedAt: number;
   /** С кем сравнивался: запись игрока, бот либо никого (соло без темпа). */
   opponent: { kind: 'player' | 'bot'; displayName: string } | null;
-  /** null: соло без соперника (ждёт его, opponent === null) либо исход не удалось определить. Ничья — 'tie'. */
+  /** null: соло без соперника (ждёт его, opponent === null) либо исход не удалось определить. Ничья - 'tie'. */
   outcome: MyRunOutcome | null;
   /**
-   * Дружеская дуэль, не в зачёт: 'played' — игрок играл по ссылке; 'hosted' — друг сыграл его запись
-   * (цифры тогда друга, а исход дан глазами владельца записи). Обычная партия — null.
+   * Дружеская дуэль, не в зачёт: 'played' - игрок играл по ссылке; 'hosted' - друг сыграл его запись
+   * (цифры тогда друга, а исход дан глазами владельца записи). Обычная партия - null.
    */
   friendDuel?: 'played' | 'hosted' | null;
   /**
-   * Реванш зовёт игрок, а не система. 'available' — этот забег сыгран против записи человека (любой исход), и её владельца
-   * можно позвать; 'sent' — уже позвал; null — звать некого.
+   * Реванш зовёт игрок, а не система. 'available' - этот забег сыгран против записи человека (любой исход), и её владельца
+   * можно позвать; 'sent' - уже позвал; null - звать некого.
    */
   rematchOffer?: 'available' | 'sent' | null;
   /**
-   * Круги соперника: его запись либо тот, кто сыграл твою. null — у бота, у чужой дружеской
+   * Круги соперника: его запись либо тот, кто сыграл твою. null - у бота, у чужой дружеской
    * дуэли и у старых данных. Поле опционально: ответ старого сервера его не несёт.
    */
   opponentRoundsPlayed?: number | null;
@@ -354,7 +354,7 @@ export interface MyRematchInvite {
   challengerName: string;
   challengerProgress: number;
   yourProgress: number;
-  /** Круги вызвавшего и твои в этой паре; null — у старых данных. */
+  /** Круги вызвавшего и твои в этой паре; null - у старых данных. */
   challengerRoundsPlayed?: number | null;
   recipientRoundsPlayed?: number | null;
   expiresAt: number;
@@ -362,7 +362,7 @@ export interface MyRematchInvite {
 
 export interface MyRunsResponse {
   runs: MyRunSummary[];
-  /** Значение для `before` следующей страницы; null — партий больше нет. */
+  /** Значение для `before` следующей страницы; null - партий больше нет. */
   nextCursor: string | null;
   invites: MyRematchInvite[];
 }
@@ -470,8 +470,8 @@ export function supportedMiniGameConfig(value: unknown): MiniGameConfig | null {
 export const MIN_POOL_ROUNDS = 3;
 
 /**
- * Соло-забег до цели: версия правил и конфиг молотка. Версия — это дуэль (DUEL_RULES_VERSION):
- * её записи — пул соперников. Забег дня и свободная игра — свои версии, см. soloModes.ts.
+ * Соло-забег до цели: версия правил и конфиг молотка. Версия - это дуэль (DUEL_RULES_VERSION):
+ * её записи - пул соперников. Забег дня и свободная игра - свои версии, см. soloModes.ts.
  */
 export const CURRENT_SOLO_RUN_CONDITIONS: AsyncMatchConditions = {
   rulesVersion: 'solo-to-100-v2',

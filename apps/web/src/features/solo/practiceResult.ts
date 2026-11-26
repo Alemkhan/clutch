@@ -24,7 +24,7 @@ function headlineOf(outcome: MyRunOutcome): string {
 
 /**
  * Сравнивает забег игрока с полным прохождением бота теми же правилами, что и обычный забег.
- * Время не сравнивается: у тренировки нет секундомера, при равных кругах — ничья.
+ * Время не сравнивается: у тренировки нет секундомера, при равных кругах - ничья.
  */
 export function buildPracticeSummary(session: SoloRunSession): PracticeSummary | null {
   const { pace } = session;

@@ -14,7 +14,7 @@ export function localizeQuestion(question: Question, locale: Locale): Question {
 
 /**
  * Все засчитываемые открытые ответы на трёх языках: игрок может ответить на любом, даже если
- * играет на другом. Порядок не важен — это список для сверки.
+ * играет на другом. Порядок не важен - это список для сверки.
  */
 export function acceptedAnswersAnyLanguage(question: Question): string[] {
   const all = [

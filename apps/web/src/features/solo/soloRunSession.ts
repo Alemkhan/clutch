@@ -14,9 +14,9 @@ import {
  */
 export interface SoloRunSession {
   questions: readonly PublicQuestion[];
-  /** Темп соперника: полоса и потолок кругов дуэли (`roundCap`). null — записи нет. */
+  /** Темп соперника: полоса и потолок кругов дуэли (`roundCap`). null - записи нет. */
   pace: Opponent | null;
-  /** Потолок кругов: у дуэли — круг, на котором соперник дошёл до цели (см. duelRoundCap). */
+  /** Потолок кругов: у дуэли - круг, на котором соперник дошёл до цели (см. duelRoundCap). */
   roundCap: number;
   rounds: readonly SoloRunRound[];
   run: SoloRunState;
@@ -34,7 +34,7 @@ export interface SoloRunView {
   questionsLeft: number;
   completed: boolean;
   reachedTarget: boolean;
-  /** Прогресс темпа после того же числа кругов; null — темпа нет. Только для полосы. */
+  /** Прогресс темпа после того же числа кругов; null - темпа нет. Только для полосы. */
   paceProgress: number | null;
 }
 

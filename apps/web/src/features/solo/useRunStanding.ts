@@ -5,7 +5,7 @@ import type { RunStandingState } from './soloResultModel';
 
 /**
  * Место только что сохранённого забега в таблице дня своей категории. Запрос идёт, когда `enabled`
- * (забег сохранён и дошёл до 100%). Ошибка сети — 'error': экран покажет «—», а не сломается.
+ * (забег сохранён и дошёл до 100%). Ошибка сети - 'error': экран покажет «-», а не сломается.
  */
 export function useRunStanding(category: CategoryId, enabled: boolean): RunStandingState {
   const [state, setState] = useState<RunStandingState>({ status: 'loading' });

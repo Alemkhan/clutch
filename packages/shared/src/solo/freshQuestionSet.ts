@@ -19,11 +19,11 @@ import { createSeededRandom, hashSeed } from '../questions/seededRandom';
  * Свежий набор для свободной игры и дуэли: собирается под забег, а не берётся из банка дня.
  * Раньше все забеги шли по наборам дня, и после 6–12 забегов вопросы начинали ходить по кругу.
  *
- * Сначала берутся вопросы, которых игрок ещё не видел (`seen` — ключи `seenQuestionKey`), и только
- * если их не хватает — уже виденные, в том же случайном порядке. Детерминирован по `seed`.
+ * Сначала берутся вопросы, которых игрок ещё не видел (`seen` - ключи `seenQuestionKey`), и только
+ * если их не хватает - уже виденные, в том же случайном порядке. Детерминирован по `seed`.
  */
 
-/** Ключ «того же вопроса»: пакетная запись в формате выбора и открытого ввода — один и тот же вопрос. */
+/** Ключ «того же вопроса»: пакетная запись в формате выбора и открытого ввода - один и тот же вопрос. */
 export function seenQuestionKey(questionId: string): string {
   return questionId.replace(/:(open|mc)$/u, '');
 }
@@ -57,7 +57,7 @@ function generatedCandidates(category: GeneratedCategoryId, wanted: number, open
   return generateMatch(count, openRatio, category, createSeededRandom(hashSeed(seed)));
 }
 
-/** Невиденные записи пакета впереди; открытым вводом — до `openCount` из тех, где он разрешён. */
+/** Невиденные записи пакета впереди; открытым вводом - до `openCount` из тех, где он разрешён. */
 function freshPackQuestions(seed: string, seen: ReadonlySet<string>, pool: readonly PackRecord[], count: number, openCount: number): Question[] {
   const records = unseenFirst(shuffled(pool, `${seed}:pack`), (record) => `gp:${record.id}`, seen, count);
   const open = new Set(

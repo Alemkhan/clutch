@@ -77,7 +77,7 @@ function DistributionChart({ answered }: { answered: TiebreakerAnsweredView }) {
   );
 }
 
-/** Ссылка-источник: http(s) открывается через openExternalLink, всё остальное — текстом. */
+/** Ссылка-источник: http(s) открывается через openExternalLink, всё остальное - текстом. */
 function SourceLink({ url, title }: { url: string; title: string }) {
   const safeUrl = safeSourceUrl(url);
   if (!safeUrl) return <span>{title}</span>;
@@ -96,8 +96,8 @@ function SourceLink({ url, title }: { url: string; title: string }) {
 }
 
 /**
- * «Как прикинуть»: шаги с источниками и формула словами. Свёрнут по умолчанию — вскрытие начинается
- * с промаха, а не с разбора. Раскрывашка — обычная <button>, поэтому работает с клавиатуры.
+ * «Как прикинуть»: шаги с источниками и формула словами. Свёрнут по умолчанию - вскрытие начинается
+ * с промаха, а не с разбора. Раскрывашка - обычная <button>, поэтому работает с клавиатуры.
  */
 export function TiebreakerExplanationBlock({
   explanation,

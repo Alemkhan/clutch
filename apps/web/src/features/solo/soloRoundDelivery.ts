@@ -6,7 +6,7 @@ const MAX_RETRY_AFTER_MS = 30_000;
 
 export type DeliveryResult<T> =
   | { ok: true; value: T }
-  | { ok: false; error: unknown; /** true — повтор имеет смысл (сеть, 5xx, 429), но попытки кончились. */ transient: boolean };
+  | { ok: false; error: unknown; /** true - повтор имеет смысл (сеть, 5xx, 429), но попытки кончились. */ transient: boolean };
 
 interface DeliveryOptions {
   signal: AbortSignal;

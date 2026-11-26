@@ -23,7 +23,7 @@ export type MyRunsState =
   | { status: 'ready'; runs: MyRunSummary[]; invites: MyRematchInvite[]; nextCursor: string | null };
 
 /**
- * Что показывать у забега вместо кнопки реванша. null — звать некого. 'working'/'error' живут
+ * Что показывать у забега вместо кнопки реванша. null - звать некого. 'working'/'error' живут
  * только в этом экране: сервер знает лишь «приглашение есть» ('sent') или «нет» ('available').
  */
 export type RematchOfferState = 'available' | 'working' | 'sent' | 'error' | null;
@@ -61,7 +61,7 @@ function Invite({ invite, now, onOpen }: { invite: MyRematchInvite; now: number;
       <div className="my-run-invite-body">
         <div className="my-run-top">
           {/* Адресное приглашение теперь рождается только от нажатия соперника, поэтому «зовёт»
-              здесь — правда. Раньше строку создавало уведомление, и вызов приходил от системы. */}
+              здесь - правда. Раньше строку создавало уведомление, и вызов приходил от системы. */}
           <span className="my-run-title">{t.callsRematch(invite.challengerName)}</span>
           <span className="my-run-deadline">{deadline}</span>
         </div>

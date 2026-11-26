@@ -68,7 +68,7 @@ export const countries: Country[] = [
   { code: 'bz', name: 'Belize', nameRu: 'Белиз', capital: 'Belmopan', capitalRu: 'Бельмопан', region: 'Americas' },
   { code: 'bo', name: 'Bolivia', nameRu: 'Боливия', capital: 'Sucre', capitalRu: 'Сукре', region: 'Americas',
     sourceUrl: 'https://www.senapi.gob.bo/normativas/constitucion-politica-del-estado/constitucion-politica-del-estado-plurinacional-de-bolivia',
-    sourceTitle: 'Конституция Боливии, статья 6: столица — Сукре',
+    sourceTitle: 'Конституция Боливии, статья 6: столица - Сукре',
     lastVerifiedAt: '2026-10-08' },
   { code: 'br', name: 'Brazil', nameRu: 'Бразилия', capital: 'Brasília', capitalRu: 'Бразилиа', region: 'Americas' },
   { code: 'ca', name: 'Canada', nameRu: 'Канада', capital: 'Ottawa', capitalRu: 'Оттава', region: 'Americas' },
@@ -218,7 +218,7 @@ export const countries: Country[] = [
   { code: 'fm', name: 'Micronesia', nameRu: 'Микронезия', capital: 'Palikir', capitalRu: 'Паликир', region: 'Oceania' },
   { code: 'nz', name: 'New Zealand', nameRu: 'Новая Зеландия', capital: 'Wellington', capitalRu: 'Веллингтон', region: 'Oceania' },
   { code: 'pw', name: 'Palau', nameRu: 'Палау', capital: 'Ngerulmud', capitalRu: 'Нгерулмуд', region: 'Oceania' },
-  { code: 'pg', name: 'Papua New Guinea', nameRu: 'Папуа — Новая Гвинея', capital: 'Port Moresby', capitalRu: 'Порт-Морсби', region: 'Oceania' },
+  { code: 'pg', name: 'Papua New Guinea', nameRu: 'Папуа - Новая Гвинея', capital: 'Port Moresby', capitalRu: 'Порт-Морсби', region: 'Oceania' },
   { code: 'ws', name: 'Samoa', nameRu: 'Самоа', capital: 'Apia', capitalRu: 'Апиа', region: 'Oceania' },
   { code: 'sb', name: 'Solomon Islands', nameRu: 'Соломоновы Острова', capital: 'Honiara', capitalRu: 'Хониара', region: 'Oceania' },
   { code: 'to', name: 'Tonga', nameRu: 'Тонга', capital: "Nuku'alofa", capitalRu: 'Нукуалофа', region: 'Oceania' },
@@ -230,7 +230,7 @@ export function flagUrl(code: string, width: number = 320): string {
   return `https://flagcdn.com/w${width}/${code}.png`;
 }
 
-// Island / archipelago states — used to pick confusable outline distractors
+// Island / archipelago states - used to pick confusable outline distractors
 // (island country outlines are compared against other island outlines).
 export const ISLAND_COUNTRIES = new Set([
   'au', 'ag', 'bs', 'bh', 'bb', 'bn', 'cv', 'km', 'cu', 'cy', 'dm', 'do',

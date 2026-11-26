@@ -74,7 +74,7 @@ export const MINE_POOL_SIZE = 3;
 
 /**
  * The system's pre-set answer for a round: one of the most obvious members, fixed by (dateKey, round).
- * Server only — never put it into a LastStandRound or a client payload.
+ * Server only - never put it into a LastStandRound or a client payload.
  */
 export function mineForRound(
   round: Pick<LastStandRound, 'index' | 'categoryId' | 'members'>,

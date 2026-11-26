@@ -4,7 +4,7 @@ import { createSeededRandom, dailyKey, hashSeed } from '../solo/dailyQuestionSet
 
 /**
  * Last Stand rules. Not a quiz: the contest is to not coincide with an opponent's answer.
- * Pure — no clock, no Math.random, no I/O. Narrow categories are passed in, never defined here.
+ * Pure - no clock, no Math.random, no I/O. Narrow categories are passed in, never defined here.
  */
 
 export type LastStandScale = 'wide' | 'regional' | 'narrow';

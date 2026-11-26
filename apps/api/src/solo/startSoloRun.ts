@@ -59,11 +59,11 @@ interface StartRequest {
 /**
  * Как начинается забег.
  * - practice: бот вместо записи игрока, вне соревнования (PRACTICE_RULES_VERSION);
- * - daily: забег дня — общий набор дня, в таблицу идёт первая попытка;
- * - free: свободная игра — свежий набор, вне таблицы, без соперника;
- * - duel: дуэль — запись другого игрока на её наборе, либо свежий набор, который сам ждёт соперника;
+ * - daily: забег дня - общий набор дня, в таблицу идёт первая попытка;
+ * - free: свободная игра - свежий набор, вне таблицы, без соперника;
+ * - duel: дуэль - запись другого игрока на её наборе, либо свежий набор, который сам ждёт соперника;
  * - rematch: дуэль по приглашению на реванш (адресовано игроку);
- * - friend: открытое приглашение «Позвать друга», соперник — сама запись автора на её наборе.
+ * - friend: открытое приглашение «Позвать друга», соперник - сама запись автора на её наборе.
  */
 type StartMode =
   | { kind: 'practice'; level: PracticeLevelId }
@@ -153,8 +153,8 @@ async function resolveStartMode(
   if (!request.rematchInviteId) return { kind: request.mode, category: request.category };
 
   // Реванш: приглашение должно быть адресовано игроку, не потрачено, не просрочено и из соло.
-  // Категория берётся из приглашения, набор — подбором дуэли (новый, не сыгранный получателем).
-  // «Позвать друга» — открытое приглашение без адресата: его гасит первый, кто начал забег, и играет
+  // Категория берётся из приглашения, набор - подбором дуэли (новый, не сыгранный получателем).
+  // «Позвать друга» - открытое приглашение без адресата: его гасит первый, кто начал забег, и играет
   // против самой записи автора на её наборе. Эта запись зарезервирована и в общем подборе не участвует.
   const invite = await findInvite(c.env.DB, request.rematchInviteId);
   if (!invite) return c.json({ error: 'Rematch invite not found.' }, 404);
@@ -192,7 +192,7 @@ async function startPracticeRun(
   // Свой набор, НЕ из дневного банка: иначе тренировка показывала бы набор забега дня.
   const { questionSetId, questions } = practiceQuestionSet(request.category, runId, now);
   const bot = createBotOpponent(questions, PRACTICE_BOT_PROFILES[level]);
-  // Соперник — бот, а не запись человека: игра случайная, поровну.
+  // Соперник - бот, а не запись человека: игра случайная, поровну.
   const miniGameId = pickMiniGameId(null);
   await createSoloRun(c.env.DB, {
     id: runId,
@@ -212,7 +212,7 @@ async function startPracticeRun(
 }
 
 /**
- * Продолжение незаконченного забега; null — продолжить не вышло (забег другой версии игры).
+ * Продолжение незаконченного забега; null - продолжить не вышло (забег другой версии игры).
  * Отдаём снимок (с уже сыгранными кругами), а не «свежий» старт: иначе клиент начал бы с круга 0
  * и повторно отвечал на круги, которые сервер уже записал.
  */
@@ -240,7 +240,7 @@ async function pickSetAndOpponent(
     return { ghost: record, questionSetId: record.questionSetId, questions: record.questions, bankExhausted: false };
   }
   const picked = await matchmakeDuel(c.env.DB, mode.category, identity.playerId, runId, now);
-  // Матч — это пара. Запись забирается атомарно: при одновременных стартах ровно один игрок
+  // Матч - это пара. Запись забирается атомарно: при одновременных стартах ровно один игрок
   // получает её, остальные играют её набор без соперника, а их забеги сами становятся записями.
   if (picked.ghost && !await claimRecord(c.env.DB, picked.ghost.row.id, runId, now)) {
     return { ...picked, ghost: null };
@@ -259,7 +259,7 @@ async function startMatchedRun(
 ): Promise<Response> {
   const { ghost, questionSetId, questions, bankExhausted } = await pickSetAndOpponent(c, identity, mode, runId, now);
   const invite = mode.kind === 'rematch' || mode.kind === 'friend' ? mode.invite : null;
-  // Забег дня — одна игра на всех в эти сутки; против записи — её игра; иначе случайная.
+  // Забег дня - одна игра на всех в эти сутки; против записи - её игра; иначе случайная.
   const miniGameId = mode.kind === 'daily' ? dailyMiniGameId(mode.category, dailyKey(now)) : pickMiniGameId(ghost);
   if (invite && !await consumeInvite(c.env.DB, invite.id, identity.playerId, runId)) {
     return c.json({ error: 'Rematch invite is no longer available.', reason: 'taken' }, 410);

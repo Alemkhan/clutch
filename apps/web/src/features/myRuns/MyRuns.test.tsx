@@ -94,10 +94,10 @@ describe('my runs screen', () => {
     expect(html).toContain('9 кругов против 5');
     expect(html).toContain('7 кругов против 7');
     expect(html).toContain('>Поражение<');
-    // Без кругов соперника — только свои.
+    // Без кругов соперника - только свои.
     expect(html).toContain('>20 кругов<');
     expect(html).toContain('География · Сегодня, 14:00 · Ann');
-    // История — одна карточка, а не стопка.
+    // История - одна карточка, а не стопка.
     expect(html.match(/my-runs-card/g)).toHaveLength(1);
   });
 
@@ -175,7 +175,7 @@ describe('calling a rematch from a run', () => {
     expect(render(ready([beat]))).toContain('Позвать на реванш');
     const lost = run({ opponent: { kind: 'player', displayName: 'Ann' }, outcome: 'opponent', rematchOffer: 'available' });
     expect(render(ready([lost]))).toContain('Позвать на реванш');
-    // Нет записи-соперника — звать некого.
+    // Нет записи-соперника - звать некого.
     expect(render(ready([run({ outcome: 'opponent', rematchOffer: null })]))).not.toContain('Позвать на реванш');
     expect(render(ready([run()]))).not.toContain('Позвать на реванш');
   });

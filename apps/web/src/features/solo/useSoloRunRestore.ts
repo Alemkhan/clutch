@@ -29,7 +29,7 @@ export function useSoloRunRestore(ctx: SoloRunContext, begin: (category: Categor
       setState(restoreSoloRun(snapshot));
     }).catch((error: unknown) => {
       if (!coordinatorRef.current.settle(request.token)) return;
-      // Забега нет или он чужой — забываем его; при обрыве связи id остаётся для следующей попытки.
+      // Забега нет или он чужой - забываем его; при обрыве связи id остаётся для следующей попытки.
       if (!isTransientApiError(error)) clearActiveSoloRun();
       onFailure();
     });

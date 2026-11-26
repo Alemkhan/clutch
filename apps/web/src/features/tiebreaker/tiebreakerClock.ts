@@ -4,14 +4,14 @@ import { m } from './messages';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-/** Сколько осталось до конца игровых суток (граница — `DAY_BOUNDARY_OFFSET_MINUTES` в shared). */
+/** Сколько осталось до конца игровых суток (граница - `DAY_BOUNDARY_OFFSET_MINUTES` в shared). */
 export function msUntilDayEnd(nowMs: number): number {
   return Math.max(0, dayStartMs(dailyKey(nowMs)) + DAY_MS - nowMs);
 }
 
 const pad2 = (value: number) => String(value).padStart(2, '0');
 
-/** «5:12:40»: часы без нуля впереди, минуты и секунды двузначные. Отрицательное — 0:00:00. */
+/** «5:12:40»: часы без нуля впереди, минуты и секунды двузначные. Отрицательное - 0:00:00. */
 export function formatCountdownClock(ms: number): string {
   const totalSeconds = Math.floor(Math.max(0, ms) / 1000);
   const hours = Math.floor(totalSeconds / 3600);
@@ -24,7 +24,7 @@ export function formatCountdownShort(ms: number): string {
   return formatCountdownClock(ms).replace(/:\d{2}$/, '');
 }
 
-/** Шапка главной: «Новый набор через 5 ч»; последний час — «меньше чем через час». Часы округляются вниз. */
+/** Шапка главной: «Новый набор через 5 ч»; последний час - «меньше чем через час». Часы округляются вниз. */
 export function newSetLabel(ms: number): string {
   const hours = Math.floor(Math.max(0, ms) / 3_600_000);
   const t = messagesFor(m);

@@ -25,10 +25,8 @@ function hiddenCount(board: WikiPathBoardResponse): number {
 function WikiPathYou({ board, onPlay }: { board: WikiPathBoardResponse; onPlay: () => void }) {
   const t = useMessages(m);
   if (board.ownGaveUp) {
-    return <div className="solo-board-you">
-      <p className="solo-board-you-text">{t.wikiGaveUp}</p>
-      {board.entries.length > 0 && <p className="solo-board-you-text">{t.wikiGaveUpRoutes}</p>}
-    </div>;
+    if (board.entries.length === 0) return null;
+    return <div className="solo-board-you"><p className="solo-board-you-text">{t.wikiGaveUpRoutes}</p></div>;
   }
   if (board.ownRank === null) {
     return <div className="solo-board-you">

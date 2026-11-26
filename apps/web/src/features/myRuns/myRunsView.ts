@@ -31,15 +31,15 @@ export function roundsText(run: Pick<MyRunSummary, 'roundsPlayed'>): string {
   return messagesFor(m).rounds(run.roundsPlayed);
 }
 
-/** «7 кругов» — тем же числительным, что и в «Моих партиях», чтобы счёт читался одинаково. */
+/** «7 кругов» - тем же числительным, что и в «Моих партиях», чтобы счёт читался одинаково. */
 export function soloRoundsText(count: number): string {
   return messagesFor(m).rounds(count);
 }
 
 /**
  * Чем закончилась партия. Исход дуэли главнее всего: партия обрывается на финише соперника, и
- * не дошедший до 100% против записи — это поражение, а не «не дошёл». «Не дошёл» — только без
- * соперника. Нет соперника у дошедшего до цели забега — «ждём соперника»; у не дошедшего ждать
+ * не дошедший до 100% против записи - это поражение, а не «не дошёл». «Не дошёл» - только без
+ * соперника. Нет соперника у дошедшего до цели забега - «ждём соперника»; у не дошедшего ждать
  * нечего: такой забег в пул не попадает, поэтому «ждём» ему не пишем.
  */
 export function runStatus(run: Pick<MyRunSummary, 'reachedTarget' | 'outcome' | 'opponent' | 'friendDuel'>): RunStatus {
@@ -72,8 +72,8 @@ export function runBadge(run: Parameters<typeof runStatus>[0]): RunStatus {
 }
 
 /**
- * Главная строка партии: «7 кругов против 9». Круги соперника есть не всегда (бот, старые данные) —
- * тогда только свои. Чужой забег по моей записи — цифры друга, с его именем.
+ * Главная строка партии: «7 кругов против 9». Круги соперника есть не всегда (бот, старые данные) -
+ * тогда только свои. Чужой забег по моей записи - цифры друга, с его именем.
  */
 export function runRoundsLine(run: MyRunSummary): string {
   const t = messagesFor(m);
@@ -82,7 +82,7 @@ export function runRoundsLine(run: MyRunSummary): string {
   return typeof run.opponentRoundsPlayed === 'number' ? t.versus(own, run.opponentRoundsPlayed) : own;
 }
 
-/** Части строки вызова: выделенное «N кругов» показывается жирным. Нет кругов с обеих сторон — null. */
+/** Части строки вызова: выделенное «N кругов» показывается жирным. Нет кругов с обеих сторон - null. */
 export function inviteRoundsParts(
   invite: Pick<MyRematchInvite, 'challengerRoundsPlayed' | 'recipientRoundsPlayed'>,
 ): { lead: string; strong: string; rest: string } | null {
@@ -104,7 +104,7 @@ export function roundsShort(count: number): string {
 
 /**
  * Инициалы для квадрата-аватара. «Игрок 5cb9» у всех начинается одинаково, поэтому для безымянных
- * берутся последние два знака кода, как в макете; иначе — первые два знака имени.
+ * берутся последние два знака кода, как в макете; иначе - первые два знака имени.
  */
 export function initials(name: string): string {
   const trimmed = name.trim();
@@ -154,7 +154,7 @@ export function formatRunTime(timestamp: number, now: number = Date.now()): stri
   return `${date}, ${time}`;
 }
 
-/** Срок приглашения: «Ещё 2 дн.», «Ещё 5 ч», «Ещё 12 мин». Просроченное — null. */
+/** Срок приглашения: «Ещё 2 дн.», «Ещё 5 ч», «Ещё 12 мин». Просроченное - null. */
 export function inviteDeadline(expiresAt: number, now: number = Date.now()): string | null {
   const left = expiresAt - now;
   if (left <= 0) return null;

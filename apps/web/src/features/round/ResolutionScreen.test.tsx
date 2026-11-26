@@ -25,7 +25,7 @@ import {
 
 const props = {
   correctAnswer: 'Астана',
-  explanation: 'Астана — столица Казахстана.',
+  explanation: 'Астана - столица Казахстана.',
   correct: false,
   onContinue: vi.fn(),
 };
@@ -48,7 +48,7 @@ describe('resolution report markup', () => {
   });
 
   it('keeps report clicks and keys from continuing the whole screen', () => {
-    // Корень — role="button" с тапом-«дальше»; область репорта обязана глушить оба события.
+    // Корень - role="button" с тапом-«дальше»; область репорта обязана глушить оба события.
     const source = readFileSync(new URL('./ResolutionScreen.tsx', import.meta.url), 'utf8');
     expect(source).toContain('onClick={stopReportAreaEvent}');
     expect(source).toContain('onKeyDown={stopReportAreaEvent}');

@@ -92,7 +92,7 @@ describe('TowerGame', () => {
     expect(find(view.tree(), (n) => String(n.props.className).startsWith('strike-result'))).not.toBeNull();
     expect(JSON.stringify(view.tree())).toContain('Совпало');
 
-    // Окончание анимации падения — тот же колбэк, что у гвоздя.
+    // Окончание анимации падения - тот же колбэк, что у гвоздя.
     const settler = classed('tower-fragment') ?? classed('tower-landed')!;
     settler.props.onAnimationComplete();
     settler.props.onAnimationComplete();

@@ -15,7 +15,7 @@ import { clansOpen } from '../clans/clans';
  * в выбранный чат уходит сообщение с крупным превью карточки результата и кнопкой «Играть».
  * Клиент присылает свою ссылку-превью; из неё берутся только путь и проверенные параметры,
  * сама страница строится на origin этого Worker, кнопка ведёт только на ссылку из конфигурации.
- * Текст сообщения и кнопки — на языке из параметра l ссылки (тот же, что на карточке).
+ * Текст сообщения и кнопки - на языке из параметра l ссылки (тот же, что на карточке).
  */
 
 const KINDS = {
@@ -33,7 +33,7 @@ export interface PreparedMessage {
   target: string;
 }
 
-/** Ссылка клиента → сообщение; null — путь не наш, параметры не прошли проверку или нет ссылки на бота. */
+/** Ссылка клиента → сообщение; null - путь не наш, параметры не прошли проверку или нет ссылки на бота. */
 export function preparedMessageFor(rawUrl: unknown, origin: string, env: Env): PreparedMessage | null {
   if (typeof rawUrl !== 'string' || rawUrl.length > 1024) return null;
   let url: URL;
@@ -118,7 +118,7 @@ export function registerPreparedShareRoutes(app: Hono<{ Bindings: Env }>): void 
     }
     if (rateLimit === 'unavailable') return c.json({ error: 'Rate limiter unavailable.' }, 503);
 
-    // Подготовить сообщение можно только для пользователя Telegram: его id — адресат в Bot API.
+    // Подготовить сообщение можно только для пользователя Telegram: его id - адресат в Bot API.
     const userId = telegramChatId(identity.playerId);
     if (!userId) return c.json({ error: 'Only Telegram players can share a message.', reason: 'telegram_only' }, 409);
 

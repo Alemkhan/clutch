@@ -46,7 +46,7 @@ export function useRoundDelivery(
           : applySoloHammerVerdict(previous, response)));
         return;
       }
-      // 409: клиент разошёлся с сервером (например, забег уже закрыт в другой вкладке) — берём правду оттуда.
+      // 409: клиент разошёлся с сервером (например, забег уже закрыт в другой вкладке) - берём правду оттуда.
       if (outcome.error instanceof ApiError && outcome.error.status === 409) {
         restoreFromServer(runId, () => {
           setSyncIssue(CONFLICT_ISSUE);

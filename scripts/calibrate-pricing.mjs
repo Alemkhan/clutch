@@ -1,13 +1,13 @@
 // Пересчёт калибровки цены вопроса по сыгранным кругам.
 //
 // `packages/shared/src/solo/questionPricing.ts` считает пар набора из двух замеров:
-//   CORRECT_RATE  — доля верных ответов по формату вопроса (выбор/ввод, текст/флаг/контур);
-//   SKILL_SHARE   — распределение удара при верном ответе, отсюда средняя награда за ответ.
+//   CORRECT_RATE  - доля верных ответов по формату вопроса (выбор/ввод, текст/флаг/контур);
+//   SKILL_SHARE   - распределение удара при верном ответе, отсюда средняя награда за ответ.
 // Оба взяты из docs/archive/PLAYTEST_01.md. SKILL_SHARE при этом замерен на **старом** молотке: до R5d
 // зона идеального была 0.15, сейчас 0.06, то есть заложенная средняя награда завышена и пар
 // занижен. Этот скрипт говорит, что показывают настоящие круги, и хватает ли их, чтобы верить.
 //
-// Он ничего не меняет: только печатает. Решение о правке константы — за владельцем.
+// Он ничего не меняет: только печатает. Решение о правке константы - за владельцем.
 //
 // Запуск: node scripts/calibrate-pricing.mjs [путь-к-базе.sqlite]
 // По умолчанию берётся локальная D1 из apps/api/.wrangler.
@@ -24,7 +24,7 @@ const d1Directory = join(repositoryRoot, 'apps', 'api', '.wrangler', 'state', 'v
 const MIN_TAPS = 30;
 const MIN_ANSWERS_PER_FORMAT = 20;
 
-/** Заложено в questionPricing.ts — для сравнения. */
+/** Заложено в questionPricing.ts - для сравнения. */
 const CURRENT_CORRECT_RATE = {
   choice_text: 105 / 158,
   choice_flag: 77 / 135,
@@ -120,7 +120,7 @@ if (byFormat.size === 0) {
     const enough = bucket.answers >= MIN_ANSWERS_PER_FORMAT;
     console.log(
       `  ${format.padEnd(14)} замер ${percent(measured).padStart(6)} (${bucket.correct}/${bucket.answers})`
-      + `  заложено ${current === undefined ? '—' : percent(current).padStart(6)}`
+      + `  заложено ${current === undefined ? '-' : percent(current).padStart(6)}`
       + `  ${enough ? '' : `← мало данных, нужно ${MIN_ANSWERS_PER_FORMAT}`}`,
     );
   }
@@ -150,7 +150,7 @@ if (taps.length === 0) {
   const currentMean = meanReward(CURRENT_SKILL_SHARE);
   console.log(`\n  Средняя награда за верный ответ: замер ${measuredMean.toFixed(2)}, заложено ${currentMean.toFixed(2)}`);
   const drift = (measuredMean - currentMean) / currentMean;
-  console.log(`  Расхождение: ${(drift * 100).toFixed(0)}% — настолько пар набора сейчас ${drift < 0 ? 'занижен' : 'завышен'}.`);
+  console.log(`  Расхождение: ${(drift * 100).toFixed(0)}% - настолько пар набора сейчас ${drift < 0 ? 'занижен' : 'завышен'}.`);
 }
 
 // --- Вердикт ----------------------------------------------------------------

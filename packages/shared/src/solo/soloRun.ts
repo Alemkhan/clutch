@@ -14,7 +14,7 @@ export interface SoloRunState {
   /** Всегда <= SOLO_TARGET_PROGRESS. */
   progress: number;
   status: 'in_progress' | 'completed';
-  /** true — дошёл до цели; false при completed — упёрся в потолок кругов или кончились вопросы. */
+  /** true - дошёл до цели; false при completed - упёрся в потолок кругов или кончились вопросы. */
   reachedTarget: boolean;
 }
 

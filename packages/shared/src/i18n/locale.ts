@@ -35,7 +35,7 @@ export function isRegion(value: unknown): value is Region {
 /** Постсоветские страны, кроме Казахстана (ISO 3166-1 alpha-2). */
 const CIS_COUNTRIES = new Set(['RU', 'BY', 'UZ', 'KG', 'TJ', 'TM', 'AZ', 'AM', 'GE', 'MD', 'UA']);
 
-/** Зона по стране подключения (Cloudflare `request.cf.country`). Неизвестная страна — мир. */
+/** Зона по стране подключения (Cloudflare `request.cf.country`). Неизвестная страна - мир. */
 export function regionFromCountry(country: string | null | undefined): Region {
   const code = (country ?? '').toUpperCase();
   if (code === 'KZ') return 'kz';
@@ -52,7 +52,7 @@ export function isEverywhere(regions: readonly Region[]): boolean {
 export interface PlayerSettingsResponse {
   locale: Locale;
   region: Region;
-  /** 'auto' — зона по стране подключения, 'manual' — выбрана в профиле. */
+  /** 'auto' - зона по стране подключения, 'manual' - выбрана в профиле. */
   regionSource: 'auto' | 'manual';
   /** Зона по текущей стране подключения: подсказка в профиле. */
   detectedRegion: Region;

@@ -12,7 +12,7 @@ type MyClan = NonNullable<ClanMeResponse['clan']>;
 
 /**
  * Ссылка-превью «заражения»: страница с карточкой клана, которая уводит в Mini App по коду.
- * v — число участников: только ключ кеша, чтобы карточка обновлялась, когда клан растёт.
+ * v - число участников: только ключ кеша, чтобы карточка обновлялась, когда клан растёт.
  */
 export function clanInvitePreviewUrl(base: string, clan: Pick<MyClan, 'inviteCode' | 'members'>, locale: Locale = currentLocale()): string {
   const params = new URLSearchParams({ c: clan.inviteCode, v: String(clan.members), l: locale });

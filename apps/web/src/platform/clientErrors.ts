@@ -35,8 +35,8 @@ export function sanitizeErrorMessage(raw: unknown): string {
 }
 
 /**
- * «Script error.» — кросс-доменная ошибка чужого скрипта (Telegram WebView, расширения):
- * браузер скрывает подробности, приложение она не роняет. Шума не шлём; render — всегда.
+ * «Script error.» - кросс-доменная ошибка чужого скрипта (Telegram WebView, расширения):
+ * браузер скрывает подробности, приложение она не роняет. Шума не шлём; render - всегда.
  */
 function isOpaqueScriptError(kind: ClientErrorKind, raw: unknown, message: string): boolean {
   if (kind !== 'error') return false;

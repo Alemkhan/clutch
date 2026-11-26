@@ -23,7 +23,7 @@ function stored(): Locale | null {
 export function suggestedLocale(): Locale {
   const telegram = getTelegramIdentity()?.languageCode;
   if (telegram) return localeFromLanguageCode(telegram);
-  // Без браузера (тесты, серверный рендер) — исходный язык контента.
+  // Без браузера (тесты, серверный рендер) - исходный язык контента.
   if (typeof window === 'undefined' || typeof navigator === 'undefined') return DEFAULT_LOCALE;
   return localeFromLanguageCode(navigator.language);
 }

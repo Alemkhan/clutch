@@ -152,7 +152,7 @@
       "Калахари"
     ],
     "openAnswer": true,
-    "explanationRu": "Если считать холодные пустыни, самая большая — Антарктида.",
+    "explanationRu": "Если считать холодные пустыни, самая большая - Антарктида.",
     "sourceHint": "Википедия: Сахара",
     "origin": "authored",
     "license": "original",
@@ -260,7 +260,7 @@
     ],
     "openAnswer": true,
     "sourceHint": "Википедия: Оймякон",
-    "reviewNote": "Верхоянск тоже претендует на звание — проверить формулировку.",
+    "reviewNote": "Верхоянск тоже претендует на звание - проверить формулировку.",
     "origin": "authored",
     "license": "original",
     "daily": false
@@ -363,7 +363,7 @@
       "Кардифф"
     ],
     "openAnswer": true,
-    "explanationRu": "Лондон — столица Соединённого Королевства.",
+    "explanationRu": "Лондон - столица Соединённого Королевства.",
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
@@ -389,7 +389,7 @@
       "Аризона"
     ],
     "openAnswer": true,
-    "explanationRu": "Денвер — административный центр штата Колорадо.",
+    "explanationRu": "Денвер - административный центр штата Колорадо.",
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
@@ -416,7 +416,7 @@
       "Лихтенштейн"
     ],
     "openAnswer": true,
-    "explanationRu": "Ватикан — карликовое государство-анклав внутри Рима.",
+    "explanationRu": "Ватикан - карликовое государство-анклав внутри Рима.",
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
@@ -577,7 +577,7 @@
       "Сакраменто"
     ],
     "openAnswer": true,
-    "explanationRu": "Лос-Анджелес — крупнейший город Калифорнии.",
+    "explanationRu": "Лос-Анджелес - крупнейший город Калифорнии.",
     "sourceTitle": "12 Smart Players vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
@@ -631,7 +631,7 @@
       "Карачи"
     ],
     "openAnswer": true,
-    "explanationRu": "Ахмадабад — крупнейший город штата Гуджарат.",
+    "explanationRu": "Ахмадабад - крупнейший город штата Гуджарат.",
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
@@ -872,7 +872,7 @@
       "Элеутера"
     ],
     "openAnswer": true,
-    "explanationRu": "Нью-Провиденс — главный остров Багам со столицей Нассау.",
+    "explanationRu": "Нью-Провиденс - главный остров Багам со столицей Нассау.",
     "sourceTitle": "Isaac & Anderson vs. 11 Smart Players: Geography Quiz",
     "origin": "notebooklm",
     "license": "original",
@@ -899,7 +899,7 @@
       "саванна"
     ],
     "openAnswer": true,
-    "explanationRu": "Тайга — биом хвойных лесов умеренного и субполярного пояса.",
+    "explanationRu": "Тайга - биом хвойных лесов умеренного и субполярного пояса.",
     "sourceTitle": "Isaac & Anderson vs. 11 Smart Players: Geography Quiz",
     "origin": "notebooklm",
     "license": "original",
@@ -954,7 +954,7 @@
       "Пампа"
     ],
     "openAnswer": true,
-    "explanationRu": "Гран-Чако — тропический малонаселённый регион Южной Америки.",
+    "explanationRu": "Гран-Чако - тропический малонаселённый регион Южной Америки.",
     "sourceTitle": "Isaac & Jake vs. 10 Smart Players",
     "origin": "notebooklm",
     "license": "original",
@@ -1033,7 +1033,7 @@
       "Капри"
     ],
     "openAnswer": true,
-    "explanationRu": "Этна — один из самых активных вулканов в мире, находящийся на востоке Сицилии.",
+    "explanationRu": "Этна - один из самых активных вулканов в мире, находящийся на востоке Сицилии.",
     "sourceTitle": "Last Person Standing Wins $500 (Ages 8-45 Quiz)",
     "origin": "notebooklm",
     "license": "original",
@@ -1110,7 +1110,7 @@
       "Эквадор"
     ],
     "openAnswer": true,
-    "explanationRu": "Парагвай — одна из двух внутриконтинентальных стран Южной Америки.",
+    "explanationRu": "Парагвай - одна из двух внутриконтинентальных стран Южной Америки.",
     "sourceTitle": "My Smartest Players vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
@@ -1123,9 +1123,9 @@
     "topic": "world",
     "difficulty": "Medium",
     "promptRu": "Какое островное государство Тихого океана признано самым многоязычным в мире?",
-    "answerRu": "Папуа — Новая Гвинея",
+    "answerRu": "Папуа - Новая Гвинея",
     "acceptedRu": [
-      "Папуа — Новая Гвинея",
+      "Папуа - Новая Гвинея",
       "Папуа Новая Гвинея",
       "Папуа-Новая Гвинея"
     ],
@@ -1138,7 +1138,7 @@
       "Фиджи"
     ],
     "openAnswer": true,
-    "explanationRu": "В Папуа — Новой Гвинее насчитывается свыше 800 живых языков.",
+    "explanationRu": "В Папуа - Новой Гвинее насчитывается свыше 800 живых языков.",
     "sourceTitle": "My Smartest Players vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
@@ -1165,7 +1165,7 @@
       "науатль"
     ],
     "openAnswer": true,
-    "explanationRu": "Гуарани — язык коренного населения, государственный язык Парагвая.",
+    "explanationRu": "Гуарани - язык коренного населения, государственный язык Парагвая.",
     "sourceTitle": "My Smartest Players vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
@@ -1194,7 +1194,7 @@
       "Ангола"
     ],
     "openAnswer": true,
-    "explanationRu": "Нельсон Мандела — борец против апартеида и первый чёрный президент ЮАР.",
+    "explanationRu": "Нельсон Мандела - борец против апартеида и первый чёрный президент ЮАР.",
     "sourceTitle": "Name the 10 Countries @jakelyonsgeo @soluna16",
     "origin": "notebooklm",
     "license": "original",
@@ -1251,7 +1251,7 @@
     ],
     "openAnswer": true,
     "sourceUrl": "https://research-portal.st-andrews.ac.uk/en/publications/multilingualism-and-linguistic-hybridity-in-dubai/",
-    "sourceTitle": "Университет Сент-Эндрюс — Многоязычие в Дубае",
+    "sourceTitle": "Университет Сент-Эндрюс - Многоязычие в Дубае",
     "origin": "authored",
     "license": "original",
     "explanationRu": "Хотя официальным языком ОАЭ является арабский, английский служит основным языком общения между людьми разных национальностей в Дубае.",
@@ -1285,7 +1285,7 @@
     "sourceTitle": "Официальный портал правительства Баварии",
     "origin": "authored",
     "license": "original",
-    "explanationRu": "Бавария — федеральная земля на юго-востоке Германии. Её столица — Мюнхен. Регион знаменит Октоберфестом, Альпами и замком Нойшванштайн.",
+    "explanationRu": "Бавария - федеральная земля на юго-востоке Германии. Её столица - Мюнхен. Регион знаменит Октоберфестом, Альпами и замком Нойшванштайн.",
     "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
     "daily": true
   },
@@ -1312,10 +1312,10 @@
     ],
     "openAnswer": true,
     "sourceUrl": "https://www.britannica.com/place/Java-island-Indonesia",
-    "sourceTitle": "Encyclopaedia Britannica — Java",
+    "sourceTitle": "Encyclopaedia Britannica - Java",
     "origin": "authored",
     "license": "original",
-    "explanationRu": "Ява — остров Индонезии, один из самых густонаселённых островов мира. На нём расположена Джакарта, крупнейший город страны.",
+    "explanationRu": "Ява - остров Индонезии, один из самых густонаселённых островов мира. На нём расположена Джакарта, крупнейший город страны.",
     "reviewNote": "Проверено 2026-11-01: факт и единственность правильного варианта сверены по указанному источнику.",
     "daily": true
   },
@@ -1407,7 +1407,7 @@
     "kind": "single",
     "topic": "world",
     "difficulty": "Medium",
-    "promptRu": "Какой крупный город стоит сразу на двух континентах — в Европе и в Азии?",
+    "promptRu": "Какой крупный город стоит сразу на двух континентах - в Европе и в Азии?",
     "answerRu": "Стамбул",
     "acceptedRu": [
       "Стамбул"
@@ -1549,7 +1549,7 @@
     "kind": "single",
     "topic": "world",
     "difficulty": "Hard",
-    "promptRu": "Какая страна — крупнейший архипелаг мира, в ней больше 17 тысяч островов?",
+    "promptRu": "Какая страна - крупнейший архипелаг мира, в ней больше 17 тысяч островов?",
     "answerRu": "Индонезия",
     "acceptedRu": [
       "Индонезия"
@@ -1619,8 +1619,8 @@
       "Янцзы"
     ],
     "openAnswer": true,
-    "explanationRu": "Амазонка — самая полноводная и длинная река на Земле.",
-    "sourceTitle": "Список рек по длине — Википедия",
+    "explanationRu": "Амазонка - самая полноводная и длинная река на Земле.",
+    "sourceTitle": "Список рек по длине - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true
@@ -1647,8 +1647,8 @@
       "Замбези"
     ],
     "openAnswer": true,
-    "explanationRu": "Нил — главная речная артерия Северной и Восточной Африки.",
-    "sourceTitle": "Список рек по длине — Википедия",
+    "explanationRu": "Нил - главная речная артерия Северной и Восточной Африки.",
+    "sourceTitle": "Список рек по длине - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true
@@ -1673,8 +1673,8 @@
       "Амур"
     ],
     "openAnswer": true,
-    "explanationRu": "Янцзы — длиннейшая река Евразийского континента.",
-    "sourceTitle": "Список рек по длине — Википедия",
+    "explanationRu": "Янцзы - длиннейшая река Евразийского континента.",
+    "sourceTitle": "Список рек по длине - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true
@@ -2204,7 +2204,7 @@
     "kind": "single",
     "topic": "world",
     "difficulty": "Medium",
-    "promptRu": "Какой город — столица Турции?",
+    "promptRu": "Какой город - столица Турции?",
     "answerRu": "Анкара",
     "acceptedRu": [
       "Анкара"

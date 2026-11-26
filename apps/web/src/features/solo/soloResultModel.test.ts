@@ -46,7 +46,7 @@ describe('solo result: did not reach the target', () => {
     const capped = view({ progress: 64, roundsPlayed: 20, reachedTarget: false, roundsToCap: 0 });
     const result = buildSoloResult({ view: capped, save: 'saving', response: null });
     expect(result).toMatchObject({ end: 'cap', reachedTarget: false, headline: 'До 100% не дошёл', progress: 64 });
-    expect(result.summary).toBe('Лимит забега — 20 кругов, и он закончился. Ты набрал 64% из 100%.');
+    expect(result.summary).toBe('Лимит забега 20 кругов, и он закончился. Ты набрал 64% из 100%.');
     expect(result.headline).not.toMatch(/клатч|побед|дошёл до 100%/i);
     expect(result.summary).not.toContain('зафиксирован');
   });

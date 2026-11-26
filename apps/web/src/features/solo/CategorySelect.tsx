@@ -12,13 +12,13 @@ type Texts = (typeof m)['ru'];
 
 const { generalTopics, countries, otherFlags, languages } = CATEGORY_POOL_SIZES;
 
-/** «132 символа», «37 языков»: числа из CATEGORY_POOL_SIZES, их сверка с данными — в shared. */
+/** «132 символа», «37 языков»: числа из CATEGORY_POOL_SIZES, их сверка с данными - в shared. */
 const categories = (t: Texts) => [
   { id: 'general', name: t.catGeneral, icon: '💡', available: true, blurb: t.blurbGeneral(generalTopics) },
   { id: 'geography', name: t.catGeography, icon: '🌍', available: true, blurb: t.blurbGeography(countries) },
   { id: 'history', name: t.catOtherFlags, icon: '🏴', available: true, blurb: t.blurbOtherFlags(otherFlags) },
   { id: 'languages', name: t.catLanguages, icon: '🗣️', available: true, blurb: t.blurbLanguages(languages) },
-  // Открывается сама, когда одобренных вопросов наберётся KZ_MIN_LIVE; до того — «Скоро».
+  // Открывается сама, когда одобренных вопросов наберётся KZ_MIN_LIVE; до того - «Скоро».
   { id: 'kz_history', name: t.catKzHistory, icon: '🇰🇿', available: isCategoryOpen('kz_history'), blurb: t.blurbKzHistory },
 ];
 
@@ -45,7 +45,7 @@ function CategoryCard({ cat, onSelect }: { cat: Category; onSelect: (categoryId:
 }
 
 /**
- * «Общие знания» — 98% забегов, поэтому они одни на виду. Узкие категории не удалены, а свёрнуты:
+ * «Общие знания» - 98% забегов, поэтому они одни на виду. Узкие категории не удалены, а свёрнуты:
  * их вопросы и так попадают в набор «Общих знаний», а отдельно в них играют единицы.
  */
 export function CategorySelect({ onSelect, onBack }: CategorySelectProps) {

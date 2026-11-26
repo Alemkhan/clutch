@@ -191,7 +191,7 @@ export function MyClanView({ clan }: { clan: NonNullable<ClanMeResponse['clan']>
       </div>
       <div className="home-stats-card clan-stats">
         <div className="mini-stat">
-          <span className="mini-stat-value">{clan.week.rank ? `#${clan.week.rank}` : '—'}</span>
+          <span className="mini-stat-value">{clan.week.rank ? `#${clan.week.rank}` : '–'}</span>
           <span className="mini-stat-label">{t.place}</span>
         </div>
         <div className="mini-stat">
@@ -233,7 +233,7 @@ export function MemberTree({ members }: { members: readonly ClanMemberView[] }) 
         rootList.push(member);
       }
     }
-    // Основатель — первым среди корней.
+    // Основатель - первым среди корней.
     rootList.sort((a, b) => Number(b.isFounder) - Number(a.isFounder) || Number(b.isOriginalFounder) - Number(a.isOriginalFounder));
     return { roots: rootList, children: byParent };
   }, [members]);
@@ -366,7 +366,7 @@ function ClanDetail({ slug, onBack }: { slug: string; onBack: () => void }) {
           </div>
           <div className="home-stats-card clan-stats">
             <div className="mini-stat">
-              <span className="mini-stat-value">{detail.week.rank ? `#${detail.week.rank}` : '—'}</span>
+              <span className="mini-stat-value">{detail.week.rank ? `#${detail.week.rank}` : '–'}</span>
               <span className="mini-stat-label">{t.place}</span>
             </div>
             <div className="mini-stat">

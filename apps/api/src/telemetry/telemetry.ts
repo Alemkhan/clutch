@@ -7,7 +7,7 @@ import { checkRateLimit, RATE_LIMIT_PERIOD_SECONDS } from '../http/rateLimit';
 
 type AppContext = Context<{ Bindings: Env }>;
 
-// Капы равны колонкам миграции 0002. Сверх капа — ошибка, а не обрезание: потерять репорт из-за
+// Капы равны колонкам миграции 0002. Сверх капа - ошибка, а не обрезание: потерять репорт из-за
 // длинного поля честнее, чем хранить непонятно что; честный клиент в капы укладывается.
 const REPORT_BODY_MAX_BYTES = 2048;
 const QUESTION_ID_MAX = 128;
@@ -38,7 +38,7 @@ async function authenticate(c: AppContext, scope: string): Promise<RequestIdenti
   return identity;
 }
 
-/** Необязательное текстовое поле в капе: null — поля нет, 'invalid' — не строка или пустое, 'too_long' — сверх капа. */
+/** Необязательное текстовое поле в капе: null - поля нет, 'invalid' - не строка или пустое, 'too_long' - сверх капа. */
 type TextOutcome = string | null | 'invalid' | 'too_long';
 
 function readText(value: unknown, max: number): TextOutcome {
@@ -51,7 +51,7 @@ function isTextOutcomeError(outcome: TextOutcome): outcome is 'invalid' | 'too_l
   return outcome === 'invalid' || outcome === 'too_long';
 }
 
-/** payload — плоский объект ≤ 4 ключей; строки (включая имена ключей) ≤ 64; итоговый JSON ≤ 512 символов. */
+/** payload - плоский объект ≤ 4 ключей; строки (включая имена ключей) ≤ 64; итоговый JSON ≤ 512 символов. */
 function readPayload(value: unknown): { ok: true; json: string | null } | { ok: false; reason: string } {
   if (value === undefined || value === null) return { ok: true, json: null };
   if (typeof value !== 'object' || Array.isArray(value)) return { ok: false, reason: 'invalid_payload' };
@@ -76,7 +76,7 @@ export function registerTelemetryRoutes(app: Hono<{ Bindings: Env }>): void {
   app.post('/api/events', handleEvent);
 }
 
-/** Причина отказа для поля, не прошедшего readText: too_long как есть, остальное — общая причина запроса. */
+/** Причина отказа для поля, не прошедшего readText: too_long как есть, остальное - общая причина запроса. */
 const textFailure = (outcome: 'invalid' | 'too_long', fallback: string): string =>
   outcome === 'too_long' ? 'too_long' : fallback;
 

@@ -44,10 +44,10 @@ describe('generateQuestionById', () => {
   });
 
   it.each([
-    ['capital_bz', 'Какой город — столица страны Белиз?'],
-    ['flag_capital_bz', 'Какой город — столица страны с этим флагом?'],
-    ['open_capital_bz', 'Напишите название города — столицы страны Белиз.'],
-    ['capital_fixed_bz', 'Напишите название города — столицы страны Белиз.'],
+    ['capital_bz', 'Какой город является столицей страны Белиз?'],
+    ['flag_capital_bz', 'Какой город является столицей страны с этим флагом?'],
+    ['open_capital_bz', 'Напишите, какой город является столицей страны Белиз.'],
+    ['capital_fixed_bz', 'Напишите, какой город является столицей страны Белиз.'],
   ])('uses an unambiguous capital prompt for %s', (id, prompt) => {
     const question = generateQuestionById(id);
     expect(question?.prompt).toBe(prompt);

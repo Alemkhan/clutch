@@ -1,6 +1,6 @@
 // Общая карточка игры (og:image сайта и запасная картинка превью) из того же SVG, что рисует Worker.
 // Запуск из корня репозитория: npx vite-node scripts/share-cards/render-og.ts
-// Результат: apps/web/public/og.png (русская, og:image сайта) и og.en.png, og.kk.png (1200x630) —
+// Результат: apps/web/public/og.png (русская, og:image сайта) и og.en.png, og.kk.png (1200x630) -
 // запасные картинки превью на языке ссылки (см. localizedAsset в shareText.ts).
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';

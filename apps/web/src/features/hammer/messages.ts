@@ -2,10 +2,10 @@ import { defineMessages } from '../../i18n/messages';
 
 export const m = defineMessages({
   ru: {
-    remaining: (target: number, left: number) => `До ${target}% — ещё ${left}%`,
+    remaining: (target: number, left: number) => `До ${target}% ещё ${left}%`,
     targetReached: (target: number) => `Цель ${target}% достигнута`,
     series: (streak: number) => `Серия ${streak} · зоны стали уже`,
-    nailRemaining: (total: number, target: number, left: number) => `Гвоздь вошёл на ${total}% · до ${target}% — ещё ${left}%`,
+    nailRemaining: (total: number, target: number, left: number) => `Гвоздь вошёл на ${total}% · до ${target}% ещё ${left}%`,
     nailReached: (total: number, target: number) => `Гвоздь вошёл на ${total}% · цель ${target}% достигнута`,
     strikeDone: 'Удар завершён',
     strikeAction: 'Нажми, чтобы ударить по гвоздю',
@@ -46,10 +46,10 @@ export const m = defineMessages({
     status: (label: string, points: number) => `Hit result: ${label}, +${points}% progress.`,
   },
   kk: {
-    remaining: (target: number, left: number) => `${target}%-ға дейін — тағы ${left}%`,
+    remaining: (target: number, left: number) => `${target}%-ға дейін тағы ${left}%`,
     targetReached: (target: number) => `${target}% мақсатқа жетті`,
     series: (streak: number) => `Серия ${streak} · аймақтар тарылды`,
-    nailRemaining: (total: number, target: number, left: number) => `Шеге ${total}% кірді · ${target}%-ға дейін — тағы ${left}%`,
+    nailRemaining: (total: number, target: number, left: number) => `Шеге ${total}% кірді · ${target}%-ға дейін тағы ${left}%`,
     nailReached: (total: number, target: number) => `Шеге ${total}% кірді · ${target}% мақсатқа жетті`,
     strikeDone: 'Соққы аяқталды',
     strikeAction: 'Шегені ұру үшін бас',

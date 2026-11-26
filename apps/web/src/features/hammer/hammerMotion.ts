@@ -3,7 +3,7 @@ import type { HammerAttemptRules, SkillResult } from '@clutch/shared';
 export const MAX_HAMMER_FRAME_DELTA_MS = 50;
 
 // Положение маркера живёт в shared: по той же формуле сервер восстанавливает удар из времени
-// тапа, и второй реализации здесь быть не должно. Реэкспорт — чтобы импорт остался одним.
+// тапа, и второй реализации здесь быть не должно. Реэкспорт - чтобы импорт остался одним.
 export { markerPositionAtElapsed } from '@clutch/shared';
 
 /** A hidden tab and an unexpectedly long frame may advance at most one short frame. */

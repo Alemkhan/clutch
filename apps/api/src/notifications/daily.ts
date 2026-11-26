@@ -25,7 +25,7 @@ export const DAILY_WIKI_PATH_PAYLOAD = 'daily_wiki';
 export const DAILY_STOP_PAYLOAD = 'daily_off';
 /** «Играть дальше» из виджета: Mini App его не распознаёт и открывает главный экран; метка нужна для источника. */
 export const DAILY_WIDGET_PAYLOAD = 'daily_quiz';
-export const DAILY_WIDGET_CAPTION = 'Вопрос дня — ответь прямо здесь 👆';
+export const DAILY_WIDGET_CAPTION = 'Вопрос дня: ответь прямо здесь 👆';
 
 async function authenticate(c: AppContext): Promise<RequestIdentity | Response> {
   const identity = await resolveRequestIdentity(c.req.header('Authorization'), c.env);
@@ -144,7 +144,7 @@ export async function sendDailyChallengeDigests(env: Env, now = Date.now()): Pro
       result = await sendTelegramWidget(env.TELEGRAM_BOT_TOKEN, chatId, widgetHtml, DAILY_WIDGET_CAPTION, stopRow);
       if (result.status === 'failed') logFailure('daily_widget', result);
     }
-    // Виджет не ушёл (метод недоступен, сбой) — прежний текст про «На глазок» и Вики-путь.
+    // Виджет не ушёл (метод недоступен, сбой) - прежний текст про «На глазок» и Вики-путь.
     if ((!result || result.status === 'failed') && (question || challenge)) {
       const streak = await playerStreak(env.DB, playerId, now).catch(() => null);
       result = await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId, ...digestText(env, question, challenge, stopRow, streak, locale));

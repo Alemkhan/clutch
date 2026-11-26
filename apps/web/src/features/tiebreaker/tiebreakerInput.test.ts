@@ -10,7 +10,7 @@ describe('parseTiebreakerInput', () => {
     expect(parseTiebreakerInput('1,5')).toEqual(ok(1.5));
     expect(parseTiebreakerInput('1.5')).toEqual(ok(1.5));
     expect(parseTiebreakerInput(',5')).toEqual(ok(0.5));
-    // Запятая всегда десятичная: «1,000» — единица, а не тысяча.
+    // Запятая всегда десятичная: «1,000» - единица, а не тысяча.
     expect(parseTiebreakerInput('1,000')).toEqual(ok(1));
   });
 

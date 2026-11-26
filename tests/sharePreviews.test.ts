@@ -290,7 +290,7 @@ describe('localized previews (l=ru|en|kk)', () => {
   it('draws the run card text in the requested language with the day number', () => {
     const card = (locale: 'ru' | 'en' | 'kk', progress = 100) => plain(buildRunCardSvg({ tiles: ['P', 'G', 'X'], progress, category: 'kz_history', day: '2026-11-16', invite: null, locale }));
     const ru = card('ru');
-    for (const value of ['Мой результат дня', 'за 3 круга', 'Clutch #29 · 16 ноя', 'История Казахстана', 'Сможешь быстрее?', 'Играть в Telegram', 'Круг — верный ответ и удар молотком']) {
+    for (const value of ['Мой результат дня', 'за 3 круга', 'Clutch #29 · 16 ноя', 'История Казахстана', 'Сможешь быстрее?', 'Играть в Telegram', 'Круг: верный ответ и удар молотком']) {
       expect(ru).toContain(value);
     }
     expect(card('ru', 60)).toContain('Дойдёшь до 100%?');

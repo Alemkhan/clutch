@@ -32,7 +32,7 @@ let coreInitializationPromise: Promise<void> | null = null;
 let viewportInitializationPromise = Promise.resolve();
 
 /**
- * Шапка, фон и нижняя полоса Telegram — в цветах игры. Иначе у игрока со светлой темой Telegram
+ * Шапка, фон и нижняя полоса Telegram - в цветах игры. Иначе у игрока со светлой темой Telegram
  * над тёмной игрой висела бы белая полоса. Старые клиенты без этих методов просто пропускаются.
  */
 function applyTelegramColors(): void {
@@ -41,7 +41,7 @@ function applyTelegramColors(): void {
     if (setMiniAppBackgroundColor.isAvailable()) setMiniAppBackgroundColor('#160f3e');
     if (setMiniAppBottomBarColor.isAvailable()) setMiniAppBottomBarColor('#181140');
   } catch {
-    // Цвета — украшение: без них игра работает как раньше.
+    // Цвета - украшение: без них игра работает как раньше.
   }
 }
 
@@ -94,7 +94,7 @@ export function getTelegramIdentity(): TelegramIdentity | null {
   return identity;
 }
 
-/** Внешняя ссылка: в Telegram открывается его встроенным браузером, а не уводит Mini App. false — открывать обычной ссылкой. */
+/** Внешняя ссылка: в Telegram открывается его встроенным браузером, а не уводит Mini App. false - открывать обычной ссылкой. */
 export function openExternalLink(url: string): boolean {
   if (!isTMA() || !openLink.isAvailable()) return false;
   try {
@@ -114,7 +114,7 @@ export function canShareMessage(): boolean {
   return isTMA() && shareMessage.isAvailable();
 }
 
-/** USER_DECLINED — человек закрыл окно сам: это отмена, а не повод открывать второе окно. */
+/** USER_DECLINED - человек закрыл окно сам: это отмена, а не повод открывать второе окно. */
 export async function shareMessageViaTelegram(id: string): Promise<'shared' | 'cancelled' | 'failed'> {
   if (!shareMessage.isAvailable()) return 'failed';
   try {
@@ -131,7 +131,7 @@ export function shareViaTelegram(url: string, text: string): boolean {
   return true;
 }
 
-/** Открыто ли приложение внутри Telegram (иначе — браузер или приложение из магазина). */
+/** Открыто ли приложение внутри Telegram (иначе - браузер или приложение из магазина). */
 export function isInsideTelegram(): boolean {
   try {
     return isTMA();
@@ -142,7 +142,7 @@ export function isInsideTelegram(): boolean {
 
 /**
  * Может ли бот писать игроку в личку. Если игрок не открывал чат с ботом, Telegram покажет своё окно
- * «Разрешить боту писать вам?». false — отказал; вне Telegram или в старом клиенте — true (пусть пробует сервер).
+ * «Разрешить боту писать вам?». false - отказал; вне Telegram или в старом клиенте - true (пусть пробует сервер).
  */
 export async function ensureBotCanWrite(): Promise<boolean> {
   if (!isInsideTelegram()) return true;

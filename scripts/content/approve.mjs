@@ -1,7 +1,7 @@
 // Одобряет записи темы, которые ждут проверки (pending → approved), одной командой.
 // Запуск: npm run content:approve -- kazakhstan [--block id1,id2] [--except id3]
-//   --block  — эти записи в игру не пускать (blocked): факт неверен или вопрос плохой;
-//   --except — оставить pending, вернуться к ним позже.
+//   --block  - эти записи в игру не пускать (blocked): факт неверен или вопрос плохой;
+//   --except - оставить pending, вернуться к ним позже.
 // Одобренные и заблокированные раньше записи не трогаются. Дальше: npm run content:check
 import fs from 'node:fs';
 import path from 'node:path';

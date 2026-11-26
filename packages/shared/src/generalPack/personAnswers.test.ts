@@ -34,7 +34,7 @@ describe('expandPersonAnswers', () => {
   it('leaves non-person answers untouched', () => {
     expect(expandPersonAnswers('Какая страна называется Южный Судан?', ['Южный Судан'])).toEqual(['Южный Судан']);
     expect(matchesAccepted('Судан', expandPersonAnswers('Столица какой страны Джуба?', ['Южный Судан']))).toBe(false);
-    expect(expandPersonAnswers('Какая страна — Сьерра-Леоне?', ['Сьерра-Леоне'])).toEqual(['Сьерра-Леоне']);
+    expect(expandPersonAnswers('Какая страна - Сьерра-Леоне?', ['Сьерра-Леоне'])).toEqual(['Сьерра-Леоне']);
   });
 
   it('handles particles, epithets and numerals', () => {

@@ -35,7 +35,7 @@ export async function createSoloRun(db: D1Database, input: {
   practice?: boolean;
   /** Забег по дружеской ссылке: своя версия правил, вне пула, таблицы и приглашений; исход считается. */
   friend?: boolean;
-  /** Версия правил режима (забег дня, свободная игра, дуэль); по умолчанию — дуэль. */
+  /** Версия правил режима (забег дня, свободная игра, дуэль); по умолчанию - дуэль. */
   rulesVersion?: string;
   now: number;
 }): Promise<void> {
@@ -70,7 +70,7 @@ export async function completeSoloRun(db: D1Database, input: {
   reachedTarget: boolean;
   setPar: number;
   soloScore: number;
-  /** Исход против темпа; null — темпа не было, забег ждёт соперника. */
+  /** Исход против темпа; null - темпа не было, забег ждёт соперника. */
   outcome: MyRunOutcome | null;
   /** Тренировка закрывается без цели, оценки и права стать записью соперника. */
   practice?: boolean;
@@ -105,7 +105,7 @@ export async function completeSoloRun(db: D1Database, input: {
  * Исход записи, против которой только что сыграли, глазами её владельца.
  *
  * Без этого исход писался только финиширующему забегу, а строка владельца оставалась с
- * `solo_outcome IS NULL` навсегда — и в «Моих партиях» у него вечно висело «Ждём соперника»,
+ * `solo_outcome IS NULL` навсегда - и в «Моих партиях» у него вечно висело «Ждём соперника»,
  * хотя уведомление уже сообщило итог. Пишем только в пустое: запись сравнивают один раз,
  * и повтор не должен переписать уже решённый исход.
  */
@@ -127,7 +127,7 @@ export async function settleRecordOutcome(
  *
  * Без этого повторный старт создавал НОВЫЙ забег: брошенный занимал набор навсегда
  * (`lastPlayedBySet` считает сыгранной любую строку), игрок уезжал на следующий набор дня,
- * а запись соперника оставалась на прежнем — и встретиться с ней он уже не мог.
+ * а запись соперника оставалась на прежнем - и встретиться с ней он уже не мог.
  * Тренировка и дружеская дуэль сюда не попадают: у них свои правила и свои строки.
  */
 export async function findActiveSoloRun(
@@ -178,7 +178,7 @@ export async function seenQuestionKeys(db: D1Database, playerId: string): Promis
   return new Set(result.results.map((row) => seenQuestionKey(row.id)));
 }
 
-/** Сохранённый исход завершённого забега; null — ждёт соперника или забег старше миграции. */
+/** Сохранённый исход завершённого забега; null - ждёт соперника или забег старше миграции. */
 export async function findSoloOutcome(db: D1Database, runId: string): Promise<MyRunOutcome | null> {
   const row = await db.prepare('SELECT solo_outcome FROM match_runs WHERE id = ?1')
     .bind(runId)
@@ -186,7 +186,7 @@ export async function findSoloOutcome(db: D1Database, runId: string): Promise<My
   return row?.solo_outcome ?? null;
 }
 
-/** Результат записи-темпа для сравнения, вместе с прикидкой её автора. null — запись не завершена или не соло-результат. */
+/** Результат записи-темпа для сравнения, вместе с прикидкой её автора. null - запись не завершена или не соло-результат. */
 export async function findPaceResult(db: D1Database, runId: string): Promise<SoloRunResult | null> {
   const row = await db.prepare(`
     SELECT player_id, reached_target, progress, solo_score, rounds_json, created_at, completed_at
@@ -226,9 +226,9 @@ export const SOLO_BOARD_LIMIT = 50;
 /**
  * Таблица дня как общий запрос (параметры: ?1 категория, ?2 rules_version, ?3 начало суток,
  * ?4 конец, ?5 ключ суток для прикидки). Один лучший забег на игрока (меньший счёт, меньше кругов,
- * раньше финиш, id). Место — RANK: делят его равные счёт, круги и прикидка «На глазок» дня
- * (меньший множитель выше; без ответа и гость — ниже всех ответивших). Длительность забега
- * не участвует (решение владельца 2026-10-16). Порядок показа внутри места — по времени финиша.
+ * раньше финиш, id). Место - RANK: делят его равные счёт, круги и прикидка «На глазок» дня
+ * (меньший множитель выше; без ответа и гость - ниже всех ответивших). Длительность забега
+ * не участвует (решение владельца 2026-10-16). Порядок показа внутри места - по времени финиша.
  */
 const BOARD_CTE = `
   WITH ranked_runs AS (
@@ -261,7 +261,7 @@ const BOARD_CTE = `
 
 /**
  * Лучший забег каждого игрока за сутки [from, to) по категории: только дошедшие до цели и только
- * места, которые видят все (`publicBoardPlaces`: лучшая половина, от 3 до 10). `total` — все
+ * места, которые видят все (`publicBoardPlaces`: лучшая половина, от 3 до 10). `total` - все
  * игроки таблицы, включая скрытые места.
  */
 export async function soloLeaderboard(
@@ -283,7 +283,7 @@ export async function soloLeaderboard(
   `).bind(category, rulesVersion, from, to, dateKey, SOLO_BOARD_LIMIT).all<SoloLeaderboardEntry & { clanEmoji: string | null; total: number }>();
   const total = result.results[0]?.total ?? 0;
   const visible = publicBoardPlaces(total);
-  // Эмодзи клана — аватар игрока в таблице; без клана поле не отдаётся.
+  // Эмодзи клана - аватар игрока в таблице; без клана поле не отдаётся.
   const entries = result.results
     .filter((row) => row.rank <= visible)
     .map(({ clanEmoji, total: _total, ...entry }) => (clanEmoji ? { ...entry, clanEmoji } : entry));
@@ -322,7 +322,7 @@ export async function soloBoardTop(
 /**
  * Место самого игрока в той же таблице, даже если он далеко за топ-50. Запрос тот же, что в
  * `soloLeaderboard`, иначе место не совпадало бы со списком.
- * null — в этот день игрок не закрыл ни одного забега этой категории.
+ * null - в этот день игрок не закрыл ни одного забега этой категории.
  */
 export async function soloStanding(
   db: D1Database,
@@ -368,7 +368,7 @@ export async function soloStanding(
     },
     roundsToNext: roundsToPass(row.roundsPlayed, row.setPar, row.nextScore),
     placeAbove: row.placeAbove,
-    // Равны и счёт, и круги — выше его поставила только прикидка.
+    // Равны и счёт, и круги - выше его поставила только прикидка.
     outrankedByGuess: row.nextScore !== null && row.nextScore === row.soloScore
       && row.nextRounds === row.roundsPlayed,
     tiebreak: !playerId.startsWith('telegram:') ? 'guest' : row.multiplier === null ? 'not_answered' : 'answered',
@@ -376,7 +376,7 @@ export async function soloStanding(
 }
 
 /**
- * Сколько кругов нужно отыграть, чтобы обойти стоящего выше. Счёт — круги / пар, поэтому разницу
+ * Сколько кругов нужно отыграть, чтобы обойти стоящего выше. Счёт - круги / пар, поэтому разницу
  * счётов надо перевести в круги **своего** набора: пары у наборов дня разные. Нужен счёт строго
  * меньше, чем у соседа, отсюда «−1»; эпсилон съедает погрешность деления.
  */

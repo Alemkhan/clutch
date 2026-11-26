@@ -172,7 +172,7 @@ describe('friend duel: out of the competition', () => {
     const db = database();
     const { run } = await playFriend(db);
     db.sqlite.prepare('UPDATE match_runs SET reached_target = 1, set_par = 20, solo_score = 0.01 WHERE id = ?').run(run.runId);
-    // Таблица дня — только забеги дня: ни дружеская дуэль, ни запись-дуэль автора туда не попадают.
+    // Таблица дня - только забеги дня: ни дружеская дуэль, ни запись-дуэль автора туда не попадают.
     const board = await call(db, 'carol', '/api/solo-leaderboard?category=geography');
     const names = (await board.json() as SoloLeaderboardResponse).entries.map((entry) => entry.displayName);
     expect(names).toEqual([]);
@@ -301,7 +301,7 @@ describe('friend duel: what stays competitive', () => {
     const done = await playRounds((path, body) => call(db, 'bob', path, body), run.runId, roundInputs(fullQuestions(db, run.runId), 4, true));
     expect(done.status).toBe(200);
     expect(rowOf(db, run.runId)).toMatchObject({ rules_version: SOLO, reached_target: 1 });
-    // Реванш — дуэль, а не забег дня: в таблицу забегов дня он не идёт.
+    // Реванш - дуэль, а не забег дня: в таблицу забегов дня он не идёт.
     const board = await call(db, 'carol', '/api/solo-leaderboard?category=geography');
     expect((await board.json() as SoloLeaderboardResponse).entries.map((e) => e.displayName)).not.toContain('bob');
   });

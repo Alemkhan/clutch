@@ -31,7 +31,7 @@ const lines: string[] = [
   `# Вопросы дня ${date} · ${category}`,
   '',
   'Плохой вопрос: найди его `id` в content/questions/*.json (или content/sets/*.json) и поставь',
-  '`"editorialStatus": "blocked"`, затем `npm run content:check`. Вопросы без id пакета — из',
+  '`"editorialStatus": "blocked"`, затем `npm run content:check`. Вопросы без id пакета - из',
   'генераторов (география, флаги, языки): о них напиши, они правятся в данных стран.',
   '',
 ];

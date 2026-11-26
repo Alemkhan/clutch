@@ -4,7 +4,7 @@
 
 ```text
 questions/<тема>.json   вопросы с одним ответом (выбор из 4 или ввод)
-sets/<тема>.json        наборы «назови …» (вопрос «что из этого — …?» и замороженный Last Stand)
+sets/<тема>.json        наборы «назови …» (вопрос «что из этого - …?» и замороженный Last Stand)
 ```
 
 Темы: science, space, nature, body, history, literature, art, music, film, popculture,
@@ -14,9 +14,9 @@ sport, food, math, language, tech, world.
 
 `editorialStatus` в каждой записи:
 
-- `pending` — добавлено, в игре не появится;
-- `approved` — в игре;
-- `blocked` — убрано из игры, запись остаётся для истории.
+- `pending` - добавлено, в игре не появится;
+- `approved` - в игре;
+- `blocked` - убрано из игры, запись остаётся для истории.
 
 Не удаляй записи, которые уже были в игре: ставь `blocked`.
 
@@ -77,9 +77,9 @@ npm run content:check
 
 ## Поля набора
 
-`titleRu` «Назови …» · `mcPromptRu` «Что из этого — …?» · `members` все верные ответы
+`titleRu` «Назови …» · `mcPromptRu` «Что из этого - …?» · `members` все верные ответы
 (от очевидных к редким; у каждого `id`, `answerRu`, `acceptedRu`) · `nonMembersRu`
 не меньше 3 правдоподобных неверных.
 
-Импортируемые паки «На глазок» лежат в `content/tiebreaker/packs/`; разборы и черновики — в `docs/content/`.
-Статус одобрения всего пакета и риски по происхождению — [CONTENT_REVIEW](../docs/CONTENT_REVIEW.md).
+Импортируемые паки «На глазок» лежат в `content/tiebreaker/packs/`; разборы и черновики - в `docs/content/`.
+Статус одобрения всего пакета и риски по происхождению - [CONTENT_REVIEW](../docs/CONTENT_REVIEW.md).

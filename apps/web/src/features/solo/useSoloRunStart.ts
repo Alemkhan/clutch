@@ -30,7 +30,7 @@ export function useSoloRunStart(ctx: SoloRunContext, botLevel?: PracticeLevelId,
       if (!coordinatorRef.current.settle(request.token)) return;
       saveActiveSoloRun({ runId: raw.runId, practice, mode: entered.mode, category });
       setState((previous) => enterStartedSoloRun(previous, raw, practice));
-      // Продуктовое событие (R22): забег создан. Продолжение начатого — не «старт».
+      // Продуктовое событие (R22): забег создан. Продолжение начатого - не «старт».
       if (!entered.resumed) logAnalyticsEvent('solo_run_started', { category });
     }).catch((error: unknown) => {
       if (!coordinatorRef.current.settle(request.token)) return;

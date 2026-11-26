@@ -11,7 +11,7 @@ export interface ShareCardData {
   p: number;
   q: number;
   name: string | null;
-  /** Язык текста на карточке; без него — русский. */
+  /** Язык текста на карточке; без него - русский. */
   locale?: Locale;
 }
 

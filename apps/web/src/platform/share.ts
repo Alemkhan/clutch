@@ -26,7 +26,7 @@ export interface ShareCapabilities {
 }
 
 export interface ShareEffects {
-  /** Сначала карточка сообщением (shareMessage); 'failed' — откат на telegramShare со ссылкой. */
+  /** Сначала карточка сообщением (shareMessage); 'failed' - откат на telegramShare со ссылкой. */
   telegramMessage?: () => Promise<'shared' | 'cancelled' | 'failed'>;
   telegramShare: (url: string, text: string) => boolean;
   nativeShare?: (data: { text: string; url: string }) => Promise<void>;
@@ -49,7 +49,7 @@ function withLocale(params: URLSearchParams, locale: Locale): void {
 /**
  * Ссылка на страницу-превью `/api/share` (OG-карточка). Имя соперника передаётся
  * только для соперника-игрока, чтобы не выдавать бота или практику за человека.
- * l — язык игрока: на нём сервер рисует карточку и подписи превью (см. withLocale).
+ * l - язык игрока: на нём сервер рисует карточку и подписи превью (см. withLocale).
  */
 export function buildShareUrl(input: ShareInput, apiBase: string | undefined, origin: string, locale: Locale = currentLocale()): string {
   const base = (apiBase?.trim() || origin).replace(/\/+$/, '');
@@ -66,7 +66,7 @@ export function buildShareUrl(input: ShareInput, apiBase: string | undefined, or
   return `${base}/api/share?${params.toString()}`;
 }
 
-/** Куда смотрят ссылки-превью: API (VITE_API_URL), а без него — тот же origin (dev-прокси /api). */
+/** Куда смотрят ссылки-превью: API (VITE_API_URL), а без него - тот же origin (dev-прокси /api). */
 export function previewBase(apiBase: string | undefined, origin: string): string {
   return (apiBase?.trim() || origin).replace(/\/+$/, '');
 }
@@ -74,8 +74,8 @@ export function previewBase(apiBase: string | undefined, origin: string): string
 const TILE_BY_SKILL: Partial<Record<SkillResult, string>> = { perfect: 'P', great: 'G', good: 'O', weak: 'W' };
 
 /**
- * Круги забега буквами для карточки: точность удара, а «X» — круг без прогресса (неверный ответ
- * или «мимо»; на карточке они одинаковы). Удар круга с прогрессом — следующий не-«мимо» в списке.
+ * Круги забега буквами для карточки: точность удара, а «X» - круг без прогресса (неверный ответ
+ * или «мимо»; на карточке они одинаковы). Удар круга с прогрессом - следующий не-«мимо» в списке.
  */
 export function roundTiles(awards: readonly number[], skills: readonly SkillResult[]): string {
   let next = 0;

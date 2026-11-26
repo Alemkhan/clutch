@@ -19,7 +19,7 @@ function exponentForm(value: number): string {
   return `${mantissa.replace('.', ',')}×10${power}`;
 }
 
-/** Множитель промаха: «×1,4», запятая, один знак. Очень большие — степенью, чтобы не ломать строку. */
+/** Множитель промаха: «×1,4», запятая, один знак. Очень большие - степенью, чтобы не ломать строку. */
 export function formatMultiplier(multiplier: number): string {
   if (multiplier >= 1e6) return `×${exponentForm(multiplier)}`;
   const fixed = multiplier.toFixed(1).replace('.', ',');
@@ -30,7 +30,7 @@ export function formatMultiplier(multiplier: number): string {
 
 /** Число из вопроса или ответа: тысячи через неразрывный пробел, запятая, без хвоста нулей. */
 export function formatTiebreakerNumber(value: number): string {
-  if (!Number.isFinite(value)) return '—';
+  if (!Number.isFinite(value)) return '–';
   if (value >= 1e15 || (value > 0 && value < 1e-6)) return exponentForm(value);
   const text = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 6, useGrouping: true }).format(value);
   return text.replace(/[\s ]/g, ' ');
@@ -87,12 +87,12 @@ export interface DistributionBar {
 
 export type BucketSide = 'under' | 'over';
 
-/** Корзины левее середины — отношение ниже 1 («занизили»), остальные — от 1 и выше. */
+/** Корзины левее середины - отношение ниже 1 («занизили»), остальные - от 1 и выше. */
 export function bucketSide(index: number): BucketSide {
   return index < TIEBREAKER_BUCKET_COUNT / 2 ? 'under' : 'over';
 }
 
-/** Столбики графика. Своя корзина — по отношению guess/answer, как и считает сервер. */
+/** Столбики графика. Своя корзина - по отношению guess/answer, как и считает сервер. */
 export function distributionBars(answered: Pick<TiebreakerAnsweredView, 'distribution' | 'guess' | 'answer'>): DistributionBar[] {
   const counts = Array.from({ length: TIEBREAKER_BUCKET_COUNT }, (_, index) => answered.distribution[index] ?? 0);
   const max = Math.max(1, ...counts);
@@ -109,7 +109,7 @@ export interface AxisTick {
 
 /**
  * Деления под гистограммой на целых степенях десяти: ÷1000 ÷100 ÷10 точно ×10 ×100 ×1000. Выводятся
- * из границ шкалы корзин в shared, а не хардкодом: сменится шкала — подписи поедут вместе с ней.
+ * из границ шкалы корзин в shared, а не хардкодом: сменится шкала - подписи поедут вместе с ней.
  */
 export function distributionAxisTicks(): AxisTick[] {
   const ticks: AxisTick[] = [];
@@ -124,7 +124,7 @@ export function distributionAxisTicks(): AxisTick[] {
   return ticks;
 }
 
-/** «2026-10-16» → «16 октября»; не дата — как есть. */
+/** «2026-10-16» → «16 октября»; не дата - как есть. */
 export function formatDayMonth(dateKey: string): string {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateKey);
   const t = messagesFor(m);
@@ -138,7 +138,7 @@ export function answersText(count: number): string {
 }
 
 /**
- * Место среди ответивших: «Лучший ответ дня» (строго ближе всех), «Точнее 72%» или null — перцентиля
+ * Место среди ответивших: «Лучший ответ дня» (строго ближе всех), «Точнее 72%» или null - перцентиля
  * нет, пока ответов меньше порога, и тогда ничего не обещаем.
  */
 export function standingText(percentile: number | null): string | null {

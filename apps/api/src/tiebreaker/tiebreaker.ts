@@ -39,7 +39,7 @@ async function authenticate(c: AppContext, scope: string): Promise<RequestIdenti
   return identity;
 }
 
-/** Состояние для клиента: answer/источник/статистика только после собственного ответа игрока; до него — лишь число ответивших. */
+/** Состояние для клиента: answer/источник/статистика только после собственного ответа игрока; до него - лишь число ответивших. */
 async function todayState(
   db: D1Database,
   playerId: string,
@@ -76,7 +76,7 @@ export function registerTiebreakerRoutes(app: Hono<{ Bindings: Env }>): void {
   });
 
   app.post('/api/tiebreaker/answer', async (c) => {
-    // Отдельный bucket: ответ — запись, и он не должен делить лимит с чтением карточки.
+    // Отдельный bucket: ответ - запись, и он не должен делить лимит с чтением карточки.
     const identity = await authenticate(c, 'tiebreaker_answer');
     if (identity instanceof Response) return identity;
     const parsed = await readJsonBody(c.req.raw, ANSWER_BODY_MAX_BYTES);
@@ -99,7 +99,7 @@ export function registerTiebreakerRoutes(app: Hono<{ Bindings: Env }>): void {
     const dateKey = dailyKey(now);
     const stored = await findQuestionByDate(c.env.DB, dateKey);
     const question = stored && localizeTiebreakerQuestion(stored, requestLocale(c));
-    // 409, а не 400: тело корректно, но вопрос уже не (или ещё не) текущий — клиенту нужно перечитать
+    // 409, а не 400: тело корректно, но вопрос уже не (или ещё не) текущий - клиенту нужно перечитать
     // карточку. Вчерашний вопрос не принимается: ответ действует на сутки своего вопроса.
     if (!question || question.id !== body.questionId) {
       return c.json({ error: 'This is not the question of the day.', reason: 'not_todays_question' }, 409);

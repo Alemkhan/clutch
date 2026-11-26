@@ -32,7 +32,7 @@ describe('practice summary', () => {
     const summary = buildPracticeSummary(play(bot([25, 25, 25, 12, 25]), [25, 25, 25, 25]))!;
     expect(summary.outcome).toBe('player');
     expect(summary.headline).toBe('Ты обошёл бота');
-    expect(summary.line).toBe('Ты — 100% за 4 круга. Бот Max — 100% за 5 кругов.');
+    expect(summary.line).toBe('Ты: 100% за 4 круга. Бот Max: 100% за 5 кругов.');
   });
 
   it('is a loss when the bot finishes first', () => {

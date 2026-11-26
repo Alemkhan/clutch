@@ -106,7 +106,7 @@ export function createBotOpponent(
   return { id: profile.id, displayName: profile.displayName, rounds };
 }
 
-/** Уровни тренировки — это существующие профили, новых нет. Подписи уровней проверяются тестом. */
+/** Уровни тренировки - это существующие профили, новых нет. Подписи уровней проверяются тестом. */
 export const PRACTICE_BOT_PROFILES: Readonly<Record<PracticeLevelId, BotProfile>> = {
   novice: WEAK_BOT_PROFILE,
   amateur: MEDIUM_BOT_PROFILE,

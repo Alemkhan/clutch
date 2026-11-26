@@ -252,7 +252,7 @@ describe('solo run', () => {
     expect(run.pace?.rounds).toHaveLength(4);
     expect(run.roundCap).toBe(4);
 
-    // Запись добрала 100 на четвёртом круге: после четвёртого круга партия кончена, исход — поражение.
+    // Запись добрала 100 на четвёртом круге: после четвёртого круга партия кончена, исход - поражение.
     const done = await finish(db, 'eve', run.runId, roundInputs(fullQuestions(db, run.runId), 4, false));
     expect(done.status).toBe(200);
     expect(await done.json()).toMatchObject({ roundsPlayed: 4, reachedTarget: false });

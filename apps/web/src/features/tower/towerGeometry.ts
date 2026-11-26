@@ -3,10 +3,10 @@ import { SKILL_REWARDS, normalizedHammerDistance, type HammerAttemptRules, type 
 /**
  * Геометрия «Башни». Математика та же, что у молотка: центр блока = положение маркера, центр верхнего
  * блока башни = центр цели. Блок шириной 0,5 дорожки перекрывает башню ровно на (1 − d), где
- * d = |x − c|·2 — это и есть normalizedHammerDistance, по которой сервер считает награду.
+ * d = |x − c|·2 - это и есть normalizedHammerDistance, по которой сервер считает награду.
  */
 export const BLOCK_WIDTH = 0.5;
-/** Дорожка (0..1) занимает эту долю ширины сцены, остальное — поля, чтобы блок в крайних положениях не вылезал. */
+/** Дорожка (0..1) занимает эту долю ширины сцены, остальное - поля, чтобы блок в крайних положениях не вылезал. */
 export const TRACK_FRACTION = 1 / 1.5;
 const TRACK_LEFT_PERCENT = ((1 - TRACK_FRACTION) / 2) * 100;
 
@@ -32,9 +32,9 @@ export interface Piece {
 export interface TowerLanding {
   /** Совпадение с нижним блоком, целые проценты (для подписи). */
   overlapPercent: number;
-  /** Часть, оставшаяся на башне; null — блок не лёг (промах). */
+  /** Часть, оставшаяся на башне; null - блок не лёг (промах). */
   landed: Piece | null;
-  /** Отломанная часть, которая падает; null — отламывать нечего. */
+  /** Отломанная часть, которая падает; null - отламывать нечего. */
   overhang: Piece | null;
   /** Куда падает отломок: -1 влево, 1 вправо. */
   side: -1 | 1;
@@ -45,7 +45,7 @@ function piece(startTrack: number, endTrack: number): Piece | null {
   return width > 0.0001 ? { left: sceneX(startTrack), width } : null;
 }
 
-/** Куда лёг блок: markerPosition — где его остановил тап, targetCenter — центр верхнего блока башни. */
+/** Куда лёг блок: markerPosition - где его остановил тап, targetCenter - центр верхнего блока башни. */
 export function towerLanding(markerPosition: number, targetCenter: number, result: SkillResult): TowerLanding {
   const distance = normalizedHammerDistance(markerPosition, targetCenter);
   const overlapPercent = Math.round((1 - distance) * 100);
@@ -73,7 +73,7 @@ export interface TowerThresholdLabel {
   points: number;
 }
 
-/** Подписи порогов под сценой: N = round((1 − порог стадии)·100), очки — SKILL_REWARDS. */
+/** Подписи порогов под сценой: N = round((1 − порог стадии)·100), очки - SKILL_REWARDS. */
 export function towerThresholdLabels(attempt: HammerAttemptRules): readonly TowerThresholdLabel[] {
   const tiers = ['perfect', 'great', 'good', 'weak'] as const;
   return [

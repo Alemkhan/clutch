@@ -1,9 +1,9 @@
 /**
- * Кланы-эмодзи. Каждое эмодзи существует один раз: кто первым его занял — основатель, остальные
+ * Кланы-эмодзи. Каждое эмодзи существует один раз: кто первым его занял - основатель, остальные
  * вступают по ссылке-приглашению («заражение»). Клан выбирается навсегда.
  *
- * Война кланов — недельная: у каждого участника очки за забеги дня этой недели (за сутки — один
- * лучший забег, какой бы категории он ни был), у клана — сумма
+ * Война кланов - недельная: у каждого участника очки за забеги дня этой недели (за сутки - один
+ * лучший забег, какой бы категории он ни был), у клана - сумма
  * десяти лучших участников, делённая на десять. Маленький активный клан может обойти большой,
  * но звать людей всё равно выгодно: пустые места в десятке считаются нулём.
  */
@@ -12,7 +12,7 @@ import { dailyKey, dayStartMs } from '../solo/dailyQuestionSet';
 
 /**
  * Первый день кланов (игровые сутки по Алматы, понедельник): код выходит раньше, а кланы
- * включаются сами в начале этой недели — она же первая неделя войны.
+ * включаются сами в начале этой недели - она же первая неделя войны.
  */
 export const CLANS_FROM = '2026-11-23';
 
@@ -33,7 +33,7 @@ const SKIN_TONES = /[\u{1F3FB}-\u{1F3FF}]/gu;
 const VARIATION_SELECTOR = /️/gu;
 
 let rgiEmoji: RegExp | null | undefined;
-/** «Ровно одно эмодзи» по Unicode (RGI). Флаг `v` есть не во всех webview — тогда грубая проверка. */
+/** «Ровно одно эмодзи» по Unicode (RGI). Флаг `v` есть не во всех webview - тогда грубая проверка. */
 function isSingleEmoji(value: string): boolean {
   if (rgiEmoji === undefined) {
     try {
@@ -55,7 +55,7 @@ export interface ClanEmoji {
 
 /**
  * Эмодзи клана из ввода игрока или null, если это не одно эмодзи. Оттенки кожи снимаются
- * (👍🏻 и 👍🏿 — один клан 👍); эмодзи, у которого без оттенка нет формы, остаётся как есть.
+ * (👍🏻 и 👍🏿 - один клан 👍); эмодзи, у которого без оттенка нет формы, остаётся как есть.
  */
 export function normalizeClanEmoji(input: string): ClanEmoji | null {
   const raw = input.trim();
@@ -63,7 +63,7 @@ export function normalizeClanEmoji(input: string): ClanEmoji | null {
   const candidates = [raw.replace(SKIN_TONES, ''), raw];
   for (const candidate of candidates) {
     const forms = [candidate];
-    // Символ без селектора (❤, ☺) — эмодзи-форма с FE0F.
+    // Символ без селектора (❤, ☺) - эмодзи-форма с FE0F.
     if ([...candidate].length === 1) forms.push(`${candidate}️`);
     for (const form of forms) {
       if (isSingleEmoji(form)) return { emoji: form, key: form.replace(VARIATION_SELECTOR, '') };
@@ -95,7 +95,7 @@ function shiftKey(dateKey: string, days: number): string {
 export interface ClanWeek {
   /** Понедельник недели (игровые сутки по Алматы), он же ключ недели. */
   weekKey: string;
-  /** Воскресенье — последний день в зачёте. */
+  /** Воскресенье - последний день в зачёте. */
   lastDayKey: string;
   startMs: number;
   endMs: number;
@@ -113,13 +113,13 @@ export function clanWeek(now: number): ClanWeek {
 export interface ClanRunResult {
   progress: number;
   reachedTarget: boolean;
-  /** Круги относительно пара (меньше — лучше); есть только у дошедших до 100%. */
+  /** Круги относительно пара (меньше - лучше); есть только у дошедших до 100%. */
   soloScore: number | null;
 }
 
 /**
  * Очки за забег дня: прогресс (до 99), а дошедший до 100% получает 100 и бонус за скорость
- * до +100 — в пар это +50, вдвое быстрее пара — +100, в полтора пара и медленнее — 0.
+ * до +100 - в пар это +50, вдвое быстрее пара - +100, в полтора пара и медленнее - 0.
  */
 export function clanRunPoints(run: ClanRunResult): number {
   if (!run.reachedTarget) return Math.max(0, Math.min(99, Math.round(run.progress)));
@@ -137,7 +137,7 @@ export function clanPlayerPoints(runs: readonly (ClanRunResult & { dayKey: strin
   return [...bestByDay.values()].reduce((sum, value) => sum + value, 0);
 }
 
-/** Очки клана за неделю: сумма десяти лучших участников / 10, недостающие места — ноль. */
+/** Очки клана за неделю: сумма десяти лучших участников / 10, недостающие места - ноль. */
 export function clanWarScore(memberPoints: readonly number[]): number {
   const top = [...memberPoints].sort((a, b) => b - a).slice(0, CLAN_TOP_MEMBERS);
   return Math.round(top.reduce((sum, value) => sum + value, 0) / CLAN_TOP_MEMBERS);
@@ -149,7 +149,7 @@ export interface ClanMemberView {
   /** Номер участника внутри ответа: для дерева заражений (id игроков наружу не отдаются). */
   id: number;
   displayName: string;
-  /** Кто заразил: id другого участника; null — основатель или пригласивший ушёл из игры. */
+  /** Кто заразил: id другого участника; null - основатель или пригласивший ушёл из игры. */
   parentId: number | null;
   weekPoints: number;
   infected: number;
@@ -173,7 +173,7 @@ export interface ClanMeResponse {
     youWeekPoints: number;
     infectedByYou: number;
     invitedByName: string | null;
-    /** Ссылка «заразить друга»; null — ссылка на Mini App не настроена. */
+    /** Ссылка «заразить друга»; null - ссылка на Mini App не настроена. */
     inviteLink: string | null;
     /** Личный код приглашения: из него строится карточка-превью «заражения». */
     inviteCode: string;

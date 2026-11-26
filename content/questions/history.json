@@ -530,7 +530,7 @@
     ],
     "openAnswer": false,
     "sourceHint": "Википедия: Иван III",
-    "reviewNote": "Формулировка длинная — сократить или оставить только выбор из вариантов.",
+    "reviewNote": "Формулировка длинная - сократить или оставить только выбор из вариантов.",
     "origin": "authored",
     "license": "original",
     "daily": false
@@ -719,7 +719,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Великий шёлковый путь был проложен во II веке до н. э. во время династии Хань.",
-    "sourceTitle": "Великий шёлковый путь — Википедия",
+    "sourceTitle": "Великий шёлковый путь - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": false
@@ -747,7 +747,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Посланник Чжан Цянь отправился на Запад при императоре У-ди династии Хань.",
-    "sourceTitle": "Великий шёлковый путь — Википедия",
+    "sourceTitle": "Великий шёлковый путь - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": false
@@ -771,7 +771,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Вторая мировая война началась 1 сентября 1939 года с вторжения Германии в Польшу.",
-    "sourceTitle": "Хронология Второй мировой войны — Википедия",
+    "sourceTitle": "Хронология Второй мировой войны - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true
@@ -797,7 +797,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Германия атаковала Польшу, что заставило Великобританию и Францию объявить войну Германии.",
-    "sourceTitle": "Хронология Второй мировой войны — Википедия",
+    "sourceTitle": "Хронология Второй мировой войны - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true
@@ -823,7 +823,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Ялтинская (Крымская) конференция проходила в Ливадийском дворце.",
-    "sourceTitle": "Хронология Второй мировой войны — Википедия",
+    "sourceTitle": "Хронология Второй мировой войны - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": false
@@ -849,7 +849,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Колосс Родосский простоял всего около 50 лет и был разрушен землетрясением.",
-    "sourceTitle": "Семь чудес света — Википедия",
+    "sourceTitle": "Семь чудес света - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true
@@ -875,7 +875,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Висячие сады Семирамиды связывают с вавилонским царём Навуходоносором II.",
-    "sourceTitle": "Семь чудес света — Википедия",
+    "sourceTitle": "Семь чудес света - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true
@@ -901,7 +901,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Фидий создал статую Зевса из золота и слоновой кости во II половине V века до н. э.",
-    "sourceTitle": "Семь чудес света — Википедия",
+    "sourceTitle": "Семь чудес света - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": false
@@ -928,7 +928,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Благодаря острову Фарос маяки во многих европейских языках называют фарами.",
-    "sourceTitle": "Семь чудес света — Википедия",
+    "sourceTitle": "Семь чудес света - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": false
@@ -954,7 +954,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Руины Галикарнаса находятся в современном турецком городе Бодрум.",
-    "sourceTitle": "Семь чудес света — Википедия",
+    "sourceTitle": "Семь чудес света - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": false
@@ -1084,7 +1084,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Акт о безоговорочной капитуляции Германии вступил в силу в мае 1945 года.",
-    "sourceTitle": "Хронология Второй мировой войны — Википедия",
+    "sourceTitle": "Хронология Второй мировой войны - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": false
@@ -1112,7 +1112,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Церемония подписания проходила в Токийском заливе на линкоре «Миссури».",
-    "sourceTitle": "Хронология Второй мировой войны — Википедия",
+    "sourceTitle": "Хронология Второй мировой войны - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": false
@@ -1161,7 +1161,7 @@
       "Парфенон"
     ],
     "openAnswer": true,
-    "explanationRu": "Стоунхендж — внесённый в список ЮНЕСКО археологический памятник.",
+    "explanationRu": "Стоунхендж - внесённый в список ЮНЕСКО археологический памятник.",
     "sourceTitle": "Geniuses vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
@@ -1296,11 +1296,11 @@
     ],
     "openAnswer": true,
     "sourceUrl": "https://whc.unesco.org/en/list/278/",
-    "sourceTitle": "ЮНЕСКО — Вавилон, объект Всемирного наследия",
+    "sourceTitle": "ЮНЕСКО - Вавилон, объект Всемирного наследия",
     "origin": "authored",
     "license": "original",
     "explanationRu": "Древний Вавилон находился на территории современного Ирака, примерно в 85 километрах к югу от Багдада. Вавилон был столицей могущественного Вавилонского царства, а Багдад сегодня является столицей Ирака.",
-    "reviewNote": "Заблокировано 2026-11-01: «недалеко» — субъективная формулировка, не годится для единственного ответа.",
+    "reviewNote": "Заблокировано 2026-11-01: «недалеко» - субъективная формулировка, не годится для единственного ответа.",
     "daily": true
   },
   {
@@ -1326,7 +1326,7 @@
     ],
     "openAnswer": true,
     "sourceUrl": "https://www.dalailama.com/the-dalai-lama/events-and-awards/chronology-of-events",
-    "sourceTitle": "Официальный сайт Далай-ламы — Хронология событий",
+    "sourceTitle": "Официальный сайт Далай-ламы - Хронология событий",
     "origin": "authored",
     "license": "original",
     "explanationRu": "Далай-ламы на протяжении нескольких столетий совмещали духовное и политическое руководство Тибетом. В 1959 году XIV Далай-лама покинул Тибет и отправился в изгнание в Индию. В 2011 году он официально передал свои оставшиеся политические полномочия избранному руководству тибетской администрации в изгнании.",

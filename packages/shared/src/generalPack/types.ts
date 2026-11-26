@@ -22,15 +22,15 @@ export type PackTopic =
   | 'language'
   | 'tech'
   | 'world'
-  /** История Казахстана (по программе ЕНТ): своя категория, в общий пул — только с `generalPool`. */
+  /** История Казахстана (по программе ЕНТ): своя категория, в общий пул - только с `generalPool`. */
   | 'kazakhstan';
 
 export type EditorialStatus = 'pending' | 'approved' | 'blocked';
 
-/** `original` — written for Clutch, facts still need a source before approval. */
-/** `opentdb` — Open Trivia Database (opentdb.com), переведено и адаптировано. */
+/** `original` - written for Clutch, facts still need a source before approval. */
+/** `opentdb` - Open Trivia Database (opentdb.com), переведено и адаптировано. */
 export type PackOrigin = 'wikidata' | 'authored' | 'notebooklm' | 'opentdb';
-/** CC-BY-SA-4.0 — нужна атрибуция (строка в профиле) и та же лицензия у переработки. */
+/** CC-BY-SA-4.0 - нужна атрибуция (строка в профиле) и та же лицензия у переработки. */
 export type PackLicense = 'CC0' | 'original' | 'CC-BY-SA-4.0';
 
 interface PackRecordBase {
@@ -74,23 +74,23 @@ export interface PackQuestion extends PackRecordBase {
    */
   generalPool?: boolean;
   /**
-   * false — вопрос не идёт в забег дня (слишком узкий или спорный между странами), но остаётся
+   * false - вопрос не идёт в забег дня (слишком узкий или спорный между странами), но остаётся
    * в дуэлях и свободной игре. Без поля решает isDailyEligible (зоны, сложность, зубрёжка).
    */
   daily?: boolean;
   /**
    * Первый день, с которого запись попадает в наборы дня (YYYY-MM-DD). Новые вопросы не должны
-   * менять уже сыгранные наборы: окно пакета считается по всему пулу. В дуэлях и свободной игре — сразу.
+   * менять уже сыгранные наборы: окно пакета считается по всему пулу. В дуэлях и свободной игре - сразу.
    */
   liveFrom?: string;
-  /** Последний день (YYYY-MM-DD), когда запись ещё идёт в забег дня; дальше — только дуэли и свободная игра. */
+  /** Последний день (YYYY-MM-DD), когда запись ещё идёт в забег дня; дальше - только дуэли и свободная игра. */
   dailyUntil?: string;
   /** Первый день (YYYY-MM-DD) в забеге дня для записи, которая уже есть в дуэлях; прошлые дни не меняет. */
   dailyFrom?: string;
 }
 
 export interface PackImage {
-  /** https://commons.wikimedia.org/wiki/Special:FilePath/<файл>?width=<px> — превью нужной ширины. */
+  /** https://commons.wikimedia.org/wiki/Special:FilePath/<файл>?width=<px> - превью нужной ширины. */
   url: string;
   /** Страница файла на Commons: автор, лицензия. */
   pageUrl: string;
@@ -105,7 +105,7 @@ export interface PackSetMember {
 
 /**
  * A closed category: «Назови планету Солнечной системы».
- * Last Stand needs every valid member; multiple choice asks «Что из этого — …?» with one member
+ * Last Stand needs every valid member; multiple choice asks «Что из этого - …?» with one member
  * against three non-members.
  */
 export interface PackSet extends PackRecordBase {

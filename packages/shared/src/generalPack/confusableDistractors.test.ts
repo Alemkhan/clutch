@@ -39,14 +39,14 @@ function closePairRows(): string[] {
   return rows.sort();
 }
 
-// «Моне/Мане» и «БЭСМ/МЭСМ» — легитимные, но опасные дистракторы (docs/AUDIT.md A08): новоявленные
+// «Моне/Мане» и «БЭСМ/МЭСМ» - легитимные, но опасные дистракторы (docs/AUDIT.md A08): новоявленные
 // близкие пары не должны появляться молча, поэтому список заморожен эталоном рядом с тестом.
 describe('близкие дистракторы', () => {
   it('не засчитывает ни один дистрактор как правильный ответ', () => {
     for (const q of approved) {
       const accepted = [q.answerRu, ...q.acceptedRu];
       for (const d of q.distractorsRu) {
-        expect(matchesAccepted(d, accepted), `${q.id}: дистрактор «${d}» прошёл бы как ответ — замени его`).toBe(false);
+        expect(matchesAccepted(d, accepted), `${q.id}: дистрактор «${d}» прошёл бы как ответ - замени его`).toBe(false);
       }
     }
   });
@@ -56,8 +56,8 @@ describe('близкие дистракторы', () => {
     const baseline = new Set(CONFUSABLE_DISTRACTOR_PAIRS);
     const added = actual.filter((row) => !baseline.has(row));
     const removed = CONFUSABLE_DISTRACTOR_PAIRS.filter((row) => !actual.includes(row));
-    expect(added, 'новые близкие пары — проверь, что дистрактор легитимный, и добавь в confusableDistractors.baseline.ts:\n' + added.join('\n')).toEqual([]);
-    expect(removed, 'пары исчезли из данных — убери их из confusableDistractors.baseline.ts:\n' + removed.join('\n')).toEqual([]);
+    expect(added, 'новые близкие пары - проверь, что дистрактор легитимный, и добавь в confusableDistractors.baseline.ts:\n' + added.join('\n')).toEqual([]);
+    expect(removed, 'пары исчезли из данных - убери их из confusableDistractors.baseline.ts:\n' + removed.join('\n')).toEqual([]);
     expect(actual.length).toBe(CONFUSABLE_DISTRACTOR_PAIRS.length);
   });
 });

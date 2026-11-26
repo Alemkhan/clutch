@@ -65,21 +65,21 @@ describe('the day board', () => {
 
   it('shows my own result softly when my place is hidden from others', () => {
     const html = render(ready({ entries: [entry('Ann', 7)], total: 140, you: standing() }));
-    // 37-е из 140 — ниже общей половины: номер не показываем, только долю обойдённых.
+    // 37-е из 140 - ниже общей половины: номер не показываем, только долю обойдённых.
     expect(html).not.toMatch(/solo-board-you-rank">37</);
     expect(html).toContain('Лучше 74% игроков<');
     expect(html).toContain('Это место видишь только ты');
     // Попытка дня сыграна: таблица зовёт в дуэль, а не во второй забег дня.
     expect(html).toMatch(/cta-btn solo-board-play">Дуэль</);
     expect(html).toContain('Ты: 11 кругов · из 140 дошедших');
-    expect(html).toContain('и ещё 139 — их места видят только они сами');
+    expect(html).toContain('и ещё 139, их места видят только они сами');
   });
 
   it('shows my place and the gap to the next one inside the public part', () => {
     const html = render(ready({ entries: [entry('Ann', 7)], you: standing({ rank: 6, total: 140, placeAbove: 5 }) }));
     expect(html).toMatch(/solo-board-you-rank">6</);
     // Цель достижимая, а не «попади в топ-50».
-    expect(html).toContain('До 5-го места — один круг<');
+    expect(html).toContain('До 5-го места: один круг<');
   });
 
   it('says plainly when my run is not in today\'s board at all', () => {
@@ -98,7 +98,7 @@ describe('the day board', () => {
     const mine = standing({ rank: 1, total: 3, entry: entry('Я', 7), roundsToNext: null });
     const html = render(ready({ entries: [entry('Я', 7), entry('Ann', 9)], you: mine }));
     expect(html).toContain('solo-board-row mine');
-    // В своей строке — «Ты» и «ТЫ» вместо имени и его инициалов; имя остаётся в title.
+    // В своей строке - «Ты» и «ТЫ» вместо имени и его инициалов; имя остаётся в title.
     expect(html).toContain('>ТЫ<');
     expect(html).toContain('title="Я">Ты<');
     expect(html).toContain('Ты первый сегодня<');
@@ -119,7 +119,7 @@ describe('the reset line and the footer', () => {
 
   it('counts down to the day boundary with fake timers', () => {
     vi.useFakeTimers();
-    // Граница суток — 00:00 по Алматы (UTC+5): 19:00 UTC.
+    // Граница суток - 00:00 по Алматы (UTC+5): 19:00 UTC.
     vi.setSystemTime(Date.UTC(2026, 9, 13, 18, 30, 0));
     expect(resetLabel(msUntilDayEnd(Date.now()))).toBe('Обнулится меньше чем через час · полночь по Алматы');
     vi.setSystemTime(Date.UTC(2026, 9, 13, 14, 30, 0));
@@ -153,20 +153,20 @@ describe('the reset line and the footer', () => {
 
 describe('the hint under my place', () => {
   it('counts the rounds needed to pass the player above', () => {
-    expect(standingHint(standing({ rank: 5, roundsToNext: 1 }))).toBe('До 4-го места — один круг');
-    expect(standingHint(standing({ rank: 5, roundsToNext: 2 }))).toBe('До 4-го места — 2 круга');
-    expect(standingHint(standing({ rank: 9, roundsToNext: 5 }))).toBe('До 8-го места — 5 кругов');
+    expect(standingHint(standing({ rank: 5, roundsToNext: 1 }))).toBe('До 4-го места: один круг');
+    expect(standingHint(standing({ rank: 5, roundsToNext: 2 }))).toBe('До 4-го места: 2 круга');
+    expect(standingHint(standing({ rank: 9, roundsToNext: 5 }))).toBe('До 8-го места: 5 кругов');
   });
 
   it('names the place above when ties share a number (1, 2, 2, 4)', () => {
-    expect(standingHint(standing({ rank: 4, roundsToNext: 1, placeAbove: 2 }))).toBe('До 2-го места — один круг');
+    expect(standingHint(standing({ rank: 4, roundsToNext: 1, placeAbove: 2 }))).toBe('До 2-го места: один круг');
   });
 
   it('explains an equal-rounds gap by the guess, per kind of viewer', () => {
     const tied = { rank: 3, roundsToNext: 1, placeAbove: 2, outrankedByGuess: true } as const;
-    expect(standingHint(standing({ ...tied, tiebreak: 'not_answered' }))).toBe('Ответь «На глазок» — поднимет над равными');
-    expect(standingHint(standing({ ...tied, tiebreak: 'answered' }))).toBe('Выше с теми же кругами — по «На глазок»');
-    expect(standingHint(standing({ ...tied, tiebreak: 'guest' }))).toBe('Равных разводит «На глазок» — только с Telegram');
+    expect(standingHint(standing({ ...tied, tiebreak: 'not_answered' }))).toBe('Ответь «На глазок», это поднимет над равными');
+    expect(standingHint(standing({ ...tied, tiebreak: 'answered' }))).toBe('Выше с теми же кругами по «На глазок»');
+    expect(standingHint(standing({ ...tied, tiebreak: 'guest' }))).toBe('Равных разводит «На глазок», только с Telegram');
   });
 
   it('says there is nobody above the first place', () => {
@@ -265,7 +265,7 @@ describe('the shared Wiki Path board tab', () => {
       .toEqual(['1', '2', '2']);
     expect(html).toContain('5 переходов');
     expect(html).toContain('aria-expanded="false"');
-    expect(html).toContain('Меньше переходов — выше');
+    expect(html).toContain('Чем меньше переходов, тем выше');
     expect(wikiPathClicksText(1)).toBe('1 переход');
     expect(wikiPathClicksText(2)).toBe('2 перехода');
     expect(wikiPathClicksText(11)).toBe('11 переходов');

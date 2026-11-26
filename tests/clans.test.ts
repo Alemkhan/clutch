@@ -90,7 +90,7 @@ describe('emoji clans', () => {
     expect(taken).toMatchObject({ status: 409, body: { reason: 'taken' } });
     const check = await call(db, 'GET', `/api/clans/check?emoji=${encodeURIComponent('🦆')}`, second.authorization);
     expect(await check.json() as ClanCheckResponse).toMatchObject({ available: false, members: 1 });
-    // Один игрок — один клан навсегда.
+    // Один игрок - один клан навсегда.
     expect((await found(db, first, '🐸')).body.reason).toBe('already_member');
   });
 
@@ -113,7 +113,7 @@ describe('emoji clans', () => {
     dailyRun(db, founder.playerId, { name: 'Основатель' });
     const code = inviteCode((await found(db, founder, '🦆')).body);
 
-    // Вступить можно и без забега: ссылка друга — это и есть приглашение.
+    // Вступить можно и без забега: ссылка друга - это и есть приглашение.
     const joined = await call(db, 'POST', '/api/clans/join', friend.authorization, { code });
     const joinedBody = await joined.json() as { status: string; me: ClanMeResponse };
     expect(joinedBody.status).toBe('joined');
@@ -122,7 +122,7 @@ describe('emoji clans', () => {
     const second = await call(db, 'POST', '/api/clans/join', friendOfFriend.authorization, { code: inviteCode(joinedBody.me) });
     expect((await second.json() as { status: string }).status).toBe('joined');
 
-    // Уже в клане — остаётся в своём.
+    // Уже в клане - остаётся в своём.
     dailyRun(db, friendOfFriend.playerId);
     const other = guest('other-founder');
     dailyRun(db, other.playerId);
@@ -149,7 +149,7 @@ describe('emoji clans', () => {
     dailyRun(db, small.playerId, { at: Date.now() - 10 * 24 * 60 * 60 * 1000, progress: 90 });
     const bigCode = inviteCode((await found(db, big, '🐘')).body);
     await found(db, small, '🐜');
-    // Слон: четыре участника по 40 очков. Муравей: один, два финиша по 200 за одни сутки — в зачёт один.
+    // Слон: четыре участника по 40 очков. Муравей: один, два финиша по 200 за одни сутки - в зачёт один.
     for (let index = 0; index < 3; index += 1) {
       const member = guest(`elephant-${index}`);
       await call(db, 'POST', '/api/clans/join', member.authorization, { code: bigCode });

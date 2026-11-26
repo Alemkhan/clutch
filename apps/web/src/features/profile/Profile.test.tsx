@@ -49,7 +49,7 @@ describe('server-backed profile', () => {
       profile: { completedRuns: 0, reachedTargetRuns: 0, bestRounds: null },
     });
     expect(html).toContain('Сыграй первый зачётный забег');
-    expect(html).toContain('>—<');
+    expect(html).toContain('>–<');
     expect(html).not.toContain('этом устройстве');
   });
 

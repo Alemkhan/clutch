@@ -21,7 +21,7 @@ export interface SoloResultView {
   end: SoloEnd;
   reachedTarget: boolean;
   headline: string;
-  /** Достигнутый прогресс: сервер главнее, пока ответа нет — локальный. */
+  /** Достигнутый прогресс: сервер главнее, пока ответа нет - локальный. */
   progress: number;
   roundsPlayed: number;
   summary: string;
@@ -37,7 +37,7 @@ export function circles(count: number): string {
 }
 
 /**
- * Исход и эталонные числа игроку здесь не нужны: цель достигнута и сохранена — сообщаем только это,
+ * Исход и эталонные числа игроку здесь не нужны: цель достигнута и сохранена - сообщаем только это,
  * а исход игрок увидит в «Моих партиях», когда с его результатом сыграют.
  */
 export function buildSoloResult({ view, save, response }: SoloResultInput): SoloResultView {
@@ -125,7 +125,7 @@ export interface RunReceiptStat {
   label: string;
 }
 
-/** Место в таблице дня: загрузка и ошибка не ломают экран, число просто остаётся «—». */
+/** Место в таблице дня: загрузка и ошибка не ломают экран, число просто остаётся «-». */
 export type RunStandingState =
   | { status: 'loading' }
   | { status: 'error' }
@@ -141,10 +141,10 @@ export function countPerfectStrikes(skillResults: readonly SkillResult[]): numbe
  */
 export function buildReceiptStats(input: {
   correctCount: number;
-  /** Сыграно кругов (один круг — один вопрос): с ним «верных» читается как «7/8». */
+  /** Сыграно кругов (один круг - один вопрос): с ним «верных» читается как «7/8». */
   roundsPlayed?: number;
   skillResults: readonly SkillResult[];
-  /** null — места у забега нет и блок не показывается. */
+  /** null - места у забега нет и блок не показывается. */
   standing: RunStandingState | null;
 }): RunReceiptStat[] {
   const t = messagesFor(m);
@@ -154,14 +154,14 @@ export function buildReceiptStats(input: {
   ];
   if (input.standing) {
     const you = input.standing.status === 'ready' ? input.standing.standing : null;
-    // Место ниже общей половины таблицы другие не видят: вместо номера — доля обойдённых.
+    // Место ниже общей половины таблицы другие не видят: вместо номера - доля обойдённых.
     if (you && !isPublicPlace(you.rank, you.total)) {
       const percent = betterThanPercent(you.rank, you.total);
       stats.push(percent
         ? { key: 'place', value: `${percent}%`, label: t.statBetterThan }
         : { key: 'place', value: '✓', label: t.statFinishCounted });
     } else {
-      stats.push({ key: 'place', value: you ? t.rank(you.rank) : '—', label: t.statPlace });
+      stats.push({ key: 'place', value: you ? t.rank(you.rank) : '–', label: t.statPlace });
     }
   }
   return stats;

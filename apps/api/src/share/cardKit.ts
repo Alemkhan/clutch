@@ -68,7 +68,7 @@ export function text(attrs: string, value: string, weight: Weight): string {
   return `<text ${attrs} font-family="${base}" font-weight="${weight === 'black' ? 900 : 700}">${spans}</text>`;
 }
 
-const NARROW = new Set(Array.from(' .,:;!|\'’iljrtfIі1()-—–«»"'));
+const NARROW = new Set(Array.from(' .,:;!|\'’iljrtfIі1()-\u2014\u2013«»"'));
 const WIDE = new Set(Array.from('MWmwШЩЖМЮЫФшщжмюыфӘә%@'));
 
 /** Грубая оценка ширины строки Inter (в долях кегля), чтобы ужать кегль под место. */

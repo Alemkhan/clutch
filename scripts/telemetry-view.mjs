@@ -2,9 +2,9 @@
 //
 // Дев-инструмент владельца: быстро увидеть, на какие вопросы жаловались
 // (question_reports, миграция 0002), кто и сколько играл (match_runs +
-// analytics_events), и всё об одном игроке. player_id печатается целиком —
+// analytics_events), и всё об одном игроке. player_id печатается целиком -
 // его копируют из вывода и передают в `player` для детализации:
-//   npm run reports -- --question gp: --limit 5   (в конце — удары по мини-играм)
+//   npm run reports -- --question gp: --limit 5   (в конце - удары по мини-играм)
 //   npm run activity -- --days 30
 //   npm run player -- guest:xxxx
 //   npm run funnel -- --days 14     (воронка по дням + приглашения)
@@ -16,7 +16,7 @@
 //
 // Запуск: node scripts/telemetry-view.mjs <reports|activity|player> [флаги]
 // Флаги принимаются как `--flag value`, так и `--flag=value`.
-// База ищется как в calibrate-pricing.mjs; явный путь — флагом --db.
+// База ищется как в calibrate-pricing.mjs; явный путь - флагом --db.
 
 import { DatabaseSync } from 'node:sqlite';
 import { readdirSync } from 'node:fs';
@@ -37,7 +37,7 @@ const USAGE = `Использование:
   node scripts/telemetry-view.mjs funnel   [--days N]
   node scripts/telemetry-view.mjs retention
   node scripts/telemetry-view.mjs errors   [--days N] [--limit N]
-Общее: --db <файл.sqlite> — явный путь к базе (по умолчанию локальная D1 из apps/api/.wrangler).`;
+Общее: --db <файл.sqlite> - явный путь к базе (по умолчанию локальная D1 из apps/api/.wrangler).`;
 
 function fail(message) {
   console.error(message);
@@ -56,19 +56,19 @@ function findDatabase(explicit) {
   return file ? join(d1Directory, file) : null;
 }
 
-/** Значение для колонки: null/пустое — «—», пробелы схлопнуты, длиннее max — с «…». */
+/** Значение для колонки: null/пустое - «-», пробелы схлопнуты, длиннее max - с «…». */
 function cell(value, max) {
-  if (value === null || value === undefined) return '—';
+  if (value === null || value === undefined) return '-';
   const text = String(value).replace(/\s+/g, ' ').trim();
-  if (!text) return '—';
+  if (!text) return '-';
   return text.length > max ? `${text.slice(0, max - 1)}…` : text;
 }
 
 function time(ms) {
-  return ms === null || ms === undefined ? '—' : new Date(ms).toLocaleString('ru-RU');
+  return ms === null || ms === undefined ? '-' : new Date(ms).toLocaleString('ru-RU');
 }
 
-/** Таблица с выравниванием: ширина колонки — по самой широкой ячейке, но не выше cap. */
+/** Таблица с выравниванием: ширина колонки - по самой широкой ячейке, но не выше cap. */
 function printTable(headers, rows, caps) {
   const widths = headers.map((header, index) => {
     const widest = rows.reduce((max, row) => Math.max(max, row[index].length), header.length);
@@ -197,7 +197,7 @@ function runActivity(db, days, limit) {
   let reports;
   let events;
   try {
-    // Забеги — только зачётное соло и его производные (training/friend отличаются rules_version).
+    // Забеги - только зачётное соло и его производные (training/friend отличаются rules_version).
     runs = db.prepare(`
       SELECT player_id,
              COUNT(*) AS total,
@@ -297,7 +297,7 @@ function runPlayer(db, playerId, limit) {
     process.exit(2);
   }
 
-  console.log(`Игрок: ${playerId} (имя: ${displayNameRow ? displayNameRow.display_name : '—'})`);
+  console.log(`Игрок: ${playerId} (имя: ${displayNameRow ? displayNameRow.display_name : '-'})`);
 
   console.log('\nЗабеги (последние 10):');
   if (runs.length === 0) {
@@ -309,9 +309,9 @@ function runPlayer(db, playerId, limit) {
         time(row.created_at),
         cell(row.category, 10),
         cell(row.status, 10),
-        row.rounds === null || row.rounds === undefined ? '—' : String(row.rounds),
+        row.rounds === null || row.rounds === undefined ? '-' : String(row.rounds),
         String(row.progress),
-        row.reached_target === 1 ? 'да' : row.reached_target === 0 ? 'нет' : '—',
+        row.reached_target === 1 ? 'да' : row.reached_target === 0 ? 'нет' : '-',
       ]),
       [20, 10, 10, 5, 8, 5],
     );
@@ -394,7 +394,7 @@ function runFunnel(db, days) {
     }),
     [10, 8, 7, 9, 13, 10, 13, 16, 7],
   );
-  console.log('«открыли» считается только с релиза с событием app_opened; раньше — 0.');
+  console.log('«открыли» считается только с релиза с событием app_opened; раньше - 0.');
 }
 
 function runRetention(db) {
@@ -414,7 +414,7 @@ function runRetention(db) {
     if (!daysByPlayer.has(r.player_id)) daysByPlayer.set(r.player_id, new Set());
     daysByPlayer.get(r.player_id).add(r.day);
   }
-  // TELEMETRY_NOW (ISO) — только для тестов: фиксирует «сейчас».
+  // TELEMETRY_NOW (ISO) - только для тестов: фиксирует «сейчас».
   const today = gameDayOf(process.env.TELEMETRY_NOW ? Date.parse(process.env.TELEMETRY_NOW) : Date.now());
   const cohorts = new Map();
   for (const set of daysByPlayer.values()) {
@@ -424,7 +424,7 @@ function runRetention(db) {
   }
   const returned = (members, first, n) => {
     const target = addDays(first, n);
-    if (target > today) return '—';
+    if (target > today) return '-';
     const back = members.filter((set) => set.has(target)).length;
     const share = `${back} (${Math.round((back / members.length) * 100)}%)`;
     // Игровой день ещё идёт: пока это не итог.
@@ -444,7 +444,7 @@ function runRetention(db) {
     }),
     [10, 8, 16, 16],
   );
-  console.log('«идёт» — игровой день ещё не закончился, значение может вырасти; «—» — срок ещё не наступил.');
+  console.log('«идёт» - игровой день ещё не закончился, значение может вырасти; «-» - срок ещё не наступил.');
 }
 
 function runErrors(db, days, limit) {

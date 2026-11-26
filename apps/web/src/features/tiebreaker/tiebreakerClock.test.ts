@@ -26,7 +26,7 @@ describe('countdown format', () => {
 
 describe('time until the day ends', () => {
   it('counts to the next day boundary, which is shifted by the shared offset', () => {
-    // Граница суток — 19:00 UTC (сдвиг 5 ч в shared).
+    // Граница суток - 19:00 UTC (сдвиг 5 ч в shared).
     expect(DAY_BOUNDARY_OFFSET_MINUTES).toBe(300);
     const noon = Date.parse('2026-10-15T12:00:00Z');
     expect(msUntilDayEnd(noon)).toBe(7 * HOUR);

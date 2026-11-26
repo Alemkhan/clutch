@@ -3,7 +3,7 @@ import type { SoloRoundRow } from './soloRoundsRepository';
 
 const TEXT_MAX = 200;
 
-/** Необязательные диагностические поля ответа: старый клиент их не шлёт. true — формат допустим. */
+/** Необязательные диагностические поля ответа: старый клиент их не шлёт. true - формат допустим. */
 export function hasValidAnswerDiagnostics(body: Record<string, unknown>): boolean {
   const { selectedText, optionCount, firstOptionId } = body;
   return (selectedText === undefined || (typeof selectedText === 'string' && selectedText.length <= TEXT_MAX))

@@ -364,7 +364,7 @@
       "2"
     ],
     "openAnswer": true,
-    "explanationRu": "В грамме белка и углеводов — около 4 ккал.",
+    "explanationRu": "В грамме белка и углеводов - около 4 ккал.",
     "sourceHint": "Википедия: Пищевая ценность",
     "origin": "authored",
     "license": "original",
@@ -438,7 +438,7 @@
       "васаби"
     ],
     "openAnswer": true,
-    "explanationRu": "Унаги — японское слово для обозначения пресноводного угря.",
+    "explanationRu": "Унаги - японское слово для обозначения пресноводного угря.",
     "sourceTitle": "Hammer Challenge",
     "origin": "notebooklm",
     "license": "original",
@@ -563,7 +563,7 @@
     "kind": "single",
     "topic": "food",
     "difficulty": "Medium",
-    "promptRu": "Какая ягода — обязательный ингредиент торта «Шварцвальд» («Чёрный лес»)?",
+    "promptRu": "Какая ягода - обязательный ингредиент торта «Шварцвальд» («Чёрный лес»)?",
     "answerRu": "вишня",
     "acceptedRu": [
       "вишня",

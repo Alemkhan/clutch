@@ -1,7 +1,7 @@
 # Первый выпуск Clutch в Cloudflare (runbook)
 
 Пошаговый порядок первого production-выпуска: Workers + D1 + Pages + Telegram Mini App.
-Команды — PowerShell из корня репозитория. Фактическое состояние первого выпуска записано
+Команды - PowerShell из корня репозитория. Фактическое состояние первого выпуска записано
 ниже и в разделе Release evidence.
 
 **Статус 2026-10-27:** OAuth-авторизация подтверждена; созданы production D1
@@ -12,7 +12,7 @@ preflight прошёл для API `https://clutch-api-prod.kettikteam-official.w
 BotFather и walkthrough на настоящем телефоне ещё не подтверждены; публичный запуск пока
 закрыт. Облачные команды (`deploy`, `secret put`) запускает только владелец. Деплой ручной,
 CI его не делает.
-Локальная настройка и туннель — [README](../README.md) и [TESTING](TESTING.md).
+Локальная настройка и туннель - [README](../README.md) и [TESTING](TESTING.md).
 
 ## Стоп-условия
 
@@ -30,7 +30,7 @@ CI его не делает.
   `apps/api/wrangler.toml` не используются (preflight откажет).
 - Заданы production `TELEGRAM_BOT_TOKEN` и независимый `SESSION_SIGNING_SECRET` (не токен бота).
 - Назначен человек, который наблюдает первый запуск и может остановить трафик.
-- **Production-бот — `@playclutchbot`** (подтверждено владельцем 2026-10-17). Обе ссылки шага 2:
+- **Production-бот - `@playclutchbot`** (подтверждено владельцем 2026-10-17). Обе ссылки шага 2:
   `https://t.me/playclutchbot?startapp`.
 
 Бюджет: для закрытой проверки хватает Workers Free; перед TikTok-трафиком включить Workers
@@ -57,7 +57,7 @@ npx wrangler whoami
 npx wrangler d1 create clutch-prod
 ```
 
-**Rate Limiting namespace.** Отдельного «create» нет: `namespace_id` — положительное целое,
+**Rate Limiting namespace.** Отдельного «create» нет: `namespace_id` - положительное целое,
 которое вы выбираете сами; оно должно быть уникальным среди Rate Limiting-привязок аккаунта и
 не равным dev-значению из `apps/api/wrangler.toml`. Возьмите, например, случайное 7-значное
 число. Это следует из документации
@@ -67,7 +67,7 @@ npx wrangler d1 create clutch-prod
 
 **Pages project (Direct Upload).** Для первого выпуска проще Direct Upload: без привязки к
 Git, build идёт локально с теми же `VITE_*`, что проверил preflight. Git integration можно
-подключить позже, но Direct Upload и Git integration — разные проекты (существующий проект
+подключить позже, но Direct Upload и Git integration - разные проекты (существующий проект
 не переключить), см. [Direct Upload](https://developers.cloudflare.com/pages/get-started/direct-upload/).
 
 ```powershell
@@ -98,8 +98,8 @@ Get-Content release.env | Where-Object { $_ -match '^\s*[A-Z0-9_]+=' } | ForEach
 ```
 
 Согласованность: `CLUTCH_PRODUCTION_TELEGRAM_MINI_APP_LINK` (`https://t.me/<bot>?startapp`) и
-`CLUTCH_PRODUCTION_TELEGRAM_BOT_LINK` (`https://t.me/<bot>?startapp` — открывает Mini App сразу; допустим и `https://t.me/<bot>`) должны называть одного бота,
-иначе preflight откажет. `CLUTCH_PRODUCTION_PUBLIC_WEB_ORIGIN` — origin Pages без пути.
+`CLUTCH_PRODUCTION_TELEGRAM_BOT_LINK` (`https://t.me/<bot>?startapp` - открывает Mini App сразу; допустим и `https://t.me/<bot>`) должны называть одного бота,
+иначе preflight откажет. `CLUTCH_PRODUCTION_PUBLIC_WEB_ORIGIN` - origin Pages без пути.
 
 ## 3. Проверки и генерация конфига
 
@@ -135,10 +135,10 @@ npx wrangler d1 migrations list DB --remote --config apps/api/wrangler.productio
 npx wrangler d1 migrations apply DB --remote --config apps/api/wrangler.production.generated.jsonc
 ```
 
-Первое применение — `CREATE TABLE`/`CREATE INDEX` и аддитивные `ALTER TABLE ADD COLUMN` на
+Первое применение - `CREATE TABLE`/`CREATE INDEX` и аддитивные `ALTER TABLE ADD COLUMN` на
 пустой базе (`0001_schema.sql`, `0002`–`0006`). Cloudflare делает backup перед применением,
 но это не план восстановления ([D1 commands](https://developers.cloudflare.com/d1/wrangler-commands/)).
-Применённые файлы не переписывать: любое изменение схемы после этого — новая migration. Для
+Применённые файлы не переписывать: любое изменение схемы после этого - новая migration. Для
 будущих миграций, пересобирающих таблицы, заранее делайте резервную копию.
 
 ## 5. Секреты
@@ -225,7 +225,7 @@ rows read/written/storage; доля `player` против `bot`; доставк�
 подтвердил сохранение и подбор записей.
 
 Репорты и события (`question_reports`, `analytics_events`: `sound_failure`,
-`answer_option_mismatch`, `answer_replay_conflict`) — выгрузить prod-базу через
+`answer_option_mismatch`, `answer_replay_conflict`) - выгрузить prod-базу через
 `npm run reports:pull`, затем смотреть `npm run reports` / `npm run activity`. Команда
 `reports:pull` делается отдельной задачей и на момент написания **может отсутствовать**;
 без неё читайте таблицы через
@@ -247,7 +247,7 @@ Rollback сразу меняет активную версию
 
 **D1.** Откат кода не откатывает базу. Не удалять production-базу и не переписывать
 применённые migrations; оценить совместимость старого кода со схемой; предпочтительно
-выпустить исправляющую forward migration; восстановление из backup/Time Travel — отдельное
+выпустить исправляющую forward migration; восстановление из backup/Time Travel - отдельное
 аварийное решение. Worker rollback не чинит удалённые или несовместимо изменённые ресурсы.
 
 ## Ansible release automation (Linux/WSL)
@@ -270,7 +270,7 @@ ansible-playbook -i ops/ansible/inventory.ini ops/ansible/release.yml \
 
 `release.env` должен находиться в корне репозитория. Команда проверит чистоту tracked-файлов,
 ветку `main`, обновит `origin/main`, проверит совпадение с `HEAD` и запишет hash коммита.
-`release_confirm_ci=true` — отдельное ручное подтверждение, что GitHub Actions прошёл именно
+`release_confirm_ci=true` - отдельное ручное подтверждение, что GitHub Actions прошёл именно
 на этом commit; Ansible сам GitHub не опрашивает. Незатреканные файлы не блокируют выпуск.
 `npm ci` пропускается по умолчанию; включите его через `-e release_npm_ci=true`. После
 проверки списка migrations они применяются только при явном `-e release_apply_migrations=true`:
@@ -298,13 +298,13 @@ GitHub Actions CI запускается при push в `main` (и на pull req
 
 ```text
 Git commit: 6c50e88af2d1d61f12f359edab81999e68db9b6e
-GitHub Actions run: 40400432617 — success; локально 1189/1189, preflight и build прошли
+GitHub Actions run: 40400432617 - success; локально 1189/1189, preflight и build прошли
 Worker version/deployment ID: ca3ec0d8-5eb9-4814-8ee4-ad8d74ce93a0
 Pages deployment URL: https://8329d1d5.clutch-app-ct8.pages.dev
 D1 migrations applied: 0001–0010; v3 содержит 7 вопросов «На глазок» и 7 маршрутов «Вики-пути»
 Telegram bot username (подтверждено владельцем): @playclutchbot
 Smoke tester/device/Telegram version: не выполнено, нужен настоящий телефон
-npm run smoke:remote result: успешно — health, ready/D1, Pages, Worker URL в bundle
+npm run smoke:remote result: успешно - health, ready/D1, Pages, Worker URL в bundle
 Smoke result (ручной): не выполнен
 Known limitations: JS bundle 890 КБ (gzip 256 КБ); телефонный walkthrough после исправления не выполнен
 Rollback target: Worker cb8d8de0-8b2d-41c8-ac96-812dcd84f26d; Pages https://94852a32.clutch-app-ct8.pages.dev

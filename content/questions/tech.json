@@ -118,7 +118,7 @@
     ],
     "openAnswer": true,
     "sourceHint": "Википедия: Facebook",
-    "reviewNote": "Сооснователей несколько — уточнить «главный создатель» или оставить только выбор.",
+    "reviewNote": "Сооснователей несколько - уточнить «главный создатель» или оставить только выбор.",
     "origin": "authored",
     "license": "original",
     "daily": true
@@ -203,7 +203,7 @@
     "kind": "single",
     "topic": "tech",
     "difficulty": "Hard",
-    "promptRu": "Как фамилия братьев — создателей Telegram?",
+    "promptRu": "Как фамилия братьев - создателей Telegram?",
     "answerRu": "Дуровы",
     "acceptedRu": [
       "Дуровы",
@@ -377,7 +377,7 @@
     "kind": "single",
     "topic": "tech",
     "difficulty": "Medium",
-    "promptRu": "Кто разработал проект Аналитической машины — первого механического цифрового компьютера?",
+    "promptRu": "Кто разработал проект Аналитической машины - первого механического цифрового компьютера?",
     "answerRu": "Чарльз Бэббидж",
     "acceptedRu": [
       "Чарльз Бэббидж",
@@ -394,7 +394,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Чарльз Бэббидж описал устройство Аналитической машины в 1835 году.",
-    "sourceTitle": "История вычислительной техники — Википедия",
+    "sourceTitle": "История вычислительной техники - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true
@@ -422,7 +422,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Графиня Ада Лавлейс написала первую алгоритмическую программу для вычисления чисел Бернулли.",
-    "sourceTitle": "История вычислительной техники — Википедия",
+    "sourceTitle": "История вычислительной техники - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true
@@ -445,7 +445,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Малая электронно-счётная машина (МЭСМ) заработала в 1950 году.",
-    "sourceTitle": "История вычислительной техники — Википедия",
+    "sourceTitle": "История вычислительной техники - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": false
@@ -469,7 +469,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Взлом шифров «Энигмы» сыграл ключевую роль в разведке союзников.",
-    "sourceTitle": "История вычислительной техники — Википедия",
+    "sourceTitle": "История вычислительной техники - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true

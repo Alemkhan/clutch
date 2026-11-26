@@ -3,7 +3,7 @@ dist/
 .wrangler/
 /apps/api/wrangler.production.generated.jsonc
 /ops/ansible/evidence/
-# Заполненные prod-входы релиза (шаблон — release.env.example)
+# Заполненные prod-входы релиза (шаблон - release.env.example)
 /release.env
 .dev.vars*
 .env*

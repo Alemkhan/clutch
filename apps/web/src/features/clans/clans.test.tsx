@@ -141,7 +141,7 @@ describe('player avatar', () => {
 describe('clan nudge after a daily run', () => {
   it('asks to infect a friend while the clan is short of ten', () => {
     const html = renderToStaticMarkup(<ClanResultNudgeView me={{ clan: myClan, canFound: false }} onInvite={vi.fn()} />);
-    expect(html).toContain('Клану 🦆 нужно 10 бойцов — сейчас 3');
+    expect(html).toContain('Клану 🦆 нужно 10 бойцов, сейчас 3');
     expect(html).toContain('Твой вклад за неделю: 150 очков');
     expect(html).toContain('Заразить');
   });

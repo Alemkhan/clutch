@@ -41,7 +41,7 @@ describe('hammer motion', () => {
 
   // Регресс: маркер когда-то замирал на цели при prefers-reduced-motion, и каждый удар
   // выходил идеальным. Положение маркера обязано зависеть только от времени и скорости,
-  // и никогда — от того, где стоит цель.
+  // и никогда - от того, где стоит цель.
   it('sweeps the whole track and never parks on the target', () => {
     const attempt = hammerAttemptRules(
       'reduced-motion-question',
@@ -54,7 +54,7 @@ describe('hammer motion', () => {
     expect(Math.min(...positions)).toBeLessThan(0.02);
     expect(Math.max(...positions)).toBeGreaterThan(0.98);
 
-    // Идеальных попаданий среди произвольных моментов — меньшинство, а не все подряд.
+    // Идеальных попаданий среди произвольных моментов - меньшинство, а не все подряд.
     const perfect = positions.filter((position) =>
       scoreHammerDistance(
         normalizedHammerDistance(position, attempt.targetCenter),

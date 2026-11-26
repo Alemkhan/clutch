@@ -71,7 +71,7 @@ const findClan = (db: D1Database, key: string) =>
 const memberCount = async (db: D1Database, key: string) =>
   (await db.prepare('SELECT COUNT(*) AS count FROM clan_members WHERE emoji_key = ?1').bind(key).first<{ count: number }>())?.count ?? 0;
 
-/** Эмодзи клана для каждого из игроков — для аватаров в таблицах. */
+/** Эмодзи клана для каждого из игроков - для аватаров в таблицах. */
 export async function clanEmojiByPlayer(db: D1Database, playerIds: readonly string[]): Promise<Map<string, string>> {
   const unique = [...new Set(playerIds)].slice(0, 100);
   if (!unique.length) return new Map();
@@ -86,7 +86,7 @@ const JOIN_DAY_START = (column: string) => `(${column} - ((${column} + ${DAY_BOU
 
 /**
  * Забеги дня участников за окно: с суток вступления, чтобы новичок не приносил клану старые очки,
- * а сегодняшний забег (без него эмодзи не занять) засчитывался. `key` — один клан; null — все.
+ * а сегодняшний забег (без него эмодзи не занять) засчитывался. `key` - один клан; null - все.
  */
 async function runsInWindow(db: D1Database, key: string | null, fromMs: number, toMs: number): Promise<RunRow[]> {
   const { results } = await db.prepare(`
@@ -112,7 +112,7 @@ function pointsByPlayer(runs: readonly RunRow[]): Map<string, number> {
 
 interface BoardRow extends ClanBoardEntry { key: string; createdAt: number }
 
-/** Таблица войны за неделю: все кланы, места по очкам, при равенстве — больше участников, раньше основан. */
+/** Таблица войны за неделю: все кланы, места по очкам, при равенстве - больше участников, раньше основан. */
 async function weekBoard(db: D1Database, now: number): Promise<{ week: ReturnType<typeof clanWeek>; rows: BoardRow[] }> {
   const week = clanWeek(now);
   const [clans, counts, runs] = await Promise.all([
@@ -143,7 +143,7 @@ async function weekBoard(db: D1Database, now: number): Promise<{ week: ReturnTyp
 
 /**
  * Основатель, не игравший забег дня месяц, уступает клан самому активному за этот месяц.
- * Проверка ленивая — при открытии клана; «нулевой пациент» при этом не меняется.
+ * Проверка ленивая - при открытии клана; «нулевой пациент» при этом не меняется.
  */
 async function ensureActiveFounder(db: D1Database, clan: ClanRow, now: number): Promise<ClanRow> {
   const cutoff = now - CLAN_FOUNDER_INACTIVE_DAYS * DAY_MS;
@@ -159,7 +159,7 @@ async function ensureActiveFounder(db: D1Database, clan: ClanRow, now: number): 
   for (const [playerId, value] of points) {
     if (value > best) { best = value; successor = playerId; }
   }
-  // Ушедший из игры основатель (удалил аккаунт) без активных участников — клан переходит
+  // Ушедший из игры основатель (удалил аккаунт) без активных участников - клан переходит
   // к самому раннему из оставшихся, чтобы у клана был основатель.
   if (!successor && !founder) {
     successor = (await db.prepare('SELECT player_id FROM clan_members WHERE emoji_key = ?1 ORDER BY joined_at LIMIT 1')
@@ -193,7 +193,7 @@ async function clanView(db: D1Database, clan: ClanRow, now: number): Promise<Cla
   };
 }
 
-/** Имя для клана: из Telegram, у гостя — из последнего забега. */
+/** Имя для клана: из Telegram, у гостя - из последнего забега. */
 async function currentName(db: D1Database, identity: RequestIdentity): Promise<string> {
   if (identity.displayName) return identity.displayName.slice(0, 64);
   const row = await db.prepare('SELECT display_name FROM match_runs WHERE player_id = ?1 ORDER BY created_at DESC LIMIT 1')
@@ -268,7 +268,7 @@ async function clanDetail(db: D1Database, clan: ClanRow, viewer: string, now: nu
   return { ...view, memberList, isYours: ids.has(viewer) };
 }
 
-/** Клан по коду приглашения — для карточки «заражения»: эмодзи, кто зовёт, размер и место. */
+/** Клан по коду приглашения - для карточки «заражения»: эмодзи, кто зовёт, размер и место. */
 export async function clanStanding(db: D1Database, code: string, now = Date.now()) {
   const inviter = await db.prepare(`SELECT m.display_name, c.emoji, c.emoji_key FROM clan_members m
     JOIN clans c ON c.emoji_key = m.emoji_key WHERE m.invite_code = ?1`).bind(code)
@@ -295,7 +295,7 @@ export async function foundClan(db: D1Database, identity: RequestIdentity, emoji
   const name = await currentName(db, identity);
   try {
     // Одна транзакция: эмодзи занимается, только если свободно, и участник-основатель пишется,
-    // только если основатель — этот игрок. Второй клан тому же игроку не даст ключ участника.
+    // только если основатель - этот игрок. Второй клан тому же игроку не даст ключ участника.
     await db.batch([
       db.prepare(`INSERT OR IGNORE INTO clans (emoji_key, emoji, founder_player_id, original_founder_player_id, created_at)
         VALUES (?1, ?2, ?3, ?3, ?4)`).bind(emoji.key, emoji.emoji, identity.playerId, now),
@@ -331,7 +331,7 @@ export async function joinClan(db: D1Database, identity: RequestIdentity, code: 
 
 /**
  * Удаление аккаунта: участник уходит из клана, приглашённые им переходят к тому, кто пригласил
- * его самого; основательство — к самому раннему участнику; клан без людей освобождает эмодзи.
+ * его самого; основательство - к самому раннему участнику; клан без людей освобождает эмодзи.
  */
 export function clanDeletionStatements(db: D1Database, playerId: string, tombstone: string): D1PreparedStatement[] {
   return [
@@ -347,7 +347,7 @@ export function clanDeletionStatements(db: D1Database, playerId: string, tombsto
 }
 
 /**
- * Открыты ли кланы для этого запроса. До дня запуска — только в проде: локально и в тестах
+ * Открыты ли кланы для этого запроса. До дня запуска - только в проде: локально и в тестах
  * кланы открыты всегда, чтобы их можно было смотреть и проверять заранее.
  */
 export function clansOpen(env: Pick<Env, 'ENVIRONMENT'>, now = Date.now()): boolean {
@@ -357,7 +357,7 @@ export function clansOpen(env: Pick<Env, 'ENVIRONMENT'>, now = Date.now()): bool
 // ---- Маршруты ----
 
 export function registerClanRoutes(app: Hono<{ Bindings: Env }>): void {
-  // До запуска: «клана нет и занять нельзя», остальное — 404, как будто кланов ещё нет.
+  // До запуска: «клана нет и занять нельзя», остальное - 404, как будто кланов ещё нет.
   const closed = async (c: AppContext, next: () => Promise<void>) => {
     if (clansOpen(c.env)) return next();
     if (c.req.method === 'GET' && c.req.path === '/api/clans/me') return c.json({ clan: null, canFound: false } satisfies ClanMeResponse);
@@ -431,7 +431,7 @@ export function registerClanRoutes(app: Hono<{ Bindings: Env }>): void {
     return c.json(await clanMe(c.env, identity), 201);
   });
 
-  /** Вступить по ссылке-приглашению. Уже состоящий в клане остаётся в своём — навсегда. */
+  /** Вступить по ссылке-приглашению. Уже состоящий в клане остаётся в своём - навсегда. */
   app.post('/api/clans/join', async (c) => {
     const identity = await authenticate(c);
     if (identity instanceof Response) return identity;

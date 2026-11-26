@@ -71,7 +71,7 @@ export function appendRecords(records) {
     const textOf = (r) => sameText(r.kind === 'set' ? r.titleRu : r.promptRu);
     const clash = list.find((r) => r.id === record.id || textOf(r) === textOf(record));
     if (clash) {
-      skipped.push(`${record.id} — уже есть как ${clash.id}`);
+      skipped.push(`${record.id} - уже есть как ${clash.id}`);
       continue;
     }
     list.push(tidy(record));

@@ -199,7 +199,7 @@ describe('the duel board of the day', () => {
       { rank: 2, displayName: 'Алем', wins: 0, draws: 0, losses: 1 },
     ]);
     expect(board.you).toMatchObject({ wins: 1, losses: 0 });
-    // Забег дня и дуэли — разные таблицы: дуэль в таблицу забегов дня не попадает.
+    // Забег дня и дуэли - разные таблицы: дуэль в таблицу забегов дня не попадает.
     const day = await (await call(db, '/api/solo-leaderboard?category=geography', bob)).json() as SoloLeaderboardResponse;
     expect(day.entries).toEqual([]);
   });
@@ -220,12 +220,12 @@ describe('solo outcome against a pace', () => {
     const payload = sentPayload();
     expect(payload.chat_id).toBe('42');
     expect(payload.text).toBe('Игрок b0b0 обошёл вашу запись.');
-    // Исход — это известие. Приглашения completion не создаёт: звать может только нажатие соперника.
+    // Исход - это известие. Приглашения completion не создаёт: звать может только нажатие соперника.
     expect(inviteRows(db)).toHaveLength(0);
     expect(payload.reply_markup.inline_keyboard).toHaveLength(1);
     expect(payload.reply_markup.inline_keyboard[0][0].url).toBe('https://t.me/testbot?startapp=unsub');
 
-    // Нажатие претендента создаёт приглашение и отправляет второе сообщение — уже с кнопкой.
+    // Нажатие претендента создаёт приглашение и отправляет второе сообщение - уже с кнопкой.
     expect((await call(db, `/api/solo-runs/${run.runId}/rematch`, bob, {})).status).toBe(201);
     expect(inviteRows(db)).toHaveLength(1);
     expect(inviteRows(db)[0]).toMatchObject({
@@ -306,7 +306,7 @@ describe('solo outcome against a pace', () => {
 
     const runs = await (await call(db, '/api/my-runs', bob)).json() as MyRunsResponse;
     expect(runs.runs[0]).toMatchObject({ outcome: 'player', opponent: { kind: 'player' } });
-    // Обошёл запись — значит может позвать; пока не позвал, кнопка доступна.
+    // Обошёл запись - значит может позвать; пока не позвал, кнопка доступна.
     expect(runs.runs[0].rematchOffer).toBe('available');
   });
 
@@ -342,7 +342,7 @@ describe('solo outcome against a pace', () => {
     // Известие не дошло, но исход сохранён, а приглашения тут и не должно быть.
     expect(storedOutcome(db, run.runId)).toBe('player');
     expect(inviteRows(db)).toHaveLength(0);
-    // Нажатие создаёт приглашение даже при недоступном Telegram: отметка доставки — 'failed'.
+    // Нажатие создаёт приглашение даже при недоступном Telegram: отметка доставки - 'failed'.
     expect((await call(db, `/api/solo-runs/${run.runId}/rematch`, bob, {})).status).toBe(201);
     expect(inviteRows(db)[0].notify_status).toBe('failed');
   });
@@ -462,7 +462,7 @@ describe('my own place in the day board', () => {
     const first = await (await board(db)).json() as SoloLeaderboardResponse;
     expect(first.you).toMatchObject({ rank: 1, total: 1, roundsToNext: null, placeAbove: null });
 
-    // Не дошёл до цели — в таблице его нет, и места у него нет.
+    // Не дошёл до цели - в таблице его нет, и места у него нет.
     const missed = database();
     insertDaily(missed, { id: 'mine', playerId: viewerId, name: 'Я', soloScore: 0.5, reachedTarget: 0 });
     expect(((await (await board(missed)).json()) as SoloLeaderboardResponse).you).toBeNull();
@@ -485,7 +485,7 @@ describe('my own place in the day board', () => {
 
   it('follows the shifted day boundary, not midnight UTC', async () => {
     const db = database();
-    // 21:00 UTC — это уже следующие сутки игры: граница проходит в 19:00 UTC.
+    // 21:00 UTC - это уже следующие сутки игры: граница проходит в 19:00 UTC.
     const afterBoundary = Date.UTC(2026, 9, 11, 21, 0, 0);
     insertDaily(db, { id: 'next-day', playerId: viewerId, name: 'Я', soloScore: 0.5, completedAt: afterBoundary });
     expect(((await (await board(db)).json()) as SoloLeaderboardResponse).you).toBeNull();

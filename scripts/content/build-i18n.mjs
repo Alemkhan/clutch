@@ -1,12 +1,12 @@
 // Собирает переводы вопросов и гео-зоны в файлы, которые читает игра:
-//   content/i18n/<locale>/pack.json  — { questions: {id: …}, sets: {id: …} }
-//   content/i18n/regions.json        — { <recordId>: ["kz","cis","world"] }
+//   content/i18n/<locale>/pack.json  - { questions: {id: …}, sets: {id: …} }
+//   content/i18n/regions.json        - { <recordId>: ["kz","cis","world"] }
 //
-//   npm run content:i18n            — собрать и проверить
+//   npm run content:i18n            - собрать и проверить
 //
 // Источники пишут переводчики по темам: content/i18n/<locale>/questions/<topic>[.partN].json и
-// content/i18n/<locale>/sets/<topic>.json; зоны — content/i18n/regions/<topic>.json.
-// Проверки: перевод есть для каждой записи (иначе предупреждение — игра покажет русский текст),
+// content/i18n/<locale>/sets/<topic>.json; зоны - content/i18n/regions/<topic>.json.
+// Проверки: перевод есть для каждой записи (иначе предупреждение - игра покажет русский текст),
 // число неправильных вариантов совпадает с оригиналом, вариант не равен засчитываемому ответу.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -44,16 +44,16 @@ for (const locale of LOCALES) {
     const t = out.questions[id];
     if (!t) { warnings.push(`${locale}: нет перевода вопроса ${id}`); continue; }
     const distractors = record.distractorsRu ?? [];
-    if ((t.distractors ?? []).length !== distractors.length) problems.push(`${locale}: ${id} — число вариантов ${t.distractors?.length} ≠ ${distractors.length}`);
+    if ((t.distractors ?? []).length !== distractors.length) problems.push(`${locale}: ${id} - число вариантов ${t.distractors?.length} ≠ ${distractors.length}`);
     const accepted = new Set((t.accepted ?? []).map(norm));
-    for (const option of t.distractors ?? []) if (accepted.has(norm(option))) problems.push(`${locale}: ${id} — вариант «${option}» совпадает с ответом`);
-    if (!t.prompt || !t.answer) problems.push(`${locale}: ${id} — пустой текст вопроса или ответа`);
+    for (const option of t.distractors ?? []) if (accepted.has(norm(option))) problems.push(`${locale}: ${id} - вариант «${option}» совпадает с ответом`);
+    if (!t.prompt || !t.answer) problems.push(`${locale}: ${id} - пустой текст вопроса или ответа`);
   }
   for (const [id, record] of source.sets) {
     const t = out.sets[id];
     if (!t) { warnings.push(`${locale}: нет перевода набора ${id}`); continue; }
-    for (const member of record.members) if (!t.members?.[member.id]) problems.push(`${locale}: ${id} — нет участника ${member.id}`);
-    if ((t.nonMembers ?? []).length !== record.nonMembersRu.length) problems.push(`${locale}: ${id} — число «не участников» не совпадает`);
+    for (const member of record.members) if (!t.members?.[member.id]) problems.push(`${locale}: ${id} - нет участника ${member.id}`);
+    if ((t.nonMembers ?? []).length !== record.nonMembersRu.length) problems.push(`${locale}: ${id} - число «не участников» не совпадает`);
   }
   // Лишние id (переводчик ошибся) не нужны в бандле.
   for (const kind of ['questions', 'sets']) {
@@ -67,8 +67,8 @@ const regions = {};
 for (const name of listJson(path.join(I18N, 'regions'))) Object.assign(regions, readJson(path.join(I18N, 'regions', name)));
 for (const id of [...source.questions.keys(), ...source.sets.keys()]) {
   const zones = regions[id];
-  if (!zones) { warnings.push(`зоны: нет разметки ${id} — считается доступным везде`); continue; }
-  if (!Array.isArray(zones) || zones.length === 0 || zones.some((zone) => !ZONES.includes(zone))) problems.push(`зоны: ${id} — некорректно ${JSON.stringify(zones)}`);
+  if (!zones) { warnings.push(`зоны: нет разметки ${id} - считается доступным везде`); continue; }
+  if (!Array.isArray(zones) || zones.length === 0 || zones.some((zone) => !ZONES.includes(zone))) problems.push(`зоны: ${id} - некорректно ${JSON.stringify(zones)}`);
 }
 const compact = Object.fromEntries(Object.entries(regions).filter(([id]) => source.questions.has(id) || source.sets.has(id)));
 fs.writeFileSync(path.join(I18N, 'regions.json'), `${JSON.stringify(compact)}\n`);

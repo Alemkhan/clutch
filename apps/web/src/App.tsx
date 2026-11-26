@@ -64,7 +64,7 @@ export default function App() {
     setBoardKind(kind);
     game.goToBoard();
   }, [game.goToBoard]);
-  // Тренировка против бота: уровень, с которым открыт экран solo. null — обычный забег.
+  // Тренировка против бота: уровень, с которым открыт экран solo. null - обычный забег.
   const [practiceLevel, setPracticeLevel] = useState<PracticeLevel | null>(null);
   const startRematch = useCallback((inviteId: string, category: CategoryId) => {
     setGroupChallenge(null);
@@ -110,7 +110,7 @@ export default function App() {
   // Молоток в соло получает собственный фон оболочки.
   const shellPhase = game.phase === 'solo' && soloStage === 'hammer' ? 'hammer' : game.phase;
 
-  // Практика ошибок внутри «Тренировки» — это игра: панель на ней скрыта.
+  // Практика ошибок внутри «Тренировки» - это игра: панель на ней скрыта.
   const [trainingPlaying, setTrainingPlaying] = useState(false);
   // Тренировка открыта с экрана итога: сразу отработка ошибок. Вкладка снизу открывает меню.
   const [trainingMistakes, setTrainingMistakes] = useState(false);

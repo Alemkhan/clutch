@@ -17,7 +17,7 @@ const root = path.join(here, '..', '..');
 const outDir = path.join(root, 'apps', 'web', 'public', 'share');
 
 const LOCALES = ['ru', 'en', 'kk'];
-/** Русская картинка — исходное имя (её же берут старые ссылки), остальные — с суффиксом языка. */
+/** Русская картинка - исходное имя (её же берут старые ссылки), остальные - с суффиксом языка. */
 const localized = (name, locale) => (locale === 'ru' ? name : name.replace(/\.png$/u, `.${locale}.png`));
 
 const CARDS = [
@@ -56,7 +56,7 @@ function describeFont(font) {
   throw new Error('В шрифте нет таблицы OS/2');
 }
 
-/** Шрифты API → файлы и fonts.css: у каждого подмножества своё семейство, порядок — в --font. */
+/** Шрифты API → файлы и fonts.css: у каждого подмножества своё семейство, порядок - в --font. */
 function stageFonts(dir) {
   const source = readFileSync(path.join(root, 'apps', 'api', 'src', 'share', 'interFonts.ts'), 'utf8');
   const fonts = [...source.matchAll(/'([A-Za-z0-9+/=]{100,})'/gu)].map((match) => Buffer.from(match[1], 'base64'));
@@ -95,7 +95,7 @@ try {
       `--screenshot=${target}`,
       `${pathToFileURL(path.join(stage, card.source)).href}${card.query}`,
     ], { stdio: 'ignore' });
-    console.log(`${card.out} — ${card.width}x${card.height}`);
+    console.log(`${card.out} - ${card.width}x${card.height}`);
   }
 } finally {
   rmSync(stage, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });

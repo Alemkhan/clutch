@@ -21,7 +21,7 @@ export interface HistoryRow {
   completed_at: number;
   /** Кто сыграл мою запись: у ждавшего забега соперника в своей строке нет. */
   played_by?: string | null;
-  /** 1 — с этого забега уже звали на реванш: кнопку показывать больше не нужно. */
+  /** 1 - с этого забега уже звали на реванш: кнопку показывать больше не нужно. */
   rematch_offered?: number | null;
   /** Круги записи, против которой шёл этот забег (по её собственной строке); у бота строки нет. */
   opponent_rounds?: number | null;
@@ -29,7 +29,7 @@ export interface HistoryRow {
   played_by_rounds?: number | null;
 }
 
-/** Курсор — completedAt_id последней отданной партии; в id нет символа "_". */
+/** Курсор - completedAt_id последней отданной партии; в id нет символа "_". */
 export function encodeHistoryCursor(row: { completedAt: number; id: string }): string {
   return `${row.completedAt}_${row.id}`;
 }
@@ -40,8 +40,8 @@ export function parseHistoryCursor(value: string): { completedAt: number; id: st
 }
 
 /**
- * Завершённые партии игрока, новые сверху; строк на одну больше limit — признак следующей страницы.
- * Партии — это дуэли (свои и дружеские): победы и поражения есть только у них. Забег дня живёт в
+ * Завершённые партии игрока, новые сверху; строк на одну больше limit - признак следующей страницы.
+ * Партии - это дуэли (свои и дружеские): победы и поражения есть только у них. Забег дня живёт в
  * таблице дня, свободная игра нигде не учитывается (решение владельца 2026-10-19).
  */
 export async function listCompletedRuns(
@@ -50,7 +50,7 @@ export async function listCompletedRuns(
   limit: number,
   cursor: { completedAt: number; id: string } | null,
 ): Promise<HistoryRow[]> {
-  // played_by: имя того, кто сыграл эту запись. Своя строка этого не знает — связь живёт
+  // played_by: имя того, кто сыграл эту запись. Своя строка этого не знает - связь живёт
   // на строке претендента (opponent_run_id), поэтому владелец записи иначе видит «Победа» без имени.
   const columns = `id, player_id, display_name, category, questions_json, rounds_json, progress, correct_count, rules_version,
     opponent_json, opponent_run_id, reached_target, set_par, solo_score, solo_outcome, created_at, completed_at,
@@ -127,9 +127,9 @@ export function toRunSummary(row: HistoryRow, viewerId?: string): MyRunSummary {
         : row.played_by
           ? { kind: 'player', displayName: row.played_by }
           : null,
-    // Соло: сохранённый исход; null — соперника не было (opponent === null) или забег старше миграции.
+    // Соло: сохранённый исход; null - соперника не было (opponent === null) или забег старше миграции.
     // Круги соперника: его собственная запись либо тот, кто сыграл мою. У бота и у чужой
-    // дружеской дуэли (там «свои» цифры уже друга) — null.
+    // дружеской дуэли (там «свои» цифры уже друга) - null.
     opponentRoundsPlayed: friendDuel === 'hosted'
       ? null
       : named

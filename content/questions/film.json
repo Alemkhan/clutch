@@ -5,7 +5,7 @@
     "kind": "single",
     "topic": "film",
     "difficulty": "Easy",
-    "promptRu": "Как зовут мышонка — символ Disney?",
+    "promptRu": "Как зовут мышонка - символ Disney?",
     "answerRu": "Микки Маус",
     "acceptedRu": [
       "Микки Маус",
@@ -454,7 +454,7 @@
       "Джонатан Демми"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Титаник» — Джеймс Кэмерон.",
+    "explanationRu": "Режиссёр фильма «Титаник» - Джеймс Кэмерон.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q44578",
     "sourceTitle": "Wikidata: Титаник",
     "origin": "wikidata",
@@ -483,7 +483,7 @@
       "Зак Снайдер"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Форрест Гамп» — Роберт Земекис.",
+    "explanationRu": "Режиссёр фильма «Форрест Гамп» - Роберт Земекис.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q134773",
     "sourceTitle": "Wikidata: Форрест Гамп",
     "origin": "wikidata",
@@ -512,7 +512,7 @@
       "Энг Ли"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Крёстный отец» — Фрэнсис Форд Коппола.",
+    "explanationRu": "Режиссёр фильма «Крёстный отец» - Фрэнсис Форд Коппола.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q47703",
     "sourceTitle": "Wikidata: Крёстный отец",
     "origin": "wikidata",
@@ -541,7 +541,7 @@
       "Дэвид Финчер"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Аватар» — Джеймс Кэмерон.",
+    "explanationRu": "Режиссёр фильма «Аватар» - Джеймс Кэмерон.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q24871",
     "sourceTitle": "Wikidata: Аватар",
     "origin": "wikidata",
@@ -570,7 +570,7 @@
       "Ирвин Кершнер"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Гладиатор» — Ридли Скотт.",
+    "explanationRu": "Режиссёр фильма «Гладиатор» - Ридли Скотт.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q128518",
     "sourceTitle": "Wikidata: Гладиатор",
     "origin": "wikidata",
@@ -599,7 +599,7 @@
       "Серджо Леоне"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Касабланка» — Майкл Кёртис.",
+    "explanationRu": "Режиссёр фильма «Касабланка» - Майкл Кёртис.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q132689",
     "sourceTitle": "Wikidata: Касабланка",
     "origin": "wikidata",
@@ -628,7 +628,7 @@
       "Питер Джексон"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Криминальное чтиво» — Квентин Тарантино.",
+    "explanationRu": "Режиссёр фильма «Криминальное чтиво» - Квентин Тарантино.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q104123",
     "sourceTitle": "Wikidata: Криминальное чтиво",
     "origin": "wikidata",
@@ -657,7 +657,7 @@
       "Ричард Маркуанд"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Побег из Шоушенка» — Фрэнк Дарабонт.",
+    "explanationRu": "Режиссёр фильма «Побег из Шоушенка» - Фрэнк Дарабонт.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q172241",
     "sourceTitle": "Wikidata: Побег из Шоушенка",
     "origin": "wikidata",
@@ -686,7 +686,7 @@
       "Энг Ли"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Тёмный рыцарь» — Кристофер Нолан.",
+    "explanationRu": "Режиссёр фильма «Тёмный рыцарь» - Кристофер Нолан.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q163872",
     "sourceTitle": "Wikidata: Тёмный рыцарь",
     "origin": "wikidata",
@@ -715,7 +715,7 @@
       "Джеймс Мактиг"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Назад в будущее» — Роберт Земекис.",
+    "explanationRu": "Режиссёр фильма «Назад в будущее» - Роберт Земекис.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q91540",
     "sourceTitle": "Wikidata: Назад в будущее",
     "origin": "wikidata",
@@ -744,7 +744,7 @@
       "Майк Ньюэлл"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Бойцовский клуб» — Дэвид Финчер.",
+    "explanationRu": "Режиссёр фильма «Бойцовский клуб» - Дэвид Финчер.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q190050",
     "sourceTitle": "Wikidata: Бойцовский клуб",
     "origin": "wikidata",
@@ -773,7 +773,7 @@
       "Билли Уайлдер"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Список Шиндлера» — Стивен Спилберг.",
+    "explanationRu": "Режиссёр фильма «Список Шиндлера» - Стивен Спилберг.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q483941",
     "sourceTitle": "Wikidata: Список Шиндлера",
     "origin": "wikidata",
@@ -802,7 +802,7 @@
       "Роберт Земекис"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Молчание ягнят» — Джонатан Демми.",
+    "explanationRu": "Режиссёр фильма «Молчание ягнят» - Джонатан Демми.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q133654",
     "sourceTitle": "Wikidata: Молчание ягнят",
     "origin": "wikidata",
@@ -831,7 +831,7 @@
       "Джеймс Мактиг"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Гарри Поттер и философский камень» — Крис Коламбус.",
+    "explanationRu": "Режиссёр фильма «Гарри Поттер и философский камень» - Крис Коламбус.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q102438",
     "sourceTitle": "Wikidata: Гарри Поттер и философский камень",
     "origin": "wikidata",
@@ -860,7 +860,7 @@
       "Серджо Леоне"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Парк юрского периода» — Стивен Спилберг.",
+    "explanationRu": "Режиссёр фильма «Парк юрского периода» - Стивен Спилберг.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q167726",
     "sourceTitle": "Wikidata: Парк юрского периода",
     "origin": "wikidata",
@@ -873,7 +873,7 @@
     "kind": "single",
     "topic": "film",
     "difficulty": "Hard",
-    "promptRu": "Кто режиссёр фильма «V — значит вендетта»?",
+    "promptRu": "Кто режиссёр фильма «V - значит вендетта»?",
     "answerRu": "Джеймс Мактиг",
     "acceptedRu": [
       "Джеймс Мактиг",
@@ -889,9 +889,9 @@
       "Мел Гибсон"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «V — значит вендетта» — Джеймс Мактиг.",
+    "explanationRu": "Режиссёр фильма «V - значит вендетта» - Джеймс Мактиг.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q5890",
-    "sourceTitle": "Wikidata: V — значит вендетта",
+    "sourceTitle": "Wikidata: V - значит вендетта",
     "origin": "wikidata",
     "license": "CC0",
     "daily": false
@@ -918,7 +918,7 @@
       "Питер Джексон"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Интерстеллар» — Кристофер Нолан.",
+    "explanationRu": "Режиссёр фильма «Интерстеллар» - Кристофер Нолан.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q13417189",
     "sourceTitle": "Wikidata: Интерстеллар",
     "origin": "wikidata",
@@ -947,7 +947,7 @@
       "Питер Уир"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Властелин колец: Братство Кольца» — Питер Джексон.",
+    "explanationRu": "Режиссёр фильма «Властелин колец: Братство Кольца» - Питер Джексон.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q127367",
     "sourceTitle": "Wikidata: Властелин колец: Братство Кольца",
     "origin": "wikidata",
@@ -976,7 +976,7 @@
       "Фрэнк Дарабонт"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Мстители» — Джосс Уидон.",
+    "explanationRu": "Режиссёр фильма «Мстители» - Джосс Уидон.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q182218",
     "sourceTitle": "Wikidata: Мстители",
     "origin": "wikidata",
@@ -1005,7 +1005,7 @@
       "Квентин Тарантино"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Звёздные войны. Эпизод IV: Новая надежда» — Джордж Лукас.",
+    "explanationRu": "Режиссёр фильма «Звёздные войны. Эпизод IV: Новая надежда» - Джордж Лукас.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q17738",
     "sourceTitle": "Wikidata: Звёздные войны. Эпизод IV: Новая надежда",
     "origin": "wikidata",
@@ -1034,7 +1034,7 @@
       "Мел Гибсон"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Хороший, плохой, злой» — Серджо Леоне.",
+    "explanationRu": "Режиссёр фильма «Хороший, плохой, злой» - Серджо Леоне.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q41483",
     "sourceTitle": "Wikidata: Хороший, плохой, злой",
     "origin": "wikidata",
@@ -1063,7 +1063,7 @@
       "Чарли Чаплин"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Гарри Поттер и тайная комната» — Крис Коламбус.",
+    "explanationRu": "Режиссёр фильма «Гарри Поттер и тайная комната» - Крис Коламбус.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q102244",
     "sourceTitle": "Wikidata: Гарри Поттер и тайная комната",
     "origin": "wikidata",
@@ -1092,7 +1092,7 @@
       "Стэнли Кубрик"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Властелин колец: Возвращение короля» — Питер Джексон.",
+    "explanationRu": "Режиссёр фильма «Властелин колец: Возвращение короля» - Питер Джексон.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q131074",
     "sourceTitle": "Wikidata: Властелин колец: Возвращение короля",
     "origin": "wikidata",
@@ -1121,7 +1121,7 @@
       "Джеймс Мактиг"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Храброе сердце» — Мел Гибсон.",
+    "explanationRu": "Режиссёр фильма «Храброе сердце» - Мел Гибсон.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q162729",
     "sourceTitle": "Wikidata: Храброе сердце",
     "origin": "wikidata",
@@ -1150,7 +1150,7 @@
       "Крис Коламбус"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Звёздные войны. Эпизод I: Скрытая угроза» — Джордж Лукас.",
+    "explanationRu": "Режиссёр фильма «Звёздные войны. Эпизод I: Скрытая угроза» - Джордж Лукас.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q165713",
     "sourceTitle": "Wikidata: Звёздные войны. Эпизод I: Скрытая угроза",
     "origin": "wikidata",
@@ -1179,7 +1179,7 @@
       "Ридли Скотт"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Гарри Поттер и Кубок огня» — Майк Ньюэлл.",
+    "explanationRu": "Режиссёр фильма «Гарри Поттер и Кубок огня» - Майк Ньюэлл.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q102225",
     "sourceTitle": "Wikidata: Гарри Поттер и Кубок огня",
     "origin": "wikidata",
@@ -1208,7 +1208,7 @@
       "Джон Фавро"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Пираты Карибского моря: Проклятие Чёрной жемчужины» — Гор Вербински.",
+    "explanationRu": "Режиссёр фильма «Пираты Карибского моря: Проклятие Чёрной жемчужины» - Гор Вербински.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q46717",
     "sourceTitle": "Wikidata: Пираты Карибского моря: Проклятие Чёрной жемчужины",
     "origin": "wikidata",
@@ -1237,7 +1237,7 @@
       "Питер Уир"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Космическая одиссея 2001 года» — Стэнли Кубрик.",
+    "explanationRu": "Режиссёр фильма «Космическая одиссея 2001 года» - Стэнли Кубрик.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q103474",
     "sourceTitle": "Wikidata: Космическая одиссея 2001 года",
     "origin": "wikidata",
@@ -1266,7 +1266,7 @@
       "Сэм Рэйми"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Гарри Поттер и узник Азкабана» — Альфонсо Куарон.",
+    "explanationRu": "Режиссёр фильма «Гарри Поттер и узник Азкабана» - Альфонсо Куарон.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q102448",
     "sourceTitle": "Wikidata: Гарри Поттер и узник Азкабана",
     "origin": "wikidata",
@@ -1295,7 +1295,7 @@
       "Крис Коламбус"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Гарри Поттер и Принц-полукровка» — Дэвид Йейтс.",
+    "explanationRu": "Режиссёр фильма «Гарри Поттер и Принц-полукровка» - Дэвид Йейтс.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q161687",
     "sourceTitle": "Wikidata: Гарри Поттер и Принц-полукровка",
     "origin": "wikidata",
@@ -1324,7 +1324,7 @@
       "Ирвин Кершнер"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Гарри Поттер и Орден Феникса» — Дэвид Йейтс.",
+    "explanationRu": "Режиссёр фильма «Гарри Поттер и Орден Феникса» - Дэвид Йейтс.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q102235",
     "sourceTitle": "Wikidata: Гарри Поттер и Орден Феникса",
     "origin": "wikidata",
@@ -1353,7 +1353,7 @@
       "Зак Снайдер"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Крёстный отец 2» — Фрэнсис Форд Коппола.",
+    "explanationRu": "Режиссёр фильма «Крёстный отец 2» - Фрэнсис Форд Коппола.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q184768",
     "sourceTitle": "Wikidata: Крёстный отец 2",
     "origin": "wikidata",
@@ -1382,7 +1382,7 @@
       "Гор Вербински"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Общество мёртвых поэтов» — Питер Уир.",
+    "explanationRu": "Режиссёр фильма «Общество мёртвых поэтов» - Питер Уир.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q106316",
     "sourceTitle": "Wikidata: Общество мёртвых поэтов",
     "origin": "wikidata",
@@ -1411,7 +1411,7 @@
       "Ричард Маркуанд"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Игры разума» — Рон Ховард.",
+    "explanationRu": "Режиссёр фильма «Игры разума» - Рон Ховард.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q164103",
     "sourceTitle": "Wikidata: Игры разума",
     "origin": "wikidata",
@@ -1440,7 +1440,7 @@
       "Майк Ньюэлл"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Пираты Карибского моря: На краю света» — Гор Вербински.",
+    "explanationRu": "Режиссёр фильма «Пираты Карибского моря: На краю света» - Гор Вербински.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q54274",
     "sourceTitle": "Wikidata: Пираты Карибского моря: На краю света",
     "origin": "wikidata",
@@ -1469,7 +1469,7 @@
       "Сэм Рэйми"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Горбатая гора» — Энг Ли.",
+    "explanationRu": "Режиссёр фильма «Горбатая гора» - Энг Ли.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q160618",
     "sourceTitle": "Wikidata: Горбатая гора",
     "origin": "wikidata",
@@ -1498,7 +1498,7 @@
       "Рон Ховард"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Гражданин Кейн» — Орсон Уэллс.",
+    "explanationRu": "Режиссёр фильма «Гражданин Кейн» - Орсон Уэллс.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q24815",
     "sourceTitle": "Wikidata: Гражданин Кейн",
     "origin": "wikidata",
@@ -1527,7 +1527,7 @@
       "Серджо Леоне"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Железный человек» — Джон Фавро.",
+    "explanationRu": "Режиссёр фильма «Железный человек» - Джон Фавро.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q192724",
     "sourceTitle": "Wikidata: Железный человек",
     "origin": "wikidata",
@@ -1556,7 +1556,7 @@
       "Питер Джексон"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Звёздные войны. Эпизод V: Империя наносит ответный удар» — Ирвин Кершнер.",
+    "explanationRu": "Режиссёр фильма «Звёздные войны. Эпизод V: Империя наносит ответный удар» - Ирвин Кершнер.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q181795",
     "sourceTitle": "Wikidata: Звёздные войны. Эпизод V: Империя наносит ответный удар",
     "origin": "wikidata",
@@ -1585,7 +1585,7 @@
       "Билли Уайлдер"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Человек-паук» — Сэм Рэйми.",
+    "explanationRu": "Режиссёр фильма «Человек-паук» - Сэм Рэйми.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q484442",
     "sourceTitle": "Wikidata: Человек-паук",
     "origin": "wikidata",
@@ -1614,7 +1614,7 @@
       "Энг Ли"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Бегущий по лезвию» — Ридли Скотт.",
+    "explanationRu": "Режиссёр фильма «Бегущий по лезвию» - Ридли Скотт.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q184843",
     "sourceTitle": "Wikidata: Бегущий по лезвию",
     "origin": "wikidata",
@@ -1643,7 +1643,7 @@
       "Билли Уайлдер"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Звёздные войны. Эпизод VI: Возвращение джедая» — Ричард Маркуанд.",
+    "explanationRu": "Режиссёр фильма «Звёздные войны. Эпизод VI: Возвращение джедая» - Ричард Маркуанд.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q181803",
     "sourceTitle": "Wikidata: Звёздные войны. Эпизод VI: Возвращение джедая",
     "origin": "wikidata",
@@ -1672,7 +1672,7 @@
       "Стивен Спилберг"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «300 спартанцев» — Зак Снайдер.",
+    "explanationRu": "Режиссёр фильма «300 спартанцев» - Зак Снайдер.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q131390",
     "sourceTitle": "Wikidata: 300 спартанцев",
     "origin": "wikidata",
@@ -1701,7 +1701,7 @@
       "Джеймс Кэмерон"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Мстители: Эра Альтрона» — Джосс Уидон.",
+    "explanationRu": "Режиссёр фильма «Мстители: Эра Альтрона» - Джосс Уидон.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q14171368",
     "sourceTitle": "Wikidata: Мстители: Эра Альтрона",
     "origin": "wikidata",
@@ -1730,7 +1730,7 @@
       "Рон Ховард"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «В джазе только девушки» — Билли Уайлдер.",
+    "explanationRu": "Режиссёр фильма «В джазе только девушки» - Билли Уайлдер.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q190086",
     "sourceTitle": "Wikidata: В джазе только девушки",
     "origin": "wikidata",
@@ -1759,7 +1759,7 @@
       "Крис Коламбус"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Великий диктатор» — Чарли Чаплин.",
+    "explanationRu": "Режиссёр фильма «Великий диктатор» - Чарли Чаплин.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q109116",
     "sourceTitle": "Wikidata: Великий диктатор",
     "origin": "wikidata",
@@ -1788,7 +1788,7 @@
       "Квентин Тарантино"
     ],
     "openAnswer": false,
-    "explanationRu": "Режиссёр фильма «Паразиты» — Пон Джун Хо.",
+    "explanationRu": "Режиссёр фильма «Паразиты» - Пон Джун Хо.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q61448040",
     "sourceTitle": "Wikidata: Паразиты",
     "origin": "wikidata",
@@ -1814,7 +1814,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "«Титаник» удерживал рекорд самых кассовых сборов более 10 лет.",
-    "sourceTitle": "Список самых кассовых фильмов — Википедия",
+    "sourceTitle": "Список самых кассовых фильмов - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true
@@ -1839,7 +1839,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Фильм «Мстители: Финал» собрал свыше 2,79 млрд долларов.",
-    "sourceTitle": "Список самых кассовых фильмов — Википедия",
+    "sourceTitle": "Список самых кассовых фильмов - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": false
@@ -1906,7 +1906,7 @@
     "kind": "single",
     "topic": "film",
     "difficulty": "Medium",
-    "promptRu": "Как зовут львёнка — главного героя «Короля Льва»?",
+    "promptRu": "Как зовут львёнка - главного героя «Короля Льва»?",
     "answerRu": "Симба",
     "acceptedRu": [
       "Симба"

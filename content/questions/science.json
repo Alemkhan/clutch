@@ -486,7 +486,7 @@
       "−373"
     ],
     "openAnswer": true,
-    "explanationRu": "Точно −273,15 °C. −459 — это абсолютный ноль по Фаренгейту.",
+    "explanationRu": "Точно −273,15 °C. −459 - это абсолютный ноль по Фаренгейту.",
     "sourceHint": "Википедия: Абсолютный ноль температуры",
     "origin": "authored",
     "license": "original",
@@ -515,7 +515,7 @@
     ],
     "openAnswer": true,
     "sourceHint": "Википедия: Естественный отбор",
-    "reviewNote": "Уоллес пришёл к идее одновременно — проверить, не нужен ли он в допустимых ответах.",
+    "reviewNote": "Уоллес пришёл к идее одновременно - проверить, не нужен ли он в допустимых ответах.",
     "origin": "authored",
     "license": "original",
     "daily": false
@@ -540,7 +540,7 @@
       "висмут"
     ],
     "openAnswer": true,
-    "explanationRu": "H — водород, элемент номер 1 в таблице Менделеева.",
+    "explanationRu": "H - водород, элемент номер 1 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q556",
     "sourceTitle": "Wikidata: водород",
     "origin": "wikidata",
@@ -567,7 +567,7 @@
       "мышьяк"
     ],
     "openAnswer": true,
-    "explanationRu": "O — кислород, элемент номер 8 в таблице Менделеева.",
+    "explanationRu": "O - кислород, элемент номер 8 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q629",
     "sourceTitle": "Wikidata: кислород",
     "origin": "wikidata",
@@ -594,7 +594,7 @@
       "хром"
     ],
     "openAnswer": true,
-    "explanationRu": "C — углерод, элемент номер 6 в таблице Менделеева.",
+    "explanationRu": "C - углерод, элемент номер 6 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q623",
     "sourceTitle": "Wikidata: углерод",
     "origin": "wikidata",
@@ -621,7 +621,7 @@
       "медь"
     ],
     "openAnswer": true,
-    "explanationRu": "Fe — железо, элемент номер 26 в таблице Менделеева.",
+    "explanationRu": "Fe - железо, элемент номер 26 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q677",
     "sourceTitle": "Wikidata: железо",
     "origin": "wikidata",
@@ -648,7 +648,7 @@
       "самарий"
     ],
     "openAnswer": true,
-    "explanationRu": "Au — золото, элемент номер 79 в таблице Менделеева.",
+    "explanationRu": "Au - золото, элемент номер 79 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q897",
     "sourceTitle": "Wikidata: золото",
     "origin": "wikidata",
@@ -675,7 +675,7 @@
       "эрбий"
     ],
     "openAnswer": true,
-    "explanationRu": "Ag — серебро, элемент номер 47 в таблице Менделеева.",
+    "explanationRu": "Ag - серебро, элемент номер 47 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1090",
     "sourceTitle": "Wikidata: серебро",
     "origin": "wikidata",
@@ -702,7 +702,7 @@
       "иридий"
     ],
     "openAnswer": true,
-    "explanationRu": "N — азот, элемент номер 7 в таблице Менделеева.",
+    "explanationRu": "N - азот, элемент номер 7 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q627",
     "sourceTitle": "Wikidata: азот",
     "origin": "wikidata",
@@ -729,7 +729,7 @@
       "германий"
     ],
     "openAnswer": true,
-    "explanationRu": "He — гелий, элемент номер 2 в таблице Менделеева.",
+    "explanationRu": "He - гелий, элемент номер 2 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q560",
     "sourceTitle": "Wikidata: гелий",
     "origin": "wikidata",
@@ -756,7 +756,7 @@
       "кадмий"
     ],
     "openAnswer": true,
-    "explanationRu": "Na — натрий, элемент номер 11 в таблице Менделеева.",
+    "explanationRu": "Na - натрий, элемент номер 11 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q658",
     "sourceTitle": "Wikidata: натрий",
     "origin": "wikidata",
@@ -783,7 +783,7 @@
       "скандий"
     ],
     "openAnswer": true,
-    "explanationRu": "Cu — медь, элемент номер 29 в таблице Менделеева.",
+    "explanationRu": "Cu - медь, элемент номер 29 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q753",
     "sourceTitle": "Wikidata: медь",
     "origin": "wikidata",
@@ -810,7 +810,7 @@
       "медь"
     ],
     "openAnswer": true,
-    "explanationRu": "Ca — кальций, элемент номер 20 в таблице Менделеева.",
+    "explanationRu": "Ca - кальций, элемент номер 20 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q706",
     "sourceTitle": "Wikidata: кальций",
     "origin": "wikidata",
@@ -837,7 +837,7 @@
       "сера"
     ],
     "openAnswer": true,
-    "explanationRu": "K — калий, элемент номер 19 в таблице Менделеева.",
+    "explanationRu": "K - калий, элемент номер 19 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q703",
     "sourceTitle": "Wikidata: калий",
     "origin": "wikidata",
@@ -864,7 +864,7 @@
       "скандий"
     ],
     "openAnswer": true,
-    "explanationRu": "Cl — хлор, элемент номер 17 в таблице Менделеева.",
+    "explanationRu": "Cl - хлор, элемент номер 17 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q688",
     "sourceTitle": "Wikidata: хлор",
     "origin": "wikidata",
@@ -892,7 +892,7 @@
       "вольфрам"
     ],
     "openAnswer": true,
-    "explanationRu": "Al — алюминий, элемент номер 13 в таблице Менделеева.",
+    "explanationRu": "Al - алюминий, элемент номер 13 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q663",
     "sourceTitle": "Wikidata: алюминий",
     "origin": "wikidata",
@@ -919,7 +919,7 @@
       "ниобий"
     ],
     "openAnswer": true,
-    "explanationRu": "Zn — цинк, элемент номер 30 в таблице Менделеева.",
+    "explanationRu": "Zn - цинк, элемент номер 30 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q758",
     "sourceTitle": "Wikidata: цинк",
     "origin": "wikidata",
@@ -946,7 +946,7 @@
       "ванадий"
     ],
     "openAnswer": true,
-    "explanationRu": "Hg — ртуть, элемент номер 80 в таблице Менделеева.",
+    "explanationRu": "Hg - ртуть, элемент номер 80 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q925",
     "sourceTitle": "Wikidata: ртуть",
     "origin": "wikidata",
@@ -973,7 +973,7 @@
       "ксенон"
     ],
     "openAnswer": true,
-    "explanationRu": "Pb — свинец, элемент номер 82 в таблице Менделеева.",
+    "explanationRu": "Pb - свинец, элемент номер 82 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q708",
     "sourceTitle": "Wikidata: свинец",
     "origin": "wikidata",
@@ -1000,7 +1000,7 @@
       "алюминий"
     ],
     "openAnswer": true,
-    "explanationRu": "Sn — олово, элемент номер 50 в таблице Менделеева.",
+    "explanationRu": "Sn - олово, элемент номер 50 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1096",
     "sourceTitle": "Wikidata: олово",
     "origin": "wikidata",
@@ -1027,7 +1027,7 @@
       "лантан"
     ],
     "openAnswer": true,
-    "explanationRu": "U — уран, элемент номер 92 в таблице Менделеева.",
+    "explanationRu": "U - уран, элемент номер 92 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1098",
     "sourceTitle": "Wikidata: уран",
     "origin": "wikidata",
@@ -1054,7 +1054,7 @@
       "рений"
     ],
     "openAnswer": true,
-    "explanationRu": "Mg — магний, элемент номер 12 в таблице Менделеева.",
+    "explanationRu": "Mg - магний, элемент номер 12 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q660",
     "sourceTitle": "Wikidata: магний",
     "origin": "wikidata",
@@ -1082,7 +1082,7 @@
       "сурьма"
     ],
     "openAnswer": true,
-    "explanationRu": "Si — кремний, элемент номер 14 в таблице Менделеева.",
+    "explanationRu": "Si - кремний, элемент номер 14 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q670",
     "sourceTitle": "Wikidata: кремний",
     "origin": "wikidata",
@@ -1110,7 +1110,7 @@
       "платина"
     ],
     "openAnswer": true,
-    "explanationRu": "P — фосфор, элемент номер 15 в таблице Менделеева.",
+    "explanationRu": "P - фосфор, элемент номер 15 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q674",
     "sourceTitle": "Wikidata: фосфор",
     "origin": "wikidata",
@@ -1139,7 +1139,7 @@
       "хлор"
     ],
     "openAnswer": true,
-    "explanationRu": "S — сера, элемент номер 16 в таблице Менделеева.",
+    "explanationRu": "S - сера, элемент номер 16 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q682",
     "sourceTitle": "Wikidata: сера",
     "origin": "wikidata",
@@ -1167,7 +1167,7 @@
       "висмут"
     ],
     "openAnswer": true,
-    "explanationRu": "I — иод, элемент номер 53 в таблице Менделеева.",
+    "explanationRu": "I - иод, элемент номер 53 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1103",
     "sourceTitle": "Wikidata: иод",
     "origin": "wikidata",
@@ -1195,7 +1195,7 @@
       "ниобий"
     ],
     "openAnswer": true,
-    "explanationRu": "Ni — никель, элемент номер 28 в таблице Менделеева.",
+    "explanationRu": "Ni - никель, элемент номер 28 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q744",
     "sourceTitle": "Wikidata: никель",
     "origin": "wikidata",
@@ -1222,7 +1222,7 @@
       "иттербий"
     ],
     "openAnswer": true,
-    "explanationRu": "Ti — титан, элемент номер 22 в таблице Менделеева.",
+    "explanationRu": "Ti - титан, элемент номер 22 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q716",
     "sourceTitle": "Wikidata: титан",
     "origin": "wikidata",
@@ -1249,7 +1249,7 @@
       "тербий"
     ],
     "openAnswer": true,
-    "explanationRu": "Ne — неон, элемент номер 10 в таблице Менделеева.",
+    "explanationRu": "Ne - неон, элемент номер 10 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q654",
     "sourceTitle": "Wikidata: неон",
     "origin": "wikidata",
@@ -1277,7 +1277,7 @@
       "алюминий"
     ],
     "openAnswer": true,
-    "explanationRu": "Ar — аргон, элемент номер 18 в таблице Менделеева.",
+    "explanationRu": "Ar - аргон, элемент номер 18 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q696",
     "sourceTitle": "Wikidata: аргон",
     "origin": "wikidata",
@@ -1304,7 +1304,7 @@
       "стронций"
     ],
     "openAnswer": true,
-    "explanationRu": "Pt — платина, элемент номер 78 в таблице Менделеева.",
+    "explanationRu": "Pt - платина, элемент номер 78 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q880",
     "sourceTitle": "Wikidata: платина",
     "origin": "wikidata",
@@ -1332,7 +1332,7 @@
       "сурьма"
     ],
     "openAnswer": true,
-    "explanationRu": "Li — литий, элемент номер 3 в таблице Менделеева.",
+    "explanationRu": "Li - литий, элемент номер 3 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q568",
     "sourceTitle": "Wikidata: литий",
     "origin": "wikidata",
@@ -1359,7 +1359,7 @@
       "германий"
     ],
     "openAnswer": true,
-    "explanationRu": "F — фтор, элемент номер 9 в таблице Менделеева.",
+    "explanationRu": "F - фтор, элемент номер 9 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q650",
     "sourceTitle": "Wikidata: фтор",
     "origin": "wikidata",
@@ -1386,7 +1386,7 @@
       "бром"
     ],
     "openAnswer": true,
-    "explanationRu": "Cr — хром, элемент номер 24 в таблице Менделеева.",
+    "explanationRu": "Cr - хром, элемент номер 24 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q725",
     "sourceTitle": "Wikidata: хром",
     "origin": "wikidata",
@@ -1413,7 +1413,7 @@
       "самарий"
     ],
     "openAnswer": true,
-    "explanationRu": "Co — кобальт, элемент номер 27 в таблице Менделеева.",
+    "explanationRu": "Co - кобальт, элемент номер 27 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q740",
     "sourceTitle": "Wikidata: кобальт",
     "origin": "wikidata",
@@ -1440,7 +1440,7 @@
       "фосфор"
     ],
     "openAnswer": true,
-    "explanationRu": "Mn — марганец, элемент номер 25 в таблице Менделеева.",
+    "explanationRu": "Mn - марганец, элемент номер 25 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q731",
     "sourceTitle": "Wikidata: марганец",
     "origin": "wikidata",
@@ -1468,7 +1468,7 @@
       "цинк"
     ],
     "openAnswer": true,
-    "explanationRu": "W — вольфрам, элемент номер 74 в таблице Менделеева.",
+    "explanationRu": "W - вольфрам, элемент номер 74 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q743",
     "sourceTitle": "Wikidata: вольфрам",
     "origin": "wikidata",
@@ -1496,7 +1496,7 @@
       "титан"
     ],
     "openAnswer": true,
-    "explanationRu": "Ra — радий, элемент номер 88 в таблице Менделеева.",
+    "explanationRu": "Ra - радий, элемент номер 88 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1128",
     "sourceTitle": "Wikidata: радий",
     "origin": "wikidata",
@@ -1523,7 +1523,7 @@
       "палладий"
     ],
     "openAnswer": true,
-    "explanationRu": "Rn — радон, элемент номер 86 в таблице Менделеева.",
+    "explanationRu": "Rn - радон, элемент номер 86 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1133",
     "sourceTitle": "Wikidata: радон",
     "origin": "wikidata",
@@ -1550,7 +1550,7 @@
       "висмут"
     ],
     "openAnswer": true,
-    "explanationRu": "Ba — барий, элемент номер 56 в таблице Менделеева.",
+    "explanationRu": "Ba - барий, элемент номер 56 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1112",
     "sourceTitle": "Wikidata: барий",
     "origin": "wikidata",
@@ -1577,7 +1577,7 @@
       "осмий"
     ],
     "openAnswer": true,
-    "explanationRu": "Sr — стронций, элемент номер 38 в таблице Менделеева.",
+    "explanationRu": "Sr - стронций, элемент номер 38 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q938",
     "sourceTitle": "Wikidata: стронций",
     "origin": "wikidata",
@@ -1604,7 +1604,7 @@
       "мышьяк"
     ],
     "openAnswer": true,
-    "explanationRu": "Br — бром, элемент номер 35 в таблице Менделеева.",
+    "explanationRu": "Br - бром, элемент номер 35 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q879",
     "sourceTitle": "Wikidata: бром",
     "origin": "wikidata",
@@ -1631,7 +1631,7 @@
       "вольфрам"
     ],
     "openAnswer": true,
-    "explanationRu": "Kr — криптон, элемент номер 36 в таблице Менделеева.",
+    "explanationRu": "Kr - криптон, элемент номер 36 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q888",
     "sourceTitle": "Wikidata: криптон",
     "origin": "wikidata",
@@ -1658,7 +1658,7 @@
       "радон"
     ],
     "openAnswer": true,
-    "explanationRu": "Xe — ксенон, элемент номер 54 в таблице Менделеева.",
+    "explanationRu": "Xe - ксенон, элемент номер 54 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1106",
     "sourceTitle": "Wikidata: ксенон",
     "origin": "wikidata",
@@ -1685,7 +1685,7 @@
       "кислород"
     ],
     "openAnswer": true,
-    "explanationRu": "Pu — плутоний, элемент номер 94 в таблице Менделеева.",
+    "explanationRu": "Pu - плутоний, элемент номер 94 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1102",
     "sourceTitle": "Wikidata: плутоний",
     "origin": "wikidata",
@@ -1736,7 +1736,7 @@
       "твёрдое тело"
     ],
     "openAnswer": true,
-    "explanationRu": "Плазма — частично или полностью ионизованный газ.",
+    "explanationRu": "Плазма - частично или полностью ионизованный газ.",
     "sourceTitle": "Trivia All-Stars vs. Impossible Quiz",
     "origin": "notebooklm",
     "license": "original",
@@ -1815,7 +1815,7 @@
       "75"
     ],
     "openAnswer": false,
-    "explanationRu": "Водород — элемент номер 1 в таблице Менделеева.",
+    "explanationRu": "Водород - элемент номер 1 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q556",
     "sourceTitle": "Wikidata: водород",
     "origin": "wikidata",
@@ -1840,7 +1840,7 @@
       "Ga"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «водород» — H.",
+    "explanationRu": "Химический символ элемента «водород» - H.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q556",
     "sourceTitle": "Wikidata: водород",
     "origin": "wikidata",
@@ -1865,7 +1865,7 @@
       "101"
     ],
     "openAnswer": false,
-    "explanationRu": "Гелий — элемент номер 2 в таблице Менделеева.",
+    "explanationRu": "Гелий - элемент номер 2 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q560",
     "sourceTitle": "Wikidata: гелий",
     "origin": "wikidata",
@@ -1891,7 +1891,7 @@
       "Tc"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «гелий» — He.",
+    "explanationRu": "Химический символ элемента «гелий» - He.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q560",
     "sourceTitle": "Wikidata: гелий",
     "origin": "wikidata",
@@ -1916,7 +1916,7 @@
       "28"
     ],
     "openAnswer": false,
-    "explanationRu": "Литий — элемент номер 3 в таблице Менделеева.",
+    "explanationRu": "Литий - элемент номер 3 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q568",
     "sourceTitle": "Wikidata: литий",
     "origin": "wikidata",
@@ -1941,7 +1941,7 @@
       "Be"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «литий» — Li.",
+    "explanationRu": "Химический символ элемента «литий» - Li.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q568",
     "sourceTitle": "Wikidata: литий",
     "origin": "wikidata",
@@ -1966,7 +1966,7 @@
       "26"
     ],
     "openAnswer": false,
-    "explanationRu": "Бериллий — элемент номер 4 в таблице Менделеева.",
+    "explanationRu": "Бериллий - элемент номер 4 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q569",
     "sourceTitle": "Wikidata: бериллий",
     "origin": "wikidata",
@@ -1991,7 +1991,7 @@
       "C"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «бериллий» — Be.",
+    "explanationRu": "Химический символ элемента «бериллий» - Be.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q569",
     "sourceTitle": "Wikidata: бериллий",
     "origin": "wikidata",
@@ -2016,7 +2016,7 @@
       "108"
     ],
     "openAnswer": false,
-    "explanationRu": "Бор — элемент номер 5 в таблице Менделеева.",
+    "explanationRu": "Бор - элемент номер 5 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q618",
     "sourceTitle": "Wikidata: бор",
     "origin": "wikidata",
@@ -2041,7 +2041,7 @@
       "Ds"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «бор» — B.",
+    "explanationRu": "Химический символ элемента «бор» - B.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q618",
     "sourceTitle": "Wikidata: бор",
     "origin": "wikidata",
@@ -2066,7 +2066,7 @@
       "37"
     ],
     "openAnswer": false,
-    "explanationRu": "Углерод — элемент номер 6 в таблице Менделеева.",
+    "explanationRu": "Углерод - элемент номер 6 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q623",
     "sourceTitle": "Wikidata: углерод",
     "origin": "wikidata",
@@ -2092,7 +2092,7 @@
       "He"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «углерод» — C.",
+    "explanationRu": "Химический символ элемента «углерод» - C.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q623",
     "sourceTitle": "Wikidata: углерод",
     "origin": "wikidata",
@@ -2117,7 +2117,7 @@
       "93"
     ],
     "openAnswer": false,
-    "explanationRu": "Азот — элемент номер 7 в таблице Менделеева.",
+    "explanationRu": "Азот - элемент номер 7 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q627",
     "sourceTitle": "Wikidata: азот",
     "origin": "wikidata",
@@ -2142,7 +2142,7 @@
       "Bk"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «азот» — N.",
+    "explanationRu": "Химический символ элемента «азот» - N.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q627",
     "sourceTitle": "Wikidata: азот",
     "origin": "wikidata",
@@ -2167,7 +2167,7 @@
       "31"
     ],
     "openAnswer": false,
-    "explanationRu": "Кислород — элемент номер 8 в таблице Менделеева.",
+    "explanationRu": "Кислород - элемент номер 8 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q629",
     "sourceTitle": "Wikidata: кислород",
     "origin": "wikidata",
@@ -2192,7 +2192,7 @@
       "Dy"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «кислород» — O.",
+    "explanationRu": "Химический символ элемента «кислород» - O.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q629",
     "sourceTitle": "Wikidata: кислород",
     "origin": "wikidata",
@@ -2217,7 +2217,7 @@
       "73"
     ],
     "openAnswer": false,
-    "explanationRu": "Фтор — элемент номер 9 в таблице Менделеева.",
+    "explanationRu": "Фтор - элемент номер 9 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q650",
     "sourceTitle": "Wikidata: фтор",
     "origin": "wikidata",
@@ -2242,7 +2242,7 @@
       "Bh"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «фтор» — F.",
+    "explanationRu": "Химический символ элемента «фтор» - F.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q650",
     "sourceTitle": "Wikidata: фтор",
     "origin": "wikidata",
@@ -2267,7 +2267,7 @@
       "35"
     ],
     "openAnswer": false,
-    "explanationRu": "Неон — элемент номер 10 в таблице Менделеева.",
+    "explanationRu": "Неон - элемент номер 10 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q654",
     "sourceTitle": "Wikidata: неон",
     "origin": "wikidata",
@@ -2292,7 +2292,7 @@
       "Ru"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «неон» — Ne.",
+    "explanationRu": "Химический символ элемента «неон» - Ne.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q654",
     "sourceTitle": "Wikidata: неон",
     "origin": "wikidata",
@@ -2317,7 +2317,7 @@
       "28"
     ],
     "openAnswer": false,
-    "explanationRu": "Натрий — элемент номер 11 в таблице Менделеева.",
+    "explanationRu": "Натрий - элемент номер 11 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q658",
     "sourceTitle": "Wikidata: натрий",
     "origin": "wikidata",
@@ -2342,7 +2342,7 @@
       "Am"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «натрий» — Na.",
+    "explanationRu": "Химический символ элемента «натрий» - Na.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q658",
     "sourceTitle": "Wikidata: натрий",
     "origin": "wikidata",
@@ -2367,7 +2367,7 @@
       "100"
     ],
     "openAnswer": false,
-    "explanationRu": "Магний — элемент номер 12 в таблице Менделеева.",
+    "explanationRu": "Магний - элемент номер 12 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q660",
     "sourceTitle": "Wikidata: магний",
     "origin": "wikidata",
@@ -2392,7 +2392,7 @@
       "Cu"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «магний» — Mg.",
+    "explanationRu": "Химический символ элемента «магний» - Mg.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q660",
     "sourceTitle": "Wikidata: магний",
     "origin": "wikidata",
@@ -2417,7 +2417,7 @@
       "114"
     ],
     "openAnswer": false,
-    "explanationRu": "Алюминий — элемент номер 13 в таблице Менделеева.",
+    "explanationRu": "Алюминий - элемент номер 13 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q663",
     "sourceTitle": "Wikidata: алюминий",
     "origin": "wikidata",
@@ -2442,7 +2442,7 @@
       "Ds"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «алюминий» — Al.",
+    "explanationRu": "Химический символ элемента «алюминий» - Al.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q663",
     "sourceTitle": "Wikidata: алюминий",
     "origin": "wikidata",
@@ -2467,7 +2467,7 @@
       "96"
     ],
     "openAnswer": false,
-    "explanationRu": "Кремний — элемент номер 14 в таблице Менделеева.",
+    "explanationRu": "Кремний - элемент номер 14 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q670",
     "sourceTitle": "Wikidata: кремний",
     "origin": "wikidata",
@@ -2492,7 +2492,7 @@
       "Ru"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «кремний» — Si.",
+    "explanationRu": "Химический символ элемента «кремний» - Si.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q670",
     "sourceTitle": "Wikidata: кремний",
     "origin": "wikidata",
@@ -2517,7 +2517,7 @@
       "48"
     ],
     "openAnswer": false,
-    "explanationRu": "Фосфор — элемент номер 15 в таблице Менделеева.",
+    "explanationRu": "Фосфор - элемент номер 15 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q674",
     "sourceTitle": "Wikidata: фосфор",
     "origin": "wikidata",
@@ -2542,7 +2542,7 @@
       "Os"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «фосфор» — P.",
+    "explanationRu": "Химический символ элемента «фосфор» - P.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q674",
     "sourceTitle": "Wikidata: фосфор",
     "origin": "wikidata",
@@ -2567,7 +2567,7 @@
       "2"
     ],
     "openAnswer": false,
-    "explanationRu": "Сера — элемент номер 16 в таблице Менделеева.",
+    "explanationRu": "Сера - элемент номер 16 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q682",
     "sourceTitle": "Wikidata: сера",
     "origin": "wikidata",
@@ -2592,7 +2592,7 @@
       "Fl"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «сера» — S.",
+    "explanationRu": "Химический символ элемента «сера» - S.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q682",
     "sourceTitle": "Wikidata: сера",
     "origin": "wikidata",
@@ -2617,7 +2617,7 @@
       "35"
     ],
     "openAnswer": false,
-    "explanationRu": "Хлор — элемент номер 17 в таблице Менделеева.",
+    "explanationRu": "Хлор - элемент номер 17 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q688",
     "sourceTitle": "Wikidata: хлор",
     "origin": "wikidata",
@@ -2642,7 +2642,7 @@
       "Mn"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «хлор» — Cl.",
+    "explanationRu": "Химический символ элемента «хлор» - Cl.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q688",
     "sourceTitle": "Wikidata: хлор",
     "origin": "wikidata",
@@ -2667,7 +2667,7 @@
       "33"
     ],
     "openAnswer": false,
-    "explanationRu": "Аргон — элемент номер 18 в таблице Менделеева.",
+    "explanationRu": "Аргон - элемент номер 18 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q696",
     "sourceTitle": "Wikidata: аргон",
     "origin": "wikidata",
@@ -2692,7 +2692,7 @@
       "Nh"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «аргон» — Ar.",
+    "explanationRu": "Химический символ элемента «аргон» - Ar.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q696",
     "sourceTitle": "Wikidata: аргон",
     "origin": "wikidata",
@@ -2717,7 +2717,7 @@
       "42"
     ],
     "openAnswer": false,
-    "explanationRu": "Калий — элемент номер 19 в таблице Менделеева.",
+    "explanationRu": "Калий - элемент номер 19 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q703",
     "sourceTitle": "Wikidata: калий",
     "origin": "wikidata",
@@ -2742,7 +2742,7 @@
       "Mo"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «калий» — K.",
+    "explanationRu": "Химический символ элемента «калий» - K.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q703",
     "sourceTitle": "Wikidata: калий",
     "origin": "wikidata",
@@ -2767,7 +2767,7 @@
       "95"
     ],
     "openAnswer": false,
-    "explanationRu": "Кальций — элемент номер 20 в таблице Менделеева.",
+    "explanationRu": "Кальций - элемент номер 20 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q706",
     "sourceTitle": "Wikidata: кальций",
     "origin": "wikidata",
@@ -2792,7 +2792,7 @@
       "Er"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «кальций» — Ca.",
+    "explanationRu": "Химический символ элемента «кальций» - Ca.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q706",
     "sourceTitle": "Wikidata: кальций",
     "origin": "wikidata",
@@ -2817,7 +2817,7 @@
       "17"
     ],
     "openAnswer": false,
-    "explanationRu": "Скандий — элемент номер 21 в таблице Менделеева.",
+    "explanationRu": "Скандий - элемент номер 21 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q713",
     "sourceTitle": "Wikidata: скандий",
     "origin": "wikidata",
@@ -2842,7 +2842,7 @@
       "Rf"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «скандий» — Sc.",
+    "explanationRu": "Химический символ элемента «скандий» - Sc.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q713",
     "sourceTitle": "Wikidata: скандий",
     "origin": "wikidata",
@@ -2867,7 +2867,7 @@
       "81"
     ],
     "openAnswer": false,
-    "explanationRu": "Титан — элемент номер 22 в таблице Менделеева.",
+    "explanationRu": "Титан - элемент номер 22 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q716",
     "sourceTitle": "Wikidata: титан",
     "origin": "wikidata",
@@ -2892,7 +2892,7 @@
       "As"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «титан» — Ti.",
+    "explanationRu": "Химический символ элемента «титан» - Ti.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q716",
     "sourceTitle": "Wikidata: титан",
     "origin": "wikidata",
@@ -2917,7 +2917,7 @@
       "64"
     ],
     "openAnswer": false,
-    "explanationRu": "Ванадий — элемент номер 23 в таблице Менделеева.",
+    "explanationRu": "Ванадий - элемент номер 23 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q722",
     "sourceTitle": "Wikidata: ванадий",
     "origin": "wikidata",
@@ -2942,7 +2942,7 @@
       "Po"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «ванадий» — V.",
+    "explanationRu": "Химический символ элемента «ванадий» - V.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q722",
     "sourceTitle": "Wikidata: ванадий",
     "origin": "wikidata",
@@ -2967,7 +2967,7 @@
       "106"
     ],
     "openAnswer": false,
-    "explanationRu": "Хром — элемент номер 24 в таблице Менделеева.",
+    "explanationRu": "Хром - элемент номер 24 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q725",
     "sourceTitle": "Wikidata: хром",
     "origin": "wikidata",
@@ -2992,7 +2992,7 @@
       "Np"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «хром» — Cr.",
+    "explanationRu": "Химический символ элемента «хром» - Cr.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q725",
     "sourceTitle": "Wikidata: хром",
     "origin": "wikidata",
@@ -3017,7 +3017,7 @@
       "53"
     ],
     "openAnswer": false,
-    "explanationRu": "Марганец — элемент номер 25 в таблице Менделеева.",
+    "explanationRu": "Марганец - элемент номер 25 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q731",
     "sourceTitle": "Wikidata: марганец",
     "origin": "wikidata",
@@ -3042,7 +3042,7 @@
       "H"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «марганец» — Mn.",
+    "explanationRu": "Химический символ элемента «марганец» - Mn.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q731",
     "sourceTitle": "Wikidata: марганец",
     "origin": "wikidata",
@@ -3067,7 +3067,7 @@
       "88"
     ],
     "openAnswer": false,
-    "explanationRu": "Железо — элемент номер 26 в таблице Менделеева.",
+    "explanationRu": "Железо - элемент номер 26 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q677",
     "sourceTitle": "Wikidata: железо",
     "origin": "wikidata",
@@ -3092,7 +3092,7 @@
       "Os"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «железо» — Fe.",
+    "explanationRu": "Химический символ элемента «железо» - Fe.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q677",
     "sourceTitle": "Wikidata: железо",
     "origin": "wikidata",
@@ -3117,7 +3117,7 @@
       "68"
     ],
     "openAnswer": false,
-    "explanationRu": "Кобальт — элемент номер 27 в таблице Менделеева.",
+    "explanationRu": "Кобальт - элемент номер 27 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q740",
     "sourceTitle": "Wikidata: кобальт",
     "origin": "wikidata",
@@ -3142,7 +3142,7 @@
       "Tb"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «кобальт» — Co.",
+    "explanationRu": "Химический символ элемента «кобальт» - Co.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q740",
     "sourceTitle": "Wikidata: кобальт",
     "origin": "wikidata",
@@ -3167,7 +3167,7 @@
       "11"
     ],
     "openAnswer": false,
-    "explanationRu": "Никель — элемент номер 28 в таблице Менделеева.",
+    "explanationRu": "Никель - элемент номер 28 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q744",
     "sourceTitle": "Wikidata: никель",
     "origin": "wikidata",
@@ -3192,7 +3192,7 @@
       "Og"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «никель» — Ni.",
+    "explanationRu": "Химический символ элемента «никель» - Ni.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q744",
     "sourceTitle": "Wikidata: никель",
     "origin": "wikidata",
@@ -3217,7 +3217,7 @@
       "90"
     ],
     "openAnswer": false,
-    "explanationRu": "Медь — элемент номер 29 в таблице Менделеева.",
+    "explanationRu": "Медь - элемент номер 29 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q753",
     "sourceTitle": "Wikidata: медь",
     "origin": "wikidata",
@@ -3242,7 +3242,7 @@
       "Xe"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «медь» — Cu.",
+    "explanationRu": "Химический символ элемента «медь» - Cu.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q753",
     "sourceTitle": "Wikidata: медь",
     "origin": "wikidata",
@@ -3267,7 +3267,7 @@
       "23"
     ],
     "openAnswer": false,
-    "explanationRu": "Цинк — элемент номер 30 в таблице Менделеева.",
+    "explanationRu": "Цинк - элемент номер 30 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q758",
     "sourceTitle": "Wikidata: цинк",
     "origin": "wikidata",
@@ -3292,7 +3292,7 @@
       "Ti"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «цинк» — Zn.",
+    "explanationRu": "Химический символ элемента «цинк» - Zn.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q758",
     "sourceTitle": "Wikidata: цинк",
     "origin": "wikidata",
@@ -3317,7 +3317,7 @@
       "102"
     ],
     "openAnswer": false,
-    "explanationRu": "Галлий — элемент номер 31 в таблице Менделеева.",
+    "explanationRu": "Галлий - элемент номер 31 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q861",
     "sourceTitle": "Wikidata: галлий",
     "origin": "wikidata",
@@ -3342,7 +3342,7 @@
       "Rb"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «галлий» — Ga.",
+    "explanationRu": "Химический символ элемента «галлий» - Ga.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q861",
     "sourceTitle": "Wikidata: галлий",
     "origin": "wikidata",
@@ -3367,7 +3367,7 @@
       "99"
     ],
     "openAnswer": false,
-    "explanationRu": "Германий — элемент номер 32 в таблице Менделеева.",
+    "explanationRu": "Германий - элемент номер 32 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q867",
     "sourceTitle": "Wikidata: германий",
     "origin": "wikidata",
@@ -3392,7 +3392,7 @@
       "Db"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «германий» — Ge.",
+    "explanationRu": "Химический символ элемента «германий» - Ge.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q867",
     "sourceTitle": "Wikidata: германий",
     "origin": "wikidata",
@@ -3417,7 +3417,7 @@
       "14"
     ],
     "openAnswer": false,
-    "explanationRu": "Мышьяк — элемент номер 33 в таблице Менделеева.",
+    "explanationRu": "Мышьяк - элемент номер 33 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q871",
     "sourceTitle": "Wikidata: мышьяк",
     "origin": "wikidata",
@@ -3442,7 +3442,7 @@
       "Bk"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «мышьяк» — As.",
+    "explanationRu": "Химический символ элемента «мышьяк» - As.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q871",
     "sourceTitle": "Wikidata: мышьяк",
     "origin": "wikidata",
@@ -3467,7 +3467,7 @@
       "113"
     ],
     "openAnswer": false,
-    "explanationRu": "Селен — элемент номер 34 в таблице Менделеева.",
+    "explanationRu": "Селен - элемент номер 34 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q876",
     "sourceTitle": "Wikidata: селен",
     "origin": "wikidata",
@@ -3492,7 +3492,7 @@
       "Mo"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «селен» — Se.",
+    "explanationRu": "Химический символ элемента «селен» - Se.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q876",
     "sourceTitle": "Wikidata: селен",
     "origin": "wikidata",
@@ -3517,7 +3517,7 @@
       "41"
     ],
     "openAnswer": false,
-    "explanationRu": "Бром — элемент номер 35 в таблице Менделеева.",
+    "explanationRu": "Бром - элемент номер 35 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q879",
     "sourceTitle": "Wikidata: бром",
     "origin": "wikidata",
@@ -3542,7 +3542,7 @@
       "Cd"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «бром» — Br.",
+    "explanationRu": "Химический символ элемента «бром» - Br.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q879",
     "sourceTitle": "Wikidata: бром",
     "origin": "wikidata",
@@ -3567,7 +3567,7 @@
       "104"
     ],
     "openAnswer": false,
-    "explanationRu": "Криптон — элемент номер 36 в таблице Менделеева.",
+    "explanationRu": "Криптон - элемент номер 36 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q888",
     "sourceTitle": "Wikidata: криптон",
     "origin": "wikidata",
@@ -3592,7 +3592,7 @@
       "Lv"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «криптон» — Kr.",
+    "explanationRu": "Химический символ элемента «криптон» - Kr.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q888",
     "sourceTitle": "Wikidata: криптон",
     "origin": "wikidata",
@@ -3617,7 +3617,7 @@
       "64"
     ],
     "openAnswer": false,
-    "explanationRu": "Рубидий — элемент номер 37 в таблице Менделеева.",
+    "explanationRu": "Рубидий - элемент номер 37 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q895",
     "sourceTitle": "Wikidata: рубидий",
     "origin": "wikidata",
@@ -3642,7 +3642,7 @@
       "Au"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «рубидий» — Rb.",
+    "explanationRu": "Химический символ элемента «рубидий» - Rb.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q895",
     "sourceTitle": "Wikidata: рубидий",
     "origin": "wikidata",
@@ -3667,7 +3667,7 @@
       "44"
     ],
     "openAnswer": false,
-    "explanationRu": "Стронций — элемент номер 38 в таблице Менделеева.",
+    "explanationRu": "Стронций - элемент номер 38 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q938",
     "sourceTitle": "Wikidata: стронций",
     "origin": "wikidata",
@@ -3692,7 +3692,7 @@
       "Ga"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «стронций» — Sr.",
+    "explanationRu": "Химический символ элемента «стронций» - Sr.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q938",
     "sourceTitle": "Wikidata: стронций",
     "origin": "wikidata",
@@ -3717,7 +3717,7 @@
       "110"
     ],
     "openAnswer": false,
-    "explanationRu": "Иттрий — элемент номер 39 в таблице Менделеева.",
+    "explanationRu": "Иттрий - элемент номер 39 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q941",
     "sourceTitle": "Wikidata: иттрий",
     "origin": "wikidata",
@@ -3742,7 +3742,7 @@
       "Be"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «иттрий» — Y.",
+    "explanationRu": "Химический символ элемента «иттрий» - Y.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q941",
     "sourceTitle": "Wikidata: иттрий",
     "origin": "wikidata",
@@ -3767,7 +3767,7 @@
       "9"
     ],
     "openAnswer": false,
-    "explanationRu": "Цирконий — элемент номер 40 в таблице Менделеева.",
+    "explanationRu": "Цирконий - элемент номер 40 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1038",
     "sourceTitle": "Wikidata: цирконий",
     "origin": "wikidata",
@@ -3792,7 +3792,7 @@
       "At"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «цирконий» — Zr.",
+    "explanationRu": "Химический символ элемента «цирконий» - Zr.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1038",
     "sourceTitle": "Wikidata: цирконий",
     "origin": "wikidata",
@@ -3817,7 +3817,7 @@
       "114"
     ],
     "openAnswer": false,
-    "explanationRu": "Ниобий — элемент номер 41 в таблице Менделеева.",
+    "explanationRu": "Ниобий - элемент номер 41 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1046",
     "sourceTitle": "Wikidata: ниобий",
     "origin": "wikidata",
@@ -3842,7 +3842,7 @@
       "Zr"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «ниобий» — Nb.",
+    "explanationRu": "Химический символ элемента «ниобий» - Nb.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1046",
     "sourceTitle": "Wikidata: ниобий",
     "origin": "wikidata",
@@ -3867,7 +3867,7 @@
       "69"
     ],
     "openAnswer": false,
-    "explanationRu": "Молибден — элемент номер 42 в таблице Менделеева.",
+    "explanationRu": "Молибден - элемент номер 42 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1053",
     "sourceTitle": "Wikidata: молибден",
     "origin": "wikidata",
@@ -3892,7 +3892,7 @@
       "Os"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «молибден» — Mo.",
+    "explanationRu": "Химический символ элемента «молибден» - Mo.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1053",
     "sourceTitle": "Wikidata: молибден",
     "origin": "wikidata",
@@ -3917,7 +3917,7 @@
       "31"
     ],
     "openAnswer": false,
-    "explanationRu": "Технеций — элемент номер 43 в таблице Менделеева.",
+    "explanationRu": "Технеций - элемент номер 43 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1054",
     "sourceTitle": "Wikidata: технеций",
     "origin": "wikidata",
@@ -3942,7 +3942,7 @@
       "Re"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «технеций» — Tc.",
+    "explanationRu": "Химический символ элемента «технеций» - Tc.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1054",
     "sourceTitle": "Wikidata: технеций",
     "origin": "wikidata",
@@ -3967,7 +3967,7 @@
       "75"
     ],
     "openAnswer": false,
-    "explanationRu": "Рутений — элемент номер 44 в таблице Менделеева.",
+    "explanationRu": "Рутений - элемент номер 44 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1086",
     "sourceTitle": "Wikidata: рутений",
     "origin": "wikidata",
@@ -3992,7 +3992,7 @@
       "Lv"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «рутений» — Ru.",
+    "explanationRu": "Химический символ элемента «рутений» - Ru.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1086",
     "sourceTitle": "Wikidata: рутений",
     "origin": "wikidata",
@@ -4017,7 +4017,7 @@
       "31"
     ],
     "openAnswer": false,
-    "explanationRu": "Родий — элемент номер 45 в таблице Менделеева.",
+    "explanationRu": "Родий - элемент номер 45 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1087",
     "sourceTitle": "Wikidata: родий",
     "origin": "wikidata",
@@ -4042,7 +4042,7 @@
       "Xe"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «родий» — Rh.",
+    "explanationRu": "Химический символ элемента «родий» - Rh.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1087",
     "sourceTitle": "Wikidata: родий",
     "origin": "wikidata",
@@ -4067,7 +4067,7 @@
       "62"
     ],
     "openAnswer": false,
-    "explanationRu": "Палладий — элемент номер 46 в таблице Менделеева.",
+    "explanationRu": "Палладий - элемент номер 46 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1089",
     "sourceTitle": "Wikidata: палладий",
     "origin": "wikidata",
@@ -4092,7 +4092,7 @@
       "O"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «палладий» — Pd.",
+    "explanationRu": "Химический символ элемента «палладий» - Pd.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1089",
     "sourceTitle": "Wikidata: палладий",
     "origin": "wikidata",
@@ -4117,7 +4117,7 @@
       "31"
     ],
     "openAnswer": false,
-    "explanationRu": "Серебро — элемент номер 47 в таблице Менделеева.",
+    "explanationRu": "Серебро - элемент номер 47 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1090",
     "sourceTitle": "Wikidata: серебро",
     "origin": "wikidata",
@@ -4142,7 +4142,7 @@
       "Ne"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «серебро» — Ag.",
+    "explanationRu": "Химический символ элемента «серебро» - Ag.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1090",
     "sourceTitle": "Wikidata: серебро",
     "origin": "wikidata",
@@ -4167,7 +4167,7 @@
       "32"
     ],
     "openAnswer": false,
-    "explanationRu": "Кадмий — элемент номер 48 в таблице Менделеева.",
+    "explanationRu": "Кадмий - элемент номер 48 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1091",
     "sourceTitle": "Wikidata: кадмий",
     "origin": "wikidata",
@@ -4192,7 +4192,7 @@
       "Pt"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «кадмий» — Cd.",
+    "explanationRu": "Химический символ элемента «кадмий» - Cd.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1091",
     "sourceTitle": "Wikidata: кадмий",
     "origin": "wikidata",
@@ -4217,7 +4217,7 @@
       "67"
     ],
     "openAnswer": false,
-    "explanationRu": "Индий — элемент номер 49 в таблице Менделеева.",
+    "explanationRu": "Индий - элемент номер 49 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1094",
     "sourceTitle": "Wikidata: индий",
     "origin": "wikidata",
@@ -4242,7 +4242,7 @@
       "Tm"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «индий» — In.",
+    "explanationRu": "Химический символ элемента «индий» - In.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1094",
     "sourceTitle": "Wikidata: индий",
     "origin": "wikidata",
@@ -4267,7 +4267,7 @@
       "27"
     ],
     "openAnswer": false,
-    "explanationRu": "Олово — элемент номер 50 в таблице Менделеева.",
+    "explanationRu": "Олово - элемент номер 50 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1096",
     "sourceTitle": "Wikidata: олово",
     "origin": "wikidata",
@@ -4292,7 +4292,7 @@
       "Cd"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «олово» — Sn.",
+    "explanationRu": "Химический символ элемента «олово» - Sn.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1096",
     "sourceTitle": "Wikidata: олово",
     "origin": "wikidata",
@@ -4317,7 +4317,7 @@
       "22"
     ],
     "openAnswer": false,
-    "explanationRu": "Сурьма — элемент номер 51 в таблице Менделеева.",
+    "explanationRu": "Сурьма - элемент номер 51 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1099",
     "sourceTitle": "Wikidata: сурьма",
     "origin": "wikidata",
@@ -4342,7 +4342,7 @@
       "Y"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «сурьма» — Sb.",
+    "explanationRu": "Химический символ элемента «сурьма» - Sb.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1099",
     "sourceTitle": "Wikidata: сурьма",
     "origin": "wikidata",
@@ -4367,7 +4367,7 @@
       "43"
     ],
     "openAnswer": false,
-    "explanationRu": "Теллур — элемент номер 52 в таблице Менделеева.",
+    "explanationRu": "Теллур - элемент номер 52 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1100",
     "sourceTitle": "Wikidata: теллур",
     "origin": "wikidata",
@@ -4392,7 +4392,7 @@
       "Ds"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «теллур» — Te.",
+    "explanationRu": "Химический символ элемента «теллур» - Te.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1100",
     "sourceTitle": "Wikidata: теллур",
     "origin": "wikidata",
@@ -4417,7 +4417,7 @@
       "25"
     ],
     "openAnswer": false,
-    "explanationRu": "Иод — элемент номер 53 в таблице Менделеева.",
+    "explanationRu": "Иод - элемент номер 53 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1103",
     "sourceTitle": "Wikidata: иод",
     "origin": "wikidata",
@@ -4442,7 +4442,7 @@
       "Bh"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «иод» — I.",
+    "explanationRu": "Химический символ элемента «иод» - I.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1103",
     "sourceTitle": "Wikidata: иод",
     "origin": "wikidata",
@@ -4467,7 +4467,7 @@
       "3"
     ],
     "openAnswer": false,
-    "explanationRu": "Ксенон — элемент номер 54 в таблице Менделеева.",
+    "explanationRu": "Ксенон - элемент номер 54 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1106",
     "sourceTitle": "Wikidata: ксенон",
     "origin": "wikidata",
@@ -4492,7 +4492,7 @@
       "Ho"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «ксенон» — Xe.",
+    "explanationRu": "Химический символ элемента «ксенон» - Xe.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1106",
     "sourceTitle": "Wikidata: ксенон",
     "origin": "wikidata",
@@ -4517,7 +4517,7 @@
       "20"
     ],
     "openAnswer": false,
-    "explanationRu": "Цезий — элемент номер 55 в таблице Менделеева.",
+    "explanationRu": "Цезий - элемент номер 55 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1108",
     "sourceTitle": "Wikidata: цезий",
     "origin": "wikidata",
@@ -4542,7 +4542,7 @@
       "Lv"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «цезий» — Cs.",
+    "explanationRu": "Химический символ элемента «цезий» - Cs.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1108",
     "sourceTitle": "Wikidata: цезий",
     "origin": "wikidata",
@@ -4567,7 +4567,7 @@
       "87"
     ],
     "openAnswer": false,
-    "explanationRu": "Барий — элемент номер 56 в таблице Менделеева.",
+    "explanationRu": "Барий - элемент номер 56 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1112",
     "sourceTitle": "Wikidata: барий",
     "origin": "wikidata",
@@ -4592,7 +4592,7 @@
       "Ag"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «барий» — Ba.",
+    "explanationRu": "Химический символ элемента «барий» - Ba.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1112",
     "sourceTitle": "Wikidata: барий",
     "origin": "wikidata",
@@ -4617,7 +4617,7 @@
       "13"
     ],
     "openAnswer": false,
-    "explanationRu": "Лантан — элемент номер 57 в таблице Менделеева.",
+    "explanationRu": "Лантан - элемент номер 57 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1801",
     "sourceTitle": "Wikidata: лантан",
     "origin": "wikidata",
@@ -4642,7 +4642,7 @@
       "Be"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «лантан» — La.",
+    "explanationRu": "Химический символ элемента «лантан» - La.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1801",
     "sourceTitle": "Wikidata: лантан",
     "origin": "wikidata",
@@ -4667,7 +4667,7 @@
       "101"
     ],
     "openAnswer": false,
-    "explanationRu": "Церий — элемент номер 58 в таблице Менделеева.",
+    "explanationRu": "Церий - элемент номер 58 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1385",
     "sourceTitle": "Wikidata: церий",
     "origin": "wikidata",
@@ -4692,7 +4692,7 @@
       "Rb"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «церий» — Ce.",
+    "explanationRu": "Химический символ элемента «церий» - Ce.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1385",
     "sourceTitle": "Wikidata: церий",
     "origin": "wikidata",
@@ -4717,7 +4717,7 @@
       "26"
     ],
     "openAnswer": false,
-    "explanationRu": "Празеодим — элемент номер 59 в таблице Менделеева.",
+    "explanationRu": "Празеодим - элемент номер 59 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1386",
     "sourceTitle": "Wikidata: празеодим",
     "origin": "wikidata",
@@ -4742,7 +4742,7 @@
       "Rf"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «празеодим» — Pr.",
+    "explanationRu": "Химический символ элемента «празеодим» - Pr.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1386",
     "sourceTitle": "Wikidata: празеодим",
     "origin": "wikidata",
@@ -4767,7 +4767,7 @@
       "78"
     ],
     "openAnswer": false,
-    "explanationRu": "Неодим — элемент номер 60 в таблице Менделеева.",
+    "explanationRu": "Неодим - элемент номер 60 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1388",
     "sourceTitle": "Wikidata: неодим",
     "origin": "wikidata",
@@ -4792,7 +4792,7 @@
       "Os"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «неодим» — Nd.",
+    "explanationRu": "Химический символ элемента «неодим» - Nd.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1388",
     "sourceTitle": "Wikidata: неодим",
     "origin": "wikidata",
@@ -4817,7 +4817,7 @@
       "85"
     ],
     "openAnswer": false,
-    "explanationRu": "Прометий — элемент номер 61 в таблице Менделеева.",
+    "explanationRu": "Прометий - элемент номер 61 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1809",
     "sourceTitle": "Wikidata: прометий",
     "origin": "wikidata",
@@ -4842,7 +4842,7 @@
       "Xe"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «прометий» — Pm.",
+    "explanationRu": "Химический символ элемента «прометий» - Pm.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1809",
     "sourceTitle": "Wikidata: прометий",
     "origin": "wikidata",
@@ -4867,7 +4867,7 @@
       "23"
     ],
     "openAnswer": false,
-    "explanationRu": "Самарий — элемент номер 62 в таблице Менделеева.",
+    "explanationRu": "Самарий - элемент номер 62 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1819",
     "sourceTitle": "Wikidata: самарий",
     "origin": "wikidata",
@@ -4892,7 +4892,7 @@
       "Pd"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «самарий» — Sm.",
+    "explanationRu": "Химический символ элемента «самарий» - Sm.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1819",
     "sourceTitle": "Wikidata: самарий",
     "origin": "wikidata",
@@ -4917,7 +4917,7 @@
       "7"
     ],
     "openAnswer": false,
-    "explanationRu": "Европий — элемент номер 63 в таблице Менделеева.",
+    "explanationRu": "Европий - элемент номер 63 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1396",
     "sourceTitle": "Wikidata: европий",
     "origin": "wikidata",
@@ -4942,7 +4942,7 @@
       "Hf"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «европий» — Eu.",
+    "explanationRu": "Химический символ элемента «европий» - Eu.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1396",
     "sourceTitle": "Wikidata: европий",
     "origin": "wikidata",
@@ -4967,7 +4967,7 @@
       "95"
     ],
     "openAnswer": false,
-    "explanationRu": "Гадолиний — элемент номер 64 в таблице Менделеева.",
+    "explanationRu": "Гадолиний - элемент номер 64 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1832",
     "sourceTitle": "Wikidata: гадолиний",
     "origin": "wikidata",
@@ -4992,7 +4992,7 @@
       "Eu"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «гадолиний» — Gd.",
+    "explanationRu": "Химический символ элемента «гадолиний» - Gd.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1832",
     "sourceTitle": "Wikidata: гадолиний",
     "origin": "wikidata",
@@ -5017,7 +5017,7 @@
       "2"
     ],
     "openAnswer": false,
-    "explanationRu": "Тербий — элемент номер 65 в таблице Менделеева.",
+    "explanationRu": "Тербий - элемент номер 65 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1838",
     "sourceTitle": "Wikidata: тербий",
     "origin": "wikidata",
@@ -5042,7 +5042,7 @@
       "Mn"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «тербий» — Tb.",
+    "explanationRu": "Химический символ элемента «тербий» - Tb.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1838",
     "sourceTitle": "Wikidata: тербий",
     "origin": "wikidata",
@@ -5067,7 +5067,7 @@
       "112"
     ],
     "openAnswer": false,
-    "explanationRu": "Диспрозий — элемент номер 66 в таблице Менделеева.",
+    "explanationRu": "Диспрозий - элемент номер 66 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1843",
     "sourceTitle": "Wikidata: диспрозий",
     "origin": "wikidata",
@@ -5092,7 +5092,7 @@
       "Bk"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «диспрозий» — Dy.",
+    "explanationRu": "Химический символ элемента «диспрозий» - Dy.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1843",
     "sourceTitle": "Wikidata: диспрозий",
     "origin": "wikidata",
@@ -5117,7 +5117,7 @@
       "25"
     ],
     "openAnswer": false,
-    "explanationRu": "Гольмий — элемент номер 67 в таблице Менделеева.",
+    "explanationRu": "Гольмий - элемент номер 67 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1846",
     "sourceTitle": "Wikidata: гольмий",
     "origin": "wikidata",
@@ -5142,7 +5142,7 @@
       "Nb"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «гольмий» — Ho.",
+    "explanationRu": "Химический символ элемента «гольмий» - Ho.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1846",
     "sourceTitle": "Wikidata: гольмий",
     "origin": "wikidata",
@@ -5167,7 +5167,7 @@
       "70"
     ],
     "openAnswer": false,
-    "explanationRu": "Эрбий — элемент номер 68 в таблице Менделеева.",
+    "explanationRu": "Эрбий - элемент номер 68 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1849",
     "sourceTitle": "Wikidata: эрбий",
     "origin": "wikidata",
@@ -5192,7 +5192,7 @@
       "Ne"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «эрбий» — Er.",
+    "explanationRu": "Химический символ элемента «эрбий» - Er.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1849",
     "sourceTitle": "Wikidata: эрбий",
     "origin": "wikidata",
@@ -5217,7 +5217,7 @@
       "97"
     ],
     "openAnswer": false,
-    "explanationRu": "Тулий — элемент номер 69 в таблице Менделеева.",
+    "explanationRu": "Тулий - элемент номер 69 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1853",
     "sourceTitle": "Wikidata: тулий",
     "origin": "wikidata",
@@ -5242,7 +5242,7 @@
       "Gd"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «тулий» — Tm.",
+    "explanationRu": "Химический символ элемента «тулий» - Tm.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1853",
     "sourceTitle": "Wikidata: тулий",
     "origin": "wikidata",
@@ -5267,7 +5267,7 @@
       "47"
     ],
     "openAnswer": false,
-    "explanationRu": "Иттербий — элемент номер 70 в таблице Менделеева.",
+    "explanationRu": "Иттербий - элемент номер 70 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1855",
     "sourceTitle": "Wikidata: иттербий",
     "origin": "wikidata",
@@ -5292,7 +5292,7 @@
       "Ba"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «иттербий» — Yb.",
+    "explanationRu": "Химический символ элемента «иттербий» - Yb.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1855",
     "sourceTitle": "Wikidata: иттербий",
     "origin": "wikidata",
@@ -5317,7 +5317,7 @@
       "112"
     ],
     "openAnswer": false,
-    "explanationRu": "Лютеций — элемент номер 71 в таблице Менделеева.",
+    "explanationRu": "Лютеций - элемент номер 71 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1857",
     "sourceTitle": "Wikidata: лютеций",
     "origin": "wikidata",
@@ -5342,7 +5342,7 @@
       "Ga"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «лютеций» — Lu.",
+    "explanationRu": "Химический символ элемента «лютеций» - Lu.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1857",
     "sourceTitle": "Wikidata: лютеций",
     "origin": "wikidata",
@@ -5367,7 +5367,7 @@
       "113"
     ],
     "openAnswer": false,
-    "explanationRu": "Гафний — элемент номер 72 в таблице Менделеева.",
+    "explanationRu": "Гафний - элемент номер 72 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1119",
     "sourceTitle": "Wikidata: гафний",
     "origin": "wikidata",
@@ -5392,7 +5392,7 @@
       "Pb"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «гафний» — Hf.",
+    "explanationRu": "Химический символ элемента «гафний» - Hf.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1119",
     "sourceTitle": "Wikidata: гафний",
     "origin": "wikidata",
@@ -5417,7 +5417,7 @@
       "107"
     ],
     "openAnswer": false,
-    "explanationRu": "Тантал — элемент номер 73 в таблице Менделеева.",
+    "explanationRu": "Тантал - элемент номер 73 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1123",
     "sourceTitle": "Wikidata: тантал",
     "origin": "wikidata",
@@ -5442,7 +5442,7 @@
       "Rf"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «тантал» — Ta.",
+    "explanationRu": "Химический символ элемента «тантал» - Ta.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1123",
     "sourceTitle": "Wikidata: тантал",
     "origin": "wikidata",
@@ -5467,7 +5467,7 @@
       "86"
     ],
     "openAnswer": false,
-    "explanationRu": "Вольфрам — элемент номер 74 в таблице Менделеева.",
+    "explanationRu": "Вольфрам - элемент номер 74 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q743",
     "sourceTitle": "Wikidata: вольфрам",
     "origin": "wikidata",
@@ -5492,7 +5492,7 @@
       "Pr"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «вольфрам» — W.",
+    "explanationRu": "Химический символ элемента «вольфрам» - W.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q743",
     "sourceTitle": "Wikidata: вольфрам",
     "origin": "wikidata",
@@ -5517,7 +5517,7 @@
       "24"
     ],
     "openAnswer": false,
-    "explanationRu": "Рений — элемент номер 75 в таблице Менделеева.",
+    "explanationRu": "Рений - элемент номер 75 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q737",
     "sourceTitle": "Wikidata: рений",
     "origin": "wikidata",
@@ -5542,7 +5542,7 @@
       "Mo"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «рений» — Re.",
+    "explanationRu": "Химический символ элемента «рений» - Re.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q737",
     "sourceTitle": "Wikidata: рений",
     "origin": "wikidata",
@@ -5567,7 +5567,7 @@
       "30"
     ],
     "openAnswer": false,
-    "explanationRu": "Осмий — элемент номер 76 в таблице Менделеева.",
+    "explanationRu": "Осмий - элемент номер 76 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q751",
     "sourceTitle": "Wikidata: осмий",
     "origin": "wikidata",
@@ -5592,7 +5592,7 @@
       "Tb"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «осмий» — Os.",
+    "explanationRu": "Химический символ элемента «осмий» - Os.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q751",
     "sourceTitle": "Wikidata: осмий",
     "origin": "wikidata",
@@ -5617,7 +5617,7 @@
       "93"
     ],
     "openAnswer": false,
-    "explanationRu": "Иридий — элемент номер 77 в таблице Менделеева.",
+    "explanationRu": "Иридий - элемент номер 77 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q877",
     "sourceTitle": "Wikidata: иридий",
     "origin": "wikidata",
@@ -5642,7 +5642,7 @@
       "Bh"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «иридий» — Ir.",
+    "explanationRu": "Химический символ элемента «иридий» - Ir.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q877",
     "sourceTitle": "Wikidata: иридий",
     "origin": "wikidata",
@@ -5667,7 +5667,7 @@
       "14"
     ],
     "openAnswer": false,
-    "explanationRu": "Платина — элемент номер 78 в таблице Менделеева.",
+    "explanationRu": "Платина - элемент номер 78 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q880",
     "sourceTitle": "Wikidata: платина",
     "origin": "wikidata",
@@ -5692,7 +5692,7 @@
       "Ag"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «платина» — Pt.",
+    "explanationRu": "Химический символ элемента «платина» - Pt.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q880",
     "sourceTitle": "Wikidata: платина",
     "origin": "wikidata",
@@ -5717,7 +5717,7 @@
       "36"
     ],
     "openAnswer": false,
-    "explanationRu": "Золото — элемент номер 79 в таблице Менделеева.",
+    "explanationRu": "Золото - элемент номер 79 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q897",
     "sourceTitle": "Wikidata: золото",
     "origin": "wikidata",
@@ -5742,7 +5742,7 @@
       "Cs"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «золото» — Au.",
+    "explanationRu": "Химический символ элемента «золото» - Au.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q897",
     "sourceTitle": "Wikidata: золото",
     "origin": "wikidata",
@@ -5767,7 +5767,7 @@
       "118"
     ],
     "openAnswer": false,
-    "explanationRu": "Ртуть — элемент номер 80 в таблице Менделеева.",
+    "explanationRu": "Ртуть - элемент номер 80 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q925",
     "sourceTitle": "Wikidata: ртуть",
     "origin": "wikidata",
@@ -5792,7 +5792,7 @@
       "Bh"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «ртуть» — Hg.",
+    "explanationRu": "Химический символ элемента «ртуть» - Hg.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q925",
     "sourceTitle": "Wikidata: ртуть",
     "origin": "wikidata",
@@ -5817,7 +5817,7 @@
       "52"
     ],
     "openAnswer": false,
-    "explanationRu": "Таллий — элемент номер 81 в таблице Менделеева.",
+    "explanationRu": "Таллий - элемент номер 81 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q932",
     "sourceTitle": "Wikidata: таллий",
     "origin": "wikidata",
@@ -5842,7 +5842,7 @@
       "Po"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «таллий» — Tl.",
+    "explanationRu": "Химический символ элемента «таллий» - Tl.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q932",
     "sourceTitle": "Wikidata: таллий",
     "origin": "wikidata",
@@ -5867,7 +5867,7 @@
       "100"
     ],
     "openAnswer": false,
-    "explanationRu": "Свинец — элемент номер 82 в таблице Менделеева.",
+    "explanationRu": "Свинец - элемент номер 82 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q708",
     "sourceTitle": "Wikidata: свинец",
     "origin": "wikidata",
@@ -5892,7 +5892,7 @@
       "Hg"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «свинец» — Pb.",
+    "explanationRu": "Химический символ элемента «свинец» - Pb.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q708",
     "sourceTitle": "Wikidata: свинец",
     "origin": "wikidata",
@@ -5917,7 +5917,7 @@
       "105"
     ],
     "openAnswer": false,
-    "explanationRu": "Висмут — элемент номер 83 в таблице Менделеева.",
+    "explanationRu": "Висмут - элемент номер 83 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q942",
     "sourceTitle": "Wikidata: висмут",
     "origin": "wikidata",
@@ -5942,7 +5942,7 @@
       "Fl"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «висмут» — Bi.",
+    "explanationRu": "Химический символ элемента «висмут» - Bi.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q942",
     "sourceTitle": "Wikidata: висмут",
     "origin": "wikidata",
@@ -5967,7 +5967,7 @@
       "30"
     ],
     "openAnswer": false,
-    "explanationRu": "Полоний — элемент номер 84 в таблице Менделеева.",
+    "explanationRu": "Полоний - элемент номер 84 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q979",
     "sourceTitle": "Wikidata: полоний",
     "origin": "wikidata",
@@ -5992,7 +5992,7 @@
       "Eu"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «полоний» — Po.",
+    "explanationRu": "Химический символ элемента «полоний» - Po.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q979",
     "sourceTitle": "Wikidata: полоний",
     "origin": "wikidata",
@@ -6017,7 +6017,7 @@
       "12"
     ],
     "openAnswer": false,
-    "explanationRu": "Астат — элемент номер 85 в таблице Менделеева.",
+    "explanationRu": "Астат - элемент номер 85 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q999",
     "sourceTitle": "Wikidata: астат",
     "origin": "wikidata",
@@ -6042,7 +6042,7 @@
       "Db"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «астат» — At.",
+    "explanationRu": "Химический символ элемента «астат» - At.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q999",
     "sourceTitle": "Wikidata: астат",
     "origin": "wikidata",
@@ -6067,7 +6067,7 @@
       "55"
     ],
     "openAnswer": false,
-    "explanationRu": "Радон — элемент номер 86 в таблице Менделеева.",
+    "explanationRu": "Радон - элемент номер 86 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1133",
     "sourceTitle": "Wikidata: радон",
     "origin": "wikidata",
@@ -6092,7 +6092,7 @@
       "Ga"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «радон» — Rn.",
+    "explanationRu": "Химический символ элемента «радон» - Rn.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1133",
     "sourceTitle": "Wikidata: радон",
     "origin": "wikidata",
@@ -6117,7 +6117,7 @@
       "35"
     ],
     "openAnswer": false,
-    "explanationRu": "Франций — элемент номер 87 в таблице Менделеева.",
+    "explanationRu": "Франций - элемент номер 87 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q671",
     "sourceTitle": "Wikidata: франций",
     "origin": "wikidata",
@@ -6142,7 +6142,7 @@
       "K"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «франций» — Fr.",
+    "explanationRu": "Химический символ элемента «франций» - Fr.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q671",
     "sourceTitle": "Wikidata: франций",
     "origin": "wikidata",
@@ -6167,7 +6167,7 @@
       "30"
     ],
     "openAnswer": false,
-    "explanationRu": "Радий — элемент номер 88 в таблице Менделеева.",
+    "explanationRu": "Радий - элемент номер 88 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1128",
     "sourceTitle": "Wikidata: радий",
     "origin": "wikidata",
@@ -6192,7 +6192,7 @@
       "Cd"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «радий» — Ra.",
+    "explanationRu": "Химический символ элемента «радий» - Ra.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1128",
     "sourceTitle": "Wikidata: радий",
     "origin": "wikidata",
@@ -6217,7 +6217,7 @@
       "23"
     ],
     "openAnswer": false,
-    "explanationRu": "Актиний — элемент номер 89 в таблице Менделеева.",
+    "explanationRu": "Актиний - элемент номер 89 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1121",
     "sourceTitle": "Wikidata: актиний",
     "origin": "wikidata",
@@ -6242,7 +6242,7 @@
       "Md"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «актиний» — Ac.",
+    "explanationRu": "Химический символ элемента «актиний» - Ac.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1121",
     "sourceTitle": "Wikidata: актиний",
     "origin": "wikidata",
@@ -6267,7 +6267,7 @@
       "114"
     ],
     "openAnswer": false,
-    "explanationRu": "Торий — элемент номер 90 в таблице Менделеева.",
+    "explanationRu": "Торий - элемент номер 90 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1115",
     "sourceTitle": "Wikidata: торий",
     "origin": "wikidata",
@@ -6292,7 +6292,7 @@
       "Zr"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «торий» — Th.",
+    "explanationRu": "Химический символ элемента «торий» - Th.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1115",
     "sourceTitle": "Wikidata: торий",
     "origin": "wikidata",
@@ -6317,7 +6317,7 @@
       "66"
     ],
     "openAnswer": false,
-    "explanationRu": "Протактиний — элемент номер 91 в таблице Менделеева.",
+    "explanationRu": "Протактиний - элемент номер 91 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1109",
     "sourceTitle": "Wikidata: протактиний",
     "origin": "wikidata",
@@ -6342,7 +6342,7 @@
       "Am"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «протактиний» — Pa.",
+    "explanationRu": "Химический символ элемента «протактиний» - Pa.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1109",
     "sourceTitle": "Wikidata: протактиний",
     "origin": "wikidata",
@@ -6367,7 +6367,7 @@
       "86"
     ],
     "openAnswer": false,
-    "explanationRu": "Уран — элемент номер 92 в таблице Менделеева.",
+    "explanationRu": "Уран - элемент номер 92 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1098",
     "sourceTitle": "Wikidata: уран",
     "origin": "wikidata",
@@ -6392,7 +6392,7 @@
       "Hg"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «уран» — U.",
+    "explanationRu": "Химический символ элемента «уран» - U.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1098",
     "sourceTitle": "Wikidata: уран",
     "origin": "wikidata",
@@ -6417,7 +6417,7 @@
       "85"
     ],
     "openAnswer": false,
-    "explanationRu": "Нептуний — элемент номер 93 в таблице Менделеева.",
+    "explanationRu": "Нептуний - элемент номер 93 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1105",
     "sourceTitle": "Wikidata: нептуний",
     "origin": "wikidata",
@@ -6442,7 +6442,7 @@
       "O"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «нептуний» — Np.",
+    "explanationRu": "Химический символ элемента «нептуний» - Np.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1105",
     "sourceTitle": "Wikidata: нептуний",
     "origin": "wikidata",
@@ -6467,7 +6467,7 @@
       "111"
     ],
     "openAnswer": false,
-    "explanationRu": "Плутоний — элемент номер 94 в таблице Менделеева.",
+    "explanationRu": "Плутоний - элемент номер 94 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1102",
     "sourceTitle": "Wikidata: плутоний",
     "origin": "wikidata",
@@ -6492,7 +6492,7 @@
       "Er"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «плутоний» — Pu.",
+    "explanationRu": "Химический символ элемента «плутоний» - Pu.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1102",
     "sourceTitle": "Wikidata: плутоний",
     "origin": "wikidata",
@@ -6517,7 +6517,7 @@
       "46"
     ],
     "openAnswer": false,
-    "explanationRu": "Америций — элемент номер 95 в таблице Менделеева.",
+    "explanationRu": "Америций - элемент номер 95 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1872",
     "sourceTitle": "Wikidata: америций",
     "origin": "wikidata",
@@ -6542,7 +6542,7 @@
       "Ra"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «америций» — Am.",
+    "explanationRu": "Химический символ элемента «америций» - Am.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1872",
     "sourceTitle": "Wikidata: америций",
     "origin": "wikidata",
@@ -6567,7 +6567,7 @@
       "1"
     ],
     "openAnswer": false,
-    "explanationRu": "Кюрий — элемент номер 96 в таблице Менделеева.",
+    "explanationRu": "Кюрий - элемент номер 96 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1876",
     "sourceTitle": "Wikidata: кюрий",
     "origin": "wikidata",
@@ -6592,7 +6592,7 @@
       "Ga"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «кюрий» — Cm.",
+    "explanationRu": "Химический символ элемента «кюрий» - Cm.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1876",
     "sourceTitle": "Wikidata: кюрий",
     "origin": "wikidata",
@@ -6617,7 +6617,7 @@
       "56"
     ],
     "openAnswer": false,
-    "explanationRu": "Берклий — элемент номер 97 в таблице Менделеева.",
+    "explanationRu": "Берклий - элемент номер 97 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1882",
     "sourceTitle": "Wikidata: берклий",
     "origin": "wikidata",
@@ -6642,7 +6642,7 @@
       "Fe"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «берклий» — Bk.",
+    "explanationRu": "Химический символ элемента «берклий» - Bk.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1882",
     "sourceTitle": "Wikidata: берклий",
     "origin": "wikidata",
@@ -6667,7 +6667,7 @@
       "109"
     ],
     "openAnswer": false,
-    "explanationRu": "Калифорний — элемент номер 98 в таблице Менделеева.",
+    "explanationRu": "Калифорний - элемент номер 98 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1888",
     "sourceTitle": "Wikidata: калифорний",
     "origin": "wikidata",
@@ -6692,7 +6692,7 @@
       "Al"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «калифорний» — Cf.",
+    "explanationRu": "Химический символ элемента «калифорний» - Cf.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1888",
     "sourceTitle": "Wikidata: калифорний",
     "origin": "wikidata",
@@ -6718,7 +6718,7 @@
       "6"
     ],
     "openAnswer": false,
-    "explanationRu": "Эйнштейний — элемент номер 99 в таблице Менделеева.",
+    "explanationRu": "Эйнштейний - элемент номер 99 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1892",
     "sourceTitle": "Wikidata: эйнштейний",
     "origin": "wikidata",
@@ -6743,7 +6743,7 @@
       "Fm"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «эйнштейний» — Es.",
+    "explanationRu": "Химический символ элемента «эйнштейний» - Es.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1892",
     "sourceTitle": "Wikidata: эйнштейний",
     "origin": "wikidata",
@@ -6768,7 +6768,7 @@
       "61"
     ],
     "openAnswer": false,
-    "explanationRu": "Фермий — элемент номер 100 в таблице Менделеева.",
+    "explanationRu": "Фермий - элемент номер 100 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1896",
     "sourceTitle": "Wikidata: фермий",
     "origin": "wikidata",
@@ -6793,7 +6793,7 @@
       "Tb"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «фермий» — Fm.",
+    "explanationRu": "Химический символ элемента «фермий» - Fm.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1896",
     "sourceTitle": "Wikidata: фермий",
     "origin": "wikidata",
@@ -6818,7 +6818,7 @@
       "83"
     ],
     "openAnswer": false,
-    "explanationRu": "Менделевий — элемент номер 101 в таблице Менделеева.",
+    "explanationRu": "Менделевий - элемент номер 101 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1898",
     "sourceTitle": "Wikidata: менделевий",
     "origin": "wikidata",
@@ -6843,7 +6843,7 @@
       "V"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «менделевий» — Md.",
+    "explanationRu": "Химический символ элемента «менделевий» - Md.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1898",
     "sourceTitle": "Wikidata: менделевий",
     "origin": "wikidata",
@@ -6868,7 +6868,7 @@
       "89"
     ],
     "openAnswer": false,
-    "explanationRu": "Нобелий — элемент номер 102 в таблице Менделеева.",
+    "explanationRu": "Нобелий - элемент номер 102 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1901",
     "sourceTitle": "Wikidata: нобелий",
     "origin": "wikidata",
@@ -6893,7 +6893,7 @@
       "Pu"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «нобелий» — No.",
+    "explanationRu": "Химический символ элемента «нобелий» - No.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1901",
     "sourceTitle": "Wikidata: нобелий",
     "origin": "wikidata",
@@ -6918,7 +6918,7 @@
       "75"
     ],
     "openAnswer": false,
-    "explanationRu": "Лоуренсий — элемент номер 103 в таблице Менделеева.",
+    "explanationRu": "Лоуренсий - элемент номер 103 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1905",
     "sourceTitle": "Wikidata: лоуренсий",
     "origin": "wikidata",
@@ -6943,7 +6943,7 @@
       "Dy"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «лоуренсий» — Lr.",
+    "explanationRu": "Химический символ элемента «лоуренсий» - Lr.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1905",
     "sourceTitle": "Wikidata: лоуренсий",
     "origin": "wikidata",
@@ -6968,7 +6968,7 @@
       "25"
     ],
     "openAnswer": false,
-    "explanationRu": "Резерфордий — элемент номер 104 в таблице Менделеева.",
+    "explanationRu": "Резерфордий - элемент номер 104 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1226",
     "sourceTitle": "Wikidata: резерфордий",
     "origin": "wikidata",
@@ -6993,7 +6993,7 @@
       "Dy"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «резерфордий» — Rf.",
+    "explanationRu": "Химический символ элемента «резерфордий» - Rf.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1226",
     "sourceTitle": "Wikidata: резерфордий",
     "origin": "wikidata",
@@ -7018,7 +7018,7 @@
       "59"
     ],
     "openAnswer": false,
-    "explanationRu": "Дубний — элемент номер 105 в таблице Менделеева.",
+    "explanationRu": "Дубний - элемент номер 105 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1232",
     "sourceTitle": "Wikidata: дубний",
     "origin": "wikidata",
@@ -7043,7 +7043,7 @@
       "La"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «дубний» — Db.",
+    "explanationRu": "Химический символ элемента «дубний» - Db.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1232",
     "sourceTitle": "Wikidata: дубний",
     "origin": "wikidata",
@@ -7068,7 +7068,7 @@
       "8"
     ],
     "openAnswer": false,
-    "explanationRu": "Сиборгий — элемент номер 106 в таблице Менделеева.",
+    "explanationRu": "Сиборгий - элемент номер 106 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1234",
     "sourceTitle": "Wikidata: сиборгий",
     "origin": "wikidata",
@@ -7093,7 +7093,7 @@
       "Tc"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «сиборгий» — Sg.",
+    "explanationRu": "Химический символ элемента «сиборгий» - Sg.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1234",
     "sourceTitle": "Wikidata: сиборгий",
     "origin": "wikidata",
@@ -7118,7 +7118,7 @@
       "77"
     ],
     "openAnswer": false,
-    "explanationRu": "Борий — элемент номер 107 в таблице Менделеева.",
+    "explanationRu": "Борий - элемент номер 107 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1249",
     "sourceTitle": "Wikidata: борий",
     "origin": "wikidata",
@@ -7143,7 +7143,7 @@
       "Pr"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «борий» — Bh.",
+    "explanationRu": "Химический символ элемента «борий» - Bh.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1249",
     "sourceTitle": "Wikidata: борий",
     "origin": "wikidata",
@@ -7168,7 +7168,7 @@
       "9"
     ],
     "openAnswer": false,
-    "explanationRu": "Хассий — элемент номер 108 в таблице Менделеева.",
+    "explanationRu": "Хассий - элемент номер 108 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1252",
     "sourceTitle": "Wikidata: хассий",
     "origin": "wikidata",
@@ -7193,7 +7193,7 @@
       "Rh"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «хассий» — Hs.",
+    "explanationRu": "Химический символ элемента «хассий» - Hs.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1252",
     "sourceTitle": "Wikidata: хассий",
     "origin": "wikidata",
@@ -7218,7 +7218,7 @@
       "36"
     ],
     "openAnswer": false,
-    "explanationRu": "Мейтнерий — элемент номер 109 в таблице Менделеева.",
+    "explanationRu": "Мейтнерий - элемент номер 109 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1258",
     "sourceTitle": "Wikidata: мейтнерий",
     "origin": "wikidata",
@@ -7243,7 +7243,7 @@
       "Sg"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «мейтнерий» — Mt.",
+    "explanationRu": "Химический символ элемента «мейтнерий» - Mt.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1258",
     "sourceTitle": "Wikidata: мейтнерий",
     "origin": "wikidata",
@@ -7268,7 +7268,7 @@
       "81"
     ],
     "openAnswer": false,
-    "explanationRu": "Дармштадтий — элемент номер 110 в таблице Менделеева.",
+    "explanationRu": "Дармштадтий - элемент номер 110 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1266",
     "sourceTitle": "Wikidata: дармштадтий",
     "origin": "wikidata",
@@ -7293,7 +7293,7 @@
       "Ti"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «дармштадтий» — Ds.",
+    "explanationRu": "Химический символ элемента «дармштадтий» - Ds.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1266",
     "sourceTitle": "Wikidata: дармштадтий",
     "origin": "wikidata",
@@ -7318,7 +7318,7 @@
       "63"
     ],
     "openAnswer": false,
-    "explanationRu": "Рентгений — элемент номер 111 в таблице Менделеева.",
+    "explanationRu": "Рентгений - элемент номер 111 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1272",
     "sourceTitle": "Wikidata: рентгений",
     "origin": "wikidata",
@@ -7343,7 +7343,7 @@
       "Os"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «рентгений» — Rg.",
+    "explanationRu": "Химический символ элемента «рентгений» - Rg.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1272",
     "sourceTitle": "Wikidata: рентгений",
     "origin": "wikidata",
@@ -7368,7 +7368,7 @@
       "62"
     ],
     "openAnswer": false,
-    "explanationRu": "Коперниций — элемент номер 112 в таблице Менделеева.",
+    "explanationRu": "Коперниций - элемент номер 112 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1278",
     "sourceTitle": "Wikidata: коперниций",
     "origin": "wikidata",
@@ -7393,7 +7393,7 @@
       "F"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «коперниций» — Cn.",
+    "explanationRu": "Химический символ элемента «коперниций» - Cn.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1278",
     "sourceTitle": "Wikidata: коперниций",
     "origin": "wikidata",
@@ -7418,7 +7418,7 @@
       "56"
     ],
     "openAnswer": false,
-    "explanationRu": "Нихоний — элемент номер 113 в таблице Менделеева.",
+    "explanationRu": "Нихоний - элемент номер 113 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1301",
     "sourceTitle": "Wikidata: нихоний",
     "origin": "wikidata",
@@ -7443,7 +7443,7 @@
       "Au"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «нихоний» — Nh.",
+    "explanationRu": "Химический символ элемента «нихоний» - Nh.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1301",
     "sourceTitle": "Wikidata: нихоний",
     "origin": "wikidata",
@@ -7468,7 +7468,7 @@
       "54"
     ],
     "openAnswer": false,
-    "explanationRu": "Флеровий — элемент номер 114 в таблице Менделеева.",
+    "explanationRu": "Флеровий - элемент номер 114 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1302",
     "sourceTitle": "Wikidata: флеровий",
     "origin": "wikidata",
@@ -7493,7 +7493,7 @@
       "Mo"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «флеровий» — Fl.",
+    "explanationRu": "Химический символ элемента «флеровий» - Fl.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1302",
     "sourceTitle": "Wikidata: флеровий",
     "origin": "wikidata",
@@ -7518,7 +7518,7 @@
       "42"
     ],
     "openAnswer": false,
-    "explanationRu": "Московий — элемент номер 115 в таблице Менделеева.",
+    "explanationRu": "Московий - элемент номер 115 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1303",
     "sourceTitle": "Wikidata: московий",
     "origin": "wikidata",
@@ -7543,7 +7543,7 @@
       "V"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «московий» — Mc.",
+    "explanationRu": "Химический символ элемента «московий» - Mc.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1303",
     "sourceTitle": "Wikidata: московий",
     "origin": "wikidata",
@@ -7568,7 +7568,7 @@
       "88"
     ],
     "openAnswer": false,
-    "explanationRu": "Ливерморий — элемент номер 116 в таблице Менделеева.",
+    "explanationRu": "Ливерморий - элемент номер 116 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1304",
     "sourceTitle": "Wikidata: ливерморий",
     "origin": "wikidata",
@@ -7593,7 +7593,7 @@
       "Cu"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «ливерморий» — Lv.",
+    "explanationRu": "Химический символ элемента «ливерморий» - Lv.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1304",
     "sourceTitle": "Wikidata: ливерморий",
     "origin": "wikidata",
@@ -7618,7 +7618,7 @@
       "12"
     ],
     "openAnswer": false,
-    "explanationRu": "Теннессин — элемент номер 117 в таблице Менделеева.",
+    "explanationRu": "Теннессин - элемент номер 117 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1306",
     "sourceTitle": "Wikidata: теннессин",
     "origin": "wikidata",
@@ -7643,7 +7643,7 @@
       "Na"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «теннессин» — Ts.",
+    "explanationRu": "Химический символ элемента «теннессин» - Ts.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1306",
     "sourceTitle": "Wikidata: теннессин",
     "origin": "wikidata",
@@ -7668,7 +7668,7 @@
       "53"
     ],
     "openAnswer": false,
-    "explanationRu": "Оганесон — элемент номер 118 в таблице Менделеева.",
+    "explanationRu": "Оганесон - элемент номер 118 в таблице Менделеева.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1307",
     "sourceTitle": "Wikidata: оганесон",
     "origin": "wikidata",
@@ -7693,7 +7693,7 @@
       "P"
     ],
     "openAnswer": false,
-    "explanationRu": "Химический символ элемента «оганесон» — Og.",
+    "explanationRu": "Химический символ элемента «оганесон» - Og.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1307",
     "sourceTitle": "Wikidata: оганесон",
     "origin": "wikidata",
@@ -7722,7 +7722,7 @@
     ],
     "openAnswer": false,
     "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/Cyanide-ion",
-    "sourceTitle": "PubChem — Цианид-ион",
+    "sourceTitle": "PubChem - Цианид-ион",
     "origin": "authored",
     "license": "original",
     "explanationRu": "Цианид-ион имеет химическую формулу CN⁻ и состоит из двух элементов: углерода (C) и азота (N). Оба элемента соединены тройной химической связью.",
@@ -7752,7 +7752,7 @@
     ],
     "openAnswer": true,
     "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/Cyanide-ion",
-    "sourceTitle": "PubChem — Цианид-ион",
+    "sourceTitle": "PubChem - Цианид-ион",
     "origin": "authored",
     "license": "original",
     "explanationRu": "Цианид-ион имеет химическую формулу CN⁻ и состоит из двух элементов: углерода (C) и азота (N). Оба элемента соединены тройной химической связью.",
@@ -8066,9 +8066,9 @@
     "topic": "science",
     "difficulty": "Hard",
     "promptRu": "Как называется эффект, при котором люди с низкой квалификацией переоценивают свои способности?",
-    "answerRu": "эффект Даннинга — Крюгера",
+    "answerRu": "эффект Даннинга - Крюгера",
     "acceptedRu": [
-      "эффект Даннинга — Крюгера",
+      "эффект Даннинга - Крюгера",
       "Даннинга-Крюгера",
       "Даннинг-Крюгер",
       "эффект Даннинга-Крюгера"

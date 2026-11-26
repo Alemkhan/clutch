@@ -3,7 +3,7 @@ import type { Question } from '../index';
 import { SOLO_TARGET_PROGRESS } from './soloRun';
 
 /*
- * Цена вопроса — оценка по формату, а не по конкретной стране: сложности самой
+ * Цена вопроса - оценка по формату, а не по конкретной стране: сложности самой
  * сущности («Франция» против «Сан-Томе и Принсипи») в данных нет, в `Country` нет такого поля.
  */
 
@@ -39,7 +39,7 @@ const CORRECT_RATE: Record<QuestionFormat, number> = {
  * примерно 21% вместо 60%. Значит средняя награда ниже заложенной на 12–22%, то есть пар набора
  * занижен, а «1.0 = сыграл как эталон» перестало быть правдой: у эталона сейчас выходит 1.0–1.25.
  *
- * Почему не поправлено: нового замера на людях нет, а подставить оценку вместо замера — обменять
+ * Почему не поправлено: нового замера на людях нет, а подставить оценку вместо замера - обменять
  * известную ошибку на неизвестную. Порядок в таблице это не ломает: внутри набора пар у всех один.
  * Пересчитать, когда наберутся круги: `npm run calibrate:pricing` (он же скажет, хватает ли их).
  */
@@ -59,7 +59,7 @@ export function questionFormat(question: Question): QuestionFormat {
   return `${kind}_${media}` as QuestionFormat;
 }
 
-/** Сложность в логитах; больше — труднее. */
+/** Сложность в логитах; больше - труднее. */
 export function questionDifficulty(question: Question): number {
   const rate = CORRECT_RATE[questionFormat(question)];
   return -Math.log(rate / (1 - rate));
@@ -72,7 +72,7 @@ function referenceCorrectProbability(question: Question): number {
 
 /**
  * За сколько кругов набор закрыл бы эталонный игрок: номер круга, на котором накопленный
- * ожидаемый прогресс достигает цели. Не закрывается — `questions.length + 1`. Больше — труднее набор.
+ * ожидаемый прогресс достигает цели. Не закрывается - `questions.length + 1`. Больше - труднее набор.
  */
 export function setPar(questions: readonly Question[], target: number = SOLO_TARGET_PROGRESS): number {
   let expected = 0;
@@ -83,7 +83,7 @@ export function setPar(questions: readonly Question[], target: number = SOLO_TAR
   return questions.length + 1;
 }
 
-/** Результат относительно пара: меньше — лучше. 1.0 = сыграл как эталон. */
+/** Результат относительно пара: меньше - лучше. 1.0 = сыграл как эталон. */
 export function soloScore(rounds: number, par: number): number {
   if (!Number.isFinite(rounds) || rounds < 0) {
     throw new RangeError('rounds must be a finite non-negative number');

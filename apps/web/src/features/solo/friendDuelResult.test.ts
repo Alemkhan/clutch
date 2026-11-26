@@ -46,19 +46,19 @@ describe('friend duel on the client', () => {
     const pending = buildFriendDuelSummary(played, null);
     expect(pending.outcome).toBeNull();
     expect(pending.headline).toBe('Дуэль сыграна');
-    expect(pending.line).toBe('Ты — 100% за 4 круга. Анна — 100% за 4 круга.');
+    expect(pending.line).toBe('Ты: 100% за 4 круга. Анна: 100% за 4 круга.');
   });
 
   it('says the tiebreaker decided a tie, with comma multipliers, only when the server reports it', () => {
     const summary = buildFriendDuelSummary(played, { outcome: 'player', tiebreak: { ownMultiplier: 1.4, opponentMultiplier: 2.8 } });
-    expect(summary.tiebreakLine).toBe('Ничья по забегу — решила «На глазок»: ×1,4 против ×2,8.');
+    expect(summary.tiebreakLine).toBe('Ничья по забегу, решила «На глазок»: ×1,4 против ×2,8.');
     expect(buildFriendDuelSummary(played, { outcome: 'player' }).tiebreakLine).toBe('');
     expect(buildFriendDuelSummary(played, null).tiebreakLine).toBe('');
     // Множитель друга не показываем тому, кто сам не отвечал.
     expect(buildFriendDuelSummary(played, { outcome: 'opponent', tiebreak: { ownMultiplier: null, opponentMultiplier: 1.2 } }).tiebreakLine)
-      .toBe('Ничья по забегу — решила «На глазок»: друг ответил, а ты нет.');
+      .toBe('Ничья по забегу, решила «На глазок»: друг ответил, а ты нет.');
     expect(buildFriendDuelSummary(played, { outcome: 'player', tiebreak: { ownMultiplier: 1.2, opponentMultiplier: null } }).tiebreakLine)
-      .toBe('Ничья по забегу — решила «На глазок»: ты ответил, а друг нет.');
+      .toBe('Ничья по забегу, решила «На глазок»: ты ответил, а друг нет.');
   });
 
   it('renders the tiebreak line on the duel result and nowhere in a ranked result', () => {

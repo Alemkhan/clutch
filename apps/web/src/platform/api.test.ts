@@ -219,7 +219,7 @@ describe('reports and analytics calls', () => {
 
   it('drops non-allowlisted event names without touching the network', () => {
     const fetchMock = stubApi();
-    // @ts-expect-error — runtime-защита от опечатки в имени события
+    // @ts-expect-error - runtime-защита от опечатки в имени события
     logAnalyticsEvent('question_answered');
     expect((fetchMock.mock.calls as unknown as [string, RequestInit][])
       .filter(([path]) => path === '/api/events')).toHaveLength(0);

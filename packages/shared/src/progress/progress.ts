@@ -20,7 +20,7 @@ function previousDay(dateKey: string): string {
 }
 
 /**
- * Серия из игровых суток, в которые сыгран забег дня. `dayKeys` — YYYY-MM-DD, в любом порядке
+ * Серия из игровых суток, в которые сыгран забег дня. `dayKeys` - YYYY-MM-DD, в любом порядке
  * и с повторами. Вчерашняя серия ещё жива: она сгорит, только если сегодня так и не сыграть.
  */
 export function streakFromDays(dayKeys: readonly string[], todayKey: string): PlayerStreak {
@@ -159,7 +159,7 @@ export function achievementsOf(stats: PlayerStats): PlayerAchievement[] {
   });
 }
 
-/** Номер игрового дня для карточки «Clutch #N»: день 1 — 2026-10-19, как у «На глазок». */
+/** Номер игрового дня для карточки «Clutch #N»: день 1-2026-10-19, как у «На глазок». */
 export const GAME_DAY_ONE = '2026-10-19';
 
 export function gameDayNumber(dateKey: string): number {

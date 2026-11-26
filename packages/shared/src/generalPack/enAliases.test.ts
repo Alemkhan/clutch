@@ -178,7 +178,7 @@ describe('английские алиасы открытых ответов', ()
       const q = openApproved.find((x) => x.id === id);
       return !q || !!q.acceptedEn?.length;
     });
-    expect(stale, 'эти id больше не нужны в NO_EN — убери:\n' + stale.join('\n')).toEqual([]);
+    expect(stale, 'эти id больше не нужны в NO_EN - убери:\n' + stale.join('\n')).toEqual([]);
   });
 
   it('английские алиасы не дублируют русские после нормализации', () => {

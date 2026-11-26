@@ -29,7 +29,7 @@ interface TowerSceneProps {
   onSettled: () => void;
 }
 
-/** Башня, летающий блок и падающий отломок. onSettled — когда игрок увидел конец падения. */
+/** Башня, летающий блок и падающий отломок. onSettled - когда игрок увидел конец падения. */
 export function TowerScene({ floors, targetCenter, markerPos, result, landing, onSettled }: TowerSceneProps) {
   const reduceMotion = useReducedMotion();
   const shown = Math.min(VISIBLE_FLOORS, floors);
@@ -40,7 +40,7 @@ export function TowerScene({ floors, targetCenter, markerPos, result, landing, o
   const topLeft = blockLeftPercent(targetCenter);
   const instant = Boolean(reduceMotion);
 
-  // Отломок — последнее, что видит игрок: ждём его; если отламывать нечего, ждём посадку блока.
+  // Отломок - последнее, что видит игрок: ждём его; если отламывать нечего, ждём посадку блока.
   // Под reduced motion колбэк окончания вызывает сам TowerGame.
   const fragmentSettles = Boolean(landing?.overhang) && !instant;
   const landedSettles = !fragmentSettles && !instant;

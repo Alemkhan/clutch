@@ -130,7 +130,7 @@ export function find(nodes: Array<HostNode | string>, pred: (n: HostNode) => boo
   return null;
 }
 
-/** Детерминированная сериализация дерева (функции — как "fn") для сравнения до/после. */
+/** Детерминированная сериализация дерева (функции - как "fn") для сравнения до/после. */
 export function dump(nodes: Array<HostNode | string>, depth = 0): string {
   return nodes
     .map((n) => {

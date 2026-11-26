@@ -1,5 +1,5 @@
 /* R26f/R26g · «Партии» и «Таблица дня» по макетам v2 (Board.dc.html, MyRuns.dc.html).
-   Тёмная карточка — тем же токеном, что tb-result: var(--text) на var(--surface). */
+   Тёмная карточка - тем же токеном, что tb-result: var(--text) на var(--surface). */
 .my-runs {
   display: flex;
   flex-direction: column;
@@ -126,7 +126,7 @@
   border-top: 1px solid var(--line);
 }
 
-/* Под метой есть ещё строка (реванш, заметка дуэли) — пилюля остаётся у заголовка строки. */
+/* Под метой есть ещё строка (реванш, заметка дуэли) - пилюля остаётся у заголовка строки. */
 .my-run:has(.my-run-main > :nth-child(3)) .my-run-status {
   align-self: flex-start;
 }

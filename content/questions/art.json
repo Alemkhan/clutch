@@ -395,7 +395,7 @@
     ],
     "openAnswer": true,
     "sourceHint": "Википедия: Статуя Христа-Искупителя",
-    "reviewNote": "В Лиссабоне есть похожая статуя Кришту-Рей — проверить, не путает ли это.",
+    "reviewNote": "В Лиссабоне есть похожая статуя Кришту-Рей - проверить, не путает ли это.",
     "origin": "authored",
     "license": "original",
     "daily": false
@@ -422,7 +422,7 @@
       "Пьер Огюст Ренуар"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Мона Лиза» — Леонардо да Винчи.",
+    "explanationRu": "Автор картины «Мона Лиза» - Леонардо да Винчи.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q12418",
     "sourceTitle": "Wikidata: Мона Лиза",
     "origin": "wikidata",
@@ -455,7 +455,7 @@
       "Франсиско Гойя"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Звёздная ночь» — Винсент Ван Гог.",
+    "explanationRu": "Автор картины «Звёздная ночь» - Винсент Ван Гог.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q45585",
     "sourceTitle": "Wikidata: Звёздная ночь",
     "origin": "wikidata",
@@ -488,7 +488,7 @@
       "Теодор Жерико"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Девушка с жемчужной серёжкой» — Ян Вермеер.",
+    "explanationRu": "Автор картины «Девушка с жемчужной серёжкой» - Ян Вермеер.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q185372",
     "sourceTitle": "Wikidata: Девушка с жемчужной серёжкой",
     "origin": "wikidata",
@@ -521,7 +521,7 @@
       "Сандро Боттичелли"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Герника» — Пабло Пикассо.",
+    "explanationRu": "Автор картины «Герника» - Пабло Пикассо.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q175036",
     "sourceTitle": "Wikidata: Герника",
     "origin": "wikidata",
@@ -550,7 +550,7 @@
       "Диего Веласкес"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Свобода, ведущая народ» — Эжен Делакруа.",
+    "explanationRu": "Автор картины «Свобода, ведущая народ» - Эжен Делакруа.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q29530",
     "sourceTitle": "Wikidata: Свобода, ведущая народ",
     "origin": "wikidata",
@@ -581,7 +581,7 @@
       "Диего Веласкес"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Ночной дозор» — Рембрандт.",
+    "explanationRu": "Автор картины «Ночной дозор» - Рембрандт.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q219831",
     "sourceTitle": "Wikidata: Ночной дозор",
     "origin": "wikidata",
@@ -614,7 +614,7 @@
       "Иероним Босх"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Менины (Фрейлины)» — Диего Веласкес.",
+    "explanationRu": "Автор картины «Менины (Фрейлины)» - Диего Веласкес.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q208758",
     "sourceTitle": "Wikidata: Менины (Фрейлины)",
     "origin": "wikidata",
@@ -647,7 +647,7 @@
       "Эдуард Мане"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Рождение Венеры» — Сандро Боттичелли.",
+    "explanationRu": "Автор картины «Рождение Венеры» - Сандро Боттичелли.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q151047",
     "sourceTitle": "Wikidata: Рождение Венеры",
     "origin": "wikidata",
@@ -676,7 +676,7 @@
       "Леонардо да Винчи"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Едоки картофеля» — Винсент Ван Гог.",
+    "explanationRu": "Автор картины «Едоки картофеля» - Винсент Ван Гог.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q154469",
     "sourceTitle": "Wikidata: Едоки картофеля",
     "origin": "wikidata",
@@ -709,7 +709,7 @@
       "Густав Климт"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Впечатление. Восходящее солнце» — Клод Моне.",
+    "explanationRu": "Автор картины «Впечатление. Восходящее солнце» - Клод Моне.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q328523",
     "sourceTitle": "Wikidata: Впечатление. Восходящее солнце",
     "origin": "wikidata",
@@ -742,7 +742,7 @@
       "Иероним Босх"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Смерть Сократа» — Жак Луи Давид.",
+    "explanationRu": "Автор картины «Смерть Сократа» - Жак Луи Давид.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1752990",
     "sourceTitle": "Wikidata: Смерть Сократа",
     "origin": "wikidata",
@@ -775,7 +775,7 @@
       "Каспар Давид Фридрих"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Поцелуй» — Густав Климт.",
+    "explanationRu": "Автор картины «Поцелуй» - Густав Климт.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q698487",
     "sourceTitle": "Wikidata: Поцелуй",
     "origin": "wikidata",
@@ -808,7 +808,7 @@
       "Теодор Жерико"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Дама с горностаем» — Леонардо да Винчи.",
+    "explanationRu": "Автор картины «Дама с горностаем» - Леонардо да Винчи.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q474338",
     "sourceTitle": "Wikidata: Дама с горностаем",
     "origin": "wikidata",
@@ -841,7 +841,7 @@
       "Эжен Делакруа"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Сад земных наслаждений» — Иероним Босх.",
+    "explanationRu": "Автор картины «Сад земных наслаждений» - Иероним Босх.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q321303",
     "sourceTitle": "Wikidata: Сад земных наслаждений",
     "origin": "wikidata",
@@ -870,7 +870,7 @@
       "Грант Вуд"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Постоянство памяти» — Сальвадор Дали.",
+    "explanationRu": "Автор картины «Постоянство памяти» - Сальвадор Дали.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q25729",
     "sourceTitle": "Wikidata: Постоянство памяти",
     "origin": "wikidata",
@@ -899,7 +899,7 @@
       "Илья Ефимович Репин"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Странник над морем тумана» — Каспар Давид Фридрих.",
+    "explanationRu": "Автор картины «Странник над морем тумана» - Каспар Давид Фридрих.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q311243",
     "sourceTitle": "Wikidata: Странник над морем тумана",
     "origin": "wikidata",
@@ -932,7 +932,7 @@
       "Диего Веласкес"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Плот «Медузы»» — Теодор Жерико.",
+    "explanationRu": "Автор картины «Плот «Медузы»» - Теодор Жерико.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q212616",
     "sourceTitle": "Wikidata: Плот «Медузы»",
     "origin": "wikidata",
@@ -965,7 +965,7 @@
       "Эжен Делакруа"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Запорожцы» — Илья Ефимович Репин.",
+    "explanationRu": "Автор картины «Запорожцы» - Илья Ефимович Репин.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q478271",
     "sourceTitle": "Wikidata: Запорожцы",
     "origin": "wikidata",
@@ -998,7 +998,7 @@
       "Винсент Ван Гог"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Американская готика» — Грант Вуд.",
+    "explanationRu": "Автор картины «Американская готика» - Грант Вуд.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q464782",
     "sourceTitle": "Wikidata: Американская готика",
     "origin": "wikidata",
@@ -1031,7 +1031,7 @@
       "Ян Вермеер"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Завтрак на траве» — Эдуард Мане.",
+    "explanationRu": "Автор картины «Завтрак на траве» - Эдуард Мане.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q152509",
     "sourceTitle": "Wikidata: Завтрак на траве",
     "origin": "wikidata",
@@ -1060,7 +1060,7 @@
       "Леонардо да Винчи"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Маха обнажённая» — Франсиско Гойя.",
+    "explanationRu": "Автор картины «Маха обнажённая» - Франсиско Гойя.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q152867",
     "sourceTitle": "Wikidata: Маха обнажённая",
     "origin": "wikidata",
@@ -1089,7 +1089,7 @@
       "Леонардо да Винчи"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Третье мая 1808 года в Мадриде» — Франсиско Гойя.",
+    "explanationRu": "Автор картины «Третье мая 1808 года в Мадриде» - Франсиско Гойя.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1091086",
     "sourceTitle": "Wikidata: Третье мая 1808 года в Мадриде",
     "origin": "wikidata",
@@ -1120,7 +1120,7 @@
       "Каспар Давид Фридрих"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Урок анатомии доктора Тульпа» — Рембрандт.",
+    "explanationRu": "Автор картины «Урок анатомии доктора Тульпа» - Рембрандт.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q661378",
     "sourceTitle": "Wikidata: Урок анатомии доктора Тульпа",
     "origin": "wikidata",
@@ -1153,7 +1153,7 @@
       "Теодор Жерико"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Молочница» — Ян Вермеер.",
+    "explanationRu": "Автор картины «Молочница» - Ян Вермеер.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q167605",
     "sourceTitle": "Wikidata: Молочница",
     "origin": "wikidata",
@@ -1186,7 +1186,7 @@
       "Эжен Делакруа"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Бал в Мулен де ла Галетт» — Пьер Огюст Ренуар.",
+    "explanationRu": "Автор картины «Бал в Мулен де ла Галетт» - Пьер Огюст Ренуар.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q683274",
     "sourceTitle": "Wikidata: Бал в Мулен де ла Галетт",
     "origin": "wikidata",
@@ -1219,7 +1219,7 @@
       "Грант Вуд"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Портрет четы Арнольфини» — Ян ван Эйк.",
+    "explanationRu": "Автор картины «Портрет четы Арнольфини» - Ян ван Эйк.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q220859",
     "sourceTitle": "Wikidata: Портрет четы Арнольфини",
     "origin": "wikidata",
@@ -1252,7 +1252,7 @@
       "Сандро Боттичелли"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Олимпия» — Эдуард Мане.",
+    "explanationRu": "Автор картины «Олимпия» - Эдуард Мане.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q737062",
     "sourceTitle": "Wikidata: Олимпия",
     "origin": "wikidata",
@@ -1281,7 +1281,7 @@
       "Тициан"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Клятва Горациев» — Жак Луи Давид.",
+    "explanationRu": "Автор картины «Клятва Горациев» - Жак Луи Давид.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q476458",
     "sourceTitle": "Wikidata: Клятва Горациев",
     "origin": "wikidata",
@@ -1314,7 +1314,7 @@
       "Эдуард Мане"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Весна» — Сандро Боттичелли.",
+    "explanationRu": "Автор картины «Весна» - Сандро Боттичелли.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q549847",
     "sourceTitle": "Wikidata: Весна",
     "origin": "wikidata",
@@ -1345,7 +1345,7 @@
       "Винсент Ван Гог"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Венера Урбинская» — Тициан.",
+    "explanationRu": "Автор картины «Венера Урбинская» - Тициан.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q727875",
     "sourceTitle": "Wikidata: Венера Урбинская",
     "origin": "wikidata",
@@ -1375,7 +1375,7 @@
       "Густав Климт"
     ],
     "openAnswer": false,
-    "explanationRu": "Автор картины «Охотники на снегу» — Питер Брейгель Старший.",
+    "explanationRu": "Автор картины «Охотники на снегу» - Питер Брейгель Старший.",
     "sourceUrl": "https://www.wikidata.org/wiki/Q500985",
     "sourceTitle": "Wikidata: Охотники на снегу",
     "origin": "wikidata",
@@ -1403,7 +1403,7 @@
       "Портрет четы Арнольфини"
     ],
     "openAnswer": false,
-    "explanationRu": "Леонардо да Винчи — автор картины «Мона Лиза».",
+    "explanationRu": "Леонардо да Винчи - автор картины «Мона Лиза».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q12418",
     "sourceTitle": "Wikidata: Мона Лиза",
     "origin": "wikidata",
@@ -1428,7 +1428,7 @@
       "Девушка с жемчужной серёжкой"
     ],
     "openAnswer": false,
-    "explanationRu": "Винсент Ван Гог — автор картины «Звёздная ночь».",
+    "explanationRu": "Винсент Ван Гог - автор картины «Звёздная ночь».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q45585",
     "sourceTitle": "Wikidata: Звёздная ночь",
     "origin": "wikidata",
@@ -1453,7 +1453,7 @@
       "Маха обнажённая"
     ],
     "openAnswer": false,
-    "explanationRu": "Ян Вермеер — автор картины «Девушка с жемчужной серёжкой».",
+    "explanationRu": "Ян Вермеер - автор картины «Девушка с жемчужной серёжкой».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q185372",
     "sourceTitle": "Wikidata: Девушка с жемчужной серёжкой",
     "origin": "wikidata",
@@ -1478,7 +1478,7 @@
       "Свобода, ведущая народ"
     ],
     "openAnswer": false,
-    "explanationRu": "Пабло Пикассо — автор картины «Герника».",
+    "explanationRu": "Пабло Пикассо - автор картины «Герника».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q175036",
     "sourceTitle": "Wikidata: Герника",
     "origin": "wikidata",
@@ -1503,7 +1503,7 @@
       "Венера Урбинская"
     ],
     "openAnswer": false,
-    "explanationRu": "Эжен Делакруа — автор картины «Свобода, ведущая народ».",
+    "explanationRu": "Эжен Делакруа - автор картины «Свобода, ведущая народ».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q29530",
     "sourceTitle": "Wikidata: Свобода, ведущая народ",
     "origin": "wikidata",
@@ -1528,7 +1528,7 @@
       "Плот «Медузы»"
     ],
     "openAnswer": false,
-    "explanationRu": "Рембрандт — автор картины «Ночной дозор».",
+    "explanationRu": "Рембрандт - автор картины «Ночной дозор».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q219831",
     "sourceTitle": "Wikidata: Ночной дозор",
     "origin": "wikidata",
@@ -1553,7 +1553,7 @@
       "Завтрак на траве"
     ],
     "openAnswer": false,
-    "explanationRu": "Диего Веласкес — автор картины «Менины (Фрейлины)».",
+    "explanationRu": "Диего Веласкес - автор картины «Менины (Фрейлины)».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q208758",
     "sourceTitle": "Wikidata: Менины (Фрейлины)",
     "origin": "wikidata",
@@ -1578,7 +1578,7 @@
       "Поцелуй"
     ],
     "openAnswer": false,
-    "explanationRu": "Сандро Боттичелли — автор картины «Рождение Венеры».",
+    "explanationRu": "Сандро Боттичелли - автор картины «Рождение Венеры».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q151047",
     "sourceTitle": "Wikidata: Рождение Венеры",
     "origin": "wikidata",
@@ -1603,7 +1603,7 @@
       "Урок анатомии доктора Тульпа"
     ],
     "openAnswer": false,
-    "explanationRu": "Клод Моне — автор картины «Впечатление. Восходящее солнце».",
+    "explanationRu": "Клод Моне - автор картины «Впечатление. Восходящее солнце».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q328523",
     "sourceTitle": "Wikidata: Впечатление. Восходящее солнце",
     "origin": "wikidata",
@@ -1628,7 +1628,7 @@
       "Американская готика"
     ],
     "openAnswer": false,
-    "explanationRu": "Жак Луи Давид — автор картины «Смерть Сократа».",
+    "explanationRu": "Жак Луи Давид - автор картины «Смерть Сократа».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q1752990",
     "sourceTitle": "Wikidata: Смерть Сократа",
     "origin": "wikidata",
@@ -1653,7 +1653,7 @@
       "Девушка с жемчужной серёжкой"
     ],
     "openAnswer": false,
-    "explanationRu": "Густав Климт — автор картины «Поцелуй».",
+    "explanationRu": "Густав Климт - автор картины «Поцелуй».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q698487",
     "sourceTitle": "Wikidata: Поцелуй",
     "origin": "wikidata",
@@ -1678,7 +1678,7 @@
       "Плот «Медузы»"
     ],
     "openAnswer": false,
-    "explanationRu": "Иероним Босх — автор картины «Сад земных наслаждений».",
+    "explanationRu": "Иероним Босх - автор картины «Сад земных наслаждений».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q321303",
     "sourceTitle": "Wikidata: Сад земных наслаждений",
     "origin": "wikidata",
@@ -1703,7 +1703,7 @@
       "Венера Урбинская"
     ],
     "openAnswer": false,
-    "explanationRu": "Сальвадор Дали — автор картины «Постоянство памяти».",
+    "explanationRu": "Сальвадор Дали - автор картины «Постоянство памяти».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q25729",
     "sourceTitle": "Wikidata: Постоянство памяти",
     "origin": "wikidata",
@@ -1728,7 +1728,7 @@
       "Девушка с жемчужной серёжкой"
     ],
     "openAnswer": false,
-    "explanationRu": "Каспар Давид Фридрих — автор картины «Странник над морем тумана».",
+    "explanationRu": "Каспар Давид Фридрих - автор картины «Странник над морем тумана».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q311243",
     "sourceTitle": "Wikidata: Странник над морем тумана",
     "origin": "wikidata",
@@ -1753,7 +1753,7 @@
       "Венера Урбинская"
     ],
     "openAnswer": false,
-    "explanationRu": "Теодор Жерико — автор картины «Плот «Медузы»».",
+    "explanationRu": "Теодор Жерико - автор картины «Плот «Медузы»».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q212616",
     "sourceTitle": "Wikidata: Плот «Медузы»",
     "origin": "wikidata",
@@ -1778,7 +1778,7 @@
       "Бал в Мулен де ла Галетт"
     ],
     "openAnswer": false,
-    "explanationRu": "Илья Ефимович Репин — автор картины «Запорожцы».",
+    "explanationRu": "Илья Ефимович Репин - автор картины «Запорожцы».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q478271",
     "sourceTitle": "Wikidata: Запорожцы",
     "origin": "wikidata",
@@ -1803,7 +1803,7 @@
       "Третье мая 1808 года в Мадриде"
     ],
     "openAnswer": false,
-    "explanationRu": "Грант Вуд — автор картины «Американская готика».",
+    "explanationRu": "Грант Вуд - автор картины «Американская готика».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q464782",
     "sourceTitle": "Wikidata: Американская готика",
     "origin": "wikidata",
@@ -1828,7 +1828,7 @@
       "Маха обнажённая"
     ],
     "openAnswer": false,
-    "explanationRu": "Эдуард Мане — автор картины «Завтрак на траве».",
+    "explanationRu": "Эдуард Мане - автор картины «Завтрак на траве».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q152509",
     "sourceTitle": "Wikidata: Завтрак на траве",
     "origin": "wikidata",
@@ -1853,7 +1853,7 @@
       "Звёздная ночь"
     ],
     "openAnswer": false,
-    "explanationRu": "Франсиско Гойя — автор картины «Маха обнажённая».",
+    "explanationRu": "Франсиско Гойя - автор картины «Маха обнажённая».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q152867",
     "sourceTitle": "Wikidata: Маха обнажённая",
     "origin": "wikidata",
@@ -1878,7 +1878,7 @@
       "Звёздная ночь"
     ],
     "openAnswer": false,
-    "explanationRu": "Пьер Огюст Ренуар — автор картины «Бал в Мулен де ла Галетт».",
+    "explanationRu": "Пьер Огюст Ренуар - автор картины «Бал в Мулен де ла Галетт».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q683274",
     "sourceTitle": "Wikidata: Бал в Мулен де ла Галетт",
     "origin": "wikidata",
@@ -1903,7 +1903,7 @@
       "Запорожцы"
     ],
     "openAnswer": false,
-    "explanationRu": "Ян ван Эйк — автор картины «Портрет четы Арнольфини».",
+    "explanationRu": "Ян ван Эйк - автор картины «Портрет четы Арнольфини».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q220859",
     "sourceTitle": "Wikidata: Портрет четы Арнольфини",
     "origin": "wikidata",
@@ -1928,7 +1928,7 @@
       "Дама с горностаем"
     ],
     "openAnswer": false,
-    "explanationRu": "Тициан — автор картины «Венера Урбинская».",
+    "explanationRu": "Тициан - автор картины «Венера Урбинская».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q727875",
     "sourceTitle": "Wikidata: Венера Урбинская",
     "origin": "wikidata",
@@ -1953,7 +1953,7 @@
       "Смерть Сократа"
     ],
     "openAnswer": false,
-    "explanationRu": "Питер Брейгель Старший — автор картины «Охотники на снегу».",
+    "explanationRu": "Питер Брейгель Старший - автор картины «Охотники на снегу».",
     "sourceUrl": "https://www.wikidata.org/wiki/Q500985",
     "sourceTitle": "Wikidata: Охотники на снегу",
     "origin": "wikidata",

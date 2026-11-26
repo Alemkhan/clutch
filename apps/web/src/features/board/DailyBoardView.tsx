@@ -98,7 +98,7 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
                   <span className="solo-board-you-hint">{isPrivateStanding(state.board.you) ? privateStandingHint(state.board.you) : standingHint(state.board.you)}</span>
                   {isPrivateStanding(state.board.you) && <span className="solo-board-you-meta">{t.privatePlace}</span>}
                   {/* Пар набора игроку не показывается: он откалиброван на старом молотке и занижен
-                      на 12–22% (см. SKILL_SHARE). Круги — честное число, их и показываем. */}
+                      на 12–22% (см. SKILL_SHARE). Круги - честное число, их и показываем. */}
                   <span className="solo-board-you-meta">
                     {t.youMeta(soloRoundsText(state.board.you.entry.roundsPlayed), finishedText(state.board.you.total))}
                   </span>
@@ -128,7 +128,7 @@ export function SoloBoardView({ state, msLeft, category, onCategory, onBack, onR
             <>
               <ol className="solo-board-list">
                 {state.board.entries.map((entry, index) => {
-                  // Место общее у ничьих (1, 2, 2, 4), поэтому «своя» строка — по месту и имени-метке.
+                  // Место общее у ничьих (1, 2, 2, 4), поэтому «своя» строка - по месту и имени-метке.
                   const mine = state.board.you !== null
                     && state.board.you.rank === entry.rank
                     && state.board.you.entry.completedAt === entry.completedAt

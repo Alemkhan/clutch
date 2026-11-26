@@ -12,7 +12,7 @@ export function useSoloRunLifecycle(
 ) {
   const { stateRef, coordinatorRef } = ctx;
 
-  // Связь вернулась — зависший круг уходит сам.
+  // Связь вернулась - зависший круг уходит сам.
   useEffect(() => {
     const onOnline = () => {
       if (stateRef.current.pending && stateRef.current.syncFailed) retrySync();
@@ -27,7 +27,7 @@ export function useSoloRunLifecycle(
   }, [state.stage]);
 
   // Продуктовое событие (R22): забег доигран до итога. Отсекаем возврат уже закрытого забега
-  // (продолжение сразу в 'result') — событие только о переходе из игры, и по одному на забег.
+  // (продолжение сразу в 'result') - событие только о переходе из игры, и по одному на забег.
   const previousStageRef = useRef<SoloFlowState['stage']>('categories');
   const loggedCompletionsRef = useRef(new Set<string>());
   useEffect(() => {

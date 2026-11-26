@@ -74,7 +74,7 @@ function validateRound(round: OpponentRound): void {
 export interface NormalizedSoloRun {
   runId: string;
   questions: PublicQuestion[];
-  /** Темп для полосы; null — записи нет или она не подходит к набору. Забег темп не завершает. */
+  /** Темп для полосы; null - записи нет или она не подходит к набору. Забег темп не завершает. */
   pace: Opponent | null;
   config: MiniGameConfig;
   /** Мини-игра этого забега: ставит сервер, клиент только рисует нужную. */
@@ -83,13 +83,13 @@ export interface NormalizedSoloRun {
   /** Забег по дружеской ссылке: вне соревнования, исход против записи автора считается. */
   friendDuel?: boolean;
   groupChallenge?: boolean;
-  /** Забег дня, свободная игра или дуэль; null — тренировка или дружеская дуэль. */
+  /** Забег дня, свободная игра или дуэль; null - тренировка или дружеская дуэль. */
   mode?: SoloMode | null;
-  /** Потолок кругов: у дуэли — круг, на котором соперник дошёл до цели. */
+  /** Потолок кругов: у дуэли - круг, на котором соперник дошёл до цели. */
   roundCap?: number;
 }
 
-/** Темп — только картинка: битую запись не рисуем, но и забег из-за неё не отменяем. */
+/** Темп - только картинка: битую запись не рисуем, но и забег из-за неё не отменяем. */
 function normalizeSoloPace(pace: Opponent | null, questions: readonly PublicQuestion[]): Opponent | null {
   if (!pace || typeof pace.id !== 'string' || pace.id.length === 0
     || typeof pace.displayName !== 'string' || pace.displayName.trim().length === 0

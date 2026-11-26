@@ -32,7 +32,7 @@ import { answerOptionMismatch, answerReplayConflict, hasValidAnswerDiagnostics, 
 
 /**
  * Чем закрывается круг: настоящим ударом игрока или отказом от него.
- * `forfeit` — верный ответ без удара (игрок ушёл с забега): промах без присланного времени.
+ * `forfeit` - верный ответ без удара (игрок ушёл с забега): промах без присланного времени.
  */
 export type HammerSettlement = { kind: 'tap'; activeElapsedMs: number } | { kind: 'forfeit' };
 
@@ -47,7 +47,7 @@ const HAMMER_TIMING_SLACK_MS = 5_000;
 /**
  * Запас к измеренному сервером окну ответа. Закрывает разницу часов и задержку запроса. Это
  * проверка на невозможное заявленное время, а не лимит 15 секунд: лимит так не поставить, пока
- * набор уходит клиенту целиком, — вопрос можно прочитать заранее и ответить, когда удобно.
+ * набор уходит клиенту целиком, - вопрос можно прочитать заранее и ответить, когда удобно.
  */
 const ANSWER_WINDOW_SLACK_MS = 5_000;
 
@@ -126,9 +126,9 @@ async function recordAnswer(
   body: SoloAnswerRequest,
 ): Promise<Response> {
   const { run } = loaded;
-  // Окно ответа по часам сервера: от закрытия предыдущего круга (у первого — от старта забега)
+  // Окно ответа по часам сервера: от закрытия предыдущего круга (у первого - от старта забега)
   // до этого запроса. Это верхняя граница времени на вопрос: внутрь входят разбор и удар
-  // предыдущего круга, а у продолженного забега — и всё время, пока вкладка была закрыта.
+  // предыдущего круга, а у продолженного забега - и всё время, пока вкладка была закрыта.
   const answeredAt = Date.now();
   const previous = rows[body.roundIndex - 1];
   const answerWindowMs = Math.max(0, answeredAt - (previous?.settled_at ?? run.created_at));
@@ -199,7 +199,7 @@ export async function handleSoloHammer(c: AppContext): Promise<Response> {
 /**
  * Закрывает ожидающий удара круг. Расстояние до цели считает сервер из присланного момента удара
  * (`scoreHammerTap`): цель и скорость маркера он выводит из id вопроса и стадии давления сам, так
- * что оценку удара клиент сообщить не может — только время. Закрытие защищено условным UPDATE:
+ * что оценку удара клиент сообщить не может - только время. Закрытие защищено условным UPDATE:
  * проигравший гонку запрос просто перечитывает записанное.
  */
 export async function settleHammerRow(
@@ -256,7 +256,7 @@ async function respondWithRound(
   const { run, questions } = loaded;
   const row = rows[index];
   const question = questions[index];
-  // Разбор — на языке игрока: пояснение и правильные ответы из той же карточки вопроса.
+  // Разбор - на языке игрока: пояснение и правильные ответы из той же карточки вопроса.
   const shown = localizeQuestion(question, requestLocale(c));
   const state = evaluateSoloRun(questionIds(questions), settledRounds(rows.slice(0, index + 1)), loaded.roundCap);
   let result: CompleteSoloRunResponse | null = null;

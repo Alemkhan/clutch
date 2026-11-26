@@ -58,7 +58,7 @@
     "kind": "single",
     "topic": "popculture",
     "difficulty": "Medium",
-    "promptRu": "Как зовут волшебника — наставника Фродо?",
+    "promptRu": "Как зовут волшебника - наставника Фродо?",
     "answerRu": "Гэндальф",
     "acceptedRu": [
       "Гэндальф"
@@ -177,7 +177,7 @@
     ],
     "openAnswer": true,
     "sourceHint": "Википедия: Minecraft",
-    "reviewNote": "Позиция в рейтинге продаж меняется — проверить перед релизом.",
+    "reviewNote": "Позиция в рейтинге продаж меняется - проверить перед релизом.",
     "origin": "authored",
     "license": "original",
     "daily": true
@@ -213,7 +213,7 @@
     "kind": "single",
     "topic": "popculture",
     "difficulty": "Hard",
-    "promptRu": "Как зовут итальянского водопроводчика — героя игр Nintendo?",
+    "promptRu": "Как зовут итальянского водопроводчика - героя игр Nintendo?",
     "answerRu": "Марио",
     "acceptedRu": [
       "Марио",
@@ -240,7 +240,7 @@
     "kind": "single",
     "topic": "popculture",
     "difficulty": "Hard",
-    "promptRu": "Как зовут ёжика — героя игр Sega?",
+    "promptRu": "Как зовут ёжика - героя игр Sega?",
     "answerRu": "Соник",
     "acceptedRu": [
       "Соник",
@@ -354,7 +354,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Зодиакальный пояс делится на 12 равных 30-градусных секторов.",
-    "sourceTitle": "Знаки зодиака — Википедия",
+    "sourceTitle": "Знаки зодиака - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true
@@ -381,7 +381,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Первым знаком зодиака традиционно является Овен.",
-    "sourceTitle": "Знаки зодиака — Википедия",
+    "sourceTitle": "Знаки зодиака - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true
@@ -408,7 +408,7 @@
     ],
     "openAnswer": true,
     "explanationRu": "Рыбы замыкают 12-секторный зодиакальный круг.",
-    "sourceTitle": "Знаки зодиака — Википедия",
+    "sourceTitle": "Знаки зодиака - Википедия",
     "origin": "notebooklm",
     "license": "original",
     "daily": true

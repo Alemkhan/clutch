@@ -44,7 +44,7 @@ interface SoloResultProps {
   standing?: RunStandingState;
   /** Режим забега: от него зависят главная кнопка, место в таблице и «ждёт соперника». */
   mode?: SoloMode | null;
-  /** Потолок кругов забега: у дуэли — круг, на котором финишировал соперник. */
+  /** Потолок кругов забега: у дуэли - круг, на котором финишировал соперник. */
   roundCap?: number;
   /** Запись соперника (дуэль): по ней видно, что партию кончил его финиш. */
   pace?: Opponent | null;
@@ -80,7 +80,7 @@ export function duelHeadline(
   return null;
 }
 
-/** Главная кнопка итога по режиму: после забега дня — дуэль, после свободной игры и дуэли — ещё одна. */
+/** Главная кнопка итога по режиму: после забега дня - дуэль, после свободной игры и дуэли - ещё одна. */
 const nextAction = (t: (typeof m)['ru']): Readonly<Record<SoloMode, { mode: SoloMode; label: string }>> => ({
   daily: { mode: 'duel', label: t.nextDuel },
   free: { mode: 'free', label: t.nextFree },

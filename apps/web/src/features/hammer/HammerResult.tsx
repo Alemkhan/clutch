@@ -2,7 +2,7 @@ import { SKILL_REWARDS, type SkillResult } from '@clutch/shared';
 import { m } from './messages';
 import { messagesFor } from '../../i18n/messages';
 
-/** Подпись удара одной строкой: «ОТЛИЧНО +18%»; промах (0%) — только «МИМО», без «+0%». */
+/** Подпись удара одной строкой: «ОТЛИЧНО +18%»; промах (0%) - только «МИМО», без «+0%». */
 export function strikeLabelText(result: SkillResult): string {
   const t = messagesFor(m);
   const name = { perfect: t.labelPerfect, great: t.labelGreat, good: t.labelGood, weak: t.labelWeak, miss: t.labelMiss }[result];
@@ -12,7 +12,7 @@ export function strikeLabelText(result: SkillResult): string {
 
 export function HammerResult({ result, remaining, series }: {
   result: SkillResult;
-  /** Готовая строка «До 100% — ещё N%» (см. remainingText). */
+  /** Готовая строка «До 100% - ещё N%» (см. remainingText). */
   remaining?: string;
   /** Готовая строка «Серия N · зоны стали уже», если стадия давления выросла. */
   series?: string | null;

@@ -10,8 +10,8 @@ import { clanDeletionStatements } from '../clans/clans';
  *
  * Личное удаляется целиком: ошибки, настройки уведомлений, жалобы, аналитика, ответы «На глазок»,
  * вики-забеги, отметки рассылок. Забеги, на которые опираются чужие дуэли, реванши, групповые
- * вызовы и «Последний герой», не стираются — иначе у соперников пропали бы их результаты. Они
- * обезличиваются: player_id меняется на случайный `deleted:<uuid>`, имя — на «Удалённый игрок»,
+ * вызовы и «Последний герой», не стираются - иначе у соперников пропали бы их результаты. Они
+ * обезличиваются: player_id меняется на случайный `deleted:<uuid>`, имя - на «Удалённый игрок»,
  * в том числе в снимках соперника внутри чужих записей. Связать их с человеком больше нельзя.
  */
 export const DELETED_PLAYER_NAME = 'Удалённый игрок';
@@ -55,7 +55,7 @@ export async function deletePlayerAccount(db: D1Database, playerId: string): Pro
   const snapshots = await anonymizeLastStandSnapshots(db, playerId);
   const deletes = DELETED_TABLES.map((table) => db.prepare(`DELETE FROM ${table} WHERE player_id = ?1`).bind(playerId));
   const anonymize = [
-    // Снимки соперника в чужих забегах — до смены player_id, пока свои забеги ещё находятся.
+    // Снимки соперника в чужих забегах - до смены player_id, пока свои забеги ещё находятся.
     db.prepare(`UPDATE match_runs SET opponent_json = json_set(opponent_json, '$.displayName', ?2)
       WHERE json_valid(opponent_json) AND opponent_run_id IN (SELECT id FROM match_runs WHERE player_id = ?1)`)
       .bind(playerId, DELETED_PLAYER_NAME),
@@ -67,8 +67,8 @@ export async function deletePlayerAccount(db: D1Database, playerId: string): Pro
     db.prepare('UPDATE group_challenges SET creator_player_id = ?2 WHERE creator_player_id = ?1').bind(playerId, tombstone),
     db.prepare('UPDATE rematch_invites SET recipient_player_id = ?2 WHERE recipient_player_id = ?1').bind(playerId, tombstone),
   ];
-  // batch в D1 — одна транзакция: либо всё, либо ничего.
-  // Клан — последним: смещения выше считают удалённые и обезличенные строки.
+  // batch в D1 - одна транзакция: либо всё, либо ничего.
+  // Клан - последним: смещения выше считают удалённые и обезличенные строки.
   const results = await db.batch([...snapshots, ...deletes, ...anonymize, ...clanDeletionStatements(db, playerId, tombstone)]);
   const changes = (index: number) => Number(results[index]?.meta?.changes ?? 0);
   const offset = snapshots.length;

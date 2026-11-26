@@ -5,7 +5,7 @@
     "kind": "set",
     "topic": "popculture",
     "titleRu": "Назови факультет Хогвартса",
-    "mcPromptRu": "Что из этого — факультет Хогвартса?",
+    "mcPromptRu": "Что из этого - факультет Хогвартса?",
     "members": [
       {
         "id": "gryffindor",
@@ -54,7 +54,7 @@
     "kind": "set",
     "topic": "popculture",
     "titleRu": "Назови черепашку-ниндзя",
-    "mcPromptRu": "Кто из них — черепашка-ниндзя?",
+    "mcPromptRu": "Кто из них - черепашка-ниндзя?",
     "members": [
       {
         "id": "leonardo",
@@ -137,7 +137,7 @@
       "Рак",
       "Скорпион"
     ],
-    "sourceTitle": "Знаки зодиака — Википедия",
+    "sourceTitle": "Знаки зодиака - Википедия",
     "reviewNote": "Три знака зодиака огненной стихии.",
     "origin": "notebooklm",
     "license": "original",

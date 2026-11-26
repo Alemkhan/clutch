@@ -1,8 +1,8 @@
 // Снимки экранов приложения на телефонном вьюпорте.
 // Нужен запущенный `npm run dev`. Запуск из корня репозитория:
-//   node scripts/screens.mjs            — все экраны в 390x844
-//   node scripts/screens.mjs 360        — другая ширина
-//   CLUTCH_REDUCED_MOTION=1 node scripts/screens.mjs — с prefers-reduced-motion
+//   node scripts/screens.mjs            - все экраны в 390x844
+//   node scripts/screens.mjs 360        - другая ширина
+//   CLUTCH_REDUCED_MOTION=1 node scripts/screens.mjs - с prefers-reduced-motion
 // Файлы кладутся в screenshots/ (каталог в .gitignore).
 import { mkdirSync } from 'node:fs';
 import { chromium, devices } from '@playwright/test';

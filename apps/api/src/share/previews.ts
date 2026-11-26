@@ -20,10 +20,10 @@ import {
  * результат, которая сразу уводит в Mini App. Все параметры проверяются строго: страница и
  * картинка рисуются только из того, что прошло проверку, а уводят только на ссылку из конфигурации.
  *
- *   /api/share/run   — результат соло-забега; с i= — приглашение на дуэль с этой записью
- *   /api/share/guess — «На глазок»
- * l — язык текста (ru|en|kk, по умолчанию ru): его ставит отправитель, получатель видит этот же язык.
- * Картинки: те же пути с .png. При сбое рендера — общая карточка игры с сайта (/og.png, /og.en.png…).
+ *   /api/share/run   - результат соло-забега; с i= - приглашение на дуэль с этой записью
+ *   /api/share/guess - «На глазок»
+ * l - язык текста (ru|en|kk, по умолчанию ru): его ставит отправитель, получатель видит этот же язык.
+ * Картинки: те же пути с .png. При сбое рендера - общая карточка игры с сайта (/og.png, /og.en.png…).
  */
 
 type AppContext = Context<{ Bindings: Env }>;
@@ -68,7 +68,7 @@ export interface RunShare {
   inviteId: string | null;
 }
 
-/** t — круги буквами PGOWX, p — прогресс, c — категория, d — день, i — приглашение, n — имя, l — язык. */
+/** t - круги буквами PGOWX, p - прогресс, c - категория, d - день, i - приглашение, n - имя, l - язык. */
 export function parseRunShare(query: Record<string, string>): Parsed<RunShare> {
   const tiles = query.t;
   if (tiles === undefined || !new RegExp(`^[PGOWX]{1,${MAX_TILES}}$`, 'u').test(tiles)) return bad('t');
@@ -98,7 +98,7 @@ export function parseRunShare(query: Record<string, string>): Parsed<RunShare> {
   };
 }
 
-/** k — номер вопроса, m — промах (×, до десятых), pc — перцентиль или best, l — язык. */
+/** k - номер вопроса, m - промах (×, до десятых), pc - перцентиль или best, l - язык. */
 export function parseGuessShare(query: Record<string, string>): Parsed<GuessCardData> {
   const number = parseInteger(query.k, 99999);
   if (number === null || number < 1) return bad('k');
@@ -136,9 +136,9 @@ const FORWARDED_HOST = /^[a-z0-9.-]+(:d{1,5})?$/iu;
 
 /**
  * Адрес, по которому этот Worker видят снаружи: его ссылки уходят в Telegram, и тот их скачивает.
- * В dev запрос приходит через туннель (ngrok) и прокси Vite с changeOrigin, поэтому сам URL запроса —
+ * В dev запрос приходит через туннель (ngrok) и прокси Vite с changeOrigin, поэтому сам URL запроса -
  * 127.0.0.1:8787; настоящий хост туннеля лежит в X-Forwarded-Host. На проде заголовкам не верим:
- * адрес Worker — это адрес запроса.
+ * адрес Worker - это адрес запроса.
  */
 export function publicOrigin(c: AppContext): string {
   if (c.env.ENVIRONMENT !== 'production') {
@@ -159,7 +159,7 @@ export function isReachableOrigin(origin: string): boolean {
     && hostname !== '[::1]';
 }
 
-/** Статичная карточка игры лежит на сайте (Pages); без PUBLIC_WEB_ORIGIN — рядом с API. */
+/** Статичная карточка игры лежит на сайте (Pages); без PUBLIC_WEB_ORIGIN - рядом с API. */
 function webOrigin(c: AppContext): string {
   return c.env.PUBLIC_WEB_ORIGIN?.trim().replace(/\/+$/u, '') || requestOrigin(c);
 }
@@ -183,8 +183,8 @@ function defaultCache(): Cache | undefined {
 }
 
 /**
- * PNG из кеша или свежий рендер; при сбое — редирект на общую карточку, превью не ломается.
- * cacheControl — для карточек, чьё содержимое меняется (клан растёт), вместо вечного кеша.
+ * PNG из кеша или свежий рендер; при сбое - редирект на общую карточку, превью не ломается.
+ * cacheControl - для карточек, чьё содержимое меняется (клан растёт), вместо вечного кеша.
  */
 export async function cardResponse(
   c: AppContext,
@@ -197,7 +197,7 @@ export async function cardResponse(
     const hit = await cache?.match(c.req.url);
     if (hit) return hit;
   } catch {
-    // кеш недоступен — рисуем заново
+    // кеш недоступен - рисуем заново
   }
   try {
     const { renderSvgPng } = await import('./workerRenderer');
@@ -209,7 +209,7 @@ export async function cardResponse(
       const store = cache?.put(c.req.url, response.clone());
       if (store) c.executionCtx.waitUntil(store.catch(() => undefined));
     } catch {
-      // нет executionCtx или кеша — ответ всё равно отдаём
+      // нет executionCtx или кеша - ответ всё равно отдаём
     }
     return response;
   } catch (error) {
@@ -221,7 +221,7 @@ export async function cardResponse(
   }
 }
 
-/** Куда ведёт ссылка: приглашение открывает дуэль с записью (id проверен по формату), остальное — Mini App. */
+/** Куда ведёт ссылка: приглашение открывает дуэль с записью (id проверен по формату), остальное - Mini App. */
 export function shareTarget(env: Env, inviteId: string | null): string | null {
   const base = env.TELEGRAM_MINI_APP_LINK?.trim();
   if (!base) return null;

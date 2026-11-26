@@ -7,12 +7,12 @@ import type {
 } from '@clutch/shared';
 import { apiFetch } from './apiClient';
 
-/** Свой клан; без клана — можно ли уже занять эмодзи. */
+/** Свой клан; без клана - можно ли уже занять эмодзи. */
 export function fetchMyClan(signal?: AbortSignal): Promise<ClanMeResponse> {
   return apiFetch('/api/clans/me', { method: 'GET' }, signal);
 }
 
-/** Свободно ли эмодзи. 400 — это не одно эмодзи. */
+/** Свободно ли эмодзи. 400 - это не одно эмодзи. */
 export function checkClanEmoji(emoji: string, signal?: AbortSignal): Promise<ClanCheckResponse> {
   return apiFetch(`/api/clans/check?emoji=${encodeURIComponent(emoji)}`, { method: 'GET' }, signal);
 }

@@ -6,7 +6,7 @@ import type { MyRunOutcome } from '../index';
  * и `compareSoloRuns` он не затрагивает.
  */
 
-/** Верхняя граница прикидки: выше — заведомо не число из жизни, и отношение не уйдёт в Infinity. */
+/** Верхняя граница прикидки: выше - заведомо не число из жизни, и отношение не уйдёт в Infinity. */
 export const TIEBREAKER_MAX_GUESS = 1e30;
 
 /** Сколько знаков после запятой хранится у множителя. */
@@ -26,9 +26,9 @@ export function parseTiebreakerGuess(value: unknown): number {
 }
 
 /**
- * Множитель промаха: max(guess/answer, answer/guess), не меньше 1, ниже — лучше. Округляется до
+ * Множитель промаха: max(guess/answer, answer/guess), не меньше 1, ниже - лучше. Округляется до
  * четырёх знаков: сравнение идёт по сохранённому округлённому значению, поэтому равенство
- * не ломается из-за float-шума. Невалидный ввод — RangeError.
+ * не ломается из-за float-шума. Невалидный ввод - RangeError.
  */
 export function tiebreakerMultiplier(guess: number, answer: number): number {
   parseTiebreakerGuess(guess);
@@ -47,9 +47,9 @@ export interface TiebreakAnswer {
 }
 
 /**
- * Исход ничьей глазами `own`. Обе стороны ответили на один вопрос — меньший множитель побеждает,
- * равные — ничья. Ответила одна — побеждает она. Никто или разные вопросы (сутки сменились между
- * забегами) — ничья остаётся.
+ * Исход ничьей глазами `own`. Обе стороны ответили на один вопрос - меньший множитель побеждает,
+ * равные - ничья. Ответила одна - побеждает она. Никто или разные вопросы (сутки сменились между
+ * забегами) - ничья остаётся.
  */
 export function resolveTiebreak(own: TiebreakAnswer | null, other: TiebreakAnswer | null): MyRunOutcome {
   if (own && other) {
@@ -67,15 +67,15 @@ export const TIEBREAKER_MIN_ANSWERS_FOR_PERCENTILE = 10;
 
 /**
  * Лог-корзины распределения по отношению guess/answer (не по множителю: так видно, в какую сторону
- * ошиблись). Корзина — полдекады по log10: границы -3, -2.5, ..., 3, всего 12 корзин; отношения за
- * пределами [10^-3, 10^3] попадают в крайние. Индекс 5 — [10^-0.5, 10^0), индекс 6 — [10^0, 10^0.5).
+ * ошиблись). Корзина - полдекады по log10: границы -3, -2.5, ..., 3, всего 12 корзин; отношения за
+ * пределами [10^-3, 10^3] попадают в крайние. Индекс 5 - [10^-0.5, 10^0), индекс 6 - [10^0, 10^0.5).
  */
 export const TIEBREAKER_BUCKET_LOG_MIN = -3;
 export const TIEBREAKER_BUCKET_LOG_MAX = 3;
 export const TIEBREAKER_BUCKET_LOG_STEP = 0.5;
 export const TIEBREAKER_BUCKET_COUNT = (TIEBREAKER_BUCKET_LOG_MAX - TIEBREAKER_BUCKET_LOG_MIN) / TIEBREAKER_BUCKET_LOG_STEP;
 
-/** Индекс корзины для отношения guess/answer; не конечное или ≤ 0 — RangeError. */
+/** Индекс корзины для отношения guess/answer; не конечное или ≤ 0 - RangeError. */
 export function tiebreakerBucketIndex(ratio: number): number {
   if (!Number.isFinite(ratio) || ratio <= 0) throw new RangeError('ratio must be a finite positive number');
   const raw = Math.floor((Math.log10(ratio) - TIEBREAKER_BUCKET_LOG_MIN) / TIEBREAKER_BUCKET_LOG_STEP);
@@ -91,8 +91,8 @@ export function tiebreakerDistribution(ratios: readonly number[]): number[] {
 
 /**
  * «Ближе, чем N%»: доля чужих ответов с множителем строго больше своего, целым процентом (вниз).
- * `allMultipliers` — множители всех ответов дня, включая свой. Ответов меньше
- * `TIEBREAKER_MIN_ANSWERS_FOR_PERCENTILE` — null.
+ * `allMultipliers` - множители всех ответов дня, включая свой. Ответов меньше
+ * `TIEBREAKER_MIN_ANSWERS_FOR_PERCENTILE` - null.
  */
 export function tiebreakerPercentile(ownMultiplier: number, allMultipliers: readonly number[]): number | null {
   if (allMultipliers.length < TIEBREAKER_MIN_ANSWERS_FOR_PERCENTILE) return null;
@@ -116,7 +116,7 @@ export interface TiebreakerQuestionView {
   /** Порядковый номер вопроса: сколько вопросов с `active_date` не позже этого. «На глазок #7». */
   number: number;
   prompt: string;
-  /** Короткая формулировка для карточки на главной; null — карточка берёт `prompt`. */
+  /** Короткая формулировка для карточки на главной; null - карточка берёт `prompt`. */
   cardPrompt: string | null;
   unit: string;
 }
@@ -177,8 +177,8 @@ function textField(source: Record<string, unknown>, key: string, max: number, wh
 
 /**
  * Проверка разбора из базы или файла заливки: возвращает чистую копию или бросает RangeError.
- * Лишние поля — ошибка (опечатка в ключе не должна молча потерять источник). sourceUrl — только
- * http(s), value — конечное число.
+ * Лишние поля - ошибка (опечатка в ключе не должна молча потерять источник). sourceUrl - только
+ * http(s), value - конечное число.
  */
 export function parseTiebreakerExplanation(input: unknown): TiebreakerExplanation {
   if (!isPlainObject(input)) throw new RangeError('explanation must be an object');
@@ -223,16 +223,16 @@ export interface TiebreakerAnsweredView {
   totalAnswers: number;
   /** «Ближе, чем N%»; null, пока ответов меньше `TIEBREAKER_MIN_ANSWERS_FOR_PERCENTILE`. */
   percentile: number | null;
-  /** Разбор вопроса; null — в базе повреждён (маршрут не падает, UI блок прячет). */
+  /** Разбор вопроса; null - в базе повреждён (маршрут не падает, UI блок прячет). */
   explanation: TiebreakerExplanation | null;
 }
 
 /** Ответ GET /api/tiebreaker/today и успешного POST /api/tiebreaker/answer. */
 export interface TiebreakerTodayResponse {
   dateKey: string;
-  /** null — на сегодня вопроса нет, карточку прячут. */
+  /** null - на сегодня вопроса нет, карточку прячут. */
   question: TiebreakerQuestionView | null;
-  /** null — игрок ещё не отвечал (или вопроса нет). */
+  /** null - игрок ещё не отвечал (или вопроса нет). */
   answered: TiebreakerAnsweredView | null;
   /** Сколько игроков уже ответили на вопрос дня. До своего ответа это единственная статистика. */
   answersCount: number;

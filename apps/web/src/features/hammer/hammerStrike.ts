@@ -12,7 +12,7 @@ type Tier = Exclude<SkillResult, 'miss'>;
 
 export interface HammerZoneLabel {
   result: Tier;
-  /** Очки за удар в этой зоне — та самая награда tier, по которой считает сервер. */
+  /** Очки за удар в этой зоне - та самая награда tier, по которой считает сервер. */
   points: number;
   /** Центр подписи на дорожке, в процентах ширины. */
   leftPercent: number;
@@ -20,12 +20,12 @@ export interface HammerZoneLabel {
 
 /**
  * Подписи очков над дорожкой. Зоны вложены друг в друга вокруг цели, поэтому подпись tier стоит
- * посередине его кольца — между границей соседней внутренней зоны и своей. Ширины берутся из
- * порогов стадии давления (attempt.thresholds), очки — из SKILL_REWARDS: ничего не хардкодится.
+ * посередине его кольца - между границей соседней внутренней зоны и своей. Ширины берутся из
+ * порогов стадии давления (attempt.thresholds), очки - из SKILL_REWARDS: ничего не хардкодится.
  */
 /**
  * Наименьшее расстояние между центрами соседних подписей, доля ширины дорожки. Подпись «+25» занимает около
- * 22 px; на дорожке 320 px (узкий телефон) 7,5% — это 24 px. Кольцо, чья подпись встала бы ближе, остаётся без
+ * 22 px; на дорожке 320 px (узкий телефон) 7,5% - это 24 px. Кольцо, чья подпись встала бы ближе, остаётся без
  * подписи: чем уже зоны, тем меньше подписей, а подпись центра есть всегда. Правила зон это не меняет.
  */
 export const MIN_ZONE_LABEL_GAP = 0.075;
@@ -40,7 +40,7 @@ export function hammerZoneLabels(attempt: HammerAttemptRules): readonly HammerZo
     ['good', thresholds.great],
     ['weak', thresholds.good],
   ];
-  // Кольцо tier — от внутреннего порога до своего; ширина зоны = порог, значит полуширина = порог / 2.
+  // Кольцо tier - от внутреннего порога до своего; ширина зоны = порог, значит полуширина = порог / 2.
   const outer: Record<Tier, number> = {
     perfect: thresholds.perfect,
     great: thresholds.great,
@@ -63,7 +63,7 @@ export interface StrikeGain {
   total: number;
   /** Реальный прирост на полосе: у цели он может быть меньше награды tier. */
   gain: number;
-  /** Сколько осталось до цели; 0 — цель достигнута. */
+  /** Сколько осталось до цели; 0 - цель достигнута. */
   remaining: number;
 }
 
@@ -73,15 +73,15 @@ export function strikeGain(before: number, reward: number, target = SOLO_TARGET_
   return { total, gain: total - base, remaining: target - total };
 }
 
-/** «До 100% — ещё N%»; на цели — честное сообщение о завершении, без «ещё 0%». */
+/** «До 100% - ещё N%»; на цели - честное сообщение о завершении, без «ещё 0%». */
 export function remainingText(remaining: number, target = SOLO_TARGET_PROGRESS): string {
   const t = messagesFor(m);
   return remaining > 0 ? t.remaining(target, remaining) : t.targetReached(target);
 }
 
 /**
- * Строка серии, если этот удар поднял стадию давления. Стадию считает shared — правило не дублируется.
- * Серия — число удачных ударов подряд в этом забеге (промах стадию не растит).
+ * Строка серии, если этот удар поднял стадию давления. Стадию считает shared - правило не дублируется.
+ * Серия - число удачных ударов подряд в этом забеге (промах стадию не растит).
  */
 export function seriesNote(previous: readonly SkillResult[], result: SkillResult): string | null {
   const before = pressureStageFromResults(previous);

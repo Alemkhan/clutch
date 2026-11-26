@@ -68,7 +68,7 @@ function loadFonts(): Uint8Array[] {
 
 /**
  * Рендерер карточки: SVG вручную + resvg. wasm передаётся снаружи: в Worker его даёт
- * wrangler, в тестах — файл с диска. Инициализация один раз на изолят; при сбое
+ * wrangler, в тестах - файл с диска. Инициализация один раз на изолят; при сбое
  * сбрасывается, и следующий запрос пробует снова.
  */
 export function createCardRenderer(loadWasm: () => Promise<WebAssembly.Module | BufferSource>) {

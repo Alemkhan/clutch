@@ -41,7 +41,7 @@ describe('GET /api/share', () => {
     expect(body).toContain('<meta property="og:type" content="website">');
     expect(body).toContain('<meta property="og:site_name" content="Clutch">');
     expect(body).toContain(
-      '<meta property="og:description" content="Ответь верно — получи попытку. Забей точнее — выиграй матч. Сегодня у всех один набор вопросов.">',
+      '<meta property="og:description" content="Ответь верно и получи попытку. Забей точнее и выиграй матч. Сегодня у всех один набор вопросов.">',
     );
     expect(body).toContain(`<meta property="og:image" content="https://web.example/api/share/card.png?o=${outcome}&amp;p=100&amp;q=73&amp;n=Rakhat&amp;l=ru">`);
     expect(body).toContain('<meta property="og:image:width" content="1200">');

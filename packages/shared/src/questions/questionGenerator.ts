@@ -6,11 +6,11 @@ import { languages, type LanguageEntry } from './languages';
 
 export type { CategoryId };
 
-// Near-identical flag pairs (indistinguishable at quiz size) — never used as
+// Near-identical flag pairs (indistinguishable at quiz size) - never used as
 // each other's distractors: the question would have no fair answer.
 const IDENTICAL_FLAG_PAIRS: [string, string][] = [
-  ['id', 'mc'], // Indonesia / Monaco — literally the same flag
-  ['ro', 'td'], // Romania / Chad — differ by a shade of blue
+  ['id', 'mc'], // Indonesia / Monaco - literally the same flag
+  ['ro', 'td'], // Romania / Chad - differ by a shade of blue
 ];
 
 // Source of randomness for the current generation. Swapped only for the duration
@@ -108,7 +108,7 @@ function pickRegionDistractors(correct: Country, count = 3): Country[] {
   return shuffle(pool).slice(0, count);
 }
 
-// Language questions: prefer distractors written in the same script —
+// Language questions: prefer distractors written in the same script -
 // Urdu is compared against Farsi and Arabic, not against Finnish.
 function pickLanguageDistractors(correct: (typeof languages)[number], count = 3): (typeof languages)[number][] {
   const others = languages.filter((l) => l.id !== correct.id);
@@ -152,7 +152,7 @@ export function generateFlagToCountry(correct: Country = pickOne(countries)): Qu
     mediaUrl: flagUrl(correct.code),
     options,
     correctOptionId,
-    explanation: `Это флаг ${correct.nameRu} — ${correct.region === 'Asia' ? 'Азия' : correct.region === 'Europe' ? 'Европа' : correct.region === 'Africa' ? 'Африка' : correct.region === 'Americas' ? 'Америка' : 'Океания'}.`,
+    explanation: `Это флаг ${correct.nameRu}, ${correct.region === 'Asia' ? 'Азия' : correct.region === 'Europe' ? 'Европа' : correct.region === 'Africa' ? 'Африка' : correct.region === 'Americas' ? 'Америка' : 'Океания'}.`,
     status: 'approved',
     createdAt: now(),
   };
@@ -179,10 +179,10 @@ export function generateCountryToCapital(
     category: 'Geography',
     subcategory: 'Столицы',
     difficulty,
-    prompt: `Какой город — столица страны ${correct.nameRu}?`,
+    prompt: `Какой город является столицей страны ${correct.nameRu}?`,
     options,
     correctOptionId,
-    explanation: `${correct.nameRu}: столица — ${correct.capitalRu}.`,
+    explanation: `${correct.nameRu}: столица ${correct.capitalRu}.`,
     status: 'approved',
     createdAt: now(),
   };
@@ -199,12 +199,12 @@ export function generateFlagToCapital(correct: Country = pickOne(countries)): Qu
     category: 'Geography',
     subcategory: 'Флаги и столицы',
     difficulty: 'Hard',
-    prompt: 'Какой город — столица страны с этим флагом?',
+    prompt: 'Какой город является столицей страны с этим флагом?',
     mediaType: 'flag',
     mediaUrl: flagUrl(correct.code),
     options,
     correctOptionId,
-    explanation: `Это флаг ${correct.nameRu}. Столица — ${correct.capitalRu}.`,
+    explanation: `Это флаг ${correct.nameRu}. Столица: ${correct.capitalRu}.`,
     status: 'approved',
     createdAt: now(),
   };
@@ -262,11 +262,11 @@ export function generateCapitalOpenAnswer(correct: Country = pickOne(countries))
     category: 'Geography',
     subcategory: 'Столица',
     difficulty: 'Hard',
-    prompt: `Напишите название города — столицы страны ${correct.nameRu}.`,
+    prompt: `Напишите, какой город является столицей страны ${correct.nameRu}.`,
     options: [],
     correctOptionId: '',
     correctAnswers: [correct.capitalRu, correct.capital],
-    explanation: `${correct.nameRu}: столица — ${correct.capitalRu}.`,
+    explanation: `${correct.nameRu}: столица ${correct.capitalRu}.`,
     status: 'approved',
     createdAt: now(),
   };
@@ -305,11 +305,11 @@ export function generateFixedCapitalQuiz(countryCodes: string[]): Question[] {
       category: 'Geography',
       subcategory: 'Столицы',
       difficulty: 'Hard' as const,
-      prompt: `Напишите название города — столицы страны ${country.nameRu}.`,
+      prompt: `Напишите, какой город является столицей страны ${country.nameRu}.`,
       options: [],
       correctOptionId: '',
       correctAnswers: [country.capitalRu, country.capital],
-      explanation: `${country.nameRu}: столица — ${country.capitalRu}.`,
+      explanation: `${country.nameRu}: столица ${country.capitalRu}.`,
       status: 'approved' as const,
       createdAt: now(),
     }));
@@ -461,7 +461,7 @@ function generateMatchWithRandom(
     return [];
   }
 
-  // `exclude` — сущности, которые нельзя брать (недавние в забеге дня). Если без них не хватает
+  // `exclude` - сущности, которые нельзя брать (недавние в забеге дня). Если без них не хватает
   // на набор, исключение не применяется. Без `exclude` выбор байт-в-байт прежний.
   const allowed = <T>(pool: T[], idOf: (item: T) => string): T[] => {
     if (!exclude || exclude.size === 0) return pool;

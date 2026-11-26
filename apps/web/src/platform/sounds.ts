@@ -106,7 +106,7 @@ async function trySources(name: SoundName, volume: number, phase: 'play' | 'unlo
  * Web Audio: один контекст на страницу. iOS (и Telegram на iOS) разрешает каждому `<audio>` играть
  * только из нажатия, поэтому звук победы на экране итога и звуки после ответа сервера там молчали
  * (аналитика: play-rejected у половины игроков). Контекст, разбуженный одним касанием, дальше играет
- * любые звуки без жеста. Нет Web Audio или контекст ещё спит — старый путь через `<audio>`.
+ * любые звуки без жеста. Нет Web Audio или контекст ещё спит - старый путь через `<audio>`.
  */
 type WebAudioContext = AudioContext;
 let context: WebAudioContext | null | undefined;
@@ -132,7 +132,7 @@ function decode(ctx: WebAudioContext, data: ArrayBuffer): Promise<AudioBuffer> {
   });
 }
 
-/** Первая кодировка, которую контекст сумел декодировать; null — ни одной. Кешируется на звук. */
+/** Первая кодировка, которую контекст сумел декодировать; null - ни одной. Кешируется на звук. */
 function loadBuffer(ctx: WebAudioContext, name: SoundName): Promise<AudioBuffer | null> {
   let pending = buffers.get(name);
   if (!pending) {
@@ -153,7 +153,7 @@ function loadBuffer(ctx: WebAudioContext, name: SoundName): Promise<AudioBuffer 
   return pending;
 }
 
-/** Играет через Web Audio; false — контекста нет, он спит или звук не декодировался. */
+/** Играет через Web Audio; false - контекста нет, он спит или звук не декодировался. */
 async function playBuffer(name: SoundName, volume: number): Promise<boolean> {
   const ctx = audioContext();
   if (!ctx || ctx.state !== 'running') return false;

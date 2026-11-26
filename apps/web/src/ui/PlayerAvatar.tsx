@@ -1,7 +1,7 @@
 import { Creature } from './Creature';
 
 /**
- * Аватар игрока: эмодзи его клана, а у игрока без клана — зверёк из имени. Эмодзи рисуется в SVG
+ * Аватар игрока: эмодзи его клана, а у игрока без клана - зверёк из имени. Эмодзи рисуется в SVG
  * с той же сеткой 64×64, что и зверёк, поэтому подходит к любому размеру контейнера.
  */
 export function PlayerAvatar({ seed, emoji, className = '' }: { seed: string; emoji?: string | null; className?: string }) {

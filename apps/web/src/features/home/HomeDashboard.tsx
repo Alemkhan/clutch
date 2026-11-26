@@ -32,7 +32,7 @@ export interface HomeDashboardViewProps extends HomeDashboardProps {
   onRetryWikiPath: () => void;
   /** Сколько осталось до конца игровых суток, мс. */
   msLeft: number;
-  /** Своё место в таблице дня; null — не играл сегодня до 100% или данных нет. */
+  /** Своё место в таблице дня; null - не играл сегодня до 100% или данных нет. */
   standing: SoloLeaderboardStanding | null;
   /** Попытка забега дня: сыгранный забег дня второй раз не предлагаем. */
   dailyAttempt?: DailyAttempt;
@@ -199,7 +199,7 @@ export function HomeDashboardView({
               {t.free}
             </button>
           </div>
-          {/* Вход в таблицу дня: нижняя панель не меняется, место для него — на главной карточке. */}
+          {/* Вход в таблицу дня: нижняя панель не меняется, место для него - на главной карточке. */}
           <button type="button" className="home-board-link" onClick={() => { onBoard(); }}>
             {t.board}
           </button>
@@ -221,7 +221,7 @@ export function HomeDashboard(props: HomeDashboardProps) {
   const { state, reload } = useTiebreakerToday();
   const { state: wikiPath, reload: reloadWikiPath } = useWikiPathToday();
   const [dayEpoch, setDayEpoch] = useState(0);
-  // Смена суток: вопрос другой, вчерашнее место не действует — перечитываем и то и другое.
+  // Смена суток: вопрос другой, вчерашнее место не действует - перечитываем и то и другое.
   const msLeft = useDayCountdown(() => {
     reload();
     reloadWikiPath();
@@ -229,7 +229,7 @@ export function HomeDashboard(props: HomeDashboardProps) {
   });
   const { standing, dailyAttempt } = useHomeStanding(dayEpoch);
   const progress = usePlayerProgress(dayEpoch);
-  // Вернувшемуся игроку один раз показываем, что изменилось; новичку — нет.
+  // Вернувшемуся игроку один раз показываем, что изменилось; новичку - нет.
   const whatsNew = useWhatsNew(progress ? progress.completedRuns > 0 : null);
   return <>
     {whatsNew.release && <WhatsNewDialog release={whatsNew.release} onClose={whatsNew.close} onClan={props.onClan} />}

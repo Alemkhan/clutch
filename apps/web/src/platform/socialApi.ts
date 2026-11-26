@@ -65,7 +65,7 @@ export function fetchPlayerSettings(signal?: AbortSignal): Promise<PlayerSetting
   return apiFetch('/api/settings', { method: 'GET' }, signal);
 }
 
-/** Зона из профиля: конкретная или 'auto' — по стране подключения. */
+/** Зона из профиля: конкретная или 'auto' - по стране подключения. */
 export function setPlayerRegion(region: Region | 'auto'): Promise<PlayerSettingsResponse> {
   return apiFetch('/api/settings', { method: 'PUT', body: JSON.stringify({ region }) });
 }

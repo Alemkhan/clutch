@@ -7,7 +7,7 @@ import { soloRunView, type SoloRunSession } from './soloRunSession';
 
 /** Итог дружеской дуэли: исход считает сервер (тем же compareSoloRuns), клиент только подписывает. */
 export interface FriendDuelSummary {
-  /** null — ответа сервера ещё нет, исход не объявляем. */
+  /** null - ответа сервера ещё нет, исход не объявляем. */
   outcome: MyRunOutcome | null;
   headline: string;
   /** Одна строка с процентами обеих сторон; пусто, если запись друга не отрисована. */
@@ -21,7 +21,7 @@ export function friendDuelChip(): string {
   return messagesFor(m).friendChip;
 }
 
-/** Русская подпись (для совместимости); на экране — friendDuelChip(). */
+/** Русская подпись (для совместимости); на экране - friendDuelChip(). */
 export const FRIEND_DUEL_CHIP = m.ru.friendChip;
 
 /** Имя в заголовке: запись друга без имени называем нейтрально. */
@@ -29,7 +29,7 @@ function nameOf(pace: SoloRunSession['pace']): string {
   return pace?.displayName.trim() || messagesFor(m).friend;
 }
 
-/** Прикидка показывается только там, где виден исход: здесь, в дружеской дуэли. Числа — только те, что отдал сервер. */
+/** Прикидка показывается только там, где виден исход: здесь, в дружеской дуэли. Числа - только те, что отдал сервер. */
 export function tiebreakLine(tiebreak: CompleteSoloRunResponse['tiebreak']): string {
   if (!tiebreak) return '';
   const { ownMultiplier, opponentMultiplier } = tiebreak;

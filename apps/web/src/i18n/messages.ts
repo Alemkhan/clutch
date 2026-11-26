@@ -9,7 +9,7 @@ import { currentLocale, useLocale } from './locale';
  *     en: { … те же ключи … },
  *     kk: { … те же ключи … },
  *   });
- *   const t = useMessages(m);  // в компоненте; вне React — messagesFor(m)
+ *   const t = useMessages(m);  // в компоненте; вне React - messagesFor(m)
  *   t.title; t.rounds(3);
  *
  * Тип требует в en и kk ровно те же ключи и сигнатуры, что в ru: забытый перевод не соберётся.
@@ -31,8 +31,8 @@ export function messagesFor<T extends Messages>(dictionary: Record<Locale, T>, l
 }
 
 /**
- * Форма слова по числу. ru: [один, несколько, много] — «1 круг, 3 круга, 5 кругов»;
- * en: [one, other]; kk: существительное после числа не меняется — одна форма.
+ * Форма слова по числу. ru: [один, несколько, много] - «1 круг, 3 круга, 5 кругов»;
+ * en: [one, other]; kk: существительное после числа не меняется - одна форма.
  */
 export function plural(locale: Locale, count: number, forms: readonly string[]): string {
   if (locale === 'kk') return forms[0];

@@ -20,7 +20,7 @@ describe('run status', () => {
   });
 
   it('calls a duel lost on the opponent finish a loss, not a miss', () => {
-    // Дуэль кончается на финише соперника: не дошёл до 100% против записи — значит проиграл.
+    // Дуэль кончается на финише соперника: не дошёл до 100% против записи - значит проиграл.
     expect(runStatus(run({ reachedTarget: false, progress: 80, outcome: 'opponent', opponent: { kind: 'player', displayName: 'Дамир' } })))
       .toEqual({ kind: 'loss', text: 'Поражение' });
   });

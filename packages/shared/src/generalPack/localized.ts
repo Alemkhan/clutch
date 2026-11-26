@@ -1,7 +1,7 @@
 /**
  * Языковые версии и гео-зоны записей пакета. Карточка вопроса: русский оригинал в content/questions,
  * переводы в content/i18n/<locale>/pack.json (собирает `npm run content:i18n`), зоны в
- * content/i18n/regions.json. Перевода нет — показывается русский текст; разметки нет — запись везде.
+ * content/i18n/regions.json. Перевода нет - показывается русский текст; разметки нет - запись везде.
  */
 import en from '../../../../content/i18n/en/pack.json';
 import kk from '../../../../content/i18n/kk/pack.json';
@@ -41,7 +41,7 @@ const ALL_REGIONS: readonly Region[] = ['kz', 'cis', 'world'];
 const questionsById = new Map<string, PackQuestion>(generalPackQuestions.map((record) => [record.id, record]));
 const setsById = new Map<string, PackSet>(generalPackSets.map((record) => [record.id, record]));
 
-/** Зоны записи пакета; без разметки — везде. */
+/** Зоны записи пакета; без разметки - везде. */
 export function packRecordRegions(recordId: string): readonly Region[] {
   return REGIONS[recordId] ?? ALL_REGIONS;
 }
@@ -53,9 +53,9 @@ const CORRECT_ANSWER: Readonly<Record<Locale, (answer: string) => string>> = {
 };
 
 const SET_EXPLANATION: Readonly<Record<Locale, (answer: string, title: string, members: string) => string>> = {
-  ru: (answer, title, members) => `${answer} — правильный ответ. ${title}: ${members}.`,
+  ru: (answer, title, members) => `Правильный ответ: ${answer}. ${title}: ${members}.`,
   en: (answer, title, members) => `${answer} is correct. ${title}: ${members}.`,
-  kk: (answer, title, members) => `${answer} — дұрыс жауап. ${title}: ${members}.`,
+  kk: (answer, title, members) => `Дұрыс жауап: ${answer}. ${title}: ${members}.`,
 };
 
 function unique(items: readonly string[]): string[] {
@@ -78,7 +78,7 @@ function packSource(questionId: string): { question?: PackQuestion; set?: PackSe
 
 /**
  * Засчитываемые ответы на всех языках: открытый ответ принимается по-русски, по-английски и
- * по-казахски, чтобы никто не проигрывал из-за перевода. Первыми — ответы языка игрока.
+ * по-казахски, чтобы никто не проигрывал из-за перевода. Первыми - ответы языка игрока.
  */
 export function acceptedAnswersAllLocales(question: Pick<Question, 'id' | 'correctAnswers'>, first: Locale = 'ru'): string[] {
   const { question: record, set, memberId } = packSource(question.id);
@@ -94,8 +94,8 @@ export function acceptedAnswersAllLocales(question: Pick<Question, 'id' | 'corre
 }
 
 /**
- * Вопрос пакета на языке игрока. Id, порядок и id вариантов не меняются — меняется только текст,
- * поэтому набор дня, ответ и таблица общие для всех языков. Не из пакета или без перевода — как есть.
+ * Вопрос пакета на языке игрока. Id, порядок и id вариантов не меняются - меняется только текст,
+ * поэтому набор дня, ответ и таблица общие для всех языков. Не из пакета или без перевода - как есть.
  */
 export function localizePackQuestion(question: Question, locale: Locale): Question {
   if (locale === 'ru') return question;

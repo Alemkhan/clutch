@@ -21,7 +21,7 @@ import { listTrainableMistakes, payBackMistake, TRAINING_SESSION_SIZE } from './
 
 type AppContext = Context<{ Bindings: Env }>;
 
-/** Сколько вопросов за запрос: сессия отработки ошибок — TRAINING_SESSION_SIZE (10), запас на устаревшие id. */
+/** Сколько вопросов за запрос: сессия отработки ошибок - TRAINING_SESSION_SIZE (10), запас на устаревшие id. */
 export const TRAINING_MAX_IDS = 20;
 const MAX_ID_LENGTH = 64;
 

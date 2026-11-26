@@ -129,7 +129,7 @@ describe('solo result receipt', () => {
     ];
     for (const standing of states) {
       const html = render({ standing, mode: 'daily' });
-      expect(html).toMatch(/data-stat="place"><strong>—<\/strong>/);
+      expect(html).toMatch(/data-stat="place"><strong>–<\/strong>/);
       expect(html).toContain('Сыграть ещё');
     }
   });
@@ -140,7 +140,7 @@ describe('solo result receipt', () => {
     expect(html).not.toContain('data-stat="place"');
     expect(html.match(/data-stat=/g)).toHaveLength(2);
     expect(html).toContain('data-cols="2"');
-    expect(html).toContain('Лимит забега — 20 кругов, и он закончился. Ты набрал 40% из 100%.');
+    expect(html).toContain('Лимит забега 20 кругов, и он закончился. Ты набрал 40% из 100%.');
     expect(html).not.toContain('из 100% за');
     expect(html.match(/20 кругов/g)).toHaveLength(2);
     expect(html).not.toContain('Твоя запись');

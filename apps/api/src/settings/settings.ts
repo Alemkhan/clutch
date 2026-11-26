@@ -21,7 +21,7 @@ interface SettingsRow {
   region_source: 'auto' | 'manual';
 }
 
-/** Страна подключения от Cloudflare; в тестах и локально её нет — тогда «мир». */
+/** Страна подключения от Cloudflare; в тестах и локально её нет - тогда «мир». */
 export function connectionCountry(c: AppContext): string | null {
   const cf = (c.req.raw as Request & { cf?: { country?: string } }).cf;
   return typeof cf?.country === 'string' ? cf.country : null;
@@ -32,7 +32,7 @@ export async function findPlayerSettings(db: D1Database, playerId: string): Prom
     .bind(playerId).first<SettingsRow>();
 }
 
-/** Язык сообщений бота для игрока; без записи — русский (язык исходного контента). */
+/** Язык сообщений бота для игрока; без записи - русский (язык исходного контента). */
 export async function playerLocale(db: D1Database, playerId: string): Promise<Locale> {
   const row = await findPlayerSettings(db, playerId).catch(() => null);
   return row && isLocale(row.locale) ? row.locale : 'ru';
@@ -49,7 +49,7 @@ async function saveSettings(db: D1Database, playerId: string, settings: Settings
 
 /**
  * Настройки с учётом страны: зона 'auto' следует за страной подключения (игрок в поездке получает
- * пул той страны), выбранная вручную — нет. Язык — последний выбранный на клиенте.
+ * пул той страны), выбранная вручную - нет. Язык - последний выбранный на клиенте.
  */
 async function currentSettings(c: AppContext, playerId: string): Promise<{ row: SettingsRow; changed: boolean }> {
   const stored = await findPlayerSettings(c.env.DB, playerId);

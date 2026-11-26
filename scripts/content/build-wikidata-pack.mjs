@@ -144,7 +144,7 @@ for (const [i, r] of books.entries()) {
     id, topic: 'literature', difficulty: rankTier(i, books.length),
     promptRu: `Какое из этих произведений написал ${r.aRu}?`, answerRu: r.wRu, acceptedRu: [r.wRu],
     distractorsRu: distractors(id, r.wRu, books.filter((other) => other.a !== r.a).map((other) => other.wRu)),
-    explanationRu: `${r.aRu} — автор произведения «${r.wRu}».`,
+    explanationRu: `${r.aRu} - автор произведения «${r.wRu}».`,
     sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`, openAnswer: false,
   });
 }
@@ -163,7 +163,7 @@ for (const [i, r] of paintings.entries()) {
   records.push({
     id, topic: 'art', difficulty: rankTier(i, paintings.length),
     promptRu: `Кто написал картину «${r.wRu}»?`, answerRu: r.aRu, acceptedRu: personAliases(r.aRu),
-    distractorsRu: distractors(id, r.aRu, painterPool), explanationRu: `Автор картины «${r.wRu}» — ${r.aRu}.`,
+    distractorsRu: distractors(id, r.aRu, painterPool), explanationRu: `Автор картины «${r.wRu}» - ${r.aRu}.`,
     sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`, openAnswer: false,
   });
 }
@@ -174,7 +174,7 @@ for (const [i, r] of paintings.entries()) {
     id, topic: 'art', difficulty: rankTier(i, paintings.length),
     promptRu: `Какую из этих картин написал ${r.aRu}?`, answerRu: r.wRu, acceptedRu: [r.wRu],
     distractorsRu: distractors(id, r.wRu, paintings.filter((other) => other.a !== r.a).map((other) => other.wRu)),
-    explanationRu: `${r.aRu} — автор картины «${r.wRu}».`,
+    explanationRu: `${r.aRu} - автор картины «${r.wRu}».`,
     sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`, openAnswer: false,
   });
 }
@@ -193,7 +193,7 @@ for (const [i, r] of films.entries()) {
   records.push({
     id, topic: 'film', difficulty: rankTier(i, films.length),
     promptRu: `Кто режиссёр фильма «${r.wRu}»?`, answerRu: r.aRu, acceptedRu: personAliases(r.aRu),
-    distractorsRu: distractors(id, r.aRu, directorPool), explanationRu: `Режиссёр фильма «${r.wRu}» — ${r.aRu}.`,
+    distractorsRu: distractors(id, r.aRu, directorPool), explanationRu: `Режиссёр фильма «${r.wRu}» - ${r.aRu}.`,
     sourceUrl: wd(r.w), sourceTitle: `Wikidata: ${r.wRu}`, openAnswer: false,
   });
 }
@@ -253,7 +253,7 @@ for (const [difficulty, symbols] of Object.entries(ELEMENT_TIERS)) {
       id, topic: 'science', difficulty,
       promptRu: `Какой химический элемент обозначается символом ${sym}?`, answerRu: name, acceptedRu: [name],
       distractorsRu: distractors(id, e.ru, elementNames).map((d) => d.toLowerCase()),
-      explanationRu: `${sym} — ${name}, элемент номер ${e.n} в таблице Менделеева.`,
+      explanationRu: `${sym} - ${name}, элемент номер ${e.n} в таблице Менделеева.`,
       sourceUrl: wd(e.el), sourceTitle: `Wikidata: ${e.ru}`,
     });
   }
@@ -271,7 +271,7 @@ for (const [i, e] of uniqueElements.entries()) {
     id: numberId, topic: 'science', difficulty,
     promptRu: `Какой атомный номер у элемента «${name}»?`, answerRu: e.n, acceptedRu: [e.n],
     distractorsRu: safeElementDistractors(numberId, e.n, elementNumbers),
-    explanationRu: `${name[0].toUpperCase()}${name.slice(1)} — элемент номер ${e.n} в таблице Менделеева.`,
+    explanationRu: `${name[0].toUpperCase()}${name.slice(1)} - элемент номер ${e.n} в таблице Менделеева.`,
     sourceUrl: wd(e.el), sourceTitle: `Wikidata: ${e.ru}`, openAnswer: false,
   });
   const symbolId = `wd-element-name-symbol-${e.sym}`;
@@ -279,7 +279,7 @@ for (const [i, e] of uniqueElements.entries()) {
     id: symbolId, topic: 'science', difficulty,
     promptRu: `Какой символ у химического элемента «${name}»?`, answerRu: e.sym, acceptedRu: [e.sym],
     distractorsRu: safeElementDistractors(symbolId, e.sym, elementSymbols),
-    explanationRu: `Химический символ элемента «${name}» — ${e.sym}.`,
+    explanationRu: `Химический символ элемента «${name}» - ${e.sym}.`,
     sourceUrl: wd(e.el), sourceTitle: `Wikidata: ${e.ru}`, openAnswer: false,
   });
 }
@@ -287,7 +287,7 @@ for (const [i, e] of uniqueElements.entries()) {
 // Wide Last Stand set: every named element.
 const elementSet = {
   id: 'set-chemical-elements', topic: 'science',
-  titleRu: 'Назови химический элемент', mcPromptRu: 'Что из этого — химический элемент?',
+  titleRu: 'Назови химический элемент', mcPromptRu: 'Что из этого - химический элемент?',
   members: uniqueElements.map((e) => ({ id: e.sym, answerRu: e.ru.toLowerCase(), acceptedRu: [e.ru.toLowerCase()] })),
   nonMembersRu: ['стекло', 'бронза', 'сталь', 'вода', 'гранит', 'латунь', 'кварц', 'алмаз'],
   sourceUrl: 'https://www.wikidata.org/wiki/Q11344', sourceTitle: 'Wikidata: химический элемент',

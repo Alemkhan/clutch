@@ -35,7 +35,7 @@ const SAVING: SoloSaveState = { status: 'saving', response: null, canRetry: fals
  * Сетевая обвязка соло-забега: старт, покруговая отправка и продолжение. Правила остаются в soloRunFlow.
  * Каждый круг уходит на сервер сразу и сохраняется там; при обрыве запрос повторяется, а закрытая вкладка
  * забег не теряет: id забега лежит в localStorage, остальное хранит сервер.
- * botLevel: тренировка против бота. Остальное — как в обычном забеге.
+ * botLevel: тренировка против бота. Остальное - как в обычном забеге.
  */
 export function useSoloRun(botLevel?: PracticeLevelId, mode: SoloMode = 'daily', groupChallengeId?: string) {
   const [state, setState] = useState<SoloFlowState>(createSoloFlowState);

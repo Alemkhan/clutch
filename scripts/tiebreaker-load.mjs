@@ -3,12 +3,12 @@
 //   npm run tiebreaker:load -- scripts/fixtures/tiebreaker-sample.json questions.sql
 //   cd apps/api && npx wrangler d1 execute <DB> --local --file ../../questions.sql
 // Вход: JSON-массив { id, prompt, cardPrompt?, unit, answer, sourceUrl, asOfDate, activeDate, explanation }.
-// cardPrompt — короткая формулировка для карточки на главной (не длиннее CARD_PROMPT_MAX, как
-// TIEBREAKER_CARD_PROMPT_MAX в shared); не задана — карточка покажет полный prompt.
+// cardPrompt - короткая формулировка для карточки на главной (не длиннее CARD_PROMPT_MAX, как
+// TIEBREAKER_CARD_PROMPT_MAX в shared); не задана - карточка покажет полный prompt.
 // Колонка card_prompt появилась в миграции 0004: без неё заливка не применится.
 //
 // Проверка разбора продублирована из packages/shared/src/tiebreaker/tiebreaker.ts (parseTiebreakerExplanation):
-// shared — TypeScript, а .mjs без сборки его не импортирует. Совпадение правил держит
+// shared - TypeScript, а .mjs без сборки его не импортирует. Совпадение правил держит
 // tests/tiebreakerLoad.test.ts, который прогоняет оба валидатора на одних и тех же случаях.
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -94,7 +94,7 @@ export function sqlString(value) {
   return `'${value.replaceAll("'", "''")}'`;
 }
 
-/** Весь SQL для массива вопросов. Дубли id и activeDate внутри файла — ошибка. */
+/** Весь SQL для массива вопросов. Дубли id и activeDate внутри файла - ошибка. */
 export function buildSql(questions, now = Date.now()) {
   if (!Array.isArray(questions) || questions.length === 0) throw new RangeError('input must be a non-empty array');
   const ids = new Set();

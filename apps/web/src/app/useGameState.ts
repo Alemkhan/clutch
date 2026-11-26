@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import type { Phase } from './gameSession';
 
-/** Навигация верхнего уровня; игровое состояние живёт внутри экранов (соло — useSoloRun). */
+/** Навигация верхнего уровня; игровое состояние живёт внутри экранов (соло - useSoloRun). */
 export function useGameState() {
   const [phase, setPhase] = useState<Phase>('home');
 

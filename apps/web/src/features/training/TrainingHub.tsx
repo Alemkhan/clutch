@@ -63,7 +63,7 @@ export function MistakePractice({ ids, onBack, exitLabel }: MistakePracticeProps
       if (controller.signal.aborted) return;
       // Порядок сессии задал сервер; вопросы приходят в том же порядке.
       setLoad({ status: 'ready', questions: response.questions });
-      // Категория сессии — категория первого вопроса: набор ошибок бывает смешанным.
+      // Категория сессии - категория первого вопроса: набор ошибок бывает смешанным.
       if (response.questions.length > 0) {
         logAnalyticsEvent('training_started', { category: response.questions[0].category });
       }
@@ -144,7 +144,7 @@ export function TrainingHub({ onStartBot, onPlayingChange, openMistakes = false 
   const t = useMessages(m);
   const [view, setView] = useState<View>('menu');
   const [summary, setSummary] = useState<MistakeSummary>({ status: 'loading' });
-  // С экрана итога — сразу в отработку, как только список ошибок пришёл; дальше обычное меню.
+  // С экрана итога - сразу в отработку, как только список ошибок пришёл; дальше обычное меню.
   const openedRef = useRef(!openMistakes);
   useEffect(() => {
     if (openedRef.current || summary.status === 'loading') return;

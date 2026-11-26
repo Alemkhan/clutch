@@ -43,7 +43,7 @@ export function isOpenInvite(invite: Pick<InviteRow, 'recipient_run_id'>): boole
 
 export type InviteUnavailableReason = 'taken' | 'expired';
 
-/** Почему приглашение уже нельзя принять; null — можно. Погашенное важнее просроченного. */
+/** Почему приглашение уже нельзя принять; null - можно. Погашенное важнее просроченного. */
 export function inviteUnavailableReason(
   invite: Pick<InviteRow, 'consumed_at' | 'expires_at'>,
   now: number,

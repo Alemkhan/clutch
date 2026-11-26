@@ -58,7 +58,7 @@ function summary(
   };
 }
 
-/** Итог уже закрытого забега из сохранённых данных; null — сохранённого итога нет. */
+/** Итог уже закрытого забега из сохранённых данных; null - сохранённого итога нет. */
 async function storedResult(c: AppContext, loaded: LoadedSoloRun): Promise<CompleteSoloRunResponse | null> {
   const runId = loaded.run.id;
   const fresh = await findRun(c.env.DB, runId);
@@ -174,7 +174,7 @@ export async function finalizeSoloRun(
 
   // R25: снимок верха таблицы до записи забега; сбой снимка не должен ломать завершение.
   const dateKey = dailyKey(completedAt);
-  // В таблицу идёт только забег дня; свободная игра и дуэли — вне её.
+  // В таблицу идёт только забег дня; свободная игра и дуэли - вне её.
   const ranked = !abandoned && loaded.mode === 'daily' && result.reachedTarget;
   let topBefore: TopTenSnapshot | null = null;
   let category = '';

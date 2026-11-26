@@ -80,7 +80,7 @@ describe('account deletion', () => {
 
   it('covers every table that stores a player id', () => {
     const db = database();
-    // Новая таблица с player_id должна попасть в deletePlayerAccount — иначе удаление аккаунта неполное.
+    // Новая таблица с player_id должна попасть в deletePlayerAccount - иначе удаление аккаунта неполное.
     const covered = new Set([
       'player_mistakes', 'player_settings', 'player_notification_prefs', 'question_reports', 'analytics_events', 'tiebreaker_answers',
       'top_ten_notices', 'daily_notification_deliveries', 'announcement_deliveries', 'wiki_path_runs',

@@ -29,7 +29,7 @@ const REPORT_KINDS: readonly { kind: QuestionReportKind; label: "reportWrongAnsw
 
 /**
  * Клик и клавиша внутри области репорта не должны продолжать разбор всем экраном:
- * корень ResolutionScreen — role="button", где любой тап означает «дальше».
+ * корень ResolutionScreen - role="button", где любой тап означает «дальше».
  */
 export function stopReportAreaEvent(event: { stopPropagation(): void }): void {
   event.stopPropagation();

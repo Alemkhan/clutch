@@ -63,10 +63,10 @@ describe('home header', () => {
 });
 
 describe('the place line after a counted finish', () => {
-  it('shows «Ты N-й сегодня. До (N-1)-го — M кругов» from the leaderboard, with the real numbers', () => {
+  it('shows «Ты N-й сегодня. До (N-1)-го - M кругов» from the leaderboard, with the real numbers', () => {
     const out = render({ standing: standing({ roundsToNext: 2 }), dailyAttempt: 'completed' });
     expect(out).toContain('Ты 3-й сегодня.');
-    expect(out).toContain('До 2-го — 2 круга.');
+    expect(out).toContain('До 2-го: 2 круга.');
     expect(out).toContain('3 / 41');
     expect(out).toContain('>7<');
     // Забег дня сыгран: главная зовёт в дуэль, второй раз забег дня не предлагает.
@@ -77,7 +77,7 @@ describe('the place line after a counted finish', () => {
   });
 
   it('says one round in the singular', () => {
-    expect(render({ standing: standing() })).toContain('До 2-го — один круг.');
+    expect(render({ standing: standing() })).toContain('До 2-го: один круг.');
   });
 
   it('says first place plainly, with no «до» line', () => {
@@ -108,12 +108,12 @@ describe('the place line after a counted finish', () => {
   });
 
   it('uses the place above under ties and the guess wording for equal rounds', () => {
-    expect(homeStandingLines(standing({ rank: 4, roundsToNext: 1, placeAbove: 2 }))).toEqual({ title: 'Ты 4-й сегодня.', hint: 'До 2-го — один круг.' });
-    expect(homeStandingLines(standing({ rank: 3, outrankedByGuess: true }))).toEqual({ title: 'Ты 3-й сегодня.', hint: 'Выше — по «На глазок».' });
+    expect(homeStandingLines(standing({ rank: 4, roundsToNext: 1, placeAbove: 2 }))).toEqual({ title: 'Ты 4-й сегодня.', hint: 'До 2-го: один круг.' });
+    expect(homeStandingLines(standing({ rank: 3, outrankedByGuess: true }))).toEqual({ title: 'Ты 3-й сегодня.', hint: 'Выше по «На глазок».' });
   });
 
   it('builds the lines as pure text', () => {
-    expect(homeStandingLines(standing({ rank: 12, roundsToNext: 5 }))).toEqual({ title: 'Ты 12-й сегодня.', hint: 'До 11-го — 5 кругов.' });
+    expect(homeStandingLines(standing({ rank: 12, roundsToNext: 5 }))).toEqual({ title: 'Ты 12-й сегодня.', hint: 'До 11-го: 5 кругов.' });
     expect(homeStandingLines(standing({ rank: 1, roundsToNext: null }))).toEqual({ title: 'Ты первый сегодня.', hint: null });
   });
 });

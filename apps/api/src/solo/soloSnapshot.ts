@@ -48,7 +48,7 @@ export async function buildSoloSnapshot(c: AppContext, loaded: LoadedSoloRun): P
     // Соперника отпустили, пока игрока не было: экран должен сказать об этом прямо.
     ...(run.pace_released === 1 ? { paceReleased: true } : {}),
     target: SOLO_TARGET_PROGRESS,
-    // У дуэли — круг, на котором соперник дошёл до цели: клиент кончает партию там же, где сервер.
+    // У дуэли - круг, на котором соперник дошёл до цели: клиент кончает партию там же, где сервер.
     roundCap: loaded.roundCap,
     rulesVersion: run.rules_version ?? CURRENT_SOLO_RUN_CONDITIONS.rulesVersion,
     miniGameId: run.mini_game_id as MiniGameId,

@@ -24,7 +24,7 @@ interface ProfileViewProps {
   state: ProfileState;
   onRetry: () => void;
   telegram?: boolean;
-  /** Эмодзи клана — аватар; без клана — зверёк. */
+  /** Эмодзи клана - аватар; без клана - зверёк. */
   clanEmoji?: string | null;
   /** Открыть клан (или выбор эмодзи). */
   onClan?: () => void;
@@ -159,7 +159,7 @@ export function ProfileView({ playerName, state, onRetry, telegram = false, clan
             </div>
             <div className="mini-stat">
               <span className="mini-stat-value">
-                {state.profile.bestRounds === null ? '—' : soloRoundsText(state.profile.bestRounds)}
+                {state.profile.bestRounds === null ? '–' : soloRoundsText(state.profile.bestRounds)}
               </span>
               <span className="mini-stat-label">{t.bestFinish}</span>
             </div>

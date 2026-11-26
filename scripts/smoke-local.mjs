@@ -310,7 +310,7 @@ async function verifyHttpFlow(baseUrl, readinessResponse) {
 
   if (verdict.awaitingHammer) {
     // Оценку удара прислать нельзя: принимается только момент удара, награду считает сервер.
-    // Насколько именно момент хорош, проверяют route-тесты — здесь важно, что по HTTP
+    // Насколько именно момент хорош, проверяют route-тесты - здесь важно, что по HTTP
     // старый путь закрыт, невозможное время отклонено, а вердикт приходит от сервера.
     const legacy = await fetch(`${baseUrl}/api/solo-runs/${runA.runId}/hammer`, {
       method: 'POST',

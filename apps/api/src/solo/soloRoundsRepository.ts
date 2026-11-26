@@ -8,9 +8,9 @@ export interface SoloRoundRow {
   selected_answer: string;
   response_time_ms: number;
   correct: number;
-  /** Присланный момент удара. null — круг закрыт без удара. Сырой ввод, из него выведено расстояние. */
+  /** Присланный момент удара. null - круг закрыт без удара. Сырой ввод, из него выведено расстояние. */
   active_elapsed_ms: number | null;
-  /** Окно ответа по часам сервера. null — круги до миграции 0017. */
+  /** Окно ответа по часам сервера. null - круги до миграции 0017. */
   answer_window_ms: number | null;
   skill_distance: number | null;
   skill_result: SkillResult | null;
@@ -31,7 +31,7 @@ export async function listSoloRounds(db: D1Database, runId: string): Promise<Sol
 }
 
 /**
- * Записывает ответ на круг. Дубликат отсекает PRIMARY KEY (run_id, round_index): false — круг уже есть,
+ * Записывает ответ на круг. Дубликат отсекает PRIMARY KEY (run_id, round_index): false - круг уже есть,
  * и вызывающий обязан отдать то, что записано, а не пересчитывать. Неверный ответ закрывается сразу.
  */
 export async function insertSoloAnswer(db: D1Database, input: {
@@ -70,11 +70,11 @@ export async function insertSoloAnswer(db: D1Database, input: {
   return result.meta.changes > 0;
 }
 
-/** Закрывает круг ударом. false — круг уже закрыт (повтор или параллельный запрос): награда не удваивается. */
+/** Закрывает круг ударом. false - круг уже закрыт (повтор или параллельный запрос): награда не удваивается. */
 export async function settleSoloHammer(db: D1Database, input: {
   runId: string;
   roundIndex: number;
-  /** Момент удара, как его сообщил клиент. null — круг закрыт без удара. */
+  /** Момент удара, как его сообщил клиент. null - круг закрыт без удара. */
   activeElapsedMs: number | null;
   /** Выведено сервером из момента удара, не присылается клиентом. */
   skillDistance: number;

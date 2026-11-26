@@ -18,18 +18,18 @@ export interface RunCardData {
   tiles: readonly RoundTile[];
   progress: number;
   category: CategoryId;
-  /** Игровой день набора, YYYY-MM-DD; null — без даты. */
+  /** Игровой день набора, YYYY-MM-DD; null - без даты. */
   day: string | null;
-  /** Карточка приглашения: имя того, кто зовёт (null — без имени); null — обычный результат. */
+  /** Карточка приглашения: имя того, кто зовёт (null - без имени); null - обычный результат. */
   invite: { name: string | null } | null;
-  /** Язык текста; без него — русский. */
+  /** Язык текста; без него - русский. */
   locale?: Locale;
 }
 
 export interface GuessCardData {
   number: number;
   multiplier: number;
-  /** «Точнее N% игроков»; 'best' — лучший ответ дня; null — ответов пока мало. */
+  /** «Точнее N% игроков»; 'best' - лучший ответ дня; null - ответов пока мало. */
   percentile: number | 'best' | null;
   locale?: Locale;
 }
@@ -49,7 +49,7 @@ export function dayLabel(day: string | null, locale: Locale = DEFAULT_LOCALE): s
   return shareText(locale).date(month, date);
 }
 
-/** «Clutch #N» для игрового дня (день 1 — 2026-10-19); до первого дня номера нет. */
+/** «Clutch #N» для игрового дня (день 1-2026-10-19); до первого дня номера нет. */
 export function dayNumberLabel(day: string | null): string | null {
   if (!day) return null;
   const number = gameDayNumber(day);
@@ -60,7 +60,7 @@ export function circles(count: number, locale: Locale = DEFAULT_LOCALE): string 
   return shareText(locale).rounds(count);
 }
 
-/** Квадраты кругов: цвет — зона удара, пустой — круг без прогресса. */
+/** Квадраты кругов: цвет - зона удара, пустой - круг без прогресса. */
 function tileGrid(tiles: readonly RoundTile[], x: number, y: number, width: number, height: number): string {
   const count = Math.min(tiles.length, MAX_TILES);
   const cols = Math.min(5, count);
@@ -119,7 +119,7 @@ export function formatMultiplierLabel(multiplier: number, locale: Locale = DEFAU
   return shareText(locale).multiplier(multiplier);
 }
 
-/** Шкала промаха: метка ответа в центре, догадка сдвинута на log10 промаха (×10 — край). */
+/** Шкала промаха: метка ответа в центре, догадка сдвинута на log10 промаха (×10 - край). */
 function missScale(multiplier: number, locale: Locale): string {
   const t = shareText(locale).guess;
   const x0 = 676;

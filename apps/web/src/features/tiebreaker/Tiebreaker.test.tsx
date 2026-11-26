@@ -200,7 +200,7 @@ describe('screen and reveal', () => {
     expect(out).not.toContain('tb-form');
     expect(out.indexOf('Твой промах')).toBeLessThan(out.indexOf('Как ответили все'));
     expect(out.indexOf('Как ответили все')).toBeLessThan(out.indexOf('Следующий вопрос'));
-    // Правильный ответ — строка той же карточки, а не отдельный блок.
+    // Правильный ответ - строка той же карточки, а не отдельный блок.
     expect(out.match(/class="tb-compare-row"/g)).toHaveLength(2);
   });
 
@@ -248,7 +248,7 @@ describe('screen and reveal', () => {
     expect(distributionAxisTicks().map((tick) => tick.position)).toEqual([0, 1 / 6, 2 / 6, 0.5, 4 / 6, 5 / 6, 1]);
     const out = screen(ready({ answered: answered() }));
     for (const label of ['÷1000', '÷100', '÷10', 'точно', '×10', '×100', '×1000']) expect(out).toContain(`>${label}</span>`);
-    // Деления стоят на границах корзин: «точно» — ровно между 5-й и 6-й корзинами.
+    // Деления стоят на границах корзин: «точно» - ровно между 5-й и 6-й корзинами.
     expect(bucketSide(5)).toBe('under');
     expect(bucketSide(6)).toBe('over');
   });
@@ -276,7 +276,7 @@ describe('screen and reveal', () => {
 
 describe('view helpers', () => {
   it('puts the own guess in the bucket by guess/answer ratio', () => {
-    // 400/553 ≈ 0.72 → log10 ≈ -0.14 → индекс 5; точный ответ — индекс 6.
+    // 400/553 ≈ 0.72 → log10 ≈ -0.14 → индекс 5; точный ответ - индекс 6.
     const base = answered();
     expect(distributionBars(base).find((bar) => bar.mine)?.index).toBe(5);
     expect(distributionBars({ ...base, guess: 553 }).find((bar) => bar.mine)?.index).toBe(6);

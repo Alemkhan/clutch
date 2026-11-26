@@ -4,7 +4,7 @@
 import { readFileSync } from 'node:fs';
 import { afterEach, describe, expect, it } from 'vitest';
 import { parseTiebreakerExplanation, TIEBREAKER_CARD_PROMPT_MAX } from '@clutch/shared';
-// @ts-expect-error — .mjs без деклараций типов
+// @ts-expect-error - .mjs без деклараций типов
 import { buildSql, parseExplanation, sqlString } from '../scripts/tiebreaker-load.mjs';
 import { createTestD1, type TestD1 } from './helpers/testD1';
 

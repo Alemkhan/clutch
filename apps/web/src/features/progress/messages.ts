@@ -4,7 +4,7 @@ export const m = defineMessages({
   ru: {
     days: (n: number) => `${n} ${plural('ru', n, ['день', 'дня', 'дней'])}`,
     streakAria: (days: string, atRisk: boolean) => `Серия: ${days} подряд${atRisk ? ', сегодня ещё не сыграно' : ''}`,
-    streakHint: (days: string) => `Серия ${days} — сыграй забег дня сегодня, чтобы её не прервать`,
+    streakHint: (days: string) => `Серия ${days}. Сыграй забег дня сегодня, чтобы её не прервать`,
     level: (n: number) => `Уровень ${n}`,
     xp: (into: number, total: number) => `${into} / ${total} опыта`,
     levelAria: (n: number, into: number, total: number) => `Уровень ${n}: ${into} из ${total} опыта`,
@@ -31,7 +31,7 @@ export const m = defineMessages({
   en: {
     days: (n: number) => `${n} ${plural('en', n, ['day', 'days'])}`,
     streakAria: (days: string, atRisk: boolean) => `Streak: ${days} in a row${atRisk ? ', not played yet today' : ''}`,
-    streakHint: (days: string) => `${days} streak — play today's daily run to keep it going`,
+    streakHint: (days: string) => `${days} streak. Play today's daily run to keep it going`,
     level: (n: number) => `Level ${n}`,
     xp: (into: number, total: number) => `${into} / ${total} XP`,
     levelAria: (n: number, into: number, total: number) => `Level ${n}: ${into} of ${total} XP`,
@@ -58,11 +58,11 @@ export const m = defineMessages({
   kk: {
     days: (n: number) => `${n} ${plural('kk', n, ['күн'])}`,
     streakAria: (days: string, atRisk: boolean) => `Серия: қатарынан ${days}${atRisk ? ', бүгін әлі ойналмады' : ''}`,
-    streakHint: (days: string) => `Серия ${days} — үзілмеуі үшін бүгін күн жарысын ойна`,
+    streakHint: (days: string) => `Серия ${days}. Үзілмеуі үшін бүгін күн жарысын ойна`,
     level: (n: number) => `${n}-деңгей`,
     xp: (into: number, total: number) => `${into} / ${total} тәжірибе`,
     levelAria: (n: number, into: number, total: number) => `${n}-деңгей: ${total} тәжірибенің ${into}`,
-    xpNote: 'Тәжірибе: дұрыс жауапқа 10, 100%-ға жетуге 25, «Көзмөлшерге» 15, «Уики-жолға» 20 (берілсең — 5).',
+    xpNote: 'Тәжірибе: дұрыс жауапқа 10, 100%-ға жетуге 25, «Көзмөлшерге» 15, «Уики-жолға» 20 (берілсең, 5).',
     unlocked: 'Алынды',
     progressOf: (value: number, goal: number) => `Прогресс: ${goal} ішінен ${value}`,
     notYetUnlocked: 'Әлі алынған жоқ',

@@ -1,6 +1,6 @@
 import { defineMessages } from '../i18n/messages';
 
-/** rival: «Имя» в кавычках или null — тогда «соперник». */
+/** rival: «Имя» в кавычках или null - тогда «соперник». */
 export const m = defineMessages({
   ru: {
     shareLocal: (p: number, o: number) => `Потренировался в Clutch: ${p}% против ${o}%. Это тренировка, результат не сохранён. Сыграем?`,

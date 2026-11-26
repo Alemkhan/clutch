@@ -3,9 +3,9 @@ import { messagesFor } from '../../i18n/messages';
 import { m } from './messages';
 
 /**
- * Разбор числа из поля «На глазок». Запятая и точка — десятичный разделитель; пробелы (в том числе
- * неразрывные) — разделители тысяч; суффиксы «тыс», «млн», «млрд», «трлн» и запись «8e24» — для больших чисел.
- * «1,000» — это единица с тремя нулями после запятой, а не тысяча: запятая у нас всегда десятичная.
+ * Разбор числа из поля «На глазок». Запятая и точка - десятичный разделитель; пробелы (в том числе
+ * неразрывные) - разделители тысяч; суффиксы «тыс», «млн», «млрд», «трлн» и запись «8e24» - для больших чисел.
+ * «1,000» - это единица с тремя нулями после запятой, а не тысяча: запятая у нас всегда десятичная.
  */
 export type TiebreakerInputError = 'empty' | 'invalid' | 'negative' | 'not_positive' | 'too_big';
 
@@ -22,13 +22,13 @@ const SUFFIX_FACTOR: Record<string, number> = {
 };
 
 // Мантисса: цифры с пробелами внутри и необязательная дробная часть либо только дробная часть.
-// Дальше — либо экспонента, либо суффикс (точка после сокращения допустима), но не вместе.
+// Дальше - либо экспонента, либо суффикс (точка после сокращения допустима), но не вместе.
 const INPUT_PATTERN = /^(\d[\d\s]*(?:[.,]\d+)?|[.,]\d+)\s*(?:e\s*([+-]?\d{1,4})|(тысяч|тыс|млн|млрд|трлн)\.?)?$/;
 
 export function parseTiebreakerInput(text: string): TiebreakerInputResult {
   const trimmed = text.replace(/[\s  ]+/g, ' ').trim().toLowerCase();
   if (!trimmed) return { ok: false, error: 'empty' };
-  if (/^[-−–—]/.test(trimmed)) return { ok: false, error: 'negative' };
+  if (/^[-\u2212\u2013\u2014]/.test(trimmed)) return { ok: false, error: 'negative' };
 
   const match = INPUT_PATTERN.exec(trimmed);
   if (!match) return { ok: false, error: 'invalid' };

@@ -46,7 +46,7 @@ export const PromoA = () => (
       <TitleCard
         over={<Shot take="take-a" from={19.4} focus={HAMMER} />}
         lines={[
-          { text: 'Ответить правильно — легко.', at: 2, size: 92 },
+          { text: 'Ответить правильно - легко.', at: 2, size: 92 },
           { text: 'А попасть в центр?', at: 16, color: C.red, size: 124 },
         ]}
       />

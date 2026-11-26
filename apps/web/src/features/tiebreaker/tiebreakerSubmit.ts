@@ -4,7 +4,7 @@ import { ApiError, isTransientApiError } from '../../platform/api';
 /** Итог отправки ответа. Все ветки, кроме `network` и `rejected`, ведут на вскрытие или обновление карточки. */
 export type TiebreakerSubmitOutcome =
   | { kind: 'answered'; state: TiebreakerTodayResponse }
-  /** 409 already_answered: ответ уже был (другая вкладка, повтор после обрыва) — показываем сохранённый. */
+  /** 409 already_answered: ответ уже был (другая вкладка, повтор после обрыва) - показываем сохранённый. */
   | { kind: 'already_answered'; state: TiebreakerTodayResponse | null }
   /** 409 not_todays_question: сутки сменились, карточку надо перечитать. */
   | { kind: 'stale' }
@@ -27,7 +27,7 @@ export interface TiebreakerSubmitDeps {
 }
 
 /**
- * Один ответ — одна отправка: пока запрос в пути, повторный вызов (двойной тап, Enter) ничего не шлёт.
+ * Один ответ - одна отправка: пока запрос в пути, повторный вызов (двойной тап, Enter) ничего не шлёт.
  * Состояние «в пути» живёт здесь, а не в React: setState не успевает между двумя быстрыми тапами.
  */
 export class TiebreakerSubmitter {
@@ -39,7 +39,7 @@ export class TiebreakerSubmitter {
     return this.inFlight;
   }
 
-  /** null — вызов проигнорирован, потому что предыдущая отправка ещё идёт. */
+  /** null - вызов проигнорирован, потому что предыдущая отправка ещё идёт. */
   async submit(body: TiebreakerAnswerRequest): Promise<TiebreakerSubmitOutcome | null> {
     if (this.inFlight) return null;
     this.inFlight = true;

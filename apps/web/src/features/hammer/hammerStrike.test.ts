@@ -17,7 +17,7 @@ describe('hammerZoneLabels', () => {
     expect(attempt.stage).toBe(stage);
     const labels = hammerZoneLabels(attempt);
 
-    // Центр — один, очки perfect; остальные tier — по две подписи (слева и справа) или ни одной, если кольцо узкое.
+    // Центр - один, очки perfect; остальные tier - по две подписи (слева и справа) или ни одной, если кольцо узкое.
     expect(labels.filter((l) => l.result === 'perfect')).toHaveLength(1);
     for (const tier of ['great', 'good', 'weak'] as const) {
       const sides = labels.filter((l) => l.result === tier);
@@ -70,7 +70,7 @@ describe('hammerZoneLabels', () => {
 describe('strike gain text', () => {
   it('shows the new percent, gain and what is left', () => {
     expect(strikeGain(36, 18)).toEqual({ total: 54, gain: 18, remaining: 46 });
-    expect(remainingText(46)).toBe('До 100% — ещё 46%');
+    expect(remainingText(46)).toBe('До 100% ещё 46%');
   });
 
   it('clamps at the target and says it honestly instead of "ещё 0%"', () => {

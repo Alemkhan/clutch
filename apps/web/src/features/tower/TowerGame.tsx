@@ -17,7 +17,7 @@ interface TowerGameProps {
   config: MiniGameConfig;
   questionId: string;
   previousSkillResults: readonly SkillResult[];
-  /** Тот же контракт, что у HammerGame: третий аргумент — активное время тапа, его и проверяет сервер. */
+  /** Тот же контракт, что у HammerGame: третий аргумент - активное время тапа, его и проверяет сервер. */
   onComplete: (result: SkillResult, progressAwarded: number, activeElapsedMs: number) => void;
   onStrike?: (result: SkillResult, progressAwarded: number) => void;
   progressBefore?: number;
@@ -37,7 +37,7 @@ export function TowerGame({ config, questionId, previousSkillResults, onComplete
     [config, previousSkillResults, questionId],
   );
   const reduceMotion = useReducedMotion();
-  // Объяснение — шаг ДО попытки: пока оно открыто, часы блока и аналитика не стартуют.
+  // Объяснение - шаг ДО попытки: пока оно открыто, часы блока и аналитика не стартуют.
   const [introOpen, setIntroOpen] = useState(() => !hasSeenTowerIntro());
   const clock = useMarkerClock(attempt, introOpen);
   const { struck, result, handleTap, onNailSettled, onKeyDown } = useHammerStrike({

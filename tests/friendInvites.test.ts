@@ -250,7 +250,7 @@ describe('friend invite: claiming and reservation', () => {
     const returned = await (await startRun(db, 'erin')).json() as StartSoloRunResponse;
     expect(returned.pace?.id).toBe(authorRun);
     expect(await releaseExpiredRematchInvites(db.binding, NOW)).toEqual({ released: 1, claimsReleased: 0, more: false });
-    // Запись забрал первый: матч — это пара, второму она уже не достаётся.
+    // Запись забрал первый: матч - это пара, второму она уже не достаётся.
     const after = await (await startRun(db, 'frank')).json() as StartSoloRunResponse;
     expect(after.pace).toBeNull();
   });

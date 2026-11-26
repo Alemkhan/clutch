@@ -33,9 +33,9 @@ describe('SoloHud strike gain', () => {
 describe('HammerResult notes', () => {
   it('renders remaining and series lines', () => {
     const html = renderToStaticMarkup(
-      <HammerResult result="great" remaining="До 100% — ещё 64%" series="Серия 2 · зоны стали уже" />,
+      <HammerResult result="great" remaining="До 100% ещё 64%" series="Серия 2 · зоны стали уже" />,
     );
-    expect(html).toContain('До 100% — ещё 64%');
+    expect(html).toContain('До 100% ещё 64%');
     expect(html).toContain('Серия 2 · зоны стали уже');
   });
 });

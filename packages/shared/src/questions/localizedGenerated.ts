@@ -2,7 +2,7 @@
  * Вопросы генераторов (флаги, столицы, контуры, языки, «Другие флаги») на языке игрока.
  * Генератор собирает вопрос по-русски; здесь тот же вопрос пересказывается шаблоном нужного языка,
  * а названия берутся из переводов content/i18n/<locale>/{countries,languages,historic-flags,other-flags}.json.
- * Id вопроса, порядок и id вариантов не меняются — только текст.
+ * Id вопроса, порядок и id вариантов не меняются - только текст.
  */
 import enCountries from '../../../../content/i18n/en/countries.json';
 import kkCountries from '../../../../content/i18n/kk/countries.json';
@@ -117,11 +117,11 @@ const EXPLAIN: Record<Translated, {
     language: (name, fact) => `This is ${name}. ${fact}`,
   },
   kk: {
-    flagOf: (country) => `Бұл — ${country} туы.`,
-    capitalOf: (country, capital) => `${country}: астанасы — ${capital}.`,
-    flagAndCapital: (country, capital) => `Бұл — ${country} туы. Астанасы — ${capital}.`,
-    outlineOf: (country) => `Бұл — ${country} пішіні.`,
-    language: (name, fact) => `Бұл — ${name}. ${fact}`,
+    flagOf: (country) => `Бұл ${country} туы.`,
+    capitalOf: (country, capital) => `${country}: астанасы ${capital}.`,
+    flagAndCapital: (country, capital) => `Бұл ${country} туы. Астанасы: ${capital}.`,
+    outlineOf: (country) => `Бұл ${country} пішіні.`,
+    language: (name, fact) => `Бұл ${name}. ${fact}`,
   },
 };
 

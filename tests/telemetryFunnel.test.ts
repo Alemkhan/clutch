@@ -10,7 +10,7 @@ import { createRequire } from 'node:module';
 import { afterEach, describe, expect, it } from 'vitest';
 import app from '../apps/api/src/index';
 import { createTestD1, type TestD1 } from './helpers/testD1';
-// @ts-expect-error — .mjs без деклараций типов
+// @ts-expect-error - .mjs без деклараций типов
 import { buildSqliteFromSql, pull, PullError, readDatabaseName } from '../scripts/reports-pull.mjs';
 
 const { DatabaseSync } = createRequire(import.meta.url)('node:sqlite') as {
@@ -168,15 +168,15 @@ describe('telemetry-view funnel, retention, errors', () => {
     expect(line.split(/\s{2,}/)).toEqual(['2026-10-01', '3', '1 (33%)', '1 (33%)']);
   });
 
-  it('shows «идёт» for a return day that has not ended and «—» for one not yet reached', () => {
+  it('shows «идёт» for a return day that has not ended and «-» for one not yet reached', () => {
     const file = fixtureDatabase();
     // Сутки D1 (BASE + 1 день) ещё идут: игрок a уже вернулся; D7 не наступил.
     const out = viewAt(new Date(BASE + DAY + 3_600_000).toISOString(), 'retention', file);
     const line = out.split('\n').find((row) => row.startsWith('2026-10-01')) ?? '';
-    expect(line.split(/\s{2,}/)).toEqual(['2026-10-01', '3', 'идёт, 1 (33%)', '—']);
-    // В день первого забега до D1 ещё далеко: «—».
+    expect(line.split(/\s{2,}/)).toEqual(['2026-10-01', '3', 'идёт, 1 (33%)', '-']);
+    // В день первого забега до D1 ещё далеко: «-».
     const early = viewAt(new Date(BASE + 3_600_000).toISOString(), 'retention', file);
-    expect(early.split('\n').find((row) => row.startsWith('2026-10-01'))?.split(/\s{2,}/)).toEqual(['2026-10-01', '3', '—', '—']);
+    expect(early.split('\n').find((row) => row.startsWith('2026-10-01'))?.split(/\s{2,}/)).toEqual(['2026-10-01', '3', '-', '-']);
   });
 
   it('groups client errors by message and counts players', () => {
