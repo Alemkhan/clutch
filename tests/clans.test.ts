@@ -2,7 +2,7 @@
 /// <reference types="@cloudflare/workers-types" />
 
 import { createHash, createHmac } from 'node:crypto';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   DAILY_RULES_VERSION,
   type ClanBoardResponse,
@@ -17,7 +17,10 @@ import { createTestD1, type TestD1 } from './helpers/testD1';
 const secret = 'test-session-signing-secret-at-least-32-characters';
 const databases: TestD1[] = [];
 const allow: RateLimit = { limit: async () => ({ success: true }) };
-afterEach(() => { for (const db of databases.splice(0)) db.sqlite.close(); });
+afterEach(() => {
+  vi.useRealTimers();
+  for (const db of databases.splice(0)) db.sqlite.close();
+});
 
 function database(): TestD1 {
   const db = createTestD1();
@@ -44,6 +47,17 @@ function dailyRun(db: TestD1, playerId: string, input: { progress?: number; reac
     VALUES (?, ?, ?, 'general', '[]', '[]', ?, 0, 'completed', ?, ?, ?, ?, ?)`)
     .run(`run-${runCounter}`, playerId, input.name ?? 'Игрок', reached ? 100 : input.progress ?? 50, at, at + 1,
       DAILY_RULES_VERSION, reached ? 1 : 0, reached ? input.score ?? 1 : null);
+}
+
+/** Вики-путь дня: пройденный за `clicks` переходов или сданный. Маршруты дней есть в миграциях. */
+function wikiRun(db: TestD1, playerId: string, dateKey: string, input: { clicks: number; gaveUp?: boolean }) {
+  runCounter += 1;
+  const at = Date.now();
+  db.sqlite.prepare(`INSERT INTO wiki_path_runs (id, player_id, display_name, challenge_id, date_key, status, clicks,
+      current_page_id, current_revision_id, current_title, path_json, completed_at, created_at, gave_up_at)
+    VALUES (?, ?, 'Игрок', ?, ?, ?, ?, 1, 1, 'Статья', '[]', ?, ?, ?)`)
+    .run(`wiki-run-${runCounter}`, playerId, `wiki-${dateKey}`, dateKey, input.gaveUp ? 'in_progress' : 'completed', input.clicks,
+      input.gaveUp ? null : at, at, input.gaveUp ? at : null);
 }
 
 function call(db: TestD1, method: 'GET' | 'POST', path: string, authorization: string, body?: unknown) {
@@ -167,6 +181,29 @@ describe('emoji clans', () => {
     expect(board.you).toMatchObject({ emoji: '🐜', rank: 1 });
     const me = await call(db, 'GET', '/api/clans/me', small.authorization).then((r) => r.json()) as ClanMeResponse;
     expect(me.clan).toMatchObject({ youWeekPoints: 200, week: { score: 20, rank: 1 } });
+  });
+
+  it('adds a finished Wiki Path to the week from 2026-11-30, a given-up one earns nothing', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(Date.parse('2026-11-30T05:00:00Z')); // 10:00 по Алматы, понедельник
+    const db = database();
+    const owl = guest('owl');
+    dailyRun(db, owl.playerId, { progress: 40 });
+    const code = inviteCode((await found(db, owl, '🦉')).body);
+    const mate = guest('owl-mate');
+    await call(db, 'POST', '/api/clans/join', mate.authorization, { code });
+    wikiRun(db, owl.playerId, '2026-11-30', { clicks: 2 });
+    wikiRun(db, mate.playerId, '2026-11-30', { clicks: 4, gaveUp: true });
+
+    vi.setSystemTime(Date.parse('2026-12-01T05:00:00Z'));
+    wikiRun(db, owl.playerId, '2026-12-01', { clicks: 5 });
+    wikiRun(db, mate.playerId, '2026-12-01', { clicks: 9 });
+    const owlNow = guest('owl');
+    // Сова: забег 40 + путь за 2 перехода 80 + за 5 переходов 60. Напарник: сдался (0) + 9 переходов (30).
+    const me = await call(db, 'GET', '/api/clans/me', owlNow.authorization).then((r) => r.json()) as ClanMeResponse;
+    expect(me.clan).toMatchObject({ youWeekPoints: 180, week: { score: 21 } });
+    const board = await call(db, 'GET', '/api/clans/board', owlNow.authorization).then((r) => r.json()) as ClanBoardResponse;
+    expect(board.entries.map((entry) => [entry.emoji, entry.score])).toEqual([['🦉', 21]]);
   });
 
   it('hands the clan to the most active member when the founder is gone for a month', async () => {

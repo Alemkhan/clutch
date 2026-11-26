@@ -4,6 +4,7 @@ import {
   CLAN_INVITE_CODE,
   CLAN_INVITE_PREFIX,
   clanKeyToSlug,
+  CLAN_WIKI_FROM,
   clanPlayerPoints,
   clanSlugToKey,
   clanWarScore,
@@ -99,15 +100,46 @@ async function runsInWindow(db: D1Database, key: string | null, fromMs: number, 
   return results;
 }
 
-/** Очки каждого игрока: по одному лучшему забегу дня за игровые сутки. */
-function pointsByPlayer(runs: readonly RunRow[]): Map<string, number> {
+interface WikiRow {
+  player_id: string;
+  emoji_key: string;
+  joined_at: number;
+  date_key: string;
+  clicks: number;
+}
+
+/**
+ * Пройденные Вики-пути участников за окно (по дню маршрута, с суток вступления и не раньше
+ * CLAN_WIKI_FROM). Сдавшиеся и незаконченные не считаются. `playerId` сужает до одного игрока.
+ */
+async function wikiInWindow(db: D1Database, key: string | null, fromMs: number, toMs: number, playerId: string | null = null): Promise<WikiRow[]> {
+  const fromKey = dailyKey(fromMs) > CLAN_WIKI_FROM ? dailyKey(fromMs) : CLAN_WIKI_FROM;
+  const toKey = dailyKey(toMs - 1);
+  if (fromKey > toKey) return [];
+  const { results } = await db.prepare(`
+    SELECT m.player_id, m.emoji_key, m.joined_at, w.date_key, w.clicks
+    FROM clan_members m JOIN wiki_path_runs w ON w.player_id = m.player_id
+    WHERE (?1 IS NULL OR m.emoji_key = ?1) AND (?4 IS NULL OR m.player_id = ?4)
+      AND w.status = 'completed' AND w.gave_up_at IS NULL
+      AND w.date_key >= ?2 AND w.date_key <= ?3
+  `).bind(key, fromKey, toKey, playerId).all<WikiRow>();
+  return results.filter((row) => row.date_key >= dailyKey(row.joined_at));
+}
+
+/** Очки каждого игрока: лучший забег дня за игровые сутки плюс пройденный Вики-путь этого дня. */
+function pointsByPlayer(runs: readonly RunRow[], wikiPaths: readonly WikiRow[] = []): Map<string, number> {
   const byPlayer = new Map<string, Parameters<typeof clanPlayerPoints>[0][number][]>();
   for (const run of runs) {
     const list = byPlayer.get(run.player_id) ?? [];
     list.push({ dayKey: dailyKey(run.created_at), progress: run.progress, reachedTarget: run.reached_target === 1, soloScore: run.solo_score });
     byPlayer.set(run.player_id, list);
   }
-  return new Map([...byPlayer].map(([playerId, list]) => [playerId, clanPlayerPoints(list)]));
+  const wikiByPlayer = new Map<string, { dayKey: string; clicks: number }[]>();
+  for (const wiki of wikiPaths) {
+    wikiByPlayer.set(wiki.player_id, [...(wikiByPlayer.get(wiki.player_id) ?? []), { dayKey: wiki.date_key, clicks: wiki.clicks }]);
+    if (!byPlayer.has(wiki.player_id)) byPlayer.set(wiki.player_id, []);
+  }
+  return new Map([...byPlayer].map(([playerId, list]) => [playerId, clanPlayerPoints(list, wikiByPlayer.get(playerId))]));
 }
 
 interface BoardRow extends ClanBoardEntry { key: string; createdAt: number }
@@ -115,15 +147,16 @@ interface BoardRow extends ClanBoardEntry { key: string; createdAt: number }
 /** Таблица войны за неделю: все кланы, места по очкам, при равенстве - больше участников, раньше основан. */
 async function weekBoard(db: D1Database, now: number): Promise<{ week: ReturnType<typeof clanWeek>; rows: BoardRow[] }> {
   const week = clanWeek(now);
-  const [clans, counts, runs] = await Promise.all([
+  const [clans, counts, runs, wikiPaths] = await Promise.all([
     db.prepare('SELECT emoji_key, emoji, created_at FROM clans').all<Pick<ClanRow, 'emoji_key' | 'emoji' | 'created_at'>>(),
     db.prepare('SELECT emoji_key, COUNT(*) AS count FROM clan_members GROUP BY emoji_key').all<{ emoji_key: string; count: number }>(),
     runsInWindow(db, null, week.startMs, week.endMs),
+    wikiInWindow(db, null, week.startMs, week.endMs),
   ]);
   const membersOf = new Map(counts.results.map((row) => [row.emoji_key, row.count]));
-  const clanOfPlayer = new Map(runs.map((run) => [run.player_id, run.emoji_key]));
+  const clanOfPlayer = new Map([...runs, ...wikiPaths].map((row) => [row.player_id, row.emoji_key]));
   const memberPoints = new Map<string, number[]>();
-  for (const [playerId, points] of pointsByPlayer(runs)) {
+  for (const [playerId, points] of pointsByPlayer(runs, wikiPaths)) {
     const key = clanOfPlayer.get(playerId)!;
     memberPoints.set(key, [...(memberPoints.get(key) ?? []), points]);
   }
@@ -218,12 +251,13 @@ export async function clanMe(env: Pick<Env, 'DB' | 'TELEGRAM_MINI_APP_LINK'>, id
   if (!stored) return { clan: null, canFound: true };
   const clan = await ensureActiveFounder(db, stored, now);
   const week = clanWeek(now);
-  const [view, mine, infected, invitedByName] = await Promise.all([
+  const [view, mine, myWiki, infected, invitedByName] = await Promise.all([
     clanView(db, clan, now),
     db.prepare(`SELECT r.progress, r.reached_target, r.solo_score, r.created_at, ?1 AS player_id, '' AS emoji_key FROM match_runs r
       WHERE r.player_id = ?1 AND r.rules_version = ?2 AND r.status = 'completed'
         AND r.created_at >= ?3 AND r.created_at < ?4 AND r.created_at >= ${JOIN_DAY_START('?5')}`)
       .bind(identity.playerId, DAILY_RULES_VERSION, week.startMs, week.endMs, member.joined_at).all<RunRow>(),
+    wikiInWindow(db, member.emoji_key, week.startMs, week.endMs, identity.playerId),
     db.prepare('SELECT COUNT(*) AS count FROM clan_members WHERE invited_by = ?1').bind(identity.playerId).first<{ count: number }>(),
     member.invited_by ? memberName(db, member.invited_by) : Promise.resolve(null),
   ]);
@@ -232,7 +266,7 @@ export async function clanMe(env: Pick<Env, 'DB' | 'TELEGRAM_MINI_APP_LINK'>, id
     clan: {
       ...view,
       isFounder: clan.founder_player_id === identity.playerId,
-      youWeekPoints: pointsByPlayer(mine.results).get(identity.playerId) ?? 0,
+      youWeekPoints: pointsByPlayer(mine.results, myWiki).get(identity.playerId) ?? 0,
       infectedByYou: infected?.count ?? 0,
       invitedByName,
       inviteLink: miniAppLink(env.TELEGRAM_MINI_APP_LINK, `${CLAN_INVITE_PREFIX}${member.invite_code}`),
@@ -243,13 +277,14 @@ export async function clanMe(env: Pick<Env, 'DB' | 'TELEGRAM_MINI_APP_LINK'>, id
 
 async function clanDetail(db: D1Database, clan: ClanRow, viewer: string, now: number): Promise<ClanDetailResponse> {
   const week = clanWeek(now);
-  const [view, members, runs] = await Promise.all([
+  const [view, members, runs, wikiPaths] = await Promise.all([
     clanView(db, clan, now),
     db.prepare('SELECT * FROM clan_members WHERE emoji_key = ?1 ORDER BY joined_at, player_id LIMIT ?2')
       .bind(clan.emoji_key, MEMBER_LIST_LIMIT).all<MemberRow>(),
     runsInWindow(db, clan.emoji_key, week.startMs, week.endMs),
+    wikiInWindow(db, clan.emoji_key, week.startMs, week.endMs),
   ]);
-  const points = pointsByPlayer(runs);
+  const points = pointsByPlayer(runs, wikiPaths);
   const ids = new Map(members.results.map((member, index) => [member.player_id, index + 1]));
   const infected = new Map<string, number>();
   for (const member of members.results) {

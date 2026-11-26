@@ -131,10 +131,35 @@ export function clanRunPoints(run: ClanRunResult): number {
  * Очки игрока за период: по одному лучшему забегу дня за сутки. Забеги дня есть в каждой
  * категории, и без этого неделю выигрывал бы тот, кто прогнал их все, а не кто точнее играет.
  */
-export function clanPlayerPoints(runs: readonly (ClanRunResult & { dayKey: string })[]): number {
+export function clanPlayerPoints(
+  runs: readonly (ClanRunResult & { dayKey: string })[],
+  wikiPaths: readonly ClanWikiResult[] = [],
+): number {
   const bestByDay = new Map<string, number>();
   for (const run of runs) bestByDay.set(run.dayKey, Math.max(bestByDay.get(run.dayKey) ?? 0, clanRunPoints(run)));
-  return [...bestByDay.values()].reduce((sum, value) => sum + value, 0);
+  const wikiByDay = new Map<string, number>();
+  for (const wiki of wikiPaths) {
+    if (wiki.dayKey < CLAN_WIKI_FROM) continue;
+    wikiByDay.set(wiki.dayKey, Math.max(wikiByDay.get(wiki.dayKey) ?? 0, clanWikiPoints(wiki.clicks)));
+  }
+  return [...bestByDay.values(), ...wikiByDay.values()].reduce((sum, value) => sum + value, 0);
+}
+
+/** С этого дня (понедельник новой недели войны) клану идут и очки за Вики-путь. */
+export const CLAN_WIKI_FROM = '2026-11-30';
+
+/** Пройденный Вики-путь дня; сдавшиеся и не дошедшие сюда не попадают. */
+export interface ClanWikiResult {
+  dayKey: string;
+  clicks: number;
+}
+
+/**
+ * Очки за пройденный Вики-путь: 80 за три перехода и меньше, каждый следующий -10, но не меньше 30.
+ * Меньше забега дня (до 200), но дойти выгодно всегда; сдавшийся и не дошедший получают ноль.
+ */
+export function clanWikiPoints(clicks: number): number {
+  return Math.max(30, Math.min(80, 80 - 10 * (Math.round(clicks) - 3)));
 }
 
 /** Очки клана за неделю: сумма десяти лучших участников / 10, недостающие места - ноль. */

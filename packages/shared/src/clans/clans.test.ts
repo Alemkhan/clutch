@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { dayStartMs } from '../solo/dailyQuestionSet';
 import {
+  CLAN_WIKI_FROM,
   clanKeyToSlug,
   clanPlayerPoints,
+  clanWikiPoints,
   clanRunPoints,
   clanSlugToKey,
   clanWarScore,
@@ -89,6 +91,19 @@ describe('clan points', () => {
       { dayKey: '2026-11-16', progress: 40, reachedTarget: false, soloScore: null },
       { dayKey: '2026-11-17', progress: 70, reachedTarget: false, soloScore: null },
     ])).toBe(200 + 70);
+  });
+
+  it('gives 80 for a Wiki Path in three clicks or fewer, 10 less per extra click, never below 30', () => {
+    expect([1, 2, 3, 4, 5, 6, 7, 8, 12, 34].map(clanWikiPoints)).toEqual([80, 80, 80, 70, 60, 50, 40, 30, 30, 30]);
+  });
+
+  it('adds one Wiki Path a day on top of the best run, only from CLAN_WIKI_FROM', () => {
+    const day = CLAN_WIKI_FROM;
+    const run = { dayKey: day, progress: 100, reachedTarget: true, soloScore: 1 };
+    expect(clanPlayerPoints([run], [{ dayKey: day, clicks: 5 }])).toBe(150 + 60);
+    // Вики-путь без забега дня тоже приносит очки.
+    expect(clanPlayerPoints([], [{ dayKey: day, clicks: 3 }, { dayKey: '2026-12-01', clicks: 9 }])).toBe(80 + 30);
+    expect(clanPlayerPoints([run], [{ dayKey: '2026-11-29', clicks: 2 }])).toBe(150);
   });
 
   it('averages the best ten, empty places count as zero', () => {

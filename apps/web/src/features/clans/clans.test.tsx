@@ -152,6 +152,14 @@ describe('clan nudge after a daily run', () => {
     expect(html).not.toContain('нужно 10');
   });
 
+  it('names what the points came from: a daily run or a Wiki Path', () => {
+    const me = { clan: { ...myClan, members: 12 }, canFound: false };
+    expect(renderToStaticMarkup(<ClanResultNudgeView me={me} onInvite={vi.fn()} runPoints={130} />)).toContain('Этот забег принёс клану +130');
+    const wiki = renderToStaticMarkup(<ClanResultNudgeView me={me} onInvite={vi.fn()} runPoints={60} kind="wiki" />);
+    expect(wiki).toContain('Этот путь принёс клану +60');
+    expect(wiki).not.toContain('забег');
+  });
+
   it('offers to claim an emoji without a clan, and nothing before the first run', () => {
     expect(renderToStaticMarkup(<ClanResultNudgeView me={{ clan: null, canFound: true }} onInvite={vi.fn()} onClan={vi.fn()} />)).toContain('Займи своё эмодзи');
     expect(renderToStaticMarkup(<ClanResultNudgeView me={{ clan: null, canFound: false }} onInvite={vi.fn()} onClan={vi.fn()} />)).toBe('');

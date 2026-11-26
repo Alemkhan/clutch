@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { StartWikiPathResponse, WikiPathPage, WikiPathRunSummary, WikiPathTodayResponse } from '@clutch/shared';
+import { CLAN_WIKI_FROM, clanWikiPoints, type StartWikiPathResponse, type WikiPathPage, type WikiPathRunSummary, type WikiPathTodayResponse } from '@clutch/shared';
+import { ClanResultNudge } from '../clans/ClanResultNudge';
 import { clickWikiPath, giveUpWikiPath, startWikiPath } from '../../platform/api';
 import { ScreenHeader } from '../../ui/ScreenHeader';
 import { approvedWikiLink, sanitizeWikiArticle, wikiLinkFromAnchor } from './wikiArticle';
@@ -43,7 +44,7 @@ export async function loadWikiPathTransition<T>(
   return result;
 }
 
-function Completion({ run }: { run: WikiPathRunSummary }) {
+function Completion({ run, date }: { run: WikiPathRunSummary; date: string }) {
   const t = useMessages(m);
   if (run.gaveUp) {
     return <section className="wp-completion wp-gave-up" aria-live="polite">
@@ -56,6 +57,7 @@ function Completion({ run }: { run: WikiPathRunSummary }) {
     <p className="wp-eyebrow">{t.routeCompleted}</p>
     <h2>{t.goalReached}</h2>
     <p>{t.reachedIn} <strong>{run.clicks}</strong> {t.clicksWord(run.clicks)}.</p>
+    {date >= CLAN_WIKI_FROM && <ClanResultNudge kind="wiki" runPoints={clanWikiPoints(run.clicks)} />}
   </section>;
 }
 
@@ -196,6 +198,6 @@ export function WikiPathScreen({ today, onRetryToday, onBack, onCompleted, onPag
       </article>
     </>}
     {screen.status === 'active' && !sanitized && <section className="wp-error" role="alert"><p>{t.unsafeArticle}</p><button type="button" className="wp-secondary" onClick={() => { void runAction(startWikiPath, t.reloadingArticle); }}>{t.retry}</button></section>}
-    {screen.status === 'completed' && <Completion run={screen.run} />}
+    {screen.status === 'completed' && <Completion run={screen.run} date={screen.challenge.date} />}
   </section>;
 }
